@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Representation</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../../Computer Fundamentals and Information Technology/index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Data Representation</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Data Representation</h1>
+        <ul>
+            <li>Digital computers store and process information in binary form as digital logic has only two values "1"
+                and "0" or in other words "True or False".</li>
+            <li>This system is called radix 2.</li>
+            <li>We human generally deal with radix 10 i.e. decimal.</li>
+            <li>As matter of convenience there are many other representations like Octal (Radix 8), Hexadecimal (Radix
+                16), Binary coded decimal (BCD), Decimal etc.</li>
+            <li>Every computer's CPU has a width measured in terms of bits such as 8 bit CPU, 16 bit CPU, 32 bit CPU
+                etc. </li>
+            <li>Similarly, each memory location can store a fixed number of bits and is called memory width.</li>
+            <li>Given the size of the CPU and Memory, it is for the programmer to handle his data representation.</li>
+        </ul>
+        <div class="wh">
+            <h2>Data Representation in Computers</h2>
+            <ul>
+                <li>Information handled by a computer is classified as intruction and data.</li>
+                <li>A broad overview of the internal representation of the information &darr;
+                    <br><img src="../../images/datare.svg" alt="">
+                </li>
+                <li>No matter whether data is in numeric or non-numeric form or integer, everything is internally
+                    represented in Binary.</li>
+                <li>It is up to the programmer to handle the interpretation of the binary pattern and this
+                    interpretation is called <i>Data Representation</i> </li>
+                <li>Choice of Data representation to be used in a computer is decided by
+                    <ul>
+                        <li>The number types to be represented (integer, real, signed, unsigned, etc)</li>
+                        <li>Range of vlaues likely to be represented (maximum and minimum to be represented)</li>
+                        <li>The precision of the numbers i.e. maximum accuracy of representation (floating point single
+                            precesion, double precision etc)</li>
+                        <li>If non-numeric i.e. character, character representation standard to be chose.
+                            <ul>
+                                <li>ASCII, EBCDIC, UTF are examples of character representation standards.</li>
+                            </ul>
+                        </li>
+                        <li>The hardware support in terms of word width, instruction.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Integer Representation</h3>
+                <ul>
+                    <li>The number of bits used in representing the integer also implies the maximum number that can be
+                        represented in the system hardware.</li>
+                    <li>However for the efficiency of storage and operations, one may choose to represent the integer
+                        with one Byte, two Bytes, Four bytes or more.</li>
+                    <li>This space allocation is translated from the definition used by the programmer while defining a
+                        variable as integer short or long and the Instruction Set Architecture.</li>
+                    <li>In addition to the bit length definition for integers, we also have a choice to represent them
+                        as below:
+                        <ul>
+                            <li><b>Unsigned Integer</b>
+                                <ul>
+                                    <li>A positive number including zero can be represented in this format.</li>
+                                    <li>All the alloted bits are utilised in defining the number.</li>
+                                    <li>So if one is using 8 bits to represent the unsigned integer, the range of values
+                                        that can be represented is 28 i.e. "0" to "255".</li>
+                                    <li>If 16 bits are used for representing then the range is 216 i.e. "0 to 65535".
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Signed Integer</b>
+                                <ul>
+                                    <li>In this format negative numbers, zero and positive numbers can be prepresented.
+                                    </li>
+                                    <li>A sign bit indicates the magnitude direction as positive or negative.</li>
+                                    <li>There are three posibble representations signed integer and these are <b>Sign
+                                            Magitude format, 1's Compliment format and 2's Compliment format.</b></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <p><b>Sign Magnitude Format</b></p>
+                    <ul>
+                        <li>Most Significant Bit (MSB) is reserved for indicating the direction of the magnitude
+                            (value).</li>
+                        <li>A "0" on MSB means a positive number and a "1" on MSB means a negative number.</li>
+                        <li>If <i>n</i> bits are used for representation, <i>n-1</i> bits indicate the absolute value of
+                            the number.</li>
+                        <li>Example for n = 8
+                            <ul>
+                                <li>0010 1111 = + 47 Decimal (Positive number)</li>
+                                <li>1010 1111 = - 47 Decimal (Negative Number)</li>
+                                <li>0111 1110 = +126 (Positive number)</li>
+                                <li>1111 1110 = -126 (Negative Number)</li>
+                                <li>0000 0000 = + 0 (Postive Number)</li>
+                                <li>1000 0000 = - 0 (Negative Number)</li>
+                            </ul>
+                        </li>
+                        <li>Although this method is easy to understand, Sign Magnitude representation has several
+                            shortcomings like
+                            <ul>
+                                <li>Zero can be represented in two ways causing redundancy and confusion.</li>
+                                <li>The total range for magnitude representation is limited to 2n-1, although <i>n</i>
+                                    bits were accounted.</li>
+                                <li>The separate sign bit makes the additionand subtraction more complicated. Also
+                                    comparing two numbers is not straigtforward.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>1's Complement Format</b></p>
+                    <ul>
+                        <li>In this format too, MSB is reserved as the sign bit.</li>
+                        <li>But the difference is in representing the Magnitude part of the value for negative numbers
+                            (magnitude) is inversed and hence called 1's Complement form.</li>
+                        <li>The positive numbers are represented as it is in binary.</li>
+                        <li>Examples for n = 8
+                            <ul>
+                                <li>0010 1111 = + 47 Decimal (Positive number)</li>
+                                <li>1101 0000 = - 47 Decimal (Negative Number)</li>
+                                <li>0111 1110 = +126 (Positive number)</li>
+                                <li>1000 0001 = -126 (Negative Number)</li>
+                                <li>0000 0000 = + 0 (Postive Number)</li>
+                                <li>1111 1111 = - 0 (Negative Number)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Converting a given binary number to its 2's complement form</b></p>
+                    <ul>
+                        <li>Step 1 &rarr; -x = x' + 1 where x' is the one's complement of x.</li>
+                        <li>Step 2 &rarr; Extend the data width of the number, fill up with sign extension i.e. MSB bit
+                            is used to fill the bits.</li>
+                        <li>Example : -47 decimal over 8bit representation
+                            <ul>
+                                <li>Binary equivalent of + 47 is 0010 1111</li>
+                                <li>Binary equivalent of - 47 is 1010 1111 (Sign Magnitude Form)</li>
+                                <li>1's complement equivalent is 1101 0000</li>
+                                <li>2’s complement equivalent is 1101 0001</li>
+                            </ul>
+                        </li>
+                        <li>As you can see zero is not getting represented with redundance.</li>
+                        <li>There is only one way of representing zero.</li>
+                        <li>The other problem of the comlexity of the arithmetic operation is also eliminated in 2's complement representation.</li>
+                        <li>Subraction is done as Addition.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Floating Point Number System</h3>
+                <ul>
+                    <li>The maximum number at best represented as a whole number is 2<sup>n</sup>.</li>
+                    <li>In Scientific world, we do come across numbers like Mass of an Electron is 9.10939 x 10<sup>-31</sup> Kg. Velocity of light is 2.99792458 x 10<sup>8</sup> m/s.</li>
+                    <li>It makes no sense to write a number in non-readable form or non-processible form.</li>
+                    <li>Hence we write such large or small numbers using exponent and mantissa.</li>
+                    <li>This is said to be Floating Point representation or real number representation.</li>
+                    <li>Representationin computer 
+                        <ul>
+                            <li>Unlike the two's compliment representation for integer numbers, Floating Point number uses Sign and Magnitude representation for both <i>mantissa and exponent,</i></li>
+                            <li>In the number 9.10939 x 10<sup>-31</sup>, in decimal form, -31 is Exponent, 9.10939 is known as <i>Fraction</i>. Mantissa, Significand and fraction are synonymously used terms.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <p><b>Floating Point Representation</b></p>
+                    <ul>
+                        <li>We have two standard known as Single Precision and Double Precision from IEEE.</li>
+                        <li>These standards enable portability among different computers.</li>
+                        <li>Single Precision uses 32bit format.
+                            <br><img src="../../images/fpr1.jpg" alt="">
+                            <ul>
+                                <li>
+                                    Single Precision can represent exponent in the range -127 to +127.
+                                    <li>It is possible as a result of arithmetic operations the resultinf exponent may not fit in.  This situation is called <i>overflow</i> in case of positive exponent and <i>underflow</i> in the case of negative exponent.</li>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Double precision uses 64 bits word length 
+                            <br><img src="../../images/fpr2.jpg" alt="">
+                            <ul>
+                                <li>Double precision can represent fractions with larger accuracy.</li>
+                                <li>The Double Precision format has 11 bits for exponent meaning a number as large as -1023 to 1023 can be represented.</li>
+                            </ul>
+                        </li>
+                        <li>In both the cases, MSB is sign bit for mantissa part, followed by Exponent and Mantissa. The exponent part has its sign bit.</li>
+                        <li>The Floating Point operations on the regular CPU is very very slow.
+                            <ul>
+                                <li>Generally, a special purpose CPU known as Co-processor is used.</li>
+                                <li>This Co-processor works in tandem with the main CPU.</li>
+                                <li>The programmer shoulb be using the float declaration only if his data is in real number form. float declaration is not to be used generously.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../main.js"></script>
+</body>
+
+</html>
