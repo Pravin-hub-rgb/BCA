@@ -518,7 +518,34 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        int arr[10] = {1, 2, 3, 4, 5, 6, 7};
+                                        int num, index;
+                                        printf("Enter the element which you want to insert in the array : ");
+                                        scanf("%d", &num);
+                                        printf("Enter the index where you want to insert : ");
+                                        scanf("%d", &index);
+                                    
+                                        // shifting the array
+                                        for (int i = sizeof(arr) / sizeof(int) - 1; i >= index; i--)
+                                        {
+                                            arr[i] = arr[i - 1];
+                                        }
+                                    
+                                        // inserting in the index
+                                        arr[index] = num;
+                                    
+                                        // printing the array
+                                        for (int i = 0; i &lt; sizeof(arr) / sizeof(int); i++)
+                                        {
+                                            printf(" %d ", arr[i]);
+                                        }
+                                    
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -533,7 +560,50 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        int arr[10] = {1, 2, 3, 4, 5, 6, 7};
+                                        int num;
+                                        printf("Enter a number which you want to delete : ");
+                                        scanf("%d", &num);
+                                    
+                                        // checking if the number is present in the array only then we will be able to delete it.
+                                        // also finding its index
+                                        int isAvail = 0, index = -1;
+                                        for (int i = 0; i &lt; sizeof(arr) / sizeof(int) - 1; i++)
+                                        {
+                                            index++;
+                                            if (num == arr[i])
+                                            {
+                                                isAvail = 1;
+                                                break;
+                                            }
+                                        }
+                                        if (isAvail)
+                                        {
+                                            printf("Deleteing in process....\n");
+                                            printf("Index of the element is : %d\n", index);
+                                        }
+                                        else
+                                            printf("Number not present \n");
+                                    
+                                        // deletion logic
+                                        // here we just shift all the element to left from the index of the deleting element
+                                        for (int i = index; i &lt; sizeof(arr) / sizeof(int) - 1; i++)
+                                        {
+                                            arr[i]=arr[i+1];
+                                        }
+                                    
+                                        // printing the array
+                                        for (int i = 0; i &lt; sizeof(arr) / sizeof(int) - 1; i++)
+                                        {
+                                            printf(" %d ", arr[i]);
+                                        }
+                                        printf("\n");
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -541,6 +611,10 @@
         </div>
         <div class="in">
             <p><b>16.</b> Develop a program to find the sum of two matrices.</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=aAFP5wsmH2k">Explanation 1</a></li>
+                <li><a href="https://www.youtube.com/watch?v=jzdQqoG1tZs">Explanation 2</a></li>
+            </ul>
             <div class="code">
                 <div class="dotc"></div>
                 <button class="accordion">code</button>
@@ -548,7 +622,70 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        int aRows, aColumns, bRows, bColumns;
+                                        printf("Enter no. of rows and columns of first matrix : ");
+                                        scanf("%d %d", &aRows, &aColumns);
+                                        int a[aRows][aColumns];
+                                        printf("Enter the elements of the first matrix a : ");
+                                        for (int i = 0; i &lt; aRows; i++)
+                                        {
+                                            for (int j = 0; j &lt; aColumns; j++)
+                                            {
+                                                scanf("%d", &a[i][j]);
+                                            }
+                                        }
+                                    
+                                        printf("Enter no. of rows and columns of matrix b : ");
+                                        scanf("%d %d", &bRows, &bColumns);
+                                        int b[aRows][aColumns];
+                                    
+                                        // for martix multiplication the no. of columns of first matrix should be equal to the rows of second matrix.
+                                        if (aColumns != bRows)
+                                            printf("Cannot multiply matrix");
+                                        else
+                                        {
+                                            printf("Enter the elements of the matrix b : ");
+                                            for (int i = 0; i &lt; bRows; i++)
+                                            {
+                                                for (int j = 0; j &lt; bColumns; j++)
+                                                {
+                                                    scanf("%d", &b[i][j]);
+                                                }
+                                            }
+                                        }
+                                    
+                                        // multiplication of matrices
+                                        int product[aRows][bColumns];
+                                        int sum = 0;
+                                        for (int i = 0; i &lt; aRows; i++)
+                                        {
+                                            for (int j = 0; j <&lt;bRows; j++)
+                                            {
+                                                for (int k = 0; k &lt; bRows; k++)
+                                                {
+                                                    sum += a[i][k] * b[k][j];
+                                                }
+                                                product[i][j] = sum;
+                                                sum = 0;
+                                            }
+                                        }
+                                    
+                                        // printing the resultant matrix
+                                        printf("Resultant Matrix : \n");
+                                        for (int i = 0; i &lt; aRows; i++)
+                                        {
+                                            for (int j = 0; j &lt; bColumns; j++)
+                                            {
+                                                printf(" %d ", product[i][j]);
+                                            }
+                                            printf("\n");
+                                        }
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -556,6 +693,9 @@
         </div>
         <div class="in">
             <p><b>17.</b> Develop a program to print transpose of a given matrix.</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=-arIesoWEoI">Explanation</a></li>
+            </ul>
             <div class="code">
                 <div class="dotc"></div>
                 <button class="accordion">code</button>
@@ -563,9 +703,31 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        int arr[2][3] = {{1, 2, 3}, {4, 5, 6}};
+                                        int transArr[3][2]; // as rows elements becomes column element so we change it
+                                        for (int i = 0; i &lt; 2; i++)
+                                        {
+                                            for (int j = 0; j &lt; 3; j++)
+                                            {
+                                                transArr[j][i] = arr[i][j];
+                                            }
+                                        }
+                                        // priting the transpose
+                                        for(int i = 0 ; i &lt; 3; i++){
+                                            for(int j = 0; j &lt; 2; j++){
+                                                printf(" %d ", transArr[i][j]);
+                                            }
+                                            printf("\n");
+                                        }
+                                    
+                                        return 0;
+                                    }
                             </code>
-                        </pre>
+                    </pre>
                 </div>
             </div>
         </div>
@@ -578,14 +740,45 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        // inputing square matrix from user
+                                        int n;
+                                        printf("Enter no. of rows of a matrix : ");
+                                        scanf("%d", &n);
+                                        int arr[n][n];
+                                        printf("Enter elements of the square matrix : ");
+                                        for (int i = 0; i &lt; n; i++)
+                                        {
+                                            for (int j = 0; j &lt; n; j++)
+                                            {
+                                                scanf("%d", &arr[i][j]);
+                                            }
+                                        }
+                                    
+                                        // diagonal is where i = j
+                                        int sum = 0;
+                                        for (int i = 0; i &lt; n; i++)
+                                        {
+                                            for (int j = 0; j &lt; n; j++)
+                                            {
+                                                if (i == j)
+                                                    sum += arr[i][j];
+                                            }
+                                        }
+                                    
+                                        printf("The diagonal sum is : %d", sum);
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
             </div>
         </div>
         <div class="in">
-            <p><b>19.</b> Develop a program to find the sum of diagonal elements of a given matrix.</p>
+            <p><b>19.</b> Develop a program to count the number of characters in a string (string length).</p>
             <div class="code">
                 <div class="dotc"></div>
                 <button class="accordion">code</button>
@@ -593,7 +786,21 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                        char str[20];
+                                        printf("Enter a string : ");
+                                        scanf("%s", str);
+                                        
+                                        int i = 0;
+                                        while (str[i] != '\0')
+                                            i++;
+                                    
+                                        printf("The string you entered has %d characters", i);
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -608,7 +815,24 @@
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int main()
+                                    {
+                                       char str1[20];
+                                       printf("Enter a string : ");
+                                       scanf("%s", str1);
+                                    
+                                    
+                                       char copyOfStr1[sizeof(str1)/sizeof(char)]; // making another string with same size as the first one.
+                                       int i = 0;
+                                       while(str1[i]!='\0'){
+                                        copyOfStr1[i]=str1[i]; // looping through first string and storing each index value in corresponding index without using strcpy function.
+                                        i++;
+                                       }
+                                       printf(" str2 is %s",copyOfStr1);
+                                       return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -623,7 +847,42 @@
                     <pre>
                             <code>
 
-
+                                    #include &lt;stdio.h>
+                                    #include &lt;string.h>
+                                    
+                                    int main()
+                                    {
+                                        char str[30];
+                                        printf("Enter a string : ");
+                                        scanf("%s", str);
+                                    
+                                        // using two pointer method
+                                        // finding the null character
+                                        int j = 0;
+                                        while (str[j] != '\0')
+                                            j++; // j will points to the last +1
+                                        j--;
+                                        // here we could use strlen function for finding the length of string
+                                        // printf("The strlen = %lu", strlen(str));
+                                    
+                                        int i = 0;       // 'i' pointing to first index and 'j' is pointing to last index
+                                        int isPalin = 1; // assuming that it is palindrome
+                                        while (i != j)
+                                        {
+                                            if (str[i] != str[j])
+                                            {
+                                                isPalin = 0; // correcting
+                                                break;
+                                            }
+                                            i++;
+                                            j--;
+                                        }
+                                        if (isPalin)
+                                            printf("The entered string is palindrome");
+                                        else
+                                            printf("The entered string is not palindrome");
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -631,7 +890,7 @@
         </div>
         <div class="in">
             <p><b>22.</b> Develop a program to count the number of vowels, special characters, consonants in a
-                givenstring.</p>
+                given string.</p>
 
             <div class="code">
                 <div class="dotc"></div>
@@ -640,7 +899,51 @@
                     <pre>
                             <code>
 
-
+                                    #include &lt;stdio.h>
+                                    #include &lt;string.h>
+                                    
+                                    int main()
+                                    {
+                                        int vowel = 0, consotant = 0, character = 0;
+                                        // edge case to work 1- capital letter .
+                                        char str[] = "this constant stuff aeiou {}";
+                                        for (int i = 0; i &lt; strlen(str); i++)
+                                        {
+                                            if (str[i] >= 97 && str[i] &lt;= 122)
+                                            {
+                                                switch (str[i])
+                                                {
+                                                case 'a':
+                                                    vowel++;
+                                                    break;
+                                                case 'e':
+                                                    vowel++;
+                                                    break;
+                                                case 'i':
+                                                    vowel++;
+                                                    break;
+                                                case 'o':
+                                                    vowel++;
+                                                    break;
+                                                case 'u':
+                                                    vowel++;
+                                                    break;
+                                                default:
+                                                    consotant++;
+                                                    break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                printf(" -%c \n", str[i]);
+                                                character++;
+                                            }
+                                        }
+                                        printf("The number of vowels are : %d\n", vowel);
+                                        printf("The number of consotant are : %d\n", consotant);
+                                        printf("The number of characters are : %d\n", character);
+                                        return 0;
+                                    }
                             </code>
                         </pre>
                 </div>
@@ -648,20 +951,101 @@
         </div>
         <div class="in">
             <p><b>23.</b> Develop a program with recursive function for - <br>a) factorial of a given number. <br>
-                b) generation of fibonacci series. <br>
-                c) G.C.D of a given two numbers (greatest common divisor)</p>
-
+                b) generation of fibonacci series. <a href="https://www.youtube.com/watch?v=PODvbWRuZ6s">Explanation 1</a> <br>
+                c) G.C.D of a given two numbers (greatest common divisor) <a href="https://www.youtube.com/watch?v=h_N5fydLSS4">explanation</a></p>
 
             <div class="code">
                 <div class="dotc"></div>
-                <button class="accordion">code</button>
+                <button class="accordion">recursive factorial</button>
                 <div class="panel">
                     <pre>
                             <code>
 
+                                    #include &lt;stdio.h>
 
+                                    int factorial(int num){
+                                        if(num == 0)
+                                        return 1;
+                                        else 
+                                        return num * factorial(num -1);
+                                    }
+                                    
+                                    int main()
+                                    {
+                                        int num;
+                                        printf("Enter a number for factorial calculations : ");
+                                        scanf("%d", &num);
+                                        
+                                        printf("Factorial = %d",factorial(num));
+                                        return 0;
+                                    }
                             </code>
-                        </pre>
+                    </pre>
+                </div>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">recrusive fibonacci</button>
+                <div class="panel">
+                    <pre>
+                            <code>
+
+                                    #include &lt;stdio.h>
+
+                                    int fib(int num)
+                                    {
+                                        if (num == 1 || num == 2)
+                                            return 1;
+                                        return (fib(num - 1) + fib(num - 2));
+                                    }
+                                    
+                                    int main()
+                                    {
+                                        int num;
+                                        printf("Enter number of digits you want to see of fibonacci series ");
+                                        scanf("%d", &num);
+                                    
+                                        for (int i = 1; i &lt;= num; i++)
+                                            printf(" %d ", fib(i));
+                                    
+                                        return 0;
+                                    }
+                            </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">GCD recursive</button>
+                <div class="panel">
+                    <pre>
+                            <code>
+
+                                    #include &lt;stdio.h>
+
+                                    int GCD(int a, int b)
+                                    {
+                                        if (a == b)
+                                            return a;
+                                        if (a % b == 0)
+                                            return b;
+                                        if (b % a == 0)
+                                            return a;
+                                    
+                                        if (a > b)
+                                            return GCD(a % b, b);
+                                        else
+                                            return GCD(a, b % a);
+                                    }
+                                    
+                                    int main()
+                                    {
+                                        printf("GCD is %d \n", GCD(105, 91));
+                                    
+                                        return 0;
+                                    }
+                            </code>
+                    </pre>
                 </div>
             </div>
         </div>
