@@ -2,16 +2,15 @@
 
 int main()
 {
-    int num;
-    printf("Enter the number of fibonacci series element you want : ");
-    scanf("%d", &num);
+    float SI;
+    int P, R, T;
 
-    // non recursive way
-    int a = 0, b = 0;
-    // printing the first num;
-    printf("1");
-    // printing second number;
-    printf("1");
-    
+    printf("Enter the value of Principle amount, Time, Interest Rate : ");
+    scanf("%d %d %d", &P, &R, &T);
+
+    SI = (P * R * T) / 100;
+
+    printf("The Simple Interest is : %f", SI);
+
     return 0;
 }
