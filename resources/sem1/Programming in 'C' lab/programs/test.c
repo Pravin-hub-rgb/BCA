@@ -2,15 +2,14 @@
 
 int main()
 {
-    float SI;
-    int P, R, T;
-
-    printf("Enter the value of Principle amount, Time, Interest Rate : ");
-    scanf("%d %d %d", &P, &R, &T);
-
-    SI = (P * R * T) / 100;
-
-    printf("The Simple Interest is : %f", SI);
-
+    int num;
+    printf("Enter a number : ");
+    scanf("%d", &num);
+    if (num < 0)
+        printf("The entered number is negative");
+    else if (num > 0)
+        printf("The entered number is positive");
+    else
+        printf("The entered number is zero");
     return 0;
 }
