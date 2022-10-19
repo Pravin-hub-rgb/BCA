@@ -1,15 +1,11 @@
-#include <stdio.h>
-
+#include<stdio.h>
 int main()
 {
-    int num;
-    printf("Enter a number : ");
-    scanf("%d", &num);
-    if (num < 0)
-        printf("The entered number is negative");
-    else if (num > 0)
-        printf("The entered number is positive");
-    else
-        printf("The entered number is zero");
+    int a,b,sum;
+    printf("enter ther value of a and b");
+    scanf("%d%d",&a,&b);
+
+    sum=a+b;
+    printf("su,=%d",sum);
     return 0;
 }
