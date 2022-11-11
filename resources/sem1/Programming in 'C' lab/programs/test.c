@@ -1,11 +1,13 @@
 #include <stdio.h>
-
 int main()
 {
-    int x = 5, y, b = 10, c;
-    y = x++;
-    c = b--;
-    printf("The value of y is = %d and x is = %d\n", y, x); // The value of y is = 5 and x is = 6
-    printf("The value of c is = %d and c is = %d\n", c, b); // The value of c is = 10 and c is = 9
+    int y;
+    printf("Enter the year : ");
+    scanf("%d", &y);
+    if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0))
+
+        printf("leap year");
+    else
+        printf("not leap year");
     return 0;
 }
