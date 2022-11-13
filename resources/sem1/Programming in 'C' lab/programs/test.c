@@ -1,13 +1,21 @@
 #include <stdio.h>
+
 int main()
 {
-    int y;
-    printf("Enter the year : ");
-    scanf("%d", &y);
-    if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0))
-
-        printf("leap year");
+    int num;
+    printf("Enter a number : ");
+    scanf("%d", &num);
+    if (num > 0)
+    {
+        printf("%d is a positive number\n", num);
+    }
+    else if (num < 0)
+    {
+        printf("%d is a negative number\n", num);
+    }
     else
-        printf("not leap year");
+    {
+        printf("The number is zero\n");
+    }
     return 0;
 }
