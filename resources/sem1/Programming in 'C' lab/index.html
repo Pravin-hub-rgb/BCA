@@ -322,30 +322,25 @@
                     <pre>
                             <code>
 
-                                    #include &lt;stdio.h>
-                                    #include &lt;math.h>
-                                    
-                                    int main()
+                                #include &lt;stdio.h>
+                                #include &lt;math.h>
+                                int find_prime(int n);
+                                int main()
+                                {
+                                    int n;
+                                    printf("Enter a number : ");
+                                    scanf("%d", &n);
+                                    printf("%d", find_prime(n));
+                                }
+                                int find_prime(int n)
+                                {
+                                    for (int i = 2; i &lt; sqrt(n); i++)
                                     {
-                                        int num;
-                                        printf("Enter a number : ");
-                                        scanf("%d", &num);
-                                        for (int i = 2; i &lt; sqrt(num); i++)
-                                        {
-                                            if (num % 2 == 0)
-                                            {
-                                                printf("The number is not prime \n");
-                                                return 0;
-                                            }
-                                            else
-                                            {
-                                                printf("The entered number is prime \n");
-                                                return 0;
-                                            }
-                                        }
-                                    
-                                        return 0;
+                                        if (n % i == 0)
+                                            return 0;
                                     }
+                                    return 1;
+                                }
                             </code>
                         </pre>
                 </div>
@@ -405,21 +400,19 @@
                     <pre>
                             <code>
 
-                                // might need correction in future.
-
-                                #include &lt;stdio.h>
-                                #include &lt;math.h>
-                                int main()
-                                {
-                                    float sum = 0;
-                                    for (int i = 0; i &lt; 26; i++)
+                                    #include <stdio.h>
+                                    #include <math.h>
+                                    int main()
                                     {
-                                        printf("Sum each time = %f \n",sum);
-                                        sum += 1 / pow(2, i);
+                                        float sum = 0;
+                                        for (int i = 0; i < 25; i++)
+                                        {
+                                            sum += 1 / pow(2, i);
+                                            printf("Sum each time = %f \n",sum);
+                                        }
+                                        printf("The sum is = %f", sum);
+                                        return 0;
                                     }
-                                    printf("The sum is = %f", sum);
-                                    return 0;
-                                }
                             </code>
                     </pre>
                 </div>

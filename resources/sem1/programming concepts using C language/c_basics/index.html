@@ -813,6 +813,25 @@
                             
                                 return 0;
                             }
+                                #include <stdio.h>
+
+                                int main()
+                                {
+                                    int num1, num2, num3, largest;
+                                    printf("Enter a 3 number : ");
+                                    scanf("%d%d%d", &num1, &num2, &num3);
+                                    largest = num1;
+                                    if (num2 > largest)
+                                    {
+                                        largest = num2;
+                                    }
+                                    else if (num3 > largest)
+                                    {
+                                        largest = num3;
+                                    }
+                                    printf("The largest number is : %d", largest);
+                                    return 0;
+                                }
                     </code>
                 </pre>
             </div>
@@ -850,8 +869,7 @@
                                 printf("Net salary of employee is : %f", netS);
                             
                                 return 0;
-                            }
-                            
+                            }                            
                     </code>
                 </pre>
             </div>
@@ -872,9 +890,9 @@
                                 printf("Enter the temperature in Fahrenheit : ");
                                 scanf("%f", &fahren);
                             
-                                celsius = ((fahren - 32) * 5) / 9;
+                                celsius = (fahren - 32) * 1.8;
                             
-                                printf("Entered temperature in celsius is : %f", celsius);
+                                printf("Temperature in celsius is : %f", celsius);
                             
                                 return 0;
                             }                            
@@ -883,25 +901,29 @@
             </div>
         </div>
         <div class="wh">
-            <h3>Write a C program to calculate simple interest</h3>
+            <h3>Write a C program to calculate simple interest and compound interest</h3>
             <div class="code">
                 <div class="dotc"></div>
                 <pre>
                     <code>
 
                             #include &lt;stdio.h>
-
+                            #include &lt;math.h>
+                            
                             int main()
                             {
-                                float SI;
-                                int P, R, T;
-                            
-                                printf("Enter the value of Principle amount, Time, Interest Rate : ");
-                                scanf("%d %d %d", &P, &R, &T);
+                                float P, R, T, SI, CI;
+                                printf("Enter the value of Principle Amount : ");
+                                scanf("%f", &P);
+                                printf("Rate of Ineterest : ");
+                                scanf("%f", &R);
+                                printf("Time (in years) : ");
+                                scanf("%f", &T);
                             
                                 SI = (P * R * T) / 100;
-                            
-                                printf("The Simple Interest is : %f", SI);
+                                CI = pow(P * (1 + (R / 100)), T);
+                                printf("The Simple Interest is : %f\n", SI);
+                                printf("The Compound Interest is : %f\n", CI);
                             
                                 return 0;
                             }
