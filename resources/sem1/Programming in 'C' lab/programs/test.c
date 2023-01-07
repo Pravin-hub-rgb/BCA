@@ -1,19 +1,38 @@
 #include <stdio.h>
-#include <math.h>
 int main()
 {
-    float a, b, c, r1, r2, d;
-    printf("Enter the values for equation : ");
-    scanf("%f%f%f", &a, &b, &c);
-    d = b * b - 4 * a * c;
-    if (d > 0)
+    int arr1[50] = {0}, arr2[50] = {0}, sum[50], n1, n2, max_size;
+    printf("Enter the number of element in array one: ");
+    scanf("%d", &n1);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n1; i++)
     {
-        r1 = (-b + sqrt(d)) / 2 * a;
-        r2 = (-b - sqrt(d)) / 2 * a;
-        printf("roots are real and unequal\n");
-        printf("%f\n%f\n", r1, r2);
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr1[i]);
     }
+    printf("Enter the number of element in array two: ");
+    scanf("%d", &n2);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n2; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr2[i]);
+    }
+
+    if (n1 > n2)
+        max_size = n1;
     else
-        printf("roots are imaginary");
+        max_size = n2;
+
+    for (int i = 0; i < max_size; i++)
+    {
+        sum[i] = arr1[1] + arr2[i];
+    }
+
+    // displaying array
+    for (int i = 0; i < max_size; i++)
+    {
+        printf("%d\t", sum[i]);
+    }
     return 0;
 }
