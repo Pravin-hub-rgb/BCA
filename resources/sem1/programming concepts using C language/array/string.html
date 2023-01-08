@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../../programming concepts using C language/index.html" class="home">Back</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>String</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>String (Character Array)</h1>
+        <ul>
+            <li>A string is an array of characters. Any group of characters enclosed between double quotes is called a string constant.</li>
+            <li>A string is a one-dimensional array of characters terminated by null character '\0'</li>
+        </ul>
+        <div class="code">
+            <pre>
+                <code>
+                    
+                    char s[10] = {'h','e','l','l','o','\0'};
+                </code>
+            </pre>
+        </div>
+        <ul>
+            <li>'\0' is null which defines end of the string. Because of the presence of this character the various functions working on the string are able to know the end of the string.</li>
+            <li>Thus it can be said that the input to the string gets terminated at null '\0'. And remaining array contains garbage values.</li>
+        </ul>
+        <div class="code">
+            <pre>
+                <code>
+
+                    note - The null '\0' looks as if two characters when typed but the compiler treats it as a single character. It is an escape sequence.
+                </code>
+            </pre>
+        </div>
+        <div class="wh">
+            <h2>Character array initialization </h2>
+            <div class="code">
+                <pre>
+                    <code>
+
+                        char s[10];
+                        char s[6] = {'h','a','r','r','y','\0'};
+                        char s[6] = {'h','a','r','r','y'};
+                        above the null character is missing which is added automatically the compiler at the end of the string.
+                        char s[6] = "harry";
+                        char s[0] = {'h','a','r','r','y','\0'};
+
+                        note - the size of the string should be equal to the maximum number of characters in the string + 1.
+                        - The initialization of the string without the mentioning of size is also permitted, as in the integer array.
+                         In such sace the array size will be automatically based on the number of elements initialized.
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>String Input</h2>
+            <ul>
+                <li>The common function used for input is scanf. This function can also be used to input string using format specifer %s.</li>
+            </ul>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+
+                        scanf("%s",name);
+                    </code>
+                </pre>
+            </div>
+            <ul>
+                <li>While inputting the string the <b>&</b> (address of operator is not requried)</li>
+                <li>A problem with the scanf function is that it ends the input on the first white space it finds (a white space includes blank, tabs, new line character)</li>
+                <li>Use of gets() function &rarr; using this we can input a string with white space.</li>
+            </ul>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+
+                        char name[10];
+                        gets(name);
+                    </code>
+                </pre>
+            </div>
+            <ul>
+                <li>For display we can use puts() function.</li>
+            </ul>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+
+                        puts(name);
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>String functions</h2>
+            <ul>
+                <li>String functions are created to make your string handling easier so we don't have make them from scratch.</li>
+                <li>We have to call string function and implement them in our code.</li>
+                <li>To use these function we have include &lt;string.h> header file.</li>
+            </ul>
+            <div class="in">
+                <h3>strlen()</h3>
+                <ul>
+                    <li>It is used to return the length of the string</li>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <pre>
+                            <code>
+
+                                char name[] = "Henry";
+                                printf("%d", (int)strlen(name)); // 5
+                            </code>
+                        </pre>
+                    </div>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strcpy(str1, str2)</h3>
+                <ul>
+                    <li>this function is uded to copy the contents of the string str1 into string str2.</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+
+                            char str1[] = "Hello";
+                            char str2[10];
+                            strcpy(str1, str2);
+                            // str2 -> "Hello"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strcat(str1, str2)</h3>
+                <ul>
+                    <li>It is used to concatenate string str2 onto the send of the string str1.</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+
+                            char fullname[30] = "Harry";
+                            char lastname[10] = " Potter";
+                            strcat(fullname, lastname);
+                            printf("%s", fullname);
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strcmp(str1, str2)</h3>
+                <ul>
+                    <li>It is used to analyse and compare the string str1 and str2.</li>
+                    <li>Returns 0 if str1 and str2 are the same, less than 0 if str1&lt;str2 and greater than 0 is str1>str2 </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strchr(str1, ch)</h3>
+                <ul>
+                    <li>It is used to discover the foremost event or occurence of a specified character within the actual string.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="../../main.js"></script>
+</body>
+
+</html>

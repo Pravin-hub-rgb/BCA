@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../../programming concepts using C language/index.html" class="home">Back</a>
+        <a href="#t1" class="link">Advantages</a>
+        <a href="#t2" class="link">Library functions</a>
+        <a href="#t3" class="link">User-Defined functions</a>
+        <a href="#t4" class="link">Function Declaration</a>
+        <a href="#t5" class="link">Function Definition</a>
+        <a href="#t6" class="link">Function Call</a>
+        <a href="#t7" class="link">return statement</a>
+        <a href="#t8" class="link">Function arguments</a>
+        <a href="#t9" class="link">Types of function</a>
+        <a href="#t10" class="link">Local, Global and Static variables</a>
+        <a href="#t11" class="link">Recursion</a>
+        <a href="#t12" class="link">Programs</a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Functions</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Functions</h1>
+        <ul>
+            <li>A function is a self-contained subprogram that is meant to do some specific, well-defined task.</li>
+            <li>A function is a group of statements that together perform a task.</li>
+            <li>Function allow a large program to be broken down into a smaller self contained components, each of which
+                has a definite purpose.</li>
+        </ul>
+        <div id="t1" class="wh">
+            <h2>Advantages of using functions</h2>
+            <ul>
+                <li>When some specific code is to be used more than once and at different places in the program the use
+                    of functions avoids repetition of that code.</li>
+                <li>The program becomes easily understandable, modifiable and easy to debug and test.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <ul>
+                <li>Every program must have a main function. This main function is used to mark the beginning of the
+                    execution.</li>
+            </ul>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+
+                        int sum(int, int);
+                        int main()
+                        {
+                            int a, b, ans;
+                            printf("Enter two numbers: ");
+                            scanf("%d%d",&a, &b);
+                            ans = sum(a, b); // function call 
+                            printf("Sum is %d", ans);
+                            return 0;
+                        }
+
+                        int sum(int x, int y)
+                        {
+                            int z;
+                            z = x + y;
+                            return z;
+                        }
+                    </code>
+                </pre>
+            </div>
+            <p>Some features of above program</p>
+            <ol>
+                <li>The first statement is the declaration of the function which tells the compiler the name of the
+                    function and the data type of the arguments passed. This declaration is also called as prototype.
+                </li>
+                <li>The declaration of a function is not necessary if the output type is an integer value. In some c
+                    compilers declaratin is not required for all the function.</li>
+                <li>Funcion call is the way of using the function. A function is declared once, defined once but can be
+                    used a numbber of times in the same program.</li>
+                <li>When the compiler encounters the function call, the conrol of the program is tranferred to the
+                    function definition the function is then executed line by line and a value is returned at the end.
+                </li>
+                <li>At the end of the main program is the definition of the function, which can also be called as
+                    process.</li>
+                <li>The function definiton does not terminate with a semicolon.</li>
+                <li>A function may or may not return any value. Thus the presence of the
+                    return statement is not necessary. When the return statement is
+                    encountered, the control is immediately passed back to the calling
+                    function.</li>
+                <li>All functions by default return int. But if the function has to return a
+                    particular type of data the type specifiers can be used along with the
+                    function name.
+                    long int fact(n)</li>
+            </ol>
+        </div>
+        <ul>
+            <li>There are two types of functions
+                <ol>
+                    <li>Library functions</li>
+                    <li>User-defined functions</li>
+                </ol>
+            </li>
+        </ul>
+        <div id="t2" class="wh">
+            <h2>Library Functions</h2>
+            <ul>
+                <li>c has the facility to provide library functions for performing some operations. These functions ar present in C library and they are predefined.</li>
+                <li>For example sqrt() is mathematical library function which is used for finding out the square root of any number.</li>
+                <li>To use a library function we have to include corresponding header file using the preprocessor directive #include. For example to use input out functions like printf(), scanf() we have to include stdio.h for mathematical library functions we have to include math.h, for string library functions string.h should be included.</li>
+                <li>There are total of 15 header files in C. main() is a user
+                    defined function.</li>
+            </ul>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">Program to find the square root of any number</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+
+                            #include&lt;stdio.h>
+                            #include&lt;math.h> 
+                            int main()
+                            {
+                                double n, s;
+                                printf("Enter a number : ");
+                                scanf("%lf", &n);
+                                s = sqrt(n);
+                                printf("The square root of %.2lf is : %.2lf", n, s);
+                                return 0;
+                            }
+                            /* 
+                                This program have three library functions - printf(), scanf() and sqrt()
+                            */
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>User-Defined Functions</h2>
+            <ul>
+                <li>Users can create their own functions for performing any specific task of the program. These types of functions are called user-defined functions. To create and use these function, we should know about these three things- 
+                    <ol>
+                        <li>Function definition</li>
+                        <li>Function declaration</li>
+                        <li>Function call</li>
+                    </ol>
+                </li>
+            </ul>
+            <p>Reference program &darr;</p>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+
+                        int sum(int, int); // function declaration / prototype
+                        int main()
+                        {
+                            int a, b, ans;
+                            printf("Enter two numbers: ");
+                            scanf("%d%d",&a, &b);
+                            ans = sum(a, b); // function call 
+                            // a and b are actual arguments
+                            printf("Sum is %d", ans);
+                            return 0;
+                        }
+
+                        int sum(int x, int y) // function definition
+                        {
+                            int z;
+                            z = x + y;
+                            return z;
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div id="t4" class="in">
+                <h3>Function Declaration</h3>
+                <ul>
+                    <li>The calling function needs information aobut the called function.</li>
+                    <li>If definition of the called function is placed before the calling function, then declaration is not needed. </li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+
+                            #include&lt;stdio.h>
+                            int sum(int x, int y) // function definition
+                            {
+                                int s;
+                                s = x + y;
+                                return s;
+                            }
+                            int main()
+                            {
+                                // body
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>Above the definition of sum() is written before main(), so main() knows everything about the function sum(). But generally the function main() is placed at the top of all other functions are placed after it. In this case, function declaration is needed. The function declaration is also known as the function prototype, and it informs the compiler about the following three things - 
+                        <ol>
+                            <li>Name of the functin</li>
+                            <li>Number and type of arguments received by the function.</li>
+                            <li>Type of value returned by the function.</li>
+                        </ol>
+                    </li>
+                    <li>Function declaration tells the compiler that  a function with these features will be defined and used later in the program. the general synstax of a function declaration is - </li>
+                </ul>
+                    <div class="code">
+                        <pre>
+                            <code>
+
+                                return_type func_name(type1, type2, ...);
+                            </code>
+                        </pre>
+                    </div>
+            </div>
+            <div id="t5" class="in">
+                <h3>Function Definition</h3>
+                <ul>
+                    <li>The function definition consists of the whole description and code of a function.</li>
+                    <li>It tells what the function is doing and what are its input and outputs.</li>
+                    <li>A function definition consists of two parts - a function header and a function body.</li>
+                    <li>The general syntax of a function definition is - </li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            return_type func_name( datatype1 arg1, datatype2 arg2, ...)
+                            {
+                                local variables declarations;
+                                statement;
+                                ...... 
+                                return(expression);
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>The first line in the function definiton is known as the function header and after this the body of the function is written enclosed in curly braces.</li>
+                    <li>The return_type denotes the type of the value that will be returned by the function. The return_type is optional and if omitted, it is assumed to be int by default.</li>
+                </ul>
+            </div>
+            <div id="t6" class="in">
+                <h3>Function Call</h3>
+                <ul>
+                    <li>The function definition describes what a function can do, but to actually use it in the program the function should be called somewhere. A function is called by simply wiriting its name followed by the argument list inside the parentheses.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            func_name(arg1, arg2, ...);
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>These arguments arg1, arg2, ... are called actual arguments.</li>
+                    <li>Here func_name is known as the called function while the function in which this function called is placed is known as the calling function. </li>
+                    <li>When a function is called, the control passes to the called function.</li>
+                    <li>If the function returns a value, then this function call can be used like an operand in any expression anywhere in the program.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+                            s = sum(a, b); /* Assigning the return value of sum() to variable s */
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div id="t7" class="in">
+                <h3>return statement</h3>
+                <ul>
+                    <li>The return statement is used in a function to return a value to the calling function.</li>
+                    <li>It may also be used for immediate exit from the called function to the calling function without returning a value.</li>
+                    <li>This statement can appear anywhere inside the body of the function. There are two ways in which it can be used -</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            return;
+                            /* Above one is used to terminate the function without returning any value. */
+                            return(expression);
+                            /* Above return statement is used to terminate a function and return a value to the calling funtion. */
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div id="t8" class="in">
+                <h3>Function Arguments</h3>
+                <ul>
+                    <li>the calling function sends some values to the called function for communication; these values are called arguments or parameters.</li>
+                </ul>
+                <div class="wh">
+                    <p>Actual arguments</p>
+                    <ul>
+                        <li>The arguments which are mentioned in the function call are known as actual arguments, since these are the values which are actually sent to the called function.</li>
+                        <li>Actual arguments can be written in the form of variables, constants or expressions or any function call that returns a value.</li>
+                    </ul>
+                    <div class="code">
+                        <pre>
+                            <code>
+
+                                func(x)
+                                func(a*b, c*d+b)
+                                func(1, 2, sum(a, b))
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="wh">
+                    <p>Formal arguments</p>
+                    <ul>
+                        <li>The name of the arguments, which are mentioned in the function definition are called formal arguments since they are used just to hold the values that are sent by the calling function.</li>
+                        <li>These formal arguments are simply like other local variables of the function which are created when the function call starts and are destroyed when the function ends. However there are two differences.
+                            <ul>
+                                <li>First is that formal arguments are declared inside parentheses while other local variables are declared at the beginning of the function block.</li>
+                                <li>The second difference is that formal arguments are automatically initialzed with the values of the actual arguments passed, while other local variables are assigned values through the statements written inside the function definition.</li>
+                            </ul>
+                        </li>
+                        <li>The order, number and type of actual arguments in the function call should match with the order, number and type of formal arguments in the function definition.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="t9" class="wh">
+            <h2>Types of Functions on the basis of the arguments and return value</h2>
+            <ol>
+                <li>Functions with no arguments and no return value.</li>
+                <li>Functions with no arguments and a return value.</li>
+                <li>Functions with arguments and no return value.</li>
+                <li>Functions with arguments and a return value.</li>
+            </ol>
+            <div class="in">
+                <h3>Functions with no arguments and no return value</h3>
+                <ul>
+                    <li>Functions that have no arguments and no return value are written as &darr;</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            void func(void);
+                            main()
+                            {
+                                ...... 
+                                func();
+                                ......
+                            }
+                            void func(void)
+                            {
+                                ..... 
+                                statement;
+                                ..... 
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Functions with no arguments but a return value</h3>
+                <ul>
+                    <li>These types of functions do not receive any arguments but they can return a value.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            int func(void);
+                            main()
+                            {
+                                int r;
+                                ..... 
+                                r = func();
+                                ..... 
+                            }
+                            int func(void)
+                            {
+                                ...... 
+                                ......
+                                return (expression);
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Function with arguments but no return value</h3>
+                <ul>
+                    <li>These types of functions have arguments hence the calling function can send data to the called function but the called function does not return any value.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            void func(int, int);
+                            main()
+                            {
+                                ..... 
+                                func(a, b);
+                                .....
+                            }
+                            void func(int c, int d)
+                            {
+                                ..... 
+                                statements 
+                                .....
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Function with arguments and return value</h3>
+                <ul>
+                    <li>These types of functions have arguments, so the calling function can send data to the called function, it can also return any value to the calling function using return statement.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            int func(int, int);
+                            main()
+                            {
+                                int r;
+                                ...... 
+                                r = func(a, b);
+                                ..... 
+                                func(c, d);
+                            }
+                            int func(int a, int b)
+                            {
+                                ...... 
+                                ...... 
+                                return (expression);
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div id="t10" class="wh">
+            <h2>Local, Global and Static Variables</h2>
+            <div class="in">
+                <h3>Local Variables</h3>
+                <ul>
+                    <li>The variables that are defined within the body of a function or a block, are local to that function block only and are called local variables.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            func()
+                            {
+                                int a, b;
+                                ..... 
+                                ..... 
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>Here a and  b are local variables which are defined within the body of the function func().</li>
+                    <li>Local variables can be used only in those functons or blocks, in which they are declared.</li>
+                    <li>The same variable may be used in different functions. For example &darr;</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+                            func1()
+                            {
+                                int a=2, b=4;
+                                ...... 
+                                ...... 
+                            }
+                            func2()
+                            {
+                                int a = 15, b = 20;
+                                ..... 
+                                ..... 
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>Here values of a = 2 and b = 4 are local to the function func1() and a = 15 and b = 20 are local to the function func2().</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Global Variables</h3>
+                <ul>
+                    <li>The variables that are defined outside any function are called global variables.</li>
+                    <li>All function in the program can access and mofigy global variables.</li>
+                    <li>It is used to declare a variable global if it is to be used by many functions in the program.</li>
+                    <li>Global variables are automatically initialized to 0 at the time of declaration.</li>
+                    <li>Program to understand the use of global variables &darr;</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+
+                            #include&lt;stdio.h>
+                            int a, b = 6;
+                            main()
+                            {
+                                printf("Inside main() : a = %d, b = %d\n", a, b);
+                                func1();
+                                func2();
+                            }
+                            void func1(void)
+                            {
+                                printf("Inside func1() : a = %d, b = %d\n", a, b);
+                            }
+                            void func2(void)
+                            {
+                                int a = 8;
+                                printf("Inside func2() : a = %d, b = %d\n", a, b);
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <p>OUTPUT &darr;</p>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            Inside main() : a = 0, b = 6
+                            Inside func1() : a = 0, b = 6
+                            Inside func2() : a = 8, b = 6
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>Here a and b are declared outside all functions hence they are global variables. </li>
+                    <li>The variable a will be initialized to 0 automatically since it is a global variable.</li>
+                    <li>Now we can use these variables in any function.</li>
+                    <li>In func2(), there is a local variable with the same name as global variable. Whenever there is a conflict between a local and global variable, the local variable gets the precedence.</li>
+                    <li>So inside func2() the value of local variable gets printed.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Static Variables</h3>
+                <ul>
+                    <li>Static variables are declared by writing keyword static in front of the declaration.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            static type var_name;
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>A static variable is initialzed only once and the value of a static variable is retained between function calls. If a static variable is not initialized then it is automatically initialized to 0.</li>
+                    <li>Program to understand the use of static variables &darr;</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+
+                            #include&lt;stdio.h>
+                            main()
+                            {
+                                func();
+                                func();
+                                func();
+                            }
+                            void func(void)
+                            {
+                                int a = 10;
+                                static int b = 10;
+                                printf("a = %d    b = %d\n", a, b);
+                                a++;
+                                b++;
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            a = 10    b = 10
+                            a = 10    b = 11
+                            a = 10    b = 12
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li>Here 'b' is a static variable. First time when the function is called 'b' is initialized to 10.</li>
+                    <li>Inside the same function the value of 'b' becomes 11. This value is retained and when next time the function is called value of 'b' is 11 and the initializaion is neglected.</li>
+                    <li>Similarly when third time function is called, value of 'b' is 12. Note that the variable 'a', which is not static is initialized on each call and its value is not retained.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="t11" class="wh">
+            <h2>Recursion</h2>
+            <ul>
+                <li>Recursion is a powerful technique of writing a complicated algorithm in an easy way.</li>
+                <li>According to this technique a problem is defined in terms of itself.</li>
+                <li>The problem is solved by dividing in into smaller problems, which are similar in nature to the original problem.</li>
+                <li>To implement recursion technique in programming, a function should be capable of calling itself, this facility is available in C.</li>
+                <li>The function that calls itself (inside fuction body) again and again is known as a recursive function.</li>
+                <li>In recursion the calling function and the called fucntion are same.</li>
+                <li>Example &darr;</li>
+            </ul>
+            <div class="code">
+                <pre>
+                    <code>
+
+                        main()
+                        {
+                            ..... 
+                            rec();
+                            .....
+                        }
+                        rec()
+                        {
+                            ...... 
+                            ...... 
+                            rec();  ----> recursive call
+                            ......
+                        }
+                    </code>
+                </pre>
+            </div>
+            <ul>
+                <li>There should be a terminating condition to stop a recursive function, otherwise it will keep on calling itself infinitely and will never return.</li>
+            </ul>
+            <div class="in">
+                <h3>Before writing a recursive function for a problem we should consifer these points-</h3>
+                <ol>
+                    <li>We should be able to define the solution of the problem in terms of similar type of smaller problem. At each step we get closer to the final solution of our original problem.</li>
+                    <li>There should be a terminating condition to stop recursion.</li>
+                </ol>
+            </div>           
+        </div>
+        <div class="wh">
+            <h2>Programs</h2>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">Program to find factorial of a number using recursion</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+
+                            #include&lt;stdio.h>
+                            main()
+                            {
+                                int num;
+                                printf("Enter a number : ");
+                                scanf("%d", &num);
+                                printf("Factorial of %d is %ld\n", num, fact(num));
+                            }
+                            long fact(int n)
+                            {
+                                if (n == 0)
+                                    return 1;
+                                else 
+                                    return (n * fact(n-1));
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../main.js"></script>
+</body>
+
+</html>
