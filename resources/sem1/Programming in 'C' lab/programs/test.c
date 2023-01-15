@@ -1,35 +1,59 @@
 #include <stdio.h>
-
+#define row 3
+#define col 3
 int main()
 {
-   int arr[10], n, search, flag = 0;
-   printf("Enter the number of element in array : ");
-   scanf("%d", &n);
-   printf("Enter the element in the array.\n");
-   for (int i = 0; i < n; i++)
+   int ar[row][col], i, j, n;
+   printf("Enter the elements of array\n");
+   for (i = 0; i < row; i++)
    {
-      printf("Enter element at %d index : ", i);
-      scanf("%d", &arr[i]);
-   }
-   printf("Enter the element you want to search : ");
-   scanf("%d", &search);
-
-   for (int i = 0; i < n; i++)
-   {
-      if (arr[i] == search)
+      for (j = 0; j < col; j++)
       {
-         flag = 1;
-         break;
+         printf("Enter at ar[%d][%d] : ", i, j);
+         scanf("%d", &ar[i][j]);
       }
    }
-   if (flag==1)
+   printf("The elements of array\n");
+   for (i = 0; i < row; i++)
    {
-      printf("%d is present\n", search);
+      for (j = 0; j < col; j++)
+      {
+         printf(" %d ", ar[i][j]);
+      }
+      printf("\n");
+   }
+   if (row == col)
+   {
+      printf("The lower triangular matrix\n");
+      for (i = 0; i < row; i++)
+      {
+         for (j = 0; j < col; j++)
+         {
+            if (j <= i)
+            {
+               printf(" %d ", ar[i][j]);
+            }
+         }
+         printf("\n");
+      }
+      printf("The upper triangular matrix\n");
+      for (i = 0; i < row; i++)
+      {
+         for (j = 0; j < col; j++)
+         {
+            if (j >= i)
+            {
+               printf("  %d", ar[i][j]);
+            }
+            else
+            {
+               printf("   ");
+            }
+         }
+         printf("\n");
+      }
    }
    else
-   {
-      printf("%d is not present\n", search);
-   }
-
+      printf("Can't calculate the upper/lower triangle in matrix");
    return 0;
 }
