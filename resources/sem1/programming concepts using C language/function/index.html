@@ -43,7 +43,7 @@
     <div class="content-box">
         <h1>Functions</h1>
         <ul>
-            <li>A function is a self-contained subprogram that is meant to do some specific, well-defined task.</li>
+            <li>A function is a self-contained block of statements that is meant to do some specific, well-defined task.</li>
             <li>A function is a group of statements that together perform a task.</li>
             <li>Function allow a large program to be broken down into a smaller self contained components, each of which
                 has a definite purpose.</li>
@@ -654,12 +654,150 @@
                 <li>There should be a terminating condition to stop a recursive function, otherwise it will keep on calling itself infinitely and will never return.</li>
             </ul>
             <div class="in">
-                <h3>Before writing a recursive function for a problem we should consifer these points-</h3>
+                <h3>Before writing a recursive function for a problem we should consider these points-</h3>
                 <ol>
                     <li>We should be able to define the solution of the problem in terms of similar type of smaller problem. At each step we get closer to the final solution of our original problem.</li>
                     <li>There should be a terminating condition to stop recursion.</li>
                 </ol>
             </div>           
+        </div>
+        <div class="wh">
+            <h2>Passing arrays to functions</h2>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">passing an array and returning it's average</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+
+                                #include &lt;stdio.h>
+                                float avg(int arr[], int s);
+                                int main()
+                                {
+                                   int arr[6] = {1, 2, 3, 4, 5, 6};
+                                   printf("The average is : %.2f", avg(arr, sizeof(arr) / sizeof(int)));
+                                   return 0;
+                                }
+                                float avg(int arr[], int s)
+                                {
+                                   float avg;
+                                   int sum = 0, i;
+                                   for (i = 0; i < s; i++)
+                                   {
+                                      sum += arr[i];
+                                   }
+                                   return (float)sum / s;
+                                }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">finding maximum and minimum in an array using function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+
+                                #include &lt;stdio.h>
+                                int max(int arr[], int s);
+                                int min(int arr[], int s);
+                                int main()
+                                {
+                                   int arr[6] = {1, 2, 3, 4, 5, 6};
+                                   printf("The Maximum number is : %d\n", max(arr, sizeof(arr) / sizeof(int)));
+                                   printf("The Minimum number is : %d\n", min(arr, sizeof(arr) / sizeof(int)));
+                                   return 0;
+                                }
+                                int max(int arr[], int s)
+                                {
+                                   int i, max = arr[0];
+                                   for (i = 1; i < s; i++)
+                                   {
+                                      if (arr[i] > max)
+                                         max = arr[i];
+                                   }
+                                   return max;
+                                }
+                                int min(int arr[], int s)
+                                {
+                                   int i, min = arr[0];
+                                   for (i = 1; i < s; i++)
+                                   {
+                                      if (arr[i] < min)
+                                         min = arr[i];
+                                   }
+                                   return min;
+                                }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Passing strings to functions</h2>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="accordion">example</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+
+                                #include &lt;stdio.h>
+                                void printit(char words[])
+                                {
+                                   printf("The words are : %s", words);
+                                }
+                                int main()
+                                {
+                                   char words[20] = "hehe";
+                                   printit(words);
+                                   return 0;
+                                }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Pre-processor</h2>
+            <ul>
+                <li>The pre-processor is a program which process the source code before it passes through compiler.</li>
+                <li>Pre-processor are placed in source program before the main line, it begins with symbol '#' and do not require a semicolon at the end.</li>
+                <li>The commonly use pre-processor directives are - 
+                    <ul>
+                        <li>#define</li>
+                        <li>#undef</li>
+                        <li>#include</li>
+                        <li>#ifdef</li>
+                        <li>#endif</li>
+                        <li>#if</li>
+                        <li>#else</li>
+                    </ul>
+                </li>
+                <li>The pre-processor directives are divided into three categories - 
+                    <ul>
+                        <li>Macro substitution directive</li>
+                        <li>File inclusion directive</li>
+                        <li>Compiler control directive</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Macro Substitution directive</h3>
+                <div class="code">
+                    <pre>
+                        <code>
+
+                            #define MAX 500
+                            #define sqrt(x) x*x // macro with arguments
+                        </code>
+                    </pre>
+                </div>
+                <ul>
+                    <li><a href="https://www.tutorialspoint.com/macros-vs-functions-in-c">Macro vs function</a></li>
+                </ul>
+            </div>
         </div>
         <div class="wh">
             <h2>Programs</h2>
