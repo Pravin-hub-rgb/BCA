@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../../advance_C/index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Structure</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Structure</h1>
+        <ul>
+            <li>A structure can be defined as a derived data type which can represent several different types of data in a single unit. Each individual data item within the structure is referred to as member.</li>
+            <li>Structure is a collection of different type of hetrogeneous data element.</li>
+            <li>Structure is also known as records.</li>
+            <li>Structure is user defined data type.</li>
+        </ul>
+        <div class="wh">
+            <h2>Definition</h2>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    struct tagname{
+                        datatype member1;
+                        datatype member2;
+                        ...
+                        ...
+                        datatype memberN;
+                    };
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Here <b><i>struct</i></b> is keyword, which ells the compiler that a structure is being defined.</li>
+                <li>member1, member2, ..., memberN are known as members of the structure and are declared inside curly braces.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    struct student
+                    {
+                        char name[20];
+                        int rollno;
+                        float marks;
+                    }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Declaring Structure Variables</h2>
+            <ul>
+                <li>Till now we have only created a template or a format, the actual use of structures will be when we declare variables based on this format. We can declare structure variables in two ways- 
+                    <ol>
+                        <li>With structure definition</li>
+                        <li>Using the structure tag</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>With structure definition</h3>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        struct student
+                        {
+                            char name[20];
+                            int rollno;
+                            float marks;
+                        } stu1, stu2, stu3;
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>Here stu1, stu2 and stu3 are variables of type <b><i>struct student.</i></b></li>
+                    <li>When we declare a variable while defining the structure template, the tagname is optional. So we can also declare them as &darr;</li>
+                </ul>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        struct 
+                        {
+                            char name[20];
+                            int rollno;
+                            float marks;
+                        } stu1, stu2, stu3;
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>If we declare variables in this way, then we'll not be able to declare other variables of this structure type anywhere else in the program nor can we send these structure variables to functions.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Using structure tag</h3>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        struct student 
+                        {
+                            char name[20];
+                            int rollno;
+                            float marks;
+                        };
+
+                        struct student stu1, stu2;
+                        struct student stu3;
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Initialization of structure variables</h2>
+            <div class="in">
+                <h3>Compiler initialization</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        #include&lt;stdio.h>
+
+                        struct student
+                        {
+                            char name[20];
+                            int rollno;
+                            float marks;
+                        };
+
+                        int main()
+                        {
+                            struct student s1 = {"Harry", 23, 45};
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Runtime initialization</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        #include&lt;stdio.h>
+
+                        struct student
+                        {
+                            char name[20];
+                            int rollno;
+                            float marks;
+                        };
+
+                        int main()
+                        {
+                            struct student s1;
+                            printf("Enter name of student : ");
+                            scanf("%s", s1.name);
+                            printf("Enter roll number of student : ");
+                            scanf("%d", &s1.rollno);
+                            printf("Enter marks of student : ");
+                            scanf("%f", &s1.marks);
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Accessing structure member</h2>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                    <code>
+                    
+                     #include&lt;stdio.h>
+
+                     struct student
+                     {
+                         char name[20];
+                         int rollno;
+                         float marks;
+                     };
+
+                     int main()
+                     {
+                         struct student s1;
+                         printf("Enter name of student : ");
+                         scanf("%s", s1.name);
+                         printf("Enter roll number of student : ");
+                         scanf("%d", &s1.rollno);
+                         printf("Enter marks of student : ");
+                         scanf("%f", &s1.marks);
+
+                         printf("Enter name of student : %s", s1.name);
+                         printf("Enter roll number of student : %d", s1.rollno);
+                         printf("Enter marks of student : %f", s1.marks);
+
+                         return 0;
+                     }
+                    </code>
+                </pre>
+             </div>
+             <ul>
+                <li>We use dot operator to access member of structure.</li>
+             </ul>
+        </div>
+        <div class="wh">
+            <h2>Practise</h2>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Program to input two distanes from ser in km, m and cm format then calculate sum of these two distances.</button>
+               <div class="panel">
+                <pre>
+                    <code>
+                    
+                            #include &lt;stdio.h>
+
+                            struct distance
+                            {
+                                int k, m, c;
+                            };
+                            
+                            int main()
+                            {
+                                struct distance d1, d2, sum;
+                                for (int i = 1; i <= 2; i++)
+                                {
+                                    printf("Enter the %d distance in Kilometers : ", i);
+                                    scanf("%d", (i == 1) ? &d1.k : &d2.k);
+                                    printf("Enter the %d distance in meters : ", i);
+                                    scanf("%d", (i == 1) ? &d1.m : &d2.m);
+                                    printf("Enter the %d distance in centimeters : ", i);
+                                    scanf("%d", (i == 1) ? &d1.c : &d2.c);
+                                }
+                                sum.k = d1.k + d2.k;
+                                sum.m = d1.m + d2.m;
+                                sum.c = d1.c + d2.c;
+                                if (sum.c >= 100)
+                                {
+                                    int times = sum.c / 100;
+                                    for (int i = 0; i < times; i++)
+                                    {
+                                        sum.m++;
+                                    }
+                                    sum.c = sum.c % 100;
+                                }
+                                if (sum.m >= 1000)
+                                {
+                                    int times = sum.m / 1000;
+                                    for (int i = 0; i < times; i++)
+                                    {
+                                        sum.k++;
+                                    }
+                                    sum.m = sum.m % 1000;
+                                }
+                                printf("Sum distance KM : %d\n", sum.k);
+                                printf("Sum distance M : %d\n", sum.m);
+                                printf("Sum distance CM : %d\n", sum.c);
+                                return 0;
+                            }
+                    </code>
+                </pre>
+               </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
