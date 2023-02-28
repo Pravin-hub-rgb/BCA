@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Arrays</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Arrays</h1>
+        <ul>
+            <li>Collection of homogenous elements</li>
+            <li>Here elements are stored in linear continous memory location.</li>
+            <li>Array is also known as index variable / subscripted variable.</li>
+        </ul>
+        <div class="wh">
+            <h2>Address calculation of single dimension array</h2>
+            <p>Representation of 1-D array in memory</p>
+            <img src="../../images/arr1.svg" alt="" class="wb">
+            <p>Formula &darr;</p>
+            <img src="../../images/1dadd.svg" alt="" class="wb">
+            <div class="in">
+                <p>Q- Given base address of A[1300, ... ,1900] is 1020, size of single element is 2 find address of A[1700].
+                    <br>
+                    <pre>
+                        <code>
+
+                            BA = 1020
+                             w = 2
+                             i = 1700
+                            lb = 1300
+
+                            formula &darr; 
+                            address of A[i] = BA + [(i - lb) w]
+
+                            address of A[1700] = 1020 + [(1700 - 1300) 2]
+                                               = 1820 
+
+                        </code>
+                    </pre>
+                </p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Address calculation of two dimensional array.</h2>
+            <img src="../../images/addcal.svg" alt="" class="wb">
+        </div>
+        <div class="wh">
+            <h2>Operations on Array</h2>
+            <ul>
+                <li>We will make menu driven program where each operation will be in a separate function.</li>
+            </ul>
+            <div class="in">
+                <h3>Insertion</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class="ac">Insertion code</button>
+                   <div class="panel">
+                    <pre>
+                        <code>
+                        
+                             #include &lt;stdio.h>
+                             void printArr(int[], int);
+                             int main()
+                             {
+                                 int arr[100] = {0}, size, value, pos;
+                                 printf("Enter the size of the array : ");
+                                 scanf("%d", &size);
+                                 printf("Enter the value you want to insert : ");
+                                 scanf("%d", &value);
+                                 printf("Enter the position : ");
+                                 scanf("%d", &pos);
+                             
+                                 printf("Array before insertion : ");
+                                 printArr(arr, size);
+                                 
+                                 // insertion logic
+                                 for (int i = size - 1; i >= pos - 1; i--)
+                                 {
+                                     arr[i + 1] = arr[i];
+                                 }
+                                 arr[pos - 1] = value;
+                                 if (size <= 100)
+                                     size++;
+                                 
+                                 printf("\nArray after insertion : ");
+                                 printArr(arr, size);
+                                 return 0;
+                             }
+                             void printArr(int x[], int size)
+                             {
+                                 for (int i = 0; i < size; i++)
+                                 {
+                                     printf("%d\t", x[i]);
+                                 }
+                                 printf("\n");
+                             }
+                        </code>
+                    </pre>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
