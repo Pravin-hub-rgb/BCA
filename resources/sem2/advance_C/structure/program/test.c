@@ -1,45 +1,65 @@
 #include <stdio.h>
-
-struct distance
+#include <stdlib.h>
+struct Complex
 {
-    int k, m, c;
-};
-
+    int real, imag;
+} no1, no2, sum;
+void enterComp();
+void display();
+void sumComp();
+void sub();
 int main()
 {
-    struct distance d1, d2, sum;
-    for (int i = 1; i <= 2; i++)
+    int option;
+    while (1)
     {
-        printf("Enter the %d distance in Kilometers : ", i);
-        scanf("%d", (i == 1) ? &d1.k : &d2.k);
-        printf("Enter the %d distance in meters : ", i);
-        scanf("%d", (i == 1) ? &d1.m : &d2.m);
-        printf("Enter the %d distance in centimeters : ", i);
-        scanf("%d", (i == 1) ? &d1.c : &d2.c);
-    }
-    sum.k = d1.k + d2.k;
-    sum.m = d1.m + d2.m;
-    sum.c = d1.c + d2.c;
-    if (sum.c >= 100)
-    {
-        int times = sum.c / 100;
-        for (int i = 0; i < times; i++)
+        printf("\n\n\t\t\t\t  -_-_-_-_- MENU -_-_-_-_-  \n\n\t\t\t\t1. Input two numbers,\n\t\t\t\t2. Display two numbers,\n\t\t\t\t3. Addition of two complex number,\n\t\t\t\t4. Subtraction of two complex number,\n\t\t\t\t5. Exit\n\n");
+        printf("\t\t\t\tEnter your option : ");
+        scanf("%d", &option);
+
+        switch (option)
         {
-            sum.m++;
+        case 1:
+            enterComp();
+            break;
+        case 2:
+            display();
+            break;
+        case 3:
+            sumComp();
+            break;
+        case 4:
+            sub();
+            break;
+        case 5:
+            exit(0);
+        default:
+            printf("\n\t\t\t\t** ** Enter correct option ** **");
         }
-        sum.c = sum.c % 100;
     }
-    if (sum.m >= 1000)
-    {
-        int times = sum.m / 1000;
-        for (int i = 0; i < times; i++)
-        {
-            sum.k++;
-        }
-        sum.m = sum.m % 1000;
-    }
-    printf("Sum distance KM : %d\n", sum.k);
-    printf("Sum distance M : %d\n", sum.m);
-    printf("Sum distance CM : %d\n", sum.c);
     return 0;
+}
+void enterComp()
+{
+    printf("\n\t\t\t\tEnter Real value of first complex number : ");
+    scanf("%d", &no1.real);
+    printf("\n\t\t\t\tEnter Imaginary value of first complex number : ");
+    scanf("%d", &no1.imag);
+    printf("\n\t\t\t\tEnter Real value of second complex number : ");
+    scanf("%d", &no2.real);
+    printf("\n\t\t\t\tEnter Imaginary value of second complex number : ");
+    scanf("%d", &no2.imag);
+}
+void display()
+{
+    printf("\n\t\t\t\tFirst complex number : %d + %di", no1.real, no1.imag);
+    printf("\n\t\t\t\tSecond complex number : %d + %di", no2.real, no2.imag);
+}
+void sumComp()
+{
+    printf("\n\t\t\t\tThe sum is %d + %di ", no1.real + no2.real, no1.imag + no2.imag);
+}
+void sub()
+{
+    printf("\n\t\t\t\tThe subtraction is %d + %di ", no1.real - no2.real, no1.imag - no2.imag);
 }

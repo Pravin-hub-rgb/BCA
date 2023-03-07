@@ -23,7 +23,7 @@
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="../../advance_C/index.html" class="home">Home</a>
+        <a href="../index.html" class="home">Home</a>
         <a href="#" class="link"></a>
     </div>
     <div id="navbar" class="grad">
@@ -248,10 +248,63 @@
              </ul>
         </div>
         <div class="wh">
+            <h2>Array of structure</h2>
+            <ul>
+                <li>As we can create array of int, float and char, we can also create array of structure and access it using its index.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Create an array of structure to store multiple student records.</button>
+               <div class="panel">
+                <pre>
+                    <code>
+                    
+                            #include &lt;stdio.h>
+                            struct Student
+                            {
+                                char name[20];
+                                int rollNo, id;
+                                float fees;
+                            };
+                            int main()
+                            {
+                                int n;
+                                struct Student many[100];
+                                printf("Enter the number of student you want : ");
+                                scanf("%d", &n);
+                                for (int i = 0; i < n; i++)
+                                {
+                                    printf("\n||||| Enter Detail of student : %d |||||\n", i + 1);
+                                    printf("Name : ");
+                                    scanf("%s", many[i].name);
+                                    printf("\nRoll Number : ");
+                                    scanf("%d", &many[i].rollNo);
+                                    printf("\nFees value : ");
+                                    scanf("%f", &many[i].fees);
+                                    printf("\nID : ");
+                                    scanf("%d", &many[i].id);
+                                }
+                                printf("\n_-_-_-_-_-_ Displaying all the student's details _-_-_-_-_-_\n");
+                                for (int i = 0; i < n; i++)
+                                {
+                                    printf("\n\n||||| Detail of student : %d |||||\n", i + 1);
+                                    printf("Name : %s", many[i].name);
+                                    printf("\nRoll Number : %d", many[i].rollNo);
+                                    printf("\nFees value : %f", many[i].fees);
+                                    printf("\nID : %d", many[i].id);
+                                }
+                                return 0;
+                            }
+                    </code>
+                </pre>
+               </div>
+            </div>
+        </div>
+        <div class="wh">
             <h2>Practise</h2>
             <div class='code'>
                <div class='dotc'></div>
-               <button class="ac">Program to input two distanes from ser in km, m and cm format then calculate sum of these two distances.</button>
+               <button class="ac">Program to input two distances from user in km, m and cm format then calculate sum of these two distances.</button>
                <div class="panel">
                 <pre>
                     <code>
@@ -305,6 +358,82 @@
                 </pre>
                </div>
             </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Menu driven program to add and subtract two complex number</button>
+                <div class="panel">
+                 <pre>
+                     <code>
+                     
+                          #include &lt;stdio.h>
+                          #include &lt;stdlib.h>
+                          struct Complex
+                          {
+                              int real, imag;
+                          } no1, no2, sum;
+                          void enterComp();
+                          void display();
+                          void sumComp();
+                          void sub();
+                          int main()
+                          {
+                              int option;
+                              while (1)
+                              {
+                                  printf("\n\n\t\t\t\t  -_-_-_-_- MENU -_-_-_-_-  \n\n\t\t\t\t1. Input two numbers,\n\t\t\t\t2. Display two numbers,\n\t\t\t\t3. Addition of two complex number,\n\t\t\t\t4. Subtraction of two complex number,\n\t\t\t\t5. Exit\n\n");
+                                  printf("\t\t\t\tEnter your option : ");
+                                  scanf("%d", &option);
+                          
+                                  switch (option)
+                                  {
+                                  case 1:
+                                      enterComp();
+                                      break;
+                                  case 2:
+                                      display();
+                                      break;
+                                  case 3:
+                                      sumComp();
+                                      break;
+                                  case 4:
+                                      sub();
+                                      break;
+                                  case 5:
+                                      exit(0);
+                                  default:
+                                      printf("\n\t\t\t\t** ** Enter correct option ** **");
+                                  }
+                              }
+                              return 0;
+                          }
+                          void enterComp()
+                          {
+                              printf("\n\t\t\t\tEnter Real value of first complex number : ");
+                              scanf("%d", &no1.real);
+                              printf("\n\t\t\t\tEnter Imaginary value of first complex number : ");
+                              scanf("%d", &no1.imag);
+                              printf("\n\t\t\t\tEnter Real value of second complex number : ");
+                              scanf("%d", &no2.real);
+                              printf("\n\t\t\t\tEnter Imaginary value of second complex number : ");
+                              scanf("%d", &no2.imag);
+                          }
+                          void display()
+                          {
+                              printf("\n\t\t\t\tFirst complex number : %d + %di", no1.real, no1.imag);
+                              printf("\n\t\t\t\tSecond complex number : %d + %di", no2.real, no2.imag);
+                          }
+                          void sumComp()
+                          {
+                              printf("\n\t\t\t\tThe sum is %d + %di ", no1.real + no2.real, no1.imag + no2.imag);
+                          }
+                          void sub()
+                          {
+                              printf("\n\t\t\t\tThe subtraction is %d + %di ", no1.real - no2.real, no1.imag - no2.imag);
+                          }
+                     </code>
+                 </pre>
+                </div>
+             </div>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
