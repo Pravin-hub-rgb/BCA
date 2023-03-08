@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving from C to C++</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Moving from C to C++</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Moving from C to C++</h1>
+        <ul>
+            <li>There is change in C++ syntax and those changes are &darr;<br>
+            </li>
+        </ul>
+        <div class='code'>
+           <pre>
+               <code>
+               
+                printf("Hello world"); // this is in C language
+                cout << "Hello world"; // this is in C++ language 
+
+                scanf("&d",&a); // inputing value in a variable in C language
+                cin>>a; // inputing value in a variable in C++ language
+               </code>
+           </pre>
+        </div>
+        <ul>
+            <li>We use &lt;iostream> header file instead of &lt;stdio.h>.</li>
+        </ul>
+        <div class="wh">
+            <h2>Adding two numbers in C and C++ language</h2>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    // C 
+                    #include &lt;stdio.h>
+                    int main()
+                    {
+                        int a, b, sum = 0;
+                        printf("Enter the value of a : ");
+                        scanf("%d", &a);
+                        printf("Enter the value of b : ");
+                        scanf("%d", &b);
+                        sum = a + b;
+                        printf("The sum is : %d", sum);
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    // C++
+                    #include &lt;iostream>
+                    using namespace std;
+                    int main()
+                    {
+                        int a, b, sum;
+                        cout << "Enter the value of a : ";
+                        cin >> a;
+                        cout << "Enter the value of b : ";
+                        cin >> b;
+                        sum = a + b;
+                        cout << "The sum is : " << sum;
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Scope resolution operator</h2>
+            <ul>
+                <li>The scope resolution operator is used to reference the global variable or member function that is out of scope. Therefore, we use the scope resolution operator to access the hidden variable or function of a program. The operator is represented as the double colon (::) symbol.</li>
+                <li>For example, when the global and local variable or function has the same name in a program, and when we call the variable, by default it only accesses the inner or local variable without calling the global variable. In this way, it hides the global variable or function. To overcome this situation, we use the scope resolution operator to fetch a program's hidden variable or function.</li>
+            </ul>
+            <div class="in">
+                <h3>Program to access the hidden value using the scope resolution (::) operator</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        #include &lt;iostream>
+                        using namespace std;
+
+                        // declare global variable 
+                        int num = 50;
+                        int main()
+                        {
+                            // declare local variable
+                            int num = 100;
+
+                            // print the value of the variables
+                            cout << "The value of the local variable num : " << num;
+
+                            // use scope resolution operator (::) to access the global variable 
+                            cout << "\n The value of the global variable num : " << ::num;
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        The value of the local variable num : 100
+                        The value of the global variable num : 50
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <h3>Use of the scope resolution Operator</h3>
+            <ol>
+                <li>It is used to access the hidden variables or member functions of a program.</li>
+                <li>It defines the member function outside of the class using the scope resolution.</li>
+                <li>It is used to access the static variable and static function of a class.</li>
+                <li>The scope resolution operator is used to override function in the inheritance.</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>Inline function</h2>
+            <ul>
+                <li>C++ provides inline functions to reduce the function call overhead.</li>
+                <li>An inline function is a function that is expanded in line when it is called.</li>
+                <li>When the inline function is called whole code of the inline function gets inserted or substituted at the point of the inline function call. This substitution is performed by the C++ compiler at compile time. </li>
+                <li>An inline function may increase efficiency if it is small.</li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    inline return-type function-name(parameters)
+                    {
+                        // function code
+                    }
+                   </code>
+               </pre>
+            </div>
+            <p>Example &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    #include &lt;iostream>
+                    using namespace std;
+                    inline int cube(int s) { return s * s * s; }
+                    int main()
+                    {
+                        cout << "The cube of 3 is : " << cube(3) << endl;
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Function Overloading</h2>
+            <ul>
+                <li>Function overloading provides multiple definitions of the function by changing signature i.e. changing number of parameters, change datatype of parameters.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    void area(int a);
+                    void area(float a);
+                    void area(int a, int b);
+                    void area(float a, int b);
+                    void area(int a, float b);
+                    void area(float a, float b);
+                    void area(int a, int b, int c);
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Function Overriding</h2>
+            <ul>
+                <li>Whenever we writing function in base and derived classes in such a way that function name, parameter must be same called function overriding.</li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    class class-name
+                    {
+                        void fun()
+                        {
+                            ...
+                        }
+                    };
+                    class class-name : public base-class
+                    {
+                        void fun()
+                        {
+                            ...
+                        }
+                    };
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>We cannot achieve function overriding without inheritance.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Default Arguments</h2>
+            <ul>
+                <li>A default argument is a value provided in a function declaration that is automatically assigned by the compiler if the calling function doesn't provide a value for the argument. In case any value is passed, the default value is overridden.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    // CPP Program to demonstrate Default Arguments
+                    #include &lt;iostream>
+                    using namespace std;
+                     
+                    // A function with default arguments,
+                    // it can be called with
+                    // 2 arguments or 3 arguments or 4 arguments.
+                    int sum(int x, int y, int z = 0, int w = 0) //assigning default values to z,w as 0
+                    {
+                        return (x + y + z + w);
+                    }
+                     
+                    // Driver Code
+                    int main()
+                    {
+                        // Statement 1
+                        cout << sum(10, 15) << endl;
+                       
+                        // Statement 2
+                        cout << sum(10, 15, 25) << endl;
+                       
+                        // Statement 3
+                        cout << sum(10, 15, 25, 30) << endl;
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    25
+                    50
+                    80
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Parameter Passing Techniques in C++</h2>
+            <ul>
+                <li>There are different ways in which parameter data can be passed into and out of functions. Let us assume that a function sum() is called from main(). In this case <i>main</i> is called the "<b>caller function</b>" and <i>sum</i> is called the "<b>called function</b>". Also, the arguments which <i>main</i> sends to <i>sum</i> are called actual arguments and the parameters of <i>sum</i> are called formal arguments.</li>
+            </ul>
+            <p>Terminology &darr;</p>
+            <ul>
+                <li><b>Formal Parameter:</b> A variable and its type as they appear in the prototype of the function or method.</li>
+                <li><b>Actual Parameter:</b> The variable or expression corresponding to a formal parameter that appears in the function or method call in the calling environment.</li>
+            </ul>
+            <img src="../../images/act.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Important methods of Parameter Passing</h3>
+                <div class="wh">
+                    <h3>Pass By Value</h3>
+                    <ul>
+                        <li>Changes made to formal parameter do not get transmitted back to the caller.</li>
+                        <li>Any modifications to the formal parameter variable inside the called function or method will not be reflected in the actual parameter in the calling environment. This method is also called as <b><i>call by value.</i></b></li>
+                    </ul>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <pre>
+                           <code>
+                           
+                                // call by value
+                                #include &lt;iostream>
+                                using namespace std;
+                                void increment(int a)
+                                {
+                                    a++;
+                                    cout << "Value of a in increment function : " << a << endl;
+                                }
+                                int main()
+                                {
+                                    int a = 0;
+                                    // passing parameters
+                                    increment(a);
+                                    cout << "Value of a in main function : " << a << endl;
+                                    return 0;
+                                }
+                           </code>
+                       </pre>
+                    </div>
+                    <p>output &darr;</p>
+                    <div class='code'>
+                       <pre>
+                           <code>
+                           
+                            Value of a in increment function : 1
+                            Value of a in main function : 0
+                           </code>
+                       </pre>
+                    </div>
+                </div>
+                <div class="wh">
+                    <h3>Pass by reference</h3>
+                    <ul>
+                        <li>Changes made to formal parameter do get transmitted back to the caller through parameter passing.</li>
+                        <li>Any changes to the formal parameter are reflected in the actual parameter in the calling environment as formal parameter receives a reference (or pointer) to the actual data. This method is also called as <b><i>call by reference.</i></b></li>
+                    </ul>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <pre>
+                           <code>
+                           
+                                #include &lt;iostream>
+                                using namespace std;
+                                void increment(int *a)
+                                {
+                                    // (*a)++; or
+                                    *a = *a + 1;
+                                    cout << "Value of a in increment function : " << *a << endl;
+                                }
+                                int main()
+                                {
+                                    int a = 0;
+                                    increment(&a);
+                                    cout << "Value of a in main function : " << a << endl;
+                                    return 0;
+                                }
+                           </code>
+                       </pre>
+                    </div>
+                    <p>output &darr;</p>
+                    <div class='code'>
+                       <pre>
+                           <code>
+                           
+                            Value of a in increment function : 1
+                            Value of a in main function : 1
+                           </code>
+                       </pre>
+                    </div>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <button class="ac">Swapping function using pass by reference</button>
+                       <div class="panel">
+                       <pre>
+                           <code>
+                           
+                                #include &lt;iostream>
+                                using namespace std;
+                                void swap(int *x, int *y)
+                                {
+                                    int temp = *x;
+                                    *x = *y;
+                                    *y = temp;
+                                }
+                                int main()
+                                {
+                                    int a = 5, b = 10;
+                                    cout << "Value of a and b before swap : a = " << a << ", b = " << b << endl;
+                                    swap(&a, &b);
+                                    cout << "Value of a and b after swap : a = " << a << ", b = " << b << endl;
+                                    return 0;
+                                }
+                           </code>
+                       </pre>
+                       <p>output &darr;</p>
+                       <pre>
+                        <code>
+
+                            Value of a and b before swap : a = 5, b = 10
+                            Value of a and b after swap : a = 10, b = 5
+                        </code>
+                       </pre>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References</p>
+        <ul>
+            <li><a href="https://www.javatpoint.com/scope-resolution-operator-in-cpp">www.javatpoint.com</a></li>
+            <li><a href="https://www.geeksforgeeks.org/inline-functions-cpp/">www.geeksforgeeks.org</a></li>
+            <li><a href="https://www.geeksforgeeks.org/function-overloading-vs-function-overriding-in-cpp/">www.geeksforgeeks.org (function overriding)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/default-arguments-c/">www.geeksforgeeks.org (default arguments)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/parameter-passing-techniques-in-c-cpp/">www.geeksforgeeks.org (passing parameter technique)</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
