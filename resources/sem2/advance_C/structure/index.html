@@ -23,8 +23,20 @@
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="../index.html" class="home">Home</a>
-        <a href="#" class="link"></a>
+        <a href="../index.html" class="home">Back</a>
+        <a href="#t1" class="link">Structure definition</a>
+        <a href="#t2" class="link">Declaration</a>
+        <a href="#t3" class="link">Initialization</a>
+        <a href="#t4" class="link">Accessing structure member</a>
+        <a href="#t11" class="link">Copying and comparing structure variable</a>
+        <a href="#t5" class="link">Storage of structure in memory</a>
+        <a href="#t6" class="link">Arrays within structures</a>
+        <a href="#t7" class="link">Array of structure</a>
+        <a href="#t8" class="link">Structures within structure</a>
+        <a href="#t9" class="link">Practise program</a>
+        <a href="#t11" class="link">Structure as a function argument</a>
+        <a href="#t12" class="link">Structure Padding and Packing</a>
+        <a href="#t10" class="link">typedef</a>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -48,7 +60,7 @@
             <li>Structure is also known as records.</li>
             <li>Structure is user defined data type.</li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>Definition</h2>
             <div class='code'>
                <pre>
@@ -83,7 +95,7 @@
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Declaring Structure Variables</h2>
             <ul>
                 <li>Till now we have only created a template or a format, the actual use of structures will be when we declare variables based on this format. We can declare structure variables in two ways- 
@@ -149,7 +161,7 @@
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Initialization of structure variables</h2>
             <div class="in">
                 <h3>Compiler initialization</h3>
@@ -208,7 +220,7 @@
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Accessing structure member</h2>
             <div class='code'>
                 <div class='dotc'></div>
@@ -247,10 +259,188 @@
                 <li>We use dot operator to access member of structure.</li>
              </ul>
         </div>
-        <div class="wh">
+        <div id="t11" class="wh">
+            <h2>Copying and comparing structure variables</h2>
+            <ul>
+                <li>Two variables of the same structure type can be copied the same way as ordinary variables.</li>
+                <li>If person1 and person2 belong to the same structure, then the following statements are valid.
+                    <pre>
+                        <code>
+
+                            person1 = person2;
+                            person2 = person1;
+                        </code>
+                    </pre>
+                </li>
+                <li>C does not permit any logical operators on structure variables in case, we need to compare them, we may do so by comparing members individually.
+                    <pre>
+                        <code>
+
+                            person1 == person2 // not valid 
+                            person1 != person2 // not valid 
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            <p>Program for comparision of structure variables &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        struct class
+                        {
+                            int no;
+                            char name[20];
+                            float marks;
+                        };
+                        
+                        int main()
+                        {
+                            int x;
+                            struct class stu1 = {11, "Ron", 72.50};
+                            struct class stu2 = {11, "Jerry", 70.50};
+                            struct class stu3;
+                            stu3 = stu2;
+                            x = ((stu3.no == stu2.no) && (stu3.marks == stu2.marks)) ? 1 : 0;
+                            if (x == 1)
+                            {
+                                printf("\n student 2 and student 3 are same \n");
+                                printf("%d\t%s\t%f", stu3.no, stu3.name, stu3.marks);
+                            }
+                            else
+                            {
+                                printf("\n student 2 and student 3 are different");
+                            }
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    student 2 and student 3 are same 
+                    11      Jerry   70.500000
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t5" class="wh">
+            <h2>Storage of Structure in Memory</h2>
+            <ul>
+                <li>The members of structures are stored in consecutive memory locations.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    // Program to show that members of structure are stored in consecutive memory locations 
+                    #include&lt;stdio.h>
+                    int main()
+                    {
+                        struct student
+                        {
+                            char name[5];
+                            int roll;
+                            float marks;
+                        }stu;
+                        printf("Address of name = %u\n", stu.name);
+                        printf("Address of roll = %u\n", &stu.roll);
+                        printf("Address of marks = %u\n", &stu.marks);
+                    
+                        /*
+                            Address of name = 3192890648 // 8 
+                            Address of roll = 3192890656 // 4
+                            Address of marks = 3192890660 // 4
+                        */
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t6" class="wh">
+            <h2>Arrays within structures</h2>
+            <ul>
+                <li>We can have array as a member of structure.</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                   struct student
+                   {
+                        char name[20];
+                   }
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>We have been already using array in structure to store name of a student.</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    struct student
+                    {
+                        char name[20];
+                        int rollno;
+                        int submarks[4];
+                    };
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>The array submarks denotes the marks of students in 4 subjects.</li>
+                <li>If stu is a variable of type struct student then - 
+                    <ul>
+                        <li>stu.submarks[0] - denotes the marks of the student in first subject</li>
+                        <li>stu.submarks[1] - denotes the marks of the student in second subject</li>
+                        <li>stu.name[0] - denotes the first character of the name member.</li>
+                        <li>stu.name[4] - denotes the fifth character of the name member.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="t7" class="wh">
             <h2>Array of structure</h2>
             <ul>
                 <li>As we can create array of int, float and char, we can also create array of structure and access it using its index.</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    struct student
+                    {
+                        int roll;
+                        char name[50];
+                        float marks;
+                    }s[10];
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>The above definition uses an array of objects to store the data of 10 students.</li>
+                <li><b>Structure initialize &darr;</b></li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    struct student s1 = {1, "Ajay", 75.5};
+                    struct student s2[3] = {{1, "Ajay", 75.5}, {2, "Vijay", 76.5}, {3, "Akash", 65.5}};
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Note: If  we initialize only some members of a structure then other will be automatically initialized to zero.</li>
             </ul>
             <div class='code'>
                <div class='dotc'></div>
@@ -300,7 +490,41 @@
                </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t8" class="wh">
+            <h2>Structures within Structure (Nested Structure)</h2>
+            <ul>
+                <li>Structure within structure is called nesting of structures. When object of a structure is the member of another structure.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    struct date
+                    {
+                        int d, m, y;
+                    };
+                    struct employee
+                    {
+                        int id;
+                        struct date dob;
+                        struct date doj;
+                    }e1;
+                    main()
+                    {
+                        printf("Enter id of a employee : ");
+                        scanf("%d", &e1.id);
+                        printf("Enter date of birth : ");
+                        scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+                        printf("Enter date of joining : ");
+                        scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+                    }
+                    // In this example we also define the strucute date inside the definition of structure employee.
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t9" class="wh">
             <h2>Practise</h2>
             <div class='code'>
                <div class='dotc'></div>
@@ -435,6 +659,272 @@
                 </div>
              </div>
         </div>
+        <div id="t11" class="wh">
+            <h2>Structure as a function argument</h2>
+            <ul>
+                <li>We can pass structure variable just like we pass predefined variables (int, float).</li>
+                <li>Program to demonstrate structure as a function argument. &darr;</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+
+                        struct Rect
+                        {
+                            int l, b;
+                        };
+                        struct Tri
+                        {
+                            int a, b, c;
+                        };
+                        int rectPara(struct Rect);
+                        int triPara(struct Tri);
+                        int main()
+                        {
+                            struct Rect rectangle1 = {5, 10};
+                            struct Tri triangle1 = {4, 6, 10};
+                            printf("The parameter of rectangle is : %d\n", rectPara(rectangle1));
+                            printf("The parameter of triangle is : %d\n", triPara(triangle1));
+                            return 0;
+                        }
+                        int rectPara(struct Rect a)
+                        {
+                            return 2 * (a.l + a.b);
+                        }
+                        int triPara(struct Tri x)
+                        {
+                            return (x.a + x.b + x.c);
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    The parameter of rectangle is : 30
+                    The parameter of triangle is : 20
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t12" class="wh">
+            <h2>Structure Padding and Packing</h2>
+            <div class="in">
+                <h3>Concept of Structure Padding</h3>
+                <ul>
+                    <li>Before that we should know how memory is allocated to structure members?
+                        <ul>
+                            <li>When an object of some structure type is declared then some contiguous block of memory will be allocated to structure members.</li>
+                            <li>For example:
+                                <pre>
+                                    <code>
+
+                                        struct abc {
+                                            char a;
+                                            char b;
+                                            int c;
+                                        } var;
+                                    </code>
+                                </pre>
+                                When the variable of structure type will be created then the memory will be allocated.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Calculating the size of the struct
+                        <ul>
+                            <li>For example:
+                                <pre>
+                                    <code>
+                                        
+                                        // let the size of int is 4 bytes and size of char is 1 byte.
+
+                                        struct abc {
+                                            char a; // 1 byte
+                                            char b; // 1 byte 
+                                            int c; // 4 bytes
+                                        } var;
+
+                                        // total = 6 bytes
+                                        // but this is wrong 
+                                    </code>
+                                </pre>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>There is a concept called <b>structure padding.</b>
+                    <ul>
+                        <li>Processor doesn't read 1 byte at a time from memroy.</li>
+                        <li>It reads 1 word at a time.</li>
+                        <li>If we have a 32 bit processor then it means it can access 4 bytes at a time which means word size is 4 bytes.</li>
+                        <li>It we have a 64 bit processor then it menas it an access 8 bytes at a time which means word size is 8 bytes.</li>
+                    </ul></li>
+                </ul>
+                <img src="../../images/padding.svg" alt="" class="wb">
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        struct abc {
+                            char a; // 1 byte
+                            char b; // 1 byte
+                            int c; // 4 bytes
+                        };
+
+                        int main()
+                        {
+                            struct abc var;
+                            printf("%d", sizeof(var));
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>Output of above program is <b>8</b>.</li>
+                </ul>
+                <p>But what happens if we change the order of members? Does it affects the size?</p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                        <code>
+                        
+                         struct abc {
+                             char a; // 1 byte
+                             int b; // 4 bytes
+                             char c; // 1 byte
+                         };
+ 
+                         int main()
+                         {
+                             struct abc var;
+                             printf("%d", sizeof(var));
+                             return 0;
+                         }
+                        </code>
+                    </pre>
+                 </div>
+                 <ul>
+                    <li>Now the output is <b>12</b>.</li>
+                 </ul>
+                 <img src="../../images/pad2.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Structure packing</h3>
+                <ul>
+                    <li>Because of structure padding, size of structure becomes more than the size of the actual structure. Due to this some memory will get wasted.</li>
+                    <li>We can avoid the wasatage of memory by simply writing <b>#pragma pack(1)</b></li>
+                </ul>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        #pragma pack(1)
+
+                        struct abc{
+                            char a;
+                            int b;
+                            char c;
+                        } var;
+
+                        int main()
+                        {
+                            printf("%d", sizeof(var));
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>#pragma is a special purpose directive used to turn on or off certain features.</li>
+                </ul>
+            </div>
+            <ul>
+                <li>Packing or alignment is the size to which each member is rounded off.</li>
+                <li>Padding is the extra space added to match the alighment.</li>
+            </ul>
+        </div>
+        <div id="10" class="wh">
+            <h2>typedef Keyword</h2>
+            <ul>
+
+                <li>In the C programming language, typedef is a keyword used to create a new type alias.</li>
+                <li>It allows programmers to create a new name for an existing data type to make code easier to read and understand.</li>
+                <li>The general syntax of the typedef statement is &darr;</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    typedef existing_data_type new_data_type_name;
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Here, "existing_data_type" refers to an already defined data type like "int", "float", "char", etc., and "new_data_type_name" is the name of the new type alias that is being created.</li>
+                <li>For example, consider the following typedef statement &darr;</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    typedef int my_integer;
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>This statement creates a new data type called "my_integer", which is an alias for the "int" data type. From this point on, "my_integer" can be used in place of "int"  in the code.</li>
+                <li>So instead of writing "<b>int x = 5;</b>", you can write "<b>my_integer x = 5;</b>" which make the code more readable and easier to understand.</li>
+            </ul>
+            <div class="in">
+                <h3>Use of typedef in structures</h3>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        // structure without using typedef 
+                        struct car {
+                            char engine[50];
+                            char fuel_type[10];
+                            int fuel_tank_cap;
+                            int seating_cap;
+                            float city_mileage;
+                        };
+                        int main()
+                        {
+                            struct car c1;
+                        }
+
+                        // structure with using typedef 
+                        typedef struct car {
+                            char engine[50];
+                            char fuel_type[10];
+                            int fuel_tank_cap;
+                            int seating_cap;
+                            float city_mileage;
+                        }car;
+
+                        int main()
+                        {
+                            car c1;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference &darr;</p>
+        <ul>
+            <li><a href="https://www.computersprofessor.com/2016/12/how-to-copy-and-compare-structure.html">www.computersprofessor.com (copying and comparing structure variables) </a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>

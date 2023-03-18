@@ -93,41 +93,249 @@
                     <pre>
                         <code>
                         
+                                #include &lt;stdio.h>
+                                void printArr(int[], int);
+                                void insertion(int[], int *, int, int);
+                                int main()
+                                {
+                                    int arr[100] = {0}, size, value, pos;
+                                    printf("Enter the size of the array : ");
+                                    scanf("%d", &size);
+                                    printf("Enter the value you want to insert : ");
+                                    scanf("%d", &value);
+                                    printf("Enter the position : ");
+                                    scanf("%d", &pos);
+                                
+                                    printf("Array before insertion : ");
+                                    printArr(arr, size);
+                                
+                                    // insertion function
+                                    insertion(arr, &size, pos, value);
+                                    
+                                    printf("\nArray after insertion : ");
+                                    printArr(arr, size);
+                                    return 0;
+                                }
+                                void printArr(int x[], int size)
+                                {
+                                    for (int i = 0; i < size; i++)
+                                    {
+                                        printf("%d\t", x[i]);
+                                    }
+                                    printf("\n");
+                                }
+                                void insertion(int arr[], int *size, int pos, int value)
+                                {
+                                    for (int i = *size - 1; i >= pos - 1; i--)
+                                    {
+                                        arr[i + 1] = arr[i];
+                                    }
+                                    arr[pos - 1] = value;
+                                    if (*size <= 100)
+                                        (*size)++;
+                                }
+                        </code>
+                    </pre>
+                   </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Deletion</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class="ac">Deleting element in a user entered position</button>
+                   <div class="panel">
+                    <pre>
+                        <code>
+                        
                              #include &lt;stdio.h>
+                             void enterEle(int[], int);
                              void printArr(int[], int);
+                             void deletion(int[], int *, int);
                              int main()
                              {
-                                 int arr[100] = {0}, size, value, pos;
+                                 int arr[100] = {0}, size, pos, i;
                                  printf("Enter the size of the array : ");
                                  scanf("%d", &size);
-                                 printf("Enter the value you want to insert : ");
-                                 scanf("%d", &value);
-                                 printf("Enter the position : ");
+                                 printf("Enter element of the array \n");
+                                 enterEle(arr, size);
+                                 printf("Enter the deletion position : ");
                                  scanf("%d", &pos);
-                             
-                                 printf("Array before insertion : ");
+                                 printf("Array before deletion : ");
                                  printArr(arr, size);
-                                 
-                                 // insertion logic
-                                 for (int i = size - 1; i >= pos - 1; i--)
-                                 {
-                                     arr[i + 1] = arr[i];
-                                 }
-                                 arr[pos - 1] = value;
-                                 if (size <= 100)
-                                     size++;
-                                 
-                                 printf("\nArray after insertion : ");
+                                 printf("\nArray after deletion : ");
+                                 deletion(arr, &size, pos);
                                  printArr(arr, size);
                                  return 0;
                              }
-                             void printArr(int x[], int size)
+                             void enterEle(int arr[], int size)
                              {
                                  for (int i = 0; i < size; i++)
                                  {
-                                     printf("%d\t", x[i]);
+                                     printf("Enter element at %d index : ", i);
+                                     scanf("%d", &arr[i]);
                                  }
-                                 printf("\n");
+                             }
+                             void printArr(int arr[], int size)
+                             {
+                                 for (int i = 0; i < size; i++)
+                                 {
+                                     printf("%d\t", arr[i]);
+                                 }
+                             }
+                             void deletion(int arr[], int *size, int pos)
+                             {
+                                 for (int i = pos - 1; i < *size; i++)
+                                 {
+                                     arr[i] = arr[i + 1];
+                                 }
+                                 *size = *size - 1;
+                             }
+                        </code>
+                    </pre>
+                   </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Menu driven program for Array</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class="ac">code</button>
+                   <div class="panel">
+                    <pre>
+                        <code>
+                        
+                             #include &lt;stdio.h>
+                             #include &lt;stdlib.h>
+                             int insertion(int[], int);
+                             void display(int[], int);
+                             int deletion(int[], int);
+                             int search(int[], int, int);
+                             void merge(int[], int);
+                             int main()
+                             {
+                                 int arr[100] = {0}, arr2[100] = {0}, size = 10, userChoice, pos, val;
+                                 while (1)
+                                 {
+                                     printf("\n---- MENU ----");
+                                     printf("\n1. Insertion");
+                                     printf("\n2. Deletion");
+                                     printf("\n3. Display");
+                                     printf("\n4. Searching");
+                                     printf("\n5. Merge");
+                                     printf("\n6. Exit");
+                                     printf("\nEnter your choice : ");
+                                     scanf("%d", &userChoice);
+                             
+                                     switch (userChoice)
+                                     {
+                                     case 1:
+                                         size = insertion(arr, size);
+                                         break;
+                                     case 2:
+                                         size = deletion(arr, size);
+                                         break;
+                                     case 3:
+                                         display(arr, size);
+                                         break;
+                                     case 4:
+                                         printf("Enter the number you want to search : ");
+                                         scanf("%d", &val);
+                                         pos = search(arr, size, val);
+                                         if (pos >= 0)
+                                             printf("Found at %d position", pos + 1);
+                                         else
+                                             printf("Element not found");
+                                         break;
+                                     case 5:
+                                         merge(arr, size);
+                                         break;
+                                     case 6:
+                                         exit(0);
+                                     default:
+                                         printf("\nEnter correct choice");
+                                     }
+                                 }
+                                 return 0;
+                             }
+                             int insertion(int a[], int s)
+                             {
+                                 int val, pos, i;
+                                 printf("Enter the value you wan to insert : ");
+                                 scanf("%d", &val);
+                                 printf("Enter the position : ");
+                                 scanf("%d", &pos);
+                                 for (i = s - 1; i > pos - 1; i--)
+                                 {
+                                     a[i + 1] = a[i];
+                                 }
+                                 a[pos - 1] = val;
+                                 return (s + 1);
+                             }
+                             int deletion(int a[], int s)
+                             {
+                                 int i, val, flag = 0, pos;
+                                 printf("Enter the value you want to delete : ");
+                                 scanf("%d", &val);
+                                 pos = search(a, s, val);
+                                 if (pos >= 0)
+                                 {
+                                     for (i = pos; i < s - 1; i++)
+                                     {
+                                         a[i] = a[i + 1];
+                                     }
+                                     if (s > 0)
+                                         s--;
+                                 }
+                                 else
+                                     printf("Element not found : Deletion cannot be performed ");
+                                 return s;
+                             }
+                             void display(int a[], int s)
+                             {
+                                 int i;
+                                 for (i = 0; i < s; i++)
+                                 {
+                                     printf("\t%d", a[i]);
+                                 }
+                             }
+                             int search(int a[], int s, int val)
+                             {
+                                 int i;
+                                 for (i = 0; i < s; i++)
+                                 {
+                                     if (a[i] == val)
+                                     {
+                                         return i;
+                                     }
+                                 }
+                                 return -1;
+                             }
+                             void merge(int a[], int s)
+                             {
+                                 int s2, arr2[100], mer[100], i, k, j = 0;
+                                 printf("Enter size of second array : ");
+                                 scanf("%d", &s2);
+                                 printf("Enter elements of array - ");
+                                 for (i = 0; i < s2; i++)
+                                 {
+                                     scanf("%d", &arr2[i]);
+                                 }
+                                 i = 0;
+                                 for (k = 0; k < s + s2; k++)
+                                 {
+                                     if (i < s)
+                                     {
+                                         mer[k] = a[i];
+                                         i++;
+                                     }
+                                     else
+                                     {
+                                         mer[k] = arr2[j];
+                                         j++;
+                                     }
+                                 }
+                                 display(mer, s + s2);
                              }
                         </code>
                     </pre>

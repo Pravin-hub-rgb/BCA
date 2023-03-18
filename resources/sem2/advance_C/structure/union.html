@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Back</a>
+        <a href="#t1" class="link">Defining a union</a>
+        <a href="#t2" class="link">Accessing union members</a>
+        <a href="#t3" class="link">Structure v/s union</a>
+        <a href="#t4" class="link">Bit fields</a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Union</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Union</h1>
+        <ul>
+            <li>A <b>union</b> is a special data type available in C that allows to store different data types in the same memory location.</li>
+            <li>You can define a union with many members, but only one member can contain a value at any given time.</li>
+            <li>Unions provide an efficient way of using the same memory location for multiple-purpose.</li>
+        </ul>
+        <div id="t1" class="wh">
+            <h2>Defining a Union</h2>
+            <ul>
+                <li>To define a union, we use <b>union</b> keyword.</li>
+                <li>The union statement defines a new data type with more than one member for your program. The format of the union statement is as follows -</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    union union_tag
+                    {
+                        datatype member1;
+                        datatype member2;
+                        .
+                        . 
+                        . 
+                    } var;
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Example &darr;</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    union Data
+                    {
+                        int i;
+                        float f;
+                        char str[20];
+                    } data;
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>The memory occupied by a union will be large enough to hold the largest member of the union.</li>
+                <li>For example, in the above example, data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by a characer string.</li>
+                <li>The following code checks the size of union data type.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    #include &lt;stdio.h>
+                    #include &lt;string.h>
+
+                    union Data
+                    {
+                        int i;
+                        float f;
+                        char str[20];
+                    };
+
+                    int main()
+                    {
+                        union Data data;
+
+                        printf("Memory size occupied by data : %d", sizeof(data)); // 20
+                    }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t2" class="wh">
+            <h2>Accessing Union Members</h2>
+            <ul>
+                <li>To access any member of a union, we use the <b>member access operator (.)</b>.</li>
+                <li>The member access operator is coded as a period between the union variable name and the union member that we wish to access.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        #include &lt;string.h>
+                         
+                        union Data {
+                           int i;
+                           float f;
+                           char str[20];
+                        };
+                         
+                        int main( ) {
+                        
+                           union Data data;        
+                        
+                           data.i = 10;
+                           data.f = 220.5;
+                           strcpy( data.str, "C Programming");
+                        
+                           printf( "data.i : %d\n", data.i);
+                           printf( "data.f : %f\n", data.f);
+                           printf( "data.str : %s\n", data.str);
+                        
+                           return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    data.i : 1917853763
+                    data.f : 4122360580327794860452759994368.000000
+                    data.str : C Programming
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>The values of <b>i</b> and <b>f</b> members of union got corrupted because the final value assigned to the variable has occupied the memory location and this is the reason that the value of <b>str</b> member is getting printed very well.</li>
+            </ul>
+            <p>Now we will take an example where we will use one variable at a time. Which is the main purpose of having unions - &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        #include &lt;string.h>
+                         
+                        union Data {
+                           int i;
+                           float f;
+                           char str[20];
+                        };
+                         
+                        int main( ) {
+                        
+                           union Data data;        
+                        
+                           data.i = 10;
+                           printf( "data.i : %d\n", data.i);
+                           
+                           data.f = 220.5;
+                           printf( "data.f : %f\n", data.f);
+                           
+                           strcpy( data.str, "C Programming");
+                           printf( "data.str : %s\n", data.str);
+                        
+                           return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>when the above code is compiled and executed, it produces the following result. &darr;</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    data.i : 10
+                    data.f : 220.500000
+                    data.str : C Programming
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Structure v/s Union</h2>
+            <img src="../../images/svu.svg" alt="" class="wb">
+        </div>
+        <div id="t4" class="wh">
+            <h2>Bit fields</h2>
+            <ul>
+                <li>In C, we can specify the size (in bits) of the structure and union members.</li>
+                <li>The idea of bit-field is to use memory efficiently when we know that the value of a filed or group of fields will never exceed a limit or is within a small range.</li>
+                <li>The type-specifier for the variable must be <i>unsigned int, signed int or int.</i></li>
+                <li>Bit fields are used when the storage of our program is limited. Need of bit fields in C programming language:
+                    <ul>
+                        <li>Reduces memory consumption</li>
+                        <li>To make our program more efficient and flexible.</li>
+                    </ul>
+                </li>
+                <li>Applications of Bit-fields:
+                    <ul>
+                        <li>If storage is limited, we can go for bit-field.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Consider the following declaration without the use of bit fields.</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    #include &lt;stdio.h>
+
+                    struct order
+                    {
+                        unsigned int isAvailable;
+                        unsigned int isTshirt;
+                    };
+
+                    int main()
+                    {
+                        printf("Size of order is %lu bytes\n", sizeof(struct order));
+                        struct order hoodie= {1, 0};
+                        printf("The order is %s and it is %s",(hoodie.isAvailable)?"available":"not available", (hoodie.isTshirt)?"T-shirt":"not T-shirt");
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    Size of order is 8 bytes
+                    The order is available and it is not T-shirt
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>The above representation of 'order' takes 8 bytes.</li>
+                <li>Since we know that the value of each member can be either 1 or 0 to represent true or false repectively.</li>
+                <li>So, we need only 2 bits out of 32 bits (8 bytes). We can optimize the space using bit fields.</li>
+            </ul>
+            <div class="in">
+                <h3>Declaration of bit fields in C.</h3>
+                <ul>
+                    <li>Bit-fields are variables that are defined using a predefined width or size. Format and the declaration of the bit-fileds in C are shown below &darr;</li>
+                </ul>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        // syntax 
+                        struct
+                        {
+                            data_type member_name: width_of_bit_field;
+                        };
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>data_type: It is an integer type that determines the bit-field value which is to be interpreted. They type may be int, signed int, or unsigned it.</li>
+                    <li><li>member_name: The member name is the name of the bit field.</li></li>
+                    <li>width: The number of bits in the bit-filed. The width be less than or equal to the bit width of the specified type.</li>
+                </ul>
+                <p>Now we will see, 'order' representation with bit-fields &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        #include &lt;stdio.h>
+
+                        // space opmitized representation of 'order'
+                        struct order
+                        {
+                            // isAvailable can store either 0 or 1, so 1 bits are sufficient
+                            unsigned int isAvailable : 1;
+
+                            // isTshirt can store either 0 or 1, so 1 bits are sufficient
+                            unsigned int isTshirt : 1;
+                        };
+    
+                        int main()
+                        {
+                            printf("Size of order is %lu bytes\n", sizeof(struct order));
+                            struct order hoodie= {1, 0};
+                            printf("The order is %s and it is %s",(hoodie.isAvailable)?"available":"not available", (hoodie.isTshirt)?"T-shirt":"not T-shirt");
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference &darr;</p>
+        <ul>
+            <li><a href="https://www.tutorialspoint.com/cprogramming/c_unions.htm#">www.tutorialspoint.com (unions)</a></li>
+            <li><a href="https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm">www.tutorialspoint.com (bit-fields)</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
