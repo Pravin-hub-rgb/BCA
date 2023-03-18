@@ -23,7 +23,7 @@
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="../index.html" class="home">Home</a>
+        <a href="../index.html" class="home">Back</a>
         <a href="#t1" class="link">Moving from C to C++</a>
         <a href="#t2" class="link">Scope resolution operator</a>
         <a href="#t3" class="link">Inline function</a>
@@ -31,6 +31,8 @@
         <a href="#t5" class="link">Function Overriding</a>
         <a href="#t6" class="link">Default Arguments</a>
         <a href="#t7" class="link">Parameter Passing Techniques in C++</a>
+        <a href="#t8" class="link">Recursion</a>
+        <a href="#t9" class="link">Structures</a>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -233,6 +235,46 @@
                     void area(int a, int b, int c);
                    </code>
                </pre>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+                <button class="ac">Program to demonstrate function overloading</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+                        
+                                #include &lt;iostream>
+                                using namespace std;
+
+                                int area(int);
+                                int area(int, int);
+                                double area(double);
+
+                                int main()
+                                {
+                                    cout << "Area of square is : " << area(5) << endl;
+                                    cout << "Area of rectangle is : " << area(5, 10) << endl;
+                                    cout << "Area of circle is : " << area(3.8) << endl;
+                                    return 0;
+                                }
+
+                                int area(int a)
+                                {
+                                    return a * a;
+                                }
+
+                                int area(int a, int b)
+                                {
+                                    return a * b;
+                                }
+                                
+                                double area(double a)
+                                {
+                                    return (314 * a * a) / 100;
+                                }
+                        </code>
+                    </pre>
+                </div>
             </div>
         </div>
         <div id="t5" class="wh">
@@ -448,7 +490,58 @@
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t8" class="wh">
+            <h2>Recursion</h2>
+            <ul>
+                <li>A <i>function</i> that calls itself is known as a recursive function. And, this techique is known as recursion.</li>
+                <li>This technique provides a way to break complicated problems down into simple problem which are easier o solve.</li>
+            </ul>
+            <img src="../../images/rec.svg" alt="" class="wb">
+            <ul>
+                <li>The recursion continues until some condition is met. Hence, there should be a terminating condition.</li>
+            </ul>
+            <p>Example program of factorial using recursion &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    #include &lt;iostream>
+                    using namespace std;
+
+                    int factorial(int);
+
+                    int main()
+                    {
+                        int n = 4, result;
+                        result = factorial(n);
+                        cout << "Factorial of " << n << " = " << result;
+                        return 0;
+                    }
+
+                    int factorial(int n)
+                    {
+                        if(n > 1)
+                        {
+                            return n * factorial(n - 1);
+                        } else {
+                            return 1;
+                        }
+                    }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    Factorial of 4 = 24
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t9" class="wh">
             <h2>C++ Structures</h2>
             <ul>
                 <li>Structures in C++ are user defined data types which are used to store group of items of non-similar data types.</li>
@@ -647,6 +740,8 @@
             <li><a href="https://www.geeksforgeeks.org/default-arguments-c/">www.geeksforgeeks.org (default arguments)</a></li>
             <li><a href="https://www.geeksforgeeks.org/parameter-passing-techniques-in-c-cpp/">www.geeksforgeeks.org (passing parameter technique)</a></li>
             <li><a href="https://www.geeksforgeeks.org/structures-in-cpp/">www.geeksforgeeks.org (structure)</a></li>
+            <li><a href="https://www.w3schools.com/cpp/cpp_functions_recursion.asp">www.w3schools.com (recursion)</a></li>
+            <li><a href="https://www.programiz.com/cpp-programming/recursion">www.programiz.com (recursion)</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>

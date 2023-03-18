@@ -1,21 +1,24 @@
-// In C++ We can Initialize the Variables with Declaration in Structure.
 #include <iostream>
 using namespace std;
-struct Point
-{
-    int x = 0; // It is considered as Default Arguments and no Error is Raised.
-    int y = 1;
-};
+int area(int);
+int area(int, int);
+double area(double);
 int main()
 {
-    struct Point p1;
-
-    // Accessing members of point p1
-    // No value is Initialized then the default value is considered. ie x = 0 and y = 1
-    cout << "x = " << p1.x << ", y = " << p1.y << endl;
-
-    // Initializing the value of y = 20;
-    p1.y = 20;
-    cout << "x = " << p1.x << ", y = " << p1.y << endl;
+    cout << "Area of square is : " << area(5) << endl;
+    cout << "Area of rectangle is : " << area(5, 10) << endl;
+    cout << "Area of circle is : " << area(3.8) << endl;
     return 0;
+}
+int area(int a)
+{
+    return a * a;
+}
+int area(int a, int b)
+{
+    return a * b;
+}
+double area(double a)
+{
+    return (314 * a * a) / 100;
 }
