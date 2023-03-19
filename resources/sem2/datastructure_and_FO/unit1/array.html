@@ -343,6 +343,113 @@
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <h2>Sparse Matrix</h2>
+            <ul>
+                <li>Sparse matrix is a matrix that contains a few non-zero elements.</li>
+                <li>Almost all the places are filled with zero.</li>
+                <li>Matrix of m * n dimension refers to a 2-D array with m numbers of rows and n number of columns.</li>
+                <li>And if the non-zero elements in the matrix are more than zero elements in the matrix then it is called a sparse matrix.</li>
+                <li>And in case that case the size of the matrix is big, a lot of space is wasted to represent such a small number of non-zero elements. </li>
+                <li>Example : 
+                    <pre>
+                        <code>
+
+                             _          _
+                            | 5  0  0  0 | 
+                            | 0  8  0  0 | 
+                            | 0  0  3  0 |
+                            | 0  6  0  0 |
+                             -          -
+                        </code>
+                    </pre>
+                </li>
+                <li>Why do we need to use sparse matrix instead of a simple matrix?
+                    <ul>
+                        <li>We can also use the simple martrix to store the elements in the memory, then why do we need to use the sparse matrix. The following are the advantages of using a sparse matrix:</li>
+                        <li>&rarr; Storage: As we know, a sparse matrix that contains lesser non-zero elements than zero so less memory can be used to store elements. It evaluates only the non-zero elements.</li>
+                        <li>&rarr; Computing time: In the case of searching n sparse matrix, we need to traverse only the non-zero elements rather than traversing all the sparse matrix elements. It saves computing time by logically designing a data structure traversing non-zero elements.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Array Representation of Sparse Matrix</h3>
+                <ul>
+                    <li>The 2nd array can be used to represent a sparse matrix in which there are three rows named as:
+                        <ol>
+                            <li>Row: It is an index of a row where a non-zero element is located.</li>
+                            <li>Column: It is an index of the column where a non-zero element is located.</li>
+                            <li>Value: The value of the non-zero element is located at the index (row, column).</li>
+                        </ol>
+                    </li>
+                </ul>
+                <img src="../../images/sparse1.svg" alt="" class="wb">
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class="ac">Sparse matrix program</button>
+                   <div class="panel">
+                    <pre>
+                        <code>
+                        
+                         // not practised
+ 
+                         #include&lt;stdio.h>
+                         
+                         int main()
+                         {
+                             // Assume 4x5 sparse matrix
+                             int sparseMatrix[4][5] =
+                             {
+                                 {0 , 0 , 3 , 0 , 4 },
+                                 {0 , 0 , 5 , 7 , 0 },
+                                 {0 , 0 , 0 , 0 , 0 },
+                                 {0 , 2 , 6 , 0 , 0 }
+                             };
+                         
+                             int size = 0;
+                             for (int i = 0; i < 4; i++)
+                                 for (int j = 0; j < 5; j++)
+                                     if (sparseMatrix[i][j] != 0)
+                                         size++;
+                         
+                             // number of columns in compactMatrix (size) must be
+                             // equal to number of non - zero elements in
+                             // sparseMatrix
+                             int compactMatrix[3][size];
+                         
+                             // Making of new matrix
+                             int k = 0;
+                             for (int i = 0; i < 4; i++)
+                                 for (int j = 0; j < 5; j++)
+                                     if (sparseMatrix[i][j] != 0)
+                                     {
+                                         compactMatrix[0][k] = i;
+                                         compactMatrix[1][k] = j;
+                                         compactMatrix[2][k] = sparseMatrix[i][j];
+                                         k++;
+                                     }
+                         
+                             for (int i=0; i < 3; i++)
+                             {
+                                 for (int j=0; j < size; j++)
+                                     printf("%d ", compactMatrix[i][j]);
+                         
+                                 printf("\n");
+                             }
+                             return 0;
+                         }
+                        </code>
+                    </pre>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a href="https://www.geeksforgeeks.org/sparse-matrix-representation/">www.geeksforgeeks.org (sparse matrix program)</a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
