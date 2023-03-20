@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Stack</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Stack</h1>
+        <ul>
+            <li>Stack is a linear data structure that follows the LIFO (Last In First Out) principle.</li>
+            <li>It performs insertion and deletion operations on the stack from only one end from the top of the stack.</li>
+            <li>Inserting a new element on the top of the stack is known as <i>push operation.</i></li>
+            <li>Deleting a data element from the top of the stack is known as <i>pop operation.</i></li>
+            <li>You can perform the implementation of the stack in memory using two data structures: stack implementation using array and stack implementation using linked-list.</li>
+            <li>Real life examples of stack:
+                <ul>
+                    <li>Stack of plates.</li>
+                    <li>Stack of balls.</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="wh">
+            <h2>Stack Implementation using Array</h2>
+            <ul>
+                <li>In stack implementation using arrays, it forms the stack using the arrays. All the operations regarding the stack implementation using arrays are done at the end of the array.</li>
+            </ul>
+            <img src="../../images/stack1.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Procedure of stack implementation using array</h3>
+                <div class="wh">
+                    <p><b>Push operation</b></p>
+                    <ul>
+                        <li>Adding an element on the top of the stack is termed as push operation.</li>
+                        <li>Push operation has the following two steps:
+                            <ol>
+                                <li>Increment the top variable of the stack so that it can refer to the next memory location.</li>
+                                <li>Add a data element at the increment top position.</li>
+                            </ol>
+                        </li>
+                        <li>Stack data structure states an overflow condition when you try to insert an element into the stack when complete.</li>
+                    </ul>
+                    <img src="../../images/stack2.svg" alt="" class="wb">
+                    <div class='code'>
+                       <pre>
+                           <code>
+                           
+                            // implementatin of push operation:
+
+                            void push(int data, int n)
+                            {
+                                if(top == n)
+                                    printf("overflow");
+                                else
+                                {
+                                    top++;
+                                    stack[top] = data;
+                                }
+                            }
+                           </code>
+                       </pre>
+                    </div>
+                </div>
+                <div class="wh">
+                    <p><b>Pop operation</b></p>
+                    <ul>
+                        <li>Removing a data element from the stack data structure is called a pop operation.</li>
+                        <li>The pop operation has two following steps:
+                            <ol>
+                                <li>The value of the top variable will decrement by one whenever you delete an item from the stack.</li>
+                                <li>The topmost variable of the stack is stored in another variable, and then the value of the top variable will be decremented by one.</li>
+                                <li>The pop operation returns the deleted element that was stored in another variable as a result.</li>
+                            </ol>
+                        </li>
+                        <li>Stack data structure states an underflow condition when you try to delete a data element when the stack is already empty.</li>
+                    </ul>
+                    <img src="../../images/stack3.svg" alt="" class="wb">
+                    <div class='code'>
+                       <pre>
+                           <code>
+                           
+                            // implementation of pop operation 
+
+                            int pop()
+                            {
+                                int val;
+                                if(top == -1)
+                                    printf("Underflow condition");
+                                else 
+                                {
+                                    val = stack[top];
+                                    top--;
+                                    return val;
+                                }
+                            }
+                           </code>
+                       </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a href="https://www.simplilearn.com/tutorials/data-structure-tutorial/stack-implementation-using-array">www.simplilearn.com (stack implementatin using array)</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
