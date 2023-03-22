@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointer</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Home</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Pointer</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Pointer</h1>
+        <ul>
+            <li>Pointers are variables which store the address of variables or a memory location.</li>
+            <li>Pointer variable can be of any data type i.e, int, char, function, array, etc.</li>
+            <li>Pointers are one of the core concepts of C programming language that provides low-level memory acess and
+                facilitates dynamic memory allocation.</li>
+            <li>A pointer is a derived data type in C that can store the address of other variables or a memory. We can
+                access and manipulate the data stored in that memory location using pointers.</li>
+        </ul>
+        <div class="wh">
+            <h2>Syntax of pointer</h2>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    datatype *pointer_name;
+
+                    int *p;
+                    float *f;
+                    char *c;
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Operator in pointer</h2>
+            <ul>
+                <li>There are basically two operator which are used in pointer.
+                    <ol>
+                        <li>& &rarr; address of / referencing of</li>
+                        <li>* &rarr; value at / dereferencing</li>
+                    </ol>
+                </li>
+                <li>& &rarr; The addressof operator is a unary operator that returns the address of its operand. Its operand can be a variable, function, array, structure, etc.
+                    <div class='code'>
+                       <pre>
+                           <code>
+                           
+                            &variable_name;
+                           </code>
+                       </pre>
+                    </div>
+                </li>
+                <li>* &rarr; The dereference operator, also known as the indirection operator is a unary operator. It is used in pointer declaration and dereferencing.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Pointer initialization</h2>
+            <ul>
+                <li>When we assign some value to the pointer, it is called pointer initialization in C.</li>
+                <li>There are two ways in which we can initialize a pointer in C.
+                    <ol>
+                        <li>C pointer definition</li>
+                        <li>Initialization after declaration</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>C pointer definition</h3>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        datatype *pointer_name = address;
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>The above method is called pointer definition as the pointer is declared and initialized at the same time.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Initialization after declaration</h3>
+                <ul>
+                    <li>The second method of pointer initialization in C is assigning some address after the declaration.</li>
+                </ul>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        datatype *pointer_name;
+                        pointer_name = address;
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Dereferencing a C pointer</h2>
+            <ul>
+                <li>Dereferencing is the process of accessing the value stored in the memory address specified in the pointer.</li>
+            </ul>
+            <img src="../../images/pointer.svg" alt="" class="wb">
+        </div>
+        <div class='code'>
+           <div class='dotc'></div>
+           <button class="ac">Program to demonstrate the use of pointer.</button>
+           <div class="panel">
+            <pre>
+                <code>
+                
+                     #include &lt;stdio.h>
+                     int main()
+                     {
+                        int var = 10, *ptr;
+                        ptr = &var;
+                     
+                        printf("Value at ptr = %p\n", ptr);         // prints 0x7ff7bec385a8
+                        printf("Value at var = %d\n", var);         // prints 10
+                        printf("Value at *ptr = %d\n", *ptr);       // prints 10
+                        printf("Value at *(&var) = %d\n", *(&var)); // prints 10
+                        printf("Value at &ptr = %p\n", &ptr); // prints address of ptr variable - 0x7ff7b1dc55a0
+                        return 0;
+                     }
+                     
+                     /*
+                        %p is used for printing address in Hexa decimal form
+                        %u is unsigned form
+                     */
+                </code>
+            </pre>
+           </div>
+        </div>
+        <div class="wh">
+            <h2>Storing one pointer value to another pointer value.</h2>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    #include&lt;stdio.h>
+                    int main()
+                    {
+                        int var = 10;
+                        int *ptr;
+                        int *q;
+                        ptr = &amp;var;
+                        // *q = *ptr; // this is invalid 
+                        // because (q) is not initialized with any address so we cannot dereference it.
+                        return 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        int main()
+                        {
+                           int var = 10, var2 = 20;
+                           int *ptr;
+                           int *q;
+                           ptr = &var;
+                           q = &var2;
+                           *q = *ptr; // now this is valid
+                           printf("%d", *q);
+                           return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a href="https://www.geeksforgeeks.org/c-pointers/">www.geeksforgeeks.org (pointer)</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

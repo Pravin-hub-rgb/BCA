@@ -100,6 +100,154 @@
                 <img src="../../images/cvs.svg" alt="" class="wb">
             </div>
         </div>
+        <div class="wh">
+            <h2>Creating object of a class</h2>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    name_of_class    object/instance of the class 
+                         &darr;              &darr; 
+                        item        i1, i2, i3, i4;
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Accessing class member</h2>
+            <p>Syntax &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    object.function_name(argument);
+                    object.data_member_name = 10;
+                   </code>
+               </pre>
+            </div>
+            <p>Example &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+
+                    object        arguments
+                    &uarr;              &uarr; 
+                    i1.getData(100, 105.5);
+                        &darr; 
+                    name of function
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Defining member function</h2>
+            <ul>
+                <li>Outside the class definition.</li>
+                <li>Inside the class definiton.</li>
+            </ul>
+            <div class="in">
+                <h3>Outside the class definition</h3>
+                <ul>
+                    <li>Here we use scope resolution operator.</li>
+                </ul>
+                <p>Syntax &darr;</p>
+                <div class='code'>
+                   <pre>
+                       <code>
+                       
+                        return_type class_name :: function_name (argument1, argument2, ...)
+                        {
+                            // function body
+                        }
+                       </code>
+                   </pre>
+                </div>
+                <p>Example &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        void item :: getData(int a, float b)
+                        {
+                            number = a;
+                            cost = b;
+                        }
+
+                        void item :: printData(void)
+                        {
+                            cout << "number " << number << endl;
+                            cout << "cost " << number << endl;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Inside the class definition</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                        class item
+                        {
+                            int number;
+                            float cost;
+                            
+                            public:
+                                void getData(int a, float b);
+                                void putData(void)
+                                {
+                                    cout << number << endl;
+                                    cout << cost << endl
+                                }
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">WAP to explain the concept of inside and outside definition of member function.</button>
+               <div class="panel">
+                <pre>
+                    <code>
+                    
+                            #include &lt;iostream>
+                            using namespace std;
+                            class item
+                            {
+                                int number;
+                                float cost;
+                            
+                            public:
+                                void getData(int, float);
+                                void showData(void) // definition inside the function
+                                {
+                                    cout << number << endl;
+                                    cout << cost << endl;
+                                }
+                            };
+                            void item ::getData(int a, float b) // definition outside the function
+                            {
+                                number = a;
+                                cost = b;
+                            }
+                            int main()
+                            {
+                                item x, y;
+                                x.getData(100, 105.15);
+                                x.showData();
+                                y.getData(180, 195.15);
+                                y.showData();
+                                return 0;
+                            }
+                    </code>
+                </pre>
+               </div>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>
