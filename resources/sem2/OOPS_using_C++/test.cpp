@@ -1,29 +1,19 @@
 #include <iostream>
 using namespace std;
-class item
+class Prac
 {
-    int number;
-    float cost;
-
 public:
-    void getData(int, float);
-    void showData(void) // definition inside the function
-    {
-        cout << number << endl;
-        cout << cost << endl;
-    }
+    static int var;
 };
-void item ::getData(int a, float b) // definition outside the function
-{
-    number = a;
-    cost = b;
-}
+int Prac::var = 1;
 int main()
 {
-    item x, y;
-    x.getData(100, 105.15);
-    x.showData();
-    y.getData(180, 195.15);
-    y.showData();
+    Prac obj1, obj2;
+    // initially the value of "var" is 1
+    // now we will try to increment is using one object
+    obj1.var++;
+    cout << obj1.var << " " << obj2.var << endl;
+    // above we are trying to check the value of "var" from both the object
+    // and it is giving 2 which means it is being shared.
     return 0;
 }

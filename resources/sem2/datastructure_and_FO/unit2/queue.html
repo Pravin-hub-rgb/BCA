@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Home</a>
+        <a href="#t1" class="link">Queue definition</a>
+        <a href="#t2" class="link">Operations associated with queue</a>
+        <a href="#t3" class="link">Working of queue</a>
+        <a href="#t4" class="link">Linear queue</a>
+        <a href="#t5" class="link">Circular queue</a>
+        <a href="#t6" class="link">Applications of queue</a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Queue</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1 id="t1">Queue</h1>
+        <ul>
+            <li>A queue is a <b>linear data structure</b> to store and manipulate the data elements.</li>
+            <li>It follows the order of <b>First In First Out (FIFO).</b></li>
+            <li>In queues, the first element entered into the array is the first element to be removed from the array.</li>
+            <li>Real life example will be: Queue of people at ticket counter, where the first person entering queue gets ticket first.</li>
+            <li><b>A queue is open at both ends.</b> One end is provided for the insertion of data and the other end for the deletion of data.</li>
+        </ul>
+        <div id="t2" class="wh">
+            <h2>Operations associated with a Queue in C</h2>
+            <ul>
+                <li>A queue being an <b>Abstract Data Structure</b> provides the following operations for manipulation on the data elements:
+                <ol>
+                    <li><b>isEmpty():</b> To check if the queue is empty.</li>
+                    <li><b>isFull():</b> To check whether the queue is full or not.</li>
+                    <li><b>dequeue():</b> Removes the element from the frontal side of the queue.</li>
+                    <li><b>enqueue():</b> It inserts elements to the end of the queue.</li>
+                    <li><b>Front:</b> Pointer element responsible for fetching the first element from the queue.</li>
+                    <li><b>Rear:</b> Pointer element responsible for fetching the last element from the queue.</li>
+                </ol></li>
+            </ul>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Working of Queue Data Structure</h2>
+            <ul>
+                <li>Queue follows the First-In-First-Out pattern. The first element is the first to be pulled out from the list of elements.
+                    <ul>
+                        <li><b>Front</b> and <b>Rear</b> pointers keep the record of the first and last element in the queue.</li>
+                        <li>At first, we need to initialize the queue by setting <b>Front = -1</b> and <b>Rear = -1.</b></li>
+                        <li>In order to insert the element (<b>enqueue</b>), we need to check whether the queue is already full i.e. <b>check the condition for Overflow.</b> If the queue is not full, we'll have to increment the value of the Rear index by 1 and place the element at the position of the Rear pointer variable. When we get to insert the first element in the queue, we need to set the value of Front to 0.</li>
+                        <li>In order to remove the element (<b>dequeue</b>) from the queue, we need to check whether the queue is already empty i.e. <b>check the condition for Underflow.</b> If the queue is not empty, we'll have to remove and return the element at the position of the Front pointer, and then increment the Front index value by 1. When we get <b>to remove the last element from the queue</b>, we will have <b>set the values of Front and Rear index to -1.</b></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Implementation of Linear Queue in C</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=YqrFeU90Coo" target="_blank">Linear queue video &neArr;</a></li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">code</button>
+               <div class="panel">
+                <pre>
+                    <code>
+
+                            #include &lt;stdio.h>
+                            #include &lt;stdlib.h>
+                            #define MAX 5
+                            int queue[MAX];
+                            int rear = -1;
+                            int front = -1;
+                            void enqueue()
+                            {
+                               if (rear == MAX - 1)
+                               {
+                                  printf("\nQueue is full");
+                               }
+                               else if (front == -1 && rear == -1)
+                               {
+                                  front = rear = 0;
+                                  printf("\nEnter the element : ");
+                                  scanf("%d", &queue[rear]);
+                               }
+                               else
+                               {
+                                  rear++;
+                                  printf("\nEnter the element : ");
+                                  scanf("%d", &queue[rear]);
+                               }
+                            }
+                            void dequeue()
+                            {
+                               if (front == -1 && rear == -1)
+                               {
+                                  printf("\nQueue is empty");
+                               }
+                               else if (front == rear)
+                               {
+                                  printf("\n%d is deleted", queue[front]);
+                                  front = rear = -1;
+                               }
+                               else
+                               {
+                                  printf("\n%d is deleted", queue[front]);
+                                  front++;
+                               }
+                            }
+                            void display()
+                            {
+                               int i;
+                               if (front == -1 && rear == -1)
+                                  printf("\nQueue is empty\n");
+                               else
+                               {
+                                  for (i = front; i <= rear; i++)
+                                  {
+                                     printf("\n%d", queue[i]);
+                                  }
+                               }
+                            }
+                            int main()
+                            {
+                               int ch;
+                               while (1)
+                               {
+                                  printf("\n------- MENU -------");
+                                  printf("\n1.Enqueue Operation\n");
+                                  printf("2.Dequeue Operation\n");
+                                  printf("3.Display the Queue\n");
+                                  printf("4.Exit\n");
+                                  printf("Enter your choice of operations : ");
+                                  scanf("%d", &ch);
+                                  switch (ch)
+                                  {
+                                  case 1:
+                                     enqueue();
+                                     break;
+                                  case 2:
+                                     dequeue();
+                                     break;
+                                  case 3:
+                                     display();
+                                     break;
+                                  case 4:
+                                     exit(0);
+                                  default:
+                                     printf("\nIncorrect choice \n");
+                                  }
+                               }
+                               return 0;
+                            }                            
+                    </code>
+                </pre>
+               </div>
+            </div>
+        </div>
+        <div id="t5" class="wh">
+            <h2>Circular queue</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=dn01XST9-bI">Circular queue</a></li>
+            </ul>
+            <p>Problems with linear queue:
+                <ul>
+                    <li>When the queue is full and we perform dequeue twice that means there are 2 place are empty (not literally) but then when if we do enqueue then it will show queue if full because rear = MAX - 1.</li>
+                </ul>
+                To Save us from this problem we use <b>circular queue.</b>
+            </p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Circular queue code</button>
+               <div class="panel">
+                   <pre>
+                       <code>
+                       
+                            #include &lt;stdio.h>
+                            #include &lt;stdlib.h>
+                            #define MAX 5
+                            int queue[MAX];
+                            int rear = -1;
+                            int front = -1;
+                            void enqueue()
+                            {
+                               if (front == -1 && rear == -1)
+                               {
+                                  front = rear = 0;
+                                  printf("\nEnter the element : ");
+                                  scanf("%d", &queue[rear]);
+                               }
+                               else if ((rear + 1) % MAX == front)
+                               {
+                                  printf("\nQueue is full");
+                               }
+                               else
+                               {
+                                  rear = (rear + 1) % MAX;
+                                  printf("\nEnter the element : ");
+                                  scanf("%d", &queue[rear]);
+                               }
+                            }
+                            void dequeue()
+                            {
+                               if (front == -1 && rear == -1)
+                               {
+                                  printf("\nQueue is empty");
+                               }
+                               else if (front == rear)
+                               {
+                                  printf("\n%d is deleted", queue[front]);
+                                  front = rear = -1;
+                               }
+                               else
+                               {
+                                  printf("\n%d is deleted", queue[front]);
+                                  front = (front + 1) % MAX;
+                               }
+                            }
+                            void display()
+                            {
+                               int i = front;
+                               if (front == -1 && rear == -1)
+                                  printf("\nQueue is empty\n");
+                               else
+                               {
+                                  while (i != rear)
+                                  {
+                                     printf("\n%d", queue[i]);
+                                     i = (i + 1) % MAX;
+                                  }
+                               }
+                            }
+                            int main()
+                            {
+                               int ch;
+                               while (1)
+                               {
+                                  printf("\n------- MENU FOR CIRCULAR QUEUE -------");
+                                  printf("\n1.Enqueue Operation\n");
+                                  printf("2.Dequeue Operation\n");
+                                  printf("3.Display the Queue\n");
+                                  printf("4.Exit\n");
+                                  printf("Enter your choice of operations : ");
+                                  scanf("%d", &ch);
+                                  switch (ch)
+                                  {
+                                  case 1:
+                                     enqueue();
+                                     break;
+                                  case 2:
+                                     dequeue();
+                                     break;
+                                  case 3:
+                                     display();
+                                     break;
+                                  case 4:
+                                     exit(0);
+                                  default:
+                                     printf("\nIncorrect choice \n");
+                                  }
+                               }
+                               return 0;
+                            }                        
+                       </code>
+                   </pre>
+               </div>
+            </div>
+        </div>
+        <div id="t6" class="wh">
+            <h2>Applications of Queue Data Structure</h2>
+            <ul>
+                <li>CPU Scheduling</li>
+                <li>Disk Scheduling</li>
+                <li>Breadth-First Search Algorithm (BFS)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a href="https://www.digitalocean.com/community/tutorials/queue-in-c">www.digitalocean.com (Queue)</a></li>
+            <li><a href="https://codeforwin.org/data-structures/queue-implementation-using-array-in-c">www.codeforwin.org (Queue)</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

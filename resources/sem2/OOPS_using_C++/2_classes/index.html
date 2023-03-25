@@ -24,7 +24,12 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">Back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">Class definition</a>
+        <a href="#t2" class="link">Object of a class</a>
+        <a href="#t3" class="link">Accessing class member</a>
+        <a href="#t4" class="link">Defining member function</a>
+        <a href="#t5" class="link">Arrays within a class</a>
+        <a href="#t6" class="link">Static variables in class</a>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -42,7 +47,7 @@
     </div>
     <div class="content-box">
         <h1>Classes and Objects</h1>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>Class</h2>
             <ul>
                 <li>Class is a way to bind the data and its associated function together.</li>
@@ -100,7 +105,7 @@
                 <img src="../../images/cvs.svg" alt="" class="wb">
             </div>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Creating object of a class</h2>
             <div class='code'>
                <pre>
@@ -113,7 +118,7 @@
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Accessing class member</h2>
             <p>Syntax &darr;</p>
             <div class='code'>
@@ -139,7 +144,7 @@
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Defining member function</h2>
             <ul>
                 <li>Outside the class definition.</li>
@@ -248,11 +253,136 @@
                </div>
             </div>
         </div>
+        <div id="t5" class="wh">
+            <h2>Arrays within a class</h2>
+            <ul>
+                <li>An array can be declared as a member of a class. They can be declared as private, public, or protected members of the class.</li>
+                <li>Consider the following program where we have used array as a member.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class student
+                        {
+                            int roll_no;
+                            int marks[3];
+                        
+                        public:
+                            void getdata();
+                            void tot_marks();
+                        };
+                        void student ::getdata()
+                        {
+                            cout << "Enter roll no : ";
+                            cin >> roll_no;
+                            for (int i = 0; i < 3; i++)
+                            {
+                                cout << "Enter marks in subject " << i + 1 << ": ";
+                                cin >> marks[i];
+                            }
+                        }
+                        void student ::tot_marks()
+                        {
+                            int total = 0;
+                            for (int i = 0; i < 3; i++)
+                            {
+                                total += marks[i];
+                            }
+                            cout << "Total Marks : " << total << endl;
+                        }
+                        int main()
+                        {
+                            student stu;
+                            stu.getdata();
+                            stu.tot_marks();
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t6" class="wh">
+            <h2>Static variables in a class</h2>
+            <ul>
+                <li>As the variables declared as static are initialized only once as they are allocated space in separate static storage so, the static variables in a class are shared by the objects.</li>
+                <li>There can not be multiple copies of same static variables for different objects.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Prac
+                        {
+                        public:
+                            static int var;
+                        };
+                        int main()
+                        {
+                            Prac obj1, obj2;
+                            obj1.var = 2;
+                            obj2.var = 3;
+                            cout << obj1.var << " " << obj2.var;
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    Undefined symbols for architecture x86_64:
+                    "Prac::var", referenced from:
+                        _main in test-f1185c.o
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>You can see in the above program that we have tried to create multiple copies of the static variable "i" for multiple objects. But this didn't happen. So, a static variable inside a class should be intialized explicitly by the user using the class name and scope resolution operator outside the class as shown below:</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Prac
+                        {
+                        public:
+                            static int var;
+                        };
+                        int Prac::var = 1;
+                        int main()
+                        {
+                            Prac obj1, obj2;
+                            // initially the value of "var" is 1
+                            // now we will try to increment is using one object
+                            obj1.var++;
+                            cout << obj1.var << " " << obj2.var << endl;
+                            // above we are trying to check the value of "var" from both the object
+                            // and it is giving 2 which means it is being shared.
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>
         <ul>
             <li><a href="https://www.geeksforgeeks.org/structure-vs-class-in-cpp/">www.geeksforgeeks.org (structure v/s class)</a></li>
+            <li><a href="https://developerstutorial.com/arrays-within-a-class">https://developerstutorial.com (array within a class)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/static-keyword-cpp/">www.geeksforgeeks.org (static variable in class)</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>

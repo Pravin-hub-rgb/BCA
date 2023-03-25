@@ -1,12 +1,87 @@
 #include <stdio.h>
+#include <stdlib.h>
+#define MAX 5
+int queue[MAX];
+int rear = -1;
+int front = -1;
+void enqueue()
+{
+   if (front == -1 && rear == -1)
+   {
+      front = rear = 0;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+   else if ((rear + 1) % MAX == front)
+   {
+      printf("\nQueue is full");
+   }
+   else
+   {
+      rear = (rear + 1) % MAX;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+}
+void dequeue()
+{
+   if (front == -1 && rear == -1)
+   {
+      printf("\nQueue is empty");
+   }
+   else if (front == rear)
+   {
+      printf("\n%d is deleted", queue[front]);
+      front = rear = -1;
+   }
+   else
+   {
+      printf("\n%d is deleted", queue[front]);
+      front = (front + 1) % MAX;
+   }
+}
+void display()
+{
+   int i = front;
+   if (front == -1 && rear == -1)
+      printf("\nQueue is empty\n");
+   else
+   {
+      while (i != rear)
+      {
+         printf("\n%d", queue[i]);
+         i = (i + 1) % MAX;
+      }
+   }
+}
 int main()
 {
-   int var = 10, var2 = 20;
-   int *ptr;
-   int *q;
-   ptr = &var;
-   q = &var2;
-   *q = *ptr; // not this is valid
-   printf("%d", *q);
+   int ch;
+   while (1)
+   {
+      printf("\n------- MENU FOR CIRCULAR QUEUE -------");
+      printf("\n1.Enqueue Operation\n");
+      printf("2.Dequeue Operation\n");
+      printf("3.Display the Queue\n");
+      printf("4.Exit\n");
+      printf("Enter your choice of operations : ");
+      scanf("%d", &ch);
+      switch (ch)
+      {
+      case 1:
+         enqueue();
+         break;
+      case 2:
+         dequeue();
+         break;
+      case 3:
+         display();
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nIncorrect choice \n");
+      }
+   }
    return 0;
 }
