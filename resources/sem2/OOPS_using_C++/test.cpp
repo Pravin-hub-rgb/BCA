@@ -1,19 +1,37 @@
 #include <iostream>
 using namespace std;
-class Prac
+class employee
 {
+    int id;
+    int salary;
+
 public:
-    static int var;
+    void getdata(void);
+    void putdata(void);
 };
-int Prac::var = 1;
 int main()
 {
-    Prac obj1, obj2;
-    // initially the value of "var" is 1
-    // now we will try to increment is using one object
-    obj1.var++;
-    cout << obj1.var << " " << obj2.var << endl;
-    // above we are trying to check the value of "var" from both the object
-    // and it is giving 2 which means it is being shared.
+    employee e[10]; // array of objects
+    for (int i = 0; i < 10; i++)
+    {
+        e[i].getdata();
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        e[i].putdata();
+    }
     return 0;
+}
+
+void employee ::getdata()
+{
+    cout << "Enter id : ";
+    cin >> id;
+    cout << "Enter salary : ";
+    cin >> salary;
+}
+void employee ::putdata()
+{
+    cout << "\nEnter id : " << id;
+    cout << "\nEnter salary : " << salary;
 }
