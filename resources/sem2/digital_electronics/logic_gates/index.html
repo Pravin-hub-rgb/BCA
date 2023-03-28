@@ -211,6 +211,344 @@
                         (Absorption)
                     </code>
                 </pre>
+                <div class="in">
+                    <h3>some questions</h3>
+                    <div class="wh">
+                        <p>(i) Prove (x+y) (x+z) = x + yz</p>
+                        <pre>
+                            <code>
+
+                                LHS = (x+y) (x+z)
+                                = (x.x) + (x.z) + (y.x) + (y.z)
+                                = x + xz + yx + yz               [as x.x = x]
+                                = x(1 + z + y) + yz 
+                                = x + yz                         [since 1 + k = 1]
+                                = RHS  
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="wh">
+                        <p>(ii) Prove xy + xz + yz' = xz + yz'</p>
+                        <pre>
+                            <code>
+
+                                LHS = xy + xz + yz' 
+                                = xy(z+z') + xz(y+y') + yz'(x+x')     [as x+x' = 1]
+                                = xyz + xyz' + xyz + xy'z + xyz' + x'yz'
+                                = xyz + xyz' + xy'z + x'yz'           [as xyz + xyz = xyz]
+                                = xyz + xy'z + xyz' + x'yz'           [rearranging]
+                                = xz(y+y') + yz'(x+x')
+                                = xz + yz'                            [as y+y' = 1]
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="wh">
+                        <p>(iii) Simplify F = ABCD + ABCD'</p>
+                        <pre>
+                            <code>
+
+                                = ABCD + ABCD'
+                                = ABC(D+D')
+                                = ABC      [as D+D' = 1]
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Boolean Expression</h2>
+            <ul>
+                <li>Boolean expression is a method using which we represent information about boolean function i.e. when it give 0 or 1.</li>
+                <li>We convert truth table of boolean function into boolean expression which contains all information.</li>
+                <li>Two types of boolean expression:
+                    <ol>
+                        <li>Sum of product (SOP) expression
+                            <br>(Which remember where is 1)
+                        </li>
+                        <li>Product of sum (POS) expression
+                            <br>(Which remember where is 0)
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h2>SOP</h2>
+                <ul>
+                    <li>It contains product term (AND term) which are sum (OR) together that's why called sum of product.</li>
+                    <li>Each product term consists of one or more literals (variables) appearing either in complemented or uncomplemented form, e.g. a'b' + a'b. 
+                        <br><pre>
+                            <code>
+
+                                Example for SOP:
+                                f(a,b) = a'b' + ab' 
+
+                                truth table 
+                                a    b     f
+                                ------------- 
+                                0    0     1
+                                0    1     0
+                                1    0     1
+                                1    1     0
+                            </code>
+                        </pre>
+                    </li>
+                    <li>A product term which contains all the literals (variables) either in complemented or uncomplemented for is called <b>minterm.</b> In a <b>n</b> variable function 2<sup>n</sup> minterm can be there.</li>
+                    <li>If a leteral have value 1 then ok, but if not, then we complement one which is zero.</li>
+                    <li>There is only one input sequence for any minterm on which output is 1 so it represent info.</li>
+                    <li>Function will have value 1, if atleast one of the product term is 1.</li>
+                </ul>
+                <p>Another example with 3 variable. &darr;</p>
+                <pre>
+                    <code>
+
+                        sequence        binary              minterm         designation
+                                        representation
+                        ----------------------------------------------------------------- 
+                            0               000              a'b'c'             m0
+                            1               001              a'b'c              m1
+                            2               010              a'bc'              m2
+                            3               011              a'bc               m3
+                            4               100              ab'c'              m4
+                            5               101              ab'c               m5
+                            6               110              abc'               m6
+                            7               111              abc                m7
+                    </code>
+                </pre>
+                <ul>
+                    <li>Example for minterm
+                        <ul>
+                            <li>f(a,b) = a'b' + ab' &check;</li>
+                            <li>f(a,b) = a' + ab' &cross;</li>
+                        </ul>
+                    </li>
+                    <li>One more example &darr; 
+                        <pre>
+                            <code>
+
+                                a   b   c   f 
+                                --------------
+                                0   0   0   0   m0
+                                0   0   1   1   m1
+                                0   1   0   1   m2
+                                0   1   1   0   m3
+                                1   0   0   1   m4
+                                1   0   1   0   m5
+                                1   1   0   0   m6
+                                1   1   1   0   m7
+
+                                We know we have to remember where 1 is in the function.
+                                at m1, m2 and m4 we have 1 which is a'b'c + a'bc' + ab'c'
+                                f(a,b,c) = &sum;m(1,2,4)
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <h3>Canonical SOP expression</h3>
+                    <ul>
+                        <li>In SOP expression if each product term (AND term) consists of all the literals appearing either in complemented or uncomplemented form.</li>
+                        <li>Example &darr; 
+                            <pre>
+                                <code>
+
+                                    a   b   c   f 
+                                    --------------
+                                    0   0   0   1
+                                    0   0   1   1
+                                    0   1   0   0
+                                    0   1   1   0
+                                    1   0   0   1
+                                    1   0   1   1
+                                    1   1   0   0
+                                    1   1   1   1
+
+                                    f(a,b,c) = a'b'c + a'b'c + ab'c' + ab'c + abc
+                                    simplifying it 
+                                    = a'b'(c+c') + ab'(c'+c) + abc 
+                                    = a'b' + ab' + abc
+                                    = b'(a'+a) + abc 
+                                    = b' + abc
+                                    we optimized it so that cost of implementation is less 
+                                    now b' is available in a'b'c, a'b'c, ab'c', ab'c 
+                                </code>
+                            </pre>
+                        </li>
+                        <li>Example (optimized function)
+                            <pre>
+                                <code>
+
+                                    f(a,b,c) = a'b + ab'c + c'
+                                    convert this to canonical form so that we can identify minterm.
+                                    = a'b(c'+c) + ab'c + (a'+a)(b'+b)c'
+                                    = a'bc' + a'bc + ab'c + (a'b' + a'b' + ab' + ab)c'
+                                    = a'bc' + a'bc + ab'c + a'b'c' + a'b'c' + ab'c' + abc' (canonical form)
+                                    = &sum;(0, 2, 4, 5, 6)
+                                </code>
+                            </pre>
+                        </li>
+                        <li>Pros: easy to read and understand.</li>
+                        <li>Cons: if the expression is in canonical form then its cost of implementation is more.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>POS</h3>
+                <ul>
+                    <li>Contains SUM (OR) terms which are AND (product) together.</li>
+                    <li>Each sum term consist of one or more literals (variables), either in complemented or uncomplemented form.
+                        <pre>
+                            <code>
+                                
+                                f(a,b,c) = (a + b') . (a' + b' + c')
+                                (a + b') = (a + b' + c) . (a + b' + c') [not optimized]
+                            </code>
+                        </pre>
+                    </li>
+                    <li>Sum term which contains all the literals is called <b>maxterm.</b></li>
+                    <li>In a n-variable function there will be 2<sup>n</sup> maxterms.</li>
+                    <li>Result of a sum term must be 0, so if a literal is having value 0 then it is ok, but if not we complement the variable to make it 0. (a = 0, a' = 1)</li>
+                    <li>There is only one value sequence for every maxterm on which i will give 0.</li>
+                    <li>3 variable representation &darr;
+                        <pre>
+                            <code>
+
+                                sequence    binary              maxterm         designation 
+                                            representation 
+                                ----------------------------------------------------------------- 
+                                    0            000              a+b+c             M0
+                                    1            001              a+b+c'            M1
+                                    2            010              a+b'+c            M2
+                                    3            011              a+b'+c'           M3
+                                    4            100              a'+b+c            M4
+                                    5            101              a'+b+c'           M5
+                                    6            110              a'+b'+c           M6
+                                    7            111              a'+b'+c'          M7
+                            </code>
+                        </pre>
+                    </li>
+                    <li>function example &darr; 
+                        <pre>
+                            <code>
+
+                                a   b   c   f 
+                                ------------- 
+                                0   0   0   0   M0
+                                0   0   1   0   M1
+                                0   1   0   1   M2
+                                0   1   1   1   M3
+                                1   0   0   0   M4
+                                1   0   1   1   M5
+                                1   1   0   1   M6
+                                1   1   1   0   M7
+
+                                we have to remember where 0 is occuring 
+                                = (a+b+c) . (a+b+c') . (a'+b+c) . (a'+b'+c')
+                                = &pi;M(0,1,4,7)
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <h3>Canonical POS form</h3>
+                    <ul>
+                        <li>If each sum (OR) term consists of all the literals, either in complemented or uncomplemented form, then it is called POS form.</li>
+                        <li>Here each sum term represent a maxterm.</li>
+                    </ul>
+                    <p>Converting non-canonical form to canonical form 
+                        <pre>
+                            <code>
+
+                                1. (a) . (a' + b) . (a' + b' + c')
+                                = (a + b'.b + c'.c) . (a' + b + c'.c) . (a' + b' + c')
+                                = [(a+b').(a+b)+c'.c] . (a' + b + c') + (a' + b + c) . (a' + b' + c')
+                                = (a+b'+c') . (a+b'+c) . (a+b+c') . (a+b+c) . (a'+b+c') . (a'+b+c) . (a'+b'+c')
+                                = &pi;M(0,1,2,3,4,5,7)
+                            </code>
+                        </pre>
+                    </p>
+                    <ul>
+                        <li>pros: improve readability and understandability of expression</li>
+                        <li>cons: implementation of circuit is hard, cost increases.</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Practise question</h3>
+                    <ol>
+                        <li>Simplify - (P+Q'+R') . (P+Q'+R) . (P+Q+R')</li>
+                        <li>Obtain boolean eq. for:
+                            <ul>
+                                <li>F(x,y,z) = &sum;(4,6,7)</li>
+                                <li>F(a,b,c) = &pi;(1,3,6)</li>
+                            </ul>
+                        </li>
+                        <li>Convert SOP to POS 
+                            <ul>
+                                <li>(XY'Z' + XYZ' + XYZ)</li>
+                            </ul>
+                        </li>
+                        <li>Convert the following to canonical form:
+                            <ul>
+                                <li>f(p,q,r) = p'q + p'qr' + q'</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Simplification of boolean expression</h2>
+            <ul>
+                <li>After deriving a boolean expression from the truth table next important step is to minimize it, so that the cost of implementation into hardware is reduced because of additional gates can be reduced.</li>
+                <li>We Karnaugh-map to reduce the boolean expression.</li>
+            </ul>
+            <div class="in">
+                <h3>Karnaugh Map</h3>
+                <ul>
+                    <li>In 1953, Maurice Karnaugh developed K-map for reducing boolean equations so that we have a small logic circuit.</li>
+                    <li>The K-map is a diagram made up of squares, and each square represent one minterm/maxterm.</li>
+                    <li>Problems with other methods: The algebraic procedure using boolean laws and rule for minimizing boolean expression becomes difficult when a function becomes complex, because we have to identify where is the scope of minimization based on some boolean laws and it is difficult to understand where we reach saturation point or not.</li>
+                    <li>Karnaugh map is one of the most extensively used tool, it is a graphical representation, represents truth table by pictorial form, provides a systematic method for simplifying or minimizing a boolean expression.</li>
+                    <li>For n-variable K-map, there will be 2<sup>n</sup> cells addressed by a gray code.</li>
+                    <li>Each cell corresponds to one minterm or maxterm.</li>
+                    <li>we are using gray code here because that it is cyclic and we can easily minimize adjacent term.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>K-MAP</h2>
+            <div class="in">
+                <h3>2 Variable K-MAP</h3>
+                <ul>
+                    <li>A 2 variable K-map is used for the boolean equation that has only two binary variables. For example &rarr; xy + xy'.</li>
+                    <li>With 2 i/ps, there are 4 possible combinations, so we have 4 squares in a 2 variable K-map. Each square shows one minterm or maxterm.</li>
+                </ul>
+                <img src="../../images/kmap1.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>3 variable K-MAP</h3>
+                <ul>
+                    <li>The number of cells in 3 variable K-map is eight, since the number of variable is three, the following figure shows 3 variable K-map.</li>
+                </ul>
+                <img src="../../images/kmap2.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>4 variable K-MAP</h3>
+                <ul>
+                    <li>The number of cells in 4 variable K-map is sixteen, since the number of variables if four. The following figure shows 4 variable K-Map.</li>
+                </ul>
+                <img src="../../images/kmap3.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>5 variable K-MAP</h3>
+                <ul>
+                    <li>The number of cells in 5 variable K-map is thirty two since the number of varaibles is 5. The following figure shows 5 variable K-map, we combine 2 maps of 16 boxes.</li>
+                </ul>
+                <img src="../../images/kmap4.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>K-MAP for POS</h3>
+                <img src="../../images/kmappos.svg" alt="" class="wb">
             </div>
         </div>
     </div>

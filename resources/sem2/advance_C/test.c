@@ -40,7 +40,7 @@ void dequeue()
       front = (front + 1) % MAX;
    }
 }
-void display()
+/*void display()
 {
    int i = front;
    if (front == -1 && rear == -1)
@@ -51,6 +51,27 @@ void display()
       {
          printf("\n%d", queue[i]);
          i = (i + 1) % MAX;
+      }
+   }
+}*/
+void display()
+{
+   int i;
+   if (front == -1 && rear == -1)
+      printf("\nQueue is empty\n");
+   else
+   {
+      if (front <= rear)
+      {
+         for (i = front; i <= rear; i++)
+            printf("%d\n", queue[i]);
+      }
+      else
+      {
+         for (i = front; i <= MAX; i++)
+            printf("%d\n", queue[i]);
+         for (i = 0; i <= rear; i++)
+            printf("%d\n", queue[i]);
       }
    }
 }
