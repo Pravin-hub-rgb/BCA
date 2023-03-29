@@ -507,6 +507,433 @@
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <h2>Constructor</h2>
+            <ul>
+                <li>A constructor is a special member function whose task is to initialize the object of class.</li>
+                <li>It constructs the values of data member of the class, that's why it is known as constructor.</li>
+                <li>It is special because its name is same as the class name.</li>
+                <li>It is invoked whenever an objects of its associated class is created.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    class integer
+                    {
+                        int m, n;
+                        public:
+                            integer(void); // default constructor declared
+                            ... 
+                            ... 
+                    };
+                    integer :: integer(void) // constructor definition
+                    {
+                        cout << "This is default constructor"; 
+                        m = 0;
+                        n = 0;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>A constructor that accepts no parameter is called default constructor.</li>
+                <li>Special feature of constructor:
+                    <ul>
+                        <li>It should be declared in public secton.</li>
+                        <li>Invoked automatically when the objects are created.</li>
+                        <li>They do not have return type not even void.</li>
+                        <li>They cannot be inherited.</li>
+                        <li>They can have default arguments.</li>
+                        <li>Constructor cannot be virtual, we cannot refer to its address.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Parameterized constructor</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+                       
+                        class interger
+                        {
+                            int m, n;
+                            public:
+                                integer(int x, int y); // parameterized constructor declaration
+                        };
+                        integer :: integer(int x, int y)
+                        {
+                            m = x;
+                            n = y;
+                        }
+                       </code>
+                   </pre>
+                </div>
+                <p>Object declaration in parameterized constructor: we cannot do this &rarr; integer int1;</p>
+                <ul>
+                    <li>Two type of call explicit and implicit.</li>
+                    <li>We must pass the intial values as arguments to the constructor function when an object is
+                        declared this can be done in two ways.
+                        <ol>
+                            <li>By calling the constructor explicitly.
+                                <div class='code'>
+                                    <pre>
+                                       <code>
+                                       
+                                        integer int1 = integer(100, 10);
+                                       </code>
+                                   </pre>
+                                </div>
+                            </li>
+                            <li>By calling the constructor implicitly.
+                                <div class='code'>
+                                    <pre>
+                                        <code>
+                                        
+                                         integer int1(100, 10);
+                                        </code>
+                                    </pre>
+                                </div>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Inline parameterized constructor</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+                       
+                        class integer
+                        {
+                            int m, n;
+                            public:
+                                integer(int x, int y)
+                                {
+                                    m = x;
+                                    n = y;
+                                }
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Program to demonstrate the working of parameterized constructor.</button>
+                <div class="panel">
+                    <pre>
+                    <code>
+                    
+                        #include&lt;iostream>
+                        using namespace std;
+                        class Rect
+                        {
+                            int length, breadth;
+                            public:
+                                integer(int x, int y)
+                                {
+                                    m = x; n = y;
+                                }
+                                void putdata()
+                                {
+                                    cout << "m = " << m << "n = " << n;
+                                }
+                        }
+                        int main()
+                        {
+                            integer m1(100, 10);
+                            m1.putdata();
+                            return 0;
+                        }
+                    </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Constructor overloading</h2>
+            <ul>
+                <li>Multiple constructor in a class having different arguments.</li>
+            </ul>
+            <p>Program to demonstrate the use of constructor overloading</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">code</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class complex
+                        {
+                            float x, y;
+                        
+                        public:
+                            complex() {}
+                            complex(float a) { x = y = a; }
+                            complex(float real, float imag)
+                            {
+                                x = real;
+                                y = imag;
+                            }
+                            friend complex sum(complex, complex);
+                            friend void show(complex);
+                        };
+                        complex sum(complex c1, complex c2)
+                        {
+                            complex c3;
+                            c3.x = c1.x + c2.x;
+                            c3.y = c1.y + c2.y;
+                            return c3;
+                        }
+                        void show(complex c)
+                        {
+                            cout << c.x << " + j " << c.y;
+                        }
+                        int main()
+                        {
+                            complex A(2.7, 3.5);
+                            complex B(1.6);
+                            complex C;
+                        
+                            C = sum(A, B);
+                            cout << "A = ";
+                            show(A);
+                            cout << "\nB = ";
+                            show(B);
+                            cout << "\nC = ";
+                            show(C);
+                        
+                            // Another way to give initial values (second method)
+                            complex P, Q, R;
+                            P = complex(2.5, 3.9);
+                            Q = complex(1.6, 2.5);
+                            R = sum(P, Q);
+                            cout << "\nP = ";
+                            show(P);
+                            cout << "\nQ = ";
+                            show(Q);
+                            cout << "\nR = ";
+                            show(R);
+                            return 0;
+                        }
+                   </code>
+               </pre>
+                </div>
+                <p>Output &darr;</p>
+                <div class='code'>
+                    <pre>
+                   <code>
+                   
+                    A = 2.7 + j 3.5
+                    B = 1.6 + j 1.6
+                    C = 4.3 + j 5.1
+                    P = 2.5 + j 3.9
+                    Q = 1.6 + j 2.5
+                    R = 4.1 + j 6.4
+                   </code>
+               </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Dynamic initialization of objects</h2>
+            <ul>
+                <li>Dynamic initialization of object refers to initializing the objects at a run time i.e., the intial
+                    value of an object is provided during run time.</li>
+                <li>It can be achieved by using constructors and by passing parameters to the constructors.</li>
+                <li><b>Dynamic Constructor:</b> the constructor used for allocating the memory at runtime is known as
+                    the <b>dynamic constructor.</b></li>
+            </ul>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Program to demonstrate dynamic intialization of objects. (1)</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+                        
+                             #include &lt;iostream>
+                             using namespace std;
+                             class Fixed_deposit
+                             {
+                                 long int P_amount; // Principal amount
+                                 int Years;         //  Period of investment
+                                 float Rate;        // interest rate
+                                 float R_value;     // Return value of amount
+                             public:
+                                 Fixed_deposit() {}
+                                 Fixed_deposit(long int p, int y, float r = 0.12);
+                                 Fixed_deposit(long int p, int y, int r);
+                                 void display(void);
+                             };
+                             
+                             Fixed_deposit ::Fixed_deposit(long int p, int y, float r)
+                             {
+                                 P_amount = p;
+                                 Years = y;
+                                 Rate = r;
+                                 R_value = P_amount;
+                                 for (int i = 1; i <= y; i++)
+                                     R_value = R_value * (1.0 + r);
+                             }
+                             Fixed_deposit::Fixed_deposit(long int p, int y, int r)
+                             {
+                                 P_amount = p;
+                                 Years = y;
+                                 Rate = r;
+                                 R_value = P_amount;
+                                 for (int i = 1; i <= y; i++)
+                                     R_value = R_value * (1.0 + float(r) / 100);
+                             }
+                             void Fixed_deposit ::display(void)
+                             {
+                                 cout << endl;
+                                 cout << "Principal Amount = " << P_amount << endl
+                                      << "Return Value     = " << R_value << endl;
+                             }
+                             int main()
+                             {
+                                 Fixed_deposit FD1, FD2, FD3; // deposits created
+                                 long int p;                  // principal amount
+                                 int y;                       // investment period, years
+                                 float r;                     // interest rate, decimal form
+                                 int R;                       // interest rate, percent form
+                                 cout << "Enter amount, period, interest rate (in percent) : ";
+                                 cin >> p >> y >> R;
+                                 FD1 = Fixed_deposit(p, y, R);
+                                 cout << "Enter amount, period, interest rate (in decimal) : ";
+                                 cin >> p >> y >> r;
+                                 FD2 = Fixed_deposit(p, y, r);
+                                 cout << "Enter amount and period : ";
+                                 cin >> p >> y;
+                                 FD3 = Fixed_deposit(p, y);
+                                 cout << endl
+                                      << "Deposit 1";
+                                 FD1.display();
+                                 cout << endl
+                                      << "Deposit 2";
+                                 FD2.display();
+                                 cout << endl
+                                      << "Deposit 3";
+                                 FD3.display();
+                                 return 0;
+                             }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">program 2</button>
+                <div class="panel">
+                    <pre>
+                       <code>
+                           
+                            #include &lt;iostream>
+                            using namespace std;
+                            
+                            void displayPer(int);
+                            
+                            class Marks
+                            {
+                                float percentage;
+                            
+                            public:
+                                Marks() {}
+                                Marks(int, int);
+                                Marks(int, int, int);
+                                Marks(int, int, int, int);
+                                Marks(int, int, int, int, int);
+                            };
+                            
+                            Marks::Marks(int m1, int m2)
+                            {
+                                percentage = (m1 + m2) / 2;
+                                displayPer(percentage);
+                            }
+                            
+                            Marks::Marks(int m1, int m2, int m3)
+                            {
+                                percentage = (m1 + m2 + m3) / 3;
+                                displayPer(percentage);
+                            }
+                            
+                            Marks::Marks(int m1, int m2, int m3, int m4)
+                            {
+                                percentage = (m1 + m2 + m3 + m4) / 4;
+                                displayPer(percentage);
+                            }
+                            
+                            Marks::Marks(int m1, int m2, int m3, int m4, int m5)
+                            {
+                                percentage = (m1 + m2 + m3 + m4 + m5) / 5;
+                                displayPer(percentage);
+                            }
+                            
+                            void enterMarks(int);
+                            
+                            int m[5] = {0}, m1, m2, m3, m4, m5;
+                            
+                            int main()
+                            {
+                                int sub;
+                                Marks result;
+                                cout << "----- Percentage Calculator------" << endl;
+                                cout << "How many subjects do you have : ";
+                                cin >> sub;
+                                switch (sub)
+                                {
+                                case 2:
+                                    enterMarks(sub);
+                                    result = Marks(m1, m2);
+                                    break;
+                                case 3:
+                                    enterMarks(sub);
+                                    result = Marks(m1, m2, m3);
+                                    break;
+                                case 4:
+                                    enterMarks(sub);
+                                    result = Marks(m1, m2, m3, m4);
+                                    break;
+                                case 5:
+                                    enterMarks(sub);
+                                    result = Marks(m1, m2, m3, m4, m5);
+                                    break;
+                                default:
+                                    cout << "Enter subject between 1 and 6";
+                                }
+                                return 0;
+                            }
+                            
+                            void enterMarks(int sub)
+                            {
+                                for (int i = 1; i <= sub; i++)
+                                {
+                                    cout << "Enter the marks in subject " << i << " : ";
+                                    cin >> m[i - 1];
+                                }
+                                m1 = m[0];
+                                m2 = m[1];
+                                m3 = m[2];
+                                m4 = m[3];
+                                m5 = m[4];
+                            }
+                            
+                            void displayPer(int val)
+                            {
+                                cout << " you got " << val << "%\n";
+                            }
+                    </code>
+                </pre>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>
@@ -517,7 +944,8 @@
                     within a class)</a></li>
             <li><a href="https://www.geeksforgeeks.org/static-keyword-cpp/">www.geeksforgeeks.org (static variable in
                     class)</a></li>
-                    <li><a href="https://learn.microsoft.com/en-us/cpp/cpp/friend-cpp?view=msvc-170">https://learn.microsoft.com (friend function)</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/cpp/cpp/friend-cpp?view=msvc-170">https://learn.microsoft.com
+                    (friend function)</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
