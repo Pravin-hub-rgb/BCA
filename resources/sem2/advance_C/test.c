@@ -1,108 +1,28 @@
 #include <stdio.h>
-#include <stdlib.h>
-#define MAX 5
-int queue[MAX];
-int rear = -1;
-int front = -1;
-void enqueue()
-{
-   if (front == -1 && rear == -1)
-   {
-      front = rear = 0;
-      printf("\nEnter the element : ");
-      scanf("%d", &queue[rear]);
-   }
-   else if ((rear + 1) % MAX == front)
-   {
-      printf("\nQueue is full");
-   }
-   else
-   {
-      rear = (rear + 1) % MAX;
-      printf("\nEnter the element : ");
-      scanf("%d", &queue[rear]);
-   }
-}
-void dequeue()
-{
-   if (front == -1 && rear == -1)
-   {
-      printf("\nQueue is empty");
-   }
-   else if (front == rear)
-   {
-      printf("\n%d is deleted", queue[front]);
-      front = rear = -1;
-   }
-   else
-   {
-      printf("\n%d is deleted", queue[front]);
-      front = (front + 1) % MAX;
-   }
-}
-/*void display()
-{
-   int i = front;
-   if (front == -1 && rear == -1)
-      printf("\nQueue is empty\n");
-   else
-   {
-      while (i != rear)
-      {
-         printf("\n%d", queue[i]);
-         i = (i + 1) % MAX;
-      }
-   }
-}*/
-void display()
-{
-   int i;
-   if (front == -1 && rear == -1)
-      printf("\nQueue is empty\n");
-   else
-   {
-      if (front <= rear)
-      {
-         for (i = front; i <= rear; i++)
-            printf("%d\n", queue[i]);
-      }
-      else
-      {
-         for (i = front; i <= MAX; i++)
-            printf("%d\n", queue[i]);
-         for (i = 0; i <= rear; i++)
-            printf("%d\n", queue[i]);
-      }
-   }
-}
 int main()
 {
-   int ch;
-   while (1)
-   {
-      printf("\n------- MENU FOR CIRCULAR QUEUE -------");
-      printf("\n1.Enqueue Operation\n");
-      printf("2.Dequeue Operation\n");
-      printf("3.Display the Queue\n");
-      printf("4.Exit\n");
-      printf("Enter your choice of operations : ");
-      scanf("%d", &ch);
-      switch (ch)
-      {
-      case 1:
-         enqueue();
-         break;
-      case 2:
-         dequeue();
-         break;
-      case 3:
-         display();
-         break;
-      case 4:
-         exit(0);
-      default:
-         printf("\nIncorrect choice \n");
-      }
-   }
+   int a = 5, *pi = &a;
+   char b = 'x', *pc = &b;
+   float c = 5.5, *pf = &c;
+   printf("Value of pi =  Address of a = %u\n", pi);
+   printf("Value of pc =  Address of b = %u\n", pc);
+   printf("Value of pf =  Address of c = %u\n", pf);
+   // now we will increment each pointer
+   pi++;
+   pc++;
+   pf++;
+   printf("Now value of pi = %u\n", pi);
+   printf("Now value of pc = %u\n", pc);
+   printf("Now value of pf = %u\n", pf);
    return 0;
 }
+/*
+output:
+Value of pi =  Address of a = 3191752024
+Value of pc =  Address of b = 3191752015
+Value of pf =  Address of c = 3191751996
+Now value of pi = 3191752028
+Now value of pc = 3191752016
+Now value of pf = 3191752000
+in this architecture float and int take 4 bytes.
+*/

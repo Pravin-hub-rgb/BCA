@@ -24,7 +24,15 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">Home</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">About pointer</a>
+        <a href="#t2" class="link">Syntax of pointer</a>
+        <a href="#t3" class="link">Operator in pointer</a>
+        <a href="#t4" class="link">Pointer initializaiton</a>
+        <a href="#t5" class="link">Dereferencing a pointer</a>
+        <a href="#t6" class="link">Memory and pointer</a>
+        <a href="#t7" class="link">Storing one pointer value to another pointer value.</a>
+        <a href="#t8" class="link">Pointer to pointer</a>
+        <a href="#t9" class="link">Pointer arithmetic</a>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -41,7 +49,7 @@
         </div>
     </div>
     <div class="content-box">
-        <h1>Pointer</h1>
+        <h1 id="t1">Pointer</h1>
         <ul>
             <li>Pointers are variables which store the address of variables or a memory location.</li>
             <li>Pointer variable can be of any data type i.e, int, char, function, array, etc.</li>
@@ -50,7 +58,7 @@
             <li>A pointer is a derived data type in C that can store the address of other variables or a memory. We can
                 access and manipulate the data stored in that memory location using pointers.</li>
         </ul>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Syntax of pointer</h2>
             <div class='code'>
                 <pre>
@@ -65,7 +73,7 @@
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Operator in pointer</h2>
             <ul>
                 <li>There are basically two operator which are used in pointer.
@@ -89,7 +97,7 @@
                     used in pointer declaration and dereferencing.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Pointer initialization</h2>
             <ul>
                 <li>When we assign some value to the pointer, it is called pointer initialization in C.</li>
@@ -132,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Dereferencing a C pointer</h2>
             <ul>
                 <li>Dereferencing is the process of accessing the value stored in the memory address specified in the
@@ -169,7 +177,47 @@
             </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t6" class="wh">
+            <h2>Memory and pointer</h2>
+            <ul>
+                <li>Suppose if three pointers are declared for int, float, char.
+                    <ul>
+                        <li>All the three pointers will occupy 2 bytes in the memory.</li>
+                        <li>This is because all the memory addresses are integer values ranging from 0 to 65536.</li>
+                        <li>Thus we can say that a pointer irrespective of its type is storing the address as integer
+                            values and each integer requires only two bytes.</li>
+                        <li>Note: For 32-bit and 64-bit architecture we need to have pointers with size 4 bytes(32-bit
+                            width) and 8 bytes(64-bit width) respectively.</li>
+                        <li>The main thing is that in a particular architecture the pointer's memory size is constant.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Program to check the size of different pointer variable.</button>
+                <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        int main()
+                        {
+                           int a = 5, *p1;
+                           float b = 2.5, *p2;
+                           char c = 'a', *p3;
+                           p1 = &amp;a;
+                           p2 = &amp;b;
+                           p3 = &amp;c;
+                           printf("%d", sizeof(p1));
+                           printf("%d", sizeof(p2));
+                           printf("%d", sizeof(p3));
+                           return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t7" class="wh">
             <h2>Storing one pointer value to another pointer value.</h2>
             <div class='code'>
                 <div class='dotc'></div>
@@ -211,7 +259,7 @@
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t8" class="wh">
             <h2>Pointer to Pointer (Double Pointer)</h2>
             <ul>
                 <li>In pointer to pointer, pointer variable can store address of another pointer variable.</li>
@@ -264,6 +312,184 @@
                        </code>
                    </pre>
                 </div>
+            </div>
+        </div>
+        <div id="t9" class="wh">
+            <h2>Pointer Arithmetic</h2>
+            <ul>
+                <li>All types of arithmetic operations are not possible with pointers.</li>
+                <li>The only valid operations that can be performed are:
+                    <ol>
+                        <li>Addition of an integer to a pointer and increment operation.</li>
+                        <li>Subtraction of an integer from a pointer and decrement operation.</li>
+                        <li>Subtraction of a pointer from another pointer of same type.</li>
+                    </ol>
+                </li>
+            </ul>
+            <img src="../../images/pointer1.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Addition of an integer to a pointer and increment operation.</h3>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        int *ptr;
+                        // let's say address of "ptr" is 1000
+                        ptr = ptr + 1;
+                        // let's say integer takes 4 bytes then
+                        ptr + 1 will be 1004
+
+                        // now same with increment 
+                        p++ means 1004 + 4 = 1008
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <p>Program to show pointer arithmetic &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        int main()
+                        {
+                           int a = 5, *pi = &a;
+                           char b = 'x', *pc = &b;
+                           float c = 5.5, *pf = &c;
+                           printf("Value of pi =  Address of a = %u\n", pi);
+                           printf("Value of pc =  Address of b = %u\n", pc);
+                           printf("Value of pf =  Address of c = %u\n", pf);
+                           // now we will increment each pointer
+                           pi++;
+                           pc++;
+                           pf++;
+                           printf("Now value of pi = %u\n", pi);
+                           printf("Now value of pc = %u\n", pc);
+                           printf("Now value of pf = %u\n", pf);
+                           return 0;
+                        }
+                        /*
+                        output:
+                        Value of pi =  Address of a = 3191752024
+                        Value of pc =  Address of b = 3191752015
+                        Value of pf =  Address of c = 3191751996
+                        Now value of pi = 3191752028
+                        Now value of pc = 3191752016
+                        Now value of pf = 3191752000
+                        in this architecture float and int take 4 bytes.
+                        */
+                   </code>
+               </pre>
+            </div>
+            <div class="in">
+                <h3>Precedence of dereferencing operator and increment/decrement operators</h3>
+                <ul>
+                    <li>The precedence level of * operator and incremenet/decrement operators is same and their
+                        associativity is from right to left.</li>
+                    <li>There can be confusion while combining these operators in pointer expressions, so we should use
+                        them carefully.</li>
+                </ul>
+                <div class="wh">
+                    <p><b>x = *ptr++;</b></p>
+                    <ul>
+                        <li>The expression *ptr++ is equivalent to *(ptr++).</li>
+                        <li>Since these operators associate from right to left. Hence the increment operator will be
+                            applied to ptr, and not to *ptr.</li>
+                        <li>The increment operator is postfix, so first the value of ptr will be used in the expression
+                            and then it will be incremented.</li>
+                        <li>Hence firstly the integer pointed to by ptr will be dereferenced and assigned to x and then
+                            ptr will be incremented.</li>
+                        <li>This is same as:
+                            <div class='code'>
+                                <pre>
+                                   <code>
+                                   
+                                    x = *ptr;
+                                    ptr = ptr + 1;
+                                   </code>
+                               </pre>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>x = *++ptr;</b></p>
+                    <ul>
+                        <li>The expression *++ptr is equivalent to *(++ptr).</li>
+                        <li>Here also the increment operator is applied ptr.</li>
+                        <li>The increment operator is prefix, so first ptr will be incremented and then its new value
+                            will be used in the expression.</li>
+                        <li>Hence firstly the value of ptr is incremented, then value at the new address is dereferenced
+                            and assigned to x.</li>
+                        <li>This is same as:
+                            <div class='code'>
+                                <pre>
+                                   <code>
+                                   
+                                    *ptr = *ptr + 1;
+                                    x = *ptr;
+                                   </code>
+                               </pre>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>x = ++*ptr</b></p>
+                    <ul>
+                        <li>The expression ++*ptr is equivalent to ++(*ptr).</li>
+                        <li>Here the increment operator is applied over *ptr and not ptr.</li>
+                        <li>So ere the value of pointer will not change but the value pointed to by the pointer will
+                            change i.e. *ptr will increment.</li>
+                        <li>Since the increment operator is prefic hence first the value of *ptr will increment and then
+                            this will be assigned to x.</li>
+                        <li>This is same as:
+                            <div class='code'>
+                                <pre>
+                                   <code>
+                                   
+                                    *ptr = *ptr + 1;
+                                    x = *ptr;
+                                   </code>
+                               </pre>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>x = (*ptr)++</b></p>
+                    <ul>
+                        <li>Here also the increment operator is applied over *ptr and since it is postfix increment
+                            hence first the value of *ptr will be assigned to x and then it will be incremented.</li>
+                        <li>This is same as:
+                            <div class='code'>
+                                <pre>
+                                   <code>
+                                   
+                                    x = *ptr;
+                                    *ptr = *ptr + 1;
+                                   </code>
+                               </pre>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p>Let us take an example and understad how these expressions are interpreted.
+                <ul>
+                    <li>Suppose value at address 2000 is 25, value at address 2002 is 38, ptr is an integer (4 byte size) pointer that
+                        contains address 2000 hence value of *ptr is 25.</li>
+                    <li>now we'll see what will be the result in these cases:
+                        <ol>
+                            <li>x = *ptr++;</li>
+                            <li>x = *++ptr;</li>
+                            <li>x = ++*ptr;</li>
+                            <li>x = (*ptr)++;</li>
+                        </ol>
+                    </li>
+                </ul>
+                <img src="../../images/pointer2.svg" alt="" class="wb">
+                </p>
             </div>
         </div>
     </div>
