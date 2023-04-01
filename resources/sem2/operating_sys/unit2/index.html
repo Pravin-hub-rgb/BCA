@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operating system components</title>
+    <title>Process Management in OS</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <style>
         body {
@@ -37,24 +37,57 @@
             </div>
         </div>
         <div>
-            <h2>Operating system components</h2>
+            <h2>Process Management in OS</h2>
         </div>
     </div>
     <div class="content-box">
-        <h1>Operating system components</h1>
+        <h1>Process Management in OS</h1>
+        <ul>
+            <li>A program does nothing unless its instructions are executed by CPU.</li>
+            <li>A program in execution is called a process.</li>
+            <li>In order to accomplish its task, process needs the computer resources.</li>
+            <li>There may exist more than one process in the system which may require the same resource at the same
+                time. Therefore, the operating system has to manage all the processes and the resources in a convenient
+                and efficient way.</li>
+            <li>Some resources may need to be executed by one process at one time to maintain the consistency otherwise
+                the system can become inconsistent, and deadlock may occur.
+                <ul>
+                    <li>A deadlock occurs when two or more processes are unable to proceed because they are waiting for
+                        each other to release resources.</li>
+                </ul>
+            </li>
+            <li>The operating system is responsible for the following activities in connection with Process Management:
+                <ol>
+                    <li>Scheduling procees and threads on the CPU's.</li>
+                    <li>Creating and deleting both user and system processes.</li>
+                    <li>Suspending and resuming processes.</li>
+                    <li>Providing mechanisms for process synchronization.</li>
+                    <li>Providing mechanisms for process communication.</li>
+                </ol>
+            </li>
+        </ul>
         <div class="wh">
             <h2>What is process?</h2>
             <ul>
-                <li>A process is a <u>program in execution</u> including the current values of the program counter, registers and variables.</li>
-                <li>The difference between a process and a program is that the program is the group of instruction where as the process is the activity. Or we can say process is an active state of program.</li>
-                <li>We write our computer programs in a text file and when we execute this program, it becomes a process which performs all the tasks mentioned in the program.</li>
-                <li>When a program is loaded into the memory and it becomes a process, it can be divided into four sections: stack, heap, text and data.</li>
+                <li>A process is a <u>program in execution</u> including the current values of the program counter,
+                    registers and variables.</li>
+                <li>The difference between a process and a program is that the program is the group of instruction where
+                    as the process is the activity. Or we can say process is an active state of program.</li>
+                <li>We write our computer programs in a text file and when we execute this program, it becomes a process
+                    which performs all the tasks mentioned in the program.</li>
+                <li>When a program is loaded into the memory and it becomes a process, it can be divided into four
+                    sections: stack, heap, text and data.</li>
+                <li>A process generally also includes the process stack, which contains temporary data (such as function
+                    parameters, return addresses, and local variables), and a data section, which contains global
+                    variables.</li>
             </ul>
             <img src="../../images/process1.svg" alt="" class="wb">
             <ul>
-                <li>Stack: The process stack contains the temporary data such as method/function, parameters, return address and local variables.</li>
+                <li>Stack: The process stack contains the temporary data such as method/function, parameters, return
+                    address and local variables.</li>
                 <li>Heap: This is dynamically allocated memory to a process during its runtim.</li>
-                <li>Text: Program counters (It stores the list of address of next instructions that has to be executed after the current process) & content of processor registers.</li>
+                <li>Text: Program counters (It stores the list of address of next instructions that has to be executed
+                    after the current process) & content of processor registers.</li>
                 <li>Data: This section contains the all global and static variables.</li>
             </ul>
         </div>
@@ -67,15 +100,337 @@
             </ul>
             <img src="../../images/process2.svg" alt="" class="wb">
             <ul>
-                <li><b>Start:</b> This is the initial state when a process is first started/created.</li>
-                <li><b>Ready:</b> The process are waiting to have the processor allocated to them by the operating system so that they can run.
-                <ul>
-                    <li>Process may comein to this state after <i>Start</i> state or while running it by but interrupted by the scheduler to assign CPU to some other process.</li>
-                </ul></li>
-                <li><b>Running</b>: After <i>Ready</i> state, the process state is set to running and the processor execute its instruction.</li>
-                <li><b>Waiting:</b> Process moves into the waiting state if it needs to wait for a resource, such as waiting for user input, or waiting for a file to become available.</li>
-                <li><b>Terminated:</b> Once the process finishes its execution or its is terminated by the operating system, it is moved to the terminated state where it waits to be removed from main memory.</li>
+                <li><b>New:</b> This is the initial state when a process is first started/created.</li>
+                <li><b>Ready:</b> The process are waiting to have the processor allocated to them by the operating
+                    system so that they can run.
+                    <ul>
+                        <li>Process may comein to this state after <i>Start</i> state or while running it by but
+                            interrupted by the scheduler to assign CPU to some other process.</li>
+                    </ul>
+                </li>
+                <li><b>Running</b>: After <i>Ready</i> state, the process state is set to running and the processor
+                    execute its instruction.</li>
+                <li><b>Waiting:</b> Process moves into the waiting state if it needs to wait for a resource, such as
+                    waiting for user input, or waiting for a file to become available.</li>
+                <li><b>Terminated:</b> Once the process finishes its execution or its is terminated by the operating
+                    system, it is moved to the terminated state where it waits to be removed from main memory.</li>
             </ul>
+            <div class="in">
+                <h3>Attributes of a process</h3>
+                <ul>
+                    <li>The attributes of the process are used by the operating system to create the process control
+                        block (PCB) for each of them.</li>
+                    <li>This is also called context of the process. Attributes which are stored in the PCB are described
+                        below.
+                        <ol>
+                            <li><b>Process ID</b>: When a process is created, a unique id is assigned to the process
+                                which is used for unique identification of the process in the system.</li>
+                            <li><b>Program counter</b>: A program counter stores the address of the last instruction of
+                                the process on which the process was suspended. The CPU uses this address when the
+                                execution of this process is resumed.</li>
+                            <li><b>Process State</b>: The process, from its creation to the complemention, goes through
+                                various states which are new, ready, running and waiting.</li>
+                            <li><b>Priority</b>: Every process has its own priority. The process with the highest
+                                priority among the process gets the CPU first. This is also stored on the process
+                                control block.</li>
+                            <li><b>General Purpose Registers</b>: Every process has its own set of registers which are
+                                used to hold the data which is generated during the execution of the process.</li>
+                            <li><b>List of open files</b>: During the execution, every process uses some files which
+                                need to be present in the main memory. OS also maintains a list of open files in the
+                                PCB.</li>
+                            <li><b>List of open devices</b>: OS also maintain the list of all open devices which are
+                                used during the execution of the process.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <img src="../../images/manage1.svg" alt="" class="wb">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Process Scheduling</h2>
+            <ul>
+                <li>Operating system uses various schedulers for the process scheduling described below.</li>
+            </ul>
+            <div class="in">
+                <h3>Long term scheduler</h3>
+                <ul>
+                    <li>Long term scheduler is also knwon as job scheduler. It chooses the process from the pool
+                        (secondary memory) and keeps them in the ready queue maintained in the primary memory.</li>
+                    <li>Long term schedular mainly controls the degree of multiprogramming. The purpose of long term
+                        scheduler is to choose a perfect mix of IO bound and CPU bound processes among the process
+                        present in the pool.</li>
+                    <li>If the job scheduler chooses more IO bound processes, then all the process may reside in the
+                        blocked state all the time and the CPU will remain idle most of the time. This will reduce the
+                        degree of multiprogramming. Therefore, the job of long term scheduler is very critical and may
+                        affect the system for a very long time.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Process Queues</h3>
+                <ul>
+                    <li>The operating system manages various types of queues for each of the process states. </li>
+                    <li>The PCB related to the process is also stored in the queue of the same state.</li>
+                    <li>If the process is moved from one state to another state then its PCB is also unlinked from the
+                        corresponding queue and added to the other state queue in which the transition is made.</li>
+                </ul>
+                <img src="../../images/manage2.svg" alt="" class="wb">
+                <ol>
+                    <li><b>Job Queue</b>
+                        <ul>
+                            <li>In starting, all the process get stored in the job queue.</li>
+                            <li>It is maintained in the secondary memory.</li>
+                            <li>The long term scheduler (Job scheduler) picks some of the process and put them in the
+                                primary memory.</li>
+                        </ul>
+                    </li>
+                    <li><b>Ready Queue</b>
+                        <ul>
+                            <li>Ready queue is maintained in primary memory.</li>
+                            <li>The short term scheduler picks the job from the ready queue and dispatch of the CPU for
+                                the execution.</li>
+                        </ul>
+                    </li>
+                    <li><b>Waiting Queue</b>
+                        <ul>
+                            <li>When the process needs some IO operation in order to complete its execution, OS Changes
+                                the state of the process from running to waiting.</li>
+                            <li>The context (PCB) associated with the process gets stored on the waiting queue which
+                                will be used by the processor when the process finishes the IO.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="wh">
+                <h2>Various Times related to Process:</h2>
+                <img src="../../images/manage3.svg" alt="" class="wb">
+                <ol>
+                    <li><b>Arrival Time</b>
+                        <ul>
+                            <li>The time at which the process enters into the ready queue.</li>
+                        </ul>
+                    </li>
+                    <li><b>Burst Time</b>
+                        <ul>
+                            <li>The total amount of time required by the CPU to execute the whole process is called the
+                                Burst Time.</li>
+                            <li>This does not include the waiting time.</li>
+                            <li>It is confusing to calculate the execution time for a process even before executing it
+                                hence the scheduling problems based on the burst time cannot be implemented in reality.
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Completion Time</b>
+                        <ul>
+                            <li>The time at which the process enters into the completion state or the time at which the
+                                process completes its execution.</li>
+                        </ul>
+                    </li>
+                    <li><b>Turnaround time</b>
+                        <ul>
+                            <li>The total amount of time spent by the process from its arrival to its completion.</li>
+                        </ul>
+                    </li>
+                    <li><b>Waiting Time</b>
+                        <ul>
+                            <li>The total amount of time for which the process waits for the CPU to be assigned.</li>
+                        </ul>
+                    </li>
+                    <li><b>Response Time</b>
+                        <ul>
+                            <li>The difference between the arrival time and the time at which the process first gets the
+                                CPU.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>CPU Scheduling</h2>
+            <ul>
+                <li><b>In the uniprogramming systems</b> like MS DOS, when a process waits for I/O operation to be done,
+                    the CPU remains idol.
+                    <ul>
+                        <li>Uniprogramming is a type of operating system in which only one program can be executed at a
+                            time.</li>
+                    </ul>
+                </li>
+                <li>This is an overhead since it wastes the time and causes the problem of starvation.
+                    <ul>
+                        <li> "overhead" refers to the extra resources that are required by the system to perform tasks
+                            beyond what is required for the user's program. Overhead can include the time, memory,
+                            processing power, or other system resources that are needed to manage and run the operating
+                            system itself.</li>
+                    </ul>
+                </li>
+                <li>However, in <b>multirogramming systems</b>, the CPU doesn't remain idle during the waiting time of
+                    the process and it starts executing other processes.</li>
+                <li>Operating system has to define which process the CPU will be given.</li>
+                <li><b>In multiprogramming systems</b>, the OS schedules the processes on the CPU to have the maximum
+                    utilization of it and this procedure is called <b>CPU scheduling</b>. The Operating system uses
+                    various scheduling algorithm to schedule the processes.</li>
+                <li>This is a task of the short term schedular to schedule the CPU for the number of processes present
+                    in the job pool.</li>
+                <li>Whenever the running process requests some IO operation then the short term scheduler saves the
+                    current context of the process (also called PCB) and changes its state from running to waiting.
+                    During the time, process is in waiting state; the short term shceduler picks another process from
+                    the ready queue and assigns the CPU to this process. This procedure is called <b>context
+                        switching.</b></li>
+            </ul>
+            <div class="in">
+                <h3>What is saved in the Process Control Block?</h3>
+                <ul>
+                    <li>The OS maintains a process control block during the lifetime of the process.</li>
+                    <li>The process control block is deleted when the process is terminated or killed.</li>
+                    <li>There is the following information which is saved in the PCB and is changing with the state of
+                        the process.
+                        <ol>
+                            <li>Process ID &rarr; A unique identifier for the process.</li>
+                            <li>Process State &rarr; The current state of the process (running, waiting, etc.)</li>
+                            <li>Pointer &rarr; Pointers to the PCBs of the parent and child processes, and other
+                                relevant data structures.</li>
+                            <li>Priority &rarr; The priority of the process in relation to other processes in the
+                                system.</li>
+                            <li>Program Counter &rarr; The address of the next instruction to be executed.</li>
+                            <li>CPU Registers &rarr; The values of the CPU registers for the process.</li>
+                            <li>I/O status information &rarr; Information about the process's open files, pending I/O
+                                requests, and other I/O-related data.</li>
+                            <li>Accounting Information &rarr; The amount of CPU time used, clock time since process
+                                creation, and other information used for process accounting.</li>
+                            <li>etc.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <ul>
+                <li>There are various algorithms which are used by the OS to schedule the processes on the processor in
+                    an efficient way.</li>
+            </ul>
+            <p><b>The purpose of a Scheduling algorithm</b>
+            <ol>
+                <li>Maximum CPU utilization</li>
+                <li>Fare allocation of CPU</li>
+                <li>Maximum throughput</li>
+                <li>Minimum turnaround time</li>
+                <li>Minimum waiting time</li>
+                <li>Minimum response time</li>
+            </ol>
+            </p>
+            <p>There are the following algorithms which can be used to schedule the process.</p>
+            <ol>
+                <li>First Come First Serve</li>
+                <li>Shortest Job First</li>
+                <li>Round Robin</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>First Come First Server CPU Process Scheduling in OS</h2>
+            <ul>
+                <li>This is the basic algorithm which every student must learn to understand all the basics of CPU
+                    Process Scheduling Algorithms.</li>
+                <li>First Come First Serve paves the way for understanding of other algorithms.</li>
+                <li>This algorithm may have many disadvantages, but these disadvantages created very new and
+                    efficient algorithms. So, we should learn First Come First Serve first.</li>
+                <li><b>Important Abbreviations:</b>
+                    <ol>
+                        <li>CPU &rarr; Central Processing Unit</li>
+                        <li>FCFS &rarr; First Come First Serve</li>
+                        <li>AT &rarr; Arrival Time</li>
+                        <li>BT &rarr; Burst Time</li>
+                        <li>WT &rarr; Waiting Time</li>
+                        <li>TAT &rarr; Turn Around Time</li>
+                        <li>CT &rarr; Completion Time</li>
+                        <li>FIFO &rarr; First In First Out</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>First Come First Serve</h3>
+                <ul>
+                    <li>FCFS is the first algorithm of CPU process scheduling algorithm.</li>
+                    <li>FCFS allow the process to execute in linear manner.</li>
+                    <li>This means that whichever process enters the ready queue first is executed first.</li>
+                    <li>This shows that FCFS algorithm follows FIFO principle.</li>
+                    <li>The FCFS algorithm can be executed in Pre Emptive and Non Pre Emptive manner.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Preemptive Approach</h3>
+                <ul>
+                    <li>Here the OS allots the resources to a process for a predetermined period of time.</li>
+                    <li>The process transitions from running state to ready state or from waiting state to ready
+                        state during resource allocation.</li>
+                    <li>This switching happens because the CPU may assign other processes precedence and substitute
+                        the currently active process for the higher priority process.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Non Preemptive Approach</h3>
+                <ul>
+                    <li>Here the resource cannot be withdrawn from a process before the process has finished
+                        running.</li>
+                    <li>When a running process finishes and transitions to the waiting state, resources are
+                        switched.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Convoy Effect in FCFS</h3>
+                <ul>
+
+                    <li>Convoy effect is a phenomenon which occurs in the scheduling algorithm named FCFS.</li>
+                    <li>The FCFS Scheduling algorithm occurs in a way of non preemptive way.</li>
+                    <li>The non preemptive way means that if a process or job is started execution, then the
+                        operating system must complete is process or job. </li>
+                    <li>Until, the process is zero the next process does not start its execution.</li>
+                    <li>The definition of Non Preemptive scheduling in terms of OS means that the CPU will be
+                        completely dedicated till the end of the process started first and the new process is
+                        executed only after finishing of the older process.</li>
+                    <li>There may be a few cases, which might cause the CPU to allot a too much time. This is
+                        because in the FCFS sheduling alorithm non preemptive approach, the process are chose in
+                        serial oder. Due, to this shorter process behind the larger process takes too much time to
+                        complete its execution. Due, to this the WT, TAT, CT is very high.</li>
+                    <li>If the first process if large or completion time is too high, then convoy effect in the FCFS
+                        algorithm is occured.</li>
+                    <li>Let us assume that longer job takes infinite time to complete. Then, the remaining processes
+                        have to wait for the same infinite time. Due to this convoy effect created by the longer job
+                        the starvation of the waiting processes increases very rapidly. this is the biggest
+                        disadvantage of FCFS CPU process scheduling.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Characteristics of FCFS CPU Process Scheduling</h3>
+                <ol>
+                    <li>Implementation is simple.</li>
+                    <li>Does not cause any casualties while using.</li>
+                    <li>It adopts a no pre emptive and pre emptive strategy.</li>
+                    <li>It runs each procedure in the order that they are recieved.</li>
+                    <li>Arrival time is used as a selection criterin for procedures.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Advantages of FCFS CPU Process Scheduling</h3>
+                <ol>
+                    <li>In order to allocate processes, it uses the FIFO queue.</li>
+                    <li>The FCFS CPU Scheduling Process is straight forward and easy to implement.</li>
+                    <li>In the FCFS situation pre emptive scheduling, there is not chance of process starving.</li>
+                    <li>As there is no consideration of process priority, it is an equitable algorithm.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Disadvantages of FCFS CPU Process Scheduling</h3>
+                <ul>
+                    <li>FCFS CPU Scheduling Algorithm has Long Waiting Time.</li>
+                    <li>FCFS CPU Scheduling favors CPU over Input or Output operations.</li>
+                    <li>In FCFS there is a chance of occurrence of Convoy Effect.</li>
+                    <li>Because FCFS is so straight forward, it often isn't very effective. Extended waiting periods
+                        go hand in hand with this. All other orders are left idle if the CPU is busy processing one
+                        time-consuming order.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Problems on the FCFS CPU Scheduling Algorithm</h3>
+            </div>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
