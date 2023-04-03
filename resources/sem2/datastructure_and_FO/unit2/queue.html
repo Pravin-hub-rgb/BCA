@@ -27,9 +27,11 @@
       <a href="#t1" class="link">Queue definition</a>
       <a href="#t2" class="link">Operations associated with queue</a>
       <a href="#t3" class="link">Working of queue</a>
+      <a href="#t6" class="link">Applications of queue</a>
       <a href="#t4" class="link">Linear queue</a>
       <a href="#t5" class="link">Circular queue</a>
-      <a href="#t6" class="link">Applications of queue</a>
+      <a href="#t7" class="link">Double Ended queue</a>
+      <a href="#t8" class="link">Priority queue</a>
    </div>
    <div id="navbar" class="grad">
       <div>
@@ -90,9 +92,18 @@
                      is already empty i.e. <b>check the condition for Underflow.</b> If the queue is not empty, we'll
                      have to remove and return the element at the position of the Front pointer, and then increment the
                      Front index value by 1. When we get <b>to remove the last element from the queue</b>, we will have
-                     <b>set the values of Front and Rear index to -1.</b></li>
+                     <b>set the values of Front and Rear index to -1.</b>
+                  </li>
                </ul>
             </li>
+         </ul>
+      </div>
+      <div id="t6" class="wh">
+         <h2>Applications of Queue Data Structure</h2>
+         <ul>
+            <li>CPU Scheduling</li>
+            <li>Disk Scheduling</li>
+            <li>Breadth-First Search Algorithm (BFS)</li>
          </ul>
       </div>
       <div id="t4" class="wh">
@@ -274,7 +285,7 @@
                                   }
                                   else
                                   {
-                                     for (i = front; i <= MAX; i++)
+                                     for (i = front; i < MAX; i++)
                                         printf("%d\n", queue[i]);
                                      for (i = 0; i <= rear; i++)
                                         printf("%d\n", queue[i]);
@@ -317,13 +328,240 @@
             </div>
          </div>
       </div>
-      <div id="t6" class="wh">
-         <h2>Applications of Queue Data Structure</h2>
+      <div id="t7" class="wh">
+         <h2>Deque (Double Ended Queue)</h2>
          <ul>
-            <li>CPU Scheduling</li>
-            <li>Disk Scheduling</li>
-            <li>Breadth-First Search Algorithm (BFS)</li>
+            <li>It is a type of queue in which insertion and deletion are allowed from both the ends.</li>
+            <li>Deque supports properties of both stack and queue.
+               <ul>
+                  <li>stack - LIFO</li>
+                  <li>queue - FIFO</li>
+               </ul>
+            </li>
          </ul>
+         <div class="in">
+            <h3>Types of Deque</h3>
+            <ul>
+               <li>Input restricted: Here insertion is allowed only from one end but deletion is allowed from both the
+                  ends.</li>
+               <li>Output restricted: Here deletion is allowed only from one end but insertion is allowed from both the
+                  ends.</li>
+            </ul>
+         </div>
+         <div class="in">
+            <h3>Types of operation performed on deque</h3>
+            <ol>
+               <li>Insert at front</li>
+               <li>Delete from front</li>
+               <li>Insert at rear</li>
+               <li>Delete from rear</li>
+            </ol>
+         </div>
+         <div class="in">
+            <h3>Application of deque</h3>
+            <ul>
+               <li>It is used to perform <b>redo</b> and <b>undo</b> operation.</li>
+               <li>It can also be used as a palindrome checker.</li>
+               <li>It is used in <b>multi-processor scheduling.</b></li>
+            </ul>
+         </div>
+         <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">DEQUE implementation</button>
+            <div class="panel">
+               <pre>
+                  <code>
+                  
+                       #include &lt;stdio.h>
+                       #include &lt;stdlib.h>
+                       #define N 5
+                       int deque[N];
+                       int F = -1, R = -1;
+                       void display();
+                       void enqueueFront();
+                       void enqueueRear();
+                       void dequeueFront();
+                       void dequeueRear();
+                       int main()
+                       {
+                          int ch;
+                          while (1)
+                          {
+                             printf("\n------- MENU FOR DEQUE -------");
+                             printf("\n1.Enqueue Front Operation\n");
+                             printf("2.Enqueue Rear Operation\n");
+                             printf("3.Dequeue  Front Operation\n");
+                             printf("4.Dequeue  Rear Operation\n");
+                             printf("5.Display the Queue\n");
+                             printf("6.Exit\n");
+                             printf("Enter your choice of operations : ");
+                             scanf("%d", &ch);
+                             switch (ch)
+                             {
+                             case 1:
+                                enqueueFront();
+                                break;
+                             case 2:
+                                enqueueRear();
+                                break;
+                             case 3:
+                                dequeueFront();
+                                break;
+                             case 4:
+                                dequeueRear();
+                                break;
+                             case 5:
+                                display();
+                                break;
+                             case 6:
+                                exit(0);
+                             default:
+                                printf("\nIncorrect choice \n");
+                             }
+                          }
+                          return 0;
+                       }
+                       
+                       void display()
+                       {
+                          int i;
+                          if (F == -1 && R == -1)
+                             printf("\nQueue is empty\n");
+                          else
+                          {
+                             if (F <= R)
+                             {
+                                for (i = F; i <= R; i++)
+                                   printf("%d\n", deque[i]);
+                             }
+                             else
+                             {
+                                for (i = F; i < N; i++)
+                                   printf("%d\n", deque[i]);
+                                for (i = 0; i <= R; i++)
+                                   printf("%d\n", deque[i]);
+                             }
+                          }
+                       }
+                       
+                       void enqueueFront()
+                       {
+                          if ((F == 0 && R == N - 1) || (F == R + 1))
+                          {
+                             printf("\nDeque is Full\n");
+                             return;
+                          }
+                          else if (F == -1 && R == -1)
+                             F = R = 0;
+                          else if (F == 0)
+                             F = N - 1;
+                          else
+                             F--;
+                          printf("\nEnter the value you want to enter : ");
+                          scanf("%d", &deque[F]);
+                       }
+                       
+                       void enqueueRear()
+                       {
+                          if ((F == 0 && R == N - 1) || (F == R + 1))
+                          {
+                             printf("\nDeque is Full\n");
+                             return;
+                          }
+                          else if (F == -1 && R == -1)
+                             F = R = 0;
+                          else if (R == N - 1)
+                             R = 0;
+                          else
+                             R++;
+                          printf("\nEnter the value you want to enter : ");
+                          scanf("%d", &deque[R]);
+                       }
+                       
+                       void dequeueFront()
+                       {
+                          int val;
+                          if (F == -1 && R == -1)
+                          {
+                             printf("\nDeque is Empty\n");
+                             return;
+                          }
+                          else if (F == R)
+                          {
+                             val = deque[F];
+                             F = R = -1;
+                          }
+                          else if (F == N - 1)
+                          {
+                             val = deque[F];
+                             F = 0;
+                          }
+                          else
+                          {
+                             val = deque[F];
+                             F++;
+                          }
+                          printf("\n%d is deleted", val);
+                       }
+                       void dequeueRear()
+                       {
+                          int val;
+                          if (F == -1 && R == -1)
+                          {
+                             printf("\nDeque is Empty\n");
+                             return;
+                          }
+                          else if (F == R)
+                          {
+                             val = deque[R];
+                             F = R = -1;
+                          }
+                          else if (R == 0)
+                          {
+                             val = deque[R];
+                             R = N - 1;
+                          }
+                          else
+                          {
+                             val = deque[R];
+                             R--;
+                          }
+                          printf("\n%d is deleted", val);
+                       }
+                  </code>
+              </pre>
+            </div>
+         </div>
+      </div>
+      <div id="t8" class="wh">
+         <h2>Priority queue</h2>
+         <ul>
+            <li>A <b>priority queue</b> is a type of queue that arranges elements based on their priority values.</li>
+            <li>Elements with higher priority values are typically removed before elements with lower priority values.</li>
+            <li>However, if elements with the same priority occur, they are served according to their order in the queue.</li>
+         </ul>
+         <div class="in">
+            <h3>Types of Priority Queue:</h3>
+            <ol>
+               <li>Ascending Order Priority Queue:
+                  <ul>
+                     <li>Here the element with a lower priority value is given a higher priority in the priority list.</li>
+                     <li>For example, if we have the following elements in a priority queue arranged in ascending order like 4,6,8,9,10. Here, 4 is the smallest number, therefore, it will get the highest priority in a priority queue and so when we dequeue from this type of priority queue, 4 will remove from the queue and dequeue returns 4.</li>
+                  </ul>
+               </li>
+               <li>Descending Oder Priority Queue:
+                  <ul>
+                     <li>Here the element with higher priority value is given a higher priority in the priority list.</li>
+                  </ul>
+               </li>
+            </ol>
+         </div>
+         <div class="in">
+            <h3>Difference between Priority queue and normal queue?</h3>
+            <ul>
+               <li>There is no priority attached to elements in a queue, the rule of first-in-first-out(FIFO) is implemented whereas, in a priority queue, the elements have a priority. The elements with higher priority are served first.</li>
+            </ul>
+         </div>
       </div>
    </div>
    <div class="content-box">
@@ -332,6 +570,12 @@
          <li><a href="https://www.digitalocean.com/community/tutorials/queue-in-c">www.digitalocean.com (Queue)</a></li>
          <li><a href="https://codeforwin.org/data-structures/queue-implementation-using-array-in-c">www.codeforwin.org
                (Queue)</a></li>
+         <li><a href="https://www.youtube.com/watch?v=pqg0SOPRlJ4" target="_blank">Jenney's Lectures CS IT (Deque
+               explaination)</a></li>
+         <li><a href="https://www.youtube.com/watch?v=WJres9mgiAk" target="_blank">Jenney's Lectures CS IT (Deque
+               implementation)</a></li>
+         <li><a href="https://www.programiz.com/dsa/priority-queue">www.programiz.com (Priority queue)</a></li>
+         <li><a href="https://www.geeksforgeeks.org/priority-queue-set-1-introduction/">www.geeksforgeeks.org (Priority Queue)</a></li>
       </ul>
    </div>
    <script src="../../../../public/main.js"></script>

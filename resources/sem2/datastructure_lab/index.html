@@ -49,7 +49,41 @@
                 <div class="panel">
                     <pre>
                         <code>
-                            
+
+                                #include &lt;stdio.h>
+                                #define SIZE 10
+                                void printArr(int[]);
+                                void swap(int[]);
+                                int main()
+                                {
+                                   int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                                   int i = 0;
+                                   printf("\nPrinting the array before reversing : ");
+                                   printArr(arr);
+                                   printf("\nPrinting the array after reversing:");
+                                   printArr(arr);
+                                   return 0;
+                                }
+                                void printArr(int arr[])
+                                {
+                                   int i;
+                                   for (i = 0; i < SIZE; i++)
+                                   {
+                                      printf("%d  ", arr[i]);
+                                   }
+                                }
+                                void swap(int arr[])
+                                {
+                                   int first = 0, last = SIZE - 1, temp;
+                                   while (first <= last)
+                                   {
+                                      temp = arr[first];
+                                      arr[first] = arr[last];
+                                      arr[last] = temp;
+                                      first++;
+                                      last--;
+                                   }
+                                }
                         </code>
                     </pre>
                 </div>
@@ -94,6 +128,48 @@
                     <pre>
                         <code>
                             
+                                #include &lt;stdio.h>
+                                #define SIZE 10
+                                void printArr(int[]);
+                                void interchangeNum(int[]);
+                                void swap(int[], int, int);
+                                int main()
+                                {
+                                   int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                                   int i = 0;
+                                   printf("\nPrinting the array before interchanging largest and smallest number : \n");
+                                   printArr(arr);
+                                   interchangeNum(arr);
+                                   printf("\nPrinting the array after interchanging largest and smallest number : \n");
+                                   printArr(arr);
+                                   return 0;
+                                }
+                                void printArr(int arr[])
+                                {
+                                   int i;
+                                   for (i = 0; i < SIZE; i++)
+                                   {
+                                      printf("%d  ", arr[i]);
+                                   }
+                                }
+                                void interchangeNum(int arr[])
+                                {
+                                   int largest = arr[0], smallest = arr[0];
+                                   for (int i = 0; i < SIZE; i++)
+                                   {
+                                      if (arr[i] > largest)
+                                         largest = arr[i];
+                                      if (arr[i] < smallest)
+                                         smallest = arr[i];
+                                   }
+                                   swap(arr, largest, smallest);
+                                }
+                                void swap(int arr[], int lar, int sm)
+                                {
+                                   int temp = arr[lar];
+                                   arr[lar] = arr[sm];
+                                   arr[sm] = temp;
+                                }
                         </code>
                     </pre>
                 </div>
@@ -104,7 +180,40 @@
                 <div class="panel">
                     <pre>
                         <code>
-                            
+
+                                #include &lt;stdio.h>
+                                void enterVal(int[], int);
+                                int findOcc(int[], int, int);
+                                int main()
+                                {
+                                   int arr[100], size, num;
+                                   printf("Enter the size of the array : ");
+                                   scanf("%d", &size);
+                                   enterVal(arr, size);
+                                   printf("Enter a number : ");
+                                   scanf("%d", &num);
+                                   printf("The number of occurrence of %d is %d\n", num, findOcc(arr, num, size));
+                                   return 0;
+                                }
+                                void enterVal(int arr[], int size)
+                                {
+                                   int i;
+                                   printf("Enter array element : ");
+                                   for (i = 0; i < size; i++)
+                                   {
+                                      scanf("%d", &arr[i]);
+                                   }
+                                }
+                                int findOcc(int arr[], int num, int size)
+                                {
+                                   int occ = 0;
+                                   for (int i = 0; i < size; i++)
+                                   {
+                                      if (arr[i] == num)
+                                         occ++;
+                                   }
+                                   return occ;
+                                }                                
                         </code>
                     </pre>
                 </div>
