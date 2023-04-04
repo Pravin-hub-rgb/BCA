@@ -29,6 +29,7 @@
         <a href="#t3" class="link">Types</a>
         <a href="#t4" class="link">Operations on DS</a>
         <a href="#t5" class="link">Static vs Dynamic</a>
+        <a href="#t6" class="link">Dynamic memory allocation</a>
         <a href="#tl" class="link">Programs</a>
     </div>
     <div id="navbar" class="grad">
@@ -124,92 +125,142 @@
             <h3>Static memory and Dynamic memory allocation</h3>
             <img src="../../images/diff1.svg" alt="" class="wb">
         </div>
+        <div id="t6" class="wh">
+            <h3>Dynamic Memory allocation</h3>
+            <ul>
+                <li>It can be defined as a procedure in which the size of data structure (like array) is changed
+                    during the runtime.</li>
+                <li>C provides some functions to achieve these tasks.</li>
+                <li>There are 4 library functions provided by C defined under <b>&lt;stdlib.h</b> header file to
+                    facilitate dynamic memory allocation in C programming. They are:
+                    <ol>
+                        <li>malloc()</li>
+                        <li>calloc()</li>
+                        <li>free()</li>
+                        <li>realloc()</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <p><b>Let's quickly brush up the concept of pointers:</b></p>
+                <ul>
+                    <li>Pointer is a variable that stores address of another variable.</li>
+                    <li>Note: The size of pointer is fixed in a particular system. The size of pointer doesn't depends
+                        upon which datatype address it is storing.</li>
+                    <li>why we have write data type before a pointer, for example- int *ptr?
+                        <ul>
+                            <li>The reason for this is that pointers in C and C++ are strongly typed, which means that
+                                the data type of the variable being pointed to must match the data type of the pointer
+                                itself. This is because pointers are used to store memory addresses, and the size of a
+                                memory address can vary depending on the data type of the variable being pointed to.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>malloc() method</h3>
+                <ul>
+                    <li>The "malloc" or "memory allocation" method in C is used to dynamically allocate a single large
+                        block of memory with the specified size.</li>
+                    <li>It returns a pointer of type void which can be cast into a pointer of any form.</li>
+                </ul>
+                <p>Syntax &darr;</p>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        ptr = (cast-type *) malloc(size of memory)
+                       </code>
+                   </pre>
+                </div>
+                <p>Example &darr;</p>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        int *ptr;
+                        ptr = (int *) malloc(100 * sizeof(int));
+                        
+                        Since the size of int is 4 bytes, this statement will allocate 400 bytes of memory.
+                        And, the pointer ptr holds the address of the first byte in the allocated memory.
+
+                        we are using sizeof() because in different architecture its value changes
+                       </code>
+                   </pre>
+                </div>
+                <div class="wh">
+                    <h3>Characteristics of malloc function</h3>
+                    <ul>
+                        <li>The function returns a pointer to the first byte of the allocated memory block. If the
+                            allocation fails, it returns NULL.</li>
+                        <li>The function takes a single argument, which is the size of the memory block to be allocated
+                            in bytes.</li>
+                        <li>The memory allocated by 'malloc()' is not initialized, which means the contents of the block
+                            will be undefined until initialized by the program.</li>
+                        <li>The memory block allocated by 'malloc()' remains allocated until the program explicitly
+                            frees it using the 'free()' function, or until the program terminates.</li>
+                        <li>'malloc()' can be used to allocate memory for variables of any data type, including
+                            structures and arrays.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="tl" class="content-box">
         <h2>programs</h2>
         <div class='code'>
-           <div class='dotc'></div>
-           <button class="ac">Menu driven calculator program</button>
-           <div class="panel">
-            <pre>
-                <code>
-                
-                     #include &lt;stdio.h>
-                     #include &lt;stdlib.h>
-                     int no1, no2;
-                     int sum(int, int);
-                     int sub(int, int);
-                     int mul(int, int);
-                     int divi(int, int);
-                     void getVal();
-                     int main()
-                     {
-                         int userChoice;
-                         do
-                         {
-                             printf("\n\n\t||||||||||||||||||-------- MENU --------||||||||||||||||||");
-                             printf("\n\n\t\t 1. Addition");
-                             printf("\n\t\t 2. Subtraction");
-                             printf("\n\t\t 3. Multiplication");
-                             printf("\n\t\t 4. Division");
-                             printf("\n\n\t\t 5. Exit");
-                             printf("\n\n\t\tEnter your choice : ");
-                             scanf("%d", &userChoice);
-                     
-                             switch (userChoice)
-                             {
-                             case 1:
-                                 getVal();
-                                 printf("\n\t\tThe addition is %d", sum(no1, no2));
-                                 break;
-                             case 2:
-                                 getVal();
-                                 printf("\n\t\tThe subraction is %d", sub(no1, no2));
-                                 break;
-                             case 3:
-                                 getVal();
-                                 printf("\n\t\tThe multiplication is %d", mul(no1, no2));
-                                 break;
-                             case 4:
-                                 getVal();
-                                 printf("\n\t\tThe division is %d", divi(no1, no2));
-                                 break;
-                             case 5:
-                                 exit(0);
-                             default:
-                                 printf("\n\t\tEnter the correct choice");
-                             }
-                         } while (1);
-                     
-                         return 0;
-                     }
-                     void getVal()
-                     {
-                         printf("\t\tEnter first value : ");
-                         scanf("%d", &no1);
-                         printf("\t\tEnter second value : ");
-                         scanf("%d", &no2);
-                     }
-                     int sum(int a, int b)
-                     {
-                         return (a + b);
-                     }
-                     int sub(int a, int b)
-                     {
-                         return (a - b);
-                     }
-                     int divi(int a, int b)
-                     {
-                         return (a / b);
-                     }
-                     int mul(int a, int b)
-                     {
-                         return (a * b);
-                     }
-                </code>
-            </pre>
-           </div>
+            <div class='dotc'></div>
+            <button class="ac">Use of malloc()</button>
+            <div class="panel">
+                <pre>
+                    <code>
+
+                            #include &lt;stdio.h>
+                            #include &lt;stdlib.h>
+                            
+                            int main()
+                            {
+                               // use of malloc
+                               int *ptr;
+                               int n;
+                               printf("Enter the size of the array you want to create : ");
+                               scanf("%d", &n);
+                               ptr = (int *)malloc(n * sizeof(int)); // create dynamic array of 10 size
+                            
+                               // Check if the memory has been successfully allocated by malloc or not
+                               if (ptr == NULL)
+                               {
+                                  printf("Memory not allocated.\n");
+                                  exit(0);
+                               }
+                               else
+                               {
+                                  for (int i = 0; i < n; i++)
+                                  {
+                                     printf("Enter the value no %d of this : ", i);
+                                     scanf("%d", &ptr[i]);
+                                  }
+                            
+                                  for (int i = 0; i < n; i++)
+                                  {
+                                     printf("The value %d of this array is %d\n", i, ptr[i]);
+                                  }
+                               }
+                               return 0;
+                            }
+                    </code>
+                </pre>
+            </div>
         </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a
+                    href="https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/">www.geeksforgeeks.org
+                    (Dynamic memory allocation)</a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
