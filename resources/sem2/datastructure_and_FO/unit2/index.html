@@ -503,7 +503,7 @@
                </li>
 
             </ol>
-            <img src="../../images/postfix.svg" alt="" class="wb"> <br>
+               <img src="../../images/postfix.svg" alt="" class="wb"> <br>
             <img src="../../images/postfix2.svg" alt="" class="wb"><br>
             <img src="../../images/postfix3.svg" alt="" class="wb"><br>
             <img src="../../images/postfix4.svg" alt="" class="wb"><br>
@@ -517,6 +517,168 @@
                <img src="../../images/ans2.svg" alt="" class="wb"><br>
                <img src="../../images/ans3.svg" alt="" class="wb"><br>
                <img src="../../images/ans4.svg" alt="" class="wb">
+            </div>
+            <div class="wh">
+               <h3>Program to convert infix expression to postfix expression:</h3>
+               <p>We know the algorithm &darr;</p>
+               <p>Scan the symbols of the expression from lest to right and for each symbol, do the following:
+                  <ol>
+                     <li>If symbol is an operand 
+                        <ul>
+                           <li>Store the symbol in the postfix array</li>
+                        </ul>
+                     </li>
+                     <li>If the symbol if left parenthesis 
+                        <ul>
+                           <li>Push it on the stack</li>
+                        </ul>
+                     </li>
+                     <li>If symbol is a right parenthesis 
+                        <ul>
+                           <li>Pop all the operators from the stack upto the first left parenthesis and store the operators in the postfix array.</li>
+                           <li>Discard the left and right parenthesis.</li>
+                        </ul>
+                     </li>
+                     <li>If the symbol is an operator 
+                        <ul>
+                           <li>If the precedence of the operators in the stack are greater than or equal to the current operator, then pop the operators out of the stack and print them onto the screen, and push the current operator onto the stack.</li>
+                           <li>else <br> 
+                           push the current operator onto the stack.</li>
+                        </ul>
+                     </li>
+                  </ol>
+               </p>
+               <div class='code'>
+                  <div class='dotc'></div>
+                  <button class="ac">code</button>
+                  <div class="panel">
+                     <pre>
+                        <code>
+                        
+                             #include &lt;stdio.h>
+                             #include &lt;stdlib.h>
+                             #include &lt;string.h>
+                             #define MAX 100
+                             char stack[MAX];
+                             char infix[MAX], postfix[MAX];
+                             int top = -1;
+                             
+                             void push(char);
+                             char pop();
+                             int isEmpty();
+                             void inToPost();
+                             int precedence(char);
+                             void print();
+                             int main()
+                             {
+                                printf("Enter the infix expression : ");
+                                gets(infix);
+                                inToPost(); // function that convert infix to postfix expression
+                                print();
+                                return 0;
+                             }
+                             void push(char c)
+                             {
+                                if (top == MAX - 1)
+                                {
+                                   printf("Stack overflow");
+                                   return;
+                                }
+                                top++;
+                                stack[top] = c;
+                             }
+                             char pop()
+                             {
+                                char c;
+                                if (top == -1)
+                                {
+                                   printf("Stack underflow");
+                                   exit(0);
+                                }
+                                c = stack[top];
+                                top=top-1;
+                                return c;
+                             }
+                             int isEmpty()
+                             {
+                                if (top == -1)
+                                   return 1;
+                                else
+                                   return 0;
+                             }
+                             int space(char c)
+                             {
+                                // If symbol is a blank space or a tab
+                                if (c == ' ' || c == '\t')
+                                   return -1;
+                                else
+                                   return 1;
+                             }
+                             void inToPost()
+                             {
+                                int i, j = 0;
+                                char symbol, next;
+                                // for(i=0;i!='\0';i++)
+                                for (i = 0; i < strlen(infix); i++)
+                                {
+                                   symbol = infix[i];
+                                   switch (symbol)
+                                   {
+                                   case '(':
+                                      push(symbol);
+                                      break;
+                                   case ')':
+                                      while ((next = pop()) != '(')
+                                         postfix[j++] = next;
+                                   case '+':
+                                   case '-':
+                                   case '*':
+                                   case '/':
+                                   case '^':
+                                      while (!isEmpty() && precedence(stack[top]) >= precedence(symbol))
+                                         postfix[j++] = pop();
+                                      push(symbol);
+                                      break;
+                                   default:
+                                      postfix[j++] = symbol;
+                                   }
+                                }
+                                while (!isEmpty())
+                                   postfix[j++] = pop();
+                                postfix[j] = '\0';
+                             }
+                             int precedence(char symbol)
+                             {
+                                switch (symbol)
+                                {
+                                // higher value means greater precedence
+                                case '^':
+                                   return 3;
+                                case '/':
+                                case '*':
+                                   return 2;
+                                case '+':
+                                case '-':
+                                   return 1;
+                                default:
+                                   return 0;
+                                }
+                             }
+                             
+                             void print()
+                             {
+                                int i = 0;
+                                printf("The equivalent post fix expression is : ");
+                                while (postfix[i])
+                                {
+                                   printf("%c", postfix[i++]);
+                                }
+                                printf("\n");
+                             }
+                        </code>
+                    </pre>
+                  </div>
+               </div>
             </div>
          </div>
          <div id="t5" class="in">

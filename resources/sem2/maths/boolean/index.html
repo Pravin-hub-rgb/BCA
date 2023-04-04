@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean Algebra</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Boolean Algebra</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Boolean Algebra</h1>
+        <p> A non-empty set B with two binary operations "+" and "." a unary operation " ' ", and two distinct element 0
+            and 1 is called a boolean algebra, denoted by (B, +, ., ', 0, 1) if and only if the following 4 properties
+            are
+            satisfied.</p>
+        <p>Axioms of boolean algebra- <br>If a,b,c &isin; B then
+        <ol>
+            <li>Commutative laws
+                <ul>
+                    <li>a + b = b + a</li>
+                    <li>a . b = b . a</li>
+                </ul>
+            </li>
+            <li>Distributive laws
+                <ul>
+                    <li>a + (b . c) = (a + b) . (a + c)</li>
+                    <li>a . (b + c) = (a . b) + (a . c)</li>
+                </ul>
+            </li>
+            <li>Identity laws
+                <ul>
+                    <li>a + 0 = a</li>
+                    <li>a . 1 = a</li>
+                </ul>
+            </li>
+            <li>Complement laws
+                <ul>
+                    <li>a + a' = 1</li>
+                    <li>a . a' = 0</li>
+                </ul>
+            </li>
+        </ol>
+        </p>
+        <div class="wh">
+            <h2>Basic Theorem</h2>
+            <p>Let a, b and c &isin; B then
+            <ol>
+                <li>Idempotent laws
+                    <ul>
+                        <li>a + a = a</li>
+                        <li>a . a = a</li>
+                    </ul>
+                </li>
+                <li>Boundedness laws
+                    <ul>
+                        <li>a + 1 = 1</li>
+                        <li>a . 0 = 0</li>
+                    </ul>
+                </li>
+                <li>Absorption laws
+                    <ul>
+                        <li>a + (a . b) = a</li>
+                        <li>a . (a + b) = a</li>
+                    </ul>
+                </li>
+                <li>Associative laws
+                    <ul>
+                        <li>(a + b) + c = a + (b + c)</li>
+                        <li>(a . b) . c = a . (b . c)</li>
+                    </ul>
+                </li>
+                <li>Uniqueness of complement
+                    <ul>
+                        <li>a + x = 1 and a . x = 0, then x = a'</li>
+                    </ul>
+                </li>
+                <li>Involution laws
+                    <ul>
+                        <li>(a')' = a</li>
+                    </ul>
+                </li>
+                <li>Complement laws
+                    <ul>
+                        <li>0' = 1</li>
+                        <li>1' = 0</li>
+                    </ul>
+                </li>
+                <li>De-Morgan's laws
+                    <ul>
+                        <li>(a + b)' = a' . b'</li>
+                        <li>(a . b)' = a' + b'</li>
+                    </ul>
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Theorems prove</h2>
+            <p>To prove the basic theorems we use the help of axioms.</p>
+            <div class="in">
+                <h3>Idemponent laws</h3>
+                <ul>
+                    <li>Let a &isin; B, then
+                        <ul>
+                            <li>a + a = a</li>
+                            <li>a . a = a</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a + a = a
+                        R.H.S = a 
+                        = a + 0 by Identity laws
+                                 [ a + 0 = 0]
+                        = a + a.a' using complement law
+                                     [a.a' = 0]
+                        = (a + a) . (a + a') using distributive laws
+                        = (a + a) . 1 using complement laws
+                                        [a + a' = 1]
+                        = (a + a)  using Identity laws
+                                     [x . 1 = x, here x = (a + a)]
+                        = L.H.S
+                        Hence, a + a = a
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a.a = a
+                        L.H.S = a.a 
+                        = a.a + 0       by Identity laws
+                        = a.a + a.a'    using Complement laws
+                        = a.(a + a')    using distributive laws
+                        = a.1           using Complement laws
+                        = a             using Identity laws
+                        = R.H.S 
+                        Hence, a.a = a
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Boundedness laws prove</h3>
+                <ul>
+                    <li>Let a &isin; B, then
+                        <ul>
+                            <li>a + 1 = a</li>
+                            <li>a.0 = 0</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a + 1 = 1
+                        R.H.S = 1 
+                        = a + a'                by Complement laws 
+                        = a + a'.1              using Identity laws
+                        = (a + a').(a + 1)      using Distributing laws
+                        = 1.(a + 1)             using Complement laws 
+                        = (a + 1).1             using commutative laws
+                        = a + 1                 using Identity laws
+                        = L.H.S 
+                        Hence, a + 1 = 1
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a.0 = 0
+                        R.H.S = 0 
+                        = a.a'              by Complement laws
+                        = a.(a' + 0)        using Identity laws
+                        = (a.a') + (a.0)    using Distributive laws
+                        = 0 + (a.0)         using Complement laws
+                        = (a.0) + 0         using Commutative laws
+                        = a.0               using Identity laws
+                        = L.H.S 
+                        Hence, a.0 = 0
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Absorption laws prove</h3>
+                <ul>
+                    <li>Let a, b &isin; B, then
+                        <ul>
+                            <li>a+(a.b) = a</li>
+                            <li>a.(a+b) = a</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a+(a.b) = a 
+                        L.H.S = a+(a.b)
+                        = a.1 + (a.b) by Identity laws
+                        = a.(1 + b)     using Distributive laws 
+                        = a.(b + 1)     using Commutative laws
+                        = a.1           using Boundedness laws
+                        = a             using Identity laws
+                        = R.H.S 
+                        Hence, a+(a.b) = a
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving a.(a+b) = a
+                        L.H.S = a.(a+b)
+                        = a + 0 . (a+b)     using Identity laws
+                        = a+(0.b)           using Distributive laws
+                        = a                 using Boundedness laws
+                        = L.H.S 
+                        Hence, a.(a+b) = a 
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Associative law prove</h3>
+                <ul>
+                    <li>a, b, & c &isin; B, then
+                        <ul>
+                            <li>(a+b)+c = a+(b+c)</li>
+                            <li>(a.b).c = a.(b.c)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving (a+b)+c = a+(b+c)
+                        R.H.S = a+(b+c)
+                        = [a+(b+c)].1                              by Identity law
+                        = [a+(b+c)].(c+c')                         by Complement law
+                        = {[a+(b+c)].c} + {[a+(b+c)].c'}           by Distributive law 
+                        = {c.[a+(b+c)]} + {c'.[a+(b+c)]}           by Commutative law
+                        = [c.a+c.(b+c)] + [c'.a+c'(b+c)]           by Distributive law
+                        = (c.a + c) + (c'.a+c'(b+c))               using Commutive law and Absorption law 
+                        = c + (c'.a+c'(b+c))                       using Commutive law and Absorption law 
+                        = c + (c'a + c'.b + c'.c)                  using Distributive law 
+                        = c + (c'.a + c'.b + c.c')                 using Commutative law
+                        = c + (c'.a + c'.b + 0)                    using Complement law
+                        = c + (c'.a + c'.b)                        using Identity law
+                        = c + (c'.(a+b))                           using Distributive law 
+                        = (c+c').(c+(a+b))                         using Distributive law 
+                        = 1.[c+(a+b)]                              using Complement law 
+                        = [c+(a+b)].1                              using Commutative law 
+                        = c + (a + b)                              using Identity law
+                        = (a+b) + c                                using commutative law 
+                        = L.H.S 
+                        Hence (a+b)+c = a+(b+c)
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving (a.b).c = a.(b.c)
+                        R.H.S = a.(b.c)
+                        = [a.(b.c)]+0                                    using Identity law 
+                        = [a.(b.c)] + (c.c')                             by Complement law
+                        = {[a.(b.c)]+c} . {[a.(b.c)]+c'}                 using Distributive law
+                        = {c+[a.(b.c)]}.{c'+[a.(b.c)]}                   using Commutative law
+                        = {(c+a).[c+(b.c)]}.{(c'+a).[c'a+(b.c)]}         using Distributing law
+                        = {(c+a).c}.{(c'+a).[c'+(b.c)]}                  using Commutative & Absorption law 
+                        = {c.(c+a)}.{(c'+a).[c'+(b.c)]}                  using Commutative law
+                        = c . {(c'+a).[c'+(b.c)]}                        using Absorption law 
+                        = c . {(c'+a).[(c'+b).(c'+c)]}                   using distributive law 
+                        = c . {(c'+a).[(c'+b).1]}                        using Commutative and Complement laws
+                        = c . {(c'+a).(c'+b)}                            using Identity law
+                        = c . [c'+(a.b)]                                 using Distributive law
+                        = (c.c')+[c.(a.b)]                               using Distributive law
+                        = 0 + [c.(a.b)]                                  using Complement law
+                        = c.(a.b)                                        using Identity law 
+                        = (a.b).c                                        using Commutative law
+                        = L.H.S 
+                        Hence, (a.b).c = a.(b.c)
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>De-Morgan's laws prove</h3>
+                <ul>
+                    <li>(a+b)' = a'.b'</li>
+                    <li>(a.b)' = a'+b'</li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving (a+b)' = a'.b'
+                        we know a + a' = 1 and a.a' = 0 
+                        So, if we can prove that (a+b) + (a'.b') = 1 and (a+b).(a'.b') = 0 that means complement of (a+b) is a'.b'
+
+                        First we will prove (a+b) + (a'.b') = 1
+                        L.H.S = (a+b) + (a'.b')
+                        = (a+b+a').(a+b+b')     using Distributive law
+                        = (b+a+a').(a+b+b')     using Commutative law
+                        = (b+1).(a+1)           using Complement law
+                        = 1.1                   using Boundedness law
+                        = 1                     using Idemponent law
+                        = R.H.S 
+
+                        Now we'll prove (a+b).(a'.b') = 0
+                        L.H.S = (a+b).(a'.b')
+                        = (a.a'.b') + (b.a'.b')    by Distributive law from right side
+                        = (a.a'.b') + (b.b'.a)     using Commutative law
+                        = (0.b') + (0.a)           [as a.a' = 0]
+                        = 0 + 0                    [as a.0 = 0]
+                        = 0                        using Idemponent law
+                        = R.H.S 
+
+                        Hence, as we have prove both the condition so we can say (a+b)' = a'.b'
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        proving (a.b)' = a' + b'
+                        we know a + a' = 1 and a.a' = 0 
+                        So, if we can prove that (a.b) + (a' + b') = 1 and (a.b).(a' + b') = 0 that means complement of (a.b) is a'+b'
+
+                        First we will prove (a.b) + (a'+b') = 1
+                        L.H.S = (a.b) + (a'+b')
+                        = (a'+b')+(a.b)         by Commutative law
+                        = (a'+b'+a).(a'+b'+b)   by Distributive law 
+                        = (a'+a+b').(a'+b'+b)   by Commutative law 
+                        = (1+b').(a'+1)         by Complement law
+                        = 1.1                   by Boundedness law
+                        = 1                     by Idempodent law
+                        = R.H.S 
+
+                        Now we will prove (a.b).(a'+b') = 0
+                        L.H.S = (a.b).(a'+b')
+                        = (a.b.a') + (a.b.b')   by Distributive law
+                        = (a.a'.b) + (a.b.b')   by Commutative law
+                        = (0.b) + (a.0)         by Complement law 
+                        = 0 + 0                 by Boundedness law 
+                        = 0                     by Idempodent law
+                        = R.H.S
+
+                        Hence, as we have prove both the condition so we can say (a.b)' = a' + b'
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Simplification of Boolean Expression using Algebraic method</h2>
+            <div class="in">
+                <p>1. (CB + CC).(A + B + C)</p>
+                <div class='code'>
+                    <pre>
+                           <code>
+                           
+                            (C.B + C.C).(A + B + C)
+                            = (CB + C).(A + B + C)   [&because; C.C = C]
+                            = C . (A + B + C)        [&because; CB + C = C]
+                            = C.A + C.B + C.C        by distributive law
+                            = C.A + C.B + C          [&because; C.C = C]
+                            = C.A + C                [&because; C.B + C = C]
+                            = C                      [&because; C.A + C = C]
+                           </code>
+                       </pre>
+                </div>
+            </div>
+            <div class="in">
+                <p>xy + x'z + yz</p>
+                <div class='code'>
+                    <pre>
+                           <code>
+                           
+                            xy + x'z + yz
+                            = xy + x'z + yz(x+x')       [&because; x+x' = 1]
+                            = xy + x'z + xyz + x'yz
+                            = xy + xyz + x'z + x'yz
+                            = xy(1+z) + x'z(1+y)
+                            = xy + x'z                  by Boundedness
+                           </code>
+                       </pre>
+                </div>
+            </div>
+            <div class="in">
+                <p>A+B(A+B) + A(A'+B)</p>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        A+B(A+B) + A(A'+B)
+                        = A + AB + BB + AA' + AB
+                        = A + AB + B + 0 + AB        [&because; BB = B & AA' = 0]
+                        = A + AB + B                 [&because; X+X = X here X = AB]
+                        = A + B                      [&because; A + AB = A]
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=0_hG_zbG9Ns&list=PLEjRWorvdxL681bU-k_Ys9KvOWXUJ3f1H&index=1" target="_blank">Boolean Algebra playlist</a></li>
+            <li><a href="https://www.youtube.com/watch?v=pvsRgRbU0a8" target="_blank">De-Morgan law proof</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
