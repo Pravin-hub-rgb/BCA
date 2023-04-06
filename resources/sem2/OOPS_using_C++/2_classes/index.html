@@ -32,9 +32,13 @@
         <a href="#t5" class="link">Arrays within a class</a>
         <a href="#t7" class="link">Array of objects</a>
         <a href="#t8" class="link">Friend function</a>
+        <a href="#t12" class="link">Friend class</a>
         <a href="#t9" class="link">Constructor</a>
         <a href="#t10" class="link">Constructor overloading</a>
+        <a href="#t13" class="link">Destructors</a>
         <a href="#t11" class="link">Dynamic initialization of objects</a>
+        <a href="#t14" class="link">Pointer to object</a>
+        <a href="#t15" class="link">"this" pointer</a>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -510,6 +514,65 @@
                 </div>
             </div>
         </div>
+        <div id="t12" class="wh">
+            <h2>Friend Class</h2>
+            <ul>
+                <li>A friend class can access private and protected members of other classes in which it is declared as
+                    a friend.</li>
+                <li>It is sometimes useful to allow a particular class to access private and protected members of other
+                    classes.</li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    friend class class_name; // declared inside the base class
+                   </code>
+               </pre>
+            </div>
+            <p>A simple program which use friend class concept &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class secret
+                        {
+                        private:
+                            int secretNumber;
+                        
+                        public:
+                            int localNumber;
+                            secret()
+                            {
+                                secretNumber = 999;
+                                localNumber = 100;
+                            }
+                            friend class another_secret;
+                        };
+                        class another_secret
+                        {
+                        public:
+                            void showSecret(secret one)
+                            {
+                                cout << "The secretNumber is = " << one.secretNumber << endl;
+                                cout << "The localNumber is = " << one.localNumber << endl;
+                            }
+                        };
+                        int main()
+                        {
+                            secret first;
+                            another_secret second;
+                            second.showSecret(first);
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
         <div id="t9" class="wh">
             <h2>Constructor</h2>
             <ul>
@@ -745,6 +808,67 @@
                 </div>
             </div>
         </div>
+        <div id="t13" class="wh">
+            <h2>Destructors</h2>
+            <ul>
+                <li>A destructor is a member function that is invoked automatically when the object goes out of scope or
+                    is explicitly destroyed by a call to delete.</li>
+                <li>A destructor has the same name as the class, preceded by a tilde (~). </li>
+                <li>For example, the destructor for class <b>Employee</b> is declared as <b>~Employee()</b></li>
+                <li>Destructor never takes an argument nor does it return any value.</li>
+            </ul>
+            <p>Simple program to demonstrate destructor functionality &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Scope
+                        {
+                        public:
+                            Scope()
+                            {
+                                cout << "The object is in the scope\n";
+                            }
+                            ~Scope()
+                            {
+                                cout << "The object goes out of the scope\n";
+                            }
+                        };
+                        int main()
+                        {
+                            Scope A;
+                            {
+                                Scope B;
+                            }
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    The object is in the scope
+                    The object is in the scope
+                    The object goes out of the scope
+                    The object goes out of the scope
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>In the above program first the "A" object is created so its constructor is invoked.</li>
+                <li>Then there is another scope created there under which second object "B" is created so its
+                    constructor is invoked.</li>
+                <li>Then the compiler comes of the scope so destructor is called for "B" object.</li>
+                <li>ThThen finally, the main function is getting terminated, and with that, "A" object is going out of
+                    scope, so its destructor is called.</li>
+            </ul>
+        </div>
         <div id="t11" class="wh">
             <h2>Dynamic initialization of objects</h2>
             <ul>
@@ -937,6 +1061,121 @@
                 </div>
             </div>
         </div>
+        <div id="t14" class="wh">
+            <h2>Pointer to object</h2>
+            <ul>
+                <li>A pointer to an object acts the same as poiner to a variable. But here, in place of the address of
+                    the variable, address of the object is stored.</li>
+                <li>In the main function, when an object is created to a class, a pointer variable is declared in the
+                    same manner as we declared for the variable, and it will store the object's address.</li>
+                <li>For creating a pointer to an object, we should not use data type for the pointer. Instead, we need
+                    to use the class name for the object pointer.</li>
+                <li>If we want to use a member function in the class using the pointer in the main functin, then we need
+                    to use the "->" symbol, as shown in the below example.</li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    class_name object_name;
+                    class_name *ptr = &object_name;
+                   </code>
+               </pre>
+            </div>
+            <p>Example &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Rectangle
+                        {
+                            int length;
+                            int breadth;
+                        
+                        public:
+                            Rectangle(int l, int b)
+                            {
+                                length = l;
+                                breadth = b;
+                            }
+                            int getArea()
+                            {
+                                return 2 * length * breadth;
+                            }
+                        };
+                        int main()
+                        {
+                            // creating an object of Rectangle
+                            Rectangle var1(10, 30);
+                        
+                            // creating a pointer for the object using class name as data type
+                            Rectangle *ptr = &var1;
+                        
+                            // calling the member function using -> symbol
+                            int area = ptr->getArea();
+                            cout << "Area of rectangle is = " << area << endl;
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    Area of rectangle is = 600
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t15" class="wh">
+            <h2>"this" pointer</h2>
+            <ul>
+                <li>"this" is a keyword that represents a pointer to the current object.</li>
+                <li>When a member function is called on an object, the "this" pointer points to the object.</li>
+                <li>In other words, this is a special pointer that is automatically created and used by the compiler in the context of a member function of a class. It allows the member function to access the data members and member functions of the object on which it is called.</li>
+                <li>"this" pointer is used when local variable's name is same as member's name</li>
+            </ul>
+            <p>Example code &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Test
+                        {
+                        private:
+                            int x;
+                        
+                        public:
+                            void setX(int x)
+                            {
+                                // 'this' pointer is used to retrieve the object's x
+                                // here 'x' is in argument and also a data member
+                                // using 'this' pointer we can point to data member
+                                this->x = x;
+                            }
+                            void print() { cout << "x = " << x << endl; }
+                        };
+                        int main()
+                        {
+                            Test obj;
+                            int x = 20;
+                            obj.setX(x);
+                            obj.print();
+                            return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>
@@ -949,6 +1188,12 @@
                     class)</a></li>
             <li><a href="https://learn.microsoft.com/en-us/cpp/cpp/friend-cpp?view=msvc-170">https://learn.microsoft.com
                     (friend function)</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/cpp/cpp/destructors-cpp?view=msvc-170">https://learn.microsoft.com
+                    (destructors)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/friend-class-function-cpp/">www.geeksforgeeks.org (friend
+                    class)</a></li>
+                    <li><a href="https://www.tutorialandexample.com/pointer-to-object-in-cpp">www.tutorialandexmample.com (poitner to object)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/this-pointer-in-c/">www.geeksforgeeks.org ('this' pointer)</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
