@@ -425,7 +425,7 @@
             <li>Recursion</li>
             <li>Polish Notation</li>
          </ul>
-         <div  class="in">
+         <div class="in">
             <h3>Polish Notation</h3>
             <ul>
                <li>Infix &rarr; a + b</li>
@@ -503,7 +503,7 @@
                </li>
 
             </ol>
-               <img src="../../images/postfix.svg" alt="" class="wb"> <br>
+            <img src="../../images/postfix.svg" alt="" class="wb"> <br>
             <img src="../../images/postfix2.svg" alt="" class="wb"><br>
             <img src="../../images/postfix3.svg" alt="" class="wb"><br>
             <img src="../../images/postfix4.svg" alt="" class="wb"><br>
@@ -522,31 +522,34 @@
                <h3>Program to convert infix expression to postfix expression:</h3>
                <p>We know the algorithm &darr;</p>
                <p>Scan the symbols of the expression from lest to right and for each symbol, do the following:
-                  <ol>
-                     <li>If symbol is an operand 
-                        <ul>
-                           <li>Store the symbol in the postfix array</li>
-                        </ul>
-                     </li>
-                     <li>If the symbol if left parenthesis 
-                        <ul>
-                           <li>Push it on the stack</li>
-                        </ul>
-                     </li>
-                     <li>If symbol is a right parenthesis 
-                        <ul>
-                           <li>Pop all the operators from the stack upto the first left parenthesis and store the operators in the postfix array.</li>
-                           <li>Discard the left and right parenthesis.</li>
-                        </ul>
-                     </li>
-                     <li>If the symbol is an operator 
-                        <ul>
-                           <li>If the precedence of the operators in the stack are greater than or equal to the current operator, then pop the operators out of the stack and print them onto the screen, and push the current operator onto the stack.</li>
-                           <li>else <br> 
+               <ol>
+                  <li>If symbol is an operand
+                     <ul>
+                        <li>Store the symbol in the postfix array</li>
+                     </ul>
+                  </li>
+                  <li>If the symbol if left parenthesis
+                     <ul>
+                        <li>Push it on the stack</li>
+                     </ul>
+                  </li>
+                  <li>If symbol is a right parenthesis
+                     <ul>
+                        <li>Pop all the operators from the stack upto the first left parenthesis and store the operators
+                           in the postfix array.</li>
+                        <li>Discard the left and right parenthesis.</li>
+                     </ul>
+                  </li>
+                  <li>If the symbol is an operator
+                     <ul>
+                        <li>If the precedence of the operators in the stack are greater than or equal to the current
+                           operator, then pop the operators out of the stack and print them onto the screen, and push
+                           the current operator onto the stack.</li>
+                        <li>else <br>
                            push the current operator onto the stack.</li>
-                        </ul>
-                     </li>
-                  </ol>
+                     </ul>
+                  </li>
+               </ol>
                </p>
                <div class='code'>
                   <div class='dotc'></div>
@@ -695,12 +698,141 @@
             <img src="../../images/prefix5.svg" alt="" class="wb"><br>
          </div>
       </div>
+      <div class="wh">
+         <h2>Stack Implementation linked-list</h2>
+         <ul>
+            <li>For creating linked-list we should have knowlegde of structure and pointer to structure.</li>
+         </ul>
+         <div class="in">
+            <h2>Structure Recap</h2>
+            <img src="../../images/arrowop.svg" alt="" class="wb">
+         </div>
+         <div class="in">
+            <h3>Problem with array</h3>
+            <img src="../../images/probarray.svg" alt="" class="wb">
+            <p>So, we need a datatype that is linear but it can be stored in fragmented memories.</p>
+            <img src="../../images/probarray2.svg" alt="" class="wb">
+            <p>Linked list can work in this situation easily.</p>
+         </div>
+         <div class="in">
+            <h3>Introduction to Linked List</h3>
+            <ul>
+               <li>Linked lists are stored in non-contiguous memory location.</li>
+               <li>To add new element, we just have to create a node somewhere in the memory and get it pointed by the
+                  previous element and deleting an element is done by not pointing to that particular node.</li>
+            </ul>
+         </div>
+         <div class="in">
+            <h3>Structure of a Linked list</h3>
+            <ul>
+               <li>Every element in a linked list is called a node and it consists of two parts, the data part, and
+                  the pointer part.</li>
+               <li>The data part stores the value, while the pointer part stores the pointer pointing to the address
+                  of the next node.</li>
+               <li>Both of these structures (arrays and linked lists) are linear data structures.</li>
+            </ul>
+            <img src="../../images/link1.svg" alt="" class="wb">
+         </div>
+         <div class="in">
+            <h3>Why linked lists?</h3>
+            <ul>
+               <li>Memory and the capacity of an array remain fixed, while in linked lists, we can keep adding and
+                  removing elements without any capacity constraint.</li>
+               <li><b>For accessing elements arrays are better and for insertion and deletion linked lists are
+                     better.</b></li>
+            </ul>
+         </div>
+         <div class="in">
+            <h3>Drawbacks of linked lists</h3>
+            <ul>
+               <li>Extra memory space for pointers is required (for ever node, extra space for a pointer is needed).
+               </li>
+               <li>Random access is not allowed as elements are stored in non-contiguous memory locations.</li>
+            </ul>
+         </div>
+         <div class="in">
+            <h3>Implementation</h3>
+            <ul>
+               <li>Linked lists are implemented is C language using a structure.</li>
+               <li>We know that a node contains data part and pointer so it will be implemented like this &darr;</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                    <code>
+                    
+                    struct Node
+                    {
+                         int data;
+                         struct Node *next; // self referencial structure.
+                    }
+                    </code>
+                </pre>
+            </div>
+            <ul>
+               <li>Now we will create 3 node and try to connect it with each other.</li>
+            </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+
+                        #include &lt;stdio.h>
+                        struct node
+                        {
+                           int data;
+                           struct node *next;
+                        };
+                        int main()
+                        {
+                           /* Initialize nodes */
+                           struct node *head;
+                           struct node *one = NULL;
+                           struct node *two = NULL;
+                           struct node *three = NULL;
+                        
+                           /* Allocate memory */
+                           one = (struct node *) malloc(sizeof(struct node));
+                           two = (struct node *) malloc(sizeof(struct node));
+                           three = (struct node *) malloc(sizeof(struct node));
+                        
+                           /* Assign data values */
+                           one->data = 1;
+                           two->data = 2;
+                           three->data = 3;
+                        
+                           /* Connect nodes */
+                           one->next = two;
+                           two->next = three;
+                           three->next = NULL;
+                        
+                           /* Save address of first node in head */
+                           head = one;
+                           return 0;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <ul>
+               <li>Now we have created a linear data structure like this &darr;</li>
+            </ul>
+            <img src="../../images/link2.svg" alt="Linear data structure using linked list" class="wb">
+         </div>
+         <div class="in">
+            <h3>Finally stack implementation using linked-list</h3>
+            <ul>
+               <li>Here also a node will have a data part and pointer part.</li>
+               <li>As in stack all operation occurs from top, so we will create a top pointer which will always point to the topmost element.</li>
+            </ul>
+         </div>
+      </div>
    </div>
    <div class="content-box">
-      <p>References &darr;</p> 
+      <p>References &darr;</p>
       <ul>
          <li><a href="https://www.simplilearn.com/tutorials/data-structure-tutorial/stack-implementation-using-array">www.simplilearn.com
                (stack implementatin using array)</a></li>
+         <li><a href="https://www.programiz.com/dsa/linked-list">www.programiz.com (linked-list)</a></li>
       </ul>
    </div>
    <script src="../../../../public/main.js"></script>
