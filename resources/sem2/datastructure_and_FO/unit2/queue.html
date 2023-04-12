@@ -32,6 +32,8 @@
       <a href="#t5" class="link">Circular queue</a>
       <a href="#t7" class="link">Double Ended queue</a>
       <a href="#t8" class="link">Priority queue</a>
+      <a href="#t9" class="link">Queue Implementation using linked list</a>
+      <a href="#t10" class="link">Circular Queue Implementation using linked list</a>
    </div>
    <div id="navbar" class="grad">
       <div>
@@ -563,6 +565,235 @@
             </ul>
          </div>
       </div>
+      <div id="t9" class="wh">
+         <h2>Queue implementation using linked list</h2>
+         <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">code</button>
+            <div class="panel">
+               <pre>
+                  <code>
+                  
+                       #include &lt;stdio.h>
+                       #include &lt;stdlib.h>
+                       typedef struct node
+                       {
+                           int data;
+                           struct node *next;
+                       } node;
+                       node *front = NULL;
+                       node *rear = NULL;
+                       void enqueue();
+                       void dequeue();
+                       void display();
+                       
+                       int main()
+                       {
+                           int choice;
+                           while (1)
+                           {
+                               printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+                               printf("\n1. Enqueue");
+                               printf("\n2. Dequeue");
+                               printf("\n3. DISPLAY");
+                               printf("\n4. EXIT");
+                               printf("\n Enter your choice : ");
+                               scanf("%d", &choice);
+                               switch (choice)
+                               {
+                               case 1:
+                                   enqueue();
+                                   break;
+                               case 2:
+                                   dequeue();
+                                   break;
+                               case 3:
+                                   display();
+                                   break;
+                               case 4:
+                                   exit(0);
+                               }
+                           }
+                           return 0;
+                       }
+                       
+                       void enqueue()
+                       {
+                           node *temp = (node *)malloc(sizeof(node));
+                           if (temp == NULL)
+                           {
+                               printf("\nOverflow");
+                               return;
+                           }
+                           printf("\nEnter a digit : ");
+                           scanf("%d", &temp->data);
+                           temp->next = NULL;
+                           if (front == NULL)
+                           {
+                               front = rear = temp;
+                           }
+                           else
+                           {
+                               rear->next = temp;
+                               rear = temp;
+                           }
+                       }
+                       
+                       void dequeue()
+                       {
+                           if (front == NULL)
+                           {
+                               printf("\nUnderflow");
+                               return;
+                           }
+                           node *temp = front;
+                           if (temp->next == NULL)
+                           {
+                               front = rear = NULL;
+                           }
+                           else
+                           {
+                               front = front->next;
+                           }
+                           printf("\n%d is deleted", temp->data);
+                           free(temp);
+                       }
+                       
+                       void display()
+                       {
+                           if (front == NULL)
+                           {
+                               printf("\nUnderflow");
+                               return;
+                           }
+                           node *temp = front;
+                           while (temp != NULL)
+                           {
+                               printf("%d ---> ", temp->data);
+                               temp = temp->next;
+                           }
+                       }
+                  </code>
+              </pre>
+            </div>
+         </div>
+      </div>
+      <div id="t10" class="wh">
+         <h2>Circular Queue implementation using linked list</h2>
+         <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">code</button>
+            <div class="panel">
+               <pre>
+                  <code>
+
+                        #include &lt;stdio.h>
+                        #include &lt;stdlib.h>
+                        typedef struct node
+                        {
+                            int data;
+                            struct node *next;
+                        } node;
+                        node *front = NULL;
+                        node *rear = NULL;
+                        void enqueue();
+                        void dequeue();
+                        void display();
+                        
+                        int main()
+                        {
+                            int choice;
+                            while (1)
+                            {
+                                printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+                                printf("\n1. Enqueue");
+                                printf("\n2. Dequeue");
+                                printf("\n3. DISPLAY");
+                                printf("\n4. EXIT");
+                                printf("\n Enter your choice : ");
+                                scanf("%d", &choice);
+                                switch (choice)
+                                {
+                                case 1:
+                                    enqueue();
+                                    break;
+                                case 2:
+                                    dequeue();
+                                    break;
+                                case 3:
+                                    display();
+                                    break;
+                                case 4:
+                                    exit(0);
+                                }
+                            }
+                            return 0;
+                        }
+                        
+                        void enqueue()
+                        {
+                            node *temp = (node *)malloc(sizeof(node));
+                            if (temp == NULL)
+                            {
+                                printf("\nOverflow");
+                                return;
+                            }
+                            printf("\nEnter a digit : ");
+                            scanf("%d", &temp->data);
+                            temp->next = front;
+                            if (front == NULL)
+                            {
+                                front = rear = temp;
+                            }
+                            else
+                            {
+                                rear->next = temp;
+                                rear = temp;
+                            }
+                        }
+                        
+                        void dequeue()
+                        {
+                            if (front == NULL)
+                            {
+                                printf("\nUnderflow");
+                                return;
+                            }
+                            node *temp = front;
+                            if (front == rear)
+                            {
+                                front = rear = NULL;
+                            }
+                            else
+                            {
+                                front = front->next;
+                                rear->next = front;
+                            }
+                            printf("\n%d is deleted", temp->data);
+                            free(temp);
+                        }
+                        
+                        void display()
+                        {
+                            if (front == NULL)
+                            {
+                                printf("\nUnderflow");
+                                return;
+                            }
+                            node *temp = front;
+                            while (temp->next != front)
+                            {
+                                printf("%d ---> ", temp->data);
+                                temp = temp->next;
+                            }
+                            printf("%d", temp->data);
+                        }
+                  </code>
+              </pre>
+            </div>
+         </div>
+      </div>
+      
    </div>
    <div class="content-box">
       <p>References &darr;</p>
