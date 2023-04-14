@@ -1,25 +1,31 @@
 #include <iostream>
 using namespace std;
-class Test
+class Sum
 {
-private:
-    int x;
+    int a, b;
 
 public:
-    void setX(int x)
+    Sum()
     {
-        // 'this' pointer is used to retrieve the object's x
-        // here 'x' is in argument and also a data member
-        // using 'this' pointer we can point to data member
-        this->x = x;
+        cout << "Constructor is called" << endl;
+        a = 1;
+        b = 2;
     }
-    void print() { cout << "x = " << x << endl; }
+    ~Sum()
+    {
+        cout << "Destructor is called using free()" << endl;
+    }
+    void show()
+    {
+        cout << "a = " << a << endl;
+        cout << "b = " << b << endl;
+    }
 };
 int main()
 {
-    Test obj;
-    int x = 20;
-    obj.setX(x);
-    obj.print();
+    Sum *ptr;
+    ptr = new Sum; // dynamic object creation
+    ptr->show(); // Accessing member through pointer to object
+    delete ptr; // Destroying object dynamically
     return 0;
 }

@@ -1,9 +1,17 @@
 function openNav() {
   document.getElementById("mySidepanel").style.width = "250px";
+  allLi = document.querySelectorAll('.link')
+  allLi.forEach(li => {
+    li.style.display = "block";
+  })
 }
 
 function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
+  allLi = document.querySelectorAll('.link')
+  allLi.forEach(li => {
+    li.style.display = "none";
+  })
 }
 
 //  ***************************** Accordion *********************
