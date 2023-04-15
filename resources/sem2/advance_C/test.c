@@ -1,16 +1,19 @@
+
 #include <stdio.h>
-void swap(int *x, int *y)
-{
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
+#include <string.h>
 int main()
 {
-    int a = 50;
-    int b = 100;
-    printf("\nBefore Swap : \n a = %d \n b = %d", a, b);
-    swap(&a, &b);
-    printf("\n\nAfter Swap : \n a = %d \n b = %d\n", a, b);
+    char name[20] = "Harry";
+    int start = 0;
+    int end = strlen(name) - 1;
+    while (start < end)
+    {
+        char temp = name[start];
+        name[start] = name[end];
+        name[end] = temp;
+        start++;
+        end--;
+    }
+    printf("The mutated string is = %s", name);
     return 0;
 }

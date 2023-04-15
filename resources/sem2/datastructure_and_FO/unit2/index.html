@@ -29,6 +29,8 @@
       <a href="#t3" class="link">Application of stack</a>
       <a href="#t4" class="link">Infix to postfix</a>
       <a href="#t5" class="link">Infix to prefix</a>
+      <a href="#t6" class="link">Stack implementation using linked list</a>
+      <a href="./queue.html" class="home">Queue</a>
    </div>
    <div id="navbar" class="grad">
       <div>
@@ -48,7 +50,15 @@
       <h1 id="t1">Stack</h1>
       <ul>
          <li>Stack is a linear data structure that follows the LIFO (Last In First Out) principle.</li>
-         <li>It performs insertion and deletion operations on the stack from only one end from the top of the stack.
+         <li>It performs insertion and deletion operations on the stack from only one end and that is from the top of
+            the stack.
+         </li>
+         <li>Stack and queue are ADTs
+            <ul>
+               <li>Abstract data types (ADTs) are high-level programming concepts that define a set of operations on a
+                  particular data structure without specifying the implementation details. In other words, they are a
+                  way of defining a data type in terms of its behavior, rather than its implementation.</li>
+            </ul>
          </li>
          <li>Inserting a new element on the top of the stack is known as <i>push operation.</i></li>
          <li>Deleting a data element from the top of the stack is known as <i>pop operation.</i></li>
@@ -85,6 +95,25 @@
                      when complete.</li>
                </ul>
                <img src="../../images/stack2.svg" alt="" class="wb">
+               <p>Algorithm &darr;</p>
+               <div class='code'>
+                  <pre>
+                     <code>
+
+                        PUSH(stack[], top, value)
+   
+                           1. if (top = MAX -1)
+                                 printf Underflow
+                                 Exit
+                              End of if
+                           2. increment top by 1
+                           3. stack[top] = value 
+                           4. End of else 
+                           5. End of PUSH
+                     </code>
+                  </pre>
+               </div>
+               <p>Program code &darr;</p>
                <div class='code'>
                   <pre>
                            <code>
@@ -94,12 +123,12 @@
                             void push(int data, int n)
                             {
                                 if(top == n)
-                                    printf("overflow");
-                                else
                                 {
-                                    top++;
-                                    stack[top] = data;
+                                    printf("overflow");
+                                    return;
                                 }
+                                 top++;
+                                 stack[top] = data;
                             }
                            </code>
                        </pre>
@@ -123,26 +152,87 @@
                      stack is already empty.</li>
                </ul>
                <img src="../../images/stack3.svg" alt="" class="wb">
+               <p>Algorithm &darr;</p>
+               <div class='code'>
+                  <pre>
+                      <code>
+                      
+                          POP(STACK[], top)
+                        1. if (top == -1)
+                              print Underflow
+                              Exit 
+                           End of if
+                        2. val = STACK[top]
+                        3. top = top - 1
+                        4. print val is deleted 
+                        5. End of POP
+                      </code>
+                  </pre>
+               </div>
+               <p>Program code &darr;</p>
                <div class='code'>
                   <pre>
                            <code>
                            
                             // implementation of pop operation 
 
-                            int pop()
+                            void POP()
                             {
                                 int val;
                                 if(top == -1)
-                                    printf("Underflow condition");
-                                else 
                                 {
+                                    printf("Underflow condition");
+                                    return;
+                                }
                                     val = stack[top];
                                     top--;
-                                    return val;
-                                }
+                                    printf("%d is deleted ", val);
                             }
                            </code>
                        </pre>
+               </div>
+            </div>
+            <div class="in">
+               <h3>Display</h3>
+               <p>Algorithm &darr;</p>
+               <div class='code'>
+                  <pre>
+                      <code>
+                      
+                        DISPLAY(STACK[], top)
+                        1. if top == -1 
+                              print Underflow 
+                              Exit
+                           End of if
+                        2. i = top 
+                        3. repeat step 4, while i >= 0
+                        4. print STACK[i]
+                           i = i + i 
+                        5. End of DISPLAY
+                      </code>
+                  </pre>
+               </div>
+               <p>Program code &darr;</p>
+               <div class='code'>
+                  <div class='dotc'></div>
+                  <pre>
+                      <code>
+                      
+                       void display()
+                       {
+                           int i;
+                           if(top == -1)
+                           {
+                              printf("Underflow");
+                              return;
+                           }
+                           for(i = top; i >= 0; i++)
+                           {
+                              printf("%d", stack[i]);
+                           }
+                       }
+                      </code>
+                  </pre>
                </div>
             </div>
          </div>
@@ -199,41 +289,43 @@
                                 }
                                 void push()
                                 {
-                                   if (top >= MAX - 1)
-                                      printf("\n\nStack overflow\n\n");
-                                   else
+                                   if (top >= MAX -1)
                                    {
-                                      top++;
-                                      printf("\nEnter a value : ");
-                                      scanf("%d", &stack[top]);
-                                      printf("\n\n%d is pushed\n\n", stack[top]);
+                                       printf("\n\nStack overflow\n\n");
+                                       return;
                                    }
+                                   top++;
+                                   printf("\nEnter a value : ");
+                                   scanf("%d", &stack[top]);
+                                   printf("\n\n%d is pushed\n\n", stack[top]);
                                 }
+
                                 void pop()
                                 {
                                    int val;
                                    if (top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
                                    {
-                                      val = stack[top];
-                                      top--;
-                                      printf("\n\n%d is popped\n\n", val);
+                                       printf("\n\nStack underflow\n\n");
+                                       return;
                                    }
+                                   val = stack[top];
+                                   top--;
+                                   printf("\n\n%d is popped\n\n", val);
                                 }
+
                                 void display()
                                 {
                                    int i;
                                    if (top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
                                    {
-                                      for (i = top; i >= 0; i--)
-                                      {
-                                         printf("\n%d", stack[i]);
-                                      }
+                                       printf("\n\nStack underflow\n\n");
+                                       return;
                                    }
-                                }
+                                    for (i = top; i >= 0; i--)
+                                    {
+                                       printf("\n%d", stack[i]);
+                                    }
+                                 }
                         </code>
                     </pre>
                </div>
@@ -250,8 +342,6 @@
                                 int push(int[], int, int);
                                 int pop(int[], int);
                                 void display(int[], int);
-                                // stack declaration
-                                
                                 int main()
                                 {
                                    const int MAX = 5;
@@ -288,7 +378,10 @@
                                 int push(int stack[], int top, int MAX)
                                 {
                                    if (top >= MAX - 1)
-                                      printf("\n\nStack overflow\n\n");
+                                   {
+                                       printf("\n\nStack overflow\n\n");
+                                       
+                                   }
                                    else
                                    {
                                       top++;
@@ -315,13 +408,13 @@
                                 {
                                    int i;
                                    if (top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
                                    {
-                                      for (i = top; i >= 0; i--)
-                                      {
-                                         printf("\n%d", stack[i]);
-                                      }
+                                       printf("\n\nStack underflow\n\n");
+                                       return;
+                                   }
+                                   for (i = top; i >= 0; i--)
+                                   {
+                                       printf("\n%d", stack[i]);
                                    }
                                 }
                         </code>
@@ -340,8 +433,6 @@
                                 void push(int[], int*, int);
                                 void pop(int[], int*);
                                 void display(int[], int);
-                                // stack declaration
-                                
                                 int main()
                                 {
                                    const int MAX = 5;
@@ -378,38 +469,40 @@
                                 void push(int stack[], int *top, int MAX)
                                 {
                                    if (*top >= MAX - 1)
-                                      printf("\n\nStack overflow\n\n");
-                                   else
                                    {
-                                      (*top)++;
-                                      printf("\nEnter a value : ");
-                                      scanf("%d", &stack[*top]);
-                                      printf("\n\n%d is pushed\n\n", stack[*top]);
+                                       printf("\n\nStack overflow\n\n");
+                                       return;
                                    }
+                                   (*top)++;
+                                   printf("\nEnter a value : ");
+                                   scanf("%d", &stack[*top]);
+                                   printf("\n\n%d is pushed\n\n", stack[*top]);
                                 }
+
                                 void pop(int stack[], int *top)
                                 {
                                    int val;
                                    if (*top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
                                    {
-                                      val = stack[*top];
-                                      (*top)--;
-                                      printf("\n\n%d is popped\n\n", val);
+                                       printf("\n\nStack underflow\n\n");
+                                       return;
                                    }
+                                   val = stack[*top];
+                                   (*top)--;
+                                   printf("\n\n%d is popped\n\n", val);
                                 }
+
                                 void display(int stack[], int top)
                                 {
                                    int i;
-                                   if (top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
+                                   if (*top <= -1)
                                    {
-                                      for (i = top; i >= 0; i--)
-                                      {
-                                         printf("\n%d", stack[i]);
-                                      }
+                                       printf("\n\nStack underflow\n\n");
+                                       return;
+                                   }
+                                   for (i = top; i >= 0; i--)
+                                   {
+                                       printf("\n%d", stack[i]);
                                    }
                                 }
                         </code>
@@ -422,21 +515,28 @@
          <h2>Application of stack</h2>
          <ul>
             <li>Function calling</li>
+            <li>Browser history: Web browsers use stacks to maintain the user's browsing history. Each time a user
+               visits a new web page, the page is pushed onto the stack, and the user can go back to the previous page
+               by popping it off the stack</li>
+            <li>Undo and redo functionality: In many software applications, such as text editors or graphics design
+               software, the undo and redo operations rely on a stack data structure. Each time the user performs an
+               action, the application pushes it onto the stack, allowing the user to undo the action by popping it off
+               the stack.</li>
             <li>Recursion</li>
-            <li>Polish Notation</li>
+            <li>Expression evaluation</li>
          </ul>
          <div class="in">
-            <h3>Polish Notation</h3>
+            <h3>Expression evaluation</h3>
             <ul>
                <li>Infix &rarr; a + b</li>
                <li>Prefix &rarr; + a b
                   <ul>
-                     <li>Known as <b>reverse Polish notation</b></li>
+                     <li>Known as <b>polish notation</b></li>
                   </ul>
                </li>
                <li>Postfix &rarr; a b +
                   <ul>
-                     <li>Known as <b>Polish notation</b></li>
+                     <li>Known as <b>reverse polish notation</b></li>
                   </ul>
                </li>
             </ul>
@@ -698,7 +798,7 @@
             <img src="../../images/prefix5.svg" alt="" class="wb"><br>
          </div>
       </div>
-      <div class="wh">
+      <div id="t6" class="wh">
          <h2>Stack Implementation using linked-list</h2>
          <ul>
             <li>For creating linked-list we should have knowlegde of structure and pointer to structure.</li>
@@ -822,7 +922,8 @@
             <h3>Finally stack implementation using linked-list</h3>
             <ul>
                <li>Here also a node will have a data part and pointer part.</li>
-               <li>As in stack all operation occurs from top, so we will create a top pointer which will always point to the topmost element.</li>
+               <li>As in stack all operation occurs from top, so we will create a top pointer which will always point to
+                  the topmost element.</li>
             </ul>
             <div class='code'>
                <div class='dotc'></div>
