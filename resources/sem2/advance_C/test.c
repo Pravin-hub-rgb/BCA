@@ -1,34 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct node
+#define MAX 5
+int queue[MAX];
+int rear = -1;
+int front = -1;
+void enqueue()
 {
-    int data;
-    struct node *next;
-} node;
-node *top = NULL;
-void push();
-void pop();
-void display();
-
+    if (rear == MAX - 1)
+    {
+        printf("\nQueue is full");
+        return;
+    }
+    if (front == -1 && rear == -1)
+    {
+        front = rear = 0;
+    }
+    else
+    {
+        rear++;
+    }
+    printf("\nEnter the element : ");
+    scanf("%d", &queue[rear]);
+}
+void dequeue()
+{
+    int val;
+    if (front == -1 && rear == -1)
+    {
+        printf("\nQueue is empty");
+        return;
+    }
+    val = queue[front];
+    if (front == rear)
+    {
+        front = rear = -1;
+    }
+    else
+    {
+        front++;
+    }
+    printf("\n%d is deleted", val);
+}
+void display()
+{
+    int i;
+    if (front == -1 && rear == -1)
+    {
+        printf("\nQueue is empty\n");
+        return;
+    }
+    for (i = front; i <= rear; i++)
+    {
+        printf("\n%d", queue[i]);
+    }
+}
 int main()
 {
-    int choice;
+    int ch;
     while (1)
     {
-        printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
-        printf("\n1. PUSH");
-        printf("\n2. POP");
-        printf("\n3. DISPLAY");
-        printf("\n4. EXIT");
-        printf("\n Enter your choice : ");
-        scanf("%d", &choice);
-        switch (choice)
+        printf("\n------- MENU -------");
+        printf("\n1.Enqueue Operation\n");
+        printf("2.Dequeue Operation\n");
+        printf("3.Display the Queue\n");
+        printf("4.Exit\n");
+        printf("Enter your choice of operations : ");
+        scanf("%d", &ch);
+        switch (ch)
         {
         case 1:
-            push();
+            enqueue();
             break;
         case 2:
-            pop();
+            dequeue();
             break;
         case 3:
             display();
@@ -36,50 +80,8 @@ int main()
         case 4:
             exit(0);
         default:
-            printf("\nEnter a correct choice : ");
+            printf("\nIncorrect choice \n");
         }
     }
     return 0;
-}
-
-void push()
-{
-    node *temp = (node *)malloc(sizeof(node));
-    if (temp == NULL)
-    {
-        printf("\nOverflow");
-        return;
-    }
-    printf("\nEnter a digit : ");
-    scanf("%d", &temp->data);
-    temp->next = top;
-    top = temp;
-}
-
-void pop()
-{
-    if (top == NULL)
-    {
-        printf("\nUnderflow");
-        return;
-    }
-    node *temp = top;
-    top = top->next;
-    printf("\n%d is deleted", temp->data);
-    free(temp);
-}
-
-void display()
-{
-    if (top == NULL)
-    {
-        printf("\nUnderflow");
-        return;
-    }
-    node *temp = top;
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
 }
