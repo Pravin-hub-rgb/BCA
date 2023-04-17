@@ -252,15 +252,16 @@
                             int front = -1;
                             void enqueue()
                             {
+                               if ((rear + 1) % MAX == front)
+                               {
+                                  printf("\nQueue is full");
+                                  return;
+                               }
                                if (front == -1 && rear == -1)
                                {
                                   front = rear = 0;
                                   printf("\nEnter the element : ");
                                   scanf("%d", &queue[rear]);
-                               }
-                               else if ((rear + 1) % MAX == front)
-                               {
-                                  printf("\nQueue is full");
                                }
                                else
                                {
@@ -552,7 +553,9 @@
          <h2>Priority queue</h2>
          <ul>
             <li>A <b>priority queue</b> is a type of queue that arranges elements based on their priority values.</li>
-            <li>Elements with higher priority values are typically removed before elements with lower priority values.</li>
+            <li>It is a type of data structure in computer science where each element has a priority assigned to it. </li>
+            <li>The priority of an element determines the order in which it will be processed or removed from the queue.</li>
+            <li>The element with the highest priority is processed first, followed by the next highest priority element, and so on.</li>
             <li>However, if elements with the same priority occur, they are served according to their order in the queue.</li>
          </ul>
          <div class="in">
@@ -660,7 +663,7 @@
                                return;
                            }
                            node *temp = front;
-                           if (temp->next == NULL)
+                           if (front == rear)
                            {
                                front = rear = NULL;
                            }

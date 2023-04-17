@@ -6,7 +6,7 @@ int rear = -1;
 int front = -1;
 void enqueue()
 {
-    if (rear == MAX - 1)
+    if ((rear + 1) % MAX == front)
     {
         printf("\nQueue is full");
         return;
@@ -14,44 +14,52 @@ void enqueue()
     if (front == -1 && rear == -1)
     {
         front = rear = 0;
+        printf("\nEnter the element : ");
+        scanf("%d", &queue[rear]);
     }
     else
     {
-        rear++;
+        rear = (rear + 1) % MAX;
+        printf("\nEnter the element : ");
+        scanf("%d", &queue[rear]);
     }
-    printf("\nEnter the element : ");
-    scanf("%d", &queue[rear]);
 }
 void dequeue()
 {
-    int val;
     if (front == -1 && rear == -1)
     {
         printf("\nQueue is empty");
-        return;
     }
-    val = queue[front];
-    if (front == rear)
+    else if (front == rear)
     {
+        printf("\n%d is deleted", queue[front]);
         front = rear = -1;
     }
     else
     {
-        front++;
+        printf("\n%d is deleted", queue[front]);
+        front = (front + 1) % MAX;
     }
-    printf("\n%d is deleted", val);
 }
 void display()
 {
     int i;
     if (front == -1 && rear == -1)
-    {
         printf("\nQueue is empty\n");
-        return;
-    }
-    for (i = front; i <= rear; i++)
+    else
     {
-        printf("\n%d", queue[i]);
+        if (front <= rear)
+        {
+            for (i = front; i <= rear; i++)
+                printf("%d\n", queue[i]);
+        }
+        else
+        {
+            for (i = front; i < MAX; i++)
+                printf("%d\n", queue[i]);
+            for (i = 0; i <= rear; i++)
+                printf("%d\n", queue[i]);
+        }
     }
 }
 int main()
@@ -59,7 +67,7 @@ int main()
     int ch;
     while (1)
     {
-        printf("\n------- MENU -------");
+        printf("\n------- MENU FOR CIRCULAR QUEUE -------");
         printf("\n1.Enqueue Operation\n");
         printf("2.Dequeue Operation\n");
         printf("3.Display the Queue\n");
