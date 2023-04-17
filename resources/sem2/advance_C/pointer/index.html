@@ -23,7 +23,7 @@
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="../index.html" class="home">Home</a>
+        <a href="../index.html" class="home">back</a>
         <a href="#t1" class="link">About pointer</a>
         <a href="#t2" class="link">Syntax of pointer</a>
         <a href="#t3" class="link">Operator in pointer</a>
@@ -1076,6 +1076,55 @@
                        After Swap : 
                         a = 100 
                         b = 50
+                       </code>
+                   </pre>
+                </div>
+                <p>Program to sort and array using pointer &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+                       
+                            #include &lt;stdio.h>
+
+                            void swap(int *a, int *b) {
+                                int temp = *a;
+                                *a = *b;
+                                *b = temp;
+                            }
+                            
+                            void sort(int *arr, int n) {
+                                for (int i = 0; i < n-1; i++) {
+                                    for (int j = i+1; j < n; j++) {
+                                        if (*(arr+j) < *(arr+i)) {
+                                            swap(arr+i, arr+j);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            void printArray(int *arr, int n) {
+                                for (int i = 0; i < n; i++) {
+                                    printf("%d ", *(arr+i));
+                                }
+                                printf("\n");
+                            }
+                            
+                            int main() {
+                                int arr[] = {5, 3, 7, 1, 8};
+                                int n = sizeof(arr) / sizeof(int);
+                            
+                                printf("Original array: ");
+                                printArray(arr, n);
+                            
+                                sort(arr, n);
+                            
+                                printf("Sorted array: ");
+                                printArray(arr, n);
+                            
+                                return 0;
+                            }
+                            
                        </code>
                    </pre>
                 </div>
