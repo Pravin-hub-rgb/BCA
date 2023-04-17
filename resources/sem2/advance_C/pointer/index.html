@@ -59,7 +59,8 @@
         <ul>
             <li>Pointers are variables which store the address of variables or a memory location.</li>
             <li>Pointer variable can be of any data type i.e, int, char, function, array, etc.</li>
-            <li>Pointers are one of the core concepts of C programming language that provides low-level memory acess and
+            <li>Pointers are one of the core concepts of C programming language that provides low-level memory access
+                and
                 facilitates dynamic memory allocation.</li>
             <li>A pointer is a derived data type in C that can store the address of other variables or a memory. We can
                 access and manipulate the data stored in that memory location using pointers.</li>
@@ -153,6 +154,30 @@
                     pointer.</li>
             </ul>
             <img src="../../images/pointer.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Program to calculate sum of two number using pointer.</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+                       
+                        #include&lt;stdio.h>
+                        int main()
+                        {
+                            int a = 10;
+                            int b = 20;
+                            int c = 0;
+                            int *x = &amp;a;
+                            int *y = &amp;b;
+                            int *z = &amp;c;
+                            *z = *x + *y;
+                            printf("The sum is %d", *z);
+                            return 0;
+                        }
+                       </code>
+                   </pre>
+                </div>
+            </div>
         </div>
         <div class='code'>
             <div class='dotc'></div>
@@ -297,30 +322,6 @@
                    </pre>
                 </div>
             </div>
-            <div class="in">
-                <h3>Program to calculate sum of two number using pointer.</h3>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                        #include&lt;stdio.h>
-                        int main()
-                        {
-                            int a = 10;
-                            int b = 20;
-                            int c = 0;
-                            int *x = &amp;a;
-                            int *y = &amp;b;
-                            int *z = &amp;c;
-                            *z = *x + *y;
-                            printf("The sum is %d", *z);
-                            return 0;
-                        }
-                       </code>
-                   </pre>
-                </div>
-            </div>
         </div>
         <div id="t9" class="wh">
             <h2>Pointer Arithmetic</h2>
@@ -362,31 +363,82 @@
                         #include &lt;stdio.h>
                         int main()
                         {
-                           int a = 5, *pi = &a;
-                           char b = 'x', *pc = &b;
-                           float c = 5.5, *pf = &c;
-                           printf("Value of pi =  Address of a = %u\n", pi);
-                           printf("Value of pc =  Address of b = %u\n", pc);
-                           printf("Value of pf =  Address of c = %u\n", pf);
-                           // now we will increment each pointer
-                           pi++;
-                           pc++;
-                           pf++;
-                           printf("Now value of pi = %u\n", pi);
-                           printf("Now value of pc = %u\n", pc);
-                           printf("Now value of pf = %u\n", pf);
-                           return 0;
+                            int a = 5, *pi = &a;
+                            char b = 'x', *pc = &b;
+                            float c = 5.5, *pf = &c;
+                            printf("Value of pi = %d  Address of a = %lu\n", *pi, (unsigned long)pi);
+                            printf("Value of pc = %c  Address of b = %lu\n", *pc, (unsigned long)pc);
+                            printf("Value of pf = %.1f  Address of c = %lu\n", *pf, (unsigned long)pf);
+                        
+                            // Incrementing pointers using pointer arithmetic
+                            pi++;
+                            pc++;
+                            pf++;
+                        
+                            printf("After incrementing:\n");
+                            printf("Modified address of a = %lu\n", (unsigned long)pi);
+                            printf("Modified address of b = %lu\n", (unsigned long)pc);
+                            printf("Modified address of c = %lu\n", (unsigned long)pf);
+                        
+                            // Decrementing pointers using pointer arithmetic
+                            pi--;
+                            pc--;
+                            pf--;
+                        
+                            printf("After decrementing:\n");
+                            printf("Modified address of a = %lu\n", (unsigned long)pi);
+                            printf("Modified address of b = %lu\n", (unsigned long)pc);
+                            printf("Modified address of c = %lu\n", (unsigned long)pf);
+                        
+                            // Adding a constant value to pointers
+                            pi += 2;
+                            pc += 2;
+                            pf += 2;
+                        
+                            printf("After adding 2:\n");
+                            printf("Modified address of a = %lu\n", (unsigned long)pi);
+                            printf("Modified address of b = %lu\n", (unsigned long)pc);
+                            printf("Modified address of c = %lu\n", (unsigned long)pf);
+                        
+                            // Subtracting a constant value from pointers
+                            pi -= 2;
+                            pc -= 2;
+                            pf -= 2;
+                        
+                            printf("After subtracting 2:\n");
+                            printf("Modified address of a = %lu\n", (unsigned long)pi);
+                            printf("Modified address of b = %lu\n", (unsigned long)pc);
+                            printf("Modified address of c = %lu\n", (unsigned long)pf);
+                        
+                            return 0;
                         }
-                        /*
-                        output:
-                        Value of pi =  Address of a = 3191752024
-                        Value of pc =  Address of b = 3191752015
-                        Value of pf =  Address of c = 3191751996
-                        Now value of pi = 3191752028
-                        Now value of pc = 3191752016
-                        Now value of pf = 3191752000
-                        in this architecture float and int take 4 bytes.
-                        */
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    Value of pi = 5  Address of a = 140701867095480
+                    Value of pc = x  Address of b = 140701867095471
+                    Value of pf = 5.5  Address of c = 140701867095452
+                    After incrementing:
+                    Modified address of a = 140701867095484
+                    Modified address of b = 140701867095472
+                    Modified address of c = 140701867095456
+                    After decrementing:
+                    Modified address of a = 140701867095480
+                    Modified address of b = 140701867095471
+                    Modified address of c = 140701867095452
+                    After adding 2:
+                    Modified address of a = 140701867095488
+                    Modified address of b = 140701867095473
+                    Modified address of c = 140701867095460
+                    After subtracting 2:
+                    Modified address of a = 140701867095480
+                    Modified address of b = 140701867095471
+                    Modified address of c = 140701867095452
                    </code>
                </pre>
             </div>
@@ -922,20 +974,20 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="t12" class="wh">
-        <h2>Pass by value and pass by reference</h2>
-        <div class="in">
-            <h3>Pass by value</h3>
-            <ul>
-                <li>Pass by value (another term is 'call by value') means the code within a function cannot alter the
-                    arguments used to call the function, even if the values are changed inside the function.</li>
-                <li>That means C creates a copy of the data that the function uses.</li>
-            </ul>
-            <p>An example of a 'swap' function to demonstrate pass by value &darr; </p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+        <div id="t12" class="wh">
+            <h2>Pass by value and pass by reference</h2>
+            <div class="in">
+                <h3>Pass by value</h3>
+                <ul>
+                    <li>Pass by value (another term is 'call by value') means the code within a function cannot alter
+                        the
+                        arguments used to call the function, even if the values are changed inside the function.</li>
+                    <li>That means C creates a copy of the data that the function uses.</li>
+                </ul>
+                <p>An example of a 'swap' function to demonstrate pass by value &darr; </p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
                        
                             #include &lt;stdio.h>
@@ -956,10 +1008,10 @@
                             }
                        </code>
                    </pre>
-            </div>
-            <p>output &darr;</p>
-            <div class='code'>
-                <pre>
+                </div>
+                <p>output &darr;</p>
+                <div class='code'>
+                    <pre>
                        <code>
                        
                         Before Swap : 
@@ -971,24 +1023,26 @@
                         b = 100
                        </code>
                    </pre>
+                </div>
+                <ul>
+                    <li>In the above code the value of 'a' and 'b' remains the same.</li>
+                </ul>
             </div>
-            <ul>
-                <li>In the above code the value of 'a' and 'b' remains the same.</li>
-            </ul>
-        </div>
-        <div class="in">
-            <h3>Pass by reference</h3>
-            <ul>
-                <li>Passing arguments to a called function by reference, means passing the address of memory location of
-                    the data to the function using '&' (addressof) operator.</li>
-                <li>Here what is passed in is a copy of the pointer, but what it points to is still the same address in
-                    memory as the original pointer, so this allows the function to change the value outside the
-                    function.</li>
-            </ul>
-            <p>Swap function using pass by reference &darr;</p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+            <div class="in">
+                <h3>Pass by reference</h3>
+                <ul>
+                    <li>Passing arguments to a called function by reference, means passing the address of memory
+                        location of
+                        the data to the function using '&' (addressof) operator.</li>
+                    <li>Here what is passed in is a copy of the pointer, but what it points to is still the same address
+                        in
+                        memory as the original pointer, so this allows the function to change the value outside the
+                        function.</li>
+                </ul>
+                <p>Swap function using pass by reference &darr;</p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
                        
                             #include &lt;stdio.h>
@@ -1009,10 +1063,10 @@
                             }
                        </code>
                    </pre>
-            </div>
-            <p>Output &darr;</p>
-            <div class='code'>
-                <pre>
+                </div>
+                <p>Output &darr;</p>
+                <div class='code'>
+                    <pre>
                        <code>
                        
                         Before Swap : 
@@ -1024,9 +1078,9 @@
                         b = 50
                        </code>
                    </pre>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>

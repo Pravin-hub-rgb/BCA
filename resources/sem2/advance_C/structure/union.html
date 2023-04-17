@@ -126,7 +126,6 @@
             <h2>Accessing Union Members</h2>
             <ul>
                 <li>To access any member of a union, we use the <b>member access operator (.)</b>.</li>
-                <li>The member access operator is coded as a period between the union variable name and the union member that we wish to access.</li>
             </ul>
             <div class='code'>
                <div class='dotc'></div>
@@ -287,7 +286,6 @@
                     <li>Bit-fields are variables that are defined using a predefined width or size. Format and the declaration of the bit-fileds in C are shown below &darr;</li>
                 </ul>
                 <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
                        <code>
                        
@@ -300,8 +298,8 @@
                    </pre>
                 </div>
                 <ul>
-                    <li>data_type: It is an integer type that determines the bit-field value which is to be interpreted. They type may be int, signed int, or unsigned it.</li>
-                    <li><li>member_name: The member name is the name of the bit field.</li></li>
+                    <li>data_type: It is an integer type that determines the bit-field value which is to be interpreted. data type may be int, signed int, or unsigned it.</li>
+                    <li>member_name: The member name is the name of the bit field.</li>
                     <li>width: The number of bits in the bit-filed. The width be less than or equal to the bit width of the specified type.</li>
                 </ul>
                 <p>Now we will see, 'order' representation with bit-fields &darr;</p>
@@ -320,11 +318,11 @@
 
                             // isTshirt can store either 0 or 1, so 1 bits are sufficient
                             unsigned int isTshirt : 1;
-                        };
+                        }__attribute__((packed));
     
                         int main()
                         {
-                            printf("Size of order is %lu bytes\n", sizeof(struct order));
+                            printf("Size of order is %lu byte\n", sizeof(struct order)); // 1
                             struct order hoodie= {1, 0};
                             printf("The order is %s and it is %s",(hoodie.isAvailable)?"available":"not available", (hoodie.isTshirt)?"T-shirt":"not T-shirt");
                             return 0;
