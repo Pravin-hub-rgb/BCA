@@ -80,7 +80,7 @@
                </pre>
             </div>
             <ul>
-                <li>Here <b><i>struct</i></b> is keyword, which ells the compiler that a structure is being defined.</li>
+                <li>Here <b><i>struct</i></b> is keyword, which tells the compiler that a structure is being defined.</li>
                 <li>member1, member2, ..., memberN are known as members of the structure and are declared inside curly braces.</li>
             </ul>
             <p>Example &darr;</p>
@@ -167,13 +167,14 @@
         <div id="t3" class="wh">
             <h2>Initialization of structure variables</h2>
             <div class="in">
-                <h3>Compiler initialization</h3>
+                <h3>Compile time initialization</h3>
                 <div class='code'>
                    <div class='dotc'></div>
                    <pre>
                        <code>
                        
                         #include&lt;stdio.h>
+                        #include&lt;string.h>
 
                         struct student
                         {
@@ -185,6 +186,13 @@
                         int main()
                         {
                             struct student s1 = {"Harry", 23, 45};
+                            struct student s2;
+                            // s2.name = "Jerry"; // This is invalid syntax 
+                            strycpy(s2.name, "Jerry"); // This is correct 
+                            //  when working with a struct that contains a character array as a member, you cannot use the array initialization syntax to initialize the member directly.
+                            // Instead, you need to copy the value of the string literal to the member using a function like strcpy().
+                            s2.rollno = 23;
+                            s2.marks = 44;
                             return 0;
                         }
                        </code>
