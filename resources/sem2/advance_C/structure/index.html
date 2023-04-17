@@ -37,6 +37,7 @@
         <a href="#t11" class="link">Structure as a function argument</a>
         <a href="#t12" class="link">Structure Padding and Packing</a>
         <a href="#t10" class="link">typedef</a>
+        <a href="#t13" class="link">Practise program 2</a>
         <div class="botbut">
             <a href="./union.html" class="link">Next Topic &rarr;</a>
         </div>
@@ -664,7 +665,7 @@
                 <div class='dotc'></div>
                 <button class="ac">code 3</button>
                 <div class="panel">
-                <pre>
+                    <pre>
                    <code>
                    
                         #include &lt;stdio.h>
@@ -695,7 +696,7 @@
                         
                    </code>
                </pre>
-            </div>
+                </div>
             </div>
         </div>
         <div id="t9" class="wh">
@@ -942,7 +943,10 @@
                                 word size is 8 bytes.</li>
                         </ul>
                     </li>
-                    <li>When we define a structure in C programming language, the compiler may add some extra bytes between the members of the structure to align them properly in memory. This is called structure padding. The reason for structure padding is to improve performance by reducing the number of memory accesses needed to access the structure members.</li>
+                    <li>When we define a structure in C programming language, the compiler may add some extra bytes
+                        between the members of the structure to align them properly in memory. This is called structure
+                        padding. The reason for structure padding is to improve performance by reducing the number of
+                        memory accesses needed to access the structure members.</li>
                 </ul>
                 <img src="../../images/padding.svg" alt="" class="wb">
                 <div class='code'>
@@ -1001,7 +1005,10 @@
                 <ul>
                     <li>Because of structure padding, size of structure becomes more than the size of the actual
                         structure. Due to this some memory will get wasted.</li>
-                        <li>Structure packing is the opposite of structure padding. It is the process of minimizing the amount of memory used by a structure by removing the padding between its members. This can be useful in certain cases, such as when working with embedded systems where memory usage is critical.</li>
+                    <li>Structure packing is the opposite of structure padding. It is the process of minimizing the
+                        amount of memory used by a structure by removing the padding between its members. This can be
+                        useful in certain cases, such as when working with embedded systems where memory usage is
+                        critical.</li>
                     <li>We can avoid the wasatage of memory by simply writing <b>#pragma pack(1)</b></li>
                 </ul>
                 <div class='code'>
@@ -1035,7 +1042,7 @@
                 <li>Padding is the extra space added to match the alignment.</li>
             </ul>
         </div>
-        <div id="10" class="wh">
+        <div id="t10" class="wh">
             <h2>typedef Keyword</h2>
             <ul>
 
@@ -1091,7 +1098,7 @@
                         }
 
                         // structure with using typedef 
-                        typedef struct car {
+                        typedef struct {
                             char engine[50];
                             char fuel_type[10];
                             int fuel_tank_cap;
@@ -1106,6 +1113,138 @@
                        </code>
                    </pre>
                 </div>
+            </div>
+        </div>
+        <div id="t13" class="wh">
+            <h2>More programs</h2>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">write a program to create a structure to specify data on students given below: <br>
+                    Roll Number, Name, Department, Course and Year of Joining. <br>
+                    Assume that there are not more than 500 students in the college.</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+                        #include &lt;string.h>
+                        
+                        #define MAX_STUDENTS 500
+                        
+                        // Define a structure to store student details
+                        struct Student {
+                            int roll_number;
+                            char name[50];
+                            char department[50];
+                            char course[50];
+                            int year_of_joining;
+                        };
+                        
+                        int main() {
+                            // Declare an array of students
+                            struct Student students[MAX_STUDENTS];
+                            
+                            // Get input for each student
+                            int num_students;
+                            printf("Enter the number of students: ");
+                            scanf("%d", &num_students);
+                            for (int i = 0; i < num_students; i++) {
+                                printf("Enter details for student %d:\n", i + 1);
+                                printf("Roll Number: ");
+                                scanf("%d", &students[i].roll_number);
+                                printf("Name: ");
+                                scanf("%s", students[i].name);
+                                printf("Department: ");
+                                scanf("%s", students[i].department);
+                                printf("Course: ");
+                                scanf("%s", students[i].course);
+                                printf("Year of Joining: ");
+                                scanf("%d", &students[i].year_of_joining);
+                            }
+                            
+                            // Print out the details of all the students
+                            printf("Details of all students:\n");
+                            for (int i = 0; i < num_students; i++) {
+                                printf("Roll Number: %d\n", students[i].roll_number);
+                                printf("Name: %s\n", students[i].name);
+                                printf("Department: %s\n", students[i].department);
+                                printf("Course: %s\n", students[i].course);
+                                printf("Year of Joining: %d\n", students[i].year_of_joining);
+                            }
+                            
+                            return 0;
+                        }                        
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Write a C program to create a structure to store data of 50 students and also print all records by
+                    using nested structure with the following details: <br>
+                    Roll Number, Name, Department, Course and Year of Joining.
+                </button>
+                <div class="panel">
+                <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+
+                        struct Date
+                        {
+                            int day;
+                            int month;
+                            int year;
+                        };
+                        
+                        struct Student
+                        {
+                            int rollNumber;
+                            char name[50];
+                            char department[20];
+                            char course[20];
+                            struct Date yearOfJoining;
+                        };
+                        
+                        int main()
+                        {
+                            struct Student students[50];
+                            int i;
+                        
+                            // Input data for all students
+                            for (i = 0; i < 50; i++)
+                            {
+                                printf("Enter Roll Number for Student %d: ", i+1);
+                                scanf("%d", &students[i].rollNumber);
+                        
+                                printf("Enter Name for Student %d: ", i+1);
+                                scanf("%s", students[i].name);
+                        
+                                printf("Enter Department for Student %d: ", i+1);
+                                scanf("%s", students[i].department);
+                        
+                                printf("Enter Course for Student %d: ", i+1);
+                                scanf("%s", students[i].course);
+                        
+                                printf("Enter Year of Joining for Student %d (dd/mm/yyyy): ", i+1);
+                                scanf("%d/%d/%d", &students[i].yearOfJoining.day, &students[i].yearOfJoining.month, &students[i].yearOfJoining.year);
+                        
+                                printf("\n");
+                            }
+                        
+                            // Print all records
+                            printf("Roll Number\tName\tDepartment\tCourse\tYear of Joining\n");
+                            for (i = 0; i < 50; i++)
+                            {
+                                printf("%d\t\t%s\t%s\t\t%s\t%d/%d/%d\n", students[i].rollNumber, students[i].name, students[i].department, students[i].course, students[i].yearOfJoining.day, students[i].yearOfJoining.month, students[i].yearOfJoining.year);
+                            }
+                        
+                            return 0;
+                        }                           
+                   </code>
+               </pre>
+            </div>
             </div>
         </div>
     </div>

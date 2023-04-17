@@ -32,10 +32,11 @@
         <a href="#t6" class="link">Memory and pointer</a>
         <a href="#t7" class="link">Storing one pointer value to another pointer value.</a>
         <a href="#t8" class="link">Pointer to pointer</a>
+        <a href="#t13" class="link">Pointer to function</a>
         <a href="#t9" class="link">Pointer arithmetic</a>
-        <a href="t10" class="link">Pointer and 1D array</a>
-        <a href="t11" class="link">Types of pointers</a>
-        <a href="t12" class="link">Pass by value and reference</a>
+        <a href="#t10" class="link">Pointer and 1D array</a>
+        <a href="#t11" class="link">Types of pointers</a>
+        <a href="#t12" class="link">Pass by value and reference</a>
         <div class="botbut">
             <a href="../structure/union.html" class="link">&larr; Previous Topic</a>
         </div>
@@ -65,6 +66,13 @@
             <li>A pointer is a derived data type in C that can store the address of other variables or a memory. We can
                 access and manipulate the data stored in that memory location using pointers.</li>
         </ul>
+        <p>Advantages of pointer:
+            <ol>
+                <li>Dynamic memory allocation: Pointers allow dynamic memory allocation, which means that memory can be allocated during runtime, depending on the program's needs. This makes it easier to create data structures like linked lists, trees, etc.</li>
+                <li>Pass by reference : C uses pass by value as a default, which means that function arguments are copied to the function's stack. With pointers, it is possible to pass a variable by reference, which means that the function can modify the original variable.</li>
+                <li>Efficient memory usage:Pointers allow efficient use of memory since they can point to any memory location. This can help to reduce memory usage, especially for large data structures.</li>
+            </ol>
+        </p>
         <div id="t2" class="wh">
             <h2>Syntax of pointer</h2>
             <div class='code'>
@@ -321,6 +329,110 @@
                        </code>
                    </pre>
                 </div>
+            </div>
+        </div>
+        <div id="t13" class="wh">
+            <h2>Pointer to function</h2>
+            <ul>
+                <li>In C language, a pointer to a function is a variable that holds the address of a function.</li>
+                <li>It allows a program to pass functions as arguments to other functions or return functions as values
+                    from a function.</li>
+                <li>This is a powerful feature of the language that enables the creation of higher-order functions and
+                    function callbacks.</li>
+            </ul>
+            <p>To declare a pointer to a function in C, you use the following syntax:</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    return_type (*pointer_name)(argument_list);
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Here, return_type is the return type of the function being pointed to, pointer_name is the name of
+                    the pointer variable, and argument_list is the list of arguments that the function being pointed to
+                    takes.</li>
+            </ul>
+            <p>For example, here's a declaration of a function pointer that takes two integers and returns an integer
+                &darr;</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                    int (*add)(int, int);
+                   </code>
+               </pre>
+            </div>
+            <p>To assign a function to a function pointer, you simply assign the address of the function to the pointer variable &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    int sum(int a, int b)
+                    {
+                        return a + b;
+                    }
+
+                    add = &amp;sum;
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Here, &sum is the address of the sum() function, which is assigned to the add pointer.</li>
+            </ul>
+            <p>To call the function through the pointer, you can use the following syntax &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    int result = (*add)(3, 4);
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>Here, (*add) dereferences the pointer to the sum() function, allowing you to call the function with the arguments (3, 4).</li>
+            </ul>
+            <p>Alternatively, you can use the shorthand notation &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                    int result = add(3, 4);
+                   </code>
+               </pre>
+            </div>
+            <p>Here's a complete example program that demonstrates the use of function pointers in C &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+                   
+                        #include &lt;stdio.h>
+
+                        int sum(int a, int b) {
+                            return a + b;
+                        }
+                        
+                        int product(int a, int b) {
+                            return a * b;
+                        }
+                        
+                        int main() {
+                            int (*func_ptr)(int, int);
+                            
+                            func_ptr = &amp;sum;
+                            printf("sum(3, 4) = %d\n", (*func_ptr)(3, 4));
+                            
+                            func_ptr = &product;
+                            printf("product(3, 4) = %d\n", (*func_ptr)(3, 4));
+                            
+                            return 0;
+                        }                        
+                   </code>
+               </pre>
             </div>
         </div>
         <div id="t9" class="wh">
@@ -1081,8 +1193,8 @@
                 </div>
                 <p>Program to sort and array using pointer &darr;</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
                        
                             #include &lt;stdio.h>

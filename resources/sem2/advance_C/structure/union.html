@@ -222,6 +222,50 @@
         <div id="t3" class="wh">
             <h2>Structure v/s Union</h2>
             <img src="../../images/svu.svg" alt="" class="wb">
+            <ol>
+                <li>Memory allocation: 
+                    <ul>
+                        <li>A structure allocates separate memory space for each member variable declared inside the structure. Thus, the size of the structure is the sum of the sizes of all the member variables.</li>
+                        <li>A union, on the other hand, allocates the same memory space for all the member variables declared inside the union. Thus, the size of the union is equal to the size of its largest member variable.</li>
+                    </ul>
+                </li>
+                <li>Accessing member variables:
+                    <ul>
+                        <li>In a structure, all the member variables can be accessed simultaneously and each variable has its own unique memory location.</li>
+                        <li>In a union, only one member variable can be accessed at a time and all the member variables share the same memory location.</li>
+                    </ul>
+                </li>
+                <li>Usage:
+                    <ul>
+                        <li>Structures are commonly used to group related variables together into a single unit, whereas unions are mainly used for memory optimization and to save memory space.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>Memory allocation of union members</h2>
+            <ul>
+                <li>In a union, memory is allocated in such a way that all the members share the same memory location. </li>
+                <li>The size of the memory allocated to the union is equal to the size of the largest member in the union.</li>
+            </ul>
+            <p>For example consider the following union &darr;</p>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    union student
+                    {
+                        char name[100];
+                        int rollNo;
+                        float fees;
+                    }
+                   </code>
+               </pre>
+            </div>
+            <ul>
+                <li>In this union, the size of the largest member is 'char name[]' which takes up 20 bytes of memory. Therefore, the union number will take up 20 bytes of memory. However, only one of the members can be accessed at a time.</li>
+                <li>Thus, the union allows us to store different data types in the same memory location, saving memory space. However, we need to be careful while accessing the members as only one member can be accessed at a time.</li>
+            </ul>
         </div>
         <div id="t4" class="wh">
             <h2>Bit fields</h2>
