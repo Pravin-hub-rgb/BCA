@@ -1,44 +1,17 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
-class Number
-{
-    int a;
-
-public:
-    Number()
-    {
-        a = 0;
-    }
-    Number(int num)
-    {
-        a = num;
-    }
-
-    // When no copy constructor is found, compiler supplies its own copy constructor
-    Number(Number &obj)
-    {
-        cout << "Copy constructor" << endl;
-        a = obj.a;
-    }
-    void display()
-    {
-        cout << "The number for this object is " << a << endl;
-    }
-};
-
 int main()
 {
-    Number x, y, z(45), z2;
-    x.display();
-    y.display();
-    z.display();
+    int num = 123;
 
-    Number z1(z); // copy constructor invoked
-    z1.display();
+    cout << "Without using setw :" << num << "\n";
+    // Using setw() manipulator to set the width of the output field to 10
+    cout << "With using setw :" << setw(10) << num << "\n";
 
-    z2 = z;        // copy constructor not invoked
-    Number z3 = z; // now in this time copy constructor will be invoked cuse we are just created this object
-    // copy constructor don't get invoked when the object is already created and later we are just assinging some value or another object.
+    // Using endl manipulator to insert a newline
+    cout << "This is on one line." << endl;
+    cout << "This is on another line." << endl;
 
     return 0;
 }
