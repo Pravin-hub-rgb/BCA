@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialization vs Assignment</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">Back</a>
+        <a href="#t1" class="link">Initialization and assignment</a>
+        <a href="#t2" class="link">copy constructor</a>
+        <div class="botbut">
+            <a href="./index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Initialization vs assignment</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1 id="t1">Initialization vs assignment</h1>
+        <img src="../../images/assignmentvsini.svg" alt="" class="wb">
+        <div id="t2" class="wh">
+            <h2>Copy constructor</h2>
+            <ul>
+                <li>A copy constructor is a special constructor that is ued to crete a new object as a copy of an
+                    existing object.</li>
+                <li>The copy constructor is invoked when an object is initialized using another object of the same class
+                    or one object is passed as an argument to another object of same class.</li>
+                <li>The copy constructor can be defined implicitly by the compiler, or it can be defined explicitly by
+                    the programmer.</li>
+                <li>If no copy constructor is written in the program compiler will supply its own copy constructor.</li>
+                <li>The default copy constructor performs a shallow copy of the object's data members, meaning that it
+                    copies the values of the data members but not the memory locations pointed to by any pointers in the
+                    object.</li>
+            </ul>
+            <p>The copy constructor can be defined explicitly by the programmer using the following syntax &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+                   
+                        class MyClass {
+                        public:
+                           // Default constructor
+                           MyClass();
+                        
+                           // Copy constructor
+                           MyClass(MyClass &obj);
+                           /* MyClass(MyClass &obj) {
+                                x = obj.x;
+                            } */ // can be defined inside the class
+                        private:
+                           int x;
+                           int* ptr;
+                        };
+                        
+                        // Implementation of the copy constructor
+                        MyClass::MyClass(MyClass &obj) {
+                           x = obj.x;
+                        }
+                   </code>
+               </pre>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Complete code</button>
+                <div class="panel">
+                    <pre>
+                       <code>
+                           
+                            #include &lt;iostream>
+                            using namespace std;
+                            
+                            class MyClass
+                            {
+                            public:
+                                // Default constructor
+                                MyClass();
+                            
+                                // Copy constructor
+                                MyClass(MyClass &other);
+                            
+                                // Get value of x
+                                int getX();
+                            
+                                // Set value of x
+                                void setX(int value);
+                            
+                            private:
+                                int x;
+                            };
+                            
+                            // Default constructor
+                            MyClass::MyClass()
+                            {
+                                x = 0;
+                            }
+                            
+                            // Copy constructor
+                            MyClass::MyClass(MyClass &other)
+                            {
+                                x = other.x;
+                            }
+                            
+                            // Get value of x
+                            int MyClass::getX()
+                            {
+                                return x;
+                            }
+                            
+                            // Set value of x
+                            void MyClass::setX(int value)
+                            {
+                                x = value;
+                            }
+                            
+                            int main()
+                            {
+                                // Create an object of MyClass
+                                MyClass obj1;
+                            
+                                // Set the value of x
+                                obj1.setX(5);
+                            
+                                // Create a copy of obj1
+                                MyClass obj2 = obj1;
+                            
+                                // Print the value of x for obj1 and obj2
+                                cout << "obj1.x = " << obj1.getX() << endl;
+                                cout << "obj2.x = " << obj2.getX() << endl;
+                            
+                                // Change the value of x for obj1
+                                obj1.setX(10);
+                            
+                                // Print the value of x for obj1 and obj2 again
+                                cout << "obj1.x = " << obj1.getX() << endl;
+                                cout << "obj2.x = " << obj2.getX() << endl;
+                            
+                                return 0;
+                            }                               
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">One more example</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+                   
+                        #include &lt;iostream>
+                        using namespace std;
+                        class Number
+                        {
+                            int a;
+                        
+                        public:
+                            Number()
+                            {
+                                a = 0;
+                            }
+                            Number(int num)
+                            {
+                                a = num;
+                            }
+                        
+                            // When no copy constructor is found, compiler supplies its own copy constructor
+                            Number(Number &obj)
+                            {
+                                cout << "Copy constructor" << endl;
+                                a = obj.a;
+                            }
+                            void display()
+                            {
+                                cout << "The number for this object is " << a << endl;
+                            }
+                        };
+                        
+                        int main()
+                        {
+                            Number x, y, z(45), z2;
+                            x.display();
+                            y.display();
+                            z.display();
+                        
+                            Number z1(z); // copy constructor invoked
+                            z1.display();
+                        
+                            z2 = z;        // copy constructor not invoked
+                            Number z3 = z; // now in this time copy constructor will be invoked cuse we are just created this object
+                            // copy constructor don't get invoked when the object is already created and later we are just assinging some value or another object.
+                        
+                            return 0;
+                        }
+                   </code>
+               </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References &darr;</p>
+        <ul>
+            <li>Chat-GPT</li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
