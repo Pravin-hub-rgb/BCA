@@ -1,19 +1,17 @@
 #include <stdio.h>
-#pragma pack(1)
-// space opmitized representation of 'order'
-struct order
+int mult(int a, int b)
 {
-    // isAvailable can store either 0 or 1, so 1 bits are sufficient
-    unsigned int isAvailable : 1;
-
-    // isTshirt can store either 0 or 1, so 1 bits are sufficient
-    unsigned int isTshirt : 1;
-};
-
+    return a * b;
+}
 int main()
 {
-    printf("Size of order is %lu byte\n", sizeof(struct order)); // 1
-    struct order hoodie = {1, 0};
-    printf("The order is %s and it is %s", (hoodie.isAvailable) ? "available" : "not available", (hoodie.isTshirt) ? "T-shirt" : "not T-shirt");
+    int x, y;
+    int (*ptr_mult)(int, int);
+    ptr_mult = &mult;
+    printf("Enter the value of a : ");
+    scanf("%d", &x);
+    printf("Enter the value of b : ");
+    scanf("%d", &y);
+    printf("The multiplication of %d and %d is = %d",x,y,(*ptr_mult)(x,y));
     return 0;
 }
