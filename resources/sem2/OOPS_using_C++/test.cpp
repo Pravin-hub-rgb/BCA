@@ -1,57 +1,35 @@
+
 #include <iostream>
 using namespace std;
-class calculation
+class Distance
 {
-    int num1;
-    int num2;
-    int sum_v;
-    int sub_v;
-    int div_v;
-    int mut_v;
+private:
+    int feet;
+    int inches;
 
 public:
-    calculation();
-    void sum();
-    void sub();
-    void div();
-    void multiply();
-    void show();
+    friend void sum(Distance);
+    void show()
+    {
+        cout << "The distance is = " << feet << " Feet " << inches << " Inches";
+    }
 };
-calculation::calculation()
-{
-    num1 = 10;
-    num2 = 20;
-}
-void calculation::sum()
-{
-    sum_v = num1 + num2;
-}
-void calculation::sub()
-{
-    sub_v = num1 - num2;
-}
-void calculation::div()
-{
-    div_v = num1 / num2;
-}
-void calculation::multiply()
-{
-    mut_v = num1 * num2;
-}
-void calculation::show()
-{
-    cout << "The sum is = " << sum_v << endl;
-    cout << "The subtraction is = " << sub_v << endl;
-    cout << "The multiplication is = " << mut_v << endl;
-    cout << "The division is = " << div_v << endl;
-}
+
 int main()
 {
-    calculation x;
-    x.sum();
-    x.sub();
-    x.multiply();
-    x.div();
-    x.show();
+    Distance one;
+    sum(one);
     return 0;
+}
+void sum(Distance d)
+{
+    int f1, f2, i1, i2;
+    cout << "Enter First Distance (in Feet and Inches) : ";
+    cin >> f1 >> i1;
+    cout << "Enter Second Distance (in Feet and Inches) : ";
+    cin >> f2 >> i2;
+    d.feet = f1 + f2;
+    d.inches = i1 + i2;
+    cout << "\nResult is : \n";
+    d.show();
 }
