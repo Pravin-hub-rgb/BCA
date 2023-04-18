@@ -94,7 +94,7 @@
             </div>
             <ul>
                 <li>The memory occupied by a union will be large enough to hold the largest member of the union.</li>
-                <li>For example, in the above example, data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by a characer string.</li>
+                <li>For example, in the above example, data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by a character string.</li>
                 <li>The following code checks the size of union data type.</li>
             </ul>
             <div class='code'>
@@ -255,7 +255,7 @@
                    
                     union student
                     {
-                        char name[100];
+                        char name[20];
                         int rollNo;
                         float fees;
                     }
@@ -263,7 +263,7 @@
                </pre>
             </div>
             <ul>
-                <li>In this union, the size of the largest member is 'char name[]' which takes up 20 bytes of memory. Therefore, the union number will take up 20 bytes of memory. However, only one of the members can be accessed at a time.</li>
+                <li>In this union, the size of the largest member is 'char name[ ]' which takes up 20 bytes of memory. Therefore, the union student will take up 20 bytes of memory. However, only one of the members can be accessed at a time.</li>
                 <li>Thus, the union allows us to store different data types in the same memory location, saving memory space. However, we need to be careful while accessing the members as only one member can be accessed at a time.</li>
             </ul>
         </div>
@@ -271,7 +271,7 @@
             <h2>Bit fields</h2>
             <ul>
                 <li>In C, we can specify the size (in bits) of the structure and union members.</li>
-                <li>The idea of bit-field is to use memory efficiently when we know that the value of a filed or group of fields will never exceed a limit or is within a small range.</li>
+                <li>The idea of bit-field is to use memory efficiently when we know that the value of a field or group of fields will never exceed a limit or is within a small range.</li>
                 <li>The type-specifier for the variable must be <i>unsigned int, signed int or int.</i></li>
                 <li>Bit fields are used when the storage of our program is limited. Need of bit fields in C programming language:
                     <ul>
@@ -353,7 +353,7 @@
                        <code>
                        
                         #include &lt;stdio.h>
-
+                        #pragma pack(1)
                         // space opmitized representation of 'order'
                         struct order
                         {
@@ -362,7 +362,7 @@
 
                             // isTshirt can store either 0 or 1, so 1 bits are sufficient
                             unsigned int isTshirt : 1;
-                        }__attribute__((packed));
+                        };
     
                         int main()
                         {
