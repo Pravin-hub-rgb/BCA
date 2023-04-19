@@ -28,6 +28,7 @@
         <a href="#t2" class="link">What is process?</a>
         <a href="#t3" class="link">Process state</a>
         <a href="#t4" class="link">Process scheduling</a>
+        <a href="#t16" class="link">Process queues</a>
         <a href="#t5" class="link">CPU scheduling</a>
         <a href="#t6" class="link">Purpose of scheduling algorithm</a>
         <a href="#t7" class="link">FCFS</a>
@@ -173,97 +174,117 @@
                 <ul>
                     <li>Long term scheduler is also knwon as job scheduler. It chooses the process from the pool
                         (secondary memory) and keeps them in the ready queue maintained in the primary memory.</li>
-                    <li>This scheduler decides which programs should be executed from the pool of programs waiting in the job queue.</li>
-                    <li>The long-term scheduler considers factors such as system utilization, available memory, and the types of programs that are currently running. It decides which programs should be admitted to the system, and it loads them into memory for execution.</li>
+                    <li>This scheduler decides which programs should be executed from the pool of programs waiting in
+                        the job queue.</li>
+                    <li>The long-term scheduler considers factors such as system utilization, available memory, and the
+                        types of programs that are currently running. It decides which programs should be admitted to
+                        the system, and it loads them into memory for execution.</li>
                 </ul>
             </div>
             <div class="in">
                 <h3>Short term schedular</h3>
                 <ul>
-                    <li>Once a process is admitted to the system, the short-term scheduler (also known as the CPU scheduler) takes over. </li>
-                    <li>The short-term scheduler is responsible for selecting which process should be executed next from the pool of processes that are currently waiting in the ready queue.</li>
-                    <li>This scheduler is a faster and more frequent process than the long-term scheduler, as it operates on a millisecond or nanosecond time scale. The short-term scheduler considers factors such as process priority, remaining burst time, and the amount of CPU time that each process has consumed so far.</li>
+                    <li>Once a process is admitted to the system, the short-term scheduler (also known as the CPU
+                        scheduler) takes over. </li>
+                    <li>The short-term scheduler is responsible for selecting which process should be executed next from
+                        the pool of processes that are currently waiting in the ready queue.</li>
+                    <li>This scheduler is a faster and more frequent process than the long-term scheduler, as it
+                        operates on a millisecond or nanosecond time scale. The short-term scheduler considers factors
+                        such as process priority, remaining burst time, and the amount of CPU time that each process has
+                        consumed so far.</li>
                 </ul>
             </div>
             <div class="in">
-                <h3>Process Queues</h3>
+                <h3>Medium term scheduler</h3>
                 <ul>
-                    <li>The operating system manages various types of queues for each of the process states. </li>
-                    <li>The PCB related to the process is also stored in the queue of the same state.</li>
-                    <li>If the process is moved from one state to another state then its PCB is also unlinked from the
-                        corresponding queue and added to the other state queue in which the transition is made.</li>
+                    <li>The medium-term scheduler is a less common type of scheduler that is used in some operating
+                        systems. </li>
+                    <li>Its main function is to control the degree of multiprogramming by swapping out some processes
+                        from main memory to disk (i.e. virtual memory), and bringing them back in again later. </li>
+                    <li>This helps in balancing the memory requirements of different processes and can improve the
+                        overall performance of the system.</li>
                 </ul>
-                <img src="../../images/manage2.svg" alt="" class="wb">
-                <ol>
-                    <li><b>Job Queue</b>
-                        <ul>
-                            <li>In starting, all the process get stored in the job queue.</li>
-                            <li>It is maintained in the secondary memory.</li>
-                            <li>The long term scheduler (Job scheduler) picks some of the process and put them in the
-                                primary memory.</li>
-                        </ul>
-                    </li>
-                    <li><b>Ready Queue</b>
-                        <ul>
-                            <li>Ready queue is maintained in primary memory.</li>
-                            <li>The short term scheduler picks the job from the ready queue and dispatch of the CPU for
-                                the execution.</li>
-                        </ul>
-                    </li>
-                    <li><b>Waiting Queue</b>
-                        <ul>
-                            <li>When the process needs some IO operation in order to complete its execution, OS Changes
-                                the state of the process from running to waiting.</li>
-                            <li>The context (PCB) associated with the process gets stored on the waiting queue which
-                                will be used by the processor when the process finishes the IO.</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-            <div class="wh">
-                <h2>Various Times related to Process:</h2>
-                <img src="../../images/manage3.svg" alt="" class="wb">
-                <ol>
-                    <li><b>Arrival Time</b>
-                        <ul>
-                            <li>The time at which the process enters into the ready queue.</li>
-                        </ul>
-                    </li>
-                    <li><b>Burst Time</b>
-                        <ul>
-                            <li>The total amount of time required by the CPU to execute the whole process is called the
-                                Burst Time.</li>
-                            <li>This does not include the waiting time.</li>
-                            <li>It is confusing to calculate the execution time for a process even before executing it
-                                hence the scheduling problems based on the burst time cannot be implemented in reality.
-                            </li>
-                        </ul>
-                    </li>
-                    <li><b>Completion Time</b>
-                        <ul>
-                            <li>The time at which the process enters into the completion state or the time at which the
-                                process completes its execution.</li>
-                        </ul>
-                    </li>
-                    <li><b>Turn around time</b>
-                        <ul>
-                            <li>The total amount of time spent by the process from its arrival to its completion.</li>
-                        </ul>
-                    </li>
-                    <li><b>Waiting Time</b>
-                        <ul>
-                            <li>The total amount of time for which the process waits for the CPU to be assigned.</li>
-                        </ul>
-                    </li>
-                    <li><b>Response Time</b>
-                        <ul>
-                            <li>The difference between the arrival time and the time at which the process first gets the
-                                CPU.</li>
-                        </ul>
-                    </li>
-                </ol>
             </div>
         </div>
+        <div id="t16" class="wh">
+            <h2>Process Queues</h2>
+            <ul>
+                <li>The operating system manages various types of queues for each of the process states. </li>
+                <li>The PCB related to the process is also stored in the queue of the same state.</li>
+                <li>If the process is moved from one state to another state then its PCB is also unlinked from the
+                    corresponding queue and added to the other state queue in which the transition is made.</li>
+            </ul>
+            <img src="../../images/manage2.svg" alt="" class="wb">
+            <ol>
+                <li><b>Job Queue</b>
+                    <ul>
+                        <li>In starting, all the process get stored in the job queue.</li>
+                        <li>It is maintained in the secondary memory.</li>
+                        <li>The long term scheduler (Job scheduler) picks some of the process and put them in the
+                            primary memory.</li>
+                    </ul>
+                </li>
+                <li><b>Ready Queue</b>
+                    <ul>
+                        <li>Ready queue is maintained in primary memory.</li>
+                        <li>The short term scheduler picks the job from the ready queue and dispatch of the CPU for
+                            the execution.</li>
+                    </ul>
+                </li>
+                <li><b>Waiting Queue</b>
+                    <ul>
+                        <li>When the process needs some IO operation in order to complete its execution, OS Changes
+                            the state of the process from running to waiting.</li>
+                        <li>The context (PCB) associated with the process gets stored on the waiting queue which
+                            will be used by the processor when the process finishes the IO.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>Various Times related to Process:</h2>
+            <img src="../../images/manage3.svg" alt="" class="wb">
+            <ol>
+                <li><b>Arrival Time</b>
+                    <ul>
+                        <li>The time at which the process enters into the ready queue.</li>
+                    </ul>
+                </li>
+                <li><b>Burst Time</b>
+                    <ul>
+                        <li>The total amount of time required by the CPU to execute the whole process is called the
+                            Burst Time.</li>
+                        <li>This does not include the waiting time.</li>
+                        <li>It is confusing to calculate the execution time for a process even before executing it
+                            hence the scheduling problems based on the burst time cannot be implemented in reality.
+                        </li>
+                    </ul>
+                </li>
+                <li><b>Completion Time</b>
+                    <ul>
+                        <li>The time at which the process enters into the completion state or the time at which the
+                            process completes its execution.</li>
+                    </ul>
+                </li>
+                <li><b>Turn around time</b>
+                    <ul>
+                        <li>The total amount of time spent by the process from its arrival to its completion.</li>
+                    </ul>
+                </li>
+                <li><b>Waiting Time</b>
+                    <ul>
+                        <li>The total amount of time for which the process waits for the CPU to be assigned.</li>
+                    </ul>
+                </li>
+                <li><b>Response Time</b>
+                    <ul>
+                        <li>The difference between the arrival time and the time at which the process first gets the
+                            CPU.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
         <div id="t5" class="wh">
             <h2>CPU Scheduling</h2>
             <ul>
@@ -296,6 +317,8 @@
                     the ready queue and assigns the CPU to this process. This procedure is called <b>context
                         switching.</b></li>
             </ul>
+            <p>Context switching diagram &darr;</p>
+            <img src="../../images/contextswitching.svg" alt="context switching" class="wb">
             <div class="in">
                 <h3>What is saved in the Process Control Block?</h3>
                 <ul>
@@ -320,6 +343,16 @@
                         </ol>
                     </li>
                 </ul>
+            </div>
+            <div class="in">
+                <h3>Different crieteria used for CPU scheduling in an operating system:</h3>
+                <ol>
+                    <li>CPU utilization:This refers to the percentage of time that the CPU is being used. A scheduling algorithm that aims to maximize CPU utilization will try to keep the CPU busy as much as possible.</li>
+                    <li>Throughput: This refers to the number of processes that are completed per unit time. A scheduling algorithm that aims to maximize throughput will try to maximize the number of processes that are completed in a given amount of time.</li>
+                    <li>Turnaround Time: This is the amount of time it takes for a process to complete, from the moment it enters the ready queue until it finishes executing. A scheduling algorithm that aims to minimize turnaround time will try to minimize the time that processes spend waiting in the ready queue.</li>
+                    <li>Waiting Time: This is the amount of time that a process spends waiting in the ready queue. A scheduling algorithm that aims to minimize waiting time will try to minimize the amount of time that processes spend waiting in the ready queue.</li>
+                    <li>Response Time: This is the amount of time it takes for a process to start responding after a request has been made. A scheduling algorithm that aims to minimize response time will try to minimize the time that processes spend waiting in the ready queue before they start executing.</li>
+                </ol>
             </div>
         </div>
         <div id="t6" class="wh">
@@ -535,7 +568,7 @@
                     </li>
                     <li>One of the most commonly used technique in CPU scheduling as a core.</li>
                     <li>It is preempitve as process are assigned CPU only for a fixed slice of time at most.</li>
-                    <li>The disadvantages of it ismore overhead of context switching.</li>
+                    <li>The disadvantages of it is more overhead of context switching.</li>
                 </ul>
             </div>
             <div class="in">
@@ -763,6 +796,12 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="content-box">
+        <p>Reference &darr;</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=R4ePnbmeTd4" target="_blank">Context switching diagram video &neArr;</a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
