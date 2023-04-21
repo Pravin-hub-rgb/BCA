@@ -367,13 +367,42 @@
                     </pre>
                 </div>
             </div>
+            <div class="in">
+                <h3>Adjoint of a matrix</h3>
+                <ul>
+                    <li>Adj(A) = transpose of co-factor matrix</li>
+                </ul>
+                <div class='code'>
+                    <pre>
+                       <code>
+
+                              _             _
+                        A =  |  3    4    5  |
+                             |  2    3    4  |
+                             |  2    5    6  |
+                              -             -
+                                                          _                _
+                        First we make co-factor matrix = |  -2    -4     4  |
+                                                         |   1     8    -7  |
+                                                         |   1    -2     1  |
+                                                          -                -
+
+                                                                         _                _
+                        Now adjoint is transpose of co-factor matrix =  |  -2     1     1  |
+                                                                        |  -4     8    -2  |
+                                                                        |   4    -7     1  |
+                                                                         -                -
+                       </code>
+                   </pre>
+                </div>
+            </div>
         </div>
         <div class="wh">
             <h2>Special types of matrices</h2>
             <div class="in">
                 <h3>Symmetric matrix: A = A<sup>T</sup></h3>
                 <ul>
-                    <li>i.e.,  a<sub>ij</sub> = a<sub>ji</sub> for all i and j</li>
+                    <li>i.e., a<sub>ij</sub> = a<sub>ji</sub> for all i and j</li>
                 </ul>
                 <div class='code'>
                     <pre>
@@ -418,7 +447,7 @@
         <div class="wh">
             <h2>Algebra of matrices</h2>
             <div class="in">
-                <h3>Transpose of a matrix : A' or A<sub>T</sub></h3>
+                <h3>Transpose of a matrix : A' or A<sup>T</sup></h3>
                 <ul>
                     <li>a<sub>ij</sub> = a<sub>ji</sub></li>
                     <li>Imp points:
@@ -436,7 +465,7 @@
                     <li>Order same &rarr; corresponding elements are also equal</li>
                 </ul>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                          _      _       _      _
@@ -454,7 +483,7 @@
                     <li>Both matrices should be of same order.</li>
                 </ul>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _           _         _           _                
@@ -473,7 +502,7 @@
             <div class="in">
                 <h3>Scalar multiplication</h3>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _           _
@@ -492,10 +521,11 @@
             <div class="in">
                 <h3>Matrix multiplication</h3>
                 <ul>
-                    <li>Note: Two matrix can only be multiplied when total number of columns of 1<sub>st</sub> matrix = total number of rows of 2<sub>nd</sub> matrix.</li>
+                    <li>Note: Two matrix can only be multiplied when total number of columns of 1<sub>st</sub> matrix =
+                        total number of rows of 2<sub>nd</sub> matrix.</li>
                 </ul>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                         A mxn    B nxp
@@ -505,7 +535,7 @@
                    </pre>
                 </div>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _      _                _      _
@@ -536,7 +566,7 @@
 
                         </code>
                     </pre>
-                 </div>
+                </div>
             </div>
         </div>
         <div class="wh">
@@ -551,7 +581,7 @@
                 <h3>Questions</h3>
                 <p>Find the rank of following matrices:</p>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _                   _
@@ -563,7 +593,7 @@
                    </pre>
                 </div>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _                  _
@@ -575,7 +605,7 @@
                    </pre>
                 </div>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _                     _
@@ -587,7 +617,7 @@
                    </pre>
                 </div>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _                    _
@@ -600,7 +630,7 @@
                    </pre>
                 </div>
                 <div class='code'>
-                   <pre>
+                    <pre>
                        <code>
                        
                              _               _
@@ -617,15 +647,16 @@
             <h2>Inverse of a matrix <br>(using elementary transformation)</h2>
             <ul>
                 <li>Let A be any non-singular matrix then <b>A = I.A</b></li>
-                <li>Applying suitable elementary row transformations to A on he LHS and I on the RHS, A reduces to I and I reduces to any matrix (say B) <br><b>I = B.A <br>A<sup>-1</sup> = B</b></li>
+                <li>Applying suitable elementary row transformations to A on he LHS and I on the RHS, A reduces to I and
+                    I reduces to any matrix (say B) <br><b>I = B.A <br>A<sup>-1</sup> = B</b></li>
             </ul>
             <img src="../../images/mat3.svg" alt="" class="wb">
             <p>Question &darr;</p>
             <div class='code'>
-               <pre>
+                <pre>
                    <code>
                    
-                    Find the inverse of a matrix by elementary transformations.
+                    Find the inverse of a matrix by elementary transformation.
 
                          _             _
                     A = |  2    3    4  |
@@ -636,6 +667,289 @@
                </pre>
             </div>
         </div>
+        <div class="wh">
+            <h2>Solution of Non-Homogenous linear equations</h2>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                   Consider a system of  non-homogenous system of linear equations in 'n' unknowns (x1, x2, x3, ... , xn) is represented by
+
+                    a11 x1 + a12 x2 + ... + a1n xn = b1
+                    a21 x1 + a22 x2 + ... + a2n xn = b2
+                      .         .              .      .
+                      .         .              .      .
+                      .         .              .      .
+                    an1 x1 + am2 x2 + ... + ann xn = bn
+
+                    In matrix form, we can write this system of equations as 
+                               AX = B, where 
+                          _                                               _
+                     A = |  a11    a12    a13    ...    ...    ...    a1n  |
+                         |  a21    a22    a23    ...    ...    ...    a2n  |
+                         |  ...    ...    ...    ...    ...    ...    ...  |
+                         |  ...    ...    ...    ...    ...    ...    ...  |
+                         |  an1    an2    an3    ...    ...    ...    ann  | nxn
+                          -                                               -
+                          _    _
+                     X = |  x1  |
+                         |  x2  | 
+                         |   .  | 
+                         |   .  | 
+                         |  xn  | nx1
+                          -    -
+                          
+                          _    _
+                     B = |  b1  |
+                         |  b2  | 
+                         |   .  | 
+                         |   .  | 
+                         |  bn  | nx1
+                          -    -
+                    </code>
+               </pre>
+            </div>
+            <p>Conditions for consistency or inconsistency:
+            <ol>
+                <li>If |A| &NotEqual; 0, then the system of equations is consistent and has unique solution X =
+                    A<sup>-1</sup>B.</li>
+                <li>If |A| = 0 and Adj(A) B = 0, then the system is consistent and has infinitely many solutions.</li>
+                <li>If |A| = 0 and Adj(A) B = &NotEqual; 0, then the system is inconsistent.</li>
+            </ol>
+            </p>
+            <p>Questions:
+            <ol>
+                <li>Solve the following system of equations, using matrix method: <br>x + 2y + z = 7, x + 3z = 11, 2x -
+                    3y = 1</li>
+                <li>Solve the following system of equations, using matrix method: <br>x + y + z = 6, x - y + z = 2, 2x +
+                    y - z = 1</li>
+            </ol>
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Eigen values</h2>
+            <ul>
+                <li>A.K.A proper values, latent values, characteristic values and spectral values.</li>
+                <li>Let A = [aij]nxn be a square matrix of order n over the field F. An element &lambda; in F is called
+                    an Eigen values of A is |A - &lambda;I| = 0 where, I is the unit matrix of order n.</li>
+            </ul>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                   Procedure:
+                            _             _
+                   let A = |  2    2    1  |
+                           |  1    3    1  |
+                           |  1    2    2  |
+                            -             -
+
+
+                    characteristic matrix 
+                                 _             _                 _             _         _              _
+                     [A - &lambda;I] = |  2    2    1  |               |  1    0    0  |       |  2-&lambda;   2    1  |
+                                |  1    3    1  |       -     &lambda; |  0    1    0  |   =   |  1    3-&lambda;   1  |
+                                |  1    2    2  |               |  0    0    1  |       |  1    2    2-&lambda; |
+                                 -             -                 -             -         -              -
+
+
+                    characteristic polynomial
+                    |A - &lambda;I|  = |  2-&lambda;   2    1  |
+                                |  1    3-&lambda;   1  |
+                                |  1    2    2-&lambda; |
+
+
+                    characteristic equation 
+                    |A - &lambda;I| = 0
+                    -&lambda;^3 + 7&lambda;^2 - 11&lambda; + 5 = 0
+                    &lambda;^3 - 7&lambda;^2 + 11&lambda; - 5 = 0
+                    characteristics values 
+                     &lambda; = 1, 1, 5
+                   </code>
+               </pre>
+            </div>
+            <div class="in">
+                <h3>Important points on Eigen values: (shortcuts)</h3>
+                <ol>
+                    <li>The characteristics equation of the matrix A of order 2 can be obtained from
+                        &lambda;<sup>2</sup> - S1&lambda; + S2 = 0 <br>Where S1 = sum of principal diagonal elements
+                        (trace) <br>S2 = determinant A
+                        <br>
+                        <div class='code'>
+                            <pre>
+                           <code>
+                           
+                                          _        _
+                                Example  |  3    2  | 
+                                         | -1    0  |
+                                          -        -
+                                S1 = 3 + 0
+                                S2 = |   3    2  |    =   0 - (-1*2) = 2
+                                     |  -1    0  |
+
+                                characteristic equation = &lambda;<sup>2</sup> - 3&lambda; + 2 = 0
+                           </code>
+                       </pre>
+                        </div>
+                    </li>
+                    <li>The characteristics equation of the matrix A of order 3 can be obtained from
+                        &lambda;<sup>3</sup> - S1^2&lambda; + S2&lambda; - S3 = 0 <br>Where S1 = sum of principal
+                        diagonal elements
+                        (trace) <br>S2 = sum of minors of principal diagonal elements <br> S3 = |A|
+                        <br>
+                        <div class='code'>
+                            <pre>
+                           <code>
+
+                                          _             _
+                                Example  |  0    1    0  | 
+                                         |  0    0    1  |
+                                         |  4  -17    8  |
+                                          -             -
+                                S1 = 0 + 0 + 8 = 8
+
+                                S2 = |   0    1  |   +   |  0    0  |  +  |  0    1  |    = 17 + 0 + 0 = 17
+                                     | -17    8  |       |  4    8  |     |  0    0  |
+
+                                S3 = -4
+
+                                characteristic equation = &lambda;^3 - 8&lambda;^2 + 17&lambda; + 4 = 0
+                           </code>
+                       </pre>
+                        </div>
+                    </li>
+                    <li>The sum of Eigen values of a matrix is the sum of its principal diagonal elements (or trace of
+                        the matrix)
+                        <br>
+                        <div class='code'>
+                            <pre>
+                               <code>
+                               
+                                 _             _
+                                |  0    1    0  |
+                                |  0    0    1  |
+                                |  4   -17   8  | 3x3 
+                                 -             -
+                                 as the order 3 so here will be 3 Eigen values &lambda;1, &lambda;2, &lambda;3
+                               </code>
+                           </pre>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Questions</h3>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                       Find the characteristic values of matrix 
+                            _        _
+                       A = |  3    2  |
+                           | -1    0  |
+                            -        -
+                       </code>
+                   </pre>
+                </div>
+                <div class="code">
+                    <pre>
+                       <code>
+                       
+                       Find the characteristic values of matrix 
+                            _             _
+                       A = |  0    1    0  |
+                           |  0    0    1  |
+                           |  4  -17    8  |
+                            -             -
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Eigen Vector</h2>
+            <ul>
+                <li>Definition: Let &lambda; be an Eigen value of n square matrix A, hen a non-zero matrix X of the
+                    order
+                    nx1 (i.e. column matrix) such that (A - &lambda;I)X = 0 <br>X is called an Eigen vector of A
+                    corresponding to that Eigen value &lambda;</li>
+            </ul>
+            <div class="in">
+                <h3>Procedure of finding Eigen vectors:</h3>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        If &lambda; is an Eigen value of A then the corresponding Eigen of A will be given by a non-zero vector 
+                             _    _
+                        X = |  x1  |
+                            |  x2  | 
+                            |  .   |
+                            |  .   |
+                            |  xn  |
+                             -    -
+
+                        Satifying the equation 
+                          (A - &lambda;I)X = 0 
+                          = AX = &lambda;X (short cut trick as &lambda;I = &lambda;)
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Properties of Eigen vectors</h3>
+                <ol>
+                    <li>The given vector X of a matrix A is not unique but ratio will be same <br>
+                        <div class='code'>
+                            <pre>
+                           <code>
+                           
+                            Example 
+                                  _   _            _   _
+                            X1 = |  1  |     x2 = |  2  |
+                                 |  2  |          |  4  |
+                                  -   -            -   -
+                           </code>
+                       </pre>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Questions</h3>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        (Non-repeated Eigen values)
+                        1- Find the Eigen values and given vectors of the matrix 
+                             _             _
+                            |  3    1    4  |
+                        A = |  0    2    6  |
+                            |  0    0    5  |
+                             -             -
+                       </code>
+                   </pre>
+                </div>
+                <div class='code'>
+                    <pre>
+                       <code>
+                       
+                        (Repeated Eigen values)
+                        2- Find the Eigen values and given vectors of the matrix 
+                             _             _
+                            | -2    2   -3  |
+                        A = |  2    1   -6  |
+                            | -1   -2    0  |
+                             -             -
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Resources &darr;</p>
         <ul>
             <li><a href="https://www.youtube.com/playlist?list=PLhSp9OSVmeyIVQpCt2kwsC1dNVl1GwlVn"
                     target="_blank">Complete Playlist &neArr;</a></li>
