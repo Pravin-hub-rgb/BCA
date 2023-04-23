@@ -30,7 +30,7 @@
         <a href="#t4" class="link">Algebra of matrices</a>
         <a href="#t5" class="link">Rank of a matrix</a>
         <a href="#t6" class="link">Inverse of matrix (elementary transformation)</a>
-        <a href="#t7" class="link">Solution of non-homogenous linear equations</a>
+        <a href="#t7" class="link">Solution of non-homogeneous linear equations</a>
         <a href="#t8" class="link">Eigen values</a>
         <a href="#t9" class="link">Eigen vector</a>
         <a href="#t10" class="link">Normalized form of vector</a>
@@ -681,12 +681,12 @@
             </div>
         </div>
         <div id="t7" class="wh">
-            <h2>Solution of Non-Homogenous linear equations</h2>
+            <h2>Solution of Non-Homogeneous linear equations</h2>
             <div class='code'>
                 <pre>
                    <code>
                    
-                   Consider a system of  non-homogenous system of linear equations in 'n' unknowns (x1, x2, x3, ... , xn) is represented by
+                   Consider a system of  non-homogeneous system of linear equations in 'n' unknowns (x1, x2, x3, ... , xn) is represented by
 
                     a11 x1 + a12 x2 + ... + a1n xn = b1
                     a21 x1 + a22 x2 + ... + a2n xn = b2
@@ -737,6 +737,148 @@
                 <li>Solve the following system of equations, using matrix method: <br>x + y + z = 6, x - y + z = 2, 2x +
                     y - z = 1</li>
             </ol>
+            </p>
+            <h2>Solution of homogeneous system of linear equations</h2>
+            <ul>
+                <li>Let AX = 0 is a homogeneous system of linear equations in n variables , then <br>
+                <b>Case 1:</b> When |A| &NotEqual; 0 i.e. the cofficient matrix A is non-singular, then the system is consistent and has unique solution i.e. zero solution.
+            <br><b>Case 2:</b> When |A| = 0 i.e. the coefficient matrix A is singular, then the system is consistent and has infinitely many solutions.</li>
+            </ul>
+            <div class='code'>
+               <pre>
+                   <code>
+                   
+                    Example: Solve the following system of equations by matrix method 
+                    2x - y + z = 0, 3x + 2y - z = 0, x + 4y + 3z = 0.
+
+                    Solution: Here we can write the matrix form of the system of equations as 
+                            AX = 0, where 
+                                 _             _        _   _           _   _
+                                |  2    1    1  |      |  x  |         |  0  |
+                            A = |  3    2   -1  |, X = |  y  | and 0 = |  0  |
+                                |  1    4    3  |      |  z  |         |  0  |
+                                 -             -        -   -           -   -
+
+                            |A| = 2(6 + 4) - 1(9 + 1) + 1(12 - 2) = 20 - 10 + 10 = 20 &NotEqual; 0
+                            Thus |A| &NotEqual;, so the system of equations is consistent and has zero solution i.e. 
+                                    x = 0, y = 0, z = 0
+                   </code>
+               </pre>
+            </div>
+            <p>Applications of Determinants to solve a system of linear equations:</p>
+            <div class='code'>
+                <pre>
+                   <code>
+                   
+                   Consider a system of linear equations
+
+                    a11 x1 + a12 x2 + ... + a1n xn = b1
+                    a21 x1 + a22 x2 + ... + a2n xn = b2
+                      .         .              .      .
+                      .         .              .      .
+                      .         .              .      .
+                    an1 x1 + am2 x2 + ... + ann xn = bn
+
+                    In matrix form, we can write this system of equations as 
+                               AX = B, where 
+                          _                                               _
+                     A = |  a11    a12    a13    ...    ...    ...    a1n  |
+                         |  a21    a22    a23    ...    ...    ...    a2n  |
+                         |  ...    ...    ...    ...    ...    ...    ...  |
+                         |  ...    ...    ...    ...    ...    ...    ...  |
+                         |  an1    an2    an3    ...    ...    ...    ann  | nxn
+                          -                                               -
+                          _    _
+                     X = |  x1  |
+                         |  x2  | 
+                         |   .  | 
+                         |   .  | 
+                         |  xn  | nx1
+                          -    -
+                          
+                          _    _
+                     B = |  b1  |
+                         |  b2  | 
+                         |   .  | 
+                         |   .  | 
+                         |  bn  | nx1
+                          -    -
+                    
+                     A system of linear equations may have a unique solution or many solutions or no solutions at all.
+                      If it has a solution (whether unique or many), the system is said to be consistent.
+                      If it has no solution, it is called an inconsistent system.
+                        If B = 0 (i.e. b1 = b2 = b3 ... ... ... = bn = 0) the system is said to be homogenous other wise it is called a non-homogeneous system of equations.
+
+                    Solution of a non-homogeneous system of linear equations (ramer's rule)
+
+
+                            _                                               _
+                           |  a11    a12    a13    ...    ...    ...    a1n  |
+                    &triangle;   =  |  a21    a22    a23    ...    ...    ...    a2n  |
+                           |  ...    ...    ...    ...    ...    ...    ...  |
+                           |  ...    ...    ...    ...    ...    ...    ...  |
+                           |  an1    an2    an3    ...    ...    ...    ann  |
+                            -                                               -
+
+                             _                                               _
+                            |  b1     a12    a13    ...    ...    ...    a1n  |
+                    &triangle;1   =  |  b2     a22    a23    ...    ...    ...    a2n  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  bn     an2    an3    ...    ...    ...    ann  |
+                             -                                               -
+
+                             _                                               _
+                            |  a11     b1    a13    ...    ...    ...    a1n  |
+                    &triangle;2   =  |  a21     b2    a23    ...    ...    ...    a2n  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  an1     bn    an3    ...    ...    ...    ann  |
+                             -                                               -
+
+                             _                                               _
+                            |  a11     a12    b1    ...    ...    ...    a1n  |
+                    &triangle;3   =  |  a21     a22    b2    ...    ...    ...    a2n  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  ...    ...    ...    ...    ...    ...    ...  |
+                            |  an1     an2    bn    ...    ...    ...    ann  |
+                             -                                               -
+
+                             _                                              _
+                            |  a11    a12    a13    ...    ...    ...    b1  |
+                    &triangle;n   =  |  a21    a22    a23    ...    ...    ...    b2  |
+                            |  ...    ...    ...    ...    ...    ...    ... |
+                            |  ...    ...    ...    ...    ...    ...    ... |
+                            |  an1    an2    an3    ...    ...    ...    bn  |
+                             -                                              -
+
+                        x1 = &triangle;1/&triangle;, x2 = &triangle;2/&triangle;, x3 = &triangle;3/&triangle;, ... ... ... and xn = &triangle;n/&triangle;,
+
+                        The determinants &triangle;1, &triangle;2, &triangle;3, ... ... &triangle;n are obtained by replacing 1st, 2nd, 3rd, ..., nth column in &triangle; by 
+                        the column of the right hand side of the given equations i.e. B =  -    - 
+                                                                                          |  b1  |
+                                                                                          |  b2  |
+                                                                                          |  .   |
+                                                                                          |  .   |
+                                                                                          |  bn  |
+                                                                                           -    -
+
+                    </code>
+               </pre>
+            </div>
+            <p>Conditions of consistency:</p>
+            <ul>
+                <li>Case 1 : If &triangle; = 0 and one of &triangle;1, &triangle;2, &triangle;3, ..., ... &triangle;n is non-zero, the system of equations is inconsistent.</li>
+                <li>Case 2: If &triangle; = 0 and &triangle;1 = &triangle;2 = &triangle;3 = ... = &triangle;n = 0, then the system of equations may or may not be consistent. However, it is consistent, and then it has infinitely many solutions.</li>
+                <li>Case 3: If &triangle; &NotEqual; -, then the given system of equations is consitent and has a unique solution given by 
+                    <br> x1 = &triangle;1/&triangle;, x2 &triangle;2/&triangle;1, x3 = &triangle;3/&triangle;, ... ... ... and xn = &triangle;n/&triangle;1.
+                    <br>x1 = &triangle;1/&triangle;
+                </li>
+            </ul>
+            <p>Questions:
+                <ul>
+                    <li>Solve by Cramer's rule 5x - 7y + z = 11, 6x - 8y - z = 15 and 3x + 2y - 6z = 7.</li>
+                </ul>
             </p>
         </div>
         <div id="t8" class="wh">
