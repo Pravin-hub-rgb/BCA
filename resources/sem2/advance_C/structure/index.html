@@ -18,6 +18,8 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -67,20 +69,17 @@
         </ul>
         <div id="t1" class="wh">
             <h2>Definition</h2>
-            <div class='code'>
                 <pre>
                    <code>
-                   
-                    struct tagname{
-                        datatype member1;
-                        datatype member2;
-                        ...
-                        ...
-                        datatype memberN;
-                    };
+struct tagname{
+    datatype member1;
+    datatype member2;
+    ...
+    ...
+    datatype memberN;
+};
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>Here <b><i>struct</i></b> is keyword, which tells the compiler that a structure is being defined.
                 </li>
@@ -88,19 +87,16 @@
                     braces.</li>
             </ul>
             <p>Example &darr;</p>
-            <div class='code'>
                 <pre>
                    <code>
-                   
-                    struct student
-                    {
-                        char name[20];
-                        int rollno;
-                        float marks;
-                    }
+struct student
+{
+    char name[20];
+    int rollno;
+    float marks;
+}
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t2" class="wh">
             <h2>Declaring Structure Variables</h2>
@@ -115,37 +111,31 @@
             </ul>
             <div class="in">
                 <h3>With structure definition</h3>
-                <div class='code'>
                     <pre>
-                       <code>
-                       
-                        struct student
-                        {
-                            char name[20];
-                            int rollno;
-                            float marks;
-                        } stu1, stu2, stu3;
+                       <code>    
+struct student
+{
+    char name[20];
+    int rollno;
+    float marks;
+} stu1, stu2, stu3;
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>Here stu1, stu2 and stu3 are variables of type <b><i>struct student.</i></b></li>
                     <li>When we declare a variable while defining the structure template, the tagname is optional. So we
                         can also declare them as &darr;</li>
                 </ul>
-                <div class='code'>
                     <pre>
-                       <code>
-                       
-                        struct 
-                        {
-                            char name[20];
-                            int rollno;
-                            float marks;
-                        } stu1, stu2, stu3;
+                       <code>    
+struct 
+{
+    char name[20];
+    int rollno;
+    float marks;
+} stu1, stu2, stu3;
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>If we declare variables in this way, then we'll not be able to declare other variables of this
                         structure type anywhere else in the program nor can we send these structure variables to
@@ -154,126 +144,111 @@
             </div>
             <div class="in">
                 <h3>Using structure tag</h3>
-                <div class='code'>
                     <pre>
-                       <code>
-                       
-                        struct student 
-                        {
-                            char name[20];
-                            int rollno;
-                            float marks;
-                        };
+                       <code>    
+struct student 
+{
+    char name[20];
+    int rollno;
+    float marks;
+};
 
-                        struct student stu1, stu2;
-                        struct student stu3;
+struct student stu1, stu2;
+struct student stu3;
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div id="t3" class="wh">
             <h2>Initialization of structure variables</h2>
             <div class="in">
                 <h3>Compile time initialization</h3>
-                <div class='code'>
-                    <div class='dotc'></div>
                     <pre>
-                       <code>
-                       
-                        #include&lt;stdio.h>
-                        #include&lt;string.h>
+                        <code class="language-c">
+#include&lt;stdio.h>
+#include&lt;string.h>
 
-                        struct student
-                        {
-                            char name[20];
-                            int rollno;
-                            float marks;
-                        };
+struct student
+{
+    char name[20];
+    int rollno;
+    float marks;
+};
 
-                        int main()
-                        {
-                            struct student s1 = {"Harry", 23, 45};
-                            struct student s2;
-                            // s2.name = "Jerry"; // This is invalid syntax 
-                            strycpy(s2.name, "Jerry"); // This is correct 
-                            //  when working with a struct that contains a character array as a member, you cannot use the array initialization syntax to initialize the member directly.
-                            // Instead, you need to copy the value of the string literal to the member using a function like strcpy().
-                            s2.rollno = 23;
-                            s2.marks = 44;
-                            return 0;
-                        }
+int main()
+{
+    struct student s1 = {"Harry", 23, 45};
+    struct student s2;
+    // s2.name = "Jerry"; // This is invalid syntax 
+    strycpy(s2.name, "Jerry"); // This is correct 
+    //  when working with a struct that contains a character array as a member, you cannot use the array initialization syntax to initialize the member directly.
+    // Instead, you need to copy the value of the string literal to the member using a function like strcpy().
+    s2.rollno = 23;
+    s2.marks = 44;
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
             <div class="in">
                 <h3>Runtime initialization</h3>
-                <div class='code'>
-                    <div class='dotc'></div>
                     <pre>
-                       <code>
-                       
-                        #include&lt;stdio.h>
+                       <code>    
+#include&lt;stdio.h>
 
-                        struct student
-                        {
-                            char name[20];
-                            int rollno;
-                            float marks;
-                        };
+struct student
+{
+    char name[20];
+    int rollno;
+    float marks;
+};
 
-                        int main()
-                        {
-                            struct student s1;
-                            printf("Enter name of student : ");
-                            scanf("%s", s1.name);
-                            printf("Enter roll number of student : ");
-                            scanf("%d", &s1.rollno);
-                            printf("Enter marks of student : ");
-                            scanf("%f", &s1.marks);
-                            return 0;
-                        }
+int main()
+{
+    struct student s1;
+    printf("Enter name of student : ");
+    scanf("%s", s1.name);
+    printf("Enter roll number of student : ");
+    scanf("%d", &s1.rollno);
+    printf("Enter marks of student : ");
+    scanf("%f", &s1.marks);
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div id="t4" class="wh">
             <h2>Accessing structure member</h2>
-            <div class='code'>
-                <div class='dotc'></div>
                 <pre>
-                    <code>
-                    
-                     #include&lt;stdio.h>
+                    <code> 
+#include&lt;stdio.h>
 
-                     struct student
-                     {
-                         char name[20];
-                         int rollno;
-                         float marks;
-                     };
+struct student
+{
+    char name[20];
+    int rollno;
+    float marks;
+};
 
-                     int main()
-                     {
-                         struct student s1;
-                         printf("Enter name of student : ");
-                         scanf("%s", s1.name);
-                         printf("Enter roll number of student : ");
-                         scanf("%d", &s1.rollno);
-                         printf("Enter marks of student : ");
-                         scanf("%f", &s1.marks);
+int main()
+{
+    struct student s1;
+    printf("Enter name of student : ");
+    scanf("%s", s1.name);
+    printf("Enter roll number of student : ");
+    scanf("%d", &s1.rollno);
+    printf("Enter marks of student : ");
+    scanf("%f", &s1.marks);
 
-                         printf("Enter name of student : %s", s1.name);
-                         printf("Enter roll number of student : %d", s1.rollno);
-                         printf("Enter marks of student : %f", s1.marks);
+    printf("Enter name of student : %s", s1.name);
+    printf("Enter roll number of student : %d", s1.rollno);
+    printf("Enter marks of student : %f", s1.marks);
 
-                         return 0;
-                     }
+    return 0;
+}
                     </code>
                 </pre>
-            </div>
             <ul>
                 <li>We use dot operator to access member of structure.</li>
             </ul>
@@ -285,9 +260,8 @@
                 <li>If person1 and person2 belong to the same structure, then the following statements are valid.
                     <pre>
                         <code>
-
-                            person1 = person2;
-                            person2 = person1;
+person1 = person2;
+person2 = person1;
                         </code>
                     </pre>
                 </li>
@@ -295,98 +269,84 @@
                     may do so by comparing members individually.
                     <pre>
                         <code>
-
-                            person1 == person2 // not valid 
-                            person1 != person2 // not valid 
+person1 == person2 // not valid 
+person1 != person2 // not valid 
                         </code>
                     </pre>
                 </li>
             </ul>
             <p>Program for comparision of structure variables &darr;</p>
-            <div class='code'>
-                <div class='dotc'></div>
                 <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
-                        struct class
-                        {
-                            int no;
-                            char name[20];
-                            float marks;
-                        };
-                        
-                        int main()
-                        {
-                            int x;
-                            struct class stu1 = {11, "Ron", 72.50};
-                            struct class stu2 = {11, "Jerry", 70.50};
-                            struct class stu3;
-                            stu3 = stu2;
-                            x = ((stu3.no == stu2.no) && (stu3.marks == stu2.marks)) ? 1 : 0;
-                            if (x == 1)
-                            {
-                                printf("\n student 2 and student 3 are same \n");
-                                printf("%d\t%s\t%f", stu3.no, stu3.name, stu3.marks);
-                            }
-                            else
-                            {
-                                printf("\n student 2 and student 3 are different");
-                            }
-                            return 0;
-                        }
-                   </code>
-               </pre>
-            </div>
-            <p>Output &darr;</p>
-            <div class='code'>
-                <pre>
-                   <code>
-                   
-                    student 2 and student 3 are same 
-                    11      Jerry   70.500000
-                   </code>
-               </pre>
-            </div>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
-                   <code>
-                   
-                        #include &lt;stdio.h>
-                        #include &lt;string.h>
-                        
-                        struct person {
-                            char name[50];
-                            int age;
-                            float height;
-                        };
-                        
-                        int compare_persons(struct person p1, struct person p2) {
-                            if (strcmp(p1.name, p2.name) == 0 && p1.age == p2.age && p1.height == p2.height) { //strcmp returns 0 if both the input are same
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                        
-                        int main() {
-                            struct person p1 = {"John", 30, 1.75};
-                            struct person p2 = {"Mary", 25, 1.60};
-                        
-                            if (compare_persons(p1, p2)) {
-                                printf("The two persons are the same.\n");
-                            } else {
-                                printf("The two persons are different.\n");
-                            }
-                        
-                            return 0;
-                        }
-                        
-                   </code>
-               </pre>
-            </div>
+#include &lt;stdio.h>
+struct class
+{
+    int no;
+    char name[20];
+    float marks;
+};
 
+int main()
+{
+    int x;
+    struct class stu1 = {11, "Ron", 72.50};
+    struct class stu2 = {11, "Jerry", 70.50};
+    struct class stu3;
+    stu3 = stu2;
+    x = ((stu3.no == stu2.no) && (stu3.marks == stu2.marks)) ? 1 : 0;
+    if (x == 1)
+    {
+        printf("\n student 2 and student 3 are same \n");
+        printf("%d\t%s\t%f", stu3.no, stu3.name, stu3.marks);
+    }
+    else
+    {
+        printf("\n student 2 and student 3 are different");
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+            <p>Output &darr;</p>
+                <pre>
+                   <code>
+student 2 and student 3 are same 
+11      Jerry   70.500000
+                   </code>
+               </pre>
+                <pre>
+                   <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+struct person {
+    char name[50];
+    int age;
+    float height;
+};
+
+int compare_persons(struct person p1, struct person p2) {
+    if (strcmp(p1.name, p2.name) == 0 && p1.age == p2.age && p1.height == p2.height) { //strcmp returns 0 if both the input are same
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int main() {
+    struct person p1 = {"John", 30, 1.75};
+    struct person p2 = {"Mary", 25, 1.60};
+
+    if (compare_persons(p1, p2)) {
+        printf("The two persons are the same.\n");
+    } else {
+        printf("The two persons are different.\n");
+    }
+
+    return 0;
+}
+                   </code>
+               </pre>
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">Program to find greater number between two number using structure variable
@@ -394,35 +354,34 @@
                 <div class="panel">
                     <pre>
                     <code>
-                    
-                         #include &lt;stdio.h>
-                         struct number
-                         {
-                            int a, b, large;
-                         };
-                         int main()
-                         {
-                            struct number x;
-                            printf("Enter first number : ");
-                            scanf("%d", &x.a);
-                            printf("Enter second number : ");
-                            scanf("%d", &x.b);
-                            if (x.a > x.b)
-                            {
-                               x.large = x.a;
-                               printf("%d is larger number\n", x.large);
-                            }
-                            else if (x.b > x.a)
-                            {
-                               x.large = x.b;
-                               printf("%d is larger number\n", x.large);
-                            }
-                            else
-                            {
-                               printf("Both number are equal");
-                            }
-                            return 0;
-                         }
+#include &lt;stdio.h>
+struct number
+{
+int a, b, large;
+};
+int main()
+{
+struct number x;
+printf("Enter first number : ");
+scanf("%d", &x.a);
+printf("Enter second number : ");
+scanf("%d", &x.b);
+if (x.a > x.b)
+{
+    x.large = x.a;
+    printf("%d is larger number\n", x.large);
+}
+else if (x.b > x.a)
+{
+    x.large = x.b;
+    printf("%d is larger number\n", x.large);
+}
+else
+{
+    printf("Both number are equal");
+}
+return 0;
+}
                     </code>
                 </pre>
                 </div>
@@ -433,65 +392,57 @@
             <ul>
                 <li>The members of structures are stored in consecutive memory locations.</li>
             </ul>
-            <div class='code'>
-                <div class='dotc'></div>
                 <pre>
                    <code>
-                   
-                    // Program to show that members of structure are stored in consecutive memory locations 
-                    #include&lt;stdio.h>
-                    int main()
-                    {
-                        struct student
-                        {
-                            char name[5];
-                            int roll;
-                            float marks;
-                        }stu;
-                        printf("Address of name = %u\n", stu.name);
-                        printf("Address of roll = %u\n", &stu.roll);
-                        printf("Address of marks = %u\n", &stu.marks);
-                    
-                        /*
-                            Address of name = 3192890648 // 8 
-                            Address of roll = 3192890656 // 4
-                            Address of marks = 3192890660 // 4
-                        */
-                        return 0;
-                    }
+// Program to show that members of structure are stored in consecutive memory locations 
+#include&lt;stdio.h>
+int main()
+{
+    struct student
+    {
+        char name[5];
+        int roll;
+        float marks;
+    }stu;
+    printf("Address of name = %u\n", stu.name);
+    printf("Address of roll = %u\n", &stu.roll);
+    printf("Address of marks = %u\n", &stu.marks);
+
+    /*
+        Address of name = 3192890648 // 8 
+        Address of roll = 3192890656 // 4
+        Address of marks = 3192890660 // 4
+    */
+    return 0;
+}
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t6" class="wh">
             <h2>Arrays within structures</h2>
             <ul>
                 <li>We can have array as a member of structure.</li>
             </ul>
-            <div class='code'>
                 <pre>
                    <code>
-                   
-                   struct student
-                   {
-                        char name[20];
-                   }
+struct student
+{
+    char name[20];
+}
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>We have been already using array in structure to store name of a student.</li>
             </ul>
             <div class='code'>
                 <pre>
                    <code>
-                   
-                    struct student
-                    {
-                        char name[20];
-                        int rollno;
-                        int submarks[4];
-                    };
+struct student
+{
+    char name[20];
+    int rollno;
+    int submarks[4];
+};
                    </code>
                </pre>
             </div>
@@ -513,19 +464,16 @@
                 <li>As we can create array of int, float and char, we can also create array of structure and access it
                     using its index.</li>
             </ul>
-            <div class='code'>
                 <pre>
                    <code>
-                   
-                    struct student
-                    {
-                        int roll;
-                        char name[50];
-                        float marks;
-                    }s[10];
+struct student
+{
+    int roll;
+    char name[50];
+    float marks;
+}s[10];
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>The above definition uses an array of objects to store the data of 10 students.</li>
                 <li><b>Structure initialize &darr;</b></li>
@@ -533,7 +481,6 @@
             <div class='code'>
                 <pre>
                    <code>
-                   
                     struct student s1 = {1, "Ajay", 75.5};
                     struct student s2[3] = {{1, "Ajay", 75.5}, {2, "Vijay", 76.5}, {3, "Akash", 65.5}};
                    </code>
@@ -548,44 +495,43 @@
                 <button class="ac">Create an array of structure to store multiple student records.</button>
                 <div class="panel">
                     <pre>
-                    <code>
-                    
-                            #include &lt;stdio.h>
-                            struct Student
-                            {
-                                char name[20];
-                                int rollNo, id;
-                                float fees;
-                            };
-                            int main()
-                            {
-                                int n;
-                                struct Student many[100];
-                                printf("Enter the number of student you want : ");
-                                scanf("%d", &n);
-                                for (int i = 0; i < n; i++)
-                                {
-                                    printf("\n||||| Enter Detail of student : %d |||||\n", i + 1);
-                                    printf("Name : ");
-                                    scanf("%s", many[i].name);
-                                    printf("\nRoll Number : ");
-                                    scanf("%d", &many[i].rollNo);
-                                    printf("\nFees value : ");
-                                    scanf("%f", &many[i].fees);
-                                    printf("\nID : ");
-                                    scanf("%d", &many[i].id);
-                                }
-                                printf("\n_-_-_-_-_-_ Displaying all the student's details _-_-_-_-_-_\n");
-                                for (int i = 0; i < n; i++)
-                                {
-                                    printf("\n\n||||| Detail of student : %d |||||\n", i + 1);
-                                    printf("Name : %s", many[i].name);
-                                    printf("\nRoll Number : %d", many[i].rollNo);
-                                    printf("\nFees value : %.1f", many[i].fees);
-                                    printf("\nID : %d", many[i].id);
-                                }
-                                return 0;
-                            }
+                    <code> 
+#include &lt;stdio.h>
+struct Student
+{
+    char name[20];
+    int rollNo, id;
+    float fees;
+};
+int main()
+{
+    int n;
+    struct Student many[100];
+    printf("Enter the number of student you want : ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("\n||||| Enter Detail of student : %d |||||\n", i + 1);
+        printf("Name : ");
+        scanf("%s", many[i].name);
+        printf("\nRoll Number : ");
+        scanf("%d", &many[i].rollNo);
+        printf("\nFees value : ");
+        scanf("%f", &many[i].fees);
+        printf("\nID : ");
+        scanf("%d", &many[i].id);
+    }
+    printf("\n_-_-_-_-_-_ Displaying all the student's details _-_-_-_-_-_\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("\n\n||||| Detail of student : %d |||||\n", i + 1);
+        printf("Name : %s", many[i].name);
+        printf("\nRoll Number : %d", many[i].rollNo);
+        printf("\nFees value : %.1f", many[i].fees);
+        printf("\nID : %d", many[i].id);
+    }
+    return 0;
+}
                     </code>
                 </pre>
                 </div>
@@ -597,66 +543,60 @@
                 <li>Structure within structure is called nesting of structures. When object of a structure is the member
                     of another structure.</li>
             </ul>
-            <div class='code'>
-                <div class='dotc'></div>
                 <pre>
                    <code>
-                   
-                    struct date
-                    {
-                        int d, m, y;
-                    };
-                    struct employee
-                    {
-                        int id;
-                        struct date dob;
-                        struct date doj;
-                    }e1;
-                    main()
-                    {
-                        printf("Enter id of a employee : ");
-                        scanf("%d", &e1.id);
-                        printf("Enter date of birth : ");
-                        scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
-                        printf("Enter date of joining : ");
-                        scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
-                    }
-                    // In this example we also define the structure date inside the definition of structure employee.
+struct date
+{
+    int d, m, y;
+};
+struct employee
+{
+    int id;
+    struct date dob;
+    struct date doj;
+}e1;
+main()
+{
+    printf("Enter id of a employee : ");
+    scanf("%d", &e1.id);
+    printf("Enter date of birth : ");
+    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+    printf("Enter date of joining : ");
+    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+}
+// In this example we also define the structure date inside the definition of structure employee.
                    </code>
                </pre>
-            </div>
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">code 2</button>
                 <div class="panel">
                     <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
+#include &lt;stdio.h>
 
-                        // Define a structure for a point in 2D space
-                        struct point {
-                            int x;
-                            int y;
-                        };
-                        
-                        // Define a structure for a rectangle
-                        struct rectangle {
-                            struct point top_left;
-                            struct point bottom_right;
-                        };
-                        
-                        int main() {
-                            // Create a rectangle with top-left corner at (1, 3) and bottom-right corner at (4, 2)
-                            struct rectangle r = {{1, 3}, {4, 2}};
-                        
-                            // Print the coordinates of the top-left and bottom-right corners of the rectangle
-                            printf("Top-left corner: (%d, %d)\n", r.top_left.x, r.top_left.y);
-                            printf("Bottom-right corner: (%d, %d)\n", r.bottom_right.x, r.bottom_right.y);
-                        
-                            return 0;
-                        }
-                        
+// Define a structure for a point in 2D space
+struct point {
+    int x;
+    int y;
+};
+
+// Define a structure for a rectangle
+struct rectangle {
+    struct point top_left;
+    struct point bottom_right;
+};
+
+int main() {
+    // Create a rectangle with top-left corner at (1, 3) and bottom-right corner at (4, 2)
+    struct rectangle r = {{1, 3}, {4, 2}};
+
+    // Print the coordinates of the top-left and bottom-right corners of the rectangle
+    printf("Top-left corner: (%d, %d)\n", r.top_left.x, r.top_left.y);
+    printf("Bottom-right corner: (%d, %d)\n", r.bottom_right.x, r.bottom_right.y);
+
+    return 0;
+}
                    </code>
                </pre>
                 </div>
@@ -667,33 +607,31 @@
                 <div class="panel">
                     <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
+#include &lt;stdio.h>
 
-                        // Define a structure for a date
-                        struct date {
-                            int day;
-                            int month;
-                            int year;
-                        };
-                        
-                        // Define a structure for a person
-                        struct person {
-                            char name[20];
-                            struct date birthday;
-                        };
-                        
-                        int main() {
-                            // Create a person with name "Alice" and birthday on December 3, 1995
-                            struct person p = {"Alice", {3, 12, 1995}};
-                        
-                            // Print the name and birthday of the person
-                            printf("Name: %s\n", p.name);
-                            printf("Birthday: %d/%d/%d\n", p.birthday.day, p.birthday.month, p.birthday.year);
-                        
-                            return 0;
-                        }
-                        
+// Define a structure for a date
+struct date {
+    int day;
+    int month;
+    int year;
+};
+
+// Define a structure for a person
+struct person {
+    char name[20];
+    struct date birthday;
+};
+
+int main() {
+    // Create a person with name "Alice" and birthday on December 3, 1995
+    struct person p = {"Alice", {3, 12, 1995}};
+
+    // Print the name and birthday of the person
+    printf("Name: %s\n", p.name);
+    printf("Birthday: %d/%d/%d\n", p.birthday.day, p.birthday.month, p.birthday.year);
+
+    return 0;
+}
                    </code>
                </pre>
                 </div>
@@ -707,53 +645,52 @@
                     these two distances.</button>
                 <div class="panel">
                     <pre>
-                    <code>
-                    
-                            #include &lt;stdio.h>
+                    <code> 
+#include &lt;stdio.h>
 
-                            struct distance
-                            {
-                                int k, m, c;
-                            };
-                            
-                            int main()
-                            {
-                                struct distance d1, d2, sum;
-                                for (int i = 1; i <= 2; i++)
-                                {
-                                    printf("Enter the %d distance in Kilometers : ", i);
-                                    scanf("%d", (i == 1) ? &d1.k : &d2.k);
-                                    printf("Enter the %d distance in meters : ", i);
-                                    scanf("%d", (i == 1) ? &d1.m : &d2.m);
-                                    printf("Enter the %d distance in centimeters : ", i);
-                                    scanf("%d", (i == 1) ? &d1.c : &d2.c);
-                                }
-                                sum.k = d1.k + d2.k;
-                                sum.m = d1.m + d2.m;
-                                sum.c = d1.c + d2.c;
-                                if (sum.c >= 100)
-                                {
-                                    int times = sum.c / 100;
-                                    for (int i = 0; i < times; i++)
-                                    {
-                                        sum.m++;
-                                    }
-                                    sum.c = sum.c % 100;
-                                }
-                                if (sum.m >= 1000)
-                                {
-                                    int times = sum.m / 1000;
-                                    for (int i = 0; i < times; i++)
-                                    {
-                                        sum.k++;
-                                    }
-                                    sum.m = sum.m % 1000;
-                                }
-                                printf("Sum distance KM : %d\n", sum.k);
-                                printf("Sum distance M : %d\n", sum.m);
-                                printf("Sum distance CM : %d\n", sum.c);
-                                return 0;
-                            }
+struct distance
+{
+    int k, m, c;
+};
+
+int main()
+{
+    struct distance d1, d2, sum;
+    for (int i = 1; i <= 2; i++)
+    {
+        printf("Enter the %d distance in Kilometers : ", i);
+        scanf("%d", (i == 1) ? &d1.k : &d2.k);
+        printf("Enter the %d distance in meters : ", i);
+        scanf("%d", (i == 1) ? &d1.m : &d2.m);
+        printf("Enter the %d distance in centimeters : ", i);
+        scanf("%d", (i == 1) ? &d1.c : &d2.c);
+    }
+    sum.k = d1.k + d2.k;
+    sum.m = d1.m + d2.m;
+    sum.c = d1.c + d2.c;
+    if (sum.c >= 100)
+    {
+        int times = sum.c / 100;
+        for (int i = 0; i < times; i++)
+        {
+            sum.m++;
+        }
+        sum.c = sum.c % 100;
+    }
+    if (sum.m >= 1000)
+    {
+        int times = sum.m / 1000;
+        for (int i = 0; i < times; i++)
+        {
+            sum.k++;
+        }
+        sum.m = sum.m % 1000;
+    }
+    printf("Sum distance KM : %d\n", sum.k);
+    printf("Sum distance M : %d\n", sum.m);
+    printf("Sum distance CM : %d\n", sum.c);
+    return 0;
+}
                     </code>
                 </pre>
                 </div>
@@ -763,73 +700,72 @@
                 <button class="ac">Menu driven program to add and subtract two complex number</button>
                 <div class="panel">
                     <pre>
-                     <code>
-                     
-                          #include &lt;stdio.h>
-                          #include &lt;stdlib.h>
-                          struct Complex
-                          {
-                              int real, imag;
-                          } no1, no2, sum;
-                          void enterComp();
-                          void display();
-                          void sumComp();
-                          void sub();
-                          int main()
-                          {
-                              int option;
-                              while (1)
-                              {
-                                  printf("\n\n\t\t\t\t  -_-_-_-_- MENU -_-_-_-_-  \n\n\t\t\t\t1. Input two numbers,\n\t\t\t\t2. Display two numbers,\n\t\t\t\t3. Addition of two complex number,\n\t\t\t\t4. Subtraction of two complex number,\n\t\t\t\t5. Exit\n\n");
-                                  printf("\t\t\t\tEnter your option : ");
-                                  scanf("%d", &option);
-                          
-                                  switch (option)
-                                  {
-                                  case 1:
-                                      enterComp();
-                                      break;
-                                  case 2:
-                                      display();
-                                      break;
-                                  case 3:
-                                      sumComp();
-                                      break;
-                                  case 4:
-                                      sub();
-                                      break;
-                                  case 5:
-                                      exit(0);
-                                  default:
-                                      printf("\n\t\t\t\t** ** Enter correct option ** **");
-                                  }
-                              }
-                              return 0;
-                          }
-                          void enterComp()
-                          {
-                              printf("\n\t\t\t\tEnter Real value of first complex number : ");
-                              scanf("%d", &no1.real);
-                              printf("\n\t\t\t\tEnter Imaginary value of first complex number : ");
-                              scanf("%d", &no1.imag);
-                              printf("\n\t\t\t\tEnter Real value of second complex number : ");
-                              scanf("%d", &no2.real);
-                              printf("\n\t\t\t\tEnter Imaginary value of second complex number : ");
-                              scanf("%d", &no2.imag);
-                          }
-                          void display()
-                          {
-                              printf("\n\t\t\t\tFirst complex number : %d + %di", no1.real, no1.imag);
-                              printf("\n\t\t\t\tSecond complex number : %d + %di", no2.real, no2.imag);
-                          }
-                          void sumComp()
-                          {
-                              printf("\n\t\t\t\tThe sum is %d + %di ", no1.real + no2.real, no1.imag + no2.imag);
-                          }
-                          void sub()
-                          {
-                              printf("\n\t\t\t\tThe subtraction is %d + %di ", no1.real - no2.real, no1.imag - no2.imag);
-                          }
+                     <code>  
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+struct Complex
+{
+    int real, imag;
+} no1, no2, sum;
+void enterComp();
+void display();
+void sumComp();
+void sub();
+int main()
+{
+    int option;
+    while (1)
+    {
+        printf("\n\n\t\t\t\t  -_-_-_-_- MENU -_-_-_-_-  \n\n\t\t\t\t1. Input two numbers,\n\t\t\t\t2. Display two numbers,\n\t\t\t\t3. Addition of two complex number,\n\t\t\t\t4. Subtraction of two complex number,\n\t\t\t\t5. Exit\n\n");
+        printf("\t\t\t\tEnter your option : ");
+        scanf("%d", &option);
+
+        switch (option)
+        {
+        case 1:
+            enterComp();
+            break;
+        case 2:
+            display();
+            break;
+        case 3:
+            sumComp();
+            break;
+        case 4:
+            sub();
+            break;
+        case 5:
+            exit(0);
+        default:
+            printf("\n\t\t\t\t** ** Enter correct option ** **");
+        }
+    }
+    return 0;
+}
+void enterComp()
+{
+    printf("\n\t\t\t\tEnter Real value of first complex number : ");
+    scanf("%d", &no1.real);
+    printf("\n\t\t\t\tEnter Imaginary value of first complex number : ");
+    scanf("%d", &no1.imag);
+    printf("\n\t\t\t\tEnter Real value of second complex number : ");
+    scanf("%d", &no2.real);
+    printf("\n\t\t\t\tEnter Imaginary value of second complex number : ");
+    scanf("%d", &no2.imag);
+}
+void display()
+{
+    printf("\n\t\t\t\tFirst complex number : %d + %di", no1.real, no1.imag);
+    printf("\n\t\t\t\tSecond complex number : %d + %di", no2.real, no2.imag);
+}
+void sumComp()
+{
+    printf("\n\t\t\t\tThe sum is %d + %di ", no1.real + no2.real, no1.imag + no2.imag);
+}
+void sub()
+{
+    printf("\n\t\t\t\tThe subtraction is %d + %di ", no1.real - no2.real, no1.imag - no2.imag);
+}
                      </code>
                  </pre>
                 </div>
@@ -841,47 +777,42 @@
                 <li>We can pass structure variable just like we pass predefined variables (int, float).</li>
                 <li>Program to demonstrate structure as a function argument. &darr;</li>
             </ul>
-            <div class='code'>
-                <div class='dotc'></div>
                 <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
+#include &lt;stdio.h>
 
-                        struct Rect
-                        {
-                            int l, b;
-                        };
-                        struct Tri
-                        {
-                            int a, b, c;
-                        };
-                        int rectPara(struct Rect);
-                        int triPara(struct Tri);
-                        int main()
-                        {
-                            struct Rect rectangle1 = {5, 10};
-                            struct Tri triangle1 = {4, 6, 10};
-                            printf("The parameter of rectangle is : %d\n", rectPara(rectangle1));
-                            printf("The parameter of triangle is : %d\n", triPara(triangle1));
-                            return 0;
-                        }
-                        int rectPara(struct Rect a)
-                        {
-                            return 2 * (a.l + a.b);
-                        }
-                        int triPara(struct Tri x)
-                        {
-                            return (x.a + x.b + x.c);
-                        }
+struct Rect
+{
+    int l, b;
+};
+struct Tri
+{
+    int a, b, c;
+};
+int rectPara(struct Rect);
+int triPara(struct Tri);
+int main()
+{
+    struct Rect rectangle1 = {5, 10};
+    struct Tri triangle1 = {4, 6, 10};
+    printf("The parameter of rectangle is : %d\n", rectPara(rectangle1));
+    printf("The parameter of triangle is : %d\n", triPara(triangle1));
+    return 0;
+}
+int rectPara(struct Rect a)
+{
+    return 2 * (a.l + a.b);
+}
+int triPara(struct Tri x)
+{
+    return (x.a + x.b + x.c);
+}
                    </code>
                </pre>
-            </div>
             <p>Output &darr;</p>
             <div class='code'>
                 <pre>
                    <code>
-                   
                     The parameter of rectangle is : 30
                     The parameter of triangle is : 20
                    </code>
@@ -900,12 +831,11 @@
                             <li>For example:
                                 <pre>
                                     <code>
-
-                                        struct abc {
-                                            char a;
-                                            char b;
-                                            int c;
-                                        } var;
+struct abc {
+    char a;
+    char b;
+    int c;
+} var;
                                     </code>
                                 </pre>
                                 When the variable of structure type will be created then the memory will be allocated.
@@ -916,18 +846,17 @@
                         <ul>
                             <li>For example:
                                 <pre>
-                                    <code>
-                                        
-                                        // let the size of int is 4 bytes and size of char is 1 byte.
+                                    <code>                     
+// let the size of int is 4 bytes and size of char is 1 byte.
 
-                                        struct abc {
-                                            char a; // 1 byte
-                                            char b; // 1 byte 
-                                            int c; // 4 bytes
-                                        } var;
+struct abc {
+    char a; // 1 byte
+    char b; // 1 byte 
+    int c; // 4 bytes
+} var;
 
-                                        // total = 6 bytes
-                                        // but this is wrong 
+// total = 6 bytes
+// but this is wrong 
                                     </code>
                                 </pre>
                             </li>
@@ -949,52 +878,44 @@
                         memory accesses needed to access the structure members.</li>
                 </ul>
                 <img src="../../images/padding.svg" alt="" class="wb">
-                <div class='code'>
-                    <div class='dotc'></div>
                     <pre>
-                       <code>
-                       
-                        #include &lt;stdio.h>
-                        struct abc {
-                            char a; // 1 byte
-                            char b; // 1 byte
-                            int c; // 4 bytes
-                        };
+                       <code>    
+#include &lt;stdio.h>
+struct abc {
+    char a; // 1 byte
+    char b; // 1 byte
+    int c; // 4 bytes
+};
 
-                        int main()
-                        {
-                            struct abc var;
-                            printf("%d", sizeof(var));
-                            return 0;
-                        }
+int main()
+{
+    struct abc var;
+    printf("%d", sizeof(var));
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>Output of above program is <b>8</b>.</li>
                 </ul>
                 <p>But what happens if we change the order of members? Does it affects the size?</p>
-                <div class='code'>
-                    <div class='dotc'></div>
                     <pre>
-                        <code>
-                        
-                         #include &lt;stdio.h>
-                         struct abc {
-                             char a; // 1 byte
-                             int b; // 4 bytes
-                             char c; // 1 byte
-                         };
- 
-                         int main()
-                         {
-                             struct abc var;
-                             printf("%d", sizeof(var));
-                             return 0;
-                         }
+                        <code>     
+#include &lt;stdio.h>
+struct abc {
+    char a; // 1 byte
+    int b; // 4 bytes
+    char c; // 1 byte
+};
+
+int main()
+{
+    struct abc var;
+    printf("%d", sizeof(var));
+    return 0;
+}
                         </code>
                     </pre>
-                </div>
                 <ul>
                     <li>Now the output is <b>12</b>.</li>
                 </ul>
@@ -1011,28 +932,24 @@
                         critical.</li>
                     <li>We can avoid the wasatage of memory by simply writing <b>#pragma pack(1)</b></li>
                 </ul>
-                <div class='code'>
-                    <div class='dotc'></div>
                     <pre>
-                       <code>
-                       
-                        #include &lt;stdio.h>
-                        #pragma pack(1)
+                       <code>    
+#include &lt;stdio.h>
+#pragma pack(1)
 
-                        struct abc{
-                            char a;
-                            int b;
-                            char c;
-                        } var;
+struct abc{
+    char a;
+    int b;
+    char c;
+} var;
 
-                        int main()
-                        {
-                            printf("%d", sizeof(var)); // 6
-                            return 0;
-                        }
+int main()
+{
+    printf("%d", sizeof(var)); // 6
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>#pragma is a special purpose directive used to turn on or off certain features.</li>
                 </ul>
@@ -1054,7 +971,6 @@
             <div class='code'>
                 <pre>
                    <code>
-                   
                     typedef existing_data_type new_data_type_name;
                    </code>
                </pre>
@@ -1067,7 +983,6 @@
             <div class='code'>
                 <pre>
                    <code>
-                   
                     typedef int my_integer;
                    </code>
                </pre>
@@ -1080,39 +995,36 @@
             </ul>
             <div class="in">
                 <h3>Use of typedef in structures</h3>
-                <div class='code'>
                     <pre>
-                       <code>
-                       
-                        // structure without using typedef 
-                        struct car {
-                            char engine[50];
-                            char fuel_type[10];
-                            int fuel_tank_cap;
-                            int seating_cap;
-                            float city_mileage;
-                        };
-                        int main()
-                        {
-                            struct car c1;
-                        }
+                       <code>    
+// structure without using typedef 
+struct car {
+    char engine[50];
+    char fuel_type[10];
+    int fuel_tank_cap;
+    int seating_cap;
+    float city_mileage;
+};
+int main()
+{
+    struct car c1;
+}
 
-                        // structure with using typedef 
-                        typedef struct {
-                            char engine[50];
-                            char fuel_type[10];
-                            int fuel_tank_cap;
-                            int seating_cap;
-                            float city_mileage;
-                        }car;
+// structure with using typedef 
+typedef struct {
+    char engine[50];
+    char fuel_type[10];
+    int fuel_tank_cap;
+    int seating_cap;
+    float city_mileage;
+}car;
 
-                        int main()
-                        {
-                            car c1;
-                        }
+int main()
+{
+    car c1;
+}
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div id="t13" class="wh">
@@ -1125,55 +1037,53 @@
                 <div class="panel">
                     <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
-                        #include &lt;string.h>
-                        
-                        #define MAX_STUDENTS 500
-                        
-                        // Define a structure to store student details
-                        struct Student {
-                            int roll_number;
-                            char name[50];
-                            char department[50];
-                            char course[50];
-                            int year_of_joining;
-                        };
-                        
-                        int main() {
-                            // Declare an array of students
-                            struct Student students[MAX_STUDENTS];
-                            
-                            // Get input for each student
-                            int num_students;
-                            printf("Enter the number of students: ");
-                            scanf("%d", &num_students);
-                            for (int i = 0; i < num_students; i++) {
-                                printf("Enter details for student %d:\n", i + 1);
-                                printf("Roll Number: ");
-                                scanf("%d", &students[i].roll_number);
-                                printf("Name: ");
-                                scanf("%s", students[i].name);
-                                printf("Department: ");
-                                scanf("%s", students[i].department);
-                                printf("Course: ");
-                                scanf("%s", students[i].course);
-                                printf("Year of Joining: ");
-                                scanf("%d", &students[i].year_of_joining);
-                            }
-                            
-                            // Print out the details of all the students
-                            printf("Details of all students:\n");
-                            for (int i = 0; i < num_students; i++) {
-                                printf("Roll Number: %d\n", students[i].roll_number);
-                                printf("Name: %s\n", students[i].name);
-                                printf("Department: %s\n", students[i].department);
-                                printf("Course: %s\n", students[i].course);
-                                printf("Year of Joining: %d\n", students[i].year_of_joining);
-                            }
-                            
-                            return 0;
-                        }                        
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+#define MAX_STUDENTS 500
+
+// Define a structure to store student details
+struct Student {
+    int roll_number;
+    char name[50];
+    char department[50];
+    char course[50];
+    int year_of_joining;
+};
+
+int main() {
+    // Declare an array of students
+    struct Student students[MAX_STUDENTS];
+    
+    // Get input for each student
+    int num_students;
+    printf("Enter the number of students: ");
+    scanf("%d", &num_students);
+    for (int i = 0; i < num_students; i++) {
+        printf("Enter details for student %d:\n", i + 1);
+        printf("Roll Number: ");
+        scanf("%d", &students[i].roll_number);
+        printf("Name: ");
+        scanf("%s", students[i].name);
+        printf("Department: ");
+        scanf("%s", students[i].department);
+        printf("Course: ");
+        scanf("%s", students[i].course);
+        printf("Year of Joining: ");
+        scanf("%d", &students[i].year_of_joining);
+    }
+    
+    // Print out the details of all the students
+    printf("Details of all students:\n");
+    for (int i = 0; i < num_students; i++) {
+        printf("Roll Number: %d\n", students[i].roll_number);
+        printf("Name: %s\n", students[i].name);
+        printf("Department: %s\n", students[i].department);
+        printf("Course: %s\n", students[i].course);
+        printf("Year of Joining: %d\n", students[i].year_of_joining);
+    }
+    return 0;
+}                        
                    </code>
                </pre>
                 </div>
@@ -1188,60 +1098,59 @@
                 <div class="panel">
                 <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
+#include &lt;stdio.h>
 
-                        struct Date
-                        {
-                            int day;
-                            int month;
-                            int year;
-                        };
-                        
-                        struct Student
-                        {
-                            int rollNumber;
-                            char name[50];
-                            char department[20];
-                            char course[20];
-                            struct Date yearOfJoining;
-                        };
-                        
-                        int main()
-                        {
-                            struct Student students[50];
-                            int i;
-                        
-                            // Input data for all students
-                            for (i = 0; i < 50; i++)
-                            {
-                                printf("Enter Roll Number for Student %d: ", i+1);
-                                scanf("%d", &students[i].rollNumber);
-                        
-                                printf("Enter Name for Student %d: ", i+1);
-                                scanf("%s", students[i].name);
-                        
-                                printf("Enter Department for Student %d: ", i+1);
-                                scanf("%s", students[i].department);
-                        
-                                printf("Enter Course for Student %d: ", i+1);
-                                scanf("%s", students[i].course);
-                        
-                                printf("Enter Year of Joining for Student %d (dd/mm/yyyy): ", i+1);
-                                scanf("%d/%d/%d", &students[i].yearOfJoining.day, &students[i].yearOfJoining.month, &students[i].yearOfJoining.year);
-                        
-                                printf("\n");
-                            }
-                        
-                            // Print all records
-                            printf("Roll Number\tName\tDepartment\tCourse\tYear of Joining\n");
-                            for (i = 0; i < 50; i++)
-                            {
-                                printf("%d\t\t%s\t%s\t\t%s\t%d/%d/%d\n", students[i].rollNumber, students[i].name, students[i].department, students[i].course, students[i].yearOfJoining.day, students[i].yearOfJoining.month, students[i].yearOfJoining.year);
-                            }
-                        
-                            return 0;
-                        }                           
+struct Date
+{
+    int day;
+    int month;
+    int year;
+};
+
+struct Student
+{
+    int rollNumber;
+    char name[50];
+    char department[20];
+    char course[20];
+    struct Date yearOfJoining;
+};
+
+int main()
+{
+    struct Student students[50];
+    int i;
+
+    // Input data for all students
+    for (i = 0; i < 50; i++)
+    {
+        printf("Enter Roll Number for Student %d: ", i+1);
+        scanf("%d", &students[i].rollNumber);
+
+        printf("Enter Name for Student %d: ", i+1);
+        scanf("%s", students[i].name);
+
+        printf("Enter Department for Student %d: ", i+1);
+        scanf("%s", students[i].department);
+
+        printf("Enter Course for Student %d: ", i+1);
+        scanf("%s", students[i].course);
+
+        printf("Enter Year of Joining for Student %d (dd/mm/yyyy): ", i+1);
+        scanf("%d/%d/%d", &students[i].yearOfJoining.day, &students[i].yearOfJoining.month, &students[i].yearOfJoining.year);
+
+        printf("\n");
+    }
+
+    // Print all records
+    printf("Roll Number\tName\tDepartment\tCourse\tYear of Joining\n");
+    for (i = 0; i < 50; i++)
+    {
+        printf("%d\t\t%s\t%s\t\t%s\t%d/%d/%d\n", students[i].rollNumber, students[i].name, students[i].department, students[i].course, students[i].yearOfJoining.day, students[i].yearOfJoining.month, students[i].yearOfJoining.year);
+    }
+
+    return 0;
+}                           
                    </code>
                </pre>
             </div>
@@ -1256,6 +1165,10 @@
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
 </body>
 
 </html>
