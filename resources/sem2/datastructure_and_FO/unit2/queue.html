@@ -18,6 +18,7 @@
          color: white;
       }
    </style>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -127,93 +128,92 @@
             <div class="panel">
                <pre>
                     <code>
-
-                            #include &lt;stdio.h>
-                            #include &lt;stdlib.h>
-                            #define MAX 5
-                            int queue[MAX];
-                            int rear = -1;
-                            int front = -1;
-                            void enqueue()
-                            {
-                               if (rear == MAX - 1)
-                               {
-                                  printf("\nQueue is full");
-                               }
-                               else if (front == -1 && rear == -1)
-                               {
-                                  front = rear = 0;
-                                  printf("\nEnter the element : ");
-                                  scanf("%d", &queue[rear]);
-                               }
-                               else
-                               {
-                                  rear++;
-                                  printf("\nEnter the element : ");
-                                  scanf("%d", &queue[rear]);
-                               }
-                            }
-                            void dequeue()
-                            {
-                               if (front == -1 && rear == -1)
-                               {
-                                  printf("\nQueue is empty");
-                               }
-                               else if (front == rear)
-                               {
-                                  printf("\n%d is deleted", queue[front]);
-                                  front = rear = -1;
-                               }
-                               else
-                               {
-                                  printf("\n%d is deleted", queue[front]);
-                                  front++;
-                               }
-                            }
-                            void display()
-                            {
-                               int i;
-                               if (front == -1 && rear == -1)
-                                  printf("\nQueue is empty\n");
-                               else
-                               {
-                                  for (i = front; i <= rear; i++)
-                                  {
-                                     printf("\n%d", queue[i]);
-                                  }
-                               }
-                            }
-                            int main()
-                            {
-                               int ch;
-                               while (1)
-                               {
-                                  printf("\n------- MENU -------");
-                                  printf("\n1.Enqueue Operation\n");
-                                  printf("2.Dequeue Operation\n");
-                                  printf("3.Display the Queue\n");
-                                  printf("4.Exit\n");
-                                  printf("Enter your choice of operations : ");
-                                  scanf("%d", &ch);
-                                  switch (ch)
-                                  {
-                                  case 1:
-                                     enqueue();
-                                     break;
-                                  case 2:
-                                     dequeue();
-                                     break;
-                                  case 3:
-                                     display();
-                                     break;
-                                  case 4:
-                                     exit(0);
-                                  default:
-                                     printf("\nIncorrect choice \n");
-                                  }
-                               }
-                               return 0;
-                            }                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#define MAX 5
+int queue[MAX];
+int rear = -1;
+int front = -1;
+void enqueue()
+{
+   if (rear == MAX - 1)
+   {
+      printf("\nQueue is full");
+   }
+   else if (front == -1 && rear == -1)
+   {
+      front = rear = 0;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+   else
+   {
+      rear++;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+}
+void dequeue()
+{
+   if (front == -1 && rear == -1)
+   {
+      printf("\nQueue is empty");
+   }
+   else if (front == rear)
+   {
+      printf("\n%d is deleted", queue[front]);
+      front = rear = -1;
+   }
+   else
+   {
+      printf("\n%d is deleted", queue[front]);
+      front++;
+   }
+}
+void display()
+{
+   int i;
+   if (front == -1 && rear == -1)
+      printf("\nQueue is empty\n");
+   else
+   {
+      for (i = front; i <= rear; i++)
+      {
+         printf("\n%d", queue[i]);
+      }
+   }
+}
+int main()
+{
+   int ch;
+   while (1)
+   {
+      printf("\n------- MENU -------");
+      printf("\n1.Enqueue Operation\n");
+      printf("2.Dequeue Operation\n");
+      printf("3.Display the Queue\n");
+      printf("4.Exit\n");
+      printf("Enter your choice of operations : ");
+      scanf("%d", &ch);
+      switch (ch)
+      {
+      case 1:
+         enqueue();
+         break;
+      case 2:
+         dequeue();
+         break;
+      case 3:
+         display();
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nIncorrect choice \n");
+      }
+   }
+   return 0;
+}                            
                     </code>
                 </pre>
             </div>
@@ -242,103 +242,102 @@
             <button class="ac">Circular queue using array code</button>
             <div class="panel">
                <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            #include &lt;stdlib.h>
-                            #define MAX 5
-                            int queue[MAX];
-                            int rear = -1;
-                            int front = -1;
-                            void enqueue()
-                            {
-                               if ((rear + 1) % MAX == front)
-                               {
-                                  printf("\nQueue is full");
-                                  return;
-                               }
-                               if (front == -1 && rear == -1)
-                               {
-                                  front = rear = 0;
-                                  printf("\nEnter the element : ");
-                                  scanf("%d", &queue[rear]);
-                               }
-                               else
-                               {
-                                  rear = (rear + 1) % MAX;
-                                  printf("\nEnter the element : ");
-                                  scanf("%d", &queue[rear]);
-                               }
-                            }
-                            void dequeue()
-                            {
-                               if (front == -1 && rear == -1)
-                               {
-                                  printf("\nQueue is empty");
-                               }
-                               else if (front == rear)
-                               {
-                                  printf("\n%d is deleted", queue[front]);
-                                  front = rear = -1;
-                               }
-                               else
-                               {
-                                  printf("\n%d is deleted", queue[front]);
-                                  front = (front + 1) % MAX;
-                               }
-                            }
-                            void display()
-                            {
-                               int i;
-                               if (front == -1 && rear == -1)
-                                  printf("\nQueue is empty\n");
-                               else
-                               {
-                                  if (front <= rear)
-                                  {
-                                     for (i = front; i <= rear; i++)
-                                        printf("%d\n", queue[i]);
-                                  }
-                                  else
-                                  {
-                                     for (i = front; i < MAX; i++)
-                                        printf("%d\n", queue[i]);
-                                     for (i = 0; i <= rear; i++)
-                                        printf("%d\n", queue[i]);
-                                  }
-                               }
-                            }
-                            int main()
-                            {
-                               int ch;
-                               while (1)
-                               {
-                                  printf("\n------- MENU FOR CIRCULAR QUEUE -------");
-                                  printf("\n1.Enqueue Operation\n");
-                                  printf("2.Dequeue Operation\n");
-                                  printf("3.Display the Queue\n");
-                                  printf("4.Exit\n");
-                                  printf("Enter your choice of operations : ");
-                                  scanf("%d", &ch);
-                                  switch (ch)
-                                  {
-                                  case 1:
-                                     enqueue();
-                                     break;
-                                  case 2:
-                                     dequeue();
-                                     break;
-                                  case 3:
-                                     display();
-                                     break;
-                                  case 4:
-                                     exit(0);
-                                  default:
-                                     printf("\nIncorrect choice \n");
-                                  }
-                               }
-                               return 0;
-                            }
+                       <code>                       
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#define MAX 5
+int queue[MAX];
+int rear = -1;
+int front = -1;
+void enqueue()
+{
+   if ((rear + 1) % MAX == front)
+   {
+      printf("\nQueue is full");
+      return;
+   }
+   if (front == -1 && rear == -1)
+   {
+      front = rear = 0;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+   else
+   {
+      rear = (rear + 1) % MAX;
+      printf("\nEnter the element : ");
+      scanf("%d", &queue[rear]);
+   }
+}
+void dequeue()
+{
+   if (front == -1 && rear == -1)
+   {
+      printf("\nQueue is empty");
+   }
+   else if (front == rear)
+   {
+      printf("\n%d is deleted", queue[front]);
+      front = rear = -1;
+   }
+   else
+   {
+      printf("\n%d is deleted", queue[front]);
+      front = (front + 1) % MAX;
+   }
+}
+void display()
+{
+   int i;
+   if (front == -1 && rear == -1)
+      printf("\nQueue is empty\n");
+   else
+   {
+      if (front <= rear)
+      {
+         for (i = front; i <= rear; i++)
+            printf("%d\n", queue[i]);
+      }
+      else
+      {
+         for (i = front; i < MAX; i++)
+            printf("%d\n", queue[i]);
+         for (i = 0; i <= rear; i++)
+            printf("%d\n", queue[i]);
+      }
+   }
+}
+int main()
+{
+   int ch;
+   while (1)
+   {
+      printf("\n------- MENU FOR CIRCULAR QUEUE -------");
+      printf("\n1.Enqueue Operation\n");
+      printf("2.Dequeue Operation\n");
+      printf("3.Display the Queue\n");
+      printf("4.Exit\n");
+      printf("Enter your choice of operations : ");
+      scanf("%d", &ch);
+      switch (ch)
+      {
+      case 1:
+         enqueue();
+         break;
+      case 2:
+         dequeue();
+         break;
+      case 3:
+         display();
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nIncorrect choice \n");
+      }
+   }
+   return 0;
+}
                        </code>
                    </pre>
             </div>
@@ -387,163 +386,162 @@
             <div class="panel">
                <pre>
                   <code>
-                  
-                       #include &lt;stdio.h>
-                       #include &lt;stdlib.h>
-                       #define N 5
-                       int deque[N];
-                       int F = -1, R = -1;
-                       void display();
-                       void enqueueFront();
-                       void enqueueRear();
-                       void dequeueFront();
-                       void dequeueRear();
-                       int main()
-                       {
-                          int ch;
-                          while (1)
-                          {
-                             printf("\n------- MENU FOR DEQUE -------");
-                             printf("\n1.Enqueue Front Operation\n");
-                             printf("2.Enqueue Rear Operation\n");
-                             printf("3.Dequeue  Front Operation\n");
-                             printf("4.Dequeue  Rear Operation\n");
-                             printf("5.Display the Queue\n");
-                             printf("6.Exit\n");
-                             printf("Enter your choice of operations : ");
-                             scanf("%d", &ch);
-                             switch (ch)
-                             {
-                             case 1:
-                                enqueueFront();
-                                break;
-                             case 2:
-                                enqueueRear();
-                                break;
-                             case 3:
-                                dequeueFront();
-                                break;
-                             case 4:
-                                dequeueRear();
-                                break;
-                             case 5:
-                                display();
-                                break;
-                             case 6:
-                                exit(0);
-                             default:
-                                printf("\nIncorrect choice \n");
-                             }
-                          }
-                          return 0;
-                       }
-                       
-                       void display()
-                       {
-                          int i;
-                          if (F == -1 && R == -1)
-                             printf("\nQueue is empty\n");
-                          else
-                          {
-                             if (F <= R)
-                             {
-                                for (i = F; i <= R; i++)
-                                   printf("%d\n", deque[i]);
-                             }
-                             else
-                             {
-                                for (i = F; i < N; i++)
-                                   printf("%d\n", deque[i]);
-                                for (i = 0; i <= R; i++)
-                                   printf("%d\n", deque[i]);
-                             }
-                          }
-                       }
-                       
-                       void enqueueFront()
-                       {
-                          if ((F == 0 && R == N - 1) || (F == R + 1))
-                          {
-                             printf("\nDeque is Full\n");
-                             return;
-                          }
-                          else if (F == -1 && R == -1)
-                             F = R = 0;
-                          else if (F == 0)
-                             F = N - 1;
-                          else
-                             F--;
-                          printf("\nEnter the value you want to enter : ");
-                          scanf("%d", &deque[F]);
-                       }
-                       
-                       void enqueueRear()
-                       {
-                          if ((F == 0 && R == N - 1) || (F == R + 1))
-                          {
-                             printf("\nDeque is Full\n");
-                             return;
-                          }
-                          else if (F == -1 && R == -1)
-                             F = R = 0;
-                          else if (R == N - 1)
-                             R = 0;
-                          else
-                             R++;
-                          printf("\nEnter the value you want to enter : ");
-                          scanf("%d", &deque[R]);
-                       }
-                       
-                       void dequeueFront()
-                       {
-                          int val;
-                          if (F == -1 && R == -1)
-                          {
-                             printf("\nDeque is Empty\n");
-                             return;
-                          }
-                          else if (F == R)
-                          {
-                             val = deque[F];
-                             F = R = -1;
-                          }
-                          else if (F == N - 1)
-                          {
-                             val = deque[F];
-                             F = 0;
-                          }
-                          else
-                          {
-                             val = deque[F];
-                             F++;
-                          }
-                          printf("\n%d is deleted", val);
-                       }
-                       void dequeueRear()
-                       {
-                          int val;
-                          if (F == -1 && R == -1)
-                          {
-                             printf("\nDeque is Empty\n");
-                             return;
-                          }
-                          else if (F == R)
-                          {
-                             val = deque[R];
-                             F = R = -1;
-                          }
-                          else if (R == 0)
-                          {
-                             val = deque[R];
-                             R = N - 1;
-                          }
-                          else
-                          {
-                             val = deque[R];
-                             R--;
-                          }
-                          printf("\n%d is deleted", val);
-                       }
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#define N 5
+int deque[N];
+int F = -1, R = -1;
+void display();
+void enqueueFront();
+void enqueueRear();
+void dequeueFront();
+void dequeueRear();
+int main()
+{
+   int ch;
+   while (1)
+   {
+      printf("\n------- MENU FOR DEQUE -------");
+      printf("\n1.Enqueue Front Operation\n");
+      printf("2.Enqueue Rear Operation\n");
+      printf("3.Dequeue  Front Operation\n");
+      printf("4.Dequeue  Rear Operation\n");
+      printf("5.Display the Queue\n");
+      printf("6.Exit\n");
+      printf("Enter your choice of operations : ");
+      scanf("%d", &ch);
+      switch (ch)
+      {
+      case 1:
+         enqueueFront();
+         break;
+      case 2:
+         enqueueRear();
+         break;
+      case 3:
+         dequeueFront();
+         break;
+      case 4:
+         dequeueRear();
+         break;
+      case 5:
+         display();
+         break;
+      case 6:
+         exit(0);
+      default:
+         printf("\nIncorrect choice \n");
+      }
+   }
+   return 0;
+}
+
+void display()
+{
+   int i;
+   if (F == -1 && R == -1)
+      printf("\nQueue is empty\n");
+   else
+   {
+      if (F <= R)
+      {
+         for (i = F; i <= R; i++)
+            printf("%d\n", deque[i]);
+      }
+      else
+      {
+         for (i = F; i < N; i++)
+            printf("%d\n", deque[i]);
+         for (i = 0; i <= R; i++)
+            printf("%d\n", deque[i]);
+      }
+   }
+}
+
+void enqueueFront()
+{
+   if ((F == 0 && R == N - 1) || (F == R + 1))
+   {
+      printf("\nDeque is Full\n");
+      return;
+   }
+   else if (F == -1 && R == -1)
+      F = R = 0;
+   else if (F == 0)
+      F = N - 1;
+   else
+      F--;
+   printf("\nEnter the value you want to enter : ");
+   scanf("%d", &deque[F]);
+}
+
+void enqueueRear()
+{
+   if ((F == 0 && R == N - 1) || (F == R + 1))
+   {
+      printf("\nDeque is Full\n");
+      return;
+   }
+   else if (F == -1 && R == -1)
+      F = R = 0;
+   else if (R == N - 1)
+      R = 0;
+   else
+      R++;
+   printf("\nEnter the value you want to enter : ");
+   scanf("%d", &deque[R]);
+}
+
+void dequeueFront()
+{
+   int val;
+   if (F == -1 && R == -1)
+   {
+      printf("\nDeque is Empty\n");
+      return;
+   }
+   else if (F == R)
+   {
+      val = deque[F];
+      F = R = -1;
+   }
+   else if (F == N - 1)
+   {
+      val = deque[F];
+      F = 0;
+   }
+   else
+   {
+      val = deque[F];
+      F++;
+   }
+   printf("\n%d is deleted", val);
+}
+void dequeueRear()
+{
+   int val;
+   if (F == -1 && R == -1)
+   {
+      printf("\nDeque is Empty\n");
+      return;
+   }
+   else if (F == R)
+   {
+      val = deque[R];
+      F = R = -1;
+   }
+   else if (R == 0)
+   {
+      val = deque[R];
+      R = N - 1;
+   }
+   else
+   {
+      val = deque[R];
+      R--;
+   }
+   printf("\n%d is deleted", val);
+}
                   </code>
               </pre>
             </div>
@@ -588,107 +586,106 @@
             <button class="ac">code</button>
             <div class="panel">
                <pre>
-                  <code>
-                  
-                       #include &lt;stdio.h>
-                       #include &lt;stdlib.h>
-                       typedef struct node
-                       {
-                           int data;
-                           struct node *next;
-                       } node;
-                       node *front = NULL;
-                       node *rear = NULL;
-                       void enqueue();
-                       void dequeue();
-                       void display();
-                       
-                       int main()
-                       {
-                           int choice;
-                           while (1)
-                           {
-                               printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
-                               printf("\n1. Enqueue");
-                               printf("\n2. Dequeue");
-                               printf("\n3. DISPLAY");
-                               printf("\n4. EXIT");
-                               printf("\n Enter your choice : ");
-                               scanf("%d", &choice);
-                               switch (choice)
-                               {
-                               case 1:
-                                   enqueue();
-                                   break;
-                               case 2:
-                                   dequeue();
-                                   break;
-                               case 3:
-                                   display();
-                                   break;
-                               case 4:
-                                   exit(0);
-                               }
-                           }
-                           return 0;
-                       }
-                       
-                       void enqueue()
-                       {
-                           node *temp = (node *)malloc(sizeof(node));
-                           if (temp == NULL)
-                           {
-                               printf("\nOverflow");
-                               return;
-                           }
-                           printf("\nEnter a digit : ");
-                           scanf("%d", &temp->data);
-                           temp->next = NULL;
-                           if (front == NULL)
-                           {
-                               front = rear = temp;
-                           }
-                           else
-                           {
-                               rear->next = temp;
-                               rear = temp;
-                           }
-                       }
-                       
-                       void dequeue()
-                       {
-                           if (front == NULL)
-                           {
-                               printf("\nUnderflow");
-                               return;
-                           }
-                           node *temp = front;
-                           if (front == rear)
-                           {
-                               front = rear = NULL;
-                           }
-                           else
-                           {
-                               front = front->next;
-                           }
-                           printf("\n%d is deleted", temp->data);
-                           free(temp);
-                       }
-                       
-                       void display()
-                       {
-                           if (front == NULL)
-                           {
-                               printf("\nUnderflow");
-                               return;
-                           }
-                           node *temp = front;
-                           while (temp != NULL)
-                           {
-                               printf("%d ---> ", temp->data);
-                               temp = temp->next;
-                           }
-                       }
+                  <code>                  
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+   int data;
+   struct node *next;
+} node;
+node *front = NULL;
+node *rear = NULL;
+void enqueue();
+void dequeue();
+void display();
+
+int main()
+{
+   int choice;
+   while (1)
+   {
+         printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+         printf("\n1. Enqueue");
+         printf("\n2. Dequeue");
+         printf("\n3. DISPLAY");
+         printf("\n4. EXIT");
+         printf("\n Enter your choice : ");
+         scanf("%d", &choice);
+         switch (choice)
+         {
+         case 1:
+            enqueue();
+            break;
+         case 2:
+            dequeue();
+            break;
+         case 3:
+            display();
+            break;
+         case 4:
+            exit(0);
+         }
+   }
+   return 0;
+}
+
+void enqueue()
+{
+   node *temp = (node *)malloc(sizeof(node));
+   if (temp == NULL)
+   {
+         printf("\nOverflow");
+         return;
+   }
+   printf("\nEnter a digit : ");
+   scanf("%d", &temp->data);
+   temp->next = NULL;
+   if (front == NULL)
+   {
+         front = rear = temp;
+   }
+   else
+   {
+         rear->next = temp;
+         rear = temp;
+   }
+}
+
+void dequeue()
+{
+   if (front == NULL)
+   {
+         printf("\nUnderflow");
+         return;
+   }
+   node *temp = front;
+   if (front == rear)
+   {
+         front = rear = NULL;
+   }
+   else
+   {
+         front = front->next;
+   }
+   printf("\n%d is deleted", temp->data);
+   free(temp);
+}
+
+void display()
+{
+   if (front == NULL)
+   {
+         printf("\nUnderflow");
+         return;
+   }
+   node *temp = front;
+   while (temp != NULL)
+   {
+         printf("%d ---> ", temp->data);
+         temp = temp->next;
+   }
+}
                   </code>
               </pre>
             </div>
@@ -702,108 +699,107 @@
             <div class="panel">
                <pre>
                   <code>
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+      int data;
+      struct node *next;
+} node;
+node *front = NULL;
+node *rear = NULL;
+void enqueue();
+void dequeue();
+void display();
 
-                        #include &lt;stdio.h>
-                        #include &lt;stdlib.h>
-                        typedef struct node
-                        {
-                            int data;
-                            struct node *next;
-                        } node;
-                        node *front = NULL;
-                        node *rear = NULL;
-                        void enqueue();
-                        void dequeue();
-                        void display();
-                        
-                        int main()
-                        {
-                            int choice;
-                            while (1)
-                            {
-                                printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
-                                printf("\n1. Enqueue");
-                                printf("\n2. Dequeue");
-                                printf("\n3. DISPLAY");
-                                printf("\n4. EXIT");
-                                printf("\n Enter your choice : ");
-                                scanf("%d", &choice);
-                                switch (choice)
-                                {
-                                case 1:
-                                    enqueue();
-                                    break;
-                                case 2:
-                                    dequeue();
-                                    break;
-                                case 3:
-                                    display();
-                                    break;
-                                case 4:
-                                    exit(0);
-                                }
-                            }
-                            return 0;
-                        }
-                        
-                        void enqueue()
-                        {
-                            node *temp = (node *)malloc(sizeof(node));
-                            if (temp == NULL)
-                            {
-                                printf("\nOverflow");
-                                return;
-                            }
-                            printf("\nEnter a digit : ");
-                            scanf("%d", &temp->data);
-                            temp->next = front;
-                            if (front == NULL)
-                            {
-                                front = rear = temp;
-                            }
-                            else
-                            {
-                                rear->next = temp;
-                                rear = temp;
-                            }
-                        }
-                        
-                        void dequeue()
-                        {
-                            if (front == NULL)
-                            {
-                                printf("\nUnderflow");
-                                return;
-                            }
-                            node *temp = front;
-                            if (front == rear)
-                            {
-                                front = rear = NULL;
-                            }
-                            else
-                            {
-                                front = front->next;
-                                rear->next = front;
-                            }
-                            printf("\n%d is deleted", temp->data);
-                            free(temp);
-                        }
-                        
-                        void display()
-                        {
-                            if (front == NULL)
-                            {
-                                printf("\nUnderflow");
-                                return;
-                            }
-                            node *temp = front;
-                            while (temp->next != front)
-                            {
-                                printf("%d ---> ", temp->data);
-                                temp = temp->next;
-                            }
-                            printf("%d", temp->data);
-                        }
+int main()
+{
+      int choice;
+      while (1)
+      {
+         printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+         printf("\n1. Enqueue");
+         printf("\n2. Dequeue");
+         printf("\n3. DISPLAY");
+         printf("\n4. EXIT");
+         printf("\n Enter your choice : ");
+         scanf("%d", &choice);
+         switch (choice)
+         {
+         case 1:
+            enqueue();
+            break;
+         case 2:
+            dequeue();
+            break;
+         case 3:
+            display();
+            break;
+         case 4:
+            exit(0);
+         }
+      }
+      return 0;
+}
+
+void enqueue()
+{
+      node *temp = (node *)malloc(sizeof(node));
+      if (temp == NULL)
+      {
+         printf("\nOverflow");
+         return;
+      }
+      printf("\nEnter a digit : ");
+      scanf("%d", &temp->data);
+      temp->next = front;
+      if (front == NULL)
+      {
+         front = rear = temp;
+      }
+      else
+      {
+         rear->next = temp;
+         rear = temp;
+      }
+}
+
+void dequeue()
+{
+      if (front == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = front;
+      if (front == rear)
+      {
+         front = rear = NULL;
+      }
+      else
+      {
+         front = front->next;
+         rear->next = front;
+      }
+      printf("\n%d is deleted", temp->data);
+      free(temp);
+}
+
+void display()
+{
+      if (front == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = front;
+      while (temp->next != front)
+      {
+         printf("%d ---> ", temp->data);
+         temp = temp->next;
+      }
+      printf("%d", temp->data);
+}
                   </code>
               </pre>
             </div>
@@ -825,6 +821,7 @@
          <li><a href="https://www.geeksforgeeks.org/priority-queue-set-1-introduction/">www.geeksforgeeks.org (Priority Queue)</a></li>
       </ul>
    </div>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
    <script src="../../../../public/main.js"></script>
 </body>
 

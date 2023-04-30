@@ -18,6 +18,7 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -59,66 +60,55 @@
             <li>There is change in C++ syntax and those changes are &darr;<br>
             </li>
         </ul>
-        <div class='code'>
            <pre>
                <code>
-               
-                printf("Hello world"); // this is in C language
-                cout << "Hello world"; // this is in C++ language 
+printf("Hello world"); // this is in C language
+cout << "Hello world"; // this is in C++ language 
 
-                scanf("&d",&a); // inputing value in a variable in C language
-                cin>>a; // inputing value in a variable in C++ language
+scanf("&d",&a); // inputing value in a variable in C language
+cin>>a; // inputing value in a variable in C++ language
                </code>
            </pre>
-        </div>
         <ul>
             <li>We use &lt;iostream> header file instead of &lt;stdio.h>.</li>
         </ul>
         <div class="wh">
             <h2>Adding two numbers in C and C++ language</h2>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
-                   <code>
-                   
-                    // C 
-                    #include &lt;stdio.h>
-                    int main()
-                    {
-                        int a, b, sum = 0;
-                        printf("Enter the value of a : ");
-                        scanf("%d", &a);
-                        printf("Enter the value of b : ");
-                        scanf("%d", &b);
-                        sum = a + b;
-                        printf("The sum is : %d", sum);
-                        return 0;
-                    }
+                   <code>                  
+// C 
+#include &lt;stdio.h>
+int main()
+{
+    int a, b, sum = 0;
+    printf("Enter the value of a : ");
+    scanf("%d", &a);
+    printf("Enter the value of b : ");
+    scanf("%d", &b);
+    sum = a + b;
+    printf("The sum is : %d", sum);
+    return 0;
+}
                    </code>
                </pre>
-            </div>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
-                   <code>
-                   
-                    // C++
-                    #include &lt;iostream>
-                    using namespace std;
-                    int main()
-                    {
-                        int a, b, sum;
-                        cout << "Enter the value of a : ";
-                        cin >> a;
-                        cout << "Enter the value of b : ";
-                        cin >> b;
-                        sum = a + b;
-                        cout << "The sum is : " << sum;
-                        return 0;
-                    }
+                   <code>               
+// C++
+#include &lt;iostream>
+using namespace std;
+int main()
+{
+    int a, b, sum;
+    cout << "Enter the value of a : ";
+    cin >> a;
+    cout << "Enter the value of b : ";
+    cin >> b;
+    sum = a + b;
+    cout << "The sum is : " << sum;
+    return 0;
+}
                    </code>
                </pre>
-            </div>
             <p>The major parts of C++ include:
                 <ol>
                     <li>Basic syntax and data types: C++ has a similar syntax and data types as C, including primitive data types like integers, floats, and characters, as well as more advanced data types like arrays, structures, and classes.</li>
@@ -137,43 +127,36 @@
                 <li>the <b>endl</b> manipulator is used to insert a newline into the output stream.</li>
             </ul>
             <p>Example code which shows use of setw() and endl &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
-                   <code>
-                   
-                        #include &lt;iostream>
-                        #include &lt;iomanip>
-                        using namespace std;
-                        int main()
-                        {
-                            int num = 123;
-                        
-                            cout << "Without using setw :" << num << "\n";
-                            // Using setw() manipulator to set the width of the output field to 10
-                            cout << "With using setw :" << setw(10) << num << "\n";
-                        
-                            // Using endl manipulator to insert a newline
-                            cout << "This is on one line." << endl;
-                            cout << "This is on another line." << endl;
-                        
-                            return 0;
-                        }
+                   <code>                  
+#include &lt;iostream>
+#include &lt;iomanip>
+using namespace std;
+int main()
+{
+    int num = 123;
+
+    cout << "Without using setw :" << num << "\n";
+    // Using setw() manipulator to set the width of the output field to 10
+    cout << "With using setw :" << setw(10) << num << "\n";
+
+    // Using endl manipulator to insert a newline
+    cout << "This is on one line." << endl;
+    cout << "This is on another line." << endl;
+
+    return 0;
+}
                    </code>
                </pre>
-            </div>
             <p>Output &darr;</p>
-            <div class='code'>
                <pre>
                    <code>
-                   
-                    Without using setw :123
-                    With using setw :       123
-                    This is on one line.
-                    This is on another line.
+Without using setw :123
+With using setw :       123
+This is on one line.
+This is on another line.
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t2" class="wh">
             <h2>Scope resolution operator</h2>
@@ -183,41 +166,34 @@
             </ul>
             <div class="in">
                 <h3>Program to access the hidden value using the scope resolution (::) operator</h3>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        #include &lt;iostream>
-                        using namespace std;
+                       <code>                
+#include &lt;iostream>
+using namespace std;
 
-                        // declare global variable 
-                        int num = 50;
-                        int main()
-                        {
-                            // declare local variable
-                            int num = 100;
+// declare global variable 
+int num = 50;
+int main()
+{
+    // declare local variable
+    int num = 100;
 
-                            // print the value of the variables
-                            cout << "The value of the local variable num : " << num;
+    // print the value of the variables
+    cout << "The value of the local variable num : " << num;
 
-                            // use scope resolution operator (::) to access the global variable 
-                            cout << "\n The value of the global variable num : " << ::num;
-                            return 0;
-                        }
+    // use scope resolution operator (::) to access the global variable 
+    cout << "\n The value of the global variable num : " << ::num;
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
                 <p>Output &darr;</p>
-                <div class='code'>
                    <pre>
                        <code>
-                       
-                        The value of the local variable num : 100
-                        The value of the global variable num : 50
+The value of the local variable num : 100
+The value of the global variable num : 50
                        </code>
                    </pre>
-                </div>
             </div>
             <h3>Use of the scope resolution Operator</h3>
             <ol>
@@ -236,34 +212,27 @@
                 <li>An inline function may increase efficiency if it is small.</li>
             </ul>
             <p>Syntax &darr;</p>
-            <div class='code'>
                <pre>
-                   <code>
-                   
-                    inline return-type function-name(parameters)
-                    {
-                        // function code
-                    }
+                   <code>       
+inline return-type function-name(parameters)
+{
+    // function code
+}
                    </code>
                </pre>
-            </div>
             <p>Example &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
                    <code>
-                   
-                    #include &lt;iostream>
-                    using namespace std;
-                    inline int cube(int s) { return s * s * s; }
-                    int main()
-                    {
-                        cout << "The cube of 3 is : " << cube(3) << endl;
-                        return 0;
-                    }
+#include &lt;iostream>
+using namespace std;
+inline int cube(int s) { return s * s * s; }
+int main()
+{
+    cout << "The cube of 3 is : " << cube(3) << endl;
+    return 0;
+}
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>When inline function will not work:
                     <ul>
@@ -281,59 +250,54 @@
                 <li>Function overloading provides multiple definitions of the function by changing signature i.e. changing number of parameters, change datatype of parameters.</li>
             </ul>
             <p>Example &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
-                   <code>
-                   
-                    void area(int a);
-                    void area(float a);
-                    void area(int a, int b);
-                    void area(float a, int b);
-                    void area(int a, float b);
-                    void area(float a, float b);
-                    void area(int a, int b, int c);
+                   <code>   
+void area(int a);
+void area(float a);
+void area(int a, int b);
+void area(float a, int b);
+void area(int a, float b);
+void area(float a, float b);
+void area(int a, int b, int c);
                    </code>
                </pre>
-            </div>
             <div class='code'>
                <div class='dotc'></div>
                 <button class="ac">Program to demonstrate function overloading</button>
                 <div class="panel">
                     <pre>
                         <code>
-                        
-                                #include &lt;iostream>
-                                using namespace std;
-                                int area(int);
-                                float area(float);
-                                int area(int, int);
-                                double area(double);
-                                int main()
-                                {
-                                    cout << "Area of square is : " << area(5) << endl;
-                                    // cout << "Area of square  in floating point is : " << area(5.7) << endl; // this is not working properly
-                                    cout << "Area of square  in floating point is : " << area((float)5.7) << endl;
-                                    cout << "Area of rectangle is : " << area(5, 10) << endl;
-                                    cout << "Area of circle is : " << area(3.8) << endl;
-                                    return 0;
-                                }
-                                int area(int a)
-                                {
-                                    return a * a;
-                                }
-                                float area(float a)
-                                {
-                                    return a * a;
-                                }
-                                int area(int a, int b)
-                                {
-                                    return a * b;
-                                }
-                                double area(double a)
-                                {
-                                    return (314 * a * a) / 100;
-                                }
+#include &lt;iostream>
+using namespace std;
+int area(int);
+float area(float);
+int area(int, int);
+double area(double);
+int main()
+{
+    cout << "Area of square is : " << area(5) << endl;
+    // cout << "Area of square  in floating point is : " << area(5.7) << endl; // this is not working properly
+    cout << "Area of square  in floating point is : " << area((float)5.7) << endl;
+    cout << "Area of rectangle is : " << area(5, 10) << endl;
+    cout << "Area of circle is : " << area(3.8) << endl;
+    return 0;
+}
+int area(int a)
+{
+    return a * a;
+}
+float area(float a)
+{
+    return a * a;
+}
+int area(int a, int b)
+{
+    return a * b;
+}
+double area(double a)
+{
+    return (314 * a * a) / 100;
+}
                         </code>
                     </pre>
                 </div>
@@ -345,28 +309,24 @@
                 <li>Whenever we write a function in both the base and derived classes with the same function name and parameters, it is called function overriding.</li>
             </ul>
             <p>Syntax &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
                    <code>
-                   
-                    class class-name
-                    {
-                        void fun()
-                        {
-                            ...
-                        }
-                    };
-                    class class-name : public base-class
-                    {
-                        void fun()
-                        {
-                            ...
-                        }
-                    };
+class class-name
+{
+    void fun()
+    {
+        ...
+    }
+};
+class class-name : public base-class
+{
+    void fun()
+    {
+        ...
+    }
+};
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>We cannot achieve function overriding without inheritance.</li>
             </ul>
@@ -376,50 +336,43 @@
             <ul>
                 <li>A default argument is a value provided in a function declaration that is automatically assigned by the compiler if the calling function doesn't provide a value for the argument. In case any value is passed, the default value is overridden.</li>
             </ul>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
                    <code>
-                   
-                    // CPP Program to demonstrate Default Arguments
-                    #include &lt;iostream>
-                    using namespace std;
-                     
-                    // A function with default arguments,
-                    // it can be called with
-                    // 2 arguments or 3 arguments or 4 arguments.
-                    int sum(int x, int y, int z = 0, int w = 0) //assigning default values to z,w as 0
-                    {
-                        return (x + y + z + w);
-                    }
-                     
-                    // Driver Code
-                    int main()
-                    {
-                        // Statement 1
-                        cout << sum(10, 15) << endl;
-                       
-                        // Statement 2
-                        cout << sum(10, 15, 25) << endl;
-                       
-                        // Statement 3
-                        cout << sum(10, 15, 25, 30) << endl;
-                        return 0;
-                    }
+// CPP Program to demonstrate Default Arguments
+#include &lt;iostream>
+using namespace std;
+    
+// A function with default arguments,
+// it can be called with
+// 2 arguments or 3 arguments or 4 arguments.
+int sum(int x, int y, int z = 0, int w = 0) //assigning default values to z,w as 0
+{
+    return (x + y + z + w);
+}
+    
+// Driver Code
+int main()
+{
+    // Statement 1
+    cout << sum(10, 15) << endl;
+    
+    // Statement 2
+    cout << sum(10, 15, 25) << endl;
+    
+    // Statement 3
+    cout << sum(10, 15, 25, 30) << endl;
+    return 0;
+}
                    </code>
                </pre>
-            </div>
             <p>Output &darr;</p>
-            <div class='code'>
                <pre>
-                   <code>
-                   
-                    25
-                    50
-                    80
+                   <code>                 
+25
+50
+80
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t7" class="wh">
             <h2>Parameter Passing Techniques in C++</h2>
@@ -447,37 +400,31 @@
                         <li>Changes made to formal parameter do not get transmitted back to the caller.</li>
                         <li>Any modifications to the formal parameter variable inside the called function or method will not be reflected in the actual parameter in the calling environment. This method is also called as <b><i>call by value.</i></b></li>
                     </ul>
-                    <div class='code'>
-                       <div class='dotc'></div>
                        <pre>
-                           <code>
-                           
-                                // call by value
-                                #include &lt;iostream>
-                                using namespace std;
-                                void increment(int a)
-                                {
-                                    a++;
-                                    cout << "Value of a in increment function : " << a << endl;
-                                }
-                                int main()
-                                {
-                                    int a = 0;
-                                    // passing parameters
-                                    increment(a);
-                                    cout << "Value of a in main function : " << a << endl;
-                                    return 0;
-                                }
+                           <code>                    
+// call by value
+#include &lt;iostream>
+using namespace std;
+void increment(int a)
+{
+    a++;
+    cout << "Value of a in increment function : " << a << endl;
+}
+int main()
+{
+    int a = 0;
+    // passing parameters
+    increment(a);
+    cout << "Value of a in main function : " << a << endl;
+    return 0;
+}
                            </code>
                        </pre>
-                    </div>
                     <p>output &darr;</p>
-                    <div class='code'>
                        <pre>
                            <code>
-                           
-                            Value of a in increment function : 1
-                            Value of a in main function : 0
+Value of a in increment function : 1
+Value of a in main function : 0
                            </code>
                        </pre>
                     </div>
@@ -488,31 +435,26 @@
                         <li>Changes made to formal parameter do get transmitted back to the caller through parameter passing.</li>
                         <li>Any changes to the formal parameter are reflected in the actual parameter in the calling environment as formal parameter receives a reference (or pointer) to the actual data. This method is also called as <b><i>call by address.</i></b></li>
                     </ul>
-                    <div class='code'>
-                       <div class='dotc'></div>
                        <pre>
                            <code>
-                           
-                                #include &lt;iostream>
-                                using namespace std;
-                                void increment(int *a)
-                                {
-                                    // (*a)++; or
-                                    *a = *a + 1;
-                                    cout << "Value of a in increment function : " << *a << endl;
-                                }
-                                int main()
-                                {
-                                    int a = 0;
-                                    increment(&a);
-                                    cout << "Value of a in main function : " << a << endl;
-                                    return 0;
-                                }
+#include &lt;iostream>
+using namespace std;
+void increment(int *a)
+{
+    // (*a)++; or
+    *a = *a + 1;
+    cout << "Value of a in increment function : " << *a << endl;
+}
+int main()
+{
+    int a = 0;
+    increment(&a);
+    cout << "Value of a in main function : " << a << endl;
+    return 0;
+}
                            </code>
                        </pre>
-                    </div>
                     <p>output &darr;</p>
-                    <div class='code'>
                        <pre>
                            <code>
                            
@@ -520,41 +462,38 @@
                             Value of a in main function : 1
                            </code>
                        </pre>
-                    </div>
                     <div class='code'>
                        <div class='dotc'></div>
                        <button class="ac">Swapping function using pass by address</button>
                        <div class="panel">
                        <pre>
-                           <code>
-                           
-                                #include &lt;iostream>
-                                using namespace std;
-                                void swap(int *x, int *y)
-                                {
-                                    int temp = *x;
-                                    *x = *y;
-                                    *y = temp;
-                                }
-                                int main()
-                                {
-                                    int a = 5, b = 10;
-                                    cout << "Value of a and b before swap : a = " << a << ", b = " << b << endl;
-                                    swap(&a, &b);
-                                    cout << "Value of a and b after swap : a = " << a << ", b = " << b << endl;
-                                    return 0;
-                                }
+                           <code>                          
+#include &lt;iostream>
+using namespace std;
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+int main()
+{
+    int a = 5, b = 10;
+    cout << "Value of a and b before swap : a = " << a << ", b = " << b << endl;
+    swap(&a, &b);
+    cout << "Value of a and b after swap : a = " << a << ", b = " << b << endl;
+    return 0;
+}
                            </code>
                        </pre>
                        <p>output &darr;</p>
                        <pre>
                         <code>
 
-                            Value of a and b before swap : a = 5, b = 10
-                            Value of a and b after swap : a = 10, b = 5
+Value of a and b before swap : a = 5, b = 10
+Value of a and b after swap : a = 10, b = 5
                         </code>
                        </pre>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -570,45 +509,38 @@
                 <li>The recursion continues until some condition is met. Hence, there should be a terminating condition.</li>
             </ul>
             <p>Example program of factorial using recursion &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
                    <code>
-                   
-                    #include &lt;iostream>
-                    using namespace std;
+#include &lt;iostream>
+using namespace std;
 
-                    int factorial(int);
+int factorial(int);
 
-                    int main()
-                    {
-                        int n = 4, result;
-                        result = factorial(n);
-                        cout << "Factorial of " << n << " = " << result;
-                        return 0;
-                    }
+int main()
+{
+    int n = 4, result;
+    result = factorial(n);
+    cout << "Factorial of " << n << " = " << result;
+    return 0;
+}
 
-                    int factorial(int n)
-                    {
-                        if(n > 1)
-                        {
-                            return n * factorial(n - 1);
-                        } else {
-                            return 1;
-                        }
-                    }
+int factorial(int n)
+{
+    if(n > 1)
+    {
+        return n * factorial(n - 1);
+    } else {
+        return 1;
+    }
+}
                    </code>
                </pre>
-            </div>
             <p>Output &darr;</p>
-            <div class='code'>
                <pre>
-                   <code>
-                   
-                    Factorial of 4 = 24
+                   <code> 
+Factorial of 4 = 24
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t9" class="wh">
             <h2>C++ Structures</h2>
@@ -621,23 +553,19 @@
                 <ul>
                     <li>The 'struct' keyword is used to create a structure.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                            struct structureName{
-                                member1;
-                                member2;
-                                member3;
-                                .
-                                . 
-                                . 
-                                memberN;
-                            }
+                       <code>                
+struct structureName{
+    member1;
+    member2;
+    member3;
+    .
+    . 
+    . 
+    memberN;
+}
                        </code>
                    </pre>
-                </div>
             </div>
             <ul>
                 <li>Data member : These members are normal C++ variables. We can create a structure with variables of different data types in C++.</li>
@@ -647,37 +575,29 @@
                 <ul>
                     <li>A structure variable can either be declared with structure declaration or as a separate declaration like basic types.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
                        <code>
-                       
-                        // A variable declaration with structure declaration. 
-                        struct Point
-                        {
-                            int x, y;
-                        } p1;  // The variable p1 is declared with 'Point'
+// A variable declaration with structure declaration. 
+struct Point
+{
+    int x, y;
+} p1;  // The variable p1 is declared with 'Point'
                        </code>
                    </pre>
-                </div>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        // A variable declaration like basic data types
-                        struct Point
-                        {
-                            int x, y;
-                        };
+                       <code>                   
+// A variable declaration like basic data types
+struct Point
+{
+    int x, y;
+};
 
-                        int main()
-                        {
-                            struct Point p1; // The variable p1 is declaraed like a normal variable
-                        }
+int main()
+{
+    struct Point p1; // The variable p1 is declaraed like a normal variable
+}
                        </code>
                    </pre>
-                </div>
             </div>
             <div class="in">
                 <h3>Initializing structure member</h3>
@@ -685,118 +605,99 @@
                     <li>Structure members cannot be initialized with declaration.</li>
                     <li>For example the following C program fails in compilation. But is considered correct in C++11 and above.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        struct Point
-                        {
-                            int x = 0; // COMPILER ERROR:  cannot initialize members here
-                            int y = 0; // COMPILER ERROR:  cannot initialize members here
-                        }
+                       <code>                    
+struct Point
+{
+    int x = 0; // COMPILER ERROR:  cannot initialize members here
+    int y = 0; // COMPILER ERROR:  cannot initialize members here
+}
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>The reason for above error is simiple, when a datatype is declared, no memory is allocated for it. Memory is allocated only when variables are created.</li>
                     <li>We use dot (.) operator to intialize value and access member variable.</li>
                     <li>Structure members can be initialized with declaration in C++. For example the following C++ program executes successfully without throwing any Error.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        // In C++ We can Initialize the Variables with Declaration in Structure.
-                        #include &lt;iostream>
-                        using namespace std;
-                        struct Point
-                        {
-                            int x = 0; // It is considered as Default Arguments and no Error is Raised.
-                            int y = 1;
-                        };
-                        int main()
-                        {
-                            struct Point p1;
-                        
-                            // Accessing members of point p1
-                            // No value is Initialized then the default value is considered. ie x = 0 and y = 1
-                            cout << "x = " << p1.x << ", y = " << p1.y << endl;
-                        
-                            // Initializing the value of y = 20;
-                            p1.y = 20;
-                            cout << "x = " << p1.x << ", y = " << p1.y << endl;
-                            return 0;
-                        }
+                       <code>                      
+// In C++ We can Initialize the Variables with Declaration in Structure.
+#include &lt;iostream>
+using namespace std;
+struct Point
+{
+    int x = 0; // It is considered as Default Arguments and no Error is Raised.
+    int y = 1;
+};
+int main()
+{
+    struct Point p1;
+
+    // Accessing members of point p1
+    // No value is Initialized then the default value is considered. ie x = 0 and y = 1
+    cout << "x = " << p1.x << ", y = " << p1.y << endl;
+
+    // Initializing the value of y = 20;
+    p1.y = 20;
+    cout << "x = " << p1.x << ", y = " << p1.y << endl;
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
                 <p>Output &darr;</p>
-                <div class='code'>
                    <pre>
-                       <code>
-                       
-                        x=0, y=1
-                        x=0, y=20
+                       <code>               
+x=0, y=1
+x=0, y=20
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>Structure members can be initialized using curly braces '{}'.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        struct Point
-                        {
-                            int x, y;
-                        };
+                       <code>                       
+struct Point
+{
+    int x, y;
+};
 
-                        int main()
-                        {
-                            struct Point p1 = { 0, 1};
-                            return 0;
-                        }
+int main()
+{
+    struct Point p1 = { 0, 1};
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
             <div class="in">
                 <h3>Array of structure</h3>
                 <ul>
                     <li>Like other primitive data types, we can create an array of structures.</li>
                 </ul>
-                <div class='code'>
-                   <div class='dotc'></div>
                    <pre>
-                       <code>
-                       
-                        #include &lt;iostream>
-                        using namespace std;
+                       <code>                      
+#include &lt;iostream>
+using namespace std;
 
-                        struct Point
-                        {
-                            int x, y;
-                        };
+struct Point
+{
+    int x, y;
+};
 
-                        int main()
-                        {
-                            // Create an array of structures
-                            struct Point arr[10];
+int main()
+{
+    // Create an array of structures
+    struct Point arr[10];
 
-                            // Access array members
-                            arr[0].x = 10;
-                            arr[0].y = 20;
+    // Access array members
+    arr[0].x = 10;
+    arr[0].y = 20;
 
-                            cout << arr[0].x << " " << arr[0].y;
-                            return 0;
-                        }
+    cout << arr[0].x << " " << arr[0].y;
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
     </div>
@@ -813,6 +714,7 @@
             <li><a href="https://www.programiz.com/cpp-programming/recursion">www.programiz.com (recursion)</a></li>
         </ul>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 

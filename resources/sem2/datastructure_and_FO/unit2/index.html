@@ -18,6 +18,7 @@
          color: white;
       }
    </style>
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -99,43 +100,37 @@
                </ul>
                <img src="../../images/stack2.svg" alt="" class="wb">
                <p>Algorithm &darr;</p>
-               <div class='code'>
                   <pre>
                      <code>
+PUSH(stack[], top, value)
 
-                        PUSH(stack[], top, value)
-   
-                           1. if (top == MAX -1)
-                                 printf Underflow
-                                 Exit
-                              End of if
-                           2. increment top by 1
-                           3. stack[top] = value 
-                           4. End of else 
-                           5. End of PUSH
+   1. if (top == MAX -1)
+         printf Underflow
+         Exit
+      End of if
+   2. increment top by 1
+   3. stack[top] = value 
+   4. End of else 
+   5. End of PUSH
                      </code>
                   </pre>
-               </div>
                <p>Program code &darr;</p>
-               <div class='code'>
                   <pre>
-                           <code>
-                           
-                            // implementatin of push operation:
+                           <code>                      
+// implementatin of push operation:
 
-                            void push(int data, int n)
-                            {
-                                if(top == n-1)
-                                {
-                                    printf("overflow");
-                                    return;
-                                }
-                                 top++;
-                                 stack[top] = data;
-                            }
+void push(int data, int n)
+{
+   if(top == n-1)
+   {
+      printf("overflow");
+      return;
+   }
+   top++;
+   stack[top] = data;
+}
                            </code>
                        </pre>
-               </div>
             </div>
             <div class="wh">
                <p><b>Pop operation</b></p>
@@ -156,87 +151,74 @@
                </ul>
                <img src="../../images/stack3.svg" alt="" class="wb">
                <p>Algorithm &darr;</p>
-               <div class='code'>
                   <pre>
-                      <code>
-                      
-                          POP(STACK[], top)
-                        1. if (top == -1)
-                              print Underflow
-                              Exit 
-                           End of if
-                        2. val = STACK[top]
-                        3. top = top - 1
-                        4. print val is deleted 
-                        5. End of POP
+                      <code>           
+   POP(STACK[], top)
+1. if (top == -1)
+      print Underflow
+      Exit 
+   End of if
+2. val = STACK[top]
+3. top = top - 1
+4. print val is deleted 
+5. End of POP
                       </code>
                   </pre>
-               </div>
                <p>Program code &darr;</p>
-               <div class='code'>
                   <pre>
-                           <code>
-                           
-                            // implementation of pop operation 
+                           <code>                       
+// implementation of pop operation 
 
-                            void POP()
-                            {
-                                int val;
-                                if(top == -1)
-                                {
-                                    printf("Underflow condition");
-                                    return;
-                                }
-                                    val = stack[top];
-                                    top--;
-                                    printf("%d is deleted ", val);
-                            }
+void POP()
+{
+   int val;
+   if(top == -1)
+   {
+      printf("Underflow condition");
+      return;
+   }
+      val = stack[top];
+      top--;
+      printf("%d is deleted ", val);
+}
                            </code>
                        </pre>
-               </div>
             </div>
             <div class="in">
                <h3>Display</h3>
                <p>Algorithm &darr;</p>
-               <div class='code'>
                   <pre>
-                      <code>
-                      
-                        DISPLAY(STACK[], top)
-                        1. if top == -1 
-                              print Underflow 
-                              Exit
-                           End of if
-                        2. i = top 
-                        3. repeat step 4, while i >= 0
-                        4. print STACK[i]
-                           i = i + i 
-                        5. End of DISPLAY
+                      <code>             
+DISPLAY(STACK[], top)
+1. if top == -1 
+      print Underflow 
+      Exit
+   End of if
+2. i = top 
+3. repeat step 4, while i >= 0
+4. print STACK[i]
+   i = i + i 
+5. End of DISPLAY
                       </code>
                   </pre>
-               </div>
                <p>Program code &darr;</p>
-               <div class='code'>
-                  <div class='dotc'></div>
                   <pre>
-                      <code>
-                      
-                       void display()
-                       {
-                           int i;
-                           if(top == -1)
-                           {
-                              printf("Underflow");
-                              return;
-                           }
-                           for(i = top; i >= 0; i--)
-                           {
-                              printf("%d", stack[i]);
-                           }
-                       }
+                      <code>                    
+void display()
+{
+   int i;
+   if(top == -1)
+   {
+      printf("Underflow");
+      return;
+   }
+   for(i = top; i >= 0; i--)
+   {
+      printf("%d", stack[i]);
+   }
+}
                       </code>
                   </pre>
-               </div>
             </div>
          </div>
          <div class="in">
@@ -247,88 +229,87 @@
                <div class="panel">
                   <pre>
                         <code>
-                        
-                                #include &lt;stdio.h>
-                                #include &lt;stdlib.h>
-                                void push();
-                                void pop();
-                                void display();
-                                // stack declaration
-                                #define MAX 5
-                                int stack[MAX];
-                                int top = -1;
-                                
-                                int main()
-                                {
-                                   int choice;
-                                   while (1)
-                                   {
-                                      printf("\n\n**** MENU *****");
-                                      printf("\n1. PUSH");
-                                      printf("\n2. POP");
-                                      printf("\n3. DISPLAY");
-                                      printf("\n4. EXIT");
-                                      printf("\nEnter your choice : ");
-                                      scanf("%d", &choice);
-                                
-                                      switch (choice)
-                                      {
-                                      case 1:
-                                         push();
-                                         break;
-                                      case 2:
-                                         pop();
-                                         break;
-                                      case 3:
-                                         display();
-                                         break;
-                                      case 4:
-                                         exit(0);
-                                      default:
-                                         printf("\nEnter a correct choice");
-                                      }
-                                   }
-                                   return 0;
-                                }
-                                void push()
-                                {
-                                   if (top >= MAX -1)
-                                   {
-                                       printf("\n\nStack overflow\n\n");
-                                       return;
-                                   }
-                                   top++;
-                                   printf("\nEnter a value : ");
-                                   scanf("%d", &stack[top]);
-                                   printf("\n\n%d is pushed\n\n", stack[top]);
-                                }
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+void push();
+void pop();
+void display();
+// stack declaration
+#define MAX 5
+int stack[MAX];
+int top = -1;
 
-                                void pop()
-                                {
-                                   int val;
-                                   if (top <= -1)
-                                   {
-                                       printf("\n\nStack underflow\n\n");
-                                       return;
-                                   }
-                                   val = stack[top];
-                                   top--;
-                                   printf("\n\n%d is popped\n\n", val);
-                                }
+int main()
+{
+   int choice;
+   while (1)
+   {
+      printf("\n\n**** MENU *****");
+      printf("\n1. PUSH");
+      printf("\n2. POP");
+      printf("\n3. DISPLAY");
+      printf("\n4. EXIT");
+      printf("\nEnter your choice : ");
+      scanf("%d", &choice);
 
-                                void display()
-                                {
-                                   int i;
-                                   if (top <= -1)
-                                   {
-                                       printf("\n\nStack underflow\n\n");
-                                       return;
-                                   }
-                                    for (i = top; i >= 0; i--)
-                                    {
-                                       printf("\n%d", stack[i]);
-                                    }
-                                 }
+      switch (choice)
+      {
+      case 1:
+         push();
+         break;
+      case 2:
+         pop();
+         break;
+      case 3:
+         display();
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nEnter a correct choice");
+      }
+   }
+   return 0;
+}
+void push()
+{
+   if (top >= MAX -1)
+   {
+      printf("\n\nStack overflow\n\n");
+      return;
+   }
+   top++;
+   printf("\nEnter a value : ");
+   scanf("%d", &stack[top]);
+   printf("\n\n%d is pushed\n\n", stack[top]);
+}
+
+void pop()
+{
+   int val;
+   if (top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   val = stack[top];
+   top--;
+   printf("\n\n%d is popped\n\n", val);
+}
+
+void display()
+{
+   int i;
+   if (top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   for (i = top; i >= 0; i--)
+   {
+      printf("\n%d", stack[i]);
+   }
+}
                         </code>
                     </pre>
                </div>
@@ -339,87 +320,86 @@
                <div class="panel">
                   <pre>
                         <code>
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+int push(int[], int, int);
+int pop(int[], int);
+void display(int[], int);
+int main()
+{
+   const int MAX = 5;
+   int stack[MAX], top = -1, choice;
+   while (1)
+   {
+      printf("\n\n**** MENU *****");
+      printf("\n1. PUSH");
+      printf("\n2. POP");
+      printf("\n3. DISPLAY");
+      printf("\n4. EXIT");
+      printf("\nEnter your choice : ");
+      scanf("%d", &choice);
 
-                                #include &lt;stdio.h>
-                                #include &lt;stdlib.h>
-                                int push(int[], int, int);
-                                int pop(int[], int);
-                                void display(int[], int);
-                                int main()
-                                {
-                                   const int MAX = 5;
-                                   int stack[MAX], top = -1, choice;
-                                   while (1)
-                                   {
-                                      printf("\n\n**** MENU *****");
-                                      printf("\n1. PUSH");
-                                      printf("\n2. POP");
-                                      printf("\n3. DISPLAY");
-                                      printf("\n4. EXIT");
-                                      printf("\nEnter your choice : ");
-                                      scanf("%d", &choice);
-                                
-                                      switch (choice)
-                                      {
-                                      case 1:
-                                         top = push(stack, top, MAX);
-                                         break;
-                                      case 2:
-                                         top = pop(stack, top);
-                                         break;
-                                      case 3:
-                                         display(stack, top);
-                                         break;
-                                      case 4:
-                                         exit(0);
-                                      default:
-                                         printf("\nEnter a correct choice");
-                                      }
-                                   }
-                                   return 0;
-                                }
-                                int push(int stack[], int top, int MAX)
-                                {
-                                   if (top >= MAX - 1)
-                                   {
-                                       printf("\n\nStack overflow\n\n");
-                                       
-                                   }
-                                   else
-                                   {
-                                      top++;
-                                      printf("\nEnter a value : ");
-                                      scanf("%d", &stack[top]);
-                                      printf("\n\n%d is pushed\n\n", stack[top]);
-                                   }
-                                   return top;
-                                }
-                                int pop(int stack[], int top)
-                                {
-                                   int val;
-                                   if (top <= -1)
-                                      printf("\n\nStack underflow\n\n");
-                                   else
-                                   {
-                                      val = stack[top];
-                                      top--;
-                                      printf("\n\n%d is popped\n\n", val);
-                                   }
-                                   return top;
-                                }
-                                void display(int stack[], int top)
-                                {
-                                   int i;
-                                   if (top <= -1)
-                                   {
-                                       printf("\n\nStack underflow\n\n");
-                                       return;
-                                   }
-                                   for (i = top; i >= 0; i--)
-                                   {
-                                       printf("\n%d", stack[i]);
-                                   }
-                                }
+      switch (choice)
+      {
+      case 1:
+         top = push(stack, top, MAX);
+         break;
+      case 2:
+         top = pop(stack, top);
+         break;
+      case 3:
+         display(stack, top);
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nEnter a correct choice");
+      }
+   }
+   return 0;
+}
+int push(int stack[], int top, int MAX)
+{
+   if (top >= MAX - 1)
+   {
+      printf("\n\nStack overflow\n\n");
+      
+   }
+   else
+   {
+      top++;
+      printf("\nEnter a value : ");
+      scanf("%d", &stack[top]);
+      printf("\n\n%d is pushed\n\n", stack[top]);
+   }
+   return top;
+}
+int pop(int stack[], int top)
+{
+   int val;
+   if (top <= -1)
+      printf("\n\nStack underflow\n\n");
+   else
+   {
+      val = stack[top];
+      top--;
+      printf("\n\n%d is popped\n\n", val);
+   }
+   return top;
+}
+void display(int stack[], int top)
+{
+   int i;
+   if (top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   for (i = top; i >= 0; i--)
+   {
+      printf("\n%d", stack[i]);
+   }
+}
                         </code>
                     </pre>
                </div>
@@ -430,84 +410,83 @@
                <div class="panel">
                   <pre>
                         <code>
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+void push(int[], int*, int);
+void pop(int[], int*);
+void display(int[], int);
+int main()
+{
+   const int MAX = 5;
+   int stack[MAX], top = -1, choice;
+   while (1)
+   {
+      printf("\n\n**** MENU *****");
+      printf("\n1. PUSH");
+      printf("\n2. POP");
+      printf("\n3. DISPLAY");
+      printf("\n4. EXIT");
+      printf("\nEnter your choice : ");
+      scanf("%d", &choice);
 
-                                #include &lt;stdio.h>
-                                #include &lt;stdlib.h>
-                                void push(int[], int*, int);
-                                void pop(int[], int*);
-                                void display(int[], int);
-                                int main()
-                                {
-                                   const int MAX = 5;
-                                   int stack[MAX], top = -1, choice;
-                                   while (1)
-                                   {
-                                      printf("\n\n**** MENU *****");
-                                      printf("\n1. PUSH");
-                                      printf("\n2. POP");
-                                      printf("\n3. DISPLAY");
-                                      printf("\n4. EXIT");
-                                      printf("\nEnter your choice : ");
-                                      scanf("%d", &choice);
-                                
-                                      switch (choice)
-                                      {
-                                      case 1:
-                                         push(stack, &top, MAX);
-                                         break;
-                                      case 2:
-                                         pop(stack, &top);
-                                         break;
-                                      case 3:
-                                         display(stack, top);
-                                         break;
-                                      case 4:
-                                         exit(0);
-                                      default:
-                                         printf("\nEnter a correct choice");
-                                      }
-                                   }
-                                   return 0;
-                                }
-                                void push(int stack[], int *top, int MAX)
-                                {
-                                   if (*top >= MAX - 1)
-                                   {
-                                       printf("\n\nStack overflow\n\n");
-                                       return;
-                                   }
-                                   (*top)++;
-                                   printf("\nEnter a value : ");
-                                   scanf("%d", &stack[*top]);
-                                   printf("\n\n%d is pushed\n\n", stack[*top]);
-                                }
+      switch (choice)
+      {
+      case 1:
+         push(stack, &top, MAX);
+         break;
+      case 2:
+         pop(stack, &top);
+         break;
+      case 3:
+         display(stack, top);
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nEnter a correct choice");
+      }
+   }
+   return 0;
+}
+void push(int stack[], int *top, int MAX)
+{
+   if (*top >= MAX - 1)
+   {
+      printf("\n\nStack overflow\n\n");
+      return;
+   }
+   (*top)++;
+   printf("\nEnter a value : ");
+   scanf("%d", &stack[*top]);
+   printf("\n\n%d is pushed\n\n", stack[*top]);
+}
 
-                                void pop(int stack[], int *top)
-                                {
-                                   int val;
-                                   if (*top <= -1)
-                                   {
-                                       printf("\n\nStack underflow\n\n");
-                                       return;
-                                   }
-                                   val = stack[*top];
-                                   (*top)--;
-                                   printf("\n\n%d is popped\n\n", val);
-                                }
+void pop(int stack[], int *top)
+{
+   int val;
+   if (*top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   val = stack[*top];
+   (*top)--;
+   printf("\n\n%d is popped\n\n", val);
+}
 
-                                void display(int stack[], int top)
-                                {
-                                   int i;
-                                   if (*top <= -1)
-                                   {
-                                       printf("\n\nStack underflow\n\n");
-                                       return;
-                                   }
-                                   for (i = top; i >= 0; i--)
-                                   {
-                                       printf("\n%d", stack[i]);
-                                   }
-                                }
+void display(int stack[], int top)
+{
+   int i;
+   if (*top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   for (i = top; i >= 0; i--)
+   {
+      printf("\n%d", stack[i]);
+   }
+}
                         </code>
                     </pre>
                </div>
@@ -546,16 +525,15 @@
             <p>Remember in pre/post fix expression there is no brackets.</p>
             <pre>
                <code>
+Operation Priority &darr;
+_________________________________
+   ^ (power) 
 
-                  Operation Priority &darr;
-                  _________________________________
-                     ^ (power) 
+   *, / , %
 
-                     *, / , %
-
-                     +, -
-                  _________________________________
-                  ( decreases from top to bottom )
+   +, -
+_________________________________
+( decreases from top to bottom )
                </code>
             </pre>
             <ul>
@@ -661,127 +639,126 @@
                   <div class="panel">
                      <pre>
                         <code>
-                        
-                             #include &lt;stdio.h>
-                             #include &lt;stdlib.h>
-                             #include &lt;string.h>
-                             #define MAX 100
-                             char stack[MAX];
-                             char infix[MAX], postfix[MAX];
-                             int top = -1;
-                             
-                             void push(char);
-                             char pop();
-                             int isEmpty();
-                             void inToPost();
-                             int precedence(char);
-                             void print();
-                             int main()
-                             {
-                                printf("Enter the infix expression : ");
-                                gets(infix);
-                                inToPost(); // function that convert infix to postfix expression
-                                print();
-                                return 0;
-                             }
-                             void push(char c)
-                             {
-                                if (top == MAX - 1)
-                                {
-                                   printf("Stack overflow");
-                                   return;
-                                }
-                                top++;
-                                stack[top] = c;
-                             }
-                             char pop()
-                             {
-                                char c;
-                                if (top == -1)
-                                {
-                                   printf("Stack underflow");
-                                   exit(0);
-                                }
-                                c = stack[top];
-                                top=top-1;
-                                return c;
-                             }
-                             int isEmpty()
-                             {
-                                if (top == -1)
-                                   return 1;
-                                else
-                                   return 0;
-                             }
-                             int space(char c)
-                             {
-                                // If symbol is a blank space or a tab
-                                if (c == ' ' || c == '\t')
-                                   return -1;
-                                else
-                                   return 1;
-                             }
-                             void inToPost()
-                             {
-                                int i, j = 0;
-                                char symbol, next;
-                                // for(i=0;i!='\0';i++)
-                                for (i = 0; i < strlen(infix); i++)
-                                {
-                                   symbol = infix[i];
-                                   switch (symbol)
-                                   {
-                                   case '(':
-                                      push(symbol);
-                                      break;
-                                   case ')':
-                                      while ((next = pop()) != '(')
-                                         postfix[j++] = next;
-                                   case '+':
-                                   case '-':
-                                   case '*':
-                                   case '/':
-                                   case '^':
-                                      while (!isEmpty() && precedence(stack[top]) >= precedence(symbol))
-                                         postfix[j++] = pop();
-                                      push(symbol);
-                                      break;
-                                   default:
-                                      postfix[j++] = symbol;
-                                   }
-                                }
-                                while (!isEmpty())
-                                   postfix[j++] = pop();
-                                postfix[j] = '\0';
-                             }
-                             int precedence(char symbol)
-                             {
-                                switch (symbol)
-                                {
-                                // higher value means greater precedence
-                                case '^':
-                                   return 3;
-                                case '/':
-                                case '*':
-                                   return 2;
-                                case '+':
-                                case '-':
-                                   return 1;
-                                default:
-                                   return 0;
-                                }
-                             }
-                             
-                             void print()
-                             {
-                                int i = 0;
-                                printf("The equivalent post fix expression is : ");
-                                while (postfix[i])
-                                {
-                                   printf("%c", postfix[i++]);
-                                }
-                                printf("\n");
-                             }
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#include &lt;string.h>
+#define MAX 100
+char stack[MAX];
+char infix[MAX], postfix[MAX];
+int top = -1;
+
+void push(char);
+char pop();
+int isEmpty();
+void inToPost();
+int precedence(char);
+void print();
+int main()
+{
+   printf("Enter the infix expression : ");
+   gets(infix);
+   inToPost(); // function that convert infix to postfix expression
+   print();
+   return 0;
+}
+void push(char c)
+{
+   if (top == MAX - 1)
+   {
+      printf("Stack overflow");
+      return;
+   }
+   top++;
+   stack[top] = c;
+}
+char pop()
+{
+   char c;
+   if (top == -1)
+   {
+      printf("Stack underflow");
+      exit(0);
+   }
+   c = stack[top];
+   top=top-1;
+   return c;
+}
+int isEmpty()
+{
+   if (top == -1)
+      return 1;
+   else
+      return 0;
+}
+int space(char c)
+{
+   // If symbol is a blank space or a tab
+   if (c == ' ' || c == '\t')
+      return -1;
+   else
+      return 1;
+}
+void inToPost()
+{
+   int i, j = 0;
+   char symbol, next;
+   // for(i=0;i!='\0';i++)
+   for (i = 0; i < strlen(infix); i++)
+   {
+      symbol = infix[i];
+      switch (symbol)
+      {
+      case '(':
+         push(symbol);
+         break;
+      case ')':
+         while ((next = pop()) != '(')
+            postfix[j++] = next;
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+      case '^':
+         while (!isEmpty() && precedence(stack[top]) >= precedence(symbol))
+            postfix[j++] = pop();
+         push(symbol);
+         break;
+      default:
+         postfix[j++] = symbol;
+      }
+   }
+   while (!isEmpty())
+      postfix[j++] = pop();
+   postfix[j] = '\0';
+}
+int precedence(char symbol)
+{
+   switch (symbol)
+   {
+   // higher value means greater precedence
+   case '^':
+      return 3;
+   case '/':
+   case '*':
+      return 2;
+   case '+':
+   case '-':
+      return 1;
+   default:
+      return 0;
+   }
+}
+
+void print()
+{
+   int i = 0;
+   printf("The equivalent post fix expression is : ");
+   while (postfix[i])
+   {
+      printf("%c", postfix[i++]);
+   }
+   printf("\n");
+}
                         </code>
                     </pre>
                   </div>
@@ -860,63 +837,55 @@
                <li>Linked lists are implemented is C language using a structure.</li>
                <li>We know that a node contains data part and pointer so it will be implemented like this &darr;</li>
             </ul>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
-                    <code>
-                    
-                    struct Node
-                    {
-                         int data;
-                         struct Node *next; // self referencial structure.
-                    }
+                    <code>                 
+struct Node
+{
+      int data;
+      struct Node *next; // self referencial structure.
+}
                     </code>
                 </pre>
-            </div>
             <ul>
                <li>Now we will create 3 node and try to connect it with each other.</li>
             </ul>
-            <div class='code'>
-               <div class='dotc'></div>
                <pre>
                    <code>
+#include &lt;stdio.h>
+struct node
+{
+   int data;
+   struct node *next;
+};
+int main()
+{
+   /* Initialize nodes */
+   struct node *head;
+   struct node *one = NULL;
+   struct node *two = NULL;
+   struct node *three = NULL;
 
-                        #include &lt;stdio.h>
-                        struct node
-                        {
-                           int data;
-                           struct node *next;
-                        };
-                        int main()
-                        {
-                           /* Initialize nodes */
-                           struct node *head;
-                           struct node *one = NULL;
-                           struct node *two = NULL;
-                           struct node *three = NULL;
-                        
-                           /* Allocate memory */
-                           one = (struct node *) malloc(sizeof(struct node));
-                           two = (struct node *) malloc(sizeof(struct node));
-                           three = (struct node *) malloc(sizeof(struct node));
-                        
-                           /* Assign data values */
-                           one->data = 1;
-                           two->data = 2;
-                           three->data = 3;
-                        
-                           /* Connect nodes */
-                           one->next = two;
-                           two->next = three;
-                           three->next = NULL;
-                        
-                           /* Save address of first node in head */
-                           head = one;
-                           return 0;
-                        }
+   /* Allocate memory */
+   one = (struct node *) malloc(sizeof(struct node));
+   two = (struct node *) malloc(sizeof(struct node));
+   three = (struct node *) malloc(sizeof(struct node));
+
+   /* Assign data values */
+   one->data = 1;
+   two->data = 2;
+   three->data = 3;
+
+   /* Connect nodes */
+   one->next = two;
+   two->next = three;
+   three->next = NULL;
+
+   /* Save address of first node in head */
+   head = one;
+   return 0;
+}
                    </code>
                </pre>
-            </div>
             <ul>
                <li>Now we have created a linear data structure like this &darr;</li>
             </ul>
@@ -935,92 +904,91 @@
                <div class="panel">
                   <pre>
                      <code>
-                        
-                           #include &lt;stdio.h>
-                           #include &lt;stdlib.h>
-                           typedef struct node
-                           {
-                               int data;
-                               struct node *next;
-                           } node;
-                           node *top = NULL;
-                           void push();
-                           void pop();
-                           void display();
-                           
-                           int main()
-                           {
-                               int choice;
-                               while (1)
-                               {
-                                   printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
-                                   printf("\n1. PUSH");
-                                   printf("\n2. POP");
-                                   printf("\n3. DISPLAY");
-                                   printf("\n4. EXIT");
-                                   printf("\n Enter your choice : ");
-                                   scanf("%d", &choice);
-                                   switch (choice)
-                                   {
-                                   case 1:
-                                       push();
-                                       break;
-                                   case 2:
-                                       pop();
-                                       break;
-                                   case 3:
-                                       display();
-                                       break;
-                                   case 4:
-                                       exit(0);
-                                   default:
-                                       printf("\nEnter a correct choice : ");
-                                   } 
-                               }
-                               return 0;
-                           }
-                           
-                           void push()
-                           {
-                               node *temp = (node *)malloc(sizeof(node));
-                               if (temp == NULL)
-                               {
-                                   printf("\nOverflow");
-                                   return;
-                               }
-                               printf("\nEnter a digit : ");
-                               scanf("%d", &temp->data);
-                               temp->next = top;
-                               top = temp;
-                           }
-                           
-                           void pop()
-                           {
-                               if (top == NULL)
-                               {
-                                   printf("\nUnderflow");
-                                   return;
-                               }
-                               node *temp = top;
-                               top = top->next;
-                               printf("\n%d is deleted", temp->data);
-                               free(temp);
-                           }
-                           
-                           void display()
-                           {
-                               if (top == NULL)
-                               {
-                                   printf("\nUnderflow");
-                                   return;
-                               }
-                               node *temp = top;
-                               while (temp != NULL)
-                               {
-                                   printf("%d ", temp->data);
-                                   temp = temp->next;
-                               }
-                           }      
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+      int data;
+      struct node *next;
+} node;
+node *top = NULL;
+void push();
+void pop();
+void display();
+
+int main()
+{
+      int choice;
+      while (1)
+      {
+         printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+         printf("\n1. PUSH");
+         printf("\n2. POP");
+         printf("\n3. DISPLAY");
+         printf("\n4. EXIT");
+         printf("\n Enter your choice : ");
+         scanf("%d", &choice);
+         switch (choice)
+         {
+         case 1:
+            push();
+            break;
+         case 2:
+            pop();
+            break;
+         case 3:
+            display();
+            break;
+         case 4:
+            exit(0);
+         default:
+            printf("\nEnter a correct choice : ");
+         } 
+      }
+      return 0;
+}
+
+void push()
+{
+      node *temp = (node *)malloc(sizeof(node));
+      if (temp == NULL)
+      {
+         printf("\nOverflow");
+         return;
+      }
+      printf("\nEnter a digit : ");
+      scanf("%d", &temp->data);
+      temp->next = top;
+      top = temp;
+}
+
+void pop()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      top = top->next;
+      printf("\n%d is deleted", temp->data);
+      free(temp);
+}
+
+void display()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      while (temp != NULL)
+      {
+         printf("%d ", temp->data);
+         temp = temp->next;
+      }
+}      
                      </code>
                   </pre>
                </div>
@@ -1036,6 +1004,7 @@
          <li><a href="https://www.programiz.com/dsa/linked-list">www.programiz.com (linked-list)</a></li>
       </ul>
    </div>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
    <script src="../../../../public/main.js"></script>
 </body>
 

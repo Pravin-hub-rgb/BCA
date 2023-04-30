@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structure lab</title>
     <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -26,80 +27,79 @@
                 <button class="ac">Menu driven calculator program</button>
                 <div class="panel">
                     <pre>
-                    <code>
-                    
-                         #include &lt;stdio.h>
-                         #include &lt;stdlib.h>
-                         int no1, no2;
-                         int sum(int, int);
-                         int sub(int, int);
-                         int mul(int, int);
-                         int divi(int, int);
-                         void getVal();
-                         int main()
-                         {
-                             int userChoice;
-                             do
-                             {
-                                 printf("\n\n\t||||||||||||||||||-------- MENU --------||||||||||||||||||");
-                                 printf("\n\n\t\t 1. Addition");
-                                 printf("\n\t\t 2. Subtraction");
-                                 printf("\n\t\t 3. Multiplication");
-                                 printf("\n\t\t 4. Division");
-                                 printf("\n\n\t\t 5. Exit");
-                                 printf("\n\n\t\tEnter your choice : ");
-                                 scanf("%d", &userChoice);
-                         
-                                 switch (userChoice)
-                                 {
-                                 case 1:
-                                     getVal();
-                                     printf("\n\t\tThe addition is %d", sum(no1, no2));
-                                     break;
-                                 case 2:
-                                     getVal();
-                                     printf("\n\t\tThe subraction is %d", sub(no1, no2));
-                                     break;
-                                 case 3:
-                                     getVal();
-                                     printf("\n\t\tThe multiplication is %d", mul(no1, no2));
-                                     break;
-                                 case 4:
-                                     getVal();
-                                     printf("\n\t\tThe division is %d", divi(no1, no2));
-                                     break;
-                                 case 5:
-                                     exit(0);
-                                 default:
-                                     printf("\n\t\tEnter the correct choice");
-                                 }
-                             } while (1);
-                         
-                             return 0;
-                         }
-                         void getVal()
-                         {
-                             printf("\t\tEnter first value : ");
-                             scanf("%d", &no1);
-                             printf("\t\tEnter second value : ");
-                             scanf("%d", &no2);
-                         }
-                         int sum(int a, int b)
-                         {
-                             return (a + b);
-                         }
-                         int sub(int a, int b)
-                         {
-                             return (a - b);
-                         }
-                         int divi(int a, int b)
-                         {
-                             return (a / b);
-                         }
-                         int mul(int a, int b)
-                         {
-                             return (a * b);
-                         }
+                    <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+int no1, no2;
+int sum(int, int);
+int sub(int, int);
+int mul(int, int);
+int divi(int, int);
+void getVal();
+int main()
+{
+    int userChoice;
+    do
+    {
+        printf("\n\n\t||||||||||||||||||-------- MENU --------||||||||||||||||||");
+        printf("\n\n\t\t 1. Addition");
+        printf("\n\t\t 2. Subtraction");
+        printf("\n\t\t 3. Multiplication");
+        printf("\n\t\t 4. Division");
+        printf("\n\n\t\t 5. Exit");
+        printf("\n\n\t\tEnter your choice : ");
+        scanf("%d", &userChoice);
+
+        switch (userChoice)
+        {
+        case 1:
+            getVal();
+            printf("\n\t\tThe addition is %d", sum(no1, no2));
+            break;
+        case 2:
+            getVal();
+            printf("\n\t\tThe subraction is %d", sub(no1, no2));
+            break;
+        case 3:
+            getVal();
+            printf("\n\t\tThe multiplication is %d", mul(no1, no2));
+            break;
+        case 4:
+            getVal();
+            printf("\n\t\tThe division is %d", divi(no1, no2));
+            break;
+        case 5:
+            exit(0);
+        default:
+            printf("\n\t\tEnter the correct choice");
+        }
+    } while (1);
+
+    return 0;
+}
+void getVal()
+{
+    printf("\t\tEnter first value : ");
+    scanf("%d", &no1);
+    printf("\t\tEnter second value : ");
+    scanf("%d", &no2);
+}
+int sum(int a, int b)
+{
+    return (a + b);
+}
+int sub(int a, int b)
+{
+    return (a - b);
+}
+int divi(int a, int b)
+{
+    return (a / b);
+}
+int mul(int a, int b)
+{
+    return (a * b);
+}
                     </code>
                 </pre>
                 </div>
@@ -109,36 +109,35 @@
                 <button class="ac">WAP to print second non – repeating number</button>
                 <div class="panel">
                     <pre>
-                        <code>
-                            
-                                #include &lt;stdio.h>
-                                void push(int[], int, int *);
-                                int main()
-                                {
-                                   int stack[2];
-                                   int top = -1;
-                                   int arr[10] = {1, 1, 3, 4, 5, 5, 6, 7, 1, 10};
-                                   for (int i = 0; i < 10; i++)
-                                   {
-                                      int repeat = -1;
-                                      for (int j = 0; j < 10; j++)
-                                      {
-                                         if (arr[i] == arr[j])
-                                            repeat++;
-                                      }
-                                      if (repeat == 0)
-                                         push(stack, arr[i], &top);
-                                      if (top >= 1)
-                                         break;
-                                   }
-                                   printf("The second non repeating number is = %d\n", stack[1]);
-                                   return 0;
-                                }
-                                void push(int stack[], int val, int *top)
-                                {
-                                   (*top)++;
-                                   stack[*top] = val;
-                                }
+                        <code class="language-c">
+#include &lt;stdio.h>
+void push(int[], int, int *);
+int main()
+{
+    int stack[2];
+    int top = -1;
+    int arr[10] = {1, 1, 3, 4, 5, 5, 6, 7, 1, 10};
+    for (int i = 0; i < 10; i++)
+    {
+        int repeat = -1;
+        for (int j = 0; j < 10; j++)
+        {
+            if (arr[i] == arr[j])
+            repeat++;
+        }
+        if (repeat == 0)
+            push(stack, arr[i], &top);
+        if (top >= 1)
+            break;
+    }
+    printf("The second non repeating number is = %d\n", stack[1]);
+    return 0;
+}
+void push(int stack[], int val, int *top)
+{
+    (*top)++;
+    stack[*top] = val;
+}
                         </code>
                     </pre>
                 </div>
@@ -148,42 +147,41 @@
                 <button class="ac">WAP to reverse array using swapping</button>
                 <div class="panel">
                     <pre>
-                        <code>
-
-                                #include &lt;stdio.h>
-                                #define SIZE 10
-                                void printArr(int[]);
-                                void swap(int[]);
-                                int main()
-                                {
-                                   int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-                                   int i = 0;
-                                   printf("\nPrinting the array before reversing : ");
-                                   printArr(arr);
-                                   printf("\nPrinting the array after reversing:");
-                                   printArr(arr);
-                                   return 0;
-                                }
-                                void printArr(int arr[])
-                                {
-                                   int i;
-                                   for (i = 0; i < SIZE; i++)
-                                   {
-                                      printf("%d  ", arr[i]);
-                                   }
-                                }
-                                void swap(int arr[])
-                                {
-                                   int first = 0, last = SIZE - 1, temp;
-                                   while (first <= last)
-                                   {
-                                      temp = arr[first];
-                                      arr[first] = arr[last];
-                                      arr[last] = temp;
-                                      first++;
-                                      last--;
-                                   }
-                                }
+                        <code class="language-c">
+#include &lt;stdio.h>
+#define SIZE 10
+void printArr(int[]);
+void swap(int[]);
+int main()
+{
+    int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int i = 0;
+    printf("\nPrinting the array before reversing : ");
+    printArr(arr);
+    printf("\nPrinting the array after reversing:");
+    printArr(arr);
+    return 0;
+}
+void printArr(int arr[])
+{
+    int i;
+    for (i = 0; i < SIZE; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+}
+void swap(int arr[])
+{
+    int first = 0, last = SIZE - 1, temp;
+    while (first <= last)
+    {
+        temp = arr[first];
+        arr[first] = arr[last];
+        arr[last] = temp;
+        first++;
+        last--;
+    }
+}
                         </code>
                     </pre>
                 </div>
@@ -193,7 +191,7 @@
                 <button class="ac">WAP to find common elements in array</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -204,7 +202,7 @@
                 <button class="ac">WAP to multiply two matrices</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -215,7 +213,7 @@
                 <button class="ac">WAP to find transpose of a matrix</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -226,50 +224,49 @@
                 <button class="ac">WAP to interchange largest and smallest element</button>
                 <div class="panel">
                     <pre>
-                        <code>
-                            
-                                #include &lt;stdio.h>
-                                #define SIZE 10
-                                void printArr(int[]);
-                                void interchangeNum(int[]);
-                                void swap(int[], int, int);
-                                int main()
-                                {
-                                   int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-                                   int i = 0;
-                                   printf("\nPrinting the array before interchanging largest and smallest number : \n");
-                                   printArr(arr);
-                                   interchangeNum(arr);
-                                   printf("\nPrinting the array after interchanging largest and smallest number : \n");
-                                   printArr(arr);
-                                   return 0;
-                                }
-                                void printArr(int arr[])
-                                {
-                                   int i;
-                                   for (i = 0; i < SIZE; i++)
-                                   {
-                                      printf("%d  ", arr[i]);
-                                   }
-                                }
-                                void interchangeNum(int arr[])
-                                {
-                                   int largest = arr[0], smallest = arr[0];
-                                   for (int i = 0; i < SIZE; i++)
-                                   {
-                                      if (arr[i] > largest)
-                                         largest = arr[i];
-                                      if (arr[i] < smallest)
-                                         smallest = arr[i];
-                                   }
-                                   swap(arr, largest, smallest);
-                                }
-                                void swap(int arr[], int lar, int sm)
-                                {
-                                   int temp = arr[lar];
-                                   arr[lar] = arr[sm];
-                                   arr[sm] = temp;
-                                }
+                        <code class="language-c">
+#include &lt;stdio.h>
+#define SIZE 10
+void printArr(int[]);
+void interchangeNum(int[]);
+void swap(int[], int, int);
+int main()
+{
+    int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int i = 0;
+    printf("\nPrinting the array before interchanging largest and smallest number : \n");
+    printArr(arr);
+    interchangeNum(arr);
+    printf("\nPrinting the array after interchanging largest and smallest number : \n");
+    printArr(arr);
+    return 0;
+}
+void printArr(int arr[])
+{
+    int i;
+    for (i = 0; i < SIZE; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+}
+void interchangeNum(int arr[])
+{
+    int largest = arr[0], smallest = arr[0];
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (arr[i] > largest)
+            largest = arr[i];
+        if (arr[i] < smallest)
+            smallest = arr[i];
+    }
+    swap(arr, largest, smallest);
+}
+void swap(int arr[], int lar, int sm)
+{
+    int temp = arr[lar];
+    arr[lar] = arr[sm];
+    arr[sm] = temp;
+}
                         </code>
                     </pre>
                 </div>
@@ -279,41 +276,40 @@
                 <button class="ac">WAP to find occurrence of a number</button>
                 <div class="panel">
                     <pre>
-                        <code>
-
-                                #include &lt;stdio.h>
-                                void enterVal(int[], int);
-                                int findOcc(int[], int, int);
-                                int main()
-                                {
-                                   int arr[100], size, num;
-                                   printf("Enter the size of the array : ");
-                                   scanf("%d", &size);
-                                   enterVal(arr, size);
-                                   printf("Enter a number : ");
-                                   scanf("%d", &num);
-                                   printf("The number of occurrence of %d is %d\n", num, findOcc(arr, num, size));
-                                   return 0;
-                                }
-                                void enterVal(int arr[], int size)
-                                {
-                                   int i;
-                                   printf("Enter array element : ");
-                                   for (i = 0; i < size; i++)
-                                   {
-                                      scanf("%d", &arr[i]);
-                                   }
-                                }
-                                int findOcc(int arr[], int num, int size)
-                                {
-                                   int occ = 0;
-                                   for (int i = 0; i < size; i++)
-                                   {
-                                      if (arr[i] == num)
-                                         occ++;
-                                   }
-                                   return occ;
-                                }                                
+                        <code class="language-c">
+#include &lt;stdio.h>
+void enterVal(int[], int);
+int findOcc(int[], int, int);
+int main()
+{
+    int arr[100], size, num;
+    printf("Enter the size of the array : ");
+    scanf("%d", &size);
+    enterVal(arr, size);
+    printf("Enter a number : ");
+    scanf("%d", &num);
+    printf("The number of occurrence of %d is %d\n", num, findOcc(arr, num, size));
+    return 0;
+}
+void enterVal(int arr[], int size)
+{
+    int i;
+    printf("Enter array element : ");
+    for (i = 0; i < size; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+}
+int findOcc(int arr[], int num, int size)
+{
+    int occ = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] == num)
+            occ++;
+    }
+    return occ;
+}                                
                         </code>
                     </pre>
                 </div>
@@ -323,7 +319,7 @@
                 <button class="ac">WAP to display Fibonacci series</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -334,7 +330,7 @@
                 <button class="ac">WAP to find factorial of a number</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -345,7 +341,7 @@
                 <button class="ac">WAP to find GCD of a number</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -356,7 +352,7 @@
                 <button class="ac">WAP to implement stack using array</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -367,7 +363,7 @@
                 <button class="ac">WAP to convert infix to postfix</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -378,7 +374,7 @@
                 <button class="ac">WAP to evaulate postfix expression</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -389,7 +385,7 @@
                 <button class="ac">WAP to implement queue using array</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -400,7 +396,7 @@
                 <button class="ac">WAP to implement singly linked list</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -411,7 +407,7 @@
                 <button class="ac">WAP to implement stack using linked list</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -422,7 +418,7 @@
                 <button class="ac">WAP to implement queue using linked list</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -433,7 +429,7 @@
                 <button class="ac">WAP to implement circular linked list </button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -444,7 +440,7 @@
                 <button class="ac">WAP to implement priority queue</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -455,7 +451,7 @@
                 <button class="ac">WAP to implement doubly linked list</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -466,7 +462,7 @@
                 <button class="ac">WAP to implement binary search tree</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -477,7 +473,7 @@
                 <button class="ac">WAP to implement linear search</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -488,7 +484,7 @@
                 <button class="ac">WAP to implement binary search</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -499,7 +495,7 @@
                 <button class="ac">WAP to implement insertion sort</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -510,7 +506,7 @@
                 <button class="ac">WAP to implement selection sort</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -521,7 +517,7 @@
                 <button class="ac">WAP to implement bubble sort</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -532,7 +528,7 @@
                 <button class="ac">WAP to implement quick sort</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -543,7 +539,7 @@
                 <button class="ac">WAP to implement merge sort</button>
                 <div class="panel">
                     <pre>
-                        <code>
+                        <code class="language-c">
                             
                         </code>
                     </pre>
@@ -552,6 +548,7 @@
             
         </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../public/main.js"></script>
 </body>
 
