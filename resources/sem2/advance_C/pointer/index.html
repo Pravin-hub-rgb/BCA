@@ -18,6 +18,8 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -67,26 +69,28 @@
                 access and manipulate the data stored in that memory location using pointers.</li>
         </ul>
         <p>Advantages of pointer:
-            <ol>
-                <li>Dynamic memory allocation: Pointers allow dynamic memory allocation, which means that memory can be allocated during runtime, depending on the program's needs. This makes it easier to create data structures like linked lists, trees, etc.</li>
-                <li>Pass by reference : C uses pass by value as a default, which means that function arguments are copied to the function's stack. With pointers, it is possible to pass a variable by reference, which means that the function can modify the original variable.</li>
-                <li>Efficient memory usage:Pointers allow efficient use of memory since they can point to any memory location. This can help to reduce memory usage, especially for large data structures.</li>
-            </ol>
+        <ol>
+            <li>Dynamic memory allocation: Pointers allow dynamic memory allocation, which means that memory can be
+                allocated during runtime, depending on the program's needs. This makes it easier to create data
+                structures like linked lists, trees, etc.</li>
+            <li>Pass by reference : C uses pass by value as a default, which means that function arguments are copied to
+                the function's stack. With pointers, it is possible to pass a variable by reference, which means that
+                the function can modify the original variable.</li>
+            <li>Efficient memory usage:Pointers allow efficient use of memory since they can point to any memory
+                location. This can help to reduce memory usage, especially for large data structures.</li>
+        </ol>
         </p>
         <div id="t2" class="wh">
             <h2>Syntax of pointer</h2>
-            <div class='code'>
-                <pre>
-                   <code>
-                   
-                    datatype *pointer_name;
+            <pre>
+                   <code>          
+datatype *pointer_name;
 
-                    int *p;
-                    float *f;
-                    char *c;
+int *p;
+float *f;
+char *c;
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t3" class="wh">
             <h2>Operator in pointer</h2>
@@ -99,14 +103,11 @@
                 </li>
                 <li>& &rarr; The addressof operator is a unary operator that returns the address of its operand. Its
                     operand can be a variable, function, array, structure, etc.
-                    <div class='code'>
-                        <pre>
-                           <code>
-                           
-                            &variable_name;
+                    <pre>
+                           <code>    
+&variable_name;
                            </code>
                        </pre>
-                    </div>
                 </li>
                 <li>* &rarr; The dereference operator, also known as the indirection operator is a unary operator. It is
                     used in pointer declaration and dereferencing.</li>
@@ -125,14 +126,11 @@
             </ul>
             <div class="in">
                 <h3>C pointer definition</h3>
-                <div class='code'>
-                    <pre>
+                <pre>
                        <code>
-                       
-                        datatype *pointer_name = address;
+datatype *pointer_name = address;
                        </code>
                    </pre>
-                </div>
                 <ul>
                     <li>The above method is called pointer definition as the pointer is declared and initialized at the
                         same time.</li>
@@ -144,15 +142,12 @@
                     <li>The second method of pointer initialization in C is assigning some address after the
                         declaration.</li>
                 </ul>
-                <div class='code'>
-                    <pre>
+                <pre>
                        <code>
-                       
-                        datatype *pointer_name;
-                        pointer_name = address;
+datatype *pointer_name;
+pointer_name = address;
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div id="t5" class="wh">
@@ -164,27 +159,23 @@
             <img src="../../images/pointer.svg" alt="" class="wb">
             <div class="in">
                 <h3>Program to calculate sum of two number using pointer.</h3>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
+                <pre>
                        <code>
-                       
-                        #include&lt;stdio.h>
-                        int main()
-                        {
-                            int a = 10;
-                            int b = 20;
-                            int c = 0;
-                            int *x = &amp;a;
-                            int *y = &amp;b;
-                            int *z = &amp;c;
-                            *z = *x + *y;
-                            printf("The sum is %d", *z);
-                            return 0;
-                        }
+#include&lt;stdio.h>
+int main()
+{
+    int a = 10;
+    int b = 20;
+    int c = 0;
+    int *x = &amp;a;
+    int *y = &amp;b;
+    int *z = &amp;c;
+    *z = *x + *y;
+    printf("The sum is %d", *z);
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div class='code'>
@@ -193,25 +184,24 @@
             <div class="panel">
                 <pre>
                 <code>
-                
-                     #include &lt;stdio.h>
-                     int main()
-                     {
-                        int var = 10, *ptr;
-                        ptr = &var;
-                     
-                        printf("Value at ptr = %p\n", ptr);         // prints 0x7ff7bec385a8
-                        printf("Value at var = %d\n", var);         // prints 10
-                        printf("Value at *ptr = %d\n", *ptr);       // prints 10
-                        printf("Value at *(&var) = %d\n", *(&var)); // prints 10
-                        printf("Value at &ptr = %p\n", &ptr); // prints address of ptr variable - 0x7ff7b1dc55a0
-                        return 0;
-                     }
-                     
-                     /*
-                        %p is used for printing address in Hexa decimal form
-                        %u is unsigned form
-                     */
+#include &lt;stdio.h>
+int main()
+{
+int var = 10, *ptr;
+ptr = &var;
+
+printf("Value at ptr = %p\n", ptr);         // prints 0x7ff7bec385a8
+printf("Value at var = %d\n", var);         // prints 10
+printf("Value at *ptr = %d\n", *ptr);       // prints 10
+printf("Value at *(&var) = %d\n", *(&var)); // prints 10
+printf("Value at &ptr = %p\n", &ptr); // prints address of ptr variable - 0x7ff7b1dc55a0
+return 0;
+}
+
+/*
+%p is used for printing address in Hexa decimal form
+%u is unsigned form
+*/
                 </code>
             </pre>
             </div>
@@ -238,21 +228,20 @@
                 <div class="panel">
                     <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
-                        int main()
-                        {
-                           int a = 5, *p1;
-                           float b = 2.5, *p2;
-                           char c = 'a', *p3;
-                           p1 = &amp;a;
-                           p2 = &amp;b;
-                           p3 = &amp;c;
-                           printf("%d", sizeof(p1));
-                           printf("%d", sizeof(p2));
-                           printf("%d", sizeof(p3));
-                           return 0;
-                        }
+#include &lt;stdio.h>
+int main()
+{
+    int a = 5, *p1;
+    float b = 2.5, *p2;
+    char c = 'a', *p3;
+    p1 = &amp;a;
+    p2 = &amp;b;
+    p3 = &amp;c;
+    printf("%d", sizeof(p1));
+    printf("%d", sizeof(p2));
+    printf("%d", sizeof(p3));
+    return 0;
+}
                    </code>
                </pre>
                 </div>
@@ -260,45 +249,37 @@
         </div>
         <div id="t7" class="wh">
             <h2>Storing one pointer value to another pointer value.</h2>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+            <pre>
                    <code>
-                   
-                    #include&lt;stdio.h>
-                    int main()
-                    {
-                        int var = 10;
-                        int *ptr;
-                        int *q;
-                        ptr = &amp;var;
-                        // *q = *ptr; // this is invalid 
-                        // because (q) is not initialized with any address so we cannot dereference it.
-                        return 0;
-                    }
+#include&lt;stdio.h>
+int main()
+{
+    int var = 10;
+    int *ptr;
+    int *q;
+    ptr = &amp;var;
+    // *q = *ptr; // this is invalid 
+    // because (q) is not initialized with any address so we cannot dereference it.
+    return 0;
+}
                    </code>
                </pre>
-            </div>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+            <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
-                        int main()
-                        {
-                           int var = 10, var2 = 20;
-                           int *ptr;
-                           int *q;
-                           ptr = &var;
-                           q = &var2;
-                           *q = *ptr; // now this is valid
-                           printf("%d", *q);
-                           return 0;
-                        }
+#include &lt;stdio.h>
+int main()
+{
+    int var = 10, var2 = 20;
+    int *ptr;
+    int *q;
+    ptr = &var;
+    q = &var2;
+    *q = *ptr; // now this is valid
+    printf("%d", *q);
+    return 0;
+}
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t8" class="wh">
             <h2>Pointer to Pointer (Double Pointer)</h2>
@@ -308,27 +289,23 @@
             </ul>
             <div class="in">
                 <h3>Program to demonstrate use of double pointer.</h3>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
+                <pre>
                        <code>
-                       
-                        #include&lt;stdio.h>
-                        int main()
-                        {
-                            // int *p = &a, a =10; // this statement is wrong because "a" have to be declared first.
-                            int a = 10, *p, **q;
-                            p = &amp;a;
-                            q = &amp;p;
+#include&lt;stdio.h>
+int main()
+{
+    // int *p = &a, a =10; // this statement is wrong because "a" have to be declared first.
+    int a = 10, *p, **q;
+    p = &amp;a;
+    q = &amp;p;
 
-                            printf("%d", a); // 10
-                            printf("%d", *p); // 10
-                            printf("%d", **q); // 10
-                            return 0;
-                        }
+    printf("%d", a); // 10
+    printf("%d", *p); // 10
+    printf("%d", **q); // 10
+    return 0;
+}
                        </code>
                    </pre>
-                </div>
             </div>
         </div>
         <div id="t13" class="wh">
@@ -341,14 +318,11 @@
                     function callbacks.</li>
             </ul>
             <p>To declare a pointer to a function in C, you use the following syntax:</p>
-            <div class='code'>
-                <pre>
+            <pre>
                    <code>
-                   
-                    return_type (*pointer_name)(argument_list);
+return_type (*pointer_name)(argument_list);
                    </code>
                </pre>
-            </div>
             <ul>
                 <li>Here, return_type is the return type of the function being pointed to, pointer_name is the name of
                     the pointer variable, and argument_list is the list of arguments that the function being pointed to
@@ -356,82 +330,69 @@
             </ul>
             <p>For example, here's a declaration of a function pointer that takes two integers and returns an integer
                 &darr;</p>
-            <div class='code'>
-                <pre>
+            <pre>
                    <code>
-                   
-                    int (*add)(int, int);
-                   </code>
-               </pre>
-            </div>
-            <p>To assign a function to a function pointer, you simply assign the address of the function to the pointer variable &darr;</p>
-            <div class='code'>
-               <pre>
-                   <code>
-                   
-                    int sum(int a, int b)
-                    {
-                        return a + b;
-                    }
 
-                    add = &amp;sum;
+int (*add)(int, int);
                    </code>
                </pre>
-            </div>
+            <p>To assign a function to a function pointer, you simply assign the address of the function to the pointer
+                variable &darr;</p>
+            <pre>
+                   <code>                   
+int sum(int a, int b)
+{
+    return a + b;
+}
+
+add = &amp;sum;
+                   </code>
+               </pre>
             <ul>
                 <li>Here, &sum is the address of the sum() function, which is assigned to the add pointer.</li>
             </ul>
             <p>To call the function through the pointer, you can use the following syntax &darr;</p>
-            <div class='code'>
-               <pre>
+            <pre>
                    <code>
-                   
-                    int result = (*add)(3, 4);
+int result = (*add)(3, 4);
                    </code>
                </pre>
-            </div>
             <ul>
-                <li>Here, (*add) dereferences the pointer to the sum() function, allowing you to call the function with the arguments (3, 4).</li>
+                <li>Here, (*add) dereferences the pointer to the sum() function, allowing you to call the function with
+                    the arguments (3, 4).</li>
             </ul>
             <p>Alternatively, you can use the shorthand notation &darr;</p>
-            <div class='code'>
-               <pre>
-                   <code>
-                   
-                    int result = add(3, 4);
+            <pre>
+                   <code>                   
+int result = add(3, 4);
                    </code>
                </pre>
-            </div>
             <p>Here's a complete example program that demonstrates the use of function pointers in C &darr;</p>
-            <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+            <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
+#include &lt;stdio.h>
 
-                        int sum(int a, int b) {
-                            return a + b;
-                        }
-                        
-                        int product(int a, int b) {
-                            return a * b;
-                        }
-                        
-                        int main() {
-                            int (*func_ptr)(int, int);
-                            
-                            func_ptr = &amp;sum;
-                            printf("sum(3, 4) = %d\n", (*func_ptr)(3, 4));
-                            
-                            func_ptr = &product;
-                            printf("product(3, 4) = %d\n", (*func_ptr)(3, 4));
-                            
-                            return 0;
-                        }                        
+int sum(int a, int b) {
+    return a + b;
+}
+
+int product(int a, int b) {
+    return a * b;
+}
+
+int main() {
+    int (*func_ptr)(int, int);
+    
+    func_ptr = &amp;sum;
+    printf("sum(3, 4) = %d\n", (*func_ptr)(3, 4));
+    
+    func_ptr = &product;
+    printf("product(3, 4) = %d\n", (*func_ptr)(3, 4));
+    
+    return 0;
+}                        
                    </code>
                </pre>
-            </div>
         </div>
         <div id="t9" class="wh">
             <h2>Pointer Arithmetic</h2>
@@ -448,797 +409,690 @@
             <img src="../../images/pointer1.svg" alt="" class="wb">
             <div class="in">
                 <h3>Addition of an integer to a pointer and increment operation.</h3>
-                <div class='code'>
-                    <pre>
+                <pre>
                        <code>
-                       
-                        int *ptr;
-                        // let's say address of "ptr" is 1000
-                        ptr = ptr + 1;
-                        // let's say integer takes 4 bytes then
-                        ptr + 1 will be 1004
+int *ptr;
+// let's say address of "ptr" is 1000
+ptr = ptr + 1;
+// let's say integer takes 4 bytes then
+ptr + 1 will be 1004
 
-                        // now same with increment 
-                        p++ means 1004 + 4 = 1008
+// now same with increment 
+p++ means 1004 + 4 = 1008
                        </code>
                    </pre>
-                </div>
             </div>
             <p>Program to show pointer arithmetic &darr;</p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+            <pre>
                    <code>
-                   
-                        #include &lt;stdio.h>
-                        int main()
-                        {
-                            int a = 5, *pi = &a;
-                            char b = 'x', *pc = &b;
-                            float c = 5.5, *pf = &c;
-                            printf("Value of pi = %d  Address of a = %lu\n", *pi, (unsigned long)pi);
-                            printf("Value of pc = %c  Address of b = %lu\n", *pc, (unsigned long)pc);
-                            printf("Value of pf = %.1f  Address of c = %lu\n", *pf, (unsigned long)pf);
-                        
-                            // Incrementing pointers using pointer arithmetic
-                            pi++;
-                            pc++;
-                            pf++;
-                        
-                            printf("After incrementing:\n");
-                            printf("Modified address of a = %lu\n", (unsigned long)pi);
-                            printf("Modified address of b = %lu\n", (unsigned long)pc);
-                            printf("Modified address of c = %lu\n", (unsigned long)pf);
-                        
-                            // Decrementing pointers using pointer arithmetic
-                            pi--;
-                            pc--;
-                            pf--;
-                        
-                            printf("After decrementing:\n");
-                            printf("Modified address of a = %lu\n", (unsigned long)pi);
-                            printf("Modified address of b = %lu\n", (unsigned long)pc);
-                            printf("Modified address of c = %lu\n", (unsigned long)pf);
-                        
-                            // Adding a constant value to pointers
-                            pi += 2;
-                            pc += 2;
-                            pf += 2;
-                        
-                            printf("After adding 2:\n");
-                            printf("Modified address of a = %lu\n", (unsigned long)pi);
-                            printf("Modified address of b = %lu\n", (unsigned long)pc);
-                            printf("Modified address of c = %lu\n", (unsigned long)pf);
-                        
-                            // Subtracting a constant value from pointers
-                            pi -= 2;
-                            pc -= 2;
-                            pf -= 2;
-                        
-                            printf("After subtracting 2:\n");
-                            printf("Modified address of a = %lu\n", (unsigned long)pi);
-                            printf("Modified address of b = %lu\n", (unsigned long)pc);
-                            printf("Modified address of c = %lu\n", (unsigned long)pf);
-                        
-                            return 0;
-                        }
+#include &lt;stdio.h>
+int main()
+{
+    int a = 5, *pi = &a;
+    char b = 'x', *pc = &b;
+    float c = 5.5, *pf = &c;
+    printf("Value of pi = %d  Address of a = %lu\n", *pi, (unsigned long)pi);
+    printf("Value of pc = %c  Address of b = %lu\n", *pc, (unsigned long)pc);
+    printf("Value of pf = %.1f  Address of c = %lu\n", *pf, (unsigned long)pf);
+
+    // Incrementing pointers using pointer arithmetic
+    pi++;
+    pc++;
+    pf++;
+
+    printf("After incrementing:\n");
+    printf("Modified address of a = %lu\n", (unsigned long)pi);
+    printf("Modified address of b = %lu\n", (unsigned long)pc);
+    printf("Modified address of c = %lu\n", (unsigned long)pf);
+
+    // Decrementing pointers using pointer arithmetic
+    pi--;
+    pc--;
+    pf--;
+
+    printf("After decrementing:\n");
+    printf("Modified address of a = %lu\n", (unsigned long)pi);
+    printf("Modified address of b = %lu\n", (unsigned long)pc);
+    printf("Modified address of c = %lu\n", (unsigned long)pf);
+
+    // Adding a constant value to pointers
+    pi += 2;
+    pc += 2;
+    pf += 2;
+
+    printf("After adding 2:\n");
+    printf("Modified address of a = %lu\n", (unsigned long)pi);
+    printf("Modified address of b = %lu\n", (unsigned long)pc);
+    printf("Modified address of c = %lu\n", (unsigned long)pf);
+
+    // Subtracting a constant value from pointers
+    pi -= 2;
+    pc -= 2;
+    pf -= 2;
+
+    printf("After subtracting 2:\n");
+    printf("Modified address of a = %lu\n", (unsigned long)pi);
+    printf("Modified address of b = %lu\n", (unsigned long)pc);
+    printf("Modified address of c = %lu\n", (unsigned long)pf);
+
+    return 0;
+}
                    </code>
                </pre>
-            </div>
-            <p>Output &darr;</p>
-            <div class='code'>
-                <pre>
+        <p>Output &darr;</p>
+        <pre>
                    <code>
-                   
-                    Value of pi = 5  Address of a = 140701867095480
-                    Value of pc = x  Address of b = 140701867095471
-                    Value of pf = 5.5  Address of c = 140701867095452
-                    After incrementing:
-                    Modified address of a = 140701867095484
-                    Modified address of b = 140701867095472
-                    Modified address of c = 140701867095456
-                    After decrementing:
-                    Modified address of a = 140701867095480
-                    Modified address of b = 140701867095471
-                    Modified address of c = 140701867095452
-                    After adding 2:
-                    Modified address of a = 140701867095488
-                    Modified address of b = 140701867095473
-                    Modified address of c = 140701867095460
-                    After subtracting 2:
-                    Modified address of a = 140701867095480
-                    Modified address of b = 140701867095471
-                    Modified address of c = 140701867095452
+Value of pi = 5  Address of a = 140701867095480
+Value of pc = x  Address of b = 140701867095471
+Value of pf = 5.5  Address of c = 140701867095452
+After incrementing:
+Modified address of a = 140701867095484
+Modified address of b = 140701867095472
+Modified address of c = 140701867095456
+After decrementing:
+Modified address of a = 140701867095480
+Modified address of b = 140701867095471
+Modified address of c = 140701867095452
+After adding 2:
+Modified address of a = 140701867095488
+Modified address of b = 140701867095473
+Modified address of c = 140701867095460
+After subtracting 2:
+Modified address of a = 140701867095480
+Modified address of b = 140701867095471
+Modified address of c = 140701867095452
                    </code>
                </pre>
-            </div>
-            <div class="in">
-                <h3>Precedence of dereferencing operator and increment/decrement operators</h3>
+        <div class="in">
+            <h3>Precedence of dereferencing operator and increment/decrement operators</h3>
+            <ul>
+                <li>The precedence level of * operator and incremenet/decrement operators is same and their
+                    associativity is from right to left.</li>
+                <li>There can be confusion while combining these operators in pointer expressions, so we should use
+                    them carefully.</li>
+            </ul>
+            <div class="wh">
+                <p><b>x = *ptr++;</b></p>
                 <ul>
-                    <li>The precedence level of * operator and incremenet/decrement operators is same and their
-                        associativity is from right to left.</li>
-                    <li>There can be confusion while combining these operators in pointer expressions, so we should use
-                        them carefully.</li>
-                </ul>
-                <div class="wh">
-                    <p><b>x = *ptr++;</b></p>
-                    <ul>
-                        <li>The expression *ptr++ is equivalent to *(ptr++).</li>
-                        <li>Since these operators associate from right to left. Hence the increment operator will be
-                            applied to ptr, and not to *ptr.</li>
-                        <li>The increment operator is postfix, so first the value of ptr will be used in the expression
-                            and then it will be incremented.</li>
-                        <li>Hence firstly the integer pointed to by ptr will be dereferenced and assigned to x and then
-                            ptr will be incremented.</li>
-                        <li>This is same as:
-                            <div class='code'>
-                                <pre>
-                                   <code>
-                                   
-                                    x = *ptr;
-                                    ptr = ptr + 1;
+                    <li>The expression *ptr++ is equivalent to *(ptr++).</li>
+                    <li>Since these operators associate from right to left. Hence the increment operator will be
+                        applied to ptr, and not to *ptr.</li>
+                    <li>The increment operator is postfix, so first the value of ptr will be used in the expression
+                        and then it will be incremented.</li>
+                    <li>Hence firstly the integer pointed to by ptr will be dereferenced and assigned to x and then
+                        ptr will be incremented.</li>
+                    <li>This is same as:
+                        <pre>
+                                   <code>            
+x = *ptr;
+ptr = ptr + 1;
                                    </code>
                                </pre>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="wh">
-                    <p><b>x = *++ptr;</b></p>
-                    <ul>
-                        <li>The expression *++ptr is equivalent to *(++ptr).</li>
-                        <li>Here also the increment operator is applied ptr.</li>
-                        <li>The increment operator is prefix, so first ptr will be incremented and then its new value
-                            will be used in the expression.</li>
-                        <li>Hence firstly the value of ptr is incremented, then value at the new address is dereferenced
-                            and assigned to x.</li>
-                        <li>This is same as:
-                            <div class='code'>
-                                <pre>
-                                   <code>
-                                   
-                                    *ptr = *ptr + 1;
-                                    x = *ptr;
-                                   </code>
-                               </pre>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="wh">
-                    <p><b>x = ++*ptr</b></p>
-                    <ul>
-                        <li>The expression ++*ptr is equivalent to ++(*ptr).</li>
-                        <li>Here the increment operator is applied over *ptr and not ptr.</li>
-                        <li>So ere the value of pointer will not change but the value pointed to by the pointer will
-                            change i.e. *ptr will increment.</li>
-                        <li>Since the increment operator is prefic hence first the value of *ptr will increment and then
-                            this will be assigned to x.</li>
-                        <li>This is same as:
-                            <div class='code'>
-                                <pre>
-                                   <code>
-                                   
-                                    *ptr = *ptr + 1;
-                                    x = *ptr;
-                                   </code>
-                               </pre>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="wh">
-                    <p><b>x = (*ptr)++</b></p>
-                    <ul>
-                        <li>Here also the increment operator is applied over *ptr and since it is postfix increment
-                            hence first the value of *ptr will be assigned to x and then it will be incremented.</li>
-                        <li>This is same as:
-                            <div class='code'>
-                                <pre>
-                                   <code>
-                                   
-                                    x = *ptr;
-                                    *ptr = *ptr + 1;
-                                   </code>
-                               </pre>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <p>Let us take an example and understad how these expressions are interpreted.
-                <ul>
-                    <li>Suppose value at address 2000 is 25, value at address 2002 is 38, ptr is an integer (4 byte
-                        size) pointer that
-                        contains address 2000 hence value of *ptr is 25.</li>
-                    <li>now we'll see what will be the result in these cases:
-                        <ol>
-                            <li>x = *ptr++;</li>
-                            <li>x = *++ptr;</li>
-                            <li>x = ++*ptr;</li>
-                            <li>x = (*ptr)++;</li>
-                        </ol>
                     </li>
                 </ul>
-                <img src="../../images/pointer2.svg" alt="" class="wb">
-                </p>
             </div>
-        </div>
-        <div id="t10" class="wh">
-            <h2>Pointers and One Dimensional Arrays</h2>
+            <div class="wh">
+                <p><b>x = *++ptr;</b></p>
+                <ul>
+                    <li>The expression *++ptr is equivalent to *(++ptr).</li>
+                    <li>Here also the increment operator is applied ptr.</li>
+                    <li>The increment operator is prefix, so first ptr will be incremented and then its new value
+                        will be used in the expression.</li>
+                    <li>Hence firstly the value of ptr is incremented, then value at the new address is dereferenced
+                        and assigned to x.</li>
+                    <li>This is same as:
+                        <pre>
+                                   <code>            
+*ptr = *ptr + 1;
+x = *ptr;
+                                   </code>
+                               </pre>
+                    </li>
+                </ul>
+            </div>
+            <div class="wh">
+                <p><b>x = ++*ptr</b></p>
+                <ul>
+                    <li>The expression ++*ptr is equivalent to ++(*ptr).</li>
+                    <li>Here the increment operator is applied over *ptr and not ptr.</li>
+                    <li>So ere the value of pointer will not change but the value pointed to by the pointer will
+                        change i.e. *ptr will increment.</li>
+                    <li>Since the increment operator is prefic hence first the value of *ptr will increment and then
+                        this will be assigned to x.</li>
+                    <li>This is same as:
+                        <pre>
+                                   <code>            
+*ptr = *ptr + 1;
+x = *ptr;
+                                   </code>
+                               </pre>
+                    </li>
+                </ul>
+            </div>
+            <div class="wh">
+                <p><b>x = (*ptr)++</b></p>
+                <ul>
+                    <li>Here also the increment operator is applied over *ptr and since it is postfix increment
+                        hence first the value of *ptr will be assigned to x and then it will be incremented.</li>
+                    <li>This is same as:
+                        <pre>
+                                   <code>            
+x = *ptr;
+*ptr = *ptr + 1;
+                                   </code>
+                               </pre>
+                    </li>
+                </ul>
+            </div>
+            <p>Let us take an example and understad how these expressions are interpreted.
             <ul>
-                <li>In C language, pointers and arrays are closely related. We can access the array elements using
-                    pointer expressions. Following are the main points for understanding the relationship of pointers
-                    with arrays.
+                <li>Suppose value at address 2000 is 25, value at address 2002 is 38, ptr is an integer (4 byte
+                    size) pointer that
+                    contains address 2000 hence value of *ptr is 25.</li>
+                <li>now we'll see what will be the result in these cases:
                     <ol>
-                        <li>Elements of an array are stored in consecutive memory locations.</li>
-                        <li>The name of an array is a contant pointer that points to the first element of the array,
-                            i.e. it stores the address of the first element, also known as the base address of array.
-                        </li>
-                        <li>According to pointer arithmetic, when a pointer variable is incremented, it points to the
-                            next location of its base type.</li>
+                        <li>x = *ptr++;</li>
+                        <li>x = *++ptr;</li>
+                        <li>x = ++*ptr;</li>
+                        <li>x = (*ptr)++;</li>
                     </ol>
                 </li>
             </ul>
-            <p>Following program shows that the elements of an array are stored in consecutive memory locations.</p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
-                   <code>
-                   
-                        #include &lt;stdio.h>
-                        int main()
-                        {
-                           int arr[5] = {5, 10, 15, 20, 25};
-                           int i;
-                           for (i = 0; i < 5; i++)
-                           {
-                              printf("Value of arr[%d] = %d\t", i, arr[i]);
-                              printf("Address of arr[%d] = %u\n", i, &arr[i]);
-                           }
-                           return 0;
-                        }
+            <img src="../../images/pointer2.svg" alt="" class="wb">
+            </p>
+        </div>
+    </div>
+    <div id="t10" class="wh">
+        <h2>Pointers and One Dimensional Arrays</h2>
+        <ul>
+            <li>In C language, pointers and arrays are closely related. We can access the array elements using
+                pointer expressions. Following are the main points for understanding the relationship of pointers
+                with arrays.
+                <ol>
+                    <li>Elements of an array are stored in consecutive memory locations.</li>
+                    <li>The name of an array is a contant pointer that points to the first element of the array,
+                        i.e. it stores the address of the first element, also known as the base address of array.
+                    </li>
+                    <li>According to pointer arithmetic, when a pointer variable is incremented, it points to the
+                        next location of its base type.</li>
+                </ol>
+            </li>
+        </ul>
+        <p>Following program shows that the elements of an array are stored in consecutive memory locations.</p>
+        <pre>
+                   <code>              
+#include &lt;stdio.h>
+int main()
+{
+int arr[5] = {5, 10, 15, 20, 25};
+int i;
+for (i = 0; i < 5; i++)
+{
+    printf("Value of arr[%d] = %d\t", i, arr[i]);
+    printf("Address of arr[%d] = %u\n", i, &arr[i]);
+}
+return 0;
+}
                    </code>
                </pre>
-            </div>
+        <p>Output &darr;</p>
+        <pre>
+                   <code>
+Value of arr[0] = 5     Address of arr[0] = 2000
+Value of arr[1] = 10    Address of arr[1] = 2002
+Value of arr[2] = 15    Address of arr[2] = 2004
+Value of arr[3] = 20    Address of arr[3] = 2006
+Value of arr[4] = 25    Address of arr[4] = 2008
+                   </code>
+               </pre>
+        <ul>
+            <li>The name of the array 'arr' denotes the address of 0<sup>th</sup> element of array which is let's
+                say 2000.</li>
+            <li>The address of 0<sup>th</sup> element can also be given by &arr[0], arr and &arr[0] represent the
+                same address.</li>
+            <li>The name of an array is a constant pointer, and according to pointer arithmetic when an integer is
+                added to a pointer then we get the address of next element of same base type.</li>
+            <li>Hence (arr+1) will denote the address of the next element arr[1]. </li>
+            <li>Similarly (arr+2) denotes the address of arr[2] and so on.</li>
+        </ul>
+        <pre>
+                   <code>
+arr   -> Points to 0th element -> &arr[0] -> 2000
+arr+1 -> Points to 1st element -> &arr[1] -> 2002 (assuming 'int' take 2 bytes)
+arr+2 -> Points t0 2nd element -> &arr[2] -> 2004
+arr+3 -> Points to 3rd element -> &arr[3] -> 2006
+arr+4 -> Points to 4th element -> &arr[4] -> 2008
+                   </code>
+               </pre>
+        <ul>
+            <li>Now if we dereference arr, then we get the 0<sup>th</sup> element of array, i.e. expression *arr or
+                *(arr+0) represents 0<sup>th</sup> element of array. Similarly on dereferencing (arr+1) we get the
+                1<sup>st</sup> element and so on.</li>
+        </ul>
+        <pre>
+                   <code>
+*arr      ->   Value of 0th element   -> arr[0]   -> 5
+*(arr+1)  ->   Value of 1st element   -> arr[1]   -> 10
+*(arr+2)  ->   Value of 2nd element   -> arr[2]   -> 15
+*(arr+3)  ->   Value of 3rd element   -> arr[3]   -> 20
+*(arr+4)  ->   Value of 4th element   -> arr[4]   -> 25
+                   </code>
+               </pre>
+        <ul>
+            <li>So instead of arr[i] we can use *(arr+i)</li>
+        </ul>
+        <p>Program to print the value and address of elements of an array using pointer notation</p>
+        <pre>
+                   <code>
+#include &lt;stdio.h>
+int main()
+{
+    int arr[5] = {5, 10, 15, 20, 25};
+    int i;
+    for (i = 0; i < 5; i++)
+    {
+        printf("Value of arr[%d] = %d\t", i, *(arr + i));
+        printf("Address of arr[%d] = %u\n", i, arr + i);
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+        <p>Output &darr;</p>
+        <pre>
+                   <code>
+Value of arr[0] = 5     Address of arr[0] = 2000
+Value of arr[1] = 10    Address of arr[1] = 2002
+Value of arr[2] = 15    Address of arr[2] = 2004
+Value of arr[3] = 20    Address of arr[3] = 2006
+Value of arr[4] = 25    Address of arr[4] = 2008
+                   </code>
+               </pre>
+    </div>
+    <div id="t11" class="wh">
+        <h2>Types of Pointers</h2>
+        <ul>
+            <li>There are eight different types of pointers which are as follows:
+                <ol>
+                    <li>Null pointer</li>
+                    <li>Void pointer</li>
+                    <li>Wild pointer</li>
+                    <li>Dangling pointer</li>
+                    <li>Near pointer</li>
+                    <li>Far pointer</li>
+                    <li>Huge pointer</li>
+                </ol>
+            </li>
+        </ul>
+        <div class="in">
+            <h3>Null Pointer</h3>
+            <ul>
+                <li>When we assign null value at the time of pointer declaration.</li>
+                <li>This method is useful when you do not assign any address to the pointer. A null pointer always
+                    contains value 0.</li>
+            </ul>
+            <p>Example code &darr;</p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+int main()
+{
+    int *ptr = NULL; // null pointer
+    printf("The value inside variable ptr is:%d",ptr);
+    return 0;
+}
+                       </code>
+                   </pre>
             <p>Output &darr;</p>
-            <div class='code'>
-                <pre>
-                   <code>
-                   
-                    Value of arr[0] = 5     Address of arr[0] = 2000
-                    Value of arr[1] = 10    Address of arr[1] = 2002
-                    Value of arr[2] = 15    Address of arr[2] = 2004
-                    Value of arr[3] = 20    Address of arr[3] = 2006
-                    Value of arr[4] = 25    Address of arr[4] = 2008
-                   </code>
-               </pre>
-            </div>
+            <pre>
+                       <code>
+The value inside variable ptr is:0
+                       </code>
+                   </pre>
+        </div>
+        <div class="in">
+            <h3>Void Pointer</h3>
             <ul>
-                <li>The name of the array 'arr' denotes the address of 0<sup>th</sup> element of array which is let's
-                    say 2000.</li>
-                <li>The address of 0<sup>th</sup> element can also be given by &arr[0], arr and &arr[0] represent the
-                    same address.</li>
-                <li>The name of an array is a constant pointer, and according to pointer arithmetic when an integer is
-                    added to a pointer then we get the address of next element of same base type.</li>
-                <li>Hence (arr+1) will denote the address of the next element arr[1]. </li>
-                <li>Similarly (arr+2) denotes the address of arr[2] and so on.</li>
+                <li>It is a pointer that has no associated data type with it.</li>
+                <li>A void pointer can hold address of any type and can be typecast to any type.</li>
+                <li>It is also called a generic pointer and does not have any standard data type.</li>
+                <li>It is created by using the keyword void.</li>
             </ul>
-            <div class='code'>
-                <pre>
-                   <code>
-                   
-                    arr   -> Points to 0th element -> &arr[0] -> 2000
-                    arr+1 -> Points to 1st element -> &arr[1] -> 2002 (assuming 'int' take 2 bytes)
-                    arr+2 -> Points t0 2nd element -> &arr[2] -> 2004
-                    arr+3 -> Points to 3rd element -> &arr[3] -> 2006
-                    arr+4 -> Points to 4th element -> &arr[4] -> 2008
-                   </code>
-               </pre>
-            </div>
-            <ul>
-                <li>Now if we dereference arr, then we get the 0<sup>th</sup> element of array, i.e. expression *arr or
-                    *(arr+0) represents 0<sup>th</sup> element of array. Similarly on dereferencing (arr+1) we get the
-                    1<sup>st</sup> element and so on.</li>
-            </ul>
-            <div class='code'>
-                <pre>
-                   <code>
-                   
-                    *arr      ->   Value of 0th element   -> arr[0]   -> 5
-                    *(arr+1)  ->   Value of 1st element   -> arr[1]   -> 10
-                    *(arr+2)  ->   Value of 2nd element   -> arr[2]   -> 15
-                    *(arr+3)  ->   Value of 3rd element   -> arr[3]   -> 20
-                    *(arr+4)  ->   Value of 4th element   -> arr[4]   -> 25
-                   </code>
-               </pre>
-            </div>
-            <ul>
-                <li>So instead of arr[i] we can use *(arr+i)</li>
-            </ul>
-            <p>Program to print the value and address of elements of an array using pointer notation</p>
-            <div class='code'>
-                <div class="dotc"></div>
-                <pre>
-                   <code>
-                   
-                        #include &lt;stdio.h>
-                        int main()
-                        {
-                           int arr[5] = {5, 10, 15, 20, 25};
-                           int i;
-                           for (i = 0; i < 5; i++)
-                           {
-                              printf("Value of arr[%d] = %d\t", i, *(arr + i));
-                              printf("Address of arr[%d] = %u\n", i, arr + i);
-                           }
-                           return 0;
-                        }
-                   </code>
-               </pre>
-            </div>
+            <p>Example code &darr;</p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+int main()
+{
+    char a = 'a';
+    void *p; // void pointer
+    p = &amp;a;
+    printf("The size of pointer is:%d", sizeof(p)); // size of p depends on compiler
+    return 0;
+}
+                       </code>
+                   </pre>
             <p>Output &darr;</p>
-            <div class='code'>
+            <pre>
+                       <code>
+The size of pointer is:8
+                       </code>
+                   </pre>
+            <ul>
+                <li>Type casting is used here to use void pointer.</li>
+            </ul>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+int main()
+{
+    int a = 10;
+    void *ptr = &a;
+    printf("*ptr = %d", *(int *)ptr);
+    return 0;
+}
+                       </code>
+                   </pre>
+        </div>
+        <div class="in">
+            <h3>Wild Pointer</h3>
+            <ul>
+                <li>Wild pointers are also called unintialized pointers.</li>
+                <li>Because they point to some arbitrary memory location and may cause a program to crash or behave
+                    badly.</li>
+                <li>This type of C pointer is not efficient. Because they may point to some unknown memory location
+                    which may cause problems in our program. This may lead to the crashing of the program.</li>
+                <li>Advised to be cautious while working with wild pointers.</li>
+            </ul>
+            <p>Example code &darr;</p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+int main()
+{
+    int *p; // wild pointer
+    printf("%d", *p);
+    return 0;
+}
+                       </code>
+                   </pre>
+            <p>Output &darr;</p>
+            <pre>
+                       <code>
+Segment fault
+                       </code>
+                   </pre>
+        </div>
+        <div class="in">
+            <h3>Dangling Pointer</h3>
+            <ul>
+                <li>A pointer pointing to a memory location that has been deleted (or freed) is called dangling
+                    pointer.</li>
+                <li>There are three different ways where pointer acts as dangling pointer.</li>
+            </ul>
+            <div class="wh">
+                <p>1. De-allocation of memory</p>
                 <pre>
-                   <code>
-                   
-                    Value of arr[0] = 5     Address of arr[0] = 2000
-                    Value of arr[1] = 10    Address of arr[1] = 2002
-                    Value of arr[2] = 15    Address of arr[2] = 2004
-                    Value of arr[3] = 20    Address of arr[3] = 2006
-                    Value of arr[4] = 25    Address of arr[4] = 2008
-                   </code>
-               </pre>
+                           <code>    
+#include&lt;stdio.h>
+#include&lt;stdlib.h>
+
+int main()
+{
+    int *ptr = (int *)malloc(sizeof(int));
+    
+    // after free call, ptr becomes a dangling pointer 
+    free(ptr);
+
+    ptr = NULL; // no more dangling pointer
+    return 0;
+}
+                           </code>
+                       </pre>
+            </div>
+            <div class="wh">
+                <p>2. Function call</p>
+                <pre>
+                           <code>    
+#include&lt;stdio.h> 
+
+int * fun() // function returns address
+{
+    // x is local variable and goes out of scope after an execution of fun() is over.
+    int x = 5;
+
+    return &x;
+}
+
+int main()
+{
+    int *p = fun();
+
+    // p points to something which is not valid anymore 
+    printf("%d", *p);
+    return 0;
+}
+                           </code>
+                       </pre>
+                <ul>
+                    <li>For the above program "p" doesn't become dangling if x is a static variable.</li>
+                </ul>
+            </div>
+            <div class="wh">
+                <p>3. Variable goes out of scope</p>
+                <pre>
+                           <code>    
+void main()
+{
+    int *ptr;
+    ... 
+    ... 
+    {
+        int ch;
+        ptr = &ch;
+    }
+    ...
+    // here ptr is dangling pointer.
+}
+                           </code>
+                       </pre>
             </div>
         </div>
-        <div id="t11" class="wh">
-            <h2>Types of Pointers</h2>
+        <div class="in">
+            <h3>Near pointer</h3>
+            <img src="../../images/nearfarptr.svg" alt="" class="wb">
             <ul>
-                <li>There are eight different types of pointers which are as follows:
+                <li>We should know that every address have two parts:
                     <ol>
-                        <li>Null pointer</li>
-                        <li>Void pointer</li>
-                        <li>Wild pointer</li>
-                        <li>Dangling pointer</li>
-                        <li>Near pointer</li>
-                        <li>Far pointer</li>
-                        <li>Huge pointer</li>
+                        <li>Segment address (2 bytes)</li>
+                        <li>Offset address (2 bytes)</li>
                     </ol>
                 </li>
+                <li>Near pointer only store offset address. That's why it's size is 2 bytes.</li>
+                <li>It can store the address of maximum 16 bits only.</li>
+                <li>We can only access 64b of data at a time. Thus, it is considered one of the major disadvantages
+                    of the near pointer, which is why it is no longer commonly used.</li>
+                <li>It is a pointer that works within the range of the 64Kb data segment of memory.</li>
+                <li>It cannot access addresses beyond the given data segment.</li>
+                <li>A near pointer can be incremented or decremented in the address range by using an arithmetic
+                    operator</li>
             </ul>
-            <div class="in">
-                <h3>Null Pointer</h3>
-                <ul>
-                    <li>When we assign null value at the time of pointer declaration.</li>
-                    <li>This method is useful when you do not assign any address to the pointer. A null pointer always
-                        contains value 0.</li>
-                </ul>
-                <p>Example code &darr;</p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            int main()
-                            {
-                               int *ptr = NULL; // null pointer
-                               printf("The value inside variable ptr is:%d",ptr);
-                               return 0;
-                            }
-                       </code>
-                   </pre>
-                </div>
-                <p>Output &darr;</p>
-                <div class='code'>
-                    <pre>
-                       <code>
-                       
-                        The value inside variable ptr is:0
-                       </code>
-                   </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Void Pointer</h3>
-                <ul>
-                    <li>It is a pointer that has no associated data type with it.</li>
-                    <li>A void pointer can hold address of any type and can be typecast to any type.</li>
-                    <li>It is also called a generic pointer and does not have any standard data type.</li>
-                    <li>It is created by using the keyword void.</li>
-                </ul>
-                <p>Example code &darr;</p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            int main()
-                            {
-                               char a = 'a';
-                               void *p; // void pointer
-                               p = &amp;a;
-                               printf("The size of pointer is:%d", sizeof(p)); // size of p depends on compiler
-                               return 0;
-                            }
-                       </code>
-                   </pre>
-                </div>
-                <p>Output &darr;</p>
-                <div class='code'>
-                    <pre>
-                       <code>
-                       
-                        The size of pointer is:8
-                       </code>
-                   </pre>
-                </div>
-                <ul>
-                    <li>Type casting is used here to use void pointer.</li>
-                </ul>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            int main()
-                            {
-                               int a = 10;
-                               void *ptr = &a;
-                               printf("*ptr = %d", *(int *)ptr);
-                               return 0;
-                            }
-                       </code>
-                   </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Wild Pointer</h3>
-                <ul>
-                    <li>Wild pointers are also called unintialized pointers.</li>
-                    <li>Because they point to some arbitrary memory location and may cause a program to crash or behave
-                        badly.</li>
-                    <li>This type of C pointer is not efficient. Because they may point to some unknown memory location
-                        which may cause problems in our program. This may lead to the crashing of the program.</li>
-                    <li>Advised to be cautious while working with wild pointers.</li>
-                </ul>
-                <p>Example code &darr;</p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            int main()
-                            {
-                               int *p; // wild pointer
-                               printf("%d", *p);
-                               return 0;
-                            }
-                            
-                       </code>
-                   </pre>
-                </div>
-                <p>Output &darr;</p>
-                <div class='code'>
-                    <pre>
-                       <code>
-                       
-                        Segment fault
-                       </code>
-                   </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Dangling Pointer</h3>
-                <ul>
-                    <li>A pointer pointing to a memory location that has been deleted (or freed) is called dangling
-                        pointer.</li>
-                    <li>There are three different ways where pointer acts as dangling pointer.</li>
-                </ul>
-                <div class="wh">
-                    <p>1. De-allocation of memory</p>
-                    <div class='code'>
-                        <div class='dotc'></div>
-                        <pre>
-                           <code>
-                           
-                            #include&lt;stdio.h>
-                            #include&lt;stdlib.h>
-
-                            int main()
-                            {
-                                int *ptr = (int *)malloc(sizeof(int));
-                                
-                                // after free call, ptr becomes a dangling pointer 
-                                free(ptr);
-
-                                ptr = NULL; // no more dangling pointer
-                                return 0;
-                            }
+            <p>Example &darr;</p>
+            <pre>
+                           <code>    
+char near * str;
+int near * a;
                            </code>
-                       </pre>
-                    </div>
-                </div>
-                <div class="wh">
-                    <p>2. Function call</p>
-                    <div class='code'>
-                        <div class='dotc'></div>
-                        <pre>
-                           <code>
-                           
-                            #include&lt;stdio.h> 
-                            
-                            int * fun() // function returns address
-                            {
-                                // x is local variable and goes out of scope after an execution of fun() is over.
-                                int x = 5;
-
-                                return &x;
-                            }
-
-                            int main()
-                            {
-                                int *p = fun();
-
-                                // p points to something which is not valid anymore 
-                                printf("%d", *p);
-                                return 0;
-                            }
-                           </code>
-                       </pre>
-                    </div>
-                    <ul>
-                        <li>For the above program "p" doesn't become dangling if x is a static variable.</li>
-                    </ul>
-                </div>
-                <div class="wh">
-                    <p>3. Variable goes out of scope</p>
-                    <div class='code'>
-                        <pre>
-                           <code>
-                           
-                            void main()
-                            {
-                                int *ptr;
-                                ... 
-                                ... 
-                                {
-                                    int ch;
-                                    ptr = &ch;
-                                }
-                                ...
-                                // here ptr is dangling pointer.
-                            }
-                           </code>
-                       </pre>
-                    </div>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Near pointer</h3>
-                <img src="../../images/nearfarptr.svg" alt="" class="wb">
-                <ul>
-                    <li>We should know that every address have two parts:
-                        <ol>
-                            <li>Segment address (2 bytes)</li>
-                            <li>Offset address (2 bytes)</li>
-                        </ol>
-                    </li>
-                    <li>Near pointer only store offset address. That's why it's size is 2 bytes.</li>
-                    <li>It can store the address of maximum 16 bits only.</li>
-                    <li>We can only access 64b of data at a time. Thus, it is considered one of the major disadvantages
-                        of the near pointer, which is why it is no longer commonly used.</li>
-                    <li>It is a pointer that works within the range of the 64Kb data segment of memory.</li>
-                    <li>It cannot access addresses beyond the given data segment.</li>
-                    <li>A near pointer can be incremented or decremented in the address range by using an arithmetic
-                        operator</li>
-                </ul>
-                <p>Example &darr;</p>
-                <div class='code'>
-                    <pre>
-                           <code>
-                           
-                            char near * str;
-                            int near * a;
-                           </code>
-                       </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Far pointer</h3>
-                <ul>
-                    <li>It is 32 bit pointer (4 bytes).</li>
-                    <li>A far pointer is a pointer that can access memory beyond the 64 KB segment boundaries.</li>
-                    <li>It is used to point to variables that are located in a different segment than the pointer
-                        itself. </li>
-                </ul>
-                <p>Example &darr;</p>
-                <div class='code'>
-                    <pre>
-                           <code>
-                           
-                            int far * ptr;
-                           </code>
-                       </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Huge pointer</h3>
-                <ul>
-                    <li>It is a 32 bit pointer (4 byte).</li>
-                    <li>A huge pointer is a pointer that can access memory beyond the 64 KB segment boundaries but has a
-                        larger segment size than a far pointer.</li>
-                    <li>Huge pointer can access whole residence memory.</li>
-                </ul>
-                <p>Example &darr;</p>
-                <div class='code'>
-                    <pre>
-                           <code>
-                           
-                            char huge * ptr;
-                           </code>
-                       </pre>
-                </div>
-            </div>
+                    </pre>
         </div>
-        <div id="t12" class="wh">
-            <h2>Pass by value and pass by reference</h2>
-            <div class="in">
-                <h3>Pass by value</h3>
-                <ul>
-                    <li>Pass by value (another term is 'call by value') means the code within a function cannot alter
-                        the
-                        arguments used to call the function, even if the values are changed inside the function.</li>
-                    <li>That means C creates a copy of the data that the function uses.</li>
-                </ul>
-                <p>An example of a 'swap' function to demonstrate pass by value &darr; </p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            void swap(int x, int y)
-                            {
-                                int temp = x;
-                                x = y;
-                                y = temp;
-                            }
-                            int main()
-                            {
-                                int a = 50;
-                                int b = 100;
-                                printf("\nBefore Swap : \n a = %d \n b = %d", a, b);
-                                swap(a, b);
-                                printf("\n\nAfter Swap : \n a = %d \n b = %d\n", a, b);
-                                return 0;
-                            }
-                       </code>
-                   </pre>
-                </div>
-                <p>output &darr;</p>
-                <div class='code'>
-                    <pre>
-                       <code>
-                       
-                        Before Swap : 
-                        a = 50 
-                        b = 100
-                       
-                       After Swap : 
-                        a = 50 
-                        b = 100
-                       </code>
-                   </pre>
-                </div>
-                <ul>
-                    <li>In the above code the value of 'a' and 'b' remains the same.</li>
-                </ul>
-            </div>
-            <div class="in">
-                <h3>Pass by reference</h3>
-                <ul>
-                    <li>Passing arguments to a called function by reference, means passing the address of memory
-                        location of
-                        the data to the function using '&' (addressof) operator.</li>
-                    <li>Here what is passed in is a copy of the pointer, but what it points to is still the same address
-                        in
-                        memory as the original pointer, so this allows the function to change the value outside the
-                        function.</li>
-                </ul>
-                <p>Swap function using pass by reference &darr;</p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-                            void swap(int *x, int *y)
-                            {
-                                int temp = *x;
-                                *x = *y;
-                                *y = temp;
-                            }
-                            int main()
-                            {
-                                int a = 50;
-                                int b = 100;
-                                printf("\nBefore Swap : \n a = %d \n b = %d", a, b);
-                                swap(&a, &b);
-                                printf("\n\nAfter Swap : \n a = %d \n b = %d\n", a, b);
-                                return 0;
-                            }
-                       </code>
-                   </pre>
-                </div>
-                <p>Output &darr;</p>
-                <div class='code'>
-                    <pre>
-                       <code>
-                       
-                        Before Swap : 
-                        a = 50 
-                        b = 100
-                       
-                       After Swap : 
-                        a = 100 
-                        b = 50
-                       </code>
-                   </pre>
-                </div>
-                <p>Program to sort and array using pointer &darr;</p>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
-                       <code>
-                       
-                            #include &lt;stdio.h>
-
-                            void swap(int *a, int *b) {
-                                int temp = *a;
-                                *a = *b;
-                                *b = temp;
-                            }
-                            
-                            void sort(int *arr, int n) {
-                                for (int i = 0; i < n-1; i++) {
-                                    for (int j = i+1; j < n; j++) {
-                                        if (*(arr+j) < *(arr+i)) {
-                                            swap(arr+i, arr+j);
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            void printArray(int *arr, int n) {
-                                for (int i = 0; i < n; i++) {
-                                    printf("%d ", *(arr+i));
-                                }
-                                printf("\n");
-                            }
-                            
-                            int main() {
-                                int arr[] = {5, 3, 7, 1, 8};
-                                int n = sizeof(arr) / sizeof(int);
-                            
-                                printf("Original array: ");
-                                printArray(arr, n);
-                            
-                                sort(arr, n);
-                            
-                                printf("Sorted array: ");
-                                printArray(arr, n);
-                            
-                                return 0;
-                            }
-                            
-                       </code>
-                   </pre>
-                </div>
-            </div>
+        <div class="in">
+            <h3>Far pointer</h3>
+            <ul>
+                <li>It is 32 bit pointer (4 bytes).</li>
+                <li>A far pointer is a pointer that can access memory beyond the 64 KB segment boundaries.</li>
+                <li>It is used to point to variables that are located in a different segment than the pointer
+                    itself. </li>
+            </ul>
+            <p>Example &darr;</p>
+            <pre>
+                           <code>    
+int far * ptr;
+                           </code>
+                    </pre>
         </div>
+        <div class="in">
+            <h3>Huge pointer</h3>
+            <ul>
+                <li>It is a 32 bit pointer (4 byte).</li>
+                <li>A huge pointer is a pointer that can access memory beyond the 64 KB segment boundaries but has a
+                    larger segment size than a far pointer.</li>
+                <li>Huge pointer can access whole residence memory.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <pre>
+                           <code>    
+char huge * ptr;
+                           </code>
+                       </pre>
+        </div>
+    </div>
+    <div id="t12" class="wh">
+        <h2>Pass by value and pass by reference</h2>
+        <div class="in">
+            <h3>Pass by value</h3>
+            <ul>
+                <li>Pass by value (another term is 'call by value') means the code within a function cannot alter
+                    the
+                    arguments used to call the function, even if the values are changed inside the function.</li>
+                <li>That means C creates a copy of the data that the function uses.</li>
+            </ul>
+            <p>An example of a 'swap' function to demonstrate pass by value &darr; </p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+void swap(int x, int y)
+{
+    int temp = x;
+    x = y;
+    y = temp;
+}
+int main()
+{
+    int a = 50;
+    int b = 100;
+    printf("\nBefore Swap : \n a = %d \n b = %d", a, b);
+    swap(a, b);
+    printf("\n\nAfter Swap : \n a = %d \n b = %d\n", a, b);
+    return 0;
+}
+                       </code>
+                   </pre>
+            <p>output &darr;</p>
+            <pre>
+                       <code>
+Before Swap : 
+a = 50 
+b = 100
+
+After Swap : 
+a = 50 
+b = 100
+                       </code>
+                   </pre>
+            <ul>
+                <li>In the above code the value of 'a' and 'b' remains the same.</li>
+            </ul>
+        </div>
+        <div class="in">
+            <h3>Pass by reference</h3>
+            <ul>
+                <li>Passing arguments to a called function by reference, means passing the address of memory
+                    location of
+                    the data to the function using '&' (addressof) operator.</li>
+                <li>Here what is passed in is a copy of the pointer, but what it points to is still the same address
+                    in
+                    memory as the original pointer, so this allows the function to change the value outside the
+                    function.</li>
+            </ul>
+            <p>Swap function using pass by reference &darr;</p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+int main()
+{
+    int a = 50;
+    int b = 100;
+    printf("\nBefore Swap : \n a = %d \n b = %d", a, b);
+    swap(&a, &b);
+    printf("\n\nAfter Swap : \n a = %d \n b = %d\n", a, b);
+    return 0;
+}
+                       </code>
+                   </pre>
+            <p>Output &darr;</p>
+            <pre>
+                       <code>
+Before Swap : 
+a = 50 
+b = 100
+
+After Swap : 
+a = 100 
+b = 50
+                       </code>
+                   </pre>
+            <p>Program to sort and array using pointer &darr;</p>
+            <pre>
+                       <code>
+#include &lt;stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void sort(int *arr, int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (*(arr+j) < *(arr+i)) {
+                swap(arr+i, arr+j);
+            }
+        }
+    }
+}
+
+void printArray(int *arr, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", *(arr+i));
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {5, 3, 7, 1, 8};
+    int n = sizeof(arr) / sizeof(int);
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    sort(arr, n);
+
+    printf("Sorted array: ");
+    printArray(arr, n);
+
+    return 0;
+}
+                       </code>
+                   </pre>
+        </div>
+    </div>
     </div>
     <div class="content-box">
         <p>References &darr;</p>
@@ -1250,6 +1104,7 @@
                     (dangling pointer) [not included]</a></li>
         </ul>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
