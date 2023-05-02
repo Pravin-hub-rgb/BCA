@@ -1,17 +1,14 @@
 #include <stdio.h>
-int mult(int a, int b)
-{
-    return a * b;
-}
 int main()
 {
-    int x, y;
-    int (*ptr_mult)(int, int);
-    ptr_mult = &mult;
-    printf("Enter the value of a : ");
-    scanf("%d", &x);
-    printf("Enter the value of b : ");
-    scanf("%d", &y);
-    printf("The multiplication of %d and %d is = %d",x,y,(*ptr_mult)(x,y));
+    int arr[5];
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", arr + i);
+    }
+    for (int i = 4; i >= 0; i--)
+    {
+        printf("%d\t", *(arr + i));
+    }
     return 0;
 }

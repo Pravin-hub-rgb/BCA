@@ -252,38 +252,45 @@ void deletion(int arr[], int *size, int pos)
                         <code>
 #include &lt;stdio.h>
 #include &lt;stdlib.h>
+void inputArr(int[], int);
 int insertion(int[], int);
 void display(int[], int);
 int deletion(int[], int);
 int search(int[], int, int);
 void merge(int[], int);
+void sort(int[], int);
 int main()
 {
-    int arr[100] = {0}, arr2[100] = {0}, size = 10, userChoice, pos, val;
+    int arr[100] = {0}, size = 10, userChoice, pos, val;
     while (1)
     {
         printf("\n---- MENU ----");
-        printf("\n1. Insertion");
-        printf("\n2. Deletion");
-        printf("\n3. Display");
-        printf("\n4. Searching");
-        printf("\n5. Merge");
-        printf("\n6. Exit");
+        printf("\n1. Input Array element");
+        printf("\n2. Insertion");
+        printf("\n3. Deletion");
+        printf("\n4. Display");
+        printf("\n5. Searching");
+        printf("\n6. Merge");
+        printf("\n7. Sort");
+        printf("\n8. Exit");
         printf("\nEnter your choice : ");
         scanf("%d", &userChoice);
 
         switch (userChoice)
         {
         case 1:
-            size = insertion(arr, size);
+            inputArr(arr, size);
             break;
         case 2:
-            size = deletion(arr, size);
+            size = insertion(arr, size);
             break;
         case 3:
-            display(arr, size);
+            size = deletion(arr, size);
             break;
         case 4:
+            display(arr, size);
+            break;
+        case 5:
             printf("Enter the number you want to search : ");
             scanf("%d", &val);
             pos = search(arr, size, val);
@@ -292,10 +299,13 @@ int main()
             else
                 printf("Element not found");
             break;
-        case 5:
+        case 6:
             merge(arr, size);
             break;
-        case 6:
+        case 7:
+            sort(arr, size);
+            break;
+        case 8:
             exit(0);
         default:
             printf("\nEnter correct choice");
@@ -303,10 +313,19 @@ int main()
     }
     return 0;
 }
+void inputArr(int a[], int s)
+{
+    int i;
+    printf("\nInsert Array elements : \n");
+    for (i = 0; i < s; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+}
 int insertion(int a[], int s)
 {
     int val, pos, i;
-    printf("Enter the value you wan to insert : ");
+    printf("Enter the value you want to insert : ");
     scanf("%d", &val);
     printf("Enter the position : ");
     scanf("%d", &pos);
@@ -381,6 +400,26 @@ void merge(int a[], int s)
         }
     }
     display(mer, s + s2);
+}
+void sort(int a[], int s)
+{
+    int i, j;
+    for (i = 0; i < s; i++)
+    {
+        for (j = 1; j < s - i; j++)
+        {
+            if (a[j-1] > a[j])
+            {
+                int temp = a[j-1];
+                a[j-1] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+    for (i = 0; i < s; i++)
+    {
+        printf("%d\t", a[i]);
+    }
 }
                         </code>
                     </pre>
