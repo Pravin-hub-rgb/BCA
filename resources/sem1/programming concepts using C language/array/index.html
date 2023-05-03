@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arrays</title>
     <link rel="stylesheet" href="../../../../public/style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </head>
 
 <body class="bg-c">
@@ -84,27 +85,23 @@
                         </li>
                     </ul>
                     <img src="../../images/arr1.svg" alt="" class="wb">
-                    <div class="code">
-                        <div class="dotc"></div>
                         <pre>
-                                    <code>
+                            <code>
+int arr[5] = {1, 2, 3}; // valid statement
+int arr[] = {1, 2, 3}; // valid statement
+int arr[]; // invalid statement
+int arr[5] = {1,2,3,4,5,6,7}; // invalid statement
 
-                                        int arr[5] = {1, 2, 3}; // valid statement
-                                        int arr[] = {1, 2, 3}; // valid statement
-                                        int arr[]; // invalid statement
-                                        int arr[5] = {1,2,3,4,5,6,7}; // invalid statement
+// first memory is known as base address
 
-                                        // first memory is known as base address
-
-                                        int a[5]; // at every index garbage value will be stored 
-                                        int a[5] = {}; // at every index 0 will be stored.
-                                        int a[6*2] = {1,2,3}; // valid 
-                                        int a[13/2] = {3,4}; // valid 
-                                        int a[12.5/2]; // invalid 
-                                        int a[-3]; // invalid 
-                                    </code>
-                                </pre>
-                    </div>
+int a[5]; // at every index garbage value will be stored 
+int a[5] = {}; // at every index 0 will be stored.
+int a[6*2] = {1,2,3}; // valid 
+int a[13/2] = {3,4}; // valid 
+int a[12.5/2]; // invalid 
+int a[-3]; // invalid 
+                            </code>
+                        </pre>
                     <ul>
                         <li>Note - If the size of the array is missing but the values are given then the size of the
                             array formed will be equal to the number of initializes.</li>
@@ -119,25 +116,21 @@
                         </li>
                         <li>We can change the values of array in every different execution.</li>
                     </ul>
-                    <div class="code">
-                        <div class="dotc"></div>
                         <pre>
                             <code>
+// runtime initialization program
 
-                                // runtime initialization program
-                                
-                                #include &lt;stdio.h> 
-                                int main()
-                                {
-                                    int arr[10];
-                                    for(int i = 0; i < 10; i++){
-                                        scanf("%d",&arr[i]);
-                                    }
-                                    return 0;
-                                }
+#include &lt;stdio.h> 
+int main()
+{
+    int arr[10];
+    for(int i = 0; i < 10; i++){
+        scanf("%d",&arr[i]);
+    }
+    return 0;
+}
                             </code>
                         </pre>
-                    </div>
                 </div>
             </div>
             <div class="in">
@@ -160,20 +153,19 @@
                     <div class="panel">
                         <pre>
                             <code>
+#include &lt;stdio.h>
 
-                                    #include &lt;stdio.h>
+int main()
+{
+    int arr[6] = {2, 5, 6, 7, 8, 22}, sum = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        sum += arr[i];
+    }
+    printf("Total sum of the array is : %d\n", sum);
 
-                                    int main()
-                                    {
-                                       int arr[6] = {2, 5, 6, 7, 8, 22}, sum = 0;
-                                       for (int i = 0; i < 6; i++)
-                                       {
-                                          sum += arr[i];
-                                       }
-                                       printf("Total sum of the array is : %d\n", sum);
-                                    
-                                       return 0;
-                                    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -187,28 +179,27 @@
                     <div class="panel">
                         <pre>
                             <code>
+#include &lt;stdio.h>
 
-                                    #include &lt;stdio.h>
+int main()
+{
+    int arr[6] = {2, 5, 6, 7, 8, 22}, even_sum = 0, odd_sum = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        if (arr[i] % 2 == 0)
+        {
+            even_sum += arr[i];
+        }
+        else
+        {
+            odd_sum += arr[i];
+        }
+    }
+    printf("The sum of even number in the array is : %d\n", even_sum);
+    printf("The sum of odd number in the array is : %d\n", odd_sum);
 
-                                    int main()
-                                    {
-                                       int arr[6] = {2, 5, 6, 7, 8, 22}, even_sum = 0, odd_sum = 0;
-                                       for (int i = 0; i < 6; i++)
-                                       {
-                                          if (arr[i] % 2 == 0)
-                                          {
-                                             even_sum += arr[i];
-                                          }
-                                          else
-                                          {
-                                             odd_sum += arr[i];
-                                          }
-                                       }
-                                       printf("The sum of even number in the array is : %d\n", even_sum);
-                                       printf("The sum of odd number in the array is : %d\n", odd_sum);
-                                    
-                                       return 0;
-                                    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -222,28 +213,27 @@
                     <div class="panel">
                         <pre>
                             <code>
-    
-                                    #include &lt;stdio.h>
-    
-                                    int main()
-                                    {
-                                       int arr[6] = {2, 5, 6, 7, 8, 22}, even_i_sum = 0, odd_i_sum = 0;
-                                       for (int i = 0; i < 6; i++)
-                                       {
-                                          if (i % 2 == 0)
-                                          {
-                                             even_i_sum += arr[i];
-                                          }
-                                          else
-                                          {
-                                             odd_i_sum += arr[i];
-                                          }
-                                       }
-                                       printf("The sum of numbers at even index is : %d\n", even_i_sum);
-                                       printf("The sum of numbers at odd index is : %d\n", odd_i_sum);
-                                    
-                                       return 0;
-                                    }
+#include &lt;stdio.h>
+
+int main()
+{
+    int arr[6] = {2, 5, 6, 7, 8, 22}, even_i_sum = 0, odd_i_sum = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        if (i % 2 == 0)
+        {
+            even_i_sum += arr[i];
+        }
+        else
+        {
+            odd_i_sum += arr[i];
+        }
+    }
+    printf("The sum of numbers at even index is : %d\n", even_i_sum);
+    printf("The sum of numbers at odd index is : %d\n", odd_i_sum);
+
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -257,28 +247,27 @@
                     <div class="panel">
                         <pre>
                             <code>
-
-                                #include &lt;stdio.h>
-                                    int main()
-                                    {
-                                        int arr[50], n, sum = 0;
-                                        float avg;
-                                        printf("Enter the number of element in array : ");
-                                        scanf("%d", &n);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr[i]);
-                                        }
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            sum += arr[i];
-                                        }
-                                        avg = sum / n;
-                                        printf("The average is : %f", avg);
-                                        return 0;
-                                    }
+#include &lt;stdio.h>
+    int main()
+    {
+        int arr[50], n, sum = 0;
+        float avg;
+        printf("Enter the number of element in array : ");
+        scanf("%d", &n);
+        printf("Enter the element in the array.\n");
+        for (int i = 0; i < n; i++)
+        {
+            printf("Enter element at %d index : ", i);
+            scanf("%d", &arr[i]);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            sum += arr[i];
+        }
+        avg = sum / n;
+        printf("The average is : %f", avg);
+        return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -384,35 +373,34 @@
                     <div class="panel">
                         <pre>
                             <code>
-    
-                                    #include &lt;stdio.h>
-                                    int main()
-                                    {
-                                        int arr[50], rev[50], n, j;
-                                        printf("Enter the number of element in array : ");
-                                        scanf("%d", &n);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr[i]);
-                                        }
-                                    
-                                        // storing reverse of array
-                                        j = n - 1;
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            rev[i] = arr[j];
-                                            j--;
-                                        }
-                                    
-                                        // displaying array
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            printf("%d\t", rev[i]);
-                                        }
-                                        return 0;
-                                    }
+#include &lt;stdio.h>
+int main()
+{
+    int arr[50], rev[50], n, j;
+    printf("Enter the number of element in array : ");
+    scanf("%d", &n);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr[i]);
+    }
+
+    // storing reverse of array
+    j = n - 1;
+    for (int i = 0; i < n; i++)
+    {
+        rev[i] = arr[j];
+        j--;
+    }
+
+    // displaying array
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d\t", rev[i]);
+    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -423,38 +411,37 @@
                     <div class="panel">
                         <pre>
                             <code>
+#include &lt;stdio.h>
+int main()
+{
+    int arr[50], rev[50], n, k, j, temp;
+    printf("Enter the number of element in array : ");
+    scanf("%d", &n);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr[i]);
+    }
 
-                                    #include &lt;stdio.h>
-                                    int main()
-                                    {
-                                        int arr[50], rev[50], n, k, j, temp;
-                                        printf("Enter the number of element in array : ");
-                                        scanf("%d", &n);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr[i]);
-                                        }
-                                    
-                                        j = 0;
-                                        k = n - 1;
-                                        for (int i = 0; i < n / 2; i++)
-                                        {
-                                            temp = arr[j];
-                                            arr[j] = arr[k];
-                                            arr[k] = temp;
-                                            j++;
-                                            k--;
-                                        }
-                                    
-                                        // displaying array
-                                        for (int i = 0; i < n; i++)
-                                        {
-                                            printf("%d\t", arr[i]);
-                                        }
-                                        return 0;
-                                    }
+    j = 0;
+    k = n - 1;
+    for (int i = 0; i < n / 2; i++)
+    {
+        temp = arr[j];
+        arr[j] = arr[k];
+        arr[k] = temp;
+        j++;
+        k--;
+    }
+
+    // displaying array
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d\t", arr[i]);
+    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -468,49 +455,48 @@
                     <div class="panel">
                         <pre>
                             <code>
+#include &lt;stdio.h>
+int main()
+{
+    int arr1[50], arr2[50], merge[50], n1, n2, j = 0;
+    printf("Enter the number of element in array one: ");
+    scanf("%d", &n1);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n1; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr1[i]);
+    }
+    printf("Enter the number of element in array two: ");
+    scanf("%d", &n2);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n2; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr2[i]);
+    }
 
-                                    #include &lt;stdio.h>
-                                    int main()
-                                    {
-                                        int arr1[50], arr2[50], merge[50], n1, n2, j = 0;
-                                        printf("Enter the number of element in array one: ");
-                                        scanf("%d", &n1);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n1; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr1[i]);
-                                        }
-                                        printf("Enter the number of element in array two: ");
-                                        scanf("%d", &n2);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n2; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr2[i]);
-                                        }
-                                    
-                                        // merging
-                                        for (int i = 0; i < n1 + n2; i++)
-                                        {
-                                            if (i < n1)
-                                            {
-                                                merge[i] = arr1[i];
-                                            }
-                                            else
-                                            {
-                                                merge[i] = arr2[j];
-                                                j++;
-                                            }
-                                        }
-                                    
-                                        // displaying array
-                                        for (int i = 0; i < n1 + n2; i++)
-                                        {
-                                            printf("%d\t", merge[i]);
-                                        }
-                                        return 0;
-                                    }
+    // merging
+    for (int i = 0; i < n1 + n2; i++)
+    {
+        if (i < n1)
+        {
+            merge[i] = arr1[i];
+        }
+        else
+        {
+            merge[i] = arr2[j];
+            j++;
+        }
+    }
+
+    // displaying array
+    for (int i = 0; i < n1 + n2; i++)
+    {
+        printf("%d\t", merge[i]);
+    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -524,45 +510,44 @@
                     <div class="panel">
                         <pre>
                             <code>
+#include &lt;stdio.h>
+int main()
+{
+    int arr1[50] = {0}, arr2[50] = {0}, sum[50], n1, n2, max_size;
+    printf("Enter the number of element in array one: ");
+    scanf("%d", &n1);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n1; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr1[i]);
+    }
+    printf("Enter the number of element in array two: ");
+    scanf("%d", &n2);
+    printf("Enter the element in the array.\n");
+    for (int i = 0; i < n2; i++)
+    {
+        printf("Enter element at %d index : ", i);
+        scanf("%d", &arr2[i]);
+    }
 
-                                    #include &lt;stdio.h>
-                                    int main()
-                                    {
-                                        int arr1[50] = {0}, arr2[50] = {0}, sum[50], n1, n2, max_size;
-                                        printf("Enter the number of element in array one: ");
-                                        scanf("%d", &n1);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n1; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr1[i]);
-                                        }
-                                        printf("Enter the number of element in array two: ");
-                                        scanf("%d", &n2);
-                                        printf("Enter the element in the array.\n");
-                                        for (int i = 0; i < n2; i++)
-                                        {
-                                            printf("Enter element at %d index : ", i);
-                                            scanf("%d", &arr2[i]);
-                                        }
-                                    
-                                        if (n1 > n2)
-                                            max_size = n1;
-                                        else
-                                            max_size = n2;
-                                    
-                                        for (int i = 0; i < max_size; i++)
-                                        {
-                                            sum[i] = arr1[1] + arr2[i];
-                                        }
-                                    
-                                        // displaying array
-                                        for (int i = 0; i < max_size; i++)
-                                        {
-                                            printf("%d\t", sum[i]);
-                                        }
-                                        return 0;
-                                    }
+    if (n1 > n2)
+        max_size = n1;
+    else
+        max_size = n2;
+
+    for (int i = 0; i < max_size; i++)
+    {
+        sum[i] = arr1[1] + arr2[i];
+    }
+
+    // displaying array
+    for (int i = 0; i < max_size; i++)
+    {
+        printf("%d\t", sum[i]);
+    }
+    return 0;
+}
                             </code>
                         </pre>
                     </div>
@@ -570,6 +555,7 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
     <script src="../../../../public/main.js"></script>
 </body>
 
