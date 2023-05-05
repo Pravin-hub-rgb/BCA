@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitwise Manipulations</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Bitwise Manipulations</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Bitwise Manipulations</h1>
+        <ul>
+            <li>We know that inside the computer, data is represented in binary digits called bits (0 and 1).</li>
+            <li>Till now we were able to access and manipulate bytes only. But some applications, such as system programming require manipulation of individual bits within a byte.</li>
+            <li>In most high-level languages this facility is not available, but C has the special feature to manipulate individual bits of a byte. This feature is implemented through bitwise operators that support bitwise operations.</li>
+            <li>These bitwise operators are:</li>
+            <pre>
+                <code>
+Operator            Meaning
+    &           bitwise AND
+    |           bitwise OR
+    ^           bitwise exclusive OR ( XOR )
+    ~           One's complement
+    <<          bitwise left shift
+    >>          bitwise right shift
+                </code>
+            </pre>
+            <li>Here all the operators are binary, except the complement operator, which is unary.</li>
+            <li>These bitwise operator work on data of integral type only i.e. char, int, shot, long including both signed and unsigned types. When these operators are applied to signed types, the result may be implementation dependent, because different implementations represent the signed data in different ways.</li>
+            <li>These operators operate on each bit of operand, so while using these operators we'll consider the binary representation (bit pattern) of the operand.</li>
+            <li><b>Note:</b> We'll represent the integers in hexadecimal, because it is easier to convert hexadecimal to binary and vice versa.</li>
+            <li>All bitwise operatos except the complement operator can be combined with the assignment operator to form the compound assignment operators:
+                <ul>
+                    <li>&=, |=, <<=, >>=, ^=</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="wh">
+            <h2>Bitwise AND ( & )</h2>
+            <ul>
+                <li>It is binary operator and requires two operands. These operands are compared bitwise i.e. all the corresponding bits in both operands are compared. The resulting bit is 1, only when the bits in both operands are 1, otherwise it is 0.</li>
+            </ul>
+            <pre>
+                <code>
+Bits of operand1    Bit of operand2     Resulting Bit
+       0                 0                   0
+       0                 1                   0
+       1                 0                   0
+       1                 1                   1
+                </code>
+            </pre>
+            <ul>
+                <li>Let us take a = 0x293B and b = 0x1A2F are two integer variables. The binary representation of these variables and the result after performing bitwise AND operation is shown below-
+                    <pre>
+                        <code>
+Note: 0x293B in 16 bits = 000000000000293B
+a    0010  1001  0011  1011     (0x293B)
+b    0001  1010  0010  1111     (0x1A2F)
+----------------------------
+a&b  0000  1000  0010  1011     (0x082B)
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            <p>Program code &darr;</p>
+            <pre>
+                <code>
+#include&lt;stdio.h>
+int main()
+{
+    int a, b;
+    printf("Enter values of a and b : ");
+    scanf("%d%d", &a, &b);
+    printf("a = %d\t\t", a);
+    printf("b = %d\t\t", b);
+    printf("a&b = %d\t\t", a&b);
+    return 0;
+}
+/*
+    if a = 8 and b = 9 then the output will be 8
+      1000
+    & 1001
+    -------
+      1000
+*/
+                </code>
+            </pre>
+        </div>
+        <div class="wh">
+            <h2>Bitwise OR ( | )</h2>
+            <ul>
+                <li>The corresponding bits of both operands are compared and the resulting bit is 0, only when the bits in both operands are 0, otherwise it is 1.</li>
+            </ul>
+            <pre>
+                <code>
+Bits of operand1    Bit of operand2     Resulting Bit
+       0                 0                   0
+       0                 1                   1
+       1                 0                   1
+       1                 1                   1
+                </code>
+            </pre>
+            <ul>
+                <li>The result of bitwise OR operation performed between variables a and b is shown below-
+                    <pre>
+                        <code>
+a    0010  1001  0011  1011     (0x293B)
+b    0001  1010  0010  1111     (0x1A2F)
+----------------------------
+a&b  0011  1011  0011  1111     (0x3B3F)
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            <p>Program code &darr;</p>
+            <pre>
+                <code>
+#include&lt;stdio.h>
+int main()
+{
+    int a, b;
+    printf("Enter values of a and b : ");
+    scanf("%d%d", &a, &b);
+    printf("a = %d\t\t", a);
+    printf("b = %d\t\t", b);
+    printf("a&b = %d\t\t", a|b);
+    return 0;
+}
+/*
+    if a = 8 and b = 9 then the output will be 9
+      1000
+    | 1001
+    -------
+      1001
+*/
+                </code>
+            </pre>
+        </div>
+        <div class="wh">
+            <h2>Bitwise XOR ( ^ )</h2>
+            <ul>
+                <li>The corresponding of both operands are compared and the resulting bit is 1, if bit of both operands have different value, otherwise it is 0.</li>
+            </ul>
+            <pre>
+                <code>
+Bits of operand1    Bit of operand2     Resulting Bit
+       0                 0                   0
+       0                 1                   1
+       1                 0                   1
+       1                 1                   0
+                </code>
+            </pre>
+            <ul>
+                <li>The result of bitwise XOR operation performed between variables a and b is shown below-
+                    <pre>
+                        <code>
+a    0010  1001  0011  1011     (0x293B)
+b    0001  1010  0010  1111     (0x1A2F)
+----------------------------
+a&b  0011  0011  0001  0100     (0x3314)
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            <p>Program code &darr;</p>
+            <pre>
+                <code>
+#include&lt;stdio.h>
+int main()
+{
+    int a, b;
+    printf("Enter values of a and b : ");
+    scanf("%d%d", &a, &b);
+    printf("a = %d\t\t", a);
+    printf("b = %d\t\t", b);
+    printf("a&b = %d\t\t", a^b);
+    return 0;
+}
+/*
+    if a = 8 and b = 9 then the output will be 1
+      1000
+    ^ 1001
+    -------
+      0001
+*/
+                </code>
+            </pre>
+        </div>
+        <ul>
+            <li>When the bitwise operators &, |, ^ operate on two operands of different sizes, then the size of smallest operand is increased to match the size of larger operand.</li>
+            <li>For example if there are two operands of sizes 16 and 32 bits, then the 16-bit operand will be converted to 32 bits.</li>
+            <li>The extra bits are added to the left of the smaller operand. If the smaller operand is <i>unsigned</i> then all these extra bits are filled with zeros, and if it is <i>signed</i> then these bits are filled with the sign bit.</li>
+        </ul>
+        <div class="wh">
+            <h2>One's Complement ( ~ )</h2>
+            <ul>
+                <li>One's complement operator is a unary operator and requires only one operand.</li>
+                <li>It negates the value of the bit.</li>
+                <li>If the bit of the operand is 1 then the resulting bit is 0 and if the bit of the operand is 0 then the resulting bit is 1.</li>
+            </ul>
+            <pre>
+                <code>
+Bits of operand        Resulting Bit
+       0                     1
+       1                     0
+
+       
+a   0010  1001  0011  1011    (0x293B)
+~a  1101  0110  1100  0100    (0xD6C4)
+
+b   0001  1010  0010  1111    (0x1A2F)
+~b  1110  0101  1101  0000    (0xE5D0)
+                </code>
+            </pre>
+            <ul>
+                <li>The ~ operator should be used carefully. The result of ~ operator on a small number can be a big number if the reuslt is stored in an unsigned variable. And the result may be a negative number if the result is stored in a signed variable (assuming that the negative numbers are stored in 2's complement form where the leftmost bit is the sign bit)</li>
+            </ul>
+            <p>Program code &darr;</p>
+            <pre>
+                <code>
+#include&lt;stdio.h>
+int main()
+{
+    unsigned int a;
+    printf("Enter values of a : ");
+    scanf("%d", &a);
+    printf("a = %d\n", a);
+    printf("Signed result of ~a = %d\n", ~a);
+    printf("Unsigned result of ~a = %u\n", ~a);
+    return 0;
+}
+/*
+    if a = 1 then the output will be -2 (signed) and 4294967294 (unsigned)
+*/
+                </code>
+            </pre>
+            <ul>
+                <li>When the complement operator is applied to an operand twice, then result is the original operand i.e., ~(~a) is equal to a.</li>
+                <li>This feature of complement operator can be used for encrypting and decrypting data. </li>
+                <li>To encrypt the data, we can apply complement oeprator to it, and to decrypt the data i.e. to get back the original data we can apply the complement operator to the encrypted data.</li>
+                <li>For example <br>
+                Original data : 0000 1111 0101 0011
+            <br>Ecrypted data : 1111 0000 1010 1100 (By applying ~ to original data) 
+        <br>Decrypted data : 0000 1111 0101 0011 (By applying ~ to encrypted data)</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Bitwise Left Shift ( << )</h2>
+            <ul>
+                <li>This operator is used for shifting the bits left. It requires two operands. The left operand is the operand whose bits are shifted and the right operand indicates the number of bits to be shifted.</li>
+                <li>On shifting the bits left, an equal number of bit position on the right are vacated. These positions are filled in with 0 bits.</li>
+            </ul>
+            <img src="../../images/bitman1.svg" alt="" class="wb">
+            <pre>
+                <code>
+#include &lt;stdio.h>
+int main()
+{
+    unsigned int a;
+    printf("Enter values of a : ");
+    scanf("%d", &a);
+    a = a << 2;
+    printf("a << 2 = %d\t\t", a);
+    return 0;
+}
+                </code>
+            </pre>
+        </div>
+        <div class="wh">
+            <h2>Bitwise Right Shift ( >> )</h2>
+            <img src="../../images/bitman2.svg" alt="" class="wb">
+            <ul>
+                <li>Logical shift - The vacated bits are always filled with zeros.</li>
+                <li>Arithmetic shift - The vacated bits are filled with the value of the leftmost bit in the initial bit pattern. If the left most bit is 1, then the vacated positions are filled with 1, and if the left most bit 0, then the vacated posisitons are filled with 0.</li>
+            </ul>
+            <pre>
+                <code>
+#include &lt;stdio.h>
+int main()
+{
+    unsigned int a;
+    printf("Enter values of a : ");
+    scanf("%d", &a);
+    a = a >> 2;
+    printf("a >> 2 = %d\t\t", a);
+    return 0;
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
