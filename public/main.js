@@ -43,3 +43,10 @@ codes.forEach(box => {
 
 // ********** HIGHLIGHT JS ***********
 hljs.highlightAll();
+
+// ************ Removing space in preTag *************
+const allPre = document.querySelectorAll('pre');
+allPre.forEach((tag)=>{
+    tag.firstChild.textContent = "";
+    tag.lastChild.textContent = "";
+})
