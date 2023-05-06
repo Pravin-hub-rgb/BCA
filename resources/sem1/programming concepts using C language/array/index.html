@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arrays</title>
+    <title>Arrays + String</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </head>
@@ -14,7 +14,13 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../../programming concepts using C language/index.html" class="home">Back</a>
-        <a href="#tp" class="link">Programs</a>
+        <a href="#t1" class="link">1D Array</a>
+        <a href="#t2" class="link">2D Array</a>
+        <a href="#t3" class="link">String</a>
+        <div class="botbut">
+            <a href="../function/index.html" class="link">Next Topic &rarr;</a>
+            <a href="../operators&expressions/index.html" class="link">&larr; Previous Topic</a>
+        </div>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -27,7 +33,7 @@
             </div>
         </div>
         <div>
-            <h2>Arrays</h2>
+            <h2>Arrays + String</h2>
         </div>
     </div>
     <div class="content-box">
@@ -43,7 +49,7 @@
                 </ol>
             </li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>One Dimensional</h2>
             <ul>
                 <li>In one dimensional array we have to perform operation in a single direction.</li>
@@ -85,7 +91,7 @@
                         </li>
                     </ul>
                     <img src="../../images/arr1.svg" alt="" class="wb">
-                        <pre>
+                    <pre>
                             <code>
 int arr[5] = {1, 2, 3}; // valid statement
 int arr[] = {1, 2, 3}; // valid statement
@@ -116,7 +122,7 @@ int a[-3]; // invalid
                         </li>
                         <li>We can change the values of array in every different execution.</li>
                     </ul>
-                        <pre>
+                    <pre>
                             <code>
 // runtime initialization program
 
@@ -555,7 +561,251 @@ int main()
             </div>
         </div>
     </div>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <div id="t2" class="content-box">
+        <h1 id="t1">2D-Array</h1>
+        <ul>
+            <li>Two dimensional array is popularly known as tables or matrix and can be easily visualized as having rows
+                and columns. Matrix can also be thought of as arrays of arrays.</li>
+            <li>To create a two dimensional array, specifying both dimensions i.e. rows and columns in square brackets.
+            </li>
+        </ul>
+        <pre>
+                <code>
+// the following declaration creates a matrix of 4 rows and 5 columns.
+int mat[4][5];
+                </code>
+            </pre>
+        <div class="wh">
+            <h2>2D array initialization</h2>
+            <pre>
+                    <code>
+int mat[4][3];
+int mat[4][3] = {{10,20,30,40},{50,60,70,80},{90,100,110,120}};
+int mat[4][3]={10,20,30,40,50,60,70,80,90,100,110,120};
+                    </code>
+                </pre>
+            <pre>
+                    <code>
+Notes 
+int mat[][] is invalied because dimensions are not specified
+int mat[][] = {1,2,3,4,5,6} is invalid because it is not possible to decide the row and column of the matrix 
+int mat[][3] = {1,2,3,4,5,6} is valid
+int mat[2][] = {1,2,3,4,5,6} is invalid as column is compulsory in matrix declaration.
+                     </code>
+                </pre>
+        </div>
+        <div id="t2" class="wh">
+            <h2>Programs</h2>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">Program to print upper triangle and lower triangle of a matrix</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;stdio.h>
+#define row 3
+#define col 3
+int main()
+{
+    int ar[row][col], i, j, n;
+    printf("Enter the elements of array\n");
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            printf("Enter at ar[%d][%d] : ", i, j);
+            scanf("%d", &ar[i][j]);
+        }
+    }
+    printf("The elements of array\n");
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            printf(" %d ", ar[i][j]);
+        }
+        printf("\n");
+    }
+    if (row == col)
+    {
+        printf("The lower triangular matrix\n");
+        for (i = 0; i < row; i++)
+        {
+            for (j = 0; j < col; j++)
+            {
+            if (j <= i)
+            {
+                printf(" %d ", ar[i][j]);
+            }
+            }
+            printf("\n");
+        }
+        printf("The upper triangular matrix\n");
+        for (i = 0; i < row; i++)
+        {
+            for (j = 0; j < col; j++)
+            {
+            if (j >= i)
+            {
+                printf("  %d", ar[i][j]);
+            }
+            else
+            {
+                printf("   ");
+            }
+            }
+            printf("\n");
+        }
+    }
+    else
+        printf("Can't calculate the upper/lower triangle in matrix");
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="t3" class="content-box">
+        <h1>String (Character Array)</h1>
+        <ul>
+            <li>A string is an array of characters. Any group of characters enclosed between double quotes is called a
+                string constant.</li>
+            <li>A string is a one-dimensional array of characters terminated by null character '\0'</li>
+        </ul>
+        <pre>
+                <code>
+char s[10] = {'h','e','l','l','o','\0'};
+                </code>
+            </pre>
+        <ul>
+            <li>'\0' is null which defines end of the string. Because of the presence of this character the various
+                functions working on the string are able to know the end of the string.</li>
+            <li>Thus it can be said that the input to the string gets terminated at null '\0'. And remaining array
+                contains garbage values.</li>
+        </ul>
+        <pre>
+                <code>
+note - The null '\0' looks as if two characters when typed but the compiler treats it as a single character. It is an escape sequence.
+                </code>
+            </pre>
+        <div class="wh">
+            <h2>Character array initialization </h2>
+            <pre>
+                    <code>
+char s[10];
+char s[6] = {'h','a','r','r','y','\0'};
+char s[6] = {'h','a','r','r','y'};
+above the null character is missing which is added automatically the compiler at the end of the string.
+char s[6] = "harry";
+char s[0] = {'h','a','r','r','y','\0'};
+
+note - the size of the string should be equal to the maximum number of characters in the string + 1.
+- The initialization of the string without the mentioning of size is also permitted, as in the integer array.
+   In such sace the array size will be automatically based on the number of elements initialized.
+                    </code>
+                </pre>
+        </div>
+        <div class="wh">
+            <h2>String Input</h2>
+            <ul>
+                <li>The common function used for input is scanf. This function can also be used to input string using
+                    format specifer %s.</li>
+            </ul>
+            <pre>
+                    <code>
+scanf("%s",name);
+                    </code>
+                </pre>
+            <ul>
+                <li>While inputting the string the <b>&</b> (address of) operator is not requried</li>
+                <li>A problem with the scanf function is that it ends the input on the first white space it finds (a
+                    white space includes blank, tabs, new line character)</li>
+                <li>Use of gets() function &rarr; using this we can input a string with white space.</li>
+            </ul>
+            <pre>
+                    <code>
+char name[10];
+gets(name);
+                    </code>
+                </pre>
+            <ul>
+                <li>For display we can use puts() function.</li>
+            </ul>
+            <pre>
+                    <code>
+puts(name);
+                    </code>
+                </pre>
+        </div>
+        <div class="wh">
+            <h2>String functions</h2>
+            <ul>
+                <li>String functions are created to make your string handling easier so we don't have to make them from
+                    scratch.</li>
+                <li>We have to call string function and implement them in our code.</li>
+                <li>To use these function we have include &lt;string.h> header file.</li>
+            </ul>
+            <div class="in">
+                <h3>strlen()</h3>
+                <ul>
+                    <li>It is used to return the length of the string</li>
+                    <pre>
+                            <code>
+char name[] = "Henry";
+printf("%d", (int)strlen(name)); // 5
+                            </code>
+                        </pre>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strcpy(str1, str2)</h3>
+                <ul>
+                    <li>this function is used to copy the contents of the string str1 into string str2.</li>
+                </ul>
+                <pre>
+                        <code>
+char str1[] = "Hello";
+char str2[10];
+strcpy(str1, str2);
+// str2 -> "Hello"
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>strcat(str1, str2)</h3>
+                <ul>
+                    <li>It is used to concatenate string str2 onto the end of the string str1.</li>
+                </ul>
+                <pre>
+                        <code>
+char fullname[30] = "Harry";
+char lastname[10] = " Potter";
+strcat(fullname, lastname);
+printf("%s", fullname);
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>strcmp(str1, str2)</h3>
+                <ul>
+                    <li>It is used to analyse and compare the string str1 and str2.</li>
+                    <li>Returns 0 if str1 and str2 are the same, less than 0 if str1&lt;str2 and greater than 0 is
+                        str1>str2 </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strchr(str1, ch)</h3>
+                <ul>
+                    <li>It is used to discover the foremost event or occurence of a specified character within the
+                        actual string.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
     <script src="../../../../public/main.js"></script>
 </body>
 
