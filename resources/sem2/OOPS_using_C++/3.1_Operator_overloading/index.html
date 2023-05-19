@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Overloading</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Operator Overloading</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Operator Overloading</h1>
+        <ul>
+            <li>Operator overloading is a complie-time polymorphism.</li>
+            <li>It is an idea of giving special meaning to an exiting operator in C++ without changing its original meaning.</li>
+            <li>It C++, we can make operators work for user-defined classes. This means C++ has the ability to provide the opertors with a special meaning for a data type, this ability is known as operator overloading.</li>
+            <li>For example, we can overload an operator '+' is a class like String so that we can concatenate two strings by just using +. Other example classes where arithmetic operators may be overloaded are complex numbers, fractional numbers, big integers, etc.</li>
+        </ul>
+        <pre>
+            <code>
+class A
+{
+    statements;
+};
+int main()
+{
+    A a1, a2, a3;
+    a3 = a1 + a2;
+    return 0;
+}
+            </code>
+        </pre>
+        <ul>
+            <li>In this example, we have 3 variavles "a1", "a2" and "a3" of type "class A". </li>
+            <li>Here we are trying to add two objects "a1" and "a2", which are of user-defined type i.e. of type "class A" using the "+" operator. This is not allowed, because the addition operator "+" is predefined to operate only on built-in data types. But here, "class A" is a user-defined type, so the compiler generates an error. This is where the concept of "Operator overloading" comes in.</li>
+            <li>Now, if the user want to make the operator "+" add two class objects, the usr has to redefine the meaning of the "+" operator such that it adds two class objects. This is done by the concept of "Operator oberloading". So the main idea behind "Operator overloading" is to use C++ operators with class variables of class objects. Redefining the meaning of operators really does not change their oiriginal meaning; instead, they have been given additional meaning along with their existing ones.</li>
+            <li>To overload operator in C++ we can create something called operator function. An operator function defines the operations that the overloaded operator will perform relative to the classes upon which it will work.</li>
+            <li>An operator function is created using a keyword '<b>operator</b>'. These operator function can be either members or non-member of a class. If it is not a member them most commonly it can be friend function of a class.</li>
+        </ul>
+        <p>Example &darr;</p>
+        <pre>
+            <code class="language-c++">
+#include &lt;iostream>
+using namespace std;
+class Marks
+{
+    int intmark;
+    int extmark;
+
+public:
+    Marks()
+    {
+        intmark = 0;
+        extmark = 0;
+    }
+    Marks(int im, int em)
+    {
+        intmark = im;
+        extmark = em;
+    }
+    void display()
+    {
+        cout << intmark << endl
+             << extmark << endl;
+    }
+    Marks operator+(Marks m)
+    {
+        Marks temp;
+        temp.intmark = intmark + m.intmark;
+        temp.extmark = extmark + m.extmark;
+        return temp;
+    }
+};
+int main()
+{
+    Marks m1(10, 20), m2(30, 40);
+    Marks m3 = m1 + m2;
+    m3.display();
+    return 0;
+}
+            </code>
+        </pre>
+        <ul>
+            <li>In above example we can see that the operator function have only one arguments because when the operator function is a member function them the first operand is automatically passed as the current object and we are just specifying the second object in the arguments.
+                <ul>
+                    <li>m1 will be automatically passed in the operator function and intmark, extmark will be of m1.</li>
+                </ul>
+            </li>
+            <li>When the operator function is a friend function then we need to pass to objects as arguments.</li>
+        </ul>
+        <div class="wh">
+            <h2>Can we overload all operator?</h2>
+            <ul>
+                <li>Almost all operators can be overloaded expect a few. Following is the list of operators that cannot be overloaded.
+                    <ol type="a">
+                        <li>sizeof</li>
+                        <li>typeif</li>
+                        <li>Scope resolution (::)</li>
+                        <li>Class member access operators</li>
+                        <li>Ternary or conditional (?:)</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Operators that can be overloaded</h2>
+            <p>We can overload</p>
+            <ul>
+                <li>Unary operators</li>
+                <li>Binary operators</li>
+                <li>Special operators ([], (), etc)</li>
+            </ul>
+            <pre>
+                <code>
+Operators that can be overloaded       Example
+   Binary Arithmetic                 +, -, *, /, %
+   Unary Arithmetic                  +, -, ++, --
+   Assignment                        =, +=, *=, /=, -=, %=
+   Bitwise                           &, |, <<, >>, ~, ^
+   De-referencing                    (->)
+   Dynamic memory allocation,         New, delete
+   De-allocation    
+   Subscript                          []
+   Function call                      ()
+   Logical                            &, |, !
+   Relational                         <, >, = =, <=, >=
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference &darr;</p>
+        <ul>
+            <li><a href="https://www.geeksforgeeks.org/operator-overloading-cpp/">www.geeksforgeeks.org (operator overloading)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=tFYRTWFXSgY&list=PLfVsf4Bjg79BX6c6YIHFxEjGPUn1ToT_e&index=1&pp=iAQB">Operator overloading program code example</a></li>
+        </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

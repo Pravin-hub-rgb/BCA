@@ -76,8 +76,7 @@ void insertAtFront()
 
 void insertAtBack()
 {
-    node *newNode = (node *)malloc(sizeof(node));
-    node *last = start;
+    node *newNode = (node *)malloc(sizeof(node)), *last = start;
     printf("Enter a value : ");
     scanf("%d", &newNode->data);
     newNode->next = NULL;
@@ -198,7 +197,7 @@ void deleteNode()
         foundNode->next->prev = foundNode->prev;
         free(foundNode);
     }
-        printf("\n%d is deleted", search);
+    printf("\n%d is deleted", search);
 }
 
 void display()
