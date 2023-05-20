@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#t1" class="link">String</a>
+        <a href="#t2" class="link">String Variables</a>
+        <a href="#t3" class="link">String Initialization</a>
+        <a href="#t4" class="link">Programs</a>
+        <a href="#t5" class="link">String library function</a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="../bitwise/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>String</h2>
+        </div>
+    </div>
+    <div id="t1" class="content-box">
+        <h1>String</h1>
+        <ul>
+            <li>There is no separate data type for strings in C. They are treated as arrays of type char. </li>
+            <li>A character array is a string if it ends with a null character ('\0'). This null character is an escape sequence with ASCII value 0. Strings are generally used to store and manipulate data in text form like workds or sentences.</li>
+        </ul>
+        <div class="wh">
+            <h2>String Constant or String Literal</h2>
+            <ul>
+                <li>The string constant is a sequence of characters enclosed in double quotes. It is sometimes called a literal.</li>
+                <li>The double quotes are not a part of string.</li>
+                <li>Some examples of string constant are &darr;</li>
+            </ul>
+            <pre>
+                <code>
+"V"
+"Taj Mahal"
+"2345"
+"" (Null string, contains only '\0')
+"My age is %d and height is %f\n" (Control string used in printf)
+                </code>
+            </pre>
+            <ul>
+                <li>Whenever a string constant is written anywhere in a program, it is stored somewhere in memory as an array of characters terminated by a null character ('\0'). The string constat itself becomes a pointer to the first character in the array. For example the string "Graphic Era" will be stored in memory as &darr;
+                    <br><img src="../../images/string1.svg" alt="" class="wb">
+                </li>
+                <li>Each character occupies one byte and compiler automatically inserts the null character at the end. The string constant "Graphic Era" is actually a  pointer to the Character 'P'. So whenever a string constant is used in the program it is replaced by a pointer pointing to the string.</li>
+            </ul>
+        </div>
+        <div id="t2" class="wh">
+            <h2>String Variables</h2>
+            <ul>
+                <li>To create a string variable we need to declare a character array with sufficient size to hold all the characters of the string including null character.</li>
+            </ul>
+            <pre>
+                <code>
+char str[] = {'N', 'e', 'w', ' ', 'Y', 'o', 'r', 'k', '\0'};
+                </code>
+            </pre>
+            <p>We may also initialize it as-</p>
+            <pre>
+                <code>
+char str[] = "New York";
+                </code>
+            </pre>
+            <p>This initialization is same as the previous one and in this case the compiler automatically inserts the null character at the end. Note that here the string constant does not represent an address. The array str will be stored in memory as &darr;
+                <br><img src="../../images/string2.svg" alt="" class="wb">
+                Here we have not specified the size of the array, but if we specify it then we should take care that array should be large enough to hold all the characters including the null character.
+            </p>
+            <p>Program to print characters of a string and address of each character</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+int main()
+{
+    char str[] = "India";
+    int i;
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        printf("Character = %d\t", str[i]);
+        printf("Address = %u\n", &str[i]);
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <pre>
+                <code>
+Character = 73  Address = 3134707238
+Character = 110 Address = 3134707239
+Character = 100 Address = 3134707240
+Character = 105 Address = 3134707241
+Character = 97  Address = 3134707242
+                </code>
+            </pre>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Initialization of string</h2>
+            <ul>
+                <li>There are two type of initialization of string:
+                    <ol>
+                        <li>Runtime initialization</li>
+                        <li>Compile time initialization</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Runtime initializaiton</h3>
+                <ul>
+                    <li><b>scanf("%s", str)</b> can be used but it there is white space (space bar, tab, etc.) in between string then only words till first white space are taken because whitespace terminate the scanf() function.</li>
+                    <li><b>gets()</b> function can also be used which can take white spaces.</li>
+                    <li><b>fgets()</b> function is used and it is supported in linux OS.</li>
+                </ul>
+                <div class="wh">
+                    <p>Program to intialize string variable runtime using scanf() function</p>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <pre>
+                           <code>
+    #include &lt;stdio.h>
+    int main()
+    {
+        char str[30];
+        printf("Enter your string : ");
+        scanf("%s", str);
+        printf("\nYour entered string is = %s", str);
+        return 0;
+    }
+                           </code>
+                       </pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
+                        <code>
+    Enter your string : Hi my name is 
+    
+    Your entered string is = Hi%
+                        </code>
+                    </pre>
+                    <p>Only "Hi" is stored because after that there was a whitespace.</p>
+                </div>
+                <div class="wh">
+                    <p>Program to intialize string variable runtime using gets() function.</p>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <pre>
+                           <code>
+#include &lt;stdio.h>
+int main()
+{
+    char str[30];
+    printf("Enter your string : ");
+    gets(str);
+    printf("\nYour entered string is = %s", str);
+    return 0;
+}
+                           </code>
+                       </pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
+                        <code>
+Enter your string : Hi my name is 
+
+Your entered string is = Hi my name is
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p>Program to intialize string variable runtime using fgets() function.</p>
+                    <div class='code'>
+                       <div class='dotc'></div>
+                       <pre>
+                           <code>
+#include &lt;stdio.h>
+int main()
+{
+    char str[30];
+    printf("Enter your string : ");
+    fgets(str, 30, stdin);
+    printf("\nYour entered string is = %s", str);
+    return 0;
+}
+                           </code>
+                       </pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
+                        <code>
+Enter your string : Hello my name is
+
+Your entered string is = Hello my name is
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Compile time intialization </h3>
+                <ul>
+                    <li>This we have already seen.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Programs</h2>
+            <div class="in">
+                <p>Program to convert string to opposite case (if upper then convert it to lower and vice versa)
+                    <br>ACSII code for 'A' to 'Z' &rarr; 65 - 90
+                    <br>ACSII code for 'a' to 'z' &rarr; 97 - 122
+                </p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+int main()
+{
+    int i;
+    char str[30];
+    printf("Enter your string : ");
+    fgets(str, 30, stdin);
+    for (i = 0; i < strlen(str); i++)
+    {
+        if (str[i] >= 65 && str[i] <= 90)
+            str[i] = str[i] + 32;
+        else
+            str[i] = str[i] - 32;
+    }
+    printf("The converted string is = %s", str);
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <p>Program to reverse any string without using predefind function.</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+int main()
+{
+    int i, l;
+    char str[30];
+    printf("Enter your string : ");
+    fgets(str, 30, stdin);
+    l = strlen(str);
+    for (i = 0; i < l / 2; i++)
+    {
+        char temp = str[i];
+        str[i] = str[l - i - 1];
+        str[l - i - 1] = temp;
+    }
+    printf("Revese of string is = %s", str);
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <p>Program to check whether a string is palindrome or not</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+int main()
+{
+    int i, l, flag = 1;
+    char str[30];
+    printf("Enter your string : ");
+    fgets(str, 30, stdin);
+    l = strlen(str) - 1;
+    for (i = 0; i < l / 2; i++)
+    {
+        if (str[i] != str[l - i - 1])
+        {
+            flag = 0;
+        }
+    }
+    if (flag)
+        printf("The given string is a palindrome");
+    else
+        printf("The given string is not a palindrome");
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div id="t5" class="wh">
+            <h2>String Library Function</h2>
+            <ul>
+                <li>There are several functions used to manipulate strings. The prototypes for these functions are in header file string.h. We'll discuss some of them below-</li>
+            </ul>
+            <div class="in">
+                <h3>strlen()</h3>
+                <ul>
+                    <li>This function returns the length of the string i.e. the number of characters in the string excluding the terminating null character. It accepts single argument, which is pointer to the first character of the string.</li>
+                    <li>For example strlen("suresh") returns the values 6. Similarly if s1 is an array that contains the name "deepali" then strlen(s1) returns the value 7.</li>
+                </ul>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include&lt;stdio.h>
+#include&lt;string.h>
+int main()
+{
+    char str[20];
+    int length;
+    printf("Enter the string : ");
+    scanf("%s", str);
+    length = strlen(str);
+    printf("Length of the string is : %d", length);
+}
+/*
+    output : 
+    Enter the string : CinDepth
+    Length of string is : 8
+*/
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strcmp()</h3>
+                <ul>
+                    <li>This function is used for comparison of two strings.</li>
+                    <li>If the two strings match, strcmp() returns value 0, otherwise it returns a non-zero value.</li>
+                    <li>This function compares the strings character by character. The comparison stops wen either the end of string is reached of the corresponding characters in the two strings are not same. The non-zero value returned on mismatch is the difference of the ASCII value of the non-matching characters of the two strings.</li>
+                    <li>Strcmpe(s1, s2) returns a value - 
+                        <br>< 0 when s1 < s2
+                        <br> = 0 when s1 = = s2 
+                        <br>> 0 when s1 > s2
+                    </li>
+                </ul>
+                <p>Program to understand the work of strcmp() function &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include&lt;stdio.h>
+#include&lt;string.h>
+int main()
+{
+    char str1[10], str2[10];
+    printf("Enter the first string : ");
+    scanf("%s", str1);
+    printf("Enter the second string : ");
+    scanf("%s", str2);
+    if(strcmp(str1, str2) == 0)
+        printf("Strings are same");
+    else 
+        printf("Strings are not same");
+}
+/*
+output : 
+Enter the first string : Bangalore
+Enter the second string : Mangolore
+Strings are not same
+*/
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strcpy()</h3>
+                <ul>
+                    <li>This function is used for copying one string to another string.</li>
+                    <li>strcpy(str1, str2) copies str2 to str1. Here str2 is the source string and str1 is destination string.</li>
+                    <li>If str2 = "suresh" then this function copies "suresh" into str1. This function takes pointers to two strings as arguments and returns the pointer to first string.</li>
+                </ul>
+                <p>Program to understand the work of the strcpy() function</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include&lt;stdio.h>
+#include&lt;string.h>
+int main()
+{
+    char str1[10], str2[10];
+    printf("Enter the first string : ");
+    scanf("%s", str1);
+    printf("Enter the second string : ");
+    scanf("%s", str2);
+    strcpy(str1, str2);
+    printf("First string : %s \t\t Second string : %s\n", str1, str2);
+    strcpy(str1, "Delhi");
+    strcpy(str2, "Calcutta");
+    printf("First string : %s \t\t Second string : %s\n", str1, str2);
+    return 0;
+}
+/*
+output:
+Enter the first string : Henry
+Enter the second string : Ford
+First string : Ford              Second string : Ford
+First string : Delhi             Second string : Calcutta
+*/
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strcat()</h3>
+                <ul>
+                    <li>This function is used for concatenation of two strings. If first string is "King" and second string is "size" then after using this function the first string becomes "Kingsize".</li>
+                    <li>The null character from the fisrt string is removed, and the second string is added at the end of first string. The second string remains unaffected.</li>
+                </ul>
+                <p>Program to understand the work of strcat() function</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+int main() {
+    char str1[100], str2[100];
+
+    printf("Enter the first string: ");
+    scanf("%99s", str1);
+
+    printf("Enter the second string: ");
+    scanf("%99s", str2);
+
+    strcat(str1, str2);
+
+    printf("Concatenated string: %s\n", str1);
+
+    return 0;
+}
+
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>strrev()</h3>
+                <ul>
+                    <li>This function reverse the string in which it is applied.</li>
+                    <li>This function is not built-in in string.h header file.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strupr()</h3>
+                <ul>
+                    <li>This function converts the lower case letters to upper case in a string.</li>
+                    <li>This function is not built-in in string.h header file.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>strlwr()</h3>
+                <ul>
+                    <li>This function converts the upper case letters to lower case in a string.</li>
+                    <li>This function is not built-in in string.h header file.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
