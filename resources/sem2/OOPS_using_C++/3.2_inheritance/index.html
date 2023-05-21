@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <!-- <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-light.min.css"> -->
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Inheritance</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Inheritance</h1>
+        <ul>
+            <li>Inheritance in C++ means the ability of objects in one class to inherit properties of another class
+                which implements the reusability concept. This means that it is not necessary to create a new methods
+                and just override the existing one, if required. Saves a lot of work.</li>
+            <li>The capability of a class to derive properties and characteristics from another class is called
+                inheritance. Inheritance is one of the most important features of Object-Oriented Programming.</li>
+            <li>Inheritance is a feature or a process in which, new classes are created from the existing classes. The
+                new class created is called "derived class" or "child class" and the existing class is known as the
+                "base class" or "parent class". The derived class now is said to be inherited from the base class.</li>
+            <li>When we say derived class inheris the base class, it means, the derived class inherits all the
+                properties of the base class, without changing the properties of base class and may add new features to
+                its own. These new features in the derived class will not affect the base class. The derived class is he
+                specialized class for the base class.
+                <ul>
+                    <li>Sub class: The class that inherits properties from another class is called Sub class or Derived
+                        class.</li>
+                    <li><b>Super class : </b> The class whose properties are inherited by a subclass is called Base
+                        Class or Super class.</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="wh">
+            <h2>Why and when to use inheritance?</h2>
+            <ul>
+                <li>Consider a group of vehicles. You need to create classes for Bus, Car and Truck. The methods
+                    fuelAmount(), capacity(), applyBrakes() will be the same for all three classes. If we create these
+                    classes avoiding inheritance then we have to write all these functions in each of the three classes
+                    as shown below figure:</li>
+            </ul>
+            <img src="../../images/inheritance1.svg" alt="" class="wb">
+            <ul>
+                <li>We can see that the above process results in duplication of the same code 3 times. This increases
+                    the chances of error and data redundancy. To avoid this type of situation, inheritance is used. If
+                    we create a class Vehicle class, then we can simply avoid the duplication of data and increase
+                    re-usability. Look at the below diagram in which the three classes are inherited from vehicle class.
+                </li>
+            </ul>
+            <img src="../../images/inheritance2.svg" alt="" class="wb">
+            <ul>
+                <li>Using inheritance, we have to write the functions only one time instead of three times as we have
+                    inherited the rest of the three classes from the base class (Vehicle).</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Syntax</h2>
+            <pre>
+                <code>
+class &lt;derived_class_name> : &lt;access-specifier>
+&lt;base_class_name> 
+{
+    //body
+}
+                </code>
+            </pre>
+            <p>Here
+            <ul>
+                <li>class - keyword to create a new class.</li>
+                <li>derived_class_name - name of the new class, which will inherit the base class.</li>
+                <li>access-specifier - either of private, public or protected. If neither is specified, PRIVATE is taken
+                    as default</li>
+                <li>base_class_name - name of the base class.</li>
+                <li>Note: A derived class doesn't inherit access to private data members. However, it does inherit a
+                    full parent object, which conatins any private members which that class declares.</li>
+            </ul>
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Modes of inheritance</h2>
+            <ul>
+                <li>There are three modes of inheritance i.e. Public, Protected and Private.
+                    <ul>
+                        <li><b>Public mode</b>: In this mode of inheritance, the public members of the base class remain
+                            public in the derived class, and same goes for protected members.</li>
+                        <li><b>Protected mode</b>: In this mode, the public and protected members of the base class will
+                            become protected in the derived class.</li>
+                        <li><b>Private class</b>: In private mode, protected and public members of class will become
+                            private in the derived class.</li>
+                    </ul>
+                </li>
+            </ul>
+            <pre>
+                <code>
+// C++ Implementation to show that a derived class doesn't inherit access to private data members.
+// However, it does inherit a full parent object.
+
+class A 
+{
+    public:
+    int x;
+
+    protected:
+    int y;
+
+    private:
+    int z;
+};
+
+class B : public A 
+{
+    // x is public 
+    // y is protected 
+    // z is not accessible from B
+};
+
+class C : protected A 
+{
+    // x is protected 
+    // y is protected 
+    // z is not accessible from C
+};
+
+class D : private A  // 'private' is default for classes
+{
+    // x is private 
+    // y is private 
+    // z is not accessible from D
+};
+                </code>
+            </pre>
+            <p>The below table summariezes the above three modes and shows the access specifier of the members of the
+                base class in the subclass when derived in public, protected and private modes:</p>
+            <img src="../../images/access1.svg" alt="" class="wb">
+        </div>
+        <div class="wh">
+            <h2>Types of Inheritance</h2>
+            <ol>
+                <li>Single inheritance</li>
+                <li>Multilevel inheritance</li>
+                <li>Multiple inheritance</li>
+                <li>Hierarchical inhertance</li>
+                <li>Hybird inheritance</li>
+            </ol>
+            <div class="in">
+                <h3>Single Inheritance</h3>
+                <ul>
+                    <li>In single inhertance, a class is allowed to inherit from only one class. i.e. one subclass is
+                        inherited by one base class only.</li>
+                </ul>
+                <img src="../../images/singlein1.svg" alt="" class="wb">
+                <p>Example code</p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include&lt;iostream>
+using namespace std;
+class Beverage
+{
+    public : 
+    void drinks()
+    {
+        cout << "All drinks are available" << endl;
+    }
+};
+
+class Coffee : public Beverage
+{
+    public:
+    void mocha()
+    {
+        cout << "Mocha tastes the best";
+    }
+};
+
+int main()
+{
+    Coffee c;
+    c.drinks();
+    c.mocha(); // using sub class we are accessing member function of base class.
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Multilevel Inhertiance</h3>
+                <ul>
+                    <li>In this type of inheritance, a derived class is created from another derived class.</li>
+                </ul>
+                <img src="../../images/multilevelin1.svg" alt="" class="wb">
+                <p>Example code &darr;</p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include <&lt;ostream>
+using namespace std;
+class A
+{
+public:
+    int x;
+    A()
+    {
+        x = 10;
+    }
+};
+class B : public A
+{
+public:
+    int y;
+    B()
+    {
+        y = 20;
+    }
+};
+class C : public B
+{
+public:
+    int sum;
+    C()
+    {
+        sum = x + y;
+    }
+};
+int main()
+{
+    C c_one;
+    cout << "The sum is = " << c_one.sum; // by creating derived class object the constructor of parent class are called.
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Multiple inheritance</h3>
+                <ul>
+                    <li>Multiple inheritance is a feature of C++ where a class can inherit from more than one class.
+                        i.e. one subclass is inherited from more than one base class.</li>
+                </ul>
+                <img src="../../images/multiplein1.svg" alt="" class="wb">
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+class A
+{
+public:
+    int x;
+    A()
+    {
+        x = 10;
+    }
+};
+class B
+{
+public:
+    int y;
+    B()
+    {
+        y = 20;
+    }
+};
+class C : public A, public B
+{
+public:
+    int sum;
+    C()
+    {
+        sum = x + y;
+    }
+};
+int main()
+{
+    C c_one;
+    cout << "The sum is = " << c_one.sum; 
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Hierarchical inheritance</h3>
+                <ul>
+                    <li>In this type of inheritance, more than one subclass is inherited from a single base class. i.e.
+                        more than one derived class is created from a single base class.</li>
+                </ul>
+                <img src="../../images/heirarichalin1.svg" alt="" class="wb">
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+class A
+{
+public:
+    int x, y, z;
+    A()
+    {
+        x = 10;
+        y = 10;
+        z = 10;
+    }
+};
+class B : public A
+{
+public:
+    int sum;
+    B()
+    {
+        sum = x + y + z;
+    }
+};
+class C : public A
+{
+public:
+    int mult;
+    C()
+    {
+        mult = x * y * z;
+    }
+};
+int main()
+{
+    B b_one;
+    C c_one;
+    cout << "The sum is = " << b_one.sum << endl;
+    cout << "The multiplication is = " << c_one.mult;
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Hybrid inheritance</h3>
+                <ul>
+                    <li>Hybrid inheritance is implemented by combining more than one type ofinheritance. For example:
+                        Combining Hierarchical inheritance and multiple inheritance.</li>
+                </ul>
+                <img src="../../images/hybridin1.svg" alt="" class="wb">
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+class A
+{
+public:
+    int x, y;
+    A()
+    {
+        x = 10;
+        y = 10;
+    }
+};
+class B : public A
+{
+public:
+    int sum;
+    B()
+    {
+        sum = x + y;
+    }
+};
+class C
+{
+public:
+    int z;
+    C()
+    {
+        z = 20;
+    }
+};
+class D : public B, public C
+{
+public:
+    int total_sum;
+    D()
+    {
+        total_sum = sum + z;
+    }
+};
+int main()
+{
+    D d_one;
+    cout << "The total sum is = " << d_one.total_sum << endl;
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Multipath inheritance</h3>
+                <ul>
+                    <li>A derived class with two base classes and these two base classes have one common base class is
+                        called multipath inheritance. Ambiguity can arise in this type of inhertiance.</li>
+                    <li>Abmiguity: A situation or statement that is unclear because it can be understood in more than
+                        one way</li>
+                </ul>
+                <img src="../../images/multipathin1.svg" alt="" class="wb">
+                <p>There are two ways to avoid this ambiguity:</p>
+                <div class="wh">
+                <ol>
+                    <li><b>Avoiding ambiguity using the scope resolution operator</b>: Using the scope resolution operator we
+                        can manually specify the path from which data member will be accessed. See the example below
+                        &darr;</li>
+                </ol>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+// C++ program demonstrating ambiguity in Multipath Inheritance
+  
+#include &lt;iostream>
+using namespace std;
+  
+class ClassA {
+public:
+    int a;
+};
+  
+class ClassB : public ClassA {
+public:
+    int b;
+};
+  
+class ClassC : public ClassA {
+public:
+    int c;
+};
+  
+class ClassD : public ClassB, public ClassC {
+public:
+    int d;
+};
+  
+int main()
+{
+    ClassD obj;
+  
+    // obj.a = 10;                  // Statement 1, Error
+    // obj.a = 100;                 // Statement 2, Error
+  
+    obj.ClassB::a = 10; // Statement 3
+    obj.ClassC::a = 100; // Statement 4
+  
+    obj.b = 20;
+    obj.c = 30;
+    obj.d = 40;
+  
+    cout << " a from ClassB  : " << obj.ClassB::a;
+    cout << "\n a from ClassC  : " << obj.ClassC::a;
+  
+    cout << "\n b : " << obj.b;
+    cout << "\n c : " << obj.c;
+    cout << "\n d : " << obj.d << '\n';
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <pre>
+                    <code>
+obj.ClassB::a = 10;
+abj.ClassC:: a = 100;
+                    </code>
+                </pre>
+                <ul>
+                    <li>In the above example, both ClassB and ClassC inherit ClassA, they both have a single copy of
+                        ClassA. However Class-D inherits both ClassB and ClassC, therefore Class-D has two copies of
+                        ClassA, one from ClassB and another from ClassC.</li>
+                    <li>If we need to access the data member of ClassA through the object of Class-D, we must specify
+                        the path from which a will be accessed, whether it is from ClassB or ClassC, bcoz compiler can’t
+                        differentiate between two copies of ClassA in Class-D.</li>
+                        <li>Note: Still, there are two copies of ClassA in ClassD.</li>
+                </ul>
+            </div>
+            <div class="wh">
+                <ol type="1" start="2">
+                    <li><b>Avoiding ambiguity using the virtual base class</b></li>
+                </ol>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include&lt;iostream>
+  
+class ClassA
+{
+  public:
+    int a;
+};
+  
+class ClassB : virtual public ClassA
+{
+  public:
+    int b;
+};
+  
+class ClassC : virtual public ClassA
+{
+  public:
+    int c;
+};
+  
+class ClassD : public ClassB, public ClassC
+{
+  public:
+    int d;
+};
+  
+int main()
+{
+    ClassD obj;
+  
+    obj.a = 10;       // Statement 3
+    obj.a = 100;      // Statement 4
+  
+    obj.b = 20;
+    obj.c = 30;
+    obj.d = 40;
+  
+    cout << "\n a : " << obj.a;
+    cout << "\n b : " << obj.b;
+    cout << "\n c : " << obj.c;
+    cout << "\n d : " << obj.d << '\n';
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <pre>
+                    <code>
+a : 100
+b : 20
+c : 30
+d : 40
+                    </code>
+                </pre>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference &darr;</p>
+        <ul>
+            <li><a href="https://www.geeksforgeeks.org/inheritance-in-c/">www.geeksforgeeks.com ()</a></li>
+        </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

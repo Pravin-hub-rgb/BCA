@@ -1,69 +1,45 @@
-/*#include <iostream>
-using namespace std;
-class Complex
-{
-    private:
-    int real, imag;
-    public:
-    Complex(int r = 0, int i = 0)
-    {
-        real = r;
-        imag = i;
-    }
-
-    // This is automatically called when '+' is used with between two Complex objects
-    Complex operator+(Complex obj)
-    {
-        Complex res;
-        res.real = real + obj.real;
-        res.imag = imag + obj.imag;
-        return res;
-    }
-    void print() { cout << real << " + i" << imag << endl; }
-};
-int main()
-{
-    Complex c1(10, 5), c2(2, 4);
-    Complex c3 = c1 + c2;
-    c3.print();
-    return 0;
-}*/
-
 #include <iostream>
 using namespace std;
-class Marks
+class A
 {
-    int intmark;
-    int extmark;
-
 public:
-    Marks()
+    int x, y;
+    A()
     {
-        intmark = 0;
-        extmark = 0;
+        x = 10;
+        y = 10;
     }
-    Marks(int im, int em)
+};
+class B : public A
+{
+public:
+    int sum;
+    B()
     {
-        intmark = im;
-        extmark = em;
+        sum = x + y;
     }
-    void display()
+};
+class C
+{
+public:
+    int z;
+    C()
     {
-        cout << intmark << endl
-             << extmark << endl;
+        z = 20;
     }
-    Marks operator+(Marks m)
+};
+class D : public B, public C
+{
+public:
+    int total_sum;
+    D()
     {
-        Marks temp;
-        temp.intmark = intmark + m.intmark;
-        temp.extmark = extmark + m.extmark;
-        return temp;
+        total_sum = sum + z;
     }
 };
 int main()
 {
-    Marks m1(10, 20), m2(30, 40);
-    Marks m3 = m1 + m2;
-    m3.display();
+    D d_one;
+    cout << "The total sum is = " << d_one.total_sum << endl;
     return 0;
 }
