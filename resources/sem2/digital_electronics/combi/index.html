@@ -442,6 +442,113 @@ A0  A1  A2  A3  A4  A5  A6  A7       B2   B1   B0
                     </code>
                 </pre>
             </div>
+            <img src="../../images/encoder1.svg" alt="" class="wb">
+            <p>The 8 to 3 or octal to binary encoder consists of 8 inputs: A7 to A0 and 3 outputs: B2 , B1 and B0. Each input line corresponds to each octal digit and three outputs generate corresponding binary code.</p>
+            <div class="in">
+                <h3>Decimal to Binary Encoder</h3>
+                <ul>
+                    <li>A Decimal to Binary Encoder converts decimal I/P into Binary O/P. It has 10 I/Ps and 4 O/Ps. It circuit diagram and truth table is given below:</li>
+                </ul>
+                <img src="../../images/encoder2.svg" alt="" class="wb">
+                <p>Truth table &darr;</p>
+                <div class="code">
+                    <pre>
+                        <code>
+
+              INPUTS                            OUTPUTS
+A0  A1  A2  A3  A4  A5  A6  A7  A8  A9      B3  B2  B1  B0
+1   0   0   0   0   0   0   0   0   0       0   0   0   0
+0   1   0   0   0   0   0   0   0   0       0   0   0   1
+0   0   1   0   0   0   0   0   0   0       0   0   1   0
+0   0   0   1   0   0   0   0   0   0       0   0   1   1
+0   0   0   0   1   0   0   0   0   0       0   1   0   0
+0   0   0   0   0   1   0   0   0   0       0   1   0   1
+0   0   0   0   0   0   1   0   0   0       0   1   1   0
+0   0   0   0   0   0   0   1   0   0       0   1   1   1
+0   0   0   0   0   0   0   0   1   0       1   0   0   0
+0   0   0   0   0   0   0   0   0   1       1   0   0   1
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Decoder</h2>
+            <ul>
+                <li>A decoder is a combinational circuit. It converts (or decode) binary number into another number systems. It has n inputs and 2<sup>n</sup> outputs.</li>
+                <li>Types of decoder:
+                    <ol type="i">
+                        <li>2x4 line decoder</li>
+                        <li>3x8 line decoder (binary to octal decoder)</li>
+                        <li>4x16 line decoder</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>2x4 Decoder</h3>
+                <ul>
+                    <li>A 2x4 Decoder has 2 inputs (A and B) and 4 O/Ps (D0, D1, D2, D3). Its circuit diagram and truth table is shown below:</li>
+                </ul>
+                <img src="../../images/decoder1.svg" alt="" class="wb">
+                <p>Truth table</p>
+                <div class="code">
+                    <pre>
+                        <code>
+
+  I/P   |    O/P
+A   B   |  D0  D1  D2  D3
+0   0   |  1   0   0   0
+0   1   |  0   1   0   0
+1   0   |  0   0   1   0
+1   1   |  0   0   0   1
+                        </code>
+                    </pre>
+                </div>
+                <p>Working &Darr;</p>
+                    <ul>
+                        <li>Case 1: When A = 0 and B = 0 then upper AND gate has I/Ps 1, 1. AND gate multiplies them and gives O/P 1. So we get O/P from linke D0. All other gate give O/P 0.</li>
+                        <li>Case 2: When A = 0 and B = 1 then second AND gate has I/Ps 1, 1. AND gate multiplies them and gives O/P 1. So we get O/P from line D1. All other AND gate give O/P 0.</li>
+                        <li>Case 4: When A=1 and B=1 then last AND gate has I/Ps 1, 1. AND gate multiples them and gives O/P 1. So we get O/P from line D3. All other AND gate give O/P 0.</li>
+                    </ul>
+            </div>
+            <div class="in">
+                <h3>Binary to Octal Decoder (3x8 Decoder)</h3>
+                <ul>
+                    <li>It has 3 inputs (A, B and C) and has 8 O/Ps (D0, D1, ..., D7). It takes binary input and gives Octal O/P. Its circuit diagram and truth table is shown below.</li>
+                </ul>
+                <img src="../../images/decoder2.svg" alt="" class="wb">
+                <p>Truth table</p>
+                <div class="code">
+                    <pre>
+                        <code>
+   I/P      |       O/P
+A   B   C   |   D0  D1  D2  D3  D4  D5  D6  D7
+0   0   0   |   1   0   0   0   0   0   0   0
+0   0   1   |   0   1   0   0   0   0   0   0
+0   1   0   |   1   0   1   0   0   0   0   0
+0   1   1   |   1   0   0   1   0   0   0   0
+1   0   0   |   1   0   0   0   1   0   0   0
+1   0   1   |   1   0   0   0   0   1   0   0
+1   1   0   |   1   0   0   0   0   0   1   0
+1   1   1   |   1   0   0   0   0   0   0   1
+                        </code>
+                    </pre>
+                </div>
+                <p>Working &darr;</p>
+                <ul>
+                    <li>Case 1: When A = 0, B = 0 and C = 0 then upper AND gate has I/Ps 1, 1, 1. This AND gate multiplies them and gives O/P 1. So we get O/P from line D0. All other gate give O/P 0.
+                        <br>It shows that when we apply 000 (Binary 0) then we get O/P from D0 (0 in octal).
+                    </li>
+                    <li>Case 2: When A = 0, B = 0 and C = 1 then second AND gate has I/Ps 1,1,1. This AND gate multiplies them and gives O/P 1. So we get O/P from line D1. All other gate give O/P 0.
+                    <br>It shows that when we apply 001 (Binary 1) then we get O/P form D1 (1 in octal).</li>
+                    <li>Case 3: When A = 0, B = 1 and C = 0 then third AND gate has I/Ps 1, 1, 1. This AND gate multiplies them and gives O/P 1. So we get O/P from line D2. All other AND gate give O/P 0.
+                        <br>It shows that when we apply 010 then we get O/P from D2 (2 in octal).
+                    </li>
+                    <li>Case 7: When A = 1, B = 1 and C = 1 then last AND gate has I/Ps 1, 1, 1. This AND gate multiplies them and gives O/P 1. So we get O/P from line D7. All other AND gate give O/P 0. 
+                        <br>It shows that when we apply 111 then we get O/P from D7 (7 in octal).
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="content-box">
