@@ -55,6 +55,57 @@
                 </ol>
             </li>
         </ul>
+        <div class="wh">
+            <h2>What is critical section problem?</h2>
+            <ul>
+                <li>A critical section  is a segment of code which can be accessed by a signal process at a specific point of time. The sectio soncisits of shared data resources that required to be accessed by other processes.
+                    <ul>
+                        <li>The entry to the critical section is handled by the wait() function, and it is represented as P().</li>
+                        <li>The exit from a critical section is controlled by the signal() function, represented as V().</li>
+                    </ul>
+                </li>
+                <li>In the critical section, only a single process can be executed. Other processes, waiting to execute their critical section, need to wait until the current process completes its execution.</li>
+            </ul>
+            <p><b>Rules of Critical Section</b></p>
+            <ul>
+                <li>The critical section need to must enforce all three rules:
+                    <ul>
+                        <li><b>Mutual Exclusion:</b> Mutual Exclusion is a special type of binary semaphore which is used for controlling access to the shared resource. It includes a priority inheritance mechanism to avoid extended priority inversion problems. Not more than one process can
+                            execute in its critical section at one time.</li>
+                            <li><b>Progress:</b> This solution is used when no one is in the critical section, and someone wants
+                                in. Then those processes not in their reminder section should decide who should go in, in
+                                a finite time.</li>
+                        <li><b>Bounded Waiting:</b> When a process makes a request for getting into critical section, there is
+                            a specific limit about number of processes can get into their critical section. So, when the limit is reached, the system must allow request to the process to get into its critical section.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Peterson's Algorithm For Critical Section Problem</h3>
+                <ul>
+                    <li>This is a software based solution to Critical Section Problem.</li>
+                    <li>Doesn’t work on modern architectures.</li>
+                    <li>It’s for 2 processes which alternate execution between then critical section and remainder
+                        section. Say, P1 is the first process and P2 is the second process.</li>
+                    <li>The 2 processes should share 2 data items with each other.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Semaphores in Process Synchronization</h3>
+                <ul>
+                    <li>Semaphores are a synchronization mechanism used to coordinate the activities of multiple processes in a computer system. They are used to enforce mutual exclusion, avoid race conditions and implement synchronization between processes.</li>
+                    <li>Semaphores provide two operations: wait (P) and signal (V). The wait operation decrements the value of the semaphore, and the signal operation increments the value of the semaphore. When the value of the semaphore is zero, any process that performs a wait operation will be blocked until another process performs a signal operation.</li>
+                    <li>Semaphores are used to implement critical sections, which are regions of code that must be executed by only one process at a time. By using semaphores, processes can coordinate access to shared resources, such as shared memory or I/O devices.</li>
+                    <li>Semaphores are of two types:
+                        <ol>
+                            <li>Binary Semaphore:
+                                <br>This is also known as a mutex lock. It can have only two values - 0 and 1. Its value is initialized to 1. It is used to implement the solution of critical section problems with multiple processes.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>

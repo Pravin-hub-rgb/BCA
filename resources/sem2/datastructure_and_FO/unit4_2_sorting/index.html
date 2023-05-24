@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="../unit4_1_searching/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Sorting</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Sorting</h1>
+        <ul>
+            <li>Sorting is a technique by which element of array can be arranged in particular order (ascending or descending).</li>
+            <li>There are many methods by which array can be sorted :  <br>
+                <img src="../../images/sort1.svg" alt="" class="wb">
+            </li>
+        </ul>
+        <div class="wh">
+            <h2>Bubble sort</h2>
+            <ul>
+                <li>Bubble sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case complexity is quite high.</li>
+            </ul>
+            <img src="../../images/sort2.svg" alt="" class="wb">
+            <p>Pseudo code &darr;</p>
+            <pre>
+                <code>
+void bubbleSort(int A[], int n)
+{
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = 0; j < n - 1 - i; j++)
+        {
+            if(A[j]> A[j+1])
+                swap(A[j], A[j+1]);
+        }
+    }
+}
+                </code>
+            </pre>
+            <ul>
+                <li>Bubble sort is not adaptive, means that if the array is already sorted then there should be not more than 1 passes.</li>
+                <li>We have to make it adoptive using a flag variable &darr;</li>
+            </ul>
+            <pre>
+                <code>
+void bubbleSort(int A[], int n)
+{
+    int flag;
+    for(i = 0; i < n - 1; i++)
+    {
+        flag = 0;
+        for(j = 0; j < n - 1 - i; j++)
+        {
+            if(A[j]> A[j+1])
+            {
+                swap(A[j], A[j+1]);
+                flag = 1;
+            }
+        }
+        if(flag == 0) break;
+    }
+}
+                </code>
+            </pre>
+            <p>Program code &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void bubbleSort(int A[], int n)
+{
+    int i, j, flag;
+    for (i = 0; i < n - 1; i++)
+    {
+        flag = 0;
+        for (j = 0; j < n - 1 - i; j++)
+        {
+            if (A[j] > A[j + 1])
+            {
+                swap(&A[j], &A[j + 1]);
+                flag = 1;
+            }
+        }
+        if (flag == 0)
+            break;
+    }
+}
+int main()
+{
+    int A[] = {3, 7, 9, 10, 6, 5, 12, 4, 11, 2}, n = 10, i;
+    bubbleSort(A, n);
+    printf("The sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Insertion Sort</h2>
+            <ul>
+                <li>Before insertion sort we should know insertion of an element in a sorted array.
+                   <br><img src="../../images/sort3.svg" alt="" class="wb">
+                </li>
+            </ul>
+            <p>Insertion sort &darr;</p>
+            <img src="../../images/sort4.svg" alt="" class="wb">
+            <ul>
+                <li>For n number of element there are n-1 passes.</li>
+                <li>Insertion is designed for linked list.</li>
+            </ul>
+            <p>Algorithm / Psuedo code &darr;</p>
+            <pre>
+                <code>
+void insertionSort(int A[], int n)
+{
+    for(i = 1; i < n; i++)
+    {
+        j = i - 1;
+        x = A[i];
+        while(j > -1 && A[j]>x)
+        {
+            A[j+1] = A[j];
+            j--;
+        }
+        A[j+1] = x;
+    }
+}
+                </code>
+            </pre>
+            <ul>
+                <li>The time complexity is O(n<sup>2</sup>).</li>
+            </ul>
+            <p>Program code &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+void insertionSort(int A[], int n)
+{
+    int i, j, x;
+    for (i = 1; i < n; i++)
+    {
+        j = i - 1;
+        x = A[i];
+        while (j > -1 && A[j] > x)
+        {
+            A[j + 1] = A[j];
+            j--;
+        }
+        A[j + 1] = x;
+    }
+}
+int main()
+{
+    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
+    insertionSort(A, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
