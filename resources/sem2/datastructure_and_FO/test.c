@@ -139,25 +139,46 @@ void insertAtMiddle(struct node *start, int item, int position)
 }
 */
 #include <stdio.h>
-void insertionSort(int A[], int n)
+void swap(int *a, int *b)
 {
-    int i, j, x;
-    for (i = 1; i < n; i++)
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int partition(int A[], int l, int h)
+{
+    int pivot = A[l];
+    int i = l, j = h;
+    do
     {
-        j = i - 1;
-        x = A[i];
-        while (j > -1 && A[j] > x)
+        do
         {
-            A[j + 1] = A[j];
+            i++;
+        } while (A[i] <= pivot);
+        do
+        {
             j--;
-        }
-        A[j + 1] = x;
+        } while (A[j] > pivot);
+        if (i < j)
+            swap(&A[i], &A[j]);
+    } while (i < j);
+    swap(&A[l], &A[j]);
+    return j;
+}
+void quickSort(int A[], int l, int h)
+{
+    int j;
+    if (l < h)
+    {
+        j = partition(A, l, h);
+        quickSort(A, l, j);
+        quickSort(A, j + 1, h);
     }
 }
 int main()
 {
-    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
-    insertionSort(A, n);
+    int A[] = {11, 13, 7, 12, 16, 9, 24, 5, 10, 3}, n = 10, i;
+    quickSort(A, 0, n);
     printf("\nDisplay the sorted array : ");
     for (i = 0; i < n; i++)
     {
