@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#t1" class="link">Recursion</a>
+        <a href="#t2" class="link">Types of recursion</a>
+        <a href="#t3" class="link">Call Stack</a>
+        <a href="#t4" class="link">Iteration vs. recursion</a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="../unit4_2_sorting/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Recursion</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1 id="t1">Recursion</h1>
+        <p><b>Definition:</b> Recursion is a programming technique where a function calls itself to solve a problem by breaking it down into smaller, similar subproblems. It involes solving a problem by reducing it to a smaller instance of the same problem.</p>
+        <div id="t2" class="wh">
+            <h2>Types of recursion</h2>
+            <div class="in">
+                <h3>Direct Recursion:</h3>
+                <ul>
+                    <li>In direct recursion, a function directly calls itself.</li>
+                    <li>Example &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+#include &lt;stdio.h>
+
+void countdown(int n) {
+    if (n == 0)
+        return;
+    printf("%d\n", n);
+    countdown(n - 1);
+}
+
+int main() {
+    countdown(5);
+    return 0;
+}
+
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Indirect recursion</h3>
+                <ul>
+                    <li>In indirect recursion, a function calls another function(s) which eventually calls the original function.</li>
+                    <li>Example &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+#include &lt;stdio.h>
+
+void function_B(int n);  // Forward declaration
+
+void function_A(int n) {
+    if (n == 0)
+        return;
+    printf("%d\n", n);
+    function_B(n - 1);
+}
+
+void function_B(int n) {
+    if (n == 0)
+        return;
+    printf("%d\n", n);
+    function_A(n - 1);
+}
+
+int main() {
+    function_A(5);
+    return 0;
+}
+
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Call Stack</h2>
+            <ul>
+                <li>The call stack is a data structure used by the program to keep track of function calls. It stores the context of each function call, including parameters, local variables, and the return address. When a fucnion is called, its context is push onto the top of the stack, and when a function completes or returns, its context is popped from the top of the stack.</li>
+            </ul>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Iteration vs. Recursion:</h2>
+            <ul>
+                <li>Iteration and recursion are both techniques for solving problems, but they have some key differences:</li>
+                <li><b>Iteration:</b>
+                <ul>
+                    <li>Iteration involves using loops (such as for or while) to repeatedly execute a block of code unil a certain conditon is met.</li>
+                    <li>It typically uses mutable variables to keep track of the state and update it in each iteration.</li>
+                    <li>It often requires explicit control flow statements, such as incrementing counters or updating indices.</li>
+                    <li>It can be more efficient in terms of memory usage and execution speed for certain problems.</li>
+                </ul></li>
+                <li><b>Recursion:</b>
+                <ul>
+                    <li>Recursion involves breaking down a problem into smaller instances of the same problem and solving them recursively.</li>
+                    <li>It relies on the call stack to handle the function calls and manage the state.</li>
+                    <li>It often uses immutable variables and passes updated values as parameters to subsequent recursive calls.</li>
+                    <li>It can provide a more concise and elegant solution for certain problems, but it may be less efficient in terms of memory usage and execution speed, especially for deeply nested recursive calls.</li>
+                </ul></li>
+                <li>Note: It's important to ensure that recursive functions have a base case (or multiple base cases) that terminates the recursion to avoid infinite loops.</li>
+            </ul>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

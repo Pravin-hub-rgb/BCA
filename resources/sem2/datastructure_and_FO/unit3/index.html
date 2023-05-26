@@ -26,7 +26,17 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">Advantages of linked lists over array.</a>
+        <a href="#t2" class="link">Drawbacks of linked lists</a>
+        <a href="#t3" class="link">Applications of linked list</a>
+        <a href="#t4" class="link">Types of linked list</a>
+        <a href="#t5" class="link">Singly linked list</a>
+        <a href="#t6" class="link">Doubly linked list </a>
+        <a href="#t7" class="link">Garbage collection and compaction</a>
+        <div class="botbut">
+            <a href="../unit4_1_searching/index.html" class="link">Next Topic &rarr;</a>
+            <a href="../unit2/queue.html" class="link">&larr; Previous Topic</a>
+        </div>
     </div>
     <div id="navbar" class="grad">
         <div>
@@ -47,7 +57,7 @@
         <ul>
             <li>We already know about linked list in previous unit.</li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>Advantages of Linked Lists over array:</h2>
             <ul>
                 <li>Ease of insertion/deletion.</li>
@@ -60,7 +70,7 @@
                 <li>Many complex applications can be easily carried out with linked lists.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Drawbacks of linked lists:</h2>
             <ul>
                 <li>Random access is not allowed. We have to access elements sequentially starting from the first node
@@ -75,7 +85,7 @@
                     the number of elements in the linked list, as compared to arrays that take O(1) time.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Applications of linked list:</h2>
             <ul>
                 <li>Represent very large numbers and operations of the large number such as adiition, multiplication and division.</li>
@@ -83,7 +93,7 @@
                 <li>Implement the symbol table in compiler construction.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Types of Linked Lists:</h2>
             <ul>
                 <li><b>Singly Linked List:</b> In this type of linked list, one can move or traverse the linked list in
@@ -102,7 +112,7 @@
                     header node at the beginning of the list.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Singly linked list</h2>
             <p>Syntax of a node &darr;</p>
             <pre>
@@ -561,11 +571,280 @@ void display()
                </pre>
                 </div>
             </div>
+            <div class="in">
+                <h3>Circular Single Linked List</h3>
+                <ul>
+                    <li>It is just a single linked list in which the link field of the last node points back to the address of the first node.</li>
+                    <li>A circular linked list has no beginning and no end. It is necessary to establish a special pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
+                    <li>Circular linked lists are frequently used instead of ordinary linked list because many operations are much easier to implement.</li>
+                    <li>In circular linked list no null pointer are used, hence all pointers contain valid address.</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Circular single linked list MENU driven program code</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+    #include &lt;stdio.h>
+    #include &lt;stdlib.h>
+    
+    typedef struct node
+    {
+        int data;
+        struct node *next;
+    } node;
+    node *start = NULL;
+    
+    void insertAtFront();
+    void insertAtBack();
+    void insertAfterNode();
+    void deleteAtFront();
+    void deleteAtBack();
+    void deleteNode();
+    void display();
+    
+    int main()
+    {
+        int choice;
+        while (1)
+        {
+            printf("\n------- MENU Circular single linked list ---------");
+            printf("\n1. Insert at front");
+            printf("\n2. Insert at back");
+            printf("\n3. Insert after a node");
+            printf("\n4. Delete at front");
+            printf("\n5. Delete at back");
+            printf("\n6. Delete a node");
+            printf("\n7. Display");
+            printf("\n8. Exit");
+            printf("\nEnter you choice : ");
+            scanf("%d", &choice);
+            switch (choice)
+            {
+            case 1:
+                insertAtFront();
+                break;
+            case 2:
+                insertAtBack();
+                break;
+            case 3:
+                insertAfterNode();
+                break;
+            case 4:
+                deleteAtFront();
+                break;
+            case 5:
+                deleteAtBack();
+                break;
+            case 6:
+                deleteNode();
+                break;
+            case 7:
+                display();
+                break;
+            case 8:
+                exit(0);
+            default:
+                printf("\nEnter a correct choice");
+            }
+        }
+        return 0;
+    }
+    void insertAtFront()
+    {
+        node *newNode = (node *)malloc(sizeof(node)), *last;
+        printf("Enter a value : ");
+        scanf("%d", &newNode->data);
+        if (start == NULL)
+        {
+            start = newNode;
+            newNode->next = start;
+        }
+        else
+        {
+            last = start;
+            while (last->next != start)
+                last = last->next;
+            newNode->next = start;
+            start = newNode;
+            last->next = start;
+        }
+    }
+    
+    void insertAtBack()
+    {
+        node *newNode = (node *)malloc(sizeof(node));
+        node *last = start;
+        printf("Enter a value : ");
+        scanf("%d", &newNode->data);
+        newNode->next = NULL;
+        if (start == NULL)
+        {
+            start = newNode;
+            newNode->next = start;
+        }
+        else
+        {
+            while (last->next != start)
+                last = last->next;
+            last->next = newNode;
+            newNode->next = start;
+        }
+    }
+    
+    void insertAfterNode()
+    {
+        if (start == NULL)
+        {
+            printf("\nlist is empty, cannot insert after a node\n");
+            return;
+        }
+        int node_val;
+        printf("\nEnter a node value after which you want to insert : ");
+        scanf("%d", &node_val);
+        node *temp = start;
+        while (temp->data != node_val)
+        {
+            if (temp->next == NULL)
+            {
+                printf("\nValue not found");
+                return;
+            }
+            temp = temp->next;
+        }
+        node *newNode = (node *)malloc(sizeof(node));
+        newNode->next = NULL;
+        printf("\nEnter the value : ");
+        scanf("%d", &newNode->data);
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+    
+    void deleteAtFront()
+    {
+        if (start == NULL)
+        {
+            printf("\nNo node exist");
+            return;
+        }
+        if (start->next == start)
+        {
+            printf("\n%d is deleted", start->data);
+            free(start);
+            start = NULL;
+            return;
+        }
+        node *last = start, *temp = start;
+        while (last->next != start)
+            last = last->next;
+        start = start->next;
+        last->next = start;
+        printf("\n%d is deleted", temp->data);
+        free(temp);
+    }
+    
+    void deleteAtBack()
+    {
+        if (start == NULL)
+        {
+            printf("\nNo node exist");
+            return;
+        }
+        if (start->next == start)
+        {
+            printf("\n%d is deleted", start->data);
+            free(start);
+            start = NULL;
+            return;
+        }
+        node *temp = start;
+        while (temp->next->next != start)
+        {
+            temp = temp->next;
+        }
+        printf("\n%d is deleted", temp->next->data);
+        free(temp->next);
+        temp->next = start;
+    }
+    
+    void deleteNode()
+    {
+        if (start == NULL)
+        {
+            printf("\nNo node exist");
+            return;
+        }
+        int search;
+        node *loop = start, *prev = start;
+        printf("Enter a value you want to delete : ");
+        scanf("%d", &search);
+        node *temp = start;
+        while (temp->data != search)
+        {
+            temp = temp->next;
+            if (temp->next == NULL)
+            {
+                printf("\nValue not found");
+                return;
+            }
+        }
+        if (temp == start)
+        {
+            loop = start;
+            while (loop->next != start)
+                loop = loop->next;
+            start = start->next;
+            loop->next = start;
+            free(temp);
+        }
+        else if (temp->next == start)
+        {
+            loop = start;
+            prev = start;
+            while (loop->next != start)
+            {
+                prev = loop;
+                loop = loop->next;
+            }
+            prev->next = start;
+            free(loop);
+        }
+        else
+        {
+            prev = start;
+            while (prev->next != temp)
+            {
+                prev = prev->next;
+            }
+            prev->next = temp->next;
+        }
+    }
+    
+    void display()
+    {
+        if (start == NULL)
+        {
+            printf("\nEmpty list");
+            return;
+        }
+        node *newNode = start;
+        while (newNode->next != start)
+        {
+            printf("%d --> ", newNode->data);
+            newNode = newNode->next;
+        }
+        printf("%d --> ", newNode->data);
+    }
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="wh">
-            <h2>Double Linked List:</h2>
+        <div id="t6" class="wh">
+            <h2>Doubly Linked List:</h2>
             <ul>
-                <li>A double linked list is a two-way list in which all have two links. This helps in accessing both successor node and predecessor node from the given node position.</li>
+                <li>A doubly linked list is a two-way list in which all have two links. This helps in accessing both successor node and predecessor node from the given node position.</li>
                 <li>It provides bi-directional traversing. Each node contains three fields:
                     <ol>
                         <li>Left link (prev)</li>
@@ -827,282 +1106,108 @@ void display()
                 </pre>
                </div>
             </div>
-        </div>
-        <div class="wh">
-            <h2>Circular Single Linked List</h2>
-            <ul>
-                <li>It is just a single linked list in which the link field of the last node points back to the address of the first node.</li>
-                <li>A circular linked list has no beginning and no end. It is necessary to establish a special pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
-                <li>Circular linked lists are frequently used instead of ordinary linked list because many operations are much easier to implement.</li>
-                <li>In circular linked list no null pointer are used, hence all pointers contain valid address.</li>
-            </ul>
-            <div class="code">
-                <div class="dotc"></div>
-                <button class="ac">Circular single linked list MENU driven program code</button>
-                <div class="panel">
-                    <pre>
-                        <code>
-#include &lt;stdio.h>
-#include &lt;stdlib.h>
-
-typedef struct node
-{
-    int data;
-    struct node *next;
-} node;
-node *start = NULL;
-
-void insertAtFront();
-void insertAtBack();
-void insertAfterNode();
-void deleteAtFront();
-void deleteAtBack();
-void deleteNode();
-void display();
-
-int main()
-{
-    int choice;
-    while (1)
-    {
-        printf("\n------- MENU Circular single linked list ---------");
-        printf("\n1. Insert at front");
-        printf("\n2. Insert at back");
-        printf("\n3. Insert after a node");
-        printf("\n4. Delete at front");
-        printf("\n5. Delete at back");
-        printf("\n6. Delete a node");
-        printf("\n7. Display");
-        printf("\n8. Exit");
-        printf("\nEnter you choice : ");
-        scanf("%d", &choice);
-        switch (choice)
-        {
-        case 1:
-            insertAtFront();
-            break;
-        case 2:
-            insertAtBack();
-            break;
-        case 3:
-            insertAfterNode();
-            break;
-        case 4:
-            deleteAtFront();
-            break;
-        case 5:
-            deleteAtBack();
-            break;
-        case 6:
-            deleteNode();
-            break;
-        case 7:
-            display();
-            break;
-        case 8:
-            exit(0);
-        default:
-            printf("\nEnter a correct choice");
-        }
-    }
-    return 0;
-}
-void insertAtFront()
-{
-    node *newNode = (node *)malloc(sizeof(node)), *last;
-    printf("Enter a value : ");
-    scanf("%d", &newNode->data);
-    if (start == NULL)
-    {
-        start = newNode;
-        newNode->next = start;
-    }
-    else
-    {
-        last = start;
-        while (last->next != start)
-            last = last->next;
-        newNode->next = start;
-        start = newNode;
-        last->next = start;
-    }
-}
-
-void insertAtBack()
-{
-    node *newNode = (node *)malloc(sizeof(node));
-    node *last = start;
-    printf("Enter a value : ");
-    scanf("%d", &newNode->data);
-    newNode->next = NULL;
-    if (start == NULL)
-    {
-        start = newNode;
-        newNode->next = start;
-    }
-    else
-    {
-        while (last->next != start)
-            last = last->next;
-        last->next = newNode;
-        newNode->next = start;
-    }
-}
-
-void insertAfterNode()
-{
-    if (start == NULL)
-    {
-        printf("\nlist is empty, cannot insert after a node\n");
-        return;
-    }
-    int node_val;
-    printf("\nEnter a node value after which you want to insert : ");
-    scanf("%d", &node_val);
-    node *temp = start;
-    while (temp->data != node_val)
-    {
-        if (temp->next == NULL)
-        {
-            printf("\nValue not found");
-            return;
-        }
-        temp = temp->next;
-    }
-    node *newNode = (node *)malloc(sizeof(node));
-    newNode->next = NULL;
-    printf("\nEnter the value : ");
-    scanf("%d", &newNode->data);
-    newNode->next = temp->next;
-    temp->next = newNode;
-}
-
-void deleteAtFront()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    if (start->next == start)
-    {
-        printf("\n%d is deleted", start->data);
-        free(start);
-        start = NULL;
-        return;
-    }
-    node *last = start, *temp = start;
-    while (last->next != start)
-        last = last->next;
-    start = start->next;
-    last->next = start;
-    printf("\n%d is deleted", temp->data);
-    free(temp);
-}
-
-void deleteAtBack()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    if (start->next == start)
-    {
-        printf("\n%d is deleted", start->data);
-        free(start);
-        start = NULL;
-        return;
-    }
-    node *temp = start;
-    while (temp->next->next != start)
-    {
-        temp = temp->next;
-    }
-    printf("\n%d is deleted", temp->next->data);
-    free(temp->next);
-    temp->next = start;
-}
-
-void deleteNode()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    int search;
-    node *loop = start, *prev = start;
-    printf("Enter a value you want to delete : ");
-    scanf("%d", &search);
-    node *temp = start;
-    while (temp->data != search)
-    {
-        temp = temp->next;
-        if (temp->next == NULL)
-        {
-            printf("\nValue not found");
-            return;
-        }
-    }
-    if (temp == start)
-    {
-        loop = start;
-        while (loop->next != start)
-            loop = loop->next;
-        start = start->next;
-        loop->next = start;
-        free(temp);
-    }
-    else if (temp->next == start)
-    {
-        loop = start;
-        prev = start;
-        while (loop->next != start)
-        {
-            prev = loop;
-            loop = loop->next;
-        }
-        prev->next = start;
-        free(loop);
-    }
-    else
-    {
-        prev = start;
-        while (prev->next != temp)
-        {
-            prev = prev->next;
-        }
-        prev->next = temp->next;
-    }
-}
-
-void display()
-{
-    if (start == NULL)
-    {
-        printf("\nEmpty list");
-        return;
-    }
-    node *newNode = start;
-    while (newNode->next != start)
-    {
-        printf("%d --> ", newNode->data);
-        newNode = newNode->next;
-    }
-    printf("%d --> ", newNode->data);
-}
-                        </code>
-                    </pre>
-                </div>
-            </div>
-        </div>
-        <div class="wh">
-            <h2>Circular Double Linked List</h2>
+        
+        <div class="in">
+            <h3>Circular Double Linked List</h3>
             <ul>
                 <li>A circular double linked list has both sucessor and predecessor pointer in circular manner. The object behind considering circular double linked list is to simplify the insertion and deletion operations performed on double linked list.</li>
                 <li>In circular double linked list the right link of the right most node points back to the start node and left link of the first node points to the last node.</li>
             </ul>
+        </div>
+    </div>
+        <div id="t7" class="wh">
+            <h2>Garbage collection and Compaction</h2>
+            <div class="in">
+                <h3>Garbage collection</h3>
+                <ul>
+                    <li>Garbage collection is the process of automatically reclaiming memory that is no longer in use by the program.</li>
+                    <li>In the context of linked lists, garbage collection involves identifying and deallocating unused nodes.</li>
+                    <li>Node beccomes unused when they are no longer reachable from the list's head node.</li>
+                    <li>Garbage collection ensures efficient memory utilization and prevents memory leaks.</li>
+                    <li><b>Mark and Sweep algorithm:</b> It is a common technique used for garbage collection in linked lists.
+                    <ul>
+                        <li>The algorithm consists of two phases: marking and sweeping.</li>
+                        <li>In the marking phase, the algorithm traverses the linked list from the head node and marks all reachable nodes.</li>
+                        <li>Marking can be done by setting a flag or modifying a field in each node.</li>
+                        <li>In the sweeping phase, the algorithm traverses the linked list again and deallocates all unmarked nodes.</li>
+                        <li>The memory occupied by unmarked nodes is returned to the system for reuse.</li>
+                    </ul></li>
+                </ul>
+                <div class="wh">
+                    <p>Using free to deallocate the unnecessary nodes</p>
+                    <ul>
+                        <li>After marking the reachable nodes during the mark phase of the mark and sweep algorithm, you need to deallocate the memory for the unmarked nodes.Traverse the linked list and for each unmarked node, use free() to release the memory occupied by that node.</li>
+                        <li>For example &darr;</li>
+                    </ul>
+                       <pre>
+                           <code>
+// Assuming a linked list node structure like:
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// During garbage collection, deallocate unmarked nodes
+struct Node* current = head;
+while (current != NULL) {
+    struct Node* nextNode = current->next;
+    if (!current->marked) {
+        free(current);  // Deallocate memory for unmarked node
+    }
+    current = nextNode;
+}
+
+                           </code>
+                       </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Compaction</h3>
+                <ul>
+                    <li>Compaction is an optimization technique that aims to reduce memory fragmentation in a linked list.</li>
+                    <li>Memory fragmentation occurs when free memory blocks are scattered throughout the memory space.</li>
+                    <li>Compaction rearranges the nodes in memory to eliminate fragmentation and create a contiguous block of free memory.</li>
+                    <li>The compaction process involves iterating over the linked list, moving the nodes closer together, and updating the pointers accordingly.</li>
+                    <li>After compaction, the linked list occupies a compact memory space, which improves memory utilization and reduces memory allocation overhead.</li>
+                </ul>
+                <div class="wh">
+                    <p>Using free() in Compaction</p>
+                    <ul>
+                        <li>During the compaction process, you rearrange the nodes to eliminate memory fragmentation and create a contiguous block of free memory.</li>
+                        <li>As you move nodes, you will have "gaps" or unused memory spaces left behind.</li>
+                        <li>To reclaim this unused memory, you can use free() to deallocate those gaps.</li>
+                        <li>For example &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+// Assuming a linked list node structure like:
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Perform compaction and deallocate gaps
+struct Node* current = head;
+struct Node* prev = NULL;
+while (current != NULL) {
+    // Move the node to its new position
+    // ...
+
+    // Deallocate the gap between prev and current
+    if (prev != NULL && prev->next != current) {
+        struct Node* gap = prev->next;
+        prev->next = current;
+        free(gap);  // Deallocate memory for the gap
+    }
+
+    prev = current;
+    current = current->next;
+}
+
+                        </code>
+                    </pre>
+                </div>
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

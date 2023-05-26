@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File handling and System calls</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="../string/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>File handling and System calls</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>File handling and System calls</h1>
+        <ul>
+            <li>The input and output operations that we have performed so far were done through screen and keyboard only. After termination of program, all the entered data is lost because primary memory is volatile. When the data has to be used later, then it becomes necessary to keep it in permanent storage device. C supports the concept of files through which data can be stored on the disk or secondary strogage  device. The stored data can be read whenever required. A file is a collection of related data placed on the disk.</li>
+            <li>The file handling in C can be broadly categorized in two types:
+                <ul>
+                    <li>High level (standard files or stream oriented files)</li>
+                    <li>Low level (system oriented files)</li>
+                </ul>
+            </li>
+            <li>High level file handling is managed by library functions while low level file handling is managed by system alls. The high level file handling is common used since it is easier to manage and hides most of the deatils from the programmer. In this chapter we'll discuss about high level file handling only.</li>
+        </ul>
+        <div class="wh">
+            <h2>Text and Binary modes</h2>
+            <ul>
+                <li>There are two ways of storing data in files, binary format and text format.</li>
+                <li>In text format, data is stored as lines of characters with each line terminated by a newline character('\n').</li>
+                <li>In binary format, data stored on the disk in the same way as it is represented in the computer memory. Unix system do not make any distinction between text file and binary files.</li>
+                <li>Text files are in human readable form and they can be created and read using any text editor, while binary files are not in human readable form and they can be created and read only by specific progran written for them. The binary data stored in the file can't be read using a text editor.</li>
+                <li>The integer 1679 will take only 2 bytes in a binary file while it will occupy 4 bytes in a text file because in-binary file it is stored as an integer. while in text file it is stored as a sequence of 4 characters i.e. '1', '6', '7', '9'.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Concept of buffer</h2>
+            <ul>
+                <li>Buffer is an area in memory where the data is temporarily stored before being writen to the file. When we open a file, a buffer is automatically associated with its file pointer. Whatever data we send to the file is not immediately written to the file. First it is sent to the buffer and when the buffer is full then its contents are written to the file. When the file is closed, all the contents of buffer are automatically written to the file even if the buffer is not full. This is called flushing the buffer, we can also explicityly flush the buffer by a function fflush() described later.</li>
+                <li>The concept of buffer is used to increase efficiency. If there had been no buffer we would have to access the disk each time for writing even single byte of data. This would have taken lot of time beacuse each time the disk is accessed, the read/write head has to be repositioned. When buffering is done, the data is collected in the buffer and data equal to the size of buffer is written to the file at a time, so the number of times disk is accessed decreases, which improves efficiency.</li>
+                <li>The steps for file operations in C programming are as follows- 
+                    <ol>
+                        <li>Open a file</li>
+                        <li>Read the file or write data in the file</li>
+                        <li>Close the file</li>
+                    </ol>
+                    The functions fopen() and fclose() are used for opening and closing the files respectively.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
