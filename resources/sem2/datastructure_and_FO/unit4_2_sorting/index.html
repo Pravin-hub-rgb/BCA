@@ -18,7 +18,8 @@
             color: white;
         }
     </style>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -51,15 +52,18 @@
     <div class="content-box">
         <h1>Sorting</h1>
         <ul>
-            <li>Sorting is a technique by which element of array can be arranged in particular order (ascending or descending).</li>
-            <li>There are many methods by which array can be sorted :  <br>
+            <li>Sorting is a technique by which element of array can be arranged in particular order (ascending or
+                descending).</li>
+            <li>There are many methods by which array can be sorted : <br>
                 <img src="../../images/sort1.svg" alt="" class="wb">
             </li>
         </ul>
         <div id="t1" class="wh">
             <h2>Bubble sort</h2>
             <ul>
-                <li>Bubble sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case complexity is quite high.</li>
+                <li>Bubble sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent
+                    elements if they are in the wrong order. This algorithm is not suitable for large data sets as its
+                    average and worst-case complexity is quite high.</li>
             </ul>
             <p>Procedure &darr;</p>
             <img src="../../images/sort2.svg" alt="" class="wb">
@@ -80,7 +84,8 @@ void bubbleSort(int A[], int n)
                 </code>
             </pre>
             <ul>
-                <li>Bubble sort is not adaptive, means that if the array is already sorted then there should be not more than 1 passes.</li>
+                <li>Bubble sort is not adaptive, means that if the array is already sorted then there should be not more
+                    than 1 passes.</li>
                 <li>We have to make it adaptive using a flag variable &darr;</li>
             </ul>
             <pre>
@@ -106,8 +111,8 @@ void bubbleSort(int A[], int n)
             </pre>
             <p>Program code &darr;</p>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 void swap(int *a, int *b)
@@ -154,7 +159,7 @@ int main()
             <h2>Insertion Sort</h2>
             <ul>
                 <li>Before insertion sort we should know insertion of an element in a sorted array.
-                   <br><img src="../../images/sort3.svg" alt="" class="wb">
+                    <br><img src="../../images/sort3.svg" alt="" class="wb">
                 </li>
             </ul>
             <p>Procedure &darr;</p>
@@ -187,8 +192,8 @@ void insertionSort(int A[], int n)
             </ul>
             <p>Program code &darr;</p>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 void insertionSort(int A[], int n)
@@ -224,7 +229,8 @@ int main()
         <div id="t3" class="wh">
             <h2>Selection sort</h2>
             <ul>
-                <li>This algorithm also sorts the element in passes, in each pass one element will be sorted. Just like bubble sort in selection sort for n element n - 1 passes are required.</li>
+                <li>This algorithm also sorts the element in passes, in each pass one element will be sorted. Just like
+                    bubble sort in selection sort for n element n - 1 passes are required.</li>
             </ul>
             <p>Procedure &darr;</p>
             <img src="../../images/sort5.svg" alt="" class="wb">
@@ -248,8 +254,8 @@ void selectionSort(int A[], int n)
             </pre>
             <p>Program code &darr;</p>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include&lt;stdio.h>
 void swap(int *a, int *b)
@@ -295,7 +301,10 @@ int main()
             </ul>
             <p>Procedure &darr;</p>
             <img src="../../images/sort7.svg" alt="" class="wb">
-            <p>The above procedure is known as partitioning procedure in which pivot element is moved to sorted place. <br>So quick sort uses partitioning procedure for sorting the elements and also it is recursive. So in code we will write the partitioned procedure and then quick sort procedure.</p>
+            <p>The above procedure is known as partitioning procedure in which pivot element is moved to sorted place.
+                <br>So quick sort uses partitioning procedure for sorting the elements and also it is recursive. So in
+                code we will write the partitioned procedure and then quick sort procedure.
+            </p>
             <p>Partitioning algorithm &darr;</p>
             <pre>
                 <code>
@@ -320,8 +329,8 @@ int partition(int A[], int l, int h)
             </p>
             <p>Program code &darr;</p>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 void swap(int *a, int *b)
@@ -373,6 +382,221 @@ int main()
 }
                    </code>
                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Merge Sort</h2>
+            <div class="in">
+                <h3>Merging two array in a single array</h3>
+                <ul>
+                    <li>Merging is a process of combining two sorted list into a single sorted list </li>
+                </ul>
+                <img src="../../images/sort8.svg" alt="" class="wb">
+                <ul>
+                    <li>In the last iteration there will be some elements that will be remaining to be added to C array
+                        and definitly this is going to happen if m and n are not equal.</li>
+                </ul>
+                <p>Algorithm &darr;</p>
+                <pre>
+                    <code>
+void merge(int A[], int B[], int m, int n)
+{
+    int i, j, k;
+    i = k = 0;
+    while(i < m && j < n)
+    {
+        if(A[i] < B[j])
+            C[k++] = A[i++];
+        else 
+            C[k++] = B[j++];
+    }
+    // now this is for if there are some remaining elements
+    for(; i < m; i++)
+        C[k++] = A[i];
+    for(; j < n; j++)
+        C[k++] = B[j];
+    // either of 'for' loop will execute
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Merging two list which is in single array</h3>
+                <img src="../../images/sort9.svg" alt="" class="wb">
+                <ul>
+                    <li>Now we have to update the previously written algorithm for single array.</li>
+                </ul>
+                <pre>
+                    <code>
+void merge(int A[], int l, int mid, int h)
+{
+    int i, j, k;
+    i = l;
+    j = mid + 1;
+    k = l;
+    // we need array to merge into 
+    int B[h + 1];
+    while(i < mid && j <= h)
+    {
+        if(A[i] < A[j])
+            B[k++] = A[i++];
+        else 
+            B[k++] = A[j++];
+    }
+
+    for(; i <= mid; i++)
+        B[k++] = A[i];
+    for(; j <= h; j++)
+        B[k++] = A[j];
+    
+    // now all the elements should be copied back to array A
+    for(i = l; i <= h; i++) A[i] = B[i];
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>Now this modified code works for single array now. </li>
+                    <li>In merge sort we will utilize this technique.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="in">
+            <h3>Two way merge sort (Iterative version)</h3>
+            <img src="../../images/sort10.svg" alt="" class="wb">
+            <p>merge sort function for iterative version &darr;</p>
+            <pre>
+                <code>
+void iMergeSort(int A[], int n)
+{
+    int p, i, l, mid, h;
+    for(p = 2; p <= n; p = p * 2)
+    {
+        for(i = 0; i + p - 1 < n; i = i + p)
+        {
+            l = i;
+            h = i + p - 1;
+            mid = (l + h) / 2;
+            merge(A, l, mid, h);
+        }
+    }
+    if(p/2 < n)
+        merge(A, 0, p/2, n-1);
+}
+                </code>
+            </pre>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Full code</button>
+               <div class="panel">
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+void merge(int A[], int l, int mid, int h)
+{
+    int i = l, j = mid + 1, k = l;
+    int B[h+1];
+    while(i <= mid && j <= h)
+    {
+        if(A[i] < A[j])
+            B[k++] = A[i++];
+        else 
+            B[k++] = A[j++];
+    }
+    for(; i <= mid; i++)
+        B[k++] = A[i];
+    for(; j <=h; j++)
+        B[k++] = A[j];
+    
+    // copying element from B to A 
+    for(i = l; i <= h; i++) A[i] = B[i];
+}
+void iMergeSort(int A[], int n)
+{
+    int p, l, h, mid, i;
+    for(p = 2; p <= n; p = p * 2)
+    {
+        for(i = 0; i + p - 1 < n; i = i + p)
+        {
+            l = i;
+            h = i + p - 1;
+            mid = (l + h) / 2;
+            merge(A, l, mid, h);
+        }
+    }
+    if(p/2 < n)
+    {
+        merge(A, 0, p/2 - 1, n);
+    }
+}
+int main()
+{
+    int A[] = {11, 13, 7, 12, 16, 9, 24, 5, 10, 3}, n = 10, i;
+    iMergeSort(A, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+            </div>
+            <div class="in">
+                <h3>Two way merge sort (recursive version)</h3>
+                <img src="../../images/sort11.svg" alt="" class="wb">
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class="ac">Full code</button>
+                   <div class="panel">
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+void merge(int A[], int l, int mid, int h)
+{
+    int i = l, j = mid + 1, k = l;
+    int B[h+1];
+    while(i <= mid && j <= h)
+    {
+        if(A[i] < A[j])
+            B[k++] = A[i++];
+        else 
+            B[k++] = A[j++];
+    }
+    for(; i <= mid; i++)
+        B[k++] = A[i];
+    for(; j <=h; j++)
+        B[k++] = A[j];
+    
+    for(i = l; i <= h; i++) A[i] = B[i];
+}                
+void mergeSort(int A[], int l, int h)
+{
+    int mid;
+    if(l < h)
+    {
+        mid = ( l + h ) / 2;
+        mergeSort(A, l, mid);
+        mergeSort(A, mid + 1, h);
+        merge(A, l, mid, h);
+    }
+}
+int main()
+{
+    int A[] = {11, 13, 7, 12, 16, 9, 24, 5, 10, 3}, n = 10, i;
+    mergeSort(A, 0, n - 1);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                </div>
             </div>
         </div>
     </div>
