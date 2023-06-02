@@ -18,7 +18,8 @@
             color: white;
         }
     </style>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -47,31 +48,54 @@
     <div class="content-box">
         <h1>File handling</h1>
         <ul>
-            <li>The input and output operations that we have performed so far were done through screen and keyboard only. After termination of program, all the entered data is lost because primary memory is volatile. When the data has to be used later, then it becomes necessary to keep it in permanent storage device. C supports the concept of files through which data can be stored on the disk or secondary strogage  device. The stored data can be read whenever required. A file is a collection of related data placed on the disk.</li>
+            <li>The input and output operations that we have performed so far were done through screen and keyboard
+                only. After termination of program, all the entered data is lost because primary memory is volatile.
+                When the data has to be used later, then it becomes necessary to keep it in permanent storage device. C
+                supports the concept of files through which data can be stored on the disk or secondary strogage device.
+                The stored data can be read whenever required. A file is a collection of related data placed on the
+                disk.</li>
             <li>The file handling in C can be broadly categorized in two types:
                 <ul>
                     <li>High level (standard files or stream oriented files)</li>
                     <li>Low level (system oriented files)</li>
                 </ul>
             </li>
-            <li>High level file handling is managed by library functions while low level file handling is managed by system alls. The high level file handling is common used since it is easier to manage and hides most of the deatils from the programmer. In this chapter we'll discuss about high level file handling only.</li>
+            <li>High level file handling is managed by library functions while low level file handling is managed by
+                system alls. The high level file handling is common used since it is easier to manage and hides most of
+                the deatils from the programmer. In this chapter we'll discuss about high level file handling only.</li>
         </ul>
         <div class="wh">
             <h2>Text and Binary modes</h2>
             <ul>
                 <li>There are two ways of storing data in files, binary format and text format.</li>
-                <li>In text format, data is stored as lines of characters with each line terminated by a newline character('\n').</li>
-                <li>In binary format, data stored on the disk in the same way as it is represented in the computer memory. Unix system do not make any distinction between text file and binary files.</li>
-                <li>Text files are in human readable form and they can be created and read using any text editor, while binary files are not in human readable form and they can be created and read only by specific progran written for them. The binary data stored in the file can't be read using a text editor.</li>
-                <li>The integer 1679 will take only 2 bytes in a binary file while it will occupy 4 bytes in a text file because in-binary file it is stored as an integer. while in text file it is stored as a sequence of 4 characters i.e. '1', '6', '7', '9'.</li>
+                <li>In text format, data is stored as lines of characters with each line terminated by a newline
+                    character('\n').</li>
+                <li>In binary format, data stored on the disk in the same way as it is represented in the computer
+                    memory. Unix system do not make any distinction between text file and binary files.</li>
+                <li>Text files are in human readable form and they can be created and read using any text editor, while
+                    binary files are not in human readable form and they can be created and read only by specific
+                    progran written for them. The binary data stored in the file can't be read using a text editor.</li>
+                <li>The integer 1679 will take only 2 bytes in a binary file while it will occupy 4 bytes in a text file
+                    because in-binary file it is stored as an integer. while in text file it is stored as a sequence of
+                    4 characters i.e. '1', '6', '7', '9'.</li>
             </ul>
         </div>
         <div class="wh">
             <h2>Concept of buffer</h2>
             <ul>
-                <li>Buffer is an area in memory where the data is temporarily stored before being writen to the file. When we open a file, a buffer is automatically associated with its file pointer. Whatever data we send to the file is not immediately written to the file. First it is sent to the buffer and when the buffer is full then its contents are written to the file. When the file is closed, all the contents of buffer are automatically written to the file even if the buffer is not full. This is called flushing the buffer, we can also explicityly flush the buffer by a function fflush() described later.</li>
-                <li>The concept of buffer is used to increase efficiency. If there had been no buffer we would have to access the disk each time for writing even single byte of data. This would have taken lot of time beacuse each time the disk is accessed, the read/write head has to be repositioned. When buffering is done, the data is collected in the buffer and data equal to the size of buffer is written to the file at a time, so the number of times disk is accessed decreases, which improves efficiency.</li>
-                <li>The steps for file operations in C programming are as follows- 
+                <li>Buffer is an area in memory where the data is temporarily stored before being writen to the file.
+                    When we open a file, a buffer is automatically associated with its file pointer. Whatever data we
+                    send to the file is not immediately written to the file. First it is sent to the buffer and when the
+                    buffer is full then its contents are written to the file. When the file is closed, all the contents
+                    of buffer are automatically written to the file even if the buffer is not full. This is called
+                    flushing the buffer, we can also explicityly flush the buffer by a function fflush() described
+                    later.</li>
+                <li>The concept of buffer is used to increase efficiency. If there had been no buffer we would have to
+                    access the disk each time for writing even single byte of data. This would have taken lot of time
+                    beacuse each time the disk is accessed, the read/write head has to be repositioned. When buffering
+                    is done, the data is collected in the buffer and data equal to the size of buffer is written to the
+                    file at a time, so the number of times disk is accessed decreases, which improves efficiency.</li>
+                <li>The steps for file operations in C programming are as follows-
                     <ol>
                         <li>Open a file</li>
                         <li>Read the file or write data in the file</li>
@@ -80,6 +104,228 @@
                     The functions fopen() and fclose() are used for opening and closing the files respectively.
                 </li>
             </ul>
+        </div>
+        <div class="wh">
+            <h2>Opening a file</h2>
+            <ul>
+                <li>A file must be opened before any I/O operations can be performed on that file. The process of
+                    estalishing a connection between the program and file is called opening the file.</li>
+                <li>A structure named <b>FILE</b> is defined in the file stdio.h that contains all information about the
+                    file like name, status, buffer size, current position, end of file status etc. All these details are
+                    hidden from the programmer and the operating system takes care of all these things.</li>
+                <li>A file pointer is a pointer to a structure of type FILE. Whenever a file is opened, a structure of
+                    type FILE is associated with it, and a file pointer that points to this structure identifies this
+                    file. The function fopen() is used to open a file.</li>
+            </ul>
+            <div class="in">
+                <h3>Declaration:</h3>
+                <pre>
+                    <code>
+FILE *fopen("filename.txt", "opening mode");
+                    </code>
+                </pre>
+                <ul>
+                    <li>fopen() function takes two strings as arguments, the first one is the name of the file to be
+                        open and the second one is the mode that decides which operations (read, write, append etc) are
+                        to performed on the file. On success, fopen() returns a pointer of type FILE and on error it
+                        returns NULL. </li>
+                    <li>The return value of fopen() is assigned to a FILE pointer declared previously. For example
+                        &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+FILE *fp1, *fp2;
+fp1 = fopen( "myfile.txt", "w");
+fp2 = fopen("yourfile.txt", "r");
+                    </code>
+                </pre>
+                <ul>
+                    <li>After opening the file with fopen(), the name of file is not used in the program for any
+                        operation on it. Whenever we have to perform a operation on the file, we'll use the file pointer
+                        returned by fopen() function. so the name of file sometimes known as external name, while the
+                        file pointer associated with it is knwon as its internal name. </li>
+                </ul>
+                <div class="in">
+                    <p>The second argument represents the mode in which the file is to be opened. The possible value of
+                        mode are &darr;</p>
+                    <ul>
+                        <li>"w" (write): If the file doesn't exist then this mode creates a new file for writing, and if
+                            the file already exists then the previous data is erased and the new data entered is written
+                            to the file.</li>
+                        <li>"a" (append): If the file doesn't exist then this mode creates a new file, and if the file
+                            already exists then the new data entered is appended at the end of existing data. In this
+                            mode, the data existing in the file is erased as in "w" mode.</li>
+                        <li>"r" (read): This mode is used for opening an existing file for reading purpose only. The
+                            file to be opened must exist and the previous data of file in not erased.</li>
+                        <li>"w+" (write+read): This mode is same as "w" mode but in this mode we can also read and
+                            modify the data. If the fiel doesn't exit then a new file is created and if the file exists
+                            then previous data is erased.</li>
+                        <li>"r+" (read+write): This mode is same as "r" mode but in this mode we can also write and
+                            modify existing data. The file to be opened must exist and the previous data of file is not
+                            erased. Since we can add new data modify existing data so this mode is also called update
+                            mode.</li>
+                        <li>"a+" (append+read): This mode is same as the "a" mode but in this mode we can also read the
+                            data stored in the file. If the file doesn't exist, a new file is created and if the file
+                            already exists then new data is appended at the end of existing data. We cannot modify
+                            existing data in this mode.</li>
+                        <li>To open a file in binary mode we can append 'b' to the mode, and to open the file in text
+                            mode 't' can be appended to the mode. But since text mode is the default mode, 't' is
+                            generally omitted while opening file in text mode. For example:
+                            <ul>
+                                <li>"wb" &rarr; Binary file opened in write mode</li>
+                                <li>"ab+" or "a+b" &rarr; Binary file opened in append mode</li>
+                                <li>"rt+" or "r+t" &rarr; Text file opened in update mode</li>
+                                <li>"w" &rarr; Text file open in write mode</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Errors in Opening Files</h3>
+                <ul>
+                    <li>If an error occurs in opening file, then fopen() returns NULL. So we can check for any errors in
+                        opening by checking the return value of fopen().</li>
+                </ul>
+                <pre>
+                    <code>
+FILE *fp;
+fp = fopen("text.dat", "W");
+if(fp == NULL)
+{
+    printf("Error in opening file");
+    exit(1);
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>Errors in opening a file may occur due to various reasons, for example-
+                        <ol>
+                            <li>If we try to open a file in read or update mode, and the file doesn't exit or we do not
+                                have read permission on that file.</li>
+                            <li>If we try to create a file but there is no space on the disk or we don't have write
+                                permission.</li>
+                            <li>If we try to create file that already exists and we don't have have permission to delete
+                                that file.</li>
+                            <li>Operating system limits the number of files that can be opened at a time and we are
+                                trying to open more files than that number.</li>
+                        </ol>
+                    </li>
+                    <li>We can give full pathname to open a file. Suppose we want to open a file in DOS whose path is
+                        "E:\booksdir\names.dat, then we'll have to write as-
+                        <br>fp = fopn("E:\\booksdir\\names.dat", "r");
+                        <br>Here we have used double backslash because single backslash inside string is considered as
+                        an escape character, '\b' and '\n' will be regarded as escape sequences if we use single
+                        backslash. In Unix, a single forward slash can be used.
+                    </li>
+                    <li>Never give the mode in single quotes, since it is a string not a character constant.
+                        <br>fp = fopen("file.data", 'w'); /* Error */
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Closing a file</h2>
+            <ul>
+                <li>The file that was opened using fopen() function must be closed when no more operations are to be
+                    performed on it. After closing the file, connection between file and program is broken.</li>
+            </ul>
+            <p>Declaration &darr;</p>
+            <pre>
+                <code>
+fclose(File *fptr);
+                </code>
+            </pre>
+            <ul>
+                <li>On closing the file, all the buffers associated with it are flushed i.e. all the data that is in the
+                    buffer is written to the file. The buffers allocated by the system for the file are freed after the
+                    file is closed so that these buffers can be available for other files. </li>
+                <li>Although all the files are closed automatically when the program terminates normally, but sometimes
+                    it may be necessary to close the file by fclose() e.g. when we have to reopen the file in some open
+                    mode or when we exceed the number of opened files permitted by the system. Moreover it is a good
+                    practise to close file explicitly by fclose() when no more operations are to be performed on that
+                    file because it becomes clear to the reader of the program that the file has no use now.</li>
+                <li>fclose() returns EOF on error and 0 on success (EOF is a constant defined in stdio.h and its value
+                    is -1). An error in fclose() may occur when there is not sufficient space on the disk or when disk
+                    has been taken out of the drive.</li>
+                <li>If more than one files are opened, then we can close all the files by calling fclose() for each of
+                    them.
+                    <br>fclose(fptr1);
+                    <br>fclose(fptr2);
+                    <br>....
+                    <br>....
+                </li>
+                <li>We can also close multiple files by calling a single function fcloseall(). It closes all the opened
+                    files.
+                    <br>Declaration: fcloseall(void);
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Structure of a General File Program</h2>
+            <pre>
+                <code>
+main()
+{
+    FILE *fp;
+    fp = fopen("filename", "mode");
+    ...
+    ... 
+    ... 
+    fclose(fp);
+} /* End of Main */
+                </code>
+            </pre>
+        </div>
+        <div class="wh">
+            <h2>The functions used for file I/O are</h2>
+            <ul>
+                <li>Character I/O - fgetc(), fputc(), getc(), putc()</li>
+                <li>String I/O - fgets(), fgets()</li>
+                <li>Integer I/O - getw(), putw()</li>
+                <li>Formatted I/O - fscanf(), fprinf()</li>
+                <li>Record I/O - fread(), fwrite()</li>
+            </ul>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Program to input any string from user, then store all the upper case letter in
+                    up.txt, all lower case in lw.txt, digits in dg.txt and all the special characters in sp.txt</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;stdio.h>
+int main()
+{
+    FILE *a, *b, *c, *d;
+    a = fopen("up.txt", "w");
+    b = fopen("lw.txt", "w");
+    c = fopen("dg.txt", "w");
+    d = fopen("sp.txt", "w");
+    char str[30];
+    int i;
+    printf("Enter a string : ");
+    scanf("%s", str);
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (str[i] >= 'A' && str[i] <= 'Z')
+            putc(str[i], a);
+        else if (str[i] >= 'a' && str[i] <= 'z')
+            putc(str[i], b);
+        else if (str[i] >= '0' && str[i] <= '9')
+            putc(str[i], c);
+        else
+            putc(str[i], d);
+    }
+    fclose(a);
+    fclose(b);
+    fclose(c);
+    fclose(d);
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
