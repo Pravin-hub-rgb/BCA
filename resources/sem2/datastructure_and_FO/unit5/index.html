@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="../unit4_2_sorting/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Tree</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Tree</h1>
+        <ul>
+            <li>It is a non-linear, a cyclic, recursive data structure.</li>
+        </ul>
+        <p><b>Why Tree Data structure?</b></p>
+        <ul>
+            <li>Other data structures such as arrays, linked list, stack, and queue are linear data structures that
+                store data sequentially. In order to perform any operation in a linear data structure, the time
+                complexity increases with the increase in the data size. But, it is not acceptable in today's
+                computational world.</li>
+            <li>Different tree data structures allow quicker and easier access to the data as it is a non-linear data
+                structure.</li>
+        </ul>
+        <div class="wh">
+            <h2>Tree Terminologies</h2>
+            <div class="in">
+                <h3>Node</h3>
+                <ul>
+                    <li>Each element in a tree is called a node.</li>
+                    <li>It can contain data and references to other nodes.</li>
+                </ul>
+                <img src="../../images/tree1.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Edge/branch</h3>
+                <ul>
+                    <li>The path line which connects two nodes.</li>
+                    <li><b>Note:</b> A tree having 'n' number of nodes has 'n-1' edges.</li>
+                </ul>
+                <img src="../../images/tree7.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Root</h3>
+                <ul>
+                    <li>This is the topmost node of a tree.</li>
+                    <li>It serves as the starting point for traversing the tree and has no parent.</li>
+                </ul>
+                <img src="../../images/tree2.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Parent</h3>
+                <ul>
+                    <li>A node that has one or more child nodes is called a parent. It is the immediate ancestor of its
+                        children.</li>
+                    <li>B is parent as D, E and F are its children.</li>
+                </ul>
+                <img src="../../images/tree3.svg" alt="" class="wb">
+                <h3>Child</h3>
+                <ul>
+                    <li>Nodes directly connected to a parent node are called its children. A parent can have zero or
+                        more children.</li>
+                    <li>D, E and F are children of B.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Sibling</h3>
+                <ul>
+                    <li>Nodes that share the same parent are called siblings. They are at the same level in the tree.
+                    </li>
+                </ul>
+                <img src="../../images/tree4.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Leaf node</h3>
+                <ul>
+                    <li>Nodes that do not have any children are called leaves or leaf nodes. They are the terminal nodes
+                        in a tree.</li>
+                </ul>
+                <img src="../../images/tree5.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Ancestor</h3>
+                <ul>
+                    <li>A node's ancestors are its parent, grandparent, and all the nodes on the path to the root.</li>
+                </ul>
+                <h3>Descendant</h3>
+                <ul>
+                    <li>A node's descendants are its children, grandchildren, and all the nodes reachable from it by by
+                        following edges downward.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Subtree</h3>
+                <ul>
+                    <li>A subtree is a smaller tree formed by a node and all its descendants, including the node itself.
+                    </li>
+                </ul>
+                <img src="../../images/tree6.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Internal nodes</h3>
+                <ul>
+                    <li>Nodes other than leaf nodes are known as internal nodes.</li>
+                </ul>
+                <h3>External nodes</h3>
+                <ul>
+                    <li>Leaf nodes are known as external nodes.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Depth/Level</h3>
+                <ul>
+                    <li>The depth or level of a node represents its distance from the root. The root has a depth of 0,
+                        its children have a depth of 1, and so on.</li>
+                </ul>
+                <img src="../../images/tree8.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Height</h3>
+                <ul>
+                    <li>The height of a tree is the maximum depth among all its nodes. It represents the length of the
+                        longest path from the root to a leaf node.</li>
+                </ul>
+                <img src="../../images/tree9.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Degree</h3>
+                <ul>
+                    <li>The degree of a node is the number of children it has. A node with no children has a degree of
+                        0, and a node with two children has a degree of 2.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Forest</h3>
+                <ul>
+                    <li>A collection of disjoint trees is called a forest. It consists of multiple trees with no common
+                        root.</li>
+                </ul>
+                <img src="../../images/tree10.svg" alt="" class="wb">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Types of tree</h2>
+            <ol>
+                <li>Generalized tree</li>
+                <li>Binary tree</li>
+                <li>Binary search tree</li>
+                <li>Full binary tree</li>
+                <li>Complete binary tree</li>
+                <li>Height balance tree</li>
+                <li>Left skewed tree</li>
+                <li>Right skewed tree</li>
+                <li>Forest many tree</li>
+            </ol>
+            <div class="in">
+                <h3>Generalized tree</h3>
+                <ul>
+                    <li>Generalized tree : It have no restrictions of level and number of child nodes of a parent.</li>
+                </ul>
+                <img src="../../images/tree11.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Binary tree</h3>
+                <ul>
+                    <li>It is a type of tree data structure in which each node has at most two children, referred to as
+                        the left child and right child.</li>
+                    <li>In a binary tree:
+                        <ul>
+                            <li>Each node can have zero, one, or two children.</li>
+                            <li>The left children is positioned to the left of the parent node.</li>
+                            <li>The right child is positioned to the right of parent node.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="../../images/tree12.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Binary search tree (BST)</h3>
+                <ul>
+                    <li>It is a specialized form of binary tree data structure in which the elements are organized in a
+                        specific order.</li>
+                    <li>In a binary search tree, the left child of a node contains a value smaller than the node's
+                        value, and the right child contains a value greater than the node's value. This property allows
+                        for efficient searching, insertion, and deletion operaton.</li>
+                    <li>Key properties of a binary search tree:
+                        <ol>
+                            <li>Ordering property: For any given node in the binary search tree, all the values in left
+                                subtree are less than its value, and all the values in its right subtree are greater
+                                than its value.</li>
+                            <li>Unique Keys: Each node in the binary search tree has a unique key: No two nodes can have
+                                the same key.</li>
+                        </ol>
+                    </li>
+                    <li>The binary search tree property enables efficient searching because it allows for a binary
+                        search algorithm to be applied. When searching for a value in a binary search tree, comparisons
+                        are made at each node, and based on the comparisons, the search can efficiently proceed to the
+                        left or right subtree, narrowing down the search space.</li>
+                </ul>
+                <img src="../../images/tree13.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Full binary tree</h3>
+                <ul>
+                    <li>A full binary tree is a special type of binary tree in which every node has either 0 or 2
+                        children. In other words, every node in a full binary tree is eiher a leaf node (having no
+                        children) or an internal node with exactly two child nodes.</li>
+                    <li>Key properties of a full binary tree:
+                        <ol>
+                            <li>Each node in the tree is either a leaf node or has exactly two children.</li>
+                            <li>All leaf nodes are at the same level.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <img src="../../images/tree14.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Complete binary tree</h3>
+                <ul>
+                    <li>A complete binary tree is another type of binary tree where all levels are completely filled,
+                        except possibly for the last level, which is filled from left to right. In other words, in a
+                        complete binary tree, all nodes are placed as far left as possible at each level, creating a
+                        left-skewed structure.</li>
+                    <li>Key properties of a complete binary tree:
+                        <ol>
+                            <li>All levels of the tree, except possibly the last one, are completely filled with nodes.
+                            </li>
+                            <li>If the last level is not completely filled, the nodes are filled from left to right.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+                <img src="../../images/tree15.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Height-balanced tree</h3>
+                <ul>
+                    <li>A height-balanced tree, also known as an AVL tree, is binary search tree that maintains a balance condition to ensure efficient operations.</li>
+                    <li>In a height-balanced tree, the heights of the left and right subtrees of any node differ by at most one.</li>
+                    <li>This balanced condition helps to maintain a relatively low height of the tree, which leads to efficient search, insertion and deletion operations.</li>
+                    <li>Key properties of a height-balanced tree (AVL tree):
+                        <ol>
+                            <li>Balance factor: The balanced factor of a node in a height-balanced tree is defined as the difference between the heights of its left and right subtrees. A node is considered balanced if its balance factor is -1, 0 or 1.</li>
+                            <li>Balance Maintenance: When performing insertion or deletion operations that may violate to restore balance. These rotations rearrange the tree structure while maintaining the order of the keys.</li>
+                        </ol>
+                    </li>
+                    <li>By maintaining the balance condition, height-balanced trees ensure that the height of the tree remains relatively low and balanced, resulting in efficient performance for various operations.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Left-skewed tree</h3>
+                <ul>
+                    <li>A left-skewed tree, also known as a left-leaning tree or a left-heavy tree, is a binary tree in which the majority of nodes and branches are oriented towards the left side of the tree.</li>
+                </ul>
+                <img src="../../images/tree16.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Right-skewed tree</h3>
+                <ul>
+                    <li>A right-skewed tree, also known as a right-leaning tree or a right-heavy tree, is a binary tree in which the majority of nodes and branches are oriented towards the right side of the tree.</li>
+                </ul>
+                <img src="../../images/tree17.svg" alt="" class="wb">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Binary tree representation</h2>
+            <div class="in">
+                <h3>Using array</h3>
+                <ul>
+                    <li>left child of a node = 2n + 1</li>
+                    <li>right child of a node = 2n + 2</li>
+                    <li>n = index of parent node</li>
+                </ul>
+                <img src="../../images/tree18.svg" alt="" class="wb">
+                <p>The array method of representing a binary tree has some limitations and may not be suitable in all scenarios. Here are some reasons why the array method may not be considered ideal:
+                    <ol>
+                        <li>Wasted space: The array representation can result in wasted space when the binary tree is not complete or nearly complete. If the tree is unbalanced, a significant portion of array will be left unused, leading to inefficient memory utilization.</li>
+                        <li>Dynamic Size: The array representation requires a fixed-size array, which may be impractical if the size of the binary tree needs to change dynamically. If the tree grows beyond the capacity of the array, it would require resizing the array or allocating a larger array, resulting in extra overhead and potentially costly operations.</li>
+                        <li>Insertion and Deletion: Insertion and deletion operations can be challenging and inefficient in the array representation. When a new node is inserted or a node is deleted from the tree, it may require shifting elements in the array to maintain the tree structure, resulting in costly time complexity, especially for large trees.</li>
+                        <li>Lack of Dynamic Operations: The array representation does not naturally support dynamic operations such as splitting or merging subtrees. Performing such operations efficiently would require additional manipulation of the array and potentially complex algorithms.</li>
+                        <li>Tree Operations: Performing certain tree operations like finding the parent of a node or navigating to a particular level in the tree can be less straightforward and require additional calculations compared to other tree representations that use explicit pointers.</li>
+                    </ol>
+                    <p>While the array representation has its advantages, such as simplicity and efficient indexing, it may not be the best choice in situations where the binary tree is large, dynamically changing, or unbalanced. Other representations like linked lists or explicit node structures with pointers may be more appropriate for such scenarios.</p>
+                </p>
+            </div>
+            <div class="in">
+                <h3>Linked list representation</h3>
+                <img src="../../images/tree19.svg" alt="" class="wb">
+                <p>Node structure &darr;</p>
+                <pre>
+                    <code>
+struct node 
+{
+    struct node *left;
+    int data;
+    struct node *right;
+};
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
