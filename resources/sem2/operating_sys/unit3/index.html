@@ -24,10 +24,14 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">IPC</a>
+        <a href="#t2" class="link">Critical section problem</a>
+        <a href="#t3" class="link">Intro to deadlock</a>
+        <a href="#t4" class="link">Banker's Algorithm</a>
+        <a href="#t5" class="link">Deadlock recovery</a>
         <div class="botbut">
             <a href="" class="link">Next Topic &rarr;</a>
-            <a href="" class="link">&larr; Previous Topic</a>
+            <a href="../unit2/index.html" class="link">&larr; Previous Topic</a>
         </div>
     </div>
     <div id="navbar" class="grad">
@@ -47,36 +51,79 @@
     <div class="content-box">
         <h1>Process Synchronization</h1>
         <ul>
-            <li>Process Synchronization is a technique which is used to coordinate the process that use shared data.</li>
+            <li>Process Synchronization is a technique which is used to coordinate the process that use shared data.
+            </li>
             <li>There are two types of processe in an Operating Systems:
                 <ol>
-                    <li><b>Independent Process</b>: The process that does not affect or is affected by the other process while its execution then the process is called independent process. Example- the process that does not share any shared variable, database, files, etc.</li>
-                    <li><b>Cooperating Process</b>: The process that affect or is affected by the other process while execution, is called a cooperating  process. Example- The process that share file, variable, database, etc are the Cooperating Process.</li>
+                    <li><b>Independent Process</b>: The process that does not affect or is affected by the other process
+                        while its execution then the process is called independent process. Example- the process that
+                        does not share any shared variable, database, files, etc.</li>
+                    <li><b>Cooperating Process</b>: The process that affect or is affected by the other process while
+                        execution, is called a cooperating process. Example- The process that share file, variable,
+                        database, etc are the Cooperating Process.</li>
                 </ol>
             </li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
+            <h2>Inter-process communication (IPC)</h2>
+            <ul>
+                <li>It is mechanism that allows processes to communicate with each other and synchronize their actions. The communication between these processes can be seen as a method of co-operation between them. Processes can communicate with each other through both:
+                    <ol>
+                        <li>Shared Memory</li>
+                        <li>Message Passing</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Shared Memory Method</h3>
+                <p>Example: Producer-Consumer problem</p>
+                <p>There are two processes: Producer and Consumer. The producer produces some items and the Consumer consumes that item. The two processes share a common space or memory location known as a buffer where the item produced by the Producer is stored and from which the Consumer consumes the item if needed. There are two versions of this problem: the first one is known as the unbounded buffer problem in which the Producer can keep on producing items and there is no limit on the size of the buffer, the second one is known as the bounded buffer problem in which the Producer can produce up to a certain number of items before it starts waiting for Consumer to consume it. We will discuss the bounded buffer problem. First, the Producer and the Consumer will share some common memory, then the producer will start producing items. If the total produced item is equal to the size of the buffer, the producer will wait to get it consumed by the Consumer. Similarly, the consumer will first check for the availability of the item. If no item is available, the Consumer will wait for the Producer to produce it. If there are items available, Consumer will consume them.</p>
+            </div>
+            <div class="in">
+                <h3>Message passing method</h3>
+                <p>In this method, processes communicate with each other without using any kind of
+                    shared memory. If two processes p1 and p2 want to communicate with each other, they proceed as follows:
+                <ul>
+                    <li>Establish a communication link (if a link already exists, no need to establish it again.)</li>
+                    <li>Start exchanging messages using basic primitives. We need at least two primitives:
+                        <br>– send(message, destination) or send(message)
+                        <br>– receive(message, host) or receive(message)</li>
+                </ul></p>
+            </div>
+        </div>
+        <div id="t2" class="wh">
             <h2>What is critical section problem?</h2>
             <ul>
-                <li>A critical section  is a segment of code which can be accessed by a signal process at a specific point of time. The sectio soncisits of shared data resources that required to be accessed by other processes.
+                <li>A critical section is a segment of code which can be accessed by a signal process at a specific
+                    point of time. The sectio soncisits of shared data resources that required to be accessed by other
+                    processes.
                     <ul>
-                        <li>The entry to the critical section is handled by the wait() function, and it is represented as P().</li>
-                        <li>The exit from a critical section is controlled by the signal() function, represented as V().</li>
+                        <li>The entry to the critical section is handled by the wait() function, and it is represented
+                            as P().</li>
+                        <li>The exit from a critical section is controlled by the signal() function, represented as V().
+                        </li>
                     </ul>
                 </li>
-                <li>In the critical section, only a single process can be executed. Other processes, waiting to execute their critical section, need to wait until the current process completes its execution.</li>
+                <li>In the critical section, only a single process can be executed. Other processes, waiting to execute
+                    their critical section, need to wait until the current process completes its execution.</li>
             </ul>
             <p><b>Rules of Critical Section</b></p>
             <ul>
                 <li>The critical section need to must enforce all three rules:
                     <ul>
-                        <li><b>Mutual Exclusion:</b> Mutual Exclusion is a special type of binary semaphore which is used for controlling access to the shared resource. It includes a priority inheritance mechanism to avoid extended priority inversion problems. Not more than one process can
+                        <li><b>Mutual Exclusion:</b> Mutual Exclusion is a special type of binary semaphore which is
+                            used for controlling access to the shared resource. It includes a priority inheritance
+                            mechanism to avoid extended priority inversion problems. Not more than one process can
                             execute in its critical section at one time.</li>
-                            <li><b>Progress:</b> This solution is used when no one is in the critical section, and someone wants
-                                in. Then those processes not in their reminder section should decide who should go in, in
-                                a finite time.</li>
-                        <li><b>Bounded Waiting:</b> When a process makes a request for getting into critical section, there is
-                            a specific limit about number of processes can get into their critical section. So, when the limit is reached, the system must allow request to the process to get into its critical section.</li>
+                        <li><b>Progress:</b> This solution is used when no one is in the critical section, and someone
+                            wants
+                            in. Then those processes not in their reminder section should decide who should go in, in
+                            a finite time.</li>
+                        <li><b>Bounded Waiting:</b> When a process makes a request for getting into critical section,
+                            there is
+                            a specific limit about number of processes can get into their critical section. So, when the
+                            limit is reached, the system must allow request to the process to get into its critical
+                            section.</li>
                     </ul>
                 </li>
             </ul>
@@ -85,7 +132,7 @@
                 <ul>
                     <li>This is a software based solution to Critical Section Problem.</li>
                     <li>Doesn’t work on modern architectures.</li>
-                    <li>It’s for 2 processes which alternate execution between then critical section and remainder
+                    <li>It’s for 2 processes which alternate execution between the critical section and remainder
                         section. Say, P1 is the first process and P2 is the second process.</li>
                     <li>The 2 processes should share 2 data items with each other.</li>
                 </ul>
@@ -93,16 +140,542 @@
             <div class="in">
                 <h3>Semaphores in Process Synchronization</h3>
                 <ul>
-                    <li>Semaphores are a synchronization mechanism used to coordinate the activities of multiple processes in a computer system. They are used to enforce mutual exclusion, avoid race conditions and implement synchronization between processes.</li>
-                    <li>Semaphores provide two operations: wait (P) and signal (V). The wait operation decrements the value of the semaphore, and the signal operation increments the value of the semaphore. When the value of the semaphore is zero, any process that performs a wait operation will be blocked until another process performs a signal operation.</li>
-                    <li>Semaphores are used to implement critical sections, which are regions of code that must be executed by only one process at a time. By using semaphores, processes can coordinate access to shared resources, such as shared memory or I/O devices.</li>
+                    <li>Semaphores are a synchronization mechanism used to coordinate the activities of multiple
+                        processes in a computer system. They are used to enforce mutual exclusion, avoid race conditions
+                        and implement synchronization between processes.</li>
+                    <li>Semaphores provide two operations: wait (P) and signal (V). The wait operation decrements the
+                        value of the semaphore, and the signal operation increments the value of the semaphore. When the
+                        value of the semaphore is zero, any process that performs a wait operation will be blocked until
+                        another process performs a signal operation.</li>
+                    <li>Semaphores are used to implement critical sections, which are regions of code that must be
+                        executed by only one process at a time. By using semaphores, processes can coordinate access to
+                        shared resources, such as shared memory or I/O devices.</li>
                     <li>Semaphores are of two types:
                         <ol>
                             <li>Binary Semaphore:
-                                <br>This is also known as a mutex lock. It can have only two values - 0 and 1. Its value is initialized to 1. It is used to implement the solution of critical section problems with multiple processes.
+                                <br>This is also known as a mutex lock. It can have only two values - 0 and 1. Its value
+                                is initialized to 1. It is used to implement the solution of critical section problems
+                                with multiple processes.
+                            </li>
+                            <li>Counting Semaphore:
+                                <br>Its value can range over an unrestricted domain. It is used to control access to a
+                                resource that has multiple instances.
                             </li>
                         </ol>
                     </li>
+                </ul>
+                <p>Now let us see how it does so.</p>
+                <ul>
+                    <li>First, look at two operations that can be used to access and change the value of the semaphore
+                        variable.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                    <code>
+P(Semaphore s)
+{
+    while(S == 0); /* wait until s = 0 */
+    s = s - 1;
+}
+
+V(Sempahore s)
+{
+    s = s + 1;
+}
+                    </code>
+                </pre>
+                </div>
+                <p>Some points regarding P and V operaton:
+                <ol>
+                    <li>P operation is alled called wait, sleep, or down operation, and V operation is also called
+                        signal, wake-up, or up operation.</li>
+                    <li>Both operations are atomic and semaphore(S) is always initialzed to one. Here atomic means that
+                        variable on which read, modify and update happens at the same time with no pre-emption i.e.
+                        in-between read, modify and update no other operation is performed that may change the variable.
+                    </li>
+                    <li>A critical section is surrounded by both operations to implement process synchronization.</li>
+                </ol>
+                </p>
+                <p>Now, let use see how it implements mutual exclusion. </p>
+                <ul>
+                    <li>Let there be two processes P1 and P2 and a semaphore s is initialized as 1. Now if suppose P1
+                        enters in its critical section then the value of semaphore s become 0. Now if P2 want to enter
+                        its critical section and called V operation on semaphore s.</li>
+                    <li>This way mutual exclusion is achieved.</li>
+                </ul>
+                <p><b>Limitations:</b>
+                <ol>
+                    <li>One of the biggest limitations of semaphore is priority inversion.</li>
+                    <li>Deadlock, suppose a process is trying to wake up another process that is not in a sleep state.
+                        Therefore, a deadlock may block indefinitely.</li>
+                    <li>The operating system has to keep track of all calls to wait and singal the semaphore.</li>
+                </ol>
+                </p>
+                <p>The main problem with semaphores is that they require busy waiting, if a process is in the critical
+                    section, then other processes trying to enter the critical section will be waiting until the
+                    critical section is not occupied by any other process. Whenever any process waits then it
+                    continously checks for semaphore value (look at this likne while(s == 0); in P operation) and waste
+                    CPU cycle.</p>
+                <p><b>Advantages of Semaphore</b>
+                <ul>
+                    <li>A siimple and effective mechanism for process synchronization.</li>
+                    <li>Supports coordination between multiple processes.</li>
+                    <li>Provides a flexible and robust way to manage shared resources.</li>
+                    <li>It can be used to implement critical sections in a program.</li>
+                    <li>It can be used to avoid race conditions.</li>
+                </ul>
+                </p>
+                <p><b>Disadvantages of Semaphore</b>
+                <ul>
+                    <li>It can lead to performance degradation due to overload associated with wait and signal
+                        operations.</li>
+                    <li>Can result in deadlock if used incorrectly.</li>
+                    <li>It was proposed by Dijshtra in 1965 which is a very significant technique to manage concurrent
+                        processes by using a simple integer value, which is known as a semaphore. A semahore is simply
+                        an integer variable that is shared between threads. This variable is used to solve the critical
+                        section problem and to achieve process synchronization in the multiprocessing environment.</li>
+                    <li>It can cause performance issues in a program if not used properly.</li>
+                    <li>It van be difficult to debug and maintain.</li>
+                    <li>It can be prone to race conditions and other synchronization problems if not used correctly.
+                    </li>
+                    <li>It can be vulnerable to certain types of attacks, such as denial of service attcks.</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Introduction of Deadlock in operating system</h2>
+            <ul>
+                <li>A process in OS uses resources in the following way.
+                    <ol>
+                        <li>Requests a resource</li>
+                        <li>Use the resource</li>
+                        <li>Releases the resource</li>
+                    </ol>
+                </li>
+                <li>A <b>deadlock</b> is a situation where a set of processes are blocked because each process is
+                    holding a resource and waiting for another resource acquired by some other process.</li>
+                <li>Consider an example when two trains are coming toward each other on the same track and there is only
+                    one track, none of the trains can move once hey are in front of each other. A similar situation
+                    occurs in operating systems when there are two or more processes that hold some resources and wait
+                    for resources held by other(s). For example, in the below diagram, Process 1 is holding Resource 1
+                    and waiting for resource 2 which is acquired by process 2, and process 2 is waiting for resource 1.
+                </li>
+            </ul>
+            <img src="../../images/deadlock1.svg" alt="" class="wb">
+            <p>Examples of deadlock</p>
+            <ol>
+                <li>The system has 2 tape drives. P1 and P2 each hold one tape drive and each needs another one.</li>
+                <li>Semaphores A and B, initialized to 1, P0, and P1 are in deadlock as follows:
+                    <ul>
+                        <li>P0 executes wait(A) and preempts</li>
+                        <li>P1 executes wait(B)</li>
+                        <li>Now P0 and P1 enter in deadlock.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p><b>Deadlock can arise if the following four conditions hold simultaneously (Necessary Conditions)</b>
+            <ul>
+                <li>Mutual Exclusion: Two or more resources are non-shareable (Only one process can use at a time)</li>
+                <li>Hold and wait: A process is holding at least one resource and waiting for resources.</li>
+                <li>No preemption: A resource cannot be taken from a process unless the process releases the resource.
+                </li>
+                <li>Circular wait: A set of processes waiting for each other in circular form.</li>
+            </ul>
+            </p>
+            <div class="in">
+                <h3>Methods for handling deadlock</h3>
+                <p>There are three ways to handle deadlock</p>
+                <div class="wh">
+                    <p>1. Deadlock Prevention</p>
+                    <ul>
+                        <li></li>Deadlock prevention aims to design the system in a way that eliminates one
+                        or more necessary conditions for deadlock to occur. By ensuring that at least one of the four
+                        necessary conditions—mutual exclusion, hold and wait, no preemption, and circular wait—is not
+                        satisfied, deadlocks can be prevented. This approach requires careful system design and resource
+                        management.</li>
+                    </ul>
+                    <p>Let's see how we can prevent each of the conditions.</p>
+                    <ol>
+                        <li>Mutual exclusion:
+                            Mutual exclusion refers to the condition where resources can be accessed by only one
+                            process at
+                            a time. To prevent this condition, you can implement techniques such as resource sharing
+                            or
+                            resource partitioning. Resource sharing involves allowing multiple processes to access a
+                            resource simultaneously, as long as their operations on the resource do not interfere
+                            with each
+                            other. Resource partitioning involves dividing resources into smaller units that can be
+                            allocated to different processes independently. By doing so, processes can access the
+                            resource
+                            concurrently without violating mutual exclusion.</li>
+                        <li>Hold and Wait:
+                            Hold and wait refers to the condition where a process holds a resource while waiting to
+                            acquire
+                            additional resources. To prevent hold and wait, you can use the "resource allocation
+                            only when
+                            all resources are available" approach. This means that a process must request and
+                            acquire all
+                            the required resources before it begins execution, ensuring that it does not hold any
+                            resources
+                            while waiting for others. Alternatively, you can employ the "resource allocation in a
+                            predetermined order" approach, where processes must request and acquire resources in a
+                            specific
+                            order to avoid holding resources and waiting indefinitely.</li>
+                        <li>No Preemption:
+                            No preemption refers to the condition where resources cannot be forcibly taken away from
+                            a
+                            process. To prevent this condition, you can introduce resource preemption. Resource
+                            preemption
+                            involves forcibly reclaiming resources from one process to allocate them to another. By
+                            allowing
+                            resource preemption, you can break resource deadlock situations by taking resources from
+                            one
+                            process and reallocating them to another process that needs them. However, preemption
+                            should be
+                            used with caution as it can introduce complexities and potential performance issues.
+                        </li>
+                        <li>Circular Wait:
+                            Circular wait refers to the condition where a circular chain of processes exists, with
+                            each
+                            process holding a resource that the next process in the chain needs. To prevent circular
+                            wait,
+                            you can introduce a technique called "resource ordering" or "resource numbering." In
+                            this
+                            approach, all resources are assigned a unique number, and processes are required to
+                            request
+                            resources in increasing order of their numbers. By enforcing a strict ordering of
+                            resource
+                            requests, circular wait situations are eliminated.</li>
+                    </ol>
+                </div>
+                <div class="wh">
+                    <p>2. Deadlock avoidance</p>
+                    <ul>
+                        <li>In deadlock avoidance, the request for any resource will be granted if the resulting state
+                            of the system doesn't cause deadlock in the system. The state of the system will continously
+                            be checked for safe and unsafe states.</li>
+                        <li>In order to avoid deadlocks, the process must tell OS, the maximum number of resources a
+                            process can request to complete its execution.</li>
+                        <li>The simplest and most useful approach states that the process should declare the maximum
+                            number of resources of each type it may ever need. The Deadlock avoidance algorithm examines
+                            the resource allocations so that there can never be a circular wait condition.
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p>3. Deadlock ignorance</p>
+                    <ul>
+                        <li>If a deadlock is very rare, then let it happen and reboot the system.
+                            This
+                            is the approach that both Windows and UNIX take. In deadlock ignorance performance is better
+                            than the above two methods.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Banker's Algorithm in OS</h2>
+            <ul>
+                <li>It is used to avoid deadlock and allocate resources safely to each process in the computer system.
+                    The 'S-state' examines all possible tests or activities before deciding whether the allocation
+                    should be allowed to each process.</li>
+                <li>It also helps the OS to successfully share the resources between all the process.</li>
+                <li>The banker's algorithm is named because it checks whether a person should be sanctioned a loan
+                    amount or not to help the bank system safely simulate allocation resources.</li>
+                <li>Real life example: Suppose the number of account holders in a particular bank is 'n', and the total
+                    money in a bank is 'T'. If an account holder applies for a loan; first, the bank subtracts the loan
+                    amount from full cash and then estimates the cash difference is greater than T to approve the loan
+                    amount.
+                    <ul>
+                        <li>These steps are taken because if another person applies for a loan or withdraws some amount
+                            from the bank, it helps the bank manage and operate all things without any restriction in
+                            the functionality
+                            of the banking system.</li>
+                        <li>These steps are taken because if another person applies for a loan or withdraws some amount
+                            from the bank, it helps the bank manage and operate all things without any restriction in
+                            the functionality
+                            of the banking system.</li>
+                        <li>Similarly, it works in an operating system. When a new process is created in a computer
+                            system, the process must provide all types of information to the operating system like
+                            upcoming processes, requests for their resources, counting them, and delays.</li>
+                    </ul>
+                </li>
+                <li>Based on these criteria, the operating system decides which process sequence should be executed or
+                    waited so that no deadlock occurs in a system. Therefore, it is also known as deadlock avoidance
+                    algorithm or deadlock detection in the operating system.</li>
+            </ul>
+            <p><b>Advantages</b></p>
+            <ol>
+                <li>It helps the OS to manage and control process requests for each type of resource in the computer
+                    system.</li>
+                <li>Deadlock avoidance: The Banker's algorithm is designed to avoid deadlock by examining the resource
+                    allocation state and determining if granting a resource request will result in a safe state. It
+                    ensures that resources are allocated to processes in a way that guarantees the avoidance of
+                    deadlock. This proactive approach helps maintain system stability and prevents the occurrence of
+                    deadlocks.</li>
+                <li>Resource Optimization: The Banker's algorithm optimizes resource utilization by allocating resources
+                    based on the maximum needs of processes and available resources. It ensures that resources are
+                    allocated efficiently without wasting them, as it considers both the current resource allocation
+                    state and future resource requests. This leads to better resource utilization and overall system
+                    performance.</li>
+                <li>Safety Guarantee: The Banker's algorithm provides a safety guarantee by only granting resource
+                    requests that will maintain a safe state. A safe state means that the system can satisfy the
+                    resource needs of all processes, allowing them to complete their execution without entering a
+                    deadlock state. The algorithm's safety guarantee ensures that the system can progress and complete
+                    its tasks without being stuck in a deadlock situation.</li>
+                <li>Avoidance of Starvation: The Banker's algorithm prevents the occurrence of resource starvation. By
+                    considering the maximum resource needs of processes and allocating resources in a way that maintains
+                    a safe state, the algorithm ensures that every process eventually receives the resources it
+                    requires. This prevents situations where certain processes are continuously denied resources and
+                    unable to make progress, leading to starvation.</li>
+                <li>Flexibility and Adaptability: The Banker's algorithm can dynamically respond to resource requests
+                    and release events. It can handle varying resource demands and dynamically adjust the resource
+                    allocation to prevent deadlock. This flexibility allows the algorithm to adapt to changing system
+                    conditions and ensure that resource allocation remains deadlock-free.</li>
+            </ol>
+            <p><b>Disadvantages of Banker's algorithm</b></p>
+            <ol>
+                <li>Resource-Heavy: The Banker's algorithm requires significant computational overhead and bookkeeping.
+                    It needs to maintain information about the maximum resource needs, allocated resources, and
+                    available resources for each process. This can lead to increased memory and processing requirements,
+                    especially in large-scale systems with numerous processes and resources.</li>
+                <li>Strict Resource Requirement Information: The Banker's algorithm relies on accurate and complete
+                    information regarding the maximum resource needs of processes. This information must be known in
+                    advance or provided by the processes. If the maximum resource needs are underestimated or not
+                    accurately known, the algorithm may result in unnecessary resource allocation delays or even false
+                    deadlock detection.</li>
+                <li>Lack of Dynamic Resource Allocation: The Banker's algorithm assumes a static resource allocation
+                    environment where the maximum resource needs of processes are fixed and known in advance. It may not
+                    be suitable for systems with dynamic resource demands or where processes' resource needs change
+                    during runtime. Adapting the algorithm to handle dynamic resource allocation can be complex and may
+                    require additional mechanisms.</li>
+                <li>Resource Holding Time and Efficiency: The Banker's algorithm follows a conservative approach by
+                    requiring a process to request and hold all the resources it needs before starting its execution.
+                    This can lead to inefficient resource utilization, especially when a process holds resources for an
+                    extended period, even if it is not actively using them. Consequently, resource holding time can
+                    increase, impacting system performance.</li>
+                <li>Limited Preemption Support: The Banker's algorithm does not inherently support resource preemption,
+                    which involves forcibly reclaiming resources from one process and reallocating them to another.
+                    Preemption is a useful mechanism to resolve deadlocks by breaking resource dependencies. However,
+                    implementing preemption within the context of the Banker's algorithm can be challenging and may
+                    require additional measures.</li>
+            </ol>
+            <p><b>When working with Banker's algorithm, it requests to know about three things:</b></p>
+            <ol>
+                <li>How much each process can request for each resource in system. It is denoted by the [MAX] request.
+                </li>
+                <li>How much each process is currently holding each resource in a system. It is denoted by the
+                    [ALLOCATED] resource.</li>
+                <li>It represents the number of each resource currently available in the system. It is denoted by the
+                    [AVAILABLE] resource.</li>
+            </ol>
+            <p><b>Following are the important data structures terms applied in the banker's algorithm as follows:</b>
+            </p>
+            <p>Suppose n is the number of processes, and m is the number of each type of resource used in a computer
+                system.</p>
+            <ol>
+                <li>Available: It is an array of length 'm' that defines each types of resource available in the system.
+                    When Available[j] = K, means that 'K' instances of Resources type R[j] are available in the system.
+                </li>
+                <li>Max: It is a [n x m] matrix that indicates each process P[i] can store the maximum number of
+                    resources R[j] (each type) in a system.</li>
+                <li>Allocation: It is a matrix of m x n orders that indicates the type of resources currently allocated
+                    to each process in the system. When Allocation [i, j] = K, it means that process P[i] is currently
+                    allocated K instances of Resources type R[j] in the system.</li>
+                <li>Need: It is an M x N matrix sequence representing the number of remaining resources for
+                    each process. When the Need[i] [j] = k, then process P[i] may require K more instances of resources
+                    type Rj to complete the assigned work.
+                    Nedd[i][j] = Max[i][j] - Allocation[i][j].</li>
+                <li>Finish: It is the vector of the order m. It includes a Boolean value (true/false) indicating whether
+                    the process has been allocated to the requested resources, and all resources have been released
+                    after finishing its task.d</li>
+            </ol>
+            <div class="in">
+                <h3>Example:</h3>
+                <p>Consider a system that contains five processes P1, P2, P3, P4, P5 and the three resource types A, B
+                    and C. Following are the resources types: A has 10, B has 5 and the resource type C has 7 instances.
+                </p>
+                <img src="../../images/deadlock2.svg" alt="" class="wb">
+                <p>Answer the following questions using the banker's algorithm:
+                <ol>
+                    <li>What is the reference of the need matrix?</li>
+                    <li>Determine if the system is safe or not?</li>
+                    <li>What will happen if the resource request (1, 0, 0) for process P1, can the system accept this
+                        request immediately?</li>
+                </ol>
+                </p>
+                <div class="wh">
+                    <p>Ans 1.</p>
+                    <p>Content of the need matrix is as follows:
+                        <br>Need[i] = Max[i] - Allocation[i]
+                        <br>Need for P1: (7, 5, 3) - (0, 1, 0) = 7, 4, 3
+                        <br>Need for P2: (3, 2, 2) - (2, 0, 0) = 1, 2, 2
+                        <br>Need for P3: (9, 0, 2) - (3, 0, 2) = 6, 0, 0
+                        <br>Need for P4: (2, 2, 2) - (2, 1, 1) = 0, 1, 1
+                        <br>Need for P5: (4, 3, 3) - (0, 0, 2) = 4, 3, 1
+                    </p>
+                    <img src="../../images/deadlock3.svg" alt="" class="wb">
+                    <p>Hence, we created the context of need matrix.</p>
+                </div>
+                <div class="wh">
+                    <p>Ans 2.</p>
+                    <p>Apply the Banker's algorithm
+                        <br>Available resources of A, B and C are 3, 3 and 2.
+                        <br>Now we check if each type of resource request is available for each process.
+                    <p><b>Steps &darr;</b></p>
+                    <ol>
+                        <li>For process P1:
+                            <ul>
+                                <li>P1 Need <= Available</li>
+                                <li>7, 4, 3 <= 3, 3, 2 condition is <b>false</b></li>
+                                <li>So, we examine another process P2.</li>
+                            </ul>
+                        </li>
+                        <li>For process P2:
+                            <ul>
+                                <li>P2 Need <= Available</li>
+                                <li>1, 2, 2 <= 3, 3, 2 condition is <b>true</b></li>
+                                <li>New available = available + Allocation of P2</li>
+                                <li>(3, 3, 2) + (2, 0, 0) &rarr; 5, 3, 2</li>
+                                <li>Similarly, we examine another process P3.</li>
+                            </ul>
+                        </li>
+                        <li>For process P3:
+                            <ul>
+                                <li>P3 Need <= Available</li>
+                                <li>6, 0, 0 <= 5, 3, 2 condition is <b>false</b></li>
+                                <li>Similarly, we examine another process P4.</li>
+                            </ul>
+                        </li>
+                        <li>For process P4:
+                            <ul>
+                                <li>P4 Need <= Available</li>
+                                <li>0, 1, 1 <= 5, 3, 2 condition is <b>true</b></li>
+                                <li>New available = available + Allocation of 42</li>
+                                <li>(5, 3, 2) + (2, 1, 1) &rarr; 7, 4, 3</li>
+                                <li>Similarly, we examine another process P5.</li>
+                            </ul>
+                        </li>
+                        <li>For process P5:
+                            <ul>
+                                <li>P5 Need <= Available</li>
+                                <li>4, 3, 1 <= 7, 4, 3 condition is <b>true</b></li>
+                                <li>New available = available + Allocation of P5</li>
+                                <li>(7, 4, 3) + (0, 0, 2) &rarr; 7, 4, 5</li>
+                                <li>Now, we again examine each type of resource request for process P1 and P3.</li>
+                            </ul>
+                        </li>
+                        <li>For process P1:
+                            <ul>
+                                <li>P1 Need <= Available</li>
+                                <li>7, 4, 3 <= 7, 4, 5 condition is <b>true</b></li>
+                                <li>New available = available + Allocation of P1</li>
+                                <li>(7, 4, 5) + (0, 1, 0) &rarr; 7, 5, 5</li>
+                                <li>Similarly, we examine another process P2.</li>
+                            </ul>
+                        </li>
+                        <li>For process P3:
+                            <ul>
+                                <li>P3 Need <= Available</li>
+                                <li>6, 0, 0 <= 7, 5, 5 condition is <b>true</b></li>
+                                <li>New available = available + Allocation of P1</li>
+                                <li>(7, 5, 5) + (3, 0, 2) &rarr; 10, 5, 7</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    Hence, we execute the banker's algorithm to find the safe state and the safe sequence like P2, P4,
+                    P5, P1 and P3.
+                    </p>
+                </div>
+                <div class="wh">
+                    <p>Ans 3.</p>
+                    <p>For granting the request (1, 0, 2) first we have to check that if Request <= Available, that is
+                            (1, 0, 2) <=(3, 3, 2), since the condition is true. So the process gets the request
+                            immediately.</p>
+                </div>
+            </div>
+        </div>
+        <div id="t5" class="wh">
+            <h2>Deadlock Recovery</h2>
+            <ul>
+                <li>When a <a href="https://www.geeksforgeeks.org/deadlock-detection-algorithm-in-operating-system/"
+                        target="_blank">Deadlock Detection Algorithm</a> determines that a deadlock has occured in the
+                    system, the system must recover from that deadlock. There are two approaches of breading a <a
+                        href="https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/">Deadlock:</a>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>1. Process termination</h3>
+                <ul>
+                    <li>To eleminate the deadlock, we can simply kill one or more processes. For this, we use
+                        two methods:
+                        <ol type="a">
+                            <li>Abort all the Deadlock processes:
+                                <br>Aborting all the processes will certainly break the deadlock, but with a great
+                                expense. The deadlocked processes may have computed for a long time and the result
+                                of those partial computations must be discarded and there is a probability to
+                                recalculate them later.
+                            </li>
+                            <li>Abort one process at a time until deadlock is eliminated: <br>
+                                Abort one deadlocked process at a time, until deadlock cycle is eliminated from the
+                                system. Due to this method, there may be considerable overhead, because after
+                                aborting each process, we have to run deadlock detection algorithm to check whether
+                                any processes are still deadlocked.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>Advantages of Process Termination</p>
+                <ul>
+                    <li>It is a simple method for breaking a deadlock.</li>
+                    <li>It ensures that the deadlock will be resolved quickly, as all processes involved in the deadlock
+                        are terminated simultaneously.</li>
+                    <li>It frees up resources that were being used by the deadlocked processes, making those resources
+                        available for other processes.</li>
+                </ul>
+                <p>Disadvantages of Process Termination:</p>
+                <ul>
+                    <li>It can result in the loss of data and other resources that were being used by the terminated
+                        processes.</li>
+                    <li>It may cause further problems in the system if the terminated processes were critical to the
+                        system’s operation.</li>
+                    <li>It may result in a waste of resources, as the terminated processes may have already completed a
+                        significant amount of work before being terminated.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2. Resource Preemption:</h3>
+                <ul>
+                    <li>To eliminate deadlocks using resource preemption, we preempt some resources from processes and
+                        give those resources to other processes. This method will raise three issues:
+                        <ol type="a">
+                            <li>Selecting a victim: <br>
+                                We must determine which resources and which processes are to be preempted and also the
+                                order to minimize the cost.</li>
+                            <li>Rollback: <br>
+                                We must determine what should be done with the process from which resources are
+                                preempted. One simple idea is total rollback. That means abort the process and restart
+                                it.
+                            </li>
+                            <li>Starvation: <br>
+                                In a system, it may happen that same process is always picked as a victim. As a result,
+                                that process will never complete its designated task. This situation is called
+                                Starvation and must be avoided. One solution is that a process must be picked as a
+                                victim only a finite number of times.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>Advantages of Resource Preemption:</p>
+                <ul>
+                    <li>It can help in breaking a deadlock without terminating any processes, thus preserving data and resources.</li>
+                    <li>It is more efficient than process termination as it targets only the resources that are causing the deadlock.</li>
+                    <li>It can potentially avoid the need for restarting the system.</li>
+                </ul>
+                <p>Disadvantages of Resource Preemption:</p>
+                <ul>
+                    <li>It may lead to increased overhead due to the need for determining which resources and processes should be preempted.</li>
+                    <li>It may cause further problems if the preempted resources were critical to the system’s operation.</li>
+                    <li>It may cause delays in the completion of processes if resources are frequently preempted.</li>
                 </ul>
             </div>
         </div>
