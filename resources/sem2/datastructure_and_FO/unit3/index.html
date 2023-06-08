@@ -145,203 +145,6 @@ struct node *start = NULL; // points to the first element. Initially NULL
                 <li>insertion at last</li>
                 <li>insertion in between</li>
             </ul>
-            <div class="in">
-                <h3>Insertion at front</h3>
-                <pre>
-                    <code>
-void insertAtFront()
-{
-    struct node *temp = (struct node *) malloc(sizeof(struct node));
-    printf("Enter a value : ");
-    scanf("%d", &temp->data);
-    temp->next = start;
-    start = temp;
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Insert at back (end of the list)</h3>
-                <pre>
-                    <code>
-void insertAtBack()
-{
-    node *newnode = (node *)malloc(sizeof(node));
-    node *last = start;
-    printf("Enter a value : ");
-    scanf("%d", &newnode->data);
-    newnode->next = NULL;
-    if (start == NULL)
-        start = newnode;
-    else
-    {
-        while (last->next != NULL)
-            last = last->next;
-        last->next = newnode;
-    }
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Insert after a node</h3>
-                <pre>
-                    <code>
-void insertAfterNode()
-{
-    if (start == NULL)
-    {
-        printf("\nlist is empty, cannot insert after a node\n");
-        return;
-    }
-    int node_val;
-    printf("\nEnter a node value after which you want to insert : ");
-    scanf("%d", &node_val);
-    node *temp = start;
-    while (temp->data != node_val)
-    {
-        if (temp->next == NULL)
-        {
-            printf("\nValue not found");
-            return;
-        }
-        temp = temp->next;
-    }
-    node *newNode = (node *)malloc(sizeof(node));
-    newNode->next = NULL;
-    printf("\nEnter the value : ");
-    scanf("%d", &newNode->data);
-    newNode->next = temp->next;
-    temp->next = newNode;
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Delete at front (first node)</h3>
-                <pre>
-                    <code>
-void deleteAtFront()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    node *temp = start;
-    start = start->next;
-    printf("\n%d is deleted", temp->data);
-    free(temp);
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Delete at back (last node of list)</h3>
-                <pre>
-                    <code>
-void deleteAtBack()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    if (start->next == NULL)
-    {
-        printf("\n%d is deleted", start->data);
-        free(start);
-        start = NULL;
-        return;
-    }
-    node *temp = start;
-    while (temp->next->next != NULL)
-    {
-        temp = temp->next;
-    }
-    printf("\n%d is deleted", temp->next->data);
-    free(temp->next);
-    temp->next = NULL;
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Delete any node</h3>
-                <pre>
-                    <code>
-void deleteNode()
-{
-    if (start == NULL)
-    {
-        printf("\nNo node exist");
-        return;
-    }
-    int search;
-    node *loop = start, *prev = start;
-    printf("Enter a value you want to delete : ");
-    scanf("%d", &search);
-    node *temp = start;
-    while (temp->data != search)
-    {
-        temp = temp->next;
-        if (temp == NULL)
-        {
-            printf("\nValue not found");
-            return;
-        }
-    }
-    if (temp == start)
-    {
-        start = start->next;
-        free(temp);
-    }
-    else if (temp->next == NULL)
-    {
-        loop = start;
-        prev = start;
-        while (loop->next != NULL)
-        {
-            prev = loop;
-            loop = loop->next;
-        }
-        prev->next = NULL;
-        free(loop);
-    }
-    else
-    {
-        prev = start;
-        while (prev->next != temp)
-        {
-            prev = prev->next;
-        }
-        prev->next = temp->next;
-    }
-}
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Display full list</h3>
-                <pre>
-                    <code>
-void display()
-{
-    if (start == NULL)
-    {
-        printf("\nUnderflow");
-        return;
-    }
-    node *newnode = start;
-    while (newnode != NULL)
-    {
-        printf("%d --> ", newnode->data);
-        newnode = newnode->next;
-    }
-}
-                    </code>
-                </pre>
-            </div>
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">Menu driven singly linked list program code</button>
@@ -363,7 +166,7 @@ void insertAtBack();
 void insertAfterNode();
 void deleteAtFront();
 void deleteAtBack();
-void deleteNode();
+void deleteANode();
 void display();
 
 int main()
@@ -372,6 +175,221 @@ int main()
     while (1)
     {
         printf("\n------- MENU ---------");
+        printf("\n1. Insert at front");
+        printf("\n2. Insert at back");
+        printf("\n3. Insert after a node");
+        printf("\n4. Delete at front");
+        printf("\n5. Delete at back");
+        printf("\n6. Delete a node");
+        printf("\n7. Display");
+        printf("\n8. Exit");
+        printf("\nEnter you choice : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            insertAtFront();
+            break;
+        case 2:
+            insertAtBack();
+            break;
+        case 3:
+            insertAfterNode();
+            break;
+        case 4:
+            deleteAtFront();
+            break;
+        case 5:
+            deleteAtBack();
+            break;
+        case 6:
+            deleteANode();
+            break;
+        case 7:
+            display();
+            break;
+        case 8:
+            exit(0);
+        default:
+            printf("\nEnter a correct choice");
+        }
+    }
+    return 0;
+}
+void insertAtFront()
+{
+    node *newnode = (node *)malloc(sizeof(node));
+    printf("Enter a value : ");
+    scanf("%d", &newnode->data);
+    newnode->next = start;
+    start = newnode;
+}
+
+void insertAtBack()
+{
+    node *newnode = (node *)malloc(sizeof(node));
+    node *last = start;
+    printf("Enter a value : ");
+    scanf("%d", &newnode->data);
+    newnode->next = NULL;
+    if (start == NULL)
+        start = newnode;
+    else
+    {
+        while (last->next != NULL)
+            last = last->next;
+        last->next = newnode;
+    }
+}
+
+void insertAfterNode()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty cannot insert after a node\n");
+        return;
+    }
+    int node_val;
+    printf("\nEnter a node value after which you want to insert : ");
+    scanf("%d", &node_val);
+    node *ptr = start;
+    while (ptr->data != node_val)
+    {
+        if (ptr->next == NULL)
+        {
+            printf("\n Node not found cannot insert element");
+            return;
+        }
+        ptr = ptr->next;
+    }
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->next = NULL;
+    printf("\nEnter the value : ");
+    scanf("%d", &newNode->data);
+    newNode->next = ptr->next;
+    ptr->next = newNode;
+}
+
+void deleteAtFront()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    node *temp = start;
+    start = start->next;
+    free(temp);
+}
+
+void deleteAtBack()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    if (start->next == NULL)
+    {
+        free(start);
+        start = NULL;
+        return;
+    }
+    node *temp = start;
+    while (temp->next->next != NULL)
+        temp = temp->next;
+    free(temp->next);
+    temp->next = NULL;
+}
+
+void deleteANode()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    int search;
+    printf("Enter a value you want to delete : ");
+    scanf("%d", &search);
+    node *temp = start;
+    while (temp->data != search)
+    {
+        if (temp->next == NULL)
+        {
+            printf("\nValue not found");
+            return;
+        }
+        temp = temp->next;
+    }
+    if (temp == start)
+        deleteAtFront();
+    else if (temp->next == NULL)
+        deleteAtBack();
+    else
+    {
+        node *prev = start;
+        while (prev->next != temp)
+            prev = prev->next;
+        prev->next = temp->next;
+    }
+}
+
+void display()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    node *newnode = start;
+    while (newnode != NULL)
+    {
+        printf("%d --> ", newnode->data);
+        newnode = newnode->next;
+    }
+}
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Circular Single Linked List</h3>
+                <ul>
+                    <li>It is just a single linked list in which the link field of the last node points back to the address of the first node.</li>
+                    <li>A circular linked list has no beginning and no end. It is necessary to establish a special pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
+                    <li>Circular linked lists are frequently used instead of ordinary linked list because many operations are much easier to implement.</li>
+                    <li>In circular linked list no null pointer are used, hence all pointers contain valid address.</li>
+                </ul>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Circular single linked list MENU driven program code</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+node *start = NULL;
+
+void insertAtFront();
+void insertAtBack();
+void insertAfterNode();
+void deleteAtFront();
+void deleteAtBack();
+void deleteNode();
+void display();
+
+int main()
+{
+    int choice;
+    while (1)
+    {
+        printf("\n------- MENU Circular single linked list ---------");
         printf("\n1. Insert at front");
         printf("\n2. Insert at back");
         printf("\n3. Insert after a node");
@@ -415,27 +433,43 @@ int main()
 }
 void insertAtFront()
 {
-    node *newnode = (node *)malloc(sizeof(node));
+    node *newNode = (node *)malloc(sizeof(node)), *last;
     printf("Enter a value : ");
-    scanf("%d", &newnode->data);
-    newnode->next = start;
-    start = newnode;
+    scanf("%d", &newNode->data);
+    if (start == NULL)
+    {
+        start = newNode;
+        newNode->next = start;
+    }
+    else
+    {
+        last = start;
+        while (last->next != start)
+            last = last->next;
+        newNode->next = start;
+        start = newNode;
+        last->next = start;
+    }
 }
 
 void insertAtBack()
 {
-    node *newnode = (node *)malloc(sizeof(node));
+    node *newNode = (node *)malloc(sizeof(node));
     node *last = start;
     printf("Enter a value : ");
-    scanf("%d", &newnode->data);
-    newnode->next = NULL;
+    scanf("%d", &newNode->data);
+    newNode->next = NULL;
     if (start == NULL)
-        start = newnode;
+    {
+        start = newNode;
+        newNode->next = start;
+    }
     else
     {
-        while (last->next != NULL)
+        while (last->next != start)
             last = last->next;
-        last->next = newnode;
+        last->next = newNode;
+        newNode->next = start;
     }
 }
 
@@ -474,9 +508,17 @@ void deleteAtFront()
         printf("\nNo node exist");
         return;
     }
-    node *temp = start;
+    if (start->next == start) // there is only one element
+    {
+        free(start);
+        start = NULL;
+        return;
+    }
+    node *last = start, *temp = start;
+    while (last->next != start)
+        last = last->next;
     start = start->next;
-    printf("\n%d is deleted", temp->data);
+    last->next = start;
     free(temp);
 }
 
@@ -487,21 +529,19 @@ void deleteAtBack()
         printf("\nNo node exist");
         return;
     }
-    if (start->next == NULL)
+    if (start->next == start) // only one element left
     {
-        printf("\n%d is deleted", start->data);
         free(start);
         start = NULL;
         return;
     }
     node *temp = start;
-    while (temp->next->next != NULL)
+    while (temp->next->next != start)
     {
         temp = temp->next;
     }
-    printf("\n%d is deleted", temp->next->data);
     free(temp->next);
-    temp->next = NULL;
+    temp->next = start;
 }
 
 void deleteNode()
@@ -512,39 +552,25 @@ void deleteNode()
         return;
     }
     int search;
-    node *loop = start, *prev = start;
     printf("Enter a value you want to delete : ");
     scanf("%d", &search);
     node *temp = start;
     while (temp->data != search)
     {
         temp = temp->next;
-        if (temp == NULL)
+        if (temp->next == NULL)
         {
             printf("\nValue not found");
             return;
         }
     }
     if (temp == start)
-    {
-        start = start->next;
-        free(temp);
-    }
-    else if (temp->next == NULL)
-    {
-        loop = start;
-        prev = start;
-        while (loop->next != NULL)
-        {
-            prev = loop;
-            loop = loop->next;
-        }
-        prev->next = NULL;
-        free(loop);
-    }
+        deleteAtFront();
+    else if (temp->next == start)
+        deleteAtBack();
     else
     {
-        prev = start;
+        node *prev = start;
         while (prev->next != temp)
         {
             prev = prev->next;
@@ -557,284 +583,17 @@ void display()
 {
     if (start == NULL)
     {
-        printf("\nUnderflow");
+        printf("\nEmpty list");
         return;
     }
-    node *newnode = start;
-    while (newnode != NULL)
+    node *newNode = start;
+    while (newNode->next != start)
     {
-        printf("%d --> ", newnode->data);
-        newnode = newnode->next;
-    }
-}
-                   </code>
-               </pre>
-                </div>
-            </div>
-            <div class="in">
-                <h3>Circular Single Linked List</h3>
-                <ul>
-                    <li>It is just a single linked list in which the link field of the last node points back to the address of the first node.</li>
-                    <li>A circular linked list has no beginning and no end. It is necessary to establish a special pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
-                    <li>Circular linked lists are frequently used instead of ordinary linked list because many operations are much easier to implement.</li>
-                    <li>In circular linked list no null pointer are used, hence all pointers contain valid address.</li>
-                </ul>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <button class="ac">Circular single linked list MENU driven program code</button>
-                    <div class="panel">
-                        <pre>
-                            <code>
-    #include &lt;stdio.h>
-    #include &lt;stdlib.h>
-    
-    typedef struct node
-    {
-        int data;
-        struct node *next;
-    } node;
-    node *start = NULL;
-    
-    void insertAtFront();
-    void insertAtBack();
-    void insertAfterNode();
-    void deleteAtFront();
-    void deleteAtBack();
-    void deleteNode();
-    void display();
-    
-    int main()
-    {
-        int choice;
-        while (1)
-        {
-            printf("\n------- MENU Circular single linked list ---------");
-            printf("\n1. Insert at front");
-            printf("\n2. Insert at back");
-            printf("\n3. Insert after a node");
-            printf("\n4. Delete at front");
-            printf("\n5. Delete at back");
-            printf("\n6. Delete a node");
-            printf("\n7. Display");
-            printf("\n8. Exit");
-            printf("\nEnter you choice : ");
-            scanf("%d", &choice);
-            switch (choice)
-            {
-            case 1:
-                insertAtFront();
-                break;
-            case 2:
-                insertAtBack();
-                break;
-            case 3:
-                insertAfterNode();
-                break;
-            case 4:
-                deleteAtFront();
-                break;
-            case 5:
-                deleteAtBack();
-                break;
-            case 6:
-                deleteNode();
-                break;
-            case 7:
-                display();
-                break;
-            case 8:
-                exit(0);
-            default:
-                printf("\nEnter a correct choice");
-            }
-        }
-        return 0;
-    }
-    void insertAtFront()
-    {
-        node *newNode = (node *)malloc(sizeof(node)), *last;
-        printf("Enter a value : ");
-        scanf("%d", &newNode->data);
-        if (start == NULL)
-        {
-            start = newNode;
-            newNode->next = start;
-        }
-        else
-        {
-            last = start;
-            while (last->next != start)
-                last = last->next;
-            newNode->next = start;
-            start = newNode;
-            last->next = start;
-        }
-    }
-    
-    void insertAtBack()
-    {
-        node *newNode = (node *)malloc(sizeof(node));
-        node *last = start;
-        printf("Enter a value : ");
-        scanf("%d", &newNode->data);
-        newNode->next = NULL;
-        if (start == NULL)
-        {
-            start = newNode;
-            newNode->next = start;
-        }
-        else
-        {
-            while (last->next != start)
-                last = last->next;
-            last->next = newNode;
-            newNode->next = start;
-        }
-    }
-    
-    void insertAfterNode()
-    {
-        if (start == NULL)
-        {
-            printf("\nlist is empty, cannot insert after a node\n");
-            return;
-        }
-        int node_val;
-        printf("\nEnter a node value after which you want to insert : ");
-        scanf("%d", &node_val);
-        node *temp = start;
-        while (temp->data != node_val)
-        {
-            if (temp->next == NULL)
-            {
-                printf("\nValue not found");
-                return;
-            }
-            temp = temp->next;
-        }
-        node *newNode = (node *)malloc(sizeof(node));
-        newNode->next = NULL;
-        printf("\nEnter the value : ");
-        scanf("%d", &newNode->data);
-        newNode->next = temp->next;
-        temp->next = newNode;
-    }
-    
-    void deleteAtFront()
-    {
-        if (start == NULL)
-        {
-            printf("\nNo node exist");
-            return;
-        }
-        if (start->next == start)
-        {
-            printf("\n%d is deleted", start->data);
-            free(start);
-            start = NULL;
-            return;
-        }
-        node *last = start, *temp = start;
-        while (last->next != start)
-            last = last->next;
-        start = start->next;
-        last->next = start;
-        printf("\n%d is deleted", temp->data);
-        free(temp);
-    }
-    
-    void deleteAtBack()
-    {
-        if (start == NULL)
-        {
-            printf("\nNo node exist");
-            return;
-        }
-        if (start->next == start)
-        {
-            printf("\n%d is deleted", start->data);
-            free(start);
-            start = NULL;
-            return;
-        }
-        node *temp = start;
-        while (temp->next->next != start)
-        {
-            temp = temp->next;
-        }
-        printf("\n%d is deleted", temp->next->data);
-        free(temp->next);
-        temp->next = start;
-    }
-    
-    void deleteNode()
-    {
-        if (start == NULL)
-        {
-            printf("\nNo node exist");
-            return;
-        }
-        int search;
-        node *loop = start, *prev = start;
-        printf("Enter a value you want to delete : ");
-        scanf("%d", &search);
-        node *temp = start;
-        while (temp->data != search)
-        {
-            temp = temp->next;
-            if (temp->next == NULL)
-            {
-                printf("\nValue not found");
-                return;
-            }
-        }
-        if (temp == start)
-        {
-            loop = start;
-            while (loop->next != start)
-                loop = loop->next;
-            start = start->next;
-            loop->next = start;
-            free(temp);
-        }
-        else if (temp->next == start)
-        {
-            loop = start;
-            prev = start;
-            while (loop->next != start)
-            {
-                prev = loop;
-                loop = loop->next;
-            }
-            prev->next = start;
-            free(loop);
-        }
-        else
-        {
-            prev = start;
-            while (prev->next != temp)
-            {
-                prev = prev->next;
-            }
-            prev->next = temp->next;
-        }
-    }
-    
-    void display()
-    {
-        if (start == NULL)
-        {
-            printf("\nEmpty list");
-            return;
-        }
-        node *newNode = start;
-        while (newNode->next != start)
-        {
-            printf("%d --> ", newNode->data);
-            newNode = newNode->next;
-        }
         printf("%d --> ", newNode->data);
+        newNode = newNode->next;
     }
+    printf("%d --> ", newNode->data);
+}
                             </code>
                         </pre>
                     </div>
@@ -887,42 +646,42 @@ struct node *start = NULL;
 #include &lt;stdio.h>
 #include &lt;stdlib.h>
 
-struct node
+typedef struct node
 {
     struct node *prev;
     int data;
     struct node *next;
-};
-struct node *head = NULL, *ptr;
-void insert_front(int val)
+} node;
+node *start = NULL;
+void insertAtFront(int val)
 {
-    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    node *temp = (node *)malloc(sizeof(node));
     temp->data = val;
     temp->prev = NULL;
     temp->next = NULL;
-    if (head == NULL)
+    if (start == NULL)
     {
-        head = temp;
+        start = temp;
     }
     else
     {
-        temp->next = head;
-        head->prev = temp;
-        head = temp;
+        temp->next = start;
+        start->prev = temp;
+        start = temp;
     }
 }
-void insert_last(int val)
+void insertAtLast(int val)
 {
-    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    node *temp = (node *)malloc(sizeof(node));
     temp->data = val;
 
-    if (head == NULL)
+    if (start == NULL)
     {
-        head = temp;
+        start = temp;
     }
     else
     {
-        ptr = head;
+        node *ptr = start;
         while (ptr->next != NULL)
         {
             ptr = ptr->next;
@@ -933,65 +692,70 @@ void insert_last(int val)
         temp->next = NULL;
     }
 }
-void insert_middle(int val, int ele)
+void insertAfterNode()
 {
-    struct node *temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = val;
-
-    if (head == NULL)
+    if (start == NULL)
     {
-        head = temp;
-    }
-    else
-    {
-        ptr = head;
-        while (ptr->data != ele)
-        {
-            ptr = ptr->next;
-            if (ptr->next == NULL)
-            {
-                printf("\n Not a middle element");
-                return;
-            }
-        }
-        temp->next = ptr->next;
-        temp->prev = ptr;
-        ptr->next->prev = temp;
-        ptr->next = temp;
-    }
-}
-void delete_front()
-{
-    if (head == NULL)
-    {
-        printf("\t\tUnderflow");
+        printf("\nList is empty cannot insert after a node\n");
         return;
     }
-    if (head->next == NULL)
-        head = NULL;
+    int ele, val;
+    printf("\nEnter the element after which you want to insert : ");
+    scanf("%d", &ele);
+    node *ptr = start;
+    while (ptr->data != ele)
+    {
+        if (ptr->next == NULL)
+        {
+            printf("\n Node not found, cannot insert element\n");
+            return;
+        }
+        ptr = ptr->next;
+    }
+    node *temp = (node *)malloc(sizeof(node));
+    printf("\nEnter the value you want to insert : ");
+    scanf("%d", &val);
+    temp->data = val;
+    temp->next = ptr->next;
+    temp->prev = ptr;
+    ptr->next->prev = temp;
+    ptr->next = temp;
+}
+void deleteAtFront()
+{
+    if (start == NULL)
+    {
+        printf("\n List is empty\n");
+        return;
+    }
+    if (start->next == NULL)
+    {
+        free(start);
+        start = NULL;
+    }
     else
     {
-        ptr = head;
-        head = head->next;
-        ptr->next = NULL;
-        head->prev = NULL;
+        node *ptr = start;
+        start = start->next;
+        start->prev = NULL;
         free(ptr);
     }
 }
-void delete_last()
+void deleteAtLast()
 {
-    if (head == NULL)
+    if (start == NULL)
     {
-        printf("\t\tUnderflow");
+        printf("\n List is empty\n");
         return;
     }
-    ptr = head;
+    node *ptr = start;
     while (ptr->next != NULL)
-    {
         ptr = ptr->next;
-    }
     if (ptr->prev == NULL)
-        head = NULL;
+    {
+        free(start);
+        start = NULL;
+    }
     else
     {
         ptr->prev->next = NULL;
@@ -999,49 +763,52 @@ void delete_last()
         free(ptr);
     }
 }
-void delete_middle(int ele)
+void deleteANode(int ele)
 {
-    if (head == NULL)
+    if (start == NULL)
     {
-        printf("\t\tUnderflow");
+        printf("\nList is empty\n");
+        return;
     }
-    else
+    node *ptr = start;
+    while (ptr->data != ele)
     {
-        ptr = head;
-        while (ptr->data != ele)
+        if (ptr->next == NULL)
         {
-
-            ptr = ptr->next;
-        }
-        if (ptr->prev == NULL || ptr->next == NULL)
-        {
-            printf("Not a middle element");
+            printf("\nElement not found\n");
             return;
         }
-        ptr->next->prev = ptr->prev;
-        ptr->prev->next = ptr->next;
-
-        ptr->prev = NULL;
-        ptr->next = NULL;
-        free(ptr);
+        ptr = ptr->next;
     }
+    if (ptr->prev == NULL)
+    {
+        deleteAtFront();
+        return;
+    }
+    else if (ptr->next == NULL)
+    {
+        deleteAtLast();
+        return;
+    }
+    ptr->next->prev = ptr->prev;
+    ptr->prev->next = ptr->next;
+
+    ptr->prev = NULL;
+    ptr->next = NULL;
+    free(ptr);
 }
 void display()
 {
-
-    if (head == NULL)
+    if (start == NULL)
     {
-
-        printf("\t\tUnderflow");
+        printf("\nList is empty\nÏ");
+        return;
     }
-    else
+    node *ptr = start;
+    while (ptr != NULL)
     {
-        ptr = head;
-        while (ptr != NULL)
-        {
-            printf("\t%d<=>", ptr->data);
-            ptr = ptr->next;
-        }
+        printf("%d <=> ", ptr->data);
+        ptr = ptr->next;
     }
 }
 int main()
@@ -1049,51 +816,47 @@ int main()
     int ch, val, ele;
     while (1)
     {
-        printf("\n1.insert in began\n2.insert in end\n3.insert in miidle");
-        printf("\n4.Delete in front\n5.Delete in last\n6.Delete in middle");
+        printf("\n1.insert in began\n2.insert in end\n3.insert after a node");
+        printf("\n4.Delete in front\n5.Delete in last\n6.Delete a node");
         printf("\n7.Display\n8.Exit\n");
-        printf("Enter your choice=");
+        printf("Enter your choice : ");
         scanf("%d", &ch);
 
         switch (ch)
         {
         case 1:
         {
-            printf("Enter the  data=");
+            printf("Enter the  data : ");
             scanf("%d", &val);
-            insert_front(val);
+            insertAtFront(val);
             break;
         }
         case 2:
         {
-            printf("Enter the elment=");
+            printf("Enter the elment : ");
             scanf("%d", &val);
-            insert_last(val);
+            insertAtLast(val);
             break;
         }
 
         case 3:
         {
-            printf("Enter the element=");
-            scanf("%d", &val);
-            printf("Enter the element after which you insert new element=");
-            scanf("%d", &ele);
-            insert_middle(val, ele);
+            insertAfterNode();
             break;
         }
 
         case 4:
-            delete_front();
+            deleteAtFront();
             break;
 
         case 5:
-            delete_last();
+            deleteAtLast();
             break;
 
         case 6:
-            printf("Enter the element=");
+            printf("Enter the element : ");
             scanf("%d", &ele);
-            delete_middle(ele);
+            deleteANode(ele);
             break;
 
         case 7:
@@ -1104,7 +867,7 @@ int main()
             exit(0);
 
         default:
-            printf("You enter wrong input");
+            printf("You enter wrong input, try again ");
             break;
         }
     }
