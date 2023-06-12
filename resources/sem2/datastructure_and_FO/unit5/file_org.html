@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Organization</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#t1" class="link">Terminologies</a>
+        <a href="#t2" class="link">Sequential file organization</a>
+        <a href="#t3" class="link">Random/Direct File organization</a>
+        <a href="#t4" class="link">Index Sequential file organization</a>
+        <a href="#t5" class="link">Multi key file organization</a>
+        <div class="botbut">
+            <a href="./index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2></h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>File Organization</h1>
+        <div id="t1" class="wh">
+            <h2> File structures Terminologies</h2>
+            <ul>
+                <li><b>Record:</b> (Group/Segment) it is a collection of information items about a particular entity. E.g. A collection of information about a student in a college.</li>
+                <li><b>Field/Item:</b> AN item of a record is a unit of meaningful information about an entity. E.g. Name, Id no, Address of student.</li>
+                <li><b>File:</b> A collection of records involving a set of entities with certain aspects in common and organized for some particular purpose is called file. E.g. Collection of all students' record make a file.</li>
+                <li><b>Key:</b> A record item or field which uniquely identifies a record in a file is called a key. E.g. Id_no of a student for student record.</li>
+                <li><b>Database:</b> If the set of files is used by the application program for some particular application area and if these files exhibit certain associations or relationships between the records of the files then such a collection of files is called as database. E.g. student data base which has files/tables like student information, result, attendence, registration, placement etc. In which all these different data have relationship and association between them.</li>
+                <li><b>Transaction:</b> A particular operation involving a record or set of records is called as transaction. E.g. "Delete all students of batch = 00".</li>
+                <li>Fields, records, files and databases are logical terms.</li>
+                <li><b>Block/Physical record:</b> Several logical records can be groped together to form a single physical entity to be stored on physical device is called as block or physical record.</li>
+                <li><b>Serial-access device:</b> The devices on which data is stored serially and can be retrieved only serially and access time of any data is proportional to the location of the data on device, are called as serail device. These device are cheap compared to direct access devices. E.g. Magnetic tape.</li>
+                <li><b>Direct-access Device: </b> The devices for which access time for two records don’t depend upon their
+                    location in memory are called as direct access devices. These devices are costly. E.g. Magnetic disk, Hard disk drive.</li>
+            </ul>
+        </div>
+        <ul>
+            <li><b>File organization:</b> The technique used to represent and store the records on a file is called as file organizatio.</li>
+            <li>The 4 fundamental file organization are:
+                <ol>
+                    <li>Sequential</li>
+                    <li>Direct/Random</li>
+                    <li>Index sequential</li>
+                    <li>Multi key</li>
+                </ol>
+            </li>
+        </ul>
+        <div id="t2" class="wh">
+            <h2>Sequential file organization</h2>
+            <ul>
+                <li>In sequential file organization, data is stored in a sequential manner, one record after another, based on the order of insertion. Records are accessed sequentially, starting from the beginning of the file. Sequential access is efficient, but random access or modifications to specific records can be time-consuming.</li>
+            </ul>
+            <div class="in">
+                <h3>Storing sequential file</h3>
+                <ul>
+                    <li>Sequential files can be stored on serial-access as well as direct-access devices.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Advantages</h3>
+                <ol>
+                    <li>Faster access to next record.</li>
+                    <li>Access time is very good.</li>
+                    <li>Simplicity</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Disadvantages</h3>
+                <ol>
+                    <li>If pattern of access do not match with record ordering pattern then access time goes very high.</li>
+                    <li>Data can be accessed sequentially only.</li>
+                </ol>
+            </div>
+            <img src="../../images/dsfileorg1.svg" alt="" class="wb">
+        </div>
+        <div id="t3" class="wh">
+            <h2>Random/Direct File organization</h2>
+            <ul>
+                <li>When records in a file are arranged in such a way so that the individual records can be directly accessed whenever they are needed is called as direct File organization.</li>
+                <li>In this file organization there exists a direct relationship between a key used to identify the particular record and the location of the record in a file.</li>
+                <li>The records do not necessarily appear physically in sorted order by their key values as in sequential files.</li>
+                <li>When relative file is created the relationship that will be used to translate between key values and physical address of record in file is assigned. That relationship is called as mapping function R.</li>
+                <li>Generally direct file are used when only selected records are accessed from file not all at a time i.e. in interactive processing. E.g. online banking system in which user want to access only his account.</li>
+            </ul>
+            <div class="in">
+                <h3>Storing direct file</h3>
+                <ul>
+                    <li>Direct files can only be stored on direct-access devices.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Advantages:</h3>
+                <ol>
+                    <li>Ability to access individual record directly, i.e. a record can be retrieved, inserted, modified or deleted without affecting other records.</li>
+                    <li>Access time for one record at a time is very good.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Disadvantages</h3>
+                <ol>
+                    <li>When all records are to be accessed at a time then it gives poor performance.</li>
+                </ol>
+            </div>
+            <img src="../../images/dsfileorg2.svg" alt="" class="wb">
+        </div>
+        <div id="t4" class="wh">
+            <h2>Index Sequential file organization</h2>
+            <ul>
+                <li>An effective way to organize a collection of records when there is a need of both accesses. To access the records sequentially by some key value and also to access the records individually by some key is called as index sequential file organization.</li>
+                <li>It supports combination of access types that are supported by a sequential file and a relative file. </li>
+                <li>It is used when there is a need for both batch and interactive processing. E.g. Student management system in which we have to calculate result for every student as well as we have requirement like of address to send a letter to only that student who is detained. So the file can be stored sequentially based on student id. And index table is also provided with key as student id which directly maps student id to its record.</li>
+            </ul>
+            <div class="in">
+                <h3>Advantages</h3>
+                <ol>
+                    <li>Ability to access individual record directly as well as all the record sequentially.</li>
+                </ol>
+            </div>
+            <img src="../../images/dsfileorg3.svg" alt="" class="wb">
+        </div>
+        <div id="t5" class="wh">
+            <h2>Multi key file organization</h2>
+            <ul>
+                <li>When a file records are made accessed based on more than one key are called Multikey file organization. </li>
+                <li>This file organization is needed many times. E.g. In banking system we keep records of accounts in file. Now accound holder needs account information which can be access through account, while load officer needs account records with a given value of overdue limit. SO we need to provide to access path to the record based on different need. Generally these files are index sequential file in which file is stored sequentially based on primary key and more than one index table are provided based on different keys. Basically there are 2 approaches for implementing multikey file organization.
+                    <ol>
+                        <li>Inverted file organization</li>
+                        <li>Multi list file organization</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>1. Inverted file organization</h3>
+                <ul>
+                    <li>In this file organization a key's inversion index contain all of the values that the key presently has in the records of the data file. Each key-value entry in the inversion index points to all the data records that have the corresponding value. The data file is said to be inverted on that key.</li>
+                    <li>Inverted files are sorted on inversion index so that binary search can be applied to find out index or record. Whenever record is added in data file its corresponding entry has to be made in inverted file.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2. Multi list file organization</h3>
+                <ul>
+                    <li>In multi list file organization the index contain all values that the secondary key has in data file same as inverted file but the difference is that the entry in the multi index for a seconday key is pointer to the first data record with thay key value. That record contains pointer to second record having same key. Thus there is a linked of data records for each value of secondary key. Multi list chains are usually bidirectional and occasionally are circular to improve update operation.</li>
+                </ul>
+            </div>
+            <img src="../../images/dsfileorg4.svg" alt="" class="wb">
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
