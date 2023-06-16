@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#t1" class="link">Containers</a>
+        <a href="#t2" class="link">Vector</a>
+        <a href="#t3" class="link">List</a>
+        <a href="#t4" class="link">Map</a>
+        <div class="botbut">
+            <a href="./exception.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>STL</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>STL</h1>
+        <ul>
+            <li>The STL is a library in C++ that provides a collection of generic algorithms and data structures.</li>
+            <li>It is part of the C++ standard library and consists of various template classes and functions.</li>
+            <li>The STL promotes code reuse, flexibilty, and efficiency by providing ready-to-use algorithms and data
+                structures.</li>
+            <li>Key components of the STL include containers, algorithms, and iterators.</li>
+        </ul>
+        <div id="t1" class="wh">
+            <h2>Containers</h2>
+            <ul>
+                <li>Containers are data structures provided by the STL to store and organize data efficiently.</li>
+                <li>The STL provides various container types, each with its own characteristics and use cases.</li>
+                <li>Commonly used containers include 'vector', 'list', 'map', 'set', 'queue', 'stack', and more.</li>
+                <li>Containers provide different interfaces and operations to manipulate and access their elements.</li>
+                <li>Containers can be categorized as sequence containers, associative containers, and container
+                    adaptors.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Vectors</h2>
+            <ul>
+                <li>'vector' is a dynamic array that grows or shrinks automatically as elements are added or removed.
+                </li>
+                <li>It provides efficient random access to elements using indices.</li>
+                <li>Insertion and deletion at the end of a 'vector' are fast, but insertion/deletion in the middle is
+                    slower.</li>
+                <li>It provides a 'size()' function to get the number of elements and supports resizing, sorting and
+                    other operations.</li>
+            </ul>
+            <p>Simple program &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;iostream>
+#include &lt;vector>
+using namespace std;
+
+int main()
+{
+    vector&lt;int> vec = {10, 20, 30};
+    vec.push_back(40);
+    vec.push_back(50);
+    // vec.pop_back(); // remove the last element
+
+    // Access elements using indexing
+    cout << "Element at index 1: " << vec[1] << endl;
+
+    // Iterate over the vector using a for loop
+    cout << "Elements: ";
+    for (int i = 0; i < vec.size(); ++i)
+    {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+
+    // Get the size of the vector
+    cout << "Size: " << vec.size() << endl;
+
+    // Clear the vector
+    vec.clear();
+    cout << "Size after clearing: " << vec.size() << endl;
+
+    return 0;
+}
+
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>List</h2>
+            <ul>
+                <li>'list' is a doubly-lined list where each element points to its previous and nex elements.</li>
+                <li>It supports efficient insertion and deletion at any position, including the beginnind and end.</li>
+                <li>Random access is not available in 'list', so indexing and direct element access is not possible.
+                </li>
+                <li>'list' provides constant-time insertion and deletion operations, but traversal is slower compared to
+                    'vector'.</li>
+            </ul>
+            <p>Simple program &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;iostream>
+#include &lt;list>
+using namespace std;
+
+int main()
+{
+    list&lt;int> myList = {5, 10, 20};
+
+    // Access elements
+    cout << "First element: " << myList.front() << endl;
+    cout << "Last element: " << myList.back() << endl;
+
+    // Iterate over the list using a for loop
+    cout << "Elements: ";
+    for (const auto element : myList)
+    {
+        cout << element << " ";
+    }
+    cout << endl;
+
+    // Insert an element at a specific position
+    auto it = next(myList.begin()); // Get iterator to the second element
+    myList.insert(it, 15);
+
+    // Remove an element from the list
+    myList.pop_front();
+
+    // Check if the list is empty
+    if (myList.empty())
+    {
+        cout << "List is empty" << endl;
+    }
+    else
+    {
+        cout << "List is not empty" << endl;
+    }
+
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Map</h2>
+            <ul>
+                <li>'map' is an associative container that stores key-value pairs, where each key is unique.</li>
+                <li>It provides efficient lookup, insertion, and deletion based on the key.</li>
+                <li>Elements in 'map' are automatically sorted by the key in ascending order.</li>
+                <li>'mapl provides a convenient way to store and retrieve data based on a unique indentifier (key).</li>
+            </ul>
+            <p>Simple program &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;iostream>
+#include &lt;map>
+using namespace std;
+
+int main()
+{
+    map&lt;string, int> myMap = {{"John", 25}, {"Alice", 30}, {"Bob", 40}};
+
+    // Access values using keys
+    cout << "Age of Alice: " << myMap["Alice"] << endl;
+
+    // Iterate over the map using a for loop
+    cout << "Name - Age pairs: ";
+    for (const auto &pair : myMap)
+    {
+        cout << pair.first << ":" << pair.second << " ";
+    }
+    cout << endl;
+
+    // Check if a key exists in the map
+    string name = "John";
+    if (myMap.count(name) > 0)
+    {
+        cout << name << " exists in the map" << endl;
+    }
+    else
+    {
+        cout << name << " does not exist in the map" << endl;
+    }
+
+    // Erase an element from the map
+    myMap.erase("Bob");
+
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
