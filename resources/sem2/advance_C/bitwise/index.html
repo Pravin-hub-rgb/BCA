@@ -18,14 +18,22 @@
             color: white;
         }
     </style>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">Bitwise AND ( & )</a>
+        <a href="#t2" class="link">Bitwise OR ( | )</a>
+        <a href="#t3" class="link">Bitwise XOR ( ^ )</a>
+        <a href="#t4" class="link">One's complement ( ~ )</a>
+        <a href="#t5" class="link">Bitwise left shift ( << )</a>
+        <a href="#t6" class="link">Bitwise right shift ( >> )</a>
+        <a href="#t7" class="link">Programs</a>
+        <a href="#t8" class="link">Bit masking</a>
         <div class="botbut">
             <a href="" class="link">Next Topic &rarr;</a>
             <a href="../pointer/index.html" class="link">&larr; Previous Topic</a>
@@ -49,8 +57,11 @@
         <h1>Bitwise Manipulations</h1>
         <ul>
             <li>We know that inside the computer, data is represented in binary digits called bits (0 and 1).</li>
-            <li>Till now we were able to access and manipulate bytes only. But some applications, such as system programming require manipulation of individual bits within a byte.</li>
-            <li>In most high-level languages this facility is not available, but C has the special feature to manipulate individual bits of a byte. This feature is implemented through bitwise operators that support bitwise operations.</li>
+            <li>Till now we were able to access and manipulate bytes only. But some applications, such as system
+                programming require manipulation of individual bits within a byte.</li>
+            <li>In most high-level languages this facility is not available, but C has the special feature to manipulate
+                individual bits of a byte. This feature is implemented through bitwise operators that support bitwise
+                operations.</li>
             <li>These bitwise operators are:</li>
             <pre>
                 <code>
@@ -64,19 +75,27 @@ Operator            Meaning
                 </code>
             </pre>
             <li>Here all the operators are binary, except the complement operator, which is unary.</li>
-            <li>These bitwise operator work on data of integral type only i.e. char, int, shot, long including both signed and unsigned types. When these operators are applied to signed types, the result may be implementation dependent, because different implementations represent the signed data in different ways.</li>
-            <li>These operators operate on each bit of operand, so while using these operators we'll consider the binary representation (bit pattern) of the operand.</li>
-            <li><b>Note:</b> We'll represent the integers in hexadecimal, because it is easier to convert hexadecimal to binary and vice versa.</li>
-            <li>All bitwise operatos except the complement operator can be combined with the assignment operator to form the compound assignment operators:
+            <li>These bitwise operator work on data of integral type only i.e. char, int, shot, long including both
+                signed and unsigned types. When these operators are applied to signed types, the result may be
+                implementation dependent, because different implementations represent the signed data in different ways.
+            </li>
+            <li>These operators operate on each bit of operand, so while using these operators we'll consider the binary
+                representation (bit pattern) of the operand.</li>
+            <li><b>Note:</b> We'll represent the integers in hexadecimal, because it is easier to convert hexadecimal to
+                binary and vice versa.</li>
+            <li>All bitwise operatos except the complement operator can be combined with the assignment operator to form
+                the compound assignment operators:
                 <ul>
-                    <li>&=, |=, <<=, >>=, ^=</li>
+                    <li>&=, |=, <<=,>>=, ^=</li>
                 </ul>
             </li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>Bitwise AND ( & )</h2>
             <ul>
-                <li>It is binary operator and requires two operands. These operands are compared bitwise i.e. all the corresponding bits in both operands are compared. The resulting bit is 1, only when the bits in both operands are 1, otherwise it is 0.</li>
+                <li>It is binary operator and requires two operands. These operands are compared bitwise i.e. all the
+                    corresponding bits in both operands are compared. The resulting bit is 1, only when the bits in both
+                    operands are 1, otherwise it is 0.</li>
             </ul>
             <pre>
                 <code>
@@ -88,7 +107,8 @@ Bits of operand1    Bit of operand2     Resulting Bit
                 </code>
             </pre>
             <ul>
-                <li>Let us take a = 0x293B and b = 0x1A2F are two integer variables. The binary representation of these variables and the result after performing bitwise AND operation is shown below-
+                <li>Let us take a = 0x293B and b = 0x1A2F are two integer variables. The binary representation of these
+                    variables and the result after performing bitwise AND operation is shown below-
                     <pre>
                         <code>
 Note: 0x293B in 16 bits = 000000000000293B
@@ -102,8 +122,8 @@ a&b  0000  1000  0010  1011     (0x082B)
             </ul>
             <p>Program code &darr;</p>
             <div class="code">
-            <div class="dotc"></div>
-            <pre>
+                <div class="dotc"></div>
+                <pre>
                 <code>
 #include&lt;stdio.h>
 int main()
@@ -127,10 +147,11 @@ int main()
             </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Bitwise OR ( | )</h2>
             <ul>
-                <li>The corresponding bits of both operands are compared and the resulting bit is 0, only when the bits in both operands are 0, otherwise it is 1.</li>
+                <li>The corresponding bits of both operands are compared and the resulting bit is 0, only when the bits
+                    in both operands are 0, otherwise it is 1.</li>
             </ul>
             <pre>
                 <code>
@@ -155,8 +176,8 @@ a&b  0011  1011  0011  1111     (0x3B3F)
             </ul>
             <p>Program code &darr;</p>
             <div class="code">
-            <div class="dotc"></div>
-            <pre>
+                <div class="dotc"></div>
+                <pre>
                 <code>
 #include&lt;stdio.h>
 int main()
@@ -180,10 +201,11 @@ int main()
             </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Bitwise XOR ( ^ )</h2>
             <ul>
-                <li>The corresponding of both operands are compared and the resulting bit is 1, if bit of both operands have different value, otherwise it is 0.</li>
+                <li>The corresponding of both operands are compared and the resulting bit is 1, if bit of both operands
+                    have different value, otherwise it is 0.</li>
             </ul>
             <pre>
                 <code>
@@ -208,8 +230,8 @@ a&b  0011  0011  0001  0100     (0x3314)
             </ul>
             <p>Program code &darr;</p>
             <div class="code">
-            <div class="dotc"></div>
-            <pre>
+                <div class="dotc"></div>
+                <pre>
                 <code>
 #include&lt;stdio.h>
 int main()
@@ -234,16 +256,21 @@ int main()
             </div>
         </div>
         <ul>
-            <li>When the bitwise operators &, |, ^ operate on two operands of different sizes, then the size of smallest operand is increased to match the size of larger operand.</li>
-            <li>For example if there are two operands of sizes 16 and 32 bits, then the 16-bit operand will be converted to 32 bits.</li>
-            <li>The extra bits are added to the left of the smaller operand. If the smaller operand is <i>unsigned</i> then all these extra bits are filled with zeros, and if it is <i>signed</i> then these bits are filled with the sign bit.</li>
+            <li>When the bitwise operators &, |, ^ operate on two operands of different sizes, then the size of smallest
+                operand is increased to match the size of larger operand.</li>
+            <li>For example if there are two operands of sizes 16 and 32 bits, then the 16-bit operand will be converted
+                to 32 bits.</li>
+            <li>The extra bits are added to the left of the smaller operand. If the smaller operand is <i>unsigned</i>
+                then all these extra bits are filled with zeros, and if it is <i>signed</i> then these bits are filled
+                with the sign bit.</li>
         </ul>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>One's Complement ( ~ )</h2>
             <ul>
                 <li>One's complement operator is a unary operator and requires only one operand.</li>
                 <li>It negates the value of the bit.</li>
-                <li>If the bit of the operand is 1 then the resulting bit is 0 and if the bit of the operand is 0 then the resulting bit is 1.</li>
+                <li>If the bit of the operand is 1 then the resulting bit is 0 and if the bit of the operand is 0 then
+                    the resulting bit is 1.</li>
             </ul>
             <pre>
                 <code>
@@ -260,12 +287,15 @@ b   0001  1010  0010  1111    (0x1A2F)
                 </code>
             </pre>
             <ul>
-                <li>The ~ operator should be used carefully. The result of ~ operator on a small number can be a big number if the reuslt is stored in an unsigned variable. And the result may be a negative number if the result is stored in a signed variable (assuming that the negative numbers are stored in 2's complement form where the leftmost bit is the sign bit)</li>
+                <li>The ~ operator should be used carefully. The result of ~ operator on a small number can be a big
+                    number if the reuslt is stored in an unsigned variable. And the result may be a negative number if
+                    the result is stored in a signed variable (assuming that the negative numbers are stored in 2's
+                    complement form where the leftmost bit is the sign bit)</li>
             </ul>
             <p>Program code &darr;</p>
             <div class="code">
-            <div class="dotc"></div>
-            <pre>
+                <div class="dotc"></div>
+                <pre>
                 <code>
 #include&lt;stdio.h>
 int main()
@@ -283,27 +313,33 @@ int main()
 */
                 </code>
             </pre>
-        </div>
+            </div>
             <ul>
-                <li>When the complement operator is applied to an operand twice, then result is the original operand i.e., ~(~a) is equal to a.</li>
+                <li>When the complement operator is applied to an operand twice, then result is the original operand
+                    i.e., ~(~a) is equal to a.</li>
                 <li>This feature of complement operator can be used for encrypting and decrypting data. </li>
-                <li>To encrypt the data, we can apply complement oeprator to it, and to decrypt the data i.e. to get back the original data we can apply the complement operator to the encrypted data.</li>
+                <li>To encrypt the data, we can apply complement oeprator to it, and to decrypt the data i.e. to get
+                    back the original data we can apply the complement operator to the encrypted data.</li>
                 <li>For example <br>
-                Original data : 0000 1111 0101 0011
-            <br>Ecrypted data : 1111 0000 1010 1100 (By applying ~ to original data) 
-        <br>Decrypted data : 0000 1111 0101 0011 (By applying ~ to encrypted data)</li>
+                    Original data : 0000 1111 0101 0011
+                    <br>Ecrypted data : 1111 0000 1010 1100 (By applying ~ to original data)
+                    <br>Decrypted data : 0000 1111 0101 0011 (By applying ~ to encrypted data)
+                </li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Bitwise Left Shift ( << )</h2>
-            <ul>
-                <li>This operator is used for shifting the bits left. It requires two operands. The left operand is the operand whose bits are shifted and the right operand indicates the number of bits to be shifted.</li>
-                <li>On shifting the bits left, an equal number of bit position on the right are vacated. These positions are filled in with 0 bits.</li>
-            </ul>
-            <img src="../../images/bitman1.svg" alt="" class="wb">
-            <div class="code">
-                <div class="dotc"></div>
-            <pre>
+                    <ul>
+                        <li>This operator is used for shifting the bits left. It requires two operands. The left operand
+                            is the operand whose bits are shifted and the right operand indicates the number of bits to
+                            be shifted.</li>
+                        <li>On shifting the bits left, an equal number of bit position on the right are vacated. These
+                            positions are filled in with 0 bits.</li>
+                    </ul>
+                    <img src="../../images/bitman1.svg" alt="" class="wb">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <pre>
                 <code>
 #include &lt;stdio.h>
 int main()
@@ -317,18 +353,20 @@ int main()
 }
                 </code>
             </pre>
+                    </div>
         </div>
-        </div>
-        <div class="wh">
+        <div id="t6" class="wh">
             <h2>Bitwise Right Shift ( >> )</h2>
             <img src="../../images/bitman2.svg" alt="" class="wb">
             <ul>
                 <li>Logical shift - The vacated bits are always filled with zeros.</li>
-                <li>Arithmetic shift - The vacated bits are filled with the value of the leftmost bit in the initial bit pattern. If the left most bit is 1, then the vacated positions are filled with 1, and if the left most bit 0, then the vacated posisitons are filled with 0.</li>
+                <li>Arithmetic shift - The vacated bits are filled with the value of the leftmost bit in the initial bit
+                    pattern. If the left most bit is 1, then the vacated positions are filled with 1, and if the left
+                    most bit 0, then the vacated posisitons are filled with 0.</li>
             </ul>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                 <code>
 #include &lt;stdio.h>
 int main()
@@ -344,7 +382,7 @@ int main()
             </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t7" class="wh">
             <h2>Some programs</h2>
             <div class="in">
                 <h3>Program to swap two number using bitwise operator</h3>
@@ -363,6 +401,178 @@ int main()
 }
                     </code>
                 </pre>
+            </div>
+        </div>
+        <div id="t8" class="wh">
+            <h2>Bit masking</h2>
+            <ul>
+                <li>Bit masking involves using bitwise operators to selectively manipulate specific bits of a variable
+                    while leaving the other bits unchanged. It is commonly used for tasks like setting, clearing, or
+                    checking specific bits in a variable.</li>
+                <li></li>
+            </ul>
+            <div class="in">
+                <h3>checking if a bit is set (1) or not</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;stdio.h>
+int isBitSet(int num, int bitPos)
+{
+    return (num & (1 << bitPos)) != 0;
+}
+int main()
+{
+    int num = 10; // Binary: 0000 1010
+
+    // Check if bit at position 3 is set
+    if (isBitSet(num, 3))
+        printf("Bit at position 3 is set.\n");
+    else
+        printf("Bit at position 3 is not set.\n");
+
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                <ul>
+                    <li>Explanation: In this function, the bit at the desired position is isolated using the left shift
+                        operator (<<) to shift 1 by bitPos positions. This creates a bit mask with only the bit at the
+                            desired position set to 1. The bitwise AND operation (&) is then performed between num and
+                            the bit mask. If the result is non-zero, it means the bit at the specified position is set
+                            (1); otherwise, it is not set (0). The function returns this result.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Setting a specific bit</h3>
+                <ul>
+                    <li>We are going to use 'setBit()' function.</li>
+                    <li>The setBit() function is used to set a specific bit to 1 in a given number. It takes two
+                        parameters: num, which represents the number you want to modify, and bitPos, which indicates the
+                        position of the bit you want to set. Here's the function implementation:</li>
+                </ul>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;stdio.h>
+// Function to set a specific bit
+int setBit(int num, int bitPos)
+{
+    return num | (1 << bitPos);
+}
+int main()
+{
+    int num = 10; // Binary: 0000 1010
+
+    // Set bit at position 2
+    num = setBit(num, 2);
+    printf("After setting bit at position 2: %d\n", num);
+    
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <pre>
+                    <code>
+After setting bit at position 2: 14
+                    </code>
+                </pre>
+                <ul>
+                    <li>num in binary was 0000 1010 = 10
+                        <br>after shifting 1 (0000 0001) by 2 we get 4 (0000 0100)
+                        <br>0000 1010 | 0000 0100 = 0000 1110 = 14
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Clearing a bit</h3>
+                <ul>
+                    <li>The clearBit() function is used to clear a specific bit to 0 in a given number. It takes two
+                        parameters: num, which represents the number you want to modify, and bitPos, which indicates the
+                        position of the bit you want to clear. Here's the function implementation:</li>
+                </ul>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;stdio.h>
+// Function to clear a specific bit
+int clearBit(int num, int bitPos)
+{
+    return num & ~(1 << bitPos);
+}
+int main()
+{
+    int num = 10; // Binary: 0000 1010
+
+    // Clear bit at position 1
+    num = clearBit(num, 1);
+    printf("After clearing bit at position 1: %d\n", num);
+    
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <pre>
+                    <code>
+After clearing bit at position 1: 8
+                    </code>
+                </pre>
+                <ul>
+                    <li>In this example, we clear the bit at position 1 (counting from the rightmost bit starting at 0)
+                        to 0 in the number num, which is initially 10. The resulting value, after clearing the bit, is
+                        8. This change occurs while preserving the other bits in the number.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Toggling a bit</h3>
+                <ul>
+                    <li>The toggleBit() function is used to toggle a specific bit in a given number, which means
+                        changing it from 0 to 1 or from 1 to 0. It takes two parameters: num, which represents the
+                        number you want to modify, and bitPos, which indicates the position of the bit you want to
+                        toggle. Here's the function implementation:</li>
+                </ul>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;stdio.h>
+// Function to toggle a specific bit
+int toggleBit(int num, int bitPos)
+{
+    return num ^ (1 << bitPos);
+}
+int main()
+{
+    int num = 10; // Binary: 0000 1010
+
+    // Toggle bit at position 0
+    num = toggleBit(num, 0);
+    printf("After toggling bit at position 0: %d\n", num);
+    
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Output &darr;</p>
+                <pre>
+                    <code>
+After toggling bit at position 0: 11
+                    </code>
+                </pre>
+                <ul>
+                    <li>In this example, we toggle the bit at position 0 (counting from the rightmost bit starting at 0)
+                        in the number num, which is initially 10. The resulting value, after toggling the bit, is 11.
+                        This change occurs while preserving the other bits in the number.</li>
+                </ul>
             </div>
         </div>
     </div>
