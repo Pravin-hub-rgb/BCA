@@ -64,9 +64,12 @@
                 <li>Insertion at the beginning is a constant time operation and takes O(1) time, as compared to arrays
                     where inserting an element at the beginning takes O(n) time, where <i>n</i> is the number of
                     elements in the array.</li>
-                <li>Linked lists are dynamic data structures. i.e., they can grow or shrink during the execution of a program.</li>
-                <li>Linked lists have efficient memory utilization. Here, memory is not pre-allocated. Memory is allocated whenever it is required and it is de-allocated (removed) when it is no longer needed.</li>
-                <li>insertion and deletion are easier and efficient. Linked lists provide flexibility in inserting a data item at a specified position and deletion of the data item from the given position.</li>
+                <li>Linked lists are dynamic data structures. i.e., they can grow or shrink during the execution of a
+                    program.</li>
+                <li>Linked lists have efficient memory utilization. Here, memory is not pre-allocated. Memory is
+                    allocated whenever it is required and it is de-allocated (removed) when it is no longer needed.</li>
+                <li>insertion and deletion are easier and efficient. Linked lists provide flexibility in inserting a
+                    data item at a specified position and deletion of the data item from the given position.</li>
                 <li>Many complex applications can be easily carried out with linked lists.</li>
             </ul>
         </div>
@@ -88,7 +91,8 @@
         <div id="t3" class="wh">
             <h2>Applications of linked list:</h2>
             <ul>
-                <li>Represent very large numbers and operations of the large number such as adiition, multiplication and division.</li>
+                <li>Represent very large numbers and operations of the large number such as adiition, multiplication and
+                    division.</li>
                 <li>Linked lists are to implement stack, queue, trees and graphs.</li>
                 <li>Implement the symbol table in compiler construction.</li>
             </ul>
@@ -356,9 +360,12 @@ void display()
             <div class="in">
                 <h3>Circular Single Linked List</h3>
                 <ul>
-                    <li>It is just a single linked list in which the link field of the last node points back to the address of the first node.</li>
-                    <li>A circular linked list has no beginning and no end. It is necessary to establish a special pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
-                    <li>Circular linked lists are frequently used instead of ordinary linked list because many operations are much easier to implement.</li>
+                    <li>It is just a single linked list in which the link field of the last node points back to the
+                        address of the first node.</li>
+                    <li>A circular linked list has no beginning and no end. It is necessary to establish a special
+                        pointer called <i>start</i> &nbsp;pointer always pointing to the first node of the list.</li>
+                    <li>Circular linked lists are frequently used instead of ordinary linked list because many
+                        operations are much easier to implement.</li>
                     <li>In circular linked list no null pointer are used, hence all pointers contain valid address.</li>
                 </ul>
                 <div class="code">
@@ -433,7 +440,7 @@ int main()
 }
 void insertAtFront()
 {
-    node *newNode = (node *)malloc(sizeof(node)), *last;
+    node *newNode = (node *)malloc(sizeof(node));
     printf("Enter a value : ");
     scanf("%d", &newNode->data);
     if (start == NULL)
@@ -443,12 +450,8 @@ void insertAtFront()
     }
     else
     {
-        last = start;
-        while (last->next != start)
-            last = last->next;
         newNode->next = start;
         start = newNode;
-        last->next = start;
     }
 }
 
@@ -603,7 +606,8 @@ void display()
         <div id="t6" class="wh">
             <h2>Doubly Linked List:</h2>
             <ul>
-                <li>A doubly linked list is a two-way list in which all have two links. This helps in accessing both successor node and predecessor node from the given node position.</li>
+                <li>A doubly linked list is a two-way list in which all have two links. This helps in accessing both
+                    successor node and predecessor node from the given node position.</li>
                 <li>It provides bi-directional traversing. Each node contains three fields:
                     <ol>
                         <li>Left link (prev)</li>
@@ -611,8 +615,11 @@ void display()
                         <li>Right link (next)</li>
                     </ol>
                 </li>
-                <li>The left link points to the predecessor node and the righ link points to the successor node. The data field stores the required data.</li>
-                <li>Many application requires searching forward and backward thru nodes of a list. For example searching for a name in telephone directory would need forward and backward scanning thru a region of the whole list.</li>
+                <li>The left link points to the predecessor node and the righ link points to the successor node. The
+                    data field stores the required data.</li>
+                <li>Many application requires searching forward and backward thru nodes of a list. For example searching
+                    for a name in telephone directory would need forward and backward scanning thru a region of the
+                    whole list.</li>
                 <li>The basic operations in a double linked list are:
                     <ul>
                         <li>Creation</li>
@@ -621,7 +628,8 @@ void display()
                         <li>Traversing</li>
                     </ul>
                 </li>
-                <li>The beginning of the double linked list is stored in a "<b>start</b>" pointer which points to the first node. The first node's left link and last node's right link is set to NULL.</li>
+                <li>The beginning of the double linked list is stored in a "<b>start</b>" pointer which points to the
+                    first node. The first node's left link and last node's right link is set to NULL.</li>
                 <li>The following code gives the structure definition:
                     <pre>
                         <code>
@@ -638,11 +646,11 @@ struct node *start = NULL;
             </ul>
             <img src="../../images/doublell1.svg" alt="" class="wb">
             <div class='code'>
-               <div class='dotc'></div>
-               <button class="ac">Doubly linked list MENU driven program code</button>
-               <div class="panel">
-                <pre>
-                    <code>
+                <div class='dotc'></div>
+                <button class="ac">Doubly linked list MENU driven program code</button>
+                <div class="panel">
+                    <pre>
+                     <code>
 #include &lt;stdio.h>
 #include &lt;stdlib.h>
 
@@ -655,41 +663,41 @@ typedef struct node
 node *start = NULL;
 void insertAtFront(int val)
 {
-    node *temp = (node *)malloc(sizeof(node));
-    temp->data = val;
-    temp->prev = NULL;
-    temp->next = NULL;
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = val;
+    newNode->prev = NULL;
+    newNode->next = NULL;
     if (start == NULL)
     {
-        start = temp;
+        start = newNode;
     }
     else
     {
-        temp->next = start;
-        start->prev = temp;
-        start = temp;
+        newNode->next = start;
+        start->prev = newNode;
+        start = newNode;
     }
 }
 void insertAtLast(int val)
 {
-    node *temp = (node *)malloc(sizeof(node));
-    temp->data = val;
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = val;
 
     if (start == NULL)
     {
-        start = temp;
+        start = newNode;
     }
     else
     {
-        node *ptr = start;
-        while (ptr->next != NULL)
+        node *last = start;
+        while (last->next != NULL)
         {
-            ptr = ptr->next;
+            last = last->next;
         }
 
-        temp->prev = ptr;
-        ptr->next = temp;
-        temp->next = NULL;
+        newNode->prev = last;
+        last->next = newNode;
+        newNode->next = NULL;
     }
 }
 void insertAfterNode()
@@ -712,14 +720,14 @@ void insertAfterNode()
         }
         ptr = ptr->next;
     }
-    node *temp = (node *)malloc(sizeof(node));
+    node *newNode = (node *)malloc(sizeof(node));
     printf("\nEnter the value you want to insert : ");
     scanf("%d", &val);
-    temp->data = val;
-    temp->next = ptr->next;
-    temp->prev = ptr;
-    ptr->next->prev = temp;
-    ptr->next = temp;
+    newNode->data = val;
+    newNode->next = ptr->next;
+    newNode->prev = ptr;
+    ptr->next->prev = newNode;
+    ptr->next = newNode;
 }
 void deleteAtFront()
 {
@@ -748,19 +756,19 @@ void deleteAtLast()
         printf("\n List is empty\n");
         return;
     }
-    node *ptr = start;
-    while (ptr->next != NULL)
-        ptr = ptr->next;
-    if (ptr->prev == NULL)
+    node *last = start;
+    while (last->next != NULL)
+        last = last->next;
+    if (last->prev == NULL)
     {
         free(start);
         start = NULL;
     }
     else
     {
-        ptr->prev->next = NULL;
-        ptr->prev = NULL;
-        free(ptr);
+        last->prev->next = NULL;
+        last->prev = NULL;
+        free(last);
     }
 }
 void deleteANode(int ele)
@@ -873,44 +881,55 @@ int main()
     }
     return 0;
 }
-                    </code>
+                     </code>
                 </pre>
-               </div>
+                </div>
             </div>
-        
-        <div class="in">
-            <h3>Circular Double Linked List</h3>
-            <ul>
-                <li>A circular double linked list has both sucessor and predecessor pointer in circular manner. The object behind considering circular double linked list is to simplify the insertion and deletion operations performed on double linked list.</li>
-                <li>In circular double linked list the right link of the right most node points back to the start node and left link of the first node points to the last node.</li>
-            </ul>
+
+            <div class="in">
+                <h3>Circular Double Linked List</h3>
+                <ul>
+                    <li>A circular double linked list has both sucessor and predecessor pointer in circular manner. The
+                        object behind considering circular double linked list is to simplify the insertion and deletion
+                        operations performed on double linked list.</li>
+                    <li>In circular double linked list the right link of the right most node points back to the start
+                        node and left link of the first node points to the last node.</li>
+                </ul>
+            </div>
         </div>
-    </div>
         <div id="t7" class="wh">
             <h2>Garbage collection and Compaction</h2>
             <div class="in">
                 <h3>Garbage collection</h3>
                 <ul>
-                    <li>Garbage collection is the process of automatically reclaiming memory that is no longer in use by the program.</li>
-                    <li>In the context of linked lists, garbage collection involves identifying and deallocating unused nodes.</li>
+                    <li>Garbage collection is the process of automatically reclaiming memory that is no longer in use by
+                        the program.</li>
+                    <li>In the context of linked lists, garbage collection involves identifying and deallocating unused
+                        nodes.</li>
                     <li>Node beccomes unused when they are no longer reachable from the list's head node.</li>
                     <li>Garbage collection ensures efficient memory utilization and prevents memory leaks.</li>
-                    <li><b>Mark and Sweep algorithm:</b> It is a common technique used for garbage collection in linked lists.
-                    <ul>
-                        <li>The algorithm consists of two phases: marking and sweeping.</li>
-                        <li>In the marking phase, the algorithm traverses the linked list from the head node and marks all reachable nodes.</li>
-                        <li>Marking can be done by setting a flag or modifying a field in each node.</li>
-                        <li>In the sweeping phase, the algorithm traverses the linked list again and deallocates all unmarked nodes.</li>
-                        <li>The memory occupied by unmarked nodes is returned to the system for reuse.</li>
-                    </ul></li>
+                    <li><b>Mark and Sweep algorithm:</b> It is a common technique used for garbage collection in linked
+                        lists.
+                        <ul>
+                            <li>The algorithm consists of two phases: marking and sweeping.</li>
+                            <li>In the marking phase, the algorithm traverses the linked list from the head node and
+                                marks all reachable nodes.</li>
+                            <li>Marking can be done by setting a flag or modifying a field in each node.</li>
+                            <li>In the sweeping phase, the algorithm traverses the linked list again and deallocates all
+                                unmarked nodes.</li>
+                            <li>The memory occupied by unmarked nodes is returned to the system for reuse.</li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="wh">
                     <p>Using free to deallocate the unnecessary nodes</p>
                     <ul>
-                        <li>After marking the reachable nodes during the mark phase of the mark and sweep algorithm, you need to deallocate the memory for the unmarked nodes.Traverse the linked list and for each unmarked node, use free() to release the memory occupied by that node.</li>
+                        <li>After marking the reachable nodes during the mark phase of the mark and sweep algorithm, you
+                            need to deallocate the memory for the unmarked nodes.Traverse the linked list and for each
+                            unmarked node, use free() to release the memory occupied by that node.</li>
                         <li>For example &darr;</li>
                     </ul>
-                       <pre>
+                    <pre>
                            <code>
 // Assuming a linked list node structure like:
 struct Node {
@@ -935,16 +954,22 @@ while (current != NULL) {
             <div class="in">
                 <h3>Compaction</h3>
                 <ul>
-                    <li>Compaction is an optimization technique that aims to reduce memory fragmentation in a linked list.</li>
-                    <li>Memory fragmentation occurs when free memory blocks are scattered throughout the memory space.</li>
-                    <li>Compaction rearranges the nodes in memory to eliminate fragmentation and create a contiguous block of free memory.</li>
-                    <li>The compaction process involves iterating over the linked list, moving the nodes closer together, and updating the pointers accordingly.</li>
-                    <li>After compaction, the linked list occupies a compact memory space, which improves memory utilization and reduces memory allocation overhead.</li>
+                    <li>Compaction is an optimization technique that aims to reduce memory fragmentation in a linked
+                        list.</li>
+                    <li>Memory fragmentation occurs when free memory blocks are scattered throughout the memory space.
+                    </li>
+                    <li>Compaction rearranges the nodes in memory to eliminate fragmentation and create a contiguous
+                        block of free memory.</li>
+                    <li>The compaction process involves iterating over the linked list, moving the nodes closer
+                        together, and updating the pointers accordingly.</li>
+                    <li>After compaction, the linked list occupies a compact memory space, which improves memory
+                        utilization and reduces memory allocation overhead.</li>
                 </ul>
                 <div class="wh">
                     <p>Using free() in Compaction</p>
                     <ul>
-                        <li>During the compaction process, you rearrange the nodes to eliminate memory fragmentation and create a contiguous block of free memory.</li>
+                        <li>During the compaction process, you rearrange the nodes to eliminate memory fragmentation and
+                            create a contiguous block of free memory.</li>
                         <li>As you move nodes, you will have "gaps" or unused memory spaces left behind.</li>
                         <li>To reclaim this unused memory, you can use free() to deallocate those gaps.</li>
                         <li>For example &darr;</li>
