@@ -26,11 +26,8 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#t" class="link"></a>
-        <a href="#t" class="link"></a>
-        <a href="#t" class="link"></a>
-        <a href="#t" class="link"></a>
-        <a href="#t" class="link"></a>
+        <a href="#t1" class="link">4 relational mapping</a>
+        <a href="#t2" class="link">Different hashing function</a>
         <div class="botbut">
             <a href="./index.html" class="link">&larr; Previous Topic</a>
         </div>
@@ -51,23 +48,186 @@
     </div>
     <div class="content-box">
         <h1>Hashing</h1>
-        <div class="in">
-            <h3>Midsquare method</h3>
+        <ul>
+            <li>Why we need hashing?
+                <ul>
+                    <li>Hashing is usefull for searching</li>
+                </ul>
+            </li>
+            <li>Hashing is a technique by which we can access key element data from hash table in O(1) time.</li>
+            <li>Here key should be mapped on hash table so its just like domain and tange.
+                <br>So element from domain are mapped to element on range, so it is like a relationship.
+                <br>SO mapping domain to range is done by a function.
+            </li>
+        </ul>
+        <div id="t1" class="wh">
+            <h2>There are 4 relational mapping</h2>
+            <img src="../../images/hashing1.svg" alt="" class="wb">
+            <div class="in">
+                <h3>One-one mapping</h3>
+                <ul>
+                    <li>Keys: 8, 3, 6, 10, 15, 9, 4</li>
+                    <li>We have to map these keys to hash table and the function we are going to use is h(x) = x</li>
+                </ul>
+                <img src="../../images/hashing2.svg" alt="" class="wb">
+                <ul>
+
+                    <li>We can say, we are not storing key directly, we are using hash function and that hash function
+                        is giving index and we are storing key at that index.</li>
+                    <li>Now if we have to search for any key we will use hash function.
+                        <br>Let's search 9, h(9) = 9, so go to 9th index.
+                    </li>
+                    <li>Functions supports two types of mapping:
+                        <ol>
+                            <li>one-one</li>
+                            <li>many-one</li>
+                        </ol>
+                    </li>
+                    <li>h(x) = x, we call it as ideal hashing because the time taken for searching, storing or deleting
+                        an element is constant.</li>
+                </ul>
+                <p><b>Drawback of ideal hashing</b></p>
+                <ul>
+                    <li>The space required is very huge.</li>
+                    <li>If we have key value as 100 then hash table should have 100 as index also.</li>
+                </ul>
+                <p>Now who is responsible for this draw back??
+                <ul>
+                    <li>Hash function.</li>
+                </ul>
+                </p>
+                <ul>
+                    <li>If we want to store key in small space then we have to modigy hash function.</li>
+                </ul>
+            </div>
             <ul>
-                <li>This method suggest that whatever the key is you do square of that key and take the middle digit.</li>
-                <li>Example: key = 11 
-                    <br>then (11)<sup>2</sup> = 121
-                    <br>middle of 121 is 2, so 11 will be stored at index 2. 
+                <li>Let's see how we can modify hash function, if we are providing only 10 spaces from 0 to 9 then hash
+                    function should be modified.
+                    <br>h(x) = x % 10
                 </li>
             </ul>
-        </div>
-        <div class="in">
-            <h3>Folding method</h3>
+            <img src="../../images/hashing3.svg" alt="" class="wb">
+            <p><b>Drawback of modulus hash function</b></p>
             <ul>
-                <li>In this method group of digits of key value are added together and the sum is the index where we have to store the key value. If the sum is still large then we can perform another hash function or we can again use folding method on it.</li>
-                <li>Example:
-                    <pre>
-                        <code>
+                <li>In above table as we can see the key 25 should be stored in index 5 as h(25) = 5, but that index is
+                    already occupied.</li>
+                <li>There is no storage for 25, so two key are mapped at same index.</li>
+                <li>When two key are mapped at same location this is known as collision.</li>
+                <li>Hence h(x) = x % 10 is many-one function.</li>
+            </ul>
+            <p>How to resolve these collisions</p>
+            <div class="in">
+                <h3>Methods for resolving collision</h3>
+                <ul>
+                    <li>There are two major methods
+                        <ol>
+                            <li>Open hashing: Here we will consume extra space beyond the hash table given.
+                                <ul>
+                                    <li>Here the method used is chaining.</li>
+                                </ul>
+                            </li>
+                            <li>Closed hashing: When space given is fixed and we have to use that space only, we will
+                                not increase the space.
+                                <ul>
+                                    <li>Open addressing: If the given address is already occupied, then we will not
+                                        forcely store other value in that space, we will use other free space.</li>
+                                    <li>So where will you store?
+                                        <ul>
+                                            <li>There are 3 options:
+                                                <ol>
+                                                    <li>Linear probing</li>
+                                                    <li>Quadratic probing</li>
+                                                    <li>Double hashing</li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <p><b>Chaining</b></p>
+                    <ul>
+                        <li>For resolving collision chaining is one of the mehod which comes under open hashing.</li>
+                    </ul>
+                    <img src="../../images/hashing4.svg" alt="" class="wb">
+                    <ul>
+                        <li>Now if we want to search 75, we will put it in hash function - h(75) = 5
+                            <br>Now search for 75 in chain of 5th index.
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Linear probing</b></p>
+                    <ul>
+                        <li>It is collision resolution technique which comes under closed hashing.</li>
+                        <li>We will be using same hash function h(x) = x % 10, but if the index location is already
+                            occupied then linearly we will probe (search) the next empty space.</li>
+                        <li>Our function was h(x) = x % 10
+                            <br>Modifying it to h'(x) = (h(x) + f(i)) % 10, where f(i) = i and i = 0, 1, 2, ...
+                        </li>
+                    </ul>
+                    <img src="../../images/hashing5.svg" alt="" class="wb">
+                    <ul>
+                        <li>Linear probing method is little time taking it is not O(1).</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Quadratic probing</b></p>
+                    <ul>
+                        <li>It if one the collision resoluting technique.</li>
+                        <li>It comes under open addressing.</li>
+                        <li>It is introduced to overcome the problem of clustering of key on after another.</li>
+                        <li>h'(x) = (h(x) + f(i)) % 10 where f(i) = i<sup>2</sup> and i = 0, 1, 2, ...</li>
+                    </ul>
+                    <img src="../../images/hashing6.svg" alt="" class="wb">
+                </div>
+            </div>
+        </div>
+        <div id="t2" class="wh">
+            <h2>Different hashing function</h2>
+            <ol>
+                <li>Mod</li>
+                <li>Mid square</li>
+                <li>Folding</li>
+            </ol>
+            <p><b>Properties of hash functions</b></p>
+            <ul>
+                <li>The hash function should be selected such that he value in hash table must be uniformly distributed
+                    whether you are using chaining, open addressing, linear probing, quadratic probing.</li>
+                <li>Hash function should be selected according to the data that we want to insert inside the hash table.
+                </li>
+                <li>If we are using linear probing then the size of hash table should be double the number of element.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Mod</h3>
+                <ul>
+                    <li>h(x) = (x % size ) + 1 ( if array index starts from 1).</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Midsquare method</h3>
+                <ul>
+                    <li>This method suggest that whatever the key is you do square of that key and take the middle
+                        digit.</li>
+                    <li>Example: key = 11
+                        <br>then (11)<sup>2</sup> = 121
+                        <br>middle of 121 is 2, so 11 will be stored at index 2.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Folding method</h3>
+                <ul>
+                    <li>In this method group of digits of key value are added together and the sum is the index
+                        where we have to store the key value. If the sum is still large then we can perform another
+                        hash function or we can again use folding method on it.</li>
+                    <li>Example:
+                        <pre>
+                                <code>
 key = 123347
  12
 +33
@@ -77,11 +237,12 @@ key = 123347
 if 92 index is not avail then again perform folding method on 92
 9 + 2 = 11 
 store value in 11th index.
-
-                        </code>
-                    </pre>
-                </li>
-            </ul>
+        
+                                </code>
+                            </pre>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
