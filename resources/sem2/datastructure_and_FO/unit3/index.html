@@ -650,10 +650,9 @@ struct node *start = NULL;
                 <button class="ac">Doubly linked list MENU driven program code</button>
                 <div class="panel">
                     <pre>
-                     <code>
+                    <code>
 #include &lt;stdio.h>
 #include &lt;stdlib.h>
-
 typedef struct node
 {
     struct node *prev;
@@ -661,7 +660,7 @@ typedef struct node
     struct node *next;
 } node;
 node *start = NULL;
-void insertAtFront(int val)
+void insert_front(int val)
 {
     node *newNode = (node *)malloc(sizeof(node));
     newNode->data = val;
@@ -678,7 +677,7 @@ void insertAtFront(int val)
         start = newNode;
     }
 }
-void insertAtLast(int val)
+void insert_last(int val)
 {
     node *newNode = (node *)malloc(sizeof(node));
     newNode->data = val;
@@ -689,134 +688,127 @@ void insertAtLast(int val)
     }
     else
     {
-        node *last = start;
-        while (last->next != NULL)
+        node *ptr = start;
+        while (ptr->next != NULL)
         {
-            last = last->next;
+            ptr = ptr->next;
         }
 
-        newNode->prev = last;
-        last->next = newNode;
+        newNode->prev = ptr;
+        ptr->next = newNode;
         newNode->next = NULL;
     }
 }
-void insertAfterNode()
+void insert_middle(int val, int ele)
 {
-    if (start == NULL)
-    {
-        printf("\nList is empty cannot insert after a node\n");
-        return;
-    }
-    int ele, val;
-    printf("\nEnter the element after which you want to insert : ");
-    scanf("%d", &ele);
-    node *ptr = start;
-    while (ptr->data != ele)
-    {
-        if (ptr->next == NULL)
-        {
-            printf("\n Node not found, cannot insert element\n");
-            return;
-        }
-        ptr = ptr->next;
-    }
     node *newNode = (node *)malloc(sizeof(node));
-    printf("\nEnter the value you want to insert : ");
-    scanf("%d", &val);
     newNode->data = val;
-    newNode->next = ptr->next;
-    newNode->prev = ptr;
-    ptr->next->prev = newNode;
-    ptr->next = newNode;
-}
-void deleteAtFront()
-{
+
     if (start == NULL)
     {
-        printf("\n List is empty\n");
-        return;
-    }
-    if (start->next == NULL)
-    {
-        free(start);
-        start = NULL;
+        start = newNode;
     }
     else
     {
         node *ptr = start;
+        while (ptr->data != ele)
+        {
+            ptr = ptr->next;
+            if (ptr->next == NULL)
+            {
+                printf("\n Not a middle element");
+                return;
+            }
+        }
+        newNode->next = ptr->next;
+        newNode->prev = ptr;
+        ptr->next->prev = newNode;
+        ptr->next = newNode;
+    }
+}
+void delete_front()
+{
+    if (start == NULL)
+    {
+        printf("\t\tUnderflow");
+        return;
+    }
+    if (start->next == NULL)
+        start = NULL;
+    else
+    {
+        node *ptr = start;
         start = start->next;
+        ptr->next = NULL;
         start->prev = NULL;
         free(ptr);
     }
 }
-void deleteAtLast()
+void delete_last()
 {
+
     if (start == NULL)
     {
-        printf("\n List is empty\n");
-        return;
-    }
-    node *last = start;
-    while (last->next != NULL)
-        last = last->next;
-    if (last->prev == NULL)
-    {
-        free(start);
-        start = NULL;
-    }
-    else
-    {
-        last->prev->next = NULL;
-        last->prev = NULL;
-        free(last);
-    }
-}
-void deleteANode(int ele)
-{
-    if (start == NULL)
-    {
-        printf("\nList is empty\n");
+        printf("\t\tUnderflow");
         return;
     }
     node *ptr = start;
-    while (ptr->data != ele)
+    while (ptr->next != NULL)
     {
-        if (ptr->next == NULL)
-        {
-            printf("\nElement not found\n");
-            return;
-        }
         ptr = ptr->next;
     }
     if (ptr->prev == NULL)
+        start = NULL;
+    else
     {
-        deleteAtFront();
-        return;
+        ptr->prev->next = NULL;
+        ptr->prev = NULL;
+        free(ptr);
     }
-    else if (ptr->next == NULL)
-    {
-        deleteAtLast();
-        return;
-    }
-    ptr->next->prev = ptr->prev;
-    ptr->prev->next = ptr->next;
-
-    ptr->prev = NULL;
-    ptr->next = NULL;
-    free(ptr);
 }
-void display()
+void delete_middle(int ele)
 {
     if (start == NULL)
     {
-        printf("\nList is empty\nÏ");
-        return;
+        printf("\t\tUnderflow");
     }
-    node *ptr = start;
-    while (ptr != NULL)
+    else
     {
-        printf("%d <=> ", ptr->data);
-        ptr = ptr->next;
+        node *ptr = start;
+        while (ptr->data != ele)
+        {
+
+            ptr = ptr->next;
+        }
+        if (ptr->prev == NULL || ptr->next == NULL)
+        {
+            printf("Not a middle element");
+            return;
+        }
+        ptr->next->prev = ptr->prev;
+        ptr->prev->next = ptr->next;
+
+        ptr->prev = NULL;
+        ptr->next = NULL;
+        free(ptr);
+    }
+}
+void display()
+{
+
+    if (start == NULL)
+    {
+
+        printf("\t\tUnderflow");
+    }
+    else
+    {
+        node *ptr = start;
+        while (ptr != NULL)
+        {
+            printf("\t%d<=>", ptr->data);
+            ptr = ptr->next;
+        }
     }
 }
 int main()
@@ -824,8 +816,8 @@ int main()
     int ch, val, ele;
     while (1)
     {
-        printf("\n1.insert in began\n2.insert in end\n3.insert after a node");
-        printf("\n4.Delete in front\n5.Delete in last\n6.Delete a node");
+        printf("\n1.insert in began\n2.insert in end\n3.insert in middle");
+        printf("\n4.Delete in front\n5.Delete in last\n6.Delete in middle");
         printf("\n7.Display\n8.Exit\n");
         printf("Enter your choice : ");
         scanf("%d", &ch);
@@ -836,35 +828,39 @@ int main()
         {
             printf("Enter the  data : ");
             scanf("%d", &val);
-            insertAtFront(val);
+            insert_front(val);
             break;
         }
         case 2:
         {
             printf("Enter the elment : ");
             scanf("%d", &val);
-            insertAtLast(val);
+            insert_last(val);
             break;
         }
 
         case 3:
         {
-            insertAfterNode();
+            printf("Enter the element : ");
+            scanf("%d", &val);
+            printf("Enter the element after which you insert new element : ");
+            scanf("%d", &ele);
+            insert_middle(val, ele);
             break;
         }
 
         case 4:
-            deleteAtFront();
+            delete_front();
             break;
 
         case 5:
-            deleteAtLast();
+            delete_last();
             break;
 
         case 6:
             printf("Enter the element : ");
             scanf("%d", &ele);
-            deleteANode(ele);
+            delete_middle(ele);
             break;
 
         case 7:
@@ -875,13 +871,13 @@ int main()
             exit(0);
 
         default:
-            printf("You enter wrong input, try again ");
+            printf("You enter wrong input");
             break;
         }
     }
     return 0;
 }
-                     </code>
+                    </code>
                 </pre>
                 </div>
             </div>
