@@ -27,9 +27,10 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
         <a href="#t1" class="link">Bubble Sort</a>
-        <a href="#t2" class="link">Merge Sort</a>
         <a href="#t3" class="link">Selection Sort</a>
+        <a href="#t2" class="link">Insertion Sort</a>
         <a href="#t4" class="link">Quick Sort</a>
+        <a href="#t5" class="link">Merge Sort</a>
         <div class="botbut">
             <a href="../unit5/index.html" class="link">Next Topic &rarr;</a>
             <a href="../unit4_1_searching/index.html" class="link">&larr; Previous Topic</a>
@@ -155,6 +156,72 @@ int main()
                </pre>
             </div>
         </div>
+        <div id="t3" class="wh">
+            <h2>Selection sort</h2>
+            <ul>
+                <li>This algorithm also sorts the element in passes, in each pass one element will be sorted. Just like
+                    bubble sort in selection sort for n element n - 1 passes are required.</li>
+            </ul>
+            <p>Procedure &darr;</p>
+            <img src="../../images/sort5.svg" alt="" class="wb">
+            <p>Algorithm / Psuedo code &darr;</p>
+            <pre>
+                <code>
+void selectionSort(int A[], int n)
+{
+    int i, j, k;
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = k = i; j < n; j++)
+        {
+            if(A[j] < A[k])
+                k = j;
+        }
+        swap(A[i], A[k]);
+    }
+}
+                </code>
+            </pre>
+            <p>Program code &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include&lt;stdio.h>
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void selectionSort(int A[], int n)
+{
+    int i, j, k;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = k = i; j < n; j++)
+        {
+            if (A[j] < A[k])
+                k = j;
+        }
+        swap(&A[i], &A[k]);
+    }
+}
+int main()
+{
+    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
+    selectionSort(A, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
         <div id="t2" class="wh">
             <h2>Insertion Sort</h2>
             <ul>
@@ -225,73 +292,7 @@ int main()
                    </code>
                </pre>
             </div>
-        </div>
-        <div id="t3" class="wh">
-            <h2>Selection sort</h2>
-            <ul>
-                <li>This algorithm also sorts the element in passes, in each pass one element will be sorted. Just like
-                    bubble sort in selection sort for n element n - 1 passes are required.</li>
-            </ul>
-            <p>Procedure &darr;</p>
-            <img src="../../images/sort5.svg" alt="" class="wb">
-            <p>Algorithm / Psuedo code &darr;</p>
-            <pre>
-                <code>
-void selectionSort(int A[], int n)
-{
-    int i, j, k;
-    for(i = 0; i < n - 1; i++)
-    {
-        for(j = k = i; j < n; j++)
-        {
-            if(A[j] < A[k])
-                k = j;
-        }
-        swap(A[i], A[k]);
-    }
-}
-                </code>
-            </pre>
-            <p>Program code &darr;</p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
-                   <code>
-#include&lt;stdio.h>
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-void selectionSort(int A[], int n)
-{
-    int i, j, k;
-    for (i = 0; i < n - 1; i++)
-    {
-        for (j = k = i; j < n; j++)
-        {
-            if (A[j] < A[k])
-                k = j;
-        }
-        swap(&A[i], &A[k]);
-    }
-}
-int main()
-{
-    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
-    selectionSort(A, n);
-    printf("\nDisplay the sorted array : ");
-    for (i = 0; i < n; i++)
-    {
-        printf("%d ", A[i]);
-    }
-    return 0;
-}
-                   </code>
-               </pre>
-            </div>
-        </div>
+        </div>  
         <div id="t4" class="wh">
             <h2>Quick Sort</h2>
             <p>Idea behind quick sort &darr;</p>
@@ -384,7 +385,7 @@ int main()
                </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Merge Sort</h2>
             <div class="in">
                 <h3>Merging two array in a single array</h3>
