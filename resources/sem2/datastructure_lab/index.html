@@ -331,7 +331,20 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+int fact(int n)
+{
+    if (n == 0)
+        return 1;
+    return fact(n - 1) * n;
+}
+int main()
+{
+    int r;
+    r = fact(5);
+    printf("%d", r);
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -353,7 +366,86 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+int push(int[], int, int);
+int pop(int[], int);
+void display(int[], int);
+int main()
+{
+   const int MAX = 5;
+   int stack[MAX], top = -1, choice;
+   while (1)
+   {
+      printf("\n\n**** MENU *****");
+      printf("\n1. PUSH");
+      printf("\n2. POP");
+      printf("\n3. DISPLAY");
+      printf("\n4. EXIT");
+      printf("\nEnter your choice : ");
+      scanf("%d", &choice);
+
+      switch (choice)
+      {
+      case 1:
+         top = push(stack, top, MAX);
+         break;
+      case 2:
+         top = pop(stack, top);
+         break;
+      case 3:
+         display(stack, top);
+         break;
+      case 4:
+         exit(0);
+      default:
+         printf("\nEnter a correct choice");
+      }
+   }
+   return 0;
+}
+int push(int stack[], int top, int MAX)
+{
+   if (top >= MAX - 1)
+   {
+      printf("\n\nStack overflow\n\n");
+      
+   }
+   else
+   {
+      top++;
+      printf("\nEnter a value : ");
+      scanf("%d", &stack[top]);
+      printf("\n\n%d is pushed\n\n", stack[top]);
+   }
+   return top;
+}
+int pop(int stack[], int top)
+{
+   int val;
+   if (top <= -1)
+      printf("\n\nStack underflow\n\n");
+   else
+   {
+      val = stack[top];
+      top--;
+      printf("\n\n%d is popped\n\n", val);
+   }
+   return top;
+}
+void display(int stack[], int top)
+{
+   int i;
+   if (top <= -1)
+   {
+      printf("\n\nStack underflow\n\n");
+      return;
+   }
+   for (i = top; i >= 0; i--)
+   {
+      printf("\n%d", stack[i]);
+   }
+}
                         </code>
                     </pre>
                 </div>
@@ -364,7 +456,126 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#include &lt;string.h>
+#define MAX 100
+char stack[MAX];
+char infix[MAX], postfix[MAX];
+int top = -1;
+
+void push(char);
+char pop();
+int isEmpty();
+void inToPost();
+int precedence(char);
+void print();
+int main()
+{
+   printf("Enter the infix expression : ");
+   gets(infix);
+   inToPost(); // function that convert infix to postfix expression
+   print();
+   return 0;
+}
+void push(char c)
+{
+   if (top == MAX - 1)
+   {
+      printf("Stack overflow");
+      return;
+   }
+   top++;
+   stack[top] = c;
+}
+char pop()
+{
+   char c;
+   if (top == -1)
+   {
+      printf("Stack underflow");
+      exit(0);
+   }
+   c = stack[top];
+   top=top-1;
+   return c;
+}
+int isEmpty()
+{
+   if (top == -1)
+      return 1;
+   else
+      return 0;
+}
+int space(char c)
+{
+   // If symbol is a blank space or a tab
+   if (c == ' ' || c == '\t')
+      return -1;
+   else
+      return 1;
+}
+void inToPost()
+{
+   int i, j = 0;
+   char symbol, next;
+   // for(i=0;i!='\0';i++)
+   for (i = 0; i < strlen(infix); i++)
+   {
+      symbol = infix[i];
+      switch (symbol)
+      {
+      case '(':
+         push(symbol);
+         break;
+      case ')':
+         while ((next = pop()) != '(')
+            postfix[j++] = next;
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+      case '^':
+         while (!isEmpty() && precedence(stack[top]) >= precedence(symbol))
+            postfix[j++] = pop();
+         push(symbol);
+         break;
+      default:
+         postfix[j++] = symbol;
+      }
+   }
+   while (!isEmpty())
+      postfix[j++] = pop();
+   postfix[j] = '\0';
+}
+int precedence(char symbol)
+{
+   switch (symbol)
+   {
+   // higher value means greater precedence
+   case '^':
+      return 3;
+   case '/':
+   case '*':
+      return 2;
+   case '+':
+   case '-':
+      return 1;
+   default:
+      return 0;
+   }
+}
+
+void print()
+{
+   int i = 0;
+   printf("The equivalent post fix expression is : ");
+   while (postfix[i])
+   {
+      printf("%c", postfix[i++]);
+   }
+   printf("\n");
+}
                         </code>
                     </pre>
                 </div>
@@ -386,7 +597,84 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#define MAX 5
+int queue[MAX];
+int rear = -1;
+int front = -1;
+void enqueue()
+{
+    if (rear == MAX - 1)
+    {
+        printf("\nQueue is full");
+        return;
+    }
+    if (front == -1 && rear == -1)
+        front = rear = 0;
+    else
+        rear++;
+    printf("\nEnter the element : ");
+    scanf("%d", &queue[rear]);
+}
+void dequeue()
+{
+    if (front == -1 && rear == -1)
+    {
+        printf("\nQueue is empty");
+        return;
+    }
+    int val = queue[front];
+    if (front == rear)
+        front = rear = -1;
+    else
+        front++;
+    printf("\n%d is deleted", val);
+}
+void display()
+{
+    int i;
+    if (front == -1 && rear == -1)
+    {
+        printf("\nQueue is empty\n");
+        return;
+    }
+    for (i = front; i <= rear; i++)
+    {
+        printf("\n%d", queue[i]);
+    }
+}
+int main()
+{
+    int ch;
+    while (1)
+    {
+        printf("\n------- MENU -------");
+        printf("\n1.Enqueue Operation\n");
+        printf("2.Dequeue Operation\n");
+        printf("3.Display the Queue\n");
+        printf("4.Exit\n");
+        printf("Enter your choice of operations : ");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            enqueue();
+            break;
+        case 2:
+            dequeue();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            exit(0);
+        default:
+            printf("\nIncorrect choice \n");
+        }
+    }
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -397,7 +685,204 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+node *start = NULL;
+
+void insertAtFront();
+void insertAtBack();
+void insertAfterNode();
+void deleteAtFront();
+void deleteAtBack();
+void deleteANode();
+void display();
+
+int main()
+{
+    int choice;
+    while (1)
+    {
+        printf("\n------- MENU ---------");
+        printf("\n1. Insert at front");
+        printf("\n2. Insert at back");
+        printf("\n3. Insert after a node");
+        printf("\n4. Delete at front");
+        printf("\n5. Delete at back");
+        printf("\n6. Delete a node");
+        printf("\n7. Display");
+        printf("\n8. Exit");
+        printf("\nEnter you choice : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            insertAtFront();
+            break;
+        case 2:
+            insertAtBack();
+            break;
+        case 3:
+            insertAfterNode();
+            break;
+        case 4:
+            deleteAtFront();
+            break;
+        case 5:
+            deleteAtBack();
+            break;
+        case 6:
+            deleteANode();
+            break;
+        case 7:
+            display();
+            break;
+        case 8:
+            exit(0);
+        default:
+            printf("\nEnter a correct choice");
+        }
+    }
+    return 0;
+}
+void insertAtFront()
+{
+    node *newnode = (node *)malloc(sizeof(node));
+    printf("Enter a value : ");
+    scanf("%d", &newnode->data);
+    newnode->next = start;
+    start = newnode;
+}
+
+void insertAtBack()
+{
+    node *newnode = (node *)malloc(sizeof(node));
+    node *last = start;
+    printf("Enter a value : ");
+    scanf("%d", &newnode->data);
+    newnode->next = NULL;
+    if (start == NULL)
+        start = newnode;
+    else
+    {
+        while (last->next != NULL)
+            last = last->next;
+        last->next = newnode;
+    }
+}
+
+void insertAfterNode()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty cannot insert after a node\n");
+        return;
+    }
+    int node_val;
+    printf("\nEnter a node value after which you want to insert : ");
+    scanf("%d", &node_val);
+    node *ptr = start;
+    while (ptr->data != node_val)
+    {
+        if (ptr->next == NULL)
+        {
+            printf("\n Node not found cannot insert element");
+            return;
+        }
+        ptr = ptr->next;
+    }
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->next = NULL;
+    printf("\nEnter the value : ");
+    scanf("%d", &newNode->data);
+    newNode->next = ptr->next;
+    ptr->next = newNode;
+}
+
+void deleteAtFront()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    node *temp = start;
+    start = start->next;
+    free(temp);
+}
+
+void deleteAtBack()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    if (start->next == NULL)
+    {
+        free(start);
+        start = NULL;
+        return;
+    }
+    node *temp = start;
+    while (temp->next->next != NULL)
+        temp = temp->next;
+    free(temp->next);
+    temp->next = NULL;
+}
+
+void deleteANode()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    int search;
+    printf("Enter a value you want to delete : ");
+    scanf("%d", &search);
+    node *temp = start;
+    while (temp->data != search)
+    {
+        if (temp->next == NULL)
+        {
+            printf("\nValue not found");
+            return;
+        }
+        temp = temp->next;
+    }
+    if (temp == start)
+        deleteAtFront();
+    else if (temp->next == NULL)
+        deleteAtBack();
+    else
+    {
+        node *prev = start;
+        while (prev->next != temp)
+            prev = prev->next;
+        prev->next = temp->next;
+    }
+}
+
+void display()
+{
+    if (start == NULL)
+    {
+        printf("\nList is empty");
+        return;
+    }
+    node *newnode = start;
+    while (newnode != NULL)
+    {
+        printf("%d --> ", newnode->data);
+        newnode = newnode->next;
+    }
+}
                         </code>
                     </pre>
                 </div>
@@ -419,7 +904,91 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+      int data;
+      struct node *next;
+} node;
+node *top = NULL;
+void push();
+void pop();
+void display();
+
+int main()
+{
+      int choice;
+      while (1)
+      {
+         printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+         printf("\n1. PUSH");
+         printf("\n2. POP");
+         printf("\n3. DISPLAY");
+         printf("\n4. EXIT");
+         printf("\n Enter your choice : ");
+         scanf("%d", &choice);
+         switch (choice)
+         {
+         case 1:
+            push();
+            break;
+         case 2:
+            pop();
+            break;
+         case 3:
+            display();
+            break;
+         case 4:
+            exit(0);
+         default:
+            printf("\nEnter a correct choice : ");
+         } 
+      }
+      return 0;
+}
+
+void push()
+{
+      node *temp = (node *)malloc(sizeof(node));
+      if (temp == NULL)
+      {
+         printf("\nOverflow");
+         return;
+      }
+      printf("\nEnter a digit : ");
+      scanf("%d", &temp->data);
+      temp->next = top;
+      top = temp;
+}
+
+void pop()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      top = top->next;
+      printf("\n%d is deleted", temp->data);
+      free(temp);
+}
+
+void display()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      while (temp != NULL)
+      {
+         printf("%d ", temp->data);
+         temp = temp->next;
+      }
+}      
                         </code>
                     </pre>
                 </div>
@@ -430,7 +999,229 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+node *start = NULL;
+
+void insertAtFront();
+void insertAtBack();
+void insertAfterNode();
+void deleteAtFront();
+void deleteAtBack();
+void deleteNode();
+void display();
+
+int main()
+{
+    int choice;
+    while (1)
+    {
+        printf("\n------- MENU Circular single linked list ---------");
+        printf("\n1. Insert at front");
+        printf("\n2. Insert at back");
+        printf("\n3. Insert after a node");
+        printf("\n4. Delete at front");
+        printf("\n5. Delete at back");
+        printf("\n6. Delete a node");
+        printf("\n7. Display");
+        printf("\n8. Exit");
+        printf("\nEnter you choice : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            insertAtFront();
+            break;
+        case 2:
+            insertAtBack();
+            break;
+        case 3:
+            insertAfterNode();
+            break;
+        case 4:
+            deleteAtFront();
+            break;
+        case 5:
+            deleteAtBack();
+            break;
+        case 6:
+            deleteNode();
+            break;
+        case 7:
+            display();
+            break;
+        case 8:
+            exit(0);
+        default:
+            printf("\nEnter a correct choice");
+        }
+    }
+    return 0;
+}
+void insertAtFront()
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    printf("Enter a value : ");
+    scanf("%d", &newNode->data);
+    if (start == NULL)
+    {
+        start = newNode;
+        newNode->next = start;
+    }
+    else
+    {
+        newNode->next = start;
+        start = newNode;
+    }
+}
+
+void insertAtBack()
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    node *last = start;
+    printf("Enter a value : ");
+    scanf("%d", &newNode->data);
+    newNode->next = NULL;
+    if (start == NULL)
+    {
+        start = newNode;
+        newNode->next = start;
+    }
+    else
+    {
+        while (last->next != start)
+            last = last->next;
+        last->next = newNode;
+        newNode->next = start;
+    }
+}
+
+void insertAfterNode()
+{
+    if (start == NULL)
+    {
+        printf("\nlist is empty, cannot insert after a node\n");
+        return;
+    }
+    int node_val;
+    printf("\nEnter a node value after which you want to insert : ");
+    scanf("%d", &node_val);
+    node *temp = start;
+    while (temp->data != node_val)
+    {
+        if (temp->next == NULL)
+        {
+            printf("\nValue not found");
+            return;
+        }
+        temp = temp->next;
+    }
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->next = NULL;
+    printf("\nEnter the value : ");
+    scanf("%d", &newNode->data);
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void deleteAtFront()
+{
+    if (start == NULL)
+    {
+        printf("\nNo node exist");
+        return;
+    }
+    if (start->next == start) // there is only one element
+    {
+        free(start);
+        start = NULL;
+        return;
+    }
+    node *last = start, *temp = start;
+    while (last->next != start)
+        last = last->next;
+    start = start->next;
+    last->next = start;
+    free(temp);
+}
+
+void deleteAtBack()
+{
+    if (start == NULL)
+    {
+        printf("\nNo node exist");
+        return;
+    }
+    if (start->next == start) // only one element left
+    {
+        free(start);
+        start = NULL;
+        return;
+    }
+    node *temp = start;
+    while (temp->next->next != start)
+    {
+        temp = temp->next;
+    }
+    free(temp->next);
+    temp->next = start;
+}
+
+void deleteNode()
+{
+    if (start == NULL)
+    {
+        printf("\nNo node exist");
+        return;
+    }
+    int search;
+    printf("Enter a value you want to delete : ");
+    scanf("%d", &search);
+    node *temp = start;
+    while (temp->data != search)
+    {
+        temp = temp->next;
+        if (temp->next == NULL)
+        {
+            printf("\nValue not found");
+            return;
+        }
+    }
+    if (temp == start)
+        deleteAtFront();
+    else if (temp->next == start)
+        deleteAtBack();
+    else
+    {
+        node *prev = start;
+        while (prev->next != temp)
+        {
+            prev = prev->next;
+        }
+        prev->next = temp->next;
+    }
+}
+
+void display()
+{
+    if (start == NULL)
+    {
+        printf("\nEmpty list");
+        return;
+    }
+    node *newNode = start;
+    while (newNode->next != start)
+    {
+        printf("%d --> ", newNode->data);
+        newNode = newNode->next;
+    }
+    printf("%d --> ", newNode->data);
+}
                         </code>
                     </pre>
                 </div>
@@ -452,7 +1243,232 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+    struct node *prev;
+    int data;
+    struct node *next;
+} node;
+node *start = NULL;
+void insert_front(int val)
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = val;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    if (start == NULL)
+    {
+        start = newNode;
+    }
+    else
+    {
+        newNode->next = start;
+        start->prev = newNode;
+        start = newNode;
+    }
+}
+void insert_last(int val)
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = val;
+
+    if (start == NULL)
+    {
+        start = newNode;
+    }
+    else
+    {
+        node *ptr = start;
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+
+        newNode->prev = ptr;
+        ptr->next = newNode;
+        newNode->next = NULL;
+    }
+}
+void insert_middle(int val, int ele)
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = val;
+
+    if (start == NULL)
+    {
+        start = newNode;
+    }
+    else
+    {
+        node *ptr = start;
+        while (ptr->data != ele)
+        {
+            ptr = ptr->next;
+            if (ptr->next == NULL)
+            {
+                printf("\n Not a middle element");
+                return;
+            }
+        }
+        newNode->next = ptr->next;
+        newNode->prev = ptr;
+        ptr->next->prev = newNode;
+        ptr->next = newNode;
+    }
+}
+void delete_front()
+{
+    if (start == NULL)
+    {
+        printf("\t\tUnderflow");
+        return;
+    }
+    if (start->next == NULL)
+        start = NULL;
+    else
+    {
+        node *ptr = start;
+        start = start->next;
+        ptr->next = NULL;
+        start->prev = NULL;
+        free(ptr);
+    }
+}
+void delete_last()
+{
+
+    if (start == NULL)
+    {
+        printf("\t\tUnderflow");
+        return;
+    }
+    node *ptr = start;
+    while (ptr->next != NULL)
+    {
+        ptr = ptr->next;
+    }
+    if (ptr->prev == NULL)
+        start = NULL;
+    else
+    {
+        ptr->prev->next = NULL;
+        ptr->prev = NULL;
+        free(ptr);
+    }
+}
+void delete_middle(int ele)
+{
+    if (start == NULL)
+    {
+        printf("\t\tUnderflow");
+    }
+    else
+    {
+        node *ptr = start;
+        while (ptr->data != ele)
+        {
+
+            ptr = ptr->next;
+        }
+        if (ptr->prev == NULL || ptr->next == NULL)
+        {
+            printf("Not a middle element");
+            return;
+        }
+        ptr->next->prev = ptr->prev;
+        ptr->prev->next = ptr->next;
+
+        ptr->prev = NULL;
+        ptr->next = NULL;
+        free(ptr);
+    }
+}
+void display()
+{
+
+    if (start == NULL)
+    {
+
+        printf("\t\tUnderflow");
+    }
+    else
+    {
+        node *ptr = start;
+        while (ptr != NULL)
+        {
+            printf("\t%d<=>", ptr->data);
+            ptr = ptr->next;
+        }
+    }
+}
+int main()
+{
+    int ch, val, ele;
+    while (1)
+    {
+        printf("\n1.insert in began\n2.insert in end\n3.insert in middle");
+        printf("\n4.Delete in front\n5.Delete in last\n6.Delete in middle");
+        printf("\n7.Display\n8.Exit\n");
+        printf("Enter your choice : ");
+        scanf("%d", &ch);
+
+        switch (ch)
+        {
+        case 1:
+        {
+            printf("Enter the  data : ");
+            scanf("%d", &val);
+            insert_front(val);
+            break;
+        }
+        case 2:
+        {
+            printf("Enter the elment : ");
+            scanf("%d", &val);
+            insert_last(val);
+            break;
+        }
+
+        case 3:
+        {
+            printf("Enter the element : ");
+            scanf("%d", &val);
+            printf("Enter the element after which you insert new element : ");
+            scanf("%d", &ele);
+            insert_middle(val, ele);
+            break;
+        }
+
+        case 4:
+            delete_front();
+            break;
+
+        case 5:
+            delete_last();
+            break;
+
+        case 6:
+            printf("Enter the element : ");
+            scanf("%d", &ele);
+            delete_middle(ele);
+            break;
+
+        case 7:
+            display();
+            break;
+
+        case 8:
+            exit(0);
+
+        default:
+            printf("You enter wrong input");
+            break;
+        }
+    }
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -463,7 +1479,7 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+
                         </code>
                     </pre>
                 </div>
@@ -474,7 +1490,24 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+int linearSearch(int arr[], int key)
+{
+    int i;
+    int size = 10;
+    for (i = 0; i < size; i++)
+    {
+        if (key == arr[i])
+            return i;
+    }
+    return -1;
+}
+int main()
+{
+    int arr[10] = {3, 2, 4, 5, 6, 7, 8, 9, 11, 23};
+    printf("The element is present at index %d", linearSearch(arr, 6));
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -485,7 +1518,31 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#define MAX 10
+int arr[MAX] = {12, 24, 25, 36, 45, 46, 47, 48, 59, 63};
+int BinarySearch(int key)
+{
+    int l, mid, h;
+    l = 0;
+    h = MAX - 1;
+    while (l <= h)
+    {
+        mid = (l + h) / 2;
+        if (key == arr[mid])
+            return mid;
+        else if (key < arr[mid])
+            h = mid - 1;
+        else
+            l = mid + 1;
+    }
+    return -1;
+}
+int main()
+{
+    printf("Value is present at index %d\n", BinarySearch(36));
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -496,7 +1553,33 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+void insertionSort(int A[], int n)
+{
+    int i, j, x;
+    for (i = 1; i < n; i++)
+    {
+        j = i - 1;
+        x = A[i];
+        while (j > -1 && A[j] > x)
+        {
+            A[j + 1] = A[j];
+            j--;
+        }
+        A[j + 1] = x;
+    }
+}
+int main()
+{
+    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
+    insertionSort(A, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -507,7 +1590,37 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include&lt;stdio.h>
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void selectionSort(int A[], int n)
+{
+    int i, j, k;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = k = i; j < n; j++)
+        {
+            if (A[j] < A[k])
+                k = j;
+        }
+        swap(&A[i], &A[k]);
+    }
+}
+int main()
+{
+    int A[] = {11, 12, 7, 2, 6, 9, 4, 5, 10, 3}, n = 10, i;
+    selectionSort(A, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -518,7 +1631,43 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void bubbleSort(int A[], int n)
+{
+    int i, j, flag;
+    for (i = 0; i < n - 1; i++)
+    {
+        flag = 0;
+        for (j = 0; j < n - 1 - i; j++)
+        {
+            if (A[j] > A[j + 1])
+            {
+                swap(&A[j], &A[j + 1]);
+                flag = 1;
+            }
+        }
+        if (flag == 0)
+            break;
+    }
+}
+int main()
+{
+    int A[] = {3, 7, 9, 10, 6, 5, 12, 4, 11, 2}, n = 10, i;
+    bubbleSort(A, n);
+    printf("The sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -529,7 +1678,54 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int partition(int A[], int l, int h)
+{
+    int pivot = A[l];
+    int i = l, j = h;
+    do
+    {
+        do
+        {
+            i++;
+        } while (A[i] <= pivot);
+        do
+        {
+            j--;
+        } while (A[j] > pivot);
+        if (i < j)
+            swap(&A[i], &A[j]);
+    } while (i < j);
+    swap(&A[l], &A[j]);
+    return j;
+}
+void quickSort(int A[], int l, int h)
+{
+    int j;
+    if (l < h)
+    {
+        j = partition(A, l, h);
+        quickSort(A, l, j);
+        quickSort(A, j + 1, h);
+    }
+}
+int main()
+{
+    int A[] = {11, 13, 7, 12, 16, 9, 24, 5, 10, 3}, n = 10, i;
+    quickSort(A, 0, n);
+    printf("\nDisplay the sorted array : ");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
