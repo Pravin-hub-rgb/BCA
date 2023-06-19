@@ -226,6 +226,9 @@ int main()
         </div>
         <div id="t4" class="wh">
             <h2>Accessing structure member</h2>
+            <ul>
+                <li>We use dot operator to access member of structure.</li>
+            </ul>
             <div class="code">
                 <div class="dotc"></div>
                 <pre>
@@ -258,9 +261,6 @@ int main()
                     </code>
                 </pre>
             </div>
-            <ul>
-                <li>We use dot operator to access member of structure.</li>
-            </ul>
         </div>
         <div id="t11" class="wh">
             <h2>Copying and comparing structure variables</h2>
@@ -285,47 +285,6 @@ person1 != person2 // not valid
                 </li>
             </ul>
             <p>Program for comparision of structure variables &darr;</p>
-            <div class="code">
-                <div class="dotc"></div>
-                <pre>
-                   <code>
-#include &lt;stdio.h>
-struct class
-{
-    int no;
-    char name[20];
-    float marks;
-};
-
-int main()
-{
-    int x;
-    struct class stu1 = {11, "Ron", 72.50};
-    struct class stu2 = {11, "Jerry", 70.50};
-    struct class stu3;
-    stu3 = stu2;
-    x = ((stu3.no == stu2.no) && (stu3.marks == stu2.marks)) ? 1 : 0;
-    if (x == 1)
-    {
-        printf("\n student 2 and student 3 are same \n");
-        printf("%d\t%s\t%f", stu3.no, stu3.name, stu3.marks);
-    }
-    else
-    {
-        printf("\n student 2 and student 3 are different");
-    }
-    return 0;
-}
-                   </code>
-               </pre>
-            </div>
-            <p>Output &darr;</p>
-            <pre>
-                <code>
-student 2 and student 3 are same 
-11      Jerry   70.500000
-                </code>
-            </pre>
             <div class="code">
                 <div class="dotc"></div>
                 <pre>
@@ -372,30 +331,30 @@ int main() {
 #include &lt;stdio.h>
 struct number
 {
-int a, b, large;
+    int a, b, large;
 };
 int main()
 {
-struct number x;
-printf("Enter first number : ");
-scanf("%d", &x.a);
-printf("Enter second number : ");
-scanf("%d", &x.b);
-if (x.a > x.b)
-{
-    x.large = x.a;
-    printf("%d is larger number\n", x.large);
-}
-else if (x.b > x.a)
-{
-    x.large = x.b;
-    printf("%d is larger number\n", x.large);
-}
-else
-{
-    printf("Both number are equal");
-}
-return 0;
+    struct number x;
+    printf("Enter first number : ");
+    scanf("%d", &x.a);
+    printf("Enter second number : ");
+    scanf("%d", &x.b);
+    if (x.a > x.b)
+    {
+        x.large = x.a;
+        printf("%d is larger number\n", x.large);
+    }
+    else if (x.b > x.a)
+    {
+        x.large = x.b;
+        printf("%d is larger number\n", x.large);
+    }
+    else
+    {
+        printf("Both number are equal");
+    }
+    return 0;
 }
                     </code>
                 </pre>
@@ -561,6 +520,7 @@ int main()
                 <div class="dotc"></div>
                 <pre>
                    <code>
+#include &lt;stdio.h>
 struct date
 {
     int d, m, y;
@@ -570,15 +530,18 @@ struct employee
     int id;
     struct date dob;
     struct date doj;
-}e1;
-main()
+} e1;
+int main()
 {
     printf("Enter id of a employee : ");
     scanf("%d", &e1.id);
     printf("Enter date of birth : ");
-    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y);
     printf("Enter date of joining : ");
-    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y)
+    scanf("%d%d%d", &e1.doj.d, &e1.doj.m, &e1.doj.y);
+
+    printf("ID: %d, DOB: %d/ %d/ %d and DOJ: %d/ %d/ %d", e1.id, e1.dob.d, e1.dob.m, e1.dob.y, e1.doj.d, e1.doj.m, e1.doj.y);
+    return 0;
 }
 // In this example we also define the structure date inside the definition of structure employee.
                    </code>
@@ -586,7 +549,7 @@ main()
             </div>
             <div class='code'>
                 <div class='dotc'></div>
-                <button class="ac">code 2</button>
+                <button class="ac">Example 2</button>
                 <div class="panel">
                     <pre>
                    <code>
@@ -620,7 +583,7 @@ int main() {
             </div>
             <div class='code'>
                 <div class='dotc'></div>
-                <button class="ac">code 3</button>
+                <button class="ac">Example 3</button>
                 <div class="panel">
                     <pre>
                    <code>
