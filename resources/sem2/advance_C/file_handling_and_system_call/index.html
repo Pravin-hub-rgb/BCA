@@ -26,7 +26,18 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">File handling</a>
+        <a href="#t2" class="link">Text and binary modes</a>
+        <a href="#t3" class="link">Concept of buffer</a>
+        <a href="#t4" class="link">Opening a file</a>
+        <a href="#t5" class="link">Closing a file</a>
+        <a href="#t6" class="link">Functions used for file I/O</a>
+        <a href="#t7" class="link">System calls</a>
+        <a href="#t8" class="link">Create</a>
+        <a href="#t9" class="link">Open</a>
+        <a href="#t10" class="link">Close</a>
+        <a href="#t11" class="link">Read</a>
+        <a href="#t12" class="link">Write</a>
         <div class="botbut">
             <a href="../string/index.html" class="link">&larr; Previous Topic</a>
         </div>
@@ -45,7 +56,7 @@
             <h2>File handling and System calls</h2>
         </div>
     </div>
-    <div class="content-box">
+    <div id="t1" class="content-box">
         <h1>File handling</h1>
         <ul>
             <li>The input and output operations that we have performed so far were done through screen and keyboard
@@ -64,7 +75,7 @@
                 system alls. The high level file handling is common used since it is easier to manage and hides most of
                 the deatils from the programmer. In this chapter we'll discuss about high level file handling only.</li>
         </ul>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Text and Binary modes</h2>
             <ul>
                 <li>There are two ways of storing data in files, binary format and text format.</li>
@@ -80,7 +91,7 @@
                     4 characters i.e. '1', '6', '7', '9'.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Concept of buffer</h2>
             <ul>
                 <li>Buffer is an area in memory where the data is temporarily stored before being writen to the file.
@@ -105,7 +116,7 @@
                 </li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Opening a file</h2>
             <ul>
                 <li>A file must be opened before any I/O operations can be performed on that file. The process of
@@ -224,7 +235,7 @@ if(fp == NULL)
                 </ul>
             </div>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Closing a file</h2>
             <ul>
                 <li>The file that was opened using fopen() function must be closed when no more operations are to be
@@ -277,7 +288,7 @@ main()
                 </code>
             </pre>
         </div>
-        <div class="wh">
+        <div id="t6" class="wh">
             <h2>The functions used for file I/O are</h2>
             <ul>
                 <li>Character I/O - fgetc(), fputc(), getc(), putc()</li>
@@ -326,6 +337,299 @@ int main()
                     </pre>
                 </div>
             </div>
+        </div>
+    </div>
+    <ul>
+        <li>Till now, we have done file handling using function calls, but now we will do using system calls</li>
+        <li>But why?
+            <ul>
+                <li>The use of system calls, such as open(), close(), read(), etc., offers some key differences compared to higher-level functions like fopen(), fclose(), fread(), etc. Here are the differences between using system calls and higher-level functions:
+                    <ol>
+                        <li>Level of abstraction:
+                            <br>System calls provide a lower-level interface to the operating system, allowing direct interaction with the underlying functionality. They offer finer-grained control and access to system resources. In contrast, higher-level functions, such as those provided by the C standard library, abstract away many low-level details and provide a more user-friendly interface. They handle certain operations and error checking internally, simplifying the code for common file operations.
+                        </li>
+                        <li>Protability:
+                            <br>System calls can be platform-specific since they directly interact with the underlying operating system. On the other hand, higher-level functions are often implemented in a portable manner across different platforms. The C standard library functions provide a consistent interface regardless of the underlying operating system, making it easier to write cross-platform code.
+                        </li>
+                        <li>Flexitybility and control:
+                            <br>System calls offer more flexibility and control over file operations. They allow you to use various flags and options to fine-tune the behavior of file operations, such as opening modes, file permissions, and file positioning. System calls also enable advanced operations like asynchronous I/O, file locking, and handling special file types. Higher-level functions may not provide all of these capabilities or expose them directly.
+                        </li>
+                        <li>Performance:
+                            <br>System calls generally have lower overhead compared to higher-level functions. This is because higher-level functions often involve additional layers of abstraction and may perform additional checks and operations. System calls directly interact with the operating system kernel, bypassing some of these overheads. However, the performance difference might be negligible for many applications unless low-level optimizations are required.
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <img src="../../images/systemcall1.svg" alt="" class="wb">
+    <div id="t7" class="content-box">
+        <h1>System calls</h1>
+        <ul>
+            <li>System calls are the calls that a program makes to the system kernel to provide the services to which
+                the program does not have direct access.</li>
+            <li>For example, providing access to input and output devices such as monitors and keywords. We can use
+                various functions provided in the C programming language for input/output system calls such as create,
+                open read, write, etc.</li>
+        </ul>
+        <div class="wh">
+            <h2>Important terminology</h2>
+            <div class="in">
+                <h3>File descriptor</h3>
+                <ul>
+                    <li>The file descriptor is an integer that uniquely itentifies an open file of the process.</li>
+                    <li>In operating systems, a file descriptor is an abstract representation of an opened file or I/O
+                        stream. It is a non-negative integer that uniquely identifies an open file within a process.
+                        File descriptors are used to perform various operations on files, such as reading, writing, and
+                        closing.</li>
+                    <li>When you open a file using 'open()'' system call library function, a file descriptor is
+                        returned. You can think of it as a handle or reference to the opened file. This file descriptor
+                        is then used in subsequent system or library calls to perform operations on the file.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="t8" class="wh">
+            <h2>Create</h2>
+            <ul>
+                <li>The create() function is used to create a new empty file in C. We can specify the permission and the
+                    name of the file which we wan to create using the create() function. It is defined inside
+                    <b>&lt;unistd.h></b> header file and the flags that are passed as arguments are defined inside
+                    <b>&lt;fcntl.h></b> header file.</li>
+            </ul>
+            <p><b>Syntax of create()</b></p>
+            <pre>
+                <code>
+int create (char *filename, mode_t mode);
+                </code>
+            </pre>
+            <p><b>Parameter</b></p>
+            <ul>
+                <li>filename: name of the file which you want to create</li>
+                <li>Mode: indicates permissions of the new file</li>
+            </ul>
+            <p><b>Return value</b></p>
+            <ul>
+                <li>return first unused file descriptor (generally 3 when first creating use in the process because 0,
+                    1, 2 fd are reserved)</li>
+                <li>return -1 when an error</li>
+            </ul>
+            <p><b>How create() works in OS</b></p>
+            <ul>
+                <li>Create a new empty file on disk</li>
+                <li>Create file table entry</li>
+                <li>Set the first unused file descriptor to point the file table entry.</li>
+                <li>Return file descriptor used, -1 upon failure.</li>
+            </ul>
+        </div>
+        <div id="t9" class="wh">
+            <h2>Open</h2>
+            <ul>
+                <li>The open() function in C is used to open the file for reading, writing, or both.</li>
+                <li>It is also capable of creating the file if it does not exist.</li>
+                <li>It is defined inside <b>&lt;unistd.h></b> header file and the flags that are passed as arguments are
+                    defined inside <b>&lt;fcntl.h></b> header file.</li>
+            </ul>
+            <p><b>Parameters</b></p>
+            <ul>
+                <li>Path: path to the file which we want to open.
+                    <ul>
+                        <li>Use the absolute path beginning with "/" when you are not working in the same directory as
+                            the C source fle.</li>
+                        <li>Use relative path which is only the file name with extension, when you are working in the
+                            same directory as the C source file.</li>
+                    </ul>
+                </li>
+                <li>Flags: It is used to specify how you want to open the file. We can use the following flags.</li>
+                <pre>
+                    <code>
+    Flags                   Description
+   O_RDONLY         Opens the file in read-only mode.
+   O_WRONGLY        Opens the file in write-only mode.
+   O_RDWR           Opens the files in read and write mode.
+   O_CREAT          Create a file if it doesn't exists.
+   O_APPEND         Opens the file and places the cursor at the end of the contents
+   O_TRUNC          Truncate the file to zero length if it exists.
+                    </code>
+                </pre>
+            </ul>
+            <p>Example of open</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;fcntl.h>
+#include &lt;unistd.h>
+
+int main() {
+    int fileDescriptor = open("example.txt", O_RDONLY);
+    if (fileDescriptor == -1) {
+        // Handle error if file couldn't be opened
+    }
+
+    // Perform operations on the opened file
+
+    close(fileDescriptor); // Close the file descriptor
+
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t10" class="wh">
+            <h2>Close</h2>
+            <ul>
+                <li>The clse() function in C tells the operating system that you are done with a file descriptor and
+                    closes the file pointed by the file descriptor. It is defined inside <b>&lt;unistd.h></b> header
+                    file.</li>
+            </ul>
+            <p><b>Parameter</b></p>
+            <ul>
+                <li>fd: File descriptor of the file that you want to close.</li>
+            </ul>
+            <p><b>Return value</b></p>
+            <ul>
+                <li>0 on success</li>
+                <li>-1 on error</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;unistd.h>
+
+int main() {
+    int fileDescriptor = open("example.txt", O_RDONLY);
+    if (fileDescriptor == -1) {
+        // Handle error if file couldn't be opened
+    }
+
+    // Perform operations on the opened file
+
+    close(fileDescriptor); // Close the file descriptor
+
+    return 0;
+}
+
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t11" class="wh">
+            <h2>Read</h2>
+            <ul>
+                <li>From the file indicated by the file descriptor f, the read() function reads the specified amount of
+                    bytes cnt of input into the memory area indicated by buf. A successful read() updates the access
+                    time for the file. The read() function is also defined inside the <b>&lt;unistd.h></b> header file.
+                </li>
+            </ul>
+            <p><b>Parameters</b></p>
+            <ul>
+                <li>fd: file descriptor of the file from which data is to be read.</li>
+                <li>buf: buffer to read data from</li>
+                <li>cnt: length of the buffer</li>
+            </ul>
+            <p><b>Return value</b></p>
+            <ul>
+                <li>returns number of bytes read on success</li>
+                <li>returns - on reaching the end of the file</li>
+                <li>return -1 on error</li>
+                <li>returns -1 on signal interrupt</li>
+            </ul>
+            <p><b>Important points</b></p>
+            <ul>
+                <li><b>buf</b> needs to point to a valid memory locaton with a length not smaller than the specified
+                    size because of overflow.</li>
+                <li><b>fd</b> should be a valid file descriptor if fd is NULL then the read should generate an error.
+                </li>
+                <li><b>cnt</b> is the requested number of bytes read, while the return value is the actual number of
+                    bytes read. Also, some times read system call should read fewer bytes than cnt.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;fcntl.h>
+#include &lt;unistd.h>
+
+#define BUFFER_SIZE 1024
+
+int main() {
+    int fileDescriptor = open("example.txt", O_RDONLY);
+    if (fileDescriptor == -1) {
+        // Handle error if file couldn't be opened
+    }
+
+    char buffer[BUFFER_SIZE];
+    ssize_t bytesRead = read(fileDescriptor, buffer, BUFFER_SIZE);
+    if (bytesRead == -1) {
+        // Handle error if reading failed
+    }
+
+    // Process the read data
+
+    close(fileDescriptor); // Close the file descriptor
+
+    return 0;
+}
+
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t12" class="wh">
+            <h2>Write</h2>
+            <ul>
+                <li>Writes cnt bytes from buf to the file or socked associated with fd. cnt should not be greater then
+                    INT_MAX (defined in the limits.h header file). If cnt is zero, write() simply returns 0 without
+                    attempting any other action.</li>
+                <li>The write() is also defined inside <b>&lt;unistd.h></b> header file.</li>
+            </ul>
+            <p><b>Parameters</b></p>
+            <ul>
+                <li>fd: file descriptor</li>
+                <li>buf: buffer to write data to.</li>
+                <li>cnt: length of the buffer.</li>
+            </ul>
+            <p><b>Return value</b></p>
+            <ul>
+                <li>returns number of bytes read on success</li>
+                <li>returns - on reaching the end of the file</li>
+                <li>return -1 on error</li>
+                <li>returns -1 on signal interrupt</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;fcntl.h>
+#include &lt;unistd.h>
+
+int main() {
+    int fileDescriptor = open("example.txt", O_WRONLY | O_CREAT, 0644);
+    if (fileDescriptor == -1) {
+        // Handle error if file couldn't be opened
+    }
+
+    char data[] = "Hello, world!";
+    ssize_t bytesWritten = write(fileDescriptor, data, sizeof(data) - 1);
+    if (bytesWritten == -1) {
+        // Handle error if writing failed
+    }
+
+    close(fileDescriptor); // Close the file descriptor
+
+    return 0;
+}
+
+                   </code>
+               </pre>
+            </div>
+            <p>0644: File permission mode (used with open()), specifies read and write permissions for the owner and
+                read-only permissions for others.</p>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
