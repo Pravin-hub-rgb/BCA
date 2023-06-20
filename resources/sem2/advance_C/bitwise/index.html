@@ -359,7 +359,7 @@ int main()
 #include &lt;stdio.h>
 int main()
 {
-    unsigned int a;
+    int a;
     printf("Enter values of a : ");
     scanf("%d", &a);
     a = a << 2;
@@ -369,6 +369,13 @@ int main()
                 </code>
             </pre>
                     </div>
+                    <p>Output &darr;</p>
+                    <pre>
+                        <code>
+Enter values of a : 1
+a << 2 = 4 
+                        </code>
+                    </pre>
         </div>
         <div id="t6" class="wh">
             <h2>Bitwise Right Shift ( >> )</h2>
@@ -386,7 +393,7 @@ int main()
 #include &lt;stdio.h>
 int main()
 {
-    unsigned int a;
+    int a;
     printf("Enter values of a : ");
     scanf("%d", &a);
     a = a >> 2;
@@ -396,6 +403,13 @@ int main()
                 </code>
             </pre>
             </div>
+            <p>Output &darr;</p>
+            <pre>
+                <code>
+Enter values of a : 9
+a << 2 = 2  
+                </code>
+            </pre>
         </div>
         <div id="t7" class="wh">
             <h2>Some programs</h2>
@@ -434,7 +448,8 @@ int main()
 #include &lt;stdio.h>
 int isBitSet(int num, int bitPos)
 {
-    return (num & (1 << bitPos)) != 0;
+    int mask = 1 << bitPos;
+    return ((num & mask) > 0);
 }
 int main()
 {
@@ -457,6 +472,7 @@ int main()
                             desired position set to 1. The bitwise AND operation (&) is then performed between num and
                             the bit mask. If the result is non-zero, it means the bit at the specified position is set
                             (1); otherwise, it is not set (0). The function returns this result.</li>
+                            <li>Note: Bit numbering starts from 0 so position bit 3 means 4th location from rightmost bit.</li>
                 </ul>
             </div>
             <div class="in">

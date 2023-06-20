@@ -1,21 +1,18 @@
 #include <stdio.h>
-#include <string.h>
+int isBitSet(int num, int bitPos)
+{
+    int mask = 1 << bitPos;
+    return ((num & mask) > 0);
+}
 int main()
 {
-    char x[12];
-    char temp;
-    int i, l;
+    int num = 10; // Binary: 0000 1010
 
-    printf("Enter the string =");
-    fgets(x, 12, stdin);
-    l = strlen(x);
-    for (i = 0; i < l / 2; i++)
-    {
-        temp = x[i];
-        x[i] = x[l - i - 1];
-        x[l - i - 1] = temp;
-    }
-    printf("%s", x);
+    // Check if bit at position 3 is set
+    if (isBitSet(num, 3))
+        printf("Bit at position 3 is set.\n");
+    else
+        printf("Bit at position 3 is not set.\n");
 
     return 0;
 }
