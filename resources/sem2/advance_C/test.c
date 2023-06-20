@@ -1,17 +1,20 @@
 
+#include <stdio.h>
+#pragma pack(1)
+// space opmitized representation of 'order'
+struct order
+{
+    // isAvailable can store either 0 or 1, so 1 bits are sufficient
+    unsigned int isAvailable : 1;
 
+    // isTshirt can store either 0 or 1, so 1 bits are sufficient
+    unsigned int isTshirt : 1;
+};
 
-#include<stdio.h>
-#include<string.h>
 int main()
 {
-    char str1[10], str2[10];
-    printf("Enter the first string : ");
-    scanf("%s", str1);
-    printf("Enter the second string : ");
-    scanf("%s", str2);
-    if(strcmp(str1, str2) == 0)
-        printf("Strings are same");
-    else 
-        printf("Strings are not same");
+    printf("Size of order is %lu byte\n", sizeof(struct order)); // 1
+    struct order hoodie= {1, 0};
+    printf("The order is %s and it is %s",(hoodie.isAvailable)?"available":"not available", (hoodie.isTshirt)?"T-shirt":"not T-shirt");
+    return 0;
 }
