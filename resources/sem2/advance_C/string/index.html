@@ -72,7 +72,7 @@
             <li>There is no separate data type for strings in C. They are treated as arrays of type char. </li>
             <li>A character array is a string if it ends with a null character ('\0'). This null character is an escape
                 sequence with ASCII value 0. Strings are generally used to store and manipulate data in text form like
-                workds or sentences.</li>
+                words or sentences.</li>
         </ul>
         <div class="wh">
             <h2>String Constant or String Literal</h2>
@@ -263,7 +263,7 @@ Your entered string is = Hello my name is
             <div class="in">
                 <h3>Compile time intialization </h3>
                 <ul>
-                    <li>This we have already seen.</li>
+                    <li>This we have already seen <a href="http://127.0.0.1:5500/resources/sem1/programming%20concepts%20using%20C%20language/array/index.html#t3">here &neArr;</a>.</li>
                 </ul>
             </div>
         </div>
@@ -327,6 +327,35 @@ int main()
                        </code>
                    </pre>
                 </div>
+                <p>Second method &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+int main()
+{
+    char x[12];
+    char temp;
+    int i, l;
+
+    printf("Enter the string =");
+    fgets(x, 12, stdin);
+    l = strlen(x);
+    for (i = 0; i < l / 2; i++)
+    {
+        temp = x[i];
+        x[i] = x[l - i - 1];
+        x[l - i - 1] = temp;
+    }
+    printf("%s", x);
+
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
             </div>
             <div class="in">
                 <p>Program to check whether a string is palindrome or not</p>
@@ -350,6 +379,39 @@ int main()
             flag = 0;
             break;
         }
+    }
+    if (flag)
+        printf("The given string is a palindrome");
+    else
+        printf("The given string is not a palindrome");
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+                <p>Second method &darr;</p>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+#include &lt;string.h>
+int main()
+{
+    int i, l, flag = 1;
+    char str[30];
+    printf("Enter your string : ");
+    fgets(str, 30, stdin);
+    int high = 0, low = strlen(str) - 1;
+    while (low < high)
+    {
+        if (str[low] != str[high])
+        {
+            flag = 0;
+            break;
+        }
+        low++;
+        high--;
     }
     if (flag)
         printf("The given string is a palindrome");

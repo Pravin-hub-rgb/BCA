@@ -49,6 +49,7 @@
                 <a href="#t6" class="link">Bitwise right shift ( >> )</a>
                 <a href="#t7" class="link">Programs</a>
                 <a href="#t8" class="link">Bit masking</a>
+                <a href="#t9" class="link">Application of bitwise operator</a>
                 <div class="botbut">
                     <a href="../string/index.html" class="link">Next Topic &rarr;</a>
                     <a href="../pointer/index.html" class="link">&larr; Previous Topic</a>
@@ -431,6 +432,67 @@ int main()
                     </code>
                 </pre>
             </div>
+            <div class="in">
+                <h3>Programto enter a decimal number and print its binary form and check whether it is even or odd.</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+
+void decimalToBinary(int num)
+{
+    int binary[32];
+    int i = 0;
+
+    // Convert decimal to binary using bit manipulation
+    while (num > 0)
+    {
+        binary[i] = num & 1;
+        num >>= 1;
+        i++;
+    }
+
+    printf("Binary representation: ");
+
+    // Print binary representation in reverse order
+    for (int j = i - 1; j >= 0; j--)
+    {
+        printf("%d", binary[j]);
+    }
+
+    printf("\n");
+}
+
+void checkEvenOdd(int num)
+{
+    // Check the least significant bit to determine even/odd
+    if ((num & 1) == 0)
+    {
+        printf("The number is even.\n");
+    }
+    else
+    {
+        printf("The number is odd.\n");
+    }
+}
+
+int main()
+{
+    int decimalNum;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &decimalNum);
+
+    decimalToBinary(decimalNum);
+    checkEvenOdd(decimalNum);
+
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
         </div>
         <div id="t8" class="wh">
             <h2>Bit masking</h2>
@@ -491,16 +553,18 @@ int main()
 // Function to set a specific bit
 int setBit(int num, int bitPos)
 {
-    return num | (1 << bitPos);
+    int mask = 1 << bitPos;
+    return num | mask;
 }
 int main()
 {
     int num = 10; // Binary: 0000 1010
 
     // Set bit at position 2
+    printf("Initially number was : %d\n", num);
     num = setBit(num, 2);
-    printf("After setting bit at position 2: %d\n", num);
-    
+    printf("After setting bit at position 2 : %d\n", num);
+
     return 0;
 }
                        </code>
@@ -509,7 +573,8 @@ int main()
                 <p>Output &darr;</p>
                 <pre>
                     <code>
-After setting bit at position 2: 14
+Initially number was : 10
+After setting bit at position 2 : 14
                     </code>
                 </pre>
                 <ul>
@@ -534,7 +599,8 @@ After setting bit at position 2: 14
 // Function to clear a specific bit
 int clearBit(int num, int bitPos)
 {
-    return num & ~(1 << bitPos);
+    int mask = 1 << bitPos;
+    return num & ~mask;
 }
 int main()
 {
@@ -577,7 +643,8 @@ After clearing bit at position 1: 8
 // Function to toggle a specific bit
 int toggleBit(int num, int bitPos)
 {
-    return num ^ (1 << bitPos);
+    int mask = 1 << bitPos;
+    return num ^ mask;
 }
 int main()
 {
@@ -605,7 +672,7 @@ After toggling bit at position 0: 11
                 </ul>
             </div>
         </div>
-        <div class="wh">
+        <div id="t9" class="wh">
             <h2>Application of bitwise operator</h2>
             <ul>
                 <li>Bitwise operators are used to perfrom operations on individual bit of integer values. They manipulate
