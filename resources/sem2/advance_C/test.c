@@ -1,11 +1,21 @@
 #include <stdio.h>
+#include <string.h>
 int main()
 {
-    int a = 10, b = 7;
-    printf("The value of a and b before swap : a = %d & b = %d\n", a, b);
-    a = a ^ b;
-    b = a ^ b;
-    a = a ^ b;
-    printf("The value of a and b after swap : a = %d & b = %d\n", a, b);
+    char x[12];
+    char temp;
+    int i, l;
+
+    printf("Enter the string =");
+    fgets(x, 12, stdin);
+    l = strlen(x);
+    for (i = 0; i < l / 2; i++)
+    {
+        temp = x[i];
+        x[i] = x[l - i - 1];
+        x[l - i - 1] = temp;
+    }
+    printf("%s", x);
+
     return 0;
 }
