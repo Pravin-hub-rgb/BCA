@@ -1,23 +1,17 @@
-#include <stdio.h>
-struct date
-{
-    int d, m, y;
-};
-struct employee
-{
-    int id;
-    struct date dob;
-    struct date doj;
-} e1;
+
+
+
+#include<stdio.h>
+#include<string.h>
 int main()
 {
-    printf("Enter id of a employee : ");
-    scanf("%d", &e1.id);
-    printf("Enter date of birth : ");
-    scanf("%d%d%d", &e1.dob.d, &e1.dob.m, &e1.dob.y);
-    printf("Enter date of joining : ");
-    scanf("%d%d%d", &e1.doj.d, &e1.doj.m, &e1.doj.y);
-
-    printf("ID: %d, DOB: %d/ %d/ %d and DOJ: %d/ %d/ %d", e1.id, e1.dob.d, e1.dob.m, e1.dob.y, e1.doj.d, e1.doj.m, e1.doj.y);
-    return 0;
+    char str1[10], str2[10];
+    printf("Enter the first string : ");
+    scanf("%s", str1);
+    printf("Enter the second string : ");
+    scanf("%s", str2);
+    if(strcmp(str1, str2) == 0)
+        printf("Strings are same");
+    else 
+        printf("Strings are not same");
 }

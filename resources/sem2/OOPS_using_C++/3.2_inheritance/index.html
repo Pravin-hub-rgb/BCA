@@ -22,6 +22,22 @@
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
     <!-- <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-light.min.css"> -->
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -453,14 +469,15 @@ int main()
                 <img src="../../images/multipathin1.svg" alt="" class="wb">
                 <p>There are two ways to avoid this ambiguity:</p>
                 <div class="wh">
-                <ol>
-                    <li><b>Avoiding ambiguity using the scope resolution operator</b>: Using the scope resolution operator we
-                        can manually specify the path from which data member will be accessed. See the example below
-                        &darr;</li>
-                </ol>
-                <div class='code'>
-                    <div class='dotc'></div>
-                    <pre>
+                    <ol>
+                        <li><b>Avoiding ambiguity using the scope resolution operator</b>: Using the scope resolution
+                            operator we
+                            can manually specify the path from which data member will be accessed. See the example below
+                            &darr;</li>
+                    </ol>
+                    <div class='code'>
+                        <div class='dotc'></div>
+                        <pre>
                        <code>
 // C++ program demonstrating ambiguity in Multipath Inheritance
   
@@ -510,31 +527,33 @@ int main()
 }
                        </code>
                    </pre>
-                </div>
-                <p>Output &darr;</p>
-                <pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
                     <code>
 obj.ClassB::a = 10;
 abj.ClassC:: a = 100;
                     </code>
                 </pre>
-                <ul>
-                    <li>In the above example, both ClassB and ClassC inherit ClassA, they both have a single copy of
-                        ClassA. However Class-D inherits both ClassB and ClassC, therefore Class-D has two copies of
-                        ClassA, one from ClassB and another from ClassC.</li>
-                    <li>If we need to access the data member of ClassA through the object of Class-D, we must specify
-                        the path from which a will be accessed, whether it is from ClassB or ClassC, because compiler can’t
-                        differentiate between two copies of ClassA in Class-D.</li>
+                    <ul>
+                        <li>In the above example, both ClassB and ClassC inherit ClassA, they both have a single copy of
+                            ClassA. However Class-D inherits both ClassB and ClassC, therefore Class-D has two copies of
+                            ClassA, one from ClassB and another from ClassC.</li>
+                        <li>If we need to access the data member of ClassA through the object of Class-D, we must
+                            specify
+                            the path from which a will be accessed, whether it is from ClassB or ClassC, because
+                            compiler can’t
+                            differentiate between two copies of ClassA in Class-D.</li>
                         <li>Note: Still, there are two copies of ClassA in ClassD.</li>
-                </ul>
-            </div>
-            <div class="wh">
-                <ol type="1" start="2">
-                    <li><b>Avoiding ambiguity using the virtual base class</b></li>
-                </ol>
-                <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <ol type="1" start="2">
+                        <li><b>Avoiding ambiguity using the virtual base class</b></li>
+                    </ol>
+                    <div class='code'>
+                        <div class='dotc'></div>
+                        <pre>
                        <code>
 #include&lt;iostream>
   
@@ -580,9 +599,9 @@ int main()
 }
                        </code>
                    </pre>
-                </div>
-                <p>Output &darr;</p>
-                <pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
                     <code>
 a : 100
 b : 20
@@ -590,7 +609,7 @@ c : 30
 d : 40
                     </code>
                 </pre>
-            </div>
+                </div>
             </div>
         </div>
     </div>

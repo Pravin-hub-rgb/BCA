@@ -20,6 +20,22 @@
     </style>
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -198,13 +214,13 @@
                     </li>
                 </ul>
                 <p>Syntax &darr;</p>
-                    <pre>
+                <pre>
                        <code>
 ptr = (cast-type *) malloc(size of memory)
                        </code>
                    </pre>
                 <p>Example &darr;</p>
-                    <pre>
+                <pre>
                        <code>
 int *ptr;
 ptr = (int *) malloc(100 * sizeof(int));
@@ -215,81 +231,81 @@ And, the pointer ptr holds the address of the first byte in the allocated memory
 we are using sizeof() because in different architecture data-type value changes
                        </code>
                    </pre>
-                    <h3>Characteristics of malloc function</h3>
-                    <ul>
-                        <li>This function returns a pointer to the first byte of the allocated memory block. If the
-                            allocation fails, it returns NULL.</li>
-                        <li>This function takes a single argument, which is the size of the memory block to be allocated
-                            in bytes.</li>
-                        <li>The memory allocated by 'malloc()' is not initialized, which means the contents of the block
-                            will be undefined until initialized by the program.</li>
-                        <li>The memory block allocated by 'malloc()' remains allocated until the program explicitly
-                            frees it using the 'free()' function, or until the program terminates.</li>
-                        <li>'malloc()' can be used to allocate memory for variables of any data type, including
-                            structures and arrays.</li>
-                        <li>'malloc()' initializes memory with garbage values.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="in">
-                <h3>calloc( ) method</h3>
+                <h3>Characteristics of malloc function</h3>
                 <ul>
-                    <li>"calloc" or "contiguous allocation" method in C is used to dynamically allocate the specified
-                        number of blocks of memory of the specified type.
-                    </li>
-                    <li>It is very much similar to malloc() but has two different points and these are:
-                        <ol>
-                            <li>It initializes each block with a default value '0'.</li>
-                            <li>It has two parameters or arguments as compare to malloc()</li>
-                        </ol>
-                    </li>
+                    <li>This function returns a pointer to the first byte of the allocated memory block. If the
+                        allocation fails, it returns NULL.</li>
+                    <li>This function takes a single argument, which is the size of the memory block to be allocated
+                        in bytes.</li>
+                    <li>The memory allocated by 'malloc()' is not initialized, which means the contents of the block
+                        will be undefined until initialized by the program.</li>
+                    <li>The memory block allocated by 'malloc()' remains allocated until the program explicitly
+                        frees it using the 'free()' function, or until the program terminates.</li>
+                    <li>'malloc()' can be used to allocate memory for variables of any data type, including
+                        structures and arrays.</li>
+                    <li>'malloc()' initializes memory with garbage values.</li>
                 </ul>
-                <p>Syntax &darr;</p>
-                    <pre>
+            </div>
+        </div>
+        <div class="in">
+            <h3>calloc( ) method</h3>
+            <ul>
+                <li>"calloc" or "contiguous allocation" method in C is used to dynamically allocate the specified
+                    number of blocks of memory of the specified type.
+                </li>
+                <li>It is very much similar to malloc() but has two different points and these are:
+                    <ol>
+                        <li>It initializes each block with a default value '0'.</li>
+                        <li>It has two parameters or arguments as compare to malloc()</li>
+                    </ol>
+                </li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <pre>
                        <code>
 ptr = (cast-type *) calloc(n, element-size);
 here, n is the no. of blocks and element-sze is the size of each element.
                        </code>
                    </pre>
-                <p>For example &darr;</p>
-                    <pre>
+            <p>For example &darr;</p>
+            <pre>
                        <code>
 ptr = (float *) calloc(25, sizeof(float));
 This statement allocates contiguous space in memory for 25 elements each with the size of the float.
                        </code>
                    </pre>
-                <ul>
-                    <li>If space is insufficient, allocation fails and returns a NULL pointer.</li>
-                </ul>
-            </div>
-            <div class="in">
-                <h3>realloc( )</h3>
-                <ul>
-                    <li>"realloc" or "re-allocation" method is C is used to dynamically change the memory allocation of
-                        a previously allocated memory.</li>
-                    <li>In other words, if the memory previously allocated with the help of malloc or calloc is
-                        insufficient, realloc can be used to dynamically re-allocate memory.</li>
-                    <li>Re-allocation of memory maintains the already present value and new blocks will be initialized
-                        with the default garbage value.</li>
-                </ul>
-                <p>Syntax &darr;</p>
-                    <pre>
+            <ul>
+                <li>If space is insufficient, allocation fails and returns a NULL pointer.</li>
+            </ul>
+        </div>
+        <div class="in">
+            <h3>realloc( )</h3>
+            <ul>
+                <li>"realloc" or "re-allocation" method is C is used to dynamically change the memory allocation of
+                    a previously allocated memory.</li>
+                <li>In other words, if the memory previously allocated with the help of malloc or calloc is
+                    insufficient, realloc can be used to dynamically re-allocate memory.</li>
+                <li>Re-allocation of memory maintains the already present value and new blocks will be initialized
+                    with the default garbage value.</li>
+            </ul>
+            <p>Syntax &darr;</p>
+            <pre>
                        <code>
 ptr = realloc(ptr, newSize);
 here ptr is reallocated with new size 'newSize'.
                        </code>
                    </pre>
-            </div>
-            <div class="in">
-                <h3>free( )</h3>
-                <ul>
-                    <li>"free" method in C is used to dynamically <b>de-allocate</b> the memory. </li>
-                    <li>The memory allocated using functions malloc() and calloc() is not de-allocated on their own.
-                        Hence free() method is used, whenever the dynamic memory allocation takes place. It helps to
-                        reduce wastage of memory by freeing it.</li>
-                </ul>
-            </div>
         </div>
+        <div class="in">
+            <h3>free( )</h3>
+            <ul>
+                <li>"free" method in C is used to dynamically <b>de-allocate</b> the memory. </li>
+                <li>The memory allocated using functions malloc() and calloc() is not de-allocated on their own.
+                    Hence free() method is used, whenever the dynamic memory allocation takes place. It helps to
+                    reduce wastage of memory by freeing it.</li>
+            </ul>
+        </div>
+    </div>
     </div>
     <div id="tl" class="content-box">
         <h2>programs</h2>

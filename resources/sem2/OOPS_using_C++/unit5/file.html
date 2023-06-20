@@ -20,6 +20,22 @@
     </style>
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -54,7 +70,8 @@
         <h1>I/O system basics, File I/O</h1>
         <ul>
             <li>So far, we have been using the <b>iostream</b> standard library, which provide <b>cin</b> and
-                <b>cout</b> mthod for reading from standard input and writing to standard output respectively.</li>
+                <b>cout</b> mthod for reading from standard input and writing to standard output respectively.
+            </li>
             <li>Now we will see how to read and write from a file. This requires another standard C++ library called
                 <b>fstream</b>, which defines three new data types-
                 <ol>
@@ -82,46 +99,55 @@
                 <h3>Mode flag and description</h3>
                 <ul>
                     <li><b>ios::app</b>
-                    <ul>
-                        <li>Append mode. All output to that file to be appended to the end.</li>
-                    </ul></li>
+                        <ul>
+                            <li>Append mode. All output to that file to be appended to the end.</li>
+                        </ul>
+                    </li>
                     <li><b>ios::ate</b>
-                    <ul>
-                        <li>Open a file for output and move the read/write control to the end of the file.</li>
-                    </ul></li>
+                        <ul>
+                            <li>Open a file for output and move the read/write control to the end of the file.</li>
+                        </ul>
+                    </li>
                     <li><b>ios::in</b>
-                    <ul>
-                        <li>Open a file for reading.</li>
-                    </ul></li>
+                        <ul>
+                            <li>Open a file for reading.</li>
+                        </ul>
+                    </li>
                     <li><b>ios::out</b>
-                    <ul>
-                        <li>Open a file for writing.</li>
-                    </ul></li>
+                        <ul>
+                            <li>Open a file for writing.</li>
+                        </ul>
+                    </li>
                     <li><b>ios::trunc</b>
-                    <ul>
-                        <li>If the file already exists, its contents will be truncated before opening the file.</li>
-                    </ul></li>
+                        <ul>
+                            <li>If the file already exists, its contents will be truncated before opening the file.</li>
+                        </ul>
+                    </li>
                 </ul>
-                <p>We can combine two or more of these values by <b>OR</b>ing them together. For example if you want to open a file in write mode and want to truncate it in case that already exists, following will be the syntax:
+                <p>We can combine two or more of these values by <b>OR</b>ing them together. For example if you want to
+                    open a file in write mode and want to truncate it in case that already exists, following will be the
+                    syntax:
                 <pre>
                     <code>
 ofstream outfile
 outfile.open("file.dat", ios::out | ios::trunc);
                     </code>
                 </pre>
-            Similar way, you can open a file for reading and writing purpose as follows:
-        <pre>
+                Similar way, you can open a file for reading and writing purpose as follows:
+                <pre>
             <code>
 fstream afile;
 afile.open("file.dat", ios::out | ios::in );
             </code>
-        </pre></p>
+        </pre>
+                </p>
             </div>
         </div>
         <div id="t2" class="wh">
             <h2>Closing a file</h2>
             <ul>
-                <li>Although the compiler automatically closes all the opened files & releases all the allocated memory.</li>
+                <li>Although the compiler automatically closes all the opened files & releases all the allocated memory.
+                </li>
                 <li>We use close() function.</li>
             </ul>
             <pre>
@@ -144,11 +170,12 @@ int main() {
         <div id="t3" class="wh">
             <h2>Writing to a file</h2>
             <ul>
-                <li>We use stream insertion operator (<<) only difference is we use ofstream or ifstream object instead of cout object.</li>
+                <li>We use stream insertion operator (<<) only difference is we use ofstream or ifstream object instead
+                        of cout object.</li>
                 <li>Example:
                     <ul>
-                        <li>using cout object : cout << "a";</li>
-                        <li>using ofstream object : ofstream << 'a';</li>
+                        <li>using cout object : cout << "a" ;</li>
+                        <li>using ofstream object : ofstream << 'a' ;</li>
                     </ul>
                 </li>
             </ul>
@@ -165,8 +192,8 @@ int main() {
             <div class="in">
                 <h3>Program in which we read data from one file and write it into some other file</h3>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;fstream>
 using namespace std;
@@ -194,12 +221,13 @@ int main()
                        </code>
                    </pre>
                 </div>
-                <p>Make sure that you have already created a input.txt file and put any two number separated by space or newline.</p>
+                <p>Make sure that you have already created a input.txt file and put any two number separated by space or
+                    newline.</p>
             </div>
             <div class="in">
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;iostream>
 #include &lt;fstream>
@@ -238,14 +266,15 @@ int main()
 }
                        </code>
                    </pre>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=h1Rx8z1GQNw" target="_blank">stream and file I/O (youtube video)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=h1Rx8z1GQNw" target="_blank">stream and file I/O (youtube
+                    video)</a></li>
         </ul>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

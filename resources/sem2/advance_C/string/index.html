@@ -18,7 +18,24 @@
             color: white;
         }
     </style>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -53,12 +70,15 @@
         <h1>String</h1>
         <ul>
             <li>There is no separate data type for strings in C. They are treated as arrays of type char. </li>
-            <li>A character array is a string if it ends with a null character ('\0'). This null character is an escape sequence with ASCII value 0. Strings are generally used to store and manipulate data in text form like workds or sentences.</li>
+            <li>A character array is a string if it ends with a null character ('\0'). This null character is an escape
+                sequence with ASCII value 0. Strings are generally used to store and manipulate data in text form like
+                workds or sentences.</li>
         </ul>
         <div class="wh">
             <h2>String Constant or String Literal</h2>
             <ul>
-                <li>The string constant is a sequence of characters enclosed in double quotes. It is sometimes called a literal.</li>
+                <li>The string constant is a sequence of characters enclosed in double quotes. It is sometimes called a
+                    literal.</li>
                 <li>The double quotes are not a part of string.</li>
                 <li>Some examples of string constant are &darr;</li>
             </ul>
@@ -72,16 +92,22 @@
                 </code>
             </pre>
             <ul>
-                <li>Whenever a string constant is written anywhere in a program, it is stored somewhere in memory as an array of characters terminated by a null character ('\0'). The string constat itself becomes a pointer to the first character in the array. For example the string "Graphic Era" will be stored in memory as &darr;
+                <li>Whenever a string constant is written anywhere in a program, it is stored somewhere in memory as an
+                    array of characters terminated by a null character ('\0'). The string constat itself becomes a
+                    pointer to the first character in the array. For example the string "Graphic Era" will be stored in
+                    memory as &darr;
                     <br><img src="../../images/string1.svg" alt="" class="wb">
                 </li>
-                <li>Each character occupies one byte and compiler automatically inserts the null character at the end. The string constant "Graphic Era" is actually a  pointer to the Character 'P'. So whenever a string constant is used in the program it is replaced by a pointer pointing to the string.</li>
+                <li>Each character occupies one byte and compiler automatically inserts the null character at the end.
+                    The string constant "Graphic Era" is actually a pointer to the Character 'P'. So whenever a string
+                    constant is used in the program it is replaced by a pointer pointing to the string.</li>
             </ul>
         </div>
         <div id="t2" class="wh">
             <h2>String Variables</h2>
             <ul>
-                <li>To create a string variable we need to declare a character array with sufficient size to hold all the characters of the string including null character.</li>
+                <li>To create a string variable we need to declare a character array with sufficient size to hold all
+                    the characters of the string including null character.</li>
             </ul>
             <pre>
                 <code>
@@ -94,14 +120,17 @@ char str[] = {'N', 'e', 'w', ' ', 'Y', 'o', 'r', 'k', '\0'};
 char str[] = "New York";
                 </code>
             </pre>
-            <p>This initialization is same as the previous one and in this case the compiler automatically inserts the null character at the end. Note that here the string constant does not represent an address. The array str will be stored in memory as &darr;
+            <p>This initialization is same as the previous one and in this case the compiler automatically inserts the
+                null character at the end. Note that here the string constant does not represent an address. The array
+                str will be stored in memory as &darr;
                 <br><img src="../../images/string2.svg" alt="" class="wb">
-                Here we have not specified the size of the array, but if we specify it then we should take care that array should be large enough to hold all the characters including the null character.
+                Here we have not specified the size of the array, but if we specify it then we should take care that
+                array should be large enough to hold all the characters including the null character.
             </p>
             <p>Program to print characters of a string and address of each character</p>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 int main()
@@ -142,15 +171,17 @@ Character = 97  Address = 3134707242
             <div class="in">
                 <h3>Runtime initializaiton</h3>
                 <ul>
-                    <li><b>scanf("%s", str)</b> can be used but it there is white space (space bar, tab, etc.) in between string then only words till first white space are taken because whitespace terminate the scanf() function.</li>
+                    <li><b>scanf("%s", str)</b> can be used but it there is white space (space bar, tab, etc.) in
+                        between string then only words till first white space are taken because whitespace terminate the
+                        scanf() function.</li>
                     <li><b>gets()</b> function can also be used which can take white spaces.</li>
                     <li><b>fgets()</b> function is used and it is supported in linux OS.</li>
                 </ul>
                 <div class="wh">
                     <p>Program to intialize string variable runtime using scanf() function</p>
                     <div class='code'>
-                       <div class='dotc'></div>
-                       <pre>
+                        <div class='dotc'></div>
+                        <pre>
                            <code>
     #include &lt;stdio.h>
     int main()
@@ -177,8 +208,8 @@ Character = 97  Address = 3134707242
                 <div class="wh">
                     <p>Program to intialize string variable runtime using gets() function.</p>
                     <div class='code'>
-                       <div class='dotc'></div>
-                       <pre>
+                        <div class='dotc'></div>
+                        <pre>
                            <code>
 #include &lt;stdio.h>
 int main()
@@ -204,8 +235,8 @@ Your entered string is = Hi my name is
                 <div class="wh">
                     <p>Program to intialize string variable runtime using fgets() function.</p>
                     <div class='code'>
-                       <div class='dotc'></div>
-                       <pre>
+                        <div class='dotc'></div>
+                        <pre>
                            <code>
 #include &lt;stdio.h>
 int main()
@@ -244,8 +275,8 @@ Your entered string is = Hello my name is
                     <br>ACSII code for 'a' to 'z' &rarr; 97 - 122
                 </p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -272,8 +303,8 @@ int main()
             <div class="in">
                 <p>Program to reverse any string without using predefind function.</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -300,8 +331,8 @@ int main()
             <div class="in">
                 <p>Program to check whether a string is palindrome or not</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -334,17 +365,21 @@ int main()
         <div id="t5" class="wh">
             <h2>String Library Function</h2>
             <ul>
-                <li>There are several functions used to manipulate strings. The prototypes for these functions are in header file string.h. We'll discuss some of them below-</li>
+                <li>There are several functions used to manipulate strings. The prototypes for these functions are in
+                    header file string.h. We'll discuss some of them below-</li>
             </ul>
             <div class="in">
                 <h3>strlen()</h3>
                 <ul>
-                    <li>This function returns the length of the string i.e. the number of characters in the string excluding the terminating null character. It accepts single argument, which is pointer to the first character of the string.</li>
-                    <li>For example strlen("suresh") returns the values 6. Similarly if s1 is an array that contains the name "deepali" then strlen(s1) returns the value 7.</li>
+                    <li>This function returns the length of the string i.e. the number of characters in the string
+                        excluding the terminating null character. It accepts single argument, which is pointer to the
+                        first character of the string.</li>
+                    <li>For example strlen("suresh") returns the values 6. Similarly if s1 is an array that contains the
+                        name "deepali" then strlen(s1) returns the value 7.</li>
                 </ul>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include&lt;stdio.h>
 #include&lt;string.h>
@@ -371,17 +406,20 @@ int main()
                 <ul>
                     <li>This function is used for comparison of two strings.</li>
                     <li>If the two strings match, strcmp() returns value 0, otherwise it returns a non-zero value.</li>
-                    <li>This function compares the strings character by character. The comparison stops wen either the end of string is reached of the corresponding characters in the two strings are not same. The non-zero value returned on mismatch is the difference of the ASCII value of the non-matching characters of the two strings.</li>
-                    <li>Strcmpe(s1, s2) returns a value - 
-                        <br>< 0 when s1 < s2
-                        <br> = 0 when s1 = = s2 
-                        <br>> 0 when s1 > s2
+                    <li>This function compares the strings character by character. The comparison stops wen either the
+                        end of string is reached of the corresponding characters in the two strings are not same. The
+                        non-zero value returned on mismatch is the difference of the ASCII value of the non-matching
+                        characters of the two strings.</li>
+                    <li>Strcmpe(s1, s2) returns a value -
+                        <br>
+                        < 0 when s1 < s2 <br> = 0 when s1 = = s2
+                            <br>> 0 when s1 > s2
                     </li>
                 </ul>
                 <p>Program to understand the work of strcmp() function &darr;</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include&lt;stdio.h>
 #include&lt;string.h>
@@ -411,13 +449,15 @@ Strings are not same
                 <h3>strcpy()</h3>
                 <ul>
                     <li>This function is used for copying one string to another string.</li>
-                    <li>strcpy(str1, str2) copies str2 to str1. Here str2 is the source string and str1 is destination string.</li>
-                    <li>If str2 = "suresh" then this function copies "suresh" into str1. This function takes pointers to two strings as arguments and returns the pointer to first string.</li>
+                    <li>strcpy(str1, str2) copies str2 to str1. Here str2 is the source string and str1 is destination
+                        string.</li>
+                    <li>If str2 = "suresh" then this function copies "suresh" into str1. This function takes pointers to
+                        two strings as arguments and returns the pointer to first string.</li>
                 </ul>
                 <p>Program to understand the work of the strcpy() function</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include&lt;stdio.h>
 #include&lt;string.h>
@@ -449,13 +489,15 @@ First string : Delhi             Second string : Calcutta
             <div class="in">
                 <h3>strcat()</h3>
                 <ul>
-                    <li>This function is used for concatenation of two strings. If first string is "King" and second string is "size" then after using this function the first string becomes "Kingsize".</li>
-                    <li>The null character from the fisrt string is removed, and the second string is added at the end of first string. The second string remains unaffected.</li>
+                    <li>This function is used for concatenation of two strings. If first string is "King" and second
+                        string is "size" then after using this function the first string becomes "Kingsize".</li>
+                    <li>The null character from the fisrt string is removed, and the second string is added at the end
+                        of first string. The second string remains unaffected.</li>
                 </ul>
                 <p>Program to understand the work of strcat() function</p>
                 <div class='code'>
-                   <div class='dotc'></div>
-                   <pre>
+                    <div class='dotc'></div>
+                    <pre>
                        <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -505,8 +547,8 @@ int main() {
         <div class="wh">
             <h2>Passing string to function</h2>
             <div class='code'>
-               <div class='dotc'></div>
-               <pre>
+                <div class='dotc'></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 #include &lt;string.h>

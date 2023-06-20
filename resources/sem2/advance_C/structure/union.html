@@ -19,7 +19,23 @@
         }
     </style>
     <link rel="stylesheet"
-    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -52,17 +68,20 @@
     <div class="content-box">
         <h1>Union</h1>
         <ul>
-            <li>A <b>union</b> is a special data type available in C that allows to store different data types in the same memory location.</li>
-            <li>You can define a union with many members, but only one member can contain a value at any given time.</li>
+            <li>A <b>union</b> is a special data type available in C that allows to store different data types in the
+                same memory location.</li>
+            <li>You can define a union with many members, but only one member can contain a value at any given time.
+            </li>
             <li>Unions provide an efficient way of using the same memory location for multiple-purpose.</li>
         </ul>
         <div id="t1" class="wh">
             <h2>Defining a Union</h2>
             <ul>
                 <li>To define a union, we use <b>union</b> keyword.</li>
-                <li>The union statement defines a new data type with more than one member for your program. The format of the union statement is as follows -</li>
+                <li>The union statement defines a new data type with more than one member for your program. The format
+                    of the union statement is as follows -</li>
             </ul>
-               <pre>
+            <pre>
                    <code>
 union union_tag
 {
@@ -77,7 +96,7 @@ union union_tag
             <ul>
                 <li>Example &darr;</li>
             </ul>
-               <pre>
+            <pre>
                    <code>
 union Data
 {
@@ -89,12 +108,13 @@ union Data
                </pre>
             <ul>
                 <li>The memory occupied by a union will be large enough to hold the largest member of the union.</li>
-                <li>For example, in the above example, data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by a character string.</li>
+                <li>For example, in the above example, data type will occupy 20 bytes of memory space because this is
+                    the maximum space which can be occupied by a character string.</li>
                 <li>The following code checks the size of union data type.</li>
             </ul>
             <div class="code">
-            <div class="dotc"></div>
-               <pre>
+                <div class="dotc"></div>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -114,16 +134,16 @@ int main()
 }
                    </code>
                </pre>
-               </div>
+            </div>
         </div>
         <div id="t2" class="wh">
             <h2>Accessing Union Members</h2>
             <ul>
                 <li>To access any member of a union, we use the <b>member access operator (.)</b></li>
             </ul>
-                <div class="code">
+            <div class="code">
                 <div class="dotc"></div>
-               <pre>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -152,7 +172,7 @@ int main( ) {
                </pre>
             </div>
             <p>Output &darr;</p>
-               <pre>
+            <pre>
                    <code>     
 data.i : 1917853763
 data.f : 4122360580327794860452759994368.000000
@@ -160,12 +180,15 @@ data.str : C Programming
                    </code>
                </pre>
             <ul>
-                <li>The values of <b>i</b> and <b>f</b> members of union got corrupted because the final value assigned to the variable has occupied the memory location and this is the reason that the value of <b>str</b> member is getting printed very well.</li>
+                <li>The values of <b>i</b> and <b>f</b> members of union got corrupted because the final value assigned
+                    to the variable has occupied the memory location and this is the reason that the value of <b>str</b>
+                    member is getting printed very well.</li>
             </ul>
-            <p>Now we will take an example where we will use one variable at a time. Which is the main purpose of having unions - &darr;</p>
-                <div class="code">
+            <p>Now we will take an example where we will use one variable at a time. Which is the main purpose of having
+                unions - &darr;</p>
+            <div class="code">
                 <div class="dotc"></div>
-               <pre>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 #include &lt;string.h>
@@ -197,7 +220,7 @@ int main( ) {
             <ul>
                 <li>when the above code is compiled and executed, it produces the following result. &darr;</li>
             </ul>
-               <pre>
+            <pre>
                    <code>
 data.i : 10
 data.f : 220.500000
@@ -209,21 +232,28 @@ data.str : C Programming
             <h2>Structure v/s Union</h2>
             <img src="../../images/svu.svg" alt="" class="wb">
             <ol>
-                <li>Memory allocation: 
+                <li>Memory allocation:
                     <ul>
-                        <li>A structure allocates separate memory space for each member variable declared inside the structure. Thus, the size of the structure is the sum of the sizes of all the member variables.</li>
-                        <li>A union, on the other hand, allocates the same memory space for all the member variables declared inside the union. Thus, the size of the union is equal to the size of its largest member variable.</li>
+                        <li>A structure allocates separate memory space for each member variable declared inside the
+                            structure. Thus, the size of the structure is the sum of the sizes of all the member
+                            variables.</li>
+                        <li>A union, on the other hand, allocates the same memory space for all the member variables
+                            declared inside the union. Thus, the size of the union is equal to the size of its largest
+                            member variable.</li>
                     </ul>
                 </li>
                 <li>Accessing member variables:
                     <ul>
-                        <li>In a structure, all the member variables can be accessed simultaneously and each variable has its own unique memory location.</li>
-                        <li>In a union, only one member variable can be accessed at a time and all the member variables share the same memory location.</li>
+                        <li>In a structure, all the member variables can be accessed simultaneously and each variable
+                            has its own unique memory location.</li>
+                        <li>In a union, only one member variable can be accessed at a time and all the member variables
+                            share the same memory location.</li>
                     </ul>
                 </li>
                 <li>Usage:
                     <ul>
-                        <li>Structures are commonly used to group related variables together into a single unit, whereas unions are mainly used for memory optimization and to save memory space.</li>
+                        <li>Structures are commonly used to group related variables together into a single unit, whereas
+                            unions are mainly used for memory optimization and to save memory space.</li>
                     </ul>
                 </li>
             </ol>
@@ -231,11 +261,13 @@ data.str : C Programming
         <div class="wh">
             <h2>Memory allocation of union members</h2>
             <ul>
-                <li>In a union, memory is allocated in such a way that all the members share the same memory location. </li>
-                <li>The size of the memory allocated to the union is equal to the size of the largest member in the union.</li>
+                <li>In a union, memory is allocated in such a way that all the members share the same memory location.
+                </li>
+                <li>The size of the memory allocated to the union is equal to the size of the largest member in the
+                    union.</li>
             </ul>
             <p>For example consider the following union &darr;</p>
-               <pre>
+            <pre>
                    <code>      
 union student
 {
@@ -246,17 +278,23 @@ union student
                    </code>
                </pre>
             <ul>
-                <li>In this union, the size of the largest member is 'char name[ ]' which takes up 20 bytes of memory. Therefore, the union student will take up 20 bytes of memory. However, only one of the members can be accessed at a time.</li>
-                <li>Thus, the union allows us to store different data types in the same memory location, saving memory space. However, we need to be careful while accessing the members as only one member can be accessed at a time.</li>
+                <li>In this union, the size of the largest member is 'char name[ ]' which takes up 20 bytes of memory.
+                    Therefore, the union student will take up 20 bytes of memory. However, only one of the members can
+                    be accessed at a time.</li>
+                <li>Thus, the union allows us to store different data types in the same memory location, saving memory
+                    space. However, we need to be careful while accessing the members as only one member can be accessed
+                    at a time.</li>
             </ul>
         </div>
         <div id="t4" class="wh">
             <h2>Bit fields</h2>
             <ul>
                 <li>In C, we can specify the size (in bits) of the structure and union members.</li>
-                <li>The idea of bit-field is to use memory efficiently when we know that the value of a field or group of fields will never exceed a limit or is within a small range.</li>
+                <li>The idea of bit-field is to use memory efficiently when we know that the value of a field or group
+                    of fields will never exceed a limit or is within a small range.</li>
                 <li>The type-specifier for the variable must be <i>unsigned int, signed int or int.</i></li>
-                <li>Bit fields are used when the storage of our program is limited. Need of bit fields in C programming language:
+                <li>Bit fields are used when the storage of our program is limited. Need of bit fields in C programming
+                    language:
                     <ul>
                         <li>Reduces memory consumption</li>
                         <li>To make our program more efficient and flexible.</li>
@@ -269,9 +307,9 @@ union student
                 </li>
             </ul>
             <p>Consider the following declaration without the use of bit fields.</p>
-                <div class="code">
+            <div class="code">
                 <div class="dotc"></div>
-               <pre>
+                <pre>
                    <code>
 #include &lt;stdio.h>
 
@@ -292,7 +330,7 @@ int main()
                </pre>
             </div>
             <p>Output &darr;</p>
-               <pre>
+            <pre>
                    <code>
 Size of order is 8 bytes
 The order is available and it is not T-shirt
@@ -300,15 +338,17 @@ The order is available and it is not T-shirt
                </pre>
             <ul>
                 <li>The above representation of 'order' takes 8 bytes.</li>
-                <li>Since we know that the value of each member can be either 1 or 0 to represent true or false repectively.</li>
+                <li>Since we know that the value of each member can be either 1 or 0 to represent true or false
+                    repectively.</li>
                 <li>So, we need only 2 bits out of 32 bits (8 bytes). We can optimize the space using bit fields.</li>
             </ul>
             <div class="in">
                 <h3>Declaration of bit fields in C.</h3>
                 <ul>
-                    <li>Bit-fields are variables that are defined using a predefined width or size. Format and the declaration of the bit-fileds in C are shown below &darr;</li>
+                    <li>Bit-fields are variables that are defined using a predefined width or size. Format and the
+                        declaration of the bit-fileds in C are shown below &darr;</li>
                 </ul>
-                   <pre>
+                <pre>
                        <code>
 // syntax 
 struct
@@ -318,14 +358,16 @@ struct
                        </code>
                    </pre>
                 <ul>
-                    <li>data_type: It is an integer type that determines the bit-field value which is to be interpreted. data type may be int, signed int, or unsigned it.</li>
+                    <li>data_type: It is an integer type that determines the bit-field value which is to be interpreted.
+                        data type may be int, signed int, or unsigned it.</li>
                     <li>member_name: The member name is the name of the bit field.</li>
-                    <li>width: The number of bits in the bit-filed. The width be less than or equal to the bit width of the specified type.</li>
+                    <li>width: The number of bits in the bit-filed. The width be less than or equal to the bit width of
+                        the specified type.</li>
                 </ul>
                 <p>Now we will see, 'order' representation with bit-fields &darr;</p>
-                    <div class="code">
+                <div class="code">
                     <div class="dotc"></div>
-                   <pre>
+                    <pre>
                        <code>
 #include &lt;stdio.h>
 #pragma pack(1)
@@ -355,9 +397,12 @@ int main()
     <div class="content-box">
         <p>Reference &darr;</p>
         <ul>
-            <li><a href="https://www.tutorialspoint.com/cprogramming/c_unions.htm#">www.tutorialspoint.com (unions)</a></li>
-            <li><a href="https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm">www.tutorialspoint.com (bit-fields)</a></li>
-            <li><a href="https://www.geeksforgeeks.org/difference-structure-union-c/">www.geeksforgeeks.com (structure vs union) </a></li>
+            <li><a href="https://www.tutorialspoint.com/cprogramming/c_unions.htm#">www.tutorialspoint.com (unions)</a>
+            </li>
+            <li><a href="https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm">www.tutorialspoint.com
+                    (bit-fields)</a></li>
+            <li><a href="https://www.geeksforgeeks.org/difference-structure-union-c/">www.geeksforgeeks.com (structure
+                    vs union) </a></li>
         </ul>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

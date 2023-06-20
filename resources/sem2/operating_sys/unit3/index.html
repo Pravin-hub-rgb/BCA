@@ -18,6 +18,22 @@
             color: white;
         }
     </style>
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "https://currypower.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
 
 <body>
@@ -67,7 +83,9 @@
         <div id="t1" class="wh">
             <h2>Inter-process communication (IPC)</h2>
             <ul>
-                <li>It is mechanism that allows processes to communicate with each other and synchronize their actions. The communication between these processes can be seen as a method of co-operation between them. Processes can communicate with each other through both:
+                <li>It is mechanism that allows processes to communicate with each other and synchronize their actions.
+                    The communication between these processes can be seen as a method of co-operation between them.
+                    Processes can communicate with each other through both:
                     <ol>
                         <li>Shared Memory</li>
                         <li>Message Passing</li>
@@ -77,18 +95,32 @@
             <div class="in">
                 <h3>Shared Memory Method</h3>
                 <p>Example: Producer-Consumer problem</p>
-                <p>There are two processes: Producer and Consumer. The producer produces some items and the Consumer consumes that item. The two processes share a common space or memory location known as a buffer where the item produced by the Producer is stored and from which the Consumer consumes the item if needed. There are two versions of this problem: the first one is known as the unbounded buffer problem in which the Producer can keep on producing items and there is no limit on the size of the buffer, the second one is known as the bounded buffer problem in which the Producer can produce up to a certain number of items before it starts waiting for Consumer to consume it. We will discuss the bounded buffer problem. First, the Producer and the Consumer will share some common memory, then the producer will start producing items. If the total produced item is equal to the size of the buffer, the producer will wait to get it consumed by the Consumer. Similarly, the consumer will first check for the availability of the item. If no item is available, the Consumer will wait for the Producer to produce it. If there are items available, Consumer will consume them.</p>
+                <p>There are two processes: Producer and Consumer. The producer produces some items and the Consumer
+                    consumes that item. The two processes share a common space or memory location known as a buffer
+                    where the item produced by the Producer is stored and from which the Consumer consumes the item if
+                    needed. There are two versions of this problem: the first one is known as the unbounded buffer
+                    problem in which the Producer can keep on producing items and there is no limit on the size of the
+                    buffer, the second one is known as the bounded buffer problem in which the Producer can produce up
+                    to a certain number of items before it starts waiting for Consumer to consume it. We will discuss
+                    the bounded buffer problem. First, the Producer and the Consumer will share some common memory, then
+                    the producer will start producing items. If the total produced item is equal to the size of the
+                    buffer, the producer will wait to get it consumed by the Consumer. Similarly, the consumer will
+                    first check for the availability of the item. If no item is available, the Consumer will wait for
+                    the Producer to produce it. If there are items available, Consumer will consume them.</p>
             </div>
             <div class="in">
                 <h3>Message passing method</h3>
                 <p>In this method, processes communicate with each other without using any kind of
-                    shared memory. If two processes p1 and p2 want to communicate with each other, they proceed as follows:
+                    shared memory. If two processes p1 and p2 want to communicate with each other, they proceed as
+                    follows:
                 <ul>
                     <li>Establish a communication link (if a link already exists, no need to establish it again.)</li>
                     <li>Start exchanging messages using basic primitives. We need at least two primitives:
                         <br>– send(message, destination) or send(message)
-                        <br>– receive(message, host) or receive(message)</li>
-                </ul></p>
+                        <br>– receive(message, host) or receive(message)
+                    </li>
+                </ul>
+                </p>
             </div>
         </div>
         <div id="t2" class="wh">
@@ -290,10 +322,13 @@ V(Sempahore s)
                     <p>1. Deadlock Prevention</p>
                     <ul>
                         <li>Deadlock prevention aims to design the system in a way that it eliminates one
-                        or more necessary conditions for deadlock to occur. By ensuring that at least one of the four
-                        necessary conditions—mutual exclusion, hold and wait, no preemption, and circular wait—is not
-                        satisfied, deadlocks can be prevented. This approach requires careful system design and resource
-                        management.</li>
+                            or more necessary conditions for deadlock to occur. By ensuring that at least one of the
+                            four
+                            necessary conditions—mutual exclusion, hold and wait, no preemption, and circular wait—is
+                            not
+                            satisfied, deadlocks can be prevented. This approach requires careful system design and
+                            resource
+                            management.</li>
                     </ul>
                     <p>Let's see how we can prevent each of the conditions.</p>
                     <ol>
@@ -667,14 +702,18 @@ V(Sempahore s)
                 </ul>
                 <p>Advantages of Resource Preemption:</p>
                 <ul>
-                    <li>It can help in breaking a deadlock without terminating any processes, thus preserving data and resources.</li>
-                    <li>It is more efficient than process termination as it targets only the resources that are causing the deadlock.</li>
+                    <li>It can help in breaking a deadlock without terminating any processes, thus preserving data and
+                        resources.</li>
+                    <li>It is more efficient than process termination as it targets only the resources that are causing
+                        the deadlock.</li>
                     <li>It can potentially avoid the need for restarting the system.</li>
                 </ul>
                 <p>Disadvantages of Resource Preemption:</p>
                 <ul>
-                    <li>It may lead to increased overhead due to the need for determining which resources and processes should be preempted.</li>
-                    <li>It may cause further problems if the preempted resources were critical to the system’s operation.</li>
+                    <li>It may lead to increased overhead due to the need for determining which resources and processes
+                        should be preempted.</li>
+                    <li>It may cause further problems if the preempted resources were critical to the system’s
+                        operation.</li>
                     <li>It may cause delays in the completion of processes if resources are frequently preempted.</li>
                 </ul>
             </div>
