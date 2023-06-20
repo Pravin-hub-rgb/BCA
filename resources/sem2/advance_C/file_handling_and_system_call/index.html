@@ -183,9 +183,9 @@ fp2 = fopen("yourfile.txt", "r");
                             already exists then the new data entered is appended at the end of existing data. In this
                             mode, the data existing in the file is not erased as in "w" mode.</li>
                         <li>"r" (read): This mode is used for opening an existing file for reading purpose only. The
-                            file to be opened must exist and the previous data of file in not erased.</li>
+                            file to be opened must exist and the previous data of file is not erased.</li>
                         <li>"w+" (write+read): This mode is same as "w" mode but in this mode we can also read and
-                            modify the data. If the fiel doesn't exit then a new file is created and if the file exists
+                            modify the data. If the file doesn't exist then a new file is created and if the file exists
                             then previous data is erased.</li>
                         <li>"r+" (read+write): This mode is same as "r" mode but in this mode we can also write and
                             modify existing data. The file to be opened must exist and the previous data of file is not
@@ -228,7 +228,7 @@ if(fp == NULL)
                 <ul>
                     <li>Errors in opening a file may occur due to various reasons, for example-
                         <ol>
-                            <li>If we try to open a file in read or update mode, and the file doesn't exit or we do not
+                            <li>If we try to open a file in read or update mode, and the file doesn't exist or we do not
                                 have read permission on that file.</li>
                             <li>If we try to create a file but there is no space on the disk or we don't have write
                                 permission.</li>
@@ -353,6 +353,44 @@ int main()
                     </pre>
                 </div>
             </div>
+            <p><b>Program that reads data from one file and writes it on another file.</b>
+            <br><ul>
+                <li>For this we should know about few things:
+                    <ul>
+                        <li><b>EOF:</b> EOF stands for "End of File." It is a special value that represents the end of a file when reading data from it. It is a constant defined in the <stdio.h> header file in C.</li>
+                    </ul>
+                </li>
+            </ul></p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+
+int main() {
+    FILE *sourceFile = fopen("source.txt", "r");
+    FILE *destinationFile = fopen("destination.txt", "w");
+    
+    if (sourceFile == NULL || destinationFile == NULL) {
+        printf("Failed to open files.\n");
+        return 1;
+    }
+    
+    int ch;
+    while ((ch = fgetc(sourceFile)) != EOF) { // The variable 'ch' is updated automatically with each call to fgetc(file) inside the while loop. 
+        fputc(ch, destinationFile);
+    }
+    
+    fclose(sourceFile);
+    fclose(destinationFile);
+    
+    printf("Data copied successfully.\n");
+    
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
         </div>
         <div id="t15" class="wh">
             <h2>Formatted and Unformatted I/O function</h2>
@@ -455,7 +493,7 @@ int main()
                         stream. It is a non-negative integer that uniquely identifies an open file within a process.
                         File descriptors are used to perform various operations on files, such as reading, writing, and
                         closing.</li>
-                    <li>When you open a file using 'open()'' system call library function, a file descriptor is
+                    <li>When you open a file using 'open()' system call library function, a file descriptor is
                         returned. You can think of it as a handle or reference to the opened file. This file descriptor
                         is then used in subsequent system or library calls to perform operations on the file.</li>
                 </ul>
@@ -553,7 +591,7 @@ int main() {
         <div id="t10" class="wh">
             <h2>Close</h2>
             <ul>
-                <li>The clse() function in C tells the operating system that you are done with a file descriptor and
+                <li>The close() function in C tells the operating system that you are done with a file descriptor and
                     closes the file pointed by the file descriptor. It is defined inside <b>&lt;unistd.h></b> header
                     file.</li>
             </ul>
