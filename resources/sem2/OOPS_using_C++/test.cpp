@@ -1,36 +1,31 @@
 #include <iostream>
 using namespace std;
-class Shape // abstract class
+template <class Type>
+class Test
 {
-public:
-    virtual void draw() = 0; // Pure virtual function
-};
+private:
+    Type n;
 
-class Circle : public Shape
-{
 public:
-    void draw() override
+    void getValue()
     {
-        cout << "Drawing Circle." << endl;
+        cin >> n;
+    }
+    void printVal()
+    {
+        cout << "you entered : " << n << endl;
     }
 };
-
-class Rectangle : public Shape
-{
-public:
-    void draw() override
-    {
-        cout << "Drawing Rectangle." << endl;
-    }
-};
-
 int main()
 {
-    Circle circle;
-    Rectangle rectangle;
-
-    circle.draw();
-    rectangle.draw();
+    Test<int> objINT;
+    cout << "Enter integer value : ";
+    objINT.getValue();
+    objINT.printVal();
+    Test<float> objFLOAT;
+    cout << "Enter real value : ";
+    objFLOAT.getValue();
+    objFLOAT.printVal();
 
     return 0;
 }

@@ -68,24 +68,38 @@
             <li>In generic programming, you define algorithms and data structures in terms of types that are not
                 specified upfront but are provided later when the code is instantiated with specific types. </li>
             <li><b>Generic programming</b> is a programming paradigm in C++ that focuses on creating reusable and
-                flexible code by using templates. 
-            <ul>
-                <li> It allows you to write algorithms and data structures that can work with various data types, without having to duplicate the code for each specific type.</li>
-            </ul></li>
+                flexible code by using templates.
+                <ul>
+                    <li> It allows you to write algorithms and data structures that can work with various data types,
+                        without having to duplicate the code for each specific type.</li>
+                </ul>
+            </li>
             <li>So if Max() function is called with int parameter, Max function with int parameter is created.</li>
             <li>In C++ generic programming is implemented with "template".</li>
         </ul>
         <p><b>Benefits of generic programming</b></p>
         <ul>
-            <li>Code Reusability: Generic programming allows you to write code that can be reused with different data types. Instead of duplicating code for each specific type, you can define algorithms and data structures once using templates. This promotes code reuse and reduces code duplication, leading to more maintainable and efficient codebases.</li>
-            <li>Flexibility: Generic programming provides flexibility by allowing your code to work with a wide range of data types. By using templates, you can write code that adapts to different types at compile-time. This flexibility is especially valuable when working with user-defined types or when you need to support different data representations.</li>
-            <li>Efficiency: Generic programming in C++ often results in highly efficient code. By using templates, the compiler can generate specialized code for each specific combination of template arguments. This enables the compiler to optimize the code based on the actual types, potentially leading to better performance compared to runtime polymorphism or type erasure techniques.</li>
-            <li>Abstraction: Generic programming allows you to abstract away specific implementation details and focus on the underlying algorithm or data structure. By separating the generic code from the specifics of the data types, you can achieve a higher level of abstraction, making the code more readable and easier to understand.</li>
+            <li>Code Reusability: Generic programming allows you to write code that can be reused with different data
+                types. Instead of duplicating code for each specific type, you can define algorithms and data structures
+                once using templates. This promotes code reuse and reduces code duplication, leading to more
+                maintainable and efficient codebases.</li>
+            <li>Flexibility: Generic programming provides flexibility by allowing your code to work with a wide range of
+                data types. By using templates, you can write code that adapts to different types at compile-time. This
+                flexibility is especially valuable when working with user-defined types or when you need to support
+                different data representations.</li>
+            <li>Efficiency: Generic programming in C++ often results in highly efficient code. By using templates, the
+                compiler can generate specialized code for each specific combination of template arguments. This enables
+                the compiler to optimize the code based on the actual types, potentially leading to better performance
+                compared to runtime polymorphism or type erasure techniques.</li>
+            <li>Abstraction: Generic programming allows you to abstract away specific implementation details and focus
+                on the underlying algorithm or data structure. By separating the generic code from the specifics of the
+                data types, you can achieve a higher level of abstraction, making the code more readable and easier to
+                understand.</li>
         </ul>
         <div id="t1" class="wh">
             <h2>Templates</h2>
             <ul>
-                <li>Templates are used to defin generic definition of function or classes.</li>
+                <li>Templates are used to define generic definition of function or classes.</li>
                 <li>Templates are not related to specific data types.</li>
                 <li>Templates make it possible to use one function or class to handle many different data types.</li>
                 <li>The template concept can be used in two different ways:
@@ -102,7 +116,8 @@
                         function overloading or template.</li>
                     <li>Template over function overloading??
                         <ul>
-                            <li>Still we have to repeat our code while making function with same name but with different
+                            <li>In function overloading have to repeat our code while making function with same name but
+                                with different
                                 data type.</li>
                             <li>While using template we have to write the function definition once.</li>
                         </ul>
@@ -169,11 +184,13 @@ r = Max(x, y);
                 </p>
             </div>
             <div class="in">
-                <p>Example program: Max function</p>
+                <h3>Programs</h3>
                 <div class='code'>
                     <div class='dotc'></div>
-                    <pre>
-                       <code>
+                    <button class="ac">Max function</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
 #include &lt;iostream>
 using namespace std;
 
@@ -193,21 +210,23 @@ int main()
 
     return 0;
 }
-
-                       </code>
-                   </pre>
-                </div>
-                <p>output &darr;</p>
-                <pre>
-                <code>
+     
+                            </code>
+                        </pre>
+                    </div>
+                    <p>output &darr;</p>
+                    <pre>
+                    <code>
 Maximum number is : 9
 Maximum number is : 98.78
-                </code>
-               </pre>
-                <p>Let's try another function which can work with string &darr;</p>
+                    </code>
+                   </pre>
+                </div>
                 <div class='code'>
                     <div class='dotc'></div>
-                    <pre>
+                    <button class="ac">Working with string using Template</button>
+                    <div class="panel">
+                        <pre>
                       <code>
 #include &lt;iostream>
 using namespace std;
@@ -228,27 +247,114 @@ int main()
 
                       </code>
                   </pre>
-                </div>
-                <p>Output &darr;</p>
-                <pre>
+                    </div>
+                    <p>Output &darr;</p>
+                    <pre>
                 <code>
 The value is : 9
 The value is : 9.5
 The value is : Curry Power
                 </code>
                </pre>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class="ac">Adding two number using template</button>
+                    <div class="panel">
+                        <pre>
+                       <code>
+                       
+#include &lt;iostream>
+using namespace std;
+template &lt;class Type>
+Type add(Type num1, Type num2)
+{
+    return num1 + num2;
+}
+int main()
+{
+    int a = 10, b = 20;
+    float x = 10.2, y = 20.2;
+    cout << "Sum of " << a << " and " << b << " is = " << add(a, b) << endl;
+    cout << "Sum of " << x << " and " << y << " is = " << add(x, y) << endl;
+    return 0;
+}
+                       </code>
+                   </pre>
+                    </div>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class="ac">Swap using template</button>
+                    <div class="panel">
+                        <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+template &lt;class Type>
+void swap(Type *num1, Type *num2)
+{
+    Type temp = *num1;
+    *num1 = *num2;
+    *num2 = temp;
+}
+int main()
+{
+    int a = 10, b = 20;
+    cout << " a and b before swap : " << a << " " << b << endl;
+    swap(&a, &b);
+    cout << " a and b after swap : " << a << " " << b << endl;
+    return 0;
+}
+                       </code>
+                   </pre>
+                    </div>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class="ac">Finding maximum number from an array (int , float)</button>
+                    <div class="panel">
+                        <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+template &lt;class Type>
+Type max(Type arr[], int size)
+{
+    Type max = arr[0];
+    for (int i = 1; i < size; i++)
+    {
+        if (arr[i] > max)
+            max = arr[i];
+    }
+    return max;
+}
+int main()
+{
+    int arr[] = {1, 2, 33, 4, 5};
+    int size = sizeof(arr) / sizeof(int);
+    cout << " max number in integer array is : " << max(arr, size) << endl;
+    float arr2[] = {1.1, 2.2, 33.3, 4.4, 5.5};
+    size = sizeof(arr2) / sizeof(int);
+    cout << " max number in float array is : " << max(arr2, size) << endl;
+    return 0;
+}
+                       </code>
+                   </pre>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="t2" class="wh">
-            <h2>Class Templates in OOP using C++</h2>
-            <ul>
-                <li>Class templates are used to define generic definition of classes.</li>
-                <li>Class templates are generally used for data storage (container) classes.</li>
-                <li>These classes are not related to specific data types and can work with different data types.</li>
-                <li>A class template consists of statements which are independent of particular data types.</li>
-            </ul>
-            <p>Class Templates syntax &darr;</p>
-            <pre>
+    </div>
+    <div id="t2" class="wh">
+        <h2>Class Templates in OOP using C++</h2>
+        <ul>
+            <li>Class templates are used to define generic definition of classes.</li>
+            <li>Class templates are generally used for data storage (container) classes.</li>
+            <li>These classes are not related to specific data types and can work with different data types.</li>
+            <li>A class template consists of statements which are independent of particular data types.</li>
+        </ul>
+        <p>Class Templates syntax &darr;</p>
+        <pre>
                 <code>
 Template &lt;class Type>
 Class class_name
@@ -257,22 +363,22 @@ Class class_name
 };
                 </code>
             </pre>
-            <p>Class Templates object Syntax &darr;</p>
-            <pre>
+        <p>Class Templates object Syntax &darr;</p>
+        <pre>
                 <code>
 Class_name &lt;template argument> object_name;
                 </code>
             </pre>
-            <pre>
+        <pre>
                 <code>
 Test&lt;int> objINT;
 Test&lt;float> objFLOAT;
                 </code>
             </pre>
-            <p>Program &darr;</p>
-            <div class='code'>
-                <div class='dotc'></div>
-                <pre>
+        <p>Program &darr;</p>
+        <div class='code'>
+            <div class='dotc'></div>
+            <pre>
                    <code>
 #include &lt;iostream>
 using namespace std;
@@ -294,11 +400,12 @@ public:
 };
 int main()
 {
-    Test<int> objINT;
+    Test&lt;int> objINT;
     cout << "Enter integer value : ";
     objINT.getValue();
     objINT.printVal();
-    Test<float> objFLOAT;
+    
+    Test&lt;float> objFLOAT;
     cout << "Enter real value : ";
     objFLOAT.getValue();
     objFLOAT.printVal();
@@ -307,8 +414,8 @@ int main()
 }
                    </code>
                </pre>
-            </div>
         </div>
+    </div>
     </div>
     <div class="content-box">
         <p>Reference &darr;</p>
