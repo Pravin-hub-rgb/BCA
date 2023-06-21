@@ -1,8 +1,8 @@
 // ************************** Luck line *****************
 
 const funnyLuckLines = {
-  line1: "May the force of knowledge be with you! 😂😂",
-  line2: "Break a pencil! Just not literally... exams can be stressful, you know. 😆😆",
+  line1: "Break a pencil! Just not literally... exams can be stressful, you know. 😆😆",
+  line2: "Look at you,😂 Whole semester you did nothing, now you tryna study!😂😂",
   line3: "Remember, you're so smart that Einstein would ask you for help! 🧠🤣🤣",
   line4: "Aced it in your dreams last night, right? Now go make it a reality! 💪😂😂",
   line5: "Knock those exam questions out of the park like a boss! 🎯😂😂",
@@ -21,7 +21,8 @@ const funnyLuckLines = {
   line18: "Remember, exams are like puzzles, and you're the master puzzle solver! 🧩😂😂",
   line19: "Wishing you an exam experience smoother than a buttered slide! 🧈😂😂",
   line20: "Just imagine the exam paper wearing a 'Kick Me' sign. You've got this! 😂😂",
-  line21: "A single piece of paper can't decide your future, but your answersheet can! 📝📝😂😂"
+  line21: "A single piece of paper can't decide your future, but your answersheet can! 📝📝😂😂",
+  line22: "May the force of knowledge be with you! 😂😂"
 };
 const luckLineElement = document.getElementById('quote');
 
@@ -29,7 +30,7 @@ let currentIndex = 1; // Start from line1
 
 function updateLuckLine() {
   luckLineElement.textContent = funnyLuckLines[`line${currentIndex}`];
-  currentIndex = (currentIndex % 21) + 1; // Update to the next line
+  currentIndex = (currentIndex % 22) + 1; // Update to the next line
 }
 
 updateLuckLine(); // Initial update
