@@ -1,3 +1,8 @@
+// ********* adding dots *********
+let codes = document.querySelectorAll('.dotc');
+codes.forEach(box => {
+  box.innerHTML += '<div class="dots"><div class="f"></div><div class="s"></div><div class="t"></div></div>'
+});
 // ************************** Luck line *****************
 
 const funnyLuckLines = {
@@ -130,11 +135,6 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-// ********* adding dots *********
-let codes = document.querySelectorAll('.dotc');
-codes.forEach(box => {
-  box.innerHTML += '<div class="dots"><div class="f"></div><div class="s"></div><div class="t"></div></div>'
-});
 
 // ********** HIGHLIGHT JS ***********
 hljs.highlightAll();
