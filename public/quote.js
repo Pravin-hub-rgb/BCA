@@ -36,4 +36,4 @@ function updateLuckLine() {
 
 updateLuckLine(); // Initial update
 
-setInterval(updateLuckLine, 10000); // Update every 10 seconds
+setInterval(updateLuckLine, 7000); // Update every 10 seconds
