@@ -2,8 +2,8 @@
 // ************************** Luck line *****************
 
 const funnyLuckLines = {
-    line1: "Break a pencil! Just not literally... exams can be stressful, you know. 😆😆",
-    line2: "Look at you,😂 Whole semester you did nothing, now you tryna study!😂😂",
+    line1: "Look at you,😂 Whole semester you did nothing, now you tryna study!😂😂",
+    line2: "Break a pencil! Just not literally... exams can be stressful, you know. 😆😆",
     line3: "Remember, you're so smart that Einstein would ask you for help! 🧠🤣🤣",
     line4: "Aced it in your dreams last night, right? Now go make it a reality! 💪😂😂",
     line5: "Knock those exam questions out of the park like a boss! 🎯😂😂",
