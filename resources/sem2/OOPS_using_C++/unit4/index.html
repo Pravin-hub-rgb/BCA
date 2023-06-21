@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual function</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#t1" class="link">Virtual function</a>
+        <a href="#t2" class="link">Early binding and late binding</a>
+        <a href="#t3" class="link">Pure virtual function</a>
+        <a href="#t4" class="link">Abstract classes</a>
+        <a href="#t5" class="link">Runtime and compile-time polymorphism</a>
+        <div class="botbut">
+            <a href="./template.html" class="link">Next Topic &rarr;</a>
+            <a href="../3.2_inheritance/index.html" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Virtual function</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Virtual function</h1>
+        <ul>
+            <li>First we will go through a problem scenario then we will see how to overcome it.</li>
+        </ul>
+        <img src="../../images/virfunc1.svg" alt="" class="wb">
+        <ul>
+            <li>Now show() function is called. Now question is what will be the outcome???</li>
+            <li>This program prints "we are in base class yeah", although the pointer was storing the address of derived
+                class. </li>
+            <li>So this was the problem, now this problem can be resolved using "virtual function".</li>
+            <li>While covering this problem there are many topics that are also involved in this like- late binding, we
+                will also cover them.</li>
+        </ul>
+        <div id="t1" class="wh">
+            <h2>Virtual function</h2>
+            <ul>
+                <li>A virtual function is a member function in a base class that can be overridden by a derived class to
+                    provide a different implementation. It allows the derived class to define its own version of the
+                    function, providing flexibility and extensibility in the object-oriented hierarchy.</li>
+                <li>The virtual keyword is used to declare a function as virtual in the base class.</li>
+                <li>Virtual functions enable dynamic polymorphism, which means that a function call is resolved
+                    dynamically at runtime based on the actual object type rather than the declared type. This allows
+                    objects of different derived classes to be treated uniformly through a base class pointer or
+                    reference, simplifying code and improving flexibility.</li>
+                <li>When a virtual function is called through a base class pointer or reference, the function that is
+                    invoked is determined at runtime based on the type of the actual object being pointed to or
+                    referenced. This is known as dynamic or late binding.</li>
+                <li>Virtual functions are typically used in scenarios where different derived classes need to provide
+                    their own implementation of a specific behavior defined in the base class. The base class provides a
+                    common interface through virtual functions, while the derived classes override these functions to
+                    customize their behavior.</li>
+                <li>It is important to note that virtual functions should be declared in the base class and overridden
+                    in the derived classes using the override keyword to ensure proper overriding and to indicate the
+                    intention of overriding the base class function.</li>
+            </ul>
+            <p>Let's resolve the problem</p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+class base_class
+{
+public:
+    virtual void show()
+    {
+        cout << "we are in base class yeah";
+    }
+};
+
+class derived_class : public base_class
+{
+public:
+    void show()
+    {
+        cout << "we are in derived class yeah";
+    }
+};
+
+int main()
+{
+    base_class *basePtr;
+    derived_class objOfDerivedC;
+    basePtr = &objOfDerivedC;
+    basePtr->show();
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+            <p>Output &darr;</p>
+            <pre>
+                <code>
+we are in derived class yeah
+                </code>
+            </pre>
+            <ul>
+                <li>Just including 'virtual' in definition of show() function of base class, the problem is resolved.
+                </li>
+            </ul>
+        </div>
+        <div id="t2" class="wh">
+            <h2>Early binding & late binding</h2>
+            <div class="in">
+                <h3>Early binding (static binding)</h3>
+                <ul>
+                    <li>Early binding occurs when the function call is resolved at compile-time.</li>
+                    <li>The compiler determines which function to call based on the static type of the object. It is
+                        also known as static binding because the binding between the function call and the function
+                        implementation is done before the program is executed.</li>
+                </ul>
+                <p>Program to demonstrate early binding</p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+
+class Shape
+{
+public:
+    void draw()
+    {
+        cout << "Drawing Shape." << endl;
+    }
+};
+
+class Circle : public Shape
+{
+public:
+    void draw()
+    {
+        cout << "Drawing Circle." << endl;
+    }
+};
+
+int main()
+{
+    Shape shape;
+    Circle circle;
+
+    Shape *shapePtr = &shape;
+    shapePtr->draw(); // Calls Shape's draw() function (early binding)
+
+    shapePtr = &circle;
+    shapePtr->draw(); // Calls Shape's draw() function (early binding)
+
+    return 0;
+}
+                   </code>
+               </pre>
+                </div>
+                <ul>
+                    <li>Just because we are not using virutal function this becomes example of early binding.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Late binding (Dynamic binding)</h3>
+                <ul>
+                    <li>Late binding occurs when the function call is resolved at runtime. The compiler defers the
+                        binding of the function call to the actual object until runtime. It is also known as dynamic
+                        binding or virtual binding.</li>
+                </ul>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <pre>
+                       <code>
+#include &lt;iostream>
+using namespace std;
+class Shape
+{
+public:
+    virtual void draw()
+    {
+        cout << "Drawing Shape." << endl;
+    }
+};
+
+class Circle : public Shape
+{
+public:
+    void draw()
+    {
+        cout << "Drawing Circle." << endl;
+    }
+};
+
+int main()
+{
+    Shape *shapePtr;
+    Shape shape;
+    Circle circle;
+
+    shapePtr = &shape;
+    shapePtr->draw(); // Calls Shape's draw() function (late binding)
+
+    shapePtr = &circle;
+    shapePtr->draw(); // Calls Circle's draw() function (late binding)
+
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Pure virtual functions</h2>
+            <ul>
+                <li>It is virtual function but there is no body.</li>
+                <li>A pure virtual function is a virtual function declared in a base class that has no implementation.
+                </li>
+                <li>It is declared using the syntax &darr;
+                    <pre>
+                        <code>
+virtual returnType functionName() = 0;
+                        </code>
+                    </pre>
+                </li>
+                <li>A class containing a pure virtual function becomes an abstract class and cannot be instantiated.
+                </li>
+                <li>Derived classes must override pure virtual functions to provide their own implementation.</li>
+            </ul>
+            <p>Example &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+class Shape
+{
+public:
+    virtual void draw() = 0; // Pure virtual function
+};
+
+class Circle : public Shape
+{
+public:
+    void draw() override // overide is keyword which ensure we are overriding function in derived class from base class.
+    {
+        cout << "Drawing Circle." << endl;
+    }
+};
+
+class Rectangle : public Shape
+{
+public:
+    void draw() override
+    {
+        cout << "Drawing Rectangle." << endl;
+    }
+};
+
+int main()
+{
+    Circle circle;
+    Rectangle rectangle;
+
+    circle.draw();    // Calls Circle's draw() function
+    rectangle.draw(); // Calls Rectangle's draw() function
+
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t4" class="wh">
+            <h2>Abstract classes</h2>
+            <ul>
+                <li>An abstract class is a class that contains at least one pure virtual function.</li>
+                <li>Abstract classes cannot be instantiated directly; they serve as base classes for derived classes.</li>
+                <li>Derived classes must provide implementations for all pure virtual functions in the abstract base class.</li>
+            </ul>
+            <p>Example program &darr;</p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+class Shape // abstract class
+{
+public:
+    virtual void draw() = 0; // Pure virtual function
+};
+
+class Circle : public Shape
+{
+public:
+    void draw() override
+    {
+        cout << "Drawing Circle." << endl;
+    }
+};
+
+class Rectangle : public Shape
+{
+public:
+    void draw() override
+    {
+        cout << "Drawing Rectangle." << endl;
+    }
+};
+
+int main()
+{
+    Circle circle;
+    Rectangle rectangle;
+
+    circle.draw();
+    rectangle.draw();
+
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t5" class="wh">
+            <h2>How Runtime polymorphism and Compile-time polymorphism is related to early and late binding??</h2>
+            <div class="in">
+                <h3>Runtime polymorphism</h3>
+                <ul>
+                    <li>Runtime polymorphism, also known as dynamic polymorphism, is achieved through the use of virtual functions.</li>
+                    <li>It allows the selection of the appropriate function implementation at runtime based on the actual object type. This is possible because virtual functions are resolved dynamically (late binding).</li>
+                    <li>The binding of the function call to its implementation occurs at runtime, depending on the type of the object being referenced or pointed to.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Compile-time Polymorphism</h3>
+                <ul>
+                    <li>Compile-time polymorphism, also known as static polymorphism, is achieved through function overloading and templates. In function overloading, multiple functions with the same name but different parameter lists can be defined. The appropriate function is selected based on the static types of the arguments at compile time.</li>
+                    <li></li>
+                </ul>
+            </div>
+            <ul>
+                <li>So, late binding is associated with runtime polymorphism, where the appropriate function implementation is determined at runtime based on the actual object type. Early binding is associated with compile-time polymorphism, where the function call is resolved at compile time based on the static types of the objects involved.</li>
+            </ul>
+        </div>
+        <div class="content-box">
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=XOSblnOEHKY" target="_blank">Youtube video (codeitup channel) &neArr;</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
