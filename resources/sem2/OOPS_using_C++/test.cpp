@@ -1,25 +1,24 @@
 #include <iostream>
-#include <fstream>
-#include <string>
 using namespace std;
 
 int main()
 {
-    ifstream inputFile("input.txt"); // Open the file for reading
-
-    if (inputFile.is_open())
-    { // Check if the file is successfully opened
-        string line;
-        while (getline(inputFile, line))
-        {                         // Read each line from the file
-            cout << line << endl; // Display the line on the console
-        }
-        inputFile.close(); // Close the file
-    }
-    else
+    int a, b;
+    float r;
+    cout << "Enter the value of a : ";
+    cin >> a;
+    try
     {
-        cout << "Failed to open the file." << endl;
+        cout << "Enter the value of b : ";
+        cin >> b;
+        if (b == 0)
+            throw 0;
+        r = a / b;
+        cout << "The result if : " << r << endl;
     }
-
+    catch (int)
+    {
+        cout << "cannot divide by zero" << endl;
+    }
     return 0;
 }
