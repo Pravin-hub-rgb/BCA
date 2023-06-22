@@ -370,6 +370,189 @@ int main()
                     </pre>
                 </div>
             </div>
+            <p><b>Overloading unary operator &darr;</b></p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading unary plus (+) and unary minus (-) operator using friend function (making
+                    positive number negative and vice versa)</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+
+    Myclass(int val)
+    {
+        value = val;
+    }
+
+    int getValue() const
+    {
+        return value;
+    }
+    // Overloading the unary minus (-) operator
+    friend Myclass operator-(Myclass);
+
+    // Overloading the unary plus (+) operator
+    friend Myclass operator+(Myclass);
+};
+Myclass operator-(Myclass x)
+{
+    Myclass y;
+    y.value = -(x.value);
+    return y;
+}
+
+Myclass operator+(Myclass x)
+{
+    return x;
+}
+int main()
+{
+    Myclass obj1(10);
+
+    Myclass obj2 = -obj1; // Using the unary minus operator
+    cout << "Unary Minus: " << obj2.getValue() << endl;
+
+    Myclass obj3 = +obj1; // Using the unary plus operator
+    cout << "Unary Plus: " << obj3.getValue() << endl;
+
+    return 0;
+}
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading prefix and postfix (++) using friend function</button>
+                <div class="panel">
+                    <pre>
+                <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass {
+private:
+ int value;
+
+public:
+ Myclass() {}
+
+ Myclass(int val) {
+     value = val;
+ }
+
+ int getValue() const {
+     return value;
+ }
+
+ // Declare the friend functions
+ friend Myclass& operator++(Myclass& obj); // prefix
+ friend Myclass operator++(Myclass& obj, int); // postfix, for postfix we to have 'int' just to differentiate between pre and post
+};
+
+// Overloading prefix increment operator (++obj)
+Myclass& operator++(Myclass& obj) {
+ obj.value++;
+ return obj;
+}
+
+// Overloading postfix increment operator (obj++)
+Myclass operator++(Myclass& obj, int) {
+ Myclass temp(obj); // previous value will be return and actual object value will be incremented
+ obj.value++;
+ return temp;
+}
+
+int main() {
+ Myclass obj(5);
+
+ cout << "Initial Value: " << obj.getValue() << endl;
+
+ // Prefix increment
+ ++obj;
+ cout << "After Prefix Increment: " << obj.getValue() << endl;
+
+ // Postfix increment
+ obj++;
+ cout << "After Postfix Increment: " << obj.getValue() << endl;
+
+ return 0;
+}
+                </code>
+            </pre>
+                </div>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Overloading prefix and postfix (--) using friend function</button>
+               <div class="panel">
+                <pre>
+                    <code>
+ #include &lt;iostream>
+ using namespace std;
+ 
+ class Myclass {
+ private:
+     int value;
+ 
+ public:
+     Myclass() {}
+ 
+     Myclass(int val) {
+         value = val;
+     }
+ 
+     int getValue() const {
+         return value;
+     }
+ 
+     // Declare the friend functions
+     friend Myclass& operator--(Myclass& obj); // prefix
+     friend Myclass operator--(Myclass& obj, int); // postfix
+ };
+ 
+ // Overloading prefix decrement operator (--obj)
+ Myclass& operator--(Myclass& obj) {
+     obj.value--;
+     return obj;
+ }
+ 
+ // Overloading postfix decrement operator (obj--)
+ Myclass operator--(Myclass& obj, int) {
+     Myclass temp(obj); // previous value will be return and actual object value will be decremented
+     obj.value--;
+     return temp;
+ }
+ 
+ int main() {
+     Myclass obj(5);
+ 
+     cout << "Initial Value: " << obj.getValue() << endl;
+ 
+     // Prefix decrement
+     --obj;
+     cout << "After Prefix Increment: " << obj.getValue() << endl;
+ 
+     // Postfix decrement
+     obj--;
+     cout << "After Postfix Increment: " << obj.getValue() << endl;
+ 
+     return 0;
+ }
+                    </code>
+                </pre>
+               </div>
+            </div>
         </div>
     </div>
     <div class="content-box">
