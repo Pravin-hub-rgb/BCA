@@ -110,8 +110,8 @@ int main()
         </ul>
         <p>Example &darr;</p>
         <div class='code'>
-           <div class='dotc'></div>
-           <pre>
+            <div class='dotc'></div>
+            <pre>
             <code class="language-c++">
 #include &lt;iostream>
 using namespace std;
@@ -204,6 +204,172 @@ Operators that can be overloaded       Example
    Relational                         <, >, = =, <=, >=
                 </code>
             </pre>
+        </div>
+        <div class="wh">
+            <h2>Programs</h2>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '+' operator using friend function</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {} // default constructor which do nothing, but it is here for the objects which we don't initialize at the time of creation, we initialize them later.
+    Myclass(int val)
+    {
+        value = val;
+    }
+    int getValue()
+    {
+        return value;
+    }
+    friend Myclass operator+(Myclass, Myclass); // friend function
+};
+
+Myclass operator+(Myclass obj1, Myclass obj2) /// friend function definition
+{
+    Myclass obj3;
+    obj3.value = obj1.value + obj2.value;
+    return obj3;
+}
+
+int main()
+{
+    Myclass obj1(20), obj2(20), obj3;
+    obj3 = obj1 + obj2;
+    cout << "The value of obj3 is : " << obj3.getValue();
+    return 0;
+}
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '-' operator using friend function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;iostream>
+using namespace std;
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+    Myclass(int val)
+    {
+        value = val;
+    }
+    int getValue()
+    {
+        return value;
+    }
+    friend Myclass operator-(Myclass, Myclass); // friend function
+};
+
+Myclass operator-(Myclass obj1, Myclass obj2) /// friend function definition
+{
+    Myclass obj3;
+    obj3.value = obj1.value - obj2.value;
+    return obj3;
+}
+
+int main()
+{
+    Myclass obj1(20), obj2(20), obj3;
+    obj3 = obj1 - obj2;
+    cout << "The value of obj3 is : " << obj3.getValue();
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '*', '%' and '/' operators using friend function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+
+    Myclass(int val)
+    {
+        value = val;
+    }
+
+    int getValue()
+    {
+        return value;
+    }
+
+    // Friend function for overloading the * operator
+    friend Myclass operator*(Myclass, Myclass);
+
+    // Friend function for overloading the % operator
+    friend Myclass operator%(Myclass, Myclass);
+
+    // Friend function for overloading the / operator
+    friend Myclass operator/(Myclass, Myclass);
+};
+
+Myclass operator*(Myclass obj1, Myclass obj2)
+{
+    int product = obj1.value * obj2.value;
+    return Myclass(product);
+}
+
+Myclass operator%(Myclass obj1, Myclass obj2)
+{
+    int remainder = obj1.value % obj2.value;
+    return Myclass(remainder);
+}
+
+Myclass operator/(Myclass obj1, Myclass obj2)
+{
+    int quotient = obj1.value / obj2.value;
+    return Myclass(quotient);
+}
+
+int main()
+{
+    Myclass obj1(30);
+    Myclass obj2(10);
+
+    Myclass obj3 = obj1 * obj2;
+    cout << "Product: " << obj3.getValue() << endl;
+
+    Myclass obj4 = obj1 % obj2;
+    cout << "Remainder: " << obj4.getValue() << endl;
+
+    Myclass obj5 = obj1 / obj2;
+    cout << "Quotient: " << obj5.getValue() << endl;
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
         </div>
     </div>
     <div class="content-box">

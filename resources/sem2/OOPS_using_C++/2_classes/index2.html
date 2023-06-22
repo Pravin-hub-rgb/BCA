@@ -89,7 +89,7 @@ public:
     MyClass();
 
     // Copy constructor
-    MyClass(MyClass &obj);
+    MyClass(MyClass &obj); // we have to object as reference
     /* MyClass(MyClass &obj) {
         x = obj.x;
     } */ // can be defined inside the class
@@ -104,6 +104,14 @@ MyClass::MyClass(MyClass &obj) {
 }
                    </code>
                </pre>
+            <ul>
+                <li>When a copy constructor is invoked, it creates a new object by making a copy of an existing object.
+                    Without passing the argument by reference, the copy constructor would be called recursively,
+                    creating an infinite loop. This happens because the copy constructor itself requires an object of
+                    the same type as its argument, and passing it by value would result in invoking the copy constructor
+                    again to create a copy of the argument, leading to an endless recursion.</li>
+                    <li>By passing the argument by reference, we avoid this recursion because the copy constructor now operates on the original object rather than making a copy of it. This way, it can create a new object using the information from the existing object without triggering another copy constructor call.</li>
+            </ul>
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">Complete code</button>
