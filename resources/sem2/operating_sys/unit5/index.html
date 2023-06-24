@@ -47,6 +47,7 @@
         <a href="#t3" class="link">Creation of Linux</a>
         <a href="#t4" class="link">Development of Linux</a>
         <a href="#t5" class="link">Linux Files</a>
+        <a href="#t7" class="link">Standard Unix Streams</a>
         <a href="#t6" class="link">Shell and programs</a>
         <div class="botbut">
             <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
@@ -692,6 +693,276 @@ $rm filename1 filename2 filename3
                 </div>
             </div>
         </div>
+        <div id="t7" class="wh">
+            <h2>Standard Unix Streams</h2>
+            <p>Under normal circumstances, every Unix program has three streams (files) opened for it when it starts up
+            </p>
+            <ul>
+                <li><b>stdin:</b> This is referred to as the standard input and the associated file descriptor is 0.
+                    This is also represented as STDIN. The Unix program will read the default input from STDIN.</li>
+                <li><b>stdout: </b>This is referred to as the standard output and the associated file descriptor is 1.
+                    This is also represented as STDOUT. The Unix program will write the default output at STDOUT.</li>
+                <li><b>stderr: </b> This is referred to as the standard error and the associated file descriptor is 2.
+                    This is also represented as STDERR. The Unix program will write all the error messages at STDERR.
+                </li>
+            </ul>
+            <p>We will discuss in detail about file permission and access modes in Unix. File ownership is an important
+                component of Unix that provides a secure method for storing files. Every file in Unix has the following
+                attributes −</p>
+            <ul>
+                <li><b>Owner permissions:</b> The owner's permissions determine what actions the owner of the file can
+                    perform on the file.</li>
+                <li><b>Group permissions:</b> The group's permissions determine what actions a user, who is a member of
+                    the group that a file belongs to, can perform on the file.</li>
+                <li><b>Other (world) permissions:</b> The permissions for others indicate what action all other users
+                    can perform on the file.</li>
+            </ul>
+            <div class="in">
+                <h3>The Permission Indicators
+                </h3>
+                <ul>
+                    <li>While using ls -l command, it displays various information related to file permission as
+                        follows:</li>
+                </ul>
+                <pre>
+                    <code>
+ $ls -l /home/amrood
+-rwxr-xr-- 1 amrood users 1024 Nov 2 00:10 myfile 
+drwxr-xr--- 1 amrood users 1024 Nov 2 00:10 mydir
+                    </code>
+                </pre>
+                <ul>
+                    <li>Here, the first column represents different access modes, i.e., the permission associated with a
+                        file or a directory.
+                    </li>
+                    <li>The permissions are broken into groups of threes, and each position in the group denotes a
+                        specific permission, in this order: read (r), write (w), execute (x):
+                        <ul>
+                            <li>The first three characters (2-4) represent the permissions for the file's owner. For
+                                example, -rwxr-xr-- represents that the owner has read (r), write (w) and execute (x)
+                                permission.</li>
+                            <li>The second group of three characters (5-7) consists of the permissions for the group to
+                                which the file belongs. For example, -rwxr-xr-- represents that the group has read (r)
+                                and execute (x) permission, but no write permission.</li>
+                            <li>The last group of three characters (8-10) represents the permissions for everyone else.
+                                For example,-rwxr-xr--represents that there isread (r) only permission.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>File Access Modes</h3>
+                <p>The permissions of a file are the first line of defense in the security of a Unix system. The basic
+                    building blocks of Unix permissions are the read, write, and execute permissions, which have been
+                    described below :</p>
+                <ul>
+                    <li><b>Read</b>: Grants the capability to read, i.e., view the contents of the file.</li>
+                    <li><b>Write</b>: Grants the capability to modify, or remove the content of the file.
+                    </li>
+                    <li><b>Execute</b>: User with execute permissions can run a file as a program.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Directory Access Modes</h3>
+                <p>
+                    Directory access modes are listed and organized in the same manner as any other file. There are a
+                    few differences that need to be mentioned:</p>
+                <ul>
+                    <li><b>Read</b>: Access to a directory means that the user can read the contents. The user can look
+                        at the filenames inside the directory.</li>
+                    <li><b>Write</b>: Access means that the user can add or delete files from the directory.</li>
+                    <li><b>Execute</b>: Executing a directory doesn't really make sense, so think of this as a traverse
+                        permission. A user must have execute access to the bin directory in order to execute the ls or
+                        the cd command.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Changing Permissions</h3>
+                <p>To change the file or the directory permissions, you use the chmod (change mode) command. There are
+                    two ways to use chmod — the symbolic mode and the absolute mode.</p>
+                <div class="wh">
+                    <p><b>Using chmod in Symbolic Mode</b></p>
+                    <p>The easiest way for a beginner to modify file or directory permissions is to use the symbolic
+                        mode.
+                        With symbolic permissions you can add, delete, or specify the permission set you want by using
+                        the
+                        operators in the following table.</p>
+                    <pre>
+                    <code>
+Sr. No          Chmod operator & Description
+  1             +   Adds the designated permission(s) to file or directory
+  2             -   Removes the designated permission(s) to file or directory
+  3             =   Sets the designated permission(s).
+                    </code>
+                </pre>
+                    <p>Here's an example using testfile. Running ls -1 on the testfile shows that the file's permissions
+                        are
+                        as follows</p>
+                    <pre>
+                        <code>
+$ls -l testfile
+-rwxrwxr-- 1 amrood users 1024 Nov 2 00:10 testfile
+                        </code>
+                    </pre>
+                    <p>Then each example chmod command from the preceding table is run on the testfile, followed by ls
+                        –l, so you can see the permission changes</p>
+                    <pre>
+                        <code>
+$chmod o+wx testfile
+$ls -l testfile
+-rwxrwxrwx 1 amrood users 1024 Nov 2 00:10 testfile $chmod u-x testfile
+$ls -l testfile
+-rw-rwxrwx 1 amrood users 1024 Nov 2 00:10 testfile $chmod g = rx testfile
+$ls -l testfile
+-rw-r-xrwx 1 amrood users 1024 Nov 2 00:10 testfile
+                        </code>
+                    </pre>
+                    <p>Here's how you can combine these commands on a single line</p>
+                    <pre>
+                        <code>
+ $chmod o+wx,u-x,g = rx testfile
+$ls -l testfile
+-rw-r-xrwx 1 amrood users 1024 Nov 2 00:10 testfile
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p><b>Using chmod with Absolute Permissions</b></p>
+                    <p>The second way to modify permissions with the chmod command is to use a number to specify each
+                        set of permissions for the file.</p>
+                    <p>
+                        Each permission is assigned a value, as the following table shows, and the total of each set of
+                        permissions provides a number for that set.</p>
+                    <pre>
+                            <code>
+Number   Octal Permission Representation                                     Ref 
+  0          No permission                                                   ---
+  1          Execute permission                                              --x
+  2          Write permission                                                -w-
+  3          Execute and write permission: 1 (execute) + 2 (write) = 3       -wx
+  4          Read permission                                                 r--
+  5          Read and execute permission: 4 (read) + 1 (execute) = 5         r-x
+  6          Read and write permission: 4 (read) + 2 (write) = 6             rw-
+  7          All permissions: 4 (read) + 2 (write) + 1 (execute) = 7         rwx
+                            </code>
+                        </pre>
+                    <p>Here's an example using the testfile. Running ls -1 on the testfile shows that the file's
+                        permissions are as follows:</p>
+                    <pre>
+                            <code>
+$ls -l testfile
+-rwxrwxr-- 1 amrood users 1024 Nov 2 00:10 testfile
+                            </code>
+                        </pre>
+                    <p>
+                        Then each example chmod command from the preceding table is run on the testfile, followed by ls
+                        –l, so you can see the permission changes</p>
+                    <pre>
+                                <code>
+$ chmod 755 testfile
+$ls -l testfile
+-rwxr-xr-x 1 amrood users 1024 Nov 2 00:10 testfile $chmod 743 testfile
+$ls -l testfile
+-rwxr---wx 1 amrood users 1024 Nov 2 00:10 testfile $chmod 043 testfile
+$ls -l testfile
+----r---wx 1 amrood users 1024 Nov 2 00:10 testfile
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Changing Ownership</h3>
+                <p>The <b>chown</b> command changes the ownership of a file. The basic syntax is as follows:</p>
+                <pre>
+                    <code>
+$chown user filelist
+                    </code>
+                </pre>
+                <p>The value of the user can be either the name of a user on the system or the user id (uid) of a user
+                    on the system.
+                    <br>The following example will help you understand the concept
+                </p>
+                <pre>
+                    <code>
+$chown amrood testfile
+$
+                    </code>
+                </pre>
+                <p>Changes the owner of the given file to the user amrood. <br>
+                    <b>NOTE</b> − The super user, root, has the unrestricted capability to change the ownership of any
+                    file but normal users can change the ownership of only those files that they own.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Changing Group Ownership</h3>
+                <p>The <b>chgrp</b> command changes the group ownership of a file. The basic syntax is as follows</p>
+                <pre>
+                    <code>
+$ chgrp group filelist
+                    </code>
+                </pre>
+                <p>The value of group can be the name of a group on the system or the group ID (GID) of a group on the
+                    system. <br>
+                    Following example helps you understand the concept: </p>
+                <pre>
+                        <code>
+$ chgrp special testfile 
+$ 
+                        </code>
+                    </pre>
+                <p>Changes the group of the given file to special group.</p>
+            </div>
+            <div class="in">
+                <h3>SUID and SGID File Permission</h3>
+                <p>Often when a command is executed, it will have to be executed with special privileges in order to
+                    accomplish its task.
+                    <br><br>
+                    As an example, when you change your password with the <b>passwd</b> command, your new password is
+                    stored in the file <b>/etc/shadow</b>.
+                    <br><br>
+                    As a regular user, you do not have <b>read</b> or <b>write</b> access to this file for security
+                    reasons, but when you change your password, you need to have the write permission to this file. This
+                    means that the <b>passwd</b> program has to give you additional permissions so that you can write to
+                    the file <b>/etc/shadow</b>.
+                    <br><br>Additional permissions are given to programs via a mechanism known as the Set User ID (SUID)
+                    and Set Group ID (SGID) bits.
+                    <br><br>
+                    When you execute a program that has the SUID bit enabled, you inherit the permissions of that
+                    program's owner. Programs that do not have the SUID bit set are run with the permissions of the user
+                    who started the program.
+                    <br><br>This is the case with SGID as well. Normally, programs execute with your group permissions,
+                    but instead your group will be changed just for this program to the group owner of the program.
+                    <br><br>The SUID and SGID bits will appear as the letter "s" if the permission is available. The
+                    SUID "s" bit will be located in the permission bits where the owners’ execute permission normally
+                    resides.
+                    <br>For example, the command
+                </p>
+                <pre>
+    <code>
+$ ls -l /usr/bin/passwd
+-r-sr-xr-x 1 root bin 19031 Feb 7 13:47 /usr/bin/passwd* $
+    </code>
+</pre>
+                <p>
+                    Shows that the SUID bit is set and that the command is owned by the root. A capital letter <b>S</b> in the execute position instead of a lowercase s indicates that the execute bit is not set.
+                    <br>If the sticky bit is enabled on the directory, files can only be removed if you are one of the following users:
+                    <ul>
+                        <li>The owner of the sticky directory</li>
+                        <li>The owner of the file being removed</li>
+                        <li>The super user, root</li>
+                    </ul>
+                    To set the SUID and SGID bits for any directory try the following command 
+                </p>
+                <pre>
+                    <code>
+$ chmod ug+s dirname
+$ ls -l
+drwsr-sr-x 2 root root 4096 Jun 19 06:45 dirname 
+$
+                    </code>
+                </pre>
+            </div>
+        </div>
         <div id="t6" class="wh">
             <ul>
                 <li>A Shell provides you with an interface to the Unix system. It gathers input from you and executes
@@ -1018,15 +1289,22 @@ Num2: num3
             <div class="in">
                 <p>Sol:</p>
                 <ul>
-                    <li>Logical and relational operatos in Linux are primarily used within shell scripting and command-line operations. These operators allow you to perform logical and relational comparisons on values or expressions to determine the truth or falsehood of a condition. They are commonly used in conditional statements, loops, and decision making processes.</li>
+                    <li>Logical and relational operatos in Linux are primarily used within shell scripting and
+                        command-line operations. These operators allow you to perform logical and relational comparisons
+                        on values or expressions to determine the truth or falsehood of a condition. They are commonly
+                        used in conditional statements, loops, and decision making processes.</li>
                 </ul>
                 <p><b>Logical Operators</b></p>
                 <ul>
-                    <li>AND (&&): Represents the logical AND operation. It returns true if both operands are true, otherwise, it return fale.</li>
-                    <li>OR (||): Represents the logical OR operation. It returns true if either of the operands is true; otherwise, it returns false.</li>
-                    <li>NOT (!): Represents the logical NOT operation. It reverses the logical state of its operand. If a condition is true, the NOT operator makes it false, and vice versa.</li>
+                    <li>AND (&&): Represents the logical AND operation. It returns true if both operands are true,
+                        otherwise, it return fale.</li>
+                    <li>OR (||): Represents the logical OR operation. It returns true if either of the operands is true;
+                        otherwise, it returns false.</li>
+                    <li>NOT (!): Represents the logical NOT operation. It reverses the logical state of its operand. If
+                        a condition is true, the NOT operator makes it false, and vice versa.</li>
                 </ul>
-                <p>These operators are typically used to combine multiple conditions or expressions and evaluate the result based on their logical relationship.
+                <p>These operators are typically used to combine multiple conditions or expressions and evaluate the
+                    result based on their logical relationship.
                     <br>Example &darr;
                 </p>
                 <pre>
@@ -1060,10 +1338,13 @@ fi
                     <li>Not equal to (!=): Checks if two values or expressions are not equal.</li>
                     <li>Greater than (>): Checks if the left operand is greater than the right operand.</li>
                     <li>Less than (<): Checks if the left operand is less than the right operand.</li>
-                    <li>Greater than or equal to (>=): Checks if the left operand is greater than or equal to the right operand.</li>
-                    <li>Less than or equal to (<=): Checks if the left operand is less than or equal to the right operand.</li>
+                    <li>Greater than or equal to (>=): Checks if the left operand is greater than or equal to the right
+                        operand.</li>
+                    <li>Less than or equal to (<=): Checks if the left operand is less than or equal to the right
+                            operand.</li>
                 </ul>
-                <p>These operators are primarily used for comparing values or variables and returning a true or false result based on the comparison.
+                <p>These operators are primarily used for comparing values or variables and returning a true or false
+                    result based on the comparison.
                     <br>Example &darr;
                 </p>
                 <pre>
@@ -1088,7 +1369,8 @@ fi
             </div>
         </div>
         <div class="wh">
-            <h3>Q- What are the file permissions in LINUX and how you can change the permission for a particular file?</h3>
+            <h3>Q- What are the file permissions in LINUX and how you can change the permission for a particular file?
+            </h3>
         </div>
     </div>
     <div class="content-box">
@@ -1098,7 +1380,8 @@ fi
                     distribution name)</a></li>
         </ul>
     </div>
-    memory partitions of 100kb, 500 kb, 200 kb, 300 kb, 600kb are available how would best, worst, fisrt fit algorithm to place prcesses 212, 417, 122, 436 in order? which is the best algorithms?
+    memory partitions of 100kb, 500 kb, 200 kb, 300 kb, 600kb are available how would best, worst, fisrt fit algorithm
+    to place prcesses 212, 417, 122, 436 in order? which is the best algorithms?
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
