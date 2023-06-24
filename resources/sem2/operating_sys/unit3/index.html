@@ -18,6 +18,8 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
@@ -127,7 +129,7 @@
             <h2>What is critical section problem?</h2>
             <ul>
                 <li>A critical section is a segment of code which can be accessed by a signal process at a specific
-                    point of time. The sectio soncisits of shared data resources that required to be accessed by other
+                    point of time. The section consists of shared data resources that required to be accessed by other
                     processes.
                     <ul>
                         <li>The entry to the critical section is handled by the wait() function, and it is represented
@@ -166,8 +168,59 @@
                     <li>Doesn’t work on modern architectures.</li>
                     <li>It’s for 2 processes which alternate execution between the critical section and remainder
                         section. Say, P1 is the first process and P2 is the second process.</li>
-                    <li>The 2 processes should share 2 data items with each other.</li>
+                    <li>The 2 processes should share 2 data items with each other.
+                            <p>
+                                int turn 
+                                <br>
+                                Boolean flag [2]
+                            </p>
+                    </li>
+                    <li>Turn – It indicates the process who should enter into its critical section.</li>
+                    <li>Flag Array – It tells whether a process is ready to enter its critical section. Let flag[0]
+                        indicate process P1. If flag[0] = true , then Process P1 is ready to execute in its critical section. flag[1] indicates process P2. If flag[1] = true, then Process P2 is ready to execute in its critical section.</li>
                 </ul>
+                <p><b>Structure of process P<sub>i</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[i] = true; // entry section
+    turn = j;
+    while(flag[j] == true && turn == j); // checking if other process is interested or it is already in CS.
+        // critical section 
+
+    flag[i] = false; // exit section
+}
+                    </code>
+                </pre>
+                <p><b>P<sub>0</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[0] = true;
+    turn = 1;
+    while(flag[1] == true && turn == 1);
+        // critical section 
+
+    flag[0] = false;
+}
+                    </code>
+                </pre>
+                <p><b>P<sub>1</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[1] = true;
+    turn = 0;
+    while(flag[0] == true && turn == 0);
+        // critical section 
+
+    flag[1] = false;
+}
+                    </code>
+                </pre>
             </div>
             <div class="in">
                 <h3>Semaphores in Process Synchronization</h3>
@@ -267,10 +320,10 @@ V(Sempahore s)
                         an integer variable that is shared between threads. This variable is used to solve the critical
                         section problem and to achieve process synchronization in the multiprocessing environment.</li>
                     <li>It can cause performance issues in a program if not used properly.</li>
-                    <li>It van be difficult to debug and maintain.</li>
+                    <li>It can be difficult to debug and maintain.</li>
                     <li>It can be prone to race conditions and other synchronization problems if not used correctly.
                     </li>
-                    <li>It can be vulnerable to certain types of attacks, such as denial of service attcks.</li>
+                    <li>It can be vulnerable to certain types of attacks, such as denial of service attacks.</li>
                 </ul>
                 </p>
             </div>
@@ -772,6 +825,13 @@ Process    Allocated        Max Need     Available
             </pre>
         </div>
     </div>
+    <div class="content-box">
+        <p>Tutorials &darr;</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=uj-zhs7cUSI">Perterson's solution tutorial (Sudhankar Atchala) &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 

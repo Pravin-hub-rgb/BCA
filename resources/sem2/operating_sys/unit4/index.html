@@ -682,6 +682,171 @@
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <p>The range of services and add-ons provided by modern operating systems is constantly expanding, and four
+                basic operating system management functions are implemented by all operating systems. These management
+                functions are briefly described below and given the following overall context. The four main operating
+                system management functions (each of which are dealt with in more detail in different places) are:</p>
+            <ul>
+                <li>Process Management</li>
+                <li>Memory Management</li>
+                <li>File and Disk Management</li>
+                <li>I/O System Management</li>
+            </ul>
+            <p>Most computer systems employ secondary storage devices (magnetic disks). It provides low- cost,
+                non-volatile storage for programs and data (tape, optical media, flash drives, etc.). Programs and the
+                user data they use are kept on separate storage devices called files. The operating system is
+                responsible for allocating space for files on secondary storage media as needed.
+                <br><br>
+                There is no guarantee that files will be stored in contiguous locations on physical disk drives,
+                especially large files. It depends greatly on the amount of space available. When the disc is full,
+                new files are more likely to be recorded in multiple locations. However, as far as the user is
+                concerned, the example file provided by the operating system hides the fact that the file is fragmented
+                into multiple parts.
+                <br><br>The operating system needs to track the location of the disk for every part of every file on the
+                disk. In some cases, this means tracking hundreds of thousands of files and file fragments on a single
+                physical disk. Additionally, the operating system must be able to locate each file and perform read and
+                write operations on it whenever it needs to. Therefore, the operating system is responsible for
+                configuring the file system, ensuring the safety and reliability of reading and write operations to
+                secondary storage, and maintains access times (the time required to write data to or read data from
+                secondary storage).
+            </p>
+            <p><b>Disk management of the operating system includes:</b></p>
+            <ul>
+                <li>Disk Format</li>
+                <li>Booting from disk</li>
+                <li>Bad lock recovery</li>
+            </ul>
+            <div class="in">
+                <p><b>The low-level format or physical format:</b></p>
+                <ul>
+                    <li>Divides the disk into sectors before storing data so that the disk controller can read and write
+                        Each sector can be:</li>
+                    <li>The header retains information, data, and error correction code (ECC) sectors of data, typically
+                        512 bytes of data, but optional disks use the operating system’s own data structures to preserve
+                        files using disks.</li>
+                    <li>It is conducted in two stages:
+                        <ol>
+                            <li>Divide the disc into multiple cylinder groups. Each is treated as a logical disk.</li>
+                            <li>Logical format or “Create File System”. The OS stores the data structure of the first
+                                file system on the disk. Contains free space and allocated space.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <ul>
+                    <li>For efficiency, most file systems group blocks into clusters. Disk I / O runs in blocks. File I
+                        / O runs in a cluster.</li>
+                    <li>For example, the sizes can be 256,512, and 1,024 bytes. If disk is formatted with larger sector
+                        size, fewer sectors can fit on each track.</li>
+                    <li>As a result fewer headers and trailers are written on each track and more space is obtainable
+                        for
+                        user data. – Some operating systems can handle a sector size of 512 bytes.</li>
+                    <li>Operating system keeps its own data structures on disk before it use disk to store the files. It
+                        performs this with following two steps:
+                        <ol>
+                            <li>It partitions the disk into one or more groups of cylinders. Each partition is treated
+                                by OS as a separate disk.</li>
+                            <li>Logical formatting: That means creation of file system.</li>
+                        </ol>
+                    </li>
+                    <li>In order to increase the efficiency, file system groups blocks in chunks called as clusters.
+                    </li>
+                    <li>Some operating systems give special programs the ability to use a disk partition as a large
+                        sequential array of logical blocks, without any file-system data structures. This array is
+                        sometimes called the raw disk, and I/O to this array is called as raw I/O.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <p><b>Boot block:</b></p>
+                <ul>
+                    <li>When the computer is turned on or restarted, the program stored in the initial bootstrap ROM
+                        finds the location of the OS kernel from the disk, loads the kernel into memory, and runs the OS
+                        start.</li>
+                    <li>To change the bootstrap code, you need to change the ROM and hardware chip. Only a small
+                        bootstrap loader program is stored in ROM instead.</li>
+                    <li>The full bootstrap code is stored in the “boot block” of the disk.</li>
+                    <li>A disk with a boot partition is called a boot disk or system disk.</li>
+                    <li>The bootstrap program is required for a computer to initiate the booting after it is
+                        powered up or rebooted.</li>
+                    <li>It initializes all components of the system, from CPU registers to device controllers
+                        and the contents of main memory, and then starts the operating system.</li>
+                    <li>The bootstrap program then locates the OS kernel on disk, loads that kemel into
+                        memory, and jumps to an initial address to start the operating-system execution.</li>
+                    <li>The Read Only Memory (ROM) does not require initialization and is at a fixed location that the
+                        processor can begin executing when powered up or reset. Therefore
+                        bootstrap is stored in ROM.</li>
+                    <li>Because of read only feature of ROM; it cannot be infected by a computer virus. The
+                        difficulty is that modification of this bootstrap code requires changing the ROM
+                        hardware chips.</li>
+                    <li>Therefore, most systems store a small bootstrap loader program in the boot ROM
+                        which invokes and bring full bootstrap program from disk into main memory.</li>
+                    <li>The modified version of full bootstrap program can be simply written onto the disk.</li>
+                    <li>The fixed storage location of full bootstrap program is in the “boot blocks”. </li>
+                    <li>A disk that has a boot partition is called a boot disk or system disk.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <p><b>Bad Blocks:</b></p>
+                <ul>
+                    <li>Disks are error-prone because moving parts have small tolerances.</li>
+                    <li>Most disks are even stuffed from the factory with bad blocks and are handled in a variety of
+                        ways.</li>
+                    <li>The controller maintains a list of bad blocks.</li>
+                    <li>The controller can instruct each bad sector to be logically replaced with one of the spare
+                        sectors. This scheme is known as sector sparing or transfer.</li>
+                    <li>A soft error triggers the data recovery process.</li>
+                    <li>However, unrecoverable hard errors may result in data loss and require manual intervention.</li>
+                    <li>Failure of the disk can be:
+                        <ol>
+                            <li>Complete, means there is no way other than replacing the disk. Back up of content must
+                                be taken on new disk.</li>
+                            <li>One or more sectors become faulty.</li>
+                            <li>After manufacturing, the bad blocks exist. Depending on the disk and controller in use,
+                                these blocks are handled in a different ways.</li>
+                            <li></li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <p>Disk management in operating systems involves organizing and maintaining the data on a storage device,
+                such as a hard disk drive or solid-state drive. The main goal of disk management is to efficiently
+                utilize the available storage space and ensure data integrity and security.
+                <br><br>
+                Some common disk management techniques used in operating systems include:
+            <ol>
+                <li>Partitioning: This involves dividing a single physical disk into multiple logical
+                    partitions. Each partition can be treated as a separate storage device, allowing for
+                    better organization and management of data.</li>
+                <li>Formatting: This involves preparing a disk for use by creating a file system on it.
+                    This process typically erases all existing data on the disk.</li>
+                <li>File system management: This involves managing the file systems used by the
+                    operating system to store and access data on the disk. Different file systems have
+                    different features and performance characteristics.</li>
+                <li>Disk space allocation: This involves allocating space on the disk for storing files
+                    and directories. Some common methods of allocation include contiguous allocation,
+                    linked allocation, and indexed allocation.</li>
+                <li>Disk defragmentation: Over time, as files are created and deleted, the data on a disk
+                    can become fragmented, meaning that it is scattered across the disk. Disk defragmentation involves
+                    rearranging the data on the disk to improve performance.</li>
+            </ol>
+            </p>
+            <p><b>Advantages of disk management include:</b></p>
+            <ul>
+                <li>Improved organization and management of data.</li>
+                <li>Efficient use of available storage space.</li>
+                <li>Improved data integrity and security.</li>
+                <li>Improved performance through techniques such as defragmentation.</li>
+            </ul>
+            <p><b>
+                    Disadvantages of disk management include:</b></p>
+            <ul>
+                <li>Increased system overhead due to disk management tasks.</li>
+                <li>Increased complexity in managing multiple partitions and file systems.</li>
+                <li>Increased risk of data loss due to errors during disk management tasks.</li>
+                <li>Overall, disk management is an essential aspect of operating system management
+                    and can greatly improve system performance and data integrity when implemented properly.</li>
+            </ul>
+        </div>
     </div>
     <div class="content-box">
         <h2>Previous Years Questions</h2>
@@ -723,7 +888,8 @@
             </div>
         </div>
         <div class="wh">
-            <h3>Q- How many page fault occur for FIFO, LRU and Optimal page replacement algorithm with following reference string for four-page frames:
+            <h3>Q- How many page fault occur for FIFO, LRU and Optimal page replacement algorithm with following
+                reference string for four-page frames:
                 <br>1, 2, 3, 4, 5, 3, 4, 1, 6, 7, 8, 7, 9, 7, 8, 9, 5, 4, 5, 4, 2
             </h3>
         </div>
