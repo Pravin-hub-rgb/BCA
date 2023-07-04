@@ -1,23 +1,27 @@
 #include <stdio.h>
 
+void findCommonElements(int arr1[], int arr2[], int size1, int size2) {
+    printf("Common Elements: ");
+
+    for (int i = 0; i < size1; i++) {
+        for (int j = 0; j < size2; j++) {
+            if (arr1[i] == arr2[j]) {
+                printf("%d ", arr1[i]);
+                break;
+            }
+        }
+    }
+
+    printf("\n");
+}
+
 int main() {
-    FILE *sourceFile = fopen("source.txt", "r");
-    FILE *destinationFile = fopen("destination.txt", "w");
-    
-    if (sourceFile == NULL || destinationFile == NULL) {
-        printf("Failed to open files.\n");
-        return 1;
-    }
-    
-    int ch;
-    while ((ch = fgetc(sourceFile)) != EOF) { // The variable 'ch' is updated automatically with each call to fgetc(file) inside the while loop. 
-        fputc(ch, destinationFile);
-    }
-    
-    fclose(sourceFile);
-    fclose(destinationFile);
-    
-    printf("Data copied successfully.\n");
-    
+    int arr1[] = {1, 2, 3, 4, 5};
+    int arr2[] = {4, 5, 6, 7, 8};
+    int size1 = sizeof(arr1) / sizeof(arr1[0]);
+    int size2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    findCommonElements(arr1, arr2, size1, size2);
+
     return 0;
 }
