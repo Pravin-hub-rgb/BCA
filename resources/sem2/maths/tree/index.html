@@ -18,32 +18,21 @@
             color: white;
         }
     </style>
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">Properties</a>
+        <a href="#t2" class="link">Terminologies</a>
+        <a href="#t3" class="link">Binary tree</a>
+        <a href="#t4" class="link">Full or complete binary tree</a>
+        <a href="#t5" class="link">Binary search tree</a>
+        <a href="#t6" class="link">Spanning tree</a>
+        <a href="#t7" class="link">Minimal spanning tree</a>
         <div class="botbut">
-            <a href="" class="link">Next Topic &rarr;</a>
-            <a href="" class="link">&larr; Previous Topic</a>
+            <a href="../graph2/index.html" class="link">&larr; Previous Topic</a>
         </div>
     </div>
     <div id="navbar" class="grad">
@@ -79,7 +68,7 @@
                 non trivial tree.</li>
             <li>The number of vertex in a tree is called order of the tree.</li>
         </ul>
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>Properties</h2>
             <ol>
                 <li>A tree with 'n' vertices has n-1 edges.</li>
@@ -93,27 +82,28 @@
                 </li>
             </ol>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Terminologies</h2>
             <ul>
                 <li>Eccentricity &rarr; Eccentricity of a vertex 'v' of a graph 'G' (or Tree 'T') is denoted by E(v)
                     which is the distance from 'v' to the vertex farthest from 'v' in 'G'.
-                    <br>i.e., E(v) = Max d(v, vi), vi &isin; G
+                    <br>i.e., E(v) = Max d(v, vi), vi &isin; G.
+                    <br><img src="../../images/eccentricity.svg" alt="" class="wb">
                 </li>
                 <li>Centre &rarr; A vertex of graph 'G' with minimum eccentricity is called the centre of 'G'.s</li>
                 <li>Radius &rarr; The eccentricity of a centre in a tree is defined as the radious of the tree.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Binary tree</h2>
             <ul>
-                <li>A binary tree is rooted treein which every vertex has at most two children and each child of a
+                <li>A binary tree is rooted tree in which every vertex has at most two children and each child of a
                     vertex is designated as its left child or right child.</li>
                 <li>The subtree rooted at the children of the root are the left subtree and the right subtree of the
                     tree.</li>
             </ul>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>Full or complete binary tree</h2>
             <ul>
                 <li>A binary tree in which every vertex has either zero or two subtrees is said to be a full binary tree
@@ -131,7 +121,7 @@
                 </li>
             </ol>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Binary Search Tree</h2>
             <ul>
                 <li>A binary search tree (BST) is a binary tree in which each node has value greater than every node of
@@ -140,7 +130,7 @@
             </ul>
             <img src="../../images/treemath2.svg" alt="" class="wb">
         </div>
-        <div class="wh">
+        <div id="t6" class="wh">
             <h2>Spanning tree</h2>
             <ul>
                 <li>A subgraph 'S' of a connected graph G(V,E) is called a spanning tree of G if
@@ -153,7 +143,7 @@
                 <li>An edge of G that is not in a given spanning tree T is called a chord.</li>
                 <li>With respect to any of its spanning tree, a connected graph of n vertices and e edges has n-1
                     branches and e - n + 1 chord.</li>
-                <li>A connected graph G is a tree if and only if adding an edge between any two vertice in G creates
+                <li>A connected graph G is a tree if and only if adding an edge between any two vertices in G creates
                     exactly one cycle.</li>
                 <li>Rank(r) = n - 1 [the number of branches of the graph]</li>
                 <li>Nullity(&micro;) = e - n + 1 [the number of chord]</li>
@@ -164,16 +154,42 @@
             <ul>
                 <li>Remove all the subgraph which are not tree:
                     <ul>
-                        <li>Tree contains all the vertices and all vetex should be connected</li>
-                        <li>There should be a circuit</li>
+                        <li>Tree contains all the vertices and all vertex should be connected.</li>
+                        <li>There should not be a circuit.</li>
                     </ul>
-                    So, T1 , T2 and T3 are not tree.
+                    So, T1 , T2 and T3 are not tree, hence they can't be spanning tree.
                 </li>
-                <li>Branch : af, fb, bc, cd and de</li>
-                <li>Chord: ab, be, fe and ce</li>
+                <li>Now subgraph T4 fullfills all the conditions.
+                    <ul>
+                        <li>Branch of T4 spanning tree are : af, fb, bc, cd and de</li>
+                        <li>Chord: ab, be, fe and ce</li>
+                    </ul>
+                </li>
             </ul>
+            <div class="in">
+                <h3>Fundamental circuit</h3>
+                <ul>
+                    <li><a class="ba" href="https://www.youtube.com/watch?v=pTeWhAKVuFk" target="_blank">Video lecture &neArr;</a></li>
+                    <li>Let G be a connected graph & T is spanning tree with respect to G.</li>
+                    <li>A circuit formed by adding a chord to spanning tree T is called fundamental circuit.</li>
+                </ul>
+                <img src="../../images/tree42.svg" alt="" class="wb">
+                <ul>
+                    <li>G graph having 'e' edges & 'n' vertices and T is spanning tree with respect to G having n-1 branches & (e - n + 1) chords.
+                        <br>&therefore;(e - n + 1) fundamental circuits can be formed.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>All spanning tree of a complete graph.</h3>
+                <ul>
+                    <li>If there are 'n' vertices then n<sup>n-2</sup> spanning trees are possible.</li>
+                </ul>
+                <p><b>Example: </b> Find all spanning tree of following complete graph &darr;</p>
+                <img class="wb" src="../../images/tree43.svg" alt="">
+            </div>
         </div>
-        <div class="wh">
+        <div id="t7" class="wh">
             <h2>Minimal Spanning tree</h2>
             <ul>
                 <li>A spanning tree in a weighted connected graph G with smallest weight is called a minimal spanning
@@ -192,7 +208,7 @@
                 <h3>Kruskal's algorithm</h3>
                 <p>There are 4 steps</p>
                 <ol>
-                    <li>List all the edge weight of the graph G in the non decreasing (ascending) order of weight.</li>
+                    <li>List all the edge weight of the graph G in ascending order of weight.</li>
                     <li>Select edge with smallest weight, this is the first edge of spanning tree T. In case there exist
                         more than one of smallest weight, arbitarily choose one of them.</li>
                     <li>Select from all the remaining edges of G having smallest value that does not form a circuit with
@@ -201,6 +217,8 @@
                         shorted spanning tree.</li>
                 </ol>
                 <img src="../../images/treemath3.svg" alt="" class="wb">
+                <p>Find the minimal spanning tree using Kruskal’s algorithm &darr;</p>
+                <img src="../../images/tree44.svg" alt="" class="wb">
             </div>
         </div>
     </div>

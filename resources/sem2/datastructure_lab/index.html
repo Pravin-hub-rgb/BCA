@@ -9,22 +9,6 @@
     <link rel="stylesheet" href="../../../public/style.css">
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -209,7 +193,33 @@ void swap(int arr[])
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+
+void findCommonElements(int arr1[], int arr2[], int size1, int size2) {
+    printf("Common Elements: ");
+
+    for (int i = 0; i < size1; i++) {
+        for (int j = 0; j < size2; j++) {
+            if (arr1[i] == arr2[j]) {
+                printf("%d ", arr1[i]);
+                break;
+            }
+        }
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int arr1[] = {1, 2, 3, 4, 5};
+    int arr2[] = {4, 5, 6, 7, 8};
+    int size1 = sizeof(arr1) / sizeof(arr1[0]);
+    int size2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    findCommonElements(arr1, arr2, size1, size2);
+
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -220,7 +230,77 @@ void swap(int arr[])
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+
+#define MS 10
+
+void multiplyMatrices(int mat1[][MS], int mat2[][MS], int result[][MS], int rows1, int cols1, int rows2, int cols2) {
+    // Check if the matrices can be multiplied
+    if (cols1 != rows2) {
+        printf("Error: Matrices cannot be multiplied.\n");
+        return;
+    }
+
+    // Multiply the matrices
+    for (int i = 0; i < rows1; i++) {
+        for (int j = 0; j < cols2; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < cols1; k++) {
+                result[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+}
+
+void displayMatrix(int mat[][MS], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int mat1[MS][MS];
+    int mat2[MS][MS];
+    int result[MS][MS];
+
+    int rows1, cols1, rows2, cols2;
+
+    printf("Enter the number of rows and columns for Matrix 1: ");
+    scanf("%d %d", &rows1, &cols1);
+
+    printf("Enter the elements of Matrix 1:\n");
+    for (int i = 0; i < rows1; i++) {
+        for (int j = 0; j < cols1; j++) {
+            scanf("%d", &mat1[i][j]);
+        }
+    }
+
+    printf("Enter the number of rows and columns for Matrix 2: ");
+    scanf("%d %d", &rows2, &cols2);
+
+    printf("Enter the elements of Matrix 2:\n");
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            scanf("%d", &mat2[i][j]);
+        }
+    }
+
+    multiplyMatrices(mat1, mat2, result, rows1, cols1, rows2, cols2);
+
+    printf("Matrix 1:\n");
+    displayMatrix(mat1, rows1, cols1);
+
+    printf("Matrix 2:\n");
+    displayMatrix(mat2, rows2, cols2);
+
+    printf("Resultant Matrix:\n");
+    displayMatrix(result, rows1, cols2);
+
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -231,7 +311,53 @@ void swap(int arr[])
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+
+#define MAX_SIZE 10
+
+void findTranspose(int mat[][MAX_SIZE], int rows, int cols, int transpose[][MAX_SIZE]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transpose[j][i] = mat[i][j];
+        }
+    }
+}
+
+void displayMatrix(int mat[][MAX_SIZE], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int mat[MAX_SIZE][MAX_SIZE];
+    int transpose[MAX_SIZE][MAX_SIZE];
+
+    int rows, cols;
+
+    printf("Enter the number of rows and columns for the matrix: ");
+    scanf("%d %d", &rows, &cols);
+
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &mat[i][j]);
+        }
+    }
+
+    findTranspose(mat, rows, cols, transpose);
+
+    printf("Original Matrix:\n");
+    displayMatrix(mat, rows, cols);
+
+    printf("Transpose Matrix:\n");
+    displayMatrix(transpose, cols, rows);
+
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -337,7 +463,34 @@ int findOcc(int arr[], int num, int size)
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+
+void displayFibonacci(int n) {
+    int first = 0, second = 1;
+
+    printf("Fibonacci Series: ");
+
+    for (int i = 0; i < n; i++) {
+        printf("%d ", first);
+
+        int next = first + second;
+        first = second;
+        second = next;
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of terms in the Fibonacci series: ");
+    scanf("%d", &n);
+
+    displayFibonacci(n);
+
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -372,7 +525,41 @@ int main()
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+
+int findGCD(int a, int b) {
+    // Ensure a is greater than or equal to b
+    if (a < b) {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+
+    // Find the GCD using the Euclidean algorithm
+    while (b != 0) {
+        int remainder = a % b;
+        a = b;
+        b = remainder;
+    }
+
+    return a;
+}
+
+int main() {
+    int num1, num2;
+
+    printf("Enter the first number: ");
+    scanf("%d", &num1);
+
+    printf("Enter the second number: ");
+    scanf("%d", &num2);
+
+    int gcd = findGCD(num1, num2);
+
+    printf("The GCD of %d and %d is %d.\n", num1, num2, gcd);
+
+    return 0;
+}
                         </code>
                     </pre>
                 </div>
@@ -910,7 +1097,91 @@ void display()
                 <div class="panel">
                     <pre>
                         <code class="language-c">
-                            
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+typedef struct node
+{
+      int data;
+      struct node *next;
+} node;
+node *top = NULL;
+void push();
+void pop();
+void display();
+
+int main()
+{
+      int choice;
+      while (1)
+      {
+         printf("\n\n-!-!-!-!-!- MENU -!-!-!-!-!-");
+         printf("\n1. PUSH");
+         printf("\n2. POP");
+         printf("\n3. DISPLAY");
+         printf("\n4. EXIT");
+         printf("\n Enter your choice : ");
+         scanf("%d", &choice);
+         switch (choice)
+         {
+         case 1:
+            push();
+            break;
+         case 2:
+            pop();
+            break;
+         case 3:
+            display();
+            break;
+         case 4:
+            exit(0);
+         default:
+            printf("\nEnter a correct choice : ");
+         } 
+      }
+      return 0;
+}
+
+void push()
+{
+      node *temp = (node *)malloc(sizeof(node));
+      if (temp == NULL)
+      {
+         printf("\nOverflow");
+         return;
+      }
+      printf("\nEnter a digit : ");
+      scanf("%d", &temp->data);
+      temp->next = top;
+      top = temp;
+}
+
+void pop()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      top = top->next;
+      printf("\n%d is deleted", temp->data);
+      free(temp);
+}
+
+void display()
+{
+      if (top == NULL)
+      {
+         printf("\nUnderflow");
+         return;
+      }
+      node *temp = top;
+      while (temp != NULL)
+      {
+         printf("%d ", temp->data);
+         temp = temp->next;
+      }
+}
                         </code>
                     </pre>
                 </div>

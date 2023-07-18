@@ -20,22 +20,6 @@
     </style>
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -47,7 +31,7 @@
         <a href="#t3" class="link">Operators that can be overloaded</a>
         <div class="botbut">
             <a href="../3.2_inheritance/index.html" class="link">Next Topic &rarr;</a>
-            <a href="../2_classes/index.html" class="link">&larr; Previous Topic</a>
+            <a href="../2_classes/index2.html" class="link">&larr; Previous Topic</a>
         </div>
     </div>
     <div id="navbar" class="grad">
@@ -67,13 +51,13 @@
     <div id="t1" class="content-box">
         <h1>Operator Overloading</h1>
         <ul>
-            <li>Operator overloading is a complie-time polymorphism.</li>
+            <li>Operator overloading is a compile-time polymorphism.</li>
             <li>It is an idea of giving special meaning to an exiting operator in C++ without changing its original
                 meaning.</li>
             <li>It C++, we can make operators work for user-defined classes. This means C++ has the ability to provide
                 the opertors with a special meaning for a data type, this ability is known as operator overloading.</li>
             <li>For example, we can overload an operator '+' is a class like String so that we can concatenate two
-                strings by just using +. Other example classes where arithmetic operators may be overloaded are complex
+                strings by just using +. Other example, classes where arithmetic operators may be overloaded are complex
                 numbers, fractional numbers, big integers, etc.</li>
         </ul>
         <pre>
@@ -91,25 +75,27 @@ int main()
             </code>
         </pre>
         <ul>
-            <li>In this example, we have 3 variavles "a1", "a2" and "a3" of type "class A". </li>
+            <li>In this example, we have 3 objects "a1", "a2" and "a3" of type "class A". </li>
             <li>Here we are trying to add two objects "a1" and "a2", which are of user-defined type i.e. of type "class
                 A" using the "+" operator. This is not allowed, because the addition operator "+" is predefined to
                 operate only on built-in data types. But here, "class A" is a user-defined type, so the compiler
                 generates an error. This is where the concept of "Operator overloading" comes in.</li>
-            <li>Now, if the user want to make the operator "+" add two class objects, the usr has to redefine the
+            <li>Now, if the user want to make the operator "+" to add two class objects, the user has to redefine the
                 meaning of the "+" operator such that it adds two class objects. This is done by the concept of
-                "Operator oberloading". So the main idea behind "Operator overloading" is to use C++ operators with
+                "Operator overloading". So the main idea behind "Operator overloading" is to use C++ operators with
                 class variables of class objects. Redefining the meaning of operators really does not change their
                 oiriginal meaning; instead, they have been given additional meaning along with their existing ones.</li>
             <li>To overload operator in C++ we can create something called operator function. An operator function
                 defines the operations that the overloaded operator will perform relative to the classes upon which it
                 will work.</li>
             <li>An operator function is created using a keyword '<b>operator</b>'. These operator function can be either
-                members or non-member of a class. If it is not a member them most commonly it can be friend function of
+                members or non-member of a class. If it is not a member, then most commonly it can be friend function of
                 a class.</li>
         </ul>
         <p>Example &darr;</p>
-        <pre>
+        <div class='code'>
+            <div class='dotc'></div>
+            <pre>
             <code class="language-c++">
 #include &lt;iostream>
 using namespace std;
@@ -151,9 +137,10 @@ int main()
 }
             </code>
         </pre>
+        </div>
         <ul>
             <li>In above example we can see that the operator function have only one arguments because when the operator
-                function is a member function them the first operand is automatically passed as the current object and
+                function is a member function then the first operand is automatically passed as the current object and
                 we are just specifying the second object in the arguments.
                 <ul>
                     <li>m1 will be automatically passed in the operator function and intmark, extmark will be of m1.
@@ -169,10 +156,10 @@ int main()
                     be overloaded.
                     <ol type="a">
                         <li>sizeof</li>
-                        <li>typeif</li>
-                        <li>Scope resolution (::)</li>
-                        <li>Class member access operators</li>
-                        <li>Ternary or conditional (?:)</li>
+                        <li>Scope resolution ::</li>
+                        <li>Class member access operators .</li>
+                        <li>Arrow operator for class member access -></li>
+                        <li>Ternary or conditional ()?:</li>
                     </ol>
                 </li>
             </ul>
@@ -201,6 +188,356 @@ Operators that can be overloaded       Example
    Relational                         <, >, = =, <=, >=
                 </code>
             </pre>
+        </div>
+        <div class="wh">
+            <h2>Programs</h2>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '+' operator using friend function</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {} // default constructor which do nothing, but it is here for the objects which we don't initialize at the time of creation, we initialize them later.
+    Myclass(int val)
+    {
+        value = val;
+    }
+    int getValue()
+    {
+        return value;
+    }
+    friend Myclass operator+(Myclass, Myclass); // friend function
+};
+
+Myclass operator+(Myclass obj1, Myclass obj2) /// friend function definition
+{
+    Myclass obj3;
+    obj3.value = obj1.value + obj2.value;
+    return obj3;
+}
+
+int main()
+{
+    Myclass obj1(20), obj2(20), obj3;
+    obj3 = obj1 + obj2;
+    cout << "The value of obj3 is : " << obj3.getValue();
+    return 0;
+}
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '-' operator using friend function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;iostream>
+using namespace std;
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+    Myclass(int val)
+    {
+        value = val;
+    }
+    int getValue()
+    {
+        return value;
+    }
+    friend Myclass operator-(Myclass, Myclass); // friend function
+};
+
+Myclass operator-(Myclass obj1, Myclass obj2) /// friend function definition
+{
+    Myclass obj3;
+    obj3.value = obj1.value - obj2.value;
+    return obj3;
+}
+
+int main()
+{
+    Myclass obj1(20), obj2(20), obj3;
+    obj3 = obj1 - obj2;
+    cout << "The value of obj3 is : " << obj3.getValue();
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading '*', '%' and '/' operators using friend function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+
+    Myclass(int val)
+    {
+        value = val;
+    }
+
+    int getValue()
+    {
+        return value;
+    }
+
+    // Friend function for overloading the * operator
+    friend Myclass operator*(Myclass, Myclass);
+
+    // Friend function for overloading the % operator
+    friend Myclass operator%(Myclass, Myclass);
+
+    // Friend function for overloading the / operator
+    friend Myclass operator/(Myclass, Myclass);
+};
+
+Myclass operator*(Myclass obj1, Myclass obj2)
+{
+    int product = obj1.value * obj2.value;
+    return Myclass(product);
+}
+
+Myclass operator%(Myclass obj1, Myclass obj2)
+{
+    int remainder = obj1.value % obj2.value;
+    return Myclass(remainder);
+}
+
+Myclass operator/(Myclass obj1, Myclass obj2)
+{
+    int quotient = obj1.value / obj2.value;
+    return Myclass(quotient);
+}
+
+int main()
+{
+    Myclass obj1(30);
+    Myclass obj2(10);
+
+    Myclass obj3 = obj1 * obj2;
+    cout << "Product: " << obj3.getValue() << endl;
+
+    Myclass obj4 = obj1 % obj2;
+    cout << "Remainder: " << obj4.getValue() << endl;
+
+    Myclass obj5 = obj1 / obj2;
+    cout << "Quotient: " << obj5.getValue() << endl;
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p><b>Overloading unary operator &darr;</b></p>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading unary plus (+) and unary minus (-) operator using friend function (making
+                    positive number negative and vice versa)</button>
+                <div class="panel">
+                    <pre>
+                   <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+    int value;
+
+public:
+    Myclass() {}
+
+    Myclass(int val)
+    {
+        value = val;
+    }
+
+    int getValue() const
+    {
+        return value;
+    }
+    // Overloading the unary minus (-) operator
+    friend Myclass operator-(Myclass);
+
+    // Overloading the unary plus (+) operator
+    friend Myclass operator+(Myclass);
+};
+Myclass operator-(Myclass x)
+{
+    Myclass y;
+    y.value = -(x.value);
+    return y;
+}
+
+Myclass operator+(Myclass x)
+{
+    return x;
+}
+int main()
+{
+    Myclass obj1(10);
+
+    Myclass obj2 = -obj1; // Using the unary minus operator
+    cout << "Unary Minus: " << obj2.getValue() << endl;
+
+    Myclass obj3 = +obj1; // Using the unary plus operator
+    cout << "Unary Plus: " << obj3.getValue() << endl;
+
+    return 0;
+}
+                   </code>
+               </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">Overloading prefix and postfix (++) using friend function</button>
+                <div class="panel">
+                    <pre>
+                <code>
+#include &lt;iostream>
+using namespace std;
+
+class Myclass {
+private:
+ int value;
+
+public:
+ Myclass() {}
+
+ Myclass(int val) {
+     value = val;
+ }
+
+ int getValue() const {
+     return value;
+ }
+
+ // Declare the friend functions
+ friend Myclass& operator++(Myclass& obj); // prefix
+ friend Myclass operator++(Myclass& obj, int); // postfix, for postfix we to have 'int' just to differentiate between pre and post
+};
+
+// Overloading prefix increment operator (++obj)
+Myclass& operator++(Myclass& obj) {
+ obj.value++;
+ return obj;
+}
+
+// Overloading postfix increment operator (obj++)
+Myclass operator++(Myclass& obj, int) {
+ Myclass temp(obj); // previous value will be return and actual object value will be incremented
+ // we just used copy constructor to create a copy of object passed in argument
+ obj.value++;
+ return temp;
+}
+
+int main() {
+ Myclass obj(5);
+
+ cout << "Initial Value: " << obj.getValue() << endl;
+
+ // Prefix increment
+ ++obj;
+ cout << "After Prefix Increment: " << obj.getValue() << endl;
+
+ // Postfix increment
+ obj++;
+ cout << "After Postfix Increment: " << obj.getValue() << endl;
+
+ return 0;
+}
+                </code>
+            </pre>
+                </div>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class="ac">Overloading prefix and postfix (--) using friend function</button>
+               <div class="panel">
+                <pre>
+                    <code>
+ #include &lt;iostream>
+ using namespace std;
+ 
+ class Myclass {
+ private:
+     int value;
+ 
+ public:
+     Myclass() {}
+ 
+     Myclass(int val) {
+         value = val;
+     }
+ 
+     int getValue() const {
+         return value;
+     }
+ 
+     // Declare the friend functions
+     friend Myclass& operator--(Myclass& obj); // prefix
+     friend Myclass operator--(Myclass& obj, int); // postfix
+ };
+ 
+ // Overloading prefix decrement operator (--obj)
+ Myclass& operator--(Myclass& obj) {
+     obj.value--;
+     return obj;
+ }
+ 
+ // Overloading postfix decrement operator (obj--)
+ Myclass operator--(Myclass& obj, int) {
+     Myclass temp(obj); // previous value will be return and actual object value will be decremented
+     obj.value--;
+     return temp;
+ }
+ 
+ int main() {
+     Myclass obj(5);
+ 
+     cout << "Initial Value: " << obj.getValue() << endl;
+ 
+     // Prefix decrement
+     --obj;
+     cout << "After Prefix Increment: " << obj.getValue() << endl;
+ 
+     // Postfix decrement
+     obj--;
+     cout << "After Postfix Increment: " << obj.getValue() << endl;
+ 
+     return 0;
+ }
+                    </code>
+                </pre>
+               </div>
+            </div>
         </div>
     </div>
     <div class="content-box">

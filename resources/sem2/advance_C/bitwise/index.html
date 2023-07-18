@@ -20,22 +20,6 @@
     </style>
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -50,8 +34,9 @@
                 <a href="#t6" class="link">Bitwise right shift ( >> )</a>
                 <a href="#t7" class="link">Programs</a>
                 <a href="#t8" class="link">Bit masking</a>
+                <a href="#t9" class="link">Application of bitwise operator</a>
                 <div class="botbut">
-                    <a href="" class="link">Next Topic &rarr;</a>
+                    <a href="../string/index.html" class="link">Next Topic &rarr;</a>
                     <a href="../pointer/index.html" class="link">&larr; Previous Topic</a>
                 </div>
     </div>
@@ -360,7 +345,7 @@ int main()
 #include &lt;stdio.h>
 int main()
 {
-    unsigned int a;
+    int a;
     printf("Enter values of a : ");
     scanf("%d", &a);
     a = a << 2;
@@ -370,6 +355,13 @@ int main()
                 </code>
             </pre>
                     </div>
+                    <p>Output &darr;</p>
+                    <pre>
+                        <code>
+Enter values of a : 1
+a << 2 = 4 
+                        </code>
+                    </pre>
         </div>
         <div id="t6" class="wh">
             <h2>Bitwise Right Shift ( >> )</h2>
@@ -387,7 +379,7 @@ int main()
 #include &lt;stdio.h>
 int main()
 {
-    unsigned int a;
+    int a;
     printf("Enter values of a : ");
     scanf("%d", &a);
     a = a >> 2;
@@ -397,6 +389,13 @@ int main()
                 </code>
             </pre>
             </div>
+            <p>Output &darr;</p>
+            <pre>
+                <code>
+Enter values of a : 9
+a << 2 = 2  
+                </code>
+            </pre>
         </div>
         <div id="t7" class="wh">
             <h2>Some programs</h2>
@@ -418,6 +417,67 @@ int main()
                     </code>
                 </pre>
             </div>
+            <div class="in">
+                <h3>Program to enter a decimal number and print its binary form and check whether it is even or odd.</h3>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <pre>
+                       <code>
+#include &lt;stdio.h>
+
+void decimalToBinary(int num)
+{
+    int binary[32];
+    int i = 0;
+
+    // Convert decimal to binary using bit manipulation
+    while (num > 0)
+    {
+        binary[i] = num & 1;
+        num >>= 1;
+        i++;
+    }
+
+    printf("Binary representation: ");
+
+    // Print binary representation in reverse order
+    for (int j = i - 1; j >= 0; j--)
+    {
+        printf("%d", binary[j]);
+    }
+
+    printf("\n");
+}
+
+void checkEvenOdd(int num)
+{
+    // Check the least significant bit to determine even/odd
+    if ((num & 1) == 0)
+    {
+        printf("The number is even.\n");
+    }
+    else
+    {
+        printf("The number is odd.\n");
+    }
+}
+
+int main()
+{
+    int decimalNum;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &decimalNum);
+
+    decimalToBinary(decimalNum);
+    checkEvenOdd(decimalNum);
+
+    return 0;
+}
+                       </code>
+                   </pre>
+                </div>
+            </div>
         </div>
         <div id="t8" class="wh">
             <h2>Bit masking</h2>
@@ -425,7 +485,6 @@ int main()
                 <li>Bit masking involves using bitwise operators to selectively manipulate specific bits of a variable
                     while leaving the other bits unchanged. It is commonly used for tasks like setting, clearing, or
                     checking specific bits in a variable.</li>
-                <li></li>
             </ul>
             <div class="in">
                 <h3>checking if a bit is set (1) or not</h3>
@@ -436,7 +495,8 @@ int main()
 #include &lt;stdio.h>
 int isBitSet(int num, int bitPos)
 {
-    return (num & (1 << bitPos)) != 0;
+    int mask = 1 << bitPos;
+    return ((num & mask) > 0);
 }
 int main()
 {
@@ -459,6 +519,7 @@ int main()
                             desired position set to 1. The bitwise AND operation (&) is then performed between num and
                             the bit mask. If the result is non-zero, it means the bit at the specified position is set
                             (1); otherwise, it is not set (0). The function returns this result.</li>
+                            <li>Note: Bit numbering starts from 0 so position bit 3 means 4th location from rightmost bit.</li>
                 </ul>
             </div>
             <div class="in">
@@ -477,16 +538,18 @@ int main()
 // Function to set a specific bit
 int setBit(int num, int bitPos)
 {
-    return num | (1 << bitPos);
+    int mask = 1 << bitPos;
+    return num | mask;
 }
 int main()
 {
     int num = 10; // Binary: 0000 1010
 
     // Set bit at position 2
+    printf("Initially number was : %d\n", num);
     num = setBit(num, 2);
-    printf("After setting bit at position 2: %d\n", num);
-    
+    printf("After setting bit at position 2 : %d\n", num);
+
     return 0;
 }
                        </code>
@@ -495,7 +558,8 @@ int main()
                 <p>Output &darr;</p>
                 <pre>
                     <code>
-After setting bit at position 2: 14
+Initially number was : 10
+After setting bit at position 2 : 14
                     </code>
                 </pre>
                 <ul>
@@ -520,7 +584,8 @@ After setting bit at position 2: 14
 // Function to clear a specific bit
 int clearBit(int num, int bitPos)
 {
-    return num & ~(1 << bitPos);
+    int mask = 1 << bitPos;
+    return num & ~mask;
 }
 int main()
 {
@@ -563,7 +628,8 @@ After clearing bit at position 1: 8
 // Function to toggle a specific bit
 int toggleBit(int num, int bitPos)
 {
-    return num ^ (1 << bitPos);
+    int mask = 1 << bitPos;
+    return num ^ mask;
 }
 int main()
 {
@@ -590,6 +656,42 @@ After toggling bit at position 0: 11
                         This change occurs while preserving the other bits in the number.</li>
                 </ul>
             </div>
+        </div>
+        <div id="t9" class="wh">
+            <h2>Application of bitwise operator</h2>
+            <ul>
+                <li>Bitwise operators are used to perfrom operations on individual bit of integer values. They manipulate
+                    the binary representation of numbers of a bit level. Here are some common applications of bitwise
+                    operators:
+                    <ol>
+                        <li>Bit manipulation: Bitwise operators allow you to manipulate individual bits within a binary
+                            number, which can be useful in various scenarios such as setting, clearing, or toggling
+                            specific bits.</li>
+                        <li>Flags and masks: Bitwise operators are commonly used to represent and manipulate sets of
+                            flags or options. Each flag corresponds to a specific bit, and bitwise operations like AND,
+                            OR, XOR, and shifting can be used to enable, disable, or check the status of individual
+                            flags.</li>
+                        <li>Bit-level data storage and retrieval: Sometimes, data needs to be packed into a compact
+                            representation to save memory or storage space. Bitwise operators can be used to store
+                            multiple Boolean values or small integers in a single integer variable.</li>
+                        <li>Bitwise operations on binary representations: Bitwise operators are essential in computer
+                            arithmetic and logical operations. They are used in addition, subtraction, multiplication,
+                            division, and other mathematical operations on binary numbers.</li>
+                        <li>Bitwise shifting: Shifting operators (left shift and right shift) allow you to move the bits
+                            of a binary number to the left or right. This operation is equivalent to multiplying or
+                            dividing the number by powers of 2, respectively.</li>
+                        <li>
+                            Performance optimizations: In some cases, bitwise operations can provide performance
+                            optimizations in low-level programming or when dealing with specific algorithms. They can be
+                            used to replace costly arithmetic operations or provide efficient implementations of certain
+                            algorithms.
+                        </li>
+                    </ol>
+                </li>
+                <li>Overall, bitwise operators are primarily used in low-level programming, embedded systems, network
+                    protocols, graphics programming, cryptography, and other areas where direct manipulation of
+                    individual bits is required.</li>
+            </ul>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

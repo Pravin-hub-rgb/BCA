@@ -20,22 +20,6 @@
     </style>
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -48,6 +32,7 @@
         <a href="#t4" class="link">Opening a file</a>
         <a href="#t5" class="link">Closing a file</a>
         <a href="#t6" class="link">Functions used for file I/O</a>
+        <a href="#t15" class="link">Formatted and Unformatted I/O function</a>
         <a href="#t7" class="link">System calls</a>
         <a href="#t8" class="link">Create</a>
         <a href="#t9" class="link">Open</a>
@@ -78,7 +63,7 @@
             <li>The input and output operations that we have performed so far were done through screen and keyboard
                 only. After termination of program, all the entered data is lost because primary memory is volatile.
                 When the data has to be used later, then it becomes necessary to keep it in permanent storage device. C
-                supports the concept of files through which data can be stored on the disk or secondary strogage device.
+                supports the concept of files through which data can be stored on the disk or secondary storage device.
                 The stored data can be read whenever required. A file is a collection of related data placed on the
                 disk.</li>
             <li>The file handling in C can be broadly categorized in two types:
@@ -88,8 +73,8 @@
                 </ul>
             </li>
             <li>High level file handling is managed by library functions while low level file handling is managed by
-                system alls. The high level file handling is common used since it is easier to manage and hides most of
-                the deatils from the programmer. In this chapter we'll discuss about high level file handling only.</li>
+                system calls. The high level file handling is commonly used since it is easier to manage and hides most of
+                the details from the programmer.</li>
         </ul>
         <div id="t2" class="wh">
             <h2>Text and Binary modes</h2>
@@ -101,7 +86,7 @@
                     memory. Unix system do not make any distinction between text file and binary files.</li>
                 <li>Text files are in human readable form and they can be created and read using any text editor, while
                     binary files are not in human readable form and they can be created and read only by specific
-                    progran written for them. The binary data stored in the file can't be read using a text editor.</li>
+                    program written for them. The binary data stored in the file can't be read using a text editor.</li>
                 <li>The integer 1679 will take only 2 bytes in a binary file while it will occupy 4 bytes in a text file
                     because in-binary file it is stored as an integer. while in text file it is stored as a sequence of
                     4 characters i.e. '1', '6', '7', '9'.</li>
@@ -110,16 +95,15 @@
         <div id="t3" class="wh">
             <h2>Concept of buffer</h2>
             <ul>
-                <li>Buffer is an area in memory where the data is temporarily stored before being writen to the file.
+                <li>Buffer is an area in memory where the data is temporarily stored before being written to the file.
                     When we open a file, a buffer is automatically associated with its file pointer. Whatever data we
                     send to the file is not immediately written to the file. First it is sent to the buffer and when the
                     buffer is full then its contents are written to the file. When the file is closed, all the contents
                     of buffer are automatically written to the file even if the buffer is not full. This is called
-                    flushing the buffer, we can also explicityly flush the buffer by a function fflush() described
-                    later.</li>
+                    flushing the buffer, we can also explicitly flush the buffer by a function fflush().</li>
                 <li>The concept of buffer is used to increase efficiency. If there had been no buffer we would have to
                     access the disk each time for writing even single byte of data. This would have taken lot of time
-                    beacuse each time the disk is accessed, the read/write head has to be repositioned. When buffering
+                    because each time the disk is accessed, the read/write head has to be repositioned. When buffering
                     is done, the data is collected in the buffer and data equal to the size of buffer is written to the
                     file at a time, so the number of times disk is accessed decreases, which improves efficiency.</li>
                 <li>The steps for file operations in C programming are as follows-
@@ -170,7 +154,7 @@ fp2 = fopen("yourfile.txt", "r");
                     <li>After opening the file with fopen(), the name of file is not used in the program for any
                         operation on it. Whenever we have to perform a operation on the file, we'll use the file pointer
                         returned by fopen() function. so the name of file sometimes known as external name, while the
-                        file pointer associated with it is knwon as its internal name. </li>
+                        file pointer associated with it is known as its internal name. </li>
                 </ul>
                 <div class="in">
                     <p>The second argument represents the mode in which the file is to be opened. The possible value of
@@ -181,11 +165,11 @@ fp2 = fopen("yourfile.txt", "r");
                             to the file.</li>
                         <li>"a" (append): If the file doesn't exist then this mode creates a new file, and if the file
                             already exists then the new data entered is appended at the end of existing data. In this
-                            mode, the data existing in the file is erased as in "w" mode.</li>
+                            mode, the data existing in the file is not erased as in "w" mode.</li>
                         <li>"r" (read): This mode is used for opening an existing file for reading purpose only. The
-                            file to be opened must exist and the previous data of file in not erased.</li>
+                            file to be opened must exist and the previous data of file is not erased.</li>
                         <li>"w+" (write+read): This mode is same as "w" mode but in this mode we can also read and
-                            modify the data. If the fiel doesn't exit then a new file is created and if the file exists
+                            modify the data. If the file doesn't exist then a new file is created and if the file exists
                             then previous data is erased.</li>
                         <li>"r+" (read+write): This mode is same as "r" mode but in this mode we can also write and
                             modify existing data. The file to be opened must exist and the previous data of file is not
@@ -228,7 +212,7 @@ if(fp == NULL)
                 <ul>
                     <li>Errors in opening a file may occur due to various reasons, for example-
                         <ol>
-                            <li>If we try to open a file in read or update mode, and the file doesn't exit or we do not
+                            <li>If we try to open a file in read or update mode, and the file doesn't exist or we do not
                                 have read permission on that file.</li>
                             <li>If we try to create a file but there is no space on the disk or we don't have write
                                 permission.</li>
@@ -353,6 +337,82 @@ int main()
                     </pre>
                 </div>
             </div>
+            <p><b>Program that reads data from one file and writes it on another file.</b>
+            <br><ul>
+                <li>For this we should know about few things:
+                    <ul>
+                        <li><b>EOF:</b> EOF stands for "End of File." It is a special value that represents the end of a file when reading data from it. It is a constant defined in the <stdio.h> header file in C.</li>
+                    </ul>
+                </li>
+            </ul></p>
+            <div class='code'>
+               <div class='dotc'></div>
+               <pre>
+                   <code>
+#include &lt;stdio.h>
+
+int main() {
+    FILE *sourceFile = fopen("source.txt", "r");
+    FILE *destinationFile = fopen("destination.txt", "w");
+    
+    if (sourceFile == NULL || destinationFile == NULL) {
+        printf("Failed to open files.\n");
+        return 1;
+    }
+    
+    int ch;
+    while ((ch = fgetc(sourceFile)) != EOF) { // The variable 'ch' is updated automatically with each call to fgetc(file) inside the while loop. 
+        fputc(ch, destinationFile);
+    }
+    
+    fclose(sourceFile);
+    fclose(destinationFile);
+    
+    printf("Data copied successfully.\n");
+    
+    return 0;
+}
+                   </code>
+               </pre>
+            </div>
+        </div>
+        <div id="t15" class="wh">
+            <h2>Formatted and Unformatted I/O function</h2>
+            <p>In C programming, input/output (I/O) functions are categorized into two types: formatted and unformatted
+                file handling functions. These functions serve different purposes and have distinct characteristics.
+                Here's an explanation of each type:
+            <ol>
+                <li><b>Formatted I/O functions</b>:
+                    <br>Formatted I/O functions deal with data in a human-readable format. They allow you to read data
+                    from or write data to files using a specified format. These functions provide more control over the
+                    data's representation and formatting. Some commonly used formatted I/O functions in C include:
+                    <ul>
+                        <li>printf(): Used to format and print data to the standard output (usually the console) or a
+                            file.</li>
+                        <LI>scanf(): Used to read and parse formatted data from the standard input (usually the
+                            keyboard) or a file.</LI>
+                        <li>fprintf(): Similar to printf(), but writes the formatted data to a specified file instead of
+                            the standard output.</li>
+                        <li>fscanf(): Similar to scanf(), but reads formatted data from a specified file instead of the
+                            standard input.</li>
+                    </ul>
+                    Formatted I/O functions use format specifiers (such as %d, %f, %s, etc.) to specify the data type
+                    and formatting options for input or output. These functions provide flexibility in how data is
+                    displayed or interpreted.
+                </li>
+                <li><b>Unformatted I/O Functions</b>:
+                    <br>Unformatted I/O functions deal with data in its raw binary format. They read or write data directly as a sequence of bytes without any specific formatting. These functions are commonly used for binary file handling, where data is read or written without any special formatting considerations. Some commonly used unformatted I/O functions in C include:
+                    <ul>
+                        <li>fread(): Reads a specified number of bytes directly from a file.</li>
+                        <li>fwrite(): Writes a specified number of bytes directly to a file.</li>
+                        <li>getc(), fgetc(): Reads a single character (byte) from a file.</li>
+                        <li>putc(), fputc(): Writes a single character (byte) to a file.</li>
+                    </ul>
+                    Unformatted I/O functions are useful when working with binary data, such as image files, sound files, or structured data stored in binary format. They provide a straightforward way to read and write raw data without any specific formatting requirements.
+                </li>
+            </ol>
+            It's important to choose the appropriate type of I/O functions based on your requirements and the nature of the data you are dealing with. Formatted I/O functions provide more control over formatting and are suitable for human-readable data, while unformatted I/O functions work with raw binary data.
+            </p>
         </div>
     </div>
     <ul>
@@ -417,7 +477,7 @@ int main()
                         stream. It is a non-negative integer that uniquely identifies an open file within a process.
                         File descriptors are used to perform various operations on files, such as reading, writing, and
                         closing.</li>
-                    <li>When you open a file using 'open()'' system call library function, a file descriptor is
+                    <li>When you open a file using 'open()' system call library function, a file descriptor is
                         returned. You can think of it as a handle or reference to the opened file. This file descriptor
                         is then used in subsequent system or library calls to perform operations on the file.</li>
                 </ul>
@@ -480,7 +540,7 @@ int create (char *filename, mode_t mode);
                     <code>
     Flags                   Description
    O_RDONLY         Opens the file in read-only mode.
-   O_WRONGLY        Opens the file in write-only mode.
+   O_WRONLY        Opens the file in write-only mode.
    O_RDWR           Opens the files in read and write mode.
    O_CREAT          Create a file if it doesn't exists.
    O_APPEND         Opens the file and places the cursor at the end of the contents
@@ -515,7 +575,7 @@ int main() {
         <div id="t10" class="wh">
             <h2>Close</h2>
             <ul>
-                <li>The clse() function in C tells the operating system that you are done with a file descriptor and
+                <li>The close() function in C tells the operating system that you are done with a file descriptor and
                     closes the file pointed by the file descriptor. It is defined inside <b>&lt;unistd.h></b> header
                     file.</li>
             </ul>

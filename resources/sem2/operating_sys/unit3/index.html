@@ -18,22 +18,8 @@
             color: white;
         }
     </style>
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body>
@@ -46,7 +32,7 @@
         <a href="#t4" class="link">Banker's Algorithm</a>
         <a href="#t5" class="link">Deadlock recovery</a>
         <div class="botbut">
-            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="../unit4/index.html" class="link">Next Topic &rarr;</a>
             <a href="../unit2/index.html" class="link">&larr; Previous Topic</a>
         </div>
     </div>
@@ -69,7 +55,7 @@
         <ul>
             <li>Process Synchronization is a technique which is used to coordinate the process that use shared data.
             </li>
-            <li>There are two types of processe in an Operating Systems:
+            <li>There are two types of process in an Operating Systems:
                 <ol>
                     <li><b>Independent Process</b>: The process that does not affect or is affected by the other process
                         while its execution then the process is called independent process. Example- the process that
@@ -126,8 +112,9 @@
         <div id="t2" class="wh">
             <h2>What is critical section problem?</h2>
             <ul>
-                <li>A critical section is a segment of code which can be accessed by a signal process at a specific
-                    point of time. The sectio soncisits of shared data resources that required to be accessed by other
+                <li>The critical section problem refers to a situation in concurrent programming where multiple processes access a shared resource, and there is a possibility of data inconsistency when they access it simultaneously.</li>
+                <li>A critical section is a segment of code which can be accessed by a single process at a specific
+                    point of time. The section consists of shared data resources that required to be accessed by other
                     processes.
                     <ul>
                         <li>The entry to the critical section is handled by the wait() function, and it is represented
@@ -144,18 +131,9 @@
                 <li>The critical section need to must enforce all three rules:
                     <ul>
                         <li><b>Mutual Exclusion:</b> Mutual Exclusion is a special type of binary semaphore which is
-                            used for controlling access to the shared resource. It includes a priority inheritance
-                            mechanism to avoid extended priority inversion problems. Not more than one process can
-                            execute in its critical section at one time.</li>
-                        <li><b>Progress:</b> This solution is used when no one is in the critical section, and someone
-                            wants
-                            in. Then those processes not in their reminder section should decide who should go in, in
-                            a finite time.</li>
-                        <li><b>Bounded Waiting:</b> When a process makes a request for getting into critical section,
-                            there is
-                            a specific limit about number of processes can get into their critical section. So, when the
-                            limit is reached, the system must allow request to the process to get into its critical
-                            section.</li>
+                            used for controlling access to the shared resource.  Only one process or thread can be executing the critical section at any given time.</li>
+                        <li><b>Progress:</b> If no process is currently executing the critical section and there are processes that wish to access it, one of those processes should be granted access in a reasonable amount of time.</li>
+                        <li><b>Bounded Waiting:</b> It ensures that no process should be indefinitely delayed or starved from entering the critical section.</li>
                     </ul>
                 </li>
             </ul>
@@ -166,8 +144,59 @@
                     <li>Doesn’t work on modern architectures.</li>
                     <li>It’s for 2 processes which alternate execution between the critical section and remainder
                         section. Say, P1 is the first process and P2 is the second process.</li>
-                    <li>The 2 processes should share 2 data items with each other.</li>
+                    <li>The 2 processes should share 2 data items with each other.
+                            <p>
+                                int turn 
+                                <br>
+                                Boolean flag [2]
+                            </p>
+                    </li>
+                    <li>Turn – It indicates the process who should enter into its critical section.</li>
+                    <li>Flag Array – It tells whether a process is ready to enter its critical section. Let flag[0]
+                        indicate process P1. If flag[0] = true , then Process P1 is ready to execute in its critical section. flag[1] indicates process P2. If flag[1] = true, then Process P2 is ready to execute in its critical section.</li>
                 </ul>
+                <p><b>Structure of process P<sub>i</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[i] = true; // entry section
+    turn = j;
+    while(flag[j] == true && turn == j); // checking if other process is interested or it is already in CS.
+        // critical section 
+
+    flag[i] = false; // exit section
+}
+                    </code>
+                </pre>
+                <p><b>P<sub>0</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[0] = true;
+    turn = 1;
+    while(flag[1] == true && turn == 1);
+        // critical section 
+
+    flag[0] = false;
+}
+                    </code>
+                </pre>
+                <p><b>P<sub>1</sub></b></p>
+                <pre>
+                    <code>
+while(true)
+{
+    flag[1] = true;
+    turn = 0;
+    while(flag[0] == true && turn == 0);
+        // critical section 
+
+    flag[1] = false;
+}
+                    </code>
+                </pre>
             </div>
             <div class="in">
                 <h3>Semaphores in Process Synchronization</h3>
@@ -206,7 +235,7 @@
                     <code>
 P(Semaphore s)
 {
-    while(S == 0); /* wait until s = 0 */
+    while(s == 0); /* wait until s = 0 */
     s = s - 1;
 }
 
@@ -219,7 +248,7 @@ V(Sempahore s)
                 </div>
                 <p>Some points regarding P and V operaton:
                 <ol>
-                    <li>P operation is alled called wait, sleep, or down operation, and V operation is also called
+                    <li>P operation is called wait, sleep, or down operation, and V operation is also called
                         signal, wake-up, or up operation.</li>
                     <li>Both operations are atomic and semaphore(S) is always initialzed to one. Here atomic means that
                         variable on which read, modify and update happens at the same time with no pre-emption i.e.
@@ -250,7 +279,7 @@ V(Sempahore s)
                     CPU cycle.</p>
                 <p><b>Advantages of Semaphore</b>
                 <ul>
-                    <li>A siimple and effective mechanism for process synchronization.</li>
+                    <li>A simple and effective mechanism for process synchronization.</li>
                     <li>Supports coordination between multiple processes.</li>
                     <li>Provides a flexible and robust way to manage shared resources.</li>
                     <li>It can be used to implement critical sections in a program.</li>
@@ -267,10 +296,10 @@ V(Sempahore s)
                         an integer variable that is shared between threads. This variable is used to solve the critical
                         section problem and to achieve process synchronization in the multiprocessing environment.</li>
                     <li>It can cause performance issues in a program if not used properly.</li>
-                    <li>It van be difficult to debug and maintain.</li>
+                    <li>It can be difficult to debug and maintain.</li>
                     <li>It can be prone to race conditions and other synchronization problems if not used correctly.
                     </li>
-                    <li>It can be vulnerable to certain types of attacks, such as denial of service attcks.</li>
+                    <li>It can be vulnerable to certain types of attacks, such as denial of service attacks.</li>
                 </ul>
                 </p>
             </div>
@@ -634,10 +663,10 @@ V(Sempahore s)
         <div id="t5" class="wh">
             <h2>Deadlock Recovery</h2>
             <ul>
-                <li>When a <a href="https://www.geeksforgeeks.org/deadlock-detection-algorithm-in-operating-system/"
+                <li>When a <a class="ba" href="https://www.geeksforgeeks.org/deadlock-detection-algorithm-in-operating-system/"
                         target="_blank">Deadlock Detection Algorithm</a> determines that a deadlock has occured in the
                     system, the system must recover from that deadlock. There are two approaches of breading a <a
-                        href="https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/">Deadlock:</a>
+                       class="ba" href="https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/">Deadlock:</a>
                 </li>
             </ul>
             <div class="in">
@@ -719,6 +748,66 @@ V(Sempahore s)
             </div>
         </div>
     </div>
+    <div class="content-box">
+        <h2>Previous Year Questions</h2>
+        <div class="wh">
+            <h3>Q- What do you mean by semaphore? Explain its types with C struct. Explain implementation of wait() and signal.</h3>
+        </div>
+        <div class="wh">
+            <h3>Q- What is deadlock? Explain the necessary conditions for its occurence. How to remove deadlock from process?</h3>
+        </div>
+        <div class="wh">
+            <h3>Q- Consider a system that contains five processes P1, P2, P3, P4, P5 and the three resource types A, B and C. Following are the resources types: A has 10, B has 5 and the resource type C has 7 instances:</h3>
+                <pre>
+                    <code>
+Process    Allocation      Max      Available 
+           A   B   C     A  B  C     A  B  C
+   P1      0   1   0     7  5  3     3  3  2
+   P2      2   0   0     3  2  2     
+   P3      3   0   2     9  0  2     
+   P4      2   1   1     2  2  2     
+   P5      0   0   2     4  3  3    
+                  </code>
+                </pre>
+                Answer the following questions using the Banker's algorithm:
+                <ol type="i">
+                    <li>What is the reference of the need matrix?</li>
+                    <li>Determine if the system is safe or not.</li>
+                    <li>What will happen if the resource request (1, 0, 0) for process P1, can the system accept this request immediately?</li>
+                </ol>
+        </div>
+        <div class="wh">
+            <h3>Q- What do you understand by critical section? Discuss whether Peterson's solution satifies the requirement of a  mechanism to control access to critical section?</h3>
+        </div>
+        <div class="wh">
+            <h3>Q- Write short notes on the following:</h3>
+            <ol>
+                <li>Deadlock</li>
+                <li>Starvation</li>
+                <li>Semaphores</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h3>Find all the safe sequence possible in the below resource allocation scenario: {total available resources are (R1, R2, R3) = (3, 3, 4)}</h3>
+            <pre>
+                <code>
+Process    Allocated        Max Need     Available 
+           R1   R2   R3    R1  R2  R3    R1  R2  R3
+   P1      0    1    0     7   5   3     3   3   4
+   P2      2    0    2     3   2   2     
+   P3      3    0    2     9   0   2     
+   P4      2    1    1     2   2   2     
+              </code>
+            </pre>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Tutorials &darr;</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=uj-zhs7cUSI">Perterson's solution tutorial (Sudhankar Atchala) &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 

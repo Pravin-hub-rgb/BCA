@@ -18,22 +18,6 @@
             color: white;
         }
     </style>
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -73,11 +57,12 @@
                     <li>A walk is a finite alternating sequence
                         v<sub>1</sub>e<sub>1</sub>v<sub>2</sub>e<sub>2</sub>v<sub>3</sub>e<sub>3</sub>...e<sub>n</sub>v<sub>n</sub>
                         of vertices and edges, beginning and ending with same or different vertices.</li>
+                        <li>Here both edges and vertices can be repeated.</li>
                 </ul>
                 <img src="../../images/graph2walk.svg" alt="" class="wb">
                 <p>Some terminologies</p>
                 <ol>
-                    <li>Lengt of the walk: The number of edges is called length of the walk.</li>
+                    <li>Length of the walk: The number of edges is called length of the walk.</li>
                     <li>Closed & open walk: A walk is said to be closed if its origin & terminous vertex (v0 = vn) is
                         equal otherwise it is called open walk.</li>
                 </ol>
@@ -85,7 +70,8 @@
             <div class="in">
                 <h3>Trail</h3>
                 <ul>
-                    <li>Any walk having different edges is called trail.</li>
+                    <li>Trail is same as walk but here vertices can be repeated but edges cannot.</li>
+                    <li>For above graph a trail can be : a - e2 - b - e9 - g - e10 - c - e12 - d - e5 - g - e11 - e</li>
                 </ul>
             </div>
             <div class="in">
@@ -123,6 +109,7 @@
                         once & only once.</li>
                 </ul>
                 <img src="../../images/graph2g2.svg" alt="" class="wb">
+                <p>Eulerian ciruit : l - e15 - k - e14 - j - e11 - i - e10 - h - e8 - g - e7 - f - e5 - e - e4 - d - e3 - c - e2 - b - e1 - a - e16 - l - e13 - j - e12 - h - e9 - f - e6 - d - e18 - b - e17 - l.</p>
             </div>
             <div class="in">
                 <h3>Eulerian graph</h3>
@@ -143,7 +130,7 @@
                 <h3>Hamiltonian circuit</h3>
                 <ul>
                     <li>A circuit that passes through each of the vertices in a graph G exactly once except the starting
-                        vertex & ent vertex is called Hamiltonian circuit.</li>
+                        vertex & end vertex is called Hamiltonian circuit.</li>
                 </ul>
                 <img src="../../images/graph2g4.svg" alt="" class="wb">
             </div>
@@ -185,7 +172,7 @@
             <div class="in">
                 <h3>Dijkstra Algorithm</h3>
                 <ul>
-                    <li>This algorithmis for single source shortest path problem.</li>
+                    <li>This algorithms for single source shortest path problem.</li>
                     <li>If a weighted graph is given then we have to find shortest path from some starting vertex to all
                         other vertices.</li>
                     <li>As we have to find the shortest path so it is a minimization problem or optimization problem.
@@ -242,6 +229,29 @@
                     </li>
                 </ul>
             </div>
+            <div class="in">
+                <h3>The Welsh Powell Algorithm</h3>
+                <ul>
+                    <li><a href="https://youtu.be/SLkyDuG1Puw" class="ba" target="_blank">Video lecture &neArr;</a></li>
+                    <li>This algorithm is used to find the proper colouring of a graph, hence to find chromatic number
+                        of a graph.</li>
+                    <li>Algorithm:
+                        <ol>
+                            <li>Find the degrees of all vertices.</li>
+                            <li>Arrange the vertices according to decreasing order of their degree.</li>
+                            <li>Assign colour 1 to the first vertex in the list and move forward in the list,
+                                find a vertex non adjacent to previous vertex and colour it with colour 1.
+                                Keep on moving in the list to find non adjacent vertices to the vertices
+                                having colour 1 and assign them colour 1.</li>
+                            <li>Repeat the step 3 for colouring previously non coloured vertices using
+                                colour 2. And repeat the process of colouring using 3, 4, and more colours
+                                until all the vertices are coloured.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p><b>Example:</b> Find the chromatic number of the following graph using Powell's algorithm.</p>
+                <img src="../../images/color1.svg" alt="" class="wb">
+            </div>
         </div>
     </div>
     <div class="content-box">
@@ -249,7 +259,7 @@
         <ul>
             <li><a href="https://www.youtube.com/watch?v=tuitCMLwPAE&list=PLU6SqdYcYsfLV24T0XVb3z3mjl8QG0EBN&index=5"
                     target="_blank">Complete playlist &neArr;</a></li>
-            <li><a href="https://www.youtube.com/watch?v=XB4MIexjvY0" target="_blank">Dijkstra algorithm (Abdul Bari)
+            <li><a href="https://www.youtube.com/watch?v=iOu3PXv5L6w" target="_blank">Dijkstra algorithm
                     &neArr;</a></li>
         </ul>
     </div>

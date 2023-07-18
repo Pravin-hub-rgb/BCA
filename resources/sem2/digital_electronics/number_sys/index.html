@@ -18,22 +18,6 @@
             color: white;
         }
     </style>
-    <!-- Matomo -->
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "https://currypower.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = '//cdn.matomo.cloud/currypower.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
-    <!-- End Matomo Code -->
-
 </head>
 
 <body>
@@ -51,6 +35,7 @@
         <a href="#t9" class="link">Gray code</a>
         <a href="#t10" class="link">Excess-3 code</a>
         <a href="#t11" class="link">BCD</a>
+        <a href="#t12" class="link">PYQs</a>
         <div class="botbut">
             <a href="../logic_gates/index.html" class="link">Next Topic &rarr;</a>
             <a href="../basics/index.html" class="link">&larr; Previous Topic</a>
@@ -85,7 +70,7 @@
                     picture, and videos.</li>
                 <li>Binary information in digital computers is stored in memory or processor registers. Registers
                     contain either data or control information. Data are numbers and other binary-coded information such
-                    as ASCII codes, EBDIC codes etc.</li>
+                    as ASCII codes, EBCDIC codes etc.</li>
                 <li><b>Numeric data</b> consists of numbers that might be used in arithmetic operations. Computers
                     represent numeric data using the binary number system.</li>
                 <li><b>Character data</b> is composed of letters, symbols, and numerals that are not used in arithmetic
@@ -284,7 +269,11 @@
                         <li>Following are the rules for subtraction using 1's complement.
                             <ol>
                                 <li>Take 1's complement of subtrahend.</li>
-                                <li>Add this complement to minued.</li>
+                                <li>Add this complement to minued.
+                                    <ul>
+                                        <li>5 - 7, here 7 is subtrahend and 5 is minued.</li>
+                                    </ul>
+                                </li>
                                 <li>If a carry is produced by addition then add this carry to the LSB of result. This is
                                     called as end around carry (EAC).</li>
                                 <li>If no carry generated result is negative, and is in 1's complement form. Take 1's
@@ -323,7 +312,7 @@
         </div>
         <div id="t4" class="wh">
             <h2>r's and r-1's complement</h2>
-            <p><a
+            <p><a class="ba"
                     href="https://www.javatpoint.com/radix-and-diminished-radix-complement-in-digital-electronics">notes</a>
             </p>
             <img src="../../../sem1/images/rscompliment.svg" alt="" class="wb">
@@ -333,9 +322,9 @@
         <div id="t5" class="wh">
             <h2>Subtraction of decimal using 10's and 9's complement</h2>
             <ul>
-                <li><a href="https://www.youtube.com/watch?v=cT3odd4xwKw" target="_blank">lecture for 10's
-                        complement</a></li>
-                <li><a href="https://www.youtube.com/watch?v=ejUTuskVUX4" target="_blank">lecture for 9's complement</a>
+                <li><a class="ba" href="https://www.youtube.com/watch?v=cT3odd4xwKw" target="_blank">lecture for 10's
+                        complement &neArr;</a></li>
+                <li><a class="ba" href="https://www.youtube.com/watch?v=ejUTuskVUX4" target="_blank">lecture for 9's complement &neArr;</a>
                 </li>
             </ul>
             <div class="in">
@@ -379,13 +368,13 @@
                         <code>
 
                               9 ---> 1 0 0 1
-                             -8 ---> 1 0 0 0
+                             +8 ---> 1 0 0 0
                               ---------------
                             17 ---> 1 0 0 0 1
                         </code>
                     </pre>
                     Thus, addition of two 4-bits numbers requires 5-bits (n+1 bits) to represent the sum. What does a
-                    computer then do in this scenaria? A computer will discard the <i>most-significant bit (MSB)</i> and
+                    computer then do in this scenario? A computer will discard the <i>most-significant bit (MSB)</i> and
                     keep the rest.
                 </li>
                 <li><b>Underflow errors</b> occurs when some operation is performed on floating point numbers. A
@@ -658,6 +647,151 @@
                 </ul>
                 <img src="../../images/bcdques1.svg" alt="" class="wb">
             </div>
+        </div>
+        <div class="wh">
+            <h2>Error Detection and Error Correction</h2>
+            <ul>
+                <li><a href="https://youtu.be/ipstZPNjpuI" class="ba" target="_blank">Parity bits lecture &neArr;</a>
+                </li>
+                <li><a href="https://youtu.be/VlyE-H3jMnY" class="ba" target="_blank">Hamming code lecture &neArr;</a>
+                </li>
+                <li><a href="https://youtu.be/hyu6dOsvbSE" class="ba" target="_blank">Hamming code question video
+                        &neArr;</a></li>
+            </ul>
+            <p>We know that data is transmitted in binary form.
+                <br>While transmission of data, if noise are added to the data then it will not be same in receiving
+                side as it will contain some error.
+            <ul>
+                <li>To solve this error we use error detection and correction methods.</li>
+                <li>To detect the error we use parity bits.
+                    <br>Parity bits A.K.A check bit, these are added with message
+                    <br>Message + parity bit = parity bit code.
+                </li>
+                <li>Now parity bit code is transmitted to receiver.</li>
+                <li>The appended parity bit determines whether the message has any error or not.</li>
+            </ul>
+            </p>
+            <div class="in">
+                <p><b>There are two types of parity bit code</b></p>
+                <h3>1- Even parity bit code</h3>
+                <ul>
+                    <li>It ensures that message including parity bit must contain even number of 1's.</li>
+                </ul>
+                <img src="../../images/parity1.svg" alt="" class="wb">
+                <h3>2- Odd parity bit code</h3>
+                <ul>
+                    <li>It ensures that message including parity bit must contain odd 1's.</li>
+                </ul>
+                <img src="../../images/parity2.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Drawback of parity bit code</h3>
+                <ol>
+                    <li>Only single bit error can be deducted.</li>
+                    <li>Can't tell in which position the bit is manipulated.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Hamming code</h3>
+                <ul>
+                    <li>It is an error detecting and correcting code.</li>
+                    <li>It uses a number of parity bits located at certain positions.</li>
+                </ul>
+                <div class="wh">
+                    <p>How many parity bit can 'm' number of bit message can have?</p>
+                    <img src="../../images/parity3.svg" alt="" class="wb"><br>
+                    <img src="../../images/parity4.svg" alt="" class="wb">
+                </div>
+                <div class="wh">
+                    <p>Now we will see where to place the parity bits within the message.</p>
+                    <p>Let the code is of 7 bits.
+                        <br>There is a rule: the parity bits can always be place at position 2<sup>n</sup> where n = 0, 1, 2, 3, ... 
+                    </p>
+                    <img src="../../images/parity5.svg" alt="" class="wb">
+                </div>
+                <div class="wh">
+                    <p>What will be the value of parity bits?</p>
+                    <img src="../../images/parity6.svg" alt="" class="wb">
+                </div>
+                <div class="wh">
+                    <p>Example question:
+                        <br>Encode the binary word 1011 into seven bit <b>even parity hamming code.</b>
+                    </p>
+                    <img src="../../images/parity7.svg" alt="" class="wb">
+                </div>
+                <div class="wh">
+                    <p>Determine the hamming code for 10111 for odd parity.</p>
+                    <img src="../../images/parity8.svg" alt="" class="wb">
+                </div>
+                <div class="wh">
+                    <p>Assume that the even parity hamming code 0110011 is transmitted & that 0100011 is recevied. The receiver does not know what was transmitted, determine the error location.</p>
+                    <img src="../../images/parity9.svg" alt="" class="wb">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="t12" class="content-box">
+        <h2>Previous year questions</h2>
+        <div class="wh">
+            <h3>Convert the following:</h3>
+            <ol type="i">
+                <li>(652)<sub>10</sub> = ( )<sub>2</sub></li>
+                <li>(25.32)<sub>8</sub> = ( )<sub>10</sub></li>
+                <li>(6864)<sub>10</sub> = ( )<sub>16</sub></li>
+                <li>(1011)<sub>2</sub> = ( )<sub>8</sub></li>
+                <li>(5D2)<sub>16</sub> = ( )<sub>8</sub></li>
+                <li>(011010110)<sub>2</sub> = ( )<sub>8</sub></li>
+                <li>(155)<sub>8</sub> = ( )<sub>2</sub></li>
+                <li>(10101.01)<sub>2</sub> = ( )<sub>10</sub></li>
+                <li>(BF4A)<sub>16</sub> = ( )<sub>8</sub></li>
+                <li>(6FBC)<sub>16</sub> = ( )<sub>8</sub></li>
+                <li>(1010)<sub>2</sub> = ( )<sub>2</sub> = ( )<sub>10</sub></li>
+                <li>(72.45)<sub>10</sub> = ( )<sub>2</sub> = ( )<sub>16</sub></li>
+                <li>(EFF2.F)<sub>16</sub> = ( )<sub>8</sub> = ( )<sub>10</sub></li>
+                <li>(100101.1101)<sub>2</sub> = ( )<sub>8</sub> = ( )<sub>10</sub></li>
+                <li>(2341)<sub>5</sub> = ( )<sub>10</sub> = ( )<sub>16</sub></li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h3>Perform the following operation using 2's complement method:</h3>
+            <ol>
+                <li>(-29)<sub>10</sub> + (35)<sub>10</sub></li>
+                <li>(-33)<sub>10</sub> + (-67)<sub>10</sub></li>
+            </ol>
+        </div>
+        <div class="wh">
+            <ol>
+                <li>Encode data bits 0101 into a 7 bit even parity Hamming code.</li>
+                <li>A 7 bit Hamming code is received as 01011101. Check whether it is correct or not? If it is incorrect, find the correct code.</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h3>How is error detection and correction carried out using parity method in digital data transmission?</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain grey code and excess-3 code. Encode the following into grey code and excess-3 code.</h3>
+            <ol>
+                <li>45</li>
+                <li>26</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h3>Explain BCD code and Excess-3 code. Represent the following in decimal number binary form using BCD code and Excess-3 code.</h3>
+            <ol>
+                <li>317</li>
+                <li>89</li>
+                <li>565</li>
+                <li>67</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h3>What do you mean by r's and r-1's complement? Find out the r's and r-1's complement of the following numbers:</h3>
+            <ol>
+                <li>(10011)<sub>2</sub></li>
+                <li>(54)<sub>10</sub></li>
+                <li>(10101011)<sub>2</sub></li>
+                <li>(87)<sub>10</sub></li>
+            </ol>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
