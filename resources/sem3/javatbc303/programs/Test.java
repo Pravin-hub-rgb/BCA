@@ -1,33 +1,21 @@
 import java.util.Scanner;
 
-class Initial {
-    public int a;
-    public int b;
-    public int mult;
+class Test {
+    static Scanner input = new Scanner(System.in);
+    static int num;
 
-    void getValue() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the first number : ");
-        a = input.nextInt();
-        System.out.println("Enter the second number : ");
-        b = input.nextInt();
-        input.close();
-    }
-
-    void calValue() {
-        mult = a * b;
-    }
-
-    void display() {
-        System.out.println("The multiplication is = " + mult);
-    }
-}
-
-class Multiplication {
     public static void main(String args[]) {
-        Initial obj = new Initial();
-        obj.getValue();
-        obj.calValue();
-        obj.display();
+        System.out.println("Enter your number : ");
+        num = input.nextInt();
+        System.out.println("Sum of digits = " + sumOfDigits(num));
+    }
+
+    public static int sumOfDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum = sum + (num % 10);
+            num /= 10;
+        }
+        return sum;
     }
 }
