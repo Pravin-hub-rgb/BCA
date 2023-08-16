@@ -409,6 +409,75 @@ public class Test{
                 </pre>
             </div>
             <div class="in">
+                <h3>Scanner class</h3>
+                <ul>
+                    <li>Input can be accepted in 3 way in Java:
+                        <ol>
+                            <li>Command line (console)</li>
+                            <li>I/O Stream</li>
+                            <li>Scanner class</li>
+                        </ol>
+                    </li>
+                    <li>It is introduced by Java 8.</li>
+                    <li>Java util (utility) package is required.</li>
+                    <li>The Scanner class in Java is a part of the java.util package and provides a convenient way to
+                        read input from various sources such as the keyboard, files, and streams. It is widely used for
+                        interactive input in console-based applications. </li>
+                    <li>The Scanner class allows you to parse and extract different types of data from the input stream,
+                        like integers, floating-point numbers, strings, and more.</li>
+                    <li>Some key method:
+                        <ol>
+                            <li>nextInt() - this is used to input an integer.</li>
+                            <li>nextLine() - this is used to input a string.</li>
+                            <li>nextFloat() - used for reading float value.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <ul>
+                    <li>Program to demonstrate Scanner class&darr;</li>
+                </ul>
+                <pre>
+                        <code>
+    // import java.util.*; // This will import all classes although we require only scanner class so, we should import only that
+    import java.util.Scanner;
+    
+    class Test {
+    
+        public static void main(String args[]) {
+            int a;
+            int b;
+            int c;
+            Scanner input = new Scanner(System.in);
+            System.out.println("Enter the first number : ");
+            a = input.nextInt();
+            input.nextLine();
+            System.out.println("Enter the a second number : ");
+            b = input.nextInt();
+            System.out.println("Enter the a third number : ");
+            c = input.nextInt();
+            input.close(); // after usage on Scanner object we should close it.
+    
+            // displaying data :
+            System.out.println("a is = " + a + ", b = " + b + " and c = " + c);
+        }
+    }
+                        </code>
+                    </pre>
+                <p>Output &darr;</p>
+                <pre>
+                        <code>
+    a is = 1, b = 13 and c = 44 
+                        </code>
+                    </pre>
+                <ol>
+                    <li>Scanner &rarr; It is a class required to take input, it is present in java.util package.</li>
+                    <li>input &rarr; It is an object that we are creating to take input.</li>
+                    <li>new &rarr; It is a keyword used to create an object in java.</li>
+                    <li>System.in &rarr; System is a class and in is a variable that denotes we are taking input from
+                        standard input stream (i.e. keyboard)</li>
+                </ol>
+            </div>
+            <div class="in">
                 <h3>Inputs in java</h3>
                 <p>
                     We have Scanner class available in java.util package to take input
@@ -486,6 +555,7 @@ String s2 = input.nextLine();
                         </pre>
                 </div>
             </div>
+
             <div class="in">
                 <h3>Output in Java</h3>
                 <ul>
@@ -592,6 +662,214 @@ public class Sum {
                     </ul>
                     <img src="../../images/java6.svg" alt="" class="wb">
                 </div>
+                <div class="wh">
+                    <p>Consideraton: Be cautious when mixing different next*() methods, as newline characters might be
+                        left in the input buffer. Use additional nextLine() to consume them if needed.</p>
+                    <pre>
+                            <code>
+import java.util.Scanner;
+
+class Initial {
+    public int a;
+    public String b;
+
+    void getValue() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first number : ");
+        a = input.nextInt();
+
+        System.out.println("Enter the a string : ");
+        b = input.nextLine();
+        input.close();
+    }
+
+    void display() {
+        System.out.println("a is = " + a + " and b = " + b);
+    }
+}
+
+class Test {
+    public static void main(String args[]) {
+        Initial obj = new Initial();
+        obj.getValue();
+        obj.display();
+    }
+}
+                            </code>
+                        </pre>
+                    <ul>
+                        <li>In above program you cannot insert the string value because when you use nextInt(), it reads
+                            an integer from the input, but it doesn't consume the newline character (Enter key) that you
+                            press after entering the integer. As a result, when you call nextLine() immediately after
+                            nextInt(), it reads the remaining newline character from the previous input, resulting in
+                            unexpected behavior.</li>
+                        <li>This is resolved by adding an additional scanner.nextLine() after nextInt() to consume the
+                            newline character left in the input buffer. This will ensure that the newline character is
+                            properly consumed before you read the next line using nextLine(). </li>
+                    </ul>
+                    <pre>
+                        <code>
+import java.util.Scanner;
+
+class Initial {
+    public int a;
+    public String b;
+
+    void getValue() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first number : ");
+        a = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter the a string : ");
+        b = input.nextLine();
+        input.close();
+    }
+
+    void display() {
+        System.out.println("a is = " + a + " and b = " + b);
+    }
+}
+
+class Test {
+    public static void main(String args[]) {
+        Initial obj = new Initial();
+        obj.getValue();
+        obj.display();
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p>Misconception about main function in java, see the following program</p>
+                    <pre>
+                        <code>
+import java.util.Scanner;
+
+class Test {
+
+    public int a;
+    public int b;
+    public int c;
+
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first number : ");
+        a = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter the a second number : ");
+        b = input.nextInt();
+        System.out.println("Enter the a third number : ");
+        c = input.nextInt();
+        input.close();
+
+        // displaying data :
+        System.out.println("a is = " + a + ", b = " + b + " and c = " + c);
+
+    }
+}
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>In above code we are trying to access non-static variables '<b>a</b>', '<b>b</b>', and
+                            '<b>c</b>' from the '<b>main</b>' method.</li>
+                        <li>Remember, in Java, static methods can only directly access static variables. </li>
+                        <li>To fix this issues, we can either make '<b>a</b>', '<b>b</b>', and '<b>c</b>' static or
+                            create an instance of the '<b>Test</b>' class to access these variables. </li>
+                        <li>The correct way to access data member &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+import java.util.Scanner;
+
+class Test {
+    public static int a; // ***
+    public static int b; // ***
+    public static int c; // ***
+
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first number : ");
+        a = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter the second number : ");
+        b = input.nextInt();
+        System.out.println("Enter the third number : ");
+        c = input.nextInt();
+        input.close();
+
+        // displaying data :
+        System.out.println("a is = " + a + ", b = " + b + " and c = " + c);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Programs</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Program to find number of digits in a inputed number</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+import java.util.Scanner;
+
+class Digits {
+    static Scanner input = new Scanner(System.in);
+    static int num;
+
+    public static void main(String args[]) {
+        System.out.println("Enter your number : ");
+        num = input.nextInt();
+        System.out.println("Number of digits = " + noOfDigits(num));
+    }
+
+    public static int noOfDigits(int num) {
+        int digits = 0;
+        while (num > 0) {
+            digits++;
+            num /= 10;
+        }
+        return digits;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Program to calculate sum of digits</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+import java.util.Scanner;
+
+class Sum {
+    static Scanner input = new Scanner(System.in);
+    static int num;
+
+    public static void main(String args[]) {
+        System.out.println("Enter your number : ");
+        num = input.nextInt();
+        System.out.println("Sum of digits = " + sumOfDigits(num));
+    }
+
+    public static int sumOfDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum = sum + (num % 10);
+            num /= 10;
+        }
+        return sum;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
             </div>
             <div class="in">
                 <h2>Type Conversion</h2>
@@ -670,6 +948,176 @@ public class TypePromotion {
                         <br>b = (byte) (b*2); // type casting int to byte.
                     </p>
                 </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Arrays</h2>
+            <ul>
+                <li>An array is a group of ocntiguous or related data items that share a common name.</li>
+            </ul>
+            <div class="in">
+                <h3>One-dimensional array</h3>
+                <ul>
+                    <li>A list of items can be given one variable name using only one subscript and such a variable is
+                        called a one-dimensional array.</li>
+                </ul>
+                <div class="wh">
+                    <p><b>Creating an array</b></p>
+                    <ul>
+                        <li>Like any other variables, array must be declared and created in the computer memory before
+                            they are used. Creation of array involves three steps:
+                            <ol>
+                                <li>Declaring the array</li>
+                                <li>Creating memory locations</li>
+                                <li>Putting values into the memory locations.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Declaration of Arrays</b></p>
+                    <pre>
+                        <code>
+// Form 1
+type arrayname[];
+                        </code>
+                    </pre>
+                    <br>
+                    <pre>
+                        <code>
+type [] arrayname;
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>Examples &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+int number[];
+float average[];
+int[] counter;
+float[] marks;
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p><b>Creation of array</b></p>
+                    <ul>
+                        <li>Java allows us to create array using <b>new</b> operator only, as show below &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+arrayname = new type[size];
+                        </code>
+                    </pre>
+                    <p>Examples &darr;</p>
+                    <pre>
+                        <code>
+number = new int[5];
+average = new float[10];
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>These lines create necessary memory locations for the arrays <b>number</b> and
+                            <b>average</b> and designate them as <b>int</b> and <b>float</b> respectively. Now, the
+                            variable <b>number</b> refers to an array of 5 integers and <b>average</b> refers to an
+                            array of 10 floating point values.
+                        </li>
+                        <li>It is also possible to combine the two steps--declaration and creation--into one as shown
+                            below&darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+int number[] = new int[5];
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p><b>Initialization of Arrays</b></p>
+                    <ul>
+                        <li>The final step is to put values into the array created. This process is known as
+                            <i>initialization</i>. This is done using the array subscript as shown below &darr;
+                        </li>
+                    </ul>
+                    <pre>
+                        <code>
+arrayname[subscript] = value;
+                        </code>
+                    </pre>
+                    <p>Example &darr;</p>
+                    <pre>
+                        <code>
+number[0] = 35;
+number[1] = 40;
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>Not that Java create creates array starting with the subscript of 0 and ends with a value
+                            one less than the <i>size</i> specified.</li>
+                        <li>Unlike C, Java protects arrays from overruns and underruns. Trying to access an array bound
+                            its boundaries will generate an error message.</li>
+                        <li>We can also initialize arrays automatically in the same way as the ordinary variables when
+                            they are declared, as shown below &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+type arrayname[] = {list of values};
+                        </code>
+                    </pre>
+                    <p>Example &darr;</p>
+                    <pre>
+                        <code>
+int number [] = {35, 40, 20, 57, 19};
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>It is possible to assign an array object to another. Example &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+int a[] = {1, 2, 3};
+int b[];
+b = a;
+                        </code>
+                    </pre>
+                </div>
+                <div class="wh">
+                    <p><b>Array length</b></p>
+                    <ul>
+                        <li>In Java, all arrays store the allocated size in a variable named <b>length</b>. We can
+                            obtain the length of the array <b>a</b> using <b>a.length</b>.</li>
+                        <li>Example &darr;</li>
+                    </ul>
+                    <pre>
+                        <code>
+int aSize = a.length;
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Two-Dimentional arrays</h3>
+                <ul>
+                    <li>Creation of two-dimensional array &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+int myArray[][];
+myArray = new int[3][4];
+
+// OR
+
+int myArray[][] = new int[3][4]; // this creates a table that can store 12 integer values, four across and three down.
+                    </code>
+                </pre>
+                <ul>
+                    <li>Two-dimensional array intitialization &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
             </div>
         </div>
     </div>
