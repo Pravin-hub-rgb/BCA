@@ -96,13 +96,20 @@
                 <ul>
                     <li>JDK is a software package provided by Oracle that includes everything required for developing,
                         compiling, and running Java applications. It consists of the Java Runtime Environment (JRE), the
-                        Java compiler, development tools, libraries, documentation, and other resources.</li>
+                        Java compiler (javac), development tools, libraries, documentation, and other resources.</li>
                 </ul>
                 <p><b>JRE</b></p>
                 <ul>
                     <li>JRE is a subset of the JDK and provides the necessary runtime environment for executing Java
                         applications. It includes the Java Virtual Machine (JVM) and essential class libraries. Users
                         who only need to run Java applications, rather than develop them, typically install the JRE.
+                        <ul>
+                            <li>These are minimum requirement for running java application.</li>
+                            <li>When JVM executes byte code then the libraries and class files which are necessary for
+                                executing of that code are provided by JRE.</li>
+                            <li>So basically, for executing byte code we require some runtime libraries (recompiled
+                                class file) which are provided by JRE</li>
+                        </ul>
                     </li>
                 </ul>
                 <p><b>JVM</b></p>
@@ -122,61 +129,57 @@
                         </ul>
                     </li>
                 </ul>
-                <p><b>Runtime :-</b></p>
-                <img class="wb" src="../../images/java4.svg" alt="">
-                <ul>
-                    <li>(How JVM works) class loader
-                        <ul>
-                            <li>Loading
-                                <ul>
-                                    <li>Read .class file and generate binary data.</li>
-                                    <li>an object of this class is created in heap.</li>
-                                </ul>
-                            </li>
-                            <li>Linking
-                                <ul>
-                                    <li>JVM verifies the .class file</li>
-                                    <li>allocates memory for the class variables and default value</li>
-                                    <li>replace symbolic references from the type with direct reference.</li>
-                                </ul>
-                            </li>
-                            <li>Initialization
-                                <ul>
-                                    <li>All static variables are assigned with their values defined in the code
-                                        and static back.</li>
-                                    <li>JVM contains the stack and heap memory locations.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <p><b>JVM Execution</b></p>
-                <ul>
-                    <li>Interpreter
-                        <ul>
-                            <li>Line by execution</li>
-                            <li>When one method is called many times it will interpret again and again</li>
-                        </ul>
-                    </li>
-                    <li>JIT
-                        <ul>
-                            <li>Those methods that are repeated. JIT provides direct machine code so that
-                                interpretation is not required.</li>
-                            <li>Makes execution faster</li>
-                            <li>Garbage collector</li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="in">
-                <h3>Working of Java Architecture</h3>
-                <img class="wb" src="../../images/java5.svg" alt="">
-            </div>
-            <div class="in">
-                <h3>Tools required to run java</h3>
+                <h3>JVM Role</h3>
+                <img src="../../images/jvm1.svg" alt="" class="wb">
                 <ul>
-                    <li>JDK</li>
-                    <li>IDE</li>
+                    <li>Java file (source code .java) is compiled using compiler and after compilation a file (byte code
+                        .class) is generated and it can run on any operating system.</li>
+                    <li>This Byte code is for Java Virtual Machine which is different for each operating system, and JVM
+                        helps in execution of byte code.</li>
+                </ul>
+                <p><b>More on JVM</b></p>
+                <img src="../../images/jvm2.svg" alt="" class="wb">
+                <ul>
+                    <li>JVM provides run time environment to execute byte code, this doesn't exists physically, it is a
+                        software component and it work is to load byte code file, verify it and execute it.</li>
+                    <li>There are three subcomponent of JVM:
+                        <ol>
+                            <li>Class loader</li>
+                            <li>JVM memory area</li>
+                            <li>Execution engine</li>
+                        </ol>
+                    </li>
+                    <li><b>Class loader &rarr;</b> It loads byte code in the main memory.</li>
+                    <li><b>JVM memory area &rarr; </b> It is the memory area allocated to program by Java Virtual
+                        Machine.
+                        <ul>
+                            <li>Whenever we execute a program, so for the methods, class and variables we require some
+                                storage area which is provided by JVM.</li>
+                            <li>If memory area - <b>class area</b> &rarr; It stores method code and class field and its
+                                method data.</li>
+                            <li><b>Heap space</b> &rarr; which is used to allocate memory for java objects.</li>
+                            <li><b>Stack memory area</b> &rarr; which is used to store method specific values, meaning
+                                for storing methods local variable and reference objects.</li>
+                            <li><b>PC registers</b> &rarr; which is used to store thread's executing instructions
+                                address. And once an instruction is executed then it stores address of next
+                                instruction.</li>
+                        </ul>
+                    </li>
+                    <li><b>Execution Engine</b> &rarr; Inside this we have JIT and Garbage collector.
+                        <ul>
+                            <li><b>JIT &rarr; </b> It helps in improving performance by compiling byte code which have
+                                same type of functionality at once.
+                                <ul>
+                                    <li>It translate byte code to CPU instructions which are machine understandable.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Garbage collector</b> &rarr; It deallocates unreferenced memory.</li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -438,35 +441,35 @@ public class Test{
                 </ul>
                 <pre>
                         <code>
-    // import java.util.*; // This will import all classes although we require only scanner class so, we should import only that
-    import java.util.Scanner;
-    
-    class Test {
-    
-        public static void main(String args[]) {
-            int a;
-            int b;
-            int c;
-            Scanner input = new Scanner(System.in);
-            System.out.println("Enter the first number : ");
-            a = input.nextInt();
-            input.nextLine();
-            System.out.println("Enter the a second number : ");
-            b = input.nextInt();
-            System.out.println("Enter the a third number : ");
-            c = input.nextInt();
-            input.close(); // after usage on Scanner object we should close it.
-    
-            // displaying data :
-            System.out.println("a is = " + a + ", b = " + b + " and c = " + c);
-        }
+// import java.util.*; // This will import all classes although we require only scanner class so, we should import only that
+import java.util.Scanner;
+
+class Test {
+
+    public static void main(String args[]) {
+        int a;
+        int b;
+        int c;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first number : ");
+        a = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter the a second number : ");
+        b = input.nextInt();
+        System.out.println("Enter the a third number : ");
+        c = input.nextInt();
+        input.close(); // after usage on Scanner object we should close it.
+
+        // displaying data :
+        System.out.println("a is = " + a + ", b = " + b + " and c = " + c);
     }
+}
                         </code>
                     </pre>
                 <p>Output &darr;</p>
                 <pre>
                         <code>
-    a is = 1, b = 13 and c = 44 
+a is = 1, b = 13 and c = 44 
                         </code>
                     </pre>
                 <ol>
@@ -951,6 +954,199 @@ public class TypePromotion {
             </div>
         </div>
         <div class="wh">
+            <h2>Functions in Java</h2>
+            <ul>
+                <li>In Java, functions are known as methods. A method is a block of code that performs a specific task.
+                    Methods in Java are used to encapsulate code, promote reusability, and organize your program's logic
+                </li>
+                <li>Here's how you define and use methods in Java &darr;</li>
+            </ul>
+            <pre>
+                <code>
+access_modifier return_type method_name(parameter_list) {
+    // Method body
+    // Code to perform the task
+    // Optional return statement if return_type is not void
+}
+                </code>
+            </pre>
+            <ul>
+                <li>access_modifier: Specifies the visibility of the method (e.g., public, private, protected, or
+                    package-private).</li>
+                <li>return_type: Specifies the type of value the method returns. Use void if the method doesn't return
+                    anything.</li>
+                <li>method_name: The name of the method.</li>
+                <li>parameter_list: List of input parameters enclosed in parentheses. If there are no parameters, leave
+                    it empty.</li>
+                <li>method_body: The actual code that the method executes.</li>
+            </ul>
+            <div class="in">
+                <h3>Static vs non static concept</h3>
+                <p>The concepts of "static" and "non-static" are fundamental in object-oriented programming, and they
+                    pertain to how members (variables and methods) of a class are associated with the class itself and
+                    instances of the class. </p>
+                <ul>
+                    <li><b>Static members</b> &rarr; Static members (variables and methods) belong to the class itself
+                        rather than to instances of the class.
+                        <ul>
+                            <li>They are shared among all instances of the class.</li>
+                            <li>You can access static members directly using the class name (e.g.,
+                                ClassName.staticVariable) or within static methods.</li>
+                            <li>Static members are created and initialized when the class is loaded into memory and
+                                exist throughout the program's execution.</li>
+                        </ul>
+                    </li>
+                    <li><b>Non-Static Members (Instance Members):</b> &rarr; Non-static members belong to instances of
+                        the class.
+                        <ul>
+                            <li>Each instance of the class has its own copy of non-static members.</li>
+                            <li>Non-static members cannot be accessed directly from static methods because they are
+                                associated with instances.</li>
+                            <li>They are created and initialized when an instance of the class is created and destroyed
+                                when the instance is garbage-collected.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><b>Remember</b> &Rarr; We can't directly access these non-static members and variable in static
+                    methods because they belong to an
+                    instance of the class, not to the class itself.</p>
+                <ul>
+                    <li>How to use non-static method inside static method?</li>
+                </ul>
+                <pre>
+                        <code>
+public class StaticVsNonStaticExample {
+    // Non-static variable
+    int nonStaticVar = 10;
+
+    // Non-static method
+    void nonStaticMethod() {
+        System.out.println("Non-static method called.");
+    }
+
+    public static void main(String[] args) {
+        // Cannot access non-static variables or methods directly from a static context (main method)
+        
+        // Uncommenting the following lines will result in a compilation error
+        // System.out.println(nonStaticVar);  // Error: non-static variable cannot be referenced from a static context
+        // nonStaticMethod();  // Error: non-static method cannot be referenced from a static context
+
+        // To use non-static variables/methods, you need to create an instance of the class
+        StaticVsNonStaticExample instance = new StaticVsNonStaticExample();
+        System.out.println("Non-static variable: " + instance.nonStaticVar);
+        instance.nonStaticMethod();
+    }
+}                            
+                        </code>
+                    </pre>
+                <ul>
+                    <li>To access non-static members within a static context like the main method, you need to create an
+                        instance of the class and then use that instance to access the members.</li>
+                    <li>Static methods and variables belong to the class itself and can be accessed directly from other
+                        static methods without creating an instance. Non-static methods and variables belong to
+                        instances of the class and require an instance to be accessed.</li>
+                </ul>
+                <p><b>Using both static and non static method</b></p>
+                <pre>
+                    <code>
+public class StaticAndNonStaticExample {
+    static int staticVar = 10; // Static variable
+    int nonStaticVar = 20; // Non-static variable
+    
+    static void staticMethod() {
+        System.out.println("Static method called.");
+    }
+    
+    void nonStaticMethod() {
+        System.out.println("Non-static method called.");
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("Static variable: " + staticVar);
+        staticMethod();
+        
+        // Uncommenting the following lines will result in a compilation error
+        // System.out.println(nonStaticVar);  // Error: non-static variable cannot be referenced from a static context
+        // nonStaticMethod();  // Error: non-static method cannot be referenced from a static context
+        
+        StaticAndNonStaticExample instance = new StaticAndNonStaticExample();
+        System.out.println("Non-static variable: " + instance.nonStaticVar);
+        instance.nonStaticMethod();
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Function example &darr;</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Simple function program</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+import java.util.Scanner;
+
+class Test {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int number;
+        System.out.print("Enter a number : ");
+        number = input.nextInt();
+        System.out.println("The sqare of the given number = " + squareNum(number));
+        input.close();
+    }
+
+    public static int squareNum(int num) {
+        return num * num;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Checking if a number is palindrome or not</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+import java.util.Scanner;
+
+class Test {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int number;
+        System.out.print("Enter a number : ");
+        number = input.nextInt();
+        if (isPalindrome(number)) {
+            System.out.println("Given number is palindrome");
+        } else {
+            System.out.println("Given number is not palindrome");
+        }
+        input.close();
+    }
+
+    public static boolean isPalindrome(int num) {
+        int rev = 0;
+        int temp = num;
+        while (temp > 0) {
+            rev *= 10;
+            rev += (temp % 10);
+            temp /= 10;
+        }
+        if (rev == num)
+            return true;
+        return false;
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
             <h2>Arrays</h2>
             <ul>
                 <li>An array is a group of ocntiguous or related data items that share a common name.</li>
@@ -1115,9 +1311,110 @@ int myArray[][] = new int[3][4]; // this creates a table that can store 12 integ
                 </ul>
                 <pre>
                     <code>
+int myArray[][];
+myArray = new int[3][4];
 
+// OR 
+
+int myArray[][] = new int[3][4];
                     </code>
                 </pre>
+                <ul>
+                    <li>This creates a table that can store 12 integer values, four across and three down.</li>
+                    <li>Like the one-dimentional arrays, two dimensional array may be initialized by following their
+                        declaration with a list of initial values enclosed in braces. Example &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+int table[][] = {{0, 0, 0}, {1, 1, 1}};
+                    </code>
+                </pre>
+                <ul>
+                    <li>Quick way to initalize two-dimensional array is by using loop &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+class Test {
+    public static void main(String[] args) {
+        int value = 10;
+        int table[][] = new int[2][3];
+        for (int r = 0; r < 2; r++) {
+            for (int c = 0; c < 3; c++) {
+                table[r][c] = value++;
+            }
+        }
+        // displaying 2D array
+        for (int r = 0; r < 2; r++) {
+            for (int c = 0; c < 3; c++) {
+                System.out.print(table[r][c] + " ");
+            }
+            System.out.println("");
+        }
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Passing array to functions</h3>
+                <ul>
+                    <li>Simple program where we pass an array to a function and print the values &darr;</li>
+                </ul>
+                <pre>
+                    <code>class Test {
+    public static void main(String[] args) {
+        int arr[] = { 2, 4, 6, 8, 99, 1 };
+        System.out.println("Printing the array using function : ");
+        printArray(arr);
+
+    }
+
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+                    </code>
+                </pre>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Passing 2 single dimensional array into a function and summing them.</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+class Test {
+    public static void main(String[] args) {
+        int arr1[] = { 2, 4, 6, 8, 99, 1 };
+        int arr2[] = { 2, 1, 2, 3, 9, 4 };
+        System.out.print("arr1 : ");
+        display(arr1);
+        System.out.print("arr2 : ");
+        display(arr2);
+        System.out.print("Sum of arr1 and arr2 : ");
+        sumTwoArray(arr1, arr2);
+
+    }
+
+    public static void sumTwoArray(int[] arr1, int[] arr2) {
+        int newArray[] = new int[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
+            newArray[i] = arr1[i] + arr2[i];
+        }
+        display(newArray);
+    }
+
+    public static void display(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println("");
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
