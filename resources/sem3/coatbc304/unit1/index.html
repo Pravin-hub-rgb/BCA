@@ -47,7 +47,7 @@
     <div class="content-box">
         <h1>Key concepts of Computer Organization and Architecture</h1>
         <ul>
-            <li><b>About "Computer Organization and Architecture:</b>
+            <li><b>About Computer Organization and Architecture:</b>
                 <ul>
                     <li>Computer Organization and Architecture is a fundamental field in computer science that deals
                         with the design and structure of computer systems, including the internal components and their
@@ -93,6 +93,35 @@
                 <li>Use of flip flop: Flip flop holds the binary information and gates control when when and how new
                     information is transferred into a register.</li>
             </ul>
+            <p><b>Before learning Register Transfer Language we should know what are registers and why we are learning
+                    them? What is its significane in digital machine?</b></p>
+            <ul>
+                <li>We know that digital machine work with digital circuits.</li>
+                <li>There are two types of digital circuits:
+                    <ol>
+                        <li>Combinational circuits</li>
+                        <li>Sequential circuits</li>
+                    </ol>
+                </li>
+                <li>We came accross flip flop in digital circuits and we know that a register is a group of flip-flop
+                    which can store bit of information.</li>
+                <li>Simple digital systems are frequently characterized in terms of:
+                    <ol>
+                        <li>The register they contain.
+                            <ul>
+                                <li>When we say our computer if of 64 bit, we mean that the size of register which we is
+                                    used to pass instruction to the machine is of size 64 bits.</li>
+                                <li>The resistor can store larger amounts of data.</li>
+                                <li>Instructions and data can be processed more efficiently.</li>
+                                <li>That's why we are learning about registers.</li>
+                            </ul>
+                        </li>
+                        <li>The operations that are performed on data stored in them.</li>
+                    </ol>
+                </li>
+                <li>The operations executed on the data in registers are called micro-operations e.g. shit, count, clear
+                    and load.</li>
+            </ul>
             <p><b>Some of the commonly used register are:</b></p>
             <ul>
                 <li><b>Accumulator</b> : This is the most common register, used to store data taken out from the memory.
@@ -105,17 +134,59 @@
             <ul>
                 <li><b>MAR</b> : Memory Address Register are those registers that holds the address for memory unit.
                 </li>
-                <li><b>MDR</b> : Memory Buffer Register stores instruction and data received from the memory and sent
+                <li><b>MBR</b> : Memory Buffer Register stores instruction and data received from the memory and sent
                     from the memory.</li>
                 <li><b>PC</b> : Program Counter points to the next instruction to be executed.</li>
                 <li><b>IR</b> : Instruction Register holds the instruction to be executed.</li>
             </ul>
             <img src="../../images/register1.svg" alt="" class="wb">
             <div class="in">
+                <h3>Internal hardware organization of a digital computer</h3>
+                <ul>
+                    <li>Internal hardware organization of a digital computer can be orgaized in 3 format.</li>
+                </ul>
+                <ol>
+                    <li>Set of register it contains and their function.
+                        <ul>
+                            <li>How many general purpose register are there.</li>
+                            <li>Size of instruction register.</li>
+                        </ul>
+                    </li>
+                    <li>Sequence of microoperations performed on binary information stored in registers.</li>
+                    <li>Control signals that initiate the sequence of microoperations that we want to perform.
+                        <ul>
+                            <li>Suppose if we want to add two numbers (A + B), they will not be directly added, there
+                                must be some control function will be used which will be contolling the value of A and
+                                B, and which will also control this operation to happen.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
                 <h3>What is RTL?</h3>
                 <ul>
-                    <li>The symbolic notation used to describe the microoperation transfers amongst registers is called
+                    <li>The symbolic notation used to describe the microoperation transfers among registers is called
                         <b>Register Transfer Language.</b>
+                    </li>
+                    <li>It is basically a language and we know that a language have its own syntax and rules and RTL is
+                        used while we are working with computer organization and its design.</li>
+                </ul>
+                <p><b>Key points for RTL</b></p>
+                <ul>
+                    <li>A symbolic language.</li>
+                    <li>A convenient tool for describing the internal organization of digital computers in
+                        consice/precise manner.</li>
+                    <li>Can also be used to facilitate the design process of digital systems.</li>
+                </ul>
+                <p><b>Rules of RTL</b></p>
+                <ul>
+                    <li>Registers are designated by capital letters, some time followed by numbers (e.g. A, R1, IR)</li>
+                    <li>Often the name indicate function:
+                        <ul>
+                            <li>MAR : Memory Address Regsiter</li>
+                            <li>PC : Program Counter</li>
+                            <li>IR : Instruction Register</li>
+                        </ul>
                     </li>
                 </ul>
                 <div class="wh">
@@ -130,18 +201,157 @@
             </div>
         </div>
         <div class="wh">
+            <h2>Some register definition</h2>
+            <div class="in">
+                <h3>Address registers</h3>
+                <ul>
+                    <li>We know CPU reads and write data on memory. So this address register is used to store memory
+                        address of
+                        data for CPU.</li>
+                    <li>It picks data from memory like addresses, addresses stored in address register, AR gives the
+                        addres to memory, memory then decodes the addresses and then fetches the data from RAM.</li>
+                    <li>Size = 12 bits.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Memory Data Register</h3>
+                <ul>
+                    <li>The Memory Data Register (MDR) is a component of a computer's CPU that temporarily holds data
+                        fetched from or destined for the computer's memory. When the CPU reads data from memory, it's
+                        stored in the MDR before being processed. Similarly, when the CPU writes data to memory, it
+                        places the data in the MDR before sending it to the memory. The MDR essentially acts as a
+                        temporary storage location for data during memory read and write operations.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Memory Buffer Register (MBR)</h3>
+                <ul>
+                    <li>The Memory Buffer Register (MBR) is used in input/output (I/O) operations in computer systems.
+                        It holds data that is being transferred between the CPU and an I/O device, such as a hard drive
+                        or network interface. The MBR helps in coordinating data transfers between the CPU and I/O
+                        devices, ensuring efficient communication and minimizing bottlenecks. It serves as a temporary
+                        buffer to hold data that is moving between the CPU and external devices.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Accumulator</h3>
+                <ul>
+                    <li>It stores intermediate results from ALU to RAM and temoporary information of operands.</li>
+                    <li>It is also called Processor Register.</li>
+                    <li>The accumulator register retrieves data from memory and temporarily stores it before
+                        transferring it to the ALU. This intermediate step allows data to be efficiently accessed by the
+                        ALU for various arithmetic and logical operations. By doing so, the processor optimizes
+                        performance by minimizing direct memory access during calculations.</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Instruction Register</h3>
+                <ul>
+                    <li>Stores instruction that needs to be executed.</li>
+                </ul>
+                <img src="../../images/opcode.svg" alt="" class="wb">
+                <p>Instruction basically consists of 3 parts</p>
+                <ol>
+                    <li><b>I</b> &rarr; It is the MSB
+                        <ul>
+                            <li>Could be 0 or 1.</li>
+                            <li>It I = 0 it means direct address.</li>
+                            <li>It I = 1 then it shows indirect addressing.</li>
+                            <li>If value is 0 then directly go on that location to fetch data and give to accumulator.
+                            </li>
+                            <li>If the value is 1, it indicates indirect addressing. In this case, the system follows a
+                                sequence where it moves to the 1st location, which then directs it to the 2nd location,
+                                and from there, to the 3rd location where the data is located.</li>
+                        </ul>
+                    </li>
+                    <li><b>Op code</b> &rarr; Operation to be performed like addition, sutraction, multiplication or
+                        division.</li>
+                    <li><b>Operands</b> &rarr; Data on which operation has to be performed.
+                        <ul>
+                            <li>Operand part has the address of data on which we have to perform operation.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <ul>
+                    <li>Instruction Register would be of 16 bit, in which operands will be of 12 bits then 3 bits is for
+                        OP code and 1 bit for I.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Program Counter</h3>
+                <ul>
+                    <li>Definition: The Program Counter (PC) register is a special-purpose processor register that holds
+                        the memory address of the next instruction to be fetched and executed.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Designation of a Register</h2>
+            <ul>
+                <li>Means how we can demonstrate that it is a :
+                    <ul>
+                        <li>Register</li>
+                        <li>Portion of register</li>
+                        <li>A bit of a register</li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="../../images/register2.svg" alt="" class="wb">
+        </div>
+        <div class="wh">
             <h2>Register Transfer</h2>
             <ul>
-                <li>The term register transfer means the availability of hardware logic circuits that can perform a
-                    stated microoperation and transfer the result of the operation to the same or another register.
-                </li>
                 <li>Register Transfer refers to the movement of data between registers within a computer's central
                     processing unit (CPU) as part of executing instructions. It involves the controlled transfer of
                     binary data from one register to another, often through arithmetic or logic operations, forming
                     the fundamental basis for instruction execution and data manipulation in a computer's
                     microarchitecture.</li>
+                <li>Basically it is copying contents of one register to another.</li>
+                <li>A register transfer is indicated as &darr;<br>
+                    R2 &larr; R1
+                    <ul>
+                        <li>R1 is source register and R2 is destination register</li>
+                        <li>In this case the contents of register R1 are copied (loaded into) register R2.</li>
+                        <li>A simultaneous transfer of all bit from the source R1 to the destination register R2, during
+                            one clock pulse.</li>
+                        <li>Note that this is non-destructive, i.e. the contents of R1 are not altered by copying
+                            (loading) them to R2.</li>
+                        <li>The data is tranfered parallely.</li>
+                        <li>Any microoperation that is performed on the register will always be controlled by the
+                            control function.</li>
+                    </ul>
+                </li>
             </ul>
-            <img src="../../images/register2.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Control functions</h3>
+                <ul>
+                    <li>Often actions need to only occur if a certain condition is true.</li>
+                    <li>This is similar to an "if" statement in a programming language. In digital systems this is often
+                        done via control signal called a <b>control function.</b></li>
+                    <li>If the signal is 1, then the action takes place. </li>
+                    <li>This is represented as:
+                        <br>P: R2 &larr; R1
+                        <br>Which means "If p = 1, then load the content of register R1 into register R2" i.e. if (P =
+                        1) the (R2 &larr; R1)
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Hardware implementation of controlled transfers</h3>
+                <img src="../../images/transfer1.svg" alt="" class="wb">
+                <p>1- Content of register R1 and R6 are added & result is transfered into register MDR only when P + Q =
+                    1. &darr;</p>
+                <img src="../../images/transfer2.svg" alt="" class="wb">
+                <p>2- The difference of two register R2 and R4 is to be stored in register IR wen either P or Q is 1.
+                    &darr;</p>
+                <img src="../../images/transfer3.svg" alt="" class="wb">
+            </div>
+            <ul>
+                <li>The same clock controls the circuits that generate the control function and the designated register.
+                </li>
+                <li>Registers are assumed to use positive edge triggered flip-flops.</li>
+            </ul>
             <div class="in">
                 <h3>Basic Symbols used for Register Transfer</h3>
                 <img src="../../images/resgister3.svg" alt="" class="wb">
@@ -169,6 +379,20 @@
         </div>
         <div class="wh">
             <h2>Bus and memory transfer</h2>
+            <p><b>Q-</b> Why there is a need to have a bus.
+            <ul>
+                <li>In a digital system with multiple registers, it's not feasible to create direct connections for data
+                    and control lines between each pair of registers to allow them to directly load content from any
+                    other register. This is why computer systems use a bus—a shared communication pathway—allowing
+                    efficient data transfer among various components.</li>
+                <li>A bus structure consists of set of common lines, one for each bit of a register through which binary
+                    information is transfered one at a time. It have a control circuits to select which register is the
+                    source, and which is the destination.</li>
+                <li>This is how we are designing the bus systems from register to bus. Bus &larr; R
+                    <br><img src="../../images/busline.svg" alt="" class="wb">
+                </li>
+            </ul>
+            </p>
             <ul>
                 <li>Bus Transfer is the most efficient way to transfer data. The transfer of data from the Bus lines to
                     the outside environment and vice versa is known as Bus transfer. Similarly, the transfer of data
@@ -186,6 +410,33 @@
                             <li>Bus transfer using Three states bus buffer</li>
                         </ul>
                     </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Bus transfer using multiplexer</h3>
+                <ul>
+                    <li>Multiplexer selects the source register whose binary information is kept on the bus.</li>
+                    <li>Key terms to understand before desinging a bus system using multiplexer.</li>
+                    <li>There would always be a scnerio given.</li>
+                    <li>Example question scenerio : Construct a bus system of 8 register with 16 bits.</li>
+                    <img src="../../images/busline2.svg" alt="" class="wb">
+                    <li>Now according to the scenerio.
+                        <ol>
+                            <li>How many multiplexer are required.</li>
+                            <li>What would be the size of each multiplexer.</li>
+                            <li>How many selection lines?</li>
+                        </ol>
+                    </li>
+                    <img src="../../images/busline3.svg" alt="" class="wb">
+                    <ul>
+                        <li>In the above scenerio of 8 registers with 16 bits
+                            <ul>
+                                <li>Number of multiplexer = 16</li>
+                                <li>Size of each multiplexer = k x 1 = 8 x 1</li>
+                                <li>And we know that for 8 x 1 multiplexer there are 3 selection lines.</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </ul>
             </div>
         </div>
@@ -227,18 +478,22 @@
                 <h3>Logic microoperation</h3>
                 <ul>
                     <li>A group of bits called strings is stored in the register, the logic microoperation consider each
-                        bit of register as compared to the arithmetic microopeation where we take whole content of
+                        bit of register as compared to the arithmetic microoperation that is performed on the register
+                        will always be controlled by the control function. where we take whole content of
                         register to perform arithmetic operation.</li>
                 </ul>
                 <img src="../../images/register5.svg" alt="" class="wb">
             </div>
             <div class="in">
-                <h3>Shift microopeation</h3>
+                <h3>Shift microoperation that is performed on the register will always be controlled by the control
+                    function.</h3>
                 <ul>
-                    <li>Shift microopeation transfer binary bits between the register serially, this shift operation is
+                    <li>Shift microoperation that is performed on the register will always be controlled by the control
+                        function. transfer binary bits between the register serially, this shift operation is
                         also used to perform binary multiplication & binary division.</li>
                     <li>Register can be shifted to left or to right. There are no conventional symbol for shift
-                        operation. The shift microopeation are represented by <b>shl</b> & <b>shr</b> to shift the
+                        operation. The shift microoperation that is performed on the register will always be controlled
+                        by the control function. are represented by <b>shl</b> & <b>shr</b> to shift the
                         content to left & to right.</li>
                     <li>The one bit shift is represented by symbolic representation & is given in form of statement :
                         <br><img class="wb" src="../../images/register6.svg" alt="">
@@ -252,6 +507,8 @@
     <div class="content-box">
         <p>Resources &darr;</p>
         <ul>
+            <li><a href="https://youtu.be/aIqd4rK0SX4" target="_blank">RTL intro &neArr;</a></li>
+            <li><a href="https://youtu.be/8YwYycuGIys" target="_blank">Bus and Memory Transfer &neArr;</a></li>
             <li><a href="https://www.youtube.com/playlist?list=PLXj4XH7LcRfDXDRzSLv1FfZ-SSA38SiC0"
                     target="_blank">Playlist &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=mNNywW00eEc" target="_blank">1.1 Register Transfer Language and
