@@ -487,8 +487,24 @@
                 <li>The Read statement causes a transfer of information into the data register (DR) from the memory
                     word (M) selected by the address register (AR).</li>
             </ul>
+            <img src="../../images/mar.svg" alt="" class="wb">
         </div>
         <div class="wh">
+            <h2>Mirco operation</h2>
+            <ul>
+                <li>A micro-operation is a simple operation performed on the data stored in one or more registers. They
+                    transfer the data between registers. There are four types of micro-operaitons:
+                    <ol>
+                        <li><b>Register transfer microoperations</b> transfer binary information from one register to
+                            another.</li>
+                        <li><b>Arithmetic mircooperations</b> perform arithmetic operation on numberic data stored in
+                            registers.</li>
+                        <li><b>Logic mircrooperations</b> perform bit manipulation operations on non0-numeric data
+                            stored in registers.</li>
+                        <li><b>Shift microoperations</b> perform shift operations on data stored in registers.</li>
+                    </ol>
+                </li>
+            </ul>
             <h2>Types of microoperation</h2>
             <div class="in">
                 <h3>Arithmetic microoperation</h3>
@@ -505,28 +521,183 @@
             <div class="in">
                 <h3>Logic microoperation</h3>
                 <ul>
-                    <li>A group of bits called strings is stored in the register, the logic microoperation consider each
-                        bit of register as compared to the arithmetic microoperation that is performed on the register
-                        will always be controlled by the control function. where we take whole content of
-                        register to perform arithmetic operation.</li>
+                    <li>Logic micro-operaitons consider each bit of the register separately and treat them as binary
+                        variables.</li>
+                    <li>Example &darr;</li>
                 </ul>
-                <img src="../../images/register5.svg" alt="" class="wb">
+                <img src="../../images/logic1.svg" alt="" class="wb">
+                <p><b>Selective set</b>: The selective-set operation sets bit to 1 in register A where there are
+                    corresponding 1 in register B.</p>
+                <img src="../../images/selectiveset1.svg" alt="" class="wb">
+                <ul>
+                    <li>The two leftmost bits of B are 1’s, so the corresponding bits of A are set to 1.The two bits of
+                        A with corresponding 0’s in B remain unchanged. The OR microoperation can be used to selectively
+                        set bits of a register. </li>
+                </ul>
+                <P><b>Selective complement</b>: The selective-complement operation complements bits in A where there are
+                    corresponding 1 in B. It does not affect bit positions that have 0’s in B. For example: </P>
+                <img src="../../images/selectiveset2.svg" alt="" class="wb">
+                <ul>
+                    <li>Again the two leftmost bits of B are 1’s, so the corresponding bits of A are complemented. The
+                        exclusive-OR microoperation can be used to selectively complement. </li>
+                </ul>
+                <p><b>Selective-clear</b>: The selective clear operatons clears to 0 the bits in A only where there are
+                    corresponding 1 in B. For example &darr;</p>
+                <img src="../../images/selectiveset3.svg" alt="" class="wb">
+                <ul>
+                    <li>Again the two leftmost bits of B are 1’s, so the corresponding bits of A are cleared to 0. </li>
+                </ul>
+                <p><b>Mask operation</b>: The mask operation is similar to the selective-clear operation except that the
+                    bits of A are cleared only where there are corresponding 0’s in B. The mask operation is an AND
+                    micro operation as seen from the following numerical example:</p>
+                <img src="../../images/mask1.svg" alt="" class="wb">
+                <ul>
+                    <li>The two rightmost bits of A are cleared because the corresponding bits of B are 0’s. The two
+                        leftmost bits are left unchanged because the corresponding bits of B are 1’s. </li>
+                </ul>
+                <p><b>Insertion operation</b>: The insert operation inserts a new value into a group of bits. This is
+                    done by first masking the bits and then ORing them with the required value. For example, suppose
+                    that an A register contains eight bits, 0110 1010. To replace the four leftmost bits by the value
+                    1001 we first mask the four unwanted bits: </p>
+                <img src="../../images/mask2.svg" alt="" class="wb">
+                <ul>
+                    <li>The mask operation is an AND microoperation and the insert operation is an OR microoperation.
+                    </li>
+                </ul>
+                <p><b>Clear operation</b>: The clear operation compares the words in A and B and produces an all 0’s
+                    result if the two numbers are equal. This operation is achieved by an exclusive-OR microoperation as
+                    shown by the following example: </p>
+                <img src="../../images/mask3.svg" alt="" class="wb">
+                <ul>
+                    <li>When A and B are equal, the two corresponding bits are either both 0 or both 1. In either case
+                        the exclusive-OR operation produces a 0. The all-0’s result is then checked to determine if the
+                        two numbers were equal</li>
+                </ul>
             </div>
             <div class="in">
-                <h3>Shift microoperation that is performed on the register will always be controlled by the control
-                    function.</h3>
+                <h3>Shift mirco-operations</h3>
                 <ul>
-                    <li>Shift microoperation that is performed on the register will always be controlled by the control
-                        function. transfer binary bits between the register serially, this shift operation is
-                        also used to perform binary multiplication & binary division.</li>
-                    <li>Register can be shifted to left or to right. There are no conventional symbol for shift
-                        operation. The shift microoperation that is performed on the register will always be controlled
-                        by the control function. are represented by <b>shl</b> & <b>shr</b> to shift the
-                        content to left & to right.</li>
-                    <li>The one bit shift is represented by symbolic representation & is given in form of statement :
-                        <br><img class="wb" src="../../images/register6.svg" alt="">
-                        <b>A &larr; shl B</b> specifies as one bit shift to the left of register B & <b>C &larr; shr
-                            A</b> specifies one bit shift to right of register A.
+                    <li>Shift microoperations are used for serial transfer of data. The contents of a register can be
+                        shifted to the left or the right. There are three types of shifts: logical, circular and
+                        arithmetic.</li>
+                    <li><b>A logical shift</b> is one that transfers 0 through the serial input. They symbols <b>shl</b>
+                        and
+                        <b>shr</b> are used to show logical shift-left and shift-right microoperations. For example
+                        &darr;
+                    </li>
+                    <img src="../../images/shl.svg" alt="" class="wb">
+                    <li><b>The circular shift</b> (also known as a rotate operation) circulates the bits of the register
+                        around the two ends without loss of information. This is accomplished by connecting the serial
+                        output of the shift register to its serial input. We will use the symbols <b>cil</b> and
+                        <b>cir</b> for the circular shift left and right, respectively.
+                    </li>
+                    <img src="../../images/circularshift.svg" alt="" class="wb">
+                    <li><b>An arithmetic shift</b>, shifts a signed binary number to the left or right. An arithmetic
+                        shift-left multiplies a signed binary number by 2. An arithmetic shift-right divides the number
+                        by 2. Arithmetic shifts must leave the sign bit unchanged because the sign of the number remains
+                        the same when it is multiplied or divided by 2.
+                        <ul>
+                            <li>The arithmetic shift-right leaves the sign bit unchanged and shifts the number to the
+                                right. Thus Rn-1 remains the same, Rn -2 receives the bit from Rn -1. The bit in R0 is
+                                lost. The arithmetic shift-left inserts a 0 into R0, and shifts all other bits to the
+                                left. The initial bit of Rn-1 is lost and replaced by the bit from Rn-2. </li>
+                        </ul>
+                    </li>
+                    <img src="../../images/asr.svg" alt="" class="wb">
+                    <ul>
+                        <li>The symbolic notation for the shift mircrooperations is shown in Table</li>
+                    </ul>
+                    <img src="../../images/arithtable.svg" alt="" class="wb">
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Computer Instructions</h2>
+            <div class="in">
+                <h3>Basic FUNDA</h3>
+                <ul>
+                    <li><a class="ba" href="https://www.youtube.com/watch?v=oADINwRQbAQ">Video lecture &nearr;</a></li>
+                </ul>
+                <ul>
+                    <li>First we should know the basic modules out of which our computer is made out of &darr;</li>
+                </ul>
+                <img src="../../images/module1.svg" alt="" class="wb">
+                <ul>
+                    <li><b>Processor &rarr; </b> It is a module where all instructions of program are executed.
+                        <ul>
+                            <li>Here all calucation occurs.</li>
+                        </ul>
+                    </li>
+                    <li><b>Memory &rarr; </b> Module where data is stored.</li>
+                    <li><b>I/O</b> &rarr; Module by which data is brought into the machine and result is given out.</li>
+                </ul>
+                <p>Using these basic 3 modules a computer is build.</p>
+                <ul>
+                    <li>We have learned about the operations that are performed by ALU (Arithmetic Logical Unit) module
+                        of processor like
+                        shift operation, arithmetic, logic, etc.</li>
+                    <li>ALU basically perform operation when data and instructions(add, sub) are given to it and then it
+                        generates result.</li>
+                    <li>The ALU by itself can't finish the job, as it needs the right instructions for calculating
+                        results in a specific time. This is why another part inside the processor, called the control
+                        unit, is necessary. The control unit makes sure the timing and control signals are all set.</li>
+                </ul>
+                <p><b>Why CU is important?</b></p>
+                <ul>
+                    <li>The Control Unit (CU) plays a vital role in the computer's operation.</li>
+                    <li>When data arrives for processing, it can't directly enter the Arithmetic Logic Unit (ALU) as the
+                        ALU doesn't have the ability to understand what to do with the data without instructions.</li>
+                    <li>This is how it functions: Initially, the data is stored in registers, which act as temporary
+                        holding areas. Following that, the Control Unit (CU) becomes active.</li>
+                    <li>The Control Unit generates instructions that guide the ALU's actions:</li>
+                    <ul>
+                        <li>Retrieving data from the registers</li>
+                        <li>Activating specific circuits within the ALU for precise time intervals, facilitating
+                            calculations</li>
+                        <li>Providing the final calculated result once the computations are finished.</li>
+                    </ul>
+                    </li>
+                    <li>Basically CU is that module of a processor which controls all the operations happening inside
+                        the processor.</li>
+                </ul>
+                <p><b>Exploring the core components of a computer highlights a vital fact: INSTRUCTIONS are the backbone
+                        of its functioning. Without instructions, the Arithmetic Logic Unit (ALU) is directionless,
+                        unable to perform tasks.</b></p>
+            </div>
+            <ul>
+                <li>Instructions are the part of the program. Basically a program is a group of instructions. </li>
+            </ul>
+            <div class="in">
+                <h3>Instruction format</h3>
+                <img src="../../images/instruction1.svg" alt="" class="wb">
+                <ul>
+                    <li>This format is stored inside memory, these are brought to processor from memory.</li>
+                    <li>This format provides a consistent way for the processor to understand and execute a wide range
+                        of instructions.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Types of instructions format</h3>
+                <ul>
+                    <li><a class="ba" href="https://youtu.be/706aFmWa9ME?si=SiaH5kZD_3C200tF">Video lecture &neArr;</a>
+                    </li>
+                </ul>
+                <img src="../../images/instruction2.svg" alt="" class="wb">
+                <ul>
+                    <li><b>Memory Reference Instructions:</b> These instructions involve operations that require data to
+                        be fetched from or stored into memory. They often include fields specifying memory addresses or
+                        offsets to locate the desired data. Memory reference instructions are essential for tasks like
+                        loading data into registers, storing results back to memory, and data manipulation.</li>
+                    <li><b>Register Reference Instructions:</b> In these instructions, the operations are performed
+                        directly using data stored within the CPU's registers. These instructions typically include
+                        fields indicating the registers involved and the operation to be executed. Register reference
+                        instructions are commonly used for arithmetic, logic, and data manipulation tasks.</li>
+                    <li>
+                        <b>Input/Output (I/O) Reference Instructions:</b> I/O reference instructions manage
+                        communication between the computer and external devices. These instructions facilitate input
+                        (receiving data from external sources) and output (sending data to external devices) operations.
+                        They often include fields specifying the device or port to interact with and the data to be
+                        transferred.
                     </li>
                 </ul>
             </div>
@@ -541,6 +712,9 @@
                     target="_blank">Playlist &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=mNNywW00eEc" target="_blank">1.1 Register Transfer Language and
                     Microoperations || Explained in Hindi Morris Mano Computer Organi &neArr;</a></li>
+            <li><a href="https://youtu.be/oADINwRQbAQ" target="_blank">Control unit: Instruction format &neArr;</a></li>
+            <li><a href="https://youtu.be/uoFr0f7lh4M" target="_blank">Types of Instructions in Computer Architecture
+                    &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
