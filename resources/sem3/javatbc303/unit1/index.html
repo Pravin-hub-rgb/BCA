@@ -1477,8 +1477,8 @@ charArray[3] = 'a';
                 <li>Although character arrays have the advantage of being able to query their length, they themselves
                     arenot good enough to support the range of operations we may like to perform on strings. For
                     example, copying one character array into another might require a lot of bookkeeping effort.</li>
-                <li>In Java, strings are class objects and implemented using two classes, namely, <b>String</b> and
-                    <b>StringBuffer</b>.
+                <li>In Java, strings are class objects and implemented using three classes, namely, <b>String</b>,
+                    <b>StringBuffer</b> and <b>StringBuilder</b>.
                 </li>
                 <li>A Java string is an instantiated object of <b>String</b> class. Java strings, as compared to C
                     strings, are more reliable and predictable. This is basically due to C's lack of bounds-checking.
@@ -1529,6 +1529,96 @@ String city1 = "New" + "Delhi";
 System.out.println(firstName + "Kumar");
                 </code>
             </pre>
+            <div class="in">
+                <h3>String Methods</h3>
+                <ul>
+                    <li>The <b>String</b> class defines a number of methods that allow us to accomplish a variety of
+                        string manipulation tasks.</li>
+                    <li>Below is the most commonly used string methods, and their tasks. &darr;</li>
+                </ul>
+                <img src="../../images/string1.svg" alt="" class="wb">
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class='ac'>Alphabetical ordering of strings</button>
+                <div class='panel'>
+                    <pre>
+                        <code>
+class Test {
+    static String name[] = { "Madras", "Delhi", "Ahmedabad", "Calcutta", "Bombay" };
+
+    public static void main(String[] args) {
+        int size = name.length;
+        String temp = null;
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (name[j].compareTo(name[i]) < 0) {
+                    // Swap the strings
+                    temp = name[i];
+                    name[i] = name[j];
+                    name[j] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            System.out.println(name[i]);
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>StringBuffer class</h3>
+                <ul>
+                    <li>String creates string of fixed length, StringBuffer creates strings of flexible length that can
+                        be modified in terms of both length and content.</li>
+                    <li>A StringBuffer is a dynamic, resizable buffer for storing and manipulating sequences of
+                        characters.</li>
+                    <li>It provides methods to append, insert, delete, and replace characters within the buffer.</li>
+                    <li>Since StringBuffer is mutable, the contents of the buffer can be modified without creating new
+                        objects, making it suitable for situations where strings are frequently modified.</li>
+                </ul>
+                <p><b>StringBuffer key methods &darr;</b></p>
+                <pre>
+                    <code>
+public class StringBufferExample {
+    public static void main(String[] args) {
+        StringBuffer stringBuffer = new StringBuffer("Hello");
+        stringBuffer.append(" World"); // Appends " World" to the buffer
+        stringBuffer.insert(5, ","); // Inserts a comma at index 5
+        stringBuffer.delete(5, 7); // Removes characters from index 5 to 7
+        stringBuffer.replace(0, 5, "Hi"); // Replaces characters from index 0 to 5 with "Hi"
+        
+        String finalString = stringBuffer.toString(); // Converts StringBuffer to String
+        System.out.println(finalString); // Output: "Hi World"
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>StringBuilder class</h3>
+                <ul>
+                    <li>StringBuilder was introduced in Java as an enhancement to the existing StringBuffer class to
+                        address certain performance considerations. While both StringBuilder and StringBuffer serve the
+                        purpose of providing a mutable sequence of characters, StringBuilder was introduced to provide
+                        better performance in single-threaded scenarios where thread safety is not a concern.</li>
+                    <li>StringBuffer: This class is synchronized, meaning that its methods are designed to be
+                        thread-safe. It ensures that when multiple threads are accessing a StringBuffer instance, they
+                        won't corrupt its content. This safety, however, comes with a performance cost due to
+                        synchronization overhead.</li>
+                    <li>StringBuilder: This class is similar to StringBuffer, but it is not synchronized. It's designed
+                        for situations where you're working in a single-threaded environment or where you're managing
+                        synchronization yourself. Because StringBuilder lacks synchronization, it's generally faster
+                        than StringBuffer.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>String vs StringBuffer vs StringBuilder</h3>
+                <img src="../../images/string2.svg" alt="" class="wb">
+            </div>
         </div>
         <div class="wh">
             <h2>Wrapper class</h2>
@@ -1607,11 +1697,8 @@ int value = num; // Unboxing Integer to int
                     </code>
                 </pre>
             </div>
-            <div class='code'>
-                <div class='dotc'></div>
-                <button class='ac'>Example code</button>
-                <div class='panel'>
-                    <pre>
+            <p>Example &darr;</p>
+            <pre>
                         <code>
 public class AutoboxingUnboxingExample {
     public static void main(String[] args) {
@@ -1634,14 +1721,16 @@ public class AutoboxingUnboxingExample {
 }
                         </code>
                     </pre>
-                </div>
-            </div>
         </div>
     </div>
     <div class="content-box">
         <p>Reference &darr;</p>
         <ul>
             <li>Strings - Programming with Java e6 E Balagurusamy Book</li>
+            <li><a href="https://youtu.be/QeP1FRlxtsk?si=v7Fi3F8pskRFiX4T" target="_blank" class="ba">Wrapper class
+                    &neArr;</a></li>
+            <li><a href="https://youtube.com/playlist?list=PLlhM4lkb2sEh8AARH5oEivYOrMgaVsPFb&si=K6jh5C4GbN5C_zG8"
+                    target="_blank" class="ba">String playlist &neArr;</a></li>
         </ul>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

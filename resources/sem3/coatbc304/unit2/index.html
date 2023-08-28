@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Programming and Control Systems</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Computer Programming and Control Systems</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Computer Programming and Control Systems</h1>
+        <div class="wh">
+            <h2>Refresher</h2>
+            <p>Before learning Assembly Language we should know about all the mnemonics used in different types
+                instructions.</p>
+            <ul>
+                <li>Assembly language &rarr; Assembly language is a low-level programming language that is specific to a
+                    particular computer architecture or processor. </li>
+                <li>There are many different types of assembly languages, each tailored to a specific CPU architecture
+                    or family of processors. Here are a few notable types of assembly languages:
+                    <ul>
+                        <li>x86 Assembly Language: This is one of the most widely used assembly languages and is
+                            associated with the Intel x86 architecture and its variants, including 32-bit and 64-bit
+                            versions. It's used in PCs and many other systems.</li>
+                        <li>ARM Assembly Language: ARM is a popular architecture used in various devices, including
+                            smartphones, tablets, embedded systems, and more. ARM assembly language is specific to
+                            ARM-based processors.</li>
+                        <li>Intel 8085 Assembly Language: Associated with the Intel 8085 microprocessor</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>The following instruction that we are going to learn are for 8085 processor architecture and the we are
+                going to program in intel 8085 assembly language.</p>
+            <div class="in">
+                <h3>Memory reference instructions</h3>
+                <ul>
+                    <li><a href="https://youtu.be/0wi91k1eSS0?si=vjpEYQHSvFZ9WIv8" target="_blank" class="ba">Memory
+                            Reference Instructions
+                            video lecture &neArr;</a></li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Register Reference instructions</h3>
+                <ul>
+                    <li><a href="https://youtu.be/tMtxrElswak?si=Q9USkxq78-WTuInq" class="ba" target="_blank">Register
+                            Reference Instruction video lecture &neArr;</a></li>
+                </ul>
+                <ul>
+                    <li>These are mainly useful inorder to perform operations on the registers.</li>
+                    <li>We know the opcode value from 0 to 6 are memory reference instructions and in register reference
+                        instructions opcode is 1.</li>
+                    <li>Register reference instructions are executed when D<sub>7</sub>I'T<sub>3</sub> (T<sub>0</sub>,
+                        T<sub>1</sub> and T<sub>2</sub> are for decoding and fetching) is active.</li>
+                    <li>The size of accumulator is 16 bit.</li>
+                </ul>
+                <p>Some register reference instructions &darr;</p>
+                <ul>
+                    <li>CLA: Clear accumulator &rArr; AC &larr; 0</li>
+                    <li>CLE: Clear E (Extended flip-flop, used for storing carry generated during sum) &rArr; E &larr; 0
+                    </li>
+                    <li>CMA: Compliment accumulator &rArr; AC &larr; (AC)'</li>
+                    <li>CME: Compliment E &rArr; E &larr; E'</li>
+                    <li>CIR: Circular right shift &rArr; AC &larr; shr AC, E &larr; AC(0), AC(15) &larr; E</li>
+                    <li>CIL: Circular left shift &rArr; AC &larr; shl AC, E &larr; AC(15), AC(0) &larr; E</li>
+                    <li>INC: Increment the accumulator &rArr; AC &larr; AC + 1</li>
+                    <li>SPA: Skip the next instruction if accumulator is positive &rArr; if(AC(15) = 0 ) then PC &larr;
+                        PC + 1</li>
+                    <li>SNA: Skip the next instruction if accumulator is negative &rArr; if(AC(15) = 1) then PC &lrarr;
+                        PC + 1</li>
+                    <li>SZA: Skip the next instruction if accumulator is zero &rArr; if(AC = 0) then PC &larr; PC + 1
+                    </li>
+                    <li>SZE: Skip the next instruction is E flip flop is zero &rArr; if(E = 0) then PC &larr; PC + 1
+                    </li>
+                    <li>HLT: Stop the program execution &rArr; S &larr; 0 ( S is start/stop flip flop)</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Input-output Reference Instructions</h3>
+                <ul>
+                    <li><a href="https://youtu.be/W0hDfef5E1c?si=MaG5wPvQTLIzQFPK" class="ba"
+                            target="_blank">Input-output
+                            Reference Instruction video lecture &neArr;</a></li>
+                </ul>
+                <ul>
+                    <li>Let's see how data is transferred from input devices to output devices.
+                        <br><img class="wb" src="../../images/ioconfig.svg" alt=""><br>The most common input
+                        device is keyboard. Whenever we type any character with the help of keyboard then the
+                        transmitter interface transmits the character to a register called INPR (input register). At
+                        INPR a flag called FGI is maintained. FGI value is set to 1 if INPR contains a character and if
+                        INPR doesn't contain any character then FGI will be cleared to 0. INPR passes that character to
+                        the accumulator. Next we have OUTR register which receives information from accumulator. At the
+                        OUTR register a flag called FGO is maintained which is intially set to 1. If OUTR contains a
+                        character then FGO will be cleared to 0 (it is reverse to the FGI). Receiver interface receives
+                        the character from the OUTR and provides that character to the monitor. So in this way
+                        transmission will be done.
+                    </li>
+                    <li>We know the size of the intruction format is 16 bit in which first 12 bit specifies I/O
+                        operations and opcode = 111 and address mode bit = 1. We can say the I/O instructions are
+                        executed when the decoders output D<sub>7</sub> and I = 1 is active.</li>
+                </ul>
+                <p>Let's discuss the instructions</p>
+                <ul>
+                    <li>INP: Input character to the accumulator &rArr; AC(0-7) &larr; INPR, FGI &larr; 0
+                        <ul>
+                            <li>Problem: size of INPR register is 8 bit and the size of accumulator is 16 bits, so for
+                                the most significance bit the data will be transfered.</li>
+                            <li>Bits from 8-15 will be 0.</li>
+                            <li>As the data is transfered to the accumulator, so the INPR register doesn't contain any
+                                value so the flag value will be set to 0.</li>
+                        </ul>
+                    </li>
+                    <li>OUT: Output register gets the character from the accumulator &rArr; OUTR &larr; AC(0-7), FGO
+                        &larr; 0
+                        <ul>
+                            <li>OUTR register contains some value so FGO is 0.</li>
+                        </ul>
+                    </li>
+                    <li>SKI: Skip the input flag &rArr; if(FGI = 1) then PC &larr; PC + 1</li>
+                    <li>SKO: Skip the output flag &rArr; if(FGO = 1) then PC &larr; PC + 1</li>
+                    <li>ION: Interrupt enable on &rArr; IEN &larr; 1</li>
+                    <li>IOFF: Interrupt off &rArr; IEN &larr; 0</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Data transfer instructions</h3>
+                <ul>
+                    <li><a target="_blank" class="ba" href="https://youtu.be/cybYscgFQBU?si=eQWVuUHPHtAwvZfE">Video
+                            lecture &neArr;</a></li>
+                </ul>
+                <p>The instructions by which data is copied from one regiser/location to another.</p>
+                <ul>
+                    <li>MOV: Data is copied from one register/location to another
+                        <ul>
+                            <li>MOV R1, R2: copy data from R2 (source register) to R1 (destination register)
+                                <br><img src="../../images/instruction3.svg" alt="" class="wb">
+                            </li>
+                            <li>MOV R, M: copy the content of memory location M into R (register)
+                                <br><img src="../../images/instruction4.svg" alt="" class="wb">
+                            <li>MOV M, R: copy data from R (register) to M (memory location)</li>
+                        </ul>
+                    </li>
+                    <li>MVI: Move immediate (we don't have to look for data, the data is already given), means data
+                        source is a data not a location.
+                        <ul>
+                            <li>MVI D 23H &rArr; copy 23H data to D register</li>
+                            <li>MVI M 23H &rArr; copy 23H data to Memory M</li>
+                        </ul>
+                    </li>
+                    <li>LDA: Load accumulator from memory
+                        <ul>
+                            <li>LDA F345H: copy data which is stored in F345H memory address.
+                                <br><img src="../../images/instruction5.svg" alt="" class="wb">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Arithmetic instructions</h3>
+                <ul>
+                    <li><a href="https://youtu.be/d1iRgeBjTgw?si=CixVfXc7PGQyEfFR" target="_blank" class="ba">Video
+                            lecture &neArr;</a></li>
+                    <li>Keep in mind : we have to assume that one operand is always inside accumulator and second
+                        operand can be inside other registers (B, C, D, E, H, L).</li>
+                </ul>
+                <p>Let's start with first instruction</p>
+                <ul>
+                    <li>ADD R: addition of accumulator with any given register and store the result back to accumulator.
+                        <ul>
+                            <li>ADD R &rArr; A &larr; A + R
+                                <br><img src="../../images/instruction6.svg" alt="" class="wb">
+                            </li>
+                            <li>ADD M: addition of accumulator with data given inside the memory M.</li>
+                        </ul>
+                    </li>
+                    <li>ADI R: add immediate (data is provided), add the given data to accumulator and store the result
+                        back to accumulator.
+                        <ul>
+                            <li>ADI F4H</li>
+                        </ul>
+                    </li>
+                    <li>INR R: increment the value of given register.
+                        <ul>
+                            <li>INR R &rArr; increment the content stored in register R</li>
+                        </ul>
+                    </li>
+                    <li>SUB R: subtract the content of R register from accumulator.
+                        <ul>
+                            <li>SUB C: A &larr; A - C, or we can say A &larr; A + 2's Compliment of C</li>
+                        </ul>
+                    </li>
+                    <li>SUI 33H: subtract the immediate content from accumulator.</li>
+                    <li>DCR R: decrement the content of given register R.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Logical instruction</h3>
+                <ul>
+                    <li><a href="https://youtu.be/EjWsdO8pdBE?si=F98aELsHhfWGlZKf" target="_blank" class="ba">Video
+                            lecture &neArr;</a></li>
+                </ul>
+                <p>Some of logical instruction are &darr;</p>
+                <ul>
+                    <li>CMA: Compliment the content of accumulator and store the result back to accumulator. <br>
+                        <img src="../../images/instruction7.svg" alt="" class="wb">
+                    </li>
+                    <li>CMP R: compare content of register R with accumulator.
+                        <ul>
+                            <li>Note: content of neither A nor R is changed.</li>
+                            <li>Simply content of register R is subtracted from accumulator and stored in temp register.
+                            </li>
+                            <li>If content of temp register is +ve means accumulator content is greater else content of
+                                register R is greater (temp = 0, both are equal).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Assembly Language</h2>
+            <p>Before learning learning assembly language we should know about assembler.</p>
+            <div class="in">
+                <h3>Assembler</h3>
+                <ul>
+                    <li><a href="https://youtu.be/Nsl2nhaQYE8?si=SMAyt8bJs_oIcejK" target="_blank" class="ba">Video
+                            lecture &neArr;</a></li>
+                    <li>An assembler is a program that accepts a sybolic language program and produces its binary
+                        machine language equivalent.</li>
+                    <li>The inpur symbolic program is called the source program and the resulting binary program is
+                        called the object program.</li>
+                    <li>The assembler is a program that operates on character strings and produces an equivalent binary
+                        interpretation.</li>
+                </ul>
+                <p>One more instruction we have to learn and those are Pseudo instruction.
+                <ul>
+                    <li>A <i>pseudo instruction</i> is not a macine instruction but rather an instruction to the
+                        assembler giving information about some phase of the translation.</li>
+                </ul>
+                <img src="../../images/instruction8.svg" alt="" class="wb">
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
