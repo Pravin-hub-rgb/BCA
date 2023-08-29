@@ -1,21 +1,29 @@
-class Test {
-    static String name[] = { "Madras", "Delhi", "Ahmedabad", "Calcutta", "Bombay" };
+// wap in Java to count number of objects in java;
+// wap to state the difference between mutable and immmutable string
+// wap to multiply two matrices
+// class variable and instance variable
+class Keyboard {
+    static int count = 0;
 
-    public static void main(String[] args) {
-        int size = name.length;
-        String temp = null;
-        for (int i = 0; i < size; i++) {
-            for (int j = i + 1; j < size; j++) {
-                if (name[j].compareTo(name[i]) < 0) {
-                    // Swap the strings
-                    temp = name[i];
-                    name[i] = name[j];
-                    name[j] = temp;
-                }
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            System.out.println(name[i]);
-        }
+    Keyboard() {
+        count++;
+    }
+
+    void display() {
+        System.out.println("This is Keyboard class");
     }
 }
+
+class Test {
+    public static void main(String[] args) {
+        Keyboard obj1 = new Keyboard();
+        Keyboard obj2 = new Keyboard();
+        Keyboard obj3 = new Keyboard();
+        System.out.println("The number of objects are = " + Keyboard.count);
+    }
+}
+
+// instance are the normal variables and these can be multiple for multiple copy
+// for objects
+// class variable will be one and it will be static
+// we cannot declare static as local
