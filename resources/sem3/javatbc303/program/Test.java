@@ -1,11 +1,8 @@
-import static java.lang.System.*;
-
-// Incorrect usage:
-// import static java.util.*; // This is not allowed
+import myPackageShape.Shape;
 
 class Test {
     public static void main(String[] args) {
-        out.println("Hello World"); // No need to use the keyword 'System' every time
-        out.println("How are you???");
+        Shape.color();
+        System.out.println("we are using it");
     }
 }
