@@ -1,4 +1,4 @@
-import myPackageShape.Shape;
+import myPackage.Shape;
 
 class Test {
     public static void main(String[] args) {
