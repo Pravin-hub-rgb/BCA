@@ -66,7 +66,7 @@
                     </ul>
                 </li>
             </ul>
-            <p>The following instruction that we are going to learn are for 8085 processor architecture and the we are
+            <p>The following instruction that we are going to learn are of 8085 processor architecture and we are
                 going to program in intel 8085 assembly language.</p>
             <div class="in">
                 <h3>Memory reference instructions</h3>
@@ -74,6 +74,50 @@
                     <li><a href="https://youtu.be/0wi91k1eSS0?si=vjpEYQHSvFZ9WIv8" target="_blank" class="ba">Memory
                             Reference Instructions
                             video lecture &neArr;</a></li>
+                </ul>
+                <p>These are useful in order to perform operations on operand which are located in the main memory.</p>
+                <ul>
+                    <li><b>AND</b> &rarr; perform AND operation on memory word and accumulator. But directly we can't
+                        perform AND operation on memory word, so we have to transfer the content of memory word into
+                        data register. And in the next CP, AND operation will be performed on DR and AC (accumulator).
+                        <br>DR &larr; M[AR]
+                        <br>AC &larr; AC &and; DR, SC &larr; 0
+                    </li>
+                    <li><b>ADD</b> &rarr; Add he content of AC to memory word but we can't perform ADD operation
+                        directly with memory word because ALU only works wih DR and accumulator.
+                        <br>DR &larr; M[AR]
+                        <br>AC &larr; AC + DR, E &larr; C<sub>out</sub>, SC &larr; 0
+                        <br>If there is any output carry it will be transfered to flip-flop E.
+                    </li>
+                    <li><b>LDA</b> &rarr; Load Memory word to Accumulator, but from the bus there is no connection to
+                        the accumulator (Bus output doesn't connect to the input of the accumulator) that's why we have
+                        to transfer memory word content to DR and from the DR we can transfer content to the AC.
+                        <br>DR &larr; M[AR]
+                        <br>AC &larr; DR, SC &larr; 0
+                    </li>
+                    <li><b>STA</b> &rarr; Store Accumulator into memory.
+                        <br>M[AR] &larr; AC
+                    </li>
+                    <li><b>BUN</b> &rarr; Branch Unconditionaly (Jump Unconditionally). So without checking any
+                        condition, if we go from one statement to another statement.
+                        <br>PC &rarr; AR, AC &larr; 0
+                    </li>
+                    <li><b>BSA</b> &rarr; Branch and save Return address
+                        <br>M[AR] &larr; PC, AR &larr; AR + 1
+                    </li>
+                    <li><b>ISZ &rarr; </b> Increment and Skip if zero. If we need to increment the content of the memory
+                        and skip the next instruction if the memory word is 0.
+                        <br>
+                        Problem - Memory has only two control inputs: 1- Write and 2- Read. Therefore, we can't directly
+                        perform a read operation on the memory. First, we have to transfer the memory word to the Data
+                        Register (DR). Then, in the next control cycle (CP), we increment the DR. Afterward, in the next
+                        CP, we load the DR content back into memory. Now, we can check whether the DR content is zero or
+                        not. If it is zero, then we skip the next instruction by incrementing the program counter value.
+                        <br>DR &larr; M[AR]
+                        <br>DR &larr; DR + 1
+                        <br>M[AR] &larr; DR
+                        if(DR = 0) then PC &larr; PC + 1
+                    </li>
                 </ul>
 
             </div>
@@ -271,12 +315,333 @@
                 </ul>
                 <p>One more instruction we have to learn and those are Pseudo instruction.
                 <ul>
-                    <li>A <i>pseudo instruction</i> is not a macine instruction but rather an instruction to the
+                    <li>A <i>pseudo instruction</i> is not a machine instruction but rather an instruction to the
                         assembler giving information about some phase of the translation.</li>
                 </ul>
                 <img src="../../images/instruction8.svg" alt="" class="wb">
                 </p>
             </div>
+            <ul>
+                <li><b>Machine language is a series of 0 and 1, which is not easy for humans to read. Using Assembly
+                        language, programmers can write human-readable programs. Assembly is a low- level programming
+                        language. It uses short codes (mnemonics) to write the programs for example ADD R1, R2. In
+                        computers, there is an assembler that converts the assembly code into machine code.</b></li>
+            </ul>
+            <div class="in">
+                <h3>Addition of two 8 bit Numbers</h3>
+                <p><b>Algorithm &darr;</b></p>
+                <ol>
+                    <li>Start the program by loading the first data into Accumulator.</li>
+                    <li>Move the data to a register (B register).</li>
+                    <li>Get the second data and load into Accumulator.</li>
+                    <li>Add the two register contents.</li>
+                    <li>Store the value of sum and carry in memory location.</li>
+                    <li>Terminate the program</li>
+                </ol>
+                <p><b>Source Code &darr;</b></p>
+                <pre>
+                    <code>
+Mnemonics    Operand     Explanation
+------------------------------------------------------------------------
+MVI           C, 00      Initialize C register to 00
+LDA           4150       Load the value to Accumulator.
+MOV           B,A        Move the content of Accumulator to B register.
+LDA           4151       Load the value to Accumulator.
+ADD           B          Add the value of register B to A
+STA           4152       Store the value of Accumulator (SUM).
+HLT                      Halt the program.
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Assembly Language program to subtract two numbers</h3>
+                <pre>
+                    <code>
+ORG 100  ;Origin of program is location 100
+LDA SUB  ;Load subtrahend to AC
+CMA      ;Complement AC
+INC      ;Increment AC
+ADD MIN  ;Add minuend to AC
+STA DIF  ;Store difference
+HLT      ;Halt computer
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Types of Assemblers</h3>
+                <p>There are two main types of assemblers used in comoputer programming.</p>
+                <ol>
+                    <li><b>Single-pass assembler:</b> A single-pass assembler, also referred to as a one-pass
+                        translator, is designed for efficiency and simplicity.
+                        <ul>
+                            <li>In this approach, the assembler reads the entire source code in a single pass or
+                                traversal.</li>
+                            <li>As it reads the source code, it generates corresponding machine code on-the-fly without
+                                revisiting the code.</li>
+                            <li>This means that each line of assembly code is processed and translated into machine code
+                                as it is encountered in the source file.</li>
+                            <li>Single-pass assemblers are typically faster and require less memory compared to
+                                multi-pass assemblers.</li>
+                            <li>However, they have limitations, such as not being able to handle forward references,
+                                which are references to symbols or labels that appear later in the code.</li>
+                        </ul>
+                    </li>
+                    <li><b>Multi-pass assembler:</b> The multi-pass assembler takes a more comprehensive and methodical
+                        approach to assembly.
+                        <ul>
+                            <li>It scans the source code multiple times, iterating through it to resolve various aspects
+                                of the code.</li>
+                            <li>The final pass, known as the synthesis pass, is where the assembler generates the
+                                machine code.</li>
+                            <li>During the previous passes, it performs tasks such as collecting information about
+                                labels, symbols, and memory addresses, resolving forward references, and ensuring
+                                correct addressing modes.</li>
+                            <li>Multi-pass assemblers are more capable and flexible in handling complex code structures
+                                and resolving dependencies between different parts of the code.</li>
+                            <li>However, this thoroughness comes at the cost of increased processing time and memory
+                                usage, making multi-pass assemblers slower compared to single-pass assemblers.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Difference between Machine language and Assembly language</h3>
+                <img src="../../images/mvsa.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Program loops programming</h3>
+                <p>A program loop is a sequence of instructions that are executed many times. The following is an
+                    example of a Fortan program that forms the sum of 100 integer numbers.</p>
+                <pre>
+                    <code>
+  DIMENSION A(100)
+  INTEGER SUM, A 
+  SUM = 0
+  DO 3 J = 1, 100
+3 SUM = SUM + A(J)
+                    </code>
+                </pre>
+                <p>Statement number 3 is executed 100 times. A system program that translates a high-level program is
+                    called a compiler. Following table shows coorecposnding assembly code of the program</p>
+                <pre>
+                        <code>
+; Symbolic Program to Add 100 Numbers
+S.N.      Assembly Code     Explanation 
+1         ORG 100          ;Origin of program is HEX 100
+2         LDA ADS          ;Load first address of operands in AC 
+3         STA PTR          ;Store contents of AC in counter 
+4         LDA NBR          ;Load minus 100 in AC 
+5         STA CTR          ;Store contents of AC in counter 
+6         CLA              ;Clear accumulator (AC = 0)
+7         LOP ADD PTR 1    ;Add an operand to AC 
+8         ISZ PTR          ;Increment pointer 
+9         ISZ CTR          ;Increment counter 
+10        BUN LOP          ;Repeat loop again 
+11        STA SUM          ;Store sum 
+12        HLT              ;Halt
+                        </code>
+                    </pre>
+                <p>Value update in various registers are shown below:</p>
+                <pre>
+                        <code>
+1       ORG = 100
+2       AC = 100
+3       PTR = 100
+4       AC = -100 
+5       CTR = -100
+6       AC = 0
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Subroutines</h3>
+                <ul>
+                    <li>In computer programming, a subroutine is a fundamental concept that allows for the reusability
+                        of a set of instructions within a program. A subroutine is essentially a self-contained sequence
+                        of instructions that can be invoked or called upon by the main program whenever needed.
+                        Subroutines play a crucial role in modularizing code and simplifying program structure.</li>
+                    <li>When a program needs to execute a subroutine, it does so using a branching instruction, often
+                        referred to as "Branch and Save Address" (BSA). This instruction allows the program to transfer
+                        control to the subroutine, which performs a specific task. Once the subroutine completes its
+                        execution, it is designed to return control to the main program. Importantly, a program can
+                        initiate a branch to the subroutine from any part of its main code, enhancing flexibility and
+                        reusability.</li>
+                    <li>To ensure a smooth return from the subroutine to the main program, it's necessary to store the
+                        return address. This return address indicates where in the main program the execution should
+                        resume after the subroutine finishes its task. The BSA instruction, which stands for "Branch and
+                        Save Address," serves this purpose by both initiating the subroutine and preserving the return
+                        address.</li>
+                    <li>As an example, let's consider a subroutine named "SH4" that performs a left shift operation on
+                        the contents of the accumulator (AC) four times. In a program, the sequence of actions might
+                        start by loading a value, let's call it "X," into the accumulator (AC). The next instruction
+                        would be "BSA SH4," invoking the subroutine called "SH4." To ensure that the program knows where
+                        to continue after the subroutine completes, the BSA instruction automatically saves the return
+                        address (in this case, 102 + 1) in the Program Counter (PC).</li>
+                    <li>Following the BSA instruction, the program proceeds to memory location 109, where the subroutine
+                        "SH4" is executed, performing the desired left shift operation. The last instruction of the
+                        subroutine, "SH4 I," facilitates the return to the main program. It does so by instructing the
+                        control unit to return to the address specified by the Program Counter (PC), which, in this
+                        case, is 102.</li>
+                </ul>
+                <p>Program to demonstrate the Use of Subroutines</p>
+                <pre>
+                    <code>
+Location   Assembly Code    Explanation
+            ORG 100        ;Main program
+100         LDA X          ;Load X
+101         BSA SH4        ;Branch to subroutine
+102         STA X          ;Store shifted number
+103         HLT
+
+;Subroutine to shift left 4 times 
+104         SH4, HEX 0     ;Store return address here 
+105         CIL            ;Circulate left once 
+106         CIL             
+107         CIL             
+108         CIL            ;Circulate left fourth time
+109         BUN SH4 I      ;Return to main program
+            END
+            </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Input-output programming</h3>
+                <ul>
+                    <li>In the realm of computer programming, input and output operations play a crucial role in
+                        interacting with external devices and facilitating communication between the computer and its
+                        users. These operations often involve processing symbols represented as strings of characters,
+                        with each character typically consisting of 8 bits.</li>
+                    <li>When a user interacts with the computer, such as by pressing a key on the keyboard, a specific
+                        set of instructions comes into play. To handle input, an "INP" (input) instruction is executed,
+                        while for displaying a character, an "OUT" (output) instruction is employed. These instructions
+                        bridge the gap between the computer's internal binary representation and the human-readable
+                        characters.</li>
+                </ul>
+                <div class="wh">
+                    <p><b>In the context of input operations, the following instructions, as listed in Table-A, are
+                            needed to input a character and store it in memory:</b></p>
+                    <ul>
+                        <li><b>SKI Instruction:</b> The "SKI" instruction plays a critical role by checking the input
+                            flag. This flag serves as an indicator of whether a character is available for transfer. If
+                            the flag is set to 1, it signifies the presence of a character ready for input; otherwise,
+                            if it's 0, no character is currently available.</li>
+                        <li><b>INP Instruction:</b> The "INP" instruction takes action when a character is indeed
+                            available. It proceeds to transfer the character into the Accumulator (AC), making it
+                            accessible for further processing. Subsequently, the character can be printed or manipulated
+                            using subsequent instructions, such as "OUT."</li>
+                    </ul>
+                    <p>In cases where the "SKI" instruction determines that the flag bit is equal to 0, the program
+                        proceeds with the next instruction in the sequence. Typically, this instruction entails
+                        branching to a return point and reevaluating the flag bit's status. This iterative process
+                        continues until a character becomes available for input.</p>
+                </div>
+                <div class="wh">
+                    <p><b>For output operations, Table-B outlines the instructions required to print a character:</b>
+                    </p>
+                    <ul>
+                        <li><b>Load Character into AC:</b> Initially, the character to be printed is loaded into the
+                            Accumulator (AC).</li>
+                        <li><b>Check Output Flag:</b> Next, the output flag is examined. If the flag is found to be 0,
+                            this check is repeated until the flag transitions to 1.</li>
+                        <li><b>Character Transfer:</b> Once the output flag is set to 1, the character stored in the
+                            Accumulator (AC) can be transferred to the printer for physical printing. This step
+                            effectively completes the process of displaying the character.</li>
+                    </ul>
+                </div>
+                <p><b>Table A - Program to Input Character</b></p>
+                <pre>
+                    <code>
+    Assembly Code     Explanation
+CIF   SKI             ;Check input flag 
+      BUN             ;Flag = 0, branch to check again 
+      INP             ;Flag = 1, input character 
+      OUT             ;Print character 
+      STA CHR         ;Store character
+      HLT
+                    </code>
+                </pre>
+                <p><b>Table B - Program to Output one character:</b></p>
+                <pre>
+                    <code>
+    Assembly Code    Explanation
+       LDA CHR       ;Load character into AC 
+COF,   SKO           ;Check output flag 
+       BUN COF       ;Flag = 0, branch to check again
+       OUT           ;Flag = 1, output character
+       HLT
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Control Memory</h2>
+            <ul>
+                <li>The central processing unit (CPU) of a digital computer comprises several essential functional
+                    units, including the control unit, arithmetic and logic unit (ALU), and various registers. Among
+                    these units, the control unit plays a pivotal role in managing the execution of instructions by
+                    initiating sequences of microoperations. To do this, it generates control words, which are composed
+                    of binary values (0's and 1's). These control words serve as signals that orchestrate the actions of
+                    various functional components within the computer.</li>
+                <li>The memory component residing within the Control Unit is referred to as "control memory." This
+                    specialized memory is primarily responsible for storing microprograms, which, in turn, consist of
+                    collections of Micro Instructions. Each Micro Instruction is designed to execute one or more
+                    micro-operations, such as addition (ADD), subtraction (SUB), transfer of data (TSA), or
+                    multiplication (MUL).</li>
+                <li>There are two primary approaches to designing a Control Unit:
+                    <ul>
+                        <li>Hardwired Control Unit: In this design, control signals are generated directly by dedicated
+                            hardware components.</li>
+                        <li>Microprogrammed Control Unit: In contrast, a microprogrammed control unit relies on
+                            software-based microprograms to generate control signals. This approach involves two
+                            distinct types of memory: a main memory for general program instructions and a control
+                            memory to store microprograms and their associated micro instructions.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Control Unit Design: Hardwired vs. Microprogrammed</h3>
+                <ul>
+                    <li><a href="https://www.youtube.com/watch?v=eC6pWLNPSQ4" target="_blank" class="ba">Video lecture
+                            &neArr;</a></li>
+                </ul>
+                <ul>
+                    <li>In the realm of control unit design, two distinct approaches are employed: hardwired design and
+                        microprogrammed design. These approaches dictate how control signals are generated and executed
+                        within a digital computer system.</li>
+                    <li>In a <b>hardwired design</b>, control signals are generated directly by dedicated hardware
+                        components. These components are carefully designed to produce the required control signals
+                        based on the system's architecture and operational requirements.</li>
+                    <li>Conversely, in a <b>microprogrammed design</b>, control signals are generated using
+                        microprograms, which are software-based instructions. These microprograms are stored in a
+                        specialized memory called "control memory." A microprogrammed control unit typically encompasses
+                        two separate memory components: a main memory and a control memory.</li>
+                    <li>It's important to note that while the contents of the main memory may change during program
+                        execution, the contents of the control memory remain static and cannot be altered by the user.
+                        This distinction is crucial for maintaining the integrity of the control instructions and
+                        ensuring the proper functioning of the control unit.</li>
+                    <li>The general configuration of a microprogrammed control unit includes the following key elements:
+                        <ul>
+                            <li>Control Memory: This memory component stores all the control information required for
+                                the execution of microprograms. The Control Memory Address Register (CAR) is responsible
+                                for providing the address of the microinstruction stored in the Control Memory.</li>
+                            <li>Control Data Register (CDR): The CDR serves as a temporary storage location for the data
+                                fetched from the control memory. It holds the binary data associated with the current
+                                microinstruction.</li>
+                            <li>Next Address Generator (Sequencer): The Next Address Generator, often referred to as the
+                                Sequencer, plays a vital role in the microprogrammed control unit. It is responsible for
+                                fetching the address of the next microinstruction to ensure the orderly progression of
+                                instructions within the microprogram.</li>
+                        </ul>
+                    </li>
+                    <li>As an illustrative example, consider a scenario where the Control Memory Address Register (CAR)
+                        contains the address "010." In this case, the data "1101" is retrieved from the Control Memory
+                        and placed into the Control Data Register (CDR) for further processing.</li>
+                    <li>This data handling process, combined with the sequencer's function, facilitates the proper
+                        execution of microprograms within the microprogrammed control unit.</li>
+                </ul>
+                <img src="../../images/microprogrammed.svg" alt="" class="wb">
+            </div>
+            <img src="../../images/microvshard.svg" alt="" class="wb">
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
