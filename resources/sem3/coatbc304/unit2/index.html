@@ -701,14 +701,145 @@ COF,   SKO           ;Check output flag
                         </ul>
                     </li>
                 </ol>
-
             </div>
         </div>
         <div class="wh">
             <h2>Design of Control Unit</h2>
-            <img src="../../images/microvshard.svg" alt="" class="wb">
-            <br>
-            <img src="../../images/microvshard2.svg" alt="" class="wb">
+            <ul>
+                <li>The design of the control unit (CU) is a crucial aspect of CPU architecture.</li>
+                <li>It dictates how instructions are executed and plays a pivotal role in a processor's performance.
+                </li>
+                <li>There are two primary approaches to control unit design: Hardwired and Micro-programmed Control
+                    Units.</li>
+            </ul>
+            <ul>
+                <li>The CPU has two main systems: control unit (CU) and arithmetic and logic unit (ALU).</li>
+                <li>CU synchronizes tasks using timings and control signals, while ALU handles mathematical and logical
+                    operations.</li>
+                <li>Two types of control units: Micro-programmed and Hardwired.</li>
+                <li>Both control units execute instructions.</li>
+            </ul>
+            <div class="in">
+                <h3>Control Signals</h3>
+                <ul>
+                    <li>Control signals convey information about operations, sequence of operations, and timing.</li>
+                    <li>Used to determine the operation to be performed.</li>
+                    <li>Indicate the sequence of processor operations.</li>
+                    <li>Specify the timing for operation execution and more.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Hardwired Control Unit</h3>
+
+                <p>The hardwired control unit is responsible for generating control signals that orchestrate the
+                    execution of instructions with precision in terms of timing and sequence. When compared to
+                    micro-programmed control units, the hardwired CU exhibits generally superior speed and efficiency.
+                    It achieves this by employing a combination of a Programmable Logic Array (PLA) circuit and a state
+                    counter, using hardware-based mechanisms to generate control signals, essentially embracing a
+                    circuitry-centric approach.</p>
+
+                <p>To provide a comprehensive understanding of the "generation of control signals" within a hardwired
+                    control unit, let's delve into its components step by step.</p>
+
+                <img src="../../images/hardwireddia.svg" alt="" class="wb">
+
+                <ul>
+                    <li><strong>The Instruction Register:</strong> This crucial component plays a pivotal role in
+                        generating the opcode bits corresponding to both the operation and the addressing mode of
+                        operands.</li>
+                    <li><strong>Instruction Decoder:</strong> The opcode bits generated earlier are fed into the
+                        instruction decoder, which interprets the operation and the addressing mode of the instruction.
+                        Based on these factors, the instruction decoder sets the corresponding Instruction signal (INSi)
+                        to 1. The execution of each instruction typically involves several steps, including instruction
+                        fetch, decode, operand fetch, arithmetic and logical operations, and memory storage. While the
+                        specific steps may vary across different sources, these five steps generally characterize the
+                        execution of an instruction.</li>
+                    <li><strong>Step Counter:</strong> It is crucial for the control unit to keep track of the current
+                        step in the instruction execution process. To facilitate this, a Step Counter is implemented,
+                        capable of holding signals from T1 to T5. Depending on the step within which the instruction
+                        currently resides, one of these step counter signals will be set to 1.</li>
+                    <li><strong>Clock:</strong> How does the Step Counter discern the current step of instruction
+                        execution? This task is accomplished by employing a Clock. Each clock cycle corresponds to one
+                        step. For instance, if the Step Counter sets T3 to 1, it will advance to T4 after the completion
+                        of one clock cycle.</li>
+                    <li><strong>Interrupt Handling:</strong> A pertinent question arises: what happens if the execution
+                        of an instruction is interrupted for some reason? Will the Step Counter continue to be triggered
+                        by the clock? The answer is no. While the execution of the current step is ongoing, the Counter
+                        Enable function will "disable" the Step Counter, ensuring that it halts temporarily and
+                        subsequently increments to the next step signal once the current step is completed.</li>
+                    <li><strong>Conditional Execution:</strong> In scenarios where the execution of an instruction
+                        depends on certain conditions, Condition Signals come into play. These signals are generated
+                        using control signals and encompass conditions such as less than, greater than, less than or
+                        equal to, greater than or equal to, and many more.</li>
+                    <li><strong>External Input:</strong> The last component, External Input, plays a crucial role in
+                        informing the Control Signal Generator about interrupts that could impact the execution of an
+                        instruction.</li>
+                </ul>
+
+                <p>Thus, based on input received from conditional signals, the step counter, external inputs, and the
+                    instruction register, the control signals are meticulously generated with the assistance of the
+                    Control Signal Generator, ensuring the seamless execution of instructions.</p>
+
+            </div>
+            <div class="in">
+                <h3>Micro-programmed Control Unit</h3>
+                <ul>
+                    <li>A micro-programmed control unit can be characterized as a straightforward logic circuit with
+                        dual capabilities:</li>
+                    <ul>
+                        <li>Firstly, it can execute instructions by generating control signals.</li>
+                        <li>Secondly, it can sequence through microinstructions to determine the control signals needed
+                            for each step of instruction execution.</li>
+                    </ul>
+                    <p>These control signals are generated based on programmed sequences, making it a valuable approach
+                        during the era of Complex Instruction Set Computer (CISC) architecture. The program responsible
+                        for crafting these control signals is known as the "Micro-program," which is stored on the
+                        processor chip, often referred to as fast memory or the control store/control memory.</p>
+                    </li>
+                    <li>A micro-program comprises a collection of microinstructions, also known as control words. Each
+                        microinstruction contains distinct bit patterns, typically n-bit words. These bit patterns serve
+                        as the blueprint for generating specific control signals, differentiating them from one another.
+                    </li>
+                    <li>Similar to other control units, micro-programmed control units execute instructions in discrete
+                        steps. Each step corresponds to a specific microinstruction within the micro-program. To execute
+                        a particular instruction, a sequence of microinstructions is employed, collectively known as a
+                        "micro-routine."</li>
+                    <li>Let's delve into the organizational structure of a Micro-programmed Control Unit, including the
+                        arrangement of micro-programs, micro-routines, and control words/microinstructions. We'll also
+                        explore the flow of instruction execution, detailing the steps involved in this process.
+                        <br>
+                        <img src="../../images/microprogramdia.svg" alt="" class="wb">
+                        <ul>
+                            <li>Instruction fetch is the first step. In this step, the instruction is fetched from the
+                                IR (Instruction Register) with the help of a Microinstruction address register.</li>
+                            <li>Decode is the second step. In this step, the instructions obtained from the instruction
+                                register will be decoded with the help of a microinstruction address generator. Here we
+                                will also get the starting address of a micro-routine. With the help of this address, we
+                                can easily perform the operation, which is mentioned in the instruction. It will also
+                                load the starting address into the micro-program counter.</li>
+                            <li>Increment is the third step. In this step, the control word, which corresponds to the
+                                starting address of a micro-program, will be read. When the execution proceeds, the
+                                value of the micro-program counter will be increased so that it can read the successive
+                                control words of a micro-routine.</li>
+                            <li>End bit is the fourth step. In this step, the microinstruction of a micro-routine
+                                contains a bit, which is known as the end bit. The execution of the microinstruction
+                                will be successfully completed when the end bit is set to 1.</li>
+                            <li>This is the last step, and in this step, the micro-program address generator will again
+                                go back to Step 1 so that we can fetch a new instruction, and this process or cycle goes
+                                on.</li>
+                        </ul>
+                    </li>
+                    <li>So in the micro-programmed control unit, the micro-programs are stored with the help of Control
+                        memory or Control store. The implementation of this CU is very easy and flexible, but it is
+                        slower as compared to the Hardwired control unit.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Difference between hardwired and microprogrammed CU</h3>
+                <img src="../../images/microvshard.svg" alt="" class="wb">
+                <br>
+                <img src="../../images/microvshard2.svg" alt="" class="wb">
+            </div>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
