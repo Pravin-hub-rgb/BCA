@@ -1241,6 +1241,177 @@ class Test {
             </div>
         </div>
         <div class="wh">
+            <h2>static keyword</h2>
+            <ul>
+                <li>We have already dicussed this but let's deep dive into it.</li>
+                <li>Static in Java is a keyword that is used to create members (variables, methods, and blocks) that
+                    belong to the class rather than instances of the class. These members are shared among all instances
+                    of the class and can be accessed using the class name itself.</li>
+            </ul>
+            <div class="in">
+                <h3>Static block</h3>
+                <ul>
+                    <li>Static blocks are used to initialize static variables or perform some one-time initialization
+                        tasks for a class. They are executed when the class is loaded into memory.</li>
+                </ul>
+                <p>Example &darr;</p>
+                <pre>
+                    <code>
+public class StaticBlockExample {
+    static {
+        System.out.println("This is a static block.");
+    }
+
+    public static void main(String[] args) {
+        // The static block is executed before the main method.
+        System.out.println("Inside the main method.");
+    }
+}
+
+                    </code>
+                </pre>
+                <ul>
+                    <li>When to use: Static blocks are used when you need to perform some one-time initialization tasks
+                        for a class, such as loading configuration files, initializing static variables, or setting up
+                        resources that should be shared among all instances.</li>
+                    <li>Static blocks in Java run when the class is loaded into memory, and they are executed before any
+                        other code in the class, including the main method (if it exists). So, static blocks will run
+                        even if there is no main function in the class.
+                    </li>
+                    <li>Remember: Static blocks in Java run before the main method or any other code within the class.
+                        When a class is loaded into memory, static blocks are executed in the order they appear in the
+                        class, and they are executed before any other code in the class, including the main method if it
+                        exists. This behavior ensures that any necessary class-level initialization is performed before
+                        the program's main logic starts executing.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Static variables</h3>
+                <ul>
+                    <li>Static variables are shared among all instances of a class. They are declared using the static
+                        keyword and are initialized only once, no matter how many instances of the class are created.
+                    </li>
+                </ul>
+                <p>Example &darr;</p>
+                <pre>
+                    <code>
+public class StaticVariableExample {
+    static int count = 0; // Static variable
+
+    public StaticVariableExample() {
+        count++; // Increment count for each instance created
+    }
+
+    public static void main(String[] args) {
+        StaticVariableExample obj1 = new StaticVariableExample();
+        StaticVariableExample obj2 = new StaticVariableExample();
+
+        // Both objects share the same 'count' variable.
+        System.out.println("Total instances created: " + count); // Output: 2
+    }
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>When to use: Static variables are useful when you want to maintain a common value or state that
+                        is shared among all instances of a class. They are often used for constants or counters.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Static methods</h3>
+                <ul>
+                    <li>Static methods belong to the class rather than to any specific instance. They can be called
+                        using the class name and are commonly used for utility functions that don't depend on object
+                        state.</li>
+                </ul>
+                <p>Example &darr;</p>
+                <pre>
+                    <code>
+public class StaticMethodExample {
+    static int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public static void main(String[] args) {
+        int result = StaticMethodExample.multiply(5, 3); // Calling static method
+        System.out.println("Result: " + result); // Output: 15
+    }
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>These are the basic concepts related to using the static keyword in Java for blocks, variables,
+                        and methods. Static members are associated with the class itself and are shared among all
+                        instances of the class.</li>
+                    <li>When to use: Static methods are used when you have utility functions that don't depend on the
+                        state of a specific object but are related to the class as a whole. These methods can be called
+                        using the class name.</li>
+                </ul>
+                <div class="wh">
+                    <p><b>Why static methods only access static members?</b></p>
+                    <p>Static methods in Java can only access static members (variables and methods) of a class. This
+                        restriction exists because static methods belong to the class itself, not to any specific
+                        instance of the class. Here's an explanation of why static methods can only access static
+                        members:</p>
+                    <ul>
+                        <li>No Instance Required: Static methods can be called without creating an instance of the
+                            class. They are associated with the class and not tied to any particular object. This means
+                            that they are available for use even if no instances of the class exist.</li>
+                        <li>Instance Members vs. Class Members:
+                            <ul>
+                                <li>Instance Members: Non-static (instance) methods and variables are associated with
+                                    individual objects created from the class. Each object has its own copy of instance
+                                    variables, and instance methods can operate on these individual copies.</li>
+                                <li>Class Members (Static): Static methods and variables are associated with the class
+                                    itself, not with individual objects. They are shared among all instances of the
+                                    class and exist independently of any specific object's state.</li>
+                            </ul>
+                        </li>
+                        <li>Accessing Instance Members from Static Methods is Ambiguous: Since static methods don't have
+                            access to any specific object's state (because they can be called without creating an
+                            object), they can't access instance-specific members like instance variables or non-static
+                            methods. Attempting to access instance members from a static method would be ambiguous
+                            because there's no specific object to operate on.</li>
+                    </ul>
+                    <p>Example code &darr;</p>
+                    <pre>
+                        <code>
+public class MyClass {
+    static int staticVariable = 10; // Static variable
+
+    int instanceVariable = 20; // Instance variable
+
+    static void staticMethod() {
+        System.out.println("Static method accessing staticVariable: " + staticVariable);
+        // Attempting to access instanceVariable would result in a compilation error.
+        // System.out.println("Static method accessing instanceVariable: " + instanceVariable); // Error
+    }
+
+    void instanceMethod() {
+        System.out.println("Instance method accessing staticVariable: " + staticVariable);
+        System.out.println("Instance method accessing instanceVariable: " + instanceVariable);
+    }
+
+    public static void main(String[] args) {
+        staticMethod(); // Calling a static method
+        MyClass myObj = new MyClass();
+        myObj.instanceMethod(); // Calling an instance method
+    }
+}
+                        </code>
+                    </pre>
+                    <p>In the above example, the staticMethod can access staticVariable but cannot access
+                        instanceVariable. In contrast, the instanceMethod can access both staticVariable and
+                        instanceVariable because it operates within the context of a specific object created from the
+                        class.
+                        <br><br>In summary, static methods in Java can only access static members because they are
+                        associated with the class as a whole and are not tied to any specific instance's state.
+                        Accessing instance members from static methods would be ambiguous and is therefore not allowed.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
             <h2>Arrays</h2>
             <ul>
                 <li>An array is a group of contiguous or related data items that share a common name.</li>
