@@ -2489,19 +2489,970 @@ public class Shape {
         </div>
         <div class="wh">
             <h2>Constructors in Java</h2>
-            <ul>
-                <li>A constructor is a special method that is used to initialize an object. Every class has a
-                    constructuro either implicitly or explicitly.</li>
-                <li>If we don't declare a constructor in the class then JVM builds a default constructor for that class.
-                    this is known as default constructor.</li>
-                <li>A constructor has same name as the class name in which it is declared. Constructor must have no
-                    explicit return type. Constructor in Java can not be abstract, static, final or synchronized. These
-                    modifiers are not allowed for constructor.</li>
-            </ul>
-            <p>Syntax to declare constructor</p>
+
+            <p>A constructor is a special method used to initialize an object in Java. Every class in Java has a
+                constructor, either implicitly or explicitly defined.</p>
+
+            <p>If we do not declare a constructor in a class, the Java Virtual Machine (JVM) automatically generates a
+                default constructor for that class. This default constructor is known as the default constructor.</p>
+
+            <p>A constructor in Java has the same name as the class in which it is declared. Constructors must have no
+                explicit return type. They cannot be declared as abstract, static, final, or synchronized. These
+                modifiers are not allowed for constructors.</p>
+
+            <h3>Syntax to Declare a Constructor:</h3>
             <pre>
-                <code></code>
+<code>
+class ClassName (parameter-list) {
+    // code-statements
+}
+</code>
+</pre>
+
+            <p><em>ClassName</em> is the name of the class, and the constructor name is the same as the class name. The
+                <em>parameter-list</em> is optional because constructors can be either parameterized or
+                non-parameterized.
+            </p>
+
+            <p><strong>Constructor Example:</strong></p>
+
+            <pre>
+<code>
+class Car {
+    String name;
+    String model;
+
+    Car() // Constructor
+    {
+        name = "";
+        model = "";
+    }
+}
+</code>
+</pre>
+
+            <div class="in">
+                <h3>Types of Constructors</h3>
+                <p>Java supports two types of constructors:</p>
+                <ol>
+                    <li>Default Constructor</li>
+                    <li>Parameterized Constructor</li>
+                </ol>
+                <pre>
+        <code>
+// Each time a new object is created, at least one constructor will be invoked.
+
+Car c1 = new Car();     // Default constructor invoked.
+Car c2 = new Car(name); // Parameterized constructor invoked.
+        </code>
+    </pre>
+            </div>
+
+            <p>Constructors play a fundamental role in object initialization in Java, allowing you to set initial values
+                for an object's properties when it is created.</p>
+            <div class="in">
+                <h3>Default Constructor</h3>
+                <ul>
+                    <li>In Java, a default constructor is a constructor that does not have any parameters.</li>
+                    <li>If a class does not contain any constructor, then during runtime, JVM generates a default
+                        constructor
+                        with no parameters.</li>
+                    <li>A default constructor is provided by the Java compiler.</li>
+                    <li>The purpose of a default constructor is to initialize the object's state with default values.
+                    </li>
+                </ul>
+                <h3>Example of Default Constructor:</h3>
+                <pre>
+                        <code>
+public class MyClass {
+    int myValue;
+
+    // Default constructor (no parameters)
+    public MyClass() {
+        myValue = 0;
+    }
+
+    public static void main(String[] args) {
+        MyClass obj = new MyClass(); // Using the default constructor
+        System.out.println("obj.myValue: " + obj.myValue); // Output: 0
+    }
+}
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Constructor Overloading</h3>
+                <ul>
+                    <li>Like methods, a constructor can also be overloaded.</li>
+                    <li>Overloaded constructors are differentiated based on their type of parameters or number of
+                        parameters.</li>
+                    <li>Constructor overloading is not much different than method overloading. In method overloading,
+                        you have
+                        multiple methods with the same name but different signatures. In constructor overloading, you
+                        have
+                        multiple constructors with different signatures, but the only difference is that constructors do
+                        not have
+                        a return type.</li>
+                </ul>
+                <h3>Example of Constructor Overloading</h3>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Java Code</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+class Cricketer {
+    String name;
+    String team;
+    int age;
+
+    Cricketer() {
+        name = "";
+        team = "";
+        age = 0;
+    }
+
+    Cricketer(String n, String t, int a) {
+        name = n;
+        team = t;
+        age = a;
+    }
+
+    Cricketer(Cricketer ckt) {
+        name = ckt.name;
+        team = ckt.team;
+        age = ckt.age;
+    }
+
+    public String toString() {
+        // Default constructor.
+        // Constructor overloaded.
+        // Constructor similar to copy constructor of C++
+        return "This is " + name + " of " + team;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Cricketer c1 = new Cricketer();
+        Cricketer c2 = new Cricketer("Sachin", "India", 32);
+        Cricketer c3 = new Cricketer(c2);
+
+        System.out.println(c2);
+        System.out.println(c3);
+
+        c1.name = "Virat";
+        c1.team = "India";
+        c1.age = 32;
+
+        System.out.println(c1);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <h3>Access Modifiers in Java</h3>
+            <ul>
+                <li>Access modifiers in Java are keywords that determine the visibility and accessibility of classes,
+                    fields,
+                    methods, and constructors in different parts of your code.</li>
+                <li>Java provides four main types of access modifiers:</li>
+                <ul>
+                    <li><code>public</code>: The element is accessible from anywhere, both within and outside the
+                        package.</li>
+                    <li><code>protected</code>: The element is accessible within its own package and by subclasses, even
+                        if
+                        they are in a different package.</li>
+                    <li><code>default (package-private)</code>: The element is accessible only within its own package
+                        (when no access modifier is specified).</li>
+                    <li><code>private</code>: The element is accessible only within its own class.</li>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="in">
+            <h3>Usage of Access Modifiers</h3>
+            <ul>
+                <li>Access modifiers are used to control the visibility and encapsulation of classes and class members
+                    in
+                    Java programs.</li>
+                <li>They help enforce encapsulation principles and restrict access to sensitive data and methods.</li>
+                <li>Choosing the appropriate access modifier depends on the desired level of access control and the
+                    design
+                    goals of your program.</li>
+            </ul>
+        </div>
+
+        <div class="wh">
+            <h2>Access Modifier Examples</h2>
+            <pre>
+                <code>
+public class MyClass {
+    public int publicVar; // Accessible from anywhere
+    protected int protectedVar; // Accessible within the same package and by subclasses
+    int defaultVar; // Accessible only within the same package (default access)
+    private int privateVar; // Accessible only within the same class
+
+    public void publicMethod() {
+        // Public method code
+    }
+
+    protected void protectedMethod() {
+        // Protected method code
+    }
+
+    void defaultMethod() {
+        // Default method code
+    }
+
+    private void privateMethod() {
+        // Private method code
+    }
+}
+                </code>
             </pre>
+        </div>
+        <div class="wh">
+            <h3>Inheritance</h3>
+            <ul>
+                <li>Inheritance is a fundamental concept in Object-Oriented Programming (OOP).</li>
+                <li>It allows a class (subclass or derived class) to inherit properties and behaviors from another class
+                    (superclass or base class).</li>
+                <li>When a class extends another class, it inherits all non-private members, including fields and
+                    methods.</li>
+                <li>Inheritance in Java is based on the "is-a" relationship, where the subclass is considered a
+                    specialized
+                    version of the superclass.</li>
+                <li>The keywords "extends" and "implements" are used to describe inheritance in Java, with "extends"
+                    indicating a class inheritance relationship.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Purpose of Inheritance</h3>
+                <ul>
+                    <li>Promotes code reusability by allowing methods and variables from a parent class to be used in a
+                        child
+                        class, reducing redundancy and improving maintainability.</li>
+                    <li>Facilitates polymorphism through method overriding, enabling a subclass to provide its own
+                        implementation of inherited methods.</li>
+                    <li>Supports the creation of well-organized class hierarchies, where shared attributes and behaviors
+                        are
+                        defined at higher levels and specialized features are added at lower levels.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Disadvantages of Inheritance</h3>
+                <ul>
+                    <li>Tight coupling: Inheritance can lead to tight coupling between parent and child classes, making
+                        the
+                        code less flexible and harder to maintain. Changes in the parent class may impact all child
+                        classes.
+                    </li>
+                    <li>Complexity: Overuse of inheritance can result in complex class hierarchies, making the codebase
+                        difficult to understand and navigate.</li>
+                    <li>Increased risk: Modifications to a superclass can introduce unforeseen issues in subclasses,
+                        posing
+                        a
+                        risk to the stability of the codebase.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Simple Example of Inheritance</h3>
+                <pre>
+                <code>
+class Parent {
+    public void p1() {
+        System.out.println("Parent method");
+    }
+}
+
+public class Child extends Parent {
+    public void c1() {
+        System.out.println("Child method");
+    }
+
+    public static void main(String[] args) {
+        Child cobj = new Child();
+        cobj.c1(); // Method of Child class
+        cobj.p1(); // Method of Parent class
+    }
+}
+                </code>
+            </pre>
+            </div>
+
+            <div class="in">
+                <h3>Inheriting Variables of Superclass</h3>
+                <pre>
+                <code>
+class Vehicle {
+    // Variable defined
+    String vehicleType;
+}
+
+public class Car extends Vehicle {
+    String modelType;
+
+    public void showDetail() {
+        vehicleType = "Car"; // Accessing Vehicle class member variable
+        modelType = "Sports";
+        System.out.println(modelType + " " + vehicleType);
+    }
+
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.showDetail();
+    }
+}
+                </code>
+            </pre>
+            </div>
+            <h3>Types of Inheritance in Java</h3>
+            <div class="in">
+                <h3>Single Inheritance</h3>
+                <img src="../../../sem2/images/singlein1.svg" alt="" class="wb">
+                <ul>
+                    <li>Java supports single inheritance, where a class can inherit from only one superclass.</li>
+                </ul>
+                <pre>
+                    <code>
+class A
+{ 
+    int a = 10;
+    void show() 
+    {
+        System.out.println("a = "+a);
+    }
+}
+
+public class B extends A
+{
+    public static void main(String[] args)
+    {
+        B b = new B();
+        b.show();
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Multilevel Inheritance</h3>
+                <img src="../../../sem2/images/multilevelin1.svg" alt="" class="wb">
+                <ul>
+                    <li>In multilevel inheritance, a class inherits from a superclass, and then another class inherits
+                        from this derived class. It forms a chain of inheritance.</li>
+                    <li>When a class extends to another class that also extends some other class forms a multilevel
+                        inheritance</li>
+                </ul>
+                <p>For example a class C extends to class B that also extends to class A and all the data members an
+                    methods of class A and B are now accessible in class C.</p>
+                <pre>
+                    <code>
+class A
+{
+    int a = 10;
+    void show() 
+    {
+        System.out.println("a = "+a); 
+    }
+}
+
+class B extends A
+{ 
+    int b = 10;
+    void showB() 
+    {
+        System.out.println("b = "+b); 
+    }
+}
+
+public class C extends B
+{
+    public static void main(String[] args) 
+    {
+        C c = new C();
+        c.show();
+        c.showB(); 
+    }
+}
+                </code>
+            </pre>
+            </div>
+            <div class="in">
+                <h3>Hierarchical Inheritance</h3>
+                <img src="../../../sem2/images/heirarichalin1.svg" alt="" class="wb">
+                <ul>
+                    <li>In hierarchical inheritance, multiple child classes inherit from a single parent class.</li>
+                    <li>When a class is extended by two or more classes, it forms hierarchical inheritance. For example,
+                        class B extends to class A and class C also extends to class A in that case both B and C share
+                        properties of class A.</li>
+                </ul>
+                <pre>
+                    <code>
+class A
+{
+    int a = 10;
+    void show()
+    {
+        System.out.println("a = "+a); 
+    }
+}
+
+class B extends A
+{
+    int b = 10;
+    void showB()
+    {
+        System.out.println("b = "+b); 
+    }
+}
+
+public class C extends A
+{
+    public static void main(String[] args) 
+    {
+        C c = new C();
+        c.show();
+        B b = new B();
+        b.show(); 
+    }
+}
+</code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Why multiple inheritance is not supported in Java?</h3>
+                <img src="../../../sem2/images/multiplein1.svg" alt="" class="wb">
+                <ul>
+                    <li>Java does not support multiple inheritance, which means a class cannot inherit from more than
+                        one class simultaneously. This restriction is in place to avoid the diamond problem, where
+                        ambiguity arises when two or more superclasses have the same method or field names.</li>
+                    <li>To remove ambiguity.</li>
+                    <li>To proivde more maintainable and clear design.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Overcoming the Lack of Multiple Inheritance: Using Interfaces</h3>
+                <p>Java does not support multiple inheritance through classes, but Interfaces offer a way to achieve it.
+                </p>
+
+                <p>The "implements" keyword is used to inherit an interface's properties and methods.</p>
+
+                <p>An interface is a collection of abstract methods, meaning they have no implementation details.</p>
+                <ul>
+                    <li>Note: You cannot create an object of an abstract class or interface.</li>
+                </ul>
+
+                <p>In a class that inherits an interface, you must provide concrete implementations for all the methods
+                    declared in the interface.</p>
+
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Example code</button>
+                    <div class='panel'>
+                        <pre>
+                    <code>
+// Define an interface for a printable object
+interface Printable {
+    void print();
+}
+
+// Define another interface for a displayable object
+interface Displayable {
+    void display();
+}
+
+// Create a class that implements both interfaces
+class MyObject implements Printable, Displayable {
+    private String data;
+
+    public MyObject(String data) {
+        this.data = data;
+    }
+
+    // Implement the print() method from the Printable interface
+    public void print() {
+        System.out.println("Printing: " + data);
+    }
+
+    // Implement the display() method from the Displayable interface
+    public void display() {
+        System.out.println("Displaying: " + data);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyObject myObj = new MyObject("Hello, World!");
+
+        // Call methods from both interfaces
+        myObj.print();
+        myObj.display();
+    }
+}
+                    </code>
+                </pre>
+                    </div>
+                </div>
+
+                <p>Interfaces also serve the purpose of defining a standard for method names and signatures, ensuring
+                    that classes implementing the interface adhere to a consistent method structure.</p>
+
+                <p><b>Some important points for interface &darr;</b></p>
+                <ul>
+                    <li><b>Abstract Methods:</b>
+                        <ul>
+                            <li>Interfaces can only contain abstract (unimplemented) methods.</li>
+                            <li>These methods do not have method bodies and end with a semicolon.</li>
+                        </ul>
+                    </li>
+                    <li><b>Public Access Modifier:</b>
+                        <ul>
+                            <li>All methods in an interface are implicitly 'public' and 'abstract'.</li>
+                            <li>Interface fields (constants) are also implicitly 'public', 'static', and 'final'.</li>
+                        </ul>
+                    </li>
+                    <li><b>Implementing and Interfaces:</b>
+                        <ul>
+                            <li>To use an interface, a class must implement it using the implements keyword.</li>
+                            <li>The implementing class must provide concrete (implemented) versions of all methods
+                                declared in the interface.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <pre>
+                    <code>
+interface MyInterface {
+    void method1();
+    int method2(String input);
+}
+                        
+class MyClass implements MyInterface {
+    public void method1() {
+        // Implementation for method1
+    }
+
+    public int method2(String input) {
+        // Implementation for method2
+        return input.length();
+    }
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Multiple Interfaces:</b>
+                        <ul>
+                            <li> A class can implement multiple interfaces, allowing it to inherit and provide
+                                implementations for methods from all interfaces.</li>
+                            <li>Basically this is how we implement multiple inheritance.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <pre>
+                    <code>
+class MyOtherClass implements Interface1, Interface2 {
+    // Implement methods from Interface1 and Interface2
+}
+                    </code>
+                </pre>
+                <p><b>Purpose of Interfaces:</b></p>
+                <ul>
+                    <li><b>Abstraction:</b>Interfaces provide a way to define a contract for classes to follow, allowing
+                        for abstraction and ensuring that classes adhere to specific behaviors.</li>
+                    <li><b>polymorphism:</b> Interfaces facilitate polymorphism, enabling different classes to be
+                        treated as instances of a common interface, enhancing flexibility and reusability in code.</li>
+                    <li><b>Standardization:</b> Interfaces help standardize the structure of classes by specifying
+                        required method signatures.</li>
+                    <li><b>Multiple Inhertance (via Interfaces):</b> Java supports multiple inheritance-like behavior
+                        through interfaces, as a class can implement multiple interfaces.</li>
+                </ul>
+                <p><b>Example &darr;</b></p>
+                <pre>
+                    <code>
+// Define an interface
+interface MyInterface {
+    void doSomething();
+}
+
+// Implement the interface in a class
+class MyClass implements MyInterface {
+    public void doSomething() {
+        System.out.println("Doing something in MyClass");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyInterface myObject = new MyClass();
+        myObject.doSomething();
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p><b>Programs</b></p>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Program to create an Animal interface with method called
+                        bark()
+                        that takes no arguments and returns void. Create a Dog class that
+                        implements
+                        Animal interface and overrides Bark() method to print "Dog is barking".</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+// Define the Animal interface
+interface Animal {
+    void bark();
+}
+
+// Implement the Animal interface in the Dog class
+class Dog implements Animal {
+    @Override
+    public void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a Dog object
+        Dog myDog = new Dog();
+
+        // Call the bark method of the Dog object
+        myDog.bark();
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Program to create a banking system with three classes -
+                        BankAccount, SavingsAccount and CurrentAccount. The bank should have a list
+                        of accounts and methods for adding them. Account should be an interface
+                        with methods deposit, withdraw, calculateInterest and displayBalances.
+                        SavingsAccount and CurrentAccount should implement the Account interface and
+                        have their own unique methods.</button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+// Define the Account interface
+interface Account {
+    void deposit(double amount);
+    void withdraw(double amount);
+    void displayBalance();
+}
+
+// Implement the SavingsAccount class
+class SavingsAccount implements Account {
+    private double balance;
+
+    public SavingsAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient funds in Savings Account.");
+        }
+    }
+
+    @Override
+    public void displayBalance() {
+        System.out.println("Savings Account Balance: " + balance);
+    }
+}
+
+// Implement the CurrentAccount class
+class CurrentAccount implements Account {
+    private double balance;
+
+    public CurrentAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient funds in Current Account.");
+        }
+    }
+
+    @Override
+    public void displayBalance() {
+        System.out.println("Current Account Balance: " + balance);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create SavingsAccount and CurrentAccount objects
+        SavingsAccount savingsAccount = new SavingsAccount(1000.0);
+        CurrentAccount currentAccount = new CurrentAccount(2000.0);
+
+        // Perform transactions and display balances
+        savingsAccount.deposit(500.0);
+        currentAccount.withdraw(100.0);
+
+        savingsAccount.displayBalance();
+        currentAccount.displayBalance();
+    }
+}
+
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Method Overloading in Java</h2>
+            <!-- Enhanced  -->
+            <ul>
+                <li>Method overloading is a concept that allows declaring multiple methods with the same name but
+                    different
+                    parameters in the same class.</li>
+                <li>Java supports method overloading, and it always occurs in the same class (unlike method overriding).
+                </li>
+                <li>Method overloading is one of the ways through which Java supports polymorphism. Polymorphism is a
+                    concept of
+                    object-oriented programming that deals with multiple forms. We will cover polymorphism in separate
+                    topics later
+                    on.</li>
+                <li>Method overloading can be achieved by changing the number of arguments or by changing the data type
+                    of
+                    arguments.</li>
+                <li>If two or more methods have the same name and the same parameter list but differ in return type,
+                    they cannot
+                    be overloaded.</li>
+                <li>Note: Overloaded methods can have different access modifiers, but it does not have any significance
+                    in method
+                    overloading.</li>
+                <li>There are two different ways of method overloading.
+                    <ol>
+                        <li>Different data types of arguments</li>
+                        <li>Different numbers of arguments</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Method Overloading by Changing Data Type of Arguments</h3>
+                <p>Example &darr;</p>
+                <ul>
+                    <li>In this example, we have two <code>sum()</code> methods that take integer and float type
+                        arguments,
+                        respectively. Notice that in the same class, we have two methods with the same name but
+                        different types of
+                        parameters.</li>
+                </ul>
+                <pre>
+        <code>
+class Calculate {
+    void sum(int a, int b) {
+        System.out.println("sum is " + (a + b));
+    }
+    void sum(float a, float b) {
+        System.out.println("sum is " + (a + b)); 
+    }
+    public static void main(String[] args) {
+        Calculate cal = new Calculate();
+        cal.sum(8, 5);       // sum(int a, int b) is called.
+        cal.sum(4.6f, 3.8f); // sum(float a, float b) is called.
+    }
+}
+        </code>
+    </pre>
+                <ul>
+                    <li>You can see that the <code>sum()</code> method is overloaded two times. The first takes two
+                        integer
+                        arguments, and the second takes two float arguments.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Method Overloading by Changing the Number of Arguments</h3>
+                <pre>
+        <code>
+class Demo {
+    void multiply(int l, int b) {
+        System.out.println("Result is " + (l * b));
+    }
+    void multiply(int l, int b, int h) {
+        System.out.println("Result is " + (l * b * h));
+    }
+    public static void main(String[] args) {
+        Demo ar = new Demo();
+        ar.multiply(8, 5);    // multiply(int l, int b) is called.
+        ar.multiply(4, 6, 2); // multiply(int l, int b, int h) is called.
+    }
+}
+        </code>
+    </pre>
+                <ul>
+                    <li>In this example, the <code>multiply()</code> method is overloaded twice. The first method takes
+                        two
+                        arguments, and the second method takes three arguments.</li>
+                    <li>When an overloaded method is called, Java looks for a match between the arguments used to call
+                        the method
+                        and its parameters. This match does not always have to be exact; sometimes, Java automatic type
+                        conversion
+                        plays a vital role in selecting the appropriate overloaded method.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Overloading the main() Method</h3>
+                <!-- enhanced  -->
+                <ul>
+                    <li>In Java, we can overload the <code>main()</code> method using different numbers and types of
+                        parameters, but the
+                        JVM only understands the original <code>main()</code> method.</li>
+                </ul>
+                <p>Example &darr;</p>
+                <pre>
+    <code>
+public class MethodDemo10 {
+    public static void main(int args) {
+        System.out.println("Main Method with int argument Executing");
+        System.out.println(args);
+    }
+
+    public static void main(char args) {
+        System.out.println("Main Method with char argument Executing");
+        System.out.println(args);
+    }
+
+    public static void main(Double[] args) {
+        System.out.println("Main Method with Double Executing");
+        System.out.println(args);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Original main Executing");
+        MethodDemo10.main(12);
+        MethodDemo10.main('c');
+        MethodDemo10.main(1236);
+    }
+}
+    </code>
+</pre>
+
+                <ul>
+                    <li>In this example, we have overloaded the `main()` method with different types of parameters (int,
+                        char, Double) in addition to the original `main()` method with the String array parameter.</li>
+                    <li>The JVM only recognizes the original `public static void main(String[] args)` method as the
+                        entry point of the program when you run it. Other overloaded `main()` methods can be called like
+                        regular methods but will not be executed as entry points.</li>
+                    <li>It's important to note that when you run the program, you will need to provide the standard
+                        `public static void main(String[] args)` method with the String array parameter as the entry
+                        point.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Method Overriding in Java</h2>
+            <ul>
+                <li>Method overriding is a process of replacing a base class method with a more specific definition in
+                    the derived class.</li>
+                <li>Method overriding occurs when two classes have an "is-a" relationship, meaning that one class must
+                    inherit from another. In other words, it is performed between two classes using an inheritance
+                    relationship.</li>
+                <li>In overriding, the method in both the parent and child classes must have the same name and an equal
+                    number of parameters.</li>
+                <li>Method overriding is also referred to as runtime polymorphism because the choice of which method to
+                    call is determined by the JVM during runtime.</li>
+                <li>The key benefit of overriding is the ability to define a method that is specific to a particular
+                    subclass type.</li>
+                <li>Rules for Method Overriding:
+                    <ol>
+                        <li>The method name must be the same in both the parent and child classes.</li>
+                        <li>The access modifier of the child method must not be more restrictive than that of the parent
+                            class method.</li>
+                        <li>Private, final, and static methods cannot be overridden.</li>
+                        <li>There must be an "is-a" relationship between the classes, i.e., inheritance must be
+                            involved.</li>
+                    </ol>
+                </li>
+            </ul>
+            <p>Below, we have a simple code example with one parent class and one child class in which the child class
+                will override a method provided by the parent class. &darr;</p>
+            <pre>
+                <code>
+class Animal {
+    public void eat() {
+        System.out.println("Eat all edibles");
+    }
+}
+
+class Dog extends Animal {
+    public void eat() { // eat() method overridden by Dog class
+        System.out.println("Dog likes to eat meat");
+    }
+
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();
+    }
+}
+                </code>
+            </pre>
+            <ul>
+                <li>As you can see in this example, the Dog class provides its own implementation of the eat() method.
+                    For method overriding, the method must have the same name and the same type signature in both the
+                    parent and child classes.</li>
+                <li>NOTE: Static methods cannot be overridden because a static method is associated with the class,
+                    whereas an instance method is associated with an object.</li>
+                <li>Example: Access modifier is more restrictive in the child class.
+                    Java does not allow method overriding if the child class has a more restricted access modifier than
+                    the parent class.
+                </li>
+                <li>In the example below, the child class method is set to protected, which is more restricted than
+                    public specified in the parent class.</li>
+            </ul>
+            <pre>
+                <code>
+class Animal {
+    public void eat() {
+        System.out.println("Eat all edibles");
+    }
+}
+
+class Dog extends Animal {
+    protected void eat() { // Error
+        System.out.println("Dog likes to eat meat");
+    }
+
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();
+    }
+}
+                </code>
+            </pre>
+
         </div>
     </div>
     <div class="content-box">
