@@ -26,7 +26,23 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#pack" class="link">Packages in Java</a>
+        <a href="#t1" class="link">How Java Executes?</a>
+        <a href="#t2" class="link">Primitive data types</a>
+        <a href="#t3" class="link">Control Statements</a>
+        <a href="#t4" class="link">First Java Program</a>
+        <a href="#t5" class="link">Functions</a>
+        <a href="#t6" class="link">static keyword</a>
+        <a href="#t7" class="link">Arrays</a>
+        <a href="#t8" class="link">Strings</a>
+        <a href="#t9" class="link">Wrapper class</a>
+        <a href="#t10" class="link">Wrapper class</a>
+        <a href="#pack" class="link">final keyword</a>
+        <a href="#t11" class="link">Constructors</a>
+        <a href="#t12" class="link">Access Modifiers</a>
+        <a href="#t13" class="link">Inheritance</a>
+        <a href="#t14" class="link">Method Overloading</a>
+        <a href="#t15" class="link">Method Overriding</a>
+        <a href="#t16" class="link">'this' keyword</a>
         <div class="botbut">
             <a href="" class="link">Next Topic &rarr;</a>
             <a href="" class="link">&larr; Previous Topic</a>
@@ -56,8 +72,8 @@
                 modification. It's extensively used for web development, mobile app development (Android), enterprise
                 applications, scientific computing, and more.</li>
         </ul>
-        <div class="wh">
-            <h2>How Java Executes ?</h2>
+        <div id="t1" class="wh">
+            <h2>How Java Executes?</h2>
             <img class="wb" src="../../images/java1.svg" alt="">
             <ul>
                 <li>The code written in java is human readable and it is saved using extension .java</li>
@@ -227,7 +243,7 @@
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>Control statements</h2>
             <ul>
                 <li>In Java, control statements are used to manage the flow of execution in a program.</li>
@@ -399,7 +415,7 @@ for (int num : numbers) {
                 </pre>
             </div>
         </div>
-        <div class="wh">
+        <div id="t4" class="wh">
             <h2>First Java Program</h2>
             <div class="in">
                 <h3>Structure of java file</h3>
@@ -1047,7 +1063,7 @@ public class TypePromotion {
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Functions in Java</h2>
             <ul>
                 <li>In Java, functions are known as methods. A method is a block of code that performs a specific task.
@@ -1240,7 +1256,7 @@ class Test {
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t6" class="wh">
             <h2>static keyword</h2>
             <ul>
                 <li>We have already dicussed this but let's deep dive into it.</li>
@@ -1411,7 +1427,7 @@ public class MyClass {
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t7" class="wh">
             <h2>Arrays</h2>
             <ul>
                 <li>An array is a group of contiguous or related data items that share a common name.</li>
@@ -1801,7 +1817,7 @@ class Test {
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t8" class="wh">
             <h2>Strings</h2>
             <ul>
                 <li>Strings represents a sequence of characters. The easiest way to represent a sequence of characters
@@ -2006,7 +2022,7 @@ class Test {
                 </p>
             </div>
         </div>
-        <div class="wh">
+        <div id="t9" class="wh">
             <h2>Wrapper class</h2>
             <ul>
                 <li>In Java, wrapper classes are used to represent primitive data types as objects. They provide a way
@@ -2108,8 +2124,8 @@ public class AutoboxingUnboxingExample {
                         </code>
                     </pre>
         </div>
-        <div class="wh">
-            <h2>final</h2>
+        <div id="t10" class="wh">
+            <h2>final keyword</h2>
             <ul>
                 <li>final is a keyword in Java.</li>
                 <li>final is a non-access modifier which provides restriction.</li>
@@ -2449,6 +2465,7 @@ class Shape {
                 </ul>
                 <pre>
                     <code>
+// Shape.java file
 package group;
 
 public class Shape {
@@ -2475,19 +2492,47 @@ public class Shape {
                         protected members (fields and methods) can be accessed by subclasses both within and outside the
                         package, regardless of whether direct inheritance is involved.</li>
                 </ul>
-                <p>Now we have created our package file, we will use it.</p>
+                <p>Now that we have created our package file, let's use it:</p>
                 <ul>
-                    <li>We have to create a directory whose name should be same as package name and it should be inside
-                        'bin' folder of Java.
-                        <ul>
-                            <li>In my device the directory is
-                                '/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin'</li>
-                        </ul>
-                    </li>
+                    <li>Open your terminal and navigate to the folder where the package file is located.</li>
+                    <li>Run the following command:</li>
                 </ul>
+                <pre>
+    <code>
+javac -d . filename.java
+    </code>
+</pre>
+                <ul>
+                    <li>The above command will create a package folder instead of generating a .class file.</li>
+                    <li>The dot (.) specifies that the package will be created in the current directory.</li>
+                    <li>the -d option to specify the destination directory where the compiled .class files for the
+                        package should be placed.</li>
+                    <li>Now, you can use it as follows:</li>
+                </ul>
+                <pre>
+    <code>
+// Test.java file where we will import our package and use the methods
+import group.Shape.*;
+
+class Test
+{
+    public static void main(String[] args)
+    {
+        // To avoid path errors, use the following
+        group.Shape obj = new group.Shape();
+        // Shape obj = new Shape(); // This might result in an error
+        obj.color();
+        obj.cal_area();
+        obj.cal_square();
+    }
+}
+    </code>
+</pre>
+
             </div>
+
         </div>
-        <div class="wh">
+        <div id="t11" class="wh">
             <h2>Constructors in Java</h2>
 
             <p>A constructor is a special method used to initialize an object in Java. Every class in Java has a
@@ -2654,7 +2699,7 @@ public class Test {
                 </div>
             </div>
         </div>
-        <div class="in">
+        <div id="t12" class="in">
             <h3>Access Modifiers in Java</h3>
             <ul>
                 <li>Access modifiers in Java are keywords that determine the visibility and accessibility of classes,
@@ -2672,25 +2717,24 @@ public class Test {
                     <li><code>private</code>: The element is accessible only within its own class.</li>
                 </ul>
             </ul>
-        </div>
-
-        <div class="in">
-            <h3>Usage of Access Modifiers</h3>
-            <ul>
-                <li>Access modifiers are used to control the visibility and encapsulation of classes and class members
-                    in
-                    Java programs.</li>
-                <li>They help enforce encapsulation principles and restrict access to sensitive data and methods.</li>
-                <li>Choosing the appropriate access modifier depends on the desired level of access control and the
-                    design
-                    goals of your program.</li>
-            </ul>
-        </div>
-
-        <div class="wh">
-            <h2>Access Modifier Examples</h2>
-            <pre>
-                <code>
+            <div class="in">
+                <h3>Usage of Access Modifiers</h3>
+                <ul>
+                    <li>Access modifiers are used to control the visibility and encapsulation of classes and class
+                        members
+                        in
+                        Java programs.</li>
+                    <li>They help enforce encapsulation principles and restrict access to sensitive data and methods.
+                    </li>
+                    <li>Choosing the appropriate access modifier depends on the desired level of access control and the
+                        design
+                        goals of your program.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Access Modifier Examples</h3>
+                <pre>
+                    <code>
 public class MyClass {
     public int publicVar; // Accessible from anywhere
     protected int protectedVar; // Accessible within the same package and by subclasses
@@ -2713,11 +2757,12 @@ public class MyClass {
         // Private method code
     }
 }
-                </code>
-            </pre>
+                    </code>
+                </pre>
+            </div>
         </div>
-        <div class="wh">
-            <h3>Inheritance</h3>
+        <div id="t13" class="wh">
+            <h2>Inheritance</h2>
             <ul>
                 <li>Inheritance is a fundamental concept in Object-Oriented Programming (OOP).</li>
                 <li>It allows a class (subclass or derived class) to inherit properties and behaviors from another class
@@ -3230,7 +3275,7 @@ public class Main {
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t14" class="wh">
             <h2>Method Overloading in Java</h2>
             <!-- Enhanced  -->
             <ul>
@@ -3372,7 +3417,7 @@ public class MethodDemo10 {
                 </ul>
             </div>
         </div>
-        <div class="wh">
+        <div id="t15" class="wh">
             <h2>Method Overriding in Java</h2>
             <ul>
                 <li>Method overriding is a process of replacing a base class method with a more specific definition in
@@ -3452,7 +3497,92 @@ class Dog extends Animal {
 }
                 </code>
             </pre>
-
+        </div>
+        <div id="t16" class="wh">
+            <h2>Java `this` Keyword</h2>
+            <ul>
+                <li>In Java, `this` is a keyword used to refer to the current object of a class. It can be used to
+                    access any member of the class, including instance variables and methods.</li>
+                <li>The primary purpose of using the `this` keyword is to resolve ambiguity when there are variables
+                    with the same name for instance and local variables.</li>
+                <li>The `this` keyword can be used for the following purposes:
+                    <ul>
+                        <li>Referring to the current object.</li>
+                        <li>Always referencing the object on which a method was invoked.</li>
+                        <li>Invoking the constructor of the current class.</li>
+                        <li>Passing `this` as an argument to another method.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Let's first understand the most common use of the `this` keyword, which is to differentiate between local
+                and instance variables in a class.</p>
+            <p>Example:</p>
+            <pre>
+    <code>
+class Demo {
+    double width, height, depth;
+    
+    Demo(double w, double h, double d) {
+        this.width = w;
+        this.height = h;
+        this.depth = d;
+    }
+    
+    public static void main(String[] args) {
+        Demo d = new Demo(10, 20, 30);
+        System.out.println("width = " + d.width);
+        System.out.println("height = " + d.height);
+        System.out.println("depth = " + d.depth);
+    }
+}
+    </code>
+</pre>
+            <p>In this example, `this` is used to initialize the members of the current object. For example,
+                `this.width` refers to the variable of the current object, while `width` alone refers to the parameter
+                received in the constructor, which is the argument passed when calling the constructor.</p>
+            <p>Calling a Constructor using the `this` Keyword:</p>
+            <p>We can call a constructor from another function inside the class by using the `this` keyword.</p>
+            <p>Example:</p>
+            <pre>
+    <code>
+class Demo {
+    Demo() {
+        // Calling the constructor
+        this("ducatindia");
+    }
+    
+    Demo(String str) {
+        System.out.println(str);
+    }
+    
+    public static void main(String[] args) {
+        Demo d = new Demo();
+    }
+}
+    </code>
+</pre>
+            <p>Accessing a Method using the `this` Keyword:</p>
+            <p>Another use of the `this` keyword is to access methods. While you can access methods using object
+                references, using `this` allows you to use the implicit object provided by Java.</p>
+            <p>Example:</p>
+            <pre>
+    <code>
+class Demo {
+    public void getName() {
+        System.out.println("ducatindia");
+    }
+    
+    public void display() {
+        this.getName();
+    }
+    
+    public static void main(String[] args) {
+        Demo d = new Demo();
+        d.display();
+    }
+}
+    </code>
+</pre>
         </div>
     </div>
     <div class="content-box">
