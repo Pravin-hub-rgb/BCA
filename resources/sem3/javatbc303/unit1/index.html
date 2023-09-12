@@ -31,15 +31,16 @@
         <a href="#t3" class="link">Control Statements</a>
         <a href="#t4" class="link">First Java Program</a>
         <a href="#t5" class="link">Functions</a>
-        <a href="#t6" class="link">static keyword</a>
+        <a href="#t6" class="link">'static' keyword</a>
         <a href="#t7" class="link">Arrays</a>
         <a href="#t8" class="link">Strings</a>
         <a href="#t9" class="link">Wrapper class</a>
-        <a href="#t10" class="link">Wrapper class</a>
-        <a href="#pack" class="link">final keyword</a>
+        <a href="#t10" class="link">'final' keyword</a>
+        <a href="#pack" class="link">Package</a>
         <a href="#t11" class="link">Constructors</a>
         <a href="#t12" class="link">Access Modifiers</a>
         <a href="#t13" class="link">Inheritance</a>
+        <a href="#t17" class="link">Abstract class</a>
         <a href="#t14" class="link">Method Overloading</a>
         <a href="#t15" class="link">Method Overriding</a>
         <a href="#t16" class="link">'this' keyword</a>
@@ -896,9 +897,9 @@ class Test {
 import java.util.Scanner;
 
 class Test {
-    public static int a; // ***
-    public static int b; // ***
-    public static int c; // ***
+    public static int a; // *
+    public static int b; // *
+    public static int c; // *
 
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
@@ -3272,6 +3273,133 @@ public class Main {
                             </code>
                         </pre>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh" id="t17">
+            <h2>Abstract Class</h2>
+            <ul>
+                <li>A class that contains the abstract keyword in its declaration is called an abstract class.</li>
+            </ul>
+            <pre>
+    <code>
+abstract class A
+{
+    // code
+}
+    </code>
+</pre>
+            <ul>
+                <li>We can't create an object for an abstract class, but we can create a reference variable:</li>
+            </ul>
+            <pre>
+    <code>
+abstract class Animal
+{
+
+}
+
+class Dog extends Animal
+{
+
+}
+
+class Demo
+{
+    public static void main(String[] args)
+    {
+        Animal r = new Dog(); // reference
+    }
+}
+    </code>
+</pre>
+            <h3>What Is an Abstract Method?</h3>
+            <p>An abstract method is a method declared in an abstract class but does not have an implementation in the
+                abstract class itself. Instead, its implementation is provided by concrete (non-abstract) subclasses
+                that inherit from the abstract class.</p>
+            <p>Abstract methods are declared using the <code>abstract</code> keyword and have no method body. They serve
+                as placeholders for methods that must be implemented by any concrete subclass. Abstract methods define a
+                contract that concrete subclasses must adhere to, ensuring that specific behavior is implemented
+                consistently across all subclasses.</p>
+            <p>Here's an example of an abstract class with an abstract method:</p>
+            <pre>
+    <code>
+abstract class Shape
+{
+    abstract void draw(); // Abstract method without implementation
+}
+    </code>
+</pre>
+            <p>Any concrete subclass of <code>Shape</code> must provide an implementation for the <code>draw</code>
+                method. This enforces a specific behavior for drawing shapes while allowing each shape type to implement
+                it differently.</p>
+
+            <ul>
+                <li>Abstract classes may or may not contain abstract methods.</li>
+                <li>They can have a mix of both abstract and non-abstract methods.</li>
+                <li>To use an abstract class, you have to inherit it in sub-classes.</li>
+                <li>If a class contains partial implementation and expects its sub-classes to provide complete
+                    implementation, it should be declared as abstract.</li>
+                <li>Abstract methods can only be declared in an abstract class; it is compulsory.</li>
+            </ul>
+            <div class="in">
+                <h3>Why Use Abstract Classes?</h3>
+                <p>Abstract classes are used in Java for several reasons:</p>
+                <ul>
+                    <li>To Define a Common Interface: Abstract classes allow you to define a common interface for a
+                        group of related classes. Subclasses that inherit from an abstract class must provide
+                        implementations for its abstract methods, ensuring a consistent interface across those
+                        subclasses.</li>
+                    <li>To Enforce Reusability: Abstract classes provide a way to reuse code. You can define common
+                        methods and fields in the abstract class, which can be inherited by multiple subclasses. This
+                        promotes code reusability and reduces redundancy.</li>
+                    <li>To Implement Polymorphism: Abstract classes play a crucial role in achieving polymorphism in
+                        Java. They allow you to create reference variables of the abstract class type, which can refer
+                        to objects of concrete subclasses. This enables you to write more flexible and dynamic code.
+                    </li>
+                </ul>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class='ac'>Simple program to demonstrate abstract class and method</button>
+                <div class='panel'>
+                    <pre>
+                        <code>
+// Abstract class
+abstract class Shape {
+    // Abstract method without implementation
+    abstract void draw();
+}
+
+// Concrete subclass 1
+class Circle extends Shape {
+    // Implementation of the abstract method
+    void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+
+// Concrete subclass 2
+class Rectangle extends Shape {
+    // Implementation of the abstract method
+    void draw() {
+        System.out.println("Drawing a Rectangle");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create objects of concrete subclasses
+        Shape circle = new Circle();
+        Shape rectangle = new Rectangle();
+
+        // Call the draw method on both objects
+        circle.draw();
+        rectangle.draw();
+    }
+}
+                        </code>
+                    </pre>
                 </div>
             </div>
         </div>
