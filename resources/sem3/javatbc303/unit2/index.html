@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exception Handling & Multithread Programming</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <style>
+        body {
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Exception Handling & Multithread Programming</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Exception Handling & Multithread Programming</h1>
+        <div class="wh">
+            <h2>Exceptions in Java</h2>
+            <p>
+                In Java, exceptions are events that occur during the execution of a program that disrupt the normal flow
+                of instructions. Exceptions can occur for various reasons, such as division by zero, trying to access an
+                array element that doesn't exist, or attempting to open a file that doesn't exist.
+                <br>
+                In Java, exceptions are a vital concept used to manage and handle runtime errors gracefully. They play a
+                crucial role in achieving the goal of a robust programming language. Let's delve deeper into the world
+                of exceptions:
+            </p>
+            <ul>
+                <li><strong>Runtime Error Management:</strong> Exceptions are primarily used to tackle runtime errors.
+                    These errors can occur during program execution and might disrupt the normal flow of the
+                    application.</li>
+                <li><strong>Robust Language:</strong> Java's exception handling mechanism is one of the reasons it's
+                    considered a robust language. It allows programs to continue running smoothly even in the presence
+                    of errors.</li>
+                <li><strong>Flow Control:</strong> Exception handling helps maintain the flow of a program. It ensures
+                    that the program doesn't terminate abruptly when errors occur but instead gracefully handles them.
+                </li>
+                <li><strong>General Errors:</strong> In a broader sense, exceptions represent various types of runtime
+                    errors, making it easier to identify and address issues.</li>
+            </ul>
+        </div>
+
+        <div class="wh">
+            <h2>Exception Handling</h2>
+            <p>
+                Exception handling is a fundamental aspect of Java programming that empowers developers to deal with
+                runtime errors systematically. Java provides built-in support for exception handling, making it easier
+                to write robust and reliable code. Here's a closer look at exception handling in Java:
+            </p>
+            <ul>
+                <li><strong>Automatic Handling:</strong> Java has a built-in mechanism for handling exceptions. When an
+                    exception occurs, Java automatically looks for an appropriate handler to manage the situation.</li>
+                <li><strong>Example:</strong> Consider this example where an attempt to divide by zero results in an
+                    exception. Java's automatic handling ensures that the program doesn't crash but rather reports the
+                    issue.</li>
+            </ul>
+            <pre>
+                <code>
+int x = 10; 
+int ans = x / 0; // Automatically handled by Java
+String s1 = null; // also an exception
+                </code>
+            </pre>
+            <ul>
+                <li><strong>Preventing Abnormal Termination:</strong> Exception handling prevents programs from
+                    abnormally terminating due to runtime errors. This is especially crucial when creating software, as
+                    unhandled exceptions can lead to unpredictable outcomes, including system crashes.</li>
+                <li><strong>Essential OOP Feature:</strong> Exception handling is a fundamental feature of
+                    object-oriented programming (OOP). It allows developers to encapsulate error-handling logic and
+                    maintain clean and modular code.</li>
+                <li><strong>Respective Handlers:</strong> In Java, exceptions are handled by methods or classes
+                    specifically designed for that purpose. These handlers determine how different types of errors are
+                    managed and what error messages to display.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Exception Hierarchy in Java</h2>
+
+            <p>In Java, exceptions are organized into a hierarchy of classes through inheritance. The
+                <code>java.lang.Throwable</code> class serves as the root of this hierarchy.
+            </p>
+            <img src="../../images/exceptioninjava.svg" alt="" class="wb">
+            <h3>Throwable (Root Class)</h3>
+            <p>The <code>Throwable</code> class is the root class of the exception hierarchy in Java. It has two main
+                subclasses:</p>
+
+            <div class="in">
+                <h3>Error</h3>
+                <p><strong>Error</strong> represents serious, unrecoverable system-level errors, often caused by the JVM
+                    or
+                    underlying hardware. Developers usually don't handle these exceptions, and they typically lead to
+                    program termination.</p>
+                <ul>
+                    <li><strong>StackOverflowError:</strong> Occurs when the call stack (method call history) exceeds
+                        its
+                        limit.</li>
+                    <li><strong>OutOfMemoryError:</strong> Indicates that the JVM has exhausted available memory.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Exception</h3>
+                <p><strong>Exception</strong> represents exceptions that can be caught and handled by application code.
+                    It's further divided into two subcategories:</p>
+
+                <div class="wh">
+                    <h3>RuntimeException</h3>
+                    <p><strong>RuntimeException</strong> represents exceptions that occur at runtime and are typically
+                        caused by programming errors. These exceptions don't require explicit handling.</p>
+                    <p>Runtime exceptions, also known as unchecked exceptions, are exceptions that occur at runtime and
+                        are typically caused by programming errors. These exceptions don't require explicit handling and
+                        can be considered bugs in the code. They are subclasses of the RuntimeException class.</p>
+                    <p>Various runtime exceptions include:</p>
+                    <ul>
+                        <li>NullPointerException: Raised when trying to access or manipulate an object reference that is
+                            null.</li>
+                        <li>IndexOutOfBoundsException:
+                            <ul>
+                                <li>ArrayIndexOutOfBoundsException: Occurs when attempting to access an array element
+                                    with an invalid index.</li>
+                                <li>StringIndexOutOfBoundsException: Happens when trying to access a character in a
+                                    string with an invalid index.</li>
+                            </ul>
+                        </li>
+                        <li>ArithmeticException: Occurs during mathematical operations like division by zero.</li>
+                        <li>NumberFormatException: Raised when trying to convert a string to a numeric type, but the
+                            string does not represent a valid numeric value.</li>
+                    </ul>
+                    <p>Runtime exceptions are typically raised when there are programming errors, such as trying to
+                        access null objects, accessing arrays or strings out of bounds, or performing invalid arithmetic
+                        operations.</p>
+                </div>
+
+                <div class="wh">
+                    <h3>Checked Exceptions</h3>
+                    <p><strong>Checked Exceptions</strong> represent exceptions that must be explicitly declared and
+                        handled in code. These exceptions occur due to external factors and often require actions like
+                        input validation or dealing with I/O operations.</p>
+                    <p>Checked exceptions are exceptions that must be explicitly declared and handled in code. They are
+                        usually subclasses of the Exception class and are typically caused by external factors.</p>
+                    <p>Examples of checked exceptions include:</p>
+                    <ul>
+                        <li>IOException: Raised when an I/O operation (e.g., file reading/writing) encounters an issue.
+                        </li>
+                        <li>FileNotFoundException: Occurs when trying to access a file that does not exist.</li>
+                        <li>SQLException: Raised in database operations when a SQL query or connection fails.</li>
+                        <li>ClassNotFoundException: Thrown when a required class is not found at runtime, often related
+                            to class loading issues.</li>
+                    </ul>
+                    <p>Checked exceptions often require explicit handling in code, such as using try-catch blocks, to
+                        deal with issues like file not found, database connection problems, or class loading failures.
+                    </p>
+                </div>
+            </div>
+
+            <p>The <code>Throwable</code> class, along with its subclasses <code>Error</code> and
+                <code>Exception</code>, forms the foundation of Java's exception handling system. Developers can create
+                their custom exceptions by extending the <code>Exception</code> class or one of its subclasses.
+            </p>
+
+            <p>When handling exceptions in Java, it's essential to catch specific exceptions based on the situation,
+                which allows for more precise error handling and recovery.</p>
+        </div>
+
+        <div class="wh">
+            <h2>Try & Catch Blocks in Exception Handling</h2>
+            <p>
+                Exception handling in Java involves several essential keywords, including try, catch, finally, throw,
+                and throws. Let's dive into the details of how these keywords play a crucial role in managing
+                exceptions:
+            </p>
+            <ul>
+                <li><strong>Keywords Overview:</strong> Exception handling in Java is facilitated by specific keywords:
+                    <ul>
+                        <li>try</li>
+                        <li>catch</li>
+                        <li>finally</li>
+                        <li>throw</li>
+                        <li>throws</li>
+                    </ul>
+                    These keywords allow programmers to handle exceptions manually, providing more control over the
+                    error-handling process.
+                </li>
+                <li><strong>Optionality of Keywords:</strong> Among these keywords, finally, throw, and throws are
+                    optional. You can choose to use them based on the specific requirements of your code.
+                    <ul>
+                        <li>finally: This block contains code that executes regardless of whether an exception occurs.
+                            It's often used for cleanup operations.</li>
+                        <li>throw: It's used to explicitly throw an exception within your code when certain conditions
+                            are met.</li>
+                        <li>throws: This keyword is used in method declarations to indicate that the method may throw a
+                            particular type of exception. It's particularly useful when defining custom exception
+                            classes.</li>
+                    </ul>
+                </li>
+                <li><strong>Levels of Exception Handling:</strong> Exception handling can be categorized into different
+                    levels:
+                    <ul>
+                        <li><strong>Level 1:</strong> At this level, Java's default error-handling mechanisms come into
+                            play. The JVM handles these exceptions without programmer intervention.</li>
+                        <li><strong>Level 2:</strong> The try and catch blocks are used by programmers to handle
+                            exceptions more specifically. It allows developers to define their own logic for dealing
+                            with exceptions.</li>
+                        <li><strong>Level 3:</strong> Finally, throw, and throws come into play at this level. The
+                            finally block ensures essential cleanup code is executed, throw is used to explicitly raise
+                            exceptions, and throws is employed for specifying potential exceptions that a method may
+                            throw.</li>
+                    </ul>
+                </li>
+                <li><strong>Effectiveness of Try, Catch, and Throws:</strong> In practice, approximately 90% of
+                    exceptions are effectively handled using try, catch, and throws blocks. These mechanisms offer a
+                    robust approach to exception management.</li>
+                <li><strong>Best Practice:</strong> Handling exceptions with 'throws' is considered a best practice,
+                    especially in situations where a programmer possesses in-depth knowledge of Java. It allows for more
+                    precise and controlled exception handling, particularly when dealing with user-defined exceptions.
+                </li>
+                <li><strong>Usage of 'throws':</strong> The 'throws' keyword is primarily used for declaring
+                    user-defined exceptions in method signatures. It indicates that a method may throw specific types of
+                    exceptions, providing valuable information to other developers using the method.</li>
+            </ul>
+            <div class="in">
+                <h3>Handling Exceptions by the User Using Try and Catch Blocks</h3>
+                <p>Example &darr;</p>
+                <pre><code>
+import java.util.Scanner;
+
+class Exp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int v1, v2, ans;
+        System.out.println("Enter two numbers: ");
+        v1 = sc.nextInt();
+        v2 = sc.nextInt();
+        try {
+            ans = v1 / v2;
+            System.out.println(ans);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
+                </code></pre>
+                <ul>
+                    <li>In the above code, when we provide v2 = 0, we will get a 'DivideByZero' error, which is
+                        correctly handled by Java.</li>
+                    <li>As we can see, the program is correct, but when v2 = 0, the code after that won't get executed
+                        because Java doesn't handle it, and that's why it gets terminated.</li>
+                    <li>Now, if we want to handle it by the user, we will use the try-catch block.
+                        <ul>
+                            <li>Try block: Used for handling exceptions by the user. In the try block, we put the code
+                                that might generate an exception. If an exception is generated by the try block, it
+                                switches to the catch block, which is the exception handler.</li>
+                        </ul>
+                    </li>
+                    <li>If we are not sure which part will give an exception, then put the whole code inside the try
+                        block. Only the content that might generate an exception will be part of the try block, not any
+                        method.</li>
+                </ul>
+                <pre><code>
+import java.util.Scanner;
+
+class Exp {
+    public static void main(String[] args) {
+        try {
+            Scanner sc = new Scanner(System.in);
+            int v1, v2, ans;
+            System.out.println("Enter two numbers: ");
+            v1 = sc.nextInt();
+            v2 = sc.nextInt();
+            ans = v1 / v2;
+            System.out.println(ans);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
+                </code></pre>
+                <ul>
+                    <li>Remember, try without catch won't work.</li>
+                    <li>If we want to find which line caused the error and get its name, we can do the following:</li>
+                </ul>
+                <pre><code>
+catch (Exception e) {
+    System.out.println("Error occurred at line: " + e.getStackTrace()[0].getLineNumber());
+    System.out.println("Error message: " + e.getMessage());
+}
+// This provides full details about the error.
+                </code></pre>
+
+            </div>
+            <div class="in">
+                <h3>Try with Multiple Catch Blocks</h3>
+                <ul>
+                    <li>We can even put a try block inside another try block.</li>
+                </ul>
+                <pre>
+                    <code>
+import java.util.Scanner;
+
+class Exp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int v1, v2, ans;
+        System.out.println("Enter two numbers: ");
+        v1 = sc.nextInt();
+        v2 = sc.nextInt();
+        try {
+            ans = v1 / v2;
+            System.out.println(ans);
+        }
+        catch (NumberFormatException e1) {
+            System.out.println("Exception due to wrong input datatype");
+        }
+        catch (ArithmeticException e2) {
+            System.out.println("Exception due to dividing by zero");
+        }
+        catch (Exception e) { // Default, if we don't exactly know what can be the exception.
+            System.out.println("Error: " + e);
+        }
+    }
+}
+                    </code>
+                </pre>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
