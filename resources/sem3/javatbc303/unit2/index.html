@@ -357,8 +357,185 @@ class Exp {
                 </pre>
 
             </div>
-        </div>
+            <div class="in">
+                <h3>Multiple Try with Multiple Catch</h3>
+                <p>Exception handling in Java is a critical aspect of ensuring that your programs can gracefully handle
+                    unexpected situations. Java provides several mechanisms for handling exceptions, including:</p>
+                <ul>
+                    <li>Automatic handling by the Java Virtual Machine (JVM)</li>
+                    <li>Using the <code>try/catch</code> block</li>
+                    <li>Using <code>try</code> with multiple <code>catch</code> blocks</li>
+                </ul>
+                <p>Let's dive deeper into the concept of multiple <code>try</code> with multiple <code>catch</code>
+                    blocks.</p>
 
+                <h4>Objectives of Try and Catch Blocks:</h4>
+                <p>When dealing with exceptions, <code>try</code> and <code>catch</code> blocks serve two main
+                    objectives:</p>
+                <ol>
+                    <li>Provide user-defined error messages for better diagnostics.</li>
+                    <li>Allow the continuation of code execution even in the presence of exceptions. This ensures that
+                        other parts of the code can still run.</li>
+                </ol>
+
+                <p>There is no strict limitation on the number of <code>try</code> and <code>catch</code> blocks you can
+                    use in your code. However, it's essential to consider code complexity as it may increase with a
+                    higher number of exception-handling blocks.</p>
+
+                <h4>Continuation of Program:</h4>
+                <ul>
+                    <li>Continuation of program flow is achieved using multiple <code>try</code> and <code>catch</code>
+                        blocks.</li>
+                    <li>This approach is particularly useful when you know the class names of the exceptions you expect
+                        to handle.</li>
+                    <li>Deciding how many <code>try</code> and <code>catch</code> blocks to use can be based on grouping
+                        the code into logical sections. Here are three common groups:</li>
+                    <ul>
+                        <li>Input processing</li>
+                        <li>Calculation</li>
+                        <li>Display</li>
+                    </ul>
+                    <p>Both the input and calculation sections have a higher chance of encountering exceptions, so it's
+                        beneficial to place separate <code>try</code> and <code>catch</code> blocks for each group.</p>
+                </ul>
+
+                <h4>Example:</h4>
+                <pre>
+        <code>
+import java.util.Scanner;
+
+class ExceptionHandlingExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int v1, v2, ans, sub; 
+        System.out.println("Enter two numbers: ");
+        try { // input
+            v1 = sc.nextInt();
+            v2 = sc.nextInt();
+        } catch (NumberFormatException e1) {
+            System.out.println("Error due to wrong input");
+        }
+
+        try { // calculation
+            ans = v1 / v2;
+            System.out.println("Division Result: " + ans);
+        } catch (ArithmeticException e2) {
+            System.out.println("Error due to division by zero");
+        }
+
+        try { // independent calculation
+            sub = v1 - v2;
+            System.out.println("Subtraction Result: " + sub);
+        } catch (ArithmeticException e3) {
+            System.out.println("Error due to subtraction");
+        }
+    }
+}
+        </code>
+    </pre>
+
+                <ul>
+                    <li>It's a good practice to declare all variables before the first <code>try</code> block to ensure
+                        they have a broader scope.</li>
+                    <li>If you don't know the specific exception class name, you can use the generic
+                        <code>Exception</code> class to catch and handle exceptions.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Nested Try-Catch Blocks in Java</h3>
+                <p>In Java, when dealing with complex situations that involve multiple layers of exception handling,
+                    nested `try` and `catch` blocks can be employed. These blocks allow for a finer level of detail in
+                    handling exceptions at different levels of your code.</p>
+
+                <h4>Understanding Nested Try-Catch Blocks:</h4>
+                <p>Nested `try` and `catch` blocks involve placing one or more `try` blocks inside another. This
+                    approach is useful when certain operations within a `try` block can themselves trigger exceptions
+                    that need to be handled separately.</p>
+
+                <h4>Example:</h4>
+                <pre>
+                    <code>
+            try {
+                // Outer try block
+                // Perform some operations
+                try {
+                    // Inner try block
+                    // Perform more specific operations
+                } catch (SpecificException e) {
+                    // Handle the specific exception from the inner block
+                }
+                // Continue with operations
+            } catch (GeneralException e) {
+                // Handle a more general exception from the outer block
+            }
+                    </code>
+                </pre>
+
+                <p>In the example above, the outer `try` block handles more general exceptions, while the inner `try`
+                    block handles exceptions specific to its operations. This way, you can provide specialized
+                    error-handling for different parts of your code.</p>
+
+                <h4>Nesting for Specificity:</h4>
+                <p>The key benefit of nested `try` and `catch` blocks is the ability to address specific exceptions
+                    without affecting the entire code block. It allows you to provide more specific error-handling
+                    strategies at different levels of your code.</p>
+
+                <h4>Caution:</h4>
+                <p>While nesting can be powerful for precise error handling, it can also make your code more complex.
+                    It's essential to strike a balance between specificity and code readability. Avoid excessive
+                    nesting, which can lead to code that's challenging to maintain.</p>
+
+                <h4>Best Practices:</h4>
+                <ul>
+                    <li>Use nested `try` and `catch` blocks when there's a genuine need to handle exceptions at
+                        different levels with varying levels of detail.</li>
+                    <li>Keep your code organized and maintainable by providing clear comments and documentation.</li>
+                    <li>Avoid deeply nested blocks when possible; instead, break down your code into smaller, more
+                        manageable functions or methods.</li>
+                </ul>
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class='ac'>Example program </button>
+                    <div class='panel'>
+                        <pre>
+                            <code>
+import java.util.Scanner;
+
+public class NestedTryCatchExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int v1, v2, ans, sub; 
+
+        try {
+            System.out.println("Enter two numbers: ");
+            v1 = sc.nextInt();
+            v2 = sc.nextInt();
+
+            try {
+                ans = v1 / v2;
+                System.out.println("Division Result: " + ans);
+            } catch (ArithmeticException e2) {
+                System.out.println("Error: Division by zero is not allowed.");
+            }
+
+            try {
+                sub = v1 - v2;
+                System.out.println("Subtraction Result: " + sub);
+            } catch (ArithmeticException e3) {
+                System.out.println("Error: Subtraction operation resulted in an error.");
+            }
+        } catch (java.util.InputMismatchException e1) {
+            System.out.println("Error: Invalid input. Please enter valid numbers.");
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
