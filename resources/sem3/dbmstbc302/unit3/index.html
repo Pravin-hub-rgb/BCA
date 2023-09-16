@@ -26,7 +26,21 @@
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
-        <a href="#" class="link"></a>
+        <a href="#t1" class="link">SQL Basics</a>
+        <a href="#t2" class="link">Working with SQL</a>
+        <a href="#t3" class="link">MySQL</a>
+        <a href="#t4" class="link">MySQL data types</a>
+        <a href="#t5" class="link">Learning MySQL commands</a>
+        <a href="#t6" class="link">MySQL Databases</a>
+        <a href="#t7" class="link">MySQL Tables</a>
+        <a href="#t8" class="link">Inserting Data</a>
+        <a href="#t9" class="link">Quering Data</a>
+        <a href="#t10" class="link">Updating and Deleting Data</a>
+        <a href="#t" class="link"></a>
+        <a href="#t" class="link"></a>
+        <a href="#t" class="link"></a>
+        <a href="#t" class="link"></a>
+        <a href="#t" class="link"></a>
         <div class="botbut">
             <a href="" class="link">Next Topic &rarr;</a>
             <a href="" class="link">&larr; Previous Topic</a>
@@ -56,7 +70,7 @@
                 deleting data.</li>
         </ul>
 
-        <div class="wh">
+        <div id="t1" class="wh">
             <h2>SQL Basics</h2>
             <div class="in">
                 <h3>Nonprocedural Nature</h3>
@@ -108,7 +122,7 @@
                 </ul>
             </div>
         </div>
-        <div class="wh">
+        <div id="t2" class="wh">
             <h2>Working with SQL</h2>
             <div class="in">
                 <h3>Choose a Database Management System (DBMS):</h3>
@@ -134,7 +148,7 @@
                 </ul>
             </div>
         </div>
-        <div class="wh">
+        <div id="t3" class="wh">
             <h2>MySQL</h2>
             <ul>
                 <li>I'm choosing MySQL as my preferred Database Management System (DBMS).</li>
@@ -160,6 +174,63 @@
             <ul>
                 <li>Inside MySQL shell or GUI, we are going to start using commands.</li>
             </ul>
+        </div>
+        <div id="t4" class="wh">
+            <h2>MySQL Data types</h2>
+            <img src="../../images/mysqltable2.svg" alt="" class="wb">
+            <h2>Understanding CHAR and VARCHAR in Databases</h2>
+            <ul>
+                <li>
+                    <h3>CHAR: Fixed-Length Text</h3>
+                    <p>
+                        CHAR is like a fixed-size box: When you use CHAR, you tell the database that you want to store a
+                        certain number of characters, no matter how long the actual text is. It's like getting a box
+                        that can hold exactly 10 letters. So, if you put the word "apple" in it, it will take up 10
+                        spaces, and 6 of them will be empty.
+                    </p>
+                    <p><strong>Example:</strong> If you store "apple" in a CHAR(10) column, it will be stored as "apple
+                        " (6 empty spaces).</p>
+                </li>
+                <li>
+                    <h3>VARCHAR: Variable-Length Text</h3>
+                    <p>
+                        VARCHAR is more flexible: With VARCHAR, the database will only use as much space as needed for
+                        the text you want to store. It's like getting a stretchy box that adjusts its size to fit what
+                        you put inside.
+                    </p>
+                    <p><strong>Example:</strong> If you store "apple" in a VARCHAR(10) column, it will be stored as
+                        "apple" (no empty spaces).</p>
+                </li>
+            </ul>
+            <p>
+                <strong>Now, why is VARCHAR generally better:</strong>
+            </p>
+            <ul>
+                <li>
+                    <strong>Efficiency:</strong> VARCHAR is usually more efficient because it doesn't waste memory by
+                    adding empty spaces. It only uses as much space as necessary to store your data.
+                </li>
+                <li>
+                    <strong>Flexibility:</strong> VARCHAR is flexible, so if you need to store different-length words or
+                    phrases, it can adapt without any wasted space.
+                </li>
+            </ul>
+            <p>
+                So, for most situations, especially when you're not sure how long your text might be, VARCHAR is the
+                preferred choice because it's efficient and flexible. It helps your database use resources wisely and
+                keeps your data storage optimized.
+            </p>
+
+        </div>
+        <div id="t5" class="wh">
+            <h2>Learning MySQL commands</h2>
+            <ul>
+                <li>We are going to learn according to the following sructure.</li>
+                <img src="../../images/mysqltable3.svg" alt="" class="wb">
+            </ul>
+        </div>
+        <div id="t6" class="wh">
+            <h2>MySQL Databases</h2>
             <div class="in">
                 <h3>Create a Database</h3>
                 <ul>
@@ -170,15 +241,7 @@
                     <code>
 CREATE DATABASE mydatabase;
                     </code>
-                </pre>
-                <ul>
-                    <li>Following command shows all the existing databases in your system &darr;</li>
-                </ul>
-                <pre>
-                    <code>
-SHOW DATABASES;
-                    </code>
-                </pre>
+                    </pre>
                 <ul>
                     <li>You can use "IF NOT EXIST" clause or condition while creating your database as this is used to
                         create a new database with the specified name (db-name) if it doesn't already exist. This
@@ -190,10 +253,22 @@ SHOW DATABASES;
                     <code>
 CREATE DATABASE IF NOT EXISTS db-name;
                     </code>
-                </pre>
+                    </pre>
             </div>
             <div class="in">
-                <h3>Use the Database</h3>
+                <h3>Listing Databases</h3>
+                <ul>
+                    <li>Following command shows all the existing databases in your system &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+SHOW DATABASES;
+                    </code>
+                    </pre>
+            </div>
+
+            <div class="in">
+                <h3>Selecting Database</h3>
                 <ul>
                     <li>After creating the database, you need to switch to it to perform operations within it. Use the
                         USE command:</li>
@@ -202,10 +277,1060 @@ CREATE DATABASE IF NOT EXISTS db-name;
                     <code>
 USE mydatabase;
                     </code>
-                </pre>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Deleting Databases</h3>
+                <p>We can also delete a database which is done by command "DROP DATABASE".
+                    <br>The DROP DATABASE statement is used to drop an existing SQL database.
+                </p>
+                <pre>
+                    <code>
+DROP DATABASE databasename;
+                    </code>
+                    </pre>
                 <ul>
                     <li>From here we will learn all the other operations like create table,...</li>
                 </ul>
+            </div>
+        </div>
+        <div id="t7" class="wh">
+            <h2>MySQL Tables</h2>
+            <div class="in">
+                <h3>Creating Tables</h3>
+                <ul>
+                    <li>We use the following syntax to create a table &darr;</li>
+                </ul>
+                <pre>
+                    <code>
+    CREATE TABLE table_name (
+        column1 datatype,
+        column2 datatype,
+        column3 datatype,
+        ...
+        PRIMARY KEY (one_or_more_columns)
+    );
+                    </code>
+                    </pre>
+                <img src="../../images/mysqltable1.svg" alt="" class="wb">
+                <p>Using this syntax to create EMPLOYEE table. Make sure you are inside a database.</p>
+                <pre>
+                <code>
+CREATE TABLE EMPLOYEE (
+    Empno VARCHAR(6) PRIMARY KEY,
+    Ename VARCHAR(20) NOT NULL,
+    Job CHAR(10),
+    Hiredate DATE,
+    Basic_Sal DECIMAL(9,2),
+    Comm DECIMAL(7,2),
+    Dept_no VARCHAR(4)
+);
+                </code>
+            </pre>
+                <ul>
+                    <li>Primary Key: Uniquely identifies each row in a table.</li>
+                    <li>NOT NULL: Requires a column to have a value (cannot be empty or NULL).</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Viewing Table Structure</h3>
+                <ul>
+                    <li>To view the structure of a table in MySQL, you can use the DESCRIBE statement or the SHOW
+                        COLUMNS statement. Here's how to do it:</li>
+                </ul>
+                <p><b>Using DESCRIBE:</b></p>
+                <pre>
+                    <code>
+mysql> DESCRIBE EMPLOYEE;
+
+
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| Empno     | varchar(6)   | NO   | PRI | NULL    |       |
+| Ename     | varchar(20)  | NO   |     | NULL    |       |
+| Job       | char(10)     | YES  |     | NULL    |       |
+| Hiredate  | date         | YES  |     | NULL    |       |
+| Basic_Sal | decimal(9,2) | YES  |     | NULL    |       |
+| Comm      | decimal(7,2) | YES  |     | NULL    |       |
+| Dept_no   | varchar(4)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.06 sec)
+                    </code>
+                    </pre>
+                <p><b>Using SHOW COLUMNS:</b></p>
+                <pre>
+                    <code>
+mysql> SHOW COLUMNS FROM EMPLOYEE;
+
+
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| Empno     | varchar(6)   | NO   | PRI | NULL    |       |
+| Ename     | varchar(20)  | NO   |     | NULL    |       |
+| Job       | char(10)     | YES  |     | NULL    |       |
+| Hiredate  | date         | YES  |     | NULL    |       |
+| Basic_Sal | decimal(9,2) | YES  |     | NULL    |       |
+| Comm      | decimal(7,2) | YES  |     | NULL    |       |
+| Dept_no   | varchar(4)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+                    </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Altering Tables</h3>
+                <ul>
+                    <li>Modifying table after creation.</li>
+                </ul>
+                <div class="wh">
+                    <p><b>Adding Columns</b></p>
+                    <ul>
+                        <li>Use the <b>ALTER TABLE</b> statement to add a new column to an existing table.</li>
+                        <li><strong>Example:</strong>
+                            <pre>
+                                <code>
+ALTER TABLE employees
+ADD COLUMN email VARCHAR(100);
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Dropping Columns</b></p>
+                    <ul>
+                        <li>You can remove a column from a table using the <b>ALTER TABLE</b> statement.</li>
+                        <li><strong>Example:</strong>
+                            <pre>
+                                <code>
+ALTER TABLE employees
+DROP COLUMN email;
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Modifying Data Types</b></p>
+                    <ul>
+                        <li>Change the data type of an existing column with the <b>ALTER TABLE</b> statement.</li>
+                        <li><strong>Example:</strong>
+                            <pre>
+                                <code>
+ALTER TABLE employees
+MODIFY COLUMN salary DECIMAL(10, 2);
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <p><b>Renaming Columns</b></p>
+                    <ul>
+                        <li>You can rename a column using the <b>ALTER TABLE</b> statement.</li>
+                        <li><strong>Example:</strong>
+                            <pre>
+                                <code>
+ALTER TABLE employees
+CHANGE COLUMN old_column_name new_column_name VARCHAR(50);
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Deleting Tables</h3>
+                <ul>
+                    <li>Use the <b>DROP TABLE</b> statement to delete an existing table and all its data.</li>
+                    <li><strong>Example:</strong>
+                        <pre>
+                            <code>
+DROP TABLE employees;       
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="t8" class="wh">
+            <h2>Inserting Data</h2>
+            <p>Now we know how table is created, now we will enter data into it.</p>
+            <div class="in">
+                <h3>Inserting Single Rows</h3>
+                <ul>
+                    <li>Use the <b>INSERT INTO</b> statement to add a single row of data into a table.</li>
+                    <li><strong>Example:</strong>
+                        <pre>
+                            <code>
+INSERT INTO employees (id, name, salary)
+VALUES (1, 'John', 50000);  </code>
+                        </pre>
+                    </li>
+                </ul>
+                <p>If you are adding values for all the columns of the table, you do not need to specify the column
+                    names in the SQL query. However, make sure the order of the values is in the same order as the
+                    columns in the table. Here, the INSERT INTO syntax would be as follows:
+                </p>
+                <pre>
+                    <code>
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+                    </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Inserting Multiple Rows</h3>
+                <ul>
+                    <li>You can insert multiple rows of data at once using the <b>INSERT INTO</b> statement.</li>
+                    <li><strong>Example:</strong>
+                        <pre>
+                            <code>
+INSERT INTO employees (id, name, salary)
+VALUES
+    (2, 'Alice', 55000),
+    (3, 'Bob', 60000),
+    (4, 'Eva', 48000);
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+                <p>Example &darr;</p>
+                <pre>
+                    <code>
+INSERT INTO EMPLOYEE (Empno, Ename, Job, Hiredate, Basic_Sal, Comm, Dept_no)
+VALUES
+    ('E0001', 'Kim', 'Manager', '2002-12-15', 5000, 500, 'D001'),
+    ('E0002', 'Bruce', 'Analyst', '1999-04-24', 4000, 400, 'D002'),
+    ('E0003', 'Amold', 'Clerk', '2001-01-10', 2500, 250, 'D004'),
+    ('E0004', 'Holvfield', 'Tester', '2001-10-10', 3000, 300, 'D002'),
+    ('B0005', 'Kelly', 'Admin', '1999-04-11', 2000, 200, 'D003');
+                    </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Inserting Data into Specific Columns</h3>
+                <ul>
+                    <li>Specify the columns you want to insert data into when using the <b>INSERT INTO</b>
+                        statement.</li>
+                    <li><strong>Example:</strong>
+                        <pre>
+                            <code>
+INSERT INTO employees (name, salary)
+VALUES ('Jane', 52000);
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="t9" class="wh">
+            <h2>Querying Data</h2>
+            <div class="in">
+                <h3>The SELECT Statement</h3>
+                <ul>
+                    <li>The SELECT statement is used to retrieve data from a database table.</li>
+                </ul>
+
+                <h3>Syntax:</h3>
+                <ul>
+                    <li>Use the following syntax to select specific columns:</li>
+                    <pre>
+                        <code>
+SELECT column1, column2, ...
+FROM table_name;
+                        </code>
+                    </pre>
+                    <li>Here, <b>column1</b>, <b>column2</b>, etc., represent the names of the fields
+                        (columns) you want to retrieve from the table.</li>
+                </ul>
+
+                <ul>
+                    <li>If you want to select all the fields available in the table, you can use the following syntax:
+                    </li>
+                    <pre>
+                        <code>
+SELECT * FROM table_name;
+                        </code>
+                    </pre>
+                </ul>
+                <h3>Example:</h3>
+                <ul>
+                    <li>Suppose you have a table called "Customers." To retrieve the customer names and cities from this
+                        table, you can use the following SQL query:</li>
+                    <pre>
+                        <code>
+SELECT CustomerName, City
+FROM Customers;
+                        </code>
+                    </pre>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>WHERE Clause</h3>
+                <ul>
+                    <li>The WHERE clause is used to filter records based on specific conditions.</li>
+                    <li><strong>Syntax:</strong>
+                        <pre>
+                        <code>
+SELECT column1, column2, ...
+FROM table_name WHERE condition;
+                        </code>
+                    </pre>
+                    </li>
+                    <li>Here, <b>condition</b> represents the filtering condition you want to apply.</li>
+                </ul>
+
+                <div class="wh">
+                    <h3>Operators Used in WHERE Clause</h3>
+                    <ul>
+                        <li>The WHERE clause can use various operators for conditions:</li>
+                        <li><b>=</b>: Equal</li>
+                        <li><b>&gt;</b>: Greater than</li>
+                        <li><b>&lt;</b>: Less than</li>
+                        <li><b>&gt;=</b>: Greater than or equal</li>
+                        <li><b>&lt;=</b>: Less than or equal</li>
+                        <li><b>&lt;&gt;</b> or <b>!=</b>: Not equal (Note: In some versions of SQL, the not
+                            equal operator may be written as <code>!=</code>).</li>
+                    </ul>
+                    <p>Let's use Operators for the following table.</p>
+                    <img src="../../images/mysqltable4.svg" alt="" class="wb">
+                    <p>To retrieve employees with a salary of $50,000, you can use the following SQL query:</p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary = 50000;
+                        </code>
+                    </pre>
+
+                    <h3>Example 2: Greater Than Operator (&gt;)</h3>
+                    <p>To retrieve employees with a salary greater than $55,000, you can use the following SQL query:
+                    </p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary &gt; 55000;
+                        </code>
+                    </pre>
+
+                    <h3>Example 3: Less Than Operator (&lt;)</h3>
+                    <p>To retrieve employees with a salary less than $60,000, you can use the following SQL query:</p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary &lt; 60000;
+                        </code>
+                    </pre>
+
+                    <h3>Example 4: Greater Than or Equal Operator (&gt;=)</h3>
+                    <p>To retrieve employees with a salary greater than or equal to $55,000, you can use the following
+                        SQL query:</p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary &gt;= 55000;
+                        </code>
+                    </pre>
+
+                    <h3>Example 5: Less Than or Equal Operator (&lt;=)</h3>
+                    <p>To retrieve employees with a salary less than or equal to $55,000, you can use the following SQL
+                        query:</p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary &lt;= 55000;
+                        </code>
+                    </pre>
+
+                    <h3>Example 6: Not Equal Operator (&lt;&gt; or !=)</h3>
+                    <p>To retrieve employees with a salary not equal to $60,000, you can use either of the following SQL
+                        queries:</p>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary &lt;&gt; 60000;
+                        </code>
+                    </pre>
+                    <pre>
+                        <code>
+SELECT * FROM Employees WHERE Salary != 60000;
+                        </code>
+                    </pre>
+                </div>
+
+                <div class="wh">
+                    <h3>Using AND, OR, and NOT Operators</h3>
+                    <ul>
+                        <li>The WHERE clause can be combined with logical operators to create complex conditions:</li>
+                        <li>The <b>AND</b> operator displays a record if all the conditions separated by
+                            <b>AND</b> are TRUE.
+                        </li>
+                        <li>The <b>OR</b> operator displays a record if any of the conditions separated by
+                            <b>OR</b> is TRUE.
+                        </li>
+                        <li>The <b>NOT</b> operator displays a record if the condition(s) is NOT TRUE.</li>
+                        <li><b>Syntax:</b>
+                            <pre>
+                        <code>
+SELECT column1, column2, ...
+FROM table_name WHERE condition1 AND condition2 AND condition3 ...;
+                        </code>
+                    </pre>
+                            <pre>
+                        <code>
+SELECT column1, column2, ...
+FROM table_name WHERE condition1 OR condition2 OR condition3 ...;
+                        </code>
+                    </pre>
+                            <pre>
+                        <code>
+SELECT column1, column2, ...
+FROM table_name WHERE NOT condition;
+                        </code>
+                    </pre>
+                        </li>
+                        <li>Use parentheses to control the order of conditions in complex queries.</li>
+                    </ul>
+
+                    <h3>Examples:</h3>
+                    <ul>
+                        <li>Example 1: Selecting customers from Mexico:
+                            <pre>
+                            <code>
+SELECT * FROM Customers WHERE Country='Mexico';
+                            </code>
+                        </pre>
+                        </li>
+                        <li>Example 2: Selecting customers from India and Japan:
+                            <pre>
+                            <code>
+SELECT * FROM Customers WHERE Country='India' AND City='Japan';
+                            </code>
+                        </pre>
+                        </li>
+                        <li>Example 3: Selecting customers from America, India, or Korea:
+                            <pre>
+                                <code>
+SELECT * FROM Customers WHERE Country='America' AND (City='India' OR City='Korea');
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+
+                <h3>DISTINCT Keyword</h3>
+                <ul>
+                    <li>The DISTINCT keyword is used to remove duplicate rows from query results.</li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT DISTINCT column1, column2 FROM table_name;
+                        </code>
+                    </pre>
+                    <li>Here, <b>column1</b>, <b>column2</b>, etc., represent the columns from which you
+                        want to retrieve distinct values.</li>
+                </ul>
+
+                <h3>Example:</h3>
+                <p>Suppose we have a table called "Orders" with the following data:</p>
+                <pre>
+                    <code>
++---------+-------------+---------+
+| OrderID | CustomerName| Product |
++---------+-------------+---------+
+| 1       | John Doe    | Widget  |
+| 2       | Jane Smith  | Gadget  |
+| 3       | John Doe    | Widget  |
++---------+-------------+---------+
+                    </code>
+                </pre>
+
+                <p>To retrieve a list of distinct products ordered, you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT DISTINCT Product FROM Orders;
+                    </code>
+                </pre>
+
+                <p>The result will only include unique product names:</p>
+                <pre>
+                    <code>
++---------+
+| Product |
++---------+
+| Widget  |
+| Gadget  |
++---------+
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>LIKE Operator</h3>
+                <ul>
+                    <li>The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.</li>
+                    <li>There are two wildcards often used in conjunction with the LIKE operator:</li>
+                    <ul>
+                        <li>The percent sign (%) represents zero, one, or multiple characters.</li>
+                        <li>The underscore sign (_) represents one, single character.</li>
+                    </ul>
+                </ul>
+
+                <h3>Examples:</h3>
+                <p>Suppose we have a table called "Employees" with the following data:</p>
+                <pre>
+                    <code>
++----+-----------+--------------+
+| ID | Firstname | Lastname     |
++----+-----------+--------------+
+| 1  | John      | Doe          |
+| 2  | Jane      | Smith        |
+| 3  | James     | Johnson      |
+| 4  | Alex      | Anderson     |
+| 5  | Robert    | Robinson     |
++----+-----------+--------------+
+                    </code>
+                </pre>
+
+                <p>To retrieve employees whose first names start with "J," you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT * FROM Employees WHERE Firstname LIKE 'J%';
+                    </code>
+                </pre>
+
+                <p>This query will return employees with first names starting with "J":</p>
+                <pre>
+                    <code>
++----+-----------+--------------+
+| ID | Firstname | Lastname     |
++----+-----------+--------------+
+| 1  | John      | Doe          |
+| 2  | Jane      | Smith        |
+| 3  | James     | Johnson      |
++----+-----------+--------------+
+                    </code>
+                </pre>
+
+                <p>To retrieve employees whose last names end with "son," you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT * FROM Employees WHERE Lastname LIKE '%son';
+                    </code>
+                </pre>
+
+                <p>This query will return employees with last names ending with "son":</p>
+                <pre>
+                    <code>
++----+-----------+--------------+
+| ID | Firstname | Lastname     |
++----+-----------+--------------+
+| 1  | John      | Doe          |
+| 3  | James     | Johnson      |
+| 5  | Robert    | Robinson     |
++----+-----------+--------------+
+                    </code>
+                </pre>
+
+                <p>You can also use the underscore (_) wildcard to match single characters:</p>
+                <pre>
+                    <code>
+SELECT * FROM Employees WHERE Firstname LIKE '_a%';
+                    </code>
+                </pre>
+
+                <p>This query will return employees with first names that have "a" as the second character:</p>
+                <pre>
+                    <code>
++----+-----------+--------------+
+| ID | Firstname | Lastname     |
++----+-----------+--------------+
+| 4  | Alex      | Anderson     |
+| 5  | Robert    | Robinson     |
++----+-----------+--------------+
+                    </code>
+                </pre>
+
+                <p>These are just a few examples of how the LIKE operator can be used to search for patterns in data.
+                </p>
+            </div>
+            <div class="in">
+                <h3>IN Operator</h3>
+                <ul>
+                    <li>The IN operator is used in a WHERE clause to filter results based on a list of values.</li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT * FROM table_name WHERE column_name IN (value1, value2, value3, ...);
+                        </code>
+                    </pre>
+                    <li>Here, <b>column_name</b> is the column you want to filter, and <b>value1</b>,
+                        <b>value2</b>, etc., are the values to match.
+                    </li>
+                </ul>
+
+                <h3>Example:</h3>
+                <p>Suppose we have a table called "Products" with the following data:</p>
+                <pre>
+                    <code>
++----+----------+-------------+
+| ID | Product  | Category_ID |
++----+----------+-------------+
+| 1  | Laptop   | 1           |
+| 2  | Phone    | 2           |
+| 3  | Tablet   | 1           |
+| 4  | Monitor  | 3           |
+| 5  | Printer  | 4           |
++----+----------+-------------+
+                    </code>
+                </pre>
+
+                <p>To retrieve products from categories 1 and 3, you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT * FROM Products WHERE Category_ID IN (1, 3);
+                    </code>
+                </pre>
+
+                <p>The result will include products from categories 1 and 3:</p>
+                <pre>
+                    <code>
++----+---------+-------------+
+| ID | Product | Category_ID |
++----+---------+-------------+
+| 1  | Laptop  | 1           |
+| 3  | Tablet  | 1           |
+| 4  | Monitor | 3           |
++----+---------+-------------+
+                    </code>
+                </pre>
+                <p>This allows you to filter results based on a list of specific values in a column.</p>
+            </div>
+            <div class="in">
+                <h3>BETWEEN Operator</h3>
+                <ul>
+                    <li>The BETWEEN operator is used in a WHERE clause to filter results within a specified range.</li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT * FROM table_name WHERE column_name BETWEEN value1 AND value2;
+                        </code>
+                    </pre>
+                    <li>Here, <b>column_name</b> is the column you want to filter, and <b>value1</b> and
+                        <b>value2</b> define the range.
+                    </li>
+                </ul>
+
+                <h3>Example:</h3>
+                <p>Suppose we have a table called "Orders" with the following data:</p>
+                <pre>
+                    <code>
++----+------------+------------+
+| ID | Order_Date | Order_Amt  |
++----+------------+------------+
+| 1  | 2023-02-15 | 500.00     |
+| 2  | 2023-04-10 | 750.00     |
+| 3  | 2023-05-20 | 300.00     |
+| 4  | 2023-03-05 | 900.00     |
+| 5  | 2023-06-25 | 600.00     |
++----+------------+------------+
+                    </code>
+                </pre>
+
+                <p>To retrieve orders placed between January 1, 2023, and June 30, 2023, you can use the following SQL
+                    query:</p>
+                <pre>
+                    <code>
+SELECT * FROM Orders WHERE Order_Date BETWEEN '2023-01-01' AND '2023-06-30';
+                    </code>
+                </pre>
+
+                <p>The result will include orders placed within the specified date range:</p>
+                <pre>
+                    <code>
++----+------------+------------+
+| ID | Order_Date | Order_Amt  |
++----+------------+------------+
+| 1  | 2023-02-15 | 500.00     |
+| 2  | 2023-04-10 | 750.00     |
+| 3  | 2023-05-20 | 300.00     |
+| 5  | 2023-06-25 | 600.00     |
++----+------------+------------+
+                    </code>
+                </pre>
+                <p>This allows you to filter results within a specified range of values in a column.</p>
+            </div>
+            <div class="in">
+                <h3>IS NULL Operator</h3>
+                <ul>
+                    <li>The IS NULL operator is used in a WHERE clause to check for NULL values in a column.</li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT * FROM table_name WHERE column_name IS NULL;
+                        </code>
+                    </pre>
+                    <li>Here, <b>column_name</b> is the column you want to check for NULL values.</li>
+                </ul>
+
+                <h3>Example:</h3>
+                <p>Suppose we have a table called "Customers" with the following data:</p>
+                <pre>
+                    <code>
++----+-----------+--------------------+
+| ID | FirstName | Email              |
++----+-----------+--------------------+
+| 1  | John      | john@example.com   |
+| 2  | Jane      | NULL               |
+| 3  | James     | james@example.com  |
+| 4  | Alex      | NULL               |
+| 5  | Robert    | robert@example.com |
++----+-----------+--------------------+
+                    </code>
+                    </pre>
+
+                <p>To retrieve customers with NULL email addresses, you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT * FROM Customers WHERE Email IS NULL;
+                    </code>
+                    </pre>
+
+                <p>The result will include customers with NULL email addresses:</p>
+                <pre>
+                    <code>
++----+-----------+--------------+
+| ID | FirstName | Email        |
++----+-----------+--------------+
+| 2  | Jane      | NULL         |
+| 4  | Alex      | NULL         |
++----+-----------+--------------+
+                    </code>
+                    </pre>
+                <p>This allows you to filter rows based on whether a specific column contains NULL values.</p>
+            </div>
+            <div class="in">
+                <h3>AS Keyword</h3>
+                <ul>
+                    <li>The AS keyword is used in a SELECT statement to rename columns or expressions in query results.
+                    </li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT column_name AS new_name FROM table_name;
+                        </code>
+                    </pre>
+                    <li>Here, <b>column_name</b> is the original column name, and <b>new_name</b> is the
+                        name you want to assign to it in the query results.</li>
+                </ul>
+
+                <h3>Example:</h3>
+                <p>Suppose we have a table called "Employees" with the following data:</p>
+                <pre>
+                    <code>
++----+-----------+------------+
+| ID | FirstName | LastName   |
++----+-----------+------------+
+| 1  | John      | Doe        |
+| 2  | Jane      | Smith      |
+| 3  | James     | Johnson    |
+| 4  | Alex      | Anderson   |
+| 5  | Robert    | Robinson   |
++----+-----------+------------+
+                </code>
+                </pre>
+
+                <p>To retrieve the first name and last name of employees with renamed columns "First Name" and "Last
+                    Name," you can use the following SQL query:</p>
+                <pre>
+                    <code>
+SELECT FirstName AS "First Name", LastName AS "Last Name" FROM Employees;
+                    </code>
+                </pre>
+
+                <p>The result will include the specified columns with the new names:</p>
+                <pre>
+                    <code>
++-----------+------------+
+| First Name| Last Name  |
++-----------+------------+
+| John      | Doe        |
+| Jane      | Smith      |
+| James     | Johnson    |
+| Alex      | Anderson   |
+| Robert    | Robinson   |
++-----------+------------+
+                </code>
+                </pre>
+                <p>This allows you to make query results more readable and descriptive by assigning custom names to
+                    columns or expressions.</p>
+            </div>
+            <div class="in">
+
+                <h3>ORDER BY Clause</h3>
+                <ul>
+                    <li>The ORDER BY clause allows you to sort the result set of a query based on one or more columns.
+                    </li>
+                    <li><strong>Basic Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT column1, column2 FROM table_name ORDER BY column1 [ASC|DESC];
+                    </code>
+                    </pre>
+                    <li>By default, it sorts in ascending order (smallest to largest).</li>
+                </ul>
+
+                <h3>Ascending and Descending Order:</h3>
+                <ul>
+                    <li>By default, the ORDER BY clause sorts in ascending order (smallest to largest).</li>
+                    <li>You can explicitly specify descending order using the DESC keyword.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT product_name, price FROM products ORDER BY price DESC;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>Sorting by Multiple Columns:</h3>
+                <ul>
+                    <li>You can sort by multiple columns by listing them sequentially in the ORDER BY clause.</li>
+                    <li>Rows are first sorted based on the first column, and for rows with equal values, subsequent
+                        columns are used for further sorting.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT first_name, last_name FROM employees ORDER BY last_name, first_name;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>Sorting by Expressions:</h3>
+                <ul>
+                    <li>It's possible to sort by calculated expressions, not just column values.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT product_name, price, price * 1.1 AS discounted_price FROM products ORDER BY discounted_price;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>Sorting NULL Values:</h3>
+                <ul>
+                    <li>By default, NULL values are considered the smallest in ascending order and the largest in
+                        descending order.</li>
+                    <li>You can control the sorting behavior of NULL values using the NULLS FIRST or NULLS LAST options.
+                    </li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT column_name FROM table_name ORDER BY column_name NULLS LAST;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>Sorting by Position:</h3>
+                <ul>
+                    <li>Instead of specifying column names, you can sort by column positions in the ORDER BY clause.
+                    </li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT product_name, price FROM products ORDER BY 2 DESC, 1 ASC;
+                    </code>
+                    </pre>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>GROUP BY Clause</h3>
+                <ul>
+                    <li>The GROUP BY clause in SQL is used to group rows from a table based on one or more columns.</li>
+                    <li><strong>Syntax:</strong></li>
+                    <pre>
+                        <code>
+SELECT column1, aggregate_function(column2) FROM table_name GROUP BY column1;
+                    </code>
+                    </pre>
+                    <li>Here, <b>column1</b> is the column by which you want to group the rows.</li>
+                </ul>
+
+                <h3>Aggregation Functions:</h3>
+                <ul>
+                    <li>Aggregation functions (e.g., COUNT, SUM, AVG, MAX, MIN) are often used with GROUP BY to
+                        calculate values for each group.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT department, AVG(salary) FROM employees GROUP BY department;
+                        </code>
+                    </pre>
+                </ul>
+
+                <h3>Grouping by Multiple Columns:</h3>
+                <ul>
+                    <li>You can group by multiple columns by listing them in the GROUP BY clause.</li>
+                    <li>This creates a hierarchical grouping based on the specified columns.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT department, gender, AVG(salary) FROM employees GROUP BY department, gender;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>HAVING Clause:</h3>
+                <ul>
+                    <li>The HAVING clause is used with GROUP BY to filter groups based on aggregate function results.
+                    </li>
+                    <li>It's similar to the WHERE clause but operates on grouped data.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT department, AVG(salary) FROM employees GROUP BY department HAVING AVG(salary) > 50000;
+                    </code>
+                    </pre>
+                </ul>
+
+                <h3>Combining GROUP BY and ORDER BY:</h3>
+                <ul>
+                    <li>You can use both GROUP BY and ORDER BY in the same query to control the order of grouped
+                        results.</li>
+                    <li><strong>Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT department, COUNT(*) FROM employees GROUP BY department ORDER BY COUNT(*) DESC;
+                    </code>
+                    </pre>
+                </ul>
+            </div>
+            <div class="in">
+
+                <h3>Aggregate Functions Overview</h3>
+                <ul>
+                    <li>Aggregate functions are used to perform calculations on groups of rows or entire result sets.
+                    </li>
+                    <li>They provide insights into data by summarizing and processing information.</li>
+                </ul>
+
+                <h3>Common Aggregate Functions</h3>
+                <ul>
+                    <li><strong>COUNT():</strong> Counts the number of rows in a group or result set.</li>
+                    <li><strong>SUM():</strong> Calculates the sum of numeric values in a group or result set.</li>
+                    <li><strong>AVG():</strong> Computes the average of numeric values in a group or result set.</li>
+                    <li><strong>MAX():</strong> Finds the maximum value in a group or result set.</li>
+                    <li><strong>MIN():</strong> Retrieves the minimum value in a group or result set.</li>
+                </ul>
+
+                <h3>Sample Table: Sales</h3>
+                <pre>
+                    <code>
++---------+----------+----------+-------------+
+| OrderID | Product  | Quantity | TotalAmount |
++---------+----------+----------+-------------+
+| 1       | Widget A | 10       | 2500.00     |
+| 2       | Widget B | 5        | 1000.00     |
+| 3       | Widget A | 8        | 2000.00     |
+| 4       | Widget C | 12       | 3600.00     |
+| 5       | Widget B | 7        | 1400.00     |
++---------+----------+----------+-------------+
+                    </code>
+                </pre>
+
+                <h3>Examples:</h3>
+                <ul>
+                    <li><strong>COUNT() Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT COUNT(*) FROM Sales;
+                        </code>
+                    </pre>
+                    <p>Result: 5 (Count of rows in the "Sales" table)</p>
+
+                    <li><strong>SUM() Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT SUM(TotalAmount) FROM Sales;
+                        </code>
+                    </pre>
+                    <p>Result: 10500.00 (Sum of the "TotalAmount" column)</p>
+
+                    <li><strong>AVG() Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT AVG(Quantity) FROM Sales;
+                        </code>
+                    </pre>
+                    <p>Result: 8.4 (Average quantity of products sold)</p>
+
+                    <li><strong>MAX() Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT MAX(TotalAmount) FROM Sales;
+                        </code>
+                    </pre>
+                    <p>Result: 3600.00 (Maximum total amount)</p>
+
+                    <li><strong>MIN() Example:</strong></li>
+                    <pre>
+                        <code>
+SELECT MIN(Quantity) FROM Sales;
+                        </code>
+                    </pre>
+                    <p>Result: 5 (Minimum quantity of products sold)</p>
+                </ul>
+
+            </div>
+        </div>
+        <div id="t10" class="wh">
+            <h2>Updating and Deleting Data</h2>
+            <div class="in">
+                <h3>Updating Existing Records (UPDATE)</h3>
+                <p>The UPDATE statement is used to modify existing records in a table.</p>
+                <p>Syntax &darr;</p>
+                <pre>
+                    <code>
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+Example:
+UPDATE Customers
+SET City = 'New York'
+WHERE CustomerID = 1;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Deleting Records (DELETE)</h3>
+                <p>The DELETE statement is used to remove records from a table.</p>
+                <p>Syntax &darr;</p>
+                <pre>
+                    <code>
+DELETE FROM table_name WHERE condition;
+Example:
+DELETE FROM Orders WHERE OrderID = 100;
+                    </code>
+                </pre>
+
+                <h3>Delete All Rows</h3>
+                <p>To delete all rows from a table, use the DELETE statement without a WHERE clause.</p>
+                <p>Syntax &darr;</p>
+                <pre>
+                    <code>
+DELETE FROM table_name;
+Example:
+DELETE FROM Customers;
+                    </code>
+                </pre>
+
+                <h3>Delete Single/Multiple Rows</h3>
+                <p>To delete single or multiple rows based on specific conditions, use the DELETE statement with a WHERE
+                    clause.</p>
+                <p>Syntax &darr;</p>
+                <pre>
+                    <code>
+DELETE FROM table_name WHERE condition;
+Example:
+DELETE FROM Employees WHERE Salary < 30000;
+                    </code>
+                </pre>
             </div>
         </div>
     </div>
