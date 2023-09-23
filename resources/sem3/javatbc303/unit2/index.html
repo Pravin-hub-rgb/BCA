@@ -456,19 +456,19 @@ class ExceptionHandlingExample {
                 <h4>Example:</h4>
                 <pre>
                     <code>
-            try {
-                // Outer try block
-                // Perform some operations
-                try {
-                    // Inner try block
-                    // Perform more specific operations
-                } catch (SpecificException e) {
-                    // Handle the specific exception from the inner block
-                }
-                // Continue with operations
-            } catch (GeneralException e) {
-                // Handle a more general exception from the outer block
-            }
+try {
+    // Outer try block
+    // Perform some operations
+    try {
+        // Inner try block
+        // Perform more specific operations
+    } catch (SpecificException e) {
+        // Handle the specific exception from the inner block
+    }
+    // Continue with operations
+} catch (GeneralException e) {
+    // Handle a more general exception from the outer block
+}
                     </code>
                 </pre>
 
@@ -535,6 +535,304 @@ public class NestedTryCatchExample {
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="wh">
+            <h2>Understanding the "throw" Keyword in Java</h2>
+            <ul>
+                <li>In Java, the "throw" keyword is a mechanism used to create and raise custom exceptions during
+                    program execution.</li>
+                <li>User-Defined Exceptions (UDEs) are exceptions that programmers create to handle specific conditions
+                    or situations within their code.</li>
+                <li>While Java provides built-in exceptions for common error scenarios (e.g.,
+                    ArrayIndexOutOfBoundsException or InputMismatchException), the "throw" keyword allows developers to
+                    define and signal custom exceptions tailored to their application's requirements.</li>
+                <li>For example, consider a situation where age verification is needed in a program. If a condition like
+                    "age < 18" is met, the programmer can use the "throw" keyword to raise a custom exception,
+                        specifying how this condition should be handled within the code.</li>
+                <li>Similarly, if a program encounters an unexpected odd result that doesn't cause a runtime error but
+                    needs special attention, the "throw" keyword can be employed to create a custom exception and define
+                    how this unique situation should be managed.</li>
+                <li>Essentially, the "throw" statement is used to communicate exceptional conditions or custom-defined
+                    situations within the program, enabling developers to implement specific handling procedures for
+                    these scenarios.</li>
+            </ul>
+            <div class="in">
+                <h3>Handling the 'Divide by Zero' Exception Using the "throw" Keyword without Try-Catch Blocks</h3>
+                <pre>
+                    <code>
+import java.util.*;
+
+class Test
+{
+    public static void main(String[] args)
+    {
+        int ans = 0;
+        int v1 = 10;
+        int v2 = 0;
+        if(v2 == 0)
+        {
+            throw new ArithmeticException("Division by zero is not allowed.");
+            // Alternatively, you can create an ArithmeticException object and then throw it:
+            // ArithmeticException obj = new ArithmeticException("Division by zero is not allowed.");
+            // throw obj;
+        }
+        else 
+        {
+            ans = v1 / v2;
+        }
+        System.out.println(ans);
+    }
+}
+                </code>
+            </pre>
+                <p>In the example above, we used the concept of anonymous objects.</p>
+                <pre>
+                    <code>
+class A
+{
+    public void sum(int v1)
+    {
+        System.out.println(v1 + 10);
+    }
+}
+public static void main(String[] args) 
+{
+    (new A()).sum(5);
+    // This is similar to the following:
+    // A obj = new A();
+    // obj.sum(5);
+}
+                </code>
+            </pre>
+            </div>
+            <div class="in">
+                <h3>Throwing Our Own Custom Exception</h3>
+                <p>Example: If a number is even, throw a custom exception.</p>
+                <pre>
+    <code>
+class Test
+{
+    public static void main(String[] args)
+    {
+        int n1 = 10;
+        if(n1 % 2 == 0)
+        {
+            throw new MyException("Number is even.");
+        }
+        else
+        {
+            System.out.println("Nothing is wrong");
+        }
+    }
+}
+    </code>
+</pre>
+                <h3>Steps to Create and Throw Our Custom Exception</h3>
+                <ol>
+                    <li>Inherit from the "Exception" class to create our custom exception class.</li>
+                    <li>Create a constructor for the custom exception class.</li>
+                </ol>
+                <pre>
+                    <code>
+// Step 1: Inheriting from Exception class to create our custom exception class
+class MyException extends Exception
+{
+    // Step 2: Creating a constructor that takes a custom error message
+    MyException(String str)
+    {
+        super(str);
+    }
+}
+
+class Test
+{
+    public static void main(String[] args)
+    {
+        int n1 = 10;
+        if(n1 % 2 == 0)
+        {
+            MyException customException = new MyException("Number is even.");
+            System.out.println(customException.getMessage());
+        }
+        else
+        {
+            System.out.println("Nothing is wrong");
+        }
+    }
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>the getMessage method is a standard method provided by the Throwable class in Java, which is the
+                        superclass of all exceptions, including custom exceptions. This method allows you to retrieve
+                        the error message associated with an exception.
+                        <br>we could also simply do the following &darr;
+                    </li>
+                </ul>
+                <pre>
+        <code>
+System.out.println(customException);
+        </code>
+    </pre>
+
+            </div>
+            <div class="in">
+                <h3>Understanding the 'super' Keyword in Java</h3>
+                <p><strong>Definition of the 'super' Keyword:</strong></p>
+
+                <p>In Java, the 'super' keyword is a special word used to refer to the <em>superclass</em> or the
+                    <em>parent
+                        class</em> of the current class. It helps you access members (like variables or methods) from
+                    the
+                    superclass, especially when there are similarly named members in both the superclass and the
+                    subclass.
+                    The 'super' keyword is primarily used to handle conflicts and interact with superclass members in an
+                    inheritance hierarchy.
+                </p>
+
+                <p><strong>Simple Example for Beginners:</strong></p>
+
+                <p>Let's illustrate the 'super' keyword with a straightforward example involving two classes: a
+                    superclass
+                    called <code>Animal</code> and a subclass called <code>Dog</code>. We'll show how 'super' can be
+                    used to
+                    access the constructor and method of the superclass.</p>
+
+                <pre>
+                <code>
+<!-- Superclass -->
+class Animal {
+    String name;
+
+    Animal(String name) {
+        this.name = name;
+    }
+
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+<!-- Subclass -->
+class Dog extends Animal {
+    String breed;
+
+    Dog(String name, String breed) {
+        <!-- Using 'super' to call the superclass constructor -->
+        super(name);
+        this.breed = breed;
+    }
+
+    void sound() {
+        <!-- Using 'super' to call the superclass method -->
+        super.sound();
+        System.out.println("Dog barks");
+    }
+}
+
+<!-- Main Program -->
+public class Main {
+    public static void main(String[] args) {
+        Dog myDog = new Dog("Buddy", "Labrador");
+        System.out.println("Name: " + myDog.name);
+        System.out.println("Breed: " + myDog.breed);
+        myDog.sound();
+    }
+}
+            </code>
+        </pre>
+
+                <p>In this example, 'super' is used within the <code>Dog</code> constructor to call the constructor of
+                    the
+                    <code>Animal</code> superclass, passing the <code>name</code> parameter. It's also used within the
+                    <code>sound</code> method of the <code>Dog</code> class to call the <code>sound</code> method of the
+                    <code>Animal</code> class before adding specific behavior for the <code>Dog</code> class.
+                </p>
+
+                <p>When you run this program, it demonstrates how 'super' allows you to use and extend functionality
+                    from
+                    the superclass when creating subclasses, promoting code reusability and organization in
+                    object-oriented
+                    programming.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>throws keyword</h2>
+            <ul>
+                <li><strong>Proper Definition:</strong> The 'throws' keyword is used to indicate exceptions that may
+                    occur in a program. For example, we know that the 'public static void main()' function might throw
+                    'ArrayIndexOutOfBoundsException' and 'NullPointerException'.</li>
+                <li><strong>'throws' Usage:</strong> 'throws' is used along with a method when we are defining it.</li>
+                <li><strong>Benefits:</strong> It makes our exception handling easier.</li>
+                <li><strong>Usage with Any Method:</strong> It can be used with any method, including 'main'.</li>
+                <li><strong>Usage in the Thread Class:</strong> It is also used in the 'Thread' class (we will learn
+                    more about this later).
+                    <br><code>Thread.sleep(1000);</code> might throw 'IOException'. If we use this, we will get an error
+                    because Java gives warnings before many classes and suggests good exception handling practices. So,
+                    only those who are familiar with exception handling should use these classes.
+                </li>
+            </ul>
+            <p><strong>Syntax:</strong></p>
+            <pre>
+    <code>
+public void myMethod() throws ExceptionType1, ExceptionType2 
+{
+    // Method body
+}
+    </code>
+</pre>
+            <ul>
+                <li><strong>Expertise and Diagnosis:</strong> If we do not specify all the exception classes, it
+                    indicates that we may not be experts, and our error diagnosis skills may be weak.</li>
+                <li><strong>Efficiency in Searching:</strong> Mentioning all the exception classes helps save time in
+                    Java error handling.</li>
+            </ul>
+            <pre>
+                <code>
+public void myMethod() throws Exception // Parent class; mentioning this may consume more memory.
+{
+    // Method implementation
+}
+                </code>
+            </pre>
+            <ul>
+                <li><strong>Throwing an Exception Outside the Method:</strong> The 'throws' clause is used to indicate
+                    that a method may throw an exception.</li>
+                <li><strong>'throws' Clause Usage:</strong> The 'throws' clause is used when declaring a method.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>finally Block</h2>
+            <ul>
+                <li><strong>Optional:</strong> The <code>finally</code> block is an optional part of Java's exception
+                    handling mechanism.</li>
+                <li><strong>Mandatory Execution:</strong> It contains code that needs to be executed regardless of
+                    whether an exception was thrown or not. This makes it suitable for tasks like resource cleanup,
+                    closing files, or releasing system resources.</li>
+                <li><strong>Always a Part of Try and Catch Blocks:</strong> The <code>finally</code> block should always
+                    be associated with a <code>try</code> and <code>catch</code> block. It ensures that the code within
+                    the <code>finally</code> block is executed after the <code>try</code> block, and potentially the
+                    <code>catch</code> block, no matter what happens in the preceding code.
+                </li>
+                <li><strong>Cannot Be Used Without Try and Catch:</strong> You cannot use the <code>finally</code> block
+                    on its own; it must be used in conjunction with a <code>try</code> and <code>catch</code> block.
+                </li>
+            </ul>
+            <p><strong>Syntax:</strong></p>
+            <pre>
+                <code>
+try {
+    // Code that may throw exceptions
+}
+catch (Exception e) {
+    // Exception handling code
+}
+finally {
+    // Code that always executes, whether or not an exception was thrown
+}
+                </code>
+            </pre>
+
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
