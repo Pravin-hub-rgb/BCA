@@ -800,6 +800,123 @@ public void myMethod() throws Exception // Parent class; mentioning this may con
                     that a method may throw an exception.</li>
                 <li><strong>'throws' Clause Usage:</strong> The 'throws' clause is used when declaring a method.</li>
             </ul>
+            <div class="in">
+                <h3>throw vs. throws</h3>
+                <ol>
+                    <li>
+                        <ul>
+                            <li><strong>throw:</strong> The 'throw' keyword is used to explicitly throw an exception
+                                object
+                                within a method. This means that when a specific exceptional condition is encountered
+                                within the
+                                method, you can use 'throw' to create and throw an exception object, indicating that
+                                something
+                                has gone wrong.
+                                <br><strong>Example:</strong>
+                                <pre>
+                                    <code>
+void m1() {
+    throw new ArithmeticException();
+}
+                                    </code>
+                                </pre>
+                                In this example, we throw an 'ArithmeticException' explicitly, signaling that an
+                                arithmetic
+                                error has occurred.
+                            </li>
+                            <li><strong>throws:</strong> The 'throws' keyword, on the other hand, is used in a method's
+                                signature to declare that the method may potentially throw one or more specific
+                                exceptions. This
+                                declaration allows the method to pass the responsibility of handling these exceptions to
+                                its
+                                caller. When a method is declared with 'throws,' it means that the method is warning the
+                                caller
+                                that it might encounter certain exceptions during execution, and the caller needs to
+                                handle
+                                them.
+                                <br><strong>Example:</strong>
+                                <pre>
+                                    <code>
+void m1() throws ArithmeticException {
+    // Method code
+}
+                                    </code>
+                                </pre>
+                                Here, 'throws' indicates that this method may throw an 'ArithmeticException,' and it's
+                                the
+                                caller's responsibility to handle it if necessary.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li><strong>throw:</strong> The 'throw' keyword is always used inside the method body to
+                                explicitly
+                                throw an exception. It is typically used when an exceptional condition is detected
+                                within the
+                                method, and you want to trigger an exception immediately.
+                            </li>
+                            <li><strong>throws:</strong> In contrast, the 'throws' keyword is always used in the
+                                method's
+                                signature to declare exceptions that the method might propagate to the caller. It
+                                doesn't create
+                                or throw exception instances within the method but rather specifies the potential
+                                exceptions the
+                                method can raise.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li><strong>throw:</strong> With 'throw,' you can throw only one exception at a time. Each
+                                'throw'
+                                statement is responsible for throwing a specific exception.
+                                <br><strong>Example:</strong>
+                                <pre>
+                                    <code>
+throw new ArithmeticException();
+                                    </code>
+                                </pre>
+                                This line throws an 'ArithmeticException.'
+                            </li>
+                            <li><strong>throws:</strong> With 'throws,' you can declare and handle multiple exceptions
+                                simultaneously. This is especially useful when a method can potentially encounter
+                                different
+                                types of exceptions.
+                                <br><strong>Example:</strong>
+                                <pre>
+                                    <code>
+void m1() throws ArithmeticException, ArrayIndexOutOfBoundsException {
+    // Method code
+}
+                                    </code>
+                                </pre>
+                                Here, the 'throws' keyword declares that 'm1' may throw either an 'ArithmeticException'
+                                or an
+                                'ArrayIndexOutOfBoundsException.'
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li><strong>throw:</strong> The 'throw' keyword is followed by an instance of an exception
+                                class,
+                                indicating that you are creating and throwing a specific exception object. This allows
+                                you to
+                                customize the exception with details about the error.
+                            </li>
+                            <li><strong>throws:</strong> In contrast, the 'throws' keyword is followed by the names of
+                                exception
+                                classes. It doesn't create or throw exception instances directly but rather informs the
+                                caller
+                                of the potential exceptions that may be thrown by the method. The caller is then
+                                responsible for
+                                handling these exceptions as needed.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
         </div>
         <div class="wh">
             <h2>finally Block</h2>
@@ -833,6 +950,292 @@ finally {
                 </code>
             </pre>
 
+        </div>
+        <div class="wh">
+            <h2>Checked and Unchecked Exceptions</h2>
+            <p>In Java, exceptions are classified into two main categories: checked exceptions and unchecked exceptions.
+                These distinctions help developers handle and manage exceptions effectively in their code.</p>
+
+            <h3>Checked Exceptions</h3>
+            <ul>
+                <li><strong>Definition:</strong> Checked exceptions, also known as compile-time exceptions, are
+                    exceptions that the Java compiler mandates to be caught or declared in the code. This means that if
+                    a method can potentially throw a checked exception, it must be either caught using a try-catch block
+                    or declared using the 'throws' keyword in the method signature.</li>
+                <li><strong>Examples:</strong> Common checked exceptions include 'IOException', 'FileNotFoundException',
+                    and 'SQLException'. These exceptions typically occur in situations where external resources or
+                    external systems are involved, and the developer needs to handle potential issues gracefully.</li>
+                <li><strong>Handling:</strong> Developers are required to handle checked exceptions explicitly in their
+                    code, either by using try-catch blocks to catch and process the exception or by declaring the
+                    exception using 'throws' in the method signature.</li>
+            </ul>
+
+            <h3>Unchecked Exceptions</h3>
+            <ul>
+                <li><strong>Definition:</strong> Unchecked exceptions, also known as runtime exceptions, are exceptions
+                    that do not require explicit handling using try-catch blocks or 'throws' declarations. These
+                    exceptions can be caught and handled, but it's not mandatory by the compiler.</li>
+                <li><strong>Examples:</strong> Common unchecked exceptions include 'NullPointerException',
+                    'ArrayIndexOutOfBoundsException', and 'ArithmeticException'. These exceptions usually result from
+                    programming errors or invalid operations and are not related to external factors.</li>
+                <li><strong>Handling:</strong> While unchecked exceptions can be caught and handled if desired,
+                    developers are not required to do so. It is often recommended to address the root cause of these
+                    exceptions during development and not rely solely on catching them in code.</li>
+            </ul>
+
+            <p>Understanding the difference between checked and unchecked exceptions is crucial for effective exception
+                handling in Java. Checked exceptions help ensure that developers handle potential issues that may arise
+                when interacting with external resources, while unchecked exceptions primarily address programming
+                errors and invalid operations.</p>
+        </div>
+        <div class="wh">
+            <h2>Multithreading in Java</h2>
+            <p>Before delving into multithreading, it's essential to understand the concept of multitasking in
+                computing.</p>
+
+            <ul>
+                <li><strong>Multitasking:</strong> Multitasking is the concurrent execution of multiple tasks or
+                    processes by a computer's operating system. It allows a computer to perform multiple activities
+                    simultaneously.</li>
+                <li><strong>Types of Multitasking:</strong> Multitasking can be categorized into two main types:</li>
+                <ol>
+                    <li><strong>Process-Based Multitasking:</strong> In process-based multitasking, multiple independent
+                        processes run concurrently. Each process has its own memory space and resources, and they can
+                        communicate with each other through inter-process communication (IPC) mechanisms.
+                        <br><strong>Example:</strong> Imagine a computer running a web browser, a word processor, and a
+                        music player as separate processes. These processes can run concurrently, allowing the user to
+                        browse the web, edit documents, and listen to music simultaneously.
+                    </li>
+                    <li><strong>Thread-Based Multitasking:</strong> In thread-based multitasking, multiple threads of a
+                        single process run concurrently. Threads within the same process share the same memory space and
+                        resources, which makes communication between them easier but also requires careful
+                        synchronization to avoid conflicts.
+                        <br><strong>Example:</strong> Consider a word processing application that uses threads to
+                        simultaneously check for spelling errors, format text, and save the document in the background
+                        while the user continues typing. These threads work together to enhance the user experience
+                        without creating separate processes.
+                    </li>
+                </ol>
+            </ul>
+
+            <p>Now, let's explore the concept of a "thread" in more detail:</p>
+
+            <h3>Threads in Computing</h3>
+            <p>A thread is the smallest unit of execution within a program. It represents a sequence of instructions
+                that can be scheduled and executed independently by the computer's CPU. Threads within a process share
+                the same memory space and resources, allowing them to work together to accomplish tasks concurrently.
+            </p>
+
+            <p>Threads are commonly used to perform multiple operations simultaneously, enhance program responsiveness,
+                and efficiently utilize modern multi-core processors.</p>
+
+            <p>Java provides extensive support for thread-based multitasking through its multithreading capabilities.
+                Understanding threads and multithreading is crucial for building responsive and efficient Java
+                applications that can perform multiple tasks concurrently.</p>
+
+
+            <p>Java provides extensive support for thread-based multitasking through its multithreading capabilities.
+                Understanding multithreading is crucial for building responsive and efficient Java applications that can
+                perform multiple tasks concurrently.</p>
+
+            <div class="in">
+                <h3>What is Multithreading?</h3>
+                <p>Multithreading is a concurrent execution process where multiple threads run independently at the same
+                    time without dependency on each other. In Java, it allows you to execute multiple threads within a
+                    single process, enhancing program performance and responsiveness by making efficient use of the CPU.
+                </p>
+                <ul>
+                    <li>Multithreading Saves Time and Enhances Performance:</li>
+                    <p>Multithreading is used to save time and increase the performance of Java applications. By
+                        dividing tasks into multiple threads, a program can execute multiple operations simultaneously,
+                        taking advantage of modern multi-core processors.</p>
+
+                    <li>Applications in Animation and Game Development:</li>
+                    <p>Java is commonly used in animation and game development, where multithreading allows multiple
+                        animated characters or game elements to appear on the screen simultaneously. Each character or
+                        element can be controlled by a separate thread, enabling concurrent and independent actions.</p>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>What is a Thread?</h3>
+                <p>A thread is a fundamental unit of execution in a program. It represents a sequence of instructions
+                    that can run independently and concurrently with other threads. In Java, threads are instances of
+                    the pre-defined `Thread` class, available in the `java.lang` package.</p>
+                <ul>
+                    <li>Basic Unit of CPU and Independent Execution:</li>
+                    <p>Threads are often referred to as the basic units of a CPU because they can be scheduled and
+                        executed independently. Each thread shares the same memory space and resources within a process,
+                        enabling them to perform tasks simultaneously.</p>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>How to Create Threads in Java?</h3>
+                <p>In Java, you can create threads in two main ways:</p>
+                <ol>
+                    <li>By Extending the Thread Class:</li>
+                    <p>You can create a new thread by extending the `Thread` class and overriding its `run()` method.
+                        This approach allows you to define the thread's behavior within the `run()` method.</p>
+                    <li>By Implementing the Runnable Interface:</li>
+                    <p>Another way to create threads is by implementing the `Runnable` interface. This approach
+                        separates the thread's behavior from the thread object itself. You need to provide the
+                        implementation of the `run()` method in a separate class that implements `Runnable` and then
+                        create a `Thread` object that executes the `Runnable` instance.</p>
+                </ol>
+            </div>
+
+            <div class="in">
+                <h3>Multitasking vs. Multithreading</h3>
+                <p>It's important to distinguish between multitasking and multithreading:</p>
+                <ul>
+                    <li>Multitasking:</li>
+                    <p>Multitasking refers to the concurrent execution of multiple processes or applications by the
+                        operating system. These processes can be entirely independent and may or may not share
+                        resources.</p>
+                    <li>Multithreading:</li>
+                    <p>Multithreading, on the other hand, involves concurrent execution within a single process.
+                        Multiple threads within the same process share the same memory space and resources, allowing
+                        them to work together to achieve parallelism and perform tasks simultaneously.</p>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Defining Threads by Extending the Thread Class</h3>
+                <ul>
+                    <li><strong>Introduction:</strong></li>
+                    <p>In Java, you can create threads by extending the `Thread` class. This approach allows you to
+                        define your thread's behavior by overriding the `run()` method. Threads created using this
+                        method are also known as "child threads," and they run concurrently with the main thread of the
+                        program.</p>
+                </ul>
+
+                <pre>
+                    <code>
+class A extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Hello");
+        }
+    }
+}
+
+class B {
+    public static void main(String[] args) {
+        A t = new A();
+        t.start(); // Starting the child thread
+
+        // Code below is part of the main thread, while the code above is part of the child thread
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Hello");
+        }
+    }
+}
+                    </code>
+                </pre>
+
+                <ul>
+                    <li><strong>The `run` Method in Thread Class:</strong></li>
+                    <p>The `run` method is already defined in the `Thread` class, but you can override it to provide
+                        your custom implementation. When you start a thread, the JVM automatically calls its `run`
+                        method.</p>
+
+                    <li><strong>Concurrency:</strong></li>
+                    <p>When you run the program, the order in which the threads run is not guaranteed. Each time you
+                        execute the program, the output sequence may differ. However, what is certain is that both the
+                        main thread and the child thread run concurrently.</p>
+                </ul>
+
+                <p>If you want to introduce a delay between the output, you can use the `Thread.sleep(1000)` method.
+                    However, you need to handle exceptions since `Thread.sleep()` can throw an `InterruptedException`.
+                    Here's an example:</p>
+
+                <pre>
+                    <code>
+class A extends Thread {
+    @Override
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Hello");
+                Thread.sleep(1000); // Pause for 1 second
+            }
+        } catch (InterruptedException e) {
+            // Handle the interrupted exception
+        }
+    }
+}
+
+class B {
+    public static void main(String[] args) throws InterruptedException {
+        A t = new A();
+        t.start(); // Starting the child thread
+
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Hello");
+        }
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Defining Threads Using the Runnable Interface</h3>
+                <ul>
+                    <li><strong>Introduction:</strong></li>
+                    <p>In Java, you can create threads by implementing the `Runnable` interface. This approach provides
+                        more flexibility compared to extending the `Thread` class because it allows you to separate the
+                        thread's behavior from the thread object. Threads created using the `Runnable` interface are
+                        also known as "runnable threads."</p>
+                </ul>
+
+                <p><strong>Syntax to Define a Thread:</strong></p>
+                <pre>
+    <code>
+class A implements Runnable {
+    public void run() {
+        // Define the thread's job or task here
+    }
+}
+
+class B {
+    public static void main(String[] args) {
+        A obj = new A();
+        // obj.start(); // This won't work because we need a Thread object to start a thread
+        Thread t = new Thread(obj); // Create a Thread object with obj as a reference
+        t.start(); // Now the thread will execute the run() method defined in class A
+    }
+}
+    </code>
+</pre>
+
+                <p><strong>Example:</strong></p>
+                <pre>
+    <code>
+class A implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("My child Thread");
+        }
+    }
+}
+
+class B {
+    public static void main(String[] args) {
+        A r = new A(); // Create an instance of class A, which implements Runnable
+
+        Thread t = new Thread(r); // Create a Thread object with the Runnable instance r
+        t.start(); // Start the child thread
+
+        // The main thread is responsible for running the following code
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("My main Thread");
+        }
+    }
+}
+    </code>
+</pre>
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
