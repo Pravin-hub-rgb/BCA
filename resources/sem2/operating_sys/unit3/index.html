@@ -7,22 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Process Synchronization</title>
     <link rel="stylesheet" href="../../../../public/style.css">
-    <style>
-        body {
-            background: #0f0c29;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            color: white;
-        }
-    </style>
     <link rel="stylesheet"
-    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
-<body>
+<body class="bg-c">
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
@@ -112,7 +101,9 @@
         <div id="t2" class="wh">
             <h2>What is critical section problem?</h2>
             <ul>
-                <li>The critical section problem refers to a situation in concurrent programming where multiple processes access a shared resource, and there is a possibility of data inconsistency when they access it simultaneously.</li>
+                <li>The critical section problem refers to a situation in concurrent programming where multiple
+                    processes access a shared resource, and there is a possibility of data inconsistency when they
+                    access it simultaneously.</li>
                 <li>A critical section is a segment of code which can be accessed by a single process at a specific
                     point of time. The section consists of shared data resources that required to be accessed by other
                     processes.
@@ -131,9 +122,13 @@
                 <li>The critical section need to must enforce all three rules:
                     <ul>
                         <li><b>Mutual Exclusion:</b> Mutual Exclusion is a special type of binary semaphore which is
-                            used for controlling access to the shared resource.  Only one process or thread can be executing the critical section at any given time.</li>
-                        <li><b>Progress:</b> If no process is currently executing the critical section and there are processes that wish to access it, one of those processes should be granted access in a reasonable amount of time.</li>
-                        <li><b>Bounded Waiting:</b> It ensures that no process should be indefinitely delayed or starved from entering the critical section.</li>
+                            used for controlling access to the shared resource. Only one process or thread can be
+                            executing the critical section at any given time.</li>
+                        <li><b>Progress:</b> If no process is currently executing the critical section and there are
+                            processes that wish to access it, one of those processes should be granted access in a
+                            reasonable amount of time.</li>
+                        <li><b>Bounded Waiting:</b> It ensures that no process should be indefinitely delayed or starved
+                            from entering the critical section.</li>
                     </ul>
                 </li>
             </ul>
@@ -145,15 +140,17 @@
                     <li>It’s for 2 processes which alternate execution between the critical section and remainder
                         section. Say, P1 is the first process and P2 is the second process.</li>
                     <li>The 2 processes should share 2 data items with each other.
-                            <p>
-                                int turn 
-                                <br>
-                                Boolean flag [2]
-                            </p>
+                        <p>
+                            int turn
+                            <br>
+                            Boolean flag [2]
+                        </p>
                     </li>
                     <li>Turn – It indicates the process who should enter into its critical section.</li>
                     <li>Flag Array – It tells whether a process is ready to enter its critical section. Let flag[0]
-                        indicate process P1. If flag[0] = true , then Process P1 is ready to execute in its critical section. flag[1] indicates process P2. If flag[1] = true, then Process P2 is ready to execute in its critical section.</li>
+                        indicate process P1. If flag[0] = true , then Process P1 is ready to execute in its critical
+                        section. flag[1] indicates process P2. If flag[1] = true, then Process P2 is ready to execute in
+                        its critical section.</li>
                 </ul>
                 <p><b>Structure of process P<sub>i</sub></b></p>
                 <pre>
@@ -663,10 +660,12 @@ V(Sempahore s)
         <div id="t5" class="wh">
             <h2>Deadlock Recovery</h2>
             <ul>
-                <li>When a <a class="ba" href="https://www.geeksforgeeks.org/deadlock-detection-algorithm-in-operating-system/"
+                <li>When a <a class="ba"
+                        href="https://www.geeksforgeeks.org/deadlock-detection-algorithm-in-operating-system/"
                         target="_blank">Deadlock Detection Algorithm</a> determines that a deadlock has occured in the
                     system, the system must recover from that deadlock. There are two approaches of breading a <a
-                       class="ba" href="https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/">Deadlock:</a>
+                        class="ba"
+                        href="https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/">Deadlock:</a>
                 </li>
             </ul>
             <div class="in">
@@ -751,14 +750,18 @@ V(Sempahore s)
     <div class="content-box">
         <h2>Previous Year Questions</h2>
         <div class="wh">
-            <h3>Q- What do you mean by semaphore? Explain its types with C struct. Explain implementation of wait() and signal.</h3>
+            <h3>Q- What do you mean by semaphore? Explain its types with C struct. Explain implementation of wait() and
+                signal.</h3>
         </div>
         <div class="wh">
-            <h3>Q- What is deadlock? Explain the necessary conditions for its occurence. How to remove deadlock from process?</h3>
+            <h3>Q- What is deadlock? Explain the necessary conditions for its occurence. How to remove deadlock from
+                process?</h3>
         </div>
         <div class="wh">
-            <h3>Q- Consider a system that contains five processes P1, P2, P3, P4, P5 and the three resource types A, B and C. Following are the resources types: A has 10, B has 5 and the resource type C has 7 instances:</h3>
-                <pre>
+            <h3>Q- Consider a system that contains five processes P1, P2, P3, P4, P5 and the three resource types A, B
+                and C. Following are the resources types: A has 10, B has 5 and the resource type C has 7 instances:
+            </h3>
+            <pre>
                     <code>
 Process    Allocation      Max      Available 
            A   B   C     A  B  C     A  B  C
@@ -769,15 +772,17 @@ Process    Allocation      Max      Available
    P5      0   0   2     4  3  3    
                   </code>
                 </pre>
-                Answer the following questions using the Banker's algorithm:
-                <ol type="i">
-                    <li>What is the reference of the need matrix?</li>
-                    <li>Determine if the system is safe or not.</li>
-                    <li>What will happen if the resource request (1, 0, 0) for process P1, can the system accept this request immediately?</li>
-                </ol>
+            Answer the following questions using the Banker's algorithm:
+            <ol type="i">
+                <li>What is the reference of the need matrix?</li>
+                <li>Determine if the system is safe or not.</li>
+                <li>What will happen if the resource request (1, 0, 0) for process P1, can the system accept this
+                    request immediately?</li>
+            </ol>
         </div>
         <div class="wh">
-            <h3>Q- What do you understand by critical section? Discuss whether Peterson's solution satifies the requirement of a  mechanism to control access to critical section?</h3>
+            <h3>Q- What do you understand by critical section? Discuss whether Peterson's solution satifies the
+                requirement of a mechanism to control access to critical section?</h3>
         </div>
         <div class="wh">
             <h3>Q- Write short notes on the following:</h3>
@@ -788,7 +793,8 @@ Process    Allocation      Max      Available
             </ol>
         </div>
         <div class="wh">
-            <h3>Find all the safe sequence possible in the below resource allocation scenario: {total available resources are (R1, R2, R3) = (3, 3, 4)}</h3>
+            <h3>Find all the safe sequence possible in the below resource allocation scenario: {total available
+                resources are (R1, R2, R3) = (3, 3, 4)}</h3>
             <pre>
                 <code>
 Process    Allocated        Max Need     Available 
@@ -804,7 +810,8 @@ Process    Allocated        Max Need     Available
     <div class="content-box">
         <p>Tutorials &darr;</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=uj-zhs7cUSI">Perterson's solution tutorial (Sudhankar Atchala) &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=uj-zhs7cUSI">Perterson's solution tutorial (Sudhankar Atchala)
+                    &neArr;</a></li>
         </ul>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
