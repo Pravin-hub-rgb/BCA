@@ -28,6 +28,7 @@
         <a href="#t13" class="link">TCP/IP Protocol Suite</a>
         <a href="#t14" class="link">Multiplexing</a>
         <a href="#t15" class="link">Switching</a>
+        <a href="#tpyq" class="link">PYQ</a>
         <div class="botbut">
             <a href="" class="link">Next Topic &rarr;</a>
             <a href="" class="link">&larr; Previous Topic</a>
@@ -116,16 +117,146 @@
             </ul>
         </div>
         <div id="t4" class="wh">
-            <h2>Network Topology and Types:</h2>
-            <ul>
-                <li><b>Topology</b>: The physical or logical arrangement of nodes and links in a network.</li>
+            <h2>Physical Network Topology and Types:</h2>
+            <p>The term physical topology refers to the way in which a network is laid out physically: I/O or more
+                devices connect to a link; two or more links form a topology.</p>
+            <p>There are four basic topologies possible: mesh, star, bus, and ring. And combining these we get hybrid.
+            </p>
+            <div class="in">
+                <h3>Mesh Topology</h3>
+                <p>In a mesh topology, every device has a dedicated point-to-point link to every other device. The term
+                    "dedicated" means that the link carries traffic only between the two devices it connects.</p>
+                <p>Node 1 must be connected to n - 1 nodes, node 2 must be connected to n – 1 nodes, and finally, node n
+                    must be connected to n - 1 nodes. We need n (n - 1) physical links.</p>
+                <p>However, if each physical link allows communication in both directions, the number of links needed is
+                    n(n-1)/2.</p>
+                <img src="../../images/meshtopo.svg" alt="" class="wb">
+                <h4>Advantages</h4>
                 <ul>
-                    <li><b>Bus Topology</b>: All devices are connected to a single cable (main bus).</li>
-                    <li><b>Star Topology</b>: All devices are connected to a central hub or switch.</li>
-                    <li><b>Ring Topology</b>: Devices are connected in a closed loop.</li>
-                    <li><b>Mesh Topology</b>: Devices are connected to each other in a point-to-point manner.</li>
+                    <li>The use of dedicated links guarantees that each connection can carry its own data load, thus
+                        eliminating the traffic problems that can occur when links must be shared by multiple devices.
+                    </li>
+                    <li>A mesh topology is robust. If one link becomes unusable, it does not incapacitate the entire
+                        system.</li>
+                    <li>There is the advantage of privacy or security. When every message travels along a dedicated
+                        line, only the intended recipient sees it.</li>
+                    <li>Point-to-point links make fault identification and fault isolation easy.</li>
                 </ul>
-            </ul>
+
+                <h4>Disadvantages</h4>
+                <ul>
+                    <li>Amount of cabling and the number of I/O ports required.</li>
+                    <li>The sheer bulk of the wiring can be greater than the available space (in walls, ceilings, or
+                        floors) can accommodate.</li>
+                    <li>The hardware required to connect each link (I/O ports and cable) can be prohibitively expensive.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Star Topology</h3>
+                <p>In a star topology, each device has a dedicated point-to-point link only to a central controller,
+                    usually called a hub.</p>
+                <p>The devices are not directly linked to one another. Unlike a mesh topology, a star topology does not
+                    allow direct traffic between devices. The controller acts as an exchange: If one device wants to
+                    send data to another, it sends the data to the controller, which then relays the data to the other
+                    connected device.</p>
+                <img src="../../images/startopo.svg" alt="" class="wb">
+                <h4>Advantages</h4>
+                <ul>
+                    <li>A star topology is less expensive than a mesh topology.</li>
+                    <li>In a star, each device needs only one link and one I/O port to connect it to any number of
+                        others. This factor also makes it easy to install and reconfigure.</li>
+                    <li>Far less cabling needs to be housed, and additions, moves, and deletions involve only one
+                        connection: between that device and the hub.</li>
+                    <li>Other advantages include robustness. If one link fails, only that link is affected. All other
+                        links remain active.</li>
+                </ul>
+
+                <h4>Disadvantages</h4>
+                <ul>
+                    <li>The dependency of the whole topology on one single point, the hub. If the hub goes down, the
+                        whole system is inoperative.</li>
+                    <li>Although a star requires far less cable than a mesh, each node must be linked to a central hub.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Bus Topology</h3>
+                <p>In a bus topology, the preceding examples all describe point-to-point connections. However, a bus
+                    topology, on the other hand, is multipoint, where one long cable acts as a backbone to link all the
+                    devices in a network.</p>
+                <p>As a signal travels along the backbone, some of its energy is transformed into heat. Consequently, it
+                    becomes weaker and weaker as it travels farther and farther along the cable.</p>
+                <img src="../../images/bustopo.svg" alt="" class="wb">
+                <h4>Advantages</h4>
+                <ul>
+                    <li>Bus topology offers ease of installation, making it a convenient choice for network setups.</li>
+                    <li>A bus topology uses less cabling compared to mesh or star topologies, resulting in cost savings
+                        and simplified network infrastructure.</li>
+                </ul>
+
+                <h4>Disadvantages</h4>
+                <ul>
+                    <li>Reconnecting devices and fault isolation in a bus topology can be challenging when issues arise,
+                        potentially leading to network downtime.</li>
+                    <li>A single fault or break in the bus cable can disrupt all data transmission, even between devices
+                        located on the same side of the problem, affecting overall network reliability.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Ring Topology</h3>
+                <p>In a ring topology, each device has a dedicated point-to-point connection with only the two devices
+                    on either side of it. A signal is passed along the ring in one direction, from device to device,
+                    until it reaches its destination.</p>
+                <img src="../../images/ringtopo1.svg" alt="" class="wb">
+                <h4>Advantages</h4>
+                <ul>
+                    <li>A ring topology is relatively easy to install and reconfigure, making it a flexible choice for
+                        network setups. Fault isolation is simplified, making it easier to identify and resolve network
+                        issues.</li>
+                </ul>
+
+                <h4>Disadvantages</h4>
+                <ul>
+                    <li>Unidirectional traffic can be a disadvantage in a ring topology, as data can only travel in one
+                        direction around the ring. This limitation can impact network efficiency.</li>
+                    <li>In a simple ring topology, a break in the ring, such as a disabled station or a cable fault, can
+                        disable the entire network. This lack of redundancy can make the network vulnerable to
+                        disruptions.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Hybrid Topology</h3>
+                <p>A hybrid topology combines different network topologies within a single network infrastructure. For
+                    example, a hybrid network can consist of a primary star topology with each branch connecting several
+                    stations in a bus topology.</p>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li>Hybrid topologies offer greater flexibility in designing and customizing a network to meet
+                        specific requirements. They can leverage the strengths of different topologies to optimize
+                        network performance.</li>
+                    <li>By combining topologies, fault tolerance and redundancy can be enhanced. If one part of the
+                        network fails, it may not affect the entire system, improving overall network reliability.</li>
+                    <li>Hybrid topologies can provide scalability, allowing the network to grow and adapt to changing
+                        needs without requiring a complete overhaul.</li>
+                </ul>
+
+                <h4>Disadvantages</h4>
+                <ul>
+                    <li>Designing and managing a hybrid network can be complex and may require more extensive planning
+                        and maintenance compared to single-topology networks.</li>
+                    <li>The cost of implementing and maintaining a hybrid network can be higher due to the need for
+                        different hardware and configurations to support multiple topologies.</li>
+                    <li>Network troubleshooting and fault isolation may be more challenging in a hybrid topology, as
+                        issues can arise from different interconnected topologies.</li>
+                </ul>
+            </div>
+
             <div class="in">
                 <h3>Connecting Networks: Broadcast and Point-to-Point</h3>
                 <p>After understanding topologies, we delve into different types of network connections.</p>
@@ -1083,7 +1214,7 @@
             </div>
         </div>
     </div>
-    <div class="content-box">
+    <div id="tpyq" class="content-box">
         <h2>Previous Year Questions</h2>
         <div class="wh">
             <h3>Define computer network based on topologies with a neat diagram. (10 Marks)</h3>
@@ -1159,6 +1290,198 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="wh">
+            <h3>Define multiplexing. Discuss frequency division multiplexing with a suitable example.</h3>
+            <ul>
+                <li>Multiplexing is a technique used in telecommunications and data communication to combine multiple
+                    signals or data streams into a single transmission medium, such as a cable or a wireless channel.
+                    The purpose of multiplexing is to efficiently utilize the available bandwidth and enable multiple
+                    signals to share the same communication channel without interfering with each other.</li>
+                <li>Frequency Division Multiplexing (FDM) is one of the common multiplexing techniques. In FDM, the
+                    available bandwidth of the communication channel is divided into multiple non-overlapping frequency
+                    bands or channels. Each signal or data stream is assigned a specific frequency band within the
+                    channel, and the signals are transmitted simultaneously.</li>
+                <li>Here's how Frequency Division Multiplexing works with a suitable example:
+                    <br>
+                    Example: Radio Broadcasting
+
+                    <br>
+                    Radio broadcasting is a classic example of Frequency Division Multiplexing. In this scenario:
+                    <ul>
+                        <li>Frequency Bands: The entire radio spectrum, from low-frequency (LF) to very high frequency
+                            (VHF) and beyond, is divided into various frequency bands or channels. Each channel
+                            represents a specific range of frequencies. For instance, FM radio stations typically
+                            operate in the VHF band.</li>
+                        <li>Multiple Radio Stations: Multiple radio stations want to broadcast their content
+                            simultaneously without interfering with each other. Each radio station is assigned a unique
+                            frequency channel within the available bandwidth.</li>
+                        <li>Separate Signals: Each radio station generates its audio signal, encodes it, and modulates
+                            it onto its allocated carrier frequency. These carrier frequencies are carefully selected to
+                            ensure they are non-overlapping and do not interfere with each other.</li>
+                        <li>Simultaneous Transmission: All the radio stations transmit their modulated carrier signals
+                            simultaneously. As long as they use different carrier frequencies (channels), their signals
+                            can coexist in the same communication medium without interference.</li>
+                        <li>Receiver Tuning: When a listener tunes their radio receiver to a specific station, the
+                            receiver's tuner is adjusted to select the desired carrier frequency (channel). This allows
+                            the receiver to isolate and demodulate the signal of the chosen station while rejecting
+                            signals from other stations operating on different channels.</li>
+                        <li>Audio Output: The listener hears the audio content of the selected radio station through
+                            their receiver's speakers.</li>
+                    </ul>
+                </li>
+                <li>Frequency Division Multiplexing allows multiple radio stations to share the same broadcasting medium
+                    (the radio spectrum) efficiently. Each station gets its dedicated frequency channel, ensuring that
+                    their signals do not interfere with each other, and listeners can tune in to the station of their
+                    choice.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h3>Discuss LAN, MAN and WAN with suitable examples.</h3>
+        </div>
+        <div class="wh">
+            <h3>Assume six devices are arranged in a mesh topology. How many cables are needed? How many ports are
+                needed for each device?</h3>
+            <ul>
+                <li>Number of Cables Needed = (n * (n - 1)) / 2</li>
+                <li>Number of Ports Required for Each Device = n - 1</li>
+                <li>Where "n" is the number of devices in mesh topology.</li>
+            </ul>
+            <p>In this case:</p>
+            <ul>
+                <li>Number of Cables Needed = (6 * (6 - 1)) / 2 = (6 * 5) / 2 = 30 / 2 = 15 cables.</li>
+                <li>Number of Ports Required for Each Device = 6 - 1 = 5 ports.</li>
+                <li>So, in a mesh topology with six devices, you would need 15 cables, and each device would require 5
+                    ports.</li>
+            </ul>
+            <h3>In a mesh topology with ten devices, how many cables are needed, and how many ports are required for
+                each device?</h3>
+            <ul>
+                <li>Number of Cables Needed = (10 * (10 - 1)) / 2 = (10 * 9) / 2 = 90 / 2 = 45 cables.</li>
+                <li>Number of Ports Required for Each Device = 10 - 1 = 9 ports.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h3>Define LAN. And discuss the different topologies to desing LAN with suitable example and neat diagram.
+            </h3>
+            <h3>LAN (Local Area Network)</h3>
+            <ul>
+                <li>A LAN, or Local Area Network, is a network of interconnected computers, devices, or systems within a
+                    limited geographic area, such as a home, office building, or campus. LANs are designed to facilitate
+                    the sharing of resources, data, and communication among devices in close proximity. LANs are
+                    characterized by high data transfer rates, low latency, and private ownership or control.</li>
+            </ul>
+
+            <h3>Different Topologies for Designing LANs:</h3>
+            <ul>
+                <li>
+                    <h3>Star Topology:</h3>
+                    <ul>
+                        <li>In a star topology, all devices are connected to a central hub or switch. All data traffic
+                            passes through the central hub, which manages the connections.</li>
+                        <li><strong>Example:</strong> A small office network with computers connected to a central
+                            network switch.</li>
+                        <img src="../../images/startopo.svg" alt="" class="wb">
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>Bus Topology:</h3>
+                    <ul>
+                        <li>In a bus topology, all devices are connected to a single central cable (the bus). Data is
+                            transmitted along the cable, and each device listens for its address.</li>
+                        <li><strong>Example:</strong> Legacy Ethernet networks, which used a single coaxial cable for
+                            data transmission.</li>
+                        <img src="../../images/bustopo.svg" alt="" class="wb">
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>Ring Topology:</h3>
+                    <ul>
+                        <li>In a ring topology, devices are connected in a closed loop. Data circulates around the ring
+                            until it reaches its destination.</li>
+                        <li><strong>Example:</strong> Some early token ring networks used a ring topology.</li>
+                        <img src="../../images/ringtopo1.svg" alt="" class="wb">
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>Mesh Topology:</h3>
+                    <ul>
+                        <li>In a mesh topology, every device is connected to every other device. This redundancy
+                            provides fault tolerance and multiple paths for data.</li>
+                        <li><strong>Example:</strong> Data centers and critical infrastructure networks.</li>
+                        <img src="../../images/meshtopo.svg" alt="" class="wb">
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>Hybrid Topology:</h3>
+                    <ul>
+                        <li>A hybrid topology combines two or more of the above topologies to create a more flexible and
+                            resilient network.</li>
+                        <li><strong>Example:</strong> A large campus network with multiple buildings might use a
+                            combination of star and ring topologies.</li>
+                        <!-- Create the Hybrid Topology Diagram here -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h3>Explain digital to analog conversion techniques with example.</h3>
+        </div>
+        <div class="wh">
+            <h3>Discuss the data communication components and characteristics with proper example.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain different modes of communicaiton with diagram.</h3>
+        </div>
+        <div class="wh">
+            <h3>Write a detailed note on various electronics and communication standardization organizaiton.</h3>
+        </div>
+        <div class="wh">
+            <h3>Define computer network. Explain different advantages and application of computer networks.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain different categories/types of networks?</h3>
+        </div>
+        <p>End Sem &darr;</p>
+        <div class="wh">
+            <h3>What is network topology? Explain the different network topology. Also explain advantages and
+                disadvantages of each topology.</h3>
+        </div>
+        <div class="wh">
+            <h3>What is meant by Data Communication? List the essential elements of network architecture and explain in
+                brief.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain briefly OSI reference model. Compare it with TCP/IP reference model.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain the following:
+                <ul>
+                    <li>Packet switching and circuit switching</li>
+                    <li>Simplex, Half duplex and Full duplex</li>
+                </ul>
+            </h3>
+        </div>
+        <div class="wh">
+            <h3>What are the various network criteria? Explain various goals and applications of computer networks?</h3>
+        </div>
+        <div class="wh">
+            <h3>How many categories of networks are present in computer networks? Also define the name of the topologies
+                used in these networks.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain different modes of communication in computer networks with proper diagram.</h3>
+        </div>
+        <div class="wh">
+            <h3>What is the significance of Switching? Explain the various switching techniques with a neat and clean
+                diagram.</h3>
+        </div>
+        <div class="wh">
+            <h3>Explain the function of each layer of the OSI model. Compare OSI model with TCP/IP protocol suite.</h3>
         </div>
     </div>
     <div class="content-box">

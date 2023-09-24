@@ -16,6 +16,7 @@
         <a href="#t1" class="link">Physical Layer</a>
         <a href="#t2" class="link">Digital and Analog</a>
         <a href="#t3" class="link">Transmission Media</a>
+        <a href="#t3_1" class="link">Transmission Impairments & Network Performance</a>
         <a href="#t4" class="link">Digital Transmission</a>
         <a href="#t5" class="link">Modulation</a>
         <a href="#t6" class="link">Digital to Digital conversion</a>
@@ -1014,6 +1015,89 @@
                 </div>
             </div>
         </div>
+        <div id="t3_1" class="wh">
+            <h2>Transmission Impairments</h2>
+            <p>Introduction: Transmission impairments are disturbances or impurities that can adversely affect the
+                performance of your network. These impurities can degrade the quality of data transmission, leading to
+                various issues.</p>
+            <p>There are three major problems that a transmission line can suffer from:</p>
+            <ol>
+                <li><strong>Attenuation:</strong> Attenuation refers to the loss of energy as a signal propagates
+                    through a medium. This loss is expressed in decibels per kilometer (dB/km). When a signal travels
+                    through a medium, it loses some of its energy due to the resistance of the medium. To compensate for
+                    this loss, amplifiers are used to boost the signal.</li>
+                <li><strong>Distortion:</strong> Distortion involves the alteration of the form or shape of signals. It
+                    typically occurs in composite signals made up of different frequencies.</li>
+                <li><strong>Noise:</strong> Noise is unwanted energy that originates from sources other than the
+                    transmitter. There are several types of noise, including thermal noise (caused by the random motion
+                    of electrons in a wire), induced noise (resulting from sources like motors and appliances), cross
+                    talk (caused by inductive coupling between close wires), and impulsive noise (sudden, high-energy
+                    spikes from sources such as power lines or lightning).</li>
+            </ol>
+
+            <h2>Network Performance</h2>
+            <p>Network performance is crucial for ensuring effective data transmission and communication. It encompasses
+                various factors, including:</p>
+            <div class="in">
+                <h3>Bandwidth</h3>
+                <p>Bandwidth refers to the data-carrying capacity of a communication channel or the range of frequencies
+                    available for transmitting data. It can be expressed in hertz (Hz) or bits per second (bps).</p>
+                <ul>
+                    <li><strong>Bandwidth in Hertz:</strong> This measures the range of frequencies contained in a
+                        composite signal or the range of frequencies a channel can carry. For example, the bandwidth of
+                        a subscriber telephone line is typically 4 kHz.</li>
+                    <li><strong>Bandwidth in Bits Per Second:</strong> This measures the number of bits a channel, a
+                        link, or a network can transmit per second. For instance, a Fast Ethernet network may have a
+                        maximum bandwidth of 100 Mbps.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Throughput</h3>
+                <ul>
+                    <li>Throughput is a way to measure how fast data can flow through a network.</li>
+                    <li>It's important to note that throughput and bandwidth are not the same. Imagine bandwidth as the
+                        maximum capacity of a road, say it's like having a road that can handle up to 100 cars at once.
+                        However, the actual number of cars that can use the road at a given time, which is the
+                        throughput, may be less than 100. So, if the throughput is 70 cars, that means only 70 cars can
+                        go through at once, even though the road can technically handle more.</li>
+                    <li>In simple terms, bandwidth is like the potential of a network connection, while throughput tells
+                        you how much data is actually being used in practice.</li>
+                    <li>For example, if a network connection has a bandwidth of 1 Mbps (which means it can handle data
+                        at a speed of up to 1 million bits per second), but the devices at the ends of the connection
+                        can only manage 200 kbps (200,000 bits per second), then the throughput of that connection is
+                        limited to 200 kbps.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Latency (Delay)</h3>
+                <ul>
+                    <li>Latency, or delay, is all about how long it takes for a complete message to travel from the
+                        sender to the receiver.</li>
+                    <li>Latency can be broken down into four parts:</li>
+                    <ol>
+                        <li><strong>Propagation time:</strong> This is the time it takes for a single bit to travel from
+                            the sender to the receiver. It depends on the distance between them and the speed at which
+                            the signal travels.
+                            <br>Propagation Time = Distance / Propagation Speed
+                        </li>
+                        <li><strong>Transmission time:</strong> This depends on how big the message is and how much data
+                            the network can carry.
+                            <br>Transmission Time = Message Size / Bandwidth
+                        </li>
+                        <li><strong>Queuing time:</strong> Sometimes, messages have to wait in a line before they can be
+                            sent. The time a message spends waiting is called queuing time. This waiting time can vary
+                            depending on how busy the network is.</li>
+                        <li><strong>Processing Delay:</strong> When a message arrives at a network device (like a router
+                            or switch), it takes some time to be processed. This processing time depends on the device's
+                            speed and how congested the network is. If there's a lot of traffic, it might take longer to
+                            process messages.</li>
+                    </ol>
+                    <li>Another thing to watch out for is "jitter." Jitter happens when different pieces of data
+                        experience varying delays. It's a problem if your application needs data to arrive at a
+                        predictable time.</li>
+                </ul>
+            </div>
+        </div>
         <div id="t4" class="wh">
             <h2>Digital Transmission</h2>
             <ul>
@@ -1702,6 +1786,77 @@
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <h3>Consider a noiseless channel with a bandwidth of 3000 Hz transmitting a signal with two singal levels.
+                What can be the maximum bit rate?</h3>
+            <ul>
+                <li>To calculate the maximum bit rate for a noiseless channel with a given bandwidth and two signal
+                    levels, you can use the Nyquist formula, which relates the maximum bit rate (R) to the bandwidth (B)
+                    and the number of signal levels (L):</li>
+                <li><strong>Maximum Bit Rate (R) = 2 * B * log2(L)</strong></li>
+                <li>Where: Bandwidth (B) = 3000 Hz <br>
+                    Number of signal levels (L) = 2 (binary signaling)</li>
+                <li>Let's calculate:
+                    <ul>
+                        <li>R = 2 * 3000 Hz * log2(2) <br>
+                            R = 2 * 3000 Hz * 1 (log2(2) is 1 because there are 2 signal levels) <br>
+                            R = 6000 bps (bits per second)</li>
+                    </ul>
+                </li>
+                <li>So, the maximum bit rate for this noiseless channel with a 3000 Hz bandwidth and two signal levels
+                    is 6000 bps or 6 kbps.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h3>What is modulation? Discuss analog to digital modulation technique in detail.</h3>
+        </div>
+        <div class="wh">
+            <h3>What is transmission media? Explain any three unguided media with example.</h3>
+        </div>
+        <div class="wh">
+            <h3>We need to send 265 kbps over a noiseless channel with a bandwith of 20 kHz. How many signal levels do
+                we needs?</h3>
+            <ul>
+                <li>Bit rate = 265 kbps = 265000 bps
+                    <br>Bandwidth = 20kHz = 20000 Hz
+                    <br>Signal level, L = ?
+                </li>
+                <li>Bit rate = 2 * Bandwidth * Log<sub>2(L)</sub>
+                    <br>265000 = 2 * 20000 * Log<sub>2</sub>(L)
+                    <br>Log<sub>2</sub>(L) = 6.625
+                    <br>L = 2<sup>6.625</sup>
+                    <br>L = 98.7 levels
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h3>Explain the various guided transmission media.</h3>
+        </div>
+        <div class="wh">
+            <h3>Discuss the PCM technique with neat and clean diagram.</h3>
+        </div>
+        <div class="wh">
+            <h3>Why do we need encoding? Draw the signal using Manchester and differential Manchester encoding scheme
+                for 10110110.</h3>
+        </div>
+        <p>End Sem &darr;</p>
+        <div class="wh">
+            <h3>(a) Discuss in detail various encoding and modulation techniques.
+                <br>(b) What are the different types of guided and unguided transmission media? Explain.
+            </h3>
+        </div>
+        <div class="wh">
+            <h3>Explain channel capacity for noisy as well as noiseless channel. We have a 6 KHz channel whose
+                signal-to-noise ratio is 30 dB. A binary signal is ent by this channel. What is the maximum achievable
+                data rate?</h3>
+        </div>
+        <div class="wh">
+            <h3>What do you mean by transmission impairment? Explain all the causes of impairments in detail.</h3>
+        </div>
+        <div class="wh">
+            <h3>Calculate the theoretical highest bit rate of a regular telephone line. A telephone line normally has a
+                bandwith of 3000 Hz assigned for data communications. The singal-to-noise ratio is usally 15.</h3>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference &darr;</p>
@@ -1719,6 +1874,10 @@
             </li>
             <li><a href="https://youtu.be/zkSU5QvqKQw?si=fNN2qnjZMPjlRuPG" target="_blank" class="ba">Digital to analog
                     conversion &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=r3Vqh4QL_1g" target="_blank" class="ba">Nyquist Singal Level
+                    question</a></li>
+            <li><a href="https://www.youtube.com/watch?v=_7639yeSm8o&t=4s" target="_blank" class="ba">Transmission
+                    impairments & network perofmance</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
