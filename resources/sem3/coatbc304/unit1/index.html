@@ -21,6 +21,7 @@
         <a href="#t6" class="link">Memory transfer in detail</a>
         <a href="#t7" class="link">Micro operation</a>
         <a href="#t8" class="link">Computer instruction</a>
+        <a href="#t81" class="link">Instruction formats</a>
         <a href="#t9" class="link">Instruction cycle</a>
         <a href="#t10" class="link">Memory reference instruction</a>
         <a href="#t11" class="link">Input/output and interrupts</a>
@@ -706,6 +707,138 @@
                         transferred.
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div class="wh" id="t81">
+            <h2>Instruction Formats</h2>
+            <p>A computer program is a collection of instructions. Each instruction is represented using an instruction
+                format, which helps the computer understand how to execute the instruction.</p>
+            <p>Instruction formats are primarily classified into three fields:</p>
+            <ol>
+                <li><strong>Address Field:</strong> This field specifies the address of the operand. Operand data can
+                    reside either in memory or registers, so the address field indicates the memory location or register
+                    where the operand can be found.</li>
+                <li><strong>Opcode Field:</strong> The opcode field specifies the operation to be performed. Different
+                    instructions have different opcodes that define their specific operations. These operations can
+                    include data transfer, data manipulation, program control, and more.</li>
+                <li><strong>Mode Field:</strong> The mode field specifies how an effective address is determined for the
+                    operand. In computer operations, we often need to work with data located at specific addresses, and
+                    the mode field helps determine how to calculate or locate that address.</li>
+            </ol>
+
+            <p>Our main focus here is on the Address Field, which plays a crucial role in specifying where data resides
+                or how to calculate an effective address.</p>
+
+            <h3>Address Field Organizations</h3>
+            <p>Based on the number of addresses required by an instruction, there are three primary types of
+                organizations:</p>
+            <ol>
+                <li><strong>Single Accumulator Organization:</strong> In this organization, the accumulator is implicit,
+                    meaning it doesn't need to be explicitly specified in the instruction. The choice of accumulator
+                    usage depends on the specific instruction being executed. For example:
+                    <ul>
+                        <li><code>CLA</code> (Clear Accumulator): This instruction doesn't contain any operands, and
+                            when executed, it automatically clears the content of the accumulator.</li>
+                        <li><code>CMA</code> (Complement Accumulator): Similarly, the accumulator is implicit here, and
+                            executing this instruction complements the content of the accumulator.</li>
+                        <li><code>ADD X</code>: While we perform addition on two operands, in this case, <code>X</code>
+                            represents a memory location, and the accumulator is the implicit second operand. So,
+                            executing this instruction adds the content of the accumulator to the memory word at address
+                            <code>X</code> (i.e., <code>AC + M[X]</code>).
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>General-Purpose Register Organization:</strong> In this organization, instructions can
+                    contain multiple addresses, which can refer to registers or memory operands. This allows for a wide
+                    range of combinations. For example:
+                    <ul>
+                        <li><code>ADD R1, R2, R3</code>: This instruction adds the contents of registers <code>R2</code>
+                            and <code>R3</code> and stores the result in <code>R1</code>.</li>
+                        <li><code>ADD R1, R2</code>: Here, <code>R1</code> serves as both the source and destination
+                            registers.</li>
+                        <li><code>MOV R1, R2</code>: This instruction copies the content of <code>R2</code> into
+                            <code>R1</code>.
+                        </li>
+                        <li><code>ADD R1, X</code>: In this case, <code>X</code> represents a memory location, and the
+                            operation adds the content of register <code>R1</code> to the memory word at address
+                            <code>X</code> (i.e., <code>R1 + M[X]</code>).
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Stack Organization:</strong> Stack organization involves instructions like <code>PUSH</code>
+                    and <code>POP</code>, which we will discuss further in the context of zero-address instructions.
+                </li>
+            </ol>
+            <p>Instructions can be classified into five types based on the number of operands they use:
+            <ol>
+                <li>Three-Address Instruction</li>
+                <li>Two-Address Instruction</li>
+                <li>One-Address Instruction</li>
+                <li>Zero-Address Instruction</li>
+                <li>RISC-Address Instruction</li>
+            </ol>
+            </p>
+            <div class="in">
+                <h3>Three-Address Instruction</h3>
+                <p>Consider the expression: X = (A + B) * (C + D)</p>
+                <p>We can represent this expression using three-address instructions, which means each instruction
+                    contains three addresses, which can be either registers or memory addresses.</p>
+                <code>
+ADD R1, A, B      ; R1 <- M[A] + M[B]
+ADD R2, C, D      ; R2 <- M[C] + M[D]
+MUL X, R1, R2     ; M[X] <- R1 * R2
+                </code>
+                <h3>Two-Address Instruction</h3>
+                <p>Now, let's represent the same computation using two-address instructions:</p>
+                <code>
+MOV R1, A        ; R1 <- M[A]
+ADD R1, B        ; R1 <- R1 + M[B]
+MOV R2, C        ; R2 <- M[C]
+ADD R2, D        ; R2 <- R2 + M[D]
+MUL R1, R2       ; R1 <- R1 * R2 
+MOV X, R1        ; M[X] <- R1
+                </code>
+
+                <h3>One-Address Instruction</h3>
+                <p>In the one-address instruction format, we use instructions like "LOAD" (load a memory word into the
+                    accumulator) and "STORE" (store the accumulator into memory):</p>
+                <code>
+LOAD A          ; AC <- M[A]
+ADD B           ; AC <- AC + M[B]
+STORE T         ; M[T] <- AC 
+LOAD C          ; AC <- M[C]
+ADD D           ; AC <- AC + M[D]
+STORE T         ; M[T] <- AC 
+MUL T           ; AC <- AC * M[T]
+STORE X         ; M[X] <- AC
+                </code>
+                <h3>Zero-Address Instruction</h3>
+                <p>In zero-address instructions, we utilize a stack for computation. This type of instruction set
+                    includes operations like "PUSH" and "POP" for stack manipulation, as well as arithmetic operations
+                    such as addition, subtraction, and multiplication. To represent the given expression using
+                    zero-address instructions, we need to convert the expression into postfix notation.</p>
+                <p>Here are some rules for postfix notation:</p>
+                <ul>
+                    <li>If it's an operand, push it onto the stack.</li>
+                    <li>If it's an operator, pop the last two operands from the stack, perform the operation, and push
+                        the result back onto the stack.</li>
+                    <li>Postfix notation eliminates the need for parentheses because the order of operations is
+                        unambiguous. Operators are always applied to the last two operands on the stack.</li>
+                    <li>When evaluating postfix expressions, operators are processed from left to right.</li>
+                    <li>The stack is used to hold both operands and intermediate results during the computation.</li>
+                </ul>
+                <code>
+Postfix Expression: AB+CD+*
+
+PUSH A          ; Push operand A onto the stack
+PUSH B          ; Push operand B onto the stack
+ADD             ; Pop the last two operands (A and B), add them, and push the result onto the stack
+PUSH C          ; Push operand C onto the stack
+PUSH D          ; Push operand D onto the stack
+ADD             ; Pop the last two operands (C and D), add them, and push the result onto the stack
+MUL             ; Pop the last two operands (result of C+D and result of A+B), multiply them, and push the result onto the stack
+POP X           ; Pop the final result from the stack and store it in memory location X
+            </code>
             </div>
         </div>
         <div id="t9" class="wh">
