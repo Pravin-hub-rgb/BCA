@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relational Data Model and Relational Algebra</title>
     <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -360,11 +362,18 @@
                     </li>
                 </ul>
             </div>
+            <p>RDBMS (Relational Database Management Systems) use key constraints to define rules and restrictions on
+                data stored in database tables. These constraints ensure data integrity and maintain consistency within
+                the database. Here are some key constraints commonly used in RDBMS:</p>
             <p>In types of Key constraints we have :
             <ol>
                 <li>Primary Key</li>
                 <li>Unique Key</li>
                 <li>Foriegn Key</li>
+                <li>Null</li>
+                <li>Not Null</li>
+                <li>Check</li>
+                <li>default</li>
             </ol>
             </p>
             <div class="in">
@@ -558,6 +567,86 @@ CREATE TABLE st_fee (
                     </ul>
                 </div>
             </div>
+            <div class="in">
+                <ul>
+                    <li><b>NULL Constraint:</b> This constraint allows a column to contain null values, signifying that
+                        no
+                        value is assigned to it. For example, a "birthdate" column may allow null values for people with
+                        unknown birthdates.</li>
+
+                    <li><b>NOT NULL Constraint:</b> The NOT NULL constraint specifies that a column must contain a
+                        value,
+                        and null values are not allowed. For instance, a "username" column in a user table should have a
+                        NOT
+                        NULL constraint to ensure that each user has a username.</li>
+
+                    <li><b>CHECK Constraint:</b> The CHECK constraint defines a condition that data in a column must
+                        meet.
+                        For example, you can use a CHECK constraint to ensure that ages in a "customer" table are
+                        greater
+                        than or equal to 18, preventing the insertion of minors' data.</li>
+
+                    <li><b>DEFAULT Constraint:</b> The DEFAULT constraint specifies a default value for a column when no
+                        value is explicitly provided during insertion. For instance, a "status" column in an order table
+                        may
+                        have a DEFAULT constraint set to "pending" so that new orders have the default status unless
+                        specified otherwise.</li>
+                </ul>
+
+                <p><b>Examples:</b></p>
+
+                <p><b>1. NULL Constraint:</b></p>
+                <pre>
+                <code>
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Birthdate DATE,
+    Email VARCHAR(100) NULL -- Email can be null
+);
+        </code>
+            </pre>
+
+                <p><b>2. NOT NULL Constraint:</b></p>
+                <pre>
+                <code>
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL, -- Username cannot be null
+    Password VARCHAR(100),
+    Email VARCHAR(100)
+);
+            </code>
+            </pre>
+
+                <p><b>3. CHECK Constraint:</b></p>
+                <pre>
+                <code>
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10, 2) CHECK (Price >= 0), -- Price must be non-negative
+    StockQuantity INT CHECK (StockQuantity >= 0), -- Stock quantity must be non-negative
+);
+                </code>
+            </pre>
+
+                <p><b>4. DEFAULT Constraint:</b></p>
+                <pre>
+                <code>
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE DEFAULT CURRENT_DATE, -- Default to the current date
+    CustomerID INT,
+    Status VARCHAR(20) DEFAULT 'Pending' -- Default to 'Pending' status
+);
+            </code>
+            </pre>
+                <p>These key constraints ensure data consistency, reliability, and accuracy within the relational
+                    database,
+                    making it easier to manage and maintain data integrity.</p>
+            </div>
         </div>
     </div>
     <div id="tpyq" class="content-box">
@@ -609,6 +698,7 @@ CREATE TABLE st_fee (
                     class="ba">Unit playlist &neArr;</a></li>
         </ul>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
