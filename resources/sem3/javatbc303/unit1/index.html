@@ -658,7 +658,69 @@ String s2 = input.nextLine();
                         </pre>
                 </div>
             </div>
+            <div class="in">
+                <h3>Input using Command Line Arguments</h3>
+                <ul>
+                    <li>Command line arguments are values that are passed to a Java program when it is execute from the command line or terminal.</li>
+                    <li>These arguments can be used to provide input data to the program at runtime.</li>
+                    <li>In Java, command line arguments are passed as an array of strings to the 'main' method of the class that serves as the entry point of the program.</li>
+                </ul>
+                <p><strong>Syntax &darr;</strong></p>
+                <pre>
+                    <code>
+public static void main(String[] args)
+{
+    // Access and use command line arguments here
+}
+                    </code>
+                </pre>
+                <ul>
+                    <li>'args': This is an array of strings that holds the command line arguments.</li>
+                </ul>
+                <p><strong>Accessing Command Line Arguments &darr;</strong></p>
+                <ul>
+                    <li>Command line arguments are accessed using the args array.</li>
+                    <li>The first argument is at args[0], the second at args[1], and so on.</li>
+                    <li>You can use these arguments as input data for your program.</li>
+                </ul>
+                <p><strong>Here's a simple Java program that takes two command line arguments (numbers) and calculates their sum:</strong></p>
+                <pre>
+                    <code>
+public class CommandLineArgumentsExample {
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Please provide two numbers as command line arguments.");
+            return;
+        }
+        // Parse the command line arguments as integers
+        int num1 = Integer.parseInt(args[0]);
+        int num2 = Integer.parseInt(args[1]);
 
+        // Calculate and display the sum
+        int sum = num1 + num2;
+        System.out.println("Sum of " + num1 + " and " + num2 + " is: " + sum);
+    }
+}
+                    </code>
+                </pre>
+                <p><strong>Running the program:</strong></p>
+                <ul>
+                    <li>To rum the program and provide command line arguments, follow these steps:
+                        <ol>
+                            <li>Open command prompt or terminal.</li>
+                            <li>Navigate to the directory containing your compiler Java class ('CommandLineArgumentsExample').</li>
+                            <li>Run the program with two numbers as arguments:
+                                <br><pre>
+                                    <code>
+java CommandLineArgumentsExample 10 20
+                                    </code>
+                                </pre>
+                                The program will calculate the sum of the provided numbers and display the result.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
             <div class="in">
                 <h3>Output in Java</h3>
                 <ul>
@@ -2688,8 +2750,61 @@ public class Test {
                     </div>
                 </div>
             </div>
+            <div class="in">
+                <h3>Copy constructor</h3>
+                <ul>
+                    <li>In Java, a copy constructor is not provided by the language itself, as it is in some other programming languages like C++.</li>
+                    <li>However, you can create your own copy constructor by defining a constructor that takes an instance of the same class as its parameter and initializes a new object based on the values of the passed object. </li>
+                    <li>Here's an example of how to create a copy constructor in Java:</li>
+                </ul>
+                <div class='code'>
+                   <div class='dotc'></div>
+                   <button class='ac'>Example code</button>
+                   <div class='panel'>
+                        <pre>
+                            <code>
+public class MyClass {
+    private int value;
+
+    // Constructor
+    public MyClass(int value) {
+        this.value = value;
+    }
+
+    // Copy Constructor
+    public MyClass(MyClass other) {
+        this.value = other.value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public static void main(String[] args) {
+        MyClass originalObject = new MyClass(42);
+        MyClass copyObject = new MyClass(originalObject);
+
+        System.out.println("Original Object Value: " + originalObject.getValue());
+        System.out.println("Copy Object Value: " + copyObject.getValue());
+    }
+}
+                            </code>
+                        </pre>
+                   </div>
+                </div>
+            </div>
+            <ul>
+                <li>In this example:
+                    <ol>
+                        <li>The MyClass class has a copy constructor that takes an instance of MyClass as a parameter.</li>
+                        <li>Inside the copy constructor, we initialize the new object's fields based on the values of the fields in the object passed as a parameter.</li>
+                        <li>In the main method, we create an originalObject with a value of 42 and then create a copyObject by passing originalObject to the copy constructor.</li>
+                        <li>When we print the values of both objects, you'll see that the copyObject has the same value as the originalObject, demonstrating the copy constructor's functionality.</li>
+                    </ol>
+                </li>
+            </ul>
         </div>
-        <div id="t12" class="in">
+        <div id="t12" class="wh">
             <h3>Access Modifiers in Java</h3>
             <ul>
                 <li>Access modifiers in Java are keywords that determine the visibility and accessibility of classes,
