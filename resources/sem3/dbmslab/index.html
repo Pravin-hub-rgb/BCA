@@ -9,21 +9,23 @@
     <link rel="stylesheet" href="../../../public/style.css">
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
-        <style>
-            .img-stash{
-                display: flex;
-                flex-wrap: wrap;
+    <style>
+        .img-stash {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .img-stash>img {
+            width: 500px;
+            margin: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .img-stash>img {
+                width: 100%;
             }
-            .img-stash > img{
-                width: 500px;
-                margin: 10px;
-            }
-            @media only screen and (max-width: 600px) {
-                .img-stash > img{
-                    width: 100%;
-                }
-            }
-        </style>
+        }
+    </style>
 </head>
 
 <body class="bg-c">
@@ -439,6 +441,91 @@ WHERE Comm > 300;
         </div>
         <div class="wh">
             <h3>Task - 3: Advance Queries</h3>
+            <div class="in">
+                <p>List the Dept_no & total salary table in each Dept.</p>
+                <pre>
+                    <code>
+mysql> SELECT Dept_no, SUM(Basic_Sal) FROM EMPLOYEE GROUP BY Dept_no;
++---------+----------------+
+| Dept_no | SUM(Basic_Sal) |
++---------+----------------+
+| D003    |        3000.00 |
+| D001    |        5000.00 |
+| D002    |        7500.00 |
+| D004    |        3000.00 |
++---------+----------------+
+                    </code>
+                </pre>
+                <ul>
+                    <li>GROUP BY is used in SQL when we need to group rows or tuples in a table based on the values in one or more columns. It allows us to perform aggregate operations on these groups, such as counting, summing, or averaging the values within each group.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <p>List the job and number of employee in each job and the result should be in descending order of the
+                    number of employee.</p>
+                <pre>
+                    <code>
+mysql> SELECT JOB, COUNT(*) FROM EMPLOYEE GROUP BY JOB ORDER BY 2 DESC;
++---------+----------+
+| JOB     | COUNT(*) |
++---------+----------+
+| Admin   |        1 |
+| Manager |        1 |
+| Analyst |        1 |
+| Clerk   |        1 |
+| Tester  |        1 |
++---------+----------+
+5 rows in set (0.00 sec)
+                    </code>
+                </pre>
+                <p>In this query, we used '2' in the ORDER BY clause because the count column is not physically
+                    available in the original EMPLOYEE table. Instead of referring to the column by name, we can use the
+                    position of the column in the result set. Here, '2' refers to the second column in the result set,
+                    which is the count of employees for each job.</p>
+
+                <ul>
+                    <li>It's important to note that when ordering by a column not present in the original table, using
+                        the position in the result set is a valid approach.</li>
+                </ul>
+
+                <p>If you want to order the result based on the job titles in descending order instead, you can use the
+                    following query:</p>
+
+                <pre>
+                    <code>
+mysql> SELECT JOB, COUNT(*) FROM EMPLOYEE GROUP BY JOB ORDER BY JOB DESC;
+                    </code>
+                </pre>
+
+                <ul>
+                    <li>In this query, we order the result by the JOB column itself in descending order. This will
+                        arrange the job titles in reverse alphabetical order.</li>
+                </ul>
+
+                <p>When working with columns not available in the original table, it's crucial to know the sequence or
+                    position of the column in the result set to perform the desired ordering or sorting.</p>
+
+            </div>
+            <div class="in">
+                <p>List the average salary of each job excluding manager.</p>
+                <pre>
+                    <code>
+mysql> SELECT Job, AVG(Basic_Sal) FROM EMPLOYEE WHERE Job != 'Manager' GROUP BY Job;
++---------+----------------+
+| Job     | AVG(Basic_Sal) |
++---------+----------------+
+| Admin   |    3000.000000 |
+| Analyst |    4000.000000 |
+| Clerk   |    3000.000000 |
+| Tester  |    3500.000000 |
++---------+----------------+
+4 rows in set (0.00 sec)
+                    </code>
+                </pre>
+                <ul>
+                    <li>Note: WHERE clause always comes before ORDER BY clause</li>
+                </ul>
+            </div>
             <div class="in">
                 <p>Change the city of client_no 'B001' from 'Gainesville' to 'Paul Street' from client_mast table.
                 </p>
