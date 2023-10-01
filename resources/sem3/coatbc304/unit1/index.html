@@ -737,14 +737,14 @@
                     meaning it doesn't need to be explicitly specified in the instruction. The choice of accumulator
                     usage depends on the specific instruction being executed. For example:
                     <ul>
-                        <li><code>CLA</code> (Clear Accumulator): This instruction doesn't contain any operands, and
+                        <li><strong>CLA</strong> (Clear Accumulator): This instruction doesn't contain any operands, and
                             when executed, it automatically clears the content of the accumulator.</li>
-                        <li><code>CMA</code> (Complement Accumulator): Similarly, the accumulator is implicit here, and
+                        <li><strong>CMA</strong> (Complement Accumulator): Similarly, the accumulator is implicit here, and
                             executing this instruction complements the content of the accumulator.</li>
-                        <li><code>ADD X</code>: While we perform addition on two operands, in this case, <code>X</code>
+                        <li><strong>ADD X</strong>: While we perform addition on two operands, in this case, <strong>X</strong>
                             represents a memory location, and the accumulator is the implicit second operand. So,
                             executing this instruction adds the content of the accumulator to the memory word at address
-                            <code>X</code> (i.e., <code>AC + M[X]</code>).
+                            <strong>X</strong> (i.e., <strong>AC + M[X]</strong>).
                         </li>
                     </ul>
                 </li>
@@ -752,21 +752,21 @@
                     contain multiple addresses, which can refer to registers or memory operands. This allows for a wide
                     range of combinations. For example:
                     <ul>
-                        <li><code>ADD R1, R2, R3</code>: This instruction adds the contents of registers <code>R2</code>
-                            and <code>R3</code> and stores the result in <code>R1</code>.</li>
-                        <li><code>ADD R1, R2</code>: Here, <code>R1</code> serves as both the source and destination
+                        <li><strong>ADD R1, R2, R3</strong>: This instruction adds the contents of registers <strong>R2</strong>
+                            and <strong>R3</strong> and stores the result in <strong>R1</strong>.</li>
+                        <li><strong>ADD R1, R2</strong>: Here, <strong>R1</strong> serves as both the source and destination
                             registers.</li>
-                        <li><code>MOV R1, R2</code>: This instruction copies the content of <code>R2</code> into
-                            <code>R1</code>.
+                        <li><strong>MOV R1, R2</strong>: This instruction copies the content of <strong>R2</strong> into
+                            <strong>R1</strong>.
                         </li>
-                        <li><code>ADD R1, X</code>: In this case, <code>X</code> represents a memory location, and the
-                            operation adds the content of register <code>R1</code> to the memory word at address
-                            <code>X</code> (i.e., <code>R1 + M[X]</code>).
+                        <li><strong>ADD R1, X</strong>: In this case, <strong>X</strong> represents a memory location, and the
+                            operation adds the content of register <strong>R1</strong> to the memory word at address
+                            <strong>X</strong> (i.e., <strong>R1 + M[X]</strong>).
                         </li>
                     </ul>
                 </li>
                 <li><strong>Stack Organization:</strong> Stack organization involves instructions like <code>PUSH</code>
-                    and <code>POP</code>, which we will discuss further in the context of zero-address instructions.
+                    and <strong>POP</strong>, which we will discuss further in the context of zero-address instructions.
                 </li>
             </ol>
             <p>Instructions can be classified into five types based on the number of operands they use:
@@ -783,26 +783,30 @@
                 <p>Consider the expression: X = (A + B) * (C + D)</p>
                 <p>We can represent this expression using three-address instructions, which means each instruction
                     contains three addresses, which can be either registers or memory addresses.</p>
-                <code>
+                <pre>
+                    <code>
 ADD R1, A, B      ; R1 <- M[A] + M[B]
 ADD R2, C, D      ; R2 <- M[C] + M[D]
 MUL X, R1, R2     ; M[X] <- R1 * R2
-                </code>
+                    </code>
+                </pre>
                 <h3>Two-Address Instruction</h3>
                 <p>Now, let's represent the same computation using two-address instructions:</p>
-                <code>
+                <pre>
+                    <code>
 MOV R1, A        ; R1 <- M[A]
 ADD R1, B        ; R1 <- R1 + M[B]
 MOV R2, C        ; R2 <- M[C]
 ADD R2, D        ; R2 <- R2 + M[D]
 MUL R1, R2       ; R1 <- R1 * R2 
 MOV X, R1        ; M[X] <- R1
-                </code>
-
+                    </code>
+                </pre>
                 <h3>One-Address Instruction</h3>
                 <p>In the one-address instruction format, we use instructions like "LOAD" (load a memory word into the
                     accumulator) and "STORE" (store the accumulator into memory):</p>
-                <code>
+                <pre>
+                    <code>
 LOAD A          ; AC <- M[A]
 ADD B           ; AC <- AC + M[B]
 STORE T         ; M[T] <- AC 
@@ -811,7 +815,8 @@ ADD D           ; AC <- AC + M[D]
 STORE T         ; M[T] <- AC 
 MUL T           ; AC <- AC * M[T]
 STORE X         ; M[X] <- AC
-                </code>
+                    </code>
+                </pre>
                 <h3>Zero-Address Instruction</h3>
                 <p>In zero-address instructions, we utilize a stack for computation. This type of instruction set
                     includes operations like "PUSH" and "POP" for stack manipulation, as well as arithmetic operations
@@ -827,7 +832,8 @@ STORE X         ; M[X] <- AC
                     <li>When evaluating postfix expressions, operators are processed from left to right.</li>
                     <li>The stack is used to hold both operands and intermediate results during the computation.</li>
                 </ul>
-                <code>
+                <pre>
+                    <code>
 Postfix Expression: AB+CD+*
 
 PUSH A          ; Push operand A onto the stack
@@ -838,7 +844,8 @@ PUSH D          ; Push operand D onto the stack
 ADD             ; Pop the last two operands (C and D), add them, and push the result onto the stack
 MUL             ; Pop the last two operands (result of C+D and result of A+B), multiply them, and push the result onto the stack
 POP X           ; Pop the final result from the stack and store it in memory location X
-            </code>
+                    </code>
+                </pre>
             </div>
         </div>
         <div id="t9" class="wh">
