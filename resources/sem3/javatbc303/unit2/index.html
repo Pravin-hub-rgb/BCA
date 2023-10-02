@@ -375,17 +375,20 @@ class Exp {
                         other parts of the code can still run.</li>
                 </ol>
 
-                <p>There is no strict limitation on the number of <strong>try</strong> and <strong>catch</strong> blocks you can
+                <p>There is no strict limitation on the number of <strong>try</strong> and <strong>catch</strong> blocks
+                    you can
                     use in your code. However, it's essential to consider code complexity as it may increase with a
                     higher number of exception-handling blocks.</p>
 
                 <h3>Continuation of Program:</h3>
                 <ul>
-                    <li>Continuation of program flow is achieved using multiple <strong>try</strong> and <strong>catch</strong>
+                    <li>Continuation of program flow is achieved using multiple <strong>try</strong> and
+                        <strong>catch</strong>
                         blocks.</li>
                     <li>This approach is particularly useful when you know the class names of the exceptions you expect
                         to handle.</li>
-                    <li>Deciding how many <strong>try</strong> and <strong>catch</strong> blocks to use can be based on grouping
+                    <li>Deciding how many <strong>try</strong> and <strong>catch</strong> blocks to use can be based on
+                        grouping
                         the code into logical sections. Here are three common groups:</li>
                     <ul>
                         <li>Input processing</li>
@@ -393,7 +396,8 @@ class Exp {
                         <li>Display</li>
                     </ul>
                     <p>Both the input and calculation sections have a higher chance of encountering exceptions, so it's
-                        beneficial to place separate <strong>try</strong> and <strong>catch</strong> blocks for each group.</p>
+                        beneficial to place separate <strong>try</strong> and <strong>catch</strong> blocks for each
+                        group.</p>
                 </ul>
 
                 <h4>Example:</h4>
@@ -432,7 +436,8 @@ class ExceptionHandlingExample {
     </pre>
 
                 <ul>
-                    <li>It's a good practice to declare all variables before the first <strong>try</strong> block to ensure
+                    <li>It's a good practice to declare all variables before the first <strong>try</strong> block to
+                        ensure
                         they have a broader scope.</li>
                     <li>If you don't know the specific exception class name, you can use the generic
                         <strong>Exception</strong> class to catch and handle exceptions.
@@ -583,6 +588,10 @@ class Test
                 </code>
             </pre>
                 <p>In the example above, we used the concept of anonymous objects.</p>
+                <ul>
+                    <li>Note: "throw" keyword is not used for predefined exception although the program will work but we
+                        should not use it, it should only we used for custom exceptions or user defined exceptions.</li>
+                </ul>
                 <pre>
                     <code>
 class A
@@ -603,56 +612,104 @@ public static void main(String[] args)
             </pre>
             </div>
             <div class="in">
-                <h3>Throwing Our Own Custom Exception</h3>
-                <p>Example: If a number is even, throw a custom exception.</p>
+                <h3>Throwing Unchecked Exceptions</h3>
+                <ul>
+                    <li>We know that exceptions are of two types:
+                        <ol>
+                            <li>Checked</li>
+                            <li>Unchecked</li>
+                        </ol>
+                        Now, which one to create?? Remember, unchecked exceptions are better because...
+                    </li>
+                    <li>If we want to throw a checked exception, then we know that we extend the Exception class.</li>
+                    <li>Now, for unchecked exceptions, we extend the RuntimeException class.</li>
+                </ul>
                 <h3>Steps to Create and Throw Our Custom Exception</h3>
                 <ol>
-                    <li>Inherit from the "Exception" class to create our custom exception class.</li>
+                    <li>Inherit from the "RuntimeException" or "Exception" class to create our custom exception class.</li>
                     <li>Create a constructor for the custom exception class.</li>
                 </ol>
                 <pre>
                     <code>
 // Step 1: Inheriting from Exception class to create our custom exception class
-class MyException extends Exception
-{
+class YoungerAgeException extends RuntimeException {
     // Step 2: Creating a constructor that takes a custom error message
-    MyException(String str)
-    {
-        super(str);
+    YoungerAgeException(String msg) {
+        super(msg);
     }
 }
 
-class Test
-{
-    public static void main(String[] args)
-    {
-        int n1 = 10;
-        if(n1 % 2 == 0)
-        {
-            throw new MyException("Number is even.");
-            System.out.println(customException.getMessage());
+class Test {
+    public static void main(String[] args) {
+        int age = 16;
+        if (age < 18) {
+            throw new YoungerAgeException("You are not eligible to vote");
+        } else {
+            System.out.println("Please vote");
         }
-        else
-        {
-            System.out.println("Nothing is wrong");
-        }
+        System.out.println("Hello"); // This message won't print if the exception is generated, which means the program will terminate abnormally.
     }
 }
                     </code>
                 </pre>
                 <ul>
-                    <li>the getMessage method is a standard method provided by the Throwable class in Java, which is the
-                        superclass of all exceptions, including custom exceptions. This method allows you to retrieve
-                        the error message associated with an exception.
-                        <br>we could also simply do the following &darr;
-                    </li>
+                    <li>Remember: Still, the program will terminate abnormally if age < 18. So, if we want to
+                            successfully execute our program, then we must use try and catch block.</li>
+                    <li>So using "throw," we are creating an exception object, but the handling will be done by the try
+                        and catch block.</li>
+                    <li>To correct it, we must use a try and catch block.</li>
                 </ul>
                 <pre>
-        <code>
-System.out.println(customException);
-        </code>
-    </pre>
+                    <code>
+class YoungerAgeException extends RuntimeException {
+    YoungerAgeException(String msg) {
+        super(msg);
+    }
+}
 
+class Test {
+    public static void main(String[] args) {
+        int age = 16;
+        try {
+            if (age < 18) {
+                throw new YoungerAgeException("You are not eligible to vote");
+            } else {
+                System.out.println("Please vote");
+            }
+        } catch (YoungerAgeException e) {
+            System.out.println(e);
+        }
+        System.out.println("Hello"); // Now this will run
+    }
+}
+                </code>
+            </pre>
+            <p>Another Example: If a number is even, throw a custom exception.</p>
+            <pre>
+                <code>
+
+class MyException extends Exception { // We could also extend RuntimeException here
+    MyException(String str) {
+        super(str);
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        int n1 = 10;
+        try {
+            if (n1 % 2 == 0) {
+                throw new MyException("Number is even.");
+            } else {
+                System.out.println("Nothing is wrong");
+            }
+        } catch (MyException e) {
+            System.out.println(e);
+        }
+    }
+}
+                </code>
+            </pre>
             </div>
             <div class="in">
                 <h3>Understanding the 'super' Keyword in Java</h3>
@@ -672,13 +729,14 @@ System.out.println(customException);
 
                 <p>Let's illustrate the 'super' keyword with a straightforward example involving two classes: a
                     superclass
-                    called <strong>Animal</strong> and a subclass called <strong>Dog</strong>. We'll show how 'super' can be
+                    called <strong>Animal</strong> and a subclass called <strong>Dog</strong>. We'll show how 'super'
+                    can be
                     used to
                     access the constructor and method of the superclass.</p>
 
                 <pre>
                 <code>
-<!-- Superclass -->
+&lt;!-- Superclass -->
 class Animal {
     String name;
 
@@ -691,24 +749,24 @@ class Animal {
     }
 }
 
-<!-- Subclass -->
+&lt;!-- Subclass -->
 class Dog extends Animal {
     String breed;
 
     Dog(String name, String breed) {
-        <!-- Using 'super' to call the superclass constructor -->
+        &lt;!-- Using 'super' to call the superclass constructor -->
         super(name);
         this.breed = breed;
     }
 
     void sound() {
-        <!-- Using 'super' to call the superclass method -->
+        &lt;!-- Using 'super' to call the superclass method -->
         super.sound();
         System.out.println("Dog barks");
     }
 }
 
-<!-- Main Program -->
+&lt;!-- Main Program -->
 public class Main {
     public static void main(String[] args) {
         Dog myDog = new Dog("Buddy", "Labrador");
@@ -720,10 +778,13 @@ public class Main {
             </code>
         </pre>
 
-                <p>In this example, 'super' is used within the <strong>Dog</strong> constructor to call the constructor of
+                <p>In this example, 'super' is used within the <strong>Dog</strong> constructor to call the constructor
+                    of
                     the
-                    <strong>Animal</strong> superclass, passing the <strong>name</strong> parameter. It's also used within the
-                    <strong>sound</strong> method of the <strong>Dog</strong> class to call the <strong>sound</strong> method of the
+                    <strong>Animal</strong> superclass, passing the <strong>name</strong> parameter. It's also used
+                    within the
+                    <strong>sound</strong> method of the <strong>Dog</strong> class to call the <strong>sound</strong>
+                    method of the
                     <strong>Animal</strong> class before adding specific behavior for the <strong>Dog</strong> class.
                 </p>
 
@@ -899,18 +960,24 @@ void m1() throws ArithmeticException, ArrayIndexOutOfBoundsException {
         <div id="t7" class="wh">
             <h2>finally Block</h2>
             <ul>
-                <li><strong>Optional:</strong> The <strong>finally</strong> block is an optional part of Java's exception
+                <li><strong>Optional:</strong> The <strong>finally</strong> block is an optional part of Java's
+                    exception
                     handling mechanism.</li>
                 <li><strong>Mandatory Execution:</strong> It contains code that needs to be executed regardless of
                     whether an exception was thrown or not. This makes it suitable for tasks like resource cleanup,
                     closing files, or releasing system resources.</li>
-                <li><strong>Always a Part of Try and Catch Blocks:</strong> The <strong>finally</strong> block should always
-                    be associated with a <strong>try</strong> and <strong>catch</strong> block. It ensures that the code within
-                    the <strong>finally</strong> block is executed after the <strong>try</strong> block, and potentially the
+                <li><strong>Always a Part of Try and Catch Blocks:</strong> The <strong>finally</strong> block should
+                    always
+                    be associated with a <strong>try</strong> and <strong>catch</strong> block. It ensures that the code
+                    within
+                    the <strong>finally</strong> block is executed after the <strong>try</strong> block, and potentially
+                    the
                     <strong>catch</strong> block, no matter what happens in the preceding code.
                 </li>
-                <li><strong>Cannot Be Used Without Try and Catch:</strong> You cannot use the <strong>finally</strong> block
-                    on its own; it must be used in conjunction with a <strong>try</strong> and <strong>catch</strong> block.
+                <li><strong>Cannot Be Used Without Try and Catch:</strong> You cannot use the <strong>finally</strong>
+                    block
+                    on its own; it must be used in conjunction with a <strong>try</strong> and <strong>catch</strong>
+                    block.
                 </li>
             </ul>
             <p><strong>Syntax:</strong></p>
@@ -978,8 +1045,7 @@ class Test {
             </div>
             <div class='code'>
                 <div class='dotc'></div>
-                <button class='ac'>Program to demonstrate the use of InputMismatchException & NumberFormatException.
-                    (try and catch)</button>
+                <button class='ac'></button>
                 <div class='panel'>
                     <pre>
                         <code>
@@ -1293,15 +1359,19 @@ class Test {
                 </pre>
                 <p>Explanation of functions used in the program:</p>
                 <ul>
-                    <li><strong>Thread.currentThread().getName()</strong>: This function retrieves the name of the current
+                    <li><strong>Thread.currentThread().getName()</strong>: This function retrieves the name of the
+                        current
                         thread.</li>
                     <li><strong>Thread.start()</strong>: This method is used to start the execution of a thread. When
                         called, it invokes the <strong>run()</strong> method of the thread.</li>
-                    <li><code>run()</code>: This method is overridden in the <strong>A</strong> class and defines the task
+                    <li><code>run()</code>: This method is overridden in the <strong>A</strong> class and defines the
+                        task
                         that the thread will perform when started.</li>
-                    <li><strong>setName(String name)</strong>: This method sets the name of a thread, making it easier to
+                    <li><strong>setName(String name)</strong>: This method sets the name of a thread, making it easier
+                        to
                         identify when multiple threads are running concurrently.</li>
-                    <li><strong>System.out.println()</strong>: This function is used to print messages to the console.</li>
+                    <li><strong>System.out.println()</strong>: This function is used to print messages to the console.
+                    </li>
                 </ul>
 
                 <p>The program demonstrates the use of multiple threads (t1, t2, t3) running concurrently and
@@ -1343,7 +1413,8 @@ class Test {
                         started its execution. To create a new thread, we use the 'new' keyword and create an instance
                         of a thread class.</li>
                     <li><strong>Runnable State (Ready):</strong> After the thread is created, it transitions to the
-                        runnable state when we invoke the <strong>t.start()</strong> method. In this state, the thread is
+                        runnable state when we invoke the <strong>t.start()</strong> method. In this state, the thread
+                        is
                         ready to be executed but is waiting for the thread scheduler to assign it CPU time.</li>
                     <li><strong>Running State (Execution):</strong> When the thread is selected by the thread scheduler,
                         it moves into the running state. During this phase, the thread's code is actively being
@@ -1493,7 +1564,7 @@ public class Test {
                 <p><strong>Syntax:</strong></p>
                 <pre>
                     <code>
-Thread.sleep(milliseconds);  <!-- Example syntax -->
+Thread.sleep(milliseconds);  &lt;!-- Example syntax -->
 // OR
 Thread t = new Thread();
 t.sleep(milliseconds);
@@ -1604,9 +1675,11 @@ class Test {
                 </code>
             </pre>
 
-                <p>In this example, we create three threads (<strong>t1</strong>, <strong>t2</strong>, and <strong>t3</strong>). We
+                <p>In this example, we create three threads (<strong>t1</strong>, <strong>t2</strong>, and
+                    <strong>t3</strong>). We
                     start <strong>t2</strong> and then call <code>t2.join()</code>, which causes the main thread to wait
-                    until <strong>t2</strong> completes its execution. This ensures that the output from <strong>t2</strong> is
+                    until <strong>t2</strong> completes its execution. This ensures that the output from
+                    <strong>t2</strong> is
                     printed before <strong>t1</strong> and <code>t3</code> start running.</p>
 
             </div>
@@ -1627,14 +1700,16 @@ class Test {
                     <li>
                         <strong>Join():</strong> The <strong>join()</strong> method is used to put the <em>parent
                             thread</em> into a temporary waiting state until the <em>completion</em> of a specified
-                        <em>child thread</em>. When a parent thread invokes <strong>join()</strong> on a child thread, it
+                        <em>child thread</em>. When a parent thread invokes <strong>join()</strong> on a child thread,
+                        it
                         waits for the child thread to finish its execution before proceeding further. This is
                         particularly useful when you want to coordinate the execution order of threads or ensure that
                         certain tasks are completed before moving on.
                     </li>
                 </ul>
 
-                <p>Here's an example to demonstrate the use of both <strong>sleep()</strong> and <strong>join()</strong>:</p>
+                <p>Here's an example to demonstrate the use of both <strong>sleep()</strong> and
+                    <strong>join()</strong>:</p>
 
                 <pre>
                     <code>
@@ -2422,6 +2497,8 @@ public class StaticSynchronizationExample {
     <div class="content-box">
         <p>Reference</p>
         <ul>
+            <li><a href="https://youtu.be/vldtYXFmZSc?si=Gf0eBrI_9X1saJlb" target="_blank" class="ba">Throw keyword
+                    &neArr;</a></li>
             <li><a href="https://www.youtube.com/playlist?list=PLqleLpAMfxGARB5Xa4Baa0lpRlUvZVJH8" target="_blank"
                     class="ba">Multithreading playlist &neArr;</a></li>
         </ul>
