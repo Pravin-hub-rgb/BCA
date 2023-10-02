@@ -619,7 +619,7 @@ public static void main(String[] args)
                             <li>Checked</li>
                             <li>Unchecked</li>
                         </ol>
-                        Now, which one to create?? Remember, unchecked exceptions are better because...
+                        Now, which one to create?? Although "throw" can handle both unchecked and checked exception but is better to use it for unchecked.
                     </li>
                     <li>If we want to throw a checked exception, then we know that we extend the Exception class.</li>
                     <li>Now, for unchecked exceptions, we extend the RuntimeException class.</li>
@@ -685,7 +685,7 @@ class Test {
                 </code>
             </pre>
             <p>Another Example: If a number is even, throw a custom exception.</p>
-            <pre>
+            <pre> 
                 <code>
 
 class MyException extends Exception { // We could also extend RuntimeException here
@@ -710,6 +710,9 @@ class Test {
 }
                 </code>
             </pre>
+            <ul>
+                <li>Remember: we can't write any statement after throw, otherwise it will provide unreachable statement error.</li>
+            </ul>
             </div>
             <div class="in">
                 <h3>Understanding the 'super' Keyword in Java</h3>
@@ -799,7 +802,7 @@ public class Main {
             <h2>throws keyword</h2>
             <ul>
                 <li><strong>Proper Definition:</strong> The 'throws' keyword is used to indicate exceptions that may
-                    occur in a program. For example, we know that the 'public static void main()' function might throw
+                    occur in a program. It gives and information to the caller method that there may occur an exception so it is better for the caller method to provide the exception handling code so that normal flow can be maintained. For example, we know that the 'public static void main()' function might throw
                     'ArrayIndexOutOfBoundsException' and 'NullPointerException'.</li>
                 <li><strong>'throws' Usage:</strong> 'throws' is used along with a method when we are defining it.</li>
                 <li><strong>Benefits:</strong> It makes our exception handling easier.</li>
@@ -810,6 +813,7 @@ public class Main {
                     because Java gives warnings before many classes and suggests good exception handling practices. So,
                     only those who are familiar with exception handling should use these classes.
                 </li>
+                <li><strong>Remember:</strong>"throws" is always used in case of checked exception only.</li>
             </ul>
             <p><strong>Syntax:</strong></p>
             <pre>
@@ -839,6 +843,42 @@ public void myMethod() throws Exception // Parent class; mentioning this may con
                     that a method may throw an exception.</li>
                 <li><strong>'throws' Clause Usage:</strong> The 'throws' clause is used when declaring a method.</li>
             </ul>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class='ac'>Example code</button>
+               <div class='panel'>
+                    <pre>
+                        <code>
+class MyException extends Exception {
+    public MyException(String message) {
+        super(message);
+    }
+}
+
+class Test {
+    // This method declares that it may throw a custom exception.
+    public void divide(int numerator, int denominator) throws MyException {
+        if (denominator == 0) {
+            // Simulate a custom exception (for demonstration purposes).
+            throw new MyException("Division by zero is not allowed.");
+        }
+        int result = numerator / denominator;
+        System.out.println("Result: " + result);
+    }
+
+    public static void main(String[] args) {
+        Test myObj = new Test();
+        try {
+            myObj.divide(10, 0);
+        } catch (MyException e) {
+            System.out.println("Caught an exception: " + e.getMessage());
+        }
+    }
+}
+                        </code>
+                    </pre>
+               </div>
+            </div>
             <div class="in">
                 <h3>throw vs. throws</h3>
                 <ol>
