@@ -367,10 +367,6 @@ class Exp {
                     <li>Using the <strong>try/catch</strong> block</li>
                     <li>Using <strong>try</strong> with multiple <strong>catch</strong> blocks</li>
                 </ul>
-                <p>Let's dive deeper into the concept of multiple <strong>try</strong> with multiple <strong>catch</strong>
-                    blocks.</p>
-
-                <h4>Objectives of Try and Catch Blocks:</h4>
                 <p>When dealing with exceptions, <strong>try</strong> and <strong>catch</strong> blocks serve two main
                     objectives:</p>
                 <ol>
@@ -383,7 +379,7 @@ class Exp {
                     use in your code. However, it's essential to consider code complexity as it may increase with a
                     higher number of exception-handling blocks.</p>
 
-                <h4>Continuation of Program:</h4>
+                <h3>Continuation of Program:</h3>
                 <ul>
                     <li>Continuation of program flow is achieved using multiple <strong>try</strong> and <strong>catch</strong>
                         blocks.</li>
@@ -403,17 +399,17 @@ class Exp {
                 <h4>Example:</h4>
                 <pre>
         <code>
-import java.util.Scanner;
+import java.util.*;
 
 class ExceptionHandlingExample {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int v1, v2, ans, sub; 
+        int v1 = 0, v2 = 0, ans = 0, sub = 0;
         System.out.println("Enter two numbers: ");
         try { // input
             v1 = sc.nextInt();
             v2 = sc.nextInt();
-        } catch (NumberFormatException e1) {
+        } catch (InputMismatchException e1) {
             System.out.println("Error due to wrong input");
         }
 
@@ -436,10 +432,10 @@ class ExceptionHandlingExample {
     </pre>
 
                 <ul>
-                    <li>It's a good practice to declare all variables before the first <code>try</code> block to ensure
+                    <li>It's a good practice to declare all variables before the first <strong>try</strong> block to ensure
                         they have a broader scope.</li>
                     <li>If you don't know the specific exception class name, you can use the generic
-                        <code>Exception</code> class to catch and handle exceptions.
+                        <strong>Exception</strong> class to catch and handle exceptions.
                     </li>
                 </ul>
             </div>
@@ -449,7 +445,7 @@ class ExceptionHandlingExample {
                     nested `try` and `catch` blocks can be employed. These blocks allow for a finer level of detail in
                     handling exceptions at different levels of your code.</p>
 
-                <h4>Understanding Nested Try-Catch Blocks:</h4>
+                <h3>Understanding Nested Try-Catch Blocks:</h3>
                 <p>Nested `try` and `catch` blocks involve placing one or more `try` blocks inside another. This
                     approach is useful when certain operations within a `try` block can themselves trigger exceptions
                     that need to be handled separately.</p>
@@ -609,25 +605,6 @@ public static void main(String[] args)
             <div class="in">
                 <h3>Throwing Our Own Custom Exception</h3>
                 <p>Example: If a number is even, throw a custom exception.</p>
-                <pre>
-    <code>
-class Test
-{
-    public static void main(String[] args)
-    {
-        int n1 = 10;
-        if(n1 % 2 == 0)
-        {
-            throw new MyException("Number is even.");
-        }
-        else
-        {
-            System.out.println("Nothing is wrong");
-        }
-    }
-}
-    </code>
-</pre>
                 <h3>Steps to Create and Throw Our Custom Exception</h3>
                 <ol>
                     <li>Inherit from the "Exception" class to create our custom exception class.</li>
@@ -652,7 +629,7 @@ class Test
         int n1 = 10;
         if(n1 % 2 == 0)
         {
-            MyException customException = new MyException("Number is even.");
+            throw new MyException("Number is even.");
             System.out.println(customException.getMessage());
         }
         else
