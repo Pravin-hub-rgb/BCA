@@ -22,7 +22,6 @@
         <a href="#t5" class="link">"throw" keyword</a>
         <a href="#t6" class="link">"throws" keyword</a>
         <a href="#t7" class="link">finally block</a>
-        <a href="#t8" class="link">Checked & uncheked exceptions</a>
         <a href="#t9" class="link">Multithreading in Java</a>
         <a href="#tpyq" class="link">Previous Year Questions</a>
         <div class="botbut">
@@ -109,11 +108,11 @@ String s1 = null; // also an exception
             <h2>Exception Hierarchy in Java</h2>
 
             <p>In Java, exceptions are organized into a hierarchy of classes through inheritance. The
-                <code>java.lang.Throwable</code> class serves as the root of this hierarchy.
+                <strong>java.lang.Throwable</stro> class serves as the root of this hierarchy.
             </p>
             <img src="../../images/exceptioninjava.svg" alt="" class="wb">
             <h3>Throwable (Root Class)</h3>
-            <p>The <code>Throwable</code> class is the root class of the exception hierarchy in Java. It has two main
+            <p>The <strong>Throwable</strong> class is the root class of the exception hierarchy in Java. It has two main
                 subclasses:</p>
 
             <div class="in">
@@ -133,55 +132,47 @@ String s1 = null; // also an exception
             <div class="in">
                 <h3>Exception</h3>
                 <p><strong>Exception</strong> represents exceptions that can be caught and handled by application code.
-                    It's further divided into two subcategories:</p>
+                    It's further divided into two subcategories:
+                <ol>
+                    <li>Checked Exceptions</li>
+                    <li>Unchecked Exceptions</li>
+                </ol></p>
 
+                <h4>Checked and Unchecked Exceptions</h4>
+                <p>In Java, exceptions are classified into two main categories: checked exceptions and unchecked exceptions.
+                    These distinctions help developers handle and manage exceptions effectively in their code.</p>
                 <div class="wh">
-                    <h3>RuntimeException</h3>
-                    <p><strong>RuntimeException</strong> represents exceptions that occur at runtime and are typically
-                        caused by programming errors. These exceptions don't require explicit handling.</p>
-                    <p>Runtime exceptions, also known as unchecked exceptions, are exceptions that occur at runtime and
-                        are typically caused by programming errors. These exceptions don't require explicit handling and
-                        can be considered bugs in the code. They are subclasses of the RuntimeException class.</p>
-                    <p>Various runtime exceptions include:</p>
+                    <h4>Checked Exceptions</h4>
                     <ul>
-                        <li>NullPointerException: Raised when trying to access or manipulate an object reference that is
-                            null.</li>
-                        <li>IndexOutOfBoundsException:
-                            <ul>
-                                <li>ArrayIndexOutOfBoundsException: Occurs when attempting to access an array element
-                                    with an invalid index.</li>
-                                <li>StringIndexOutOfBoundsException: Happens when trying to access a character in a
-                                    string with an invalid index.</li>
-                            </ul>
-                        </li>
-                        <li>ArithmeticException: Occurs during mathematical operations like division by zero.</li>
-                        <li>NumberFormatException: Raised when trying to convert a string to a numeric type, but the
-                            string does not represent a valid numeric value.</li>
+                        <li><strong>Definition:</strong> Checked exceptions, also known as compile-time exceptions, are
+                            exceptions that the Java compiler mandates to be caught or declared in the code. This means that if
+                            a method can potentially throw a checked exception, it must be either caught using a try-catch block
+                            or declared using the 'throws' keyword in the method signature.</li>
+                        <li><strong>Examples:</strong> Common checked exceptions include 'IOException', 'FileNotFoundException',
+                            and 'SQLException'. These exceptions typically occur in situations where external resources or
+                            external systems are involved, and the developer needs to handle potential issues gracefully.</li>
+                        <li><strong>Handling:</strong> Developers are required to handle checked exceptions explicitly in their
+                            code, either by using try-catch blocks to catch and process the exception or by declaring the
+                            exception using 'throws' in the method signature.</li>
                     </ul>
-                    <p>Runtime exceptions are typically raised when there are programming errors, such as trying to
-                        access null objects, accessing arrays or strings out of bounds, or performing invalid arithmetic
-                        operations.</p>
-                </div>
-
-                <div class="wh">
-                    <h3>Checked Exceptions</h3>
-                    <p><strong>Checked Exceptions</strong> represent exceptions that must be explicitly declared and
-                        handled in code. These exceptions occur due to external factors and often require actions like
-                        input validation or dealing with I/O operations.</p>
-                    <p>Checked exceptions are exceptions that must be explicitly declared and handled in code. They are
-                        usually subclasses of the Exception class and are typically caused by external factors.</p>
-                    <p>Examples of checked exceptions include:</p>
+        
+                    <h4>Unchecked Exceptions</h4>
                     <ul>
-                        <li>IOException: Raised when an I/O operation (e.g., file reading/writing) encounters an issue.
-                        </li>
-                        <li>FileNotFoundException: Occurs when trying to access a file that does not exist.</li>
-                        <li>SQLException: Raised in database operations when a SQL query or connection fails.</li>
-                        <li>ClassNotFoundException: Thrown when a required class is not found at runtime, often related
-                            to class loading issues.</li>
+                        <li><strong>Definition:</strong> Unchecked exceptions, also known as runtime exceptions, are exceptions
+                            that do not require explicit handling using try-catch blocks or 'throws' declarations. These
+                            exceptions can be caught and handled, but it's not mandatory by the compiler.</li>
+                        <li><strong>Examples:</strong> Common unchecked exceptions include 'NullPointerException',
+                            'ArrayIndexOutOfBoundsException', and 'ArithmeticException'. These exceptions usually result from
+                            programming errors or invalid operations and are not related to external factors.</li>
+                        <li><strong>Handling:</strong> While unchecked exceptions can be caught and handled if desired,
+                            developers are not required to do so. It is often recommended to address the root cause of these
+                            exceptions during development and not rely solely on catching them in code.</li>
                     </ul>
-                    <p>Checked exceptions often require explicit handling in code, such as using try-catch blocks, to
-                        deal with issues like file not found, database connection problems, or class loading failures.
-                    </p>
+        
+                    <p>Understanding the difference between checked and unchecked exceptions is crucial for effective exception
+                        handling in Java. Checked exceptions help ensure that developers handle potential issues that may arise
+                        when interacting with external resources, while unchecked exceptions primarily address programming
+                        errors and invalid operations.</p>
                 </div>
             </div>
 
@@ -949,42 +940,63 @@ finally {
             </pre>
 
         </div>
-        <div id="t8" class="wh">
-            <h2>Checked and Unchecked Exceptions</h2>
-            <p>In Java, exceptions are classified into two main categories: checked exceptions and unchecked exceptions.
-                These distinctions help developers handle and manage exceptions effectively in their code.</p>
+        <div class="wh">
+            <h2>Programs</h2>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class='ac'>Program to demonstrate the use of InputMismatchException & NumberFormatException. (try and catch)</button>
+               <div class='panel'>
+                    <pre>
+                        <code>
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-            <h3>Checked Exceptions</h3>
-            <ul>
-                <li><strong>Definition:</strong> Checked exceptions, also known as compile-time exceptions, are
-                    exceptions that the Java compiler mandates to be caught or declared in the code. This means that if
-                    a method can potentially throw a checked exception, it must be either caught using a try-catch block
-                    or declared using the 'throws' keyword in the method signature.</li>
-                <li><strong>Examples:</strong> Common checked exceptions include 'IOException', 'FileNotFoundException',
-                    and 'SQLException'. These exceptions typically occur in situations where external resources or
-                    external systems are involved, and the developer needs to handle potential issues gracefully.</li>
-                <li><strong>Handling:</strong> Developers are required to handle checked exceptions explicitly in their
-                    code, either by using try-catch blocks to catch and process the exception or by declaring the
-                    exception using 'throws' in the method signature.</li>
-            </ul>
+class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num1 = 0;
+        int num2 = 0;
+        
+        try {
+            System.out.println("Enter first number: ");
+            num1 = sc.nextInt();
+            
+            System.out.println("Enter second number: ");
+            num2 = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("InputMismatchException: " + e.getMessage());
+            // Clear the invalid input
+            sc.next();
+        }
 
-            <h3>Unchecked Exceptions</h3>
-            <ul>
-                <li><strong>Definition:</strong> Unchecked exceptions, also known as runtime exceptions, are exceptions
-                    that do not require explicit handling using try-catch blocks or 'throws' declarations. These
-                    exceptions can be caught and handled, but it's not mandatory by the compiler.</li>
-                <li><strong>Examples:</strong> Common unchecked exceptions include 'NullPointerException',
-                    'ArrayIndexOutOfBoundsException', and 'ArithmeticException'. These exceptions usually result from
-                    programming errors or invalid operations and are not related to external factors.</li>
-                <li><strong>Handling:</strong> While unchecked exceptions can be caught and handled if desired,
-                    developers are not required to do so. It is often recommended to address the root cause of these
-                    exceptions during development and not rely solely on catching them in code.</li>
-            </ul>
+        try {
+            String str = "123Human";
+            int num3 = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException: " + e.getMessage());
+        }
 
-            <p>Understanding the difference between checked and unchecked exceptions is crucial for effective exception
-                handling in Java. Checked exceptions help ensure that developers handle potential issues that may arise
-                when interacting with external resources, while unchecked exceptions primarily address programming
-                errors and invalid operations.</p>
+        // Rest of your code
+        int sum = num1 + num2;
+        System.out.println("Sum: " + sum);
+    }
+}
+
+                        </code>
+                    </pre>
+               </div>
+            </div>
+            <div class='code'>
+               <div class='dotc'></div>
+               <button class='ac'>Program to demonstrate the use of InputMismatchException & NumberFormatException. (try and catch)</button>
+               <div class='panel'>
+                    <pre>
+                        <code>
+            
+                        </code>
+                    </pre>
+               </div>
+            </div>
         </div>
         <div id="t9" class="wh">
             <h2>Multithreading in Java</h2>
