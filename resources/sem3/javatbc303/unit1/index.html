@@ -25,7 +25,6 @@
         <a href="#t8" class="link">Strings</a>
         <a href="#t9" class="link">Wrapper class</a>
         <a href="#t10" class="link">'final' keyword</a>
-        <a href="#pack" class="link">Package</a>
         <a href="#t11" class="link">Constructors</a>
         <a href="#t12" class="link">Access Modifiers</a>
         <a href="#t13" class="link">Inheritance</a>
@@ -2390,200 +2389,7 @@ final class A
                     final) is more flexible and allows for easier future expansion.</p>
             </div>
         </div>
-        <div id="pack" class="wh">
-            <h2>Packages in Java</h2>
-            <ul>
-                <li>Packages are used for organizing and sharing code in Java.</li>
-                <li>The 'package' keyword is used to define a package in Java.</li>
-                <li>The 'import' keyword is used to import a package into an existing Java file.</li>
-                <li>Packages promote code reusability and maintainability.</li>
-                <li>Packages can store classes, interfaces, and subpackages.</li>
-                <li>Packages are used for grouping classes.</li>
-            </ul>
-            <p><b>Packages in Java can be classified as:</b></p>
-            <ul>
-                <li><b>Internal packages (predefined packages):</b> Also known as predefined packages, these are
-                    built-in packages in Java.</li>
-                <li><b>External packages (user-defined packages):</b> These packages are created by the user to organize
-                    their code.</li>
-            </ul>
-            <p><b>Some commonly user predefined packages in Java include:</b></p>
-            <ul>
-                <li><b>java.lang.*:</b> The java package is the main package and serves as the default package. The lang
-                    package is a subpackage.</li>
-                <li><b>java.util.*:</b> Contains useful utilities, such as the Scanner class.</li>
-                <li><b>java.io.*:</b> Used for handling input and output streams.</li>
-                <li><b>java.awt.* (Abstract Window Toolkit):</b> Used for creating graphical user interfaces.</li>
-                <li><b>java.awt.event.*:</b> This is a sub-subpackage under java.awt that contains classes for handling
-                    events in GUI applications.</li>
-                <li><b>java.sql.*:</b> Provides classes for database connectivity.</li>
-                <li><b>java.net.*:</b> Used for network connectivity.</li>
-                <li><b>javax.swing.*:</b> Provides classes for building GUIs using Swing components.</li>
-            </ul>
-            <div class="in">
-                <h3>Inside java package</h3>
-                <img src="../../images/javapackage.svg" alt="" class="wb">
-                <p><b>Note: When using the "import java.awt.*" statement, it will include only the classes from the
-                        specified package, not its subpackages. To include classes from a subpackage, you must import it
-                        explicitly. For example: to include classes from the "java.awt.event" subpackage, you should use
-                        the statement "import java.awt.event.</b></p>
-                <p>That's why java.* won't include everything because there are no classes directly inside the java
-                    package; instead, it contains subpackages. In Java, packages are used to organize and structure
-                    code. The java package serves as the root package for many core Java libraries, and it houses
-                    various subpackages, each responsible for specific functionalities or components.
-                <ul>
-                    <li>For instance, you will find subpackages like java.util, java.io, java.awt, java.sql, and more
-                        within the java package. These subpackages, in turn, contain classes, interfaces, and other
-                        resources related to their respective domains. To access the classes within these subpackages,
-                        you must import them explicitly in your code using statements like import java.util.* or import
-                        java.awt.*, as the wildcard * includes all classes from the specified subpackage.</li>
-                </ul>
-                </p>
-            </div>
-            <div class="in">
-                <h3>Term "import static"</h3>
-                <p>Syntax &darr;</p>
-                <pre>
-                    <code>
-import static java.lang.System.*;
-                    </code>
-                </pre>
-                <p>Example &darr;</p>
-                <pre>
-                    <code>
-import static java.lang.System.*;
-
-// Incorrect usage:
-// import static java.util.*; // This is not allowed
-
-class Test {
-    public static void main(String[] args) {
-        out.println("Hello World"); // No need to use the keyword 'System' every time
-        out.println("How are you???");
-    }
-}
-                    </code>
-                </pre>
-                <p>Explanation:
-                <ul>
-                    <li>The term "import static" in Java allows you to access static members (fields and methods) of a
-                        class directly without specifying the class name each time. In the example provided, we use
-                        import static for the <b>'java.lang.System'</b> class. This means that we can directly access
-                        the static members of the 'System' class without having to prefix them with 'System.'.</li>
-                    <li>However, it's important to note that import static doesn't work with wildcard imports like
-                        <b>'import static java.util.*;'</b>. You can only use import static for specific classes and
-                        their static members.
-                    </li>
-                    <li>In the example, when out.println(...) is used, we no longer need to use the keyword System
-                        because of the import static. This feature can improve code readability when dealing with
-                        frequently used static members.</li>
-                    <li>In Java, when you want to import and use static members from a class using the import static
-                        feature, it's essential to specify the class name followed by a '.*' wildcard. This combination,
-                        <b>'import static some.package.SomeClass.*'</b>, allows you to import and make available all
-                        static members (fields and methods) of the specified class within your code. Omitting the '.*'
-                        part when using import static will result in the import statement not functioning as intended,
-                        and you won't be able to access the static members without referencing the class explicitly in
-                        your code.
-                    </li>
-                </ul>
-                </p>
-            </div>
-            <div class="in">
-                <h3>Creating our own Package in Java</h3>
-                <ul>
-                    <li>Creating a package in Java is a straightforward process, but effectively using it may require
-                        some understanding. Let's take a simple class and transform it into a package.</li>
-                </ul>
-                <pre>
-                    <code>
-class Shape {
-    void color() {
-        System.out.println("Coloring the shape");
-    }
-    void cal_area() {
-        System.out.println("Calculating area.");
-    }
-
-    void cal_square() {
-        System.out.println("Calculating square");
-    }
-}
-                    </code>
-                </pre>
-                <ul>
-                    <li>If we want to reuse the color(), cal_area(), and cal_square() methods without duplicating the
-                        code every time, we can achieve this using a package. To convert the file into a package, we
-                        make the following changes:</li>
-                </ul>
-                <pre>
-                    <code>
-// Shape.java file
-package group;
-
-public class Shape {
-    public void color() {
-        System.out.println("Coloring the shape");
-    }
-    public void cal_area() {
-        System.out.println("Calculating area.");
-    }
-
-    public void cal_square() {
-        System.out.println("Calculating square");
-    }
-}
-                    </code>
-                </pre>
-                <ul>
-                    <li>When creating a package, you can use any name following Java's naming conventions, typically
-                        using lowercase letters and adhering to a reverse domain naming scheme to avoid naming
-                        conflicts.</li>
-                    <li>Classes and methods inside a package should generally be declared as either public or protected.
-                        The 'default' access modifier is limited to use within the same package, allowing classes to
-                        access each other without being explicitly declared as public or protected. Additionally,
-                        protected members (fields and methods) can be accessed by subclasses both within and outside the
-                        package, regardless of whether direct inheritance is involved.</li>
-                </ul>
-                <p>Now that we have created our package file, let's use it:</p>
-                <ul>
-                    <li>Open your terminal and navigate to the folder where the package file is located.</li>
-                    <li>Run the following command:</li>
-                </ul>
-                <pre>
-    <code>
-javac -d . filename.java
-    </code>
-</pre>
-                <ul>
-                    <li>The above command will create a package folder instead of generating a .class file.</li>
-                    <li>The dot (.) specifies that the package will be created in the current directory.</li>
-                    <li>the -d option to specify the destination directory where the compiled .class files for the
-                        package should be placed.</li>
-                    <li>Now, you can use it as follows:</li>
-                </ul>
-                <pre>
-    <code>
-// Test.java file where we will import our package and use the methods
-import group.Shape.*;
-
-class Test
-{
-    public static void main(String[] args)
-    {
-        // To avoid path errors, use the following
-        group.Shape obj = new group.Shape();
-        // Shape obj = new Shape(); // This might result in an error
-        obj.color();
-        obj.cal_area();
-        obj.cal_square();
-    }
-}
-    </code>
-</pre>
-
-            </div>
-
-        </div>
+        
         <div id="t11" class="wh">
             <h2>Constructors in Java</h2>
 
@@ -3855,26 +3661,6 @@ class Demo {
             </h3>
         </div>
         <div class="in">
-            <h3>Describe packages in Java. State the benefits of using packages in Java. Write a program to create
-                package shape and add the following (as given below) in the package.</h3>
-            <pre>
-                <code>
-+---------------------+
-|  Interface: Test    |
-|---------------------|
-|  Area(int l, int b) |
-+---------------------+ 
-
-+---------------------+
-|  Class: Rectangle   |
-|---------------------|
-|  Area(int l, int b) |
-+---------------------+ 
-                </code>
-            </pre>
-            <h3>The above package must contain interface Test and Class Rectangle.</h3>
-        </div>
-        <div class="in">
             <h3>Define class and its types in Java. Write a programme in Java to show the implementation of method
                 ovveriding.</h3>
         </div>
@@ -3892,13 +3678,7 @@ class Demo {
         <div class="in">
             <h3>Define Wrapper class in Java. Explain all wrapper classes in Java.</h3>
         </div>
-        <div class="in">
-            <h3>Define Packages. Name any five inbuilt packages in Java. Design a package called Shape and it contains
-                Rectangle, square and Circle class. Write a programme to illustrate this.</h3>
-        </div>
-        <div class="in">
-            <h3>State the difference between import and static import. Explain by using an example.</h3>
-        </div>
+        
         <div class="in">
             <h3>Define Abstract class in Java. Illustrate how it is diffent from Interface.</h3>
         </div>
