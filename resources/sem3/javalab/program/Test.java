@@ -1,21 +1,12 @@
 class Test {
-    static String name[] = { "Madras", "Delhi", "Ahmedabad", "Calcutta", "Bombay" };
-
     public static void main(String[] args) {
-        int size = name.length;
-        String temp = null;
-        for (int i = 0; i < size; i++) {
-            for (int j = i + 1; j < size; j++) {
-                if (name[j].compareTo(name[i]) < 0) {
-                    // Swap the strings
-                    temp = name[i];
-                    name[i] = name[j];
-                    name[j] = temp;
-                }
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            System.out.println(name[i]);
-        }
+        String str1 = new String("Hello");
+        str1.concat(" World");
+        System.out.println(str1); // Hello was printed although we concatenated " World" that means it is
+                                  // immutable
+
+        StringBuffer str2 = new StringBuffer("Hello");
+        str2.append(" World");
+        System.out.println(str2); // Hello World is printed
     }
 }
