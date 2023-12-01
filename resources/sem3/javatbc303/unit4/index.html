@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applets</title>
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <a href="#" class="link"></a>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Applets</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Java Applets Overview</h1>
+        <ul>
+            <li>An applet in Java is essentially a Java program that is embedded within a webpage.</li>
+            <li>Functionality of Java applets includes:
+                <ol>
+                    <li>Playing music.</li>
+                    <li>Playing videos.</li>
+                    <li>Creating animations.</li>
+                    <li>Displaying graphics.</li>
+                    <li>Handling user data input.</li>
+                    <li>Retrieving data from a database.</li>
+                    <li>Primarily used to generate dynamic content at the client side.</li>
+                </ol>
+            </li>
+            <li>Key points about Java applets:
+                <ol>
+                    <li>Extends the <b>java.applet.Applet</b> class.</li>
+                    <li>Does not contain a <b>main()</b> method.</li>
+                    <li>Life cycle methods include:
+                        <ul>
+                            <li><b>init()</b></li>
+                            <li><b>start()</b></li>
+                            <li><b>paint()</b> (this method is present in the <b>java.awt</b> - Abstract Window Toolkit
+                                - <b>Component</b> class)</li>
+                            <li><b>stop()</b></li>
+                            <li><b>destroy()</b></li>
+                        </ul>
+                    </li>
+                    <li>Applets do not use the <b>System.out.println()</b> method.</li>
+                    <li>To execute an applet, you can use the <b>appletviewer</b> tool or a web browser. The
+                        <b>appletviewer</b> tool is part of the JDK. If using a browser, additional plugins are required
+                        for proper applet execution.
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <div class="wh">
+            <h2>Applet Life Cycle methods in Java</h2>
+            <div class="in">
+                <h3>init Method</h3>
+                <pre>
+                    <code>
+public void init()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>init</b> method is crucial for initializing the applet, allowing tasks such as
+                        variable initialization, setting background and foreground colors, and allocating memory for
+                        controls (e.g., labels, checkboxes).</li>
+                    <li>This method is executed only once during the entire life cycle of the applet.</li>
+                    <li>When the applet is first loaded into memory, the <b>init</b> method is called.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>start Method</h3>
+                <pre>
+                    <code>
+public void start()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>start</b> method is executed after the <b>init</b> method.</li>
+                    <li>Useful for restarting an applet if its execution has been stopped.</li>
+                    <li>Restarting the execution of the current webpage is achieved using the <b>start</b> method.
+                    </li>
+                    <li>There's no predictable limit to how many times an applet webpage can be restarted; it can be
+                        restarted multiple times.</li>
+                    <li>Whenever switching back to the same page, the <b>start</b> method will be executed again.
+                    </li>
+                    <li>When we click on the maximize button than this method can be called.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>paint Method</h3>
+                <pre>
+                    <code>
+public void paint(Graphics g)
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>paint</b> method is used to display content in the view area of the applet.</li>
+                    <li>With the <b>Graphics</b> class, one can paint shapes like circles and rectangles, as well
+                        as display text within the applet.</li>
+                    <li>This method is executed after the <b>start</b> method.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>stop Method</h3>
+                <pre>
+                    <code>
+public void stop()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>stop</b> method is employed to halt the execution of an applet.</li>
+                    <li>Execution of the current webpage is stopped using the <b>stop</b> method when
+                        transitioning from one webpage to another. Additionally, clicking the minimize button on the
+                        applet window triggers the execution of the <b>stop</b> method.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>destroy Method</h3>
+                <pre>
+                    <code>
+public void destroy()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>destroy</b> method serves to release the applet object's memory. When this method
+                        is called, the applet memory is destroyed, making it available for use in other programs.</li>
+                    <li>Clicking on the cross button of the applet window triggers the execution of the
+                        <b>destroy</b> method.</li>
+                    <li>The <b>destroy</b> method is executed only once in the entire life cycle of an applet.
+                    </li>
+                    <li>It's worth noting that the <b>init</b> and <b>destroy</b> methods are executed only
+                        once, whereas the remaining methods can be executed multiple times.</li>
+                </ul>
+            </div>
+            <ul>
+                <li><strong>Remember:</strong> The <b>init()</b>, <b>start()</b>, <b>stop()</b>, and
+                    <b>destroy()</b> methods are present in the <b>Applet</b> class, which is part of the
+                    <b>java.applet</b> package.</li>
+            </ul>
+            <img src="../../images/applet1.svg" alt="" class="wb">
+        </div>
+        <div class="wh">
+            <h2>Applet Structure || Applet Skeleton</h2>
+            <p>Now we will write a program to demonstrate all these methods</p>
+            <pre>
+                <code>
+import 
+                </code>
+            </pre>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

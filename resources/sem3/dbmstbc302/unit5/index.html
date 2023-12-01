@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction and Concurrency Control</title>
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../../public/style.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+        </div>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Transaction and Concurrency Control</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Transaction and Concurrency Control</h1>
+        <div class="wh">
+            <h2>What is a Transaction?</h2>
+            <ul>
+                <li>
+                    A transaction can be defined as a unit or part of a program at the time of its execution, forming a
+                    logical unit of database processing.
+                </li>
+                <li>
+                    A transaction includes one or more database access operations such as insertion, deletion,
+                    modification, or retrieval operations.
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Basic Database Access Operations</h3>
+                <ol>
+                    <li>Read_item(x)</li>
+                    <li>Write_item(x)</li>
+                </ol>
+
+                <p><strong>Example:</strong> Transaction to transfer 700 Rs from A/C A to B A/C.</p>
+                <ul>
+                    <li>read(A);</li>
+                    <li>A = A - 700;</li>
+                    <li>Write(A);</li>
+                    <li>read(B);</li>
+                    <li>B = B + 700;</li>
+                    <li>write(B);</li>
+                </ul>
+
+                <ul>
+                    <li>
+                        Remember, in a unit or part of a program in DBMS, it is known as a transaction, and a similar
+                        concept is referred to as processes in an operating system.
+                    </li>
+                    <li>For insuring integrity of data, database system maintain the 'ACID' properties.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>ACID Properties of Transaction</h2>
+            <p>
+                To ensure the integrity of data, a database system is required to maintain the following properties:
+            </p>
+            <ol>
+                <li><strong>Atomicity:</strong> It means that either all operations within a transaction are completed,
+                    or none are. The transaction is treated as an indivisible unit of work, ensuring that either all
+                    changes are applied or none at all.</li>
+                <li><strong>Consistency:</strong> It means that all operations performed by the user are logically
+                    correct and executed completely. The database is transferred from one consistent state to another,
+                    maintaining data integrity throughout the transaction.</li>
+                <li><strong>Isolation:</strong> If transactions are executing concurrently (e.g., T<sub>i</sub> and
+                    T<sub>j</sub>), the operations of one transaction (T<sub>i</sub>) should not interfere with the
+                    operations of another transaction (T<sub>j</sub>). Each transaction should be isolated from the
+                    effects of other concurrently executing transactions.</li>
+                <li><strong>Durability:</strong> The committed transaction should persist in the database, and its
+                    changes must not be lost even in the face of system failures. Once a transaction is committed, its
+                    effects should be durable and survive system crashes or other failures.</li>
+            </ol>
+
+            <p><strong>Examples:</strong></p>
+            <p><strong>Atomicity:</strong> Consider a funds transfer transaction where money is deducted from one
+                account and added to another. Atomicity ensures that either both these operations happen successfully or
+                none at all, preventing scenarios where money is deducted but not added or vice versa.</p>
+
+            <p><strong>Consistency:</strong> In a database managing student grades, consistency ensures that if a
+                transaction involves updating grades, the database moves from one consistent state (e.g., all grades are
+                within a valid range) to another consistent state after the transaction is executed.</p>
+
+            <p><strong>Isolation:</strong> Imagine two transactions updating different sets of records simultaneously.
+                Isolation ensures that the changes made by one transaction do not affect the ongoing operations or the
+                final outcome of the other transaction.</p>
+
+            <p><strong>Durability:</strong> After a user confirms a purchase in an e-commerce system, durability ensures
+                that the record of that transaction persists in the database even if there's a system failure
+                immediately after the confirmation, safeguarding against data loss.</p>
+
+        </div>
+        <div class="wh">
+            <h2>Transaction States</h2>
+            <img src="../../images/transaction1.svg" alt="" class="wb">
+            <ul>
+                <li>
+                    <strong>Database before execution:</strong> Before the start of any execution, the database is in an
+                    idle position, awaiting transaction initiation.
+                </li>
+                <li>
+                    <strong>Active state:</strong> It is the initial state of a transaction. During the execution of
+                    statements, a transaction is in the active state, actively performing read or write operations.
+                </li>
+                <li>
+                    <strong>Failed state:</strong> If, by any chance, the transaction encounters an error, it enters the
+                    failed state. In such cases, the ongoing transaction is terminated, and the system rolls back the
+                    changes, undoing the incomplete transaction.
+                </li>
+                <li>
+                    <strong>Partially committed state:</strong> If there is no error, the transaction proceeds to the
+                    partially committed state. This signifies that the transaction has completed its intended work, but
+                    the changes are not yet finalized.
+                </li>
+                <li>
+                    <strong>Committed state:</strong> After successful execution and confirmation, the transaction
+                    enters the committed state. At this point, the changes made by the transaction are permanent and
+                    saved on the hard disk or in the server, ensuring durability.
+                    <ul>
+                        <li>After commit, the changes will reflect and persist, making them a permanent part of the
+                            database.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Terminated state:</strong> Following the committed state, the transaction is terminated,
+                    signifying the end of its lifecycle. At this point, the transaction has successfully completed its
+                    tasks, and the database returns to an idle state, ready for new transactions.
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Concurrency</h2>
+            <p>
+                Concurrency refers to the simultaneous execution of multiple transactions.
+            </p>
+
+            <p><strong>EXAMPLE:</strong></p>
+            <pre>
+    <code>
+Time  | T1  |  T2  | T3
+------------------------- 
+t1    |     |   R  |
+t2    |  R  |      |
+t3    |     |      | W
+t4    |     |   R  |
+t5    |     |   R  |
+t6    |     |   W  |
+t7    |  W  |      |
+t8    |  R  |      |
+t9    |     |      | R
+    </code>
+</pre>
+            <ul>
+                <li>Simultaneously, three transactions are occurring, and at each time duration, a portion of each
+                    transaction is being completed.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Advantages of Concurrency</h3>
+                <ol>
+                    <li>
+                        <strong>Resource utilization:</strong> If one transaction is busy using the CPU, others can
+                        utilize I/O devices concurrently, leading to better resource utilization.
+                    </li>
+                    <li>
+                        <strong>Improved throughput:</strong> Concurrency enables more transactions to be completed or
+                        executed simultaneously, resulting in improved overall throughput.
+                    </li>
+                    <li>
+                        <strong>Reduced response time:</strong> With multiple transactions executing concurrently, the
+                        time needed for completing transactions is reduced, leading to quicker system responses.
+                    </li>
+                    <li>
+                        <strong>Reduced waiting time:</strong> Transactions have to wait less for acquiring resources,
+                        as the system allows multiple transactions to proceed simultaneously, reducing waiting times.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Why Concurrency Control is Needed?</h2>
+            <div class="in">
+                <h3>Concurrency leads to several problems</h3>
+                <ul>
+                    <li>Lost update problem</li>
+                    <li>Dirty read problem</li>
+                    <li>Uncommitted dependency problem</li>
+                    <li>Unrepeatable read problem</li>
+                    <li>Inconsistent analysis problem</li>
+                    <li>Phantom read problem</li>
+                </ul>
+
+                <div class="in">
+                    <h3>Lost Update Problem</h3>
+                    <ul>
+                        <li>
+                            If any transaction T<sub>j</sub> updates any variable 'A' at time 't' without knowing the
+                            value of 'A' at time 't', then this may lead to the lost update problem.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Consider two transactions, T<sub>1</sub> and T<sub>2</sub>, where T<sub>1</sub> reads the value
+                        of variable 'A' and T<sub>2</sub> updates 'A' without considering the updated value from
+                        T<sub>1</sub>. This can result in a lost update problem as the update from T<sub>1</sub> is
+                        overwritten by the update from T<sub>2</sub>.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Dirty Read Problem</h3>
+                    <ul>
+                        <li>
+                            Reading the data value of a variable before committing may lead to the 'dirty read problem'.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Consider two transactions, T<sub>1</sub> and T<sub>2</sub>, where T<sub>1</sub> updates a
+                        variable 'X', but before committing the update, T<sub>2</sub> reads the intermediate and
+                        uncommitted value of 'X'. This premature read by T<sub>2</sub> may result in inaccurate or
+                        inconsistent data, illustrating the dirty read problem.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Uncommitted Dependency Problem</h3>
+                    <ul>
+                        <li>
+                            This problem arises if any transaction T<sub>j</sub> updates any variable 'V' and allows
+                            read or write operations on 'V' by any other transaction, but T<sub>j</sub> is rolled back
+                            due to failure.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Imagine two transactions, T<sub>1</sub> and T<sub>2</sub>, where T<sub>1</sub> updates a
+                        variable 'V', and T<sub>2</sub> reads or writes 'V' based on the update from T<sub>1</sub>. If
+                        T<sub>1</sub> is rolled back due to a failure before committing, it creates an uncommitted
+                        dependency problem for T<sub>2</sub>. This is because T<sub>2</sub> might have performed
+                        operations based on the temporary changes made by T<sub>1</sub>, which are now lost due to the
+                        rollback.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Unrepeatable Read Problem</h3>
+                    <ul>
+                        <li>
+                            It occurs when a transaction tries to read the value of a data item twice, and another
+                            transaction updates the same data item in between the two read operations of the first
+                            transaction.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Consider two transactions, T<sub>1</sub> and T<sub>2</sub>, where T<sub>1</sub> reads a data
+                        item twice. Meanwhile, T<sub>2</sub> updates the same data item between the two read operations
+                        of T<sub>1</sub>. This creates an unrepeatable read problem for T<sub>1</sub> because the second
+                        read yields a different value than the first read due to the update performed by T<sub>2</sub>.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Inconsistent Analysis Problem</h3>
+                    <ul>
+                        <li>
+                            This problem occurs when one transaction reads a variable before it is committed by another
+                            transaction.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Suppose there are two transactions, T<sub>1</sub> and T<sub>2</sub>. T<sub>1</sub> reads a
+                        variable, and before T<sub>1</sub> commits its changes, T<sub>2</sub> updates the same variable.
+                        This leads to the inconsistent analysis problem for T<sub>1</sub> because the value it read
+                        initially is now different from the updated value made by T<sub>2</sub>.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Phantom Read Problem</h3>
+                    <ul>
+                        <li>
+                            This problem occurs when a transaction reads the same variable from the buffer, and when it
+                            reads it again later, it finds that it doesn't exist or has been modified.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Consider two transactions, T<sub>1</sub> and T<sub>2</sub>. T<sub>1</sub> reads a set of
+                        variables, and in between its two read operations, T<sub>2</sub> inserts or modifies a record
+                        that affects the range of data read by T<sub>1</sub>. When T<sub>1</sub> reads the same set of
+                        variables again, it encounters a phantom read problem as the data it initially read has changed
+                        due to the insertion or modification by T<sub>2</sub>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Schedule</h2>
+            <ul>
+                <li>
+                    A schedule is a sequential arrangement of operations from one transaction to another within a
+                    database system.
+                </li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre>
+    <code>
+T1         |       T2
+_____________________
+R(A)       |
+R(B)       |
+A = A + B  |
+W(A)       | 
+           |  R(A)
+           |  A = A - 500
+           |  W(A)
+    </code>
+</pre>
+            <p><strong>In the above example:</strong></p>
+            <ol>
+
+                <li>
+                    This schedule involves two transactions, T1 and T2, executing concurrently. T1 begins by reading the
+                    values of variables A and B, followed by an addition operation (A = A + B) and a write operation
+                    (W(A)).
+                    Meanwhile, T2 reads the value of A, subtracts 500 from it, and writes back the updated value to A.
+                </li>
+                <li>
+                    The schedule illustrates the interleaved execution of operations from both transactions, showcasing
+                    the
+                    concept of concurrency. It is crucial to note that the order of operations within each transaction
+                    is
+                    maintained, ensuring consistency in their individual sequences.
+                </li>
+                <li>
+                    Schedules play a key role in understanding the dynamic execution of transactions in a concurrent
+                    environment, helping maintain the integrity and consistency of the database system.
+                </li>
+            </ol>
+
+            <ul>
+                <li>It is used to preserve the order of operation in each of individual transaction.</li>
+            </ul>
+            <div class="in">
+                <h3>Schedule are of three types:</h3>
+                <ol>
+                    <li>Serial schdeule</li>
+                    <li>Non serial schedule</li>
+                    <li>Serializable schedule</li>
+                </ol>
+                <div class="in">
+                    <h3>Serial Schedule</h3>
+                    <ul>
+                        <li>
+                            In a serial schedule, one transaction is executed entirely before starting another
+                            transaction.
+                        </li>
+                        <li>
+                            When the first transaction completes its cycles, only then does the next transaction start.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Consider two transactions, T1 and T2. In a serial schedule, if T2 is being executed first, it
+                        means that T2 will be completely executed before T1 begins its execution. The operations of T2,
+                        including reads, writes, and any computations, will finish before T1's operations commence.
+                    </p>
+                    <p>
+                        Serial schedules ensure a strict sequential execution of transactions, eliminating any
+                        interleaving of operations between transactions. This guarantees that the effects of one
+                        transaction are visible to the database before the next transaction begins, maintaining a clear
+                        order of execution.
+                    </p>
+                    <p>
+                        While serial schedules provide simplicity and ease of analysis, they may lead to reduced
+                        concurrency and potentially longer execution times when compared to more concurrent scheduling
+                        methods.
+                    </p>
+                    <ul>
+                        <li>Note: For set of 'n' transaction 'n!' different valid schedules can be possible.
+                            <ul>
+                                <li>For 3 transaction T1 T2 T3 - 3! - 1 * 2 * 3 = 6
+                                    <br>T1 T2 T3, T2 T1 T3, T3 T1 T2, T1 T3 T2, T2 T3 T1, T3 T2 T1
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Non-Serial Schedule</h3>
+                    <ul>
+                        <li>
+                            In a non-serial schedule, instructions of transactions execute concurrently, allowing for
+                            the interleaving of instructions between transactions.
+                        </li>
+                        <li>
+                            Interleaving refers to the practice of transitioning from the execution of one transaction
+                            to another transaction within the schedule.
+                        </li>
+                        <li>
+                            The possible number of non-serial schedules for multiple transactions can be significantly
+                            larger compared to serial schedules.
+                            <ul>
+                                <li>
+                                    For example, consider three transactions:
+                                    <ul>
+                                        <li>T1 has 4 instructions</li>
+                                        <li>T2 has 2 instructions</li>
+                                        <li>T3 has 3 instructions</li>
+                                    </ul>
+                                    Then the total number of non-serial schedules is calculated using permutations,
+                                    considering the interleaving of instructions:
+                                    <br>Total Non-Serial Schedules = (2 + 3 + 4)! / (2! * 3! * 4!) = 1260
+                                    <br>Total Serial Schedules = 3! = 6
+                                    <br>Total Number of Non-Serial Schedules = 1260 - 6 = 1254
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Serializable Schedule</h3>
+                    <ul>
+                        <li>
+                            A non-serial schedule is considered serializable if its result is equivalent to the result
+                            obtained from executing a serial schedule of the same transactions.
+                        </li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p>
+                        Let's consider a non-serial schedule involving two transactions, T1 and T2. The non-serial
+                        schedule interleaves instructions between T1 and T2 to execute concurrently. To determine if it
+                        is serializable, we compare its result with that of a corresponding serial schedule.
+                    </p>
+                    <pre>
+                        <code>
+Non-Serial Schedule:
+T1: R(A)
+T2: R(B)
+T1: A = A + B
+T2: B = B * 2
+T1: W(A)
+T2: W(B)
+                        </code>
+                    </pre>
+                    <p>
+                        To check serializability, we compare this schedule with the serial schedule:
+                    </p>
+                    <pre>
+                        <code>
+Serial Schedule:
+T1: R(A)
+T1: A = A + B
+T1: W(A)
+T2: R(B)
+T2: B = B * 2
+T2: W(B)
+                        </code>
+                    </pre>
+                    <ul>
+
+                        <p>
+                            If the results of both schedules are the same, the non-serial schedule is serializable. If
+                            not,
+                            it indicates potential conflicts or dependencies that may need resolution for
+                            serializability.
+                        </p>
+                        <p>
+                            Serializable schedules are crucial for maintaining consistency in a concurrent database
+                            environment, ensuring that the final state is equivalent to the state achieved through a
+                            serialized execution of transactions.
+                        </p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Serializability & Testing of Serializability</h2>
+            <ul>
+                <li>
+                    Serializability helps identify which non-serial schedule produces consistent results similar to
+                    those of a serial schedule.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Test for Serializability of a Schedule</h3>
+                <p>
+                    A precedence graph is employed to test the serializability of a non-serial schedule.
+                </p>
+                <ul>
+                    <li>Graph is represented by 'G'. G(V, E)</li>
+                    <ul>
+                        <li>V: set of vertices (all transactions)</li>
+                        <li>E: set of edges T<sub>i</sub> &rarr; T<sub>j</sub></li>
+                    </ul>
+                    <li>
+                        When creating edges from one transaction to another in the precedence graph, three conditions
+                        are considered:
+                        <pre>
+                <code>
+T1    ->     T2
+W(Q)         R(Q)
+R(Q)         W(Q)
+W(Q)         W(Q)
+R(Q)         R(Q) (In this condition, there will be no edge)
+                </code>
+            </pre>
+                    </li>
+                    <li>
+                        When both transactions are reading the same variable, there will be no edge between them.
+                    </li>
+                    <li>
+                        If the precedence graph contains no cycles, it indicates that the schedule S is a serializable
+                        schedule.
+                    </li>
+                </ul>
+            </div>
+
+            <p>Example:</p>
+            <pre>
+                    <code>
+   T1    |     T2     |     T3
+--------------------------------
+   R(A)  |            |       
+   R(C)  |            |       
+   W(A)  |            |       
+         |    R(B)    |       
+   W(C)  |            |       
+         |    R(A)    |       
+         |            |   R(C)    
+         |    W(B)    |       
+         |            |   R(B)    
+         |            |   W(C)    
+         |    W(A)    |       
+         |            |   W(B)     
+                    </code>
+                </pre>
+            <img src="../../images/schedule1.svg" alt="" class="wb">
+            <p>As there is no cycle formed in this graph that means it is serializable schedule.</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=866aUdG-iLY&list=PLL8qj6F8dGlRyI82X0yUtKEb_eAlHXbW2&index=182&pp=iAQB"
+                        class="ba" target="_blank">Video lecture &neArr;</a></li>
+            </ul>
+            <p>Another example:</p>
+            <pre>
+                    <code>
+   T1    |     T2     |     T3
+--------------------------------
+   R(A)  |            |       
+         |    R(B)    |       
+         |            |   R(C)    
+         |    W(B)    |       
+         |            |   W(C)    
+   W(A)  |            |       
+         |    R(A)    |       
+         |            |       
+   R(C)  |            |       
+         |    W(A)    |     
+   W(C)  |            |       
+         |            |   W(B)    
+                    </code>
+                </pre>
+            <img src="../../images/schedule2.svg" alt="" class="wb">
+            <ul>
+                <li>A cycle is formed in this one that means it is non serializable schedule.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <p>
+                If we have a non-serializable schedule and we aim to convert it into a serializable schedule, two
+                methods can be employed:
+            <ol>
+                <li>Conflict Serializability</li>
+                <li>View Serializability</li>
+            </ol>
+            </p>
+            <div class="in">
+                <h3>Conflict Serializability</h3>
+                <ul>
+                    <li>
+                        A schedule is considered conflict serializable if, after swapping non-conflicting operations, it
+                        can be transformed into a serial schedule (conflict equivalent to a serial schedule).
+                    </li>
+                    <li>
+                        Conflicting operations are those that may create interference when executed concurrently. For
+                        instance:
+                        <pre>
+                            <code>
+            T1   |   T2
+            -----------
+            W(A) | W(A)
+            W(A) | R(A)
+            R(A) | W(A)
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        In the above example, when both T1 and T2 are writing to the same variable (A), it constitutes a
+                        conflicting operation. The conditions previously used to create edges in the precedence graph
+                        are now identified as conflicting operations.
+                    </li>
+                    <li>
+                        Other operations not falling into these conflicting conditions are considered non-conflicting.
+                    </li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <pre>
+                    <code>
+T1    |     T2     
+-----------------
+R(A)  |              
+W(A)  |          
+      |    R(A)          
+      |    W(A)      
+R(B)  |               
+W(B)  |              
+      |    R(B)      
+      |    W(B)                    
+                    </code>
+                </pre>
+                <p>
+                    In order to convert the given schedule into a conflict serializable form, we will identify
+                    conflicting operations and rearrange them to achieve serializability. In the given example:
+                </p>
+                <pre>
+                    <code>
+    T1    |     T2     
+---------------------
+    R(A)  |              
+    W(A)  |          
+          |    R(A)          
+          |    W(A)      
+    R(B)  |               
+    W(B)  |              
+          |    R(B)      
+          |    W(B)                    
+                    </code>
+                </pre>
+                <p>
+                    The conflicting operations are W(A) in T1 and W(A) in T2, as well as W(B) in T1 and W(B) in T2. To
+                    make the schedule conflict serializable, we can swap these conflicting operations:
+                </p>
+                <pre>
+                    <code>
+    T1    |     T2     
+---------------------
+    R(A)  |              
+    R(B)  |          
+    W(A)  |    R(A)          
+    W(B)  |    W(A)      
+          |    R(B)      
+          |    W(B)                    
+                    </code>
+                </pre>
+                <p>
+                    The modified schedule is now conflict serializable as it can be transformed into a serial schedule
+                    by rearranging conflicting operations. This ensures that the final result remains consistent with a
+                    serial execution of transactions.
+                </p>
+            </div>
+            <div class="in">
+                <h3>View Serializability</h3>
+                <ul>
+                    <li>
+                        A schedule is considered view serializable if it is view equivalent to a serial schedule.
+                    </li>
+                    <li>
+                        If a schedule is conflict serializable, then it is also view serializable.
+                    </li>
+                    <li>
+                        However, view serializable schedules that are not conflict serializable may contain blind
+                        writes.
+                    </li>
+                </ul>
+                <p><strong>Two schedules, s1 and s2, are view equivalent if they satisfy the following
+                        conditions:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Initial Read:</strong> The initial read of both schedules is the same.
+                        <pre>
+            <code>
+S1       T1   |   T2          S2   T1   |    T2 
+        ------+-------            ------+------- 
+         R(A) |                         |  W(A)
+                  |  W(A)              R(A) |
+            </code>
+        </pre>
+                        In this example, R(A) is the initial read in Schedule 1, and in Schedule 2, R(A) is still the
+                        initial read.
+                    </li>
+                    <li>
+                        <strong>Update Read:</strong> In Schedule S1, if T<sub>i</sub> is reading A, which is updated by
+                        T<sub>j</sub>, then in S2 also.
+                        <pre>
+            <code>
+S1       T1  |  T2  | T3           S2   T1  |  T2  |  T3
+       ------+------+-----             -----+------+------ 
+        W(A) |      |                       | W(A) |
+             | W(A) |                  W(A) |      |
+             |      | R(A)                  |      | R(A)
+            </code>
+        </pre>
+                    </li>
+                    <li>
+                        <strong>Final Write:</strong> The final write must be the same between both schedules.
+                        <pre>
+            <code>
+S1       T1  |  T2  | T3           S2   T1  |  T2  |  T3
+       ------+------+-----             -----+------+------ 
+        W(A) |      |                       | R(A) |
+             | R(A) |                  W(A) |      |
+             |      | W(A)                  |      | W(A)
+            </code>
+        </pre>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Recoverability of Schedule</h2>
+            <ul>
+                <li>
+                    If a schedule involves multiple transactions and one transaction reads some other transaction's
+                    updated instruction, and after that, if there is a failure or error, and we are able to return to a
+                    consistent state, then it is considered a recoverable schedule; otherwise, it is an irrecoverable
+                    schedule.
+                </li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <p>
+                Consider the following schedule involving two transactions, T1 and T2:
+            </p>
+            <pre>
+    <code>
+    T1        |       T2
+----------------------------------
+   R(A)       |             
+   W(A)       |             
+              |      R(A)          
+              |      W(A) (Updated by T1)
+   W(B)       |             
+    </code>
+</pre>
+            <p>
+                In this example, T1 reads and writes to variable A, and T2 reads and writes to the same variable after
+                T1. If a failure occurs after T2 reads A but before T2 writes A, the system needs to recover to a
+                consistent state.
+            </p>
+            <p>
+                If the system can roll back the changes made by T1 (undo the write operation), it can ensure
+                recoverability. In this case, the schedule is recoverable because the system can return to a consistent
+                state despite the error or failure.
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Cascading Rollback & Cascadeless Schedule</h2>
+            <div class="in">
+                <h3>Cascading Rollback</h3>
+                <ul>
+                    <li>
+                        Cascading rollback occurs when, due to a failure in one transaction, multiple transactions have
+                        to be rolled back.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Cascadeless Schedule</h3>
+                <ul>
+                    <li>
+                        A cascadeless schedule is designed to avoid cascading rollbacks by ensuring that a transaction
+                        must commit before the data item it updates is read by another transaction.
+                    </li>
+                </ul>
+            </div>
+            <p><strong>Example:</strong></p>
+            <p>
+                Consider the following schedule involving two transactions, T1 and T2, where T2 reads a data item before
+                T1 commits:
+            </p>
+            <pre>
+    <code>
+    T1        |       T2
+----------------------------------
+   W(A)       |             
+   R(A)       |             
+   R(B)       |             
+              |      W(B)          
+              |      R(A) (Reads uncommitted value due to T1 not committed)
+    </code>
+</pre>
+            <p>
+                In this example, T2 reads data item A before T1 commits its write operation on A. If T1 encounters a
+                failure and rolls back, it will result in T2 having read an uncommitted value of A. This situation
+                represents cascading rollback.
+            </p>
+            <p>
+                To achieve a cascadeless schedule, transactions should be arranged such that a transaction commits
+                before the data it updates is read by another transaction, preventing cascading rollbacks.
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Concurrency Control Techniques</h2>
+            <ul>
+                <li>
+                    Concurrency is a critical aspect of database management systems that involves multiple transactions
+                    executing concurrently to enhance system efficiency.
+                </li>
+                <li>
+                    To mitigate issues related to concurrency, various protocols (rules) are applied to transactions to
+                    ensure consistency and isolation.
+                </li>
+                <li>
+                    Different concurrency control techniques include:
+                    <ol>
+                        <li><strong>Lock-Based Protocols:</strong> These protocols involve acquiring and releasing locks
+                            on data items to control access and prevent conflicts between transactions.</li>
+                        <li><strong>Timestamp-Based Protocols:</strong> Transactions are assigned unique timestamps, and
+                            conflicts are resolved based on these timestamps to ensure a consistent order of execution.
+                        </li>
+                        <li><strong>Validation-Based Protocols:</strong> Transactions are validated before committing to
+                            ensure that their execution does not violate consistency constraints.</li>
+                        <li><strong>Multiversion Concurrency Control Protocols:</strong> Multiple versions of a data
+                            item are maintained, allowing transactions to access the appropriate version without
+                            locking, enhancing concurrency.</li>
+                        <li><strong>Graph-Based Protocols:</strong> Dependency graphs are used to represent
+                            relationships between transactions, helping in deadlock detection and prevention.</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Lock-Based Protocols</h3>
+                <p><strong>Granularity of Locks</strong></p>
+                <ul>
+                    <li>
+                        The level or type of information that a lock protects is referred to as locking granularity. In
+                        other words, locking granularity defines the size of data items that the data manager locks.
+                    </li>
+                </ul>
+                <p><strong>Locking can occur at the following levels:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Coarse Granularity:</strong> In this level, the database management system (DBMS) places
+                        locks on entities such as tables, data files, or the entire database.
+                        <ul>
+                            <li>It reduces the number of transactions that can be executed concurrently, leading to
+                                lower throughput and increased response time.</li>
+                            <li>This approach results in lower concurrency due to the larger entities being locked.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Fine Granularity:</strong> Locks are placed on smaller entities, such as records or
+                        fields within a table. It can also involve locking entire tables.
+                        <ul>
+                            <li>Although fine granularity introduces more lock overhead, it enhances concurrency by
+                                allowing multiple transactions to access different parts of the data simultaneously.
+                            </li>
+                            <li>Higher concurrency leads to increased throughput and reduced response time.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Intermediate Granularity:</strong> Locks are applied to pages, where a page is a
+                        fixed-size unit like 4KB, 8KB, or 16KB.
+                        <ul>
+                            <li><strong>Pages:</strong> In the context of databases, a table may span several pages, and
+                                a page may contain several rows of a table or multiple tables.</li>
+                            <li>This approach provides moderate concurrency and incurs moderate lock overhead.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Timestamp-Based Protocol</h3>
+                <ul>
+                    <li>
+                        The timestamp-based protocol is employed to order conflicting transactions, where conflicting
+                        transactions are those that require access to the same data items for execution.
+                    </li>
+                    <li>
+                        Each transaction T<sub>i</sub> is assigned a timestamp or a unique number denoted by TS before
+                        it starts execution.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Deadlock</h2>
+            <p>This topic falls under the umbrella of concurrency control.</p>
+            <ul>
+                <li>
+                    A system is considered to be in a deadlock state if there exists a set of transactions
+                    {T<sub>0</sub>, T<sub>1</sub>, T<sub>2</sub>, T<sub>3</sub>, ..., T<sub>n</sub>} such that each
+                    transaction in the set is waiting for the release of a resource held by any other transaction in
+                    that set, resulting in all transactions being in a waiting state.
+                </li>
+            </ul>
+            <p><strong>Necessary Conditions for Deadlock:</strong></p>
+            <p>These conditions indicate that our system is in a deadlock.</p>
+            <ol>
+                <li><strong>Hold and Wait:</strong> Transactions hold resources while waiting for additional resources.
+                    <ul>
+                        <li><strong>Example:</strong>
+                            <br> Transaction T1 holds resource R1 and is waiting for resource R2, while Transaction T2
+                            holds resource R3 and is waiting for resource R1. Both transactions are holding resources
+                            and waiting for additional resources, satisfying the hold and wait condition.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Mutual Exclusion:</strong> Resources cannot be shared; only one transaction can use a
+                    resource at a time.
+                    <ul>
+                        <li>
+                            <strong>Example:</strong> <br>
+                            Two transactions, T1 and T2, are competing for access to a printer resource. Due to the
+                            mutual exclusion condition, only one transaction can use the printer at a time, leading to
+                            potential conflicts and deadlock situations.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>No Preemption:</strong> Resources cannot be preempted or forcefully taken away from a
+                    transaction; they must be explicitly released.
+
+                    <ul>
+                        <li><strong>Example:</strong> <br>
+                            Transaction T1 holds resource R1, and Transaction T2 requests R1. If preemption were
+                            allowed, the system could forcefully take R1 from T1 and give it to T2. However, the no
+                            preemption condition states that this is not allowed, contributing to deadlock risk.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Circular Wait:</strong> There is a circular chain of transactions, each holding a resource
+                    needed by the next transaction in the chain.
+                    <ul>
+                        <li>
+                            <strong>Example:</strong> <br>
+                            Consider two transactions, T<sub>1</sub> and T<sub>2</sub>, where T<sub>1</sub> holds
+                            resource
+                            R<sub>1</sub> and requests resource R<sub>2</sub>, while T<sub>2</sub> holds resource
+                            R<sub>2</sub> and
+                            requests resource R<sub>1</sub>. This scenario forms a circular wait and contributes to
+                            deadlock
+                            conditions.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <div class="in">
+                <h3>Methods for Handling Deadlocks</h3>
+                <p>Deadlocks, once identified, can be managed using different methods to prevent or address them. There
+                    are two primary methods for handling deadlocks:</p>
+                <ol>
+                    <li>
+                        <strong>Deadlock Prevention:</strong>
+                        <p>Preventing deadlocks involves employing strategies and protocols to eliminate one or more
+                            necessary conditions for deadlock. The focus is on structuring the system in a way that
+                            potential deadlocks cannot occur. Key strategies include:</p>
+                        <ul>
+                            <li>Ensuring the Hold and Wait condition is not satisfied by requiring transactions to
+                                acquire all needed resources before initiating execution.</li>
+                            <li>Addressing Mutual Exclusion by allowing resources to be shared among transactions.</li>
+                            <li>Introducing Preemption, where if a transaction cannot acquire a resource, it releases
+                                all previously acquired resources and restarts the process.</li>
+                            <li>Breaking Circular Wait by assigning a priority to resources and requiring transactions
+                                to request resources in increasing order of priority.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Detect & Recovery:</strong>
+                        <p>Deadlock detection involves periodically examining the system's state to identify if a
+                            deadlock has occurred. If a deadlock is detected, recovery strategies are implemented to
+                            resolve it. Common approaches include:</p>
+                        <ul>
+                            <li>Rollback: Roll back one or more transactions to a previous consistent state, releasing
+                                the resources held by those transactions.</li>
+                            <li>Resource Preemption: Forcefully reclaim resources from transactions to break the
+                                circular wait and resolve the deadlock.</li>
+                            <li>Transaction Termination: Terminate one or more transactions involved in the deadlock to
+                                release their resources.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>These methods provide different approaches for managing deadlocks, offering a balance between
+                    prevention measures and post-detection recovery strategies.</p>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>References</p>
+        <ul>
+            <li><a href="https://www.youtube.com/playlist?list=PLL8qj6F8dGlRyI82X0yUtKEb_eAlHXbW2" class="ba"
+                    target="_blank">Playlist
+                    &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

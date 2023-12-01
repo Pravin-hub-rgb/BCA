@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Level Data Base Design & Normalization</title>
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../../public/style.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+        </div>
+        <div class="botbut">
+            <a href="" class="link">Next Topic &rarr;</a>
+            <a href="" class="link">&larr; Previous Topic</a>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>High Level Data Base Design & Normalization</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>High-Level Database Design & Normalization</h1>
+        <div class="wh">
+            <h2>Features of Relational Database Design</h2>
+            <p>When a database designer is planning to design a database, they consider the process, key points, and
+                methodologies involved in the construction of a relational database.</p>
+            <ul>
+                <li>Relational Database design is based on four key parameters that serve as guidelines for the
+                    construction of a database.</li>
+            </ul>
+            <div class="in">
+                <h3>1. Semantics of Attributes:</h3>
+                <ul>
+                    <li>This aspect revolves around the meaning of each individual attribute within the database.</li>
+                    <li><strong>Guideline:</strong> Design a relation schema to facilitate easy explanation of its
+                        meaning; names should align with the data stored in them.</li>
+                    <li>Do not combine attributes from multiple entity types to avoid confusion.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2. Reducing Redundant Information from Tuples:</h3>
+                <ul>
+                    <li>Duplicate values should not exist in multiple tuples.</li>
+                    <li><strong>Guideline:</strong> Design the database to eliminate insertion, deletion, and updation
+                        anomalies.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>3. Reducing Null Values in Attributes:</h3>
+                <ul>
+                    <li>The value of an attribute should not be frequently null.</li>
+                    <li><strong>Guidelines:</strong> Avoid including attributes with frequent null values in the
+                        relation.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>4. Disallowing the Possibility of Generating Spurious Tuples</h3>
+                <ul>
+                    <li>This refers to avoiding the generation of spurious tuples, meaning undesired results when
+                        joining tables.</li>
+                    <li><strong>Guidelines:</strong> Design the relational schema to enable joining with equality
+                        conditions on common attributes.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Anomalies in Relational Database:-</h2>
+            <ul>
+                <li>Refers to undesirable problem occured while designing the database.</li>
+                <li>Basically we have 3 anomolies (problems):
+                    <ol>
+                        <li>Insertion anamoly</li>
+                        <li>Deletion anamoly</li>
+                        <li>Updation anamoly</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Insertion Anomaly</h3>
+                <ul>
+                    <li>An insertion anomaly occurs when there is a desire to insert information, but it cannot be added
+                        due to certain constraints or restrictions.</li>
+                </ul>
+                <p>Example:</p>
+                <pre>
+    <code>
++-------------------------------------------+
+| EID |   Name  | Salary | DID | Department |
++-------------------------------------------+
+|  1  | Paul    | 10,000 |  1  | A/C        |  
+|  2  | John    | 6,000  |  1  | A/C        |  
+|  3  | Sharav  | 7,000  |  3  | Sales      |
+|  4  | Nike    | 6,000  |  2  | Marketing  |
+|  5  | Hudson  | 10,000 |  2  | Marketing  |
+|  6  | Smith   | 20,000 |  1  | A/C        |  
+|  7  | Paula   | 50,000 |  2  | Marketing  |
+|  8  | Maithli | 15,000 |  1  | A/C        |
+|     |         |        |  5  | Finance    | 
++-------------------------------------------+
+                    </code>
+                </pre>
+                <ul>
+                    <li>We can't add Finance and DID 5 due to EID constraints, as EID (primary key) cannot be left blank
+                        or null.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Deletion Anomaly</h3>
+                <ul>
+                    <li>A deletion anomaly occurs when we remove some existing information from a database, and this
+                        action unintentionally leads to the deletion of other related but necessary data.</li>
+                    <li>Example:</li>
+                    <pre>
+                        <code>
++-------------------------------------------+
+| EID |   Name  | Salary | DID | Department |
++-------------------------------------------+
+|  1  | Paul    | 10,000 |  1  | A/C        |  
+|  2  | John    | 6,000  |  1  | A/C        |  
+|  3  | Sharav  | 7,000  |  3  | Sales      |
++-------------------------------------------+
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>If we delete the tuple with EID 1, which is the only occurrence of Department A/C, we lose
+                            the definition of the A/C department entirely.</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Updation Anomaly</h3>
+                <ul>
+                    <li>An updation anomaly occurs when we attempt to update data in a way that introduces inconsistency
+                        into the dataset.</li>
+                    <li>Example: Suppose we want to change the Department ID (DID) from 1 to 2 for the A/C department:
+                    </li>
+                    <pre>
+                        <code>
++-------------------------------------------+
+| EID |   Name  | Salary | DID | Department |
++-------------------------------------------+
+|  1  | Paul    | 10,000 |  2  | A/C        |  
+|  2  | John    | 6,000  |  1  | A/C        |  
+|  3  | Sharav  | 7,000  |  3  | Sales      |
++-------------------------------------------+
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>This update would create inconsistency because now the Department A/C is associated with
+                            both DID 1 and DID 2, making it unreliable and confusing.</li>
+                        <li>For accurate updates, one would need to change the Department ID for all instances of A/C,
+                            leading to a more complex and error-prone process.</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Normalization: Introduction</h2>
+            <p>Normalization is a systematic process aimed at decomposing or dividing a relational database into
+                multiple relations to eliminate anomalies and improve its overall structure.</p>
+            <ul>
+                <li>It is a step-by-step process, and each step is referred to as a normal form. Normalization is a
+                    reversible process.</li>
+            </ul>
+            <div class="in">
+                <h3>Benefits of Normalization</h3>
+                <ol>
+                    <li>Smaller tables with smaller rows:</li>
+                    <ul>
+                        <li>Normalization results in breaking down large tables into smaller, more manageable ones,
+                            reducing redundancy and improving efficiency.</li>
+                    </ul>
+                    <li>Searching, sorting & creating indexes are faster:</li>
+                    <ul>
+                        <li>Normalized tables simplify data retrieval operations, leading to faster search, sort, and
+                            index creation processes.</li>
+                    </ul>
+                    <li>Small number of null values & less redundant data:</li>
+                    <ul>
+                        <li>Normalization aims to minimize null values and redundant data, ensuring a cleaner and more
+                            efficient database design.</li>
+                    </ul>
+                    <li>Data modification anomalies are reduced:</li>
+                    <ul>
+                        <li>Normalization helps mitigate issues such as insertion, update, and deletion anomalies,
+                            promoting data integrity.</li>
+                    </ul>
+                    <li>Easier to maintain & change as the needs change:</li>
+                    <ul>
+                        <li>A normalized database is more adaptable to changes in requirements, making it easier to
+                            maintain and modify over time.</li>
+                    </ul>
+                    <li>Reduces data dependency:</li>
+                    <ul>
+                        <li>Normalization minimizes data redundancy, leading to reduced dependency and ensuring that
+                            changes in one part of the database do not adversely affect other parts.</li>
+                    </ul>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Types of Normal Forms:</h3>
+                <ol>
+                    <li>First Normal Form (1NF):</li>
+                    <ul>
+                        <li>Focuses on eliminating duplicate data by ensuring that each attribute in a table contains
+                            only atomic (indivisible) values.</li>
+                    </ul>
+                    <li>Second Normal Form (2NF):</li>
+                    <ul>
+                        <li>Builds on 1NF by addressing partial dependencies. All non-prime attributes must be fully
+                            functionally dependent on the primary key.</li>
+                    </ul>
+                    <li>Third Normal Form (3NF):</li>
+                    <ul>
+                        <li>Further refines data integrity by removing transitive dependencies. No non-prime attribute
+                            should be transitively dependent on the primary key.</li>
+                    </ul>
+                    <li>Boyce-Codd Normal Form (BCNF):</li>
+                    <ul>
+                        <li>Aims to eliminate all non-trivial functional dependencies. Every non-trivial functional
+                            dependency is a superkey.</li>
+                    </ul>
+                    <li>Fourth Normal Form (4NF) based on Multivalued Dependency:</li>
+                    <ul>
+                        <li>Addresses situations where a table has multiple independent multi-valued attributes. It
+                            ensures data is organized efficiently.</li>
+                    </ul>
+                    <li>Fifth Normal Form (5NF) based on Join Dependency:</li>
+                    <ul>
+                        <li>Deals with scenarios where a table contains multiple overlapping candidate keys, and it aims
+                            to eliminate redundancy through the use of join dependencies.</li>
+                    </ul>
+                </ol>
+                <p>The first four depend on the concept of functional dependency.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>What are Functional Dependencies?</h2>
+            <p>Functional dependencies result from the interrelationship between attributes or tuples in any relation.
+            </p>
+            <ul>
+                <li>They play a crucial role in normalization and reduce redundancy.</li>
+                <li>In relation R, where X and Y are two subsets of sets of attributes, Y is said to be functionally
+                    dependent on X if a given set of values for all attributes in X uniquely determines the values of
+                    all attributes in Y.
+                    <br>X &rarr; Y (Y depends on X or X determines Y)
+                </li>
+            </ul>
+            <p>Example:</p>
+            <pre>
+                <code>
++-----------+
+|  X  |  Y  |
++-----------+
+|  a  |  1  |
+|  b  |  22 |
+|  c  |  65 |
+|  a  |  1  |
++-----------+
+                </code>
+            </pre>
+            <p>If X &rarr; Y, then for any two tuples (t1 and t2) where t1[X] = t2[X], it follows that t1[Y] = t2[Y].
+                For every unique value of X, we get a unique value from Y.
+                <br>a &rarr; 1
+                <br>X is the determinant, and Y is dependent.
+            </p>
+            <p><b>Question: Is X &rarr; Y?</b></p>
+            <pre>
+                <code>
++-----------+
+|  X  |  Y  |
++-----------+
+|  a  |  2  |
+|  b  |  2  |
+|  a  |  2  |
+|  b  |  2  |
+|  c  |  2  |
++-----------+
+                </code>
+            </pre>
+            <p>For every 'a' in X, we get Y = 2, and the same holds for 'b'; however, 'c' won't affect anything.
+                <br>a &rarr; 2, b &rarr; 2, c &rarr; 2
+            </p>
+            <p>
+                <b>Another example:</b>
+            <pre>
+                    <code>
++---------------------------+
+|  EID  |   Name  |  Salary |
++---------------------------+
+|   1   | Aditya  |  15000  |
+|   2   |  Manoj  |  16000  |
+|   3   | Sandeep |  9000   |
+|   4   |  Vikas  |  10000  |
+|   5   |  Manoj  |  9000   |
++---------------------------+
+                    </code>
+                </pre>
+            <p>Consider the functional dependency:</p>
+            <ul>
+                <li>X(EID) &rarr; Y(Name, Salary)</li>
+                <ul>
+                    <li>Which means X(EID) &rarr; Y(Name)</li>
+                    <li>X(EID) &rarr; Y(Salary)</li>
+                </ul>
+                <li>Vice versa is not true. For instance, when finding the name of a person with a salary of 9000, we
+                    might get two people, but when searching for the name of the person with ID 2, we get only one
+                    person.</li>
+            </ul>
+            </p>
+        </div>
+        <div class="wh">
+            <h2>First Normal Form - 1NF</h2>
+            <ul>
+                <li>A relation is in 1NF if the domain of each attribute contains only atomic values.</li>
+            </ul>
+            <p>Examples:</p>
+            <div class="in">
+                <pre>
+        <code>
++-------------------------------------+
+|  ID  |  Name  |  Age  |     Phone   |
++-------------------------------------+
+|   1  |    x   |  32   |     666     |
+|   2  |    y   |  65   |     777     |
+|   3  |    z   |  42   |  888, 222   |
++-------------------------------------+
+                </code>
+            </pre>
+                <p>ID 3 has two phone numbers, and we shouldn't have multiple values in a single attribute. To convert
+                    this to 1NF form, we can repeat the row like this &darr;</p>
+                <pre>
+                    <code>
++-------------------------------------+
+|  ID  |  Name  |  Age  |     Phone   |
++-------------------------------------+
+|   1  |    x   |  32   |     666     |
+|   2  |    y   |  65   |     777     |
+|   3  |    z   |  42   |     888     |
+|   3  |    z   |  42   |     222     |
++-------------------------------------+
+                    </code>
+                </pre>
+                <p>Now, each attribute contains only atomic values, adhering to the 1NF requirements.</p>
+            </div>
+            <div class="in">
+                <p><b>We can't even have composite attributes as it violates the atomic property for 1NF. For example
+                        &darr;</b></p>
+                <pre>
+                    <code>
++----------------------------------------+
+|  ID  |  Name  |  Address               |
++----------------------------------------+
+|   1  |    x   |  74A, Block 7, Delhi   |
+|   2  |    y   |  664b, Block 8, Delhi  |
++----------------------------------------+ 
+                    </code>
+                </pre>
+                <p>Converting it to 1NF form by distributing the address attribute into sub-attributes.</p>
+                <pre>
+                    <code>
++--------------------------------------------+
+|  ID  |  Name  |  Street  |  Block | State  |
++--------------------------------------------+
+|   1  |    x   |   74A    | Block 7 | Delhi |
+|   2  |    y   |   664b   | Block 8 | Delhi |
++--------------------------------------------+ 
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p><b>Working with derived attributes:</b></p>
+                <p>As derived attribute values can be easily calculated at runtime, they are removed in 1NF form.</p>
+                <pre>
+                    <code>
++-----------------------------------------+
+|  ID  |  Name  |      DOJ       |  WExp  |
++-----------------------------------------+
+|   1  |    x   |   16 May 2018  |   3    |
+|   2  |    y   |   14 Aug 2019  |   2    |
++-----------------------------------------+ 
+                    </code>
+                </pre>
+                <p>Converting to 1NF form &darr;</p>
+                <pre>
+                    <code>
++-------------------------------+
+|  ID  |  Name  |      DOJ      |
++-------------------------------+
+|   1  |    x   |   16 May 2018 |
+|   2  |    y   |   14 Aug 2019 |
++-------------------------------+ 
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <div>
+                <h2>Prime and Non-Prime Attributes</h2>
+
+                <div class="in">
+                    <h3>Prime or Key Attribute</h3>
+                    <ul>
+                        <li>
+                            For a given relation R = {A1, A2, A3, A4, ..., An}, an attribute a is a prime attribute if A
+                            is part
+                            of any candidate key of R.
+                        </li>
+                        <li>
+                            Alternatively, an attribute is considered prime if it is part of a key.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="in">
+                    <h3>Non-Prime or Non-Key Attribute:</h3>
+                    <ul>
+                        <li>
+                            If an attribute is not part of any key, it is classified as a non-prime attribute.
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>Example:</h3>
+                <p>
+                    <strong>Relation Schema:</strong>
+                <ul>
+                    <li><strong>Relation Schema:</strong> Student(Rollno, S-Name, S-Address, S-DOB, S-Fees, S-Course)
+                    </li>
+                    <li>
+                        Now, let's determine which attributes can serve as candidate keys.
+                        <ul>
+                            <li>Since Rollno uniquely identifies each student, it qualifies as a candidate key: Rollno →
+                                C<sub>k</sub>.</li>
+                            <li>The combination [S-Name + S-Address] can also uniquely identify a student: [S-Name +
+                                S-Address] → C<sub>k</sub>
+                                (This combination can also identify a unique value).</li>
+                            <li>Therefore, Rollno, S-Name, and S-Address are considered prime attributes as they are
+                                either individually or
+                                collectively part of a candidate key.</li>
+                            <li>On the other hand, S-DOB, S-Fees, and S-Course are classified as non-prime key
+                                attributes since they do not
+                                contribute to the identification of unique tuples.</li>
+                        </ul>
+                    </li>
+                </ul>
+                </p>
+            </div>
+
+        </div>
+        <div class="wh">
+            <h2>Fully Functional Dependency:</h2>
+            <ul>
+                <li>In the context of database normalization, a fully functional dependency refers to the condition
+                    where a non-prime key attribute (denoted as A) is entirely dependent on all prime key attributes. In
+                    other words, the value of A is uniquely determined by the combination of values in all prime key
+                    attributes.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <p>Consider a relation named "Student" with prime key attributes (rollno & games) and non-prime key
+                attributes (grade, name, and fees).</p>
+
+            <p>For illustration purposes:</p>
+            <ul>
+                <li><strong>Name:</strong> This attribute can be uniquely identified using only the "rollno."</li>
+                <li><strong>Fees:</strong> Similarly, the "fees" attribute can be uniquely identified using only the
+                    "games."</li>
+                <li>
+                    <strong>Grade:</strong> However, the "grade" attribute requires knowledge of both "rollno" and
+                    "games" to uniquely identify it. In this scenario, the grade is considered fully dependent on both
+                    prime key attributes (rollno and games).
+                </li>
+            </ul>
+            <p>This exemplifies a fully functional dependency, where certain non-prime key attributes rely on the
+                entirety of the prime key for their uniqueness.</p>
+            <h2>Partial Dependency</h2>
+            <ul>
+                <li>Partial Dependency occurs when you have more than one prime key attribute, and a non-prime key
+                    attribute is not dependent on all prime key attributes.</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <p>Consider a relation named "Student" with prime key attributes (rollno & games) and non-prime key
+                attributes (grade, name, and fees).</p>
+
+            <ul>
+                <li>
+                    <strong>Name:</strong> The "name" attribute, in this case, can be retrieved solely using the
+                    "rollno." Since it is not dependent on both prime key attributes (rollno and games), it is
+                    considered a partial dependency.
+                </li>
+                <li>
+                    <strong>Fees:</strong> Similarly, the "fees" attribute can be uniquely identified using only the
+                    "games" attribute. This situation also represents a partial dependency since it does not depend on
+                    both prime key attributes.
+                </li>
+                <li>
+                    <strong>Grade:</strong> Unlike the previous examples, the "grade" attribute requires knowledge of
+                    both "rollno" and "games" for unique identification. Therefore, it does not exhibit partial
+                    dependency and is fully dependent on the entire combination of prime key attributes.
+                </li>
+            </ul>
+
+            <p>This provides a more comprehensive view of partial dependency within the context of a relational
+                database, emphasizing that certain non-prime key attributes depend on only a subset of the prime key
+                attributes for their uniqueness.</p>
+
+        </div>
+        <div class="wh">
+            <h2>Trivial and Non-trivial Dependency</h2>
+            <div class="in">
+                <h3>Trivial Functional Dependency</h3>
+                <ul>
+                    <li>
+                        If <em>A &rarr; B</em> and <em>B &subseteq; A</em>, then this dependency is a Trivial Functional
+                        Dependency. In simpler terms, if the right-hand side (B) is a subset of the left-hand side (A),
+                        the dependency is considered trivial.
+                    </li>
+                    <li>
+                        <em>A &rarr; A</em> and <em>B &rarr; B</em> are also categorized as Trivial Dependencies. These
+                        cases express that an attribute is functionally dependent on itself, which is inherently
+                        evident.
+                    </li>
+                    <li>
+                        <strong>Example:</strong> Let's consider a relation where <em>Rollno &rarr; Rollno</em> and
+                        <em>Rollno, S-name &rarr; S-Name</em>. In the first case, <em>Rollno &rarr; Rollno</em> is
+                        trivial because it merely states that you can find the value of <em>Rollno</em> from itself,
+                        which is self-evident and doesn't provide new information. The second case, <em>Rollno, S-name
+                            &rarr; S-Name</em>, is also trivial as it essentially says that knowing both <em>Rollno</em>
+                        and <em>S-name</em>, you can find the value of <em>S-Name</em>. These examples highlight
+                        situations where the dependency is obvious and doesn't contribute additional insights.
+                    </li>
+                    <li>
+                        Trivial dependencies are characterized by their predictability and lack of novelty, making them
+                        less informative in the context of database relationships.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Non-trivial Functional Dependency</h3>
+                <ul>
+                    <li>
+                        If <em>A &rarr; B</em> and <em>B</em> is not a subset of <em>A</em>, then this dependency is a
+                        Non-trivial Functional Dependency. In other words, the right-hand side (B) provides new
+                        information beyond what is already known from the left-hand side (A).
+                    </li>
+                    <li>
+                        <strong>Example:</strong> Consider a relation where <em>Rollno &rarr; S-Name</em>. This is a
+                        non-trivial dependency because knowing the <em>Rollno</em> uniquely determines the value of
+                        <em>S-Name</em>, and the relationship is not self-evident or redundant. The dependency
+                        introduces new information about the dataset.
+                    </li>
+                    <li>
+                        Non-trivial dependencies are essential in database design as they contribute to the
+                        normalization process, helping to eliminate redundancy and ensure data integrity.
+                    </li>
+                    <li>
+                        Unlike trivial dependencies, non-trivial dependencies play a crucial role in providing valuable
+                        insights and maintaining the accuracy of data relationships within a relational database.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Transitive and Non-transitive Dependency</h2>
+            <div class="in">
+                <h3>Transitive Dependency</h3>
+                <ul>
+                    <li>
+                        A transitive dependency occurs when there is an indirect relationship between two attributes
+                        through a third attribute. In other words, if <em>A &rarr; B</em> and <em>B &rarr; C</em>, then
+                        <em>A &rarr; C</em> is a transitive dependency.
+                    </li>
+                    <li>
+                        <strong>Example:</strong> Consider a relation where <em>EmployeeID &rarr; DepartmentID</em> and
+                        <em>DepartmentID &rarr; DepartmentName</em>. Here, <em>EmployeeID &rarr; DepartmentName</em> is
+                        a transitive dependency, as the department name is indirectly determined by the employee ID
+                        through the relationship with the department ID.
+                    </li>
+                    <li>
+                        Transitive dependencies can lead to data redundancy and are typically addressed through
+                        normalization techniques.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Non-transitive Dependency</h3>
+                <ul>
+                    <li>
+                        A non-transitive dependency, on the other hand, exists when there is a direct relationship
+                        between two attributes without involving a third attribute.
+                    </li>
+                    <li>
+                        <strong>Example:</strong> In a relation where <em>StudentID &rarr; StudentName</em>, this is a
+                        non-transitive dependency. The student name is directly determined by the student ID without the
+                        need for an intermediary attribute.
+                    </li>
+                    <li>
+                        Non-transitive dependencies are desirable in database design as they help maintain simplicity
+                        and reduce the risk of data anomalies.
+                    </li>
+                    <li>
+                        Identifying and eliminating transitive dependencies is a key step in the normalization process
+                        to ensure a well-structured and efficient relational database.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Second Normal Form (2NF)</h2>
+            <ul>
+                <li>
+                    A relation is in the second normal form (2NF) if it is in 1NF and all non-prime key attributes are
+                    fully functionally dependent upon the primary key attributes.
+                </li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <p>
+                Consider a relation named "Student" with prime key attributes (rollno & games) and non-prime key
+                attributes (grade, name, and fees).
+            </p>
+            <img src="../../images/functional1.svg" alt="" class="wb">
+            <ul>
+                <li>
+                    Using the diagram, we can observe that the "name" is dependent on "rollno" only, "fees" is dependent
+                    on "games" only, and "grade" is dependent on both "rollno" and "games."
+                </li>
+                <li>
+                    So, according to the definition of 2NF, we can create three tables:
+                    <ol>
+                        <li>(Rollno, Games, Grade)</li>
+                        <li>(Rollno, Name)</li>
+                        <li>(Games, Fees)</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <p>
+                In the new structure, each table represents a distinct functional dependency, ensuring that non-prime
+                key attributes are fully dependent on the primary key attributes. This adheres to the principles of the
+                second normal form, promoting data integrity and reducing redundancy in the relational database.
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Third Normal Form (3NF)</h2>
+            <ul>
+                <li>
+                    A relation is in the third normal form (3NF) if it is in 2NF and non-primary key attributes are
+                    non-transitively dependent upon primary key attributes.
+                </li>
+                <li>
+                    Alternatively, a relation is in 3NF if it is in 2NF and has no transitive dependencies.
+                </li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <img src="../../images/3nf.svg" alt="" class="wb">
+            <ul>
+                <li>
+                    In this example, we have a relation named "Student" with "Rollno" as the primary key attribute and
+                    "name," "semester," and "hostel" as non-prime attributes.
+                </li>
+                <li>
+                    Notably, we can determine "name," "semester," and "hostel" using "rollno," and we can also find
+                    "hostel" using "semester" directly.
+                </li>
+                <li>
+                    However, the main issue arises when different hostels are allotted to different semesters, creating
+                    a potential transitive dependency.
+                </li>
+                <li>
+                    This becomes evident when attempting to update or delete information, leading to problems in
+                    maintaining data integrity.
+                </li>
+                <li>
+                    To overcome this problem, we can divide the original relation into two sub-relations:
+                    <ol>
+                        <li>R1(Rollno, Name, Semester)</li>
+                        <li>R2(Semester, Hostel)</li>
+                    </ol>
+                    By doing this, we eliminate the transitive dependency and represent the data in 3NF. Each
+                    sub-relation now independently reflects meaningful relationships and adheres to the principles of
+                    the third normal form.
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Properties of Normalization</h2>
+            <ul>
+                <li>In 1NF, 2NF, 3NF we decompose relation to minimize the redundancy on the basis of function dependencies. But alone these are not sufficuent parameters for good relation schema.</li>
+                <li>So for making good design two additional properties also must hold on decomposition of relation:
+                    <ol>
+                        <li>Lossless Join properties</li>
+                        <li>Dependency preservation property</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
