@@ -914,16 +914,152 @@
         </div>
         <div class="wh">
             <h2>Properties of Normalization</h2>
+            <p>Normalization is a crucial process in database design, aiming to minimize redundancy and dependency
+                issues within relation schemas. While the first three normal forms (1NF, 2NF, 3NF) focus on decomposing
+                relations based on functional dependencies, achieving a good relational schema requires considering
+                additional properties.</p>
+
             <ul>
-                <li>In 1NF, 2NF, 3NF we decompose relation to minimize the redundancy on the basis of function
-                    dependencies. But alone these are not sufficuent parameters for good relation schema.</li>
-                <li>So for making good design two additional properties also must hold on decomposition of relation:
+                <li><strong>Functional Dependency:</strong> In 1NF, 2NF, and 3NF, relations are decomposed to minimize
+                    redundancy by organizing data based on functional dependencies. However, relying solely on these
+                    normal forms is insufficient for ensuring an optimal relation schema.</li>
+
+                <li><strong>Additional Properties:</strong> To enhance the design, two supplementary properties must
+                    also be satisfied during the decomposition of relations:
                     <ol>
-                        <li>Lossless Join properties</li>
-                        <li>Dependency preservation property</li>
+                        <li><strong>Lossless Join Property:</strong> This property ensures that combining decomposed
+                            relations through a natural join results in the original relation without losing any
+                            information. It prevents the creation of spurious tuples and maintains data integrity.</li>
+
+                        <li><strong>Dependency Preservation Property:</strong> This property ensures that functional
+                            dependencies observed in the original relation are retained after decomposition. It is vital
+                            for preserving the semantics of the data and preventing anomalies that could arise from lost
+                            dependencies.</li>
                     </ol>
                 </li>
             </ul>
+            <div class="in">
+                <h3>Lossless Join Property</h3>
+                <p>Picture the Lossless Join Property as taking a big table, splitting it into smaller ones, and then
+                    being able to merge them back together without losing any data. In the database world, this property
+                    ensures that when we decompose a table into smaller tables, we can recreate the original table
+                    without any missing information.</p>
+                <ul>
+                    <li><strong>No Missing Rows:</strong> Suppose we have a 'Employees' table split into 'Employee
+                        Names' and 'Employee Departments.' The Lossless Join Property guarantees that combining
+                        'Employee Names' and 'Employee Departments' brings us back to the full 'Employees' table, making
+                        sure no employee details are left out.</li>
+
+                    <li><strong>Essential in Normalization:</strong> It's a crucial rule in the process of
+                        normalization. When we organize our database, we want to be certain that no data is lost as we
+                        break it down and piece it back together.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Dependency Preservation Property</h3>
+                <p>Now, think of the Dependency Preservation Property as ensuring that the relationships between
+                    different parts of our data remain clear, even when we split them. It's about preserving the
+                    dependencies.</p>
+                <ul>
+                    <li><strong>Preserve Relationships:</strong> Consider a 'Orders' table with 'Order ID' and 'Customer
+                        Name.' If we decompose this into 'Order ID' and 'Customer Details,' Dependency Preservation
+                        ensures that the connection between 'Order ID' and 'Customer Name' is maintained.</li>
+
+                    <li><strong>Not Always Guaranteed:</strong> Unlike Lossless Join, Dependency Preservation isn't
+                        always guaranteed. Sometimes, when we break down our tables, we might lose some connections
+                        between pieces. It's like making sure the dependencies between tables stay intact - it doesn't
+                        always happen perfectly.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Boyce Codd Normal Form (BCNF)</h2>
+            <p>BCNF is a more refined version of the Third Normal Form (3NF) in database normalization. A relation is
+                said to be in BCNF if and only if all of its determinants are candidate keys.</p>
+            <ul>
+                <li>BCNF is essentially a stricter form of 3NF, emphasizing the elimination of certain types of
+                    redundancy in a relational database.</li>
+                <li>Consider a relation R(A, B, C) with the functional dependencies A &rarr; B and B &rarr; C. In BCNF,
+                    both A and B must be candidate keys, ensuring that all determinants are keys.</li>
+                <li>It's important to note that every relation in BCNF is also in 3NF, but not every relation in 3NF is
+                    necessarily in BCNF.</li>
+            </ul>
+            <p>Example:</p>
+            <p>Let's take a relation EmployeeSkills(EmployeeID, Skill, Proficiency) with the following functional
+                dependencies:</p>
+            <ul>
+                <li>EmployeeID &rarr; Skill (An employee is associated with a specific skill)</li>
+                <li>Skill &rarr; Proficiency (The proficiency level of a skill is determined by the skill itself)</li>
+            </ul>
+            <p>In BCNF, both EmployeeID and Skill must be candidate keys. This ensures that the determinants (EmployeeID
+                and Skill) are capable of uniquely identifying each tuple in the relation.</p>
+        </div>
+        <div class="wh">
+            <h2>Multivalued Dependency (MVD)</h2>
+            <p>Multivalued Dependency (MVD) is a concept in database normalization that deals with relationships
+                involving multiple values. It occurs when one attribute in a table uniquely determines another
+                attribute, independent of the other attributes in the table.</p>
+            <ul>
+                <li>In a relation R(A, B, C), if A determines both B and C independently, it forms a multivalued
+                    dependency.</li>
+                <li>MVDs help in identifying and addressing certain types of redundancies that may arise in a relational
+                    database.</li>
+                <li>Normalization through MVD is essential for achieving a more structured and efficient database
+                    design.</li>
+            </ul>
+            <p>Example:</p>
+            <p>Consider a relation StudentCourses(StudentID, Course, Instructor) with the following multivalued
+                dependency:</p>
+            <ul>
+                <li>StudentID &rarr; Course (A student can be enrolled in multiple courses)</li>
+                <li>StudentID &rarr; Instructor (A student can have multiple instructors)</li>
+            </ul>
+            <p>In this example, StudentID determines both the Course and the Instructor independently, representing a
+                multivalued dependency.</p>
+
+        </div>
+        <div class="wh">
+
+            <h2>Fourth Normal Form (4NF)</h2>
+            <p>Fourth Normal Form (4NF) is an advanced level of normalization that addresses certain complex scenarios
+                involving multivalued dependencies and composite keys.</p>
+            <ul>
+                <li>A relation is in 4NF if it is in BCNF and has no non-trivial multivalued dependencies.</li>
+                <li>4NF helps in eliminating redundant data and ensures a high degree of data integrity in a relational
+                    database.</li>
+                <li>It is particularly useful when dealing with relations where a combination of attributes determines
+                    multiple independent sets of values.</li>
+            </ul>
+            <p>Example:</p>
+            <p>Consider a relation EmployeeProjects(EmployeeID, Project, Responsibilities) with the multivalued
+                dependency:</p>
+            <ul>
+                <li>EmployeeID &rarr; Project (An employee can work on multiple projects)</li>
+                <li>EmployeeID &rarr; Responsibilities (An employee can have different responsibilities on different
+                    projects)</li>
+            </ul>
+            <p>In 4NF, the relation should be in BCNF and free from non-trivial multivalued dependencies.</p>
+        </div>
+        <div class="wh">
+            <h2>5NF</h2>
+            <h2>Fifth Normal Form (5NF)</h2>
+            <p>Fifth Normal Form (5NF) is a further extension of normalization that addresses cases where information
+                can be derived from the combination of multiple multivalued dependencies.</p>
+            <ul>
+                <li>A relation is in 5NF if it is in 4NF and there are no non-trivial join dependencies.</li>
+                <li>5NF helps in ensuring data consistency and reducing the risk of anomalies that may arise due to
+                    complex relationships in the database.</li>
+                <li>It is applied in scenarios where a combination of attributes may determine the existence of related
+                    data in other tables.</li>
+            </ul>
+            <p>Example:</p>
+            <p>Consider a relation SupplierParts(SupplierID, Part, Location) with the multivalued dependencies:</p>
+            <ul>
+                <li>SupplierID &rarr; Part (A supplier can supply multiple parts)</li>
+                <li>Part &rarr; Location (A part can be available at different locations)</li>
+            </ul>
+            <p>In 5NF, the relation should be in 4NF, and there should be no non-trivial join dependencies, ensuring a
+                high level of data integrity and structure.</p>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
