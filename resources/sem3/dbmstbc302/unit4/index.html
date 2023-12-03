@@ -129,20 +129,22 @@
                         action unintentionally leads to the deletion of other related but necessary data.</li>
                     <li>Example:</li>
                     <pre>
-                        <code>
+        <code>
 +-------------------------------------------+
 | EID |   Name  | Salary | DID | Department |
 +-------------------------------------------+
 |  1  | Paul    | 10,000 |  1  | A/C        |  
 |  2  | John    | 6,000  |  1  | A/C        |  
-|  3  | Sharav  | 7,000  |  3  | Sales      |
+|  3  | Sharav  | 7,000  |  2  | Sales      |
 +-------------------------------------------+
-                        </code>
-                    </pre>
+        </code>
+    </pre>
                     <ul>
-                        <li>If we delete the tuple with EID 1, which is the only occurrence of Department A/C, we lose
-                            the definition of the A/C department entirely.</li>
+                        <li>If we delete the tuple with EID 3, which is the only occurrence of the "Sales" department,
+                            we lose the definition of the "Sales" department entirely.</li>
                     </ul>
+                </ul>
+
                 </ul>
             </div>
             <div class="in">
@@ -214,6 +216,35 @@
                             changes in one part of the database do not adversely affect other parts.</li>
                     </ul>
                 </ol>
+            </div>
+            <div class="in">
+                <h3>Pros and Cons of Normalization in Databases</h3>
+                <div class="in">
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li>Reduces data redundancy, minimizing storage space.</li>
+                        <li>Enhances overall organization of the database.</li>
+                        <li>Promotes data consistency within the database.</li>
+                        <li>Facilitates a more flexible database design.</li>
+                        <li>Reduces the number of indexes per table, speeding up maintenance tasks.</li>
+                        <li>Allows for selective table joins, improving query efficiency.</li>
+                        <li>Enhances database security management.</li>
+                        <li>Increases storage efficiency.</li>
+                        <li>Speeds up data access.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Disadvantages</h3>
+                    <ul>
+                        <li>Database design must align with user requirements before development.</li>
+                        <li>Normalization can consume significant CPU, memory, and I/O resources, affecting performance.
+                        </li>
+                        <li>Requires more joins for desired results; poorly written queries can impact database
+                            performance.</li>
+                        <li>Normalizing relations of a higher degree is time-consuming and challenging.</li>
+                        <li>Careless decomposition may lead to poorly designed databases and serious issues.</li>
+                    </ul>
+                </div>
             </div>
             <div class="in">
                 <h3>Types of Normal Forms:</h3>
@@ -662,6 +693,40 @@
             </p>
         </div>
         <div class="wh">
+            <h2>Dependencies & Logical Implication</h2>
+            <ul>
+                <li>Dependencies refer to the relationship where Y is dependent on X, prompting us to explore the
+                    logical consequences and other derived relationships.</li>
+            </ul>
+            <p>We can utilize Armstrong's Axioms to further understand these dependencies:</p>
+            <ol>
+                <li>
+                    <strong>Reflexivity:</strong> If Y is a subset of X, then X → Y, signifying the unique
+                    identification of Y using X. This axiom also implies that X → X.
+                </li>
+                <li>
+                    <strong>Augmentation:</strong> If X → Y holds and Z is a set of attributes, then ZX → ZY.
+                </li>
+                <li>
+                    <strong>Transitivity:</strong> If X → Y holds and Y → Z, then X → Z holds.
+                </li>
+            </ol>
+            <p>Additional Axioms:</p>
+            <ol start="4">
+                <li>
+                    <strong>Additivity or Union:</strong> If X → Y and X → Z, then X → YZ holds.
+                </li>
+                <li>
+                    <strong>Projectivity or Decomposition:</strong> If X → YX holds, then X → Y and X → Z also hold.
+                </li>
+                <li>
+                    <strong>Pseudo-Transitivity:</strong> If X → Y and ZY → W hold, then XZ → W holds.
+                </li>
+            </ol>
+            <p>These axioms play a crucial role in determining closures, which, in turn, assist us in identifying keys,
+                particularly in the context of achieving Third Normal Form (3NF).</p>
+        </div>
+        <div class="wh">
             <h2>Third Normal Form (3NF)</h2>
             <ul>
                 <li>
@@ -707,7 +772,8 @@
         <div class="wh">
             <h2>Properties of Normalization</h2>
             <ul>
-                <li>In 1NF, 2NF, 3NF we decompose relation to minimize the redundancy on the basis of function dependencies. But alone these are not sufficuent parameters for good relation schema.</li>
+                <li>In 1NF, 2NF, 3NF we decompose relation to minimize the redundancy on the basis of function
+                    dependencies. But alone these are not sufficuent parameters for good relation schema.</li>
                 <li>So for making good design two additional properties also must hold on decomposition of relation:
                     <ol>
                         <li>Lossless Join properties</li>
