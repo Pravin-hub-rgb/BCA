@@ -727,6 +727,149 @@
                 particularly in the context of achieving Third Normal Form (3NF).</p>
         </div>
         <div class="wh">
+            <h2>Closure of Functional Dependencies</h2>
+            <ul>
+                <li>If we have a relation with some attributes and given dependencies, the closure of dependencies
+                    signifies what we can derive from the provided dependencies. This process is facilitated by applying
+                    the Armstrong Axioms, as discussed earlier.</li>
+                <li>Closure is represented as (AB)<sup>+</sup> = {} where all the derived dependencies are enclosed
+                    within the curly brackets.</li>
+            </ul>
+            <p>The closure, (AB)<sup>+</sup>, essentially represents the set of all attributes that can be functionally
+                determined by the attributes A and B, considering the given set of dependencies.</p>
+            <div class="in">
+                <p><strong>Q&rarr; R = {X, Y, Z, H, D}
+                        <br>F.D = X &rarr; YZ, DX &rarr; W, Y &rarr; H then find closure F<sup>+</sup> of FD's.
+                    </strong>
+                </p>
+                <p>
+                    <u>Solution:</u>
+                    <br>Given Functional Dependencies (FD):
+                <ul>
+                    <li>X &rarr; YZ</li>
+                    <li>DX &rarr; W</li>
+                    <li>Y &rarr; H</li>
+                </ul>
+                <p>We need to find the closure F<sup>+</sup> of these FDs.</p>
+                <ol>
+                    <li>Applying X &rarr; YZ, we get X &rarr; Y and X &rarr; Z.</li>
+                    <li>Now, considering X &rarr; Y and Y &rarr; H, applying transitivity, we find X &rarr; H.</li>
+                    <li>No other dependencies can be derived from the given FDs.</li>
+                </ol>
+                <p>Therefore, the closure F<sup>+</sup> is: {X, Y, H}</p>
+                </p>
+            </div>
+            <div class="in">
+                <p><strong>Q&rarr; R = {A, B, C, D, E}
+                        <br>F.D = A &rarr; BC, CD &rarr; E, B &rarr; D, E &rarr; A
+                        <br>Find F<sup>+</sup>
+                    </strong></p>
+                <p><u>Solution:</u>
+                    <br>Given Functional Dependencies (FD):
+                <ul>
+                    <li>A &rarr; BC</li>
+                    <li>CD &rarr; E</li>
+                    <li>B &rarr; D</li>
+                    <li>E &rarr; A</li>
+                </ul>
+                <p>We need to find the closure F<sup>+</sup> of these FDs.</p>
+                <ol>
+                    <li>Starting with A &rarr; BC, we get A &rarr; B and A &rarr; C.</li>
+                    <li>Considering CD &rarr; E, no new attributes are added.</li>
+                    <li>Considering B &rarr; D, we add B &rarr; D.</li>
+                    <li>Considering E &rarr; A, we add E &rarr; A.</li>
+                    <li>No more attributes can be added. The closure F<sup>+</sup> is: {A, B, C, D, E}</li>
+                </ol>
+                </p>
+            </div>
+            <div class="in">
+                <p><strong>Q&rarr; R = {A, B, C, D, E, F, G}
+                        <br>F.D = A &rarr; B, BC &rarr; DE, AEF &rarr; G, E &rarr; C, A &rarr; E
+                    </strong></p>
+                <p><u>Solution:</u>
+                    <br>Given Functional Dependencies (FD):
+                <ul>
+                    <li>A &rarr; B</li>
+                    <li>BC &rarr; DE</li>
+                    <li>AEF &rarr; G</li>
+                    <li>E &rarr; C</li>
+                    <li>A &rarr; E</li>
+                </ul>
+                <p>We need to find the closure F<sup>+</sup> of these FDs.</p>
+                <ol>
+                    <li>Starting with A &rarr; B, we get A &rarr; B.</li>
+                    <li>Considering BC &rarr; DE, we add BC &rarr; D and BC &rarr; E.</li>
+                    <li>Considering AEF &rarr; G, we add AEF &rarr; G.</li>
+                    <li>Considering E &rarr; C, we add E &rarr; C.</li>
+                    <li>Considering A &rarr; E, we add A &rarr; E.</li>
+                    <li>No more attributes can be added. The closure F<sup>+</sup> is: {A, B, C, D, E, F, G}</li>
+                </ol>
+                </p>
+            </div>
+            <div class="in">
+                <h3>Finding the Candidate Key of a Relation by Closure</h3>
+                <ul>
+                    <li>Candidate key: It is the minimal set of attributes whose attribute closure includes all
+                        attributes of the relation; this set is called the candidate key of the relation.</li>
+                </ul>
+                <p><b>Example: R{A, B, C, D, E}
+                        <br>F.D = AB &rarr; C, CD &rarr; E, DE &rarr; B
+                        <br>Find the candidate key.
+                    </b></p>
+                <p><b>Solution:</b>
+                    <br>According to the rules, we don't consider attributes on the right-hand side of the functional
+                    dependencies. In this case, B, C, and E are ignored, leaving us with A and D.
+                    <br>Now, using the AD combination, we will create more combinations such as ADC, ABC, ADE. For each
+                    combination, we will find the attribute closure.
+                <ul>
+                    <li>For {ADC}<sub>+</sub> = {A, D, C}
+                        <br>= {A, C, D, E} as CD &rarr; E
+                        <br>= {A, B, C, D, E} as DE &rarr; B
+                        <br>So, C<sub>k</sub> = {ADC}, and it is a candidate key.
+                    </li>
+                    <li>For {ADB}<sub>+</sub> = {A, D, B}
+                        <br>= {A, B, C, D}
+                        <br>= {A, B, C, D, E}
+                        <br>So, C<sub>k</sub> = {ADB} is also a candidate key.
+                    </li>
+                    <li>For {ADE}<sub>+</sub> = {A, D, E}
+                        <br>= {A, B, D, E}
+                        <br>= {A, B, C, D, E}
+                        <br>So, C<sub>k</sub> = {ADE} is yet another candidate key.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Convert Relation to 2NF</h2>
+            <div class="in">
+                <p><strong>R(A, B, C, D)
+                        <br>A, B prime key attributes (denoted as C<sub>k</sub>)
+                        <br>C, D non-prime key attributes
+                        <br>F.D = AB &rarr; D, B &rarr; C
+                    </strong></p>
+                <p>In 2NF, all non-prime attributes should be fully functionally dependent on the prime key attributes.
+                    Let's analyze the given relation:
+                <ul>
+                    <li>On the right side, we have AB, so we will find the closure (AB)<sup>+</sup> = {A, B, C, D}.
+                        <br>As we are obtaining all the attributes, it qualifies as a candidate key.
+                    </li>
+                    <li>Now, the goal is to convert the relation into 2NF form.</li>
+                    <li>Observing that D is completely dependent on AB, but C is not completely dependent on AB; it is
+                        only dependent on B. This implies that the relation is not in 2NF, and decomposition is
+                        required.</li>
+                    <li>We will create two relations:
+                        <br>R1 (ABD), which is in 2NF as all non-prime attributes are fully functionally dependent on
+                        the prime key.
+                        <br>R2 (B, C), where all non-prime attributes are dependent on the prime key according to the
+                        2NF rule.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        <div class="wh">
             <h2>Third Normal Form (3NF)</h2>
             <ul>
                 <li>
