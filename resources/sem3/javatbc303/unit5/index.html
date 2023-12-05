@@ -115,6 +115,46 @@
                     </li>
                 </ul>
         </div>
+        <div class="wh">
+            <h2>JDBC operations using MySQL</h2>
+            <ul>
+                <li>Mainly we can perform 4 operations: (CRUD)
+                    <ol>
+                        <li>Create</li>
+                        <li>Retrieve</li>
+                        <li>Update</li>
+                        <li>Delete</li>
+                    </ol>
+                </li>
+            </ul>
+            <p>We will understand these operations using a program</p>
+            <pre>
+                <code>
+import java.sql.*;
+public class CRUD 
+{
+    public static void main(String[] args) throws Exception
+    {
+        Class.forName("com.mySql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root", "Root1234@");
+        // now we will perform first operation which is creating a table 
+        Statement st = con.createStatement();
+        st.executeUpdate("create table student(rno int, name varchar(20), branch varchar(20))");// using this we are creating a table
+        // closing Statement and Connection object 
+        st.close();
+        con.close();
+    }
+}
+                </code>
+            </pre>
+            <ul>
+                <li>java.sql package contains several classes and interfaces which helps</li>
+                <li>Inside the main function as we use several methods like get connection and those methods throws some exception so we have to handle the exception using try catch or explicitly throw them</li>
+                <li>Class.forName("com.mydql.jdbc.Driver"); - Class is a static class which is available in lang package, there is no need to import the lang package and forName is a static method which is used to load corresponding driver class. Driver class is available in jdbc folder, jdbc is availabe in mysql, mysql folder is available in com folder. ForName method throws class not found exception which can be handle by throws sqlexception</li>
+                <li>Connection is an Interface and we know that we can't create object of an interface so in order to create an object we are using getconnection method, getconnectio is a static method which is available in driver manager class. In getConnection method we have to specify three arguments 1st one is to specify the url of the mysql using which we connection to mysql. Default portnumber for mysql is 3306 after this we specify databse name. 2nd argument is username and then 3rd is the password.</li>
+                <li>In order to create a table first we have to create Statement object, Statement is an interface and we create its object using createStatement method we can call createStatement method using Connection object. Create operation is done using executeUpdate</li>
+            </ul> 
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
