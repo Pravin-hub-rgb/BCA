@@ -640,23 +640,62 @@
                     outline
                     the DMA
                     process:</p>
-                    <img src="../../images/dmacontroller2.svg" alt="" class="wb">
+                <img src="../../images/dmacontroller2.svg" alt="" class="wb">
+                <p>In the diagram above, we have a detailed breakdown of the components involved in the Direct Memory
+                    Access (DMA) process:
+                <ol>
+                    <li><strong>DS (DMA Select):</strong> The processor sets DS = 1 to activate DMA, initiating the DMA
+                        process.</li>
+                    <li><strong>RS (Register Select):</strong> The CPU uses this signal to select DMA registers for
+                        storing values, such as the starting address and the number of words to be transferred.</li>
+                    <li><strong>RD (Read) & WR (Write):</strong> These signals, Iri is used for reading and writing
+                        purposes during the DMA operation.</li>
+                    <li><strong>BR (Bus Request):</strong> DMA employs this line to send a request to the processor to
+                        release the BUS system, indicating its need for control over the system bus.</li>
+                    <li><strong>BG (Bus Grant):</strong> When the processor relinquishes control of the bus to DMA, it
+                        sets BG = 1, signifying that the bus is now granted to the DMA controller.</li>
+                    <li><strong>Interrupt:</strong> DMA uses this line to send a signal when data transfer is completed.
+                        The processor can also use this line to check whether data transfer has been successfully
+                        completed.</li>
+                    <li><strong>DMA Request:</strong> I/O devices utilize this line to send a request to the DMA
+                        controller, signaling the need for data transfer.</li>
+                    <li><strong>DMA Acknowledgement:</strong> The DMA controller responds to I/O devices through this
+                        line, acknowledging the receipt of the request and preparing for data transfer.</li>
+                    <li><strong>Address Register:</strong> The processor stores the starting address of data in this
+                        register, providing the necessary information for the DMA controller to locate the data.</li>
+                    <li><strong>Word Count Register:</strong> The processor stores the total number of words to be
+                        transferred in this register, allowing the DMA controller to determine the extent of the data
+                        transfer operation.</li>
+                    <li><strong>Control Register:</strong> The processor stores control signals in this register,
+                        dictating various aspects of the DMA operation, such as the transfer mode and direction.</li>
+                    <li><strong>Data Bus Buffer:</strong> This component is employed to temporarily store data during
+                        the DMA transfer process, ensuring efficient and synchronized data movement.</li>
+                    <li><strong>Data Bus:</strong> DMA utilizes this bus for the actual transfer of data between memory
+                        and peripheral devices, facilitating high-speed and direct communication.</li>
+                </ol>
+                </p>
+                <p>Now, let's delve into the operational sequence of the Direct Memory Access (DMA) process:</p>
                 <ul>
-                    <li>The I/O device sends a DMA request to the DMA controller (DMAC).</li>
-                    <li>The DMA controller (DMAC) initiates the process by sending a Bus Request (BR) signal to the CPU,
-                        indicating its need for control over the buses.</li>
-                    <li>The DMA controller (DMAC) patiently waits until the CPU responds with a Bus Grant (BG) signal,
-                        signifying that it has relinquished control over the buses.</li>
-                    <li>Upon receiving the Bus Grant (BG) signal, the CPU surrenders control of the buses, placing the
-                        address bus (ABUS), data bus (DBUS), RW lines, and WR lines into a high-impedance state.</li>
-                    <li>The CPU activates the Bus Grant (BG) signal and enters an idle state, effectively disabling its
-                        involvement in the data transfer.</li>
-                    <li>With the CPU in an idle state, the DMA controller (DMAC) assumes control of the buses, enabling
-                        direct memory transfer without CPU intervention.</li>
-                    <li>Upon completion of the DMA transfer, the DMA controller (DMAC) disables the Bus Request (BR)
-                        lines.</li>
-                    <li>The CPU, having completed the DMA transfer, disables the Bus Grant (BG) signal, reassumes
-                        control of the buses, and returns to its normal operation.</li>
+                    <li><strong>Initiation of Data Transfer Request:</strong> When an I/O device wishes to transfer
+                        data, it sends a request to the DMA through the DMA request line.</li>
+                    <li><strong>Bus Request to Processor:</strong> DMA, in response to the request, sends a bus request
+                        (BR = 1) to the processor, requesting it to release control of the bus system (utilizing the BR
+                        line).</li>
+                    <li><strong>Processor's Response:</strong> Upon receiving the bus request, the processor stores its
+                        current work, and then transmits essential information, such as the starting address and the
+                        number of words to be transferred, to DMA. Subsequently, the processor relinquishes control of
+                        the bus system and notifies DMA by setting the BG line to 1.</li>
+                    <li><strong>DMA Acknowledgement and Data Transfer:</strong> Upon receiving the BG signal, DMA
+                        activates the DMA acknowledgement line, informing the I/O device that it can commence data
+                        transfer. The DMA controller initiates the actual data transfer process.</li>
+                    <li><strong>Decrementing Word Count:</strong> With each data transfer, the value of the Word Count
+                        (WC) register is decremented by 1, keeping track of the progress of the data transfer operation.
+                    </li>
+                    <li><strong>Data Transfer Completion:</strong> When the WC register reaches 0, DMA sets BR = 0 and
+                        sends an interrupt signal to the CPU, signaling the completion of the data transfer.</li>
+                    <li><strong>CPU's Post-Transfer Actions:</strong> The CPU, upon receiving the interrupt, checks the
+                        WC register. Since it is now 0, the CPU sets BG = 0, reclaiming control of the bus system for
+                        its own operations.</li>
                 </ul>
             </div>
         </div>
