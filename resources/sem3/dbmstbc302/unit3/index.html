@@ -1464,6 +1464,195 @@ ROLLBACK;
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <h2>Primary Key & Foreign Key</h2>
+            <div class="in">
+                <h3>Primary Key</h3>
+                <ul>
+                    <li>A Primary Key always contains unique data within a table.</li>
+                    <li>Uniqueness in a Primary Key is achieved using a unique constraint. However, a significant
+                        distinction is that a Primary Key does not allow null values, unlike a Unique Key.</li>
+                    <li>Each table can have only one Primary Key constraint, and it plays a crucial role in uniquely
+                        identifying each record in the table.</li>
+                </ul>
+
+                <p>Example:</p>
+                <pre>
+                    <code>
++-----------------------------------------+
+|  Id |     Name        |  Age  |  City   |
++-----------------------------------------+
+|  1  |  Ram Kumar      |   19  |  Agra   |
+|  2  |  Salman Khan    |   18  |  Bhopal |
+|  3  |  Meera Khan     |   19  |  Agra   |
+|  4  |  Sarita Kumari  |   21  |  Delhi  |
++-----------------------------------------+
+                    </code>
+                </pre>
+
+                <ul>
+                    <li>For a column to serve as a Primary Key, it must be unique. In this example, 'Id' is chosen as
+                        the Primary Key since it meets the criteria of uniqueness, whereas 'Name,' 'Age,' and 'City' may
+                        contain duplicate values.</li>
+                </ul>
+                <div class="in">
+                    <h3>Create Table with PRIMARY KEY Syntax</h3>
+                    <pre>
+                        <code>
+CREATE TABLE table_name (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL,
+    city VARCHAR(10) NOT NULL,
+    PRIMARY KEY(id)
+);
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>The <code>AUTO_INCREMENT</code> attribute for the 'id' column ensures that the database
+                            system automatically assigns a unique value to 'id' for each new record. This eliminates the
+                            need for manually specifying the 'id' value during insertion.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Alter Table with PRIMARY KEY Syntax</h3>
+                    <p>When a table has already been created without a specified primary key, you can alter it to add a
+                        primary key constraint afterward.</p>
+                    <pre>
+                        <code>
+ALTER TABLE table_name 
+ADD PRIMARY KEY(id);
+                        </code>
+                    </pre>
+                    <p>This ALTER TABLE statement adds a primary key constraint to the 'id' column of the existing
+                        table.</p>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Foreign Key</h3>
+                <ul>
+                    <li>A FOREIGN KEY is a crucial database concept used to establish a connection between two tables.
+                    </li>
+                    <li>It acts as a link between tables by referencing a PRIMARY Key in one table as a FOREIGN Key in
+                        another table.</li>
+                </ul>
+
+                <p>Example:</p>
+                <pre>
+                    <code>
+Student Table 
++-----------------------------------------+
+|  Id |     Name        |  Age  |  City   |
++-----------------------------------------+
+|  1  |  Ram Kumar      |   19  |   1     |
+|  2  |  Salman Khan    |   18  |   2     |
+|  3  |  Meera Khan     |   19  |   1     |
+|  4  |  Sarita Kumari  |   21  |   3     |
++-----------------------------------------+
+
+City Table 
++--------------+
+| Cid | City   |
++--------------+
+|  1  | Agra   |
+|  2  | Bhopal |
+|  3  | Delhi  |
++--------------+
+                    </code>
+                </pre>
+
+                <ul>
+                    <li>In the given example, 'Id' in the Student table serves as the primary key, 'City' in the Student
+                        table acts as a foreign key, and 'Cid' in the City table is the primary key.</li>
+                    <li>These tables can be linked using the foreign key relationship.</li>
+                    <li>Using foreign keys helps in optimizing the database structure. By storing only the primary key
+                        of another table as a foreign key, the table becomes lightweight. This optimization is
+                        especially beneficial when dealing with large datasets, resulting in faster loading times and
+                        improved search performance, especially in scenarios where searching is done based on city-wise
+                        criteria.</li>
+                </ul>
+                <div class="in">
+                    <h3>Create Table with FOREIGN KEY Syntax</h3>
+                    <pre>
+                        <code>
+CREATE TABLE student(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL,
+    city VARCHAR(10) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(city) REFERENCES City(cid);
+)
+                        </code>
+                    </pre>
+                </div>
+                <div class="in">
+                    <h3>Alter Table with FOREIGN KEY Syntax</h3>
+                    <pre>
+                        <code>
+ALTER TABLE table_name 
+ADD FOREIGN KEY(city) REFERENCES City(cid); 
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Practical:</h3>
+                <div class="in">
+                    <p>Creating City Table:</p>
+                    <pre>
+                        <code>
+mysql> CREATE TABLE City(cid INT NOT NULL AUTO_INCREMENT, cityname VARCHAR(50) NOT NULL, PRIMARY KEY (cid));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> INSERT INTO City(cityname) VALUES('Agra'), ('Dehli'), ('Bhopal'), ('Jaipur'), ('Noida');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from City;
++-----+----------+
+| cid | cityname |
++-----+----------+
+|   1 | Agra     |
+|   2 | Dehli    |
+|   3 | Bhopal   |
+|   4 | Jaipur   |
+|   5 | Noida    |
++-----+----------+
+5 rows in set (0.00 sec) 
+                        </code>
+                    </pre>
+                    <p>Creating Personal Table</p>
+                    <pre>
+                        <code>
+mysql> CREATE TABLE Personal(id INT NOT NULL, name VARCHAR(50) NOT NULL, percentage INT NOT NULL, age INT NOT NULL, gender VARCHAR(1) NOT NULL, city INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (city) REFERENCES City (cid));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> INSERT INTO Personal VALUES (1, "Ram Kumar", 45, 19, "M", 1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Personal VALUES (2, "Sarita Kumari", 55, 22, "F", 2), (3, "Salman Khan", 62, 20, "M", 1), (4, "Juhi Chawla", 47, 19, "F", 3), (5, "Anil Kapoor", 74, 22, "M", 1), (6, "John Abrahm", 64, 21, "M", 2), (7, "Shahid Kapoor", 52, 20, "M", 1);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Personal;
++----+---------------+------------+-----+--------+------+
+| id | name          | percentage | age | gender | city |
++----+---------------+------------+-----+--------+------+
+|  1 | Ram Kumar     |         45 |  19 | M      |    1 |
+|  2 | Sarita Kumari |         55 |  22 | F      |    2 |
+|  3 | Salman Khan   |         62 |  20 | M      |    1 |
+|  4 | Juhi Chawla   |         47 |  19 | F      |    3 |
+|  5 | Anil Kapoor   |         74 |  22 | M      |    1 |
+|  6 | John Abrahm   |         64 |  21 | M      |    2 |
+|  7 | Shahid Kapoor |         52 |  20 | M      |    1 |
++----+---------------+------------+-----+--------+------+
+7 rows in set (0.00 sec)
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <h2>Previous Year Questions</h2>
