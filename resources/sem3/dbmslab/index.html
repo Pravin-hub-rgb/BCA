@@ -458,7 +458,9 @@ mysql> SELECT Dept_no, SUM(Basic_Sal) FROM EMPLOYEE GROUP BY Dept_no;
                     </code>
                 </pre>
                 <ul>
-                    <li>GROUP BY is used in SQL when we need to group rows or tuples in a table based on the values in one or more columns. It allows us to perform aggregate operations on these groups, such as counting, summing, or averaging the values within each group.</li>
+                    <li>GROUP BY is used in SQL when we need to group rows or tuples in a table based on the values in
+                        one or more columns. It allows us to perform aggregate operations on these groups, such as
+                        counting, summing, or averaging the values within each group.</li>
                 </ul>
             </div>
             <div class="in">
@@ -858,6 +860,555 @@ WHERE Product_no = 'PR065';
             </div>
             <div class="in">
                 <p>Create a sequence name counter which incremented by 5 and starts with 25.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Lab Assignment - 04</h2>
+            <div class="in">
+                <p>Delete all Salesman_Mast whose salaries are equal to Rs. 2000</p>
+                <pre>
+                    <code>
+mysql> set autocommit = off;
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from Salesman_Mast where sal_amount = 2000;
+Query OK, 0 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Write a query to undo above deleted query.</p>
+                <pre>
+                    <code>
+rollback;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete all products from Product_Mast where Qty_Available = 100;</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM Product_Mast WHERE Qty_Available = 100;
+Query OK, 2 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Write a query such that above query canot be undone.</p>
+                <pre>
+                    <code>
+commit;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete from Client_Mast where state = 'Illinois'.</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM Client_Mast where state = "Illinois";
+Query OK, 2 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete all employees from Employee where Basic_Sal is less than 2000;</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM EMPLOYEE WHERE Basic_Sal &lt; 2000;
+Query OK, 0 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete employee from EMPLOYEE table where Basic_Sal = 3000 and job = 'Clerk'.</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM EMPLOYEE WHERE Basic_Sal = 3000 AND Job = "Clerk";
+Query OK, 1 row affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete employee from employee table where job='clerk'or 'manager';</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM EMPLOYEE WHERE Job = "Clerk" OR Job = "Manager";
+Query OK, 1 row affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete all records from dept.</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM DEPT;
+Query OK, 5 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete all managers and salesman with salary over 1500 from employee table.</p>
+                <pre>
+                    <code>
+mysql> DELETE FROM EMPLOYEE WHERE Basic_Sal > 1500;
+Query OK, 3 rows affected (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Delete all employees whose name fall in alphabe cal range 'c' to 'l'</p>
+                <pre>
+                    <code>
+mysql> select * from EMPLOYEE;
+Empty set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Write a query so the following statement can be achieved 'Kim is working
+                    as manager since 15-12-2002 where employee number is E0001.</p>
+                <pre>
+                        <code>
+SELECT * FROM EMPLOYEE WHERE Empno = "E0001";
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <p>Rename table name from Client_Mast to T_Client_Mast.</p>
+                <pre>
+                    <code>
+mysql> RENAME TABLE Client_Mast TO T_Client_Mast;
+Query OK, 0 rows affected (0.08 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Write a query in which column name should be displayed as employee name from
+                    employee
+                    table.</p>
+                <pre>
+                        <code>
+SELECT Ename as "Employee Name" FROM EMPLOYEE;
+                        </code>
+                    </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Lab Assignment - 05</h2>
+            <div class="in">
+                <p>Add a column "Telephone_No" of data type 'int'
+                    and size='10' to EMPLOYEE table.</p>
+                <pre>
+                        <code>
+mysql> ALTER TABLE EMPLOYEE ADD Telephone_No INT(10);
+Query OK, 0 rows affected, 1 warning (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc EMPLOYEE;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Empno        | varchar(6)   | NO   | PRI | NULL    |       |
+| Ename        | varchar(20)  | NO   |     | NULL    |       |
+| Job          | char(10)     | YES  |     | NULL    |       |
+| Hiredate     | date         | YES  |     | NULL    |       |
+| Basic_Sal    | decimal(9,2) | YES  |     | NULL    |       |
+| Comm         | decimal(7,2) | YES  |     | NULL    |       |
+| Dept_no      | varchar(4)   | YES  |     | NULL    |       |
+| Telephone_No | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <p>Add a column "Country" of datatype 'varchar' and
+                    size='15'to Client_Mast table.</p>
+                <pre>
+                        <code>
+mysql> ALTER TABLE Client_Mast ADD Country varchar(15);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Client_Mast;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| Client_no | varchar(6)   | NO   | PRI | NULL    |       |
+| Name      | varchar(20)  | NO   |     | NULL    |       |
+| Address   | varchar(25)  | YES  |     | NULL    |       |
+| City      | varchar(20)  | YES  |     | NULL    |       |
+| Pincode   | decimal(6,0) | YES  |     | NULL    |       |
+| State     | varchar(15)  | YES  |     | NULL    |       |
+| Bal_due   | decimal(8,2) | YES  |     | NULL    |       |
+| Country   | varchar(15)  | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <p>Increase the side of 'Description' field from 14 to 16 in Product_Mast table.</p>
+                <pre>
+                    <code>
+mysql> ALTER TABLE Product_Mast MODIFY COLUMN Description varchar(16);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Product_Mast;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Product_no    | varchar(6)   | YES  |     | NULL    |       |
+| Description   | varchar(16)  | YES  |     | NULL    |       |
+| Profit_perc   | decimal(5,2) | YES  |     | NULL    |       |
+| Units         | varchar(10)  | YES  |     | NULL    |       |
+| Qty_Available | decimal(6,0) | YES  |     | NULL    |       |
+| Sell_Price    | decimal(7,2) | YES  |     | NULL    |       |
+| Cost_Price    | decimal(7,2) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Modify 'Product_No' key as a primary key from Product_Mast table.</p>
+                <pre>
+                    <code>
+mysql> ALTER TABLE Product_Mast ADD primary key(Product_No);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Product_Mast;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Product_no    | varchar(6)   | NO   | PRI | NULL    |       |
+| Description   | varchar(16)  | YES  |     | NULL    |       |
+| Profit_perc   | decimal(5,2) | YES  |     | NULL    |       |
+| Units         | varchar(10)  | YES  |     | NULL    |       |
+| Qty_Available | decimal(6,0) | YES  |     | NULL    |       |
+| Sell_Price    | decimal(7,2) | YES  |     | NULL    |       |
+| Cost_Price    | decimal(7,2) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Drop the primary key of T_Client_Mast table.</p>
+                <pre>
+                    <code>
+mysql> ALTER TABLE Product_Mast ADD primary key(Product_No);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Product_Mast;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Product_no    | varchar(6)   | NO   | PRI | NULL    |       |
+| Description   | varchar(16)  | YES  |     | NULL    |       |
+| Profit_perc   | decimal(5,2) | YES  |     | NULL    |       |
+| Units         | varchar(10)  | YES  |     | NULL    |       |
+| Qty_Available | decimal(6,0) | YES  |     | NULL    |       |
+| Sell_Price    | decimal(7,2) | YES  |     | NULL    |       |
+| Cost_Price    | decimal(7,2) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Define 'Deptno' as NOT NULL constraint from DEPT table</p>
+                <pre>
+                    <code>
+mysql> ALTER TABLE DEPT MODIFY Deptno varchar(8) NOT NULL;
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc DEPT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Deptno | varchar(8)  | NO   |     | NULL    |       |
+| Dname  | varchar(20) | YES  |     | NULL    |       |
+| Loc    | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Display Empno, Ename and 'Anual Salary' from EMPLOYEE table.</p>
+                <pre>
+                    <code>
+mysql> SELECT Empno, Ename, Basic_Sal AS 'Annual Salary' FROM EMPLOYEE;
++-------+-----------+---------------+
+| Empno | Ename     | Annual Salary |
++-------+-----------+---------------+
+| B0005 | Kelly     |       2000.00 |
+| E0001 | Kim       |       5000.00 |
+| E0002 | Bruce     |       4000.00 |
+| E0003 | Arnold    |       2500.00 |
+| E0004 | Holtfield |       3000.00 |
++-------+-----------+---------------+
+5 rows in set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Add two columns 'Hod' and 'Strength' of datatype varchar and size = 15 to DEPT table.</p>
+                <pre>
+                    <code>
+mysql> ALTER TABLE DEPT ADD Hod varchar(15), ADD Strength varchar(15);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC DEPT;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Deptno   | varchar(8)  | NO   |     | NULL    |       |
+| Dname    | varchar(20) | YES  |     | NULL    |       |
+| Loc      | varchar(20) | YES  |     | NULL    |       |
+| Hod      | varchar(15) | YES  |     | NULL    |       |
+| Strength | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Create a view as Emp_View from EMPLOYEE
+                    table where Basic_Sal = 2500 and Job = 'Clerk'.</p>
+                <ul>
+                    <li>A view in a relational database is a virtual table that is based on the result of a SELECT
+                        query. It does not store the actual data but provides a way to represent the data stored in one
+                        or more tables in a specific way. Views are useful for simplifying complex queries, abstracting
+                        the underlying structure of the database, and providing a security mechanism by allowing users
+                        to access specific columns or rows.</li>
+                </ul>
+                <pre>
+                    <code>
+mysql> CREATE VIEW Emp_View AS SELECT Basic_Sal FROM EMPLOYEE WHERE Basic_Sal = 2500 AND Job = 'Clerk';
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM Emp_View;
++-----------+
+| Basic_Sal |
++-----------+
+|   2500.00 |
++-----------+
+1 row in set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Drop above created Emp_View.</p>
+                <pre>
+                    <code>
+DROP VIEW IF EXISTS Emp_View;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Create an index for Client_No on T_Client_Mast table.</p>
+                <pre>
+                    <code>
+mysql> CREATE INDEX Ind_Client_No on T_Client_Mast(Client_No);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Create a view as Em_View from EMPLOYEE table
+                    with Basic_Sal,Empno,Ename.</p>
+                <pre>
+                    <code>
+mysql> CREATE VIEW Emp_View AS SELECT Basic_Sal, Empno, Ename FROM EMPLOYEE;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SELECT * FROM Emp_View;
++-----------+-------+-----------+
+| Basic_Sal | Empno | Ename     |
++-----------+-------+-----------+
+|   2000.00 | B0005 | Kelly     |
+|   5000.00 | E0001 | Kim       |
+|   4000.00 | E0002 | Bruce     |
+|   2500.00 | E0003 | Arnold    |
+|   3000.00 | E0004 | Holtfield |
++-----------+-------+-----------+
+5 rows in set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <p>Create a view as ClientView from T_Client_Mast
+                    with all columns of table.</p>
+                    <pre>
+                        <code>
+mysql> CREATE VIEW Client_View AS SELECT * FROM T_Client_Mast;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM Client_View;
++-----------+----------+-----------------------+--------------+---------+----------+---------+---------+
+| Client_no | Name     | Address               | City         | Pincode | State    | Bal_due | Country |
++-----------+----------+-----------------------+--------------+---------+----------+---------+---------+
+| B001      | Procurez | 12 Sunbay street      | Glainsville  |    1233 | Florida  | 3500.00 | NULL    |
+| B002      | BMW      | 6 Rocky creek         | Jacksonville |    1234 | Florida  | 3488.00 | NULL    |
+| B004      | Teoco    | 1243 Princeton circle | Fairfax      |    3433 | Virginia | 4433.00 | NULL    |
++-----------+----------+-----------------------+--------------+---------+----------+---------+---------+
+3 rows in set (0.00 sec)
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <p>Drop above created Client_View view.</p>
+                <pre>
+                    <code>
+DROP VIEW Client_View;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Assignment - 06</h2>
+            <div class="in">
+                <p>Select the average salaries of each department where DeptNo is either 'D001' or 'D002' from EMPLOYEE table.</p>
+            </div>
+            <div class="in">
+                <p>Select the name of the lowest paid employee from EMPLOYEE table.</p>
+            </div>
+            <div class="in">
+                <p>Select the highest paid employee from EMPLOYEE table.</p>
+            </div>
+            <div class="in">
+                <p>Display the total number of rows in the EMPLOYEE table.</p>
+            </div>
+            <div class="in">
+                <p>Display only those jobs where max sal >= 3000 in the employee table.</p>
+            </div>
+            <div class="in">
+                <p>List the name of employees whose hiredate is in the month of December using Substr function.</p>
+            </div>
+            <div class="in">
+                <p>Count the number of people in department number 'D003'.</p>
+            </div>
+            <div class="in">
+                <p>Produce the following output using EMPLOYEE table:
+                    <ul>
+                        <li>EMPLOYEE <br>Kim(Manager) <br>Bruce(Analyst)</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="in">
+                <p>Find out the difference between highest and lowest salaries.</p>
+            </div>
+            <div class="in">
+                <p>How many months has the manager worked for the company (Round value).</p>
+            </div>
+            <div class="in">
+                <p>Display the top three earners with name and salary in the company.</p>
+            </div>
+            <div class="in">
+                <p>Display the Sin and Sinh value of 45.</p>
+            </div>
+            <div class="in">
+                <p>Display the ASCII value of "ORACLE".</p>
+            </div>
+            <div class="in">
+                <p>Display all job types in smaller case from EMPLOYEE TABLE.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Lab Assignment - 07</h2>
+            <div class="in">
+                <p>Select those clients whose Bal_Due is greater than value 2000 from Client_Mast table.</p>
+            </div>
+            <div class="in">
+                <p>Count the total number of orders from Product_Mast table.</p>
+            </div>
+            <div class="in">
+                <p>Calculate the average price of all the products from Products_Mast table.</p>
+            </div>
+            <div class="in">
+                <p>Calculate the maximum and minimum product prices and rename the output as max_price and min_price respectively from product_mast table.</p>
+            </div>
+            <div class="in">
+                <p>Count the number of products having price greater than or equal to 1200.</p>
+            </div>
+            <div class="in">
+                <p>Display the employee number and day on which employee hired from EMPLOYEE table.</p>
+            </div>
+            <div class="in">
+                <p>Display the date, 20 days after today's date.</p>
+            </div>
+            <div class="in">
+                <p>Count all distinct job types from employee table.</p>
+            </div>
+            <div class="in">
+                <p>Using LPAD function pad the job types with 15 characters by '*' symbol.</p>
+            </div>
+            <div class="in">
+                <p>Display the length of each employee name from employee table.</p>
+            </div>
+            <div class="in">
+                <p>Display the value of 3 raised of 4 using power function.</p>
+            </div>
+            <div class="in">
+                <p>Dislay the square root of 81.</p>
+            </div>
+            <div class="in">
+                <p>Display the number of bytes used by ename from employee table.</p>
+            </div>
+            <div class="in">
+                <p>Display the ename of those who are having sound like Kim from EMPLOYEE table.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Lab Assignment - 08</h2>
+            <div class="in">
+                <p>Select the average salaries of each department where Dept_No is either 'D001' or 'D002'.</p>
+            </div>
+            <div class="in">
+                <p>Find average salary per job in each department_no.</p>
+            </div>
+            <div class="in">
+                <p>Find avg, min, max salaries of employee for each dept_no.</p>
+            </div>
+            <div class="in">
+                <p>Display the dept_no where more thatn two clerks are wokring.</p>
+            </div>
+            <div class="in">
+                <p>Who was the first employee hired in each department_no?</p>
+            </div>
+            <div class="in">
+                <p>Display the average monthly salary bill for each job type within a department_no.</p>
+            </div>
+            <div class="in">
+                <p>Find all departments which have more than 3 employees.</p>
+            </div>
+            <div class="in">
+                <p>Display only those jobs where max sal >= 3000;</p>
+            </div>
+            <div class="in">
+                <p>Find out the employees who are doing the same job as 'KIM'.</p>
+            </div>
+            <div class="in">
+                <p>List the emp_name and minimum salary earned by employee in each dept_no.</p>
+            </div>
+            <div class="in">
+                <p>List names of employees who do not work in the marketing department.</p>
+            </div>
+            <div class="in">
+                <p>Select all the fields of the table Dept and the name from EMPLOYEE for those employees who has basic_sal less than the average salary.</p>
+            </div>
+            <div class="in">
+                <p>List all the employees in descending order of salaries where the first employee should be the last one to join the company.</p>
             </div>
         </div>
     </div>
