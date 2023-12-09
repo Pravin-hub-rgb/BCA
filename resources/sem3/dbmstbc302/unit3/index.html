@@ -428,7 +428,8 @@ CHANGE COLUMN old_column_name new_column_name VARCHAR(50);
                 <div class="wh">
                     <p><b>Adding Constraints - Primary Key</b></p>
                     <ul>
-                        <li>To add a primary key to an existing table, you can use the ALTER TABLE statement with the ADD PRIMARY KEY clause.</li>
+                        <li>To add a primary key to an existing table, you can use the ALTER TABLE statement with the
+                            ADD PRIMARY KEY clause.</li>
                     </ul>
                     <p>Syntax:</p>
                     <pre>
@@ -449,7 +450,8 @@ ADD PRIMARY KEY (student_id);
                 <div class="wh">
                     <p><b>Adding Constrainsts - Foreign Key</b></p>
                     <ul>
-                        <li>To add a foreign key to an existing table, you can use the ALTER TABLE statement with the ADD FOREIGN KEY clause.</li>
+                        <li>To add a foreign key to an existing table, you can use the ALTER TABLE statement with the
+                            ADD FOREIGN KEY clause.</li>
                     </ul>
                     <p>Syntax for Adding a Foreign Key:</p>
                     <pre>
@@ -474,7 +476,8 @@ FOREIGN KEY (student_id) REFERENCES Students(student_id);
                     <ul>
                         <li>When it comes to enforcing the NOT NULL constraint in a table, the SQL syntax differs from
                             that of primary keys or foreign keys. To apply the NOT NULL constraint, you use the
-                            <code>ALTER TABLE</code> statement with the <code>MODIFY</code> clause.</li>
+                            <code>ALTER TABLE</code> statement with the <code>MODIFY</code> clause.
+                        </li>
                     </ul>
                     <pre>
                         <code>
@@ -1375,6 +1378,90 @@ Example:
 DELETE FROM Employees WHERE Salary < 30000;
                     </code>
                 </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Database Transactions, Commit, Rollback and Autocommit in MySQL:</h2>
+            <ul>
+                <li>A transaction is a sequence of one or more SQL statements executed as a single unit. Transactions
+                    ensure data integrity and consistency in a database.</li>
+                <li>Commit: Makes all changes made during the current transaction permanent. Once committed, changes are
+                    saved to the database, marking the transaction as successful.</li>
+                <li>Rollback: Undoes all changes made during the current transaction. It reverts the database to its
+                    state before the transaction started, useful for handling errors or canceling transactions.</li>
+                <li>Autocommit: In MySQL, autocommit is the default mode where each SQL statement is treated as a
+                    transaction and automatically committed. Disabling autocommit allows manual control over
+                    transactions.</li>
+            </ul>
+            <div class="in">
+                <h3>Autocommit in MySQL:</h3>
+                <p><b>Default Autocommit:</b></p>
+                <pre>
+                    <code>
+-- Default autocommit mode (each statement is a transaction)
+SET autocommit = ON;
+                    </code>
+                </pre>
+                <p><b>Disable Autocommit:</b></p>
+                <pre>
+                    <code>
+-- Disable autocommit (requires explicit commit or rollback)
+SET autocommit = OFF;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Example Transaction in MySQL with commit:</h3>
+                <pre>
+                    <code>
+-- Disable autocommit
+SET autocommit = OFF;
+
+-- Start a transaction
+START TRANSACTION;
+
+-- SQL statements within the transaction
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 'A';
+UPDATE accounts SET balance = balance + 100 WHERE account_id = 'B';
+
+-- Commit the transaction
+COMMIT;
+                    </code>
+                </pre>
+                <h3>Example Transaction in MySQL with Rollback:</h3>
+                <pre>
+                    <code>
+-- Disable autocommit
+SET autocommit = OFF;
+
+-- Start a transaction
+START TRANSACTION;
+
+-- SQL statements within the transaction
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 'A';
+UPDATE accounts SET balance = balance + 100 WHERE account_id = 'B';
+
+-- Rollback the transaction (simulate an error or cancellation)
+ROLLBACK;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Commit Limitations:</h3>
+                <ul>
+                    <li>Irreversible Changes: Once committed, changes become permanent, and there's no built-in
+                        mechanism to revert them directly.</li>
+                    <li>Data Consistency: Committing is suitable when you are certain about the correctness of the
+                        changes.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Best Practices:</h3>
+                <ul>
+                    <li>Always use transactions when performing multiple related database operations.</li>
+                    <li>Handle exceptions appropriately and perform a rollback in case of errors.</li>
+                    <li>Choose between autocommit and manual control based on the requirements of your application.</li>
+                </ul>
             </div>
         </div>
     </div>
