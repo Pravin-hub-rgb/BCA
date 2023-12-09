@@ -7,6 +7,7 @@ import java.awt.*;
 // label, test field, button, frame, applet are classes which are part of awt package.
 // there are some scenrario, with frame we don't need...
 
+
 class TestFrameWin extends Frame {
     FlowLayout fl; // we have to set this in constructor function
     Frame f1;

@@ -36,7 +36,7 @@
             <h2>Applets</h2>
         </div>
     </div>
-    <div class="content-box">
+    <!--<div class="content-box">
         <h1>Java Applets Overview</h1>
         <ul>
             <li>An applet in Java is essentially a Java program that is embedded within a webpage.</li>
@@ -148,7 +148,8 @@ public void destroy()
                     <li>The <b>destroy</b> method serves to release the applet object's memory. When this method
                         is called, the applet memory is destroyed, making it available for use in other programs.</li>
                     <li>Clicking on the cross button of the applet window triggers the execution of the
-                        <b>destroy</b> method.</li>
+                        <b>destroy</b> method.
+                    </li>
                     <li>The <b>destroy</b> method is executed only once in the entire life cycle of an applet.
                     </li>
                     <li>It's worth noting that the <b>init</b> and <b>destroy</b> methods are executed only
@@ -158,7 +159,8 @@ public void destroy()
             <ul>
                 <li><strong>Remember:</strong> The <b>init()</b>, <b>start()</b>, <b>stop()</b>, and
                     <b>destroy()</b> methods are present in the <b>Applet</b> class, which is part of the
-                    <b>java.applet</b> package.</li>
+                    <b>java.applet</b> package.
+                </li>
             </ul>
             <img src="../../images/applet1.svg" alt="" class="wb">
         </div>
@@ -172,26 +174,1052 @@ import
             </pre>
         </div>
     </div>
+-->
     <div class="content-box">
         <h1>Applet</h1>
         <ul>
-            <li>Applet cannot be executed independently. Applets can only be executed inside a Java compatible container, such as a browser or Appletviewer.</li>
-            <li>Applets can be embedded in HTML pages and downloaded over the internet.</li>
-            <li>Applet code is refreshed autmatically each time the user revisists the hosting website. Therefore, keeps full aplication up to dat on each client desktop on which it is running.</li>
+            <li><strong>Execution Limitations:</strong> Applets cannot be executed independently; they require a
+                Java-compatible container, such as a browser or Appletviewer, for execution.</li>
+            <li><strong>Embedding and Internet Deployment:</strong> Applets can be embedded in HTML pages and downloaded
+                over the internet, providing a convenient and versatile way to deliver dynamic content to users.</li>
+            <li><strong>Automatic Code Refresh:</strong> The code of an applet is automatically refreshed each time the
+                user revisits the hosting website. This feature ensures that the applet running on each client desktop
+                stays up-to-date with the latest application version.</li>
         </ul>
         <div class="wh">
-            <h2>Applet Hirarchy</h2>
+            <h2>Applet Hierarchy</h2>
             <p>Object &rarr; Component &rarr; Container &rarr; Panel &rarr; Applet</p>
             <ul>
-                <li>Applet is</li>
+                <li><strong>Applet Position:</strong> An applet is positioned within the hierarchy as a specialized type
+                    of panel within a container.</li>
             </ul>
         </div>
         <div class="wh">
             <ul>
-                <li>Note: Applet is getting removed by Java, it is being deprecated.</li>
-                <li>Reason is that because to run a java applet in a web browser require of a browser plugin... as borser have plugin support removed that's why</li>
-                <li>And also applet view is also being remove because</li>
+                <li><strong>Deprecation Notice:</strong> It's important to note that Java is phasing out support for
+                    applets, and they are being deprecated.</li>
+                <li><strong>Reasons for Deprecation:</strong> This decision is motivated by the fact that running a Java
+                    applet in a web browser requires a browser plugin. With the removal of plugin support in modern
+                    browsers, the feasibility and security of running applets have been compromised.</li>
+                <li><strong>Applet View Removal:</strong> Additionally, the applet view is also being removed,
+                    contributing to the overall deprecation of the applet technology.</li>
             </ul>
+        </div>
+        <div class="wh">
+            <h2>Applet Life Cycle</h2>
+            <p>The Applet Life Cycle refers to the series of phases an applet goes through during its complete
+                execution.</p>
+            <ul>
+                <li><strong>Five Life Cycle Methods:</strong> There are five key methods that define the applet life
+                    cycle:
+                </li>
+            </ul>
+            <div class="in">
+                <h3>init Method</h3>
+                <pre>
+                    <code>
+public void init()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>init</b> method is crucial for initializing the applet, allowing tasks such as
+                        variable initialization, setting background and foreground colors, and allocating memory for
+                        controls (e.g., labels, checkboxes).</li>
+                    <li>This method is executed only once during the entire life cycle of the applet.</li>
+                    <li>When the applet is first loaded into memory, the <b>init</b> method is called.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>start Method</h3>
+                <pre>
+                    <code>
+public void start()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>start</b> method is executed after the <b>init</b> method.</li>
+                    <li>Useful for restarting an applet if its execution has been stopped.</li>
+                    <li>Restarting the execution of the current webpage is achieved using the <b>start</b> method.
+                    </li>
+                    <li>There's no predictable limit to how many times an applet webpage can be restarted; it can be
+                        restarted multiple times.</li>
+                    <li>Whenever switching back to the same page, the <b>start</b> method will be executed again.
+                    </li>
+                    <li>When we click on the maximize button than this method can be called.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>paint Method</h3>
+                <pre>
+                    <code>
+public void paint(Graphics g)
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>paint</b> method is used to display content in the view area of the applet.</li>
+                    <li>With the <b>Graphics</b> class, one can paint shapes like circles and rectangles, as well
+                        as display text within the applet.</li>
+                    <li>This method is executed after the <b>start</b> method.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>stop Method</h3>
+                <pre>
+                    <code>
+public void stop()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>stop</b> method is employed to halt the execution of an applet.</li>
+                    <li>Execution of the current webpage is stopped using the <b>stop</b> method when
+                        transitioning from one webpage to another. Additionally, clicking the minimize button on the
+                        applet window triggers the execution of the <b>stop</b> method.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>destroy Method</h3>
+                <pre>
+                    <code>
+public void destroy()
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <b>destroy</b> method serves to release the applet object's memory. When this method
+                        is called, the applet memory is destroyed, making it available for use in other programs.</li>
+                    <li>Clicking on the cross button of the applet window triggers the execution of the
+                        <b>destroy</b> method.
+                    </li>
+                    <li>The <b>destroy</b> method is executed only once in the entire life cycle of an applet.
+                    </li>
+                    <li>It's worth noting that the <b>init</b> and <b>destroy</b> methods are executed only
+                        once, whereas the remaining methods can be executed multiple times.</li>
+                </ul>
+            </div>
+            <ul>
+                <li><strong>Method Inheritance:</strong> The <code>init()</code>, <code>start()</code>,
+                    <code>stop()</code>, and <code>destroy()</code> methods belong to the <code>Applet</code> class,
+                    while the <code>paint()</code> method is inherited from the <code>Component</code> class. When
+                    creating a class by extending the <code>Applet</code> class, all these methods become accessible due
+                    to inheritance.
+                </li>
+            </ul>
+        </div>
+        <p>Note: Given that Java applets have been deprecated, investing time in learning them is no longer considered
+            practical or beneficial. Applets have fallen out of favor due to security concerns and the evolution of web
+            technologies. Consequently, we recommend focusing on more contemporary and versatile alternatives for
+            creating graphical user interfaces (GUIs).</p>
+        <p>One such alternative is Swing, a robust GUI toolkit for Java. Swing provides a set of components and tools
+            that allow developers to create interactive and visually appealing graphical interfaces for desktop
+            applications. By learning Swing, you'll gain valuable skills in building modern and responsive user
+            interfaces that align with current industry standards.</p>
+        <p>Swing offers a wide range of components, including buttons, text fields, panels, and more, making it suitable
+            for developing diverse applications with varying complexity. Moreover, Swing applications can run
+            independently of web browsers, providing greater flexibility in deployment.</p>
+        <div class="wh">
+            <h2>Graphical User Interface using AWT</h2>
+            <p>AWT, which stands for Abstract Window Toolkit, is a set of classes in Java that provides the foundation
+                for creating Graphical User Interfaces (GUIs). AWT facilitates the development of applications with GUI
+                components, allowing developers to build interactive and user-friendly software.</p>
+            <div class="in">
+                <h3>Frame</h3>
+                <p>The <code>Frame</code> class in AWT represents the main window or container for a GUI application. It
+                    serves as the top-level container that holds and organizes other GUI components. To use
+                    <code>Frame</code>, you need to import it with:
+                </p>
+                <pre>
+                    <code>
+import java.awt.Frame;
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Label</h3>
+                <p>The <code>Label</code> class is used to display text related to a text field or to denote the purpose
+                    of the following GUI elements. Labels are passive controls, meaning user interaction is not possible
+                    with labels, unlike active controls such as text fields or checkboxes. To use <code>Label</code>,
+                    you need to import it with:</p>
+                <pre>
+                    <code>
+import java.awt.Label;
+                    </code>
+                </pre>
+
+                <p><b>Constructors of the Label class:</b></p>
+                <p>The <code>Label</code> class is part of the <code>Component</code> class in the AWT package. It
+                    provides three constructors:</p>
+
+                <ol>
+                    <li><code>Label():</code> Creates an empty label.</li>
+                    <li><code>Label(String text):</code> Creates a label with the specified text, left-justified.</li>
+                    <li><code>Label(String text, Alignment):</code> Creates a label with specified text and alignment.
+                        Possible alignments are left, right, and center.</li>
+                </ol>
+                <p><b>So till now we have learnt about Label and Frame so let's make a simple program using that.</b>
+                </p>
+                <pre>
+                    <code>
+// Import necessary AWT classes
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.FlowLayout; // using this components comes one after another
+
+// Main class for the AWT GUI program
+public class TestStuff {
+
+    // Main method, the entry point of the program
+    public static void main(String[] args) {
+        // Create a Frame (main window) with a title
+        Frame frame = new Frame("Simple AWT Program");
+        FlowLayout flow1 = new FlowLayout();
+
+        frame.setLayout(flow1);
+
+        // Create a Label with specified text
+        Label label = new Label("Hello, AWT!");
+
+        // Set the layout of the frame to null (absolute layout)
+        frame.setLayout(null);
+
+        // Set the bounds (position and size) for the label
+        label.setBounds(50, 50, 100, 30);
+
+        // Add the label to the frame
+        frame.add(label);
+
+        // Set the size of the frame
+        frame.setSize(300, 200);
+
+        // Make the frame visible
+        frame.setVisible(true);
+
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Button</h3>
+                <p>Buttons play a crucial role in user interfaces, providing a means to trigger actions or submit
+                    data in a form. They are fundamental components for user interaction in graphical applications.
+                </p>
+
+                <ul>
+                    <li><b>Usage:</b> Buttons are commonly employed to submit the details entered in a form,
+                        initiate specific actions, or respond to user inputs.</li>
+                    <li><b>Constructors of the Button class:</b></li>
+                </ul>
+
+                <ol>
+                    <li>
+                        <p><code>Button():</code> This constructor creates an empty button, meaning a button with no
+                            visible label displayed on it. It serves as a blank canvas for customization based on
+                            application needs.</p>
+                        <pre>
+                                    <code>
+Button emptyButton = new Button();
+                                    </code>
+                                </pre>
+                    </li>
+
+                    <li>
+                        <p><code>Button(String text):</code> This constructor creates a button with the specified
+                            string text as its label. The label provides a descriptive element to convey the purpose
+                            or action associated with the button.</p>
+                        <pre>
+                                    <code>
+Button labeledButon = new Button("Click Me");
+                                    </code>
+                                </pre>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>TextField</h3>
+                <p>The <code>TextField</code> class in Java is utilized to create a single-line text box, offering a
+                    user-friendly way to input and retrieve textual information in graphical applications.</p>
+
+                <ul>
+                    <li><b>Usage:</b> TextFields are commonly employed to gather user input, such as usernames,
+                        passwords, or other textual data, in a simple and intuitive manner.</li>
+                    <li><b>Constructors of the TextField class:</b></li>
+                </ul>
+
+                <ol>
+                    <li>
+                        <p><code>TextField():</code> This constructor creates a default text field with an initial
+                            width, allowing users to input text. It's a straightforward text box with no predefined
+                            text content.</p>
+                        <pre>
+                                <code>
+TextField defaultTextField = new TextField();
+                                </code>
+                            </pre>
+                    </li>
+
+                    <li>
+                        <p><code>TextField(int col):</code> The constructor with an integer parameter defines the
+                            width of the text field, specifying the number of columns it can display. This allows
+                            for customization based on the desired visual appearance.</p>
+                        <pre>
+                                <code>
+TextField customWidthTextField = new TextField(20);
+                                </code>
+                            </pre>
+                    </li>
+
+                    <li>
+                        <p><code>TextField(String str):</code> This constructor creates a text field with the
+                            specified initial text content. It's useful when you want to provide users with a
+                            predefined value or placeholder text.</p>
+                        <pre>
+                                <code>
+TextField preFilledTextField = new TextField("Enter your text here");
+                                </code>
+                            </pre>
+                    </li>
+
+                    <li>
+                        <p><code>TextField(String str, int col):</code> Combining both parameters, this constructor
+                            allows you to set both the initial text content and the width of the text field
+                            simultaneously, offering flexibility in customization.</p>
+                        <pre>
+                            <code>
+TextFiel{d customTextField = new TextField("Default Text", 15);}
+                            </code>
+                           </pre>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Event Handling In Java OR Delegation Event Model in Java</h2>
+            <p>Event handling in Java, also known as the Delegation Event Model, enables the response to user
+                actions on graphical user interface (GUI) components. Events represent user interactions like button
+                clicks, key presses, or mouse movements, triggering specific actions in a Java program.</p>
+
+            <ul>
+                <li><b>Understanding Events:</b></li>
+                <ul>
+                    <li>Events are actions performed on GUI forms or AWT controls, such as button clicks or text
+                        input.</li>
+                    <li>For instance, when a button transitions from an unclicked to a clicked state, this state
+                        change is considered an event.</li>
+                </ul>
+
+                <li><b>Event Source:</b></li>
+                <ul>
+                    <li>In Java, everything is treated as an object. GUI components like buttons, labels, and text
+                        fields are objects, and the source of an event is the object that generates the event.</li>
+                    <li>When an event occurs, the source object must provide the event to the appropriate listener
+                        for handling.</li>
+                </ul>
+            </ul>
+            <p>Now, let's create a simple Java program to demonstrate event handling using a button. In this example,
+                we'll use an ActionListener to handle button click events. The comments in the code explain each part of
+                the program.</p>
+            <pre>
+                    <code>
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class EventHandlingExample {
+    public static void main(String[] args) {
+        Frame frame = new Frame("Event Handling Example");
+
+        // Create a button
+        Button button = new Button("Click Me");
+
+        // Add an ActionListener to the button
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // This method is called when the button is clicked
+                System.out.println("Button Clicked!");
+            }
+        });
+
+        // Set layout to null for absolute positioning
+        frame.setLayout(null);
+
+        // Set bounds for the button
+        button.setBounds(50, 50, 80, 30);
+
+        // Add the button to the frame
+        frame.add(button);
+
+        // Set size of the frame
+        frame.setSize(300, 200);
+
+        // Make the frame visible
+        frame.setVisible(true);
+
+        // Add a WindowListener to handle closing the frame
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
+    }
+}
+                    </code>
+                </pre>
+            <p>
+                In this program, the ActionListener is implemented to handle the button click event. When the button is
+                clicked, the actionPerformed method is executed, and it prints a message to the console. The program
+                creates a simple frame with a button, and the event handling logic is encapsulated within the
+                ActionListener.
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Adapter Classes</h2>
+            <p>Adapter classes in Java are designed to address the limitations of interfaces. In interfaces, all
+                methods are abstract, meaning that the implementing class must provide definitions for all declared
+                methods. This can be cumbersome when we are only interested in a subset of the methods. Adapter
+                classes offer a solution to this issue by providing empty implementations for all methods in an
+                interface.</p>
+
+            <ul>
+                <li><b>Drawbacks of Interfaces:</b></li>
+                <ul>
+                    <li>When implementing an interface with multiple methods, the class must provide definitions for
+                        all of them.</li>
+                    <li>Adapter classes help overcome this drawback by offering empty implementations, allowing
+                        classes to selectively override only the methods they need.</li>
+                </ul>
+
+                <li><b>Adapter Classes Overview:</b></li>
+                <ul>
+                    <li>Adapter classes provide empty implementations for all methods in an interface, allowing
+                        classes to choose which methods to override.</li>
+                    <li>For example, the `MouseListener` interface has five methods, and the corresponding adapter
+                        class is `MouseAdapter`.</li>
+                </ul>
+
+                <li><b>Listener Interface with Adapter Classes:</b></li>
+                <ul>
+                    <li><code>ComponentListener</code> - <code>ComponentAdapter</code></li>
+                    <li><code>ContainerListener</code> - <code>ContainerAdapter</code></li>
+                    <li><code>FocusListener</code> - <code>FocusAdapter</code></li>
+                    <li><code>KeyListener</code> - <code>KeyAdapter</code></li>
+                    <li><code>MouseListener</code> - <code>MouseAdapter</code></li>
+                    <li><code>MouseMotionListener</code> - <code>MouseMotionAdapter</code></li>
+                    <li><code>WindowListener</code> - <code>WindowAdapter</code></li>
+                </ul>
+
+                <li><b>Implementing Adapter Classes:</b></li>
+                <ul>
+                    <li>To implement an adapter class, create a class that extends the corresponding adapter class
+                        for the interface you are interested in.</li>
+                    <pre>
+                        <code>
+class CustomMouseListener extends MouseAdapter {
+    // Override only the methods you need
+    public void mouseClicked(MouseEvent e) {
+        // Custom handling for mouse click
+    }
+}
+                        </code>
+                    </pre>
+                </ul>
+
+                <li><b>ActionListener Interface:</b></li>
+                <ul>
+                    <li>For the <strong>ActionListener</code> interface, which typically has only one method
+                            (<strong>actionPerformed</strong>), there is usually no need for a specific adapter class.
+                    </li>
+                </ul>
+            </ul>
+            <p>Now, let's create a simple Java program to demonstrate the use of an adapter class for event handling.
+                This example will use a MouseListener and its corresponding adapter class, MouseAdapter. The comments in
+                the code explain each part of the program.</p>
+            <pre>
+                <code>
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class AdapterExample {
+    public static void main(String[] args) {
+        Frame frame = new Frame("Adapter Example");
+        Label label = new Label("Mouse Event Demo");
+
+        // Create a custom mouse listener by extending MouseAdapter
+        CustomMouseListener customMouseListener = new CustomMouseListener();
+
+        // Add the custom mouse listener to the label
+        label.addMouseListener(customMouseListener);
+
+        // Set layout to null for absolute positioning
+        frame.setLayout(null);
+
+        // Set bounds for the label
+        label.setBounds(50, 50, 150, 30);
+
+        // Add the label to the frame
+        frame.add(label);
+
+        // Set size of the frame
+        frame.setSize(300, 200);
+
+        // Make the frame visible
+        frame.setVisible(true);
+
+        // Add a WindowListener to handle closing the frame
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
+    }
+
+    // Custom mouse listener class extending MouseAdapter
+    static class CustomMouseListener extends MouseAdapter {
+        // Override only the methods you need
+        public void mouseClicked(MouseEvent e) {
+            // Custom handling for mouse click
+            System.out.println("Mouse Clicked!");
+        }
+    }
+}
+                </code>
+            </pre>
+            <p>In this program, the CustomMouseListener class extends MouseAdapter to provide an empty implementation
+                for the mouseClicked method. This allows you to only override the methods you need for your specific use
+                case.</p>
+        </div>
+        <div class="wh">
+            <h2>Swing Introduction</h2>
+            <p>Swing is a powerful GUI (Graphical User Interface) toolkit in Java designed to overcome the limitations
+                of AWT (Abstract Window Toolkit). It provides a set of classes that offers more flexibility and advanced
+                GUI components for developing both window and web applications.</p>
+
+            <ul>
+                <li><b>Types of Applications:</b></li>
+                <ul>
+                    <li>Swing is commonly used for developing two main types of applications: window applications and
+                        web applications.</li>
+                </ul>
+
+                <li><b>Definition:</b></li>
+                <ul>
+                    <li>Swing is a collection of classes that delivers powerful and flexible GUI components, surpassing
+                        the capabilities of AWT. While AWT provides some basic GUI components, Swing extends its
+                        functionality by offering a richer set of components.</li>
+                    <li>Swing is an integral part of JFC (Java Foundation Classes).</li>
+                </ul>
+            </ul>
+            <div class="in">
+                <h3>Differences between AWT and Swing:</h3>
+                <img src="../../images/swingawt1.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <p>When working with Swing components in Java, you need to import classes from the javax.swing package. Below is a simple example that demonstrates how to create a basic Swing window using JFrame.</p>
+                <pre>
+                    <code>
+import javax.swing.*;
+
+public class EmptySwingWindow {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("Empty Swing Window");
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                    </code>
+                </pre>
+
+            </div>
+            <div class="in">
+                <h3>Swing Component: JLabel Class</h3>
+                <p>The JLabel class in Swing is used to display a line of text or an image. It is similar to the AWT
+                    Label but with some enhancements and added features.</p>
+
+                <p>For example, in a login form like Gmail, the "Enter your email" and "Enter your password" messages
+                    are similar to labels. In Swing, these labels are instances of the JLabel class.</p>
+
+                <p>The key difference between AWT Label and Swing JLabel is the naming convention; in AWT, it was Label,
+                    and in Swing, it is JLabel.</p>
+
+                <div class="in">
+                    <h3>Constructors of JLabel class:</h3>
+                    <ul>
+                        <li><code>JLabel()</code>: Creates a JLabel with no text.</li>
+                        <li><code>JLabel(String text)</code>: Creates a JLabel with the specified text.</li>
+                        <li><code>JLabel(Icon icon)</code>: Creates a JLabel that displays the specified icon (image).
+                            Useful when you want to represent information with images.</li>
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Here's a simple Java program to demonstrate the usage of JLabel in Swing:</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+
+public class JLabelExample {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("JLabel Example");
+
+        // Create a JLabel with text
+        JLabel textLabel = new JLabel("Hello, Swing!");
+
+        // Create a JLabel with an icon (image)
+        ImageIcon icon = new ImageIcon("path/to/your/image.png");
+        JLabel iconLabel = new JLabel(icon);
+
+        // Add labels to the content pane
+        Container container = frame.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(textLabel);
+        container.add(iconLabel);
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Swing Component: JTextField Class</h3>
+                <p>The JTextField class in Swing is used to create a single-line text input field. It allows users to enter and edit text. JTextField provides a versatile way to handle user input in graphical user interfaces.</p>
+            
+                <p>Key features of JTextField:</p>
+                <ul>
+                    <li>Allows users to input and edit a single line of text.</li>
+                    <li>Can be used for various purposes, such as accepting usernames, passwords, or search queries.</li>
+                    <li>Provides events to listen for changes in the text.</li>
+                </ul>
+            
+                <div class="in">
+                    <h3>Constructors of JTextField class:</h3>
+                    <ul>
+                        <li><code>JTextField()</code>: Creates an empty text field.</li>
+                        <li><code>JTextField(String text)</code>: Creates a text field with the specified initial text.</li>
+                        <li><code>JTextField(int columns)</code>: Creates a text field with the specified number of columns (width).</li>
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Now, let's provide a simple Java program to demonstrate the usage of JTextField in Swing:</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+
+public class JTextFieldExample {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("JTextField Example");
+
+        // Create a JTextField
+        JTextField textField = new JTextField("Type here...");
+
+        // Add the text field to the content pane
+        Container container = frame.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(textField);
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Swing Component: JTextArea Class</h3>
+                <p>The JTextArea class in Swing is used to create a multi-line text area that allows users to input and edit text over multiple lines. It is suitable for handling larger amounts of text compared to a single-line text field like JTextField.</p>
+            
+                <p>Key features of JTextArea:</p>
+                <ul>
+                    <li>Allows users to input and edit text over multiple lines.</li>
+                    <li>Useful for scenarios where a larger amount of text input is required, such as comments or descriptions.</li>
+                    <li>Supports scrolling for viewing and editing longer text.</li>
+                    <li>Provides events to listen for changes in the text.</li>
+                </ul>
+            
+                <div class="in">
+                    <h3>Constructors of JTextArea class:</h3>
+                    <ul>
+                        <li><code>JTextArea()</code>: Creates an empty text area.</li>
+                        <li><code>JTextArea(String text)</code>: Creates a text area with the specified initial text.</li>
+                        <li><code>JTextArea(int rows, int columns)</code>: Creates a text area with the specified number of rows and columns.</li>
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">And here's a simple Java program demonstrating the usage of JTextArea in Swing:</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+
+public class JTextAreaExample {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("JTextArea Example");
+
+        // Create a JTextArea
+        JTextArea textArea = new JTextArea("Type here...");
+
+        // Set the rows and columns for the text area
+        textArea.setRows(5);
+        textArea.setColumns(20);
+
+        // Add the text area to a JScrollPane for scrolling
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        // Add the scroll pane to the content pane
+        Container container = frame.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(scrollPane);
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Swing Component: JButton Class</h3>
+                <p>The JButton class in Swing is used to create a button that can trigger an action when clicked. Buttons are fundamental components for user interaction in graphical user interfaces, allowing users to perform various tasks or operations.</p>
+            
+                <p>Key features of JButton:</p>
+                <ul>
+                    <li>Represents a clickable button.</li>
+                    <li>Can be used to trigger events or actions in response to user clicks.</li>
+                    <li>Supports text, icons, or both as content.</li>
+                    <li>Provides events to listen for button clicks.</li>
+                </ul>
+            
+                <div class="in">
+                    <h3>Constructors of JButton class:</h3>
+                    <ul>
+                        <li><code>JButton()</code>: Creates a button with no text or icon.</li>
+                        <li><code>JButton(String text)</code>: Creates a button with the specified text.</li>
+                        <li><code>JButton(Icon icon)</code>: Creates a button with the specified icon.</li>
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">And here's a simple Java program demonstrating the usage of JButton in Swing:</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class JButtonExample {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("JButton Example");
+
+        // Create a JButton
+        JButton button = new JButton("Click Me");
+
+        // Add an ActionListener to handle button clicks
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Button Clicked!");
+            }
+        });
+
+        // Add the button to the content pane
+        Container container = frame.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(button);
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Swing Component: JPasswordField Class</h3>
+                <p>The JPasswordField class in Swing is used to create a text input field specifically designed for entering passwords. It provides a secure way to handle sensitive information, such as user passwords, by displaying the entered characters as dots or asterisks.</p>
+            
+                <p>Key features of JPasswordField:</p>
+                <ul>
+                    <li>Allows users to input and edit text (passwords) in a secure manner.</li>
+                    <li>Displays characters as dots or asterisks for privacy.</li>
+                    <li>Provides events to listen for changes in the entered password.</li>
+                </ul>
+            
+                <div class="in">
+                    <h3>Constructors of JPasswordField class:</h3>
+                    <ul>
+                        <li><code>JPasswordField()</code>: Creates an empty password field.</li>
+                        <li><code>JPasswordField(int columns)</code>: Creates a password field with the specified number of columns (width).</li>
+                    </ul>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">And here's a simple Java program demonstrating the usage of JPasswordField in Swing:</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class JPasswordFieldExample {
+    public static void main(String[] args) {
+        // Create a JFrame (window)
+        JFrame frame = new JFrame("JPasswordField Example");
+
+        // Create a JPasswordField
+        JPasswordField passwordField = new JPasswordField();
+
+        // Create a JButton to simulate checking the password
+        JButton checkButton = new JButton("Check Password");
+
+        // Add an ActionListener to handle button clicks
+        checkButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                char[] password = passwordField.getPassword();
+                // For demonstration purposes, convert the password to a string and show in a dialog
+                String passwordString = new String(password);
+                JOptionPane.showMessageDialog(frame, "Entered Password: " + passwordString);
+            }
+        });
+
+        // Add the password field and button to the content pane
+        Container container = frame.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(passwordField);
+        container.add(checkButton);
+
+        // Set default close operation and make the frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Programs</h2>
+            <div class="in">
+                <h3>Simple calculator program using AWT</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Code</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TestStuff implements ActionListener {
+    TextField tf1, tf2, tf3;
+    Button b1, b2, b3, b4, b5;
+
+    public TestStuff() {
+        Frame mainF = new Frame("Simple calculator");
+        FlowLayout ef1 = new FlowLayout();
+        Label el1 = new Label("Enter First Number : ");
+        Label el2 = new Label("Enter Second Number : ");
+        tf1 = new TextField(10);
+        tf2 = new TextField(10);
+        b1 = new Button("Add");
+        b2 = new Button("Sub");
+        b3 = new Button("Mult");
+        b4 = new Button("Div");
+        b5 = new Button("Reset");
+        tf3 = new TextField(10);
+
+        mainF.setLayout(ef1);
+
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+        b5.addActionListener(this);
+
+        mainF.add(el1);
+        mainF.add(tf1);
+        mainF.add(el2);
+        mainF.add(tf2);
+        mainF.add(b1);
+        mainF.add(b2);
+        mainF.add(b3);
+        mainF.add(b4);
+        mainF.add(b5);
+        mainF.add(tf3);
+
+        mainF.setVisible(true);
+        mainF.setSize(400, 200);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        int num1 = Integer.parseInt(tf1.getText());
+            int num2 = Integer.parseInt(tf2.getText());
+            int num3 = 0;
+        if (e.getSource() == b1) {
+            num3 = num1 + num2;
+            tf3.setText(String.valueOf(num3));
+        }
+        if(e.getSource() == b2) {
+            num3 = num1 - num2;
+            tf3.setText(String.valueOf(num3));
+        }
+        if(e.getSource() == b3) {
+            num3 = num1 * num2;
+            tf3.setText(String.valueOf(num3));
+        }
+        if(e.getSource() == b4) {
+            num3 = num1 / num2;
+            tf3.setText(String.valueOf(num3));
+        }
+        if(e.getSource() == b5) {
+            tf1.setText("");
+            tf2.setText("");
+            tf3.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        TestStuff one = new TestStuff();
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Simple calculator program using Swing</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">Code</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TestStuff implements ActionListener {
+    private JTextField tf1, tf2, tf3;
+
+    public TestStuff() {
+        JFrame mainFrame = new JFrame("Simple Calculator");
+        mainFrame.setLayout(new FlowLayout());
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel label1 = new JLabel("Enter First Number:");
+        JLabel label2 = new JLabel("Enter Second Number:");
+        tf1 = new JTextField(10);
+        tf2 = new JTextField(10);
+
+        JButton addButton = new JButton("Add");
+        JButton subButton = new JButton("Sub");
+        JButton multButton = new JButton("Mult");
+        JButton divButton = new JButton("Div");
+        JButton resetButton = new JButton("Reset");
+
+        tf3 = new JTextField(10);
+        tf3.setEditable(false);
+
+        addButton.addActionListener(this);
+        subButton.addActionListener(this);
+        multButton.addActionListener(this);
+        divButton.addActionListener(this);
+        resetButton.addActionListener(this);
+
+        mainFrame.add(label1);
+        mainFrame.add(tf1);
+        mainFrame.add(label2);
+        mainFrame.add(tf2);
+        mainFrame.add(addButton);
+        mainFrame.add(subButton);
+        mainFrame.add(multButton);
+        mainFrame.add(divButton);
+        mainFrame.add(resetButton);
+        mainFrame.add(tf3);
+
+        mainFrame.setSize(400, 200);
+        mainFrame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int num1 = Integer.parseInt(tf1.getText());
+            int num2 = Integer.parseInt(tf2.getText());
+            int num3 = 0;
+
+            if (e.getActionCommand().equals("Add")) {
+                num3 = num1 + num2;
+            } else if (e.getActionCommand().equals("Sub")) {
+                num3 = num1 - num2;
+            } else if (e.getActionCommand().equals("Mult")) {
+                num3 = num1 * num2;
+            } else if (e.getActionCommand().equals("Div")) {
+                num3 = num1 / num2;
+            } else if (e.getActionCommand().equals("Reset")) {
+                tf1.setText("");
+                tf2.setText("");
+                tf3.setText("");
+                return; // Skip setting the result field for Reset button
+            }
+
+            tf3.setText(String.valueOf(num3));
+        } catch (NumberFormatException | ArithmeticException ex) {
+            tf3.setText("Error");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new TestStuff());
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
