@@ -1968,6 +1968,138 @@ mysql> SELECT * FROM Personal CROSS JOIN City;
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <h2>GROUP BY Clause</h2>
+            <ul>
+                <li>The GROUP BY clause is used in conjunction with the SELECT statement and Aggregate functions to group rows together by common column values.</li>
+                <li>Remember is it not necessary to have two tables </li>
+            </ul>
+            <p>Example:</p>
+            <pre>
+                <code>
+Student Table 
++----------------------------------------------+
+|  Id |     Name        |  Age  |  City (F.K)  |
++----------------------------------------------+
+|  1  |  Ram Kumar      |   19  |       1      |
+|  2  |  Salman Khan    |   18  |       2      |
+|  3  |  Meera Khan     |   19  |              |
+|  4  |  Sarita Kumari  |   21  |       3      |
++----------------------------------------------+
+
+City Table
++--------------------+
+| Cid (P.K) | City   |
++--------------------+
+|     1     | Agra   |
+|     2     | Bhopal |
+|     3     | Delhi  |
+|     4     | Noida  |
++--------------------+
+
+Result we want:
++-----------------------------+
+|   City   | Total Students   |
++-----------------------------+
+|    Agra  |       2          |
+|  Bhopal  |       1          |
+|   Delhi  |       1          |
++-----------------------------+
+                </code>
+            </pre>
+            <div class="in">
+                <h3>SELECT with GROUP BY Syntax</h3>
+                <pre>
+                    <code>
+SELECT columns
+FROM table_name 
+WHERE condition 
+GROUP BY column_name(s);
+                    </code>
+                </pre>
+                <p>If we are getting data from two tables and we want to use GROUP BY.</p>
+                <pre>
+                    <code>
+SELECT columns
+FROM table1 INNER JOIN table2 
+ON table1.column_name = table2.column_name 
+WHERE condition 
+GROUP BY column_name(s); 
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Practical</h3>
+                <pre>
+                    <code>
+mysql> SELECT city, COUNT(city) FROM Personal GROUP BY city;
++------+-------------+
+| city | COUNT(city) |
++------+-------------+
+|    1 |           4 |
+|    2 |           2 |
+|    3 |           1 |
++------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal
+ INNE
++----------+---------------+
+| cityname | Total_student |
++----------+---------------+
+| Agra     |             4 |
+| Dehli    |             2 |
+| Bhopal   |             1 |
++----------+---------------+
+3 rows in set (0.00 sec)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Using WHERE Clause</h3>
+                <p>We put WHERE clause before using  GROUP BY</p>
+                <pre>
+                    <code>
+mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal
+ INNER JOIN City ON Personal.city = City.cid WHERE Personal.age >= 20 GROUP BY Personal.city;
++----------+---------------+
+| cityname | Total_student |
++----------+---------------+
+| Dehli    |             2 |
+| Agra     |             3 |
++----------+---------------+
+2 rows in set (0.00 sec)                  
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>GROUP BY with HAVING Clause</h3>
+                <p>Now if we want those cities from where there are more than 5 students. so this condition will work on total students it is done by HAVING Clause.</p>
+                <div class="in">
+                    <h3>SELECT with GROUP BY & HAVING Syntax</h3>
+                    <pre>
+                        <code>
+SELECT columns 
+FROM table_name 
+GROUP BY column_name(s)
+HAVING condition;
+                        </code>
+                    </pre>
+                    <h3>Practical</h3>
+                    <pre>
+                        <code>
+ mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal INNER JOIN City ON Personal.city = City.cid GROUP BY Personal.city HAVING COUNT(Personal.city) > 3;
++----------+---------------+
+| cityname | Total_student |
++----------+---------------+
+| Agra     |             4 |
++----------+---------------+
+1 row in set (0.00 sec)
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <h2>Previous Year Questions</h2>
@@ -1981,8 +2113,13 @@ mysql> SELECT * FROM Personal CROSS JOIN City;
             </h3>
         </div>
     </div>
+    <div class="wh">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=RJbP_oTbwNw&list=PL0b6OzIxLPbzf12lu5etX_vjN-eUxgxnr&index=26" target="_blank">Playlist &neArr;</a></li>
+        </ul>
+    </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
-
 </html>
