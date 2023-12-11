@@ -573,7 +573,7 @@ VALUES
     ('E0002', 'Bruce', 'Analyst', '1999-04-24', 4000, 400, 'D002'),
     ('E0003', 'Amold', 'Clerk', '2001-01-10', 2500, 250, 'D004'),
     ('E0004', 'Holvfield', 'Tester', '2001-10-10', 3000, 300, 'D002'),
-    ('B0005', 'Kelly', 'Admin', '1999-04-11', 2000, 200, 'D003');
+    ('E0005', 'Kelly', 'Admin', '1999-04-11', 2000, 200, 'D003');
                     </code>
                     </pre>
             </div>
@@ -1347,92 +1347,121 @@ SELECT MIN(Quantity) FROM Sales;
             </div>
         </div>
         <div id="t10" class="wh">
-            <h2>Updating and Deleting Data</h2>
+            <h2>Updating, Deleting, and Truncating Data</h2>
             <div class="in">
                 <h3>Updating Existing Records (UPDATE)</h3>
                 <p>The UPDATE statement is used to modify existing records in a table.</p>
                 <p>Syntax &darr;</p>
                 <pre>
-                    <code>
+        <code>
 UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
-Example:
+        </code>
+    </pre>
+                <p>Example:</p>
+                <pre>
+        <code>
 UPDATE Customers
 SET City = 'New York'
 WHERE CustomerID = 1;
-                    </code>
-                </pre>
+        </code>
+    </pre>
             </div>
             <div class="in">
                 <h3>Deleting Records (DELETE)</h3>
                 <p>The DELETE statement is used to remove records from a table.</p>
                 <p>Syntax &darr;</p>
                 <pre>
-                    <code>
+        <code>
 DELETE FROM table_name WHERE condition;
 Example:
 DELETE FROM Orders WHERE OrderID = 100;
-                    </code>
-                </pre>
+        </code>
+    </pre>
 
                 <h3>Delete All Rows</h3>
                 <p>To delete all rows from a table, use the DELETE statement without a WHERE clause.</p>
                 <p>Syntax &darr;</p>
                 <pre>
-                    <code>
+        <code>
 DELETE FROM table_name;
 Example:
 DELETE FROM Customers;
-                    </code>
-                </pre>
+        </code>
+    </pre>
 
                 <h3>Delete Single/Multiple Rows</h3>
                 <p>To delete single or multiple rows based on specific conditions, use the DELETE statement with a WHERE
                     clause.</p>
                 <p>Syntax &darr;</p>
                 <pre>
-                    <code>
+        <code>
 DELETE FROM table_name WHERE condition;
 Example:
 DELETE FROM Employees WHERE Salary < 30000;
-                    </code>
-                </pre>
+        </code>
+    </pre>
             </div>
-        </div>
-        <div class="wh">
-            <h2>Database Transactions, Commit, Rollback and Autocommit in MySQL:</h2>
-            <ul>
-                <li>A transaction is a sequence of one or more SQL statements executed as a single unit. Transactions
-                    ensure data integrity and consistency in a database.</li>
-                <li>Commit: Makes all changes made during the current transaction permanent. Once committed, changes are
-                    saved to the database, marking the transaction as successful.</li>
-                <li>Rollback: Undoes all changes made during the current transaction. It reverts the database to its
-                    state before the transaction started, useful for handling errors or canceling transactions.</li>
-                <li>Autocommit: In MySQL, autocommit is the default mode where each SQL statement is treated as a
-                    transaction and automatically committed. Disabling autocommit allows manual control over
-                    transactions.</li>
-            </ul>
             <div class="in">
-                <h3>Autocommit in MySQL:</h3>
-                <p><b>Default Autocommit:</b></p>
+                <h3>Truncating a Table (TRUNCATE)</h3>
+                <p>The TRUNCATE statement is used to remove all records from a table quickly.</p>
+                <p>Syntax &darr;</p>
                 <pre>
+        <code>
+TRUNCATE table_name;
+Example:
+TRUNCATE TABLE Customers;
+        </code>
+    </pre>
+            </div>
+
+            <h3>Difference Between DELETE and TRUNCATE</h3>
+            <p>While both DELETE and TRUNCATE can be used to remove data from a table, there are key differences:</p>
+            <ul>
+                <li>DELETE is a DML (Data Manipulation Language) command, while TRUNCATE is a DDL (Data Definition
+                    Language) command.</li>
+                <li>DELETE allows for the removal of specific rows based on a condition, whereas TRUNCATE removes all
+                    rows from a table.</li>
+                <li>DELETE operations are slower than TRUNCATE, especially on large tables, as DELETE logs individual
+                    row deletions and can be rolled back, while TRUNCATE doesn't log individual row deletions.</li>
+                <li>DELETE can activate triggers, while TRUNCATE cannot.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="wh">
+        <h2>Database Transactions, Commit, Rollback and Autocommit in MySQL:</h2>
+        <ul>
+            <li>A transaction is a sequence of one or more SQL statements executed as a single unit. Transactions
+                ensure data integrity and consistency in a database.</li>
+            <li>Commit: Makes all changes made during the current transaction permanent. Once committed, changes are
+                saved to the database, marking the transaction as successful.</li>
+            <li>Rollback: Undoes all changes made during the current transaction. It reverts the database to its
+                state before the transaction started, useful for handling errors or canceling transactions.</li>
+            <li>Autocommit: In MySQL, autocommit is the default mode where each SQL statement is treated as a
+                transaction and automatically committed. Disabling autocommit allows manual control over
+                transactions.</li>
+        </ul>
+        <div class="in">
+            <h3>Autocommit in MySQL:</h3>
+            <p><b>Default Autocommit:</b></p>
+            <pre>
                     <code>
 -- Default autocommit mode (each statement is a transaction)
 SET autocommit = ON;
                     </code>
                 </pre>
-                <p><b>Disable Autocommit:</b></p>
-                <pre>
+            <p><b>Disable Autocommit:</b></p>
+            <pre>
                     <code>
 -- Disable autocommit (requires explicit commit or rollback)
 SET autocommit = OFF;
                     </code>
                 </pre>
-            </div>
-            <div class="in">
-                <h3>Example Transaction in MySQL with commit:</h3>
-                <pre>
+        </div>
+        <div class="in">
+            <h3>Example Transaction in MySQL with commit:</h3>
+            <pre>
                     <code>
 -- Disable autocommit
 SET autocommit = OFF;
@@ -1448,8 +1477,8 @@ UPDATE accounts SET balance = balance + 100 WHERE account_id = 'B';
 COMMIT;
                     </code>
                 </pre>
-                <h3>Example Transaction in MySQL with Rollback:</h3>
-                <pre>
+            <h3>Example Transaction in MySQL with Rollback:</h3>
+            <pre>
                     <code>
 -- Disable autocommit
 SET autocommit = OFF;
@@ -1465,39 +1494,39 @@ UPDATE accounts SET balance = balance + 100 WHERE account_id = 'B';
 ROLLBACK;
                     </code>
                 </pre>
-            </div>
-            <div class="in">
-                <h3>Commit Limitations:</h3>
-                <ul>
-                    <li>Irreversible Changes: Once committed, changes become permanent, and there's no built-in
-                        mechanism to revert them directly.</li>
-                    <li>Data Consistency: Committing is suitable when you are certain about the correctness of the
-                        changes.</li>
-                </ul>
-            </div>
-            <div class="in">
-                <h3>Best Practices:</h3>
-                <ul>
-                    <li>Always use transactions when performing multiple related database operations.</li>
-                    <li>Handle exceptions appropriately and perform a rollback in case of errors.</li>
-                    <li>Choose between autocommit and manual control based on the requirements of your application.</li>
-                </ul>
-            </div>
         </div>
-        <div class="wh">
-            <h2>Primary Key & Foreign Key</h2>
-            <div class="in">
-                <h3>Primary Key</h3>
-                <ul>
-                    <li>A Primary Key always contains unique data within a table.</li>
-                    <li>Uniqueness in a Primary Key is achieved using a unique constraint. However, a significant
-                        distinction is that a Primary Key does not allow null values, unlike a Unique Key.</li>
-                    <li>Each table can have only one Primary Key constraint, and it plays a crucial role in uniquely
-                        identifying each record in the table.</li>
-                </ul>
+        <div class="in">
+            <h3>Commit Limitations:</h3>
+            <ul>
+                <li>Irreversible Changes: Once committed, changes become permanent, and there's no built-in
+                    mechanism to revert them directly.</li>
+                <li>Data Consistency: Committing is suitable when you are certain about the correctness of the
+                    changes.</li>
+            </ul>
+        </div>
+        <div class="in">
+            <h3>Best Practices:</h3>
+            <ul>
+                <li>Always use transactions when performing multiple related database operations.</li>
+                <li>Handle exceptions appropriately and perform a rollback in case of errors.</li>
+                <li>Choose between autocommit and manual control based on the requirements of your application.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="wh">
+        <h2>Primary Key & Foreign Key</h2>
+        <div class="in">
+            <h3>Primary Key</h3>
+            <ul>
+                <li>A Primary Key always contains unique data within a table.</li>
+                <li>Uniqueness in a Primary Key is achieved using a unique constraint. However, a significant
+                    distinction is that a Primary Key does not allow null values, unlike a Unique Key.</li>
+                <li>Each table can have only one Primary Key constraint, and it plays a crucial role in uniquely
+                    identifying each record in the table.</li>
+            </ul>
 
-                <p>Example:</p>
-                <pre>
+            <p>Example:</p>
+            <pre>
                     <code>
 +-----------------------------------------+
 |  Id |     Name        |  Age  |  City   |
@@ -1510,14 +1539,14 @@ ROLLBACK;
                     </code>
                 </pre>
 
-                <ul>
-                    <li>For a column to serve as a Primary Key, it must be unique. In this example, 'Id' is chosen as
-                        the Primary Key since it meets the criteria of uniqueness, whereas 'Name,' 'Age,' and 'City' may
-                        contain duplicate values.</li>
-                </ul>
-                <div class="in">
-                    <h3>Create Table with PRIMARY KEY Syntax</h3>
-                    <pre>
+            <ul>
+                <li>For a column to serve as a Primary Key, it must be unique. In this example, 'Id' is chosen as
+                    the Primary Key since it meets the criteria of uniqueness, whereas 'Name,' 'Age,' and 'City' may
+                    contain duplicate values.</li>
+            </ul>
+            <div class="in">
+                <h3>Create Table with PRIMARY KEY Syntax</h3>
+                <pre>
                         <code>
 CREATE TABLE table_name (
     id INT NOT NULL AUTO_INCREMENT,
@@ -1528,37 +1557,37 @@ CREATE TABLE table_name (
 );
                         </code>
                     </pre>
-                    <ul>
-                        <li>The <code>AUTO_INCREMENT</code> attribute for the 'id' column ensures that the database
-                            system automatically assigns a unique value to 'id' for each new record. This eliminates the
-                            need for manually specifying the 'id' value during insertion.</li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <h3>Alter Table with PRIMARY KEY Syntax</h3>
-                    <p>When a table has already been created without a specified primary key, you can alter it to add a
-                        primary key constraint afterward.</p>
-                    <pre>
+                <ul>
+                    <li>The <code>AUTO_INCREMENT</code> attribute for the 'id' column ensures that the database
+                        system automatically assigns a unique value to 'id' for each new record. This eliminates the
+                        need for manually specifying the 'id' value during insertion.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Alter Table with PRIMARY KEY Syntax</h3>
+                <p>When a table has already been created without a specified primary key, you can alter it to add a
+                    primary key constraint afterward.</p>
+                <pre>
                         <code>
 ALTER TABLE table_name 
 ADD PRIMARY KEY(id);
                         </code>
                     </pre>
-                    <p>This ALTER TABLE statement adds a primary key constraint to the 'id' column of the existing
-                        table.</p>
-                </div>
+                <p>This ALTER TABLE statement adds a primary key constraint to the 'id' column of the existing
+                    table.</p>
             </div>
-            <div class="in">
-                <h3>Foreign Key</h3>
-                <ul>
-                    <li>A FOREIGN KEY is a crucial database concept used to establish a connection between two tables.
-                    </li>
-                    <li>It acts as a link between tables by referencing a PRIMARY Key in one table as a FOREIGN Key in
-                        another table.</li>
-                </ul>
+        </div>
+        <div class="in">
+            <h3>Foreign Key</h3>
+            <ul>
+                <li>A FOREIGN KEY is a crucial database concept used to establish a connection between two tables.
+                </li>
+                <li>It acts as a link between tables by referencing a PRIMARY Key in one table as a FOREIGN Key in
+                    another table.</li>
+            </ul>
 
-                <p>Example:</p>
-                <pre>
+            <p>Example:</p>
+            <pre>
                     <code>
 Student Table 
 +-----------------------------------------+
@@ -1581,19 +1610,19 @@ City Table
                     </code>
                 </pre>
 
-                <ul>
-                    <li>In the given example, 'Id' in the Student table serves as the primary key, 'City' in the Student
-                        table acts as a foreign key, and 'Cid' in the City table is the primary key.</li>
-                    <li>These tables can be linked using the foreign key relationship.</li>
-                    <li>Using foreign keys helps in optimizing the database structure. By storing only the primary key
-                        of another table as a foreign key, the table becomes lightweight. This optimization is
-                        especially beneficial when dealing with large datasets, resulting in faster loading times and
-                        improved search performance, especially in scenarios where searching is done based on city-wise
-                        criteria.</li>
-                </ul>
-                <div class="in">
-                    <h3>Create Table with FOREIGN KEY Syntax</h3>
-                    <pre>
+            <ul>
+                <li>In the given example, 'Id' in the Student table serves as the primary key, 'City' in the Student
+                    table acts as a foreign key, and 'Cid' in the City table is the primary key.</li>
+                <li>These tables can be linked using the foreign key relationship.</li>
+                <li>Using foreign keys helps in optimizing the database structure. By storing only the primary key
+                    of another table as a foreign key, the table becomes lightweight. This optimization is
+                    especially beneficial when dealing with large datasets, resulting in faster loading times and
+                    improved search performance, especially in scenarios where searching is done based on city-wise
+                    criteria.</li>
+            </ul>
+            <div class="in">
+                <h3>Create Table with FOREIGN KEY Syntax</h3>
+                <pre>
                         <code>
 CREATE TABLE student(
     id INT NOT NULL AUTO_INCREMENT,
@@ -1605,21 +1634,21 @@ CREATE TABLE student(
 )
                         </code>
                     </pre>
-                </div>
-                <div class="in">
-                    <h3>Alter Table with FOREIGN KEY Syntax</h3>
-                    <pre>
+            </div>
+            <div class="in">
+                <h3>Alter Table with FOREIGN KEY Syntax</h3>
+                <pre>
                         <code>
 ALTER TABLE table_name 
 ADD FOREIGN KEY(city) REFERENCES City(cid); 
                         </code>
                     </pre>
-                </div>
             </div>
-            <div class="in">
-                <h3>Practical:</h3>
-                <p>Creating City Table:</p>
-                <pre>
+        </div>
+        <div class="in">
+            <h3>Practical:</h3>
+            <p>Creating City Table:</p>
+            <pre>
                         <code>
 mysql> CREATE TABLE City(cid INT NOT NULL AUTO_INCREMENT, cityname VARCHAR(50) NOT NULL, PRIMARY KEY (cid));
 Query OK, 0 rows affected (0.12 sec)
@@ -1641,8 +1670,8 @@ mysql> select * from City;
 5 rows in set (0.00 sec) 
                         </code>
                     </pre>
-                <p>Creating Personal Table</p>
-                <pre>
+            <p>Creating Personal Table</p>
+            <pre>
                         <code>
 mysql> CREATE TABLE Personal(id INT NOT NULL, name VARCHAR(50) NOT NULL, percentage INT NOT NULL, age INT NOT NULL, gender VARCHAR(1) NOT NULL, city INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (city) REFERENCES City (cid));
 Query OK, 0 rows affected (0.15 sec)
@@ -1669,30 +1698,30 @@ mysql> SELECT * FROM Personal;
 7 rows in set (0.00 sec)
                         </code>
                     </pre>
-            </div>
         </div>
-        <div class="wh">
-            <h2>Types of JOINS</h2>
+    </div>
+    <div class="wh">
+        <h2>Types of JOINS</h2>
+        <ul>
+            <li>INNER JOIN</li>
+            <li>LEFT JOIN</li>
+            <li>RIGHT JOIN</li>
+            <li>CROSS JOIN</li>
+        </ul>
+        <div class="in">
+            <h3>INNER JOIN</h3>
             <ul>
-                <li>INNER JOIN</li>
-                <li>LEFT JOIN</li>
-                <li>RIGHT JOIN</li>
-                <li>CROSS JOIN</li>
+                <li>In the context of relational databases, the INNER JOIN operation is used to retrieve data that
+                    exists in common between two tables, typically denoted as Table A and Table B.</li>
+                <li>This type of join selects records where there are matching values in the specified columns of
+                    both tables.</li>
+                <li>For the INNER JOIN operation to work seamlessly, the tables involved must have a relationship
+                    established through the concepts of foreign keys and primary keys.</li>
             </ul>
-            <div class="in">
-                <h3>INNER JOIN</h3>
-                <ul>
-                    <li>In the context of relational databases, the INNER JOIN operation is used to retrieve data that
-                        exists in common between two tables, typically denoted as Table A and Table B.</li>
-                    <li>This type of join selects records where there are matching values in the specified columns of
-                        both tables.</li>
-                    <li>For the INNER JOIN operation to work seamlessly, the tables involved must have a relationship
-                        established through the concepts of foreign keys and primary keys.</li>
-                </ul>
 
-                <div class="in">
-                    <h3>INNER JOIN Syntax</h3>
-                    <pre>
+            <div class="in">
+                <h3>INNER JOIN Syntax</h3>
+                <pre>
                         <code>
 SELECT columns 
 FROM table1 
@@ -1700,15 +1729,15 @@ INNER JOIN table2
 ON table1.column_name = table2.column_name; 
                         </code>
                     </pre>
-                    <p>The syntax above demonstrates the structure of an INNER JOIN query. It specifies the columns to
-                        be selected and the tables involved. The condition for the join is defined using the ON keyword,
-                        where the common columns (usually a foreign key in one table and its corresponding primary key
-                        in the other) are specified.</p>
-                </div>
+                <p>The syntax above demonstrates the structure of an INNER JOIN query. It specifies the columns to
+                    be selected and the tables involved. The condition for the join is defined using the ON keyword,
+                    where the common columns (usually a foreign key in one table and its corresponding primary key
+                    in the other) are specified.</p>
+            </div>
 
-                <div class="in">
-                    <h3>Practical:</h3>
-                    <pre>
+            <div class="in">
+                <h3>Practical:</h3>
+                <pre>
                         <code>
 mysql> SELECT * FROM Personal INNER JOIN City ON Personal.city = City.cid;
 +----+---------------+------------+-----+--------+------+-----+----------+
@@ -1725,14 +1754,14 @@ mysql> SELECT * FROM Personal INNER JOIN City ON Personal.city = City.cid;
 7 rows in set (0.00 sec)
                         </code>
                     </pre>
-                    <p>We can also give alias name like this &darr;</p>
-                    <pre>
+                <p>We can also give alias name like this &darr;</p>
+                <pre>
                         <code>
 SELECT * FROM Personal p INNER JOIN City c ON p.city = c.cid;
                         </code>
                     </pre>
-                    <p>Now to remove some column on inner join we can do the following:</p>
-                    <pre>
+                <p>Now to remove some column on inner join we can do the following:</p>
+                <pre>
                         <code>
 mysql> SELECT Personal.id, Personal.name, City.cityname FROM Personal INNER JOIN City ON Personal.id = City.cid;
 +----+---------------+----------+
@@ -1747,8 +1776,8 @@ mysql> SELECT Personal.id, Personal.name, City.cityname FROM Personal INNER JOIN
 5 rows in set (0.00 sec)
                         </code>
                     </pre>
-                    <p>We can also use WHERE Clause</p>
-                    <pre>
+                <p>We can also use WHERE Clause</p>
+                <pre>
                         <code>
  mysql> SELECT p.id, p.name, p.percentage, p.age, c.cityname FROM Personal p INNER JOIN City c ON
 p.city = c.cid WHERE c.cityname = 'Agra';
@@ -1763,19 +1792,19 @@ p.city = c.cid WHERE c.cityname = 'Agra';
 4 rows in set (0.00 sec)
                         </code>
                     </pre>
-                </div>
             </div>
-            <div class="in">
-                <h3>LEFT JOIN</h3>
-                <ul>
-                    <li>A LEFT JOIN retrieves data that is common between two tables as well as all the data from the
-                        left table, even if there is no matching data in the right table.</li>
-                    <li>If there is no common data, the result will still display all the records from the left table,
-                        with corresponding NULL values for columns from the right table.</li>
-                </ul>
+        </div>
+        <div class="in">
+            <h3>LEFT JOIN</h3>
+            <ul>
+                <li>A LEFT JOIN retrieves data that is common between two tables as well as all the data from the
+                    left table, even if there is no matching data in the right table.</li>
+                <li>If there is no common data, the result will still display all the records from the left table,
+                    with corresponding NULL values for columns from the right table.</li>
+            </ul>
 
-                <p>Example:</p>
-                <pre>
+            <p>Example:</p>
+            <pre>
                     <code>
 Student Table (A)
 +----------------------------------------------+
@@ -1809,9 +1838,9 @@ Left Join Result
                     </code>
                 </pre>
 
-                <div class="in">
-                    <h3>LEFT JOIN Syntax</h3>
-                    <pre>
+            <div class="in">
+                <h3>LEFT JOIN Syntax</h3>
+                <pre>
                         <code>
 SELECT columns 
 FROM table1 
@@ -1819,14 +1848,14 @@ LEFT JOIN table2
 ON table.column_name = table2.column_name;
                         </code>
                     </pre>
-                    <p>The syntax above illustrates the structure of a LEFT JOIN query, where data from the left table
-                        is selected along with any matching data from the right table based on the specified column
-                        relationship.</p>
-                </div>
+                <p>The syntax above illustrates the structure of a LEFT JOIN query, where data from the left table
+                    is selected along with any matching data from the right table based on the specified column
+                    relationship.</p>
+            </div>
 
-                <div class="in">
-                    <h3>Practical:</h3>
-                    <pre>
+            <div class="in">
+                <h3>Practical:</h3>
+                <pre>
                         <code>
 mysql> SELECT * FROM Personal LEFT JOIN City ON Personal.city = City.cid;
 +----+---------------+------------+-----+--------+------+------+----------+
@@ -1842,17 +1871,17 @@ mysql> SELECT * FROM Personal LEFT JOIN City ON Personal.city = City.cid;
 +----+---------------+------------+-----+--------+------+------+----------+
                         </code>
                     </pre>
-                </div>
             </div>
+        </div>
+        <div class="in">
+            <h3>RIGHT JOIN</h3>
+            <ul>
+                <li>A RIGHT JOIN retrieves data that is common between two tables along with all the data from the
+                    right table, even if there is no matching data in the left table.</li>
+            </ul>
             <div class="in">
-                <h3>RIGHT JOIN</h3>
-                <ul>
-                    <li>A RIGHT JOIN retrieves data that is common between two tables along with all the data from the
-                        right table, even if there is no matching data in the left table.</li>
-                </ul>
-                <div class="in">
-                    <h3>RIGHT JOIN Syntax</h3>
-                    <pre>
+                <h3>RIGHT JOIN Syntax</h3>
+                <pre>
                         <code>
 SELECT columns 
 FROM table1 
@@ -1862,10 +1891,10 @@ ON table1.column_name = table3.column_name;
            (F.K)                  (P.K)
                         </code>
                     </pre>
-                </div>
-                <div class="in">
-                    <h3>Practical:</h3>
-                    <pre>
+            </div>
+            <div class="in">
+                <h3>Practical:</h3>
+                <pre>
                         <code>
 mysql> SELECT * FROM Personal RIGHT JOIN City ON Personal.city = City.cid;
 +------+---------------+------------+------+--------+------+-----+----------+
@@ -1884,19 +1913,19 @@ mysql> SELECT * FROM Personal RIGHT JOIN City ON Personal.city = City.cid;
 9 rows in set (0.00 sec)
                         </code>
                     </pre>
-                </div>
             </div>
-            <div class="in">
-                <h3>CROSS JOIN</h3>
-                <ul>
-                    <li>A CROSS JOIN is a type of join operation that results in the combination of every row from the
-                        first table with every row from the second table, creating a Cartesian product.</li>
-                    <li>Unlike INNER JOIN, LEFT JOIN, or RIGHT JOIN, there is no specific condition specified for the
-                        join. It simply combines all rows from one table with all rows from another table.</li>
-                </ul>
+        </div>
+        <div class="in">
+            <h3>CROSS JOIN</h3>
+            <ul>
+                <li>A CROSS JOIN is a type of join operation that results in the combination of every row from the
+                    first table with every row from the second table, creating a Cartesian product.</li>
+                <li>Unlike INNER JOIN, LEFT JOIN, or RIGHT JOIN, there is no specific condition specified for the
+                    join. It simply combines all rows from one table with all rows from another table.</li>
+            </ul>
 
-                <p>Example:</p>
-                <pre>
+            <p>Example:</p>
+            <pre>
                     <code>
 Table A
 +---------+
@@ -1926,21 +1955,21 @@ Cross Join Result
                     </code>
                 </pre>
 
-                <div class="in">
-                    <h3>CROSS JOIN Syntax</h3>
-                    <pre>
+            <div class="in">
+                <h3>CROSS JOIN Syntax</h3>
+                <pre>
                         <code>
 SELECT * 
 FROM table1 
 CROSS JOIN table2;
                     </code>
                 </pre>
-                    <p>The CROSS JOIN syntax involves selecting all columns from both tables without specifying any
-                        condition for the join.</p>
-                </div>
-                <div class="in">
-                    <h3>Practical:</h3>
-                    <pre>
+                <p>The CROSS JOIN syntax involves selecting all columns from both tables without specifying any
+                    condition for the join.</p>
+            </div>
+            <div class="in">
+                <h3>Practical:</h3>
+                <pre>
                         <code>
 mysql> SELECT * FROM Personal CROSS JOIN City;
 +----+---------------+------------+-----+--------+------+-----+----------+
@@ -1985,18 +2014,18 @@ mysql> SELECT * FROM Personal CROSS JOIN City;
 35 rows in set (0.01 sec)
                         </code>
                     </pre>
-                </div>
             </div>
         </div>
-        <div class="wh">
-            <h2>GROUP BY Clause</h2>
-            <ul>
-                <li>The GROUP BY clause is used in conjunction with the SELECT statement and Aggregate functions to
-                    group rows together by common column values.</li>
-                <li>Remember is it not necessary to have two tables </li>
-            </ul>
-            <p>Example:</p>
-            <pre>
+    </div>
+    <div class="wh">
+        <h2>GROUP BY Clause</h2>
+        <ul>
+            <li>The GROUP BY clause is used in conjunction with the SELECT statement and Aggregate functions to
+                group rows together by common column values.</li>
+            <li>Remember is it not necessary to have two tables </li>
+        </ul>
+        <p>Example:</p>
+        <pre>
                 <code>
 Student Table 
 +----------------------------------------------+
@@ -2028,9 +2057,9 @@ Result we want:
 +-----------------------------+
                 </code>
             </pre>
-            <div class="in">
-                <h3>SELECT with GROUP BY Syntax</h3>
-                <pre>
+        <div class="in">
+            <h3>SELECT with GROUP BY Syntax</h3>
+            <pre>
                     <code>
 SELECT columns
 FROM table_name 
@@ -2038,8 +2067,8 @@ WHERE condition
 GROUP BY column_name(s);
                     </code>
                 </pre>
-                <p>If we are getting data from two tables and we want to use GROUP BY.</p>
-                <pre>
+            <p>If we are getting data from two tables and we want to use GROUP BY.</p>
+            <pre>
                     <code>
 SELECT columns
 FROM table1 INNER JOIN table2 
@@ -2048,10 +2077,10 @@ WHERE condition
 GROUP BY column_name(s); 
                     </code>
                 </pre>
-            </div>
-            <div class="in">
-                <h3>Practical</h3>
-                <pre>
+        </div>
+        <div class="in">
+            <h3>Practical</h3>
+            <pre>
                     <code>
 mysql> SELECT city, COUNT(city) FROM Personal GROUP BY city;
 +------+-------------+
@@ -2075,11 +2104,11 @@ mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal
 3 rows in set (0.00 sec)
                     </code>
                 </pre>
-            </div>
-            <div class="in">
-                <h3>Using WHERE Clause</h3>
-                <p>We put WHERE clause before using GROUP BY</p>
-                <pre>
+        </div>
+        <div class="in">
+            <h3>Using WHERE Clause</h3>
+            <p>We put WHERE clause before using GROUP BY</p>
+            <pre>
                     <code>
 mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal
  INNER JOIN City ON Personal.city = City.cid WHERE Personal.age >= 20 GROUP BY Personal.city;
@@ -2092,14 +2121,14 @@ mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal
 2 rows in set (0.00 sec)                  
                     </code>
                 </pre>
-            </div>
+        </div>
+        <div class="in">
+            <h3>GROUP BY with HAVING Clause</h3>
+            <p>Now if we want those cities from where there are more than 5 students. so this condition will work on
+                total students it is done by HAVING Clause.</p>
             <div class="in">
-                <h3>GROUP BY with HAVING Clause</h3>
-                <p>Now if we want those cities from where there are more than 5 students. so this condition will work on
-                    total students it is done by HAVING Clause.</p>
-                <div class="in">
-                    <h3>SELECT with GROUP BY & HAVING Syntax</h3>
-                    <pre>
+                <h3>SELECT with GROUP BY & HAVING Syntax</h3>
+                <pre>
                         <code>
 SELECT columns 
 FROM table_name 
@@ -2107,8 +2136,8 @@ GROUP BY column_name(s)
 HAVING condition;
                         </code>
                     </pre>
-                    <h3>Practical</h3>
-                    <pre>
+                <h3>Practical</h3>
+                <pre>
                         <code>
  mysql> SELECT City.cityname, COUNT(Personal.city) AS Total_student FROM Personal INNER JOIN City ON Personal.city = City.cid GROUP BY Personal.city HAVING COUNT(Personal.city) > 3;
 +----------+---------------+
@@ -2119,9 +2148,9 @@ HAVING condition;
 1 row in set (0.00 sec)
                         </code>
                     </pre>
-                </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="content-box">
         <h2>Previous Year Questions</h2>
