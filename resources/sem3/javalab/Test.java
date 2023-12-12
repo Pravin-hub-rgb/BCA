@@ -1,14 +1,23 @@
 import java.util.Scanner;
-
+class Parent 
+{
+    final void parentDisplay()
+    {
+        System.out.println("This is display method which is final from Parent class");
+    }
+}
+class Child extends Parent
+{
+    @Override
+    void parentDisplay()
+    {
+        System.out.println("Trying to extend it");
+    }
+}
 public class Test {
     public static void main(String[] args)
     {
-        String str1 = new String("Hello");
-        str1 = str1.concat(" world");
-        System.out.println(str1);
-
-        StringBuffer str2 = new StringBuffer("Hello");
-        str2.append(" world");
-        System.out.println(str2);
+        Parent p1 = new Parent();
+        Child c1 = new Child();
     }
 }
