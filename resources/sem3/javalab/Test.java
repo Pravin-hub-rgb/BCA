@@ -1,21 +1,20 @@
-class Test {
-    public static void main(String[] args) {
-        int x = 10, y = 20;
-        double l = 100, m = 200;
-        System.out.println(addition(x, y));
-        System.out.println(addition(l, m));
-        System.out.println(addition(x, m));
+import group.Shape.*;
+class Test{
+    public static void main(String[] args)
+    {
+        group.Shape obj = new group.Shape();
+        obj.sqarea();
     }
-
-    static int addition(int a, int b) {
-        return a + b;
+    static void area(int side)
+    {
+        System.out.println("The area of square = " + side * side);
     }
-
-    static int addition(double a, double b) {
-        return (int) a + (int) b;
+    static void area(int len, int bred)
+    {
+        System.out.println("The area of rectangle : " + len * bred);
     }
-
-    static int addition(int a, double b) {
-        return a + (int) b;
+    static void area(double radius)
+    {
+        System.out.println("The area of circle = " + 3.14 * radius * radius);
     }
 }
