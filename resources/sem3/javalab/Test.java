@@ -5,6 +5,7 @@ public class Test {
         int arrayname[];
         int[] newarray;
         newarray = new int[7];
-        int[] myarray = new int[];
+        int[] myarray = new int[9];
+        int[] newarray1 = { 1, 2, 3, 4, 5 };
     }
 }
