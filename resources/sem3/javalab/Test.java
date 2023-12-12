@@ -1,23 +1,65 @@
 import java.util.Scanner;
-class Parent 
-{
-    final void parentDisplay()
-    {
-        System.out.println("This is display method which is final from Parent class");
+
+interface Account {
+    public void deposit();
+
+    public void withdraw();
+
+    public void displayBalances();
+}
+
+class SavingsAccount implements Account {
+    Scanner sc = new Scanner(System.in);
+    int wallet = 0;
+
+    public void deposit() {
+        System.out.println("Enter amount to deposit : ");
+        wallet += sc.nextInt();
+    }
+
+    public void withdraw() {
+        System.out.println("Enter the amount you want to withdraw : ");
+        int amount = sc.nextInt();
+        wallet -= amount;
+    }
+
+    public void displayBalances() {
+        System.out.println("Your Balance is = " + wallet);
     }
 }
-class Child extends Parent
-{
-    @Override
-    void parentDisplay()
-    {
-        System.out.println("Trying to extend it");
+
+class CurrentAccount implements Account {
+    Scanner sc = new Scanner(System.in);
+    int wallet = 0;
+
+    public void deposit() {
+        System.out.println("Enter amount to deposit : ");
+        wallet += sc.nextInt();
+    }
+
+    public void withdraw() {
+        System.out.println("Enter the amount you want to withdraw : ");
+        int amount = sc.nextInt();
+        wallet -= amount;
+    }
+
+    public void displayBalances() {
+        System.out.println("Your Balance is = " + wallet);
     }
 }
-public class Test {
+
+class Test
+{
     public static void main(String[] args)
     {
-        Parent p1 = new Parent();
-        Child c1 = new Child();
+        SavingsAccount sa = new SavingsAccount();
+        sa.deposit();
+        sa.withdraw();
+        sa.displayBalances();
+
+        CurrentAccount ca = new CurrentAccount();
+        ca.deposit();
+        ca.withdraw();
+        ca.displayBalances();
     }
 }
