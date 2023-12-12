@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packages / Interfaces / Exception handling</title>
+    <title>Packages / Exception handling</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <link rel="stylesheet"
@@ -41,11 +41,11 @@
             </div>
         </div>
         <div>
-            <h2>Packages / Interfaces / Exception handling</h2>
+            <h2>Packages / Exception handling</h2>
         </div>
     </div>
     <div class="content-box">
-        <h1>Packages / Interfaces / Exception handling</h1>
+        <h1>Packages / Exception handling</h1>
         <div id="pack" class="wh">
             <h2>Packages in Java</h2>
             <ul>
@@ -183,7 +183,6 @@ public class Shape {
     public void cal_area() {
         System.out.println("Calculating area.");
     }
-
     public void cal_square() {
         System.out.println("Calculating square");
     }
@@ -215,10 +214,11 @@ javac -d . filename.java
                     <li>The dot (.) specifies that the package will be created in the current directory.</li>
                     <li>the -d option to specify the destination directory where the compiled .class files for the
                         package should be placed.</li>
+                    <li>Make sure that the package and the class in which are you going to import the package should be in same directory.</li>
                     <li>Now, you can use it as follows:</li>
                 </ul>
                 <pre>
-    <code>
+                    <code>
 // Test.java file where we will import our package and use the methods
 import group.Shape.*;
 
@@ -234,11 +234,9 @@ class Test
         obj.cal_square();
     }
 }
-    </code>
-</pre>
-
+                </code>
+            </pre>
             </div>
-
         </div>
         <div id="t1" class="wh">
             <h2>Exceptions in Java</h2>
@@ -536,7 +534,7 @@ class Exp {
             ans = v1 / v2;
             System.out.println(ans);
         }
-        catch (NumberFormatException e1) {
+        catch (InputMismatchException e1) {
             System.out.println("Exception due to wrong input datatype");
         }
         catch (ArithmeticException e2) {
@@ -868,7 +866,7 @@ public static void main(String[] args)
                 </ol>
                 <pre>
                     <code>
-// Step 1: Inheriting from Exception class to create our custom exception class
+// Step 1: Inheriting from RuntimeException class to create our custom exception class
 class YoungerAgeException extends RuntimeException {
     // Step 2: Creating a constructor that takes a custom error message
     YoungerAgeException(String msg) {
@@ -1052,7 +1050,7 @@ public class Main {
                     because Java gives warnings before many classes and suggests good exception handling practices. So,
                     only those who are familiar with exception handling should use these classes.
                 </li>
-                <li><strong>Remember:</strong>"throws" is always used in case of checked exception only.</li>
+                <li><strong>Remember: </strong> "throws" is always used in case of checked exception only.</li>
             </ul>
             <p><strong>Syntax:</strong></p>
             <pre>
@@ -1079,12 +1077,12 @@ public void myMethod() throws Exception // Parent class; mentioning this may con
             </pre>
             <h3>Understanding Thread.sleep and Exception Handling in Java (Next topic)</h3>
             <p>
-                The <code>Thread.sleep</code> method is used to intentionally introduce a pause or delay in the
+                The <b>Thread.sleep</b> method is used to intentionally introduce a pause or delay in the
                 execution of a Java program. When this method is called, the program suspends its execution for the
                 specified duration in milliseconds.
                 Importantly, during this pause, the program does not perform any tasks and does not continue from where
                 it left off immediately. This behavior necessitates proper exception handling because
-                <code>Thread.sleep</code> can throw an <code>InterruptedException</code> when interrupted during the
+                <b>Thread.sleep</b> can throw an <b>InterruptedException</b> when interrupted during the
                 sleep period. Exception handling is essential to ensure the program's stability and graceful response to
                 interruptions.
             </p>
@@ -1131,9 +1129,9 @@ class Test {
 
             <ul>
                 <li>
-                    To simplify the code, we can use the <code>throws</code> keyword in the method signature to declare
-                    that <code>main</code> method can throw <code>InterruptedException</code>.
-                    This eliminates the need for a <code>try-catch</code> block within the <code>main</code> method.
+                    To simplify the code, we can use the <b>throws</b> keyword in the method signature to declare
+                    that <b>main</b> method can throw <b>InterruptedException</b>.
+                    This eliminates the need for a <b>try-catch</b> block within the <b>main</b> method.
                 </li>
             </ul>
 
@@ -1154,17 +1152,17 @@ class Test {
 
             <ul>
                 <li>
-                    Using the <code>throws</code> keyword in the method signature is particularly useful when there are
-                    multiple instances of <code>Thread.sleep</code>.
+                    Using the <b>throws</b> keyword in the method signature is particularly useful when there are
+                    multiple instances of <b>Thread.sleep</b>.
                     It simplifies the code and improves readability.
                 </li>
             </ul>
 
             <p>
-                In summary, using the <code>throws</code> keyword in the method signature can make your code cleaner and
-                more concise when dealing with <code>Thread.sleep</code>.
+                In summary, using the <b>throws</b> keyword in the method signature can make your code cleaner and
+                more concise when dealing with <b>Thread.sleep</b>.
                 It simplifies exception handling and is especially beneficial when you have multiple
-                <code>Thread.sleep</code> calls in your code.
+                <b>Thread.sleep</b> calls in your code.
             </p>
 
             <div class='code'>

@@ -1,26 +1,16 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.awt.*;
 
-class Test {
+class Test
+{
+    public static void main(String[] args)
+    {
+        Frame frame = new Frame("New Window");
+        Label label = new Label("Number 1 : ");
+        Button btn1 = new Button("Add");
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a, b, ans;
-        try {
-
-            System.out.print("Enter first number : ");
-            a = sc.nextInt();
-            System.out.print("Enter second number : ");
-            b = sc.nextInt();
-        } catch (InputMismatchException e) {
-            // } catch (InputMismatchException e) {
-            System.out.println(e);
-        }
-        try {
-            String str = "abc";
-            int x = Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
+        frame.add(label);
+        frame.add(btn1);
+        frame.setVisible(true);
+        frame.setSize(400, 200);
     }
 }
