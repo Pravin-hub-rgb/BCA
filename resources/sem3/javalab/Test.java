@@ -1,24 +1,19 @@
-import java.awt.*;
-class Test
-{
-    public static void main(String[] args)
-    {
-        Frame frame = new Frame("New Window");
-        FlowLayout fl = new FlowLayout();
-        Label lab1 = new Label("Name : ");
-        Label lab2 = new Label("Password : ");
-        TextField tf1 = new TextField(20);
-        TextField tf2 = new TextField(20);
-        Button btn1 = new Button("Submit");
-
-        frame.add(lab1);
-        frame.add(tf1);
-        frame.add(lab2);
-        frame.add(tf2);
-        frame.add(btn1);
-
-        frame.setLayout(fl);
-        frame.setVisible(true);
-        frame.setSize(300, 200);
+class Test {
+    public static void main(String[] args) {
+        int[] arr = { 1, 44, 2, 5, 55, 66, 3 };
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[i]) {
+                    int temp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+            int[][] arr1 = new int[][] {{1, 2, 3}, {2, 4, 4}};
+        }
+        System.out.println("Printing array ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
     }
 }
