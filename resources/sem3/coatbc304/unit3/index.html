@@ -99,6 +99,203 @@
                         designated for C.</li>
                 </ul>
             </div>
+            <div class="in">
+                <h3>General Register Organization</h3>
+                <ul>
+                    <li>To understand General Register Organization, it's essential to grasp the major components within
+                        a CPU:</li>
+                    <ol>
+                        <li><strong>Storage Components:</strong> These include registers and flip-flops, serving as
+                            temporary storage for data.</li>
+                        <li><strong>Execution Components:</strong> The Arithmetic Logic Unit (ALU) is responsible for
+                            carrying out calculations and logical operations.</li>
+                        <li><strong>Transfer Components:</strong> The bus facilitates the transfer of data between
+                            storage and execution components.</li>
+                        <li><strong>Control Component:</strong> The control unit oversees and directs the functioning of
+                            other components within the CPU.</li>
+                    </ol>
+                    <li>Memory locations play a crucial role in storing various data types such as pointers, counters,
+                        return addresses, temporary results, and partial products. However, accessing memory is a
+                        time-consuming task. To enhance efficiency, intermediate values are stored in processor
+                        registers. These registers are interconnected through a common bus system, allowing seamless
+                        communication not only for direct data transfer but also for coordinating various
+                        microoperations.</li>
+                    <li><strong>Definition of General Register Organization:</strong> In computing, General Register
+                        Organization refers to the systematic arrangement and utilization of registers within the CPU.
+                        These registers serve as high-speed, temporary storage for data and play a vital role in
+                        enhancing computational efficiency by minimizing the need for frequent memory access.</li>
+                </ul>
+                <p><strong>A Bus Organization for Seven CPU Registers</strong></p>
+                <img src="../../images/gro1.svg" alt="" class="wb">
+                <ul>
+                    <li>The depicted bus organization features seven CPU registers, and its functionality is detailed as
+                        follows:</li>
+                    <li>The output of each register is linked to two multiplexers (MUX), both of which play a crucial
+                        role in transferring register data into the Arithmetic Logic Unit (ALU).</li>
+                    <li>Two buses, A and B, are utilized for data transfer. The selection lines in each multiplexer
+                        determine whether to choose data from a register or from input data. Data is transmitted to the
+                        ALU via buses A and B.</li>
+                    <li>The OPR (Operation) signal serves to define the type of operation to be executed by the ALU.
+                    </li>
+                    <li>The result of the operation conducted by the ALU can be directed to other units within the
+                        system or stored in any of the processor registers.</li>
+                    <li>A decoder is employed to select the register where the result will be stored. The decoder
+                        activates one of the register load inputs, specifying the destination register for storing the
+                        result.</li>
+                </ul>
+                <p><strong>Example, Let we want to perform the operation R1 &larr; R2 + R3</strong></p>
+                <ul>
+                    <li>To do this operation, Control Unit generates following singal (Control Word).
+                        <br><img src="../../images/controlw1.svg" alt="" class="wb">
+                    </li>
+                </ul>
+                <div class="in">
+                    <p><b>Control Word</b></p>
+                    <ul>
+                        <li>A control word, designed for the aforementioned CPU organization, consists of four fields as
+                            illustrated below:
+                            <br><img src="../../images/controlw2.svg" alt="" class="wb">
+                        </li>
+                        <li>The three bits of SEL A are dedicated to transferring the contents of a register into
+                            BUS A.</li>
+                        <li>The three bits of SEL B are assigned to transferring the contents of a register into BUS
+                            B.</li>
+                        <li>The three bits of SELD are utilized for selecting a destination register. This
+                            facilitates the decision of whether to store the result in a register or to transmit it
+                            outside the ALU.</li>
+                        <li>The five bits of OPR define the type of operation to be performed by the ALU. This field
+                            governs the arithmetic or logical operation executed by the ALU based on the specified
+                            opcode.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <p><strong>Code for for Register Selection</strong></p>
+                    <img src="../../images/sfrs1.svg" alt="" class="wb">
+                </div>
+                <div class="in">
+                    <p><strong>Operation Code for ALU</strong></p>
+                    <img src="../../images/ocfa1.svg" alt="" class="wb">
+                </div>
+            </div>
+            <div class="in">
+                <h3>Stack Organization</h3>
+                <ul>
+                    <li>The memory of a CPU can be organized as a STACK, a structure where information is stored in a
+                        Last-In-First-Out (LIFO) manner. This means that the item last stored is the first to be removed
+                        or popped.</li>
+                    <li>To manage the items, a stack uses a stack pointer (SP) register. The stack pointer stores the
+                        address of the last item in the stack, essentially pointing to the topmost element. Stack
+                        operations involve two main actions:
+                        <ol>
+                            <li><strong>Insertion (Push):</strong> When an item is added to the stack, it is referred to
+                                as insertion or a push operation.</li>
+                            <li><strong>Deletion (Pop):</strong> When an item is removed from the stack, it is known as
+                                deletion or a pop operation.</li>
+                        </ol>
+                    </li>
+                    <li>There are two main types of stacks:
+                        <ol>
+                            <li><strong>Register Stack:</strong> Utilizes processor registers to create a stack
+                                structure, enhancing speed and efficiency in certain operations.</li>
+                            <li><strong>Memory Stack:</strong> Involves using dedicated memory locations to implement
+                                the stack structure.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <div class="in">
+                    <p><b>Register Stack</b></p>
+                    <img src="../../images/stackorg1.svg" alt="" class="wb">
+                    <ul>
+                        <li>When processor registers are organized in a stack-like fashion, it is termed a register
+                            stack. The diagram above illustrates a 64-word register stack.</li>
+                        <li>The stack pointer (SP) contains the address of the topmost element in the stack.</li>
+                        <li>When the stack is empty, the EMPTY flag is set to 1, and when the stack is full, the FULL
+                            flag is set to 1.</li>
+                        <li>The DR (Data Register) contains the data either being popped from or pushed into the stack.
+                        </li>
+                        <li>Additional benefits of a register stack include faster access times and reduced memory bus
+                            contention, making it suitable for certain computing tasks requiring high-speed data
+                            manipulation.</li>
+                        <li>For example, in the figure, three items (A, B, and C) are placed in the stack, with item C
+                            at the top. Thus, the stack pointer (SP) holds the address of C (SP = 3).</li>
+                    </ul>
+                    <p><strong>PUSH Operation:</strong></p>
+                    <ul>
+                        <li>When performing a PUSH operation to add an element (let's say E) to the stack, the following
+                            steps are executed:</li>
+                        <ul>
+                            <li><strong>Step 1:</strong> Increment the Stack Pointer (SP) by 1 so that it points to an
+                                empty slot.
+                                <br><code>SP &larr; SP + 1</code> [Increment stack pointer]
+                            </li>
+                            <li><strong>Step 2:</strong> Store the value of the Data Register (DR) at the address
+                                pointed to by SP.
+                                <br><code>M[SP] &larr; DR</code> [Write the item on top of the stack]
+                            </li>
+                            <li><strong>Step 3:</strong> Check boundary conditions.
+                                <br>If <code>(SP = 0)</code>, then set <code>FULL &larr; 1</code> indicating the stack
+                                is full.
+                                <br><code>EMPTY &larr; 0</code> signifies that the stack is not empty.
+                            </li>
+                        </ul>
+                    </ul>
+                    <p><strong>POP Operation:</strong></p>
+                    <ul>
+                        <li>When performing a POP operation to remove an element from the stack, the following steps are
+                            executed:</li>
+                        <ul>
+                            <li><strong>Step 1:</strong> Retrieve the data from the address stored in the Stack Pointer
+                                (SP) and store it in the Data Register (DR).
+                                <br><code>DR &larr; M[SP]</code> [Fetch item from the top of the stack]
+                            </li>
+                            <li><strong>Step 2:</strong> Decrement the Stack Pointer (SP) by 1.
+                                <br><code>SP &rarr; SP - 1</code>
+                            </li>
+                            <li><strong>Step 3:</strong> Check boundary conditions.
+                                <br><code>if (SP = 0) then (EMPTY &larr; 1) [Check if the stack is empty]
+            <br>
+                                    FULL &larr; 0 [Mark the stack as not full]
+            </code>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="in">
+                    <p><b>Memory Stack</b></p>
+                    <ul>
+                        <li>When primary memory (RAM) is organized in the form of a stack, it is referred to as a Memory
+                            Stack.</li>
+                    </ul>
+                    <img src="../../images/memstack1.svg" alt="" class="wb">
+                    <ul>
+                        <li>The Program Counter (PC) indicates the address of the next instruction in the program.</li>
+                        <li>The Address Register (AR) points to an array of data within the memory stack.</li>
+                        <li>The Stack Pointer (SP) identifies the top of the stack.</li>
+                        <li>In the illustrated figure, the initial value of SP is 4001, and the stack grows with
+                            decreasing addresses. Consequently, the first item stored in the stack is at address 4000,
+                            the second item at address 3999, and the last item at address 3000.</li>
+                    </ul>
+                    <p><b>PUSH Operation</b></p>
+                    <code>
+    SP &rarr; SP - 1
+    <br>M[SP] &larr; DR
+</code>
+                    <p><b>POP Operation</b></p>
+                    <code>
+    DR &larr; M[SP]
+    <br>SP &rarr; SP + 1
+</code>
+                    <ul>
+                        <li>The PUSH operation involves decrementing the Stack Pointer (SP) to allocate space for a new
+                            item and storing the value from the Data Register (DR) at the address pointed to by the
+                            updated SP.</li>
+                        <li>The POP operation retrieves the item from the top of the stack by copying the data from the
+                            address indicated by SP to DR. Subsequently, SP is incremented to free up space in the
+                            stack.</li>
+                    </ul>
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="content-box">
@@ -106,6 +303,12 @@
         <ul>
             <li><a href="https://www.youtube.com/watch?v=k5YMLXPy1SE&list=PLxCzCOWd7aiHMonh3G6QNKq53C6oNXGrX&index=15"
                     target="_blank">Playlist &neArr;</a></li>
+
+            <li><a href="https://www.youtube.com/watch?v=6sIfSsz0rWw" target="_blank">Single Accumulator Organization
+                    (Lecture)
+                    &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=vjqnWn5PdD0" target="_blank">General Register Organization</a>
+            </li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
