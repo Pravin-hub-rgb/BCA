@@ -39,106 +39,660 @@
         <div class="wh">
             <h2>Data Link Layer</h2>
             <ul>
-                <li>The Data Link Layer plays a crucial role in computer networking as it facilitates communication
-                    between devices within the same network.</li>
-                <li>This layer operates as a bridge between the Network Layer (Layer 3) and the Physical Layer (Layer 1)
-                    in the OSI model.</li>
-                <li>One of its primary responsibilities is to ensure reliable and error-free data transmission between
-                    nodes or devices on a local network.</li>
-                <li>Let's delve deeper into the various aspects of the Data Link Layer.</li>
+                <li>The Data Link Layer serves a crucial role in computer networks by facilitating the transmission of
+                    data between two devices or nodes.</li>
+                <li>It is divided into two main parts: Data Link Control and Multiple Access Resolution/Protocol.</li>
+                <li><strong>Data Link Control:</strong> This upper layer is responsible for flow control and error
+                    control within the data link layer. It ensures the reliable and orderly transfer of data between
+                    connected devices.</li>
+                <li><strong>Multiple Access Resolution/Protocol:</strong> The lower sub-layer focuses on handling and
+                    minimizing collisions or multiple access issues on a communication channel. It is often referred to
+                    as Media Access Control (MAC) or Multiple Access Resolutions.</li>
+            </ul>
+
+            <p>The <strong>Data Link Control (DLC)</strong> component ensures the integrity of data transmission by
+                managing flow control and error control. Flow control regulates the pace of data exchange between
+                devices to prevent overwhelming the receiving end. Error control mechanisms detect and correct errors
+                that may occur during transmission, ensuring the accuracy of the transmitted data.</p>
+
+            <p>The <strong>Media Access Control (MAC)</strong> or <strong>Multiple Access Resolutions</strong> component
+                of the Data Link Layer addresses challenges related to channel access. It handles and reduces
+                collisions, ensuring that multiple devices on the network can efficiently share the communication
+                channel without interference.</p>
+            <ul>
+                <li>The Data Link Layer operates at the second layer of the OSI model, providing a reliable link between
+                    two directly connected nodes.</li>
+                <li>Protocols within the Data Link Layer include Ethernet for local area networks (LANs) and
+                    Point-to-Point Protocol (PPP) for point-to-point communication.</li>
+                <li>Efficient data link layer protocols contribute to overall network performance, as they directly
+                    impact the reliability and speed of data transmission.</li>
+                <li>Data Link Layer protocols handle addressing, framing, and error detection, enhancing the overall
+                    robustness of communication between devices.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Functions of the Data-link Layer</h2>
+            <ul>
+                <li>The Data-link Layer serves various essential functions that contribute to the efficient and reliable
+                    transmission of data in a computer network.</li>
             </ul>
             <div class="in">
-                <h3>Responsibilities</h3>
+                <h3>Framing</h3>
                 <ul>
-                    <li>Moving Frames: One of the core responsibilities of the Data Link Layer is to move data frames
-                        from one network node to another.
-                        <ul>
-                            <li>These frames are the fundamental units of data transmission within a network.</li>
-                        </ul>
+                    <li>Organizes data received from the Network layer into frames.</li>
+                    <li>Divides packets into smaller frames at the sender's side.</li>
+                    <li>Adds special bits for error control and addressing in the frame's header and end.</li>
+                    <li>Sends frames bit-by-bit to the Physical layer.</li>
+                    <li>Assembles bits received from the Physical layer into frames at the receiver's end.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Addressing</h3>
+                <ul>
+                    <li>Encapsulates the MAC address (physical address) of the source and destination in the header of
+                        each frame.</li>
+                    <li>Ensures node-to-node delivery.</li>
+                    <li>The MAC address is a unique hardware identifier assigned to a device during manufacturing.</li>
+                </ul>
+            </div>
+            <div class="in">
+
+                <h3>Error Control</h3>
+                <ul>
+                    <li>Responsible for error detection and correction during data transmission.</li>
+                    <li>Adds error detection bits to the frame's header.</li>
+                    <li>Enhances reliability by enabling the detection and retransmission of damaged or lost frames.
                     </li>
-                    <li>Frame Division: Before transmission, the Data Link Layer divides the continuous stream of data
-                        received from the Network Layer into manageable chunks known as frames.
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Flow Control</h3>
+                <ul>
+                    <li>Prevents overflow in the receiver's buffer.</li>
+                    <li>Synchronizes the sender's and receiver's speeds.</li>
+                    <li>Establishes flow control mechanisms to manage data transfer rates.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Access Control</h3>
+                <ul>
+                    <li>Ensures control in scenarios where multiple devices share a communication channel.</li>
+                    <li>Uses protocols like CSMA/CD and CSMA/CA to determine which device has access to the channel.
+                    </li>
+                    <li>Minimizes the risk of collisions and loss of frames.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Design Issues of Data Link Layer</h2>
+            <p>The design issues of the Data Link Layer revolve around key challenges and considerations in ensuring
+                reliable and efficient communication between network devices. These issues include:</p>
+            <div class="in">
+                <h3>Services Provided to the Network Layer:</h3>
+                <ul>
+                    <li>The Data Link Layer must serve as a seamless interface to the Network Layer.</li>
+                    <li>Ensuring the transfer of data from the sending machine's network layer to the destination
+                        machine's
+                        network layer.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Frame Synchronization:</h3>
+                <ul>
+                    <li>Identification of the starting and ending points of each frame sent from the source machine to
+                        the
+                        destination machine.</li>
+                    <li>Facilitating proper frame recognition and reception by the destination machine.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Flow Control:</h3>
+                <ul>
+                    <li>Regulating the flow of data frames at the receiver end.</li>
+                    <li>Preventing the source machine from sending data frames at a rate faster than the destination
+                        machine's capacity, avoiding overflow and frame loss.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Error Control:</h3>
+                <ul>
+                    <li>Detecting and correcting errors introduced during the transmission of frames from the source to
+                        the
+                        destination machines.</li>
+                    <li>Preventing the duplication of frames and enhancing overall data transmission reliability.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Service Provided to Network Layer:</h3>
+                <ul>
+                    <li>Acting as an essential interface between the Data Link Layer and the Network Layer.</li>
+                    <li>The Network Layer, positioned just above the Data Link Layer in the OSI reference model, relies
+                        on
+                        the services provided for effective communication.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Main Aim of Data Link Layer:</h3>
+                <ul>
+                    <li>Transmitting data frames received from the network layer to the destination machine.</li>
+                    <li>Ensuring appropriate addressing and routing of data frames within the network layer of the
+                        destination machine.</li>
+                    <li>Addressing the critical task of reliable and efficient data transfer between nodes in a network.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Actual and Virtual Communication</h2>
+            <img src="../../images/vitual1.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Actual Communication</h3>
+                <p>Actual communication involves the presence of a physical medium through which the Data Link
+                    Layer transmits data frames. The actual communication path is as follows:</p>
+                <ul>
+                    <li>From Network Layer to Data Link Layer to Physical Layer on the sending machine.</li>
+                    <li>Transmitted through the physical media.</li>
+                    <li>Received at the Physical Layer on the receiving machine.</li>
+                    <li>Processed through the Data Link Layer and delivered to the Network Layer.</li>
+                </ul>
+                <p>This type of communication follows a tangible and physical transmission path.</p>
+            </div>
+
+            <div class="in">
+                <h3>Virtual Communication</h3>
+                <ul>
+                    <li>Virtual communication, on the other hand, occurs without the presence of a physical medium for
+                        Data Link Layer to transmit data. It is a conceptual communication where the interaction between
+                        two
+                        Data Link Layers is visualized and imagined, facilitated by the use of a data link protocol.
+                    </li>
+                    <li>This mode of communication does not rely on a physical connection and is more abstract in
+                        nature.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Types of Services provided by Data Link Layer</h2>
+
+            <div class="in">
+                <h3>1. Unacknowledged Connectionless Service</h3>
+                <ul>
+                    <li>Unacknowledged connectionless service offers datagram-style delivery without error, flow
+                        control, or acknowledgment.</li>
+                    <li>The source machine transmits independent frames to the destination machine without expecting
+                        acknowledgment.</li>
+                    <li>No established connection exists between the source and destination machines before or after
+                        data transfer.</li>
+                    <li>If a frame is lost due to noise in the Data Link Layer, there is no attempt to detect or recover
+                        from the loss.</li>
+                    <li>Example: Ethernet.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>2. Acknowledged Connectionless Service</h3>
+                <ul>
+                    <li>Acknowledged connectionless service ensures packet delivery is acknowledged, utilizing a
+                        stop-and-wait protocol.</li>
+                    <li>Each transmitted frame is individually acknowledged, allowing the sender to determine whether
+                        the data frames were received safely.</li>
+                    <li>No logical connection is established, and each frame is acknowledged individually.</li>
+                    <li>Users can send and request the return of data simultaneously, using a specific time period for
+                        resending data frames if acknowledgment is not received within that time.</li>
+                    <li>More reliable than unacknowledged connectionless service; useful in unreliable channels like
+                        wireless systems and Wi-Fi services.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>3. Acknowledged Connection-Oriented Service</h3>
+                <ul>
+                    <li>In acknowledged connection-oriented service, a connection is first established between the
+                        sender and receiver or source and destination before data transfer occurs.</li>
+                    <li>Data is then transmitted over this established connection.</li>
+                    <li>Each transmitted frame is assigned individual numbers to confirm and guarantee that each frame
+                        is received only once and in the correct order.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Framing in Data Link Layer</h2>
+
+            <h3>Overview:</h3>
+            <ul>
+                <li>Frames are fundamental units of digital transmission in computer networks and telecommunications.
+                </li>
+                <li>Similar to photons in light energy, frames are used in Time Division Multiplexing.</li>
+                <li>Framing is a function of the data link layer.</li>
+            </ul>
+
+            <h3>Framing Process:</h3>
+            <ul>
+                <li>Point-to-point connection between two devices using a wire.</li>
+                <li>Data is transmitted as a stream of bits and needs to be framed into discernible blocks.</li>
+                <li>Framing organizes and controls the transmission of data.</li>
+            </ul>
+
+            <h3>Frame Structure:</h3>
+            <ul>
+                <li>Data link layer technologies (Ethernet, token ring, frame relay) have distinct frame structures.
+                </li>
+                <li>Frames include headers with information like error-checking codes.</li>
+                <li>The data link layer extracts the message, including sender's and receiver's addresses.</li>
+            </ul>
+
+            <h3>Advantages of Using Frames:</h3>
+            <ul>
+                <li>Data is broken into recoverable chunks, facilitating easy corruption checks.</li>
+                <li>Organized and controlled transmission ensures accurate and efficient data delivery.</li>
+            </ul>
+
+            <h3>Transparent Process:</h3>
+            <ul>
+                <li>Dividing data into frames and reassembling it is transparent to the user.</li>
+                <li>The data link layer seamlessly handles this process.</li>
+            </ul>
+
+            <h3>Importance in Protocol Design:</h3>
+            <ul>
+                <li>Framing is crucial in designing data link layer protocols.</li>
+                <li>It provides a structured approach to organize and control data transmission.</li>
+                <li>Ensures accurate and efficient delivery of data.</li>
+            </ul>
+            <div class="in">
+                <h3>Problems in Framing</h3>
+                <div class="in">
+                    <h3>Detecting Start of the Frame:</h3>
+                    <ul>
+                        <li>Every station must detect the start of a frame.</li>
+                        <li>Detection is based on a special bit sequence known as Starting Frame Delimiter (SFD).</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>How Stations Detect a Frame:</h3>
+                    <ul>
+                        <li>Stations use a sequential circuit to listen for the SFD pattern.</li>
+                        <li>If SFD is detected, the sequential circuit alerts the station.</li>
+                        <li>The station checks the destination address to accept or reject the frame.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Detecting End of Frame:</h3>
+                    <ul>
+                        <li>Challenge: Determining when to stop reading the frame.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Handling Errors:</h3>
+                    <ul>
+                        <li>Framing errors may occur due to noise or transmission errors.</li>
+                        <li>Utilizes error detection and correction mechanisms like cyclic redundancy check (CRC).</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Framing Overhead:</h3>
+                    <ul>
+                        <li>Every frame has a header and trailer containing control information.</li>
+                        <li>Includes source and destination addresses, error detection code, and protocol-related data.
+                        </li>
+                        <li>Results in overhead, reducing available bandwidth, especially for small-sized frames.</li>
+                    </ul>
+                </div>
+                <div class="in">
+
+                    <h3>Framing Incompatibility:</h3>
+                    <ul>
+                        <li>Different devices and protocols may use varying framing methods.</li>
+                        <li>Potential issues arise when a device with one framing method communicates with another using
+                            a
+                            different method.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Framing Synchronization:</h3>
+                    <ul>
+                        <li>Stations need synchronization to avoid collisions and ensure reliable communication.</li>
+                        <li>Requires agreement on frame boundaries and timing, challenging in complex networks with
+                            diverse
+                            devices and traffic loads.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Framing Efficiency:</h3>
+                    <ul>
+                        <li>Design goal: Minimize data overhead while maximizing available bandwidth.</li>
+                        <li>Inefficient framing methods can lead to lower network performance and higher latency.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Data Link Control and Multiple Access Protocol</h2>
+
+            <ul>
+                <li><b>Data Link Control (DLC):</b> A reliable channel for transmitting data over a dedicated link,
+                    employing techniques like framing, error control, and flow control.</li>
+
+                <li><b>Introduction to Multiple Access Protocol:</b>
+                    <ul>
+                        <li>When a sender and receiver have a dedicated link, DLC manages the channel effectively.</li>
+                        <li>In scenarios without a dedicated path, multiple stations share a common channel, leading to
+                            simultaneous data transmission.</li>
+                    </ul>
+                </li>
+
+                <li><b>Multiple Access Protocol:</b>
+                    <ul>
+                        <li>Becomes crucial in scenarios with no dedicated link, preventing collisions and crosstalk.
+                        </li>
+                        <li>Orchestrates the access of multiple stations to the channel, ensuring orderly and efficient
+                            data transfer.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>For instance, consider a classroom scenario where students represent small channels. When a teacher asks
+                a question, all students attempt to answer simultaneously, akin to transferring data concurrently. This
+                simultaneous response can lead to data overlap or loss. In this analogy, the teacher acts as the
+                multiple access protocol, managing the students to ensure a coherent and organized response.</p>
+            <p><strong>Following are the types of multiple access protocol that is subdivided into the different
+                    process as:</strong></p>
+            <img src="../../images/map1.svg" alt="" class="wb">
+            <div class="in">
+                <h3>Random Access Protocol</h3>
+
+                <ul>
+                    <li><b>Overview:</b> In this protocol, all stations have equal priority to send data over a channel.
+                        Each station can independently transmit data frames without relying on or controlling other
+                        stations. However, collisions may occur if multiple stations attempt to send data
+                        simultaneously.</li>
+
+                    <li><b>Methods of Random-Access Protocols:</b>
                         <ul>
-                            <li>Each frame consists of two essential components: the header and the actual data.</li>
-                            <li>The header contains crucial information, such as source and destination addresses, which
-                                are
-                                vital for routing and ensuring that the data reaches its intended recipient.</li>
+                            <li><b>Aloha:</b> Designed for wireless LAN, allowing any station to transmit data when a
+                                frame is available.</li>
+                            <li><b>CSMA (Carrier Sense Multiple Access):</b> Stations listen to the channel before
+                                transmitting to avoid collisions.</li>
+                            <li><b>CSMA/CD (Carrier Sense Multiple Access with Collision Detection):</b> Detects
+                                collisions during transmission and takes corrective actions.</li>
+                            <li><b>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance):</b> Aims to avoid
+                                collisions rather than detecting them.</li>
                         </ul>
                     </li>
                 </ul>
-                <div class="wh">
-                    <p><b>Physical Addressing</b></p>
+
+                <div class="in">
+                    <h3>Aloha Random Access Protocol</h3>
+
                     <ul>
-                        <li>In networking, addressing is essential for identifying and routing data to the correct
-                            destination.</li>
-                        <li>Within the Data Link Layer, physical addressing is a key concept.</li>
-                        <li>There are three types of addresses involved in networking: port addresses, logical
-                            addresses, and physical addresses.</li>
-                        <li>The physical address, often referred to as the Media Access Control (MAC) address, plays a
-                            pivotal role in data link layer operations.</li>
-                        <li>Here are some key points regarding physical addressing:</li>
+                        <li><b>Rules:</b>
+                            <ol>
+                                <li>Any station can transmit data at any time.</li>
+                                <li>No carrier sensing is required.</li>
+                                <li>Collision and data frames may be lost.</li>
+                                <li>Acknowledgment of frames exists.</li>
+                                <li>Requires retransmission after a random time.</li>
+                            </ol>
+                        </li>
+
+                        <li><b>Pure Aloha:</b>
+                            <ul>
+                                <li>Data transmission without checking channel status.</li>
+                                <li>Retransmission occurs after a random backoff time if no acknowledgment.</li>
+                                <li>Total vulnerable time: 2 * Transmission time of a frame (Tfr).</li>
+                                <li>Maximum throughput: 18.4% (G = 1/2).</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Slotted Aloha:</b>
+                            <ul>
+                                <li>Channel divided into fixed time slots.</li>
+                                <li>Data frames can only be sent at the beginning of a slot.</li>
+                                <li>Retransmission in the next slot if unsuccessful.</li>
+                                <li>Maximum throughput: 37% (G = 1).</li>
+                                <li>Probability of successful transmission: S = G * e^(-2G).</li>
+                                <li>Total vulnerable time required: Tfr.</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <p>MAC Address</p>
+                </div>
+                <div class="in">
+                    <h3>CSMA (Carrier Sense Multiple Access)</h3>
                     <ul>
-                        <li>MAC Address: MAC addresses are unique, 48-bit (6-byte) identifiers assigned to network
-                            interface cards (NICs).</li>
-                        <li>These addresses are hardwired into the NIC and cannot be changed.</li>
-                        <li>The Data Link Layer is responsible for providing and managing MAC addresses, ensuring that
-                            each network device has a unique identifier.</li>
-                        <li>This addressing mechanism is essential for devices to communicate within the local network.
+                        <li>CSMA is a media access protocol based on carrier sensing, where stations
+                            sense the channel's status (idle or busy) before transmitting data. This reduces the
+                            likelihood of collisions on the transmission medium.</li>
+
+                        <li><b>CSMA Access Modes:</b>
+                            <ul>
+                                <li><b>1-Persistent:</b> Nodes immediately send data if the channel is idle; otherwise,
+                                    they wait and broadcast unconditionally when the channel becomes idle.</li>
+                                <li><b>Non-Persistent:</b> Nodes sense the channel before transmission; if inactive,
+                                    they immediately send data; otherwise, they wait for a random time and transmit when
+                                    the channel is idle.</li>
+                                <li><b>P-Persistent:</b> A combination of 1-Persistent and Non-Persistent modes. Nodes
+                                    send a frame with a P probability if the channel is inactive; if not, they wait for
+                                    a random time and resume transmission.</li>
+                                <li><b>O-Persistent:</b> Stations determine their turn based on superiority before
+                                    transmitting on the shared channel. If the channel is inactive, each station waits
+                                    for its turn to retransmit data.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</h3>
+
+                    <ul>
+                        <li>CSMA/CD is a network protocol that combines carrier sensing with collision
+                            detection for transmitting data frames. It operates at the medium access control layer and
+                            follows a specific sequence of actions.</li>
+
+                        <li><b>Protocol Steps:</b>
+                            <ol>
+                                <li>Senses the shared channel before broadcasting frames.</li>
+                                <li>If the channel is idle, transmits a frame to check for successful transmission.</li>
+                                <li>If the frame is successfully received, the station sends another frame.</li>
+                                <li>If a collision is detected, the station sends a jam/stop signal to terminate data
+                                    transmission.</li>
+                                <li>Waits for a random time before attempting to send a frame to the channel again.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</h3>
+
+                    <ul>
+                        <li>CSMA/CA is a network protocol that combines carrier sensing with collision
+                            avoidance for the transmission of data frames. Operating at the medium access control layer,
+                            it employs acknowledgment signals to ensure successful transmission and avoid collisions.
+                        </li>
+
+                        <li><b>Protocol Mechanism:</b>
+                            <ul>
+                                <li>When a data frame is sent to the channel, the station awaits acknowledgment to check
+                                    channel status.</li>
+                                <li>If the station receives a single acknowledgment (its own), the data frame is
+                                    successfully transmitted to the receiver.</li>
+                                <li>If two signals are received (its own and one indicating collision), a collision has
+                                    occurred in the shared channel.</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Collision Avoidance Methods:</b>
+                            <ul>
+                                <li><b>Interframe Space (IFS):</b> The station waits for the channel to become idle. If
+                                    the channel is idle, it does not immediately send data but waits for a defined
+                                    Interframe Space (IFS) to prioritize station access.</li>
+
+                                <li><b>Contention Window:</b> The total time is divided into different slots. When ready
+                                    to transmit, the station selects a random slot as wait time. If the channel is still
+                                    busy, it restarts the timer for sending data packets when the channel is inactive.
+                                </li>
+
+                                <li><b>Acknowledgment:</b> The sender sends the data frame to the shared channel only if
+                                    acknowledgment is not received within a specified time.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Controlled Access Protocols</h3>
+                <ul>
+                    <li><b>Overview:</b> Controlled Access Protocol is a method aimed at reducing data frame collisions
+                        on a shared channel. In this method, each station collaborates to determine which station has
+                        the right to send a data frame, preventing collisions and ensuring orderly data transmission.
+                    </li>
+
+                    <li><b>Types of Controlled Access:</b> Controlled Access Protocol includes three types: Reservation,
+                        Polling, and Token Passing.</li>
+
+                </ul>
+                <p><b>Controlled Access Methods:</b></p>
+                <div class="wh">
+                    <p><b>Reservation:</b></p>
+                    <ul>
+                        <li>In the reservation method, stations must make a reservation before sending
+                            data.
+                        </li>
+                        <li>The timeline consists of a fixed-length Reservation Interval and a
+                            variable-length Data Transmission Period.</li>
+                        <li>Each station is assigned a slot in the reservation interval, and if a
+                            station
+                            has data to send, it transmits a bit in its designated slot.</li>
+                        <li>After all slots are checked, stations know which others wish to transmit,
+                            and
+                            data is sent accordingly.</li>
+                        <li>Advantages:
+                            <ul>
+                                <li>Predictable network performance with fixed time and rates.</li>
+                                <li>Priority settings for speedier access.</li>
+                                <li>Reduced contention for network resources.</li>
+                                <li>Quality of Service (QoS) support for different traffic types.</li>
+                                <li>Efficient use of bandwidth through multiplexing.</li>
+                                <li>Support for multimedia applications with guaranteed resources.</li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="wh">
-                    <p><b>Flow Control</b></p>
+                    <p><b>Polling:</b></p>
                     <ul>
-                        <li>Effective communication between network devices relies on a balanced flow of data.</li>
-                        <li>In situations where the sender's data rate exceeds the receiver's capacity, issues like data
-                            loss and network congestion can occur.</li>
-                        <li>Flow control mechanisms implemented at the Data Link Layer help manage this data flow.</li>
-                        <li>Here's an explanation of flow control:</li>
-                    </ul>
-                    <p>Flow Control Mechanism</p>
-                    <ul>
-                        <li>Flow Control Mechanism: Flow control mechanisms prevent data overload on the receiver
-                            side.</li>
-                        <li>For example, if the sender is transmitting data at a rate of 10 frames per second, while
-                            the receiver can only handle 5 frames per second, a flow control mechanism comes into
-                            play.</li>
-                        <li>It may involve the use of buffers to store excess frames while the receiver processes
-                            them.</li>
-                        <li>This ensures that data transmission remains efficient even when sender and receiver
-                            speeds differ.</li>
+                        <li>Polling is a controlled access method that resembles a roll-call process,
+                            where a controller (primary station) sends messages to each node in sequence to grant
+                            access.</li>
+
+                        <li><b>Operation:</b>
+                            <ul>
+                                <li>The controller sends a message to each node with the address of the selected node
+                                    for access.</li>
+                                <li>Nodes can only exchange data through the controller.</li>
+                                <li>Upon receiving the message, the addressed node responds and sends data if available;
+                                    otherwise, it sends a "poll reject" (NAK) message.</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Advantages:</b>
+                            <ul>
+                                <li>Fixed and predictable maximum/minimum access time and data rates on the channel.
+                                </li>
+                                <li>Maximum efficiency and bandwidth utilization.</li>
+                                <li>No slot is wasted in the polling process.</li>
+                                <li>Assignment of priority ensures faster access for some secondary stations.</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Disadvantages:</b>
+                            <ul>
+                                <li>Consumes more time due to the sequential polling process.</li>
+                                <li>Link sharing is biased as every station has an equal chance of winning in each
+                                    round.</li>
+                                <li>Some stations might run out of data to send, leading to inefficient use.</li>
+                                <li>An increase in turnaround time can result in a drop in data rates, especially under
+                                    low loads.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="wh">
-                    <p><b>Error Control</b></p>
+                    <p><b>Token Passing</b></p>
                     <ul>
-                        <li>In any data transmission, errors can occur due to various factors, such as electromagnetic
-                            interference, signal attenuation, or data corruption during transmission.</li>
-                        <li>The Data Link Layer includes error control mechanisms to detect and, in some cases, correct
-                            these errors.</li>
-                        <li>Error control encompasses two primary functions:</li>
-                        <p>Error Detection</p>
-                        <ul>
-                            <li>Error Detection: This function involves identifying errors in received data frames.</li>
-                            <li>For instance, if a sender transmits a sequence of bits (e.g., 10101100), and the
-                                receiver receives a slightly altered sequence (e.g., 10101111), error detection
-                                mechanisms are employed to pinpoint which bits have changed and assess the extent of the
-                                error.</li>
-                            <li>Common techniques include checksums and CRC (Cyclic Redundancy Check).</li>
+                        <li>Token Passing is a controlled access method where stations are logically
+                            connected in a ring, and access to the network is governed by tokens.</li>
 
-                        </ul>
-                        <p>Error Correction</p>
-                        <ul>
-                            <li>Error Correction: In some cases, error correction is essential.</li>
-                            <li>This function aims to not only detect errors but also correct them.</li>
-                            <li>Methods like Hamming codes or Reed-Solomon codes are used for error correction,
-                                ensuring
-                                that data integrity is maintained even in the presence of errors introduced during
-                                transmission.</li>
-                        </ul>
+                        <li><b>Operation:</b>
+                            <ul>
+                                <li>Stations are arranged in a ring, and a token, a special bit pattern or message,
+                                    circulates among them in a predefined order.</li>
+                                <li>In a Token Ring, the token moves from one station to the next in the ring. In Token
+                                    Bus, each station uses the bus to send the token to the next station.</li>
+                                <li>The token serves as permission to send. If a station has a queued frame, it can send
+                                    it upon receiving the token. Otherwise, it passes the token to the next station.
+                                </li>
+                                <li>After sending a frame, each station must wait for all N stations (including itself)
+                                    to send the token to their neighbors and N – 1 stations to send a frame, if they
+                                    have one.</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Advantages:</b>
+                            <ul>
+                                <li>Applicable with routers, cabling, and includes built-in debugging features like
+                                    protective relay and auto-reconfiguration.</li>
+                                <li>Provides good throughput under conditions of high load.</li>
+                            </ul>
+                        </li>
+
+                        <li><b>Disadvantages:</b>
+                            <ul>
+                                <li>High cost compared to other methods.</li>
+                                <li>Topology components are more expensive than those of more widely used standards.
+                                </li>
+                                <li>Hardware elements of token rings are intricate, requiring careful selection and
+                                    exclusive use from a single manufacturer.</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            <div class="in">
+                <h3>Channelization Protocols</h3>
+
+                <ul>
+                    <li><b>Overview:</b> Channelization Protocols enable the sharing of total usable bandwidth in a
+                        shared channel among multiple stations, utilizing various methods based on time, distance, and
+                        codes.</li>
+
+                    <li><b>Methods:</b>
+                        <ol>
+                            <li>
+                                <b>FDMA (Frequency Division Multiple Access):</b>
+                                <p>FDMA divides the available bandwidth into equal bands, allowing multiple users to
+                                    send data through different frequencies to subchannels. Each station is reserved a
+                                    specific band to prevent crosstalk and interferences.</p>
+                            </li>
+
+                            <li>
+                                <b>TDMA (Time Division Multiple Access):</b>
+                                <p>TDMA shares the same frequency bandwidth across multiple stations by dividing the
+                                    channel into different time slots. This division helps avoid collisions, but there
+                                    is an overhead of synchronization, specifying each station's time slot with
+                                    synchronization bits.</p>
+                            </li>
+
+                            <li>
+                                <b>CDMA (Code Division Multiple Access):</b>
+                                <p>CDMA allows all stations to simultaneously send data over the same channel without
+                                    dividing the bandwidth based on time slots. Each station uses a unique code
+                                    sequence, enabling multiple stations to transmit data simultaneously without
+                                    interference. It doesn't require time slot division.</p>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
