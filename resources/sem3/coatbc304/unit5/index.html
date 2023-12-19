@@ -425,7 +425,145 @@
                 <li>Another related term is "paging," which involves the transfer of data from the secondary memory to
                     the main memory. This process complements cache mapping, ensuring that a hierarchy of memory levels
                     is efficiently utilized to meet the varying speed requirements of different memory types.</li>
+                <li>3 Types of Mapping:
+                    <ol>
+                        <li>Associative Mapping:
+                            <ul>
+                                <li>Associative mapping is a cache mapping technique where a block of main memory can be
+                                    placed in any cache location.</li>
+                                <li>There is no fixed relationship between the block's address in main memory and its
+                                    location in the cache.</li>
+                                <li>This flexibility allows for efficient utilization of cache space but comes at the
+                                    cost of increased complexity and hardware requirements.</li>
+                                <li>Associative mapping is well-suited for scenarios where the program's memory access
+                                    patterns are unpredictable, providing high flexibility in cache usage.</li>
+                            </ul>
+                        </li>
+                        <li>Direct Mapping:
+                            <ul>
+                                <li>Direct mapping is a simpler cache mapping technique where each block of main memory
+                                    is mapped to a specific location in the cache.</li>
+                                <li>There is a fixed relationship between the block's address in main memory and its
+                                    location in the cache, determined by a mathematical function.</li>
+                                <li>This method is efficient in terms of hardware complexity but may lead to cache
+                                    conflicts where multiple blocks contend for the same cache location.</li>
+                                <li>Direct mapping is suitable for scenarios where memory access patterns are somewhat
+                                    predictable and can benefit from a straightforward mapping approach.</li>
+                            </ul>
+                        </li>
+                        <li>Set-Associative Mapping:
+                            <ul>
+                                <li>Set-associative mapping combines features of both associative and direct mapping,
+                                    providing a compromise between flexibility and simplicity.</li>
+                                <li>The cache is divided into sets, and each set contains multiple lines. Each block
+                                    from main memory can be placed in any line within a specific set.</li>
+                                <li>This allows for a degree of flexibility in cache usage while addressing some of the
+                                    issues associated with direct mapping, such as cache conflicts.</li>
+                                <li>Set-associative mapping strikes a balance, making it suitable for a wide range of
+                                    applications with varying memory access patterns.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
             </ul>
+        </div>
+
+        <div class="wh">
+            <h2>Locality of References</h2>
+            <ul>
+                <li>
+                    <strong>Definition:</strong>
+                    Locality of reference refers to a phenomenon in which a computer program accesses the same set of
+                    memory locations very frequently for a particular time period. It signifies the tendency of a
+                    computer program to access instructions whose addresses are near one another. This property is
+                    often
+                    observed in loops within a program.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Types of Localities:</h3>
+
+
+                <ul>
+                    <li>
+                        <strong>Temporal Locality:</strong>
+                        <ul>
+                            <li>Temporal locality implies that current data being fetched may be needed again soon. To
+                                exploit this, the data or instruction is stored in the cache memory, eliminating the
+                                need to search the main memory for the same data repeatedly.</li>
+                            <li>When the CPU fetches data from RAM, it is also stored in the cache memory based on the
+                                assumption that the same data or instruction may be needed in the near future. This
+                                phenomenon is known as temporal locality.</li>
+                            <li>If certain data is referenced, there is a high probability that it will be referenced
+                                again in the near future, making temporal locality a key optimization factor in caching.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Spatial Locality:</strong>
+                        <ul>
+                            <li>Spatial locality assumes that if a memory location has been accessed, there is a high
+                                likelihood that a nearby or consecutive memory location will be accessed soon after. To
+                                capitalize on this, nearby memory references are also stored in the cache memory for
+                                faster access.</li>
+                            <li>For instance, the traversal of a one-dimensional array in any instruction set benefits
+                                from spatial locality optimization.</li>
+                            <li>Spatial locality enhances caching efficiency by anticipating and preloading adjacent
+                                memory locations that are likely to be accessed shortly.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Virtual Memory</h2>
+            <ul>
+                <li>Virtual memory creates the illusion of a larger memory space, providing the appearance of abundant
+                    memory despite physical limitations.</li>
+                <li>The technique of virtual memory allows users to utilize more memory for a program than the actual
+                    physical memory capacity of a computer.</li>
+                <li>It is a concept that conveys the illusion to users that their available main memory is equal to the
+                    capacity of secondary storage media (or auxiliary memory).</li>
+                <li>
+                    <strong>Need for Virtual Memory:</strong>
+                    <ol>
+                        <li>Virtual memory is an imaginary memory concept used when a program exceeds the size of the
+                            available main memory.</li>
+                        <li>It functions as temporary memory, complementing the RAM (or main memory) of the system.</li>
+                    </ol>
+                </li>
+                <li>Virtual Memory (VM) is a memory management capability of an operating system that utilizes both
+                    hardware and software to address physical memory shortages by temporarily transferring data between
+                    RAM and disk storage.</li>
+                <li>
+                    <strong>Example Scenario:</strong>
+                    <p>Consider a system with 4 GB of main memory and a program size of 16 GB. Since it is not feasible
+                        to store the entire 16 GB program in the 4 GB main memory at once, virtual memory comes into
+                        play. A portion of the 16 GB program that is currently in use is transferred to the main memory.
+                        When that portion is no longer needed, it is moved back to the secondary memory in a process
+                        known as swapping.</p>
+                </li>
+                <li>The fundamental idea behind virtual memory is to keep only those parts of the program currently in
+                    use in the memory, while the rest remains on the disk drive.</li>
+            </ul>
+            <div class="in">
+                <h3>Implementation of Virtual Memory</h3>
+                <img src="../../images/vm1.svg" alt="" class="wb">
+                <ul>
+                    <li>To implement virtual memory (VM), a designated portion of the hard disk (HDD) is allocated by
+                        the system. This allocated portion can be either a file or a separate partition.</li>
+                    <li>In Windows, this allocated space is represented by a file named pagefile.sys, while in Linux, a
+                        distinct partition is often used for virtual memory.</li>
+                    <li>When the system requires more memory (RAM) than is currently available, it transfers some of its
+                        data from the main memory (RAM) to the hard disk drive.</li>
+                    <li>The additional memory doesn't physically exist in RAM; rather, it is a storage space on the
+                        disk. This implementation is achieved through a process known as swapping, involving the
+                        exchange of data between the main memory and the hard disk.</li>
+                    <li>This swapping mechanism allows the system to create an illusion of extended memory space,
+                        efficiently managing memory demands beyond the physical limits of RAM.</li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="content-box">
