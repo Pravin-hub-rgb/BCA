@@ -291,6 +291,228 @@
         </div>
         <div class="wh">
             <h2>Application Layer</h2>
+            <ul>
+                <li>The Application Layer is the topmost layer of the OSI model, responsible for providing network
+                    services directly to end-users and applications.</li>
+                <li>It serves as the interface between the software applications and the underlying network
+                    infrastructure.</li>
+                <li>Application layer protocols enable communication and data exchange between software applications on
+                    different devices.</li>
+                <li>Examples of Application Layer protocols include HTTP (Hypertext Transfer Protocol), SMTP (Simple
+                    Mail Transfer Protocol), and FTP (File Transfer Protocol).</li>
+                <li>These protocols define the rules and conventions for communication, ensuring seamless interaction
+                    between applications running on diverse devices.</li>
+                <li>One practical example illustrating the role of the Application Layer is the communication between
+                    users on WhatsApp. When you send a message on WhatsApp, the application layer protocols manage the
+                    process of composing, sending, and receiving messages, providing a user-friendly and efficient
+                    communication experience.</li>
+                <li>The Application Layer encapsulates the complexities of network communication, allowing diverse
+                    applications to interact without being concerned with the underlying network details.</li>
+                <li>It plays a pivotal role in supporting a wide range of network-based applications, including web
+                    browsing, email services, and instant messaging.</li>
+            </ul>
+            <div class="in">
+                <h3>Simple Mail Transfer Protocol (SMTP)</h3>
+                <ul>
+                    <li>SMTP is an application layer protocol designed for efficiently and reliably sending emails over
+                        the internet.</li>
+                </ul>
+                <p><strong>Working:</strong></p>
+                <ul>
+                    <li>The SMTP server is consistently in a listening mode, ready to handle incoming connections.</li>
+                    <li>A client initiates a TCP connection with the SMTP server.</li>
+                    <li>The SMTP server listens for a connection and establishes a connection on the designated port.
+                    </li>
+                    <li>Once the connection is established, the client informs the SMTP server of its intention to send
+                        an email.</li>
+                    <li>Upon confirmation, the client sends the email to its mail server through the SMTP server.</li>
+                    <li>SMTP facilitates the transfer of the email from the sender's mail server to the receiver's mail
+                        server.</li>
+                </ul>
+                <img src="../../images/smtpd1.svg" alt="" class="wb">
+                <ul>
+                    <li>SMTP is involved in the email transmission process twice:
+                        <ol>
+                            <li>Between the sender and the sender's mail server.</li>
+                            <li>Between the sender's mail server and the receiver's mail server.</li>
+                        </ol>
+                    </li>
+                    <li>Note: To receive or download the email,
+                        <ul>
+                            <li>Another protocol is required between the receiver's mail server and the recipient.</li>
+                            <li>The two most commonly used protocols for this purpose are POP3 (Post Office Protocol
+                                version 3) and IMAP (Internet Message Access Protocol).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="in">
+                    <p><strong>Characteristics of SMTP</strong></p>
+                    <ul>
+                        <li><strong>Push Protocol:</strong> SMTP operates as a push protocol, meaning it initiates the
+                            transfer of data without waiting for a request. It actively pushes emails from the sender to
+                            the receiver.</li>
+                        <li><strong>Transport Layer:</strong> SMTP utilizes TCP (Transmission Control Protocol) at the
+                            transport layer, ensuring reliable and orderly data transmission.</li>
+                        <li><strong>Port Number:</strong> SMTP uses port number 25 to establish communication between
+                            the sender and the recipient's mail server.</li>
+                        <li><strong>Persistent TCP Connections:</strong> SMTP employs persistent TCP connections,
+                            allowing it to send multiple emails in a single connection, which enhances efficiency.</li>
+                        <li><strong>Connection Oriented:</strong> SMTP is a connection-oriented protocol, establishing a
+                            dedicated connection between the sender and the mail server for the duration of the email
+                            transfer.</li>
+                        <li><strong>In-Band Protocol:</strong> SMTP is an in-band protocol, meaning the control
+                            information and data share the same communication channel. This simplifies the communication
+                            process but may limit scalability.</li>
+                        <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, implying that each email
+                            transaction is independent. The server does not retain information about the previous
+                            interactions, treating each email as a new transaction.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Important Points about SMTP</h3>
+                    <ul>
+                        <li><strong>Text-Based Protocol:</strong> SMTP is a pure text-based protocol, meaning it can
+                            only handle messages containing 7-bit ASCII text. It is not designed to transfer other types
+                            of data like images, video, audio, executable files, binary objects, or text data in
+                            languages represented in 8-bit codes such as French, Japanese, Chinese, etc.</li>
+                        <li><strong>MIME Extension:</strong> Multipurpose Internet Mail Extensions (MIME) extends the
+                            limited capabilities of SMTP. It is an extension to the internet email protocol designed to
+                            enable users to send and receive graphics, audio files, video files, and other non-text data
+                            within email messages. MIME was specially designed for SMTP.</li>
+                        <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, meaning it does not
+                            maintain the state of its clients. If an email is requested to be sent twice, the SMTP
+                            server resends it without recognizing that the email has already been sent.</li>
+                        <li><strong>Receiver's Side:</strong> SMTP is not used at the receiver's side. Instead, a pull
+                            protocol like POP3 or IMAP is needed. The receiver periodically checks if there are any new
+                            emails from the mail server.</li>
+                        <li><strong>Sender and Receiver Machines:</strong> SMTP is not run directly between sender and
+                            receiver machines. This is because machines cannot always be ON. The functionality has been
+                            divided between the client and the mail server. The mail server receives the mail on behalf
+                            of its client and manages the client's mailbox.</li>
+                        <li><strong>Client Authentication:</strong> SMTP is not suitable for client authentication, as
+                            it does not require authentication. It allows anyone on the Internet to send emails to
+                            anyone or even to a large group of people. SMTP Auth, short for SMTP Authentication, has
+                            been introduced separately to provide authentication features.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Post Office Protocol (POP)</h3>
+                <ul>
+                    <li>POP is an application layer protocol designed for facilitating the retrieval and management of
+                        emails on a remote server.</li>
+                </ul>
+                <p><strong>Purpose</strong></p>
+                <ul>
+                    <li><strong>Message Access:</strong> POP serves as a message access protocol, allowing clients to
+                        retrieve or download emails from their remote mail server.</li>
+                    <li><strong>POP3 Version:</strong> The most widely used version of POP is POP version 3 (POP3).</li>
+                </ul>
+                <div class="in">
+                    <p><strong>Working</strong></p>
+                    <ul>
+                        <li><strong>To Retrieve a Message:</strong>
+                            <ul>
+                                <li>The client initiates a TCP connection using port 110.</li>
+                                <li>The client identifies itself to the server during the connection establishment.</li>
+                                <li>Client issues a series of POP3 commands to interact with the server.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <p><strong>Characteristics of Post Office Protocol (POP)</strong></p>
+                    <ul>
+                        <li><strong>Pull Protocol:</strong> POP is a pull protocol, implying that the client initiates
+                            communication and pulls emails from the server when needed.</li>
+                        <li><strong>Transport Layer:</strong> POP utilizes TCP at the transport layer for reliable
+                            communication.</li>
+                        <li><strong>Port Number:</strong> POP uses port number 110 for communication between the client
+                            and the server.</li>
+                        <li><strong>Persistent TCP Connections:</strong> POP employs persistent TCP connections,
+                            allowing the client to maintain a continuous connection for multiple interactions with the
+                            server.</li>
+                        <li><strong>Connection-Oriented:</strong> POP is a connection-oriented protocol, ensuring a
+                            reliable and ordered data exchange between the client and the server.</li>
+                        <li><strong>In-Band Protocol:</strong> POP is an in-band protocol, meaning that control
+                            information and data share the same communication channel.</li>
+                        <li><strong>Stateful and Stateless:</strong> POP is stateful during a session while the mail is
+                            being downloaded, ensuring that the server maintains awareness of the client's actions.
+                            However, it becomes stateless across sessions.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Internet Message Access Protocol (IMAP)</h3>
+                <ul>
+                    <li>IMAP is an application layer protocol.</li>
+                    <li>It enables clients to receive or download emails from their remote mail server.</li>
+                    <li>IMAP has become more widely used than POP for managing emails.</li>
+                </ul>
+                <div class="in">
+                    <p><strong>Characteristics of IMAP</strong></p>
+                    <ul>
+                        <li><strong>Pull Protocol:</strong> IMAP is a pull protocol, allowing clients to initiate
+                            communication and pull emails from the server when needed.</li>
+                        <li><strong>Transport Layer:</strong> IMAP uses TCP at the transport layer to ensure reliable
+                            communication between the client and the server.</li>
+                        <li><strong>Port Number:</strong> IMAP uses port number 143 for communication between the client
+                            and the server.</li>
+                        <li><strong>Persistent TCP Connections:</strong> IMAP employs persistent TCP connections,
+                            enabling clients to maintain continuous connections for multiple interactions with the
+                            server.</li>
+                        <li><strong>Connection-Oriented:</strong> IMAP is a connection-oriented protocol, ensuring a
+                            reliable and ordered data exchange between the client and the server.</li>
+                        <li><strong>In-Band Protocol:</strong> IMAP is an in-band protocol, meaning that control
+                            information and data share the same communication channel.</li>
+                        <li><strong>Stateful Protocol:</strong> IMAP is a stateful protocol, maintaining the state of
+                            the client's actions across the session for efficient interaction.</li>
+                        <li><strong>Distributed Mailboxes:</strong> IMAP distributes mailboxes across multiple servers,
+                            allowing for better organization and accessibility of emails.</li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <p><strong>POP vs. IMAP</strong></p>
+                    <img src="../../images/popvsimap1.svg" alt="" class="wb">
+                </div>
+            </div>
+            <div class="in">
+                <h3>Hyper Text Transfer Protocol (HTTP)</h3>
+                <ul>
+                    <li>It is an application layer protocol that facilitates communication between clients and servers
+                        on the World Wide Web.</li>
+                </ul>
+                <p><strong>Purpose</strong></p>
+                <ul>
+                    <li>HTTP is primarily used for the retrieval of data from websites throughout the internet.</li>
+                    <li>It operates on top of the TCP/IP suite of protocols, providing a standardized way for web
+                        browsers to communicate with web servers.</li>
+                </ul>
+                <div class="in">
+                    <p><strong>Working</strong></p>
+                    <ul>
+                        <li>HTTP operates on a client-server model where:
+                            <ul>
+                                <li>The web browser acts as the client.</li>
+                                <li>The client communicates with the web server hosting the website.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <img src="../../images/httpd1.svg" alt="" class="wb">
+                    <ul>
+                        <li>When a client requests information (such as clicking on a hyperlink) from the website
+                            server:</li>
+                        <li>The browser sends a request message to the HTTP server for the requested objects. Then:
+                            <ul>
+                                <li>HTTP establishes a connection between the client and server through TCP.</li>
+                                <li>HTTP sends a request to the server, which collects the requested data.</li>
+                                <li>HTTP sends the response with the objects back to the client.</li>
+                                <li>HTTP closes the connection.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
