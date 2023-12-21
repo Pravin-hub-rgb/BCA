@@ -512,6 +512,175 @@
                         </li>
                     </ul>
                 </div>
+                <div class="in">
+                    <p><strong>HTTP Connections</strong></p>
+                    <ul>
+                        <li><strong>Non-persistent:</strong> In non-persistent HTTP connections:</li>
+                        <ul>
+                            <li>A new connection is established for each request and response exchange between the
+                                client and server.</li>
+                            <li>After serving the requested content, the connection is immediately closed.</li>
+                            <li>Subsequent requests require opening new connections, incurring additional overhead.</li>
+                        </ul>
+                        <li><strong>Persistent:</strong> In persistent HTTP connections:</li>
+                        <ul>
+                            <li>A single connection is reused for multiple request-response exchanges between the client
+                                and server.</li>
+                            <li>The connection remains open after serving a request, allowing for subsequent requests to
+                                use the same connection.</li>
+                            <li>This reduces the overhead of opening and closing connections for each interaction.</li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="in">
+                    <p><strong>HTTP Characteristics and Notes</strong></p>
+                    <ul>
+                        <li>HTTP uses TCP at the transport layer.</li>
+                        <ul>
+                            <li>This choice is made because:</li>
+                            <ul>
+                                <li>Unlike UDP, TCP ensures reliable data delivery through a Three-way handshake.</li>
+                                <li>TCP guarantees retransmission of lost packets, providing a reliable communication
+                                    channel.</li>
+                                <li>HTTP lacks built-in reliability features, necessitating the use of TCP for reliable
+                                    data transfer.</li>
+                                <li>If HTTP used UDP, it would need to manage sessions independently, including packet
+                                    retransmission.</li>
+                            </ul>
+                        </ul>
+                        <li>It is important to note:</li>
+                        <ul>
+                            <li>Any service not using TCP must have built-in reliability features.</li>
+                        </ul>
+                        <li>HTTP uses port number 80.</li>
+                        <ul>
+                            <li>HTTP clients use port 80 to send and receive requested web pages from an HTTP server.
+                            </li>
+                            <li>HTTP servers respond to all requests at port 80.</li>
+                        </ul>
+                        <li>HTTP 1.0 is non-persistent, and HTTP 1.1 is persistent.</li>
+                        <ul>
+                            <li>Persistent connections, as in HTTP 1.1, improve performance by 20% compared to
+                                non-persistent connections.</li>
+                        </ul>
+                        <li>HTTP 1.0 is a connectionless protocol:</li>
+                        <ul>
+                            <li>After serving a single HTTP request, the connection is closed and not reused.</li>
+                            <li>HTTP 1.0 without connection keep-alive is considered connectionless.</li>
+                        </ul>
+                        <li>HTTP is an in-band protocol:</li>
+                        <ul>
+                            <li>HTTP passes control data (commands) and main data over the same connection.</li>
+                            <li>Both control data and main data are processed without distinction or priority for
+                                control data.</li>
+                        </ul>
+                        <li>HTTP is a stateless protocol:</li>
+                        <ul>
+                            <li>HTTP servers do not maintain any state information.</li>
+                            <li>After sending a response, the server forgets about the client.</li>
+                            <li>Each new request is treated independently, and the connection is automatically closed
+                                after generating the response.</li>
+                        </ul>
+                        <li>If HTTP were a stateful protocol:</li>
+                        <ul>
+                            <li>It would allow browser windows to engage connections with the web server for extended
+                                periods.</li>
+                            <li>This could lead to a situation of reaching the maximum connections of a web server, even
+                                with many idle connections.</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>File Transfer Protocol (FTP)</h3>
+                <ul>
+                    <li>FTP is an application layer protocol.</li>
+                </ul>
+
+                <p><strong>Purpose:</strong></p>
+                <ul>
+                    <li>FTP is designed for exchanging files over the internet.</li>
+                    <li>It facilitates users in uploading and downloading files from the internet.</li>
+                </ul>
+
+                <div class="in">
+                    <p><strong>Working:</strong></p>
+                    <p>FTP establishes two TCP connections between the client and the server:</p>
+                    <ol>
+                        <li>One connection is dedicated to transferring data.</li>
+                        <li>The other connection is utilized for transferring control information.</li>
+                    </ol>
+                    <img src="../../images/ftpd1.svg" alt="" class="wb">
+                </div>
+
+                <p><strong>Additional Information:</strong></p>
+                <ul>
+                    <li>FTP operates on two modes: Active mode and Passive mode.
+                        <ul>
+                            <li>In Active mode, the client initiates the connection, and the server responds.</li>
+                            <li>In Passive mode, the server initiates the data connection, and the client responds.
+                                Passive mode is useful when the client is behind a firewall.</li>
+                        </ul>
+                    </li>
+                    <li>FTP uses different commands for controlling the file transfer operations, such as RETR (retrieve
+                        a copy of the file) and STOR (store a copy of the file).</li>
+                    <li>FTP can work with or without user authentication, depending on the server's configuration.</li>
+                    <li>Security concerns with FTP have led to the development of more secure alternatives, such as SFTP
+                        (SSH File Transfer Protocol) and FTPS (FTP Secure).</li>
+                </ul>
+                <div class="in">
+                    <p><strong>Characteristics of FTP</strong></p>
+                    <ul>
+                        <li><strong>FTP uses TCP at the transport layer:</strong> FTP relies on the Transmission Control
+                            Protocol (TCP) for reliable communication between the client and server.</li>
+                        <li><strong>FTP uses port number 21 for the control connection:</strong> Port 21 is designated
+                            for the control connection, where commands and responses between the client and server are
+                            exchanged.</li>
+                        <li><strong>FTP uses port number 20 for the data connection:</strong> Port 20 is reserved for
+                            the data connection, facilitating the actual transfer of files between the client and
+                            server.</li>
+                        <li><strong>FTP establishes persistent TCP connections for the control connection:</strong> The
+                            control connection remains open throughout the FTP session, handling commands, and
+                            responses.</li>
+                        <li><strong>FTP uses non-persistent connections for the data connection:</strong> The data
+                            connection is established as needed for file transfers and closed after the transfer is
+                            complete.</li>
+                        <li><strong>FTP is a connection-oriented protocol:</strong> FTP maintains a connection between
+                            the client and server, ensuring a reliable exchange of commands and data.</li>
+                        <li><strong>FTP is an out-of-band protocol:</strong> FTP uses separate connections for control
+                            information (out-of-band) and data, enhancing efficiency and flexibility.</li>
+                        <li><strong>FTP is not mentioned as SMTP; it is a stateful protocol:</strong> FTP maintains the
+                            state of the session, remembering user login information and the current working directory.
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Important Notes</h3>
+                    <ul>
+                        <li><strong>Emails can't be sent using FTP.</strong>
+                            <ul>
+                                <li>FTP requires the establishment of a connection between the client and server before
+                                    transferring files.</li>
+                                <li>Both the client and server need to be online simultaneously for FTP file transfers.
+                                </li>
+                                <li>Due to this requirement, emails are not sent using FTP.</li>
+                            </ul>
+                        </li>
+                        <li><strong>FTP can transfer one file at a time.</strong>
+                            <ul>
+                                <li>FTP is designed for transferring a single file at a time in either direction between
+                                    the client and server.</li>
+                            </ul>
+                        </li>
+                        <li><strong>FTP is a stateful protocol.</strong>
+                            <ul>
+                                <li>The client establishes a control connection for the duration of an FTP session.</li>
+                                <li>FTP sessions typically span multiple data transfers, making it a stateful protocol.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
