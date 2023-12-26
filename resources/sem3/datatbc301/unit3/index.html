@@ -149,10 +149,96 @@
             <div class="in">
                 <h3>Flow Control:</h3>
                 <ul>
-                    <li>Regulating the flow of data frames at the receiver end.</li>
-                    <li>Preventing the source machine from sending data frames at a rate faster than the destination
+                    <li>Flow control means regulating the flow of data frames at the receiver end.</li>
+                    <li>It prevents the source machine from sending data frames at a rate faster than the destination
                         machine's capacity, avoiding overflow and frame loss.</li>
+                    <li>In this context, we have a few protocols like Stop-and-Wait and Sliding Window which help in
+                        managing data flow efficiently.</li>
                 </ul>
+
+                <div class="in">
+                    <h3>Stop-and-Wait Protocol</h3>
+                    <ul>
+                        <li>The Stop-and-Wait Protocol is a simple flow control mechanism used in the data link layer of
+                            the OSI model. It is primarily designed to ensure reliable and sequential delivery of frames
+                            between a sender and receiver over a communication link.</li>
+                    </ul>
+                    <p><strong>Basic Steps:</strong></p>
+                    <ol>
+                        <li><strong>Sender Side:</strong>
+                            <ul>
+                                <li>The sender sends a frame to the receiver.</li>
+                                <li>Waits for an acknowledgment (ACK) from the receiver.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Receiver Side:</strong>
+                            <ul>
+                                <li>Receives the frame.</li>
+                                <li>Sends an acknowledgment (ACK) back to the sender.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sender Side (After ACK):</strong>
+                            <ul>
+                                <li>If the ACK is received within a specified timeout period, the sender assumes
+                                    successful delivery and proceeds to send the next frame.</li>
+                                <li>If the ACK is not received within the timeout period, the sender retransmits the
+                                    same frame.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <img src="../../images/snwp1.svg" alt="" class="wb">
+                    <p><strong>Issues and Limitations:</strong></p>
+                    <ul>
+                        <li>Low Efficiency: Stop-and-Wait is not very efficient, especially in scenarios where there is
+                            a significant delay between the sender and receiver. While waiting for an acknowledgment,
+                            the sender is idle, leading to low utilization of the communication link.</li>
+                        <li>Limited Bandwidth Utilization: The sender cannot transmit a new frame until it receives an
+                            acknowledgment for the previous one. This results in underutilization of the available
+                            bandwidth.</li>
+                        <li>Increased Latency: The round-trip time (RTT) heavily influences the protocol's performance.
+                            Higher RTT can lead to increased latency, affecting the overall throughput.</li>
+                    </ul>
+                </div>
+
+                <div class="in">
+                    <h3>Sliding Window Protocol</h3>
+                    <ul>
+                        <li>The Sliding Window Protocol is an advancement over the Stop-and-Wait Protocol, aiming to
+                            improve the efficiency of data transfer in communication networks. It falls under the design
+                            issues of the data link layer and specifically addresses flow control.</li>
+                        <li>In this protocol, idle time is reduced as multiple frames are sent at once.</li>
+                    </ul>
+                    <p><strong>Basic Steps:</strong></p>
+                    <ol>
+                        <li><strong>Sender Side:</strong>
+                            <ul>
+                                <li>The sender maintains a window of allowed, but not yet acknowledged, frames.</li>
+                                <li>It sends multiple frames within the window before waiting for acknowledgments.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Receiver Side:</strong>
+                            <ul>
+                                <li>The receiver keeps track of the frames it has received in order.</li>
+                                <li>It sends cumulative acknowledgments, indicating the highest sequence number received
+                                    successfully.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sender Side (After ACK):</strong>
+                            <ul>
+                                <li>As acknowledgments are received, the sender slides the window to send new frames.
+                                </li>
+                                <li>New frames are continuously sent within the updated window.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Flow Control:</strong>
+                            <ul>
+                                <li>The sender adjusts the window size dynamically based on network conditions and
+                                    available resources.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <img src="../../images/swp1.svg" alt="" class="wb">
+                </div>
             </div>
             <div class="in">
                 <h3>Error Control:</h3>
@@ -695,6 +781,13 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=0Ico08tGVHU" target="_blank">Stop and Wait Protocol || Sliding
+                    Window Protocol &neArr;</a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
