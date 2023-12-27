@@ -10,7 +10,7 @@
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
 </head>
 
-<body class="bg-c">
+< class="bg-c">
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
@@ -288,402 +288,408 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="content-box">
+        <h2>Application Layer</h2>
+        <ul>
+            <li>The Application Layer is the topmost layer of the OSI model, responsible for providing network
+                services directly to end-users and applications.
+                <ul>
+                    <li>Here "network services" refer to the set of functionalities and capabilities that the
+                        Application Layer provides to end-users and applications. The Application Layer serves as the
+                        interface between the network and the software applications that users interact with</li>
+                </ul>
+            </li>
+            <li>It serves as the interface between the software applications and the underlying network
+                infrastructure.</li>
+            <li>Application layer protocols enable communication and data exchange between software applications on
+                different devices.</li>
+            <li>Examples of Application Layer protocols include HTTP (Hypertext Transfer Protocol), SMTP (Simple
+                Mail Transfer Protocol), and FTP (File Transfer Protocol).</li>
+            <li>These protocols define the rules and conventions for communication, ensuring seamless interaction
+                between applications running on diverse devices.</li>
+            <li>One practical example illustrating the role of the Application Layer is the communication between
+                users on WhatsApp. When you send a message on WhatsApp, the application layer protocols manage the
+                process of composing, sending, and receiving messages, providing a user-friendly and efficient
+                communication experience.</li>
+            <li>The Application Layer encapsulates the complexities of network communication, allowing diverse
+                applications to interact without being concerned with the underlying network details.</li>
+            <li>It plays a pivotal role in supporting a wide range of network-based applications, including web
+                browsing, email services, and instant messaging.</li>
+        </ul>
         <div class="wh">
-            <h2>Application Layer</h2>
+            <h2>Simple Mail Transfer Protocol (SMTP)</h2>
             <ul>
-                <li>The Application Layer is the topmost layer of the OSI model, responsible for providing network
-                    services directly to end-users and applications.</li>
-                <li>It serves as the interface between the software applications and the underlying network
-                    infrastructure.</li>
-                <li>Application layer protocols enable communication and data exchange between software applications on
-                    different devices.</li>
-                <li>Examples of Application Layer protocols include HTTP (Hypertext Transfer Protocol), SMTP (Simple
-                    Mail Transfer Protocol), and FTP (File Transfer Protocol).</li>
-                <li>These protocols define the rules and conventions for communication, ensuring seamless interaction
-                    between applications running on diverse devices.</li>
-                <li>One practical example illustrating the role of the Application Layer is the communication between
-                    users on WhatsApp. When you send a message on WhatsApp, the application layer protocols manage the
-                    process of composing, sending, and receiving messages, providing a user-friendly and efficient
-                    communication experience.</li>
-                <li>The Application Layer encapsulates the complexities of network communication, allowing diverse
-                    applications to interact without being concerned with the underlying network details.</li>
-                <li>It plays a pivotal role in supporting a wide range of network-based applications, including web
-                    browsing, email services, and instant messaging.</li>
+                <li>SMTP is an application layer protocol designed for efficiently and reliably sending emails over
+                    the internet.</li>
+            </ul>
+            <p><strong>Working:</strong></p>
+            <ul>
+                <li>The SMTP server is consistently in a listening mode, ready to handle incoming connections.</li>
+                <li>A client initiates a TCP connection with the SMTP server.</li>
+                <li>The SMTP server listens for a connection and establishes a connection on the designated port.
+                </li>
+                <li>Once the connection is established, the client informs the SMTP server of its intention to send
+                    an email.</li>
+                <li>Upon confirmation, the client sends the email to its mail server through the SMTP server.</li>
+                <li>SMTP facilitates the transfer of the email from the sender's mail server to the receiver's mail
+                    server.</li>
+            </ul>
+            <img src="../../images/smtpd1.svg" alt="" class="wb">
+            <ul>
+                <li>SMTP is involved in the email transmission process twice:
+                    <ol>
+                        <li>Between the sender and the sender's mail server.</li>
+                        <li>Between the sender's mail server and the receiver's mail server.</li>
+                    </ol>
+                </li>
+                <li>Note: To receive or download the email,
+                    <ul>
+                        <li>Another protocol is required between the receiver's mail server and the recipient.</li>
+                        <li>The two most commonly used protocols for this purpose are POP3 (Post Office Protocol
+                            version 3) and IMAP (Internet Message Access Protocol).</li>
+                    </ul>
+                </li>
             </ul>
             <div class="in">
-                <h3>Simple Mail Transfer Protocol (SMTP)</h3>
+                <h3>Characteristics of SMTP</h3>
                 <ul>
-                    <li>SMTP is an application layer protocol designed for efficiently and reliably sending emails over
-                        the internet.</li>
+                    <li><strong>Push Protocol:</strong> SMTP operates as a push protocol, meaning it initiates the
+                        transfer of data without waiting for a request. It actively pushes emails from the sender to
+                        the receiver.</li>
+                    <li><strong>Transport Layer:</strong> SMTP utilizes TCP (Transmission Control Protocol) at the
+                        transport layer, ensuring reliable and orderly data transmission.</li>
+                    <li><strong>Port Number:</strong> SMTP uses port number 25 to establish communication between
+                        the sender and the recipient's mail server.</li>
+                    <li><strong>Persistent TCP Connections:</strong> SMTP employs persistent TCP connections,
+                        allowing it to send multiple emails in a single connection, which enhances efficiency.</li>
+                    <li><strong>Connection Oriented:</strong> SMTP is a connection-oriented protocol, establishing a
+                        dedicated connection between the sender and the mail server for the duration of the email
+                        transfer.</li>
+                    <li><strong>In-Band Protocol:</strong> SMTP is an in-band protocol, meaning the control
+                        information and data share the same communication channel. This simplifies the communication
+                        process but may limit scalability.</li>
+                    <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, implying that each email
+                        transaction is independent. The server does not retain information about the previous
+                        interactions, treating each email as a new transaction.</li>
                 </ul>
-                <p><strong>Working:</strong></p>
+            </div>
+            <div class="in">
+                <h3>Important Points about SMTP</h3>
                 <ul>
-                    <li>The SMTP server is consistently in a listening mode, ready to handle incoming connections.</li>
-                    <li>A client initiates a TCP connection with the SMTP server.</li>
-                    <li>The SMTP server listens for a connection and establishes a connection on the designated port.
+                    <li><strong>Text-Based Protocol:</strong> SMTP is a pure text-based protocol, meaning it can
+                        only handle messages containing 7-bit ASCII text. It is not designed to transfer other types
+                        of data like images, video, audio, executable files, binary objects, or text data in
+                        languages represented in 8-bit codes such as French, Japanese, Chinese, etc.</li>
+                    <li><strong>MIME Extension:</strong> Multipurpose Internet Mail Extensions (MIME) extends the
+                        limited capabilities of SMTP. It is an extension to the internet email protocol designed to
+                        enable users to send and receive graphics, audio files, video files, and other non-text data
+                        within email messages. MIME was specially designed for SMTP.</li>
+                    <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, meaning it does not
+                        maintain the state of its clients. If an email is requested to be sent twice, the SMTP
+                        server resends it without recognizing that the email has already been sent.</li>
+                    <li><strong>Receiver's Side:</strong> SMTP is not used at the receiver's side. Instead, a pull
+                        protocol like POP3 or IMAP is needed. The receiver periodically checks if there are any new
+                        emails from the mail server.</li>
+                    <li><strong>Sender and Receiver Machines:</strong> SMTP is not run directly between sender and
+                        receiver machines. This is because machines cannot always be ON. The functionality has been
+                        divided between the client and the mail server. The mail server receives the mail on behalf
+                        of its client and manages the client's mailbox.</li>
+                    <li><strong>Client Authentication:</strong> SMTP is not suitable for client authentication, as
+                        it does not require authentication. It allows anyone on the Internet to send emails to
+                        anyone or even to a large group of people. SMTP Auth, short for SMTP Authentication, has
+                        been introduced separately to provide authentication features.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Post Office Protocol (POP)</h2>
+            <ul>
+                <li>POP is an application layer protocol designed for facilitating the retrieval and management of
+                    emails on a remote server.</li>
+            </ul>
+            <p><strong>Purpose</strong></p>
+            <ul>
+                <li><strong>Message Access:</strong> POP serves as a message access protocol, allowing clients to
+                    retrieve or download emails from their remote mail server.</li>
+                <li><strong>POP3 Version:</strong> The most widely used version of POP is POP version 3 (POP3).</li>
+            </ul>
+            <div class="in">
+                <h3>Working</h3>
+                <ul>
+                    <li><strong>To Retrieve a Message:</strong>
+                        <ul>
+                            <li>The client initiates a TCP connection using port 110.</li>
+                            <li>The client identifies itself to the server during the connection establishment.</li>
+                            <li>Client issues a series of POP3 commands to interact with the server.</li>
+                        </ul>
                     </li>
-                    <li>Once the connection is established, the client informs the SMTP server of its intention to send
-                        an email.</li>
-                    <li>Upon confirmation, the client sends the email to its mail server through the SMTP server.</li>
-                    <li>SMTP facilitates the transfer of the email from the sender's mail server to the receiver's mail
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Characteristics of Post Office Protocol (POP)</h3>
+                <ul>
+                    <li><strong>Pull Protocol:</strong> POP is a pull protocol, implying that the client initiates
+                        communication and pulls emails from the server when needed.</li>
+                    <li><strong>Transport Layer:</strong> POP utilizes TCP at the transport layer for reliable
+                        communication.</li>
+                    <li><strong>Port Number:</strong> POP uses port number 110 for communication between the client
+                        and the server.</li>
+                    <li><strong>Persistent TCP Connections:</strong> POP employs persistent TCP connections,
+                        allowing the client to maintain a continuous connection for multiple interactions with the
                         server.</li>
+                    <li><strong>Connection-Oriented:</strong> POP is a connection-oriented protocol, ensuring a
+                        reliable and ordered data exchange between the client and the server.</li>
+                    <li><strong>In-Band Protocol:</strong> POP is an in-band protocol, meaning that control
+                        information and data share the same communication channel.</li>
+                    <li><strong>Stateful and Stateless:</strong> POP is stateful during a session while the mail is
+                        being downloaded, ensuring that the server maintains awareness of the client's actions.
+                        However, it becomes stateless across sessions.</li>
                 </ul>
-                <img src="../../images/smtpd1.svg" alt="" class="wb">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Internet Message Access Protocol (IMAP)</h2>
+            <ul>
+                <li>IMAP is an application layer protocol.</li>
+                <li>It enables clients to receive or download emails from their remote mail server.</li>
+                <li>IMAP has become more widely used than POP for managing emails.</li>
+            </ul>
+            <div class="in">
+                <h3>Characteristics of IMAP</h3>
                 <ul>
-                    <li>SMTP is involved in the email transmission process twice:
-                        <ol>
-                            <li>Between the sender and the sender's mail server.</li>
-                            <li>Between the sender's mail server and the receiver's mail server.</li>
-                        </ol>
+                    <li><strong>Pull Protocol:</strong> IMAP is a pull protocol, allowing clients to initiate
+                        communication and pull emails from the server when needed.</li>
+                    <li><strong>Transport Layer:</strong> IMAP uses TCP at the transport layer to ensure reliable
+                        communication between the client and the server.</li>
+                    <li><strong>Port Number:</strong> IMAP uses port number 143 for communication between the client
+                        and the server.</li>
+                    <li><strong>Persistent TCP Connections:</strong> IMAP employs persistent TCP connections,
+                        enabling clients to maintain continuous connections for multiple interactions with the
+                        server.</li>
+                    <li><strong>Connection-Oriented:</strong> IMAP is a connection-oriented protocol, ensuring a
+                        reliable and ordered data exchange between the client and the server.</li>
+                    <li><strong>In-Band Protocol:</strong> IMAP is an in-band protocol, meaning that control
+                        information and data share the same communication channel.</li>
+                    <li><strong>Stateful Protocol:</strong> IMAP is a stateful protocol, maintaining the state of
+                        the client's actions across the session for efficient interaction.</li>
+                    <li><strong>Distributed Mailboxes:</strong> IMAP distributes mailboxes across multiple servers,
+                        allowing for better organization and accessibility of emails.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>POP vs. IMAP</h3>
+                <img src="../../images/popvsimap1.svg" alt="" class="wb">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Hyper Text Transfer Protocol (HTTP)</h2>
+            <ul>
+                <li>It is an application layer protocol that facilitates communication between clients and servers
+                    on the World Wide Web.</li>
+            </ul>
+            <p><strong>Purpose</strong></p>
+            <ul>
+                <li>HTTP is primarily used for the retrieval of data from websites throughout the internet.</li>
+                <li>It operates on top of the TCP/IP suite of protocols, providing a standardized way for web
+                    browsers to communicate with web servers.</li>
+            </ul>
+            <div class="in">
+                <h3>Working</h3>
+                <ul>
+                    <li>HTTP operates on a client-server model where:
+                        <ul>
+                            <li>The web browser acts as the client.</li>
+                            <li>The client communicates with the web server hosting the website.</li>
+                        </ul>
                     </li>
-                    <li>Note: To receive or download the email,
+                </ul>
+                <img src="../../images/httpd1.svg" alt="" class="wb">
+                <ul>
+                    <li>When a client requests information (such as clicking on a hyperlink) from the website
+                        server:</li>
+                    <li>The browser sends a request message to the HTTP server for the requested objects. Then:
                         <ul>
-                            <li>Another protocol is required between the receiver's mail server and the recipient.</li>
-                            <li>The two most commonly used protocols for this purpose are POP3 (Post Office Protocol
-                                version 3) and IMAP (Internet Message Access Protocol).</li>
+                            <li>HTTP establishes a connection between the client and server through TCP.</li>
+                            <li>HTTP sends a request to the server, which collects the requested data.</li>
+                            <li>HTTP sends the response with the objects back to the client.</li>
+                            <li>HTTP closes the connection.</li>
                         </ul>
                     </li>
                 </ul>
-                <div class="in">
-                    <p><strong>Characteristics of SMTP</strong></p>
-                    <ul>
-                        <li><strong>Push Protocol:</strong> SMTP operates as a push protocol, meaning it initiates the
-                            transfer of data without waiting for a request. It actively pushes emails from the sender to
-                            the receiver.</li>
-                        <li><strong>Transport Layer:</strong> SMTP utilizes TCP (Transmission Control Protocol) at the
-                            transport layer, ensuring reliable and orderly data transmission.</li>
-                        <li><strong>Port Number:</strong> SMTP uses port number 25 to establish communication between
-                            the sender and the recipient's mail server.</li>
-                        <li><strong>Persistent TCP Connections:</strong> SMTP employs persistent TCP connections,
-                            allowing it to send multiple emails in a single connection, which enhances efficiency.</li>
-                        <li><strong>Connection Oriented:</strong> SMTP is a connection-oriented protocol, establishing a
-                            dedicated connection between the sender and the mail server for the duration of the email
-                            transfer.</li>
-                        <li><strong>In-Band Protocol:</strong> SMTP is an in-band protocol, meaning the control
-                            information and data share the same communication channel. This simplifies the communication
-                            process but may limit scalability.</li>
-                        <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, implying that each email
-                            transaction is independent. The server does not retain information about the previous
-                            interactions, treating each email as a new transaction.</li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <h3>Important Points about SMTP</h3>
-                    <ul>
-                        <li><strong>Text-Based Protocol:</strong> SMTP is a pure text-based protocol, meaning it can
-                            only handle messages containing 7-bit ASCII text. It is not designed to transfer other types
-                            of data like images, video, audio, executable files, binary objects, or text data in
-                            languages represented in 8-bit codes such as French, Japanese, Chinese, etc.</li>
-                        <li><strong>MIME Extension:</strong> Multipurpose Internet Mail Extensions (MIME) extends the
-                            limited capabilities of SMTP. It is an extension to the internet email protocol designed to
-                            enable users to send and receive graphics, audio files, video files, and other non-text data
-                            within email messages. MIME was specially designed for SMTP.</li>
-                        <li><strong>Stateless Protocol:</strong> SMTP is a stateless protocol, meaning it does not
-                            maintain the state of its clients. If an email is requested to be sent twice, the SMTP
-                            server resends it without recognizing that the email has already been sent.</li>
-                        <li><strong>Receiver's Side:</strong> SMTP is not used at the receiver's side. Instead, a pull
-                            protocol like POP3 or IMAP is needed. The receiver periodically checks if there are any new
-                            emails from the mail server.</li>
-                        <li><strong>Sender and Receiver Machines:</strong> SMTP is not run directly between sender and
-                            receiver machines. This is because machines cannot always be ON. The functionality has been
-                            divided between the client and the mail server. The mail server receives the mail on behalf
-                            of its client and manages the client's mailbox.</li>
-                        <li><strong>Client Authentication:</strong> SMTP is not suitable for client authentication, as
-                            it does not require authentication. It allows anyone on the Internet to send emails to
-                            anyone or even to a large group of people. SMTP Auth, short for SMTP Authentication, has
-                            been introduced separately to provide authentication features.</li>
-                    </ul>
-                </div>
             </div>
             <div class="in">
-                <h3>Post Office Protocol (POP)</h3>
+                <h3>HTTP Connections</h3>
                 <ul>
-                    <li>POP is an application layer protocol designed for facilitating the retrieval and management of
-                        emails on a remote server.</li>
-                </ul>
-                <p><strong>Purpose</strong></p>
-                <ul>
-                    <li><strong>Message Access:</strong> POP serves as a message access protocol, allowing clients to
-                        retrieve or download emails from their remote mail server.</li>
-                    <li><strong>POP3 Version:</strong> The most widely used version of POP is POP version 3 (POP3).</li>
-                </ul>
-                <div class="in">
-                    <p><strong>Working</strong></p>
+                    <li><strong>Non-persistent:</strong> In non-persistent HTTP connections:</li>
                     <ul>
-                        <li><strong>To Retrieve a Message:</strong>
-                            <ul>
-                                <li>The client initiates a TCP connection using port 110.</li>
-                                <li>The client identifies itself to the server during the connection establishment.</li>
-                                <li>Client issues a series of POP3 commands to interact with the server.</li>
-                            </ul>
+                        <li>A new connection is established for each request and response exchange between the
+                            client and server.</li>
+                        <li>After serving the requested content, the connection is immediately closed.</li>
+                        <li>Subsequent requests require opening new connections, incurring additional overhead.</li>
+                    </ul>
+                    <li><strong>Persistent:</strong> In persistent HTTP connections:</li>
+                    <ul>
+                        <li>A single connection is reused for multiple request-response exchanges between the client
+                            and server.</li>
+                        <li>The connection remains open after serving a request, allowing for subsequent requests to
+                            use the same connection.</li>
+                        <li>This reduces the overhead of opening and closing connections for each interaction.</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>HTTP Characteristics and Notes</h3>
+                <ul>
+                    <li>HTTP uses TCP at the transport layer.</li>
+                    <ul>
+                        <li>This choice is made because:</li>
+                        <ul>
+                            <li>Unlike UDP, TCP ensures reliable data delivery through a Three-way handshake.</li>
+                            <li>TCP guarantees retransmission of lost packets, providing a reliable communication
+                                channel.</li>
+                            <li>HTTP lacks built-in reliability features, necessitating the use of TCP for reliable
+                                data transfer.</li>
+                            <li>If HTTP used UDP, it would need to manage sessions independently, including packet
+                                retransmission.</li>
+                        </ul>
+                    </ul>
+                    <li>It is important to note:</li>
+                    <ul>
+                        <li>Any service not using TCP must have built-in reliability features.</li>
+                    </ul>
+                    <li>HTTP uses port number 80.</li>
+                    <ul>
+                        <li>HTTP clients use port 80 to send and receive requested web pages from an HTTP server.
                         </li>
+                        <li>HTTP servers respond to all requests at port 80.</li>
                     </ul>
-                </div>
-                <div class="in">
-                    <p><strong>Characteristics of Post Office Protocol (POP)</strong></p>
+                    <li>HTTP 1.0 is non-persistent, and HTTP 1.1 is persistent.</li>
                     <ul>
-                        <li><strong>Pull Protocol:</strong> POP is a pull protocol, implying that the client initiates
-                            communication and pulls emails from the server when needed.</li>
-                        <li><strong>Transport Layer:</strong> POP utilizes TCP at the transport layer for reliable
-                            communication.</li>
-                        <li><strong>Port Number:</strong> POP uses port number 110 for communication between the client
-                            and the server.</li>
-                        <li><strong>Persistent TCP Connections:</strong> POP employs persistent TCP connections,
-                            allowing the client to maintain a continuous connection for multiple interactions with the
-                            server.</li>
-                        <li><strong>Connection-Oriented:</strong> POP is a connection-oriented protocol, ensuring a
-                            reliable and ordered data exchange between the client and the server.</li>
-                        <li><strong>In-Band Protocol:</strong> POP is an in-band protocol, meaning that control
-                            information and data share the same communication channel.</li>
-                        <li><strong>Stateful and Stateless:</strong> POP is stateful during a session while the mail is
-                            being downloaded, ensuring that the server maintains awareness of the client's actions.
-                            However, it becomes stateless across sessions.</li>
+                        <li>Persistent connections, as in HTTP 1.1, improve performance by 20% compared to
+                            non-persistent connections.</li>
                     </ul>
-                </div>
+                    <li>HTTP 1.0 is a connectionless protocol:</li>
+                    <ul>
+                        <li>After serving a single HTTP request, the connection is closed and not reused.</li>
+                        <li>HTTP 1.0 without connection keep-alive is considered connectionless.</li>
+                    </ul>
+                    <li>HTTP is an in-band protocol:</li>
+                    <ul>
+                        <li>HTTP passes control data (commands) and main data over the same connection.</li>
+                        <li>Both control data and main data are processed without distinction or priority for
+                            control data.</li>
+                    </ul>
+                    <li>HTTP is a stateless protocol:</li>
+                    <ul>
+                        <li>HTTP servers do not maintain any state information.</li>
+                        <li>After sending a response, the server forgets about the client.</li>
+                        <li>Each new request is treated independently, and the connection is automatically closed
+                            after generating the response.</li>
+                    </ul>
+                    <li>If HTTP were a stateful protocol:</li>
+                    <ul>
+                        <li>It would allow browser windows to engage connections with the web server for extended
+                            periods.</li>
+                        <li>This could lead to a situation of reaching the maximum connections of a web server, even
+                            with many idle connections.</li>
+                    </ul>
+                </ul>
             </div>
+        </div>
+        <div class="wh">
+            <h2>File Transfer Protocol (FTP)</h2>
+            <ul>
+                <li>FTP is an application layer protocol.</li>
+            </ul>
             <div class="in">
-                <h3>Internet Message Access Protocol (IMAP)</h3>
-                <ul>
-                    <li>IMAP is an application layer protocol.</li>
-                    <li>It enables clients to receive or download emails from their remote mail server.</li>
-                    <li>IMAP has become more widely used than POP for managing emails.</li>
-                </ul>
-                <div class="in">
-                    <p><strong>Characteristics of IMAP</strong></p>
-                    <ul>
-                        <li><strong>Pull Protocol:</strong> IMAP is a pull protocol, allowing clients to initiate
-                            communication and pull emails from the server when needed.</li>
-                        <li><strong>Transport Layer:</strong> IMAP uses TCP at the transport layer to ensure reliable
-                            communication between the client and the server.</li>
-                        <li><strong>Port Number:</strong> IMAP uses port number 143 for communication between the client
-                            and the server.</li>
-                        <li><strong>Persistent TCP Connections:</strong> IMAP employs persistent TCP connections,
-                            enabling clients to maintain continuous connections for multiple interactions with the
-                            server.</li>
-                        <li><strong>Connection-Oriented:</strong> IMAP is a connection-oriented protocol, ensuring a
-                            reliable and ordered data exchange between the client and the server.</li>
-                        <li><strong>In-Band Protocol:</strong> IMAP is an in-band protocol, meaning that control
-                            information and data share the same communication channel.</li>
-                        <li><strong>Stateful Protocol:</strong> IMAP is a stateful protocol, maintaining the state of
-                            the client's actions across the session for efficient interaction.</li>
-                        <li><strong>Distributed Mailboxes:</strong> IMAP distributes mailboxes across multiple servers,
-                            allowing for better organization and accessibility of emails.</li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <p><strong>POP vs. IMAP</strong></p>
-                    <img src="../../images/popvsimap1.svg" alt="" class="wb">
-                </div>
-            </div>
-            <div class="in">
-                <h3>Hyper Text Transfer Protocol (HTTP)</h3>
-                <ul>
-                    <li>It is an application layer protocol that facilitates communication between clients and servers
-                        on the World Wide Web.</li>
-                </ul>
-                <p><strong>Purpose</strong></p>
-                <ul>
-                    <li>HTTP is primarily used for the retrieval of data from websites throughout the internet.</li>
-                    <li>It operates on top of the TCP/IP suite of protocols, providing a standardized way for web
-                        browsers to communicate with web servers.</li>
-                </ul>
-                <div class="in">
-                    <p><strong>Working</strong></p>
-                    <ul>
-                        <li>HTTP operates on a client-server model where:
-                            <ul>
-                                <li>The web browser acts as the client.</li>
-                                <li>The client communicates with the web server hosting the website.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <img src="../../images/httpd1.svg" alt="" class="wb">
-                    <ul>
-                        <li>When a client requests information (such as clicking on a hyperlink) from the website
-                            server:</li>
-                        <li>The browser sends a request message to the HTTP server for the requested objects. Then:
-                            <ul>
-                                <li>HTTP establishes a connection between the client and server through TCP.</li>
-                                <li>HTTP sends a request to the server, which collects the requested data.</li>
-                                <li>HTTP sends the response with the objects back to the client.</li>
-                                <li>HTTP closes the connection.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <p><strong>HTTP Connections</strong></p>
-                    <ul>
-                        <li><strong>Non-persistent:</strong> In non-persistent HTTP connections:</li>
-                        <ul>
-                            <li>A new connection is established for each request and response exchange between the
-                                client and server.</li>
-                            <li>After serving the requested content, the connection is immediately closed.</li>
-                            <li>Subsequent requests require opening new connections, incurring additional overhead.</li>
-                        </ul>
-                        <li><strong>Persistent:</strong> In persistent HTTP connections:</li>
-                        <ul>
-                            <li>A single connection is reused for multiple request-response exchanges between the client
-                                and server.</li>
-                            <li>The connection remains open after serving a request, allowing for subsequent requests to
-                                use the same connection.</li>
-                            <li>This reduces the overhead of opening and closing connections for each interaction.</li>
-                        </ul>
-                    </ul>
-                </div>
-                <div class="in">
-                    <p><strong>HTTP Characteristics and Notes</strong></p>
-                    <ul>
-                        <li>HTTP uses TCP at the transport layer.</li>
-                        <ul>
-                            <li>This choice is made because:</li>
-                            <ul>
-                                <li>Unlike UDP, TCP ensures reliable data delivery through a Three-way handshake.</li>
-                                <li>TCP guarantees retransmission of lost packets, providing a reliable communication
-                                    channel.</li>
-                                <li>HTTP lacks built-in reliability features, necessitating the use of TCP for reliable
-                                    data transfer.</li>
-                                <li>If HTTP used UDP, it would need to manage sessions independently, including packet
-                                    retransmission.</li>
-                            </ul>
-                        </ul>
-                        <li>It is important to note:</li>
-                        <ul>
-                            <li>Any service not using TCP must have built-in reliability features.</li>
-                        </ul>
-                        <li>HTTP uses port number 80.</li>
-                        <ul>
-                            <li>HTTP clients use port 80 to send and receive requested web pages from an HTTP server.
-                            </li>
-                            <li>HTTP servers respond to all requests at port 80.</li>
-                        </ul>
-                        <li>HTTP 1.0 is non-persistent, and HTTP 1.1 is persistent.</li>
-                        <ul>
-                            <li>Persistent connections, as in HTTP 1.1, improve performance by 20% compared to
-                                non-persistent connections.</li>
-                        </ul>
-                        <li>HTTP 1.0 is a connectionless protocol:</li>
-                        <ul>
-                            <li>After serving a single HTTP request, the connection is closed and not reused.</li>
-                            <li>HTTP 1.0 without connection keep-alive is considered connectionless.</li>
-                        </ul>
-                        <li>HTTP is an in-band protocol:</li>
-                        <ul>
-                            <li>HTTP passes control data (commands) and main data over the same connection.</li>
-                            <li>Both control data and main data are processed without distinction or priority for
-                                control data.</li>
-                        </ul>
-                        <li>HTTP is a stateless protocol:</li>
-                        <ul>
-                            <li>HTTP servers do not maintain any state information.</li>
-                            <li>After sending a response, the server forgets about the client.</li>
-                            <li>Each new request is treated independently, and the connection is automatically closed
-                                after generating the response.</li>
-                        </ul>
-                        <li>If HTTP were a stateful protocol:</li>
-                        <ul>
-                            <li>It would allow browser windows to engage connections with the web server for extended
-                                periods.</li>
-                            <li>This could lead to a situation of reaching the maximum connections of a web server, even
-                                with many idle connections.</li>
-                        </ul>
-                    </ul>
-                </div>
-            </div>
-            <div class="in">
-                <h3>File Transfer Protocol (FTP)</h3>
-                <ul>
-                    <li>FTP is an application layer protocol.</li>
-                </ul>
-
-                <p><strong>Purpose:</strong></p>
+                <h3>Purpose:</h3>
                 <ul>
                     <li>FTP is designed for exchanging files over the internet.</li>
                     <li>It facilitates users in uploading and downloading files from the internet.</li>
                 </ul>
+            </div>
+            <div class="in">
+                <h3>Working:</h3>
+                <p>FTP establishes two TCP connections between the client and the server:</p>
+                <ol>
+                    <li>One connection is dedicated to transferring data.</li>
+                    <li>The other connection is utilized for transferring control information.</li>
+                </ol>
+                <img src="../../images/ftpd1.svg" alt="" class="wb">
+            </div>
 
-                <div class="in">
-                    <p><strong>Working:</strong></p>
-                    <p>FTP establishes two TCP connections between the client and the server:</p>
-                    <ol>
-                        <li>One connection is dedicated to transferring data.</li>
-                        <li>The other connection is utilized for transferring control information.</li>
-                    </ol>
-                    <img src="../../images/ftpd1.svg" alt="" class="wb">
-                </div>
-
-                <p><strong>Additional Information:</strong></p>
+            <p><strong>Additional Information:</strong></p>
+            <ul>
+                <li>FTP operates on two modes: Active mode and Passive mode.
+                    <ul>
+                        <li>In Active mode, the client initiates the connection, and the server responds.</li>
+                        <li>In Passive mode, the server initiates the data connection, and the client responds.
+                            Passive mode is useful when the client is behind a firewall.</li>
+                    </ul>
+                </li>
+                <li>FTP uses different commands for controlling the file transfer operations, such as RETR (retrieve
+                    a copy of the file) and STOR (store a copy of the file).</li>
+                <li>FTP can work with or without user authentication, depending on the server's configuration.</li>
+                <li>Security concerns with FTP have led to the development of more secure alternatives, such as SFTP
+                    (SSH File Transfer Protocol) and FTPS (FTP Secure).</li>
+            </ul>
+            <div class="in">
+                <h3>Characteristics of FTP</h3>
                 <ul>
-                    <li>FTP operates on two modes: Active mode and Passive mode.
+                    <li><strong>FTP uses TCP at the transport layer:</strong> FTP relies on the Transmission Control
+                        Protocol (TCP) for reliable communication between the client and server.</li>
+                    <li><strong>FTP uses port number 21 for the control connection:</strong> Port 21 is designated
+                        for the control connection, where commands and responses between the client and server are
+                        exchanged.</li>
+                    <li><strong>FTP uses port number 20 for the data connection:</strong> Port 20 is reserved for
+                        the data connection, facilitating the actual transfer of files between the client and
+                        server.</li>
+                    <li><strong>FTP establishes persistent TCP connections for the control connection:</strong> The
+                        control connection remains open throughout the FTP session, handling commands, and
+                        responses.</li>
+                    <li><strong>FTP uses non-persistent connections for the data connection:</strong> The data
+                        connection is established as needed for file transfers and closed after the transfer is
+                        complete.</li>
+                    <li><strong>FTP is a connection-oriented protocol:</strong> FTP maintains a connection between
+                        the client and server, ensuring a reliable exchange of commands and data.</li>
+                    <li><strong>FTP is an out-of-band protocol:</strong> FTP uses separate connections for control
+                        information (out-of-band) and data, enhancing efficiency and flexibility.</li>
+                    <li><strong>FTP is not mentioned as SMTP; it is a stateful protocol:</strong> FTP maintains the
+                        state of the session, remembering user login information and the current working directory.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Important Notes</h3>
+                <ul>
+                    <li><strong>Emails can't be sent using FTP.</strong>
                         <ul>
-                            <li>In Active mode, the client initiates the connection, and the server responds.</li>
-                            <li>In Passive mode, the server initiates the data connection, and the client responds.
-                                Passive mode is useful when the client is behind a firewall.</li>
+                            <li>FTP requires the establishment of a connection between the client and server before
+                                transferring files.</li>
+                            <li>Both the client and server need to be online simultaneously for FTP file transfers.
+                            </li>
+                            <li>Due to this requirement, emails are not sent using FTP.</li>
                         </ul>
                     </li>
-                    <li>FTP uses different commands for controlling the file transfer operations, such as RETR (retrieve
-                        a copy of the file) and STOR (store a copy of the file).</li>
-                    <li>FTP can work with or without user authentication, depending on the server's configuration.</li>
-                    <li>Security concerns with FTP have led to the development of more secure alternatives, such as SFTP
-                        (SSH File Transfer Protocol) and FTPS (FTP Secure).</li>
+                    <li><strong>FTP can transfer one file at a time.</strong>
+                        <ul>
+                            <li>FTP is designed for transferring a single file at a time in either direction between
+                                the client and server.</li>
+                        </ul>
+                    </li>
+                    <li><strong>FTP is a stateful protocol.</strong>
+                        <ul>
+                            <li>The client establishes a control connection for the duration of an FTP session.</li>
+                            <li>FTP sessions typically span multiple data transfers, making it a stateful protocol.
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-                <div class="in">
-                    <p><strong>Characteristics of FTP</strong></p>
-                    <ul>
-                        <li><strong>FTP uses TCP at the transport layer:</strong> FTP relies on the Transmission Control
-                            Protocol (TCP) for reliable communication between the client and server.</li>
-                        <li><strong>FTP uses port number 21 for the control connection:</strong> Port 21 is designated
-                            for the control connection, where commands and responses between the client and server are
-                            exchanged.</li>
-                        <li><strong>FTP uses port number 20 for the data connection:</strong> Port 20 is reserved for
-                            the data connection, facilitating the actual transfer of files between the client and
-                            server.</li>
-                        <li><strong>FTP establishes persistent TCP connections for the control connection:</strong> The
-                            control connection remains open throughout the FTP session, handling commands, and
-                            responses.</li>
-                        <li><strong>FTP uses non-persistent connections for the data connection:</strong> The data
-                            connection is established as needed for file transfers and closed after the transfer is
-                            complete.</li>
-                        <li><strong>FTP is a connection-oriented protocol:</strong> FTP maintains a connection between
-                            the client and server, ensuring a reliable exchange of commands and data.</li>
-                        <li><strong>FTP is an out-of-band protocol:</strong> FTP uses separate connections for control
-                            information (out-of-band) and data, enhancing efficiency and flexibility.</li>
-                        <li><strong>FTP is not mentioned as SMTP; it is a stateful protocol:</strong> FTP maintains the
-                            state of the session, remembering user login information and the current working directory.
-                        </li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <h3>Important Notes</h3>
-                    <ul>
-                        <li><strong>Emails can't be sent using FTP.</strong>
-                            <ul>
-                                <li>FTP requires the establishment of a connection between the client and server before
-                                    transferring files.</li>
-                                <li>Both the client and server need to be online simultaneously for FTP file transfers.
-                                </li>
-                                <li>Due to this requirement, emails are not sent using FTP.</li>
-                            </ul>
-                        </li>
-                        <li><strong>FTP can transfer one file at a time.</strong>
-                            <ul>
-                                <li>FTP is designed for transferring a single file at a time in either direction between
-                                    the client and server.</li>
-                            </ul>
-                        </li>
-                        <li><strong>FTP is a stateful protocol.</strong>
-                            <ul>
-                                <li>The client establishes a control connection for the duration of an FTP session.</li>
-                                <li>FTP sessions typically span multiple data transfers, making it a stateful protocol.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
-</body>
+    </body>
 
 </html>
