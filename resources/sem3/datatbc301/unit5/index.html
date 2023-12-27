@@ -10,7 +10,7 @@
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
 </head>
 
-< class="bg-c">
+<body class="bg-c">
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
@@ -34,263 +34,260 @@
         </div>
     </div>
     <div class="content-box">
-        <h1>Transport Layer & Application Layer</h1>
+        <h1>Transport Layer</h1>
+        <ul>
+            <li>The network layer is responsible for host-to-host communication at the computer level, delivering
+                messages only to the destination computer.</li>
+            <li>However, this delivery is incomplete, as the message still needs to be directed to the specific
+                computer process. Therefore, the primary role of the transport layer is to provide communication
+                services directly to the application processes running on different hosts.</li>
+            <li>The transport layer establishes a logical communication channel between application processes on
+                different hosts. Despite not being physically connected, application processes utilize the logical
+                communication facilitated by the transport layer to exchange messages.</li>
+            <li>For instance, when using WhatsApp on a mobile phone, the connection between two phones is
+                established by the network layer, but the communication between my WhatsApp application and my
+                friend's WhatsApp application is facilitated by the transport layer.
+                <br><img src="../../images/transportlw1.svg" alt="" class="wb">
+            </li>
+            <li>The transport layer protocol is specifically responsible for delivering messages to the appropriate
+                process. It ensures end-to-end or process-to-process communication, addressing the intricacies
+                (complexities) of
+                connecting and communicating between specific applications running on different hosts.</li>
+            <li>
+                Common transport layer protocols include Transmission Control Protocol (TCP) and User
+                Datagram Protocol (UDP), each offering different features and trade-offs in terms of
+                reliability and speed.</li>
+            <li>Transport layer protocols use port numbers to identify specific processes on a host,
+                enabling the correct delivery of messages to the intended applications.</li>
+            <li>Through flow control and error detection mechanisms, the transport layer ensures reliable
+                and ordered delivery of messages between applications.</li>
+            <li>Transport layer services contribute to the abstraction of the underlying network
+                complexities, allowing application developers to focus on high-level communication without
+                worrying about the complexities of network configuration.</li>
+        </ul>
         <div class="wh">
-            <h2>Transport Layer</h2>
+            <h2>Transmission Control Protocol (TCP) vs. User Datagram Protocol (UDP)</h2>
             <ul>
-                <li>The network layer is responsible for host-to-host communication at the computer level, delivering
-                    messages only to the destination computer.</li>
-                <li>However, this delivery is incomplete, as the message still needs to be directed to the specific
-                    computer process. Therefore, the primary role of the transport layer is to provide communication
-                    services directly to the application processes running on different hosts.</li>
-                <li>The transport layer establishes a logical communication channel between application processes on
-                    different hosts. Despite not being physically connected, application processes utilize the logical
-                    communication facilitated by the transport layer to exchange messages.</li>
-                <li>For instance, when using WhatsApp on a mobile phone, the connection between two phones is
-                    established by the network layer, but the communication between my WhatsApp application and my
-                    friend's WhatsApp application is facilitated by the transport layer.
-                    <br><img src="../../images/transportlw1.svg" alt="" class="wb">
-                </li>
-                <li>The transport layer protocol is specifically responsible for delivering messages to the appropriate
-                    process. It ensures end-to-end or process-to-process communication, addressing the intricacies
-                    (complexities) of
-                    connecting and communicating between specific applications running on different hosts.</li>
                 <li>
-                    Common transport layer protocols include Transmission Control Protocol (TCP) and User
-                    Datagram Protocol (UDP), each offering different features and trade-offs in terms of
-                    reliability and speed.</li>
-                <li>Transport layer protocols use port numbers to identify specific processes on a host,
-                    enabling the correct delivery of messages to the intended applications.</li>
-                <li>Through flow control and error detection mechanisms, the transport layer ensures reliable
-                    and ordered delivery of messages between applications.</li>
-                <li>Transport layer services contribute to the abstraction of the underlying network
-                    complexities, allowing application developers to focus on high-level communication without
-                    worrying about the complexities of network configuration.</li>
+                    <strong>Transmission Control Protocol (TCP):</strong>
+                    <ul>
+                        <li>TCP is a connection-oriented protocol that provides reliable, ordered, and error-checked
+                            delivery of data between applications.</li>
+                        <li>It establishes a virtual circuit or connection between the sender and receiver before
+                            exchanging data, ensuring that data is delivered accurately and in the correct order.
+                        </li>
+                        <li>TCP includes features such as flow control, acknowledgment of received data, and
+                            retransmission of lost or corrupted packets to guarantee the integrity of the
+                            communication.</li>
+                        <li>Example: Web browsing, file transfer (e.g., FTP), and email (e.g., SMTP) commonly use
+                            TCP to ensure accurate and complete data delivery.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>User Datagram Protocol (UDP):</strong>
+                    <ul>
+                        <li>UDP is a connectionless protocol that provides faster, simpler, and less reliable
+                            communication compared to TCP.</li>
+                        <li>It does not establish a dedicated connection before data transfer, and it does not
+                            perform error checking or retransmission of lost packets.</li>
+                        <li>UDP is suitable for applications where speed and low overhead are prioritized over
+                            guaranteed data delivery, such as real-time applications like online gaming, live
+                            streaming, and voice over IP (VoIP).</li>
+                        <li>Example: Domain Name System (DNS) uses UDP for quick and lightweight communication to
+                            resolve domain names to IP addresses.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>Comparison:</strong>
+                    <ul>
+                        <li>TCP is ideal for applications that require reliable, ordered, and error-checked
+                            delivery, making it suitable for scenarios where data accuracy is crucial.</li>
+                        <li>UDP, on the other hand, is suitable for applications where speed and simplicity are
+                            prioritized, and occasional packet loss or disorder is acceptable.</li>
+                        <li>The choice between TCP and UDP depends on the specific requirements of the application
+                            and the trade-offs between reliability and speed.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Connection-Oriented and Connectionless Services in Transport Layer</h2>
+            <ul>
+                <li>
+                    <strong>Connection-Oriented Services:</strong>
+                    <ul>
+                        <li>Connection-oriented services in the transport layer involve the establishment of a
+                            dedicated, reliable, and ordered communication channel before data exchange begins.</li>
+                        <li>These services ensure a virtual circuit or connection is established between the sender
+                            and receiver, providing a reliable and predictable data transfer mechanism.</li>
+                        <li>Transmission Control Protocol (TCP) is a prime example of a connection-oriented
+                            protocol, offering features such as acknowledgment, flow control, and error checking to
+                            ensure the integrity of data delivery.</li>
+                        <li>Connection-oriented services are suitable for applications where data accuracy,
+                            sequencing, and completeness are critical, such as file transfer and web browsing.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>Connectionless Services:</strong>
+                    <ul>
+                        <li>Connectionless services in the transport layer involve communication without the
+                            establishment of a dedicated connection beforehand.</li>
+                        <li>These services are faster and less resource-intensive but do not guarantee ordered or
+                            error-checked delivery of data.</li>
+                        <li>User Datagram Protocol (UDP) is a classic example of a connectionless protocol,
+                            providing a lightweight and quick data transfer mechanism without the overhead of
+                            connection setup and maintenance.</li>
+                        <li>Connectionless services are suitable for real-time applications, such as online gaming,
+                            live streaming, and voice over IP (VoIP), where speed is prioritized over guaranteed
+                            data delivery.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>Relationship with UDP and TCP:</strong>
+                    <ul>
+                        <li><strong>TCP:</strong> TCP is inherently connection-oriented, establishing a virtual
+                            circuit before data transfer. It ensures reliability, flow control, and ordered
+                            delivery, making it suitable for applications where data accuracy is paramount.</li>
+                        <li><strong>UDP:</strong> UDP, being connectionless, does not establish a dedicated
+                            connection and does not perform acknowledgment or retransmission of lost packets. It is
+                            chosen for applications prioritizing speed and simplicity over guaranteed data delivery.
+                        </li>
+                        <li>The choice between TCP and UDP depends on the specific requirements of the application,
+                            balancing the need for reliability and ordered delivery against the desire for faster
+                            and lightweight communication.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Services provided by the Transport Layer</h2>
+            <ul>
+                <li>The services offered by the transport layer share similarities with those of the data link
+                    layer. While the data link layer operates within a single network, the transport layer extends
+                    its services across an internetwork, encompassing multiple interconnected networks. Unlike the
+                    data link layer, which governs the physical layer, the transport layer exercises control over
+                    all the lower layers of the OSI model.</li>
+            </ul>
+            <p>The services provided by transport layer protocols can be categorized into five main areas:</p>
+            <ul>
+                <li><strong>End-to-End Delivery:</strong> Ensuring the reliable delivery of messages between the
+                    source and destination, regardless of the number of intermediate networks.</li>
+                <li><strong>Addressing:</strong> Managing the addressing scheme to identify the source and
+                    destination processes in the communication.</li>
+                <li>
+                    <strong>Reliable Delivery:</strong> Ensuring the accuracy and completeness of data delivery
+                    through:
+                    <ul>
+                        <li>Error Control: Detecting and correcting errors in transmitted data.</li>
+                        <li>Sequence Control: Maintaining the correct order of data packets during transmission.
+                        </li>
+                        <li>Loss Control: Minimizing data loss during the transmission process.</li>
+                        <li>Duplication Control: Preventing the occurrence of duplicated data packets.</li>
+                    </ul>
+                </li>
+                <li><strong>Flow Control:</strong> Managing the rate of data transmission to prevent overwhelming
+                    the receiving device or network.</li>
+                <li>
+                    <strong>Multiplexing:</strong> Efficiently handling multiple communication streams through:
+                    <ul>
+                        <li>Upward Multiplexing: Combining data streams from multiple processes into a single
+                            communication channel.</li>
+                        <li>Downward Multiplexing: Distributing data streams from a single source process to
+                            multiple destination processes.</li>
+                    </ul>
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div class="wh">
+            <h2>User Datagram Protocol (UDP)</h2>
+            <ul>
+                <li>User Datagram Protocol (UDP) operates at the Transport Layer and is an integral part of the
+                    Internet Protocol suite, commonly known as UDP/IP suite.</li>
+                <li>Unlike Transmission Control Protocol (TCP), UDP is characterized as an unreliable and
+                    connectionless protocol. Consequently, there is no need to establish a dedicated connection
+                    before initiating data transfer.</li>
+                <li>While TCP is the predominant transport layer protocol for most Internet services, providing
+                    guaranteed delivery, reliability, and additional features, these benefits come with added
+                    overhead and latency.</li>
+                <li>UDP, on the other hand, plays a crucial role in scenarios that demand real-time services, such
+                    as online gaming, voice or video communication, and live conferences. In these applications,
+                    where high performance is paramount, UDP allows packets to be dropped instead of processing
+                    delayed packets. Notably, UDP lacks error checking, resulting in bandwidth savings.</li>
+                <li>User Datagram Protocol (UDP) stands out for its efficiency in terms of both latency and
+                    bandwidth, making it a preferred choice for time-sensitive and performance-critical
+                    applications.</li>
             </ul>
             <div class="in">
-                <h3>Transmission Control Protocol (TCP) vs. User Datagram Protocol (UDP)</h3>
+                <h3>UDP Header</h3>
                 <ul>
-                    <li>
-                        <strong>Transmission Control Protocol (TCP):</strong>
-                        <ul>
-                            <li>TCP is a connection-oriented protocol that provides reliable, ordered, and error-checked
-                                delivery of data between applications.</li>
-                            <li>It establishes a virtual circuit or connection between the sender and receiver before
-                                exchanging data, ensuring that data is delivered accurately and in the correct order.
-                            </li>
-                            <li>TCP includes features such as flow control, acknowledgment of received data, and
-                                retransmission of lost or corrupted packets to guarantee the integrity of the
-                                communication.</li>
-                            <li>Example: Web browsing, file transfer (e.g., FTP), and email (e.g., SMTP) commonly use
-                                TCP to ensure accurate and complete data delivery.</li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <strong>User Datagram Protocol (UDP):</strong>
-                        <ul>
-                            <li>UDP is a connectionless protocol that provides faster, simpler, and less reliable
-                                communication compared to TCP.</li>
-                            <li>It does not establish a dedicated connection before data transfer, and it does not
-                                perform error checking or retransmission of lost packets.</li>
-                            <li>UDP is suitable for applications where speed and low overhead are prioritized over
-                                guaranteed data delivery, such as real-time applications like online gaming, live
-                                streaming, and voice over IP (VoIP).</li>
-                            <li>Example: Domain Name System (DNS) uses UDP for quick and lightweight communication to
-                                resolve domain names to IP addresses.</li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <strong>Comparison:</strong>
-                        <ul>
-                            <li>TCP is ideal for applications that require reliable, ordered, and error-checked
-                                delivery, making it suitable for scenarios where data accuracy is crucial.</li>
-                            <li>UDP, on the other hand, is suitable for applications where speed and simplicity are
-                                prioritized, and occasional packet loss or disorder is acceptable.</li>
-                            <li>The choice between TCP and UDP depends on the specific requirements of the application
-                                and the trade-offs between reliability and speed.</li>
-                        </ul>
+                    <li>The UDP header is a fixed and simple 8-byte structure, in contrast to TCP, which can vary in
+                        size from 20 to 60 bytes.</li>
+                    <li>The first 8 bytes of the UDP header contain all the necessary information, while the
+                        remaining part is dedicated to data transmission.</li>
+                    <li>UDP port number fields are each 16 bits long, allowing for a port number range defined from
+                        0 to 65535. Port number 0 is reserved for special purposes. These port numbers play a
+                        crucial role in distinguishing between different user requests or processes.</li>
+                </ul>
+                <img src="../../images/udpdata1.svg" alt="" class="wb">
+                <ul>
+                    <li>The UDP header consists of the following fields, each serving a specific purpose:
+                        <ol>
+                            <li><strong>Source Port:</strong> Identifies the port of the sender, helping in the
+                                proper routing of the response.</li>
+                            <li><strong>Destination Port:</strong> Specifies the port of the intended recipient,
+                                guiding the delivery of the data.</li>
+                            <li><strong>Length:</strong> Indicates the total length of the UDP datagram, including
+                                both the header and the data.</li>
+                            <li><strong>Checksum:</strong> Facilitates error detection, ensuring the integrity of
+                                the transmitted data.</li>
+                        </ol>
                     </li>
                 </ul>
             </div>
             <div class="in">
-                <h3>Connection-Oriented and Connectionless Services in Transport Layer</h3>
+                <h3>Applications of UDP:</h3>
                 <ul>
-                    <li>
-                        <strong>Connection-Oriented Services:</strong>
+                    <li>Used for simple request-response communication when the data size is small, reducing
+                        concerns about flow and error control.</li>
+                    <li>Suitable for multicasting due to its support for packet switching.</li>
+                    <li>Utilized in routing update protocols like RIP (Routing Information Protocol).</li>
+                    <li>Preferred for real-time applications that cannot tolerate uneven delays in message sections.
+                    </li>
+                    <li>Implementations using UDP as a transport layer protocol include:
                         <ul>
-                            <li>Connection-oriented services in the transport layer involve the establishment of a
-                                dedicated, reliable, and ordered communication channel before data exchange begins.</li>
-                            <li>These services ensure a virtual circuit or connection is established between the sender
-                                and receiver, providing a reliable and predictable data transfer mechanism.</li>
-                            <li>Transmission Control Protocol (TCP) is a prime example of a connection-oriented
-                                protocol, offering features such as acknowledgment, flow control, and error checking to
-                                ensure the integrity of data delivery.</li>
-                            <li>Connection-oriented services are suitable for applications where data accuracy,
-                                sequencing, and completeness are critical, such as file transfer and web browsing.</li>
+                            <li>NTP (Network Time Protocol)</li>
+                            <li>DNS (Domain Name Service)</li>
+                            <li>BOOTP, DHCP</li>
+                            <li>NNP (Network News Protocol)</li>
+                            <li>Quote of the day protocol</li>
+                            <li>TFTP, RTSP, RIP</li>
                         </ul>
                     </li>
-
-                    <li>
-                        <strong>Connectionless Services:</strong>
+                    <li>Tasks performed by the application layer through UDP:
                         <ul>
-                            <li>Connectionless services in the transport layer involve communication without the
-                                establishment of a dedicated connection beforehand.</li>
-                            <li>These services are faster and less resource-intensive but do not guarantee ordered or
-                                error-checked delivery of data.</li>
-                            <li>User Datagram Protocol (UDP) is a classic example of a connectionless protocol,
-                                providing a lightweight and quick data transfer mechanism without the overhead of
-                                connection setup and maintenance.</li>
-                            <li>Connectionless services are suitable for real-time applications, such as online gaming,
-                                live streaming, and voice over IP (VoIP), where speed is prioritized over guaranteed
-                                data delivery.</li>
+                            <li>Trace Route</li>
+                            <li>Record Route</li>
+                            <li>Timestamp</li>
                         </ul>
                     </li>
-
-                    <li>
-                        <strong>Relationship with UDP and TCP:</strong>
-                        <ul>
-                            <li><strong>TCP:</strong> TCP is inherently connection-oriented, establishing a virtual
-                                circuit before data transfer. It ensures reliability, flow control, and ordered
-                                delivery, making it suitable for applications where data accuracy is paramount.</li>
-                            <li><strong>UDP:</strong> UDP, being connectionless, does not establish a dedicated
-                                connection and does not perform acknowledgment or retransmission of lost packets. It is
-                                chosen for applications prioritizing speed and simplicity over guaranteed data delivery.
-                            </li>
-                            <li>The choice between TCP and UDP depends on the specific requirements of the application,
-                                balancing the need for reliability and ordered delivery against the desire for faster
-                                and lightweight communication.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="in">
-                <h3>Services provided by the Transport Layer</h3>
-                <ul>
-                    <li>The services offered by the transport layer share similarities with those of the data link
-                        layer. While the data link layer operates within a single network, the transport layer extends
-                        its services across an internetwork, encompassing multiple interconnected networks. Unlike the
-                        data link layer, which governs the physical layer, the transport layer exercises control over
-                        all the lower layers of the OSI model.</li>
-                </ul>
-                <p>The services provided by transport layer protocols can be categorized into five main areas:</p>
-                <ul>
-                    <li><strong>End-to-End Delivery:</strong> Ensuring the reliable delivery of messages between the
-                        source and destination, regardless of the number of intermediate networks.</li>
-                    <li><strong>Addressing:</strong> Managing the addressing scheme to identify the source and
-                        destination processes in the communication.</li>
-                    <li>
-                        <strong>Reliable Delivery:</strong> Ensuring the accuracy and completeness of data delivery
-                        through:
-                        <ul>
-                            <li>Error Control: Detecting and correcting errors in transmitted data.</li>
-                            <li>Sequence Control: Maintaining the correct order of data packets during transmission.
-                            </li>
-                            <li>Loss Control: Minimizing data loss during the transmission process.</li>
-                            <li>Duplication Control: Preventing the occurrence of duplicated data packets.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Flow Control:</strong> Managing the rate of data transmission to prevent overwhelming
-                        the receiving device or network.</li>
-                    <li>
-                        <strong>Multiplexing:</strong> Efficiently handling multiple communication streams through:
-                        <ul>
-                            <li>Upward Multiplexing: Combining data streams from multiple processes into a single
-                                communication channel.</li>
-                            <li>Downward Multiplexing: Distributing data streams from a single source process to
-                                multiple destination processes.</li>
-                        </ul>
-                    </li>
-                </ul>
-                </p>
-            </div>
-            <div class="in">
-                <h3>User Datagram Protocol (UDP)</h3>
-                <ul>
-                    <li>User Datagram Protocol (UDP) operates at the Transport Layer and is an integral part of the
-                        Internet Protocol suite, commonly known as UDP/IP suite.</li>
-                    <li>Unlike Transmission Control Protocol (TCP), UDP is characterized as an unreliable and
-                        connectionless protocol. Consequently, there is no need to establish a dedicated connection
-                        before initiating data transfer.</li>
-                    <li>While TCP is the predominant transport layer protocol for most Internet services, providing
-                        guaranteed delivery, reliability, and additional features, these benefits come with added
-                        overhead and latency.</li>
-                    <li>UDP, on the other hand, plays a crucial role in scenarios that demand real-time services, such
-                        as online gaming, voice or video communication, and live conferences. In these applications,
-                        where high performance is paramount, UDP allows packets to be dropped instead of processing
-                        delayed packets. Notably, UDP lacks error checking, resulting in bandwidth savings.</li>
-                    <li>User Datagram Protocol (UDP) stands out for its efficiency in terms of both latency and
-                        bandwidth, making it a preferred choice for time-sensitive and performance-critical
+                    <li>UDP takes a datagram from the Network Layer, attaches its header, and swiftly sends it to
+                        the user, contributing to its fast operation.</li>
+                    <li>UDP is considered a null protocol if you remove the checksum field, reducing the demand on
+                        computer resources.</li>
+                    <li>Effective when using Multicast or Broadcast for data transfer.</li>
+                    <li>Commonly employed for the transmission of real-time packets, particularly in multimedia
                         applications.</li>
                 </ul>
-                <div class="in">
-                    <p><strong>UDP Header</strong></p>
-                    <ul>
-                        <li>The UDP header is a fixed and simple 8-byte structure, in contrast to TCP, which can vary in
-                            size from 20 to 60 bytes.</li>
-                        <li>The first 8 bytes of the UDP header contain all the necessary information, while the
-                            remaining part is dedicated to data transmission.</li>
-                        <li>UDP port number fields are each 16 bits long, allowing for a port number range defined from
-                            0 to 65535. Port number 0 is reserved for special purposes. These port numbers play a
-                            crucial role in distinguishing between different user requests or processes.</li>
-                    </ul>
-                    <img src="../../images/udpdata1.svg" alt="" class="wb">
-                    <ul>
-                        <li>The UDP header consists of the following fields, each serving a specific purpose:
-                            <ol>
-                                <li><strong>Source Port:</strong> Identifies the port of the sender, helping in the
-                                    proper routing of the response.</li>
-                                <li><strong>Destination Port:</strong> Specifies the port of the intended recipient,
-                                    guiding the delivery of the data.</li>
-                                <li><strong>Length:</strong> Indicates the total length of the UDP datagram, including
-                                    both the header and the data.</li>
-                                <li><strong>Checksum:</strong> Facilitates error detection, ensuring the integrity of
-                                    the transmitted data.</li>
-                            </ol>
-                        </li>
-                    </ul>
-                </div>
-                <div class="in">
-                    <h3>Applications of UDP:</h3>
-                    <ul>
-                        <li>Used for simple request-response communication when the data size is small, reducing
-                            concerns about flow and error control.</li>
-                        <li>Suitable for multicasting due to its support for packet switching.</li>
-                        <li>Utilized in routing update protocols like RIP (Routing Information Protocol).</li>
-                        <li>Preferred for real-time applications that cannot tolerate uneven delays in message sections.
-                        </li>
-                        <li>Implementations using UDP as a transport layer protocol include:
-                            <ul>
-                                <li>NTP (Network Time Protocol)</li>
-                                <li>DNS (Domain Name Service)</li>
-                                <li>BOOTP, DHCP</li>
-                                <li>NNP (Network News Protocol)</li>
-                                <li>Quote of the day protocol</li>
-                                <li>TFTP, RTSP, RIP</li>
-                            </ul>
-                        </li>
-                        <li>Tasks performed by the application layer through UDP:
-                            <ul>
-                                <li>Trace Route</li>
-                                <li>Record Route</li>
-                                <li>Timestamp</li>
-                            </ul>
-                        </li>
-                        <li>UDP takes a datagram from the Network Layer, attaches its header, and swiftly sends it to
-                            the user, contributing to its fast operation.</li>
-                        <li>UDP is considered a null protocol if you remove the checksum field, reducing the demand on
-                            computer resources.</li>
-                        <li>Effective when using Multicast or Broadcast for data transfer.</li>
-                        <li>Commonly employed for the transmission of real-time packets, particularly in multimedia
-                            applications.</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
     <div class="content-box">
-        <h2>Application Layer</h2>
+        <h1>Application Layer</h1>
         <ul>
             <li>The Application Layer is the topmost layer of the OSI model, responsible for providing network
                 services directly to end-users and applications.
@@ -690,6 +687,6 @@
         </div>
     </div>
     <script src="../../../../public/main.js"></script>
-    </body>
+</body>
 
 </html>
