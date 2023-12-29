@@ -8,6 +8,8 @@
     <title>Transaction and Concurrency Control</title>
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -59,14 +61,15 @@
 
                 <p><strong>Example:</strong> Transaction to transfer 700 Rs from A/C A to B A/C.</p>
                 <ul>
-                    <li>read(A);</li>
-                    <li>A = A - 700;</li>
-                    <li>Write(A);</li>
-                    <li>read(B);</li>
-                    <li>B = B + 700;</li>
-                    <li>write(B);</li>
+                    <li>
+                        read(A);
+                        <br> A = A - 700;
+                        <br> Write(A);
+                        <br> read(B);
+                        <br> B = B + 700;
+                        <br> write(B);
+                    </li>
                 </ul>
-
                 <ul>
                     <li>
                         Remember, in a unit or part of a program in DBMS, it is known as a transaction, and a similar
@@ -609,11 +612,11 @@ R(Q)         R(Q) (In this condition, there will be no edge)
                         instance:
                         <pre>
                             <code>
-            T1   |   T2
-            -----------
-            W(A) | W(A)
-            W(A) | R(A)
-            R(A) | W(A)
+                T1   |   T2
+                -----------
+                W(A) | W(A)
+                W(A) | R(A)
+                R(A) | W(A)
                             </code>
                         </pre>
                     </li>
@@ -629,50 +632,50 @@ R(Q)         R(Q) (In this condition, there will be no edge)
                 <p><strong>Example:</strong></p>
                 <pre>
                     <code>
-T1    |     T2     
------------------
-R(A)  |              
-W(A)  |          
-      |    R(A)          
-      |    W(A)      
-R(B)  |               
-W(B)  |              
-      |    R(B)      
-      |    W(B)                    
+                T1    |     T2     
+                -----------------
+                R(A)  |              
+                W(A)  |          
+                      |    R(A)          
+                      |    W(A)      
+                R(B)  |               
+                W(B)  |              
+                      |    R(B)      
+                      |    W(B)                    
                     </code>
                 </pre>
                 <p>
                     In order to convert the given schedule into a conflict serializable form, we will identify
-                    conflicting operations and rearrange them to achieve serializability. In the given example:
+                    conflicting operations and rearrange non-conflicting operations to achieve serializability. In the given example:
                 </p>
                 <pre>
                     <code>
-    T1    |     T2     
----------------------
-    R(A)  |              
-    W(A)  |          
-          |    R(A)          
-          |    W(A)      
-    R(B)  |               
-    W(B)  |              
-          |    R(B)      
-          |    W(B)                    
+                T1    |     T2     
+                ---------------------
+                R(A)  |              
+                W(A)  |          
+                      |    R(A)          
+                      |    W(A)      
+                R(B)  |               
+                W(B)  |              
+                      |    R(B)      
+                      |    W(B)                    
                     </code>
                 </pre>
                 <p>
                     The conflicting operations are W(A) in T1 and W(A) in T2, as well as W(B) in T1 and W(B) in T2. To
-                    make the schedule conflict serializable, we can swap these conflicting operations:
+                    make the schedule conflict serializable, we will rearrange non-conflicting operations:
                 </p>
                 <pre>
                     <code>
-    T1    |     T2     
----------------------
-    R(A)  |              
-    R(B)  |          
-    W(A)  |    R(A)          
-    W(B)  |    W(A)      
-          |    R(B)      
-          |    W(B)                    
+                T1    |     T2     
+                ---------------------
+                R(A)  |              
+                R(B)  |          
+                W(A)  |    R(A)          
+                W(B)  |    W(A)      
+                      |    R(B)      
+                      |    W(B)                    
                     </code>
                 </pre>
                 <p>
@@ -680,6 +683,7 @@ W(B)  |
                     by rearranging conflicting operations. This ensures that the final result remains consistent with a
                     serial execution of transactions.
                 </p>
+                
             </div>
             <div class="in">
                 <h3>View Serializability</h3>
@@ -1014,6 +1018,7 @@ S1       T1  |  T2  | T3           S2   T1  |  T2  |  T3
                     &neArr;</a></li>
         </ul>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
