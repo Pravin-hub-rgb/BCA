@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
 });
-
+ 
 function updateCommitInfo() {
   var username = "Pravin-hub-rgb";
   var repo = "BCA";
@@ -14,42 +14,53 @@ function updateCommitInfo() {
   fetchCommits();
 
   function fetchCommits() {
-    fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
-      .then(response => response.json())
-      .then(data => {
-        // Add the number of commits in the current page to the commit count
-        commitCount += data.length;
+      fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+          })
+          .then(data => {
+              // Add the number of commits in the current page to the commit count
+              commitCount += data.length;
 
-        // If there are more pages, fetch the next page
-        if (data.length === perPage) {
-          currentPage++;
-          fetchCommits();
-        } else {
-          // All commits have been fetched, update the HTML content
-          document.getElementById("commit-count").textContent = commitCount;
-        }
-      })
-      .catch(error => {
-        console.log("Error:", error);
-      });
+              // If there are more pages, fetch the next page
+              if (data.length === perPage) {
+                  currentPage++;
+                  fetchCommits();
+              } else {
+                  // All commits have been fetched, update the HTML content
+                  document.getElementById("commit-count").textContent = commitCount;
+              }
+          })
+          .catch(error => {
+              console.error("Error fetching commits:", error);
+          });
   }
 
   fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
-    .then(response => response.json())
-    .then(data => {
-      var latestCommitTime = new Date(data[0].commit.author.date);
-      var currentTime = new Date();
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then(data => {
+          var latestCommitTime = new Date(data[0].commit.author.date);
+          var currentTime = new Date();
 
-      // Calculate the time difference in hours
-      var timeDiffHours = Math.floor((currentTime - latestCommitTime) / (1000 * 60 * 60));
+          // Calculate the time difference in hours
+          var timeDiffHours = Math.floor((currentTime - latestCommitTime) / (1000 * 60 * 60));
 
-      // Update the HTML content
-      document.getElementById("time-ago").textContent = timeDiffHours === 1 ? "1 hour ago" : `${timeDiffHours} hours ago`;
-    })
-    .catch(error => {
-      console.log("Error:", error);
-    });
+          // Update the HTML content
+          document.getElementById("time-ago").textContent = timeDiffHours === 1 ? "1 hour ago" : `${timeDiffHours} hours ago`;
+      })
+      .catch(error => {
+          console.error("Error fetching latest commit:", error);
+      });
 }
+
 
 // ________________________________________________________________________________________
 function openNav() {
