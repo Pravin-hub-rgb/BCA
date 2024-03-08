@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBNST lab</title>
+    <link rel="icon" href="../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="../../../index.html"><img src="../../../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>CBNST lab</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>CBNST lab</h1>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to find actual error, relative error and percentage error
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;math.h>
+int main()
+{
+    float actual_val, approx_val, actual_err, relative_err, percentage_err;
+    printf("Enter Actual value : ");
+    scanf("%f", &actual_val);
+    printf("Enter Approx value : ");
+    scanf("%f", &approx_val);
+    actual_err = fabs(actual_val - approx_val);
+    relative_err = actual_err / actual_val;
+    percentage_err = relative_err * 100;
+    printf("\nActual Error = %f", actual_err);
+    printf("\nRelative Error = %f", relative_err);
+    printf("\nPercentage Error = %f%%\n", percentage_err);
+    return 0;
+}
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <h3>Bisection Method program</h3>
+            <img src="../images/xmid7.svg" class="wb">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to Find Root of the Function Using Bisection Method.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;stdlib.h> // so we can use exit(0) function
+#define EPSILON 0.003
+
+// Function which will give value of equation
+float f(float x)
+{
+    return ((x * x * x) - (9 * x) + 1);
+}
+
+int main()
+{
+    float x1, x2, xmid;
+    int i = 1, itr;
+    printf("Enter Initial Guess: ");
+    scanf("%f", &x1);
+    scanf("%f", &x2);
+
+    if (f(x1) * f(x2) > 0)
+    {
+        printf("\nAssumptions are wrong!");
+        exit(0);
+    }
+    printf("\nEnter number of iteration : ");
+    scanf("%d", &itr);
+    do
+    {
+        xmid = (x1 + x2) / 2;
+        printf("\nxmid is = %f", xmid);
+        if (f(xmid) == 0.0)
+        {
+            printf("\nRoot is = %f", xmid);
+            exit(0);
+        }
+        if (f(xmid) * f(x1) < 0)
+            x2 = xmid;
+        else
+            x1 = xmid;
+        printf("\nRoot after %d iteration = %f\n", i, xmid);
+        i = i + 1;
+    } while (fabs(x1 - x2) > EPSILON && i <= itr);
+
+    return 0;
+}
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to Find Root of the Function Using Regula Falsi Method.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;stdlib.h> 
+#define EPSILON 0.003
+
+float f(float x)
+{
+    return ((x * x * x) - (9 * x) + 1);
+}
+
+int main()
+{
+    float x1, x2, xn, fn;
+    int i = 1;
+    printf("Enter Initial Guess: ");
+    scanf("%f", &x1);
+    scanf("%f", &x2);
+
+    if (f(x1) * f(x2) > 0)
+    {
+        printf("\nAssumptions are wrong!");
+        exit(0);
+    }
+    do
+    {
+        xn = ((x1 * f(x2)) - (x2 * f(x1))) / (f(x2) - f(x1));
+        fn = f(xn);
+        if (f(xn) * f(x1) &lt; 0)
+            x2 = xn;
+        else
+            x1 = xn;
+        printf("\nRoot after %d iteration = %f\n", i, xn);
+        i = i + 1;
+    } while (fabs(f(xn)) > EPSILON);
+    return 0;
+}
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../public/main.js"></script>
+</body>
+
+</html>
