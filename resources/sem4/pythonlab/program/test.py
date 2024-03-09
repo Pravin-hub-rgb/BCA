@@ -1,8 +1,19 @@
-import sys
+student = [556, "Mothi", 84, 96, 84, 75, 84]
 
-num1 = int(sys.argv[1])
-num2 = int(sys.argv[2])
+# Accessing 0th element
+print(student[0:]) # Output : 
 
-sum = num1 + num2
+# Accessing 0th to 1st element
+print(student[0:1]) # Output : 
 
-print("The sum is = ", str(sum))
+# Accessing 2nd to end of list elements
+print(student[2:]) # Output : 
+
+# Accessing starting to ending elements
+print(student[:]) # Output : 
+
+# Accessing last index value
+print(student[-1]) # Output : 
+
+# Accessing elements in reverse order
+print(student[::-1]) # Output : 
