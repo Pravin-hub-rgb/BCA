@@ -1,19 +1,15 @@
-student = [556, "Mothi", 84, 96, 84, 75, 84]
+import pandas as pd
 
-# Accessing 0th element
-print(student[0:]) # Output : 
+# Creating a dictionary
+data = {
+    'Name': ['John', 'Alice', 'Bob', 'Eve'],
+    'Age': [28, 24, 22, 26],
+    'City': ['New York', 'San Francisco', 'Los Angeles', 'Seattle']
+}
 
-# Accessing 0th to 1st element
-print(student[0:1]) # Output : 
+# Creating a DataFrame from the dictionary
+df = pd.DataFrame(data)
 
-# Accessing 2nd to end of list elements
-print(student[2:]) # Output : 
-
-# Accessing starting to ending elements
-print(student[:]) # Output : 
-
-# Accessing last index value
-print(student[-1]) # Output : 
-
-# Accessing elements in reverse order
-print(student[::-1]) # Output : 
+# Displaying the DataFrame
+print("Original DataFrame:")
+print(df)
