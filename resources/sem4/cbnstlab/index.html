@@ -169,16 +169,58 @@ int main()
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-                    
+                    Program to Find Root of the Function Using Newton-Raphson Method.
                 </button>
                 <div class="panel">
                     <pre>
                         <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;stdlib.h>
+
+float f(float x)
+{
+    return ((x * x * x) - 9 * x + 1);
+}
+float df(float x)
+{
+    return (3 * x * x - 9);
+}
+
+void main()
+{
+    float x0, e = 0.003, y, diff, x1, dy;
+    int i, n;
+    printf("\n Enter intial guess:");
+    scanf("%f", &x0);
+    printf("Iterations to be checked");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        y = f(x0);   // calling function f(x)
+        dy = df(x0); // calling differentiation df(x)
+        if (fabs(dy) < e)
+        {
+            printf("Slope is too small");
+            exit(1);
+        }
+        x1 = x0 - (y / dy);
+        diff = fabs(x1 - x0);
+        x0 = x1;
+        if (diff < e)
+        {
+            printf("Root %f is found at %d iteration", x0, i + 1);
+            exit(1);
+        }
+    }
+    printf("Solution do not converge");
+}
                         </code>
                 </pre>
                 </div>
             </div>
         </div>
+        <!--
         <div class="in">
             <div class='code'>
                 <div class='dotc'></div>
@@ -207,6 +249,7 @@ int main()
                 </div>
             </div>
         </div>
+    -->
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../public/main.js"></script>
