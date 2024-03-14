@@ -431,6 +431,120 @@ print(difference_result)        # Output: {1, 4, 'apple', 3.14, True}
             <img src="../../images/py2.svg" alt="" class="wb">
         </div>
         <div class="wh">
+            <h2>DataFrame</h2>
+            <ul>
+                <li>A DataFrame is a two-dimensional labeled data structure provided by libraries such as Pandas, which
+                    is commonly used for data manipulation and analysis tasks. It can be thought of as similar to a
+                    spreadsheet or a SQL table, or even a dictionary of Series objects.</li>
+                <li>Key Features of a DataFrame:
+                    <ol>
+                        <li>Tabular Data Structure: A DataFrame is a two-dimensional data structure with rows and
+                            columns, where each column can have a different data type.</li>
+                        <li>Labels: Both rows and columns of a DataFrame are labeled. Rows are typically indexed with
+                            integers starting from 0, while columns are labeled with column names.</li>
+                        <li>Heterogeneous Data Types: Each column in a DataFrame can contain different data types, such
+                            as integers, floats, strings, or even complex objects.</li>
+                        <li>Flexibility: DataFrames provide a wide range of functionalities for data manipulation,
+                            including indexing, slicing, merging, joining, reshaping, pivoting, and aggregating data.
+                        </li>
+                        <li>Integration with Other Libraries: DataFrames are widely used in conjunction with libraries
+                            such as NumPy, Matplotlib, and Scikit-learn for various data analysis and machine learning
+                            tasks.</li>
+                    </ol>
+                </li>
+            </ul>
+            <h3>Creating a DataFrame:</h3>
+            <p>You can create a DataFrame in Python using various methods, such as:</p>
+            <ol>
+                <li>From dictionaries.</li>
+                <li>From lists.</li>
+                <li>From external data sources like CSV files, SQL databases, or Excel files.</li>
+            </ol>
+            <ul>
+                <li>We take help of Pandas, which is a powerful Python library for data manipulation and analysis, and
+                    which provides high-performance, easy-to-use data structures like DataFrame.</li>
+                <li>If you don't have Pandas installed on your system, you can install it using the following command:
+                </li>
+            </ul>
+            <pre>
+                    <code>
+pip install pandas
+                    </code>
+                </pre>
+            <div class="in">
+                <h3>Creating a DataFrame from dictionaries.</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <pre>
+                        <code>
+import pandas as pd
+# Creating a dictionary
+data = {
+    'Name': ['John', 'Alice', 'Bob', 'Eve'],
+    'Age': [28, 24, 22, 26],
+    'City': ['New York', 'San Francisco', 'Los Angeles', 'Seattle']
+}
+
+# Creating a DataFrame from the dictionary
+df = pd.DataFrame(data)
+
+# Displaying the DataFrame
+print("Original DataFrame:")
+print(df)
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p><strong>If we want to change the indexing of data frame then we can do the following:</strong></p>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+import pandas as pd
+
+data = {'Name': ['John', 'Emma', 'Peter'],
+        'Age': [30, 25, 35],
+        'City': ['New York', 'San Francisco', 'Chicago']}
+df = pd.DataFrame(data, index=['a', 'b', 'c'])
+print(df.loc['a'])
+                    </code>
+                </pre>
+            </div>
+            <p>Output:</p>
+            <pre>
+                <code>
+Name         John
+Age            30
+City     New York
+Name: a, dtype: object
+                </code>
+            </pre>
+            <ul>
+                <li>In Pandas, .loc[] is a label-based indexing method used for selection by label. It is primarily used
+                    to access a group of rows and columns by labels.</li>
+            </ul>
+            <p><strong>We can also perform the transpose of the DataFrame using the `.T` attribute or using the
+                    'transpose()' function:</strong></p>
+            <div class="code">
+                <div class="dotc"></div>
+                <pre>
+                    <code>
+import pandas as pd
+
+# Create a DataFrame
+data = {'Name': ['John', 'Emma', 'Peter'],
+        'Age': [30, 25, 35],
+        'City': ['New York', 'San Francisco', 'Chicago']}
+df = pd.DataFrame(data, index=['a', 'b', 'c'])
+
+# Transpose the DataFrame
+transposed_df = df.transpose()
+                    </code>
+                </pre>
+            </div>
+
+        </div>
+        <div class="wh">
             <h2>Type Conversion in Python</h2>
 
             <p>Type conversion, also known as type casting, is the process of changing the data type of a variable from
@@ -736,8 +850,8 @@ for i in range(1, 10, 2):
     print(i)
                         </code>
                     </pre>
-                    <p>Output:</p>
-                    <pre>
+                <p>Output:</p>
+                <pre>
                         <code>
 1
 3
