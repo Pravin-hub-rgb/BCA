@@ -1,41 +1,38 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-
+#define EPSILON 0.003
 float f(float x)
 {
-    return x * x * x - 9 * x + 1; // example function
+    return x * x * x - 9 * x + 1;
 }
 
-void main()
+int main()
 {
-    int i = 1;
-    float xn, x1, x2, epsilon = 0.003, delta = 0.003, fn, f1, f2;
-    printf("\n enter initial");
+    float x1, x2, x, f1, f2, fx;
+    int i, n;
+    printf("Enter Initial Guess: ");
     scanf("%f", &x1);
     scanf("%f", &x2);
-
-    if (f(x1) * f(x2) > 0)
+    printf("Enter number of iteration : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
     {
-        printf("\nwrong Assumption");
-        exit(1);
-    }
 
-    do
-    {
-        if (fabs(f(x2) - f(x1)) < delta)
+        f1 = f(x1);
+        f2 = f(x2);
+        x = ((x1 * f2) - (x2 * f1)) / (f2 - f1);
+        fx = f(x);
+        if ((fabs(x - x2) < EPSILON) || f(x) == 0)
         {
-            printf("\nSlope is Small");
-            exit(1);
+            printf("Required root is %f found at %d iteration", x, i + 1);
+            exit(0);
         }
-
-        xn = x1 - ((x2 - x1) * f(x1)) / (f(x2) - f(x1));
-        fn = f(xn);
-        if (f(xn) * f(x2) < 0)
-            x1 = xn;
-        else
-            x2 = xn;
-        printf("\n value after %d iteration:%f", i, xn);
-        i = i + 1;
-    } while (fabs(f(xn)) > epsilon);
+        x1 = x2;
+        x2 = x;
+        f1 = f2;
+        f2 = fx;
+    }
+    printf("\nSolution does not converge in %d iterations", i);
+    return 0;
 }

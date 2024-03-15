@@ -55,8 +55,6 @@ int main()
             </div>
         </div>
         <div class="in">
-            <h3>Bisection Method program</h3>
-            <img src="../images/xmid7.svg" class="wb">
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
@@ -66,48 +64,35 @@ int main()
                     <pre>
                         <code class="language-c">
 #include &lt;stdio.h>
+#include &lt;stdlib.h>
 #include &lt;math.h>
-#include &lt;stdlib.h> // so we can use exit(0) function
 #define EPSILON 0.003
-
-// Function which will give value of equation
 float f(float x)
 {
-    return ((x * x * x) - (9 * x) + 1);
+    return x * x * x - 9 * x + 1;
 }
-
 int main()
 {
-    float x1, x2, xmid;
-    int i = 1, itr;
-    printf("Enter Initial Guess: ");
+    float xmid, x1, x2;
+    printf("Enter the initial guess : ");
     scanf("%f", &x1);
     scanf("%f", &x2);
-
     if (f(x1) * f(x2) > 0)
     {
-        printf("\nAssumptions are wrong!");
+        printf("Wrong Assumptions");
         exit(0);
     }
-    printf("\nEnter number of iteration : ");
-    scanf("%d", &itr);
+    int i = 1;
     do
     {
         xmid = (x1 + x2) / 2;
-        printf("\nxmid is = %f", xmid);
-        if (f(xmid) == 0.0)
-        {
-            printf("\nRoot is = %f", xmid);
-            exit(0);
-        }
         if (f(xmid) * f(x1) < 0)
             x2 = xmid;
         else
             x1 = xmid;
-        printf("\nRoot after %d iteration = %f\n", i, xmid);
-        i = i + 1;
-    } while (fabs(x1 - x2) > EPSILON && i <= itr);
-
+        printf("Root after %d iteration is = %f\n", i, xmid);
+        i++;
+    } while (fabs(f(xmid)) > EPSILON);
     return 0;
 }
                         </code>
@@ -126,17 +111,16 @@ int main()
                         <code class="language-c">
 #include &lt;stdio.h>
 #include &lt;math.h>
-#include &lt;stdlib.h> 
+#include &lt;stdlib.h>
 #define EPSILON 0.003
-
 float f(float x)
 {
-    return ((x * x * x) - (9 * x) + 1);
+    return x * x * x - 9 * x + 1;
 }
 
 int main()
 {
-    float x1, x2, xn, fn;
+    float x1, x2, xn;
     int i = 1;
     printf("Enter Initial Guess: ");
     scanf("%f", &x1);
@@ -150,14 +134,65 @@ int main()
     do
     {
         xn = ((x1 * f(x2)) - (x2 * f(x1))) / (f(x2) - f(x1));
-        fn = f(xn);
-        if (f(xn) * f(x1) &lt; 0)
+        if (f(xn) * f(x1) < 0)
             x2 = xn;
         else
             x1 = xn;
         printf("\nRoot after %d iteration = %f\n", i, xn);
-        i = i + 1;
+        i++;
     } while (fabs(f(xn)) > EPSILON);
+    return 0;
+}
+                        </code>
+                </pre>
+                </div>
+            </div>
+        </div>
+        <div class="in">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to Find Root of the Function Using Secant Method.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c">
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;stdlib.h>
+#define EPSILON 0.003
+float f(float x)
+{
+    return x * x * x - 9 * x + 1;
+}
+
+int main()
+{
+    float x1, x2, x, f1, f2, fx;
+    int i, n;
+    printf("Enter Initial Guess: ");
+    scanf("%f", &x1);
+    scanf("%f", &x2);
+    printf("Enter number of iteration : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+
+        f1 = f(x1);
+        f2 = f(x2);
+        x = ((x1 * f2) - (x2 * f1)) / (f2 - f1);
+        fx = f(x);
+        if ((fabs(x - x2) < EPSILON) || f(x) == 0)
+        {
+            printf("Required root is %f found at %d iteration", x, i + 1);
+            exit(0);
+        }
+        x1 = x2;
+        x2 = x;
+        f1 = f2;
+        f2 = fx;
+    }
+    printf("\nSolution does not converge in %d iterations", i);
     return 0;
 }
                         </code>
@@ -251,6 +286,16 @@ void main()
         </div>
     -->
     </div>
+    <!--
+    <div class="content-box">
+        <p>Reference:</p>
+        <ul>
+            <li><a href="https://www.youtube.com/playlist?list=PLVKIC9j3jSYsm8GELqAMFJ_1ebbMpK-9U" target="_blank">Playlist &ne</a></li>
+            <li><a href="https://www.youtube.com/watch?v=KKJorRX2new" target="_blank">Bisection method</a></li>
+            <li><a href="https://www.youtube.com/watch?v=ADlIUvQeiI0" target="_blank">Regula falsi method</a></li>
+        </ul>
+    </div>
+-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../public/main.js"></script>
 </body>
