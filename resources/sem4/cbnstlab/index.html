@@ -167,31 +167,23 @@ float f(float x)
 
 int main()
 {
-    float x1, x2, x, f1, f2, fx;
-    int i, n;
+    float x0, x1, x2, f0, f1, f2;
+    int i;
     printf("Enter Initial Guess: ");
-    scanf("%f", &x1);
-    scanf("%f", &x2);
-    printf("Enter number of iteration : ");
-    scanf("%d", &n);
-    for (i = 0; i < n; i++)
+    scanf("%f%f", &x0, &x1);
+    do
     {
-
-        f1 = f(x1);
+        f1 = f(x0);
+        f2 = f(x1);
+        x2 = ((x0 * f2) - (x1 * f1)) / (f2 - f1);
         f2 = f(x2);
-        x = ((x1 * f2) - (x2 * f1)) / (f2 - f1);
-        fx = f(x);
-        if ((fabs(x - x2) < EPSILON) || f(x) == 0)
-        {
-            printf("Required root is %f found at %d iteration", x, i + 1);
-            exit(0);
-        }
-        x1 = x2;
-        x2 = x;
+        f0 = f1;
         f1 = f2;
-        f2 = fx;
-    }
-    printf("\nSolution does not converge in %d iterations", i);
+        x0 = x1;
+        x1 = x2;
+        i++;
+        printf("Required root is %f found at %d iteration and value of function = %f\n", x2, i, f2);
+    } while (fabs(f2) > EPSILON);
     return 0;
 }
                         </code>
