@@ -211,6 +211,7 @@ int main()
 #include &lt;stdio.h>
 #include &lt;math.h>
 #include &lt;stdlib.h>
+#define EPSILON 0.003
 
 float f(float x)
 {
@@ -221,33 +222,23 @@ float df(float x)
     return (3 * x * x - 9);
 }
 
-void main()
+int main()
 {
-    float x0, e = 0.003, y, diff, x1, dy;
+    float x0, x1, f0, f1, df0;
     int i, n;
-    printf("\n Enter intial guess:");
+    printf("Enter intial guess:");
     scanf("%f", &x0);
-    printf("Iterations to be checked");
-    scanf("%d", &n);
-    for (i = 0; i < n; i++)
+    do
     {
-        y = f(x0);   // calling function f(x)
-        dy = df(x0); // calling differentiation df(x)
-        if (fabs(dy) < e)
-        {
-            printf("Slope is too small");
-            exit(1);
-        }
-        x1 = x0 - (y / dy);
-        diff = fabs(x1 - x0);
+        f0 = f(x0);
+        df0 = df(x0);
+        x1 = x0 - (f0 / df0);
+        f1 = f(x1);
         x0 = x1;
-        if (diff < e)
-        {
-            printf("Root %f is found at %d iteration", x0, i + 1);
-            exit(1);
-        }
-    }
-    printf("Solution do not converge");
+        i++;
+        printf("No of iteration = %d\t Root = %f\t Value of function = %f\n", i, x1, f1);
+    } while (fabs(f1) > EPSILON);
+    return 0;
 }
                         </code>
                 </pre>
