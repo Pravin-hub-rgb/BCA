@@ -8,6 +8,8 @@
     <title>Programming Model (8085)</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -120,17 +122,82 @@
                 </li>
             </ul>
             <div class="in">
-                <p><strong>Numerical 1: <br> Assume A (Accumulator) = 88H & B = 99H <br>determine the status of all flags and
+                <p><strong>Numerical 1: <br> Assume A (Accumulator) = 88H & B = 99H <br>determine the status of all
+                        flags and
                         accumulator content when following 8085 instruction is executed: Add B (A &larr; A +
                         B).</strong></p>
                 <img src="../../images/mp12.svg" alt="" class="wb">
             </div>
             <div class="in">
-                <p><strong>Numerical 2: <br> A = 13H and B = 24H <br>determine the status of all flags when following 8085 instruction is executed: SUB B (A &larr; A - B).</strong></p>
+                <p><strong>Numerical 2: <br> A = 13H and B = 24H <br>determine the status of all flags when following
+                        8085 instruction is executed: SUB B (A &larr; A - B).</strong></p>
                 <img src="../../images/mp13.svg" alt="" class="wb">
             </div>
         </div>
+        <div class="wh">
+            <h2>Memory Mapped I/O and Peripheral Mapped I/O in 8085 Microprocessor</h2>
+            <p>In the world of microprocessor architecture, efficient communication between the processor and external
+                devices is essential for system functionality. Two key concepts that facilitate this communication in
+                the 8085 microprocessor are memory mapped I/O and peripheral mapped I/O. These techniques play a crucial
+                role in interfacing the microprocessor with memory devices, input/output (I/O) devices, and other
+                peripherals. Memory mapped I/O involves treating I/O devices as if they were memory locations,
+                simplifying access through standard memory read and write instructions. On the other hand, peripheral
+                mapped I/O assigns specific addresses to I/O ports separate from the memory address space, requiring
+                dedicated I/O instructions for communication. Understanding these concepts is fundamental for designing
+                efficient systems and programming interfaces in 8085-based applications.</p>
+            <div class="in">
+                <h3>Memory Mapped I/O</h3>
+                <ul>
+                    <li>Definition: Memory mapped I/O is a technique where the microprocessor treats I/O devices as if
+                        they were memory locations. This means that I/O devices are assigned specific memory addresses,
+                        and accessing these addresses allows the microprocessor to communicate with the devices.</li>
+                    <li>Usage: In the 8085 microprocessor, memory mapped I/O is used to access I/O devices by mapping
+                        them to specific memory addresses. This simplifies programming as I/O operations are performed
+                        using standard memory read and write instructions.</li>
+                    <li>Addressing: Memory mapped I/O uses memory addresses to access I/O devices, making them appear as
+                        part of the memory address space.</li>
+                    <li>Example: Accessing an input device (e.g., keyboard) or an output device (e.g., display) through
+                        memory addresses mapped to specific I/O ports.</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <p>Reading from an input device mapped to a memory address:</p>
+                <pre>
+                        <code>
+MOV A, M  ; Move data from memory (input device address) to accumulator
+                        </code>
+                    </pre>
+                <p>Writing to an output device mapped to a memory address:</p>
+                <pre>
+                        <code>
+MOV M, A  ; Move data from accumulator to memory (output device address)
+                        </code>
+                    </pre>
+            </div>
+            <div class="in">
+                <h3>Peripheral Mapped I/O:</h3>
+                <ul>
+                    <li>Definition: Peripheral mapped I/O involves assigning specific addresses to I/O ports separate from the memory address space. Each I/O port is assigned a unique address, allowing the microprocessor to communicate with external devices connected to these ports.</li>
+                    <li>Usage: In the 8085 microprocessor, peripheral mapped I/O is used to access external devices through dedicated I/O ports. Instructions and signals specific to</li>
+                    <li>Addressing: Peripheral mapped I/O uses separate port addresses for each I/O device, distinct from memory addresses.</li>
+                    <li>Example: Reading input from a keyboard connected to a specific I/O port address or sending output to a printer connected to another I/O port address.u</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <p>Reading from an input device connected to an I/O port:</p>
+                <pre>
+                    <code>
+IN 30H  ; Input data from port address 30H into accumulator
+                    </code>
+                </pre>
+                <p>Writing to an output device connected to an I/O port:</p>
+                <pre>
+                    <code>
+OUT 40H  ; Output data from accumulator to port address 40H
+                    </code>
+                </pre>
+            </div>
+        </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
