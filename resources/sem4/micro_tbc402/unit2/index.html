@@ -201,6 +201,97 @@ OUT 40H  ; Output data from accumulator to port address 40H
                 </pre>
             </div>
         </div>
+        <div class="wh">
+            <h2>Machine Cycle</h2>
+            <ul>
+                <li>The machine cycle refers to the time required to complete one operation of accessing memory or an
+                    I/O port,
+                    acknowledging an external request, or performing a specific task within the microprocessor.</li>
+                <li>Various operations are encompassed within the machine cycle, including:</li>
+                <ul>
+                    <li><strong>OP Code Fetch:</strong> Fetching the operation code (OP code) from memory to execute an
+                        instruction.</li>
+                    <li><strong>Memory Read (<u style="text-decoration: overline;">MEMR</u>):</strong> Reading data from
+                        a memory
+                        location.</li>
+                    <li><strong>Memory Write (<u style="text-decoration: overline;">MEMW</u>):</strong> Writing data to
+                        a memory
+                        location.</li>
+                    <li><strong>I/O Read:</strong> Reading data from an input/output (I/O) port.</li>
+                    <li><strong>I/O Write:</strong> Writing data to an I/O port.</li>
+                    <li><strong>Interrupt Acknowledge:</strong> Acknowledging an interrupt request from external
+                        devices.</li>
+                    <li><strong>Control Signals:</strong> Generating and managing control signals such as clock pulses,
+                        enable signals,
+                        and timing signals.</li>
+                </ul>
+                <li>The machine cycle is crucial in determining the overall performance and efficiency of a
+                    microprocessor-based system.
+                    It sets the pace for executing instructions, processing data, and handling input/output operations.
+                </li>
+                <li>A machine cycle is composed of multiple T-states, where a T-state represents a single clock cycle or
+                    the time
+                    duration of a clock signal.</li>
+                <li>Understanding the machine cycle and its components is essential for designing efficient
+                    microprocessor systems,
+                    optimizing instruction execution, and ensuring accurate timing in data processing and communication.
+                </li>
+            </ul>
+            <img src="../../images/mp14.svg" alt="" class="wb">
+            <p><strong>Note:</strong></p>
+            <ul>
+                <li>All machine cycles such as <u style="text-decoration: overline;">MEMR</u>, <u
+                        style="text-decoration: overline;">MEMW</u>,
+                    I/O Read, and I/O Write typically require 3 T-states to complete their operations. However, the OP
+                    code fetch cycle
+                    is an exception, taking 4 T-states to complete.</li>
+                <li>The OP code fetch cycle includes an additional T-state for decoding the OP code, extending its
+                    duration to 4
+                    T-states.</li>
+                <li>For example, let's consider the instruction cycle, which encompasses the complete process of
+                    fetching an
+                    instruction, decoding its OP code, and executing it. This cycle's duration is determined by the
+                    number of machine
+                    cycles required for the specific instruction.</li>
+                <li>During the 4 T-state OP code fetch cycle, the first three T-states are typically used for fetching
+                    the
+                    instruction's address from memory, and the fourth T-state is dedicated to decoding the OP code
+                    retrieved in the
+                    previous T-states.</li>
+                <li>On the other hand, in a 3 T-state machine cycle such as I/O Read or I/O Write, each T-state is
+                    utilized for
+                    specific tasks like initiating the I/O operation, transferring data, and completing the operation
+                    within the cycle's
+                    duration.</li>
+            </ul>
+            <p><strong>Determine the machine cycles and total T-states required for execution of the following
+                    instructions:</strong></p>
+            <ul>
+                <li>MOV A, B: only op code fetch (4T) (1m cycle) as there is no memory access or additional processing
+                    involved. This instruction moves data from register B to register A.</li>
+                <li>MOV A, M: Op fetch (4T) + MR (3T) (2m cycle) where MR stands for Memory Read. This instruction
+                    involves fetching the op code, then reading data from the memory location addressed by the HL pair
+                    and moving it to register A.</li>
+                <li>MVI B, 32H: Op fetch (4T) + Data Write (3T) (2m cycle) as it involves fetching the op code and
+                    writing immediate data (32H) to register B.</li>
+                <li>LXI H, 2050H: Op fetch (4T) + Data Write (3T) (2m cycle) as it involves fetching the op code and
+                    loading immediate data (2050H) into the HL pair.</li>
+                <li>LDA 300H: Op fetch (4T) + MR (3T) (2m cycle) where MR stands for Memory Read. This instruction
+                    involves fetching the op code and loading accumulator A with data from memory address 300H.</li>
+                <li>STA 3050H: Op fetch (4T) + MW (3T) (2m cycle) where MW stands for Memory Write. This instruction
+                    involves fetching the op code and storing accumulator A data into memory address 3050H.</li>
+                <li>IN 00h: Op fetch (4T) + Input (3T) (2m cycle) as it involves fetching the op code and inputting data
+                    from input port 00h.</li>
+                <li>OUT FFh: Op fetch (4T) + Output (3T) (2m cycle) as it involves fetching the op code and outputting
+                    data to output port FFh.</li>
+                <li>LDAX B: Op fetch (4T) + MR (3T) (2m cycle) where MR stands for Memory Read. This instruction
+                    involves fetching the op code and loading accumulator A with data from the address pointed to by
+                    register pair BC.</li>
+                <li>STA X D: Op fetch (4T) + MW (3T) (2m cycle) where MW stands for Memory Write. This instruction
+                    involves fetching the op code and storing accumulator A data into the address pointed to by register
+                    pair XD.</li>
+            </ul>
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
