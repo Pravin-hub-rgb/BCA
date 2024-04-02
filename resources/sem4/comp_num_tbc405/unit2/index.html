@@ -63,6 +63,78 @@
                     <li>Compute A<sup>-1</sup> as (Adj A) / |A|.</li>
                     <li>Determine the matrix of unknowns (X) by multiplying A<sup>-1</sup> and the matrix B.</li>
                 </ol>
+                <div class="in">
+                    <p><strong>Solve by Matrix Inversion method:
+                            <br>x + y + z = 8
+                            <br>x - y + 2z = 6
+                            <br>3x + 5y - 7z = 14
+                        </strong></p>
+                    <p>Sol:
+                        <br>
+                        Writing these equation in matrix form:
+                    <pre>
++--        --+  +-- --+     +--  --+
+| 2    1   1 |  |  x  |     |  8   |
+| 1   -1   2 |  |  y  |  =  |  6   |  
+| 3    5  -7 |  |  z  |     |  14  |
++--        --+  +-- --+     +--  --+
+                        </pre>
+                    AX = B
+                    <br>X = A<sup>-1</sup>B
+                    <br>We have to calculate A<sup>-1</sup>
+                    <br>We know A<sup>-1</sup> = <math>
+                        <mfrac>
+                            <mn>Adj A</mn>
+                            <mn>|A|</mn>
+                        </mfrac>
+                    </math>
+                    <br>And Adj A = Transpose of Cofactor matrix
+                    <pre>
+            +--                       --+
+            | (7-10)   -(-7-6)   (5+3)  |                
+Cofactor =  | -(-7-5)   (-7-3)  -(5-3)  |
+            | (2+1)     -(2-1)   (-1-1) |
+            +--                       --+
+
+            +--          --+
+            | -3   13   8  |                
+Cofactor =  | 12  -10  -2  |
+            |  3   -1  -2  |
+            +--          --+
+
+Adj = Transpose of cofactor matrix
+
+         +--          --+
+         | -3   12   3  |                
+Adj A =  | 13  -10  -1  |
+         |  8   -2  -2  |
+         +--          --+
+
+Now finding |A|,
+|A| = 1(7-10) -1(-7-6) +1(5+3)
+|A| = 18
+
+As X = A<sup>-1</sup>B 
+       +--         --+    +--  --+
+       | -3    12    3 |  |  8   |
+X = <math><mfrac><mn>1</mn><mn>18</mn></mfrac></math> | 13   -10   -1 |  |  6   |
+       |  8    -2   -2 |  |  14  |
+       +--           --+  +--  --+
+
+       +-  -+  
+       | 90 |  
+X = <math><mfrac><mn>1</mn><mn>18</mn></mfrac></math> | 30 |
+       | 24 |
+       +-  -+
+
++-- --+    +--  --+ 
+|  x  |    |  5   |
+|  y  | =  |  5/3 | 
+|  z  |    |  4/3 |
++-- --+    +--  --+
+                        </pre>
+                    </p>
+                </div>
             </div>
             <div class="in">
                 <h3>Gauss Elimination Method for Solving Linear Equations</h3>
@@ -169,8 +241,8 @@
 | 0   0   -21  : -21 |
 +--                --+
                         </pre>
-                    Converting this back into equation form we get:
-                    <br> 2x + y + 4z = 12 (eq-1)
+                    Converting this back into equation form, we get:
+                    <br>2x + y + 4z = 12 (eq-1)
                     <br>9y -9z = 9 (eq-2)
                     <br>-21z = -21 (eq-3)
                     <br>From equation 3 we get z = 1
