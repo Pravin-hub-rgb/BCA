@@ -1,31 +1,32 @@
-
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #define EPSILON 0.003
+
 float f(float x)
 {
-    return x * x * x - 9 * x + 1;
+    return ((x * x * x) - 4 * x - 9);
+}
+float df(float x)
+{
+    return (3 * x * x - 4);
 }
 
 int main()
 {
-    float x0, x1, x2, f0, f1, f2;
+    float x0, x1, f0, f1, df0;
     int i;
-    printf("Enter Initial Guess: ");
-    scanf("%f%f", &x0, &x1);
+    printf("Enter intial guess: ");
+    scanf("%f", &x0);
     do
     {
         f0 = f(x0);
+        df0 = df(x0);
+        x1 = x0 - (f0 / df0);
         f1 = f(x1);
-        x2 = ((x0 * f1) - (x1 * f0)) / (f1 - f0);
-        f2 = f(x2);
-        f0 = f1;
-        f1 = f2;
         x0 = x1;
-        x1 = x2;
         i++;
-        printf("Required root is %f found at %d iteration and value of function = %f\n", x2, i, f2);
-    } while (fabs(f2) > EPSILON);
+        printf("No. of iteration = %d\t Root = %f\t Value of function = %f\n", i, x1, f1);
+    } while (fabs(f1) > EPSILON);
     return 0;
 }
