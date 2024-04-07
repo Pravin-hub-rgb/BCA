@@ -38,27 +38,6 @@ function updateCommitInfo() {
         console.error("Error fetching commits:", error);
       });
   }
-
-  // fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
-  //     .then(response => {
-  //         if (!response.ok) {
-  //             throw new Error(`HTTP error! Status: ${response.status}`);
-  //         }
-  //         return response.json();
-  //     })
-  //     .then(data => {
-  //         var latestCommitTime = new Date(data[0].commit.author.date);
-  //         var currentTime = new Date();
-
-  //         // Calculate the time difference in hours
-  //         var timeDiffHours = Math.floor((currentTime - latestCommitTime) / (1000 * 60 * 60));
-
-  //         // Update the HTML content
-  //         document.getElementById("time-ago").textContent = timeDiffHours === 1 ? "1 hour ago" : `${timeDiffHours} hours ago`;
-  //     })
-  //     .catch(error => {
-  //         console.error("Error fetching latest commit:", error);
-  //     });
   fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
     .then(response => {
       if (!response.ok) {
@@ -78,7 +57,10 @@ function updateCommitInfo() {
       var timeDiffDays = Math.floor(timeDiffHours / 24);
 
       // Format the time difference based on hours and days
-      var timeAgoText = timeDiffHours < 24 ? `${timeDiffHours} hours ago` : `${timeDiffDays} days and ${timeDiffHours % 24} hours ago`;
+      var daysText = timeDiffDays === 1 ? "day" : "days";
+      var hoursText = timeDiffHours % 24 === 1 ? "hour" : "hours";
+
+      var timeAgoText = timeDiffHours < 24 ? `${timeDiffHours} ${hoursText} ago` : `${timeDiffDays} ${daysText} and ${timeDiffHours % 24} ${hoursText} ago`;
 
       // Update the HTML content
       document.getElementById("time-ago").textContent = timeAgoText;
