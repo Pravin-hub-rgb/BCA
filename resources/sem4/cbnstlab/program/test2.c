@@ -1,32 +1,62 @@
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
-#define EPSILON 0.003
+#include <math.h>
+#define e 0.003
 
 float f(float x)
 {
-    return ((x * x * x) - 4 * x - 9);
+    return x * x * x - 9 * x + 1;
 }
-float df(float x)
+
+float g1(float x)
 {
-    return (3 * x * x - 4);
+    return pow((9 * x - 1), 1.0 / 3.0);
+}
+float g2(float x)
+{
+    return ((1 + x * x * x) / 9);
 }
 
 int main()
 {
-    float x0, x1, f0, f1, df0;
-    int i;
-    printf("Enter intial guess: ");
-    scanf("%f", &x0);
-    do
+    int ch, i;
+    float a, b, xm, diff;
+    printf("Enter initial guess : ");
+    scanf("%f%f", &a, &b);
+    if (f(a) * f(b) > 0)
     {
-        f0 = f(x0);
-        df0 = df(x0);
-        x1 = x0 - (f0 / df0);
-        f1 = f(x1);
-        x0 = x1;
-        i++;
-        printf("No. of iteration = %d\t Root = %f\t Value of function = %f\n", i, x1, f1);
-    } while (fabs(f1) > EPSILON);
+        printf("Assumptions are wrong");
+        exit(0);
+    }
+    xm = (a + b) / 2;
+    printf("Enter your choice for choice between two method (1 & 2) : ");
+    scanf("%d", &ch);
+    if (ch == 1)
+    {
+        do
+        {
+            float xnew = g1(xm);
+            diff = fabs(xnew - xm);
+            xm = xnew;
+            printf("root = %f\n", xnew);
+        } while (diff > e);
+    }
+    else if (ch == 2)
+    {
+        do
+        {
+            float xnew = g2(xm);
+            diff = fabs(xnew - xm);
+            xm = xnew;
+            printf("root = %f\n", xnew);
+        } while (diff > e);
+    }
+    else
+    {
+        printf("Either choose 1 or 2");
+        exit(0);
+    }
     return 0;
 }
+
+// run  cmd = gcc prog.c -lm
