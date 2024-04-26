@@ -10,6 +10,15 @@
         <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
         <link rel="stylesheet"
             href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+        <style>
+            .box {
+                background-color: white;
+                margin: 10px;
+                color: black;
+                padding: 15px;
+                border-radius: 5px;
+            }
+        </style>
     </head>
 
     <body class="bg-c">
@@ -502,7 +511,276 @@ if (name !== null) {
                     </div>
                 </div>
             </div>
+            <div class="wh">
+                <h2>Document Object Model (DOM)</h2>
+                <ul>
+                    <li>The DOM stands for Document Object Model.</li>
+                    <li>It represents the structure and content of a webpage as a tree-like structure.</li>
+                    <li>The DOM is created by the browser when a webpage is loaded.</li>
+                    <li>It provides a structured way to access and manipulate elements and content on a webpage using
+                        JavaScript.</li>
+                    <li>Each HTML element in a webpage is represented as a node in the DOM tree.</li>
+                    <li>The DOM allows you to dynamically modify the content, structure, and styles of a webpage.</li>
+                    <li>It serves as your JavaScript "window" into the contents of a webpage, allowing you to interact
+                        with and modify elements in real time.</li>
+                    <li>By using DOM methods and properties, you can create interactive and responsive web applications.
+                    </li>
+                    <li>The DOM is a key concept in front-end web development and is fundamental to understanding how
+                        JavaScript interacts with web pages.</li>
+                </ul>
+                <div class="in">
+                    <h3>Document Object</h3>
+                    <ul>
+                        <li>The Document object represents the entire HTML document in the DOM.</li>
+                        <li>It provides properties and methods to access and manipulate various aspects of the document.
+                        </li>
+                        <li>You can use the Document object to interact with elements, styles, events, and more within
+                            the document.</li>
+                        <li>It is accessed through the global `document` variable in JavaScript.</li>
+                    </ul>
+
+                    <div class="wh">
+                        <h3>Example: Accessing Document Properties</h3>
+                        <p>You can use the Document object to access properties like title, URL, and document type.</p>
+                        <pre>
+                            <code>
+// Get the document title
+var pageTitle = document.title;
+
+// Get the URL of the document
+var pageURL = document.URL;
+
+// Get the document type
+var docType = document.doctype.name;
+                            </code>
+                        </pre>
+                        <h3>Example: Modifying Document Elements</h3>
+                        <p>The Document object allows you to modify elements, styles, and content within the document.
+                        </p>
+                        <pre>
+                            <code>
+// Create a new paragraph element
+var newParagraph = document.createElement("p");
+newParagraph.textContent = "This is a new paragraph.";
+
+// Append the new element to the document body
+document.body.appendChild(newParagraph);
+
+// Change the background color of the document body
+document.body.style.backgroundColor = "lightblue";
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+                <div class="in">
+                    <h3>Selecting Elements</h3>
+                    <p>Methods that help us select elements from the DOM:</p>
+
+                    <div class="wh">
+                        <h3>getElementById</h3>
+                        <p>The <code>getElementById</code> method selects an element by its ID attribute.</p>
+                        <pre>
+                        <code>
+// Select an element by ID
+var elementById = document.getElementById("myElementId");
+                        </code>
+                    </pre>
+                    </div>
+
+                    <div class="wh">
+                        <h3>getElementsByTagName</h3>
+                        <p>The <code>getElementsByTagName</code> method selects elements by their tag name.</p>
+                        <pre>
+                        <code>
+// Select elements by tag name
+var elementsByTagName = document.getElementsByTagName("div");
+                        </code>
+                    </pre>
+                    </div>
+
+                    <div class="wh">
+                        <h3>getElementsByClassName</h3>
+                        <p>The <code>getElementsByClassName</code> method selects elements by their class name.</p>
+                        <pre>
+                        <code>
+// Select elements by class name
+var elementsByClassName = document.getElementsByClassName("myClassName");
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+                <div class="in">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">Web program that allows users to input two numbers and then adds them
+                            together, displaying the result dynamically on the page.</button>
+                        <div class="panel">
+                            <pre>
+                                <code class="language-html">
+&lt;!DOCTYPE html>
+&lt;html>
+
+&lt;head>
+    &lt;title>Addition Program&lt;/title>
+&lt;/head>
+
+&lt;body>
+    &lt;label>Num 1 : &lt;/label>
+    &lt;input type="text" id="t1">&lt;br>&lt;br>
+    &lt;label>Num 2 : &lt;/label>
+    &lt;input type="text" id="t2">&lt;br>&lt;br>
+    &lt;label>Sum Result : &lt;/label>
+    &lt;input type="text" id="t3">&lt;br>&lt;br>
+    &lt;input type="button" value="Add" onclick="add()">
+    &lt;input type="button" value="Reset" onclick="reset()">
+    &lt;script>
+        function add() {
+            var num1 = parseInt(document.getElementById("t1").value);
+            var num2 = parseInt(document.getElementById("t2").value);
+            var sum = num1 + num2;
+            document.getElementById("t3").value = sum;
+        }
+        function reset() {
+            document.getElementById("t1").value = "";
+            document.getElementById("t2").value = "";
+            document.getElementById("t3").value = "";
+        }
+    &lt;/script>
+&lt;/body>
+
+&lt;/html>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <label>Num 1 : </label>
+                        <input type="text" id="t1"><br><br>
+                        <label>Num 2 : </label>
+                        <input type="text" id="t2"><br><br>
+                        <label>Sum Result : </label>
+                        <input type="text" id="t3"><br><br>
+                        <input type="button" value="Add" onclick="add()">
+                        <input type="button" value="Reset" onclick="reset()">
+                    </div>
+                </div>
+                <div class="in">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">Web program that allows users to input a number and then find its factorial,
+                            and displays its result dynamically on the page.</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Factorial&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;label for=&quot;&quot;&gt;Enter a number : &lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;t1&quot;&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for=&quot;&quot;&gt;Factorial : &lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;t2&quot;&gt;&lt;br&gt;&lt;br&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Find Factorial&quot; onclick=&quot;fact()&quot;&gt;
+    &lt;script&gt;
+        function fact() {
+            var f = 1;
+            var num = parseInt(document.getElementById(&quot;t1&quot;).value);
+            for (var i = 1; i &lt;= num; i++) {
+                f = f * i;
+            }
+            document.getElementById(&quot;t2&quot;).value = f;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <label for="">Enter a number : </label>
+                        <input type="text" id="t4"><br><br>
+                        <label for="">Factorial : </label>
+                        <input type="text" id="t5"><br><br>
+                        <input type="button" value="Find Factorial" onclick="fact()">
+                    </div>
+                </div>
+                <div class="in">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">Web program to swap two numbers</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Factorial&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;label for=&quot;&quot;&gt;Enter A : &lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;t1&quot;&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for=&quot;&quot;&gt;Enter B : &lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;t2&quot;&gt;&lt;br&gt;&lt;br&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Swap&quot; onclick=&quot;swap()&quot;&gt;
+    &lt;script&gt;
+        function swap() {
+            var temp = parseInt(document.getElementById(&quot;t1&quot;).value);
+            document.getElementById(&quot;t1&quot;).value = document.getElementById(&quot;t2&quot;).value;
+            document.getElementById(&quot;t2&quot;).value = temp;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <label for="">Enter A : </label>
+                        <input type="text" id="t6"><br><br>
+                        <label for="">Enter B : </label>
+                        <input type="text" id="t7"><br><br>
+                        <input type="button" value="Swap" onclick="swap()">
+                    </div>
+                </div>
+            </div>
         </div>
+        </div>
+        <script>
+            function swap() {
+                var temp = parseInt(document.getElementById("t6").value);
+                document.getElementById("t6").value = document.getElementById("t7").value;
+                document.getElementById("t7").value = temp;
+            }
+            function add() {
+                var num1 = parseInt(document.getElementById("t1").value);
+                var num2 = parseInt(document.getElementById("t2").value);
+                var sum = num1 + num2;
+                document.getElementById("t3").value = sum;
+            }
+            function reset() {
+                document.getElementById("t1").value = "";
+                document.getElementById("t2").value = "";
+                document.getElementById("t3").value = "";
+            }
+            function fact() {
+                var f = 1;
+                var num = parseInt(document.getElementById("t4").value);
+                for (var i = 1; i <= num; i++) {
+                    f = f * i;
+                }
+                document.getElementById("t5").value = f;
+            }
+        </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <script src="../../../../public/main.js"></script>
     </body>
