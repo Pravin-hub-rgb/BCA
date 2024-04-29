@@ -441,6 +441,33 @@ print(my_list)  # Output: [1, 2, 3, 4] (original list modified inside the functi
                         pass-by-value, which always creates a copy of the object.</li>
                 </ul>
             </div>
+            <div class="in">
+                <h3>Returning Multiple Integer Values in Python Functions</h3>
+                <p>In Python, you can return multiple integer values from a function by using separate return statements
+                    for each value.</p>
+
+                <h3>Example</h3>
+                <p>Here's an example of returning multiple integer values:</p>
+                <pre>
+                    <code>
+def calculate_numbers(a, b):
+    sum_result = a + b
+    product_result = a * b
+    return sum_result
+    return product_result
+
+# Calling the function and capturing each returned value separately
+sum_value = calculate_numbers(5, 3)
+product_value = calculate_numbers(5, 3)
+print(f"Sum: {sum_value}, Product: {product_value}")
+                    </code>
+                </pre>
+
+                <p>In this code, the function `calculate_numbers` calculates the sum and product of two integers `a` and
+                    `b`. Each value is returned using a separate return statement. When calling the function, each
+                    returned value is captured separately.</p>
+
+            </div>
         </div>
         <div class="wh">
             <h2>Advanced Functions</h2>
@@ -700,19 +727,20 @@ f1.close()
                         </code>
                     </pre>
                     </div>
-                    <div class="wh">
-                        <h3>r+ mode</h3>
-                        <ul>
-                            <li>The "r+" mode allows both reading and writing operations on the file.</li>
-                            <li>In "r+" mode, if we read first, the cursor will be at the beginning initially. After
-                                reading, the cursor will be at the end, allowing us to write content at the end of the
-                                file.
-                            </li>
-                        </ul>
-                        <p>Example:</p>
-                        <div class="code">
-                            <div class="dotc"></div>
-                            <pre>
+                </div>
+                <div class="wh">
+                    <h3>r+ mode</h3>
+                    <ul>
+                        <li>The "r+" mode allows both reading and writing operations on the file.</li>
+                        <li>In "r+" mode, if we read first, the cursor will be at the beginning initially. After
+                            reading, the cursor will be at the end, allowing us to write content at the end of the
+                            file.
+                        </li>
+                    </ul>
+                    <p>Example:</p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <pre>
                         <code class="language-python">
 # Open the file in "r+" mode
 f1 = open("file_2.txt", "r+")
@@ -729,47 +757,47 @@ f1.close()
 # You can check the file to see the updated content
                         </code>
                     </pre>
-                        </div>
-                        <ul>
-                            <li>The write operation in "r+" mode adds the new content at the end of the existing content
-                                in
-                                the file.</li>
-                        </ul>
-                        <p>Finding the cursor position:</p>
-                        <pre>
+                    </div>
+                    <ul>
+                        <li>The write operation in "r+" mode adds the new content at the end of the existing content
+                            in
+                            the file.</li>
+                    </ul>
+                    <p>Finding the cursor position:</p>
+                    <pre>
                         <code class="language-python">
 # Use the tell() method to find the cursor position
 cursor_position = f1.tell()
 print("Cursor position:", cursor_position)
                         </code>
                     </pre>
-                        <p>If you want to place the cursor at a specific position, you can use the seek() method:</p>
-                        <pre>
+                    <p>If you want to place the cursor at a specific position, you can use the seek() method:</p>
+                    <pre>
                         <code class="language-python">
 # Set the cursor position to a specific location (e.g., position 0)
 f1.seek(0)
                         </code>
                     </pre>
-                    </div>
-                    <div class="wh">
-                        <h3>w+ mode</h3>
-                        <ul>
-                            <li>The "w+" mode opens the file for both reading and writing operations, similar to the
-                                "r+"
-                                mode.</li>
-                            <li>The file pointer or cursor exists at the beginning of the file when opened in "w+" mode.
-                            </li>
-                            <li>If the file already exists, the previous content will be overwritten. If the file
-                                doesn't
-                                exist, a new file will be created.</li>
-                            <li>In contrast to the "r+" mode where a non-existing file raises an error, the "w+" mode
-                                simply
-                                creates a new file if it doesn't exist.</li>
-                        </ul>
-                        <p>Example:</p>
-                        <div class="code">
-                            <div class="dotc"></div>
-                            <pre>
+                </div>
+                <div class="wh">
+                    <h3>w+ mode</h3>
+                    <ul>
+                        <li>The "w+" mode opens the file for both reading and writing operations, similar to the
+                            "r+"
+                            mode.</li>
+                        <li>The file pointer or cursor exists at the beginning of the file when opened in "w+" mode.
+                        </li>
+                        <li>If the file already exists, the previous content will be overwritten. If the file
+                            doesn't
+                            exist, a new file will be created.</li>
+                        <li>In contrast to the "r+" mode where a non-existing file raises an error, the "w+" mode
+                            simply
+                            creates a new file if it doesn't exist.</li>
+                    </ul>
+                    <p>Example:</p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <pre>
                         <code class="language-python">
 # Open the file in "w+" mode
 f1 = open("file_4.txt", "w+")
@@ -790,23 +818,23 @@ f1.close()
 print("Read data:", data)
                     </code>
                 </pre>
-                        </div>
                     </div>
-                    <div class="wh">
-                        <h3>a mode</h3>
-                        <ul>
-                            <li>The "a" mode opens the file in append mode, which is different from write mode because
-                                it
-                                appends new content to the end of the file without overwriting existing content.</li>
-                            <li>When a file is opened in "a" mode, the file handler is positioned at the end of the
-                                previously written content. If the file already exists, the cursor is placed at the end
-                                of
-                                that file; if the file doesn't exist, a new file will be created.</li>
-                        </ul>
-                        <p>Example:</p>
-                        <div class="code">
-                            <div class="dotc"></div>
-                            <pre>
+                </div>
+                <div class="wh">
+                    <h3>a mode</h3>
+                    <ul>
+                        <li>The "a" mode opens the file in append mode, which is different from write mode because
+                            it
+                            appends new content to the end of the file without overwriting existing content.</li>
+                        <li>When a file is opened in "a" mode, the file handler is positioned at the end of the
+                            previously written content. If the file already exists, the cursor is placed at the end
+                            of
+                            that file; if the file doesn't exist, a new file will be created.</li>
+                    </ul>
+                    <p>Example:</p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <pre>
                         <code class="language-python">
 # Open the file in "a" mode
 f1 = open("file_5.txt", "a")
@@ -820,11 +848,11 @@ f1.close()
 # You can check the file to see the appended content
                     </code>
                 </pre>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
