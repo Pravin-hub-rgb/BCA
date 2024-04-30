@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <h1>Calculator</h1>
+    <form action="#" name="mycal">
+        <label>Enter First Number : </label>
+        <input type="number" name="firstNum" /> <br><br>
+        <label>Enter Second Number :</label>
+        <input type="number" name="secondNum" /> <br><br>
+        <label>Select Operation : </label>
+        <select name="operation">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <br><br><label>Result : </label>
+        <input name="result" type="number" />
+        <br><br><input type="button" value="Calculate" onclick="calculate()">
+    </form>
+    <script>
+        function calculate() {
+            var firstNum = Number(document.mycal.firstNum.value);
+            var secondNum = Number(document.mycal.secondNum.value);
+            var operation = document.mycal.operation.value;
+            var result = document.mycal.result;
+            if (firstNum == "" || secondNum == "") {
+                alert("Please enter both number ");
+            }
+            console.log(result.value)
+            if (operation == "+") {
+                result.value = firstNum + secondNum;
+            } else if (operation == "-") {
+                result.value = firstNum - secondNum;
+            } else if (operation == "*") {
+                result.value = firstNum * secondNum;
+            } else if (operation == "/") {
+                result.value = firstNum / secondNum;
+            }
+            console.log(result.value)
+        }
+    </script>
+</body>
+
+</html>
