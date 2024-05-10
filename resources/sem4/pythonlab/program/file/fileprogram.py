@@ -1,0 +1,6 @@
+f1 = open("f1.txt", "w")
+f1.writelines("this is the new line \n and this is the other line")
+f1.close()
+f1 = open("f1.txt", "r")
+print(f1.read())
+f1.close()

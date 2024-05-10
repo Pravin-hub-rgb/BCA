@@ -126,7 +126,7 @@
                     three
                     commonly used approaches:</p>
                 <div class="in">
-                    <strong>Placing JS code inside the body tag:</strong>
+                    <strong>1: Placing JS code inside the body tag:</strong>
                     <p>One method is to embed JavaScript directly within the body of the HTML document, typically at
                         the
                         end of the body tag. This allows the JavaScript code to access and manipulate the HTML
@@ -152,7 +152,7 @@
                     </pre>
                 </div>
                 <div class="in">
-                    <strong>Placing JS code inside the head tag:</strong>
+                    <strong>2: Placing JS code inside the head tag:</strong>
                     <p>Another approach is to include JavaScript within the head section of the HTML document. While
                         this method is common, it's important to note that the JavaScript code is executed before
                         the
@@ -171,7 +171,7 @@
                     </pre>
                 </div>
                 <div class="in">
-                    <strong>Creating a separate external JS file:</strong>
+                    <strong>3: Creating a separate external JS file:</strong>
                     <p>Alternatively, JavaScript code can be placed in a separate external file with the ".js"
                         extension. This file is then linked to the HTML document using the
                         <strong>&lt;script&gt;</strong>
@@ -753,7 +753,135 @@ var elementsByClassName = document.getElementsByClassName("myClassName");
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="wh">
+                <h2>Form Validation</h2>
+                <ul>
+                    <li>Form validation can prevent invalid or malicious data from being submitted to the server,
+                        enhancing data integrity and security.</li>
+                    <li>Common validation checks include verifying required fields, checking data formats (such as email
+                        addresses or phone numbers), and ensuring data falls within acceptable ranges (like minimum and
+                        maximum values).</li>
+                    <li>Client-side validation provides immediate feedback to users, improving user experience by
+                        highlighting errors before submission.</li>
+                    <li>Server-side validation acts as a safety net even if client-side validation fails or is bypassed,
+                        ensuring data consistency and reliability.</li>
+                </ul>
+                <p>We can apply validation using the following methods:
+                <ol>
+                    <li>HTML 5: This method is easier as we can use attributes like 'required' for simple validations
+                        directly in HTML tags.</li>
+                    <li>jQuery: This approach, although deprecated now, was based on JavaScript and allowed for more
+                        interactive form validation.</li>
+                    <li>JavaScript: This method is superior as it provides more control and flexibility. Using
+                        JavaScript, we can handle complex validations, customize error messages, and implement dynamic
+                        validation logic based on user inputs.</li>
+                </ol>
+                </p>
+                <div class="in">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">Create a form that takes a username and password, and display an alert
+                            message when the username field is empty or the password length is less than 6
+                            characters.</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;form action=&quot;#&quot; name=&quot;myform&quot;&gt;
+        &lt;label&gt;Name : &lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt; &lt;br&gt;&lt;br&gt;
+        &lt;label&gt;Password : &lt;/label&gt;
+        &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt; &lt;br&gt;&lt;br&gt;
+        &lt;input type=&quot;button&quot; value=&quot;submit&quot; onclick=&quot;validate()&quot; /&gt;
+        &lt;input type=&quot;reset&quot; value=&quot;reset&quot;&gt;
+    &lt;/form&gt;
+    &lt;script&gt;
+        function validate() {
+            var name = document.myform.name.value;
+            var password = document.myform.password.value;
+            if (name == &quot;&quot;) {
+                alert(&quot;Name can't be blank!&quot;);
+            }
+            else if (password.length &lt; 6) {
+                alert(&quot;Password must be atleast 6 characters long!&quot;);
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <form action="#" name="myform">
+                            <label>Name : </label>
+                            <input type="text" name="name" /> <br><br>
+                            <label>Password : </label>
+                            <input type="password" name="password" /> <br><br>
+                            <input type="button" value="submit" onclick="validate()" />
+                            <input type="reset" value="reset">
+                        </form>
+                    </div>
+                </div>
+                <div class="in">
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">Create a form that takes a numeric input and displays an error message if the
+                            input is not a number when the form is submitted</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;form action=&quot;#&quot; name=&quot;myform&quot; onsubmit=&quot;validate()&quot;&gt;
+        &lt;label&gt;Number : &lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;num&quot; /&gt; &lt;br&gt;
+        &lt;span id=&quot;numloc&quot;&gt;&lt;/span&gt;
+        &lt;br&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;
+    &lt;/form&gt;
+    &lt;script&gt;
+        function validate() {
+            var num = document.myform.num.value;
+            if (isNaN(num)) {
+                document.getElementById(&quot;numloc&quot;).innerHTML = &quot;Enter numberic value only&quot;;
+            } else {
+                document.getElementById(&quot;numloc&quot;).innerHTML = &quot;&quot;;
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <form action="#" name="myform1" onsubmit="validate1(event)">
+                            <label>Number : </label>
+                            <input type="text" name="num" /> <br>
+                            <span id="numloc"></span>
+                            <br>
+                            <input type="submit" value="submit">
+                        </form>
+                    </div>
+                    <ul>
+                        <li>We have used the `isNaN()` function, which checks if a value is not a number (NaN). In our
+                            validation logic, `isNaN(num)` is used to verify if the input value in the "num" field is a
+                            numeric value or not. If it's not a number, the validation displays an error message.</li>
+                        <li>We have also used `.innerHTML`, which is a property that allows us to get or set the HTML
+                            content inside an element. In our validation function,
+                            `document.getElementById("numloc").innerHTML` is used to dynamically update the content of
+                            the `&lt;span>` element with the ID "numloc" to display the error message when the input
+                            value
+                            is not a number.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <script>
             function swap() {
@@ -779,6 +907,25 @@ var elementsByClassName = document.getElementsByClassName("myClassName");
                     f = f * i;
                 }
                 document.getElementById("t5").value = f;
+            }
+            function validate() {
+                var name = document.myform.name.value;
+                var password = document.myform.password.value;
+                if (name == "") {
+                    alert("Name can't be blank!");
+                }
+                else if (password.length < 6) {
+                    alert("Password must be atleast 6 characters long!");
+                }
+            }
+            function validate1(event) {
+                event.preventDefault();
+                var num = document.myform1.num.value;
+                if (isNaN(num)) {
+                    document.getElementById("numloc").innerHTML = "Enter numberic value only";
+                } else {
+                    document.getElementById("numloc").innerHTML = "";
+                }
             }
         </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
