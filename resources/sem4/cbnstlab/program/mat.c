@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-    float A[10][10], u;
+    float A[20][20], u;
     int n, i, j, k;
     printf("Enter the number of unknowns : ");
     scanf("%d", &n);
