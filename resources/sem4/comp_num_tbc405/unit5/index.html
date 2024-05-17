@@ -169,7 +169,133 @@
                 <p>Note: A trendline is a line that represents the overall direction of a dataset. It is not intended to
                     perfectly match every data point, but rather to capture the general trend.</p>
             </div>
+            <div class="in">
+                <h3>Semi Averages Method</h3>
+                <p>Steps followed:</p>
+                <ol>
+                    <li>Divide the Data:
+                        Split your time series data into two equal halves. If you have an odd number of data points,
+                        exclude the middle one for this method.</li>
+                    <li>Calculate Averages: Compute the average (arithmetic mean) of the values in each half of the data
+                        set. These become your "semi-averages."</li>
+                    <li>Plot the Points: Assign the first semi-average to a point midway through the first half of the
+                        data,
+                        and the second semi-average to a point midway through the second half. Plot these two points on
+                        a graph with time on the x-axis and the variable of interest on the y-axis.</li>
+                    <li>Draw the Trend Line: Connect the two plotted points (representing the semi-averages) with a
+                        straight line.
+                        This line is considered your estimated trend line.</li>
+                </ol>
+                <p><strong>Question 1:</strong> Fit a trend line by the method of semi-average to the data given below:
+                    <br>
+                    <img src="../../images/semiavgimg.svg" alt="" class="wb"><br>
+                    Solution: Here we have even number of years so, these can be divided into two equal parts.
+                </p>
+                <img src="../../images/semiavgimg2.svg" alt="" class="wb">
+                <br><img src="../../images/semiavgimg3.svg" alt="" class="wb">
+                <p><strong>Question 2:</strong> Find a trend line by the method of semi-averages.</p>
+                <img src="../../images/semiavgimg4.svg" alt="" class="wb">
+                <br><img src="../../images/semiavgimg5.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Moving Average Method</h3>
+                <p>This method is a more robust approach compared to semi-averages. It smooths out short-term
+                    fluctuations in the data to reveal the underlying long-term trend (secular trend).</p>
+                <p>Steps followed:
+                <ol>
+                    <li>Given Moving Average Size: You'll be provided with a specific number of data points to be
+                        included in the moving average calculation (the moving average size).
+                        This size determines how much smoothing is applied. A larger moving average size results in a
+                        smoother line but might be less responsive to recent changes.</li>
+                    <li>Calculate Moving Averages:
+                        <ul>
+                            <li>Odd Moving Average Size: Slide the window (encompassing the moving average size) across
+                                your data set one position at a time.
+                                For each window position, calculate the average of the data points within that window.
+                                You'll directly get a moving average for each data point (except potentially the first
+                                few and last few points depending on the moving average size).</li>
+                            <li>Even Size (Centered Moving Average):
+                                Here's the trick!
+                                Because you have an even number of data points in the window, we need a special average
+                                for the center. Slide the window as usual. For even-numbered window sizes, find the
+                                center data point. To get its centered moving average, average the data point before it
+                                and the one after it (basically, the sum of two neighbors divided by 2). Do this for all
+                                center points in windows with even sizes.</li>
+                        </ul>
+                    </li>
+                    <li>Plotting the Moving Averages:
+                        The original data points are plotted on a graph with time on the x-axis and the variable of
+                        interest on the y-axis. Subsequently, the calculated moving averages, including the centered
+                        values for even moving average sizes, are plotted alongside the original data points.</li>
+                </ol>
+                </p>
+                <p><strong>Question 1:</strong> Find the 5 yearly moving average for the following:</p>
+                <img src="../../images/movingavgimg1.svg" alt="" class="wb">
+                <p>Now, we will plot actual value and trend value on the graph.</p>
+                <img src="../../images/movingavgimg2.svg" alt="" class="wb">
+            </div>
+            <div class="in">
+                <h3>Least Square Method</h3>
+                <p>We will understand the least square method using the following question:
+                    <br><strong>Q-</strong> Fit a straight line trend by the method of least squares (taking 1978 as the
+                    year
+                    of origin) for the following data:
+                    <br><img src="../../images/lstsqimg1.svg" alt="" class="wb">
+                <ul>
+                    <li>Step 1:
+                        <br> The straight-line trend equation is given by:
+                        <br>y = a + bx ---- (1)
+                        <br>Normal equations:
+                        <br>&sum; y = Na + b&sum; x ---- (2)
+                        <br>where N = number of years of data given.
+                        <br>&sum; xy = a&sum; x + b&sum; x<sup>2</sup> ---- (3)
+                        <br>In the least squares method, we try to find the values of 'a' and 'b' using the normal
+                        equations.
+                    </li>
+                    <li>Step 2:
+                        <br> Create a table with columns for x, y, xy, and x<sup>2</sup> (these are the values required
+                        in the normal equations).
+                        <br><img src="../../images/lstsqimg2.svg" alt="" class="wb">
+                        <br>If the origin year is given in the question, then we can calculate the value of 'x' as the
+                        row year minus
+                        the origin year. If the origin year is not given, we have to assume it. The condition for
+                        assuming the origin year is as follows:
+                        <br>If 'N' is odd, the middle year can be taken as the origin year. If 'N' is even, the average
+                        of the mid two years is taken as the origin year.
+                        For example, for the years 1980, 1981, 1982, 1983, 'N' is even, so the average of 1981 and 1982,
+                        which is equal to 1981.5, will be taken as the origin year.
+                        Accordingly, 'x' will be calculated.
+                        <br>Now, calculate &sum; x, &sum; y, &sum; xy, and &sum; x<sup>2</sup> as we require them in the
+                        normal equations to solve them.
+                        <br>&sum; x = 21, &sum; y = 60, &sum; xy = 248, and &sum; x<sup>2</sup> = 91.
+                    </li>
+                    <li>Step 3:
+                        <br>Using the values obtained from step 2, substitute them into the equations to find the values
+                        of 'a' and 'b':
+                        <br>Equation 2 becomes: 60 = 6a + 21b
+                        <br>Equation 3 becomes: 248 = 21a + 91b
+                        <br>After solving these equations, we get a = 2.40 and b = 2.17.
+                        <br>Now, substitute the values of 'a' and 'b' into equation 1 to get: y = 2.40 + 2.17x.
+                    </li>
+                    <li>Step 4:
+                        <br>Using the trend equation, we can find the trend values.
+                        <br><img src="../../images/lstsqimg3.svg" alt="" class="wb">
+                    </li>
+                </ul>
+                </p>
+
+            </div>
         </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/playlist?list=PLEHGYFbPuuMFDl1z1wwdz7uOH8BcmDeS6"
+                    target="_blank">Playlist &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=t52qB6QqTno" target="_blank">4 Year Moving Average method
+                    &neArr;</a>
+            </li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
