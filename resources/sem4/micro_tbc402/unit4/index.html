@@ -498,8 +498,181 @@ Memory Location  |   Instruction   |    Comments
                 <p>After execution of this program, 05H will be stored at 2051H, and the carry 1 will be stored at
                     2052H.</p>
             </div>
+            <div class="in">
+                <h3>3- Program to Subtract Two 8-Bit Numbers Without Borrow in 8085</h3>
+                <p>Suppose we have two 8-bit numbers stored in memory locations 4000H and 4001H, and we want to subtract
+                    them without
+                    borrow.</p>
+                <pre>
+                                <code>
+Memory Location  |   Instruction   |    Comments
+-----------------|-----------------|---------------------------------------------
+    3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
+    3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
+    3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A without borrow
+    3005H          |  HLT            |    ; Halt the program
+                                </code>
+                            </pre>
+                <p>Explanation of Instructions:</p>
+                <ul>
+                    <li><strong>MVI A, 40H</strong>: Load the first number (40H) into accumulator A.</li>
+                    <li><strong>MVI B, 30H</strong>: Load the second number (30H) into register B.</li>
+                    <li><strong>SUB B</strong>: Subtract the content of register B from accumulator A without borrow.
+                    </li>
+                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>4- Program to Subtract Two 8-Bit Numbers with Borrow in 8085</h3>
+                <p>Suppose we have two 8-bit numbers stored in memory locations 4000H and 4001H, and we want to subtract
+                    them with
+                    borrow.</p>
+                <pre>
+                                <code>
+Memory Location  |   Instruction   |    Comments
+-----------------|-----------------|---------------------------------------------
+    3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
+    3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
+    3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A with borrow
+    3005H          |  MOV C, A       |    ; Move the result (difference) to register C
+    3006H          |  SBB A          |    ; Subtract borrow from accumulator A
+    3007H          |  HLT            |    ; Halt the program
+                                </code>
+                            </pre>
+                <p>Explanation of Instructions:</p>
+                <ul>
+                    <li><strong>MVI A, 40H</strong>: Load the first number (40H) into accumulator A.</li>
+                    <li><strong>MVI B, 30H</strong>: Load the second number (30H) into register B.</li>
+                    <li><strong>SUB B</strong>: Subtract the content of register B from accumulator A with borrow.</li>
+                    <li><strong>MOV C, A</strong>: Move the result (difference) to register C.</li>
+                    <li><strong>SBB A</strong>: Subtract borrow from accumulator A.</li>
+                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>5- Write a Program for Addition of Two 16-bit Hexadecimal Numbers and Store the Result at Memory
+                    Location
+                    3050H.</h3>
+                <p>Suppose the first 16-bit number is 2A75H and the second 16-bit number is B42FH. The addition of these
+                    two numbers
+                    will be 2A75H + B42FH = DCA4H.
+                    <br>We start our program from the memory location 3000H, so 3000H will be the starting memory
+                    location.
+                </p>
+                <pre>
+                                <code>
+Memory Location  |   Instruction   |    Comments
+-----------------|-----------------|---------------------------------------------
+    3000H        |  MVI H, 2AH     |    ; Load high byte of first number (2A75H) into register H
+    3002H        |  MVI L, 75H     |    ; Load low byte of first number into register L
+    3004H        |  MVI D, B4H     |    ; Load high byte of second number (B42FH) into register D
+    3006H        |  MVI E, 2FH     |    ; Load low byte of second number into register E
+    3008H        |  MOV A, L       |    ; Move low byte of first number to accumulator A
+    3009H        |  ADD E          |    ; Add low byte of second number to accumulator A
+    300AH        |  MOV L, A       |    ; Move the sum in accumulator A to register L (low byte)
+    300BH        |  MOV A, H       |    ; Move high byte of first number to accumulator A
+    300CH        |  ADC D          |    ; Add high byte of second number to accumulator A with carry
+    300DH        |  MOV H, A       |    ; Move the sum in accumulator A to register H (high byte)
+    300EH        |  STA 3050H      |    ; Store the 16-bit sum from registers H and L at memory location 3050H
+    3011H        |  HLT            |    ; Halt the program
+                                </code>
+                            </pre>
+                <p>Explanation of Instructions:</p>
+                <ul>
+                    <li><strong>MVI H, 2AH</strong>: Load the high byte of the first number (2A75H) into register H.
+                    </li>
+                    <li><strong>MVI L, 75H</strong>: Load the low byte of the first number into register L.</li>
+                    <li><strong>MVI D, B4H</strong>: Load the high byte of the second number (B42FH) into register D.
+                    </li>
+                    <li><strong>MVI E, 2FH</strong>: Load the low byte of the second number into register E.</li>
+                    <li><strong>MOV A, L</strong>: Move the low byte of the first number to accumulator A.</li>
+                    <li><strong>ADD E</strong>: Add the low byte of the second number to accumulator A.</li>
+                    <li><strong>MOV L, A</strong>: Move the sum in accumulator A to register L (low byte).</li>
+                    <li><strong>MOV A, H</strong>: Move the high byte of the first number to accumulator A.</li>
+                    <li><strong>ADC D</strong>: Add the high byte of the second number to accumulator A with carry.</li>
+                    <li><strong>MOV H, A</strong>: Move the sum in accumulator A to register H (high byte).</li>
+                    <li><strong>STA 3050H</strong>: Store the 16-bit sum from registers H and L at memory location
+                        3050H.</li>
+                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>6- Program to Swap Two Numbers in Memory Locations.</h3>
+                <p>Suppose we have two numbers stored in memory locations 4000H and 4001H, and we want to swap their
+                    values.</p>
+                <pre>
+                                <code>
+Memory Location  |   Instruction   |    Comments
+-----------------|-----------------|---------------------------------------------
+    3000H        |  LXI H, 4000H   |    ; Load memory location for first number into register pair HL
+    3003H        |  MOV A, M       |    ; Move the content of memory location 4000H to accumulator A
+    3004H        |  LXI D, 4001H   |    ; Load memory location for second number into register pair DE
+    3007H        |  MOV E, M       |    ; Move the content of memory location 4001H to register E
+    3008H        |  MOV L, E       |    ; Move the content of register E (second number) to register L (first number)
+    3009H        |  MOV M, A       |    ; Move the content of accumulator A (first number) to memory location 4001H
+    300AH        |  MOV M, L       |    ; Move the content of register L (second number) to memory location 4000H
+    300BH        |  HLT            |    ; Halt the program
+                                </code>
+                            </pre>
+                <p>Explanation of Instructions:</p>
+                <ul>
+                    <li><strong>LXI H, 4000H</strong>: Load the memory location for the first number into register pair
+                        HL.</li>
+                    <li><strong>MOV A, M</strong>: Move the content of memory location 4000H to accumulator A.</li>
+                    <li><strong>LXI D, 4001H</strong>: Load the memory location for the second number into register pair
+                        DE.</li>
+                    <li><strong>MOV E, M</strong>: Move the content of memory location 4001H to register E.</li>
+                    <li><strong>MOV L, E</strong>: Move the content of register E (second number) to register L (first
+                        number).</li>
+                    <li><strong>MOV M, A</strong>: Move the content of accumulator A (first number) to memory location
+                        4001H.</li>
+                    <li><strong>MOV M, L</strong>: Move the content of register L (second number) to memory location
+                        4000H.</li>
+                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>7- Program to Move a Block of Data of 16 Bytes from Starting Addresses 2050H to 2060H in 8085</h3>
+                <p>We want to move a block of data of 16 bytes from starting addresses 2050H to 2060H to another
+                    location.</p>
+                <pre>
+                                <code>
+Memory Location  |   Instruction   |    Comments
+-----------------|-----------------|---------------------------------------------
+    3000H          |  LXI H, 2050H   |    ; Load starting address of the block into register pair HL
+    3003H          |  LXI D, 2070H   |    ; Load destination address into register pair DE
+    3006H          |  LXI B, 10H     |    ; Load counter (number of bytes to move) into register pair BC
+    3009H          |  L1 MOV A, M    |    ; Move data from source address pointed by HL to accumulator A
+    300AH          |  MOV M, A       |    ; Move data from accumulator A to destination address pointed by DE
+    300BH          |  INX H          |    ; Increment source address (HL)
+    300CH          |  INX D          |    ; Increment destination address (DE)
+    300DH          |  DCX B          |    ; Decrement counter (BC)
+    300EH          |  JNZ L1         |    ; Jump to L1 if counter is not zero
+    3011H          |  HLT            |    ; Halt the program
+                                </code>
+                            </pre>
+                <p>Explanation of Instructions:</p>
+                <ul>
+                    <li><strong>LXI H, 2050H</strong>: Load the starting address of the block (2050H) into register pair
+                        HL.</li>
+                    <li><strong>LXI D, 2070H</strong>: Load the destination address (2070H) into register pair DE.</li>
+                    <li><strong>LXI B, 10H</strong>: Load the counter (number of bytes to move, here 16 bytes) into
+                        register pair BC.</li>
+                    <li><strong>MOV A, M</strong>: Move data from the source address pointed by HL to accumulator A.
+                    </li>
+                    <li><strong>MOV M, A</strong>: Move data from accumulator A to the destination address pointed by
+                        DE.</li>
+                    <li><strong>INX H</strong>: Increment the source address (HL).</li>
+                    <li><strong>INX D</strong>: Increment the destination address (DE).</li>
+                    <li><strong>DCX B</strong>: Decrement the counter (BC).</li>
+                    <li><strong>JNZ L1</strong>: Jump to label L1 if the counter is not zero.</li>
+                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                </ul>
+            </div>
+
         </div>
-    </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
