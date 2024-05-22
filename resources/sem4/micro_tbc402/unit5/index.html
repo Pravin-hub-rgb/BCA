@@ -362,12 +362,307 @@
             </ul>
 
         </div>
+        <div class="wh">
+            <h2>Important parts of 8051 Microcontroller</h2>
+            <div class="in">
+                <h3>ALU</h3>
+                <p>The Arithmetic and Logic Unit (ALU) is a part of the CPU. The 8051 microcontroller has an 8-bit ALU
+                    responsible for executing instructions along with arithmetic and logical operations. All arithmetic
+                    and
+                    logical operations inside the CPU are performed by the ALU.</p>
+                <p>Here are some examples for better understanding:</p>
+                <ul>
+                    <li><code>ADD A, R1</code>: Adds the accumulator A with register R1, and the result is stored in A.
+                    </li>
+                    <li><code>CPL P0.3</code>: Complements bit 3 of port 0, demonstrating that the ALU can perform
+                        single-bit operations.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Accumulator</h3>
+                <p>The accumulator (A) is an 8-bit register used for most arithmetic and logical operations in the 8051
+                    microcontroller. Examples include:</p>
+                <ul>
+                    <li><code>ADD A, R0</code>: Adds the accumulator A with register R0, and the result is stored in A.
+                    </li>
+                    <li><code>ANL A, R1</code>: Performs a logical AND operation between A and R1, and stores the result
+                        in
+                        A.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>B Register</h3>
+                <p>The B register is an 8-bit register dedicated to multiplication and division instructions in the 8051
+                    microcontroller. Examples include:</p>
+                <ul>
+                    <li><code>MUL AB</code>: Multiplies A and B, storing the 16-bit result in A (lower byte) and B
+                        (higher
+                        byte).</li>
+                    <li><code>DIV AB</code>: Divides A by B, storing the quotient in A and the remainder in B.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Program Counter</h3>
+                <ul>
+                    <li>The program counter (PC) is a 16-bit register that points to the address of the next instruction
+                        to
+                        be
+                        executed.</li>
+                    <li> The 8051 microcontroller follows the Harvard architecture, with separate memory for
+                        program
+                        (ROM) and data (RAM). The PC automatically increments after each instruction is fetched.</li>
+                </ul>
+
+            </div>
+
+            <div class="in">
+                <h3>Data Pointer</h3>
+                <ul>
+                    <li>The Data Pointer (DPTR) is a 16-bit register used to point to data in RAM.</li>
+                    <li> It is divided into two
+                        8-bit
+                        registers: DPH (higher byte) and DPL (lower byte). The DPTR can also be used as a pointer for a
+                        lookup
+                        table in ROM.</li>
+                </ul>
+
+            </div>
+
+            <div class="in">
+                <h3>Stack Pointer</h3>
+                <ul>
+                    <li>The stack pointer (SP) is an 8-bit register that holds the address of the top of the stack.</li>
+                    <li> The stack
+                        operates on a Last In, First Out (LIFO) basis. The SP points to internal RAM addresses ranging
+                        from
+                        00H
+                        to 7FH and is used with push and pop instructions, as well as for subroutine and interrupt
+                        handling.
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="in">
+                <h3>Program Status Word (PSW)</h3>
+                <ul>
+                    <li>The Program Status Word (PSW) is an 8-bit register that indicates the status of the program,
+                        such as
+                        carry, overflow, and other flags.</li>
+                    <li>The PSW is bit-addressable, allowing bit-by-bit operations as well
+                        as
+                        operations on the entire register. The PSW flags change after each instruction execution.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h3>Flag Register of 8051 Microcontroller</h3>
+            <img src="../../images/microcontroller4.svg" alt="" class="wb">
+            <p>The flag register, also known as the Program Status Word (PSW), is an 8-bit register used to indicate the
+                status of the processor. The PSW contains flags that represent the result of arithmetic and logical
+                operations. The 8051 microcontroller's flag register is divided into various flags, each serving a
+                specific purpose. Let's discuss each flag with simple examples:</p>
+            <div class="in">
+                <h3>Carry Flag (CY)</h3>
+                <ul>
+                    <li>This flag is set if there is a carry out from the most significant bit (MSB) in an arithmetic
+                        operation.
+                        It is also affected by rotate operations.</li>
+                    <li>
+                        Example: Addition of two 8-bit numbers resulting in a carry<br>
+
+                        ; A = 1101 0101 (0xD5)<br>
+                        ; B = 1001 0011 (0x93)<br>
+                        ; A + B = 1 0110 1100 (0x1B8)<br>
+                        ; Result = 0110 1100 (0x6C), CY = 1 (carry out from MSB)
+                        </l>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Auxiliary Carry Flag (AC)</h3>
+                <ul>
+                    <li>This flag is set if there is a carry out from the 4th bit (low nibble) to the 5th bit (high
+                        nibble)
+                        in an
+                        arithmetic operation. It is used in BCD (Binary-Coded Decimal) arithmetic operations.</li>
+                    <li>
+                        Example: Addition of two BCD numbers<br>
+
+                        ; A = 0000 1001 (0x09)<br>
+                        ; B = 0000 0111 (0x07)<br>
+                        ; A + B = 0001 0000 (0x10)<br>
+                        ; Result = 0001 0000 (0x10), AC = 1 (carry out from low nibble)
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Parity Flag (P)</h3>
+                <ul>
+                    <li>This flag is set if the number of 1-bits in the accumulator is even. It is cleared if the number
+                        of
+                        1-bits is odd. It reflects the parity of the accumulator.</li>
+                    <li>
+                        Example: Checking the parity of a value<br>
+
+                        ; A = 0000 0011 (0x03, two 1s, even parity)<br>
+                        ; P = 1
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Overflow Flag (OV)</h3>
+                <ul>
+                    <li>This flag is set if there is a signed overflow, i.e., when the result of an arithmetic operation
+                        exceeds
+                        the range of -128 to +127.</li>
+                    <li>
+                        Example: Addition causing overflow<br>
+
+                        ; A = 0111 1111 (0x7F)<br>
+                        ; B = 0000 0001 (0x01)<br>
+                        ; A + B = 1000 0000 (0x80)<br>
+                        ; Result = 1000 0000 (0x80), OV = 1 (signed overflow)
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>General Purpose Flag (F0)</h3>
+                <ul>
+                    <li>This is a user-defined flag that can be set or cleared by software. It does not affect the
+                        operation of the ALU.</li>
+                    <li>
+                        Example: Using general-purpose flag F0
+                        <pre>
+            ; Set flag F0
+            SETB PSW.5
+            ; Clear flag F0
+            CLR PSW.5
+                        </pre>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Register Bank Select Flags (RS1 and RS0)</h3>
+                <ul>
+                    <li>These flags are used to select one of the four register banks (Bank 0, Bank 1, Bank 2, Bank 3)
+                        in
+                        the
+                        internal RAM of the 8051 microcontroller.</p>
+                    <li>
+                        Example: Selecting Register Bank 2<br>
+
+                        ; Select Register Bank 2<br>
+                        SETB PSW.4 ; RS1 = 1<br>
+                        CLR PSW.3 ; RS0 = 0<br>
+                        ; This selects Register Bank 2
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Interrupts in 8051</h2>
+            <p>Interrupts play a vital role in microcontroller systems like the 8051, allowing the processor to respond
+                to external events promptly. This lecture delves into the intricacies of interrupts in the 8051
+                microcontroller, focusing on their types, vector addresses, priority management, and control mechanisms
+                using the IE and IP registers.</p>
+            <div class="in">
+                <h3>Types of Interrupts in 8051:</h3>
+                <p>The 8051 microcontroller supports five interrupts, categorized into hardware and software interrupts:
+                </p>
+                <ul>
+                    <li>Hardware Interrupts:
+                        <ul>
+                            <li>INT0: Triggered by an external signal on the INT0 pin.</li>
+                            <li>INT1: Triggered similarly by an external signal on the INT1 pin.</li>
+                        </ul>
+                    </li>
+                    <li>Software Interrupts:
+                        <ul>
+                            <li>TF0 and TF1: Timer overflow interrupts associated with Timer 0 and Timer 1,
+                                respectively.
+                                RI and TI: Serial communication interrupts related to Receive Interrupt (RI) and
+                                Transmit Interrupt (TI).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Vector Address and Priority Management:</h3>
+                <p>Each interrupt in the 8051 microcontroller is associated with a vector address, which determines the
+                    location of the Interrupt Service Routine (ISR) in memory. The priority of interrupts is crucial for
+                    handling multiple simultaneous events efficiently:</p>
+
+                <ul>
+                    <li>Priority Order:
+                        <ol>
+                            <li>INT0 (Highest Priority)
+                            </li>
+                            <li>TF0 (Timer 0 Overflow)
+
+                            </li>
+                            <li>INT1 (Hardware Interrupt 1)</li>
+                            <li>TF1 (Timer 1 Overflow)
+                            </li>
+                            <li>Serial Communication (RI/TI) (Lowest Priority)</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Interrupt Service Routine (ISR) Execution:</h3>
+                <img src="../../images/microcontroller5.svg" alt="" class="wb">
+                <p>When an interrupt occurs, the processor suspends the current program execution and jumps to the
+                    corresponding ISR location. The ISR handles the interrupt-specific tasks and then returns to the
+                    main program using the RETI (Return from Interrupt) instruction. The main program's address is
+                    stored on the stack during ISR execution.</p>
+            </div>
+            <div class="in">
+                <h3>Interrupt Enable (IE) Register:
+                </h3>
+                <p>The IE register controls the enable/disable status of interrupts in the 8051 microcontroller. It
+                    consists of several bit-addressable flags:</p>
+                <ul>
+                    <li>EA (Enable All): Enables all interrupts when set to 1.</li>
+                    <li>ES (Enable Serial): Enables the serial communication interrupt (RI/TI).</li>
+                    <li>ET1 (Enable Timer 1), EX1 (Enable External Interrupt 1), EX0 (Enable External Interrupt 0):
+                        Enable specific interrupts individually.</li>
+                </ul>
+                <p>Enabling interrupts allows the processor to respond to external events based on their priority and
+                    handling requirements.</p>
+            </div>
+            <div class="in">
+                <h3>Interrupt Priority (IP) Register</h3>
+                <p>The IP register manages interrupt priorities in the 8051 microcontroller. It assigns higher priority
+                    to certain interrupts based on bit settings:
+                <ul>
+                    <li>PX1 (Priority for External Interrupt 1), PT1 (Priority for Timer 1), PT0 (Priority for Timer 0),
+                        PS (Priority for Serial): Setting these bits to 1 assigns higher priority to the corresponding
+                        interrupts.</li>
+                </ul>
+                Adjusting interrupt priorities ensures critical tasks are handled promptly, enhancing system
+                responsiveness and efficiency.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Controlling Interrupts:</h3>
+                <p>By configuring the IE and IP registers, developers can control interrupt behavior in the 8051
+                    microcontroller. Enabling specific interrupts and assigning priorities facilitate seamless event
+                    handling, optimizing system performance in real-time applications.</p>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>References</p>
         <ul>
             <li><a href="https://youtu.be/TElgHiPcVU8?si=RZUyj-FC_iA7AT4t" target="_blank">Pin Diagram of 8051
-                    Mircocontroller</a></li>
+                    Mircocontroller &neArr;</a></li>
+            <li><a href="https://youtu.be/I_qFGUTBYek?si=p0nLuZuTHwcnonIQ" target="_blank">Block Diagram of 8051
+                    Microcontroller &neArr;</a></li>
+            <li><a href="https://youtu.be/x4eBYZ52Vgo?si=PIb7aKDm0Vv9S1hH" target="_blank">Interrupts in 8051
+                    Microcontroller &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
