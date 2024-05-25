@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 4</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Unit 4</h1>
+        <div class="wh">
+            <h2>Curve Fitting</h2>
+            <ul>
+                <li>Curve fitting is the method of finding an approximate curve that satisfies the given data.</li>
+                <li>There are two types of curves to be fitted:
+                    <ol>
+                        <li>Exact fit - Passes through all the points, suitable for a small number of data points.</li>
+                        <li>Best fit - Does not pass through all the points, suitable for a large number of data points.
+                        </li>
+                    </ol>
+                </li>
+                <li>Why are we learning curve fitting?
+                    <ol>
+                        <li>To perform trend analysis, such as exponential or linear trends.</li>
+                        <li>To carry out interpolation and optimization.</li>
+                        <li>If you want to know the value of properties at any intermediate point, curve fitting helps
+                            to estimate those properties at intermediate points.</li>
+                    </ol>
+                </li>
+                <li>There are three different curves that can be fitted using the least squares method:
+                    <ol>
+                        <li>&star; Straight line </li>
+                        <li>Parabola</li>
+                        <li>&star; Exponential curve</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Fitting of a Straight Line Using the Least Squares Method</h3>
+                <p><strong>Working Rule (Steps)</strong></p>
+                <ol>
+                    <li>Let y = ax + b (Equation 1) be the curve of best fit, where 'a' and 'b' are the constants to be
+                        determined.</li>
+                    <li>Write the normal equations: <br>
+                        There are two constants in y = ax + b, so there are two normal equations:
+                        <br>∑y = a∑x + b∑1 (Note: ∑1 = n, so it is ∑y = a∑x + bn)
+                        <br>where n is the number of given data points.
+                        <br>∑xy = a∑x² + b∑x
+                    </li>
+                    <li>Using tabular calculation with the given data, find the unknowns 'a' and 'b'.</li>
+                    <li>Substitute these values of 'a' and 'b' into Equation 1 to get the required curve of best fit.
+                    </li>
+                </ol>
+                <br>
+                <p><strong>Question:</strong> By the method of least squares, find the best fitting straight line to the
+                    data given below:</p>
+                <pre>
+x  |  5  |  10  |  15  |  20  |  25
+y  | 15  |  19  |  23  |  26  |  30
+                </pre>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Let y = ax + b (Equation 1) be the straight line of best fit where 'a' and 'b' are the constants
+                        to be determined.</li>
+                    <li>The normal equations are:
+                        <br>∑y = a∑x + bn (Equation 2)
+                        <br>where n is the number of given data points
+                        <br>∑xy = a∑x² + b∑x (Equation 3)
+                        <br>The number of given data points, n = 5.
+                    </li>
+                    <li>Tabular calculations as we need ∑x, ∑y, ∑x², and ∑xy for finding the values of 'a' and 'b'
+                        through the normal equations:
+                        <pre>
+  x  |  y  | x²   |  xy 
+--------------------------
+  5  | 15  | 25   | 75
+  10 | 19  | 100  | 190
+  15 | 23  | 225  | 345
+  20 | 26  | 400  | 520
+  25 | 30  | 625  | 750
+                        </pre>
+                        ∑x = 75, ∑y = 113, ∑x² = 1375, and ∑xy = 1880
+                        <br>Now substitute these summation values into the normal equations to get:
+                        <br>Equation 2: 113 = 75a + 5b (Equation 4)
+                        <br>Equation 3: 1880 = 1375a + 75b (Equation 5)
+                        <br>On solving Equation 4 and Equation 5 we get:
+                        <br>a = 0.74
+                        <br>b = 11.5
+                    </li>
+                    <li>Now substitute the values of 'a' and 'b' into Equation 1 to get:
+                        <br>y = 0.74x + 11.5
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Fitting of Exponential Curves by the Method of Least Squares
+                    <br>Example: y = ae<sup>bx</sup> (exponential), y = ax<sup>b</sup> (power)
+                </h3>
+                <p><strong>Question:</strong> Fit y = ae<sup>bx</sup> to the following data using the method of least
+                    squares:
+                <pre>
+    x  |  0  |    5  |   8  |  12    |  20
+    y  |  3  |  1.5  |   1  |  0.55  |  0.18
+                </pre>
+                <ol>
+                    <li>Let y = ae<sup>bx</sup> (Equation 1) be the curve to be fitted where 'a' and 'b' are constants
+                        to be determined.</li>
+                    <li>Taking the logarithm on both sides, we get:
+                        <br>log(y) = log(ae<sup>bx</sup>)
+                        <br>log(y) = log(a) + log(e<sup>bx</sup>) [since log(AB) = log(A) + log(B)]
+                        <br>log(y) = log(a) + bx log(e) [since log(A<sup>m</sup>) = m log(A)]
+                        <br>Therefore, Y = A + Bx where Y = log(y), A = log(a), and B = b log(e)
+                        <br>Now, the normal equations are:
+                        <br>∑Y = An + B∑x (Equation 2)
+                        <br>∑xY = A∑x + B∑x² (Equation 3)
+                        <br>The number of data points, n = 5
+                    </li>
+                    <li>Tabular calculation:
+                        <pre>
+    x  |   y   |  Y = log(y)   |   xY    | x² 
+  ---------------------------------------------
+    0  |  3    |    0.4771     |  0      | 0
+    5  | 1.5   |    0.1761     |  0.8805 | 25
+    8  |  1    |    0.0000     |  0      | 64
+    12 | 0.55  |   -0.2596     | -3.1152 | 144
+    20 | 0.18  |   -0.7447     | -14.894 | 400
+                        </pre>
+                        ∑x = 45, ∑Y = -0.3512, ∑xY = -17.1292, and ∑x² = 633
+                    </li>
+                    <li>Now we will substitute these values into Equations 2 and 3 to get A and B:
+                        <br>Equation 2: -0.3512 = 5A + 45B (Equation 4)
+                        <br>Equation 3: -17.1292 = 45A + 633B (Equation 5)
+                        <br>Upon solving, we get:
+                        <br>B = -0.0612
+                        <br>A = 0.48056
+                        <br>But A = log<sub>10</sub>(a)
+                        <br>log<sub>10</sub>(a) = 0.48056
+                        <br>a = 10<sup>0.48056</sup>
+                        <br>a ≈ 3.0238
+                        <br>And B = b log(e)
+                        <br>b log<sub>10</sub>(e) = -0.0612
+                        <br>b = -0.0612 / log(e)
+                        <br>b ≈ -0.1409
+                    </li>
+                    <li>Now Equation 1 becomes:
+                        <br>y = 3.0238 e<sup>-0.1409x</sup>
+                    </li>
+                </ol>
+                <p><strong>Fit a curve y = ax<sup>b</sup> to the following data:</strong></p>
+                <pre>
+    x  |    1   |    2   |   3    |    4   |    5   |   6
+    y  |  2.98  |  4.26  |  5.21  |  6.10  |  6.80  |  7.50
+</pre>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Let y = ax<sup>b</sup> (Equation 1) be the curve to be fitted where 'a' and 'b' are constants to
+                        be determined. Taking the logarithm on both sides of Equation 1, we get:
+                        <br>log(y) = log(ax<sup>b</sup>)
+                        <br>log(y) = log(a) + log(x<sup>b</sup>) [since log(AB) = log(A) + log(B)]
+                        <br>log(y) = log(a) + b log(x)
+                        <br>Therefore, Y = A + bX where Y = log(y), X = log(x), and A = log(a)
+                        <br>Now, the normal equations are:
+                        <br>∑Y = An + b∑X (Equation 2)
+                        <br>∑XY = A∑X + b∑X² (Equation 3)
+                        <br>The number of given data points, n = 6
+                    </li>
+                    <li>
+                        Tabular calculation:
+                        <pre>
+    x  |   y     |   X = log(x)  |   Y = log(y)  |   X²   |   XY
+-------------------------------------------------------------------
+    1  |  2.98   |       0       |   0.4742      | 0      |  0
+    2  |  4.26   |    0.3010     |   0.6294      | 0.0906 |  0.1894
+    3  |  5.21   |    0.4771     |   0.7168      | 0.2276 |  0.3419
+    4  |  6.10   |    0.6021     |   0.7853      | 0.3625 |  0.4727
+    5  |  6.80   |    0.6990     |   0.8325      | 0.4886 |  0.5819
+    6  |  7.50   |    0.7782     |   0.8751      | 0.6056 |  0.6809
+-------------------------------------------------------------------
+    ∑  |         |    2.8574     |    4.3133     | 1.7743 |  2.2668
+    </pre>
+                    </li>
+                    <li>Now we will substitute these values into Equations 2 and 3 to get A and B:
+                        <br>Equation 2: 4.3133 = 6A + 2.8574b (Equation 4)
+                        <br>Equation 3: 2.2668 = 2.8574A + 1.7743b (Equation 5)
+                        <br>On solving these equations, we get:
+                        <br>b = 0.5140
+                        <br>A = 0.4741
+                        <br>Now, A = log(a)
+                        <br>So, log(a) = 0.4741
+                        <br>a = 10<sup>0.4741</sup>
+                        <br>a ≈ 2.9792
+                    </li>
+                    <li>Equation 1 becomes:
+                        <br>y = 2.9792x<sup>0.5140</sup>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
