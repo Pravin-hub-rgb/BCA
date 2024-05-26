@@ -180,7 +180,7 @@ y  | 15  |  19  |  23  |  26  |  30
                 <pre>
     x  |    1   |    2   |   3    |    4   |    5   |   6
     y  |  2.98  |  4.26  |  5.21  |  6.10  |  6.80  |  7.50
-</pre>
+                </pre>
                 <p><strong>Solution:</strong></p>
                 <ol>
                     <li>Let y = ax<sup>b</sup> (Equation 1) be the curve to be fitted where 'a' and 'b' are constants to
@@ -224,6 +224,281 @@ y  | 15  |  19  |  23  |  26  |  30
                         <br>y = 2.9792x<sup>0.5140</sup>
                     </li>
                 </ol>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Correlation</h2>
+            <ul>
+                <li>Correlation refers to the relationship between two or more variables. The degree of strength of the
+                    relationship between the two variables is given by the coefficient of correlation, denoted by 'r'.
+                    The formula for 'r' is:
+                    <br><img src="../../images/corr1.svg" alt="Coefficient of Correlation Formula" class="wb">
+                    <br>Where X = x - mean(x) and Y = y - mean(y). Here, mean(x) and mean(y) are the means of x and y,
+                    respectively.
+                    <br>mean(x) = (sum of x) / n and mean(y) = (sum of y) / n, where n is the total number of given data
+                    points.
+                </li>
+                <li>'r' is also known as <strong>Karl Pearson's coefficient of correlation</strong>.</li>
+                <li>If the values of x and y are numerically large, we apply the following formula:
+                    <br><img src="../../images/corr2.svg" alt="Alternate Coefficient of Correlation Formula" class="wb">
+                </li>
+                <li>The coefficient of correlation (r) has values between -1 and 1:
+                    <ul>
+                        <li>If r = 0, there is no correlation.</li>
+                        <li>If r = +1, the relationship is perfectly positive.</li>
+                        <li>If r = -1, the relationship is perfectly negative.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Karl Pearson's coefficient of correlation</h3>
+                <p><strong>Example Question:</strong> Find the coefficient of correlation for the given data:
+                <pre>
+    x  |  6  |  2  |  10  |  4  |  8
+    y  |  9  | 11  |  5   |  8  |  7  
+                    </pre>
+                </p>
+
+                <p><strong>Solution:</strong>
+                <ul>
+                    <li>There are numerically small values, so we are going to use the following formula:
+                        <br><img src="../../images/corr1.svg" alt="Coefficient of Correlation Formula" class="wb">
+                        <br>Where X = x - mean(x) and Y = y - mean(y)
+                    </li>
+                    <li>The number of given data points, n = 5
+                        <br>Let's find mean(x) = sum of x / n = (6 + 2 + 10 + 4 + 8) / 5 = 6
+                        <br>mean(y) = sum of y / n = (9 + 11 + 5 + 8 + 7) / 5 = 8
+                        <br>Therefore, X = x - mean(x) = x - 6
+                        <br>Therefore, Y = y - mean(y) = y - 8
+                    </li>
+                    <li>Tabular calculation:
+                        <pre>
+    x  |  y  |  X  |  Y  |  X²  |  Y²  |  XY
+    ------------------------------------------
+    6  |  9  |  0  |  1  |  0   |  1   |  0
+    2  | 11  | -4  |  3  | 16   |  9   | -12
+    10 |  5  |  4  | -3  | 16   |  9   | -12
+    4  |  8  | -2  |  0  |  4   |  0   |  0
+    8  |  7  |  2  | -1  |  4   |  1   | -2
+    ------------------------------------------
+    ∑  |     |     |     | 40   | 20   | -26
+                        </pre>
+                    </li>
+                    <li>r = -26 / sqrt(40 * 20)
+                        <br>Therefore, r = -0.9192
+                    </li>
+                </ul>
+                </p>
+            </div>
+            <div class="in">
+                <p><strong>Question:</strong> Find the correlation for the following data:
+                <pre>
+    x  |  122  |  135  |  143  |  103  |  156 | 178 | 190
+    y  |   46  |   78  |  89   |   46  |   82 |  52 |  96 
+                    </pre>
+                </p>
+
+                <p><strong>Solution:</strong>
+                <ul>
+                    <li>The number of given data points, n = 7
+                        <br>mean(x) = 146.71
+                        <br>mean(y) = 69.85
+                        <br>As mean(x) and mean(y) are not integers, we use the method of assumed means where we round
+                        them off. So now, mean(x) = 147 and mean(y) = 70
+                        <br>Now, X = x - mean(x) = x - 147
+                        <br>and Y = y - mean(y) = y - 70
+                        <br>As the data points are larger, we are going to use the following formula:
+                        <br><img src="../../images/corr2.svg" alt="Correlation Formula" class="wb">
+                    </li>
+                    <li>Tabular calculation:
+                        <pre>
+    x   |  y  |   X   |   Y   |   X²   |   Y²   |   XY
+    ---------------------------------------------------
+    122 |  46 |  -25  |  -24  |  625   |  576   |   600
+    135 |  78 |  -12  |   8   |  144   |   64   |   -96
+    143 |  89 |   -4  |  19   |   16   |  361   |   -76
+    103 |  46 |  -44  |  -24  | 1936   |  576   |  1056
+    156 |  82 |    9  |  12   |   81   |  144   |   108
+    178 |  52 |   31  |  -18  |  961   |  324   |  -558
+    190 |  96 |   43  |   26  | 1849   |  676   |  1118
+    ----------------------------------------------------
+    ∑   |     |   -2  |  -17  | 5612   | 2712   |  2152
+                        </pre>
+                    </li>
+                    <li>After putting all the values in the formula, we get r = 0.5506</li>
+                </ul>
+                </p>
+            </div>
+            <div class="in">
+                <h3>Spearman's Rank Correlation</h3>
+                <ul>
+                    <li>Determine the correlation coefficient between two variables that cannot be measured
+                        quantitatively.</li>
+                    <li>Qualitative features such as honesty, beauty, character, morality, etc.</li>
+                    <li>The rank correlation coefficient is given by:
+                        <br><img src="../../images/corr3.svg" alt="Spearman's Rank Correlation Formula" class="wb">
+                    </li>
+                    <li>Rank correlation coefficient has three cases:
+                        <ol>
+                            <li>When actual ranks are given</li>
+                            <li>When ranks are not given</li>
+                            <li>In case of equal ranks</li>
+                        </ol>
+                    </li>
+                    <li>The value of the rank correlation coefficient (r) can range from -1 to 1, indicating the
+                        strength and direction of the relationship:
+                        <ul>
+                            <li>If r = 1, there is a perfect positive correlation.</li>
+                            <li>If 0.7 < r < 1, there is a strong positive correlation.</li>
+                            <li>If 0.3 < r ≤ 0.7, there is a moderate positive correlation.</li>
+                            <li>If 0 < r ≤ 0.3, there is a weak positive correlation.</li>
+                            <li>If r = 0, there is no correlation.</li>
+                            <li>If -0.3 ≤ r < 0, there is a weak negative correlation.</li>
+                            <li>If -0.7 ≤ r < -0.3, there is a moderate negative correlation.</li>
+                            <li>If -1 ≤ r < -0.7, there is a strong negative correlation.</li>
+                            <li>If r = -1, there is a perfect negative correlation.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Case 1: When actual ranks are given</h3>
+                <p><strong>Question:</strong> The preference of two persons A and B for different car brands are given
+                    in the following table:
+                <pre>
+Car Brand  | Person A | Person B
+--------------------------------
+   Suzuki  |    5     |    1
+  Hyundai  |    4     |    4
+     Tata  |    1     |    2
+    Skoda  |    3     |    5
+   Toyota  |    2     |    3
+    </pre>
+                Determine the coefficient of rank correlation between the preferences of consumers A and B and interpret
+                your result.</p>
+
+                <p><strong>Solution:</strong>
+                <ul>
+                    <li>Tabular Calculation to find D and D²
+                        <pre>
+R1 | R2 | D = R1 - R2 |  D²
+----------------------------
+ 5 |  1 |      4      |  16
+ 4 |  4 |      0      |   0
+ 1 |  2 |     -1      |   1
+ 3 |  5 |     -2      |   4
+ 2 |  3 |     -1      |   1
+----------------------------
+∑  |    |      0      |  22
+        </pre>
+                    </li>
+                    <li>Now the formula is:
+                        <br><img src="../../images/corr3.svg" alt="Spearman's Rank Correlation Formula" class="wb">
+                        <br>r = 1 - ((6 * 22) / (125 - 5))
+                        <br>r = 1 - (132 / 120)
+                        <br>r = 1 - 1.1
+                        <br>r = -0.1
+                        <br>The value of r shows that there is a very weak negative correlation between the preferences
+                        of persons A and B.
+                    </li>
+                </ul>
+                </p>
+                <h3>Case 2: When ranks are not given</h3>
+                <p><strong>Question: Calculate the rank correlation coefficient from the given data:</strong>
+                <pre>
+Marks in Computer (x):  20  30  40  50  60  70  80
+Marks in English (y) :  14   5  30  32  40  45  65
+</pre>
+                </p>
+
+                <p><strong>Solution:</strong>
+                <ul>
+                    <li>Tabular calculation, where ranks are assigned based on the lowest values getting the lowest rank
+                        <pre>
+x  | Rx |  y | Ry |  D  | D²
+-----------------------------
+20 |  1 | 14 |  2 | -1  |  1
+30 |  2 |  5 |  1 |  1  |  1
+40 |  3 | 30 |  3 |  0  |  0
+50 |  4 | 32 |  4 |  0  |  0
+60 |  5 | 40 |  5 |  0  |  0
+70 |  6 | 45 |  6 |  0  |  0
+80 |  7 | 65 |  7 |  0  |  0
+-----------------------------
+∑  |    |    |    |  0  |  2
+        </pre>
+                    </li>
+                    <li>Using the formula: <img src="../../images/corr3.svg" alt="Spearman's Rank Correlation Formula"
+                            class="wb">
+                        <br>Here n = 7
+                        <br>
+                        r = 1 - ((6 * 2) / (343 - 7))
+                        <br>r = 1 - (12 / 336)
+                        <br>r = 1 - 0.0357
+                        <br>r = 0.964
+                        <br>The value of r shows that there is a very strong positive correlation between the marks in
+                        Computer and English.
+                    </li>
+                </ul>
+                </p>
+                <h3>Case 3: Equal ranks are given</h3>
+                <ul>
+                    <li>If some item is repeated for 'p' times in a given data, then add a factor of 1/12(p<sup>3</sup>
+                        - p) to every repeated item.
+                        <br>i.e., <img src="../../images/corr4.svg" alt="" class="wb">
+                        <br>If 2 items are repeated, then 1/12(p<sup>3</sup> - p) will repeat 2 times.
+                    </li>
+                </ul>
+
+                <p><strong>Question: Calculate the rank correlation coefficient for the following data:</strong></p>
+                <pre>
+x  | 12 | 15 | 18 | 20 | 16 | 15 | 18 | 22 | 15 | 21 | 18 | 15
+---------------------------------------------------------------
+y  | 10 | 18 | 19 | 12 | 15 | 19 | 17 | 19 | 16 | 14 | 13 | 17
+</pre>
+
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>
+                        <pre>
+x  |  y  |  Rx | Ry |   D   |  D²
+--------------------------------------
+12 |  10 |   1 |  2 |    0  |      0
+15 |  18 | 3.5 |  1 | -5.5  |  30.25
+18 |  19 |   8 |  3 |   -3  |      9
+20 |  12 |  10 |  4 |    8  |     64
+16 |  15 |   6 |  5 |    1  |      1
+15 |  19 | 3.5 |  6 | -7.5  |  56.25
+18 |  17 |   8 |  7 |  0.5  |   0.25
+22 |  19 |  12 |  7 |    1  |      1
+15 |  16 | 3.5 |  7 | -2.5  |   6.25
+21 |  14 |  11 |  7 |    7  |     49
+18 |  13 |   8 |  7 |    5  |     25
+15 |  17 | 3.5 |  7 |   -4  |     16
+---------------------------------------
+∑  |     |     |    |    0  |   258
+        </pre>
+                        <ul>
+                            <li>For ranking x variable:
+                                <ul>
+                                    <li>Rank of 15 = (2 + 3 + 4 + 5) / 4 = 3.5</li>
+                                    <li>Rank of 18 = (7 + 8 + 9) / 3 = 8</li>
+                                </ul>
+                            </li>
+                            <li>For ranking y variable:
+                                <ul>
+                                    <li>Rank of 17 = (7 + 8) / 2 = 7.5</li>
+                                    <li>Rank of 19 = (10 + 11 + 12) / 3 = 11</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><img src="../../images/corr5.svg" alt="" class="wb">
+                        <br>r = 1 - ((6 * (258 + 5 + 2 + 0.5 + 2)) / 1716)
+                        <br>r = 1 - (1605 / 1716)
+                        <br>r = 0.0646
+                        <br>The value of r shows that there is a very weak positive correlation between the variables.
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
