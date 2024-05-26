@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing and Visualizing Data</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Processing and Visualizing Data</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Processing and Visualizing Data</h1>
+        <ul>
+            <li>In the modern data-driven world, the ability to effectively process and visualize data is crucial. Data
+                processing involves transforming raw data into a meaningful format that can be analyzed and interpreted.
+                Visualization, on the other hand, helps to present this processed data in a graphical format, making it
+                easier to identify patterns, trends, and insights. Together, these skills enable data scientists and
+                analysts to make informed decisions and communicate their findings clearly.</li>
+            <li>Two powerful tools that aid in this process are NumPy and pandas. NumPy provides support for large,
+                multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on
+                these arrays. It forms the foundation for numerical computing in Python. pandas builds on NumPy by
+                offering data structures and operations specifically designed for data manipulation and analysis, making
+                it easier to handle and analyze large datasets. Before diving into the technical aspects like using
+                NumPy for array manipulations, it's important to grasp the fundamental concepts of data processing and
+                visualization, as these form the backbone of data analysis.</li>
+        </ul>
+        <div class="wh">
+            <h2>NumPy</h2>
+            <ul>
+                <li>NumPy is an open-source library designed for working with arrays.</li>
+                <li>It was developed in 2005 by Travis Oliphant.</li>
+                <li>The name stands for Numerical Python and it is a critical data science library in Python, with many
+                    other libraries depending on it.</li>
+                <li>NumPy is extremely popular because it improves the performance of working with multi-dimensional
+                    arrays. Mathematical operations on NumPy arrays are up to 50 times faster than iterating over Python
+                    lists using loops. It requires fewer lines of code for mathematical operations compared to native
+                    Python lists.</li>
+
+                <li>It offers an indexing system for easily accessing portions of data within arrays.</li>
+                <li>It contains built-in functions that improve the quality of code when working with arrays and
+                    mathematics, such as linear algebra, array transformations, and other mathematical operations.</li>
+            </ul>
+            <h3>Purpose of NumPy</h3>
+            <ul>
+                <li>It is mostly used in data analytics for working with arrays and matrices, including
+                    multi-dimensional arrays.</li>
+                <li>It helps to solve complex mathematical and statistical operations, offering multiple functions for
+                    working with 2D matrices and 3D tensors.</li>
+            </ul>
+            <div class="in">
+                <h3>NumPy Arrays</h3>
+                <ul>
+                    <li>NumPy arrays are used to create n-dimensional arrays, allowing us to solve complex problems in
+                        mathematics, statistics, linear algebra, and matrix operations.</li>
+
+                    <li>NumPy provides efficient data structures for handling large datasets and performing fast
+                        numerical computations.</li>
+                    <li>With NumPy arrays, we can perform vectorized operations, which are much faster than traditional
+                        loop-based operations on Python lists.</li>
+                    <li>NumPy is widely used in scientific computing, machine learning, data analysis, and other fields
+                        due to its speed and convenience.</li>
+                    <li>It is a package, so first, we have to import it using: <code>import numpy as np</code>.
+                        <br>Make sure it is installed on your system by using the command:
+                        <pre>
+                            <code>
+pip install numpy
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+                <h3>Working with Arrays</h3>
+                <pre>
+                    <code>
+import numpy as np 
+
+# Creating a 1D array
+a = np.array([1, 2, 3, 4])
+print(a)
+                    </code>
+                </pre>
+                <p>The above code creates a 1D array and prints it.</p>
+                <p><strong>Taking elements from the user and printing them:</strong></p>
+                <pre>
+                    <code>
+import numpy as np
+
+# Taking input from the user
+n = int(input("Enter the number of elements in the array: "))
+elements = []
+
+for i in range(n):
+    element = int(input(f"Enter element {i + 1}: "))
+    elements.append(element)
+
+# Converting the list of elements to a NumPy array
+elements_array = np.array(elements)
+
+print("The created array is:", elements_array)
+                    </code>
+                </pre>
+                <p>The above code takes the number of elements and each element from the user to create an array and
+                    then prints the array. It prompts the user to enter the number of elements in the array, then
+                    iteratively takes each element as input, appends it to a list, converts the list to a NumPy array,
+                    and prints the resulting array.</p>
+                <div class="wh">
+                    <h3>Creating 1D, 2D, and 3D Arrays in NumPy</h3>
+
+                    <p><strong>1. Creating a 1D array:</strong></p>
+                    <pre>
+                    <code>
+import numpy as np
+
+# Creating a 1D array using np.array()
+a_1d = np.array([1, 2, 3, 4, 5])
+print("1D Array:")
+print(a_1d)
+                    </code>
+                    </pre>
+                    <p><strong>2. Creating a 2D array:</strong></p>
+                    <pre>
+                    <code>
+# Creating a 2D array using np.array()
+a_2d = np.array([[1, 2, 3], [4, 5, 6]])
+print("2D Array:")
+print(a_2d)
+                    </code>
+                    </pre>
+                    <p><strong>3. Creating an 3D array:</strong></p>
+                    <pre>
+                    <code>
+# Creating an N-dimensional array using np.array()
+a_nd = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+print("N-dimensional Array:")
+print(a_nd)
+                    </code>
+                    </pre>
+                    <p>The above code demonstrates creating 1D, 2D, and N-dimensional arrays in NumPy using the
+                        <code>np.array()</code> function. You can specify the elements of the array as nested lists,
+                        with
+                        each list representing a row in a 2D array or a higher-dimensional structure in N-dimensional
+                        arrays.
+                    </p>
+                </div>
+                <div class="wh">
+
+                    <h3>Special Arrays in NumPy</h3>
+                    <ul>
+                        <li>NumPy provides functions to easily create special arrays, such as:</li>
+                    </ul>
+                    <p><strong>1- Zero Array</strong></p>
+                    <pre>
+        <code>
+import numpy as np
+
+# Creating a 1D zero array of length 3
+print(np.zeros(3))
+
+# Creating a 2D zero array of shape (3, 3)
+print(np.zeros((3, 3)))
+        </code>
+        </pre>
+                    <p>Output:</p>
+                    <pre>
+        <code>
+[0. 0. 0.]
+        
+[[0. 0. 0.]
+[0. 0. 0.]
+[0. 0. 0.]]
+        </code>
+        </pre>
+                    <p>The <code>np.zeros()</code> function creates an array filled with zeros. When used with a single
+                        argument, it creates a 1D array of zeros with the specified length. When used with a tuple
+                        specifying the shape, it creates a multi-dimensional array (in this case, a 2D array) filled
+                        with
+                        zeros.</p>
+                    <p><strong>2. Ones Array:</strong> An array where all elements are ones.</p>
+                    <pre>
+        <code>
+import numpy as np
+
+# Creating a 1D ones array of length 3
+print(np.ones(3))
+
+# Creating a 2D ones array of shape (3, 3)
+print(np.ones((3, 3)))
+        </code>
+        </pre>
+                    <p>Output:</p>
+                    <pre>
+        <code>
+[1. 1. 1.]
+
+[[1. 1. 1.]
+[1. 1. 1.]
+[1. 1. 1.]]
+        </code>
+        </pre>
+
+                    <p><strong>3. Full Array:</strong> An array filled with a specified value.</p>
+                    <pre>
+        <code>
+# Creating a 1D full array of length 3 filled with 5
+print(np.full(3, 5))
+
+# Creating a 2D full array of shape (3, 3) filled with 7
+print(np.full((3, 3), 7))
+        </code>
+        </pre>
+                    <p>Output:</p>
+                    <pre>
+        <code>
+[5 5 5]
+
+[[7 7 7]
+[7 7 7]
+[7 7 7]]
+        </code>
+        </pre>
+
+                    <p><strong>4. Identity Matrix:</strong> A square matrix with ones on the diagonal and zeros
+                        elsewhere.
+                    </p>
+                    <pre>
+        <code>
+# Creating a 3x3 identity matrix
+print(np.eye(3))
+        </code>
+        </pre>
+                    <p>Output:</p>
+                    <pre>
+        <code>
+[[1. 0. 0.]
+[0. 1. 0.]
+[0. 0. 1.]]
+        </code>
+        </pre>
+
+                    <p><strong>5. Range Array:</strong> An array of evenly spaced values within a specified range.</p>
+                    <pre>
+        <code>
+# Creating a range array from 0 to 5 (exclusive) with a step of 1
+print(np.arange(0, 5, 1))
+
+# Creating a range array from 0 to 10 (exclusive) with a step of 2
+print(np.arange(0, 10, 2))
+        </code>
+        </pre>
+                    <p>Output:</p>
+                    <pre>
+        <code>
+[0 1 2 3 4]
+
+[0 2 4 6 8]
+        </code>
+        </pre>
+                </div>
+                <div class="wh">
+                    <h3>Attributes of NumPy Arrays</h3>
+
+                    <p><strong>1. ndim:</strong> The ndim attribute returns the number of dimensions (axes) of the
+                        array.
+                    </p>
+                    <pre>
+                    <code>
+import numpy as np
+
+# Creating a NumPy array
+a = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Using ndim attribute to get the number of dimensions
+num_dimensions = a.ndim
+print("Number of dimensions:", num_dimensions)
+                    </code>
+                    </pre>
+                    <p>The ndim attribute in this example will return 2, indicating that the array 'a' is a
+                        2-dimensional
+                        array.</p>
+
+                    <p><strong>2. shape:</strong> The shape attribute returns a tuple representing the shape of the
+                        array.
+                    </p>
+                    <pre>
+                    <code>
+# Using shape attribute to get the shape of the array
+array_shape = a.shape
+print("Shape of the array:", array_shape)
+                    </code>
+                    </pre>
+                    <p>The shape attribute will return (2, 3), indicating that the array 'a' has 2 rows and 3 columns.
+                    </p>
+
+                    <p><strong>3. size:</strong> The size attribute returns the total number of elements in the array.
+                    </p>
+                    <pre>
+                    <code>
+# Using size attribute to get the total number of elements
+array_size = a.size
+print("Size of the array:", array_size)
+                    </code>
+                    </pre>
+                    <p>The size attribute will return 6, indicating that the array 'a' contains 6 elements.</p>
+
+                    <p><strong>4. dtype:</strong> The dtype attribute returns the data type of the elements in the
+                        array.
+                    </p>
+                    <pre>
+                    <code>
+# Using dtype attribute to get the data type of elements
+array_dtype = a.dtype
+print("Data type of the array:", array_dtype)
+                    </code>
+                    </pre>
+                    <p>The dtype attribute will return int64, indicating that the elements in the array 'a' are of type
+                        integer with 64-bit precision.</p>
+
+                    <p>These attributes provide valuable information about the structure, size, and data type of NumPy
+                        arrays, allowing for effective manipulation and analysis of array data.</p>
+                </div>
+                <div class="wh">
+                    <h3>Upcasting in NumPy</h3>
+
+                    <p>When performing operations or combining arrays with different data types in NumPy, there is a
+                        concept
+                        called "upcasting" where NumPy automatically converts the data types of the arrays to a common
+                        data
+                        type to ensure consistency.</p>
+
+                    <p><strong>Example:</strong></p>
+                    <pre>
+                        <code>
+import numpy as np
+
+# Creating arrays with different data types
+a = np.array([1, 2, 3])
+b = np.array([1.1, 2.2, 3.3])
+
+# Performing an operation that requires upcasting
+c = a + b
+
+print("Array a (int):", a)
+print("Array b (float):", b)
+print("Array c (upcasted):", c)
+print("Data type of array c:", c.dtype)
+                        </code>
+                    </pre>
+                    <p>In this example, array 'a' has integer elements, and array 'b' has floating-point elements. When
+                        we
+                        perform the addition operation (a + b), NumPy automatically upcasts the elements of array 'a' to
+                        float64 to match the data type of array 'b', resulting in array 'c' with elements of type
+                        float64.
+                    </p>
+
+                    <p>The output will show the arrays and their data types, confirming the upcasting that occurred
+                        during
+                        the operation.</p>
+
+                    <p>Understanding upcasting is important when working with mixed data types in NumPy arrays to ensure
+                        correct results and avoid unexpected behavior due to data type inconsistencies.</p>
+                    <h3>Handling Mixed Data Types in NumPy Arrays</h3>
+
+                    <p>NumPy arrays can handle mixed data types, but it's essential to understand how NumPy treats these
+                        mixed types, especially during operations and array creation.</p>
+
+                    <p><strong>Example 1: Integer and Float Elements</strong></p>
+                    <pre>
+                        <code>
+import numpy as np
+
+# Creating an array with integer and float elements
+mixed_array = np.array([2, 3, 4.4, 4, 3])
+
+print("Mixed-type array:", mixed_array)
+print("Data type of the array:", mixed_array.dtype)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+Mixed-type array: [2.  3.  4.4 4.  3. ]
+Data type of the array: float64
+                        </code>
+                    </pre>
+
+                    <p>In this example, the array contains both integers and floats. NumPy automatically upcasts the
+                        integers to floating-point numbers to maintain consistency in operations, resulting in the
+                        entire array being of data type float64.</p>
+
+                    <p><strong>Example 2: Integer and String Elements</strong></p>
+                    <pre>
+                        <code>
+# Creating an array with integer and string elements
+mixed_array = np.array([3, 4, 5, '6', 4])
+
+print("Mixed-type array:", mixed_array)
+print("Data type of the array:", mixed_array.dtype)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+Mixed-type array: ['3' '4' '5' '6' '4']
+Data type of the array: &lt;U21
+                        </code>
+                    </pre>
+
+                    <p>Here, the array contains integers and a string. NumPy upcasts the entire array to a string data
+                        type (&lt;U21) because of the presence of a string element, ensuring consistency in the array's
+                        data type.</p>
+
+                    <p>Understanding how NumPy handles mixed data types is crucial for avoiding unexpected
+                        behavior and ensuring correct data processing in array operations and manipulations.</p>
+
+                </div>
+                <div class="wh">
+                    <h3>Creating N-dimensional Arrays with ndmin</h3>
+                    <ul>
+                        <li>The ndmin argument in np.array specifies the minimum number of dimensions an array should
+                            have.</li>
+                    </ul>
+                    <pre>
+                        <code>
+import numpy as np
+
+# Create a 1D array
+arr = np.array([1, 2, 3])
+
+# Increase the dimension of the array to 5 using ndmin argument
+ndimarray = np.array(arr, ndmin=5)
+
+# Print the shape of the new array
+print(ndimarray.shape)
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>np.array(arr, ndmin=5) creates a new array from arr and ensures it has a minimum of 5
+                            dimensions using ndmin=5</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
