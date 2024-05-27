@@ -350,6 +350,7 @@ $variablename = value;
     $num2 = 4;
     $sum = $num1 + $num2;
     echo "The sum is = $sum";
+?>
                     </code>
                 </pre>
             </div>
@@ -499,6 +500,213 @@ counter(); // Outputs: Count: 3
                 </code>
             </pre>
         </div>
+        <div class="wh">
+            <h2>PHP SuperGlobal Variables</h2>
+            <p>PHP provides several superglobal variables that are used to collect data from various sources. These
+                superglobal variables are accessible from any part of the script, regardless of scope. Here are some of
+                the most commonly used superglobals:</p>
+
+            <ul>
+                <li><strong>$_POST:</strong> This variable is used to collect data from HTML forms using the POST
+                    method. The data is sent as part of the HTTP request body, making it more secure for sensitive
+                    information like passwords.</li>
+                <li><strong>$_GET:</strong> This variable is used to collect data from HTML forms using the GET method.
+                    The data is sent as part of the URL, making it visible in the browser's address bar. It is suitable
+                    for non-sensitive information and when bookmarking or sharing the URL is needed.</li>
+                <li><strong>$_REQUEST:</strong> This variable contains the contents of both $_GET and $_POST, as well as
+                    $_COOKIE. It is used to collect data from multiple sources in a single variable.</li>
+                <li><strong>$_COOKIE:</strong> This variable is used to collect data stored in cookies. Cookies are
+                    small files stored on the client's computer that are sent to the server with each HTTP request.</li>
+                <li><strong>$_SESSION:</strong> This variable is used to store data that persists across multiple pages.
+                    Session variables are stored on the server and are identified by a unique session ID, which is
+                    typically stored in a cookie on the client side.</li>
+            </ul>
+
+            <h3>Examples:</h3>
+
+            <div class="in">
+                <h3>Example 1: Using $_POST</h3>
+                <p>This example demonstrates how to use the $_POST variable to collect data from a form.</p>
+                <pre>
+                <code>
+&lt;!-- form.html file --&gt; 
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+    &lt;body&gt; 
+        &lt;form method="post" action="post_handler.php"&gt;
+            &lt;label&gt;Enter your name: &lt;/label&gt;
+            &lt;input type="text" name="name" /&gt;
+            &lt;input type="submit" value="Submit" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+
+                <pre>
+                <code>
+&lt;?php
+// post_handler.php
+$name = $_POST['name'];
+echo "Hello, $name!";
+?>
+                </code>
+            </pre>
+            </div>
+
+            <div class="in">
+                <h3>Example 2: Using $_GET</h3>
+                <p>This example demonstrates how to use the $_GET variable to collect data from a URL.</p>
+                <pre><code>
+&lt;!-- link.html file --&gt; 
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+    &lt;body&gt; 
+        &lt;a href="get_handler.php?name=John"&gt;Click here to send your name&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+                <pre>
+                <code>
+&lt;?php
+// get_handler.php
+$name = $_GET['name'];
+echo "Hello, $name!";
+?>
+                </code>
+            </pre>
+            </div>
+
+            <div class="in">
+                <h3>Example 3: Using $_REQUEST</h3>
+                <p>This example demonstrates how to use the $_REQUEST variable to collect data from a form.</p>
+                <pre>
+                <code>
+&lt;!-- form_request.html file --&gt; 
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+    &lt;body&gt; 
+        &lt;form method="post" action="request_handler.php"&gt;
+            &lt;label&gt;Enter your age: &lt;/label&gt;
+            &lt;input type="text" name="age" /&gt;
+            &lt;input type="submit" value="Submit" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+
+                <pre>
+                <code>
+&lt;?php
+// request_handler.php
+$age = $_REQUEST['age'];
+echo "Your age is: $age";
+?>
+                </code>
+            </pre>
+            </div>
+
+            <div class="in">
+                <h3>Example 4: Using $_COOKIE</h3>
+                <p>This example demonstrates how to use the $_COOKIE variable to store and retrieve a cookie.</p>
+                <pre>
+                <code>
+&lt;?php
+// set_cookie.php
+setcookie("user", "John", time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+    &lt;body&gt; 
+        &lt;?php
+        if(isset($_COOKIE["user"])) {
+            echo "User is " . $_COOKIE["user"];
+        } else {
+            echo "User is not set";
+        }
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+            </div>
+
+            <div class="in">
+                <h3>Example 5: Using $_SESSION</h3>
+                <p>This example demonstrates how to use the $_SESSION variable to store and retrieve session data.</p>
+                <pre>
+                    <code>
+&lt;?php
+// start_session.php
+session_start();
+$_SESSION["favcolor"] = "green";
+$_SESSION["favanimal"] = "cat";
+echo "Session variables are set.";
+?>
+                    </code>
+                </pre>
+
+                <pre>
+                    <code>
+&lt;?php
+// retrieve_session.php
+session_start();
+echo "Favorite color is " . $_SESSION["favcolor"] . ".&lt;br&gt;";
+echo "Favorite animal is " . $_SESSION["favanimal"] . ".";
+?>
+                    </code>
+                </pre>
+            </div>
+            <p>By understanding and using these superglobal variables, you can effectively manage and manipulate data
+                within your PHP applications.</p>
+            <div class="in">
+                <h3>Program to Add Two Numbers Inputted in an HTML Input Tag and Show the Result in an HTML Input Tag
+                    Upon Clicking the Add Button</h3>
+                <p>This example demonstrates how to create a simple web form that allows users to input two numbers, add
+                    them, and display the result in another input field using PHP.</p>
+
+                <pre>
+                    <code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Add Two Numbers&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h3&gt;Program to Add Two Numbers Inputted in an HTML Input Tag and Show the Result in an HTML Input Tag Upon Clicking the Add Button&lt;/h3&gt;
+
+    &lt;?php
+    $sum = &quot;&quot;; // Initialize the sum variable
+
+    // Fetch data directly without checking request method
+    $num1 = $_POST[&quot;num1&quot;];
+    $num2 = $_POST[&quot;num2&quot;];
+    $sum = $num1 + $num2;
+    ?&gt;
+
+    &lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+        &lt;label&gt;Num 1: &lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;num1&quot; value=&quot;&lt;?php echo $num1; ?&gt;&quot; required&gt;
+        &lt;br&gt;
+        &lt;label&gt;Num 2: &lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;num2&quot; value=&quot;&lt;?php echo $num2; ?&gt;&quot; required&gt;
+        &lt;br&gt;
+        &lt;label&gt;Result: &lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;result&quot; value=&quot;&lt;?php echo $sum; ?&gt;&quot; readonly&gt;
+        &lt;br&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
+        &lt;input type=&quot;reset&quot; value=&quot;Reset&quot;&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </code>
+                </pre>
+                <p>Make sure you save this file with ".php" extension.</p>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
