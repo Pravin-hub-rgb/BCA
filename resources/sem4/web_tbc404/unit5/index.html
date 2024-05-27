@@ -341,8 +341,164 @@ $variablename = value;
     </code>
 </pre>
             </div>
+            <div class="in">
+                <h3>Sum of two numbers in php</h3>
+                <pre>
+                    <code>
+&lt;?php
+    $num1 = 5;
+    $num2 = 4;
+    $sum = $num1 + $num2;
+    echo "The sum is = $sum";
+                    </code>
+                </pre>
+            </div>
         </div>
-    </div>
+        <div class="wh">
+            <h2>Functions in PHP</h2>
+            <p>A function in PHP is a block of reusable code that performs a specific task. Functions help in organizing
+                code, improving readability, and reducing redundancy. Here's how you declare and use functions in PHP:
+            </p>
+
+            <h3>Basic Syntax:</h3>
+            <pre>
+                <code>
+&lt;?php
+function functionName($param1, $param2, ...) {
+    // Function body
+    // Code to be executed when the function is called
+    return $returnValue; // Optional: return value
+}
+?>
+                </code>
+            </pre>
+            <p>Let's break down the components of a PHP function:</p>
+            <ul>
+                <li><strong>function</strong>: Keyword used to define a function.</li>
+                <li><strong>functionName</strong>: Name of the function.</li>
+                <li><strong>($param1, $param2, ...)</strong>: Parameters the function accepts.</li>
+                <li><strong>Function Body</strong>: Block of code executed when the function is called.</li>
+                <li><strong>return $returnValue;</strong>: Optional; used to return a value from the function.</li>
+            </ul>
+
+            <h3>Example 1: Function to Calculate Sum</h3>
+            <pre>
+                <code>
+&lt;?php
+function calculateSum($num1, $num2) {
+    $sum = $num1 + $num2;
+    return $sum;
+}
+
+$number1 = 10;
+$number2 = 5;
+$result = calculateSum($number1, $number2);
+echo "The sum of $number1 and $number2 is: $result";
+?>
+                </code>
+            </pre>
+
+            <p>In this example, the <strong>calculateSum</strong> function takes two parameters and returns their sum.
+            </p>
+
+            <h3>Example 2: Function to Check Even or Odd</h3>
+            <pre>
+                <code>
+&lt;?php
+function checkEvenOdd($number) {
+    if ($number % 2 == 0) {
+        return "Even";
+    } else {
+        return "Odd";
+    }
+}
+
+$inputNumber = 15;
+$result = checkEvenOdd($inputNumber);
+echo "$inputNumber is $result";
+?>
+                </code>
+            </pre>
+
+            <p>This example demonstrates a function that checks whether a number is even or odd.</p>
+
+            <h3>Example 3: Function with Default Parameter</h3>
+            <pre>
+                <code>
+&lt;?php
+function greetUser($name = "Guest") {
+    echo "Hello, $name!";
+}
+
+greetUser(); // Outputs: Hello, Guest!
+greetUser("John"); // Outputs: Hello, John!
+?>
+                </code>
+            </pre>
+
+            <p>Here, the <strong>greetUser</strong> function has a default parameter value, allowing it to be called
+                without
+                an argument.</p>
+        </div>
+        <div class="wh">
+            <h2>PHP Variable Scope</h2>
+            <p>Variable scope refers to the visibility and accessibility of variables within different parts of a PHP
+                script. Understanding variable scope is crucial for writing efficient and bug-free code. Here are the
+                key aspects of PHP variable scope:</p>
+
+            <h3>Local Variables</h3>
+            <p>Local variables are declared inside a function and can only be accessed within that function.</p>
+            <pre>
+                <code>
+&lt;?php
+function myFunction() {
+    $localVariable = "This is a local variable.";
+    echo $localVariable;
+}
+
+myFunction(); // Outputs: This is a local variable.
+echo $localVariable; // Error: Undefined variable
+?>
+                </code>
+            </pre>
+
+            <h3>Global Variables</h3>
+            <p>Global variables are declared outside of any function and can be accessed from anywhere within the
+                script.</p>
+            <pre>
+                <code>
+&lt;?php
+$globalVariable = "This is a global variable.";
+
+function myFunction() {
+    global $globalVariable;
+    echo $globalVariable;
+}
+
+myFunction(); // Outputs: This is a global variable.
+echo $globalVariable; // Outputs: This is a global variable.
+?>
+                </code>
+            </pre>
+
+            <h3>Static Variables</h3>
+            <p>Static variables retain their values between function calls and are initialized only once.</p>
+            <pre>
+                <code>
+&lt;?php
+function counter() {
+    static $count = 0;
+    $count++;
+    echo "Count: $count\n";
+}
+
+counter(); // Outputs: Count: 1
+counter(); // Outputs: Count: 2
+counter(); // Outputs: Count: 3
+?>
+                </code>
+            </pre>
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
