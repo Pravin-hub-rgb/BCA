@@ -1156,7 +1156,6 @@ mysqli_close($conn);
                 <h3>PHP MySQLi Create Database Example</h3>
                 <pre>
                     <code>
-// Example
 &lt;?php
 $host = 'localhost:3306';
 $user = 'root';
@@ -1232,6 +1231,53 @@ mysqli_close($conn);
                         This line closes the database connection that was previously opened.
                     </li>
                 </ul>
+            </div>
+            <div class="in">
+                <h3>PHP MySQL Database Connectivity</h3>
+                <p>PHP allows you to connect to a MySQL database using the <strong>mysqli_connect()</strong> function.
+                </p>
+
+                <h3>Steps to Connect to MySQL Database in PHP</h3>
+                <ol>
+                    <li><strong>Set Database Credentials:</strong> Define variables for hostname, username, password,
+                        and database name.</li>
+                    <li><strong>Establish Connection:</strong> Use <strong>mysqli_connect()</strong> function to
+                        establish a
+                        connection to the MySQL database.</li>
+                    <li><strong>Check Connection:</strong> Verify if the connection was successful using an
+                        <strong>if</strong> statement.
+                    </li>
+                    <li><strong>Perform Database Operations:</strong> Once connected, you can execute SQL queries to
+                        perform various database operations.</li>
+                    <li><strong>Close Connection:</strong> After completing the database operations, close the
+                        connection using <code>mysqli_close()</code> function to free up resources.</li>
+                </ol>
+
+                <h3>PHP MySQL Database Connectivity Example</h3>
+                <p><strong>Example:</strong></p>
+                <pre>
+                    <code>
+&lt;?php
+$host = 'localhost:3306';
+$user = 'root';
+$pass = 'your_password';
+$dbname = 'your_database';
+
+// Establishing the connection
+$conn = mysqli_connect($host, $user, $pass, $dbname);
+
+if (!$conn) {
+    die('Could not connect: ' . mysqli_connect_error());
+}
+echo 'Connected successfully&lt;br/&gt;';
+
+// Perform database operations here
+
+// Closing the connection
+mysqli_close($conn);
+?>
+                </code>
+            </pre>
             </div>
             <div class="in">
                 <h3>PHP MySQL Create Table</h3>
@@ -1544,6 +1590,7 @@ mysqli_close($conn);
                     </pre>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="content-box">
