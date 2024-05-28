@@ -589,14 +589,12 @@ echo $students[1]["age"]; // Outputs: 22
             </code>
         </pre>
             </div>
-
-            <div class="in">
-                <h3>Using Array Functions</h3>
-                <p>PHP provides built-in functions to work with arrays, such as <strong>count()</strong> to count
-                    elements
-                    in an
-                    array and <strong>array_push()</strong> to add elements to an array.</p>
-                <pre>
+            <h3>Using Array Functions</h3>
+            <p>PHP provides built-in functions to work with arrays, such as <strong>count()</strong> to count
+                elements
+                in an
+                array and <strong>array_push()</strong> to add elements to an array.</p>
+            <pre>
                 <code>
 $fruits = array("Apple", "Banana", "Orange");
 echo count($fruits); // Outputs: 3
@@ -605,7 +603,6 @@ array_push($fruits, "Mango");
 print_r($fruits); // Outputs: Array ( [0] => Apple [1] => Banana [2] => Orange [3] => Mango )
             </code>
         </pre>
-            </div>
         </div>
         <div class="wh">
             <h2>String Handling in PHP</h2>
@@ -1398,10 +1395,9 @@ if (mysqli_query($conn, $sql)) {
                     </li>
                 </ol>
             </div>
-            <div class="in">
-                <h3>PHP MySQL Insert Record</h3>
-                <pre>
-                    <code>
+            <h3>PHP MySQL Update Record</h3>
+            <pre>
+                <code>
 &lt;?php
 $host = 'localhost:3306';
 $user = 'root';
@@ -1416,29 +1412,34 @@ if (!$conn) {
 }
 echo 'Connected successfully&lt;br/&gt;';
 
-// SQL query to insert a record
-$sql = "INSERT INTO emp4 (name, salary) VALUES ('sonoo', 9000)";
+// Variables to update the record
+$id = 2;
+$name = "Rahul";
+$salary = 80000;
+
+// SQL query to update a record
+$sql = "UPDATE emp4 SET name='$name', salary=$salary WHERE id=$id";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Record inserted successfully";
+    echo "Record updated successfully";
 } else {
-    echo "Could not insert record: " . mysqli_error($conn);
+    echo "Could not update record: " . mysqli_error($conn);
 }
 
 // Closing the connection
 mysqli_close($conn);
 ?>
-</code>
-</pre>
-            </div>
+                </code>
+            </pre>
+
             <div class="in">
                 <h2>PHP MySQL Delete Record</h2>
                 <pre>
     <code>
-        &lt;?php
+&lt;?php
 $host = 'localhost:3306';
 $user = 'root';
-$pass = 'Alpha99%mysqlroot';
+$pass = '';
 $dbname = 'test';
 
 // Establishing the connection
@@ -1464,6 +1465,84 @@ mysqli_close($conn);
 ?>
                     </code>
                 </pre>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">All MySQL operation in single php file</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+&lt;?php
+$host = 'localhost:3306';
+$user = 'root';
+$pass = '';
+$dbname = 'test';
+
+// Establishing the connection
+$conn = mysqli_connect($host, $user, $pass);
+
+if (!$conn) {
+    die('Could not connect: ' . mysqli_connect_error());
+}
+echo 'Connected successfully&lt;br/>';
+
+// Creating a database
+$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+if (mysqli_query($conn, $sql)) {
+    echo "Database $dbname created successfully&lt;br/>";
+} else {
+    echo "Could not create database: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Selecting the database
+mysqli_select_db($conn, $dbname);
+
+// Creating a table
+$sql = "CREATE TABLE IF NOT EXISTS emp4 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    salary INT NOT NULL
+)";
+if (mysqli_query($conn, $sql)) {
+    echo "Table emp4 created successfully&lt;br/>";
+} else {
+    echo "Could not create table: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Inserting a record
+$sql = "INSERT INTO emp4 (name, salary) VALUES ('sonoo', 9000)";
+if (mysqli_query($conn, $sql)) {
+    echo "Record inserted successfully&lt;br/>";
+} else {
+    echo "Could not insert record: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Updating a record
+$id = 1;
+$name = "Rahul";
+$salary = 80000;
+$sql = "UPDATE emp4 SET name='$name', salary=$salary WHERE id=$id";
+if (mysqli_query($conn, $sql)) {
+    echo "Record updated successfully&lt;br/>";
+} else {
+    echo "Could not update record: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Deleting a record
+$id = 1;
+$sql = "DELETE FROM emp4 WHERE id=$id";
+if (mysqli_query($conn, $sql)) {
+    echo "Record deleted successfully&lt;br/>";
+} else {
+    echo "Could not delete record: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Closing the connection
+mysqli_close($conn);
+?>
+                        </code>
+                    </pre>
+                </div>
             </div>
         </div>
     </div>
