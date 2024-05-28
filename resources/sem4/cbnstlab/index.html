@@ -389,6 +389,79 @@ int main()
                 </div>
             </div>
         </div>
+        <div class="in">
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">Matrix Back Substitution</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;stdio.h>
+
+int main()
+{
+    int i, j, k, n;
+    float a[10][10], x[10], u, sum;
+
+    printf("\nEnter number of unknowns: ");
+    scanf("%d", &n);
+
+    printf("\nEnter [A:B] matrix:\n");
+    for (i = 0; i &lt; n; i++)
+    {
+        for (j = 0; j &lt; n + 1; j++)
+        {
+            scanf("%f", &a[i][j]);
+        }
+    }
+
+    // Transform to upper triangular matrix
+    for (i = 0; i &lt; n - 1; i++)
+    {
+        for (j = i + 1; j &lt; n; j++)
+        {
+            u = a[j][i] / a[i][i];
+            for (k = 0; k &lt; n + 1; k++)
+            {
+                a[j][k] = a[j][k] - u * a[i][k];
+            }
+        }
+    }
+
+    printf("\nUpper Triangular Matrix Elements:\n");
+    for (i = 0; i &lt; n; i++)
+    {
+        for (j = 0; j &lt; n + 1; j++)
+        {
+            printf("%f\t", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Back substitution
+    for (i = n - 1; i >= 0; i--)
+    {
+        sum = 0;
+        for (j = i + 1; j &lt; n; j++)
+        {
+            sum += a[i][j] * x[j]; /* Performing Back Substitution */
+        }
+        x[i] = (a[i][n] - sum) / a[i][i];
+    }
+
+    printf("\nSolution values are:\n");
+    for (i = 0; i &lt; n; i++)
+    {
+        printf("%f\n", x[i]);
+    }
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
         <!--
         <div class="in">
             <div class='code'>

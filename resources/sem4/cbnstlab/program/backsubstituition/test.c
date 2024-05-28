@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 // void printMat(int A[][], int n)
 // {
@@ -69,5 +70,107 @@ int main()
     {
         printf("%f\t", x[i]);
     }
+    return 0;
+}
+*/
+
+// #include <stdio.h>
+// int main()
+// {
+//     int i, j, n;
+//     float a[10][10], x[10], u, sum;
+//     printf("\n Enter number of unknowns:");
+//     scanf("%d", &n);
+//     printf("\n Enter [A:B] matrix:");
+//     for (i = 0; i < n; i++)
+//     {
+//         for (j = 0; j < n + 1; j++)
+//         {
+//             scanf("%f", &a[i][j]);
+//         }
+//     }
+
+//     printf("\nUper Triangular Matrix Elements:\n");
+//     for (i = 0; i < n; i++)
+//     {
+//         for (j = 0; j < n + 1; j++)
+//         {
+//             printf("%f\t", a[i][j]);
+//         }
+//         printf("\n");
+//     }
+
+//     for (i = n - 1; i >= 0; i--)
+//     {
+//         sum = 0;
+//         for (j = i + 1; j < n; j++)
+//             sum = sum + a[i][j] * x[j]; /* Performing Back Substitution*/
+//         x[i] = (a[i][n] - sum) / (float)a[i][i];
+//     }
+//     printf("\n Solution values are:");
+//     for (i = 0; i < n; i++)
+//         printf("%f\n", x[i]);
+//     return 0;
+// }
+
+#include <stdio.h>
+
+int main()
+{
+    int i, j, k, n;
+    float a[10][10], x[10], u, sum;
+
+    printf("\nEnter number of unknowns: ");
+    scanf("%d", &n);
+
+    printf("\nEnter [A:B] matrix:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n + 1; j++)
+        {
+            scanf("%f", &a[i][j]);
+        }
+    }
+
+    // Transform to upper triangular matrix
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            u = a[j][i] / a[i][i];
+            for (k = 0; k < n + 1; k++)
+            {
+                a[j][k] = a[j][k] - u * a[i][k];
+            }
+        }
+    }
+
+    printf("\nUpper Triangular Matrix Elements:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n + 1; j++)
+        {
+            printf("%f\t", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Back substitution
+    for (i = n - 1; i >= 0; i--)
+    {
+        sum = 0;
+        for (j = i + 1; j < n; j++)
+        {
+            sum += a[i][j] * x[j]; /* Performing Back Substitution */
+        }
+        x[i] = (a[i][n] - sum) / a[i][i];
+    }
+
+    printf("\nSolution values are:\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("%f\n", x[i]);
+    }
+
     return 0;
 }
