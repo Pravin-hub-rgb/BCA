@@ -19,8 +19,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -1590,7 +1589,109 @@ mysqli_close($conn);
                     </pre>
                 </div>
             </div>
+            <div class="in">
+                <h3>Create a User Registration Page with the Help of PHP and MySQL</h3>
+                <ul>
+                    <li>We can create everything in one PHP file, but we are creating it in two separate files: an HTML
+                        file to display the form, and a PHP file to handle the form submission.</li>
+                </ul>
 
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">register.html file code</button>
+                    <div class="panel">
+                        <pre>
+                        <code>
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+    &lt;title>User Registration&lt;/title>
+&lt;/head>
+&lt;body>
+    &lt;h2>User Registration&lt;/h2>
+    &lt;form action="register.php" method="post">
+        &lt;label for="username">Username:&lt;/label>
+        &lt;input type="text" id="username" name="username" required>&lt;br>&lt;br>
+
+        &lt;label for="email">Email:&lt;/label>
+        &lt;input type="email" id="email" name="email" required>&lt;br>&lt;br>
+
+        &lt;label for="password">Password:&lt;/label>
+        &lt;input type="password" id="password" name="password" required>&lt;br>&lt;br>
+
+        &lt;input type="submit" value="Register">
+    &lt;/form>
+&lt;/body>
+&lt;/html>
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">register.php file code</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?php
+$host = 'localhost:3306';
+$user = 'root';
+$pass = '';
+$dbname = 'user_registration';
+
+// Establishing the connection
+$conn = mysqli_connect($host, $user, $pass);
+
+if (!$conn) {
+die('Could not connect: ' . mysqli_connect_error());
+}
+echo 'Connected successfully&lt;br/>';
+
+// Creating a database
+$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+if (mysqli_query($conn, $sql)) {
+echo "Database $dbname created successfully&lt;br/>";
+} else {
+echo "Could not create database: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Selecting the database
+mysqli_select_db($conn, $dbname);
+
+// Creating a table
+$sql = "CREATE TABLE IF NOT EXISTS users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL
+)";
+if (mysqli_query($conn, $sql)) {
+echo "Table users created successfully&lt;br/>";
+} else {
+echo "Could not create table: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Getting form data
+$username = $_POST['username'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+// Inserting a record
+$sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+if (mysqli_query($conn, $sql)) {
+echo "Registration successful!&lt;br/>";
+} else {
+echo "Could not register user: " . mysqli_error($conn) . "&lt;br/>";
+}
+
+// Closing the connection
+mysqli_close($conn);
+?>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="content-box">
