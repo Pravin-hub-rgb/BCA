@@ -2030,7 +2030,53 @@ print(df2)
                     </code>
                 </pre>
                 <ul>
-                    <li>Now only the Physics, Chemistry, and Maths columns are affected by filling null values.</li>
+                    <li>Now only the Physics, Chemistry, and Maths columns are affected by filling specific values.</li>
+                    <li>Let's now discuss the 'method' parameter in the fillna function. It can have 'ffill' (forward
+                        fill) and 'bfill' (backward fill) values.</li>
+                    <li>The 'ffill' method fills the null values with the previous row's values in the same column. For
+                        example, if a null value appears in the Physics column of row 3, it will be replaced by the
+                        value from the Physics column of row 2.</li>
+                </ul>
+                <pre>
+    <code>
+df2 = df.fillna(method='ffill')
+    </code>
+</pre>
+                <ul>
+                    <li>When we also provide another parameter, axis=1, the fillna method fills the null values with the
+                        previous column's values in the same row. For example, if a null value appears in the Chemistry
+                        column of row 3, it will be replaced by the value from the Physics column of row 3.</li>
+                </ul>
+                <pre>
+    <code>
+df2 = df.fillna(method='ffill', axis=1)
+    </code>
+</pre>
+                <ul>
+                    <li>We can be more precise by filling the null values with the mean value of a specific column. For
+                        example, using the mean value of the Physics column to fill its null values ensures that the
+                        replacement is more representative of the data.</li>
+                </ul>
+                <pre>
+    <code>
+df2 = df.fillna(value=df['Physics'].mean())
+    </code>
+</pre>
+                <ul>
+                    <li>Using the above code, all null values in the Physics column will be replaced with the mean of
+                        the non-null values in the Physics column.</li>
+                    <li>The 'bfill' method fills the null values with the next row's values in the same column. For
+                        example, if a null value appears in the Physics column of row 2, it will be replaced by the
+                        value from the Physics column of row 3.</li>
+                </ul>
+                <pre>
+    <code>
+df2 = df.fillna(method='bfill')
+    </code>
+</pre>
+                <ul>
+                    <li>Using this method, all null values in the dataframe will be filled with the next row's values in
+                        their respective columns, effectively propagating values backward to fill gaps.</li>
                 </ul>
             </div>
         </div>
