@@ -10,6 +10,11 @@
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+    <style>
+        li>pre {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 
 <body class="bg-c">
@@ -584,6 +589,798 @@ print(random_int_array)
                         </pre>
                     </li>
                 </ul>
+            </div>
+            <div class="in">
+                <h3>Array Indexing and Slicing</h3>
+                <ul>
+                    <li>First, let's create a 2D array:</li>
+                </ul>
+                <pre>
+                    <code>
+import numpy as np
+
+# Create a 1D array with values from 1 to 50
+a = np.arange(1, 51)
+
+# Reshape the 1D array to a 2D array with 10 rows and 5 columns
+a = a.reshape(10, 5)
+                    </code>
+                </pre>
+                <ul>
+                    <li>
+                        <code>a = np.arange(1, 51)</code> will create a 1D array that starts from 1 and goes up to 50 as
+                        follows:
+                        <pre>
+                            <code>
+[1, 2, 3, ..., 50]
+                        </code>
+                    </pre>
+                    </li>
+                    <li>
+                        <code>a.reshape(10, 5)</code> will reshape the 1D array into a 2D array with 10 rows and 5
+                        columns as follows:
+                        <pre>
+                            <code>
+[[ 1,  2,  3,  4,  5],
+ [ 6,  7,  8,  9, 10],
+ [11, 12, 13, 14, 15],
+ [16, 17, 18, 19, 20],
+ [21, 22, 23, 24, 25],
+ [26, 27, 28, 29, 30],
+ [31, 32, 33, 34, 35],
+ [36, 37, 38, 39, 40],
+ [41, 42, 43, 44, 45],
+ [46, 47, 48, 49, 50]]
+                        </code>
+                    </pre>
+                    </li>
+                </ul>
+                <p><strong>Now, let's perform some indexing and slicing operations on the 2D array:</strong></p>
+                <ul>
+                    <li>Printing the first array, as this is now an array of arrays, and we are interested in printing
+                        the first row:
+                        <pre>
+                            <code>
+print(a[0])
+                            </code>
+                        </pre>
+                        Output:
+                        <pre>
+                            <code>
+[ 1,  2,  3,  4,  5]
+                            </code>
+                        </pre>
+                    </li>
+
+                    <li>Printing the 3rd row array, which will be indexed as 2:
+                        <pre>
+                            <code>
+print(a[2])
+                            </code>
+                        </pre>
+                        Output:
+                        <pre>
+                            <code>
+[11, 12, 13, 14, 15]
+                            </code>
+                        </pre>
+                    </li>
+
+                    <li><code>a[0, 0]</code> - What will this print? 0, 0 means the 0th row (first row for our
+                        understanding) and 0th column (1st column):
+                        <pre>
+                            <code>
+print(a[0, 0])
+                            </code>
+                        </pre>
+                        Output:
+                        <pre>
+                            <code>
+1
+                            </code>
+                        </pre>
+                    </li>
+
+                    <li>What will <code>a[3, 4]</code> print? It will print the element at the 3rd row and 4th column:
+                        <pre>
+                            <code>
+print(a[3, 4])
+                            </code>
+                        </pre>
+                        Output:
+                        <pre>
+                            <code>
+20
+                            </code>
+                        </pre>
+                    </li>
+
+                    <li><strong>a[2:5]</strong> - What does this <strong>:</strong> represent? That means slicing from
+                        the 2nd
+                        index (inclusive) to the 5th index (exclusive), which will give us rows 3 to 4:
+                        <pre>
+                            <code>
+print(a[2:5])
+                            </code>
+                        </pre>
+                        Output:
+                        <pre>
+                            <code>
+[[11, 12, 13, 14, 15],
+ [16, 17, 18, 19, 20],
+ [21, 22, 23, 24, 25]]
+                            </code>
+                        </pre>
+                    </li>
+                    <ul>
+                        <li>Printing all the rows:
+                            <pre>
+                                <code>
+print(a[0:10])
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+[[ 1,  2,  3,  4,  5],
+ [ 6,  7,  8,  9, 10],
+ [11, 12, 13, 14, 15],
+ [16, 17, 18, 19, 20],
+ [21, 22, 23, 24, 25],
+ [26, 27, 28, 29, 30],
+ [31, 32, 33, 34, 35],
+ [36, 37, 38, 39, 40],
+ [41, 42, 43, 44, 45],
+ [46, 47, 48, 49, 50]]
+                            </code>
+                        </pre>
+                            If we provide <strong>0:100</strong>, this will also work because we are asking for a range
+                            that exceeds the actual number of rows in the array. NumPy handles this gracefully by
+                            returning all available rows.
+                        </li>
+
+                        <li>Printing a column: <strong>a[:, 2]</strong> - The first part before <strong>,</strong> is
+                            for rows,
+                            and after it is for columns. <strong>:</strong> means all rows, and <strong>2</strong> means
+                            the 2nd
+                            column:
+                            <pre>
+                                <code>
+print(a[:, 2])
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+[ 3,  8, 13, 18, 23, 28, 33, 38, 43, 48]
+                            </code>
+                        </pre>
+                        </li>
+
+                        <li><strong>a[2:5, 4]</strong> - This means selecting rows from index 2 to 4 and the element in
+                            the
+                            4th column:
+                            <pre>
+                                <code>
+print(a[2:5, 4])
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+[15, 20, 25]
+                            </code>
+                        </pre>
+                        </li>
+
+                        <li><strong>a[:, :]</strong> - This means selecting all rows and all columns:
+                            <pre>
+                                <code>
+print(a[:, :])
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+[[ 1,  2,  3,  4,  5],
+ [ 6,  7,  8,  9, 10],
+ [11, 12, 13, 14, 15],
+ [16, 17, 18, 19, 20],
+ [21, 22, 23, 24, 25],
+ [26, 27, 28, 29, 30],
+ [31, 32, 33, 34, 35],
+ [36, 37, 38, 39, 40],
+ [41, 42, 43, 44, 45],
+ [46, 47, 48, 49, 50]]
+                            </code>
+                        </pre>
+                        </li>
+
+                        <li><strong>a[:, 2:5]</strong> - This means selecting all rows and columns from index 2 to 4:
+                            <pre>
+                                <code>
+print(a[:, 2:5])
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+[[ 3,  4,  5],
+ [ 8,  9, 10],
+ [13, 14, 15],
+ [18, 19, 20],
+ [23, 24, 25],
+ [28, 29, 30],
+ [33, 34, 35],
+ [38, 39, 40],
+ [43, 44, 45],
+ [48, 49, 50]]
+                            </code>
+                        </pre>
+                        </li>
+
+                        <li><strong>a[:, 2:].dtype</strong> - This will give the data type of the elements in the array
+                            starting from column index 2 to the end:
+                            <pre>
+                                <code>
+print(a[:, 2:].dtype)
+                            </code>
+                        </pre>
+                            Output:
+                            <pre>
+                                <code>
+dtype('int64')
+                            </code>
+                        </pre>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Pandas 🐼</h2>
+            <ul>
+                <li>Pandas is a fast, powerful, flexible, and easy-to-use open-source data analysis and manipulation
+                    tool built on top of the Python programming language.</li>
+                <li>Pandas is one of the most popular and robust data analysis libraries in Python. Data analysts, data
+                    scientists, and machine learning engineers utilize it essentially every day for projects involving
+                    data wrangling, data manipulation, and data visualization.</li>
+            </ul>
+
+            <p><strong>Installation</strong></p>
+            <ul>
+                <li>Pandas must be installed first before you can use it in your system:</li>
+            </ul>
+            <pre>
+                <code>
+pip install pandas
+                </code>
+            </pre>
+            <ul>
+                <li>Once installed, it is now ready to be imported and used:</li>
+            </ul>
+            <pre>
+                <code>
+import pandas as pd
+                </code>
+            </pre>
+
+            <h3>Working with Data</h3>
+            <p>Pandas offers primarily two types of data structures: Series and DataFrames. These are designed in a way
+                to make data fast and easier to analyze.</p>
+            <ol>
+                <li>Series: Pandas Series is a one-dimensional array object of key-value pairs of integers, strings,
+                    floats, and other data types. Each element (value) of a Series is assigned a unique label, often
+                    known as an index or key. Series are often used in data manipulation tasks.
+                    <pre>
+                        <code>
+import pandas as pd
+# Initialize the series object
+num = pd.Series([12, 3, 2, 8])
+print(num)
+                        </code>
+                    </pre>
+                    Output:
+                    <pre>
+                        <code>
+0    12
+1     3
+2     2
+3     8
+dtype: int64
+                        </code>
+                    </pre>
+                </li>
+                <li>DataFrame: DataFrames have a two-dimensional structure that is similar to a spreadsheet or table
+                    with rows and columns. A DataFrame is basically an arrangement of two or more Series, with distinct
+                    data types, such as name (string), age (int), and date_of_birth (datetime), in each column. To
+                    create a DataFrame in Pandas, we use <strong>pandas.DataFrame()</strong>:
+                    <pre>
+                        <code>
+import pandas as pd
+# Initialize the DataFrame object
+data = {
+    'Name': ['John', 'Anna', 'Peter', 'Linda'],
+    'Age': [28, 24, 35, 32],
+    'Date_of_Birth': ['1996-05-24', '1999-03-17', '1988-12-05', '1991-08-12']
+}
+df = pd.DataFrame(data)
+print(df)
+                        </code>
+                    </pre>
+                    Output:
+                    <pre>
+                        <code>
+    Name  Age Date_of_Birth
+0   John   28    1996-05-24
+1   Anna   24    1999-03-17
+2  Peter   35    1988-12-05
+3  Linda   32    1991-08-12
+                        </code>
+                    </pre>
+                </li>
+            </ol>
+            <div class="in">
+                <h3>Pandas Series with Python Lists</h3>
+                <ul>
+                    <li>A list in Python is a collection of elements which can include integers, strings, floats, and
+                        other data types. Lists are mutable and ordered.</li>
+                </ul>
+                <pre>
+                        <code>
+lst = [1, 2, 3, 4, 5, 6]
+print(lst)
+                        </code>
+                    </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+[1, 2, 3, 4, 5, 6]
+                    </code>
+                </pre>
+                <p>There are some advantages of Series over lists:</p>
+                <ul>
+                    <li>Pandas Series provide more functionality, such as the ability to handle missing data, vectorized
+                        operations, and the ability to use labels for indexing.</li>
+                </ul>
+                <p>We can create a Series using a list:</p>
+                <pre>
+                    <code>
+import pandas as pd
+series = pd.Series(lst)
+print(series)
+print(type(series))
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+0    1
+1    2
+2    3
+3    4
+4    5
+5    6
+dtype: int64
+&lt;class 'pandas.core.series.Series'>
+                    </code>
+                </pre>
+                <ul>
+                    <li>As you can see in the output, the 1D array is converted to a column with an index.</li>
+                    <li>We can create a Series using a dictionary as well:</li>
+                </ul>
+                <pre>
+                    <code>
+data = {'a': 10, 'b': 20, 'c': 30}
+series_dict = pd.Series(data)
+print(series_dict)
+                        </code>
+                    </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+a    10
+b    20
+c    30
+dtype: int64
+                    </code>
+                </pre>
+                <h3>Creating Empty Series</h3>
+                <ul>
+                    <li>You don't have to provide anything; just an empty list or array.</li>
+                    <li>By default, the data type is float.</li>
+                </ul>
+                <pre>
+                    <code>
+empty = pd.Series([])
+print(empty)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Series([], dtype: float64)
+                    </code>
+                </pre>
+
+                <h3>Defining Your Own Index</h3>
+                <pre>
+                    <code>
+a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14])
+print(a)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+10    p
+11    q
+12    r
+13    s
+14    t
+dtype: object
+                    </code>
+                </pre>
+
+                <h3>Giving Name to a Series</h3>
+                <ul>
+                    <li>Using this we can assign a name to the Series, which can be useful for identifying the Series in
+                        a DataFrame or when displaying it.</li>
+                </ul>
+                <pre>
+                    <code>
+a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14], name="alphabets")
+print(a)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+10    p
+11    q
+12    r
+13    s
+14    t
+Name: alphabets, dtype: object
+                    </code>
+                </pre>
+
+                <h3>Creating Scalar Series</h3>
+                <ul>
+                    <li>A scalar Series is a Series where every element is the same scalar value.</li>
+                </ul>
+                <pre>
+                    <code>
+scalar_series = pd.Series(0.5)
+print(scalar_series)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+0    0.5
+dtype: float64
+                    </code>
+                </pre>
+                <ul>
+                    <li>This contains a single scalar value 0.5 repeated once.</li>
+                </ul>
+
+                <h3>Increasing the Quantity of the Scalar Values</h3>
+                <ul>
+                    <li>We can do this by specifying an index with the desired length.</li>
+                </ul>
+                <pre>
+                    <code>
+scalar_series = pd.Series(0.5, index=[1, 2, 3])
+print(scalar_series)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+1    0.5
+2    0.5
+3    0.5
+dtype: float64
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Pandas Series with Python Dictionary</h3>
+                <ul>
+                    <li>A dictionary in Python contains key-value pairs, where each key is unique and maps to a
+                        corresponding value.</li>
+                </ul>
+                <p>Creating a Series using a dictionary:</p>
+                <pre>
+                    <code>
+import pandas as pd
+dict_series = pd.Series({'p': 1, 'q': 2, 'r': 3, 's': 4, 't': 5})
+print(dict_series)
+                </code>
+            </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+p    1
+q    2
+r    3
+s    4
+t    5
+dtype: int64
+                </code>
+            </pre>
+
+                <h3>Accessing the Data</h3>
+                <pre>
+                    <code>
+print(dict_series[0])
+                </code>
+            </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+                1
+                </code>
+            </pre>
+                <ul>
+                    <li>This will print the value associated with the first key in the Series, which is 1.</li>
+                </ul>
+                <pre>
+                    <code>
+print(dict_series[0:3])
+                </code>
+            </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+p    1
+q    2
+r    3
+dtype: int64
+                </code>
+            </pre>
+                <ul>
+                    <li>This will print the first three elements in the Series.</li>
+                </ul>
+
+                <h3>Getting the Maximum Value in the Dictionary Series</h3>
+                <pre>
+                    <code>
+print(max(dict_series))
+                </code>
+            </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+5
+                </code>
+            </pre>
+
+                <h3>Increasing the Column Count</h3>
+                <ul>
+                    <li>Till now, it was containing only one column. Now we want three columns, and we can do this by
+                        combining a dictionary and a list.</li>
+                </ul>
+                <pre>
+                    <code>
+dict_series = pd.Series({'p': [1, 5, 6], 'q': [2, 6, 7], 'r': [3, 7, 8], 's': [4, 8, 9], 't': [5, 9, 10]})
+print(dict_series)
+                </code>
+            </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+p    [1, 5, 6]
+q    [2, 6, 7]
+r    [3, 7, 8]
+s    [4, 8, 9]
+t    [5, 9, 10]
+dtype: object
+                </code>
+            </pre>
+            </div>
+            <div class="in">
+                <h3>Pandas DataFrame</h3>
+                <ul>
+                    <li>We know how to create pandas Series. Now we will create pandas DataFrame, which is a more
+                        effective way of representing data in terms of rows and columns.</li>
+                </ul>
+                <p>Example:</p>
+                <pre>
+                    <code>
+import pandas as pd
+df = pd.DataFrame()
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Empty DataFrame
+Columns: []
+Index: []
+                    </code>
+                </pre>
+                <ul>
+                    <li>It creates an empty DataFrame because we have not provided any data.</li>
+                </ul>
+
+                <h3>DataFrame using a List</h3>
+                <pre>
+                    <code>
+lst = [1, 2, 3, 4, 5]
+df = pd.DataFrame(lst)
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+   0
+0  1
+1  2
+2  3
+3  4
+4  5
+                    </code>
+                </pre>
+                <ul>
+                    <li>We will get a DataFrame with index values and one column containing the list elements.</li>
+                </ul>
+
+                <h3>Creating DataFrame with Multiple Columns</h3>
+                <pre>
+                    <code>
+lst = [[1, 2, 3, 4, 5], [11, 12, 13, 14, 15]]
+df = pd.DataFrame(lst)
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+    0   1   2   3   4
+0   1   2   3   4   5
+1  11  12  13  14  15
+                    </code>
+                </pre>
+                <ul>
+                    <li>We will get a DataFrame with two rows and five columns, where each inner list represents a row.
+                    </li>
+                </ul>
+
+                <h3>DataFrame using a Dictionary</h3>
+                <pre>
+                    <code>
+a = [{'a': 5, 'b': 7, 'c': 9, 'd': 2},
+     {'a': 4, 'b': 8, 'c': 19, 'd': 12}] # dictionary keys represent column names
+df = pd.DataFrame(a)
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+   a  b   c   d
+0  5  7   9   2
+1  4  8  19  12
+                    </code>
+                </pre>
+                <ul>
+                    <li>The dictionary keys become column names, and the values form the rows of the DataFrame.</li>
+                </ul>
+
+                <h3>Creating DataFrame using Pandas Series</h3>
+                <pre>
+                    <code>
+b = {'RollNo.': pd.Series([1, 2, 3, 4, 5]),
+     'Maths': pd.Series([67, 89, 23, 90, 56]),
+     'Physics': pd.Series([12, 98, 44, 90, 78])}
+df = pd.DataFrame(b)
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+   RollNo.  Maths  Physics
+0        1     67       12
+1        2     89       98
+2        3     23       44
+3        4     90       90
+4        5     56       78
+                    </code>
+                </pre>
+                <ul>
+                    <li>The Series objects form the columns of the DataFrame, with their indexes aligning to form rows.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Reading CSV (Comma Separated Values) as DataFrames</h3>
+                <ul>
+                    <li>CSV (Comma Separated Values) files are a common format for storing tabular data, where each line
+                        represents a row, and columns are separated by commas.</li>
+                    <li>CSV files are widely used because they are simple to read and write and can be processed by many
+                        different applications.</li>
+                    <li>Excel files with the extension .xlsx can also be saved as CSV files, which is a more generalized
+                        format for data interchange. CSV files are plain text files that can be created and edited with
+                        any text editor.</li>
+                    <li>Using the <code>read_csv</code> method from Pandas, we can easily create a DataFrame from a CSV
+                        file. This method offers many options for handling different types of data and file formats.
+                    </li>
+                    <li>Let's suppose we have a CSV file named <code>Salary_Data.csv</code> that contains two columns:
+                        <code>YearsExperience</code> and <code>Salary</code>.
+                    </li>
+                    <li>Here is an example of the content of the <code>Salary_Data.csv</code> file:</li>
+                </ul>
+                <img src="../../images/csv1.svg" alt="" class="wb">
+                <ul>
+                    <li>We can use the following code to read the CSV file into a Pandas DataFrame and print its
+                        contents:</li>
+                </ul>
+                <pre>
+                    <code>
+import pandas as pd
+df = pd.read_csv('Salary_Data.csv')
+print(df)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+        YearsExperience     Salary
+    0               1.1   39343.00
+    1               1.3   46205.00
+    2               1.5   37731.00
+    3               2.0   43525.00
+    4               2.2   39891.00
+    5               2.9   56642.00
+    6               3.0   60150.00
+    7               3.2   54445.00
+    8               3.2   64445.00
+    9               3.7   57189.00
+    10              3.9   63218.00
+    11              4.0   55794.00
+    12              4.0   56957.00
+    13              4.1   57081.00
+    14              4.5   61111.00
+    15              4.9   67938.00
+    16              5.1   66029.00
+    17              5.3   83088.00
+    18              5.9   81363.00
+    19              6.0   93940.00
+    20              6.8   91738.00
+    21              7.1   98273.00
+    22              7.9  101302.00
+    23              8.2  113812.00
+    24              8.7  109431.00
+    25              9.0  105582.00
+    26              9.5  116969.00
+    27              9.6  112635.00
+    28             10.3  122391.00
+    29             10.5  121872.00
+                </code>
+            </pre>
+                <ul>
+                    <li>The above code reads the CSV file into a DataFrame named <strong>df</strong> and prints its
+                        contents.</li>
+                    <li>Pandas provides various options in the <strong>read_csv</strong> method to handle different file
+                        structures, such as specifying delimiters, handling missing values, and parsing dates.</li>
+                    <li>Using <strong>df.head()</strong> and <strong>df.tail()</strong>, we can view the first and last
+                        few rows
+                        of the DataFrame, respectively.</li>
+                    <li>We can also get summary statistics of the DataFrame using <strong>df.describe()</strong>.</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.head())  # Displays the first 5 rows
+print(df.tail())  # Displays the last 5 rows
+print(df.describe())  # Displays summary statistics
+                </code>
+            </pre>
             </div>
         </div>
     </div>
