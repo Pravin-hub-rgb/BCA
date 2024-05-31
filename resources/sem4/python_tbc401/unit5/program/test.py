@@ -1,4 +1,8 @@
 import pandas as pd
 
-df = pd.read_csv('sample2.csv')
-print(df.loc[5:15, 'Chemistry'])
+# Creating a sample DataFrame
+data = {'Name': ['John', 'Emma', 'Michael', 'Sophia'],
+         'Age': [28, 24, 32, 29],
+        'City': ['New York', 'San Francisco', 'Los Angeles', 'Houston']}
+df = pd.DataFrame(data)
+df.to_csv('Dataframe1.csv', index=False)

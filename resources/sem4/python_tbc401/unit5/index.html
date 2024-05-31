@@ -2160,7 +2160,7 @@ Concatenated DataFrame along columns:
             </code>
         </pre>
                 </div>
-                <div class="notes">
+                <div class="in">
                     <h3>Merge Operation in DataFrame</h3>
                     <p>Merging in Pandas combines DataFrames based on one or more keys.</p>
 
@@ -2241,6 +2241,167 @@ Merged DataFrame:
                         <li>'right': Returns all rows from the right DataFrame, filling in missing values with NaN.</li>
                     </ul>
                 </div>
+
+                <div class="in">
+                    <h3>Join Operation in DataFrame</h3>
+                    <p>The join operation in Pandas combines DataFrames based on their indexes or key columns.</p>
+
+                    <h4>Creating DataFrames</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+                
+# Creating DataFrame 1
+data1 = {'Name': ['John', 'Emma', 'Michael', 'Sophia'],
+          'Age': [28, 24, 32, 29],
+          'Key': ['A', 'B', 'C', 'D']}
+df1 = pd.DataFrame(data1)
+
+# Creating DataFrame 2
+data2 = {'City': ['New York', 'San Francisco', 'Los Angeles', 'Houston'],
+          'Key': ['A', 'B', 'E', 'F']}
+df2 = pd.DataFrame(data2)
+                </code>
+            </pre>
+
+                    <h4>Joining DataFrames Using Index</h4>
+                    <p>The join operation merges DataFrames based on their indexes.</p>
+                    <pre>
+                        <code>
+result = df1.join(df2, lsuffix='_left', rsuffix='_right')
+print("Joined DataFrame:")
+print(result)
+            </code>
+            </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Joined DataFrame:
+     Name  Age Key_left             City  Key_right
+0    John   28        A         New York          A
+1    Emma   24        B    San Francisco          B
+2 Michael   32        C              NaN        NaN
+3  Sophia   29        D              NaN        NaN
+                        </code>
+                    </pre>
+
+                    <h4>Joining DataFrames on a Common Column ('on' parameter)</h4>
+                    <p>The 'on' parameter specifies the column on which to join the DataFrames.</p>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, on='Key')
+print("Merged DataFrame on 'Key':")
+print(result)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Merged DataFrame on 'Key':
+     Name  Age  Key             City
+0    John   28    A         New York
+1    Emma   24    B    San Francisco
+                        </code>
+                    </pre>
+
+                    <h4>Explanation of Join Types</h4>
+                    <ul>
+                        <li>Full Outer Join: Includes all rows from both DataFrames, filling in missing values with NaN.
+                        </li>
+                        <li>Inner Join: Returns only the rows with matching keys in both DataFrames.</li>
+                        <li>Left Join: Returns all rows from the left DataFrame, filling in missing values with NaN.
+                        </li>
+                        <li>Right Join: Returns all rows from the right DataFrame, filling in missing values with NaN.
+                        </li>
+                    </ul>
+
+                    <h4>Full Outer Join</h4>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, on='Key', how='outer')
+print("Full Outer Join:")
+print(result)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Full Outer Join:
+     Name   Age Key             City
+0    John  28.0   A         New York
+1    Emma  24.0   B    San Francisco
+2 Michael  32.0   C              NaN
+3  Sophia  29.0   D              NaN
+4     NaN   NaN   E      Los Angeles
+5     NaN   NaN   F          Houston
+                        </code>
+                    </pre>
+
+                    <h4>Inner Join</h4>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, on='Key', how='inner')
+print("Inner Join:")
+print(result)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Inner Join:
+     Name  Age Key             City
+0    John   28   A         New York
+1    Emma   24   B    San Francisco
+                        </code>
+                    </pre>
+
+                    <h4>Left Join</h4>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, on='Key', how='left')
+print("Left Join:")
+print(result)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Left Join:
+     Name  Age Key             City
+0    John   28   A         New York
+1    Emma   24   B    San Francisco
+2 Michael   32   C              NaN
+3  Sophia   29   D              NaN
+                        </code>
+                    </pre>
+
+                    <h4>Right Join</h4>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, on='Key', how='right')
+print("Right Join:")
+print(result)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Right Join:
+     Name   Age Key             City
+0    John  28.0   A         New York
+1    Emma  24.0   B    San Francisco
+2     NaN   NaN   E      Los Angeles
+3     NaN   NaN   F          Houston
+                        </code>
+                    </pre>
+                </div>
+
             </div>
         </div>
         <div class="wh">
@@ -2445,6 +2606,45 @@ memory usage: 608.0 bytes
                         </pre>
                     </li>
                 </ul>
+                <div class="in">
+                    <h3>Exporting Data from DataFrame to CSV File</h3>
+                    <p>To export a DataFrame into a CSV file, you can use the <strong>to_csv()</strong> method provided
+                        by
+                        Pandas.</p>
+
+                    <h4>Creating a DataFrame</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating a sample DataFrame
+data = {'Name': ['John', 'Emma', 'Michael', 'Sophia'],
+         'Age': [28, 24, 32, 29],
+        'City': ['New York', 'San Francisco', 'Los Angeles', 'Houston']}
+df = pd.DataFrame(data)
+                    </code>
+                </pre>
+
+                    <h4>Exporting DataFrame to CSV File</h4>
+                    <p>To export the DataFrame <strong>df</strong> to a CSV file named <strong>Dataframe1.csv</s>, use
+                            the
+                            following code:</p>
+                    <pre>
+                        <code>
+df.to_csv('E:/Dataframe1.csv', index=False)
+        </code>
+        </pre>
+
+                    <h4>Explanation:</h4>
+                    <ul>
+                        <li><strong>df.to_csv('E:/Dataframe1.csv', index=False):</strong> Exports the DataFrame
+                            <strong>df</strong> to the file path specified (E:/Dataframe1.csv).
+                        </li>
+                        <li><strong>index=False:</strong> This parameter ensures that the index of the DataFrame is not
+                            included in the CSV file.</li>
+                    </ul>
+                </div>
+
                 <p>Now we will work with a different type of CSV file that contains complex data. This file includes
                     restaurant data with the following columns: rank of restaurant, name of restaurant, content (which
                     has many null values), sales, YOY_Sales (year-over-year sales), units, YOY_Units (year-over-year
@@ -3027,7 +3227,242 @@ df2 = df.fillna(method='bfill')
 df.fillna(method='bfill', inplace=True)
                     </code>
                 </pre>
+                <div class="in">
+                    <h3>Replacing Empty Cells Using Mean, Median, or Mode</h3>
+
+                    <ul>
+                        <li>We can replace empty cells in a DataFrame using statistical methods like mean, median, or
+                            mode. This approach ensures that the replacement values are representative of the dataset.
+                        </li>
+                        <li>Here we are working with <a class="ba"
+                                href="https://github.com/Pravin-hub-rgb/BCA/tree/master/resources/sem4/python_tbc401/unit5/program"
+                                target="_blank">dirtydata.csv file &neArr;</a></li>
+                    </ul>
+
+                    <h4>Calculating the Mean and Replacing Empty Values</h4>
+                    <ul>
+                        <li>The <strong>mean()</strong> method calculates the average value of a column.</li>
+                        <li>We can use the mean to fill in empty cells, making the data more consistent.</li>
+                    </ul>
+                    <pre>
+                    <code>
+import pandas as pd
+
+# Reading data from a CSV file
+sharad = pd.read_csv('dirtydata.csv')
+
+# Calculating the mean of the "Calories" column
+x = sharad["Calories"].mean()
+
+# Replacing empty values with the calculated mean
+sharad["Calories"].fillna(x, inplace=True)
+
+# Printing the updated DataFrame
+print(sharad.to_string())
+                    </code>
+                    </pre>
+                    <ul>
+                        <li>to_string(): This method is used to render a DataFrame to a console-friendly tabular output.
+                            It is particularly useful for quickly inspecting the content of a DataFrame in a readable
+                            format. It converts the entire DataFrame to a string representation, which can be printed
+                            out to view the data more conveniently.</li>
+                    </ul>
+
+                    <h4>Calculating the Median and Replacing Empty Values</h4>
+                    <ul>
+                        <li>The <strong>median()</strong> method finds the middle value of a column, which can be a
+                            better
+                            measure of central tendency for skewed data.</li>
+                        <li>Using the median helps to fill empty cells with a value that is less affected by outliers.
+                        </li>
+                    </ul>
+                    <pre>
+                    <code>
+import pandas as pd
+
+# Reading data from a CSV file
+sharad = pd.read_csv('dirtydata.csv')
+
+# Calculating the median of the "Calories" column
+x = sharad["Calories"].median()
+
+# Replacing empty values with the calculated median
+sharad["Calories"].fillna(x, inplace=True)
+
+# Printing the updated DataFrame
+print(sharad.to_string())
+                    </code>
+                    </pre>
+
+                    <h4>Calculating the Mode and Replacing Empty Values</h4>
+                    <ul>
+                        <li>The <code>mode()</code> method identifies the most frequently occurring value in a column.
+                        </li>
+                        <li>Replacing empty cells with the mode ensures that the most common value in the dataset is
+                            used.</li>
+                    </ul>
+                    <pre>
+                    <code>
+import pandas as pd
+
+# Reading data from a CSV file
+sharad = pd.read_csv('dirtydata.csv')
+
+# Calculating the mode of the "Calories" column
+x = sharad["Calories"].mode()[0]
+
+# Replacing empty values with the calculated mode
+sharad["Calories"].fillna(x, inplace=True)
+
+# Printing the updated DataFrame
+print(sharad.to_string())
+                    </code>
+                    </pre>
+                </div>
+
             </div>
+            <div class="in">
+                <h3>Cleaning Wrong Format</h3>
+                <p>Data in a wrong format can cause issues in data analysis. To fix this problem, there are two main
+                    approaches: removing the rows with incorrect format or converting all the cells to the same format.
+                </p>
+
+                <h4>Loading and Reading the Original DataFrame</h4>
+                <ul>
+                    <li>First, load the dataset and display its contents to understand the current state of the data.
+                    </li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+print(sharad.to_string())
+    </code>
+    </pre>
+
+                <h4>Converting All Cells in the Date Column to Dates</h4>
+                <ul>
+                    <li>We can use the <strong>to_datetime()</strong> function to convert all cells in the 'Date' column
+                        to
+                        a uniform date format.</li>
+                    <li>This method ensures that all date entries are correctly formatted, making the data consistent.
+                    </li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+
+# Converting all cells in the 'Date' column to dates
+sharad["Date"] = pd.to_datetime(sharad['Date'])
+print(sharad.to_string())
+    </code>
+    </pre>
+                <ul>
+                    <li> pd.to_datetime(): Converts a column or series of date strings into datetime objects.</li>
+                </ul>
+
+                <h4>Removing Rows with NULL Values in the 'Date' Column</h4>
+                <ul>
+                    <li>After converting the date column, any rows with NULL values in the 'Date' column can be removed
+                        using the <strong>dropna()</strong> method.</li>
+                    <li>This approach ensures that the DataFrame only contains rows with valid dates, improving data
+                        quality.</li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+
+# Converting all cells in the 'Date' column to dates
+sharad['Date'] = pd.to_datetime(sharad['Date'])
+
+# Removing rows with NULL values in the 'Date' column
+sharad.dropna(subset=['Date'], inplace=True)
+print(sharad.to_string())
+    </code>
+    </pre>
+                <ul>
+                    <li>dropna(subset=['Date'], inplace=True): Removes rows with NULL values in the specified column
+                        ('Date') and updates the DataFrame directly</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Removing Duplicate Values</h3>
+                <p>Removing duplicate values is essential to ensure data quality. The process involves discovering
+                    duplicate values and then removing them from the DataFrame.</p>
+
+                <h4>Loading and Reading the Original DataFrame</h4>
+                <ul>
+                    <li>First, load the dataset and display its contents to understand the current state of the data.
+                    </li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+print(sharad.to_string())
+    </code>
+    </pre>
+
+                <h4>Discovering Duplicate Values</h4>
+                <ul>
+                    <li>The <strong>duplicated()</strong> method is used to identify duplicate rows in the DataFrame.
+                    </li>
+                    <li>It returns a series of boolean values, with <code>True</code> indicating a duplicate row and
+                        <code>False</code> indicating a unique row.</li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+
+# Discovering duplicate values
+print(sharad.duplicated())
+    </code>
+    </pre>
+
+                <h4>Removing Duplicate Values</h4>
+                <ul>
+                    <li>Once duplicates are identified, the <strong>drop_duplicates()</strong> method can be used to
+                        remove them from the DataFrame.</li>
+                    <li>Using the <strong>inplace=True</strong> parameter ensures that the original DataFrame is updated
+                        directly.</li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+
+# Loading and reading the original DataFrame
+sharad = pd.read_csv('dirtydata.csv')
+
+# Removing duplicate values from the DataFrame
+sharad.drop_duplicates(inplace=True)
+print(sharad.to_string())
+    </code>
+    </pre>
+                <ul>
+                    <li><strong>duplicated()</strong>: Identifies duplicate rows in the DataFrame. It returns a series of
+                        boolean values where <strong>True</strong> indicates a duplicate row and <strong>False</strong>
+                        indicates a unique row.</li>
+                    <li><strong>drop_duplicates(inplace=True)</strong>: Removes duplicate rows from the DataFrame. The
+                        <strong>inplace=True</strong> parameter updates the original DataFrame directly without needing to
+                        assign the result to a new variable.</li>
+                    <li><strong>to_string()</strong>: Converts the DataFrame to a string representation, which can be
+                        printed out for a readable display of the data.</li>
+                </ul>
+            </div>
+
             <div class="in">
                 <h3>replace() function in Pandas</h3>
                 <ul>
