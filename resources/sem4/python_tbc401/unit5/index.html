@@ -2077,8 +2077,548 @@ df2 = df.fillna(method='bfill')
                 <ul>
                     <li>Using this method, all null values in the dataframe will be filled with the next row's values in
                         their respective columns, effectively propagating values backward to fill gaps.</li>
+                    <li>When we pass the <strong>inplace=True</strong> parameter with the method as 'bfill' (backward
+                        fill)
+                        or 'ffill' (forward fill), the original DataFrame will be modified in place, meaning it will be
+                        updated directly without needing to assign the result to a new variable.</li>
                 </ul>
+                <pre>
+                    <code>
+df.fillna(method='bfill', inplace=True)
+                    </code>
+                </pre>
             </div>
+            <div class="in">
+                <h3>replace() function in Pandas</h3>
+                <ul>
+                    <li>This function is used to replace values in a DataFrame.</li>
+                    <li>We are still working with the same <a class="ba"
+                            href="https://github.com/Pravin-hub-rgb/BCA/tree/master/resources/sem4/python_tbc401/unit5/program"
+                            target="_blank">sample.csv file &neArr;</a></li>
+                    <li>Let's first discuss the parameters that we can pass inside this function:
+                        <ol>
+                            <li><strong>to_replace:</strong> This parameter is set to the value that we want to replace.
+                            </li>
+                            <li><strong>value:</strong> The new value that will replace the old value specified in
+                                <code>to_replace</code>.
+                            </li>
+                            <li><strong>inplace:</strong> If set to True, it modifies the original DataFrame directly.
+                            </li>
+                            <li><strong>limit:</strong> The maximum number of replacements to make.</li>
+                            <li><strong>regex:</strong> If True, treats the <code>to_replace</code> parameter as a
+                                regular expression.</li>
+                            <li><strong>method:</strong> The method to use for filling holes in reindexed Series (e.g.,
+                                'ffill' or 'bfill').</li>
+                        </ol>
+                    </li>
+                    <li>Now let's see how to use this function:</li>
+                </ul>
+                <pre>
+                    <code>
+import pandas as pd
+df = pd.read_csv('sample.csv')
+
+# Replacing values
+df2 = df.replace(to_replace=26, value=30)
+print(df2)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+    Roll No.  Physics  Chemistry  Maths  Computer
+0           1     56.0       57.0   58.0      59.0
+1           2     23.0       24.0   25.0      30.0
+2           3     89.0       25.0   30.0      27.0
+3           4     45.0       30.0   27.0      28.0
+4           5     23.0       27.0   28.0      29.0
+5           6     90.0        NaN   29.0      30.0
+6           7     12.0       13.0   14.0      15.0
+7           8     78.0       14.0   15.0      16.0
+8           9      NaN       15.0   16.0      17.0
+9          10     45.0       16.0   17.0      18.0
+10         11      NaN       17.0   18.0      19.0
+11         12     88.0        NaN   19.0      20.0
+12         13     22.0       23.0   24.0      25.0
+13         14     90.0        NaN    NaN      42.0
+14         15      NaN       43.0   43.0      43.0
+15         16     44.0       44.0   44.0      44.0
+16         17     45.0       45.0   45.0      45.0
+17         18     46.0       46.0   46.0      46.0
+18         19     47.0       47.0   47.0      47.0
+19         20     48.0       48.0   48.0      48.0
+20         21     49.0       49.0   49.0      49.0
+21         22     50.0       50.0   50.0      50.0
+22         23     51.0       51.0   51.0      51.0
+23         24     52.0       52.0   52.0      52.0
+24         25     53.0        NaN    NaN      53.0
+25         30     54.0       33.0   33.0      54.0
+26         27     55.0       34.0   34.0      55.0
+27         28     56.0       35.0   35.0       NaN
+28         29     57.0       36.0   36.0      66.0
+29         30     58.0       37.0   37.0      43.0
+                    </code>
+                </pre>
+                <ul>
+                    <li>As you can see, all instances of 26 are replaced by 30 in the DataFrame.</li>
+                    <li>We don't even need to provide the parameter names; we can also do it directly like this:</li>
+                </ul>
+                <pre>
+                    <code>
+df2 = df.replace(26, 1000)
+# This will replace all instances of 26 with 1000
+                    </code>
+                </pre>
+                <ul>
+                    <li>As you can see, all instances of 26 are replaced with 1000 in the DataFrame.</li>
+                    <li>Now we will see how we can replace a large set of numbers. We don't need to write the function
+                        each time for each value; we can just provide them in a list.</li>
+                </ul>
+                <pre>
+                    <code>
+df2 = df.replace([50, 51, 52, 53, 54, 55, 56, 57, 58, 59], 'A')
+# This will replace all instances of 50, 51, 52, 53, 54, 55, 56, 57, 58, and 59 with 'A'
+print(df2)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+    Roll No.  Physics  Chemistry  Maths  Computer
+0          1        A         A      A         A
+1          2     23.0      24.0   25.0      26.0
+2          3     89.0      25.0   26.0      27.0
+3          4     45.0      26.0   27.0      28.0
+4          5     23.0      27.0   28.0      29.0
+5          6     90.0       NaN   29.0      30.0
+6          7     12.0      13.0   14.0      15.0
+7          8     78.0      14.0   15.0      16.0
+8          9      NaN      15.0   16.0      17.0
+9         10     45.0      16.0   17.0      18.0
+10        11      NaN      17.0   18.0      19.0
+11        12     88.0       NaN   19.0      20.0
+12        13     22.0      23.0   24.0      25.0
+13        14     90.0       NaN    NaN      42.0
+14        15      NaN      43.0   43.0      43.0
+15        16     44.0      44.0   44.0      44.0
+16        17     45.0      45.0   45.0      45.0
+17        18     46.0      46.0   46.0      46.0
+18        19     47.0      47.0   47.0      47.0
+19        20     48.0      48.0   48.0      48.0
+20        21     49.0      49.0   49.0      49.0
+21        22        A         A      A         A
+22        23        A         A      A         A
+23        24        A         A      A         A
+24        25        A       NaN     NaN         A
+25        26        A      33.0   33.0         A
+26        27        A      34.0   34.0         A
+27        28        A      35.0   35.0       NaN
+28        29        A      36.0   36.0      66.0
+29        30        A      37.0   37.0      43.0
+                    </code>
+                </pre>
+                <ul>
+                    <li>As you can see, all instances of 50, 51, 52, 53, 54, 55, 56, 57, 58, and 59 are replaced with
+                        'A' in the DataFrame.</li>
+                    <li>Now we will see how we can replace a certain set of numbers with a certain set of values.</li>
+                </ul>
+                <pre>
+                    <code>
+# Assuming df is the DataFrame loaded from the sample.csv file
+df2 = df.replace([50, 51, 52, 53], ['A', 'B', 'C', 'D'])
+# This will replace all instances of 50, 51, 52, and 53 with 'A', 'B', 'C', and 'D' respectively
+print(df2)
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+    Roll No.  Physics  Chemistry  Maths  Computer
+0          1     56.0       57.0   58.0      59.0
+1          2     23.0       24.0   25.0      26.0
+2          3     89.0       25.0   26.0      27.0
+3          4     45.0       26.0   27.0      28.0
+4          5     23.0       27.0   28.0      29.0
+5          6     90.0        NaN   29.0      30.0
+6          7     12.0       13.0   14.0      15.0
+7          8     78.0       14.0   15.0      16.0
+8          9      NaN       15.0   16.0      17.0
+9         10     45.0       16.0   17.0      18.0
+10        11      NaN       17.0   18.0      19.0
+11        12     88.0        NaN   19.0      20.0
+12        13     22.0       23.0   24.0      25.0
+13        14     90.0        NaN    NaN      42.0
+14        15      NaN       43.0   43.0      43.0
+15        16     44.0       44.0   44.0      44.0
+16        17     45.0       45.0   45.0      45.0
+17        18     46.0       46.0   46.0      46.0
+18        19     47.0       47.0   47.0      47.0
+19        20     48.0       48.0   48.0      48.0
+20        21     49.0       49.0   49.0      49.0
+21        22        A          A      A         A
+22        23        B          B      B         B
+23        24        C          C      C         C
+24        25        D        NaN    NaN         D
+25        26     54.0       33.0   33.0      54.0
+26        27     55.0       34.0   34.0      55.0
+27        28     56.0       35.0   35.0       NaN
+28        29     57.0       36.0   36.0      66.0
+29        30     58.0       37.0   37.0      43.0
+                    </code>
+                </pre>
+                <ul>
+                    <li>As you can see, all instances of 50, 51, 52, and 53 are replaced with 'A', 'B', 'C', and 'D'
+                        respectively in the DataFrame.</li>
+                    <li><code>df.replace('[A-Za-z]', 0)</code>: This is a new way to replace all alphabetic characters
+                        in a DataFrame with numeric values. However, this won't work alone as we also need to pass
+                        <code>regex=True</code> as a parameter, which allows the replacement to recognize the pattern as
+                        a regular expression.
+                    </li>
+                </ul>
+                <pre>
+                        <code>
+import pandas as pd
+
+# Load the DataFrame from the sample CSV file
+df = pd.read_csv('sample.csv')
+
+# First, we are trying to have some character values in our dataset
+df2 = df.replace([50, 51, 52, 53], ['A', 'B', 'C', 'D']) 
+
+# Convert the DataFrame to string type to avoid downcasting issues
+df2 = df2.astype(str)
+
+# Replace alphabetic characters with 0 using regex
+df2 = df2.replace('[A-Za-z]', 0, regex=True)
+
+# Print the updated DataFrame
+print(df2)
+                        </code>
+                    </pre>
+                <ul>
+                    <li>We can also use forward fill and backward fill with the replace function to propagate the next
+                        or previous value.</li>
+                </ul>
+                <pre>
+                    <code>
+import pandas as pd
+
+# Load the DataFrame from the sample CSV file
+df = pd.read_csv('sample.csv')
+
+# Use forward fill with the replace function
+df2 = df.replace(to_replace=15, method='ffill')
+
+# Use backward fill with the replace function
+df3 = df.replace(to_replace=15, method='bfill')
+
+# Print the updated DataFrames
+print("DataFrame with forward fill:\n", df2)
+print("\nDataFrame with backward fill:\n", df3)
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>loc() and iloc function in pandas</h3>
+                <ul>
+                    <li>Here we are working with the <a
+                            href="https://github.com/Pravin-hub-rgb/BCA/tree/master/resources/sem4/python_tbc401/unit5/program"
+                            target="_blank">sample2.csv &neArr;</a> file, which contains columns like Roll No., Section,
+                        Branch, Physics, Chemistry, Maths, Computer, and DOB.</li>
+                    <li>Let's display the content of the file using the head function.</li>
+                </ul>
+                <pre>
+    <code>
+import pandas as pd
+df = pd.read_csv('sample2.csv', index_col='Roll No.')
+print(df.head())
+    </code>
+</pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+         Section Branch  Physics  Chemistry  Maths  Computer         DOB
+Roll No.                                                                
+1              A     CS     56.0       57.0   58.0      59.0  01-01-2001
+2              A    ECE     23.0       24.0   25.0      26.0  02-01-2001
+3              B   MECH     89.0       25.0   26.0      27.0  03-01-2001
+4              C   MECH     45.0       26.0   27.0      28.0  04-01-2001
+5              A     CS     23.0       27.0   28.0      29.0  05-01-2001
+                    </code>
+                </pre>
+                <ul>
+                    <li>We have provided another parameter inside the <code>read_csv</code> method, which is
+                        <code>index_col='Roll No.'</code>. This makes the 'Roll No.' column the index of the DataFrame.
+                        This helps in efficiently accessing rows using the index label.
+                    </li>
+                    <li><code>df.loc[1]</code> what this will do is retrieve the row with the index label 1 from the
+                        DataFrame.</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.loc[1])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Section               A
+Branch               CS
+Physics            56.0
+Chemistry          57.0
+Maths              58.0
+Computer           59.0
+DOB          01-01-2001
+Name: 1, dtype: object
+                    </code>
+                </pre>
+                <ul>
+                    <li>The <code>loc[]</code> method is used to access a group of rows and columns by labels or a
+                        boolean array. In this case, <code>df.loc[1]</code> returns the row where the index label is 1.
+                    </li>
+                    <li>We can also provide an array of indexes to select multiple rows at once.</li>
+                </ul>
+                <pre>
+                    <code>
+import pandas as pd
+df = pd.read_csv('sample2.csv', index_col=['Roll No.'])
+print(df.loc[[2, 4, 6]])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+         Section Branch  Physics  Chemistry  Maths  Computer         DOB
+Roll No.                                                                
+2              A    ECE     23.0       24.0   25.0      26.0  02-01-2001
+4              C   MECH     45.0       26.0   27.0      28.0  04-01-2001
+6              A    ECE     90.0        NaN   29.0      30.0  06-01-2001
+                    </code>
+                </pre>
+                <ul>
+                    <li>By using <code>df.loc[[2, 4, 6]]</code>, we can select rows with indexes 2, 4, and 6. The result
+                        is a DataFrame containing only these rows.</li>
+                    <li>You can also select specific columns for a particular row:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.loc[5, 'Physics'])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+28.0
+                    </code>
+                </pre>
+                <ul>
+                    <li>This selects the 'Physics' column value for the row with index 5.</li>
+                    <li>You can also select a range of rows and a specific column:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.loc[5:15, 'Chemistry'])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Roll No.
+5     27.0
+6      NaN
+7     13.0
+8     14.0
+9     15.0
+10    16.0
+11    17.0
+12     NaN
+13    23.0
+14     NaN
+15    43.0
+Name: Chemistry, dtype: float64
+                    </code>
+                </pre>
+                <ul>
+                    <li>The difference between <code>loc</code> and <code>iloc</code> is that with <code>loc</code>, you
+                        provide the label-based index value, while with <code>iloc</code>, you provide the integer-based
+                        position index.</li>
+                    <li>Using <code>iloc</code> to select the first row:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[0])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Section               A
+Branch               CS
+Physics              56
+Chemistry            57
+Maths                58
+Computer             59
+DOB          01-01-2001
+Name: 1, dtype: object
+                    </code>
+                </pre>
+                <ul>
+                    <li>Using <code>iloc</code> to select multiple rows:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[[0, 1, 2]])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+         Section Branch  Physics  Chemistry  Maths  Computer         DOB
+Roll No.                                                                
+1              A     CS       56         57     58        59  01-01-2001
+2              A    ECE       23         24     25        26  02-01-2001
+3              B   MECH       89         25     26        27  03-01-2001
+                    </code>
+                </pre>
+                <ul>
+                    <li>Using <code>iloc</code> to select all rows and the first column:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[:, 0])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                <code>
+Roll No.
+1     A
+2     A
+3     B
+4     C
+5     A
+6     A
+7     B
+8     C
+9     A
+10    A
+11    B
+12    C
+13    A
+14    A
+15    B
+16    C
+17    A
+18    A
+19    B
+20    C
+21    A
+22    A
+23    B
+24    C
+25    A
+26    A
+27    B
+28    C
+29    A
+30    A
+Name: Section, dtype: object
+                    </code>
+                </pre>
+                <ul>
+                    <li>Using <code>iloc</code> to select all rows and the second column:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[:, 1])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Roll No.
+1       CS
+2      ECE
+3     MECH
+4     MECH
+5       CS
+6      ECE
+7       CS
+8       NaN
+9      ECE
+10      CS
+11     ECE
+12      CS
+13      CS
+14      CS
+15     ECE
+16      NaN
+17    MECH
+18    MECH
+19     ECE
+20    MECH
+21    MECH
+22    MECH
+23     ECE
+24    MECH
+25    MECH
+26     ECE
+27      CS
+28      CS
+29      CS
+30      CS
+Name: Branch, dtype: object
+                    </code>
+                </pre>
+                <ul>
+                    <li>Using <code>iloc</code> to select rows 0 to 4 and the second column:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[0:5, 1])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+Roll No.
+1     CS
+2    ECE
+3   MECH
+4   MECH
+5     CS
+Name: Branch, dtype: object
+                    </code>
+                </pre>
+                <ul>
+                    <li>Using <code>iloc</code> to select rows 0 to 4 and columns 1 to 3:</li>
+                </ul>
+                <pre>
+                    <code>
+print(df.iloc[0:5, 1:4])
+                    </code>
+                </pre>
+                <p>Output:</p>
+                <pre>
+                    <code>
+         
+Roll No.  Branch  Physics  Chemistry                       
+      1       CS     56.0       57.0
+      2      ECE     23.0       24.0
+      3     MECH     89.0       25.0
+      4     MECH     45.0       26.0
+      5       CS     23.0       27.0
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Matplotlib: A library for Data Visualization</h2>
+            <ul>
+                <li>Data visualization is ... which is part of data analysisi which is ... for example ...</li>
+                <li>let's say we have a data so data visualliation help</li>
+                <li>we are going to use matplotlib which is a fundamental....</li>
+            </ul>
         </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
