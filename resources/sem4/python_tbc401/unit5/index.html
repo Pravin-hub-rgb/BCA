@@ -845,15 +845,28 @@ dtype('int64')
             </div>
         </div>
         <div class="wh">
-            <h2>Pandas 🐼</h2>
+            <h2>Data Handling using Pandas 🐼</h2>
+            <h3>Pandas: A Library for Data Analysis and Manipulation</h3>
+
+            <h3>Overview</h3>
             <ul>
-                <li>Pandas is a fast, powerful, flexible, and easy-to-use open-source data analysis and manipulation
-                    tool built on top of the Python programming language.</li>
-                <li>Pandas is one of the most popular and robust data analysis libraries in Python. Data analysts, data
-                    scientists, and machine learning engineers utilize it essentially every day for projects involving
-                    data wrangling, data manipulation, and data visualization.</li>
+                <li><strong>Pandas:</strong> It is a package useful for data analysis and manipulation.</li>
+                <li>Pandas provides an easy way to create, manipulate, and wrangle data. Wrangling refers to the process
+                    of cleaning, transforming, and enriching raw data into a more usable format for analysis.</li>
+                <li>Pandas provides powerful and easy-to-use data structures, as well as the means to quickly perform
+                    operations on these structures.</li>
             </ul>
 
+            <h3>Advantages of Pandas</h3>
+            <ul>
+                <li><strong>Easily handles missing data:</strong> Pandas provides robust methods to handle missing data
+                    efficiently.</li>
+                <li><strong>Data Structures:</strong> It uses <strong>Series</strong> for one-dimensional data structure
+                    and <strong>DataFrame</strong> for multi-dimensional data structure.</li>
+                <li><strong>Efficient Data Slicing:</strong> It provides an efficient way to slice the data.</li>
+                <li><strong>Flexible Data Operations:</strong> It provides a flexible way to merge, concatenate, or
+                    reshape the data.</li>
+            </ul>
             <p><strong>Installation</strong></p>
             <ul>
                 <li>Pandas must be installed first before you can use it in your system:</li>
@@ -871,38 +884,716 @@ pip install pandas
 import pandas as pd
                 </code>
             </pre>
-
-            <h3>Working with Data</h3>
-            <p>Pandas offers primarily two types of data structures: Series and DataFrames. These are designed in a way
-                to make data fast and easier to analyze.</p>
+            <h3>Data Structures in Pandas</h3>
+            <p>A data structure is a way to arrange the data so it can be accessed quickly and we can perform various
+                operations on this data like retrieval, deletion, modification, etc.</p>
+            <p>Pandas deals with three data structures:</p>
             <ol>
-                <li>Series: Pandas Series is a one-dimensional array object of key-value pairs of integers, strings,
-                    floats, and other data types. Each element (value) of a Series is assigned a unique label, often
-                    known as an index or key. Series are often used in data manipulation tasks.
+                <li><strong>&starf; Series:</strong> A one-dimensional data structure.</li>
+                <li><strong>&starf; DataFrame:</strong> A multi-dimensional data structure.</li>
+                <li><strong>Panel:</strong> A three-dimensional data structure (though it is less commonly used and
+                    considered deprecated).</li>
+            </ol>
+            <div class="in">
+                <h3>Series</h3>
+                <p>A <strong>Series</strong> is a one-dimensional array-like structure with homogeneous data, which can
+                    be used to handle and manipulate data. What makes it special is its index attribute, which has
+                    incredible functionality and is heavily mutable.</p>
+
+                <p>It has two parts:</p>
+                <ol>
+                    <li><strong>Data part:</strong> An array of actual data.</li>
+                    <li><strong>Associated index with data:</strong> An associated array of indexes or data labels.</li>
+                </ol>
+
+                <p>For example:</p>
+                <pre>
+                    <code>
+Index   Data
+0       10
+1       15
+2       18
+3       22
+                    </code>
+                </pre>
+
+                <ul>
+                    <li><strong>Series is a labeled one-dimensional array that can hold any type of data.</strong></li>
+                    <li><strong>Data of Series is always mutable:</strong> It means it can be changed.</li>
+                    <li><strong>Size of Data of Series is always immutable:</strong> It means it cannot be changed.</li>
+                    <li><strong>Series may be considered as a Data Structure with two arrays:</strong> One array works
+                        as Index (Labels) and the second array works as original Data.</li>
+                    <li><strong>Row Labels in Series are called Index.</strong></li>
+                </ul>
+                <div class="in">
+                    <h3>Pandas Series with Python Lists</h3>
+                    <ul>
+                        <li>A list in Python is a collection of elements which can include integers, strings, floats,
+                            and
+                            other data types. Lists are mutable and ordered.</li>
+                    </ul>
+                    <pre>
+                            <code class="language-py">
+lst = [1, 2, 3, 4, 5, 6]
+print(lst)
+                            </code>
+                        </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+[1, 2, 3, 4, 5, 6]
+                        </code>
+                    </pre>
+                    <p>There are some advantages of Series over lists:</p>
+                    <ul>
+                        <li>Pandas Series provide more functionality, such as the ability to handle missing data,
+                            vectorized
+                            operations, and the ability to use labels for indexing.</li>
+                    </ul>
+                    <p>We can create a Series using a list:</p>
                     <pre>
                         <code class="language-py">
 import pandas as pd
-# Initialize the series object
-num = pd.Series([12, 3, 2, 8])
-print(num)
+series = pd.Series(lst)
+print(series)
+print(type(series))
                         </code>
                     </pre>
-                    Output:
+                    <p>Output:</p>
                     <pre>
                         <code class="language-py">
-0    12
-1     3
-2     2
-3     8
+0    1
+1    2
+2    3
+3    4
+4    5
+5    6
+dtype: int64
+&lt;class 'pandas.core.series.Series'>
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>As you can see in the output, the 1D array is converted to a column with an index.</li>
+                        <li>We can create a Series using a dictionary as well:</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+data = {'a': 10, 'b': 20, 'c': 30}
+series_dict = pd.Series(data)
+print(series_dict)
+                            </code>
+                        </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+a    10
+b    20
+c    30
 dtype: int64
                         </code>
                     </pre>
-                </li>
-                <li>DataFrame: DataFrames have a two-dimensional structure that is similar to a spreadsheet or table
-                    with rows and columns. A DataFrame is basically an arrangement of two or more Series, with distinct
-                    data types, such as name (string), age (int), and date_of_birth (datetime), in each column. To
-                    create a DataFrame in Pandas, we use <strong>pandas.DataFrame()</strong>:
+                    <h3>Creating Empty Series</h3>
+                    <ul>
+                        <li>You don't have to provide anything; just an empty list or array.</li>
+                        <li>By default, the data type is float.</li>
+                    </ul>
                     <pre>
+                        <code class="language-py">
+empty = pd.Series([])
+print(empty)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+Series([], dtype: float64)
+                        </code>
+                    </pre>
+
+                    <h3>Defining Your Own Index</h3>
+                    <pre>
+                        <code class="language-py">
+a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14])
+print(a)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+10    p
+11    q
+12    r
+13    s
+14    t
+dtype: object
+                        </code>
+                    </pre>
+
+                    <h3>Giving Name to a Series</h3>
+                    <ul>
+                        <li>Using this we can assign a name to the Series, which can be useful for identifying the
+                            Series in
+                            a DataFrame or when displaying it.</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14], name="alphabets")
+print(a)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+10    p
+11    q
+12    r
+13    s
+14    t
+Name: alphabets, dtype: object
+                        </code>
+                    </pre>
+
+                    <h3>Creating Scalar Series</h3>
+                    <ul>
+                        <li>A scalar Series is a Series where every element is the same scalar value.</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+scalar_series = pd.Series(0.5)
+print(scalar_series)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+0    0.5
+dtype: float64
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>This contains a single scalar value 0.5 repeated once.</li>
+                    </ul>
+
+                    <h3>Increasing the Quantity of the Scalar Values</h3>
+                    <ul>
+                        <li>We can do this by specifying an index with the desired length.</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+scalar_series = pd.Series(0.5, index=[1, 2, 3])
+print(scalar_series)
+                        </code>
+                    </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+1    0.5
+2    0.5
+3    0.5
+dtype: float64
+                        </code>
+                    </pre>
+                </div>
+                <div class="in">
+                    <h3>Pandas Series with Python Dictionary</h3>
+                    <ul>
+                        <li>A dictionary in Python contains key-value pairs, where each key is unique and maps to a
+                            corresponding value.</li>
+                    </ul>
+                    <p>Creating a Series using a dictionary:</p>
+                    <pre>
+                        <code class="language-py">
+import pandas as pd
+dict_series = pd.Series({'p': 1, 'q': 2, 'r': 3, 's': 4, 't': 5})
+print(dict_series)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+p    1
+q    2
+r    3
+s    4
+t    5
+dtype: int64
+                    </code>
+                </pre>
+
+                    <h3>Accessing the Data</h3>
+                    <pre>
+                        <code class="language-py">
+print(dict_series[0])
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+1
+                    </code>
+                </pre>
+                    <ul>
+                        <li>This will print the value associated with the first key in the Series, which is 1.</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+print(dict_series[0:3])
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+p    1
+q    2
+r    3
+dtype: int64
+                    </code>
+                </pre>
+                    <ul>
+                        <li>This will print the first three elements in the Series.</li>
+                    </ul>
+
+                    <h3>Getting the Maximum Value in the Dictionary Series</h3>
+                    <pre>
+                        <code class="language-py">
+print(max(dict_series))
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+5
+                    </code>
+                </pre>
+
+                    <h3>Increasing the Column Count</h3>
+                    <ul>
+                        <li>Till now, it was containing only one column. Now we want three columns, and we can do this
+                            by
+                            combining a dictionary and a list.</li>
+                    </ul>
+                    <pre>
+                        <code class="language-py">
+dict_series = pd.Series({'p': [1, 5, 6], 'q': [2, 6, 7], 'r': [3, 7, 8], 's': [4, 8, 9], 't': [5, 9, 10]})
+print(dict_series)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code class="language-py">
+p    [1, 5, 6]
+q    [2, 6, 7]
+r    [3, 7, 8]
+s    [4, 8, 9]
+t    [5, 9, 10]
+dtype: object
+                    </code>
+                </pre>
+                </div>
+                <div class="in">
+                    <h3>Mathematical Operations in Series</h3>
+                    <p>Pandas Series supports various mathematical operations. These operations are performed
+                        element-wise and are very similar to numpy array operations. Let's discuss the common
+                        mathematical operations using a single program.</p>
+
+                    <h4>Program:</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+import numpy as np
+
+# Creating a Series
+series = pd.Series([10, 20, 30, 40, 50])
+
+# Multiplication by a scalar
+multiplication = series * 2
+
+# Square of each element
+square = series ** 2
+
+# Filtering values greater than 25
+greater_than_25 = series[series > 25]
+
+print("Original Series:")
+print(series)
+print("\nMultiplication by 2:")
+print(multiplication)
+print("\nSquare of each element:")
+print(square)
+print("\nValues greater than 25:")
+print(greater_than_25)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Original Series:
+0    10
+1    20
+2    30
+3    40
+4    50
+dtype: int64
+
+Multiplication by 2:
+0     20
+1     40
+2     60
+3     80
+4    100
+dtype: int64
+
+Square of each element:
+0     100
+1     400
+2     900
+3    1600
+4    2500
+dtype: int64
+
+Values greater than 25:
+2    30
+3    40
+4    50
+dtype: int64
+                        </code>
+                    </pre>
+                    <h3>Mathematical operation involving 2 series</h3>
+
+                    <h4>Program:</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+import numpy as np
+
+# Creating two Series
+series1 = pd.Series([10, 20, 30, 40, 50])
+series2 = pd.Series([5, 10, 15, 20, 25])
+
+# Addition
+addition = series1 + series2
+
+# Subtraction
+subtraction = series1 - series2
+
+# Multiplication
+multiplication = series1 * series2
+
+# Division
+division = series1 / series2
+
+# Exponentiation
+exponentiation = series1 ** 2
+
+# Modulus
+modulus = series1 % 3
+
+print("Series 1:")
+print(series1)
+print("\nSeries 2:")
+print(series2)
+print("\nAddition:")
+print(addition)
+print("\nSubtraction:")
+print(subtraction)
+print("\nMultiplication:")
+print(multiplication)
+print("\nDivision:")
+print(division)
+print("\nExponentiation:")
+print(exponentiation)
+print("\nModulus:")
+print(modulus)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Series 1:
+0    10
+1    20
+2    30
+3    40
+4    50
+dtype: int64
+
+Series 2:
+0     5
+1    10
+2    15
+3    20
+4    25
+dtype: int64
+
+Addition:
+0    15
+1    30
+2    45
+3    60
+4    75
+dtype: int64
+
+Subtraction:
+0     5
+1    10
+2    15
+3    20
+4    25
+dtype: int64
+
+Multiplication:
+0     50
+1    200
+2    450
+3    800
+4    1250
+dtype: int64
+
+Division:
+0    2.0
+1    2.0
+2    2.0
+3    2.0
+4    2.0
+dtype: float64
+
+Exponentiation:
+0     100
+1     400
+2     900
+3    1600
+4    2500
+dtype: int64
+
+Modulus:
+0    1
+1    2
+2    0
+3    1
+4    2
+dtype: int64
+                    </code>
+                </pre>
+                </div>
+                <div class="in">
+                    <h3>Head and Tail Functions in Series</h3>
+                    <p>Pandas Series provides the <code>head()</code> and <code>tail()</code> functions to easily view a
+                        subset of the data. These functions are useful for quickly inspecting the beginning and end of a
+                        Series.</p>
+
+                    <h4>Program:</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating a Series
+series = pd.Series([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+
+# Using the head() function
+head_default = series.head()
+head_custom = series.head(3)
+
+# Using the tail() function
+tail_default = series.tail()
+tail_custom = series.tail(3)
+
+print("Original Series:")
+print(series)
+print("\nFirst 5 elements (head - default):")
+print(head_default)
+print("\nFirst 3 elements (head - custom):")
+print(head_custom)
+print("\nLast 5 elements (tail - default):")
+print(tail_default)
+print("\nLast 3 elements (tail - custom):")
+print(tail_custom)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Original Series:
+0     10
+1     20
+2     30
+3     40
+4     50
+5     60
+6     70
+7     80
+8     90
+9    100
+dtype: int64
+
+First 5 elements (head - default):
+0    10
+1    20
+2    30
+3    40
+4    50
+dtype: int64
+
+First 3 elements (head - custom):
+0    10
+1    20
+2    30
+dtype: int64
+
+Last 5 elements (tail - default):
+5     60
+6     70
+7     80
+8     90
+9    100
+dtype: int64
+
+Last 3 elements (tail - custom):
+7     80
+8     90
+9    100
+dtype: int64
+                        </code>
+                    </pre>
+
+                    <p>This program demonstrates how to use the <strong>head()</strong> and <strong>tail()</strong>
+                        functions to
+                        inspect the beginning and end of a pandas Series.</p>
+
+                    <ul>
+                        <li><strong><strong>series.head()</strong>:</strong> By default, retrieves the first 5 elements
+                            of
+                            the Series.</li>
+                        <li><strong><strong>series.head(3)</strong>:</strong> Retrieves the first 3 elements of the
+                            Series.
+                        </li>
+                        <li><strong><strong>series.tail()</strong>:</strong> By default, retrieves the last 5 elements
+                            of
+                            the Series.</li>
+                        <li><strong><strong>series.tail(3)</strong>:</strong> Retrieves the last 3 elements of the
+                            Series.
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>Selection in Series</h3>
+                    <p>Pandas Series provides various methods for selecting data, including <strong>loc</strong>,
+                        <strong>iloc</strong>, and using index or range.
+                    </p>
+
+                    <h4>1. loc</h4>
+                    <p>The <strong>loc</strong> function is used to access a group of rows and columns by labels or a
+                        boolean array.</p>
+                    <ul>
+                        <li><strong>series.loc[label]</strong>: Access a single element in the Series using its label.
+                        </li>
+                        <li><strong>series.loc[start_label:end_label]</strong>: Access a range of elements from
+                            start_label
+                            to end_label (inclusive).</li>
+                        <li><strong>series.loc[start_label:stop_label]</strong>: Access a range of elements from
+                            start_label
+                            to stop_label (inclusive).</li>
+                        <li><strong>series.loc[condition]</strong>: Access elements based on a boolean condition.</li>
+                    </ul>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+import pandas as pd
+
+data = {'A': 10, 'B': 20, 'C': 30, 'D': 40}
+series = pd.Series(data)
+
+print(series.loc['B'])  # Access element with label 'B'
+print(series.loc['B':'D'])  # Access elements from 'B' to 'D' (inclusive)
+                    </code>
+                </pre>
+
+                    <h4>2. iloc</h4>
+                    <p>The <strong>iloc</strong> function is used for integer-location based indexing, i.e., accessing
+                        elements by integer position.</p>
+                    <ul>
+                        <li><strong>series.iloc[index]</strong>: Access an element at a specific integer index.</li>
+                        <li><strong>series.iloc[start_index:end_index]</strong>: Access a range of elements from
+                            start_index
+                            to end_index (exclusive).</li>
+                    </ul>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+print(series.iloc[1])  # Access element at index 1
+print(series.iloc[1:3])  # Access elements from index 1 to 2 (exclusive)
+                    </code>
+                </pre>
+
+                    <h4>3. Using Index or Range</h4>
+                    <p>You can also select data using square brackets with index or range.</p>
+                    <ul>
+                        <li><strong>series[label]</strong>: Access an element using its label.</li>
+                        <li><strong>series[start_label:end_label]</strong>: Access a range of elements using labels.
+                        </li>
+                        <li><strong>series[start_label:stop_label]</strong>: Access a range of elements using labels
+                            (inclusive).</li>
+                        <li><strong>series[index]</strong>: Access an element at a specific index.</li>
+                        <li><strong>series[start_index:end_index]</strong>: Access a range of elements using integer
+                            indices
+                            (exclusive).</li>
+                    </ul>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+print(series['B'])  # Access element with label 'B'
+print(series[1:3])  # Access elements using integer indices 1 to 2 (exclusive)
+                    </code>
+                </pre>
+
+                    <h4>Difference Between loc and iloc</h4>
+                    <ul>
+                        <li><strong>loc:</strong> Accesses elements using labels (names) of the data. It is inclusive,
+                            meaning it includes the end label in the selection.</li>
+                        <li><strong>iloc:</strong> Accesses elements using integer indices (positions) of the data. It
+                            is exclusive, meaning it excludes the end index in the selection.</li>
+                    </ul>
+
+                </div>
+                <div class="in">
+                    <h3>Slicing in Series</h3>
+                    <p>Slicing in Pandas Series allows you to extract a subset of data based on labels or integer
+                        positions.</p>
+                    <ul>
+                        <li><strong>s[start:stop:step]</strong>: Slice with a specified step size.</li>
+                    </ul>
+                    <p>Examples:</p>
+                    <pre>
+                        <code>
+# Original Series
+s = pd.Series([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Slice from index 1 to 5 with step 2 (1, 3, 5)
+print(s[1:6:2])
+
+# Slice from index 0 to 8 with step 3 (0, 3, 6)
+print(s[:9:3])
+
+# Slice from index 2 to end with step 1 (2, 3, 4, 5, 6, 7, 8, 9, 10)
+print(s[2::])
+
+# Slice from start to end with step 2 (1, 3, 5, 7, 9)
+print(s[::2])
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Pandas DataFrame</h3>
+                <ul>
+                    <li>DataFrame: DataFrames have a two-dimensional structure that is similar to a spreadsheet or table
+                        with rows and columns. A DataFrame is basically an arrangement of two or more Series, with
+                        distinct
+                        data types, such as name (string), age (int), and date_of_birth (datetime), in each column. To
+                        create a DataFrame in Pandas, we use <strong>pandas.DataFrame()</strong>:
+                        <pre>
                         <code class="language-py">
 import pandas as pd
 # Initialize the DataFrame object
@@ -915,8 +1606,8 @@ df = pd.DataFrame(data)
 print(df)
                         </code>
                     </pre>
-                    Output:
-                    <pre>
+                        Output:
+                        <pre>
                         <code class="language-py">
     Name  Age Date_of_Birth
 0   John   28    1996-05-24
@@ -925,272 +1616,10 @@ print(df)
 3  Linda   32    1991-08-12
                         </code>
                     </pre>
-                </li>
-            </ol>
-            <div class="in">
-                <h3>Pandas Series with Python Lists</h3>
-                <ul>
-                    <li>A list in Python is a collection of elements which can include integers, strings, floats, and
-                        other data types. Lists are mutable and ordered.</li>
+                    </li>
                 </ul>
-                <pre>
-                        <code class="language-py">
-lst = [1, 2, 3, 4, 5, 6]
-print(lst)
-                        </code>
-                    </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-[1, 2, 3, 4, 5, 6]
-                    </code>
-                </pre>
-                <p>There are some advantages of Series over lists:</p>
                 <ul>
-                    <li>Pandas Series provide more functionality, such as the ability to handle missing data, vectorized
-                        operations, and the ability to use labels for indexing.</li>
-                </ul>
-                <p>We can create a Series using a list:</p>
-                <pre>
-                    <code class="language-py">
-import pandas as pd
-series = pd.Series(lst)
-print(series)
-print(type(series))
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-0    1
-1    2
-2    3
-3    4
-4    5
-5    6
-dtype: int64
-&lt;class 'pandas.core.series.Series'>
-                    </code>
-                </pre>
-                <ul>
-                    <li>As you can see in the output, the 1D array is converted to a column with an index.</li>
-                    <li>We can create a Series using a dictionary as well:</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-data = {'a': 10, 'b': 20, 'c': 30}
-series_dict = pd.Series(data)
-print(series_dict)
-                        </code>
-                    </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-a    10
-b    20
-c    30
-dtype: int64
-                    </code>
-                </pre>
-                <h3>Creating Empty Series</h3>
-                <ul>
-                    <li>You don't have to provide anything; just an empty list or array.</li>
-                    <li>By default, the data type is float.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-empty = pd.Series([])
-print(empty)
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-Series([], dtype: float64)
-                    </code>
-                </pre>
 
-                <h3>Defining Your Own Index</h3>
-                <pre>
-                    <code class="language-py">
-a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14])
-print(a)
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-10    p
-11    q
-12    r
-13    s
-14    t
-dtype: object
-                    </code>
-                </pre>
-
-                <h3>Giving Name to a Series</h3>
-                <ul>
-                    <li>Using this we can assign a name to the Series, which can be useful for identifying the Series in
-                        a DataFrame or when displaying it.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-a = pd.Series(['p', 'q', 'r', 's', 't'], index=[10, 11, 12, 13, 14], name="alphabets")
-print(a)
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-10    p
-11    q
-12    r
-13    s
-14    t
-Name: alphabets, dtype: object
-                    </code>
-                </pre>
-
-                <h3>Creating Scalar Series</h3>
-                <ul>
-                    <li>A scalar Series is a Series where every element is the same scalar value.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-scalar_series = pd.Series(0.5)
-print(scalar_series)
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-0    0.5
-dtype: float64
-                    </code>
-                </pre>
-                <ul>
-                    <li>This contains a single scalar value 0.5 repeated once.</li>
-                </ul>
-
-                <h3>Increasing the Quantity of the Scalar Values</h3>
-                <ul>
-                    <li>We can do this by specifying an index with the desired length.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-scalar_series = pd.Series(0.5, index=[1, 2, 3])
-print(scalar_series)
-                    </code>
-                </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-1    0.5
-2    0.5
-3    0.5
-dtype: float64
-                    </code>
-                </pre>
-            </div>
-            <div class="in">
-                <h3>Pandas Series with Python Dictionary</h3>
-                <ul>
-                    <li>A dictionary in Python contains key-value pairs, where each key is unique and maps to a
-                        corresponding value.</li>
-                </ul>
-                <p>Creating a Series using a dictionary:</p>
-                <pre>
-                    <code class="language-py">
-import pandas as pd
-dict_series = pd.Series({'p': 1, 'q': 2, 'r': 3, 's': 4, 't': 5})
-print(dict_series)
-                </code>
-            </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-p    1
-q    2
-r    3
-s    4
-t    5
-dtype: int64
-                </code>
-            </pre>
-
-                <h3>Accessing the Data</h3>
-                <pre>
-                    <code class="language-py">
-print(dict_series[0])
-                </code>
-            </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-1
-                </code>
-            </pre>
-                <ul>
-                    <li>This will print the value associated with the first key in the Series, which is 1.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-print(dict_series[0:3])
-                </code>
-            </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-p    1
-q    2
-r    3
-dtype: int64
-                </code>
-            </pre>
-                <ul>
-                    <li>This will print the first three elements in the Series.</li>
-                </ul>
-
-                <h3>Getting the Maximum Value in the Dictionary Series</h3>
-                <pre>
-                    <code class="language-py">
-print(max(dict_series))
-                </code>
-            </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-5
-                </code>
-            </pre>
-
-                <h3>Increasing the Column Count</h3>
-                <ul>
-                    <li>Till now, it was containing only one column. Now we want three columns, and we can do this by
-                        combining a dictionary and a list.</li>
-                </ul>
-                <pre>
-                    <code class="language-py">
-dict_series = pd.Series({'p': [1, 5, 6], 'q': [2, 6, 7], 'r': [3, 7, 8], 's': [4, 8, 9], 't': [5, 9, 10]})
-print(dict_series)
-                </code>
-            </pre>
-                <p>Output:</p>
-                <pre>
-                    <code class="language-py">
-p    [1, 5, 6]
-q    [2, 6, 7]
-r    [3, 7, 8]
-s    [4, 8, 9]
-t    [5, 9, 10]
-dtype: object
-                </code>
-            </pre>
-            </div>
-            <div class="in">
-                <h3>Pandas DataFrame</h3>
-                <ul>
                     <li>We know how to create pandas Series. Now we will create pandas DataFrame, which is a more
                         effective way of representing data in terms of rows and columns.</li>
                 </ul>
@@ -1304,7 +1733,518 @@ print(df)
                     <li>The Series objects form the columns of the DataFrame, with their indexes aligning to form rows.
                     </li>
                 </ul>
+                <div class="in">
+                    <h3>Iteration on Rows and Columns in DataFrame</h3>
+                    <p>If we want to access records or data from a DataFrame row-wise or column-wise, we can use
+                        iteration. Pandas provides two functions for iterations:</p>
+                    <ul>
+                        <li><strong>iterrows():</strong> Iterates over the DataFrame rows as (index, Series) pairs.</li>
+                        <li><strong>iteritems():</strong> Iterates over the DataFrame columns as (column name, Series)
+                            pairs.</li>
+                    </ul>
+                    <p>Example of creating a DataFrame and iterating over rows:</p>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, 30, 35, 40],
+        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston']}
+
+df = pd.DataFrame(data)
+
+# Iterating over rows using iterrows()
+for index, row in df.iterrows():
+    print(index, row['Name'], row['Age'], row['City'])
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+0 Alice 25 New York
+1 Bob 30 Los Angeles
+2 Charlie 35 Chicago
+3 David 40 Houston
+                    </code>
+                </pre>
+                    <p>Example of iterating over columns using iteritems():</p>
+                    <pre>
+                        <code>
+# Iterating over columns using iteritems()
+for column_name, column_data in df.iteritems():
+    print(column_name)
+    print(column_data)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+Name
+0 Alice
+1 Bob
+2 Charlie
+3 David
+Name: Name, dtype: object
+Age
+0 25
+1 30
+2 35
+3 40
+Name: Age, dtype: int64
+City
+0 New York
+1 Los Angeles
+2 Chicago
+3 Houston
+Name: City, dtype: object
+                    </code>
+                </pre>
+                    <p>This code snippet demonstrates how to iterate over DataFrame columns using the iteritems()
+                        function.</p>
+                </div>
+                <div class="in">
+                    <h3>Select Operation in DataFrame</h3>
+                    <p>Selecting data from a DataFrame can be done using various methods. One common method is the
+                        indexing operator [].</p>
+                    <p><strong>Indexing Operator []:</strong> The indexing operator is used to select columns or rows
+                        from a DataFrame based on labels or boolean arrays.</p>
+                    <p>Example of using indexing operator [] to select columns:</p>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, 30, 35, 40],
+        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston']}
+
+df = pd.DataFrame(data)
+
+# Selecting columns using []
+names = df['Name']
+ages_cities = df[['Age', 'City']]
+
+print(names)
+print(ages_cities)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+0    Alice
+1      Bob
+2  Charlie
+3    David
+Name: Name, dtype: object
+
+    Age         City
+0   25     New York
+1   30  Los Angeles
+2   35      Chicago
+3   40      Houston
+                    </code>
+                </pre>
+                    <p>The indexing operator [] allows you to select specific columns from a DataFrame by label. You can
+                        select a single column or multiple columns by passing a list of column names within the
+                        operator.</p>
+                </div>
+                <div class="in">
+                    <h3>Add & Rename a Column in DataFrame</h3>
+                    <p>You can add new columns to a DataFrame or rename existing columns using Pandas.</p>
+                    <p><strong>Adding a Column:</strong> To add a new column, you can directly assign values to a new
+                        column label.</p>
+                    <p>Example of adding a new column:</p>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, 30, 35, 40],
+        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston']}
+
+df = pd.DataFrame(data)
+
+# Adding a new column
+df['Gender'] = ['Female', 'Male', 'Male', 'Female']
+
+print(df)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+      Name  Age         City  Gender
+0    Alice   25     New York  Female
+1      Bob   30  Los Angeles    Male
+2  Charlie   35      Chicago    Male
+3    David   40      Houston  Female
+                    </code>
+                </pre>
+                    <p><strong>Renaming a Column:</strong> To rename an existing column, you can use the rename()
+                        method.</p>
+                    <p>Example of renaming a column:</p>
+                    <pre>
+                        <code>
+# Renaming the 'Age' column to 'Years'
+df.rename(columns={'Age': 'Years'}, inplace=True)
+
+print(df)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+      Name  Years         City  Gender
+0    Alice     25     New York  Female
+1      Bob     30  Los Angeles    Male
+2  Charlie     35      Chicago    Male
+3    David     40      Houston  Female
+                    </code>
+                </pre>
+                    <p>The rename() method allows you to specify a dictionary where the keys are the current column
+                        names and the values are the new column names.</p>
+                </div>
+                <div class="in">
+                    <h3>Delete a Column in DataFrame</h3>
+                    <p>You can delete a column from a DataFrame using various methods in Pandas.</p>
+                    <p><strong>1. Using <code>del</code>:</strong> You can use the <code>del</code> keyword followed by
+                        the DataFrame and the column name in square brackets to delete a column.</p>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+del df['List3']
+print(df)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+   List1  List2
+0     10     20
+1     15     20
+2     18     20
+3     22     20
+                    </code>
+                </pre>
+                    <p><strong>2. Using <code>pop()</code>:</strong> The <code>pop()</code> method removes and returns
+                        the specified column.</p>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+                df.pop('List2')
+                print(df)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+   List1
+0     10
+1     15
+2     18
+3     22
+                    </code>
+                </pre>
+                    <p><strong>3. Using <code>drop()</code>:</strong> The <code>drop()</code> method can delete columns
+                        or rows based on the axis parameter.</p>
+                    <p>Example of deleting a column:</p>
+                    <pre>
+                        <code>
+import pandas as pd
+
+s = pd.Series([10, 20, 30, 40])
+df = pd.DataFrame(s)
+df.columns = ['List1']
+df['List2'] = 40
+
+# Deleting a column using drop()
+df1 = df.drop('List2', axis=1)
+
+# Deleting rows using drop()
+df2 = df.drop(index=[2, 3], axis=0)
+
+print(df)
+print("After deletion:")
+print(df1)
+print("After row deletion:")
+print(df2)
+                    </code>
+                </pre>
+                    <p>Output:</p>
+                    <pre>
+                        <code>
+   List1  List2
+0     10     40
+1     20     40
+2     30     40
+3     40     40
+
+After deletion:
+   List1
+0     10
+1     20
+2     30
+3     40
+
+After row deletion:
+   List1  List2
+0     10     40
+1     20     40
+                    </code>
+                </pre>
+                    <p>The <strong>axis=1</strong> parameter in <strong>drop()</strong> specifies column-wise deletion,
+                        while
+                        <strong>axis=0</strong> specifies row-wise deletion.
+                    </p>
+                </div>
+                <div class="in">
+                    <h3>Accessing Data Frame Using loc() and iloc()</h3>
+                    <p>Pandas provides <code>loc()</code> and <code>iloc()</code> methods to access subsets of data from
+                        a DataFrame using row and column labels or integer indexes, respectively.</p>
+
+                    <h4>Accessing Data Frame Through <code>loc()</code></h4>
+                    <p>The <code>loc()</code> method is used to access a group of rows and columns based on labels.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre>
+                        <code>Df.loc[StartRow : EndRow, StartColumn : EndColumn]</code>
+                    </pre>
+                    <p>Note: If you use a colon (<strong>:</strong>) in the row or column part, Pandas provides the
+                        entire
+                        rows or columns, respectively.</p>
+
+                    <h4>Examples:</h4>
+                    <p>Accessing specific rows and columns:</p>
+                    <pre>
+                        <code>
+df.loc[2:5, 'A':'C']
+                    </code>
+                </pre>
+                    <p>This will select rows 2 to 5 and columns 'A' to 'C' inclusive.</p>
+
+                    <p>Accessing all rows for specific columns:</p>
+                    <pre>
+                        <code>
+df.loc[:, 'B':'D']
+                    </code>
+                </pre>
+                    <p>This will select all rows for columns 'B' to 'D' inclusive.</p>
+
+                    <p>Accessing specific rows for all columns:</p>
+                    <pre>
+                        <code>
+df.loc[2:5, :]
+                        </code>
+                    </pre>
+                    <p>This will select rows 2 to 5 for all columns.</p>
+
+                    <h4>Accessing Data Frame Through <strong>iloc()</strong></h4>
+                    <p>The <strong>iloc()</strong> method is used for integer-location based indexing.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre>
+                        <code>
+Df.iloc[StartRow : EndRow, StartColumn : EndColumn]
+                        </code>
+                    </pre>
+
+                    <h4>Examples:</h4>
+                    <p>Accessing specific rows and columns:</p>
+                    <pre>
+                        <code>
+df.iloc[2:5, 0:3]
+                    </code>
+                </pre>
+                    <p>This will select rows 2 to 4 and columns 0 to 2.</p>
+
+                    <p>Accessing all rows for specific columns:</p>
+                    <pre>
+                        <code>
+df.iloc[:, 1:4]
+                    </code>
+                </pre>
+                    <p>This will select all rows for columns 1 to 3.</p>
+
+                    <p>Accessing specific rows for all columns:</p>
+                    <pre>
+                        <code>
+df.iloc[2:5, :]
+                    </code>
+                </pre>
+                    <p>This will select rows 2 to 4 for all columns.</p>
+                </div>
+                <div class="in">
+                    <h3><strong>head()</strong> and <strong>tail()</strong> Method</h3>
+                    <p>The <strong>head()</strong> method returns the first 5 rows of a DataFrame, while the
+                        <strong>tail()</strong> method returns the last 5 rows.
+                    </p>
+
+                    <h4>Examples:</h4>
+                    <p>Using <strong>head()</strong> method:</p>
+                    <pre>
+                        <code>
+df.head()
+                    </code>
+                </pre>
+                    <p>This will display the first 5 rows of the DataFrame.</p>
+
+                    <p>Using <code>tail()</code> method:</p>
+                    <pre>
+                        <code>
+df.tail()
+                    </code>
+                </pre>
+                    <p>This will display the last 5 rows of the DataFrame.</p>
+                </div>
+                <div class="notes">
+                    <h3>Concatenation Operation in DataFrame</h3>
+                    <p>Concatenation in Pandas combines two or more DataFrames along rows or columns.</p>
+
+                    <h4>Creating DataFrames</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating DataFrame 1
+data1 = {'Name': ['John', 'Emma', 'Michael', 'Sophia'],
+          'Age': [28, 24, 32, 29],
+         'City': ['New York', 'San Francisco', 'Los Angeles', 'Chicago']}
+df1 = pd.DataFrame(data1)
+
+# Creating DataFrame 2
+data2 = {'Name': ['Ethan', 'Olivia', 'James', 'Ava'],
+          'Age': [31, 27, 35, 26],
+         'City': ['Seattle', 'Boston', 'Dallas', 'Miami']}
+df2 = pd.DataFrame(data2)
+                        </code>
+                    </pre>
+
+                    <h4>Concatenating DataFrames</h4>
+                    <p>Concatenating along rows (vertically):</p>
+                    <pre>
+                        <code>
+result_rows = pd.concat([df1, df2], axis=0)
+print("Concatenated DataFrame along rows:")
+print(result_rows)
+                        </code>
+                    </pre>
+                    <p>Concatenating along columns (horizontally):</p>
+                    <pre>
+                        <code>
+result_cols = pd.concat([df1, df2], axis=1)
+print("\nConcatenated DataFrame along columns:")
+print(result_cols)
+                        </code>
+                    </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Concatenated DataFrame along rows:
+      Name  Age           City
+0    John   28       New York
+1    Emma   24  San Francisco
+2  Michael   32    Los Angeles
+3   Sophia   29        Chicago
+0   Ethan   31        Seattle
+1  Olivia   27         Boston
+2   James   35         Dallas
+3     Ava   26          Miami
+
+Concatenated DataFrame along columns:
+      Name  Age           City    Name  Age           City
+0     John   28       New York   Ethan   31        Seattle
+1     Emma   24  San Francisco  Olivia   27         Boston
+2   Michael   32    Los Angeles   James   35         Dallas
+3    Sophia   29        Chicago     Ava   26          Miami
+            </code>
+        </pre>
+                </div>
+                <div class="notes">
+                    <h3>Merge Operation in DataFrame</h3>
+                    <p>Merging in Pandas combines DataFrames based on one or more keys.</p>
+
+                    <h4>Creating DataFrames</h4>
+                    <pre>
+                        <code>
+import pandas as pd
+
+# Creating DataFrame 1
+data1 = {'Name': ['John', 'Emma', 'Michael', 'Sophia'],
+          'Age': [28, 24, 32, 29],
+         'City': ['New York', 'San Francisco', 'Los Angeles', 'Chicago'],
+   'Department': ['HR', 'IT', 'Finance', 'Sales']}
+df1 = pd.DataFrame(data1)
+
+# Creating DataFrame 2
+data2 = {'Name': ['Ethan', 'Olivia', 'James', 'Ava'],
+          'Age': [31, 27, 35, 26],
+         'City': ['Seattle', 'Boston', 'Dallas', 'Miami'],
+   'Department': ['Finance', 'HR', 'Sales', 'IT']}
+df2 = pd.DataFrame(data2)
+            </code>
+            </pre>
+
+                    <h4>Merging DataFrames Using 'on' Parameter</h4>
+                    <p>The 'on' parameter specifies the column(s) to join the DataFrames on. It merges the DataFrames
+                        based on the common values in the specified column.</p>
+                    <pre>
+                        <code>
+res[ult = pd.merge(df1, df2, on='Department', how='inner')
+print("Merged DataFrame:")
+print(result)]
+            </code>
+            </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Merged DataFrame:
+   Name_x  Age_x         City_x     Department    Name_y  Age_y   City_y
+0    John     28       New York             HR    Olivia     27   Boston
+1    Emma     24  San Francisco             IT       Ava     26    Miami
+2 Michael     32    Los Angeles        Finance     Ethan     31  Seattle
+3  Sophia     29        Chicago          Sales     James     35   Dallas
+            </code>
+            </pre>
+
+                    <h4>Merging DataFrames with Different Column Names</h4>
+                    <p>When the column names differ between DataFrames, 'left_on' and 'right_on' parameters specify the
+                        columns to join on for the left and right DataFrames, respectively.</p>
+                    <pre>
+                        <code>
+result = pd.merge(df1, df2, left_on='Department', right_on='Department', how='inner')
+print("Merged DataFrame:")
+print(result)
+                </code>
+            </pre>
+
+                    <h4>Output:</h4>
+                    <pre>
+                        <code>
+Merged DataFrame:
+   Name_x  Age_x   City_x Department   Name_y  Age_y   City_y
+0    John     28  New York         HR   Olivia     27   Boston
+1    Emma     24 San Francisco         IT     Ava     26   Miami
+2 Michael     32 Los Angeles    Finance   Ethan     31 Seattle
+3  Sophia     29     Chicago      Sales   James     35   Dallas
+            </code>
+        </pre>
+
+                    <h4>Explanation of 'how' Parameter</h4>
+                    <p>The 'how' parameter in the merge operation specifies the type of join to perform. The common
+                        options are 'inner', 'outer', 'left', and 'right'.</p>
+                    <ul>
+                        <li>'inner': Returns only the rows with matching keys in both DataFrames.</li>
+                        <li>'outer': Returns all rows from both DataFrames, filling in missing values with NaN.</li>
+                        <li>'left': Returns all rows from the left DataFrame, filling in missing values with NaN.</li>
+                        <li>'right': Returns all rows from the right DataFrame, filling in missing values with NaN.</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+        <div class="wh">
+            <h2>Data Handling on CSV file</h2>
             <div class="in">
                 <h3>Reading CSV (Comma Separated Values) as DataFrames</h3>
                 <ul>
@@ -2323,7 +3263,8 @@ print("\nDataFrame with backward fill:\n", df3)
                 <ul>
                     <li>Here we are working with the <a
                             href="https://github.com/Pravin-hub-rgb/BCA/tree/master/resources/sem4/python_tbc401/unit5/program"
-                            target="_blank">sample2.csv &neArr;</a> file, which contains columns like Roll No., Section,
+                            target="_blank" class="ba">sample2.csv &neArr;</a> file, which contains columns like Roll
+                        No., Section,
                         Branch, Physics, Chemistry, Maths, Computer, and DOB.</li>
                     <li>Let's display the content of the file using the head function.</li>
                 </ul>
@@ -2867,7 +3808,7 @@ plt.xlabel('Categories')
 plt.ylabel('Values')
 plt.title('Sample Bar Graph')
 plt.show()
-                    </cod>
+                    </code>
                 </pre>
                 <ul>
                     <li>We can also change the width of the bars using the <strong>width</strong> parameter.</li>
@@ -2876,21 +3817,6 @@ plt.show()
                     <code>
 # Creating a bar graph with specified bar width
 plt.bar(categories, values, color='green', width=0.5)
-plt.show()
-                    </code>
-                </pre>
-                <ul>
-                    <li>We can create horizontal bar graphs using the <code>barh()</code> function instead of
-                        <code>bar()</code>.
-                    </li>
-                </ul>
-                <pre>
-                    <code>
-# Creating a horizontal bar graph
-plt.barh(categories, values, color='blue')
-plt.xlabel('Values')
-plt.ylabel('Categories')
-plt.title('Sample Horizontal Bar Graph')
 plt.show()
                     </code>
                 </pre>
@@ -2957,23 +3883,22 @@ plt.show()
                 </code>
             </pre>
             </div>
-        </div>
-        <div class="in">
-            <h3>Multiple Bar Chart with Matplotlib and NumPy</h3>
+            <div class="in">
+                <h3>Multiple Bar Chart with Matplotlib and NumPy</h3>
 
-            <p>To draw multiple bar charts:</p>
-            <ol>
-                <li>Decide the number of X points using <code>np.linspace()</code> function based on the length of
-                    values in the sequence.</li>
-                <li>Decide the thickness of each bar and adjust X points on the X-axis accordingly.</li>
-                <li>Assign different colors to different data ranges.</li>
-                <li>Keep the width constant for all ranges being plotted.</li>
-                <li>Call <code>plt.bar()</code> for each data range to plot the bars.</li>
-            </ol>
+                <p>To draw multiple bar charts:</p>
+                <ol>
+                    <li>Decide the number of X points using <code>np.linspace()</code> function based on the length of
+                        values in the sequence.</li>
+                    <li>Decide the thickness of each bar and adjust X points on the X-axis accordingly.</li>
+                    <li>Assign different colors to different data ranges.</li>
+                    <li>Keep the width constant for all ranges being plotted.</li>
+                    <li>Call <code>plt.bar()</code> for each data range to plot the bars.</li>
+                </ol>
 
-            <p>Now let's break down the code and understand each part in detail:</p>
+                <p>Now let's break down the code and understand each part in detail:</p>
 
-            <pre>
+                <pre>
                 <code>
 import matplotlib.pyplot as plt
 import numpy as np
@@ -2993,68 +3918,77 @@ plt.show()
                 </code>
             </pre>
 
-            <ul>
-                <li><strong>import matplotlib.pyplot as plt:</strong> Imports the matplotlib library for plotting graphs
-                    and assigns it an alias <strong>plt</strong>.</li>
-                <li><strong>import numpy as np:</strong> Imports the numpy library for numerical computations and
-                    assigns it an alias <strong>np</strong>.</li>
-                <li><strong>a = [50, 60, 70, 80, 90]:</strong> Defines a list <strong>a</strong> containing values
-                    representing runs scored by a team (e.g., Australia) in different overs.</li>
-                <li><strong>b = [55, 65, 75, 85, 95]:</strong> Defines a list <strong>b</strong> containing values
-                    representing runs scored by another team (e.g., India) in the same overs.</li>
-                <li><strong>x = np.linspace(1, 51, 5):</strong> Creates an array <strong>x</strong> using
-                    <code>np.linspace()</code> function.
-                </li>
                 <ul>
-                    <li>The first parameter 1 is the starting point of the sequence.</li>
-                    <li>The second parameter 51 is the ending point of the sequence.</li>
-                    <li>The third parameter 5 is the number of points or steps in the sequence.</li>
-                    <li><code>np.linspace(1, 51, 5)</code> generates 5 evenly spaced points starting from 1 and ending
-                        at 51.</li>
+                    <li><strong>import matplotlib.pyplot as plt:</strong> Imports the matplotlib library for plotting
+                        graphs
+                        and assigns it an alias <strong>plt</strong>.</li>
+                    <li><strong>import numpy as np:</strong> Imports the numpy library for numerical computations and
+                        assigns it an alias <strong>np</strong>.</li>
+                    <li><strong>a = [50, 60, 70, 80, 90]:</strong> Defines a list <strong>a</strong> containing values
+                        representing runs scored by a team (e.g., Australia) in different overs.</li>
+                    <li><strong>b = [55, 65, 75, 85, 95]:</strong> Defines a list <strong>b</strong> containing values
+                        representing runs scored by another team (e.g., India) in the same overs.</li>
+                    <li><strong>x = np.linspace(1, 51, 5):</strong> Creates an array <strong>x</strong> using
+                        <code>np.linspace()</code> function.
+                    </li>
+                    <ul>
+                        <li>The first parameter 1 is the starting point of the sequence.</li>
+                        <li>The second parameter 51 is the ending point of the sequence.</li>
+                        <li>The third parameter 5 is the number of points or steps in the sequence.</li>
+                        <li><code>np.linspace(1, 51, 5)</code> generates 5 evenly spaced points starting from 1 and
+                            ending
+                            at 51.</li>
+                    </ul>
+                    <li><strong>plt.bar(x, a, width=3, color='r', label='Australia'):</strong> Plots a bar chart for
+                        team
+                        Australia.</li>
+                    <ul>
+                        <li><strong>x:</strong> Represents the x-axis values, which are the positions of the bars on the
+                            plot. These are the evenly spaced points generated by <strong>np.linspace()</strong>.</li>
+                        <li><strong>a:</strong> Represents the y-axis values, which are the heights of the bars, i.e.,
+                            the
+                            runs scored by Australia.</li>
+                        <li><strong>width=3:</strong> Specifies the width of each bar in the plot.</li>
+                        <li><strong>color='r':</strong> Sets the color of the bars to red ('r').</li>
+                        <li><strong>label='Australia':</strong> Adds a label for the data series, which will be used in
+                            the
+                            legend.</li>
+                    </ul>
+                    <li><strong>plt.bar(x+3, b, width=3, color='g', label='India'):</strong> Plots another set of bars
+                        for
+                        team India.</li>
+                    <ul>
+                        <li><strong>x+3:</strong> Shifts the x-axis positions by 3 units to the right, so that the bars
+                            for
+                            India are displayed next to the bars for Australia.</li>
+                        <li><strong>b:</strong> Represents the y-axis values for India (runs scored).</li>
+                        <li><strong>width=3:</strong> Specifies the width of each bar.</li>
+                        <li><strong>color='g':</strong> Sets the color of the bars to green ('g').</li>
+                        <li><strong>label='India':</strong> Adds a label for this data series in the legend.</li>
+                    </ul>
+                    <li><strong>plt.xlabel('Overs'):</strong> Adds a label 'Overs' to the x-axis.</li>
+                    <li><strong>plt.ylabel('Runs Scored'):</strong> Adds a label 'Runs Scored' to the y-axis.</li>on<li>
+                        <strong>plt.legend():</strong> Displays the legend on the plot, which shows the labels
+                        ('Australia'
+                        and 'India') corresponding to the data series.
+                    </li>
+                    <li><strong>plt.show():</strong> Displays the plot with the bar chart, x-axis labeled as 'Overs',
+                        y-axis
+                        labeled as 'Runs Scored', and a legend showing the data series for Australia and India.</li>
                 </ul>
-                <li><strong>plt.bar(x, a, width=3, color='r', label='Australia'):</strong> Plots a bar chart for team
-                    Australia.</li>
-                <ul>
-                    <li><strong>x:</strong> Represents the x-axis values, which are the positions of the bars on the
-                        plot. These are the evenly spaced points generated by <strong>np.linspace()</strong>.</li>
-                    <li><strong>a:</strong> Represents the y-axis values, which are the heights of the bars, i.e., the
-                        runs scored by Australia.</li>
-                    <li><strong>width=3:</strong> Specifies the width of each bar in the plot.</li>
-                    <li><strong>color='r':</strong> Sets the color of the bars to red ('r').</li>
-                    <li><strong>label='Australia':</strong> Adds a label for the data series, which will be used in the
-                        legend.</li>
-                </ul>
-                <li><strong>plt.bar(x+3, b, width=3, color='g', label='India'):</strong> Plots another set of bars for
-                    team India.</li>
-                <ul>
-                    <li><strong>x+3:</strong> Shifts the x-axis positions by 3 units to the right, so that the bars for
-                        India are displayed next to the bars for Australia.</li>
-                    <li><strong>b:</strong> Represents the y-axis values for India (runs scored).</li>
-                    <li><strong>width=3:</strong> Specifies the width of each bar.</li>
-                    <li><strong>color='g':</strong> Sets the color of the bars to green ('g').</li>
-                    <li><strong>label='India':</strong> Adds a label for this data series in the legend.</li>
-                </ul>
-                <li><strong>plt.xlabel('Overs'):</strong> Adds a label 'Overs' to the x-axis.</li>
-                <li><strong>plt.ylabel('Runs Scored'):</strong> Adds a label 'Runs Scored' to the y-axis.</li>on<li>
-                    <strong>plt.legend():</strong> Displays the legend on the plot, which shows the labels ('Australia'
-                    and 'India') corresponding to the data series.
-                </li>
-                <li><strong>plt.show():</strong> Displays the plot with the bar chart, x-axis labeled as 'Overs', y-axis
-                    labeled as 'Runs Scored', and a legend showing the data series for Australia and India.</li>
-            </ul>
-        </div>
-        <div class="in">
-            <h3>Pie Chart with Matplotlib</h3>
-            <p>To create a pie chart using Matplotlib:</p>
-            <ol>
-                <li>Define the data to be represented in the pie chart.</li>
-                <li>Call <code>plt.pie()</code> with the data to plot the pie chart.</li>
-                <li>Customize the chart as needed, such as adding labels and colors.</li>
-                <li>Display the chart using <code>plt.show()</code>.</li>
-            </ol>
-            <p>Now let's break down the code and understand each part:</p>
+            </div>
+            <div class="in">
+                <h3>Pie Chart with Matplotlib</h3>
+                <p>To create a pie chart using Matplotlib:</p>
+                <ol>
+                    <li>Define the data to be represented in the pie chart.</li>
+                    <li>Call <code>plt.pie()</code> with the data to plot the pie chart.</li>
+                    <li>Customize the chart as needed, such as adding labels and colors.</li>
+                    <li>Display the chart using <code>plt.show()</code>.</li>
+                </ol>
+                <p>Now let's break down the code and understand each part:</p>
 
-            <pre>
+                <pre>
                 <code>
 import matplotlib.pyplot as plt
 
@@ -3070,57 +4004,71 @@ plt.show()
                 </code>
             </pre>
 
-            <ul>
-                <li><strong>import matplotlib.pyplot as plt:</strong> Imports the matplotlib library for plotting graphs
-                    and assigns it an alias <strong>plt</strong>.</li>
-                <li><strong>sizes = [30, 20, 15, 35]:</strong> Defines a list <strong>sizes</strong> representing the
-                    sizes or proportions of different data segments in the pie chart.</li>
-                <li><strong>labels = ['A', 'B', 'C', 'D']:</strong> Defines a list <strong>labels</strong> containing
-                    labels for each data segment.</li>
-                <li><strong>colors = ['gold', 'lightcoral', 'lightskyblue', 'lightgreen']:</strong> Defines a list
-                    <strong>colors</strong> specifying colors for each data segment.
-                </li>
-                <li><strong>plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140):</strong>
-                    Creates the pie chart.</li>
                 <ul>
-                    <li><strong>sizes:</strong> Specifies the sizes or proportions of the pie chart segments.</li>
-                    <li><strong>labels=labels:</strong> Adds labels to each segment based on the <strong>labels</strong>
-                        list.</li>
-                    <li><strong>colors=colors:</strong> Sets colors for each segment based on the
-                        <strong>colors</strong> list.
+                    <li><strong>import matplotlib.pyplot as plt:</strong> Imports the matplotlib library for plotting
+                        graphs
+                        and assigns it an alias <strong>plt</strong>.</li>
+                    <li><strong>sizes = [30, 20, 15, 35]:</strong> Defines a list <strong>sizes</strong> representing
+                        the
+                        sizes or proportions of different data segments in the pie chart.</li>
+                    <li><strong>labels = ['A', 'B', 'C', 'D']:</strong> Defines a list <strong>labels</strong>
+                        containing
+                        labels for each data segment.</li>
+                    <li><strong>colors = ['gold', 'lightcoral', 'lightskyblue', 'lightgreen']:</strong> Defines a list
+                        <strong>colors</strong> specifying colors for each data segment.
                     </li>
-                    <li><strong>autopct='%1.1f%%':</strong> Displays the percentage of each segment in the chart with
-                        one decimal place.</li>
-                    <li><strong>startangle=140:</strong> Specifies the starting angle for the first segment of the pie
-                        chart (optional).</li>
+                    <li><strong>plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%',
+                            startangle=140):</strong>
+                        Creates the pie chart.</li>
+                    <ul>
+                        <li><strong>sizes:</strong> Specifies the sizes or proportions of the pie chart segments.</li>
+                        <li><strong>labels=labels:</strong> Adds labels to each segment based on the
+                            <strong>labels</strong>
+                            list.
+                        </li>
+                        <li><strong>colors=colors:</strong> Sets colors for each segment based on the
+                            <strong>colors</strong> list.
+                        </li>
+                        <li><strong>autopct='%1.1f%%':</strong> Displays the percentage of each segment in the chart
+                            with
+                            one decimal place.</li>
+                        <li><strong>startangle=140:</strong> Specifies the starting angle for the first segment of the
+                            pie
+                            chart (optional).</li>
+                    </ul>
+                    <li><strong>plt.axis('equal'):</strong> Ensures that the pie chart is drawn as a circle by setting
+                        equal
+                        aspect ratio.</li>
+                    <li><strong>plt.title('Pie Chart Example'):</strong> Adds a title to the pie chart.</li>
+                    <li><strong>plt.show():</strong> Displays the pie chart.</li>
                 </ul>
-                <li><strong>plt.axis('equal'):</strong> Ensures that the pie chart is drawn as a circle by setting equal
-                    aspect ratio.</li>
-                <li><strong>plt.title('Pie Chart Example'):</strong> Adds a title to the pie chart.</li>
-                <li><strong>plt.show():</strong> Displays the pie chart.</li>
-            </ul>
-        </div>
-        <div class="in">
-            <h2>Histogram: A Visualization of Data Distribution</h2>
+            </div>
+            <div class="in">
+                <h3>Histogram: A Visualization of Data Distribution</h3>
 
-            <p>A histogram is a type of bar chart that represents the distribution of numerical data. It divides data
-                into intervals called bins and displays the frequency of data points falling into each bin.</p>
+                <p>A histogram is a type of bar chart that represents the distribution of numerical data. It divides
+                    data
+                    into intervals called bins and displays the frequency of data points falling into each bin.</p>
 
-            <ul>
-                <li><strong>plt.hist():</strong> The <strong>plt.hist()</strong> function is used to create a histogram
-                    in
-                    Matplotlib.</li>
-                <li><strong>Data Distribution:</strong> Histograms are useful for visualizing the distribution of data,
-                    such as whether it is normally distributed, skewed, or has outliers.</li>
-                <li><strong>Bins:</strong> Bins are intervals into which data is divided. The number of bins and their
-                    width can be adjusted to visualize the data more effectively.</li>
-                <li><strong>Frequency:</strong> The height of each bar in a histogram represents the frequency of data
-                    points in that bin.</li>
-            </ul>
+                <ul>
+                    <li><strong>plt.hist():</strong> The <strong>plt.hist()</strong> function is used to create a
+                        histogram
+                        in
+                        Matplotlib.</li>
+                    <li><strong>Data Distribution:</strong> Histograms are useful for visualizing the distribution of
+                        data,
+                        such as whether it is normally distributed, skewed, or has outliers.</li>
+                    <li><strong>Bins:</strong> Bins are intervals into which data is divided. The number of bins and
+                        their
+                        width can be adjusted to visualize the data more effectively.</li>
+                    <li><strong>Frequency:</strong> The height of each bar in a histogram represents the frequency of
+                        data
+                        points in that bin.</li>
+                </ul>
 
-            <p>Here's an example code for creating a histogram:</p>
+                <p>Here's an example code for creating a histogram:</p>
 
-            <pre>
+                <pre>
                 <code>
 import matplotlib.pyplot as plt
 import numpy as np
@@ -3137,27 +4085,29 @@ plt.show()
                 </code>
             </pre>
 
-            <ul>
-                <li><strong>import matplotlib.pyplot as plt:</strong> Imports the Matplotlib library for plotting
-                    graphs.</li>
-                <li><strong>import numpy as np:</strong> Imports the NumPy library for numerical computations.</li>
-                <li><strong>np.random.seed(0):</strong> Sets the random seed for reproducibility of random data.</li>
-                <li><strong>data = np.random.randn(1000):</strong> Generates 1000 random data points using a normal
-                    distribution (mean=0, standard deviation=1).</li>
-                <li><strong>plt.hist(data, bins=30, color='blue', alpha=0.7):</strong> Creates a histogram with 30 bins,
-                    blue bars, and transparency set to 0.7 (alpha=0.7).</li>
-                <li><strong>plt.xlabel('Value'):</strong> Adds a label 'Value' to the x-axis.</li>
-                <li><strong>plt.ylabel('Frequency'):</strong> Adds a label 'Frequency' to the y-axis.</li>
-                <li><strong>plt.title('Histogram Example'):</strong> Adds a title to the histogram.</li>
-                <li><strong>plt.show():</strong> Displays the histogram plot.</li>
-            </ul>
-        </div>
-        <div class="in">
-            <h2>Multiple Box Plots for Different Data Sets</h2>
+                <ul>
+                    <li><strong>import matplotlib.pyplot as plt:</strong> Imports the Matplotlib library for plotting
+                        graphs.</li>
+                    <li><strong>import numpy as np:</strong> Imports the NumPy library for numerical computations.</li>
+                    <li><strong>np.random.seed(0):</strong> Sets the random seed for reproducibility of random data.
+                    </li>
+                    <li><strong>data = np.random.randn(1000):</strong> Generates 1000 random data points using a normal
+                        distribution (mean=0, standard deviation=1).</li>
+                    <li><strong>plt.hist(data, bins=30, color='blue', alpha=0.7):</strong> Creates a histogram with 30
+                        bins,
+                        blue bars, and transparency set to 0.7 (alpha=0.7).</li>
+                    <li><strong>plt.xlabel('Value'):</strong> Adds a label 'Value' to the x-axis.</li>
+                    <li><strong>plt.ylabel('Frequency'):</strong> Adds a label 'Frequency' to the y-axis.</li>
+                    <li><strong>plt.title('Histogram Example'):</strong> Adds a title to the histogram.</li>
+                    <li><strong>plt.show():</strong> Displays the histogram plot.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Multiple Box Plots for Different Data Sets</h3>
 
-            <p>Here's an example of creating multiple box plots for three different data sets:</p>
+                <p>Here's an example of creating multiple box plots for three different data sets:</p>
 
-            <pre>
+                <pre>
                 <code>
 import matplotlib.pyplot as plt
 
@@ -3174,18 +4124,130 @@ plt.show()
                 </code>
             </pre>
 
-            <ul>
-                <li><strong>import matplotlib.pyplot as plt:</strong> Imports Matplotlib for plotting.</li>
-                <li><strong>data1, data2, data3:</strong> Predefined data sets for the box plots.</li>
-                <li><strong>plt.boxplot([data1, data2, data3], labels=['Data 1', 'Data 2', 'Data 3']):</strong> Creates
-                    multiple box plots for the three data sets with labels.</li>
-                <li><strong>plt.xlabel('Data Sets'):</strong> Adds a label 'Data Sets' to the x-axis.</li>
-                <li><strong>plt.ylabel('Values'):</strong> Adds a label 'Values' to the y-axis.</li>
-                <li><strong>plt.title('Multiple Box Plots Example'):</strong> Adds a title to the plot.</li>
-                <li><strong>plt.show():</strong> Displays the box plots.</li>
-            </ul>
-
+                <ul>
+                    <li><strong>import matplotlib.pyplot as plt:</strong> Imports Matplotlib for plotting.</li>
+                    <li><strong>data1, data2, data3:</strong> Predefined data sets for the box plots.</li>
+                    <li><strong>plt.boxplot([data1, data2, data3], labels=['Data 1', 'Data 2', 'Data 3']):</strong>
+                        Creates
+                        multiple box plots for the three data sets with labels.</li>
+                    <li><strong>plt.xlabel('Data Sets'):</strong> Adds a label 'Data Sets' to the x-axis.</li>
+                    <li><strong>plt.ylabel('Values'):</strong> Adds a label 'Values' to the y-axis.</li>
+                    <li><strong>plt.title('Multiple Box Plots Example'):</strong> Adds a title to the plot.</li>
+                    <li><strong>plt.show():</strong> Displays the box plots.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Types of Graphs and When to Use Them</h3>
+                <ol>
+                    <li>Scatter Plot: A scatter plot is a type of plot that displays data points as markers in a
+                        two-dimensional space,
+                        typically to observe the relationship between two variables.
+                        <ul>
+                            <li><strong>When to use:</strong> Use scatter plots to visualize the relationship or
+                                correlation
+                                between
+                                two continuous variables, such as height vs. weight or temperature vs. time.</li>
+                        </ul>
+                    </li>
+                    <li>Line Plot: A line plot is a type of plot that displays data points connected by straight lines,
+                        typically to
+                        show
+                        trends over time or ordered data points.
+                        <ul>
+                            <li><strong>When to use:</strong> Use line plots to display trends or changes over time,
+                                such as
+                                stock
+                                prices, temperature changes, or sales data over months.</li>
+                        </ul>
+                    </li>
+                    <li>Bar Graph: A bar graph is a type of plot that represents data with rectangular bars, where the
+                        length or height
+                        of
+                        each bar is proportional to the value it represents.
+                        <ul>
+                            <li><strong>When to use:</strong> Use bar graphs to compare different categories or groups,
+                                such
+                                as
+                                the
+                                sales of different products, population by region, or scores of different students.</li>
+                        </ul>
+                    </li>
+                    <li>Horizontal Bar Graph: A horizontal bar graph is similar to a bar graph, but the bars are
+                        displayed horizontally instead of
+                        vertically.
+                        <ul>
+                            <li><strong>When to use:</strong> Use horizontal bar graphs when you have long category
+                                names or
+                                when
+                                comparing a small number of categories.</li>
+                        </ul>
+                    </li>
+                    <li>Multiple Bar Graph: A multiple bar graph displays multiple sets of data side by side for
+                        comparison,
+                        using groups of
+                        rectangular bars.
+                        <ul>
+                            <li><strong>When to use:</strong> Use multiple bar graphs to compare multiple sets of data
+                                across
+                                the
+                                same categories, such as comparing sales of different products across multiple years.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Pie Chart:
+                        A pie chart is a circular graph divided into sectors, where each sector represents a proportion
+                        of
+                        the
+                        whole.
+                        <ul>
+                            <li><strong>When to use:</strong> Use pie charts to show the relative proportions or
+                                percentages
+                                of
+                                a
+                                whole, such as market share distribution, survey results, or budget allocation.</li>
+                        </ul>
+                    </li>
+                    <li>Histogram:
+                        A histogram is a type of plot that displays the distribution of a dataset by grouping data into
+                        bins
+                        and
+                        showing the frequency of data points in each bin.
+                        <ul>
+                            <li><strong>When to use:</strong> Use histograms to visualize the distribution of a dataset,
+                                such as
+                                the
+                                frequency of exam scores, age distribution, or the distribution of income levels.</li>
+                        </ul>
+                    </li>
+                    <li>8. Box Plot:
+                        A box plot, also known as a box-and-whisker plot, is a type of plot that displays the
+                        distribution
+                        of
+                        a
+                        dataset through five summary statistics: minimum, first quartile (Q1), median, third quartile
+                        (Q3),
+                        and
+                        maximum.
+                        <ul>
+                            <li><strong>When to use:</strong> Use box plots to visualize the distribution, variability,
+                                and
+                                outliers
+                                of a dataset, such as comparing test scores, salaries, or experiment results across
+                                different
+                                groups.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
         </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/playlist?list=PL9n0l8rSshSnragNblKDBsT8Xu3otp3jA"
+                    target="_blank">Playlist
+                    &neArr;</a></li>
+        </ul>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
