@@ -2008,7 +2008,9 @@ After row deletion:
                     <p>The <code>loc()</code> method is used to access a group of rows and columns based on labels.</p>
                     <p><strong>Syntax:</strong></p>
                     <pre>
-                        <code>Df.loc[StartRow : EndRow, StartColumn : EndColumn]</code>
+                        <code>
+df.loc[StartRow : EndRow, StartColumn : EndColumn]
+                        </code>
                     </pre>
                     <p>Note: If you use a colon (<strong>:</strong>) in the row or column part, Pandas provides the
                         entire
@@ -3392,6 +3394,21 @@ print(sharad.to_string())
                     <li>dropna(subset=['Date'], inplace=True): Removes rows with NULL values in the specified column
                         ('Date') and updates the DataFrame directly</li>
                 </ul>
+                <h4>Converting String Data in a Numeric Column to Numeric Format</h4>
+                <ul>
+                    <li>If you have a column containing numeric data as strings, you can use the
+                        <strong>to_numeric()</strong> function to convert it to numeric format.</li>
+                </ul>
+                <pre>
+                    <code>
+import pandas as pd
+
+# Converting string data in a numeric column to numeric format
+sharad["NumericColumn"] = pd.to_numeric(sharad['NumericColumn'])
+print(sharad.to_string())
+                </code>
+                </pre>
+
             </div>
             <div class="in">
                 <h3>Removing Duplicate Values</h3>
@@ -3418,7 +3435,8 @@ print(sharad.to_string())
                     <li>The <strong>duplicated()</strong> method is used to identify duplicate rows in the DataFrame.
                     </li>
                     <li>It returns a series of boolean values, with <code>True</code> indicating a duplicate row and
-                        <code>False</code> indicating a unique row.</li>
+                        <code>False</code> indicating a unique row.
+                    </li>
                 </ul>
                 <pre>
     <code>
@@ -3452,12 +3470,15 @@ print(sharad.to_string())
     </code>
     </pre>
                 <ul>
-                    <li><strong>duplicated()</strong>: Identifies duplicate rows in the DataFrame. It returns a series of
+                    <li><strong>duplicated()</strong>: Identifies duplicate rows in the DataFrame. It returns a series
+                        of
                         boolean values where <strong>True</strong> indicates a duplicate row and <strong>False</strong>
                         indicates a unique row.</li>
                     <li><strong>drop_duplicates(inplace=True)</strong>: Removes duplicate rows from the DataFrame. The
-                        <strong>inplace=True</strong> parameter updates the original DataFrame directly without needing to
-                        assign the result to a new variable.</li>
+                        <strong>inplace=True</strong> parameter updates the original DataFrame directly without needing
+                        to
+                        assign the result to a new variable.
+                    </li>
                     <li><strong>to_string()</strong>: Converts the DataFrame to a string representation, which can be
                         printed out for a readable display of the data.</li>
                 </ul>

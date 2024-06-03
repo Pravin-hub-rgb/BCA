@@ -1,17 +1,14 @@
-# Check if a number is prime or not
-import math
-a = int(input("Enter a number : "))
+import pandas as pd
 
-def checkIsPrime(num):
-    if num < 2:
-        return False
-    else:
-        for i in range(2, int(math.sqrt(num))):
-            if(num % i == 0):
-                return False
-    return True
+# Create a dictionary with index labels
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Emily'],
+        'Age': [25, 30, 35, 40, 45],
+        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Dallas']}
+index_labels = ['A', 'B', 'C', 'D', 'E']
 
-if checkIsPrime(a):
-    print("The number is prime")
-else:
-    print("The number is not prime")
+# Create a pandas DataFrame with index labels
+df = pd.DataFrame(data, index=index_labels)
+
+# Display the pandas DataFrame
+print("Pandas DataFrame with Index Labels:")
+print(df)
