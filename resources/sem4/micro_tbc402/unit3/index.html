@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Input/ Output Interface</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Basic Input/ Output Interface</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Basic Input/ Output Interface</h1>
+        <div class="wh">
+            <h2>Programmable Peripheral Interface (8255)</h2>
+            <ul>
+                <li>
+                    The 8085 microprocessor faced difficulties in terms of I/O interfacing capability due to limited
+                    data and address buses. To address this issue and enhance the I/O capabilities, Intel introduced the
+                    8255 IC, which significantly increased interfacing capacities.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Basics of 8255</h3>
+                <ul>
+                    <li>
+                        The 8255 Programmable Peripheral Interface is designed to increase the I/O interfacing
+                        capability of microprocessors.
+                    </li>
+                    <li>
+                        It has 24 I/O pins that can be grouped into three 8-bit parallel ports: Port A, Port B, and Port
+                        C.
+                    </li>
+                    <li>
+                        Port C can be used as individual bits or can be split into two 4-bit parts: C<sub>upper</sub>
+                        (C<sub>7</sub> - C<sub>4</sub>) and C<sub>lower</sub> (C<sub>3</sub> - C<sub>0</sub>).
+                    </li>
+                    <li>
+                        The 8255 operates in the following modes:
+                        <ol>
+                            <li>
+                                I/O Modes:
+                                <ul>
+                                    <li>Mode 0: Basic Input/Output</li>
+                                    <li>Mode 1: Strobed Input/Output</li>
+                                    <li>Mode 2: Bi-Directional Bus</li>
+                                </ul>
+                            </li>
+                            <li>
+                                BSR (Bit Set/Reset) Mode: This mode is used to set or reset individual bits in Port C.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Control Signals of 8255</h3>
+                <ul>
+                    <li>
+                        <u style="text-decoration: overline;">RD</u> &rarr; Active low signal.
+                        <br>When <u style="text-decoration: overline;">RD</u> is active, the microprocessor reads data
+                        from the selected port of the 8255.
+                    </li>
+                    <li>
+                        <u style="text-decoration: overline;">WR</u> &rarr; Active low signal.
+                        <br>When <u style="text-decoration: overline;">WR</u> is active, the microprocessor writes data
+                        to the selected port of the 8255.
+                    </li>
+                    <li>
+                        RESET &rarr; Active high signal.
+                        <br>When RESET is active, it clears the control registers and sets all ports in input mode.
+                    </li>
+                    <li>
+                        <u style="text-decoration: overline;">CS</u>, A<sub>0</sub>, and A<sub>1</sub> &rarr; Chip
+                        Select and Address Lines.
+                        <pre>
+ __
+ CS   A1   A0
+ 0    0    0    Port A 
+ 0    0    1    Port B 
+ 0    1    0    Port C 
+ 0    1    1    Control Register 
+ 1    X    X    8255 not selected
+                        </pre>
+                        The above table shows the selection of ports or the control register based on the values of <u
+                            style="text-decoration: overline;">CS</u>, A<sub>0</sub>, and A<sub>1</sub>.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Block Diagram</h3>
+                <img src="../../images/ppi.svg" alt="8255 Block Diagram" class="wb">
+                <ul>
+                    <li>
+                        <strong>Interfacing Requirement:</strong>
+                        <ul>
+                            <li>The need for interfacing arises because of the difference in operating speeds between
+                                the microprocessor and the peripherals. Microprocessors operate at high speeds, while
+                                peripherals like keyboards, displays, and printers operate at comparatively lower
+                                speeds.</li>
+                            <li>The 8255 Programmable Peripheral Interface helps manage this speed mismatch by providing
+                                a buffer and control logic that allows the microprocessor to communicate efficiently
+                                with the peripherals.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Port Connections:</strong>
+                        <ul>
+                            <li><strong>Port A:</strong> This port can be configured as an 8-bit input or output port
+                                and is connected to I/O devices that require higher data transfer rates or need to
+                                handle 8-bit data simultaneously.</li>
+                            <li><strong>Port B:</strong> Similar to Port A, Port B can also be configured as an 8-bit
+                                input or output port, allowing it to interface with various I/O devices.</li>
+                            <li><strong>Port C:</strong> This port can be split into two 4-bit ports (C<sub>upper</sub>
+                                and C<sub>lower</sub>). It can be used for controlling individual bits or for
+                                interfacing with devices that require less data transfer.</li>
+                            <li><strong>Control Port:</strong> The control port is used by the microprocessor to
+                                configure and control the operation of Ports A, B, and C. The microprocessor uses the
+                                read (<u style="text-decoration: overline;">RD</u>), write (<u
+                                    style="text-decoration: overline;">WR</u>), and chip select (<u
+                                    style="text-decoration: overline;">CS</u>) signals to access and manage the control
+                                port.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Block Diagram Overview:</strong>
+                        <ul>
+                            <li><strong>Data Bus Buffer:</strong> This part of the 8255 is connected to the system data
+                                bus. It transfers data between the microprocessor and the 8255.</li>
+                            <li><strong>Read/Write Control Logic:</strong> This section manages the read and write
+                                operations between the microprocessor and the 8255. It generates the appropriate control
+                                signals based on the input from the microprocessor.</li>
+                            <li><strong>Group A and Group B Control:</strong> The control logic is divided into two
+                                groups, A and B, each controlling one of the ports (A or B) and a portion of Port C.
+                                This allows for flexible configuration of the ports.</li>
+                            <li><strong>Ports (A, B, and C):</strong> These ports are connected to the I/O devices. The
+                                configuration of these ports is managed by the control registers.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Keyboard and Display Controller (8279)</h2>
+            <p>
+                The 8279 is a programmable keyboard and display interface designed by Intel to manage input from a
+                keyboard and output to a display. It helps in interfacing keyboards and displays with a microprocessor,
+                providing efficient data entry and display management.
+            </p>
+            <div class="in">
+                <h3>Features</h3>
+                <ul>
+                    <li>
+                        The 8279 is designed by Intel.
+                    </li>
+                    <li>
+                        It supports a 64-contact key matrix along with two additional keys: "CONTROL" and "SHIFT".
+                    </li>
+                    <li>
+                        It provides three operation modes (or input modes):
+                        <ol>
+                            <li>Scanned Keyboard Mode: In this mode, the keys are scanned row by row for key presses.
+                            </li>
+                            <li>Scanned Sensor Matrix Mode: This mode is used for interfacing with sensors arranged in a
+                                matrix form.</li>
+                            <li>Strobed Input Mode: In this mode, the input is strobed and the data is latched with each
+                                strobe signal.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        It has an inbuilt debounce key feature to eliminate key bounce issues.
+                    </li>
+                    <li>
+                        It provides a 16-byte display RAM to display up to 16 digits, allowing for efficient interfacing
+                        and display of characters.
+                    </li>
+                    <li>
+                        It offers two output modes:
+                        <ol>
+                            <li>Left Entry Mode: Data is entered from the left, similar to a typewriter.</li>
+                            <li>Right Entry Mode: Data is entered from the right, similar to a calculator.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        The interrupt output of the 8279 can be used to notify the CPU of a key press detection, which
+                        eliminates the need for software polling. This means the CPU can perform other tasks and respond
+                        to key presses as they occur.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>8254 Programmable Interval Timer</h2>
+            <ul>
+                <li>
+                    The 8254 is used to generate finite delays. It has three integrated counters, each with a capacity
+                    of 16 bits.
+                </li>
+                <li>
+                    <strong>Why do we use the 8254?</strong>
+                    <br>
+                    The initial versions of Intel microprocessors, such as the 8085 and 8086, did not have an integrated
+                    timer. Without a hardware timer, generating delays required executing software loops, which had two
+                    main issues:
+                    <ol>
+                        <li>The microprocessor would be busy while executing the delay program, meaning it couldn't
+                            perform other tasks simultaneously.</li>
+                        <li>The accuracy of the timing would depend on the execution time of the instructions, which
+                            could vary.</li>
+                    </ol>
+                    These issues are resolved by using the 8254 IC.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Features of 8254 PIT IC</h3>
+                <ul>
+                    <li>
+                        The 8254 is designed to work with various microprocessors, including the 8085 and 8086.
+                    </li>
+                    <li>
+                        The 8254 is used as a timer to generate hardware delays.
+                        <br>
+                        <strong>Difference between hardware delay and software delay:</strong> A hardware delay is
+                        generated by a dedicated timer IC, allowing the microprocessor to perform other tasks during the
+                        delay period. In contrast, a software delay requires the microprocessor to execute a delay
+                        program, making it unavailable for other tasks during the delay.
+                    </li>
+                    <li>
+                        The 8254 can be used as a real-time clock or as a square wave generator.
+                    </li>
+                    <li>
+                        Hardware delay is more useful than software delay because the microprocessor is not actively
+                        involved in generating the delay. When the 8254 generates a delay, the microprocessor is free to
+                        execute other programs.
+                    </li>
+                    <li>
+                        The 8254 has three independent 16-bit down counters.
+                        <br>
+                        <strong>Down Counter:</strong> A down counter starts from a specified value and counts down to
+                        zero.
+                    </li>
+                    <li>
+                        These counters can operate in BCD (Binary-Coded Decimal) or binary mode.
+                    </li>
+                    <li>
+                        Once a counter finishes counting (i.e., the required delay is reached), the 8254 interrupts the
+                        microprocessor.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
