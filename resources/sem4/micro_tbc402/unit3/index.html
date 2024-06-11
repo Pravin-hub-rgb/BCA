@@ -276,6 +276,431 @@
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <h2>Programmable Communication Interface (8251)</h2>
+            <p></p>
+            <div class="in">
+                <h3>Basics of 8251</h3>
+                <ul>
+                    <li>
+                        The 8251 is a programmable chip designed for synchronous and asynchronous serial data
+                        communication.
+                    </li>
+                    <li>
+                        The 8251A is an advanced version of the 8251, with additional features and improvements.
+                    </li>
+                    <li>
+                        The control logic of the 8251 is connected with the microprocessor to determine the function of
+                        the 8251. The control logic essentially manages the mode of operation and the configuration of
+                        the 8251.
+                    </li>
+                    <li>
+                        The 8251 converts parallel data to serial format for transmission and converts serial data to
+                        parallel format for reception.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Working of 8251</h3>
+                <ul>
+                    <li>
+                        <strong>Transmitter Section:</strong>
+                        <ul>
+                            <li>Receives parallel data from the microprocessor.</li>
+                            <li>Converts the parallel data into serial format.</li>
+                            <li>Transmits the serial data on the TxD (Transmit Data) line.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Receiver Section:</strong>
+                        <ul>
+                            <li>Receives serial data on the RxD (Receive Data) line.</li>
+                            <li>Converts the serial data into parallel format.</li>
+                            <li>Transfers the parallel data to the microprocessor.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Data transmission can be done for both synchronous and asynchronous data transfer.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Control Signals of 8251</h3>
+                <ul>
+                    <li>
+                        <strong><u style="text-decoration: overline;">CS</u> (Chip Select):</strong>
+                        <br>
+                        An active low signal that selects the 8251 for communication with the microprocessor. When this
+                        signal is low, the 8251 is enabled for communication.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">RD</u> (Read):</strong>
+                        <br>
+                        An active low signal used to read data from the 8251. When this signal is low, the
+                        microprocessor reads data from the 8251's data bus.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">WR</u> (Write):</strong>
+                        <br>
+                        An active low signal used to write data to the 8251. When this signal is low, the microprocessor
+                        writes data to the 8251's data bus.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">C/D</u> (Control/Data):</strong>
+                        <br>
+                        This signal determines whether the data being transferred is control information or actual data.
+                        When C/D is high, the data is control information; when low, the data is actual communication
+                        data.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">RESET</u>:</strong>
+                        <br>
+                        An active high signal that resets the 8251, clearing the control registers and initializing the
+                        device.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">CLK</u> (Clock):</strong>
+                        <br>
+                        Provides the timing signal necessary for the 8251 to operate. The clock signal synchronizes the
+                        data transmission and reception processes.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Interrupts</h2>
+            <p>Interrupts are signals that inform the processor about the occurrence of an event, allowing the processor
+                to temporarily halt its current execution and address the event. Interrupts can be classified into two
+                main types: hardware interrupts and software interrupts.</p>
+
+            <div class="in">
+                <h3>Hardware Interrupts</h3>
+                <ul>
+                    <li>
+                        <strong>Definition:</strong>
+                        <br>
+                        Hardware interrupts are generated by external hardware devices, such as keyboards, mice,
+                        printers, or other peripheral devices, to signal the processor that an event has occurred that
+                        requires immediate attention.
+                    </li>
+                    <li>
+                        <strong>Characteristics:</strong>
+                        <ul>
+                            <li>Triggered by external devices.</li>
+                            <li>Used for real-time processing and handling of external events.</li>
+                            <li>Examples include interrupts from a mouse click or a keystroke.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Process:</strong>
+                        <ul>
+                            <li>The external device sends an interrupt signal to the processor.</li>
+                            <li>The processor pauses its current tasks and saves the current state.</li>
+                            <li>The processor executes the interrupt service routine (ISR) to handle the event.</li>
+                            <li>After the ISR completes, the processor resumes its previous tasks.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Software Interrupts</h3>
+                <ul>
+                    <li>
+                        <strong>Definition:</strong>
+                        <br>
+                        Software interrupts are generated by executing specific instructions in the software, typically
+                        used to request system services from the operating system.
+                    </li>
+                    <li>
+                        <strong>Characteristics:</strong>
+                        <ul>
+                            <li>Triggered by software instructions.</li>
+                            <li>Used for system calls and to handle software events.</li>
+                            <li>Examples include system calls for file operations or memory allocation.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Process:</strong>
+                        <ul>
+                            <li>The software executes a specific interrupt instruction.</li>
+                            <li>The processor recognizes the software interrupt and pauses the current tasks.</li>
+                            <li>The processor executes the corresponding interrupt service routine (ISR) to perform the
+                                requested service.</li>
+                            <li>After the ISR completes, the processor resumes its previous tasks.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>8259 Programmable Interrupt Controller (PIC)</h2>
+            <p>The 8259 Programmable Interrupt Controller (PIC) is a specialized IC designed to manage hardware
+                interrupts and prioritize them before sending them to the processor. It is used to enhance the interrupt
+                handling capabilities of microprocessors.</p>
+
+            <div class="in">
+                <h3>Basics of 8259</h3>
+                <ul>
+                    <li>
+                        <strong>Purpose:</strong>
+                        <br>
+                        The 8259 PIC is used to handle and prioritize multiple interrupt requests from various hardware
+                        devices, ensuring efficient interrupt management in a system.
+                    </li>
+                    <li>
+                        <strong>Interrupt Vector:</strong>
+                        <br>
+                        It generates an interrupt vector address that points to the appropriate interrupt service
+                        routine (ISR) for the processor to execute.
+                    </li>
+                    <li>
+                        <strong>Compatibility:</strong>
+                        <br>
+                        The 8259 is designed to work seamlessly with the 8085, 8086, and other microprocessors,
+                        enhancing their interrupt handling capabilities.
+                    </li>
+                    <li>
+                        <strong>Interrupt Requests:</strong>
+                        <br>
+                        It can handle up to 8 interrupt requests (IR0-IR7), which can be expanded by cascading multiple
+                        8259 PICs.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Features of 8259</h3>
+                <ul>
+                    <li>
+                        <strong>Priority Resolver:</strong>
+                        <br>
+                        The 8259 contains a priority resolver that determines the priority of the incoming interrupt
+                        requests and services them accordingly.
+                    </li>
+                    <li>
+                        <strong>Cascading:</strong>
+                        <br>
+                        Multiple 8259 PICs can be cascaded to handle more than 8 interrupt requests, allowing for a
+                        scalable interrupt management system.
+                    </li>
+                    <li>
+                        <strong>Interrupt Masking:</strong>
+                        <br>
+                        Individual interrupt lines can be masked using the Interrupt Mask Register (IMR), allowing
+                        selective enabling or disabling of interrupt requests.
+                    </li>
+                    <li>
+                        <strong>Interrupt Modes:</strong>
+                        <ul>
+                            <li>Fully Nested Mode: Prioritizes interrupts in a fixed order (IR0-IR7).</li>
+                            <li>Special Fully Nested Mode: Allows certain interrupts to have higher priority.</li>
+                            <li>Rotating Priority Mode: Rotates the priority of interrupts, giving each interrupt line a
+                                chance to be the highest priority.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>End of Interrupt (EOI):</strong>
+                        <br>
+                        The 8259 uses an EOI command to signal the completion of an interrupt service routine, allowing
+                        it to handle the next interrupt request.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Control Signals of 8259</h3>
+                <ul>
+                    <li>
+                        <strong><u style="text-decoration: overline;">CS</u> (Chip Select):</strong>
+                        <br>
+                        An active low signal that selects the 8259 for communication with the microprocessor.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">RD</u> (Read):</strong>
+                        <br>
+                        An active low signal used to read data from the 8259.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">WR</u> (Write):</strong>
+                        <br>
+                        An active low signal used to write data to the 8259.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">INT</u> (Interrupt):</strong>
+                        <br>
+                        An active high signal sent to the processor to indicate that an interrupt request has occurred.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">INTA</u> (Interrupt Acknowledge):</strong>
+                        <br>
+                        An active low signal sent by the processor to the 8259 to acknowledge the receipt of the
+                        interrupt request.
+                    </li>
+                    <li>
+                        <strong><u style="text-decoration: overline;">SP/EN</u> (Slave Program/Enable Buffer):</strong>
+                        <br>
+                        Determines whether the 8259 is in master or slave mode in a cascaded configuration, and can also
+                        be used to enable buffer.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Direct Memory Access (DMA)</h2>
+            <ul>
+                <li>
+                    Direct Memory Access (DMA) is a method that allows data to be moved from one location to another
+                    without the direct intervention of the Central Processing Unit (CPU). This method significantly
+                    speeds up data transfer operations within a computer system.
+                </li>
+                <li>
+                    DMA provides a faster way of transferring data within the computer because it bypasses the CPU,
+                    which can be a bottleneck in data transfer operations. By allowing peripheral devices to communicate
+                    directly with memory, DMA improves overall system performance.
+                </li>
+                <li>
+                    The DMA I/O technique provides direct access to memory while the microprocessor is temporarily
+                    disabled. This means that the CPU can continue to perform other tasks while the DMA controller
+                    handles the data transfer, leading to more efficient use of system resources.
+                </li>
+                <li>
+                    The DMA controller temporarily borrows the address bus, data bus, and control bus from the
+                    microprocessor. It transfers the data directly from external devices (like disk drives or network
+                    cards) to a series of memory locations. This direct transfer bypasses the CPU, allowing for faster
+                    data movement.
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Basic DMA Operations</h3>
+                <p>
+                    Two control signals are used to request and acknowledge a DMA transfer in a microprocessor-based
+                    system. These two signals are:
+                <ol>
+                    <li>HOLD: The HOLD signal is used by the DMA controller to request control of the system
+                        buses from the CPU.
+                        <ul>
+                            <li>
+                                The HOLD signal is an input to the processor used to request DMA action. When the DMA
+                                controller
+                                needs to transfer data, it asserts the HOLD signal, asking the CPU to release control of
+                                the
+                                buses.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>HLDA (Hold Acknowledge): The HLDA signal is used by the CPU to acknowledge that it has
+                        relinquished control of the system buses to the DMA controller.
+                        <ul>
+                            <li>
+                                The HLDA (Hold Acknowledge) signal is an output from the processor that acknowledges the
+                                DMA
+                                action. When the CPU receives the HOLD signal, it finishes its current operation, places
+                                the
+                                buses in a high-impedance state (effectively disconnecting from them), and then asserts
+                                the HLDA
+                                signal to indicate that the DMA controller can take control of the buses.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                </p>
+
+                <p>
+                    Note: The HOLD signal has the highest priority compared to other interrupt signals like INTR
+                    (Interrupt Request) and NMI (Non-Maskable Interrupt). However, the RESET signal has the absolute
+                    highest priority.
+                </p>
+
+                <ul>
+                    <li>
+                        When the HLDA signal becomes active, it indicates that the processor has put its buses in a
+                        high-impedance state. In this state, the buses are effectively disconnected from the processor,
+                        allowing the DMA controller to take over and transfer data directly between I/O devices and
+                        memory. This means the microprocessor is free to execute other tasks or go into a low-power
+                        state.
+                    </li>
+                    <li>
+                        DMA operations occur directly between I/O devices and memory without involving the
+                        microprocessor. This direct transfer method significantly speeds up data transfer processes and
+                        frees up the CPU to perform other tasks, leading to more efficient system performance.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>DMA Read and Write Operations</h3>
+                <ul>
+                    <li>
+                        <strong>DMA Read Operation:</strong>
+                        <ol>
+                            <li>The DMA controller asserts the HOLD signal to request control of the system buses from
+                                the CPU.</li>
+                            <li>The CPU finishes its current operation, places the buses in a high-impedance state, and
+                                asserts the HLDA signal.</li>
+                            <li>The DMA controller takes control of the buses and reads data from the memory address
+                                specified in the DMA request.</li>
+                            <li>The data is transferred from memory to the I/O device.</li>
+                            <li>Once the transfer is complete, the DMA controller deasserts the HOLD signal, and the CPU
+                                regains control of the buses.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>DMA Write Operation:</strong>
+                        <ol>
+                            <li>The DMA controller asserts the HOLD signal to request control of the system buses from
+                                the CPU.</li>
+                            <li>The CPU finishes its current operation, places the buses in a high-impedance state, and
+                                asserts the HLDA signal.</li>
+                            <li>The DMA controller takes control of the buses and writes data to the memory address
+                                specified in the DMA request.</li>
+                            <li>The data is transferred from the I/O device to memory.</li>
+                            <li>Once the transfer is complete, the DMA controller deasserts the HOLD signal, and the CPU
+                                regains control of the buses.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+                <h2>8237 DMA Controller</h2>
+                <ul>
+                    <li>
+                        <strong>Introduction:</strong>
+                        <br>
+                        The 8237 DMA controller is a programmable device used to manage DMA operations, allowing
+                        peripheral devices to directly read from and write to memory without CPU intervention.
+                    </li>
+                    <li>
+                        <strong>Features:</strong>
+                        <ul>
+                            <li>Contains four independent DMA channels, each capable of transferring data between memory
+                                and I/O devices.</li>
+                            <li>Supports both memory-to-memory and peripheral-to-memory transfers.</li>
+                            <li>Each channel has a 64KB address range.</li>
+                            <li>Provides data transfer modes such as single transfer, block transfer, demand transfer,
+                                and cascade mode.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Addressing:</strong>
+                        <br>
+                        The 8237 DMA controller uses a base address and a current address register for each channel to
+                        keep track of the memory locations involved in the transfer.
+                    </li>
+                    <li>
+                        <strong>Transfer Modes:</strong>
+                        <ul>
+                            <li>Single Transfer Mode: Transfers a single byte of data per request.</li>
+                            <li>Block Transfer Mode: Transfers a block of data in a single burst.</li>
+                            <li>Demand Transfer Mode: Continues transferring data as long as the peripheral is
+                                requesting it.</li>
+                            <li>Cascade Mode: Used for cascading multiple DMA controllers to handle more channels.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
