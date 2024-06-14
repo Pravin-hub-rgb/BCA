@@ -13,7 +13,7 @@
     <style>
         .ms {
             display: inline-block;
-            font-size: 28px;
+            font-size: 23px;
             line-height: 2.2;
         }
     </style>
@@ -360,10 +360,11 @@ x5 = 1   and y4 = 0.3679
         <div class="wh">
             <h2>Simpson's 3/8th Rule</h2>
             <div class="in">
-                <h3>Q1- Using Simpson's 3/8th Rule, calculate the value of integral <span class="ms">\(\int_{0}^{6} \frac{1}{1+x^2}\ dx\)</span></h3>
+                <h3>Q1- Using Simpson's 3/8th Rule, calculate the value of integral <span class="ms">\(\int_{0}^{6}
+                        \frac{1}{1+x^2}\ dx\)</span></h3>
                 <p><strong>Solution:</strong></p>
                 <ul>
-                    <li>x0 = 0 and xn = 6 
+                    <li>x0 = 0 and xn = 6
                         <br>x0 + nh = 6
                         <br>taking n = 6
                         <br>0 + 6h = 6
@@ -407,12 +408,113 @@ x6 = 6 and y4 = 0.027
                     </li>
                 </ul>
             </div>
+            <div class="in">
+                <h3>Q1- Using Simpson's 3/8th Rule, calculate the value of integral <span class="ms">\( \int_{0}^{3}
+                        \frac{1}{1+x^5}\ dx \)</span> and n = 6
+                </h3>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>x0 = 0 and xn = 3
+                        <br>x0 + nh = 3
+                        <br>0 + 6h = 3
+                        <br>h = 0.5
+                    </li>
+                    <li>
+                        x<sub>1</sub> = x<sub>0</sub> + h
+                        <br>y<sub>0</sub> = <span class="ms">\(\frac{1}{1+x0^2}\)</span>
+                        <pre>
+x0 = 0   and y0 = 1
+x1 = 0.5 and y1 = 0.9697
+x2 = 1   and y2 = 0.5
+x3 = 1.5 and y3 = 0.11636
+x4 = 2   and y4 = 0.03031
+x5 = 2.5 and y3 = 0.01014
+x6 = 3   and y4 = 0.00410
+                        </pre>
+                    </li>
+                    <li><span class="ms">\( \int_{0}^{3}
+                            \frac{1}{1+x^5}\ dx \)</span> = <math>
+                            <mfrac>
+                                <mn>3*05</mn>
+                                <mn>8</mn>
+                            </mfrac>
+                        </math>[(1 + 0.00410) + 2(0.11636) + 3(1.5102)]
+                        <br><span class="ms">\( \int_{0}^{3}
+                            \frac{1}{1+x^5}\ dx \)</span> = 1.0814 (approx)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Boole's Rule</h2>
+            <p><strong>Formula:</strong></p>
+            <p><span class="ms">\( \int_{x0}^{xn}
+                    f(x) dx \) = <math>
+                        <mfrac>
+                            <mn>2h</mn>
+                            <mn>45</mn>
+                        </mfrac>
+                    </math>[(7y0 + 32y1 + 12y2 + 32y3 + 7y4 + 7y4 + 32y5 + 12 y6 + ....)]</span></p>
+            <p>7 - 32 - 12 - 32 - 7 again repeat
+                <br>y4 is repeated twice because this method works with instance of 4
+            </p>
+            <div class="in">
+                <h3>Q- Evaluate <span class="ms">\( \int_{0}^{4}
+                        \frac{1}{1+x^2}\ dx \)</span> using Boole's Rule taking h = 0.5</h3>
+                <ul>
+                    <li>
+                        <pre>
+x0 = 0   and y0 = 1
+x1 = 0.5 and y1 = 0.8
+x2 = 1   and y2 = 0.5
+x3 = 1.5 and y3 = 0.3077
+x4 = 2   and y4 = 0.2
+x5 = 2.5 and y3 = 0.1379
+x6 = 3   and y4 = 0.1
+x7 = 3.5 and y3 = 0.0755
+x8 = 4   and y4 = 0.0588
+                                </pre>
+                    </li>
+                    <li><span class="ms">\( \int_{0}^{4}
+                            \frac{1}{1+x^2}\ dx \)</span> = <math>
+                            <mfrac>
+                                <mn>2 * 0.5</mn>
+                                <mn>45</mn>
+                            </mfrac>
+                        </math> [7(1) + 32(0.8) + 12(0.5) + 32(0.3077) + 7(0.2) + 7(0.2) + 32(0.1379) + 12(0.1) +
+                        32(0.0755) + 7(0.0588)]
+                        <br><span class="ms">\( \int_{0}^{4}
+                            \frac{1}{1+x^2}\ dx \)</span> = 1.3250
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Weedle's Rule</h2>
+            <p>Note:</p>
+            <ul>
+                <li>We divide the interval into an even number of subintervals in the 1/3rd Simpson Method</li>
+                <li>We divide the interval into multiples of 3 subintervals in the 3/8th Simpson Method</li>
+                <li>We divide the interval into multiples of 4 subintervals in Boole's Rule</li>
+                <li>We divide the interval into multiples of 6 subintervals in Weddle's Method</li>
+            </ul>
+            <p class="ms"><strong>Formula:</strong>\( \int_{x0}^{xn}
+                f(x) dx \) = <math>
+                    <mfrac>
+                        <mn>3h</mn>
+                        <mn>10</mn>
+                    </mfrac>
+                </math>[1(y0) + 5(y1) + 1(y2) + 6(y3) + 1(y4) + 5(y5) + 1(y6)]
+                <br>the sequence goes like: 1,5,1,6,1,5,1,5,1,6,1,5,2,5,1,6,1,5
+            </p>
+            
         </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://youtu.be/SNSMRH3b1G8?si=PVQEvyD9hWcUq03Z" target="_blank">Trapezoidal Rule &neArr;</a>
+            <li><a href="https://youtu.be/SNSMRH3b1G8?si=PVQEvyD9hWcUq03Z" target="_blank">Trapezoidal Rule
+                    &neArr;</a>
             </li>
             <li><a href="https://youtu.be/KpVB4Tn7gB4?si=ImZ0iz3HKd9q2drz" target="_blank">Simpson's 1/3rd Rule
                     &neArr;</a></li>
@@ -423,11 +525,14 @@ x6 = 6 and y4 = 0.027
                     &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=yNVXGoByE_c" target="_blank">Picard's Method p2 &neArr;</a>
             </li>
-            <li><a href="https://youtu.be/LSad3qHtUeM?si=CYWUEApaTKIqFFVt" target="_blank">Euler's Method p1 &neArr;</a>
+            <li><a href="https://youtu.be/LSad3qHtUeM?si=CYWUEApaTKIqFFVt" target="_blank">Euler's Method p1
+                    &neArr;</a>
             </li>
-            <li><a href="https://youtu.be/q425oPKh3jE?si=JitiQc1H87qy5rB4" target="_blank">Euler's Method p2 &neArr;</a>
+            <li><a href="https://youtu.be/q425oPKh3jE?si=JitiQc1H87qy5rB4" target="_blank">Euler's Method p2
+                    &neArr;</a>
             </li>
-            <li><a href="https://www.youtube.com/watch?v=mzcacVNe6Hs" target="_blank">Taylor's Series Method &neArr;</a>
+            <li><a href="https://www.youtube.com/watch?v=mzcacVNe6Hs" target="_blank">Taylor's Series Method
+                    &neArr;</a>
             </li>
             <li><a href="https://youtu.be/rv8XER8ef5k?si=R4Wxt71Lcxguxa9f" target="_blank">Taylor's Series Method
                     &neArr;</a></li>
