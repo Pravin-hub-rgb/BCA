@@ -8,6 +8,15 @@
     <title>Simultaneous Linear Algebric Equations</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .ms {
+            display: inline-block;
+            font-size: 20px;
+            line-height: 2.2;
+        }
+    </style>
 </head>
 
 <body class="bg-c">
@@ -322,6 +331,87 @@ X = <math><mfrac><mn>1</mn><mn>18</mn></mfrac></math> | 30 |
                         </ul>
                     </li>
                 </ul>
+                <h3>Gauss's Forward Difference Formula</h3>
+                <p><span class="ms">y(x) = \(y_0\) + u&triangle;\(y_0\) +
+                        \(\frac{(u-1)u}{2!}\)&triangle;<sup>2</sup>\(y_{-1}\) +
+                        \(\frac{(u-1)u(u+1)}{3!}\)&triangle;<sup>3</sup>\(y_{-1}\) +
+                        \(\frac{(u-2)(u-1)u(u+1)}{4!}\)&triangle;<sup>4</sup>\(y_{-2}\) +
+                        \(\frac{(u-2)(u-1)u(u+1)(u+2)}{5!}\)&triangle;<sup>5</sup>\(y_{-2}\)</span> + ...
+                    <br><span class="ms">u = \(\frac{x - x_o}{h}\)</span>
+                </p>
+                <p><strong>Q-</strong> Use Gauss's forward formula to find the value of y when x = 3.75 from the
+                    following table:
+                <pre>
+x |  2.5   |   3.0   |   3.5   |   4.0   |   4.5   |   5.0   |
+y | 24.145 | 22.043  | 20.225  | 18.644  | 17.262  | 16.047  |
+                </pre>
+                <br>Sol:
+                <br><span class="ms">u = \(\frac{x - x_o}{h}\)</span>
+                <br>here x is the given value in the question, so x = 3.75 and \(x_o\) = just smallest value then x, so
+                \(x_o\) = 3.5
+                <br>Now h is the difference between two consecutive value of x, so h = 3.0 - 2.5 = 0.5
+                <br><span class="ms">u = \(\frac{3.75 - 3.5}{0.5}\) = 0.5</span>
+                <br>If (0 &lt; u &lt; 1) then we use Gauss Forward formula.
+                <br>Now table:
+                <pre>
+ x       |      y      |          △y               |    △^2 y   |    △^3 y    |   △^4 y    |   △^5 y
+---------+-------------+----------------------------+----------------------------+-------------+-------------
+2.5      | 24.145      |                            |             |              |             |
+         |             | 22.043-24.145= -2.102  (-2)|             |              |             |
+3.0      | 22.043      |                            | 0.284 (y-2) |              |             |
+         |             |        -1.818          (-1)|             | -0.047 (y-2) |             |
+3.5 (x0) | 20.225 (y0)✮|                            | 0.237 (y-1)✮|              | 0.009 (y-2)✮|
+         |             |        -1.581          (0)✮|             | -0.038 (y-1)✮|             | -0.003 (y-2)✮
+4.0      | 18.644      |                            | 0.199 (y0)  |              | 0.006 (y-1) |
+         |             |        -1.382           (1)|             | -0.032 (y0)  |             |
+4.5      | 17.262      |                            | 0.167 (y1)  |              |             |
+         |             |        -1.215           (2)|             |              |             |
+5.0      | 16.047      |                            |             |              |             |
+                </pre>
+                <span class="ms">y(x) = 20.225 + 0.5(-1.581) +
+                    \(\frac{(0.5-1)0.5}{2!}\) (0.237) +
+                    \(\frac{(0.5-1)0.5(0.5+1)}{3!}\)(-0.038) +
+                    \(\frac{(0.5-2)(0.5-1)0.5(0.5+1)}{4!}\)(0.009) +
+                    \(\frac{(0.5-2)(0.5-1)0.5(0.5+1)(0.5+2)}{5!}\)(-0.003)</span>
+                    <br>y(x) = 22.225 - 0.7905 - 0.029625 + 0.002375 + 0.0002109375 - 0.0000351563
+                    <br>y(x) = 19.4074257812
+                </p>
+                <h3>Gauss's Backward Formula</h3>
+                <p>
+                    <span class="ms">
+                        y(x) = \(y_o\) + u&triangle;\(y_{-1}\) + \(\frac{u(u+1)}{2!}\)&triangle;<sup>2</sup>\(y_{-1}\) + \(\frac{(u-1)u(u+1)}{3!}\)&triangle;<sup>3</sup>\(y_{-2}\) + \(\frac{(u-1)u(u+1)(u+2)}{4!}\)&triangle;<sup>4</sup>\(y_{-2}\) + \(\frac{(u-2)(u-1)u(u+1)(u+2)}{5!}\)&triangle;<sup>5</sup>\(y_{-3}\)
+                    </span>
+                    <br><span class="ms">u = \(\frac{x - x_o}{h}\)</span>
+                </p>
+                <p><strong>Q-</strong> Apply Gauss Backward formula to find the population of the town in 1946, given that
+                <pre>
+         Year  |  1931  |  1941  |  1951  |  1961  | 1971
+   Population  |   15   |   20   |   27   |   39   |  52
+(In thousands) | 
+                </pre>
+                <br><span class="ms">u = \(\frac{x - x_o}{h}\)</span>
+            <br>x = 1946 and \(x_o\) is slightly bigger value than x so here \(x_o\) = 1951
+            <br>h is the difference between two consecutive x values.
+            <br><span class="ms">u = \(\frac{1946 - 1951}{10}\) = -0.5</span>
+            <br>We use Gauss Backward when (-1 &lt; u &lt; 0)
+            <pre>
+ x       |   y     |    △y   | △^2 y  | △^3 y   |   △^4 y  |   
+---------+---------+----------+---------+----------+-----------+
+1931     | 15      |          |         |          |           |
+         |         | 5   (y-2)|         |          |           |
+1941     | 20      |          | 2 (y-2) |          |           |
+         |         | 7  (y-1)✮|         | 3 (y-2)✮ |           |
+1951 (x0)| 27 (y0)✮|          | 5 (y-1)✮|          | -7 (y-2)✮ |
+         |         | 12  (y0) |         | -4 (y-1) |           |
+1961     | 39      |          | 1 (y0)  |          |           |
+         |         | 13   (y1)|         |          |           |
+1971     | 52      |          |         |          |           |
+            </pre>
+            <span class="ms">
+                y(x) = 27 + (-0.5)(7) + \(\frac{(-0.5)(-0.5+1)}{2!}\)(5) + \(\frac{(-0.5-1)(-0.5)(-0.5+1)}{3!}\)(3) + \(\frac{(-0.5-1)(-0.5)(-0.5+1)(-0.5+2)}{4!}\)(-7)
+                <br>y(x) = 22.7890
+            </span>
+        </p>
             </div>
         </div>
     </div>
