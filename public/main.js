@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
 });
-
 function updateCommitInfo() {
   var username = "Pravin-hub-rgb";
   var repo = "BCA";
@@ -14,63 +13,68 @@ function updateCommitInfo() {
   fetchCommits();
 
   function fetchCommits() {
-    fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
+      fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+          })
+          .then(data => {
+              // Add the number of commits in the current page to the commit count
+              commitCount += data.length;
+
+              // If there are more pages, fetch the next page
+              if (data.length === perPage) {
+                  currentPage++;
+                  fetchCommits();
+              } else {
+                  // All commits have been fetched, update the HTML content
+                  document.getElementById("commit-count").textContent = commitCount;
+              }
+          })
+          .catch(error => {
+              console.error("Error fetching commits:", error);
+          });
+  }
+  
+  fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
       .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
       })
       .then(data => {
-        // Add the number of commits in the current page to the commit count
-        commitCount += data.length;
+          var latestCommitTime = new Date(data[0].commit.author.date);
+          var currentTime = new Date();
 
-        // If there are more pages, fetch the next page
-        if (data.length === perPage) {
-          currentPage++;
-          fetchCommits();
-        } else {
-          // All commits have been fetched, update the HTML content
-          document.getElementById("commit-count").textContent = commitCount;
-        }
+          // Calculate the time difference in milliseconds
+          var timeDiffMilliseconds = currentTime - latestCommitTime;
+
+          // Calculate the time difference in hours and days
+          var timeDiffHours = Math.floor(timeDiffMilliseconds / (1000 * 60 * 60));
+          var timeDiffDays = Math.floor(timeDiffHours / 24);
+
+          // Format the time difference based on hours and days
+          var timeAgoText;
+          if (timeDiffHours === 0) {
+              timeAgoText = "just now";
+          } else {
+              var daysText = timeDiffDays === 1 ? "day" : "days";
+              var hoursText = timeDiffHours % 24 === 1 ? "hour" : "hours";
+              timeAgoText = timeDiffHours < 24 
+                  ? `${timeDiffHours} ${hoursText} ago` 
+                  : `${timeDiffDays} ${daysText} and ${timeDiffHours % 24} ${hoursText} ago`;
+          }
+
+          // Update the HTML content
+          document.getElementById("time-ago").textContent = timeAgoText;
       })
       .catch(error => {
-        console.error("Error fetching commits:", error);
+          console.error("Error fetching latest commit:", error);
       });
-  }
-  fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      var latestCommitTime = new Date(data[0].commit.author.date);
-      var currentTime = new Date();
-
-      // Calculate the time difference in milliseconds
-      var timeDiffMilliseconds = currentTime - latestCommitTime;
-
-      // Calculate the time difference in hours and days
-      var timeDiffHours = Math.floor(timeDiffMilliseconds / (1000 * 60 * 60));
-      var timeDiffDays = Math.floor(timeDiffHours / 24);
-
-      // Format the time difference based on hours and days
-      var daysText = timeDiffDays === 1 ? "day" : "days";
-      var hoursText = timeDiffHours % 24 === 1 ? "hour" : "hours";
-
-      var timeAgoText = timeDiffHours < 24 ? `${timeDiffHours} ${hoursText} ago` : `${timeDiffDays} ${daysText} and ${timeDiffHours % 24} ${hoursText} ago`;
-
-      // Update the HTML content
-      document.getElementById("time-ago").textContent = timeAgoText;
-    })
-    .catch(error => {
-      console.error("Error fetching latest commit:", error);
-    });
-
 }
-
 
 // ________________________________________________________________________________________
 function openNav() {
