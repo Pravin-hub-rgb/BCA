@@ -814,11 +814,11 @@ print(sum)  # Output: 28 (1 + 2 + 3 + 4 + 5 + 6 + 7 = 28)
 variable_of_mymodule = 99 
 
 def areaOfSquare(side):
-    """Calculate the area of a square."""
+    #Calculate the area of a square
     return side * side
 
 def calculator(a, b, op):
-    """Perform basic arithmetic operations."""
+    #Perform basic arithmetic operations
     if op == 1:
         print("Addition is =", a + b)
     elif op == 2:
@@ -837,20 +837,20 @@ def calculator(a, b, op):
                 <p>Now import it in a separate file and use the functions:</p>
                 <pre>
                     <code>
-# newfile.py 
-from mymodule import *
+# newfile.py
+import mymodule
 
 # Usage example
 side_length = 5
-print("Area of square with side length", side_length, "is", areaOfSquare(side_length))
+print("Area of square with side length", side_length, "is", mymodule.areaOfSquare(side_length))
 
 num1 = 10
 num2 = 5
 operation = 3  # Multiplication
-calculator(num1, num2, operation)
+mymodule.calculator(num1, num2, operation)
 
 # Using the variable_of_mymodule
-print("Value of variable_of_mymodule in newfile.py:", variable_of_mymodule)
+print("Value of variable_of_mymodule in newfile.py:", mymodule.variable_of_mymodule)
                     </code>
                 </pre>
                 <p>If we want to use only one function, we can import it directly:</p>
