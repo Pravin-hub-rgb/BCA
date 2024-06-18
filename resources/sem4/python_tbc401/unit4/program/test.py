@@ -1,4 +1,3 @@
-fptr = open("new.txt","w+")
-fptr.write("Hello from the other side.")
-fptr.seek(0)
-print(fptr.read())
+import pandas as pd
+mySeries = pd.Series({'a':1,'b':2,'c':3,'d':4,'e':5})
+print(max(mySeries))
