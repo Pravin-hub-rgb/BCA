@@ -1,11 +1,3 @@
 import numpy as np
-
-# Create a NumPy array with elements from 1 to 10
-array = np.arange(1, 11)
-
-# Replace all even numbers with 0
-for i in array:
-    if array[i]%2==0:
-        array[i] = 0
-
-print("Modified array:", array)
+arr1 = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
+print(arr1[1:,1:3])
