@@ -63,7 +63,6 @@
             <h2>NumPy</h2>
             <ul>
                 <li>NumPy is an open-source library designed for working with arrays.</li>
-                <li>It was developed in 2005 by Travis Oliphant.</li>
                 <li>The name stands for Numerical Python and it is a critical data science library in Python, with many
                     other libraries depending on it.</li>
                 <li>NumPy is extremely popular because it improves the performance of working with multi-dimensional
@@ -473,6 +472,11 @@ print(ndimarray.shape)
                     <ul>
                         <li>np.array(arr, ndmin=5) creates a new array from arr and ensures it has a minimum of 5
                             dimensions using ndmin=5</li>
+                        <li>By specifying ndmin=5, NumPy adds four additional dimensions at the beginning, each of size
+                            1.</li>
+                        <li>the resulting array has a shape of (1, 1, 1, 1, 3). Each 1 corresponds to a new dimension
+                            added by the ndmin parameter, and the final dimension 3 corresponds to the original array's
+                            length.</li>
                     </ul>
                 </div>
             </div>
@@ -2419,8 +2423,8 @@ Right Join:
                         format for data interchange. CSV files are plain text files that can be created and edited with
                         any text editor.</li>
                     <li>Using the <strong>read_csv</stron> method from Pandas, we can easily create
-                        a DataFrame from a CSV
-                        file. This method offers many options for handling different types of data and file formats.
+                            a DataFrame from a CSV
+                            file. This method offers many options for handling different types of data and file formats.
                     </li>
                     <li>Let's suppose we have a CSV file named <strong>Salary_Data.csv</strong> that
                         contains two columns:
@@ -3205,15 +3209,18 @@ df2 = df.fillna(value=df['Physics'].mean())
     </code>
 </pre>
                 <ul>
-                    <li>The above code, replaces all NaN values in the entire DataFrame df with the mean of the 'Physics' column. This means that if there are NaN values in columns other than 'Physics', they will also be replaced with the mean of the 'Physics' column, which is likely not the intended behavior.</li>
+                    <li>The above code, replaces all NaN values in the entire DataFrame df with the mean of the
+                        'Physics' column. This means that if there are NaN values in columns other than 'Physics', they
+                        will also be replaced with the mean of the 'Physics' column, which is likely not the intended
+                        behavior.</li>
                     <li>If you want to fill NaNs only in the 'Physics' column, you should do:</li>
-                    </ul>
-                    <pre>
+                </ul>
+                <pre>
                         <code>
 df['Physics'] = df['Physics'].fillna(df['Physics'].mean())
                         </code>
                     </pre>
-                    <ul>
+                <ul>
                     <li>The 'bfill' method fills the null values with the next row's values in the same column. For
                         example, if a null value appears in the Physics column of row 2, it will be replaced by the
                         value from the Physics column of row 3.</li>
@@ -3404,7 +3411,8 @@ print(sharad.to_string())
                 <h4>Converting String Data in a Numeric Column to Numeric Format</h4>
                 <ul>
                     <li>If you have a column containing numeric data as strings, you can use the
-                        <strong>to_numeric()</strong> function to convert it to numeric format.</li>
+                        <strong>to_numeric()</strong> function to convert it to numeric format.
+                    </li>
                 </ul>
                 <pre>
                     <code>
