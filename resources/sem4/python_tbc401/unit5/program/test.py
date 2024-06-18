@@ -1,14 +1,12 @@
 
 import matplotlib.pyplot as plt
 
-# Predefined data sets
-data1 = [10, 20, 30, 40, 50]
-data2 = [15, 25, 35, 45, 55]
-data3 = [5, 15, 25, 35, 45]
+# Sample data
+sizes = [30, 20, 15, 35]
+labels = ['A', 'B', 'C', 'D']
+colors = ['gold', 'lightcoral', 'lightskyblue', 'lightgreen']
 
-plt.boxplot([data1, data2, data3], labels=['Data 1', 'Data 2', 'Data 3'])
-plt.xlabel('Data Sets')
-plt.ylabel('Values')
-plt.title('Multiple Box Plots Example')
+plt.pie(sizes, labels=labels, colors=colors)
+# plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.title('Pie Chart Example')
 plt.show()
-              
