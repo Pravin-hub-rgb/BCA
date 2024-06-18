@@ -1,15 +1,11 @@
-import math
-n = int(input("Enter n : "))
-flag = True
-if n < 2:
-    print("Not prime")
-    exit(0)
-else:
-    for i in range(2,int(math.sqrt(n)) + 1):
-        if(n%i==0):
-                flag = False 
-                break
-if(flag):
-    print("Is prime")
-else:
-    print("Not prime")
+import numpy as np
+
+# Create a NumPy array with elements from 1 to 10
+array = np.arange(1, 11)
+
+# Replace all even numbers with 0
+for i in array:
+    if array[i]%2==0:
+        array[i] = 0
+
+print("Modified array:", array)
