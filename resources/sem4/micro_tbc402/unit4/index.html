@@ -79,7 +79,6 @@
                         <br>The "MVI" instruction stands for "Move Immediate," indicating that the data (25H) is moved
                         directly into the specified register (B).
                         <br>Format: MVI [destination], [source]
-                        <br>Example: MVI B, 25H loads the value 25H into register B.
                         <br><strong>Operation:</strong> B &larr; 25H
                         <br><strong>Explanation:</strong> This instruction places the hexadecimal value 25 directly into
                         the B register. The "I" in "MVI" signifies that the operand is immediate, meaning it is provided
@@ -91,7 +90,6 @@
                         <br>The "LXI" instruction stands for "Load Register Pair Immediate," indicating that the data
                         (2000H) is loaded directly into a specified register pair.
                         <br>Format: LXI [register pair], [data]
-                        <br>Example: LXI B, 2000H loads the value 2000H into the B-C register pair.
                         <br><strong>Operation:</strong> B &larr; 20H, C &larr; 00H
                         <br><strong>Explanation:</strong> This instruction loads the immediate 16-bit data (2000H) into
                         the B-C register pair. Here, the higher byte (20H) is loaded into register B, and the lower byte
@@ -103,8 +101,6 @@
                         <br>In this instruction, "M" stands for memory. The memory location is defined by the address
                         pointed to by the H-L register pair.
                         <br>Format: MVI M, [data]
-                        <br>Example: MVI M, 25H moves the immediate value 25H to the memory location addressed by the
-                        H-L pair.
                         <br><strong>Operation:</strong> (HL) &larr; 25H
                         <br><strong>Explanation:</strong> This instruction loads the immediate value 25H into the memory
                         location pointed to by the H-L register pair. For instance, if the H-L pair is pointing to the
@@ -120,7 +116,6 @@
                         <strong>MOV B, C:</strong>
                         <br>This instruction moves the data from register C to register B.
                         <br>Format: MOV [destination], [source]
-                        <br>Example: MOV B, C copies the contents of register C into register B.
                         <br><strong>Operation:</strong> B &larr; C
                         <br><strong>Explanation:</strong> The data in register C is transferred to register B. This
                         operation is useful when you need to copy data between registers without altering the original
@@ -131,8 +126,6 @@
                         <br>This instruction moves the data from the memory location addressed by the H-L register pair
                         to register B.
                         <br>Format: MOV [destination], [source]
-                        <br>Example: MOV B, M copies the contents of the memory location pointed to by the H-L pair into
-                        register B.
                         <br><strong>Operation:</strong> B &larr; (HL)
                         <br><strong>Explanation:</strong> The data in the memory location pointed to by the H-L register
                         pair is transferred to register B. This instruction is useful for accessing data stored in
@@ -143,8 +136,6 @@
                         <br>This instruction moves the data from register C to the memory location addressed by the H-L
                         register pair.
                         <br>Format: MOV [destination], [source]
-                        <br>Example: MOV M, C copies the contents of register C into the memory location pointed to by
-                        the H-L pair.
                         <br><strong>Operation:</strong> (HL) &larr; C
                         <br><strong>Explanation:</strong> The data in register C is transferred to the memory location
                         specified by the H-L register pair. This instruction is useful for storing data from a register
@@ -158,7 +149,6 @@
                         <strong>LDA 2000H:</strong>
                         <br>This instruction loads the accumulator with the data from the memory location 2000H.
                         <br>Format: LDA [address]
-                        <br>Example: LDA 2000H loads the data stored at memory location 2000H into the accumulator.
                         <br><strong>Operation:</strong> A &larr; (2000H)
                         <br><strong>Explanation:</strong> The "LDA" instruction stands for "Load Accumulator." Although
                         the accumulator (A) is an 8-bit register, the address 2000H is 16-bit, indicating the location
@@ -170,7 +160,6 @@
                         <strong>STA 2000H:</strong>
                         <br>This instruction stores the contents of the accumulator into the memory location 2000H.
                         <br>Format: STA [address]
-                        <br>Example: STA 2000H stores the value in the accumulator (A) into the memory location 2000H.
                         <br><strong>Operation:</strong> (2000H) &larr; A
                         <br><strong>Explanation:</strong> The "STA" instruction stands for "Store Accumulator." It takes
                         the data in the accumulator and writes it to the specified memory address. For instance, if the
@@ -182,8 +171,6 @@
                         <br>This instruction loads the accumulator with the contents of the memory location addressed by
                         the B-C register pair.
                         <br>Format: LDAX [register pair]
-                        <br>Example: LDAX B loads the data from the memory location pointed to by the B-C pair into the
-                        accumulator.
                         <br><strong>Operation:</strong> A &larr; (BC)
                         <br><strong>Explanation:</strong> The "LDAX" instruction stands for "Load Accumulator Indirect."
                         It fetches data from the memory address specified by the B-C register pair and loads it into the
@@ -195,8 +182,6 @@
                         <br>This instruction stores the contents of the accumulator into the memory location addressed
                         by the B-C register pair.
                         <br>Format: STAX [register pair]
-                        <br>Example: STAX B stores the value in the accumulator (A) into the memory location pointed to
-                        by the B-C pair.
                         <br><strong>Operation:</strong> (BC) &larr; A
                         <br><strong>Explanation:</strong> The "STAX" instruction stands for "Store Accumulator
                         Indirect." It takes the data in the accumulator and writes it to the memory address specified by
@@ -299,11 +284,37 @@
                         <br><strong>Explanation:</strong> The DCX B instruction decreases the BC register pair by 1,
                         updating the result in the BC register pair.
                     </li>
+                    <li><strong>CMP B (Compare with Register B):</strong>
+                        <br>In microprocessor instructions, the CMP B instruction compares the contents of the
+                        accumulator
+                        with the contents of register B.
+                        <br><strong>Operation:</strong> A - B
+                        <br><strong>Explanation:</strong> This instruction subtracts the contents of register B from the
+                        contents of the accumulator, but the result is not stored. Instead, the flags are updated based
+                        on
+                        the result of the subtraction.
+                        <ul>
+                            <li>If the accumulator is greater than the contents of register B, the carry flag (CY) is
+                                reset (CY = 0)
+                                and the zero flag (Z) is reset (Z = 0).</li>
+                            <li>If the accumulator is equal to the contents of register B, the zero flag (Z) is set (Z =
+                                1).
+                            </li>
+                            <li>If the accumulator is less than the contents of register B, the carry flag (CY) is set
+                                (CY = 1).
+                            </li>
+                        </ul>
+                    </li>
                 </ol>
             </div>
             <div class="in">
                 <h3>Branch Control Group</h3>
-                <ol start="21">
+                <p>The Branch Control Group in the 8085 microprocessor contains instructions that change the sequence of
+                    execution of instructions in a program. These instructions are essential for implementing control
+                    flow constructs such as loops, conditionals, and function calls. The primary function of branch
+                    control instructions is to alter the program counter (PC), which dictates the address of the next
+                    instruction to be executed.</p>
+                <ol start="22">
                     <li>
                         <strong>JNC (Jump if No Carry):</strong>
                         <br>In microprocessor instructions, the condition is checked for the Carry flag (CY). If the CY
@@ -314,11 +325,26 @@
                         specified address or label if the CY flag is not set (indicating no carry occurred during the
                         previous operation). Otherwise, the program continues sequential execution without jumping.
                     </li>
+                    <li>
+                        <strong>RCC (Return on Carry Clear):</strong>
+                        <br>In microprocessor instructions, the condition is checked for the Carry flag (CY). If the CY
+                        flag is not set (no carry occurred), the program returns from the subroutine to the address
+                        stored in the stack.
+                        <br><strong>Operation:</strong> Conditional return from subroutine if CY flag is not set (no
+                        carry occurred).
+                        <br><strong>Explanation:</strong> This instruction checks the Carry flag (CY) and returns from
+                        the subroutine to the address stored in the stack if the CY flag is not set (indicating no carry
+                        occurred during the previous operation). Otherwise, the program continues sequential execution
+                        within the subroutine.
+                    </li>
                 </ol>
             </div>
             <div class="in">
                 <h3>Control Group</h3>
-                <ol start="22">
+                <p>The Control Group in the 8085 microprocessor includes instructions that manage the flow of data and
+                    control within the processor. These instructions are crucial for handling input/output operations,
+                    enabling interrupts, and controlling various aspects of the microprocessor's operation. </p>
+                <ol start="24">
                     <li>
                         <strong>HLT (Halt):</strong>
                         <br>In microprocessor instructions, the HLT instruction is used to halt or stop the execution of
