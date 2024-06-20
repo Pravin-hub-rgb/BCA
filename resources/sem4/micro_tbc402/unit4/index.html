@@ -503,8 +503,6 @@ Memory Location  |   Instruction   |    Comments
                 </ol>
                 <pre>
                     <code>
-ORG 2000H         ; Start of the program
-
 MVI C, 00H        ; Initialize carry register (C) to zero
 MVI A, FFH        ; Load first number (FFH) into accumulator A
 MVI B, FFH        ; Load second number (FFH) into register B
@@ -516,8 +514,6 @@ STA 2051H         ; Store the sum from the accumulator to memory location 2051H
 MOV A, C          ; Move the value of register C (carry) to accumulator A
 STA 2052H         ; Store the carry from the accumulator to memory location 2052H
 HLT               ; Halt the program
-
-END               ; End of the program
                     </code>
                 </pre>
                 <p>After execution of this program, FEH will be stored at 2051H, and the carry 1 will be stored at
@@ -525,19 +521,17 @@ END               ; End of the program
             </div>
             <div class="in">
                 <h3>3- Program to Subtract Two 8-Bit Numbers Without Borrow in 8085</h3>
-                <p>Suppose we have two 8-bit numbers stored in memory locations 4000H and 4001H, and we want to subtract
-                    them without
-                    borrow.</p>
+                <p>Suppose we have two 8-bit numbers, 40H and 30H, and we want to subtract them without borrow.</p>
                 <pre>
-                                <code>
+    <code>
   Memory Location  |   Instruction   |    Comments
 -------------------|-----------------|---------------------------------------------
     3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
     3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
     3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A without borrow
     3005H          |  HLT            |    ; Halt the program
-                                </code>
-                            </pre>
+    </code>
+</pre>
                 <p>Explanation of Instructions:</p>
                 <ul>
                     <li><strong>MVI A, 40H</strong>: Load the first number (40H) into accumulator A.</li>
