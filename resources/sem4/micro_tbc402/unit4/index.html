@@ -544,30 +544,39 @@ HLT               ; Halt the program
 
             <div class="in">
                 <h3>4- Program to Subtract Two 8-Bit Numbers with Borrow in 8085</h3>
-                <p>Suppose we have two 8-bit numbers stored in memory locations 4000H and 4001H, and we want to subtract
-                    them with
-                    borrow.</p>
+                <p>Suppose we have two 8-bit numbers, 30H and 20H where we want to subtract 30H from 20H with borrow (20H - 30H).</p>
                 <pre>
-                                <code>
+    <code>
   Memory Location  |   Instruction   |    Comments
 -------------------|-----------------|---------------------------------------------
-    3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
-    3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
-    3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A with borrow
-    3005H          |  MOV C, A       |    ; Move the result (difference) to register C
-    3006H          |  SBB A          |    ; Subtract borrow from accumulator A
+    3000H          |  MVI A, 20H     |    ; Load 20H into accumulator A
+    3002H          |  MVI B, 30H     |    ; Load 30H into register B
+    3004H          |  SUB B          |    ; Subtract B from A with borrow
+    3005H          |  MOV C, A       |    ; Move result to register C
+    3006H          |  SBB A          |    ; Subtract borrow from A
     3007H          |  HLT            |    ; Halt the program
-                                </code>
-                            </pre>
-                <p>Explanation of Instructions:</p>
+    </code>
+</pre>
+                <p><strong>Explanation:</strong></p>
                 <ul>
-                    <li><strong>MVI A, 40H</strong>: Load the first number (40H) into accumulator A.</li>
-                    <li><strong>MVI B, 30H</strong>: Load the second number (30H) into register B.</li>
-                    <li><strong>SUB B</strong>: Subtract the content of register B from accumulator A with borrow.</li>
-                    <li><strong>MOV C, A</strong>: Move the result (difference) to register C.</li>
-                    <li><strong>SBB A</strong>: Subtract borrow from accumulator A.</li>
-                    <li><strong>HLT</strong>: Halt the execution of the program.</li>
+                    <li><strong>MVI A, 20H</strong>: Loads the first number (20H) into accumulator A.</li>
+                    <li><strong>MVI B, 30H</strong>: Loads the second number (30H) into register B.</li>
+                    <li><strong>SUB B</strong>: Subtracts B (30H) from A (20H) with borrow.</li>
                 </ul>
+                <p>Now, let's perform the binary subtraction:</p>
+                <pre>
+  A (Accumulator)  |  B (Register B)  |  Result (A - B with borrow)  |  Carry (CY)  
+-------------------|------------------|-----------------------------|---------------
+    0010 0000      |    0011 0000     |          1111 0000           |       1       
+</pre>
+                <p>After the subtraction, the result (1111 0000) is stored in accumulator A, and the carry flag (CY) is
+                    set to 1 indicating a borrow.</p>
+                <ul>
+                    <li><strong>MOV C, A</strong>: Moves the result (1111 0000) from accumulator A to register C.</li>
+                    <li><strong>SBB A</strong>: Subtracts the borrow (1) from A (1111 0000 - 1 = 1110 1111).</li>
+                    <li><strong>HLT</strong>: Halts the program.</li>
+                </ul>
+                <p>After executing this program, the final result in accumulator A is EFH (1110 1111 in binary).</p>
             </div>
 
             <div class="in">
