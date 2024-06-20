@@ -483,45 +483,44 @@ Memory Location  |   Instruction   |    Comments
             <div class="in">
                 <h3>2. Write a Program for Addition of Two 8-bit Hexadecimal Numbers and Store the Sum and Carry at
                     Memory Locations 2051H and 2052H Respectively</h3>
-                <p>Numbers are: 2040H &larr; 5AH and 2041H &larr; ABH.</p>
-                <p>So basically, 5AH is stored at memory location 2040H and ABH is stored at memory location 2041H.
-                    <br>We know 5AH + ABH = 105H. Here, 1 is the carry, so 1 will be stored at memory location 2052H,
-                    and 05H will be stored at 2051H.
-                </p>
+                <p>Numbers are: FFH and FFH.</p>
+                <p>So basically, FFH is added to FFH, resulting in 1FEH. Since there is a carry, 1 is stored as the
+                    carry, and FEH is stored as the sum.</p>
                 <p>The basic steps involved for this program are:</p>
                 <ol>
                     <li>Start</li>
-                    <li>Initialize the carry register as zero (we will use general register C as the carry register, so
-                        C = 0)</li>
-                    <li>Get the 1st and 2nd numbers</li>
+                    <li>Initialize the carry register as zero (C = 0)</li>
+                    <li>Get the first and second numbers</li>
                     <li>Add them</li>
                     <li>Check for the carry
                         <ul>
-                            <li>If there is a carry, then carry = carry + 1</li>
+                            <li>If there is a carry, then increment the carry register</li>
                         </ul>
                     </li>
                     <li>Store the sum</li>
-                    <li>Store the carry if there is.</li>
+                    <li>Store the carry if there is one</li>
                     <li>Stop</li>
                 </ol>
                 <pre>
                     <code>
-Memory Location  |   Instruction   |    Comments
------------------|-----------------|---------------------------------------------
-  2000H          |  MVI C, 00H     |    Initialize register C (carry register) to 00H
-  2002H          |  LXI H, 2040H   |    Load HL register pair with address 2040H
-  2005H          |  MOV A, M       |    Move the value at memory location 2040H to accumulator A
-  2006H          |  INX H          |    Increment HL to point to 2041H
-  2007H          |  ADD M          |    Add the value at memory location 2041H to accumulator A
-  2008H          |  JNC L1         |    Jump to label L1 if no carry (if CY flag is not set)
-  200BH          |  INR C          |    Increment register C (carry) by 1 if there is a carry
-  200CH          |  L1: STA 2051H  |    Store the sum from the accumulator to memory location 2051H
-  200FH          |  MOV A, C       |    Move the value of register C (carry) to accumulator A
-  2010H          |  STA 2052H      |    Store the carry from the accumulator to memory location 2052H
-  2013H          |  HLT            |    Halt the program
+ORG 2000H         ; Start of the program
+
+MVI C, 00H        ; Initialize carry register (C) to zero
+MVI A, FFH        ; Load first number (FFH) into accumulator A
+MVI B, FFH        ; Load second number (FFH) into register B
+ADD B             ; Add the contents of register B to accumulator A
+JNC NO_CARRY      ; Jump if no carry (CY flag is not set)
+INR C             ; Increment register C (carry) by 1 if there is a carry
+NO_CARRY:         ; Label for no carry condition
+STA 2051H         ; Store the sum from the accumulator to memory location 2051H
+MOV A, C          ; Move the value of register C (carry) to accumulator A
+STA 2052H         ; Store the carry from the accumulator to memory location 2052H
+HLT               ; Halt the program
+
+END               ; End of the program
                     </code>
                 </pre>
-                <p>After execution of this program, 05H will be stored at 2051H, and the carry 1 will be stored at
+                <p>After execution of this program, FEH will be stored at 2051H, and the carry 1 will be stored at
                     2052H.</p>
             </div>
             <div class="in">
@@ -531,8 +530,8 @@ Memory Location  |   Instruction   |    Comments
                     borrow.</p>
                 <pre>
                                 <code>
-Memory Location  |   Instruction   |    Comments
------------------|-----------------|---------------------------------------------
+  Memory Location  |   Instruction   |    Comments
+-------------------|-----------------|---------------------------------------------
     3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
     3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
     3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A without borrow
@@ -556,8 +555,8 @@ Memory Location  |   Instruction   |    Comments
                     borrow.</p>
                 <pre>
                                 <code>
-Memory Location  |   Instruction   |    Comments
------------------|-----------------|---------------------------------------------
+  Memory Location  |   Instruction   |    Comments
+-------------------|-----------------|---------------------------------------------
     3000H          |  MVI A, 40H     |    ; Load first number (40H) into accumulator A
     3002H          |  MVI B, 30H     |    ; Load second number (30H) into register B
     3004H          |  SUB B          |    ; Subtract the content of register B from accumulator A with borrow
