@@ -285,24 +285,65 @@
                     and Port 3. Each port consists of 8 pins, and they function as bidirectional I/O ports, meaning they
                     can operate as both input and output ports. Let’s discuss the function of each pin:</li>
                 <ul>
-                    <li><b>Port 0 (P0.0 to P0.7):</b> Port 0 serves as an 8-bit bidirectional I/O port. It can also
+                    <li><strong>Port 0 (P0.0 to P0.7):</strong> Port 0 serves as an 8-bit bidirectional I/O port. It can
+                        also
                         function as a multiplexed address and data bus during external memory access.</li>
-                    <li><b>Port 1 (P1.0 to P1.7):</b> Port 1 is an 8-bit bidirectional I/O port. Unlike Port 0, it does
+                    <li><strong>Port 1 (P1.0 to P1.7):</strong> Port 1 is an 8-bit bidirectional I/O port. Unlike Port
+                        0, it does
                         not have any dual function, making it solely an I/O port.</li>
-                    <li><b>Port 2 (P2.0 to P2.7):</b> Port 2 serves as an 8-bit bidirectional I/O port. It can also be
+                    <li><strong>Port 2 (P2.0 to P2.7):</strong> Port 2 serves as an 8-bit bidirectional I/O port. It can
+                        also be
                         used as the higher-order address bus during external memory access, in combination with Port 0.
                     </li>
-                    <li><b>Port 3 (P3.0 to P3.7):</b> Port 3 is an 8-bit bidirectional I/O port with additional
+                    <li><strong>Port 3 (P3.0 to P3.7):</strong> Port 3 is an 8-bit bidirectional I/O port with
+                        additional
                         functionalities. Each pin can be used for specific alternate functions like serial
                         communication, external interrupts, and timer/counter inputs.</li>
-                    <li><b>Pin 9 (RST):</b> This pin is used to reset the microcontroller. A high signal on this pin for
+                    <li><strong>Pin 9 (RST):</strong> This pin is used to reset the microcontroller. A high signal on
+                        this pin for
                         at least two machine cycles will reset the microcontroller.</li>
-                    <li><b>Pin 18 and 19 (XTAL1 and XTAL2):</b> These pins are connected to an external crystal
+                    <li><strong>Pin 18 and 19 (XTAL1 and XTAL2):</strong> These pins are connected to an external
+                        crystal
                         oscillator to provide the clock frequency for the microcontroller’s operation.</li>
-                    <li><b>Pin 20 (GND):</b> This pin is connected to the ground of the power supply.</li>
-                    <li><b>Pin 31 (EA/ VPP):</b> External Access enable pin. It should be connected to Vcc for internal
-                        program memory access.</li>
-                    <li><b>Pin 40 (Vcc):</b> This pin is connected to the positive supply voltage.</li>
+                    <li><strong>Pin 20 (GND):</strong> This pin is connected to the ground of the power supply.</li>
+                    <li><strong>Pin 31 (<u style="text-decoration: overline;">EA</u>/ VPP):</strong>
+                        <ul>
+                            <li><strong><u style="text-decoration: overline;">EA</u> (External Access):</strong> Allows
+                                the 8051 to access external memory for
+                                program execution. For example, if a program is too large to fit into the internal
+                                memory of the microcontroller, <u style="text-decoration: overline;">EA</u> enables it to fetch instructions from an
+                                    external
+                                    memory chip.</li>
+                            <li><strong>VPP (Programming Voltage):</strong> Provides the necessary voltage for
+                                programming the microcontroller's memory. When programming the 8051, VPP ensures that
+                                the correct voltage levels are applied to write data into the memory cells.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pin 40 (Vcc):</strong> This pin is connected to the positive supply voltage.</li>
+                    <li><strong>ALE/<u style="text-decoration: overline;">PROG</u>:</strong>
+                        <ul>
+                            <li><strong>ALE (Address Latch Enable):</strong> ALE is used to latch the address from the
+                                data bus when interfacing with external memory or devices. For example, when accessing a
+                                memory location, ALE ensures that the correct address is latched for data retrieval or
+                                storage.</li>
+                            <li><strong><u style="text-decoration: overline;">PROG</u> (Program):</strong> <u
+                                    style="text-decoration: overline;">PROG</u> is involved in programming the 8051
+                                microcontroller. It is used during the programming process to enable the microcontroller
+                                to receive and store program instructions. For instance, when uploading a new program to
+                                the microcontroller, PROG enables the device to enter programming mode and accept the
+                                new instructions.</li>
+                        </ul>
+                    </li>
+                    <li><strong><u style="text-decoration: overline;">PSEN</u>:</strong>
+                        <ul>
+                            <li>PSEN is a signal in the 8051 microcontroller that enables the program memory for reading
+                                instructions.</li>
+                            <li><strong>Example:</strong> When the microcontroller needs to fetch an instruction from
+                                its program memory, it activates the PSEN signal to enable the memory for reading. This
+                                allows the microcontroller to retrieve and execute the next instruction in the program
+                                flow.</li>
+                        </ul>
+                    </li>
                 </ul>
             </ul>
         </div>
@@ -332,21 +373,24 @@
                     unit handles the address and data lines. The microcontroller has four I/O ports (Port 0, Port 1,
                     Port 2, and Port 3) with multiple functionalities:</li>
                 <ul>
-                    <li><b>Port 0:</b> It serves as an 8-bit bidirectional I/O port and also as a multiplexed address
+                    <li><strong>Port 0:</strong> It serves as an 8-bit bidirectional I/O port and also as a multiplexed
+                        address
                         and data bus (AD0 to AD7) for external memory interfacing.</li>
-                    <li><b>Port 1:</b> It is an 8-bit bidirectional I/O port without any additional functions.</li>
-                    <li><b>Port 2:</b> It serves as an 8-bit bidirectional I/O port and also provides the higher-order
+                    <li><strong>Port 1:</strong> It is an 8-bit bidirectional I/O port without any additional functions.
+                    </li>
+                    <li><strong>Port 2:</strong> It serves as an 8-bit bidirectional I/O port and also provides the
+                        higher-order
                         address bus (A8 to A15) for external memory interfacing.</li>
-                    <li><b>Port 3:</b> It is an 8-bit bidirectional I/O port with additional functionalities:
+                    <li><strong>Port 3:</strong> It is an 8-bit bidirectional I/O port with additional functionalities:
                         <ul>
-                            <li><b>Pin 3.0 (RXD):</b> Serial input (receive data)</li>
-                            <li><b>Pin 3.1 (TXD):</b> Serial output (transmit data)</li>
-                            <li><b>Pin 3.2 (INT0):</b> External interrupt 0</li>
-                            <li><b>Pin 3.3 (INT1):</b> External interrupt 1</li>
-                            <li><b>Pin 3.4 (T0):</b> Timer 0 external input</li>
-                            <li><b>Pin 3.5 (T1):</b> Timer 1 external input</li>
-                            <li><b>Pin 3.6 (WR):</b> External memory write strobe</li>
-                            <li><b>Pin 3.7 (RD):</b> External memory read strobe</li>
+                            <li><strong>Pin 3.0 (RXD):</strong> Serial input (receive data)</li>
+                            <li><strong>Pin 3.1 (TXD):</strong> Serial output (transmit data)</li>
+                            <li><strong>Pin 3.2 (INT0):</strong> External interrupt 0</li>
+                            <li><strong>Pin 3.3 (INT1):</strong> External interrupt 1</li>
+                            <li><strong>Pin 3.4 (T0):</strong> Timer 0 external input</li>
+                            <li><strong>Pin 3.5 (T1):</strong> Timer 1 external input</li>
+                            <li><strong>Pin 3.6 (WR):</strong> External memory write strobe</li>
+                            <li><strong>Pin 3.7 (RD):</strong> External memory read strobe</li>
                         </ul>
                     </li>
                 </ul>
