@@ -289,21 +289,58 @@
                         also
                         function as a multiplexed address and data bus during external memory access.
                         <ul>
-                            <li><strong>Input Function:</strong> When configured as an input port, Port 0 can receive data from external devices. For example, if a sensor is connected to Port 0, it can read sensor values.</li>
-                            <li><strong>Output Function:</strong> When configured as an output port, Port 0 can send data to external devices. For instance, if an LED is connected to Port 0, it can control the LED by sending signals.</li>
-                            <li><strong>General-Purpose I/O:</strong> Port 0 can also be used for general-purpose input/output operations. For example, it can be used to interface with buttons for input or drive motors for output.</li>
-                        </ul></li>
+                            <li><strong>Input Function:</strong> When configured as an input port, Port 0 can receive
+                                data from external devices. For example, if a sensor is connected to Port 0, it can read
+                                sensor values.</li>
+                            <li><strong>Output Function:</strong> When configured as an output port, Port 0 can send
+                                data to external devices. For instance, if an LED is connected to Port 0, it can control
+                                the LED by sending signals.</li>
+                            <li><strong>General-Purpose I/O:</strong> Port 0 can also be used for general-purpose
+                                input/output operations. For example, it can be used to interface with buttons for input
+                                or drive motors for output.</li>
+                        </ul>
+                    </li>
                     <li><strong>Port 1 (P1.0 to P1.7):</strong> Port 1 is an 8-bit bidirectional I/O port. Unlike Port
                         0, it does
-                        not have any dual function, making it solely an I/O port.</li>
-                    <li><strong>Port 2 (P2.0 to P2.7):</strong> Port 2 serves as an 8-bit bidirectional I/O port. It can
-                        also be
-                        used as the higher-order address bus during external memory access, in combination with Port 0.
+                        not have any dual function, making it solely an I/O port.
+
+                        <ul>
+                            <li>The Port 1 pin of the 8051 microcontroller is a general-purpose I/O (Input/Output) port
+                                used for connecting external devices and peripherals.</li>
+                            <li><strong>Input:</strong> It can be configured to read digital signals from external
+                                sensors, switches, or other devices. For example, a button connected to Port 1 can be
+                                used to input user commands.</li>
+                            <li><strong>Output:</strong> It can also be used to send digital signals to control external
+                                devices such as LEDs, relays, or displays. For instance, connecting an LED to Port 1
+                                allows the microcontroller to turn the LED on or off.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Port 2 (P2.0 to P2.7):</strong>The Port 2 pin on the 8051 microcontroller is a
+                        bidirectional I/O port that can be used for various purposes.
+                        <ul>
+                            <li><strong>Input:</strong> When configured as an input, Port 2 can be used to read data
+                                from external devices or sensors connected to it.</li>
+                            <li><strong>Output:</strong> When configured as an output, Port 2 can send data or control
+                                signals to external devices or components.</li>
+                            <li><strong>Communication:</strong> Port 2 can also be used for communication purposes, such
+                                as interfacing with other microcontrollers, sensors, or communication modules.</li>
+                        </ul>
                     </li>
                     <li><strong>Port 3 (P3.0 to P3.7):</strong> Port 3 is an 8-bit bidirectional I/O port with
                         additional
                         functionalities. Each pin can be used for specific alternate functions like serial
-                        communication, external interrupts, and timer/counter inputs.</li>
+                        communication, external interrupts, and timer/counter inputs.
+                        <ul>
+                            <li>The Port 3 pin of the 8051 microcontroller is a versatile I/O (Input/Output) port that
+                                can be used for various purposes.</li>
+                            <li>It can function as a general-purpose I/O port, allowing you to connect external devices
+                                such as sensors, LEDs, or switches for input and output operations.</li>
+                            <li>Some pins within Port 3 have additional functions such as UART (Universal Asynchronous
+                                Receiver-Transmitter) communication for serial data transfer.</li>
+                            <li>Port 3 pins may also be used for interfacing with external memory or other peripherals,
+                                depending on the specific requirements of your project.</li>
+                        </ul>
+                    </li>
                     <li><strong>Pin 9 (RST):</strong> This pin is used to reset the microcontroller. A high signal on
                         this pin for
                         at least two machine cycles will reset the microcontroller.</li>
@@ -316,9 +353,10 @@
                             <li><strong><u style="text-decoration: overline;">EA</u> (External Access):</strong> Allows
                                 the 8051 to access external memory for
                                 program execution. For example, if a program is too large to fit into the internal
-                                memory of the microcontroller, <u style="text-decoration: overline;">EA</u> enables it to fetch instructions from an
-                                    external
-                                    memory chip.</li>
+                                memory of the microcontroller, <u style="text-decoration: overline;">EA</u> enables it
+                                to fetch instructions from an
+                                external
+                                memory chip.</li>
                             <li><strong>VPP (Programming Voltage):</strong> Provides the necessary voltage for
                                 programming the microcontroller's memory. When programming the 8051, VPP ensures that
                                 the correct voltage levels are applied to write data into the memory cells.</li>
@@ -585,10 +623,10 @@
                     <li>
                         Example: Using general-purpose flag F0
                         <pre>
-            ; Set flag F0
-            SETB PSW.5
-            ; Clear flag F0
-            CLR PSW.5
+; Set flag F0
+SETB PSW.5
+; Clear flag F0
+CLR PSW.5
                         </pre>
                     </li>
                 </ul>
@@ -619,45 +657,24 @@
                 using the IE and IP registers.</p>
             <div class="in">
                 <h3>Types of Interrupts in 8051:</h3>
-                <p>The 8051 microcontroller supports five interrupts, categorized into hardware and software interrupts:
-                </p>
+                <p>Interrupts in the 8051 microcontroller help manage tasks efficiently.</p>
                 <ul>
-                    <li>Hardware Interrupts:
-                        <ul>
-                            <li>INT0: Triggered by an external signal on the INT0 pin.</li>
-                            <li>INT1: Triggered similarly by an external signal on the INT1 pin.</li>
-                        </ul>
-                    </li>
-                    <li>Software Interrupts:
-                        <ul>
-                            <li>TF0 and TF1: Timer overflow interrupts associated with Timer 0 and Timer 1,
-                                respectively.
-                                RI and TI: Serial communication interrupts related to Receive Interrupt (RI) and
-                                Transmit Interrupt (TI).</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="in">
-                <h3>Vector Address and Priority Management:</h3>
-                <p>Each interrupt in the 8051 microcontroller is associated with a vector address, which determines the
-                    location of the Interrupt Service Routine (ISR) in memory. The priority of interrupts is crucial for
-                    handling multiple simultaneous events efficiently:</p>
-
-                <ul>
-                    <li>Priority Order:
-                        <ol>
-                            <li>INT0 (Highest Priority)
-                            </li>
-                            <li>TF0 (Timer 0 Overflow)
-
-                            </li>
-                            <li>INT1 (Hardware Interrupt 1)</li>
-                            <li>TF1 (Timer 1 Overflow)
-                            </li>
-                            <li>Serial Communication (RI/TI) (Lowest Priority)</li>
-                        </ol>
-                    </li>
+                    <li><strong>Hardware Interrupts:</strong> These interrupts are triggered by external hardware events
+                        connected to the microcontroller.</li>
+                    <ul>
+                        <li>Example: Imagine an 8051 microcontroller used in a security system. When a motion sensor
+                            connected to the microcontroller detects movement, it sends a signal to trigger a hardware
+                            interrupt. The microcontroller can then respond immediately to handle the security event,
+                            such as sounding an alarm or capturing images.</li>
+                    </ul>
+                    <li><strong>Software Interrupts:</strong> These interrupts are initiated by software instructions
+                        within the program running on the microcontroller.</li>
+                    <ul>
+                        <li>Example: In an embedded system application, the software may need to perform periodic tasks
+                            such as updating a display or processing user inputs. A software interrupt can be programmed
+                            to occur at specific intervals to trigger these tasks. For instance, a software timer
+                            interrupt can be set up to update a real-time clock display every second.</li>
+                    </ul>
                 </ul>
             </div>
             <div class="in">
@@ -709,8 +726,6 @@
             <li><a href="https://youtu.be/TElgHiPcVU8?si=RZUyj-FC_iA7AT4t" target="_blank">Pin Diagram of 8051
                     Mircocontroller &neArr;</a></li>
             <li><a href="https://youtu.be/I_qFGUTBYek?si=p0nLuZuTHwcnonIQ" target="_blank">Block Diagram of 8051
-                    Microcontroller &neArr;</a></li>
-            <li><a href="https://youtu.be/x4eBYZ52Vgo?si=PIb7aKDm0Vv9S1hH" target="_blank">Interrupts in 8051
                     Microcontroller &neArr;</a></li>
         </ul>
     </div>
