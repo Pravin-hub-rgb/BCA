@@ -544,7 +544,8 @@ HLT               ; Halt the program
 
             <div class="in">
                 <h3>4- Program to Subtract Two 8-Bit Numbers with Borrow in 8085</h3>
-                <p>Suppose we have two 8-bit numbers, 30H and 20H where we want to subtract 30H from 20H with borrow (20H - 30H).</p>
+                <p>Suppose we have two 8-bit numbers, 30H and 20H where we want to subtract 30H from 20H with borrow
+                    (20H - 30H).</p>
                 <pre>
     <code>
   Memory Location  |   Instruction   |    Comments
@@ -580,17 +581,11 @@ HLT               ; Halt the program
             </div>
 
             <div class="in">
-                <h3>5- Write a Program for Addition of Two 16-bit Hexadecimal Numbers and Store the Result at Memory
-                    Location
-                    3050H.</h3>
-                <p>Suppose the first 16-bit number is 2A75H and the second 16-bit number is B42FH. The addition of these
-                    two numbers
-                    will be 2A75H + B42FH = DCA4H.
-                    <br>We start our program from the memory location 3000H, so 3000H will be the starting memory
-                    location.
-                </p>
+                <h3>5- Program to Add Two 16-bit Hexadecimal Numbers and Store the Result at Memory Location 3050H</h3>
+                <p>Suppose we have two 16-bit numbers: 2A75H and B42FH. We want to add these numbers and store the
+                    result at memory location 3050H.</p>
                 <pre>
-                                <code>
+    <code>
 Memory Location  |   Instruction   |    Comments
 -----------------|-----------------|---------------------------------------------
     3000H        |  MVI H, 2AH     |    ; Load high byte of first number (2A75H) into register H
@@ -605,24 +600,26 @@ Memory Location  |   Instruction   |    Comments
     300DH        |  MOV H, A       |    ; Move the sum in accumulator A to register H (high byte)
     300EH        |  STA 3050H      |    ; Store the 16-bit sum from registers H and L at memory location 3050H
     3011H        |  HLT            |    ; Halt the program
-                                </code>
-                            </pre>
-                <p>Explanation of Instructions:</p>
+    </code>
+</pre>
+                <p><strong>Explanation of Instructions:</strong></p>
                 <ul>
-                    <li><strong>MVI H, 2AH</strong>: Load the high byte of the first number (2A75H) into register H.
-                    </li>
-                    <li><strong>MVI L, 75H</strong>: Load the low byte of the first number into register L.</li>
-                    <li><strong>MVI D, B4H</strong>: Load the high byte of the second number (B42FH) into register D.
-                    </li>
-                    <li><strong>MVI E, 2FH</strong>: Load the low byte of the second number into register E.</li>
-                    <li><strong>MOV A, L</strong>: Move the low byte of the first number to accumulator A.</li>
-                    <li><strong>ADD E</strong>: Add the low byte of the second number to accumulator A.</li>
-                    <li><strong>MOV L, A</strong>: Move the sum in accumulator A to register L (low byte).</li>
-                    <li><strong>MOV A, H</strong>: Move the high byte of the first number to accumulator A.</li>
-                    <li><strong>ADC D</strong>: Add the high byte of the second number to accumulator A with carry.</li>
-                    <li><strong>MOV H, A</strong>: Move the sum in accumulator A to register H (high byte).</li>
-                    <li><strong>STA 3050H</strong>: Store the 16-bit sum from registers H and L at memory location
-                        3050H.</li>
+                    <li><strong>MVI H, 2AH</strong>: Load the high byte (2A) of the first number (2A75H) into register
+                        H.</li>
+                    <li><strong>MVI L, 75H</strong>: Load the low byte (75) of the first number into register L.</li>
+                    <li><strong>MVI D, B4H</strong>: Load the high byte (B4) of the second number (B42FH) into register
+                        D.</li>
+                    <li><strong>MVI E, 2FH</strong>: Load the low byte (2F) of the second number into register E.</li>
+                    <li><strong>MOV A, L</strong>: Move the low byte of the first number (75) to accumulator A.</li>
+                    <li><strong>ADD E</strong>: Add the low byte of the second number (2F) to accumulator A (resulting
+                        in 75 + 2F = A4).</li>
+                    <li><strong>MOV L, A</strong>: Move the sum (A4) in accumulator A to register L (low byte).</li>
+                    <li><strong>MOV A, H</strong>: Move the high byte (2A) of the first number to accumulator A.</li>
+                    <li><strong>ADC D</strong>: Add the high byte (B4) of the second number to accumulator A with carry
+                        (resulting in 2A + B4 + 1 (carry) = D9).</li>
+                    <li><strong>MOV H, A</strong>: Move the sum (D9) in accumulator A to register H (high byte).</li>
+                    <li><strong>STA 3050H</strong>: Store the 16-bit sum (D9A4H) from registers H and L at memory
+                        location 3050H.</li>
                     <li><strong>HLT</strong>: Halt the execution of the program.</li>
                 </ul>
             </div>
