@@ -873,7 +873,8 @@ regularCounter(); // Outputs: Regular Count: 1
                 <li><strong>$_GET:</strong> This variable is used to collect data from HTML forms using the GET method.
                     The data is sent as part of the URL, making it visible in the browser's address bar. It is suitable
                     for non-sensitive information and when bookmarking or sharing the URL is needed.</li>
-                    <li><strong>$_REQUEST:</strong> This variable contains the contents of $_GET, $_POST, and $_COOKIE. It is used to collect data from multiple sources in a single variable.</li>
+                <li><strong>$_REQUEST:</strong> This variable contains the contents of $_GET, $_POST, and $_COOKIE. It
+                    is used to collect data from multiple sources in a single variable.</li>
                 <li><strong>$_COOKIE:</strong> This variable is used to collect data stored in cookies. Cookies are
                     small files stored on the client's computer that are sent to the server with each HTTP request.</li>
                 <li><strong>$_SESSION:</strong> This variable is used to store data that persists across multiple pages.
@@ -915,21 +916,24 @@ echo "Hello, $name!";
 
             <div class="in">
                 <h3>Example 2: Using $_GET</h3>
-                <p>This example demonstrates how to use the $_GET variable to collect data from a URL.</p>
+                <p>This example demonstrates how to use the $_GET variable to collect data from a form.</p>
                 <pre>
                     <code>
-&lt;!-- link.html file --&gt; 
-&lt;!DOCTYPE html&gt; 
+&lt;!-- form.html file --&gt; 
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-    &lt;body&gt; 
-        &lt;a href="get_handler.php?name=John"&gt;Click here to send your name&lt;/a&gt;
+    &lt;body&gt;
+        &lt;form action="get_handler.php" method="get"&gt;
+            Name: &lt;input type="text" name="name"&gt;
+            &lt;input type="submit" value="Submit"&gt;
+        &lt;/form&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</code>
-</pre>
+                    </code>
+                </pre>
 
                 <pre>
-                <code>
+                    <code>
 &lt;?php
 // get_handler.php
 $name = $_GET['name'];
@@ -937,6 +941,7 @@ echo "Hello, $name!";
 ?>
                 </code>
             </pre>
+
             </div>
 
             <div class="in">
@@ -1180,13 +1185,61 @@ mysqli_close($conn);
                     </li>
                 </ul>
             </div>
+
+            <div class="in">
+                <h3>PHP MySQL Database Connectivity</h3>
+                <p>PHP allows you to connect to a MySQL database using the <strong>mysqli_connect()</strong> function.
+                </p>
+
+                <h3>Steps to Connect to MySQL Database in PHP</h3>
+                <ol>
+                    <li><strong>Set Database Credentials:</strong> Define variables for hostname, username, password,
+                        and database name.</li>
+                    <li><strong>Establish Connection:</strong> Use <strong>mysqli_connect()</strong> function to
+                        establish a
+                        connection to the MySQL database.</li>
+                    <li><strong>Check Connection:</strong> Verify if the connection was successful using an
+                        <strong>if</strong> statement.
+                    </li>
+                    <li><strong>Perform Database Operations:</strong> Once connected, you can execute SQL queries to
+                        perform various database operations.</li>
+                    <li><strong>Close Connection:</strong> After completing the database operations, close the
+                        connection using <code>mysqli_close()</code> function to free up resources.</li>
+                </ol>
+
+                <h3>PHP MySQL Database Connectivity Example</h3>
+                <p><strong>Example:</strong></p>
+                <pre>
+                    <code>
+&lt;?php
+$host = 'localhost:3306';
+$user = 'root';
+$pass = 'your_password';
+$dbname = 'your_database';
+
+// Establishing the connection
+$conn = mysqli_connect($host, $user, $pass, $dbname);
+
+if (!$conn) {
+    die('Could not connect: ' . mysqli_connect_error());
+}
+echo 'Connected successfully&lt;br/&gt;';
+
+// Perform database operations here
+
+// Closing the connection
+mysqli_close($conn);
+?>
+                </code>
+            </pre>
+            </div>
             <div class="in">
                 <h3>PHP MySQL Create Database</h3>
-                <p>Since PHP 4.3, the <code>mysql_create_db()</code> function is deprecated. Now it is recommended to
+                <p>Since PHP 4.3, the <strong>mysql_create_db()</strong> function is deprecated. Now it is recommended to
                     use one of the two alternatives:</p>
                 <ul>
-                    <li><code>mysqli_query()</code></li>
-                    <li><code>PDO::__query()</code></li>
+                    <li><strong>mysqli_query()</strong></li>
+                    <li><strong>PDO::__query()</strong></li>
                 </ul>
 
                 <h3>PHP MySQLi Create Database Example</h3>
@@ -1267,53 +1320,6 @@ mysqli_close($conn);
                         This line closes the database connection that was previously opened.
                     </li>
                 </ul>
-            </div>
-            <div class="in">
-                <h3>PHP MySQL Database Connectivity</h3>
-                <p>PHP allows you to connect to a MySQL database using the <strong>mysqli_connect()</strong> function.
-                </p>
-
-                <h3>Steps to Connect to MySQL Database in PHP</h3>
-                <ol>
-                    <li><strong>Set Database Credentials:</strong> Define variables for hostname, username, password,
-                        and database name.</li>
-                    <li><strong>Establish Connection:</strong> Use <strong>mysqli_connect()</strong> function to
-                        establish a
-                        connection to the MySQL database.</li>
-                    <li><strong>Check Connection:</strong> Verify if the connection was successful using an
-                        <strong>if</strong> statement.
-                    </li>
-                    <li><strong>Perform Database Operations:</strong> Once connected, you can execute SQL queries to
-                        perform various database operations.</li>
-                    <li><strong>Close Connection:</strong> After completing the database operations, close the
-                        connection using <code>mysqli_close()</code> function to free up resources.</li>
-                </ol>
-
-                <h3>PHP MySQL Database Connectivity Example</h3>
-                <p><strong>Example:</strong></p>
-                <pre>
-                    <code>
-&lt;?php
-$host = 'localhost:3306';
-$user = 'root';
-$pass = 'your_password';
-$dbname = 'your_database';
-
-// Establishing the connection
-$conn = mysqli_connect($host, $user, $pass, $dbname);
-
-if (!$conn) {
-    die('Could not connect: ' . mysqli_connect_error());
-}
-echo 'Connected successfully&lt;br/&gt;';
-
-// Perform database operations here
-
-// Closing the connection
-mysqli_close($conn);
-?>
-                </code>
-            </pre>
             </div>
             <div class="in">
                 <h3>PHP MySQL Create Table</h3>
