@@ -569,6 +569,8 @@ echo $colors[1]; // Outputs: Green
 echo $colors[2]; // Outputs: Blue
             </code>
         </pre>
+            </div>
+            <div class="in">
 
                 <h3>2. Associative Arrays</h3>
                 <p>An associative array stores elements with named keys. Elements are accessed using their keys.</p>
@@ -580,11 +582,14 @@ echo $person["age"]; // Outputs: 30
 echo $person["city"]; // Outputs: New York
             </code>
         </pre>
-
+            </div>
+            <div class="in">
                 <h3>3. Multidimensional Arrays</h3>
-                <p>A multidimensional array contains one or more arrays. It is used to store arrays in an array.</p>
+                <p>A multidimensional array contains one or more arrays. It is used to store arrays within an array.</p>
+
+                <h4>Associative Array Example:</h4>
                 <pre>
-                <code>
+        <code>
 $students = array(
     array("name" => "John", "age" => 20),
     array("name" => "Jane", "age" => 22),
@@ -592,8 +597,22 @@ $students = array(
 );
 echo $students[0]["name"]; // Outputs: John
 echo $students[1]["age"]; // Outputs: 22
-            </code>
+        </code>
         </pre>
+
+                <h4>Indexed Array Example:</h4>
+                <pre>
+        <code>
+$students = array(
+    array("John", 20),
+    array("Jane", 22),
+    array("Doe", 25)
+);
+echo $students[0][0]; // Outputs: John
+echo $students[1][1]; // Outputs: 22
+        </code>
+        </pre>
+
             </div>
             <h3>Using Array Functions</h3>
             <p>PHP provides built-in functions to work with arrays, such as <strong>count()</strong> to count
@@ -776,8 +795,8 @@ greetUser("John"); // Outputs: Hello, John!
                 script. Understanding variable scope is crucial for writing efficient and bug-free code. Here are the
                 key aspects of PHP variable scope:</p>
 
-            <h3>Local Variables</h3>
-            <p>Local variables are declared inside a function and can only be accessed within that function.</p>
+            <h3>Local Scope</h3>
+            <p>Variables declared within a function have local scope and can only be accessed within that function.</p>
             <pre>
                 <code>
 &lt;?php
@@ -792,9 +811,9 @@ echo $localVariable; // Error: Undefined variable
                 </code>
             </pre>
 
-            <h3>Global Variables</h3>
-            <p>Global variables are declared outside of any function and can be accessed from anywhere within the
-                script.</p>
+            <h3>Global Scope</h3>
+            <p>Variables declared outside of any function have global scope and can be accessed from anywhere within the
+                script. To access a global variable inside a function, use the <code>global</code> keyword.</p>
             <pre>
                 <code>
 &lt;?php
@@ -811,23 +830,35 @@ echo $globalVariable; // Outputs: This is a global variable.
                 </code>
             </pre>
 
-            <h3>Static Variables</h3>
-            <p>Static variables retain their values between function calls and are initialized only once.</p>
+            <h3>Static Scope</h3>
+            <p>Static variables retain their values between function calls and are initialized only once. They are
+                useful when you need a variable to persist its value across multiple function calls.</p>
             <pre>
                 <code>
 &lt;?php
-function counter() {
-    static $count = 0;
+function staticCounter() {
+    static $count = 0; // Initialized only once
     $count++;
-    echo "Count: $count\n";
+    echo "Static Count: $count&lt;br&gt;";
 }
 
-counter(); // Outputs: Count: 1
-counter(); // Outputs: Count: 2
-counter(); // Outputs: Count: 3
+function regularCounter() {
+    $count = 0; // Initialized every time the function is called
+    $count++;
+    echo "Regular Count: $count&lt;br&gt;";
+}
+
+staticCounter(); // Outputs: Static Count: 1
+staticCounter(); // Outputs: Static Count: 2
+staticCounter(); // Outputs: Static Count: 3
+
+regularCounter(); // Outputs: Regular Count: 1
+regularCounter(); // Outputs: Regular Count: 1
+regularCounter(); // Outputs: Regular Count: 1
 ?>
-                </code>
-            </pre>
+            </code>
+        </pre>
+
         </div>
         <div class="wh">
             <h2>PHP SuperGlobal Variables</h2>
