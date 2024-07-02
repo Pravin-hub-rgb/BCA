@@ -1,65 +1,69 @@
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
-#define e 0.003
-
+#include <math.h>
 float f(float x)
 {
-    return x * x * x - 9 * x + 1;
+    return x * x * x - 4 * x - 9;
 }
-
-float g1(float x)
+float fx2(float x0, float x1)
 {
-    return pow((9 * x - 1), 1 / 3);
+    return x0 - (((x1 - x0) / (f(x1) - f(x0))) * f(x0));
+    // return ((x0 * f(x1)) - (x1 * f(x1))) / (f(x1) - f(x0));
 }
-
-float g2(float x)
-{
-    return ((1 + x * x * x) / 9);
-}
-
+#define EPSILON 0.003
 int main()
 {
-    int i = 0;
-    float a, b, xm, diff;
-    int ch;
-    printf("Enter two initial guess = ");
-    scanf("%f%f", &a, &b);
-    if (f(a) * f(b) > 0)
+    float x0, x1, x2, f2;
+    int i = 1;
+    printf("Enter initial guess:");
+    scanf("%f", &x0);
+    scanf("%f", &x1);
+    if (f(x0) * f(x1) > 0)
     {
-        printf("You assumptions were wrong");
+        printf("Wrong Assumption");
         exit(0);
     }
-    xm = (a + b) / 2;
-    printf("Enter your choice for choice between two method (1 & 2) : ");
-    scanf("%d", &ch);
-    if (ch == 1)
+    do
     {
-        do
-        {
-            float xnew = g1(xm);
-            diff = fabs(xnew - xm);
-            xm = xnew;
-            i++;
-            printf("No. of iteration = %d", i);
-            printf("Your root is : %f", xnew);
-        } while (fabs(diff) > e);
-    }
-    else if (ch == 2)
-    {
-        do
-        {
-            float xnew = g2(xm);
-            float diff = fabs(xnew - xm);
-            xm = xnew;
-            printf("No. of iteration : %d", i);
-            printf("Your root is : %f", xnew);
-        } while (fabs(diff > e));
-    }
-    else
-    {
-        printf("Either choose 1 or 2");
-        exit(0);
-    }
+        x2 = fx2(x0, x1);
+        x0 = x1;
+        x1 = x2;
+        i++;
+    } while (fabs(f(x2)) > EPSILON);
+    printf("The required root = %f and f(xn) = %f found at iteration %d\n", x2, f(x2), i);
     return 0;
 }
+/*
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#define EPSILON 0.003
+float f(float x)
+{
+    return x * x * x - 4 * x - 9;
+}
+float fx2(float x0, float x1)
+{
+    return x0 - (((x1 - x0) / (f(x1) - f(x0))) * f(x0));
+}
+int main()
+{
+    float x0, x1, x2, f0, f1, f2;
+    int i = 1;
+    printf("Enter Initial Guess: ");
+    scanf("%f%f", &x0, &x1);
+    do
+    {
+        // x2 = ((x0 * f(x1)) - (x1 * f(x0))) / (f(x1) - f(x0));
+        // x2 = x0 - (((x1 - x0) / (f(x1) - f(x0))) * f(x0));
+        x2 = fx2(x0, x1);
+        f2 = f(x2);
+        x0 = x1;
+        x1 = x2;
+        printf("Root after iteration = %d is %f and value of function = %f\n", i, x2, f2);
+        i++;
+    } while (fabs(f2) > EPSILON);
+    return 0;
+}
+*/
