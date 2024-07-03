@@ -1407,33 +1407,40 @@ f2.close()
                 </ul>
 
                 <p><strong>read() Method:</strong></p>
-                <ul>
-                    <li>This method is used to read a specified number of bytes of data from a file.</li>
-                    <li>If no argument or a negative number is specified in the read() function, the entire file
-                        content
-                        is read.</li>
-                </ul>
-                <p>Example:</p>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <pre>
-        <code>
-f2 = open("myfile.txt", "r")
-data = f2.read(10)  # Reads only 10 characters
-print(data)  # Output: First 10 characters of myfile.txt
-        </code>
+<ul>
+    <li>This method is used to read a specified number of bytes of data from a file.</li>
+    <li>If no argument or a negative number is specified in the read() function, the entire file content is read.</li>
+</ul>
+<p>Example:</p>
+<div class="code">
+    <div class="dotc"></div>
+    <pre>
+<code>
+f1 = open("abc.txt", "r") #make sure this file exists and there is data inside it.
+# Reading the entire file
+content = f1.read()
+print("Content of the file:")
+print(content)
+
+# Resetting the file pointer to the beginning
+f1.seek(0)
+
+# Reading the first 10 characters
+content = f1.read(10)
+print("\nFirst 10 characters of the file:")
+print(content)
+</code>
     </pre>
-                </div>
-                <p>Explanation:</p>
-                <ul>
-                    <li>The <code>open()</code> function is used to open the file "myfile.txt" in read mode ("r").
-                    </li>
-                    <li>The <code>read()</code> method is then applied to read the first 10 characters from the file
-                        and
-                        store them in the variable <code>data</code>.</li>
-                    <li>The <code>print()</code> function is used to display the content of <code>data</code>, which
-                        represents the first 10 characters of the file.</li>
-                </ul>
+</div>
+<p>Explanation:</p>
+<ul>
+    <li><strong>f1.read()</strong>: Reads the entire content of the file <strong>example.txt</strong> and prints it.</li>
+    <li><strong>f1.seek(0)</strong>: Resets the file pointer to the beginning of the file.</li>
+    <li><strong>f1.read(10)</strong>: Reads the first 10 characters from the file <strong>example.txt</strong> and prints them.</li>
+    <li>The file pointer moves forward by the number of characters read, so subsequent reads continue from the current position of the file pointer.</li>
+    <li>If you attempt to read more characters than are left in the file, <strong>read</strong> will return fewer characters than requested, or an empty string if the file pointer is already at the end of the file.</li>
+</ul>
+
 
                 <p><strong>readline() Method:</strong></p>
                 <ul>
