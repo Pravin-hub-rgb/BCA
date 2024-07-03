@@ -1614,37 +1614,57 @@ arr2 = arr1[1:,1:3]
                         <code class="language-python">
 import numpy as np
 
-# Creating a Python list
+# Difference 1: Type
+# --------------------
+# Python list
 py_list = [1, 2, 3, 4, 5]
+print(f"Type of py_list: {type(py_list)}")  # The type of py_list is <class 'list'>
 
-# Creating a NumPy array
+# NumPy array
 np_array = np.array([1, 2, 3, 4, 5])
+print(f"Type of np_array: {type(np_array)}")  # The type of np_array is <class 'numpy.ndarray'>
 
-# Displaying types
-print(f"Type of py_list: {type(py_list)}")
-print(f"Type of np_array: {type(np_array)}")
+# Difference 2: Element-wise Operations
+# -------------------------------------
+# Element-wise addition
 
-# Performing element-wise addition on Python list
-py_list_add = []
-for x in py_list:
-    py_list_add.append(x + 1)
+# Python list - element-wise addition requires a loop
+py_list_add = [x + 1 for x in py_list]
+print(f"Python list after addition: {py_list_add}")  # Python list after addition: [2, 3, 4, 5, 6]
 
-# Performing element-wise addition on NumPy array
+# NumPy array - element-wise addition is vectorized
 np_array_add = np_array + 1
+print(f"NumPy array after addition: {np_array_add}")  # NumPy array after addition: [2 3 4 5 6]
 
-print(f"Python list after addition: {py_list_add}")
-print(f"NumPy array after addition: {np_array_add}")
+# Element-wise multiplication
 
-# Performing element-wise multiplication on Python list
-py_list_mul = []
-for x in py_list:
-    py_list_mul.append(x * 2)
+# Python list - element-wise multiplication requires a loop
+py_list_mul = [x * 2 for x in py_list]
+print(f"Python list after multiplication: {py_list_mul}")  # Python list after multiplication: [2, 4, 6, 8, 10]
 
-# Performing element-wise multiplication on NumPy array
+# NumPy array - element-wise multiplication is vectorized
 np_array_mul = np_array * 2
+print(f"NumPy array after multiplication: {np_array_mul}")  # NumPy array after multiplication: [ 2  4  6  8 10]
 
-print(f"Python list after multiplication: {py_list_mul}")
-print(f"NumPy array after multiplication: {np_array_mul}")
+# Difference 3: Slicing
+# ---------------------
+# Python list - slicing returns a new list
+py_list_slice = py_list[1:4]
+print(f"Python list slice (1:4): {py_list_slice}")  # Python list slice (1:4): [2, 3, 4]
+
+# NumPy array - slicing returns a view of the original array (no data copy)
+np_array_slice = np_array[1:4]
+print(f"NumPy array slice (1:4): {np_array_slice}")  # NumPy array slice (1:4): [2 3 4]
+
+# Difference 4: Data Types
+# ------------------------
+# Python list - can store elements of different data types
+py_list_mixed = [1, "two", 3.0]
+print(f"Python list with mixed types: {py_list_mixed}")  # Python list with mixed types: [1, 'two', 3.0]
+
+# NumPy array - all elements must be of the same data type
+np_array_mixed = np.array([1, 2, 3.0])
+print(f"NumPy array with mixed types: {np_array_mixed}")  # NumPy array with mixed types: [1. 2. 3.]
                         </code>
                     </pre>
                 </div>
