@@ -1,15 +1,9 @@
 # calculator.py
-
-def addition(x, y):
-    return x + y
-
-def subtract(x, y):
-    return x - y
-
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y == 0:
-        return "Error! Division by zero."
-    return x / y
+import numpy as np
+def sum_array(a1, a2):
+    m=np.arange(9)
+    m=m.resize(3,3)
+    for i in range(len(a1)):
+        for j in range(len(a1[0])):
+            m[i][j] = a1[i][j] + a2[i][j]
+    return m
