@@ -20,11 +20,11 @@
         .sem {
             display: none;
         }
-
+    
         .sem.activesem {
             display: block;
         }
-
+    
         .container {
             position: absolute;
             top: 10px;
@@ -35,7 +35,15 @@
             border: var(--container-border);
             background-color: var(--sem-bg-color);
         }
-
+    
+        .desktop-container {
+            display: block;
+        }
+    
+        .mobile-container {
+            display: none;
+        }
+    
         .theme-select {
             background-color: var(--theme-select-bg-color);
             color: var(--theme-select-color);
@@ -43,28 +51,46 @@
             border-radius: 4px;
             padding: 2px 5px;
         }
+    
         @media (max-width: 850px) {
             .container {
                 position: relative;
                 top: auto;
+                right: auto;
                 left: auto;
-                width: 100%;
                 height: auto;
-                padding: 10px;
-                margin-bottom: 2px; /* Add margin to push elements below */
+                padding: 10px 20px;
+                margin: 0 auto;
+                box-sizing: border-box;
+            }
+    
+            .desktop-container {
+                display: none;
+            }
+    
+            .mobile-container {
+                display: block;
             }
         }
     </style>
-</head>
-
-<body>
-    <div class="container">
-        <label for="theme">Select Theme:</label>
-        <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
-            <option value="light">Light Mode</option>
-            <option value="dark">Dark Mode</option>
-        </select>
-    </div>
+    </head>
+    
+    <body>
+        <div class="mobile-container container">
+            <label for="theme">Select Theme:</label>
+            <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+    
+        <div class="desktop-container container">
+            <label for="theme">Select Theme:</label>
+            <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
     <h1>BCA Notes
         <!--<br>R.I.P (Sept 2022 - Mar 2024)
         <br>--><span id="small-head"><span id="commit-count"></span> Commits - Last updated: <span
