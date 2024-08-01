@@ -1,50 +1,18 @@
-*{
+* {
   margin: 0;
-  padding:0;
-}
-/* Default theme (light) */
-:root {
-  --background-color: #fff1eb;
-  --background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
-  --text-color: black;
-  --link-color: black;
-  --accordion-bg-color: #eee;
-  --accordion-hover-bg-color: #ccc;
-  --sem-bg-color: rgba(255, 253, 253, 0.363);
-  --footer-bg-image: linear-gradient(to top, #ace0f9 0%, #fff1eb 100%);
-  --container-border: 1px solid rgba(0, 0, 0, 0.582);
-  --theme-select-bg-color: #fffdfd5d;
-  --theme-select-color: #000;
-  --theme-select-border: 1px solid #000000;
-  --tele-bg-color: linear-gradient(to top, #4481eb 0%, #04befe 100%);
-}
-
-/* Dark theme overrides */
-body.dark-mode {
-  --tele-bg-color: white;
-  --tele-color: black;
-  --background-color: rgba(5, 8, 114, 1);
-  --background-image: radial-gradient(circle 610px at 5.2% 51.6%, rgba(5, 8, 114, 1) 0%, rgba(7, 3, 53, 1) 97.5%);
-  --text-color: white;
-  --link-color: whitesmoke;
-  --accordion-bg-color: #eee;
-  --accordion-hover-bg-color: #ccc;
-  --sem-bg-color: rgba(255, 255, 255, 0.123);
-  --footer-bg-image: rgba(255, 255, 255, 0.21);
-  --container-border: 1px solid rgba(255, 255, 255, 0.541);
-  --theme-select-bg-color: #ffffff1f;
-  --theme-select-color: #fff;
-  --theme-select-border: 1px solid #ffffff;
+  padding: 0;
 }
 
 body {
-  background-image: var(--background-image);
-  color: var(--text-color);
+  background-image: radial-gradient(circle 610px at 5.2% 51.6%,
+      rgba(5, 8, 114, 1) 0%,
+      rgba(7, 3, 53, 1) 97.5%);
+  color: white;
   font-family: "Kalam", cursive;
 }
 
 a {
-  color: var(--link-color);
+  color: whitesmoke;
   font-size: 1.2rem;
 }
 
@@ -60,13 +28,14 @@ h2 {
 }
 
 .sem {
-  background-color: var(--sem-bg-color);
+  background-color: rgba(255, 255, 255, 0.123);
   border-radius: 15px;
   margin: 10px 0;
 }
 
 .sem-container {
   display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr; */
   margin: 0px 0 15px;
 }
 
@@ -101,15 +70,14 @@ h2 {
 }
 
 footer {
-  background-image: var(--footer-bg-image);
+  background-color: rgba(255, 255, 255, 0.21);
   text-align: center;
-  margin: 0;
-  padding: 0;
 }
 
-/* Accordion */
+/* ************************************** Accordion ***************************** */
+/* Style the buttons that are used to open and close the accordion panel */
 .ac {
-  background-color: var(--accordion-bg-color);
+  background-color: #eee;
   color: #444;
   cursor: pointer;
   padding: 18px;
@@ -124,11 +92,13 @@ footer {
   font-size: 1.4rem;
 }
 
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active,
 .ac:hover {
-  background-color: var(--accordion-hover-bg-color);
+  background-color: #ccc;
 }
 
+/* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 0 18px;
   background-color: rgba(255, 255, 255, 0.151);
@@ -151,7 +121,7 @@ footer {
   }
 }
 
-/* Social plug */
+/* PLUG */
 .social-plug-container {
   display: flex;
   justify-content: space-around;
@@ -165,6 +135,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 2px solid rgba(255, 0, 0, 0.365); */
 }
 
 .social-box>div>a {
@@ -172,13 +143,13 @@ footer {
   padding: 4px;
   display: inline-block;
   border-radius: 30px;
+  border: none;
   font-size: 17px;
   margin: 0 10px;
   cursor: pointer;
-  background-color: var(--tele-bg-color);
-  background-image: var(--tele-bg-color);
+  background-color: white;
   text-align: center;
-  color: var(--tele-color);
+  color: black;
   padding: 10px 15px;
   box-sizing: border-box;
   vertical-align: middle;
@@ -192,6 +163,7 @@ img.social-logo {
   height: 40px;
 }
 
+/* Plug media queries */
 @media only screen and (max-width: 600px) {
   .social-plug-container {
     flex-direction: column;
@@ -207,20 +179,19 @@ img.social-logo {
   }
 }
 
-/* New Front Page */
-#semester-selector {
+
+/* *********************** New Front Page ****************************** */
+#semester-selector{
   font-size: 22px;
   padding: 10px;
   display: flex;
   justify-content: center;
 }
-
-#semester-selector select {
+#semester-selector select{
   padding: 5px;
   font-size: 20px;
 }
-
-#semester-selector select option {
+#semester-selector select option{
   padding: 5px;
   font-size: 18px;
 }
