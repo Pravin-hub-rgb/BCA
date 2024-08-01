@@ -1,32 +1,26 @@
-// Function to update commit info
+// Function to update commit info and theme and semester
 document.addEventListener("DOMContentLoaded", function () {
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
 
   // Load the saved theme and semester
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedTheme = localStorage.getItem('theme');
   const themeSelect = document.getElementById('themeSelect');
   if (themeSelect) {
-    themeSelect.value = savedTheme;
+    themeSelect.value = savedTheme || 'light'; // Default to light if no saved theme
   }
-  setTheme(savedTheme); // Apply the saved theme
+  setTheme(savedTheme || 'light'); // Apply the saved or default theme
 
   loadSemester();
 
-
   const linkElement = document.getElementById('highlightStylesheet');
-  if (savedTheme == 'dark') {
-    console.log("dark themee");
-    if (linkElement) {
-      linkElement.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css';
-    }
-  } else {
-    console.log("light themee");
-    if (linkElement) {
-      linkElement.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
-    }
+  if (linkElement) {
+    linkElement.href = savedTheme === 'dark'
+      ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css'
+      : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
   }
 });
+
 
 // Function to update commit info
 function updateCommitInfo() {
@@ -212,15 +206,8 @@ function setTheme(theme) {
 
   if (theme === 'dark') {
     document.body.classList.add('dark-mode');
-    if (linkElement) {
-      console.log("hiiii");
-      linkElement.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css';
-    }
   } else {
     document.body.classList.remove('dark-mode');
-    if (linkElement) {
-      linkElement.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
-    }
   }
 }
 
