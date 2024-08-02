@@ -3,16 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
 
-  // Load the saved theme and semester
-  const savedTheme = localStorage.getItem('theme');
+  // Load the saved theme and apply it
+  const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no saved theme
+  setTheme(savedTheme); // Apply the saved or default theme
+
+  // Set the theme select value to the saved theme
   const themeSelect = document.getElementById('themeSelect');
   if (themeSelect) {
-    themeSelect.value = savedTheme || 'light'; // Default to light if no saved theme
+    themeSelect.value = savedTheme;
   }
-  setTheme(savedTheme || 'light'); // Apply the saved or default theme
 
   loadSemester();
 
+  // Update Highlight.js stylesheet based on the current theme
   const linkElement = document.getElementById('highlightStylesheet');
   if (linkElement) {
     linkElement.href = savedTheme === 'dark'
@@ -20,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
   }
 });
-
 
 // Function to update commit info
 function updateCommitInfo() {
@@ -159,6 +161,8 @@ allPre.forEach((tag) => {
   if (tag.lastChild) tag.lastChild.textContent = "";
 });
 
+
+
 // Function to save the selected semester to localStorage
 function saveSemester() {
   const semesterElement = document.getElementById("semester");
@@ -174,14 +178,9 @@ function loadSemester() {
   const savedSemester = localStorage.getItem("selectedSemester");
   const semesterElement = document.getElementById("semester");
   if (semesterElement) {
-    if (savedSemester) {
-      semesterElement.value = savedSemester;
-      showSemester(savedSemester);
-    } else {
-      // Set to default semester if no value is saved
-      semesterElement.value = "1";
-      showSemester("1");
-    }
+    const semesterToLoad = savedSemester || "1"; // Default to "1" if no saved semester
+    semesterElement.value = semesterToLoad;
+    showSemester(semesterToLoad);
   }
 }
 
@@ -199,11 +198,10 @@ function showSemester(semester) {
 
 // Function to set the theme
 function setTheme(theme) {
-  const linkElement = document.getElementById('highlightStylesheet');
-
   // Update the theme in localStorage
   localStorage.setItem('theme', theme);
 
+  // Apply or remove the dark-mode class based on the selected theme
   if (theme === 'dark') {
     document.body.classList.add('dark-mode');
   } else {
