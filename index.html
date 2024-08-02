@@ -20,11 +20,11 @@
         .sem {
             display: none;
         }
-    
+
         .sem.activesem {
             display: block;
         }
-    
+
         .container {
             position: absolute;
             top: 10px;
@@ -35,15 +35,15 @@
             border: var(--container-border);
             background-color: var(--sem-bg-color);
         }
-    
+
         .desktop-container {
             display: block;
         }
-    
+
         .mobile-container {
             display: none;
         }
-    
+
         .theme-select {
             background-color: var(--theme-select-bg-color);
             color: var(--theme-select-color);
@@ -51,7 +51,7 @@
             border-radius: 4px;
             padding: 2px 5px;
         }
-    
+
         @media (max-width: 850px) {
             .container {
                 position: relative;
@@ -63,34 +63,34 @@
                 margin: 0 auto;
                 box-sizing: border-box;
             }
-    
+
             .desktop-container {
                 display: none;
             }
-    
+
             .mobile-container {
                 display: block;
             }
         }
     </style>
-    </head>
-    
-    <body>
-        <div class="mobile-container container">
-            <label for="theme">Select Theme:</label>
-            <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
-                <option value="light">Light Mode</option>
-                <option value="dark">Dark Mode</option>
-            </select>
-        </div>
-    
-        <div class="desktop-container container">
-            <label for="theme">Select Theme:</label>
-            <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
-                <option value="light">Light Mode</option>
-                <option value="dark">Dark Mode</option>
-            </select>
-        </div>
+</head>
+
+<body>
+    <div class="mobile-container container">
+        <label for="themeSelectMobile">Select Theme:</label>
+        <select class="theme-select" id="themeSelectMobile">
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+        </select>
+      </div>
+      
+      <div class="desktop-container container">
+        <label for="themeSelectDesktop">Select Theme:</label>
+        <select class="theme-select" id="themeSelectDesktop">
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+        </select>
+      </div>      
     <h1>BCA Notes
         <!--<br>R.I.P (Sept 2022 - Mar 2024)
         <br>--><span id="small-head"><span id="commit-count"></span> Commits - Last updated: <span
@@ -99,7 +99,7 @@
     <div class="sem" id="semester-selector">
         <div>
             <label for="semester">Select Semester:</label>
-            <select id="semester" onchange="saveSemester()">
+            <select id="semester">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -194,68 +194,10 @@
             </div>
         </div>
         <p>Created with &hearts; by <!--<a href="https://www.instagram.com/world.wibe.web/" target="_blank">-->
-                Pravin<!--</a> --></p>
+            Pravin<!--</a> --></p>
     </footer>
     <script src="./public/main.js"></script>
-    <!-- <script>
-        /*function saveSemester() {
-            const semester = document.getElementById("semester").value;
-            localStorage.setItem("selectedSemester", semester);
-            showSemester(semester);
-        }
 
-        function loadSemester() {
-            const savedSemester = localStorage.getItem("selectedSemester");
-            if (savedSemester) {
-                document.getElementById("semester").value = savedSemester;
-                showSemester(savedSemester);
-            } else {
-                // Set to default semester if no value is saved
-                document.getElementById("semester").value = "1";
-                showSemester("1");
-            }
-        }
-
-        function showSemester(semester) {
-            const semDivs = document.querySelectorAll(".sem");
-            semDivs.forEach(div => {
-                if (div.getAttribute("data-semester") === semester) {
-                    div.classList.add("activesem");
-                } else {
-                    div.classList.remove("activesem");
-                }
-            });
-        }
-
-        // Load the saved semester on page load
-        window.onload = () => {
-            // Load the saved theme first
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.getElementById('themeSelect').value = savedTheme;
-            setTheme(savedTheme);
-
-            // Load the saved semester
-            loadSemester();
-        };
-
-        const themeSelect = document.getElementById('themeSelect');
-        const body = document.body;
-
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                body.classList.add('dark-mode');
-                body.classList.remove('light-mode');
-            } else {
-                body.classList.add('light-mode');
-                body.classList.remove('dark-mode');
-            }
-            localStorage.setItem('theme', theme);
-        }
-
-        themeSelect.addEventListener('change', () => {
-            setTheme(themeSelect.value);
-        });*/
-    </script> -->
 </body>
 
 </html>

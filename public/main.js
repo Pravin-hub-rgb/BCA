@@ -1,28 +1,210 @@
-// Function to update commit info and theme and semester
+// // Function to update commit info and theme and semester
+// document.addEventListener("DOMContentLoaded", function () {
+//   updateCommitInfo();
+//   setInterval(updateCommitInfo, 3600000); // Update every hour
+
+//   // Load the saved theme and apply it
+//   const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no saved theme
+//   setTheme(savedTheme); // Apply the saved or default theme
+
+//   // Load the saved semester
+//   loadSemester();
+
+//   // Update Highlight.js stylesheet based on the current theme
+//   const linkElement = document.getElementById('highlightStylesheet');
+//   if (linkElement) {
+//     linkElement.href = savedTheme === 'dark'
+//       ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css'
+//       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
+//   }
+// });
+
+// // Function to save the selected semester to localStorage
+// function saveSemester() {
+//   const semesterElement = document.getElementById("semester");
+//   if (semesterElement) {
+//     const semester = semesterElement.value;
+//     localStorage.setItem("selectedSemester", semester);
+//     showSemester(semester);
+//   }
+// }
+
+// // Function to load the saved semester from localStorage
+// function loadSemester() {
+//   const savedSemester = localStorage.getItem("selectedSemester");
+//   const semesterElement = document.getElementById("semester");
+//   if (semesterElement) {
+//     const semesterToLoad = savedSemester || "1"; // Default to "1" if no saved semester
+//     semesterElement.value = semesterToLoad;
+//     showSemester(semesterToLoad);
+//   }
+// }
+
+// // Function to display the selected semester's content
+// function showSemester(semester) {
+//   const semDivs = document.querySelectorAll(".sem");
+//   semDivs.forEach(div => {
+//     if (div.getAttribute("data-semester") === semester) {
+//       div.classList.add("activesem");
+//     } else {
+//       div.classList.remove("activesem");
+//     }
+//   });
+// }
+
+// // Function to set the theme
+// function setTheme(theme) {
+//   // Update the theme in localStorage
+//   localStorage.setItem('theme', theme);
+
+//   // Apply or remove the dark-mode class based on the selected theme
+//   if (theme === 'dark') {
+//     document.body.classList.add('dark-mode');
+//   } else {
+//     document.body.classList.remove('dark-mode');
+//   }
+
+//   // Update the theme select value
+//   const themeSelect = document.getElementById('themeSelect');
+//   if (themeSelect) {
+//     themeSelect.value = theme;
+//   }
+// }
+
+// // Event listener for semester change
+// const semesterElement = document.getElementById("semester");
+// if (semesterElement) {
+//   semesterElement.addEventListener('change', saveSemester);
+// }
+
+// // Event listener for theme change
+// const themeSelect = document.getElementById('themeSelect');
+// if (themeSelect) {
+//   themeSelect.addEventListener('change', (event) => {
+//     setTheme(event.target.value);
+//   });
+// }
+
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM fully loaded and parsed");
+
+  // Update commit info
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
 
-  // Load the saved theme and apply it
-  const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no saved theme
-  setTheme(savedTheme); // Apply the saved or default theme
+  // Load and apply the saved theme
+  loadTheme();
 
-  // Set the theme select value to the saved theme
-  const themeSelect = document.getElementById('themeSelect');
-  if (themeSelect) {
-    themeSelect.value = savedTheme;
+  // Load and apply the saved semester
+  loadSemester();
+
+  // Add event listeners for theme selection
+  const themeSelectMobile = document.getElementById('themeSelectMobile');
+  const themeSelectDesktop = document.getElementById('themeSelectDesktop');
+
+  if (themeSelectMobile) {
+    console.log("Adding event listener to themeSelectMobile");
+    themeSelectMobile.addEventListener('change', (event) => {
+      console.log("Theme changed via mobile select");
+      setTheme(event.target.value);
+    });
+  } else {
+    console.log("themeSelectMobile element not found");
   }
 
-  loadSemester();
+  if (themeSelectDesktop) {
+    console.log("Adding event listener to themeSelectDesktop");
+    themeSelectDesktop.addEventListener('change', (event) => {
+      console.log("Theme changed via desktop select");
+      setTheme(event.target.value);
+    });
+  } else {
+    console.log("themeSelectDesktop element not found");
+  }
+
+  // Add event listener for semester change
+  const semesterElement = document.getElementById("semester");
+  if (semesterElement) {
+    semesterElement.addEventListener('change', saveSemester);
+  } else {
+    console.log("semester element not found");
+  }
+});
+
+// Function to save the selected semester to localStorage
+function saveSemester() {
+  const semesterElement = document.getElementById("semester");
+  if (semesterElement) {
+    const semester = semesterElement.value;
+    localStorage.setItem("selectedSemester", semester);
+    showSemester(semester);
+  }
+}
+
+// Function to load the saved semester from localStorage
+function loadSemester() {
+  const savedSemester = localStorage.getItem("selectedSemester");
+  const semesterElement = document.getElementById("semester");
+  if (semesterElement) {
+    const semesterToLoad = savedSemester || "1"; // Default to "1" if no saved semester
+    semesterElement.value = semesterToLoad;
+    showSemester(semesterToLoad);
+  }
+}
+
+// Function to display the selected semester's content
+function showSemester(semester) {
+  const semDivs = document.querySelectorAll(".sem");
+  semDivs.forEach(div => {
+    if (div.getAttribute("data-semester") === semester) {
+      div.classList.add("activesem");
+    } else {
+      div.classList.remove("activesem");
+    }
+  });
+}
+
+// Function to set the theme
+function setTheme(theme) {
+  console.log("Setting theme:", theme); // Debug log
+  // Update the theme in localStorage
+  localStorage.setItem('theme', theme);
+
+  // Apply or remove the dark-mode class based on the selected theme
+  if (theme === 'dark') {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
 
   // Update Highlight.js stylesheet based on the current theme
   const linkElement = document.getElementById('highlightStylesheet');
   if (linkElement) {
-    linkElement.href = savedTheme === 'dark'
+    linkElement.href = theme === 'dark'
       ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css'
       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
   }
-});
+
+  // Update the theme select values
+  const themeSelectMobile = document.getElementById('themeSelectMobile');
+  const themeSelectDesktop = document.getElementById('themeSelectDesktop');
+  
+  if (themeSelectMobile) {
+    themeSelectMobile.value = theme;
+  }
+  if (themeSelectDesktop) {
+    themeSelectDesktop.value = theme;
+  }
+}
+
+// Function to load the saved theme from localStorage
+function loadTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no saved theme
+  setTheme(savedTheme); // Apply the saved or default theme
+}
+
+
+
 
 // Function to update commit info
 function updateCommitInfo() {
@@ -161,64 +343,3 @@ allPre.forEach((tag) => {
   if (tag.lastChild) tag.lastChild.textContent = "";
 });
 
-
-
-// Function to save the selected semester to localStorage
-function saveSemester() {
-  const semesterElement = document.getElementById("semester");
-  if (semesterElement) {
-    const semester = semesterElement.value;
-    localStorage.setItem("selectedSemester", semester);
-    showSemester(semester);
-  }
-}
-
-// Function to load the saved semester from localStorage
-function loadSemester() {
-  const savedSemester = localStorage.getItem("selectedSemester");
-  const semesterElement = document.getElementById("semester");
-  if (semesterElement) {
-    const semesterToLoad = savedSemester || "1"; // Default to "1" if no saved semester
-    semesterElement.value = semesterToLoad;
-    showSemester(semesterToLoad);
-  }
-}
-
-// Function to display the selected semester's content
-function showSemester(semester) {
-  const semDivs = document.querySelectorAll(".sem");
-  semDivs.forEach(div => {
-    if (div.getAttribute("data-semester") === semester) {
-      div.classList.add("activesem");
-    } else {
-      div.classList.remove("activesem");
-    }
-  });
-}
-
-// Function to set the theme
-function setTheme(theme) {
-  // Update the theme in localStorage
-  localStorage.setItem('theme', theme);
-
-  // Apply or remove the dark-mode class based on the selected theme
-  if (theme === 'dark') {
-    document.body.classList.add('dark-mode');
-  } else {
-    document.body.classList.remove('dark-mode');
-  }
-}
-
-// Event listener for semester change
-const semesterElement = document.getElementById("semester");
-if (semesterElement) {
-  semesterElement.addEventListener('change', saveSemester);
-}
-
-// Event listener for theme change
-const themeSelect = document.getElementById('themeSelect');
-if (themeSelect) {
-  themeSelect.addEventListener('change', (event) => {
-    setTheme(event.target.value);
-  });
-}
