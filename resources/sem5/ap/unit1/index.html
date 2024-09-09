@@ -907,6 +907,96 @@
         <div class="wh">
             <h2>Android Boot Process</h2>
             <img src="../../images/ap11.jpeg" alt="">
+
+            <p>Android, like any operating system, goes through a series of steps to start up the device and make the
+                system ready for user interaction. These steps are crucial to initialize hardware, system services, and
+                load the core framework that supports Android applications. Below, we will explain each stage in detail:
+            </p>
+
+            <h3>1. Boot ROM</h3>
+            <ul>
+                <li>When you press the power button, the device hardware (like the CPU) receives power.</li>
+                <li><strong>Boot ROM</strong> is the first component that runs, which is part of the hardware itself.
+                </li>
+                <li>Its job is to load the <strong>bootloader</strong> into RAM (the device’s main memory) from a fixed
+                    location (often the internal storage).</li>
+                <li>This step is critical as it kicks off the entire boot process by giving the system a way to start
+                    executing the bootloader.</li>
+            </ul>
+
+            <h3>2. Bootloader</h3>
+            <ul>
+                <li>Once the <strong>bootloader</strong> is loaded into RAM, it starts executing.</li>
+                <li>The bootloader works in two stages:</li>
+                <ul>
+                    <li><strong>Stage 1:</strong> It detects the external RAM (device memory) and ensures that the
+                        system has enough memory to continue. It also prepares the system for the next steps.</li>
+                    <li><strong>Stage 2:</strong> In this stage, the bootloader sets up important parts of the system,
+                        such as network configurations and memory allocation.</li>
+                </ul>
+            </ul>
+
+            <h3>3. Kernel</h3>
+            <ul>
+                <li>The bootloader then hands over control to the <strong>Linux Kernel</strong>, which is the core of
+                    the Android operating system.</li>
+                <li>The kernel is responsible for:</li>
+                <ul>
+                    <li>Setting up cache and protected memory areas.</li>
+                    <li>Initializing input/output (I/O) systems, such as touchscreens, USB, and Wi-Fi.</li>
+                    <li>Loading device drivers (for hardware like the camera, audio, etc.).</li>
+                    <li>Starting essential system processes, called <em>daemons</em> (background services that keep the
+                        system running).</li>
+                </ul>
+                <li>The kernel then searches for the first system process called <strong>init</strong>.</li>
+            </ul>
+
+            <h3>4. Init Process</h3>
+            <ul>
+                <li><strong>Init</strong> is the first process started by the kernel.</li>
+                <li>Its role is to mount key system directories, such as:</li>
+                <ul>
+                    <li><code>/sys</code> - contains system configuration files.</li>
+                    <li><code>/dev</code> - contains device files representing hardware components.</li>
+                    <li><code>/proc</code> - contains process information.</li>
+                </ul>
+                <li>The init process also runs an <strong>init.rc</strong> script, which sets up system properties and
+                    triggers the <strong>Zygote</strong> process (which handles app management).</li>
+            </ul>
+
+            <h3>5. Zygote</h3>
+            <ul>
+                <li><strong>Zygote</strong> is a critical process that helps Android manage applications more
+                    efficiently.</li>
+                <li>Its goal is to launch applications by:</li>
+                <ul>
+                    <li>Preloading core library classes that apps need to run (e.g., Java libraries).</li>
+                    <li>Creating a shared memory space that allows multiple instances of the Dalvik Virtual Machine
+                        (DVM) to use the same code, saving memory.</li>
+                    <li>Starting applications quickly by copying the memory space instead of starting from scratch.</li>
+                </ul>
+            </ul>
+
+            <h3>6. System Server and Services</h3>
+            <ul>
+                <li>Once Zygote is initialized, it starts the <strong>System Server</strong>, which is responsible for
+                    launching important Android services like:</li>
+                <ul>
+                    <li>Power Manager</li>
+                    <li>Activity Manager</li>
+                    <li>Telephony Manager</li>
+                    <li>Package Manager</li>
+                    <li>Bluetooth and Sensor Services</li>
+                    <li>Other core system services (e.g., Alarm Manager, Battery Manager, etc.)</li>
+                </ul>
+                <li>Once these services are up and running, the system broadcasts an
+                    <strong>"ACTION_BOOT_COMPLETED"</strong> signal, indicating that the system is fully booted and
+                    ready for use.</li>
+            </ul>
+            <p>The Android boot process is a layered sequence that starts from the hardware level (Boot ROM) and ends
+                with launching core system services via Zygote. Each step ensures that the hardware and software are
+                correctly initialized, allowing the Android operating system to function smoothly and efficiently.</p>
+
         </div>
         <div class="wh">
             <h2>Android Activity</h2>
