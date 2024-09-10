@@ -8,6 +8,8 @@
     <title>Introduction to Android</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
     <style>
         #lessSpace,
         #lessSpace li,
@@ -991,7 +993,8 @@
                 </ul>
                 <li>Once these services are up and running, the system broadcasts an
                     <strong>"ACTION_BOOT_COMPLETED"</strong> signal, indicating that the system is fully booted and
-                    ready for use.</li>
+                    ready for use.
+                </li>
             </ul>
             <p>The Android boot process is a layered sequence that starts from the hardware level (Boot ROM) and ends
                 with launching core system services via Zygote. Each step ensures that the hardware and software are
@@ -1000,11 +1003,311 @@
         </div>
         <div class="wh">
             <h2>Android Activity</h2>
+
+            <p>An <strong>Activity</strong> in Android is a crucial component that provides the window in which an app
+                draws its user interface (UI). Each activity represents a single screen in an Android application, much
+                like a window or frame in Java. The activity window typically takes up the full screen but can be
+                resized or float over other windows in certain scenarios.</p>
+
+            <p>Activities allow developers to place all UI components or widgets in a single screen. Generally, each
+                activity corresponds to one screen of the app. For example, one activity may handle a
+                <em>Preferences</em> screen, while another may manage a <em>Select Photo</em> screen.
+            </p>
+
+            <p>The Android <strong>Activity</strong> class is a subclass of <code>ContextThemeWrapper</code>, meaning it
+                inherits the ability to apply themes and styles to its UI components.</p>
+
+            <h3>Key Characteristics of an Activity:</h3>
+            <ul>
+                <li>Represents a single screen in the app.</li>
+                <li>Handles user interaction and UI display for that screen.</li>
+                <li>Can be resized or float over other windows.</li>
+                <li>It manages the lifecycle of the screen, controlling how the app behaves in response to user
+                    interaction and system changes.</li>
+            </ul>
+
             <h3>Android Activity Lifecycle</h3>
             <img src="../../images/ap1.png" alt="">
-        </div>
+            <p>The Android Activity Lifecycle refers to the various states that an activity can exist in as it moves
+                between foreground and background or when it gets interrupted by another activity. These states define
+                how an activity behaves and manages its resources. There are four main states:</p>
 
+            <ul>
+                <li><strong>Active (Running)</strong>:<br>
+                    If the activity is in the foreground, it is considered <em>active</em> or <em>running</em>. This is
+                    the activity that the user is currently interacting with.
+                </li>
+
+                <li><strong>Visible</strong>:<br>
+                    When an activity loses focus but is still visible to the user, it is in the <em>visible</em> state.
+                    This can happen if another activity (e.g., a popup) partially obscures it. In this state, the
+                    activity remains alive, retaining its state and staying attached to the window manager.
+                </li>
+
+                <li><strong>Stopped (Hidden)</strong>:<br>
+                    If an activity is completely hidden by another activity, it enters the <em>stopped</em> state. While
+                    hidden, it retains all its state and member information but its window is no longer visible. The
+                    system may kill this activity if it needs to free memory for other applications.
+                </li>
+
+                <li><strong>Destroyed</strong>:<br>
+                    When an activity is removed from memory, either by the system or by the user finishing it, it is
+                    considered <em>destroyed</em>. When an activity is recreated, it must be restarted and restored to
+                    its previous state.
+                </li>
+            </ul>
+            <p>The activity lifecycle is crucial for managing an Android app's resources efficiently. Understanding
+                these states helps in designing applications that perform well under different conditions, such as
+                interruptions or multitasking. Activities provide the foundation for user interaction by managing the
+                screen, handling user inputs, and maintaining their states as they transition through various lifecycle
+                stages.</p>
+        </div>
+        <div class="wh">
+            <h2>First Android Program: Hello World</h2>
+
+            <p>In Android, the simplest way to get started is by creating an application that displays the text "Hello
+                World" on the screen. Below, we will discuss the classes and methods used in the basic 'Hello World'
+                app.</p>
+
+            <h3>1. Main Components of the "Hello World" Android Program</h3>
+
+            <ul>
+                <li><strong>MainActivity.java</strong>: This is the main entry point of the app. It's a Java file where
+                    you define the behavior of the app's interface.</li>
+                <li><strong>activity_main.xml</strong>: This is the layout file where the UI of the app is defined, like
+                    buttons, text, etc. For the 'Hello World' program, it will simply contain a TextView that displays
+                    "Hello World".</li>
+            </ul>
+
+            <h3>2. MainActivity.java</h3>
+
+            <p>This class is the backbone of any Android app. In this case, we are using Java to code the app’s
+                behavior. Here's a simplified version of the "Hello World" code and an explanation of its elements:</p>
+
+            <pre>
+                <code> 
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+                </code>
+            </pre>
+
+            <ul>
+                <li><strong>MainActivity:</strong> This is the class that controls the main screen of the app. It
+                    extends <i>AppCompatActivity</i>, which provides backward compatibility for older Android
+                    versions.</li>
+                <li><strong>onCreate(Bundle savedInstanceState):</strong> This is the method that runs when the activity
+                    is created. It sets up the initial state of the app. The <i>Bundle</i> parameter holds the
+                    saved state of the activity (if any), which allows restoring the state when the app is relaunched.
+                </li>
+                <li><strong>setContentView(R.layout.activity_main):</strong> This method sets the layout of the
+                    activity, defined in the <i>activity_main.xml</i> file. It links the XML layout to the Java
+                    code.</li>
+            </ul>
+
+            <h3>3. activity_main.xml</h3>
+
+            <p>This is the XML file where the app's user interface is designed. In our case, the interface is quite
+                simple, with just a TextView displaying "Hello World".</p>
+
+            <pre>
+                <code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="24sp"
+        android:layout_gravity="center"/&gt;
+
+&lt;/LinearLayout&gt;
+                </code>
+            </pre>
+
+            <ul>
+                <li><strong>LinearLayout:</strong> This is a container that arranges child elements in a single
+                    direction, either vertically or horizontally. Here, it's set to vertical.</li>
+                <li><strong>TextView:</strong> This widget displays the "Hello World!" message. We can set the text
+                    size, gravity, and other attributes to customize its appearance.</li>
+                <li><strong>android:text:</strong> The text attribute holds the message that will be displayed to the
+                    user, which is "Hello World!" in this case.</li>
+                <li><strong>android:layout_gravity:</strong> This property centers the TextView within the parent
+                    layout.</li>
+            </ul>
+            <h3>4. Breakdown of Key Classes & Methods</h3>
+            <ul>
+                <li><strong>AppCompatActivity:</strong> This is a base class for activities that wish to use modern
+                    features while providing backward compatibility with older Android versions. It provides important
+                    functions like managing the activity lifecycle.</li>
+                <li><strong>onCreate(Bundle):</strong> This method is called when the activity is first created. It is
+                    used to initialize the activity's UI and logic. Here, we use it to link our layout (XML) file to the
+                    Java file.</li>
+                <li><strong>TextView:</strong> A user interface element that displays text to the user. It is part of
+                    the <i>android.widget</i> package and is used in the layout file.</li>
+            </ul>
+            <h3>5. Running the Program</h3>
+            <p>Once you create the "Hello World" program, you can run it on either an emulator or a physical Android
+                device. The app will display a screen with "Hello World!" in the center.</p>
+        </div>
+        <div class="wh">
+            <h2>Android Toast</h2>
+            <p>A <strong>Toast</strong> is a small message that pops up on the screen for a short duration, providing
+                feedback to the user. Unlike a dialog, a toast does not block user interaction with the app, making it
+                useful for showing non-intrusive messages like "Task completed," "Network error," or "File saved
+                successfully."</p>
+
+            <h3>Why Use a Toast?</h3>
+            <ul>
+                <li>Non-intrusive way to show messages.</li>
+                <li>Does not require user action to disappear (auto-dismissed after a set duration).</li>
+                <li>Useful for brief notifications or status updates.</li>
+                <li>Ideal for informing the user of a background task's completion.</li>
+            </ul>
+
+            <h3>Basic Syntax of Toast</h3>
+            <p>In Android, a <code>Toast</code> message can be created and displayed using the following syntax:</p>
+
+            <pre>
+<code>Toast.makeText(context, message, duration).show();</code>
+    </pre>
+
+            <p>Let’s break this down:</p>
+
+            <h3>Arguments Passed to a Toast</h3>
+            <ul>
+                <li><strong>Context</strong>: The context in which the toast is created. This is usually the current
+                    Activity. The context provides the necessary information about the app environment to the toast.
+                    Example: <code>this</code> or <code>getApplicationContext()</code>.</li>
+                <li><strong>Message</strong>: The text or message you want to display to the user. This can be a simple
+                    string or a string resource. Example: <code>"Hello, World!"</code>.</li>
+                <li><strong>Duration</strong>: The length of time the toast should appear on the screen. There are two
+                    predefined values:
+                    <ul>
+                        <li><code>Toast.LENGTH_SHORT</code>: Displays the toast for a short period (~2 seconds).</li>
+                        <li><code>Toast.LENGTH_LONG</code>: Displays the toast for a longer period (~3.5 seconds).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Example of a Basic Toast</h3>
+            <pre>
+<code>Toast.makeText(this, "Hello, World!", Toast.LENGTH_SHORT).show();</code>
+    </pre>
+
+            <p><strong>Step-by-Step Explanation:</strong></p>
+            <ol>
+                <li><code>this</code>: Refers to the current activity context.</li>
+                <li><code>"Hello, World!"</code>: This is the message that will be displayed on the screen.</li>
+                <li><code>Toast.LENGTH_SHORT</code>: The duration for which the toast will be shown (approximately 2
+                    seconds).</li>
+                <li><code>.show()</code>: This method ensures that the toast is actually displayed to the user.</li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>Android Activity Lifecycle - Sample Program</h2>
+
+            <p>We already know that the Android Activity Lifecycle describes the different states an activity goes through from its creation
+                to its destruction. Below is a sample Android program that uses <code>Toast</code> messages to indicate
+                when different lifecycle methods are called. This will help you understand how activities transition
+                through these states.</p>
+            <p>In this example, we'll implement a simple Android activity that displays a Toast message for each
+                lifecycle method:</p>
+            <ul>
+                <li><code>onCreate()</code></li>
+                <li><code>onStart()</code></li>
+                <li><code>onResume()</code></li>
+                <li><code>onPause()</code></li>
+                <li><code>onStop()</code></li>
+                <li><code>onDestroy()</code></li>
+            </ul>
+
+            <h3>Activity Lifecycle Program Code</h3>
+            <pre>
+                <code>
+package com.example.lifecycleexample;
+
+import android.os.Bundle;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toast.makeText(this, "Activity Created", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "Activity Started", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "Activity Resumed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "Activity Paused", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "Activity Stopped", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "Activity Destroyed", Toast.LENGTH_SHORT).show();
+    }
+}
+    </code>
+</pre>
+            <h3>Explanation of the Program</h3>
+            <p>This program demonstrates how to use <code>Toast</code> messages to track the lifecycle of an Android
+                activity. Here’s what each lifecycle method does:</p>
+
+            <ul>
+                <li><strong>onCreate():</strong> Called when the activity is first created. This is where you initialize
+                    your UI components and perform setup tasks. In this method, we show a Toast message saying "Activity
+                    Created".</li>
+                <li><strong>onStart():</strong> Called when the activity is becoming visible to the user. This method is
+                    used for actions that need to occur when the activity is visible but not yet interactive. Here, we
+                    display a Toast message saying "Activity Started".</li>
+                <li><strong>onResume():</strong> Called when the activity starts interacting with the user. This is
+                    where you should start processes or actions that need to be active while the activity is in the
+                    foreground. We use a Toast message saying "Activity Resumed" in this method.</li>
+                <li><strong>onPause():</strong> Called when the activity is no longer in the foreground but still
+                    visible. This method is used to save data or stop processes that should not continue while the
+                    activity is partially obscured. The Toast message "Activity Paused" is shown here.</li>
+                <li><strong>onStop():</strong> Called when the activity is no longer visible to the user. Use this
+                    method to release resources that are not needed while the activity is stopped. We show a Toast
+                    message saying "Activity Stopped" in this method.</li>
+                <li><strong>onDestroy():</strong> Called before the activity is destroyed. This method is where you
+                    perform final cleanup of resources. A Toast message saying "Activity Destroyed" is shown in this
+                    method to indicate that the activity is about to be removed from memory.</li>
+            </ul>
+
+        </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
