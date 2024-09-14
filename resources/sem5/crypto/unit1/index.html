@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Cryptography</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Introduction to Cryptography</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Introduction to Cryptography</h1>
+        <p>Cryptography is the science of securing communication by transforming readable data (plainli) into an
+            unreadable form (cipherli). The goal is to ensure that only authorized users can access or understand the
+            information, protecting it from unauthorized access. Cryptography plays a key role in securing data in our
+            everyday lives, from email communication to online banking, ensuring that private information remains
+            confidential and secure.</p>
+        <div class="wh">
+            <h2>Security Goals</h2>
+            <ul>
+                <li>Before understanding cryptographic attacks, it’s important to know the goals of security in
+                    cryptography. These goals define what cryptographic methods aim to achieve when protecting data.
+                    Without these goals, any effort to protect information becomes ineffective.</li>
+            </ul>
+            <p>The three main security goals are confidentiality, integrity, and availability.</p>
+            <ol>
+                <li><strong>Confidentiality</strong>:
+                    <ul>
+                        <li>The primary goal of confidentiality is to prevent unauthorized access to data. Only those
+                            who have the right permissions should be able to view the information.</li>
+                        <li>Example: Your password is encrypted when you log in to your email, ensuring that only you
+                            and the system can access it.</li>
+                    </ul>
+                </li>
+                <li><strong>Integrity</strong>:
+                    <ul>
+                        <li>Integrity ensures that the data remains unchanged and accurate. Any unauthorized
+                            modifications to data should be detectable, and only authorized users should be able to make
+                            changes.</li>
+                        <li>Example: When sending important documents via email, the integrity goal ensures the document
+                            isn’t altered during transmission.</li>
+                    </ul>
+                </li>
+                <li><strong>Availability</strong>:
+                    <ul>
+                        <li>Availability ensures that authorized users can access the data or services when needed.
+                            Attacks that limit access to resources can disrupt business operations and communication.
+                        </li>
+                        <li>Example: During a denial-of-service (DoS) attack, users may be unable to access a website
+                            because the server is overwhelmed with traffic.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div class="wh">
+            <h2>Classification of Cryptographic Attacks</h2>
+            <p>Cryptographic attacks refer to attempts by attackers to compromise or break cryptographic systems. These
+                attacks can be classified based on the security goal they target, the type of damage they cause, or the
+                mathematical methods they exploit.</p>
+            <div class="in">
+                <h3>1) Attacks Based on Security Goals They Impact</h3>
+                <p>Each cryptographic attack is designed to target specific security goals, threatening the
+                    confidentiality, integrity, or availability of data.</p>
+                <h3>1. Confidentiality Attacks</h3>
+                <ul>
+                    <li>
+                        <strong>Snooping:</strong> Unauthorized access to data without modifying it. The attacker reads
+                        or monitors the information.
+                        <br><strong>Example:</strong> Intercepting unencrypted emails to steal sensitive information
+                        like PINs.
+                    </li>
+                    <li>
+                        <strong>Traffic Analysis:</strong> Monitoring traffic patterns (e.g., size, frequency) to gather
+                        insights, even if data is encrypted.
+                        <br><strong>Example:</strong> Monitoring encrypted military communications to predict troop
+                        movements.
+                    </li>
+                </ul>
+
+                <h3>2. Integrity Attacks</h3>
+                <ul>
+                    <li>
+                        <strong>Modification:</strong> Altering the contents of a message or file. Unauthorized changes
+                        to data violate its integrity.
+                        <br><strong>Example:</strong> Modifying a bank transaction to transfer money to the attacker’s
+                        account.
+                    </li>
+                    <li>
+                        <strong>Masquerading (Spoofing):</strong> The attacker pretends to be someone else to gain
+                        unauthorized access.
+                        <br><strong>Example:</strong> An attacker impersonates a system administrator to steal sensitive
+                        data.
+                    </li>
+                    <li>
+                        <strong>Replay Attack:</strong> Re-transmitting a previously captured message to trick the
+                        system into accepting it as legitimate.
+                        <br><strong>Example:</strong> Re-sending a captured financial transaction to duplicate an
+                        authorized payment.
+                    </li>
+                    <li>
+                        <strong>Repudiation:</strong> Denying having performed an action in communication, often leading
+                        to disputes.
+                        <br><strong>Example:</strong> A person denies having made an online payment, even though the
+                        transaction was completed.
+                    </li>
+                </ul>
+
+                <h3>3. Availability Attacks</h3>
+                <ul>
+                    <li>
+                        <strong>Denial of Service (DoS):</strong> Preventing legitimate users from accessing services by
+                        overwhelming the system with excessive requests.
+                        <br><strong>Example:</strong> Overloading a server with traffic, making a website unavailable to
+                        users.
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="in">
+                <h3>2) Attacks Based on the Type of Damage</h3>
+                <p>Cryptographic attacks can also be classified based on whether they involve directly damaging data or
+                    simply stealing information without modification.</p>
+                <ol>
+                    <li><strong>Active Attacks:</strong>
+                        <ul>
+                            <li>In active attacks, the attacker aims to modify or disrupt data and services, causing
+                                harm to the system.</li>
+                            <li>Example: An attacker intercepting and altering a message in transit to change the
+                                meaning.</li>
+                            <li>Security Goals Compromised: Integrity and Availability.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Passive Attacks:</strong>
+                        <ul>
+                            <li>In passive attacks, the attacker’s goal is to observe and collect information without
+                                altering or disrupting the data.</li>
+                            <li>Example: Monitoring network traffic to capture unencrypted usernames and passwords.</li>
+                            <li>Security Goal Compromised: Confidentiality.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>3) Attacks Based on Mathematical Viewpoint (Cryptographic Attacks)</h3>
+                <p>Cryptographic attacks can also exploit mathematical flaws in cryptographic algorithms. These types of
+                    attacks are more technical and focus on breaking the encryption itself.</p>
+                <ol>
+                    <li><strong>Cryptoanalytic Attacks:</strong>
+                        <ul>
+                            <li>These attacks use mathematical techniques such as statistical analysis to find
+                                vulnerabilities in cryptographic algorithms and deduce the secret key.</li>
+                            <li>Example: Factoring large prime numbers to break the RSA encryption algorithm.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Non-cryptoanalytic Attacks:</strong>
+                        <ul>
+                            <li>These attacks don’t target the mathematical weaknesses of cryptography but exploit other
+                                vulnerabilities, such as poor implementation or human error.</li>
+                            <li>Example: Social engineering attacks where attackers trick users into revealing their
+                                passwords.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>Cryptoanalytic Attacks</h3>
+                <p>Cryptoanalytic attacks focus on analyzing the encrypted data (cipherli) to extract information or
+                    break the encryption without knowing the key.</p>
+                <ol>
+                    <li><strong>Cipherli-only Attack:</strong>
+                        <ul>
+                            <li>In this attack, the attacker only has access to the cipherli and tries to deduce the
+                                encryption key or original message.</li>
+                            <li>Example: Intercepting encrypted emails and trying to decrypt them using statistical
+                                methods.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Known-plainli Attack:</strong>
+                        <ul>
+                            <li>Here, the attacker has access to both the plainli and its corresponding cipherli,
+                                allowing them to analyze how the encryption process works.</li>
+                            <li>Example: If an attacker knows a common word in a message, they can use that to decrypt
+                                other parts of the message.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Chosen-plainli Attack:</strong>
+                        <ul>
+                            <li>The attacker chooses specific plainlis and encrypts them to study how the algorithm
+                                works.</li>
+                            <li>Example: Encrypting the word "password" using different encryption methods to study
+                                patterns in the cipherli.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Chosen-cipherli Attack:</strong>
+                        <ul>
+                            <li>The attacker can select specific cipherlis and attempt to decrypt them, using the
+                                results to understand the encryption system.</li>
+                            <li>Example: Injecting fake cipherlis into a system to gather insights into its decryption
+                                process.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>Non-cryptoanalytic Attacks</h3>
+                <p>Non-cryptoanalytic attacks focus on vulnerabilities outside the cryptographic algorithms, such as
+                    poor security practices or flaws in the system setup.</p>
+                <img src="../../images/cry1.png" alt="">
+            </div>
+            <div class="wh">
+                <h2>Types of Cryptography</h2>
+                <p>Cryptography is the practice of securing information by transforming it into an unreadable format.
+                    There are several types of cryptographic techniques, each serving different purposes and utilizing
+                    various methods to ensure data security. The primary types of cryptography include symmetric
+                    cryptography, asymmetric cryptography, and hash functions. Each type has its own unique features and
+                    applications in securing digital communication and data.</p>
+
+                <div class="in">
+                    <h3>Symmetric Cryptography</h3>
+                    <p>Symmetric cryptography, also known as secret key cryptography or private key cryptography, is a
+                        straightforward encryption technique that uses a single key for both encryption and decryption.
+                        This means that the same key is used to transform plaintext into ciphertext and vice versa. The
+                        security of this method relies on keeping the key secret between the communicating parties.</p>
+                    <p>The most popular symmetric key cryptography system is DES (Data Encryption Standard), which has
+                        been widely used for securing data. However, due to advancements in computational power, DES has
+                        been largely replaced by more secure algorithms like AES (Advanced Encryption Standard).</p>
+                    <img src="../../images/cry2.jpeg" alt="Symmetric Cryptography">
+                </div>
+
+                <div class="in">
+                    <h3>Asymmetric Cryptography</h3>
+                    <p>Asymmetric cryptography, also known as public key cryptography, utilizes two different keys for
+                        encryption and decryption. One key, known as the public key, is shared openly and can be used by
+                        anyone to encrypt data. The second key, known as the private key, is kept secret by the owner
+                        and is used to decrypt the data that was encrypted with the corresponding public key.</p>
+                    <ul>
+                        <li>Public Key: This key is widely distributed and available to anyone. It is used to encrypt
+                            data.</li>
+                        <li>Private Key: This key is kept confidential by the owner. It is used to decrypt data that was
+                            encrypted with the corresponding public key.</li>
+                    </ul>
+                    <p><strong>Note:</strong> A message encrypted using a public key can only be decrypted using the
+                        corresponding private key. Conversely, a message encrypted with a private key can only be
+                        decrypted using the corresponding public key.</p>
+                    <p>Popular asymmetric key algorithms include RSA (Rivest–Shamir–Adleman), DSA (Digital Signature
+                        Algorithm), and elliptic curve cryptography (ECC).</p>
+                    <img src="../../images/cry3.jpeg" alt="Asymmetric Cryptography">
+                </div>
+
+                <div class="in">
+                    <h3>Hash Functions</h3>
+                    <p>Hash functions are cryptographic algorithms that generate a fixed-size output (hash value) from
+                        variable-size input data. The primary purpose of a hash function is to ensure data integrity by
+                        producing a unique hash value for unique input data. Even a small change in the input data will
+                        result in a significantly different hash value, making hash functions useful for detecting
+                        alterations or corruption in data.</p>
+                    <ul>
+                        <li>Hash functions are one-way functions, meaning they cannot be reversed to retrieve the
+                            original data from the hash value.</li>
+                        <li>Common hash functions include MD5 (Message Digest Algorithm 5), SHA-1 (Secure Hash Algorithm
+                            1), and SHA-256 (Secure Hash Algorithm 256).</li>
+                    </ul>
+                    <img src="../../images/cry4.jpeg" alt="">
+                    <h4>Example: Password Storage and Verification</h4>
+                    <p>When a user creates a password for their account, it is not stored directly in the database.
+                        Instead, the password is processed through a hash function to produce a hash value. This hash
+                        value is then stored in the database.</p>
+                    <p>Here's how it works in practice:</p>
+                    <ol>
+                        <li><strong>User Registration:</strong> When a user sets a password, the password is hashed
+                            using a hash function (e.g., SHA-256) to produce a hash value. For example, if the password
+                            is "mypassword", the hash function generates a hash value like
+                            "5e884898da28047151d0e56f8dc6292773603d0d" (this is just a sample hash).</li>
+                        <li><strong>Storing the Hash:</strong> The resulting hash value is stored in the database, not
+                            the actual password. This ensures that the plaintext password is not exposed even if the
+                            database is compromised.</li>
+                        <li><strong>User Login:</strong> When the user attempts to log in, they enter their password.
+                            This password is again processed through the same hash function to produce a hash value.
+                        </li>
+                        <li><strong>Verification:</strong> The hash value generated from the entered password is
+                            compared with the hash value stored in the database. If the two hash values match, the
+                            password is correct, and the user is granted access. If they do not match, access is denied.
+                        </li>
+                    </ol>
+
+                    <p>By using hash functions, passwords are kept secure and confidential, as the original password
+                        cannot be directly retrieved from the hash value.</p>
+
+                </div>
+                <h3>Difference between Symmetric and Asymmetric Cryptography</h3>
+                <img src="../../images/cry5.png" alt="">
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
