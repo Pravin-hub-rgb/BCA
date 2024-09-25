@@ -464,7 +464,8 @@
                     </li>
                     <li><strong>Element of a Matrix:</strong> Each value in the matrix is called an element, usually
                         denoted by <strong>a<sub>ij</sub></strong>, where <strong>i</strong> is the row number and
-                        <strong>j</strong> is the column number.</li>
+                        <strong>j</strong> is the column number.
+                    </li>
                 </ul>
 
                 <p><strong>Types of Matrices:</strong></p>
@@ -504,25 +505,9 @@
                     been widely used for securing data. However, due to advancements in computational power, DES has
                     been largely replaced by more secure algorithms like AES (Advanced Encryption Standard).</p>
                 <img src="../../images/cry2.jpeg" alt="Symmetric Cryptography">
-                <h3>Conventional Encryption Model</h3>
-                <p>The conventional encryption model, also known as the classical encryption model, is a
-                    foundational concept in symmetric cryptography. It outlines the process of encrypting and
-                    decrypting data using a single key. The key components of the conventional encryption model
-                    include:</p>
-                <ul>
-                    <li><strong>Plaintext:</strong> The original, readable data that needs to be protected. For
-                        example, a message or file.</li>
-                    <li><strong>Encryption Algorithm:</strong> The process or set of rules used to transform
-                        plaintext into ciphertext. This algorithm uses the key to perform the encryption.</li>
-                    <li><strong>Key:</strong> A secret value used by the encryption algorithm to perform the
-                        transformation. Both the sender and receiver must have access to this key.</li>
-                    <li><strong>Ciphertext:</strong> The encrypted, unreadable data produced by the encryption
-                        algorithm. This is the result of applying the key to the plaintext.</li>
-                    <li><strong>Decryption Algorithm:</strong> The process or set of rules used to transform
-                        ciphertext back into plaintext. This algorithm uses the same key to reverse the encryption
-                        process.</li>
-                </ul>
+
             </div>
+
 
             <div class="in">
                 <h3>Asymmetric Cryptography</h3>
@@ -587,6 +572,209 @@
             <h3>Difference between Symmetric and Asymmetric Cryptography</h3>
             <img src="../../images/cry5.png" alt="">
         </div>
+        <div class="wh">
+            <h2>Conventional Encryption Model</h2>
+<p>The conventional encryption model, also known as the classical encryption model, is a foundational concept in symmetric cryptography. It outlines the process of encrypting and decrypting data using a single key. This model serves as the basis for many traditional encryption techniques and is essential for understanding how modern symmetric algorithms function. The key components of the conventional encryption model include:</p>
+<ul>
+    <li><strong>Plaintext:</strong> The original, readable data that needs to be protected. For example, a message or file that a user wants to keep confidential from unauthorized access.</li>
+    <li><strong>Encryption Algorithm:</strong> The process or set of rules used to transform plaintext into ciphertext. This algorithm applies mathematical operations and logical functions, utilizing the key to perform the encryption effectively.</li>
+    <li><strong>Key:</strong> A secret value used by the encryption algorithm to perform the transformation. Both the sender and receiver must securely share and store this key to ensure the integrity of the communication.</li>
+    <li><strong>Ciphertext:</strong> The encrypted, unreadable data produced by the encryption algorithm. This is the result of applying the key to the plaintext, rendering it secure from unauthorized parties.</li>
+    <li><strong>Decryption Algorithm:</strong> The process or set of rules used to transform ciphertext back into plaintext. This algorithm employs the same key used in encryption to reverse the transformation, allowing the intended recipient to access the original data.</li>
+</ul>
+<p>Understanding the conventional encryption model is crucial as it leads us to classical ciphers, which illustrate these principles in action. One of the most notable examples is the Caesar cipher, which embodies the basic concepts of encryption and decryption in a straightforward manner. By examining the Caesar cipher, we can see how a simple algorithm and a single key can effectively secure information, laying the groundwork for more complex encryption methods used in modern cryptography.</p>
+
+<div class="in">
+    <h3>Caesar Cipher</h3>
+    <p>The Caesar cipher is one of the oldest and simplest encryption techniques, named after Julius Caesar, who reportedly used it to protect his messages. This cipher operates by shifting each letter in the plaintext a fixed number of places down the alphabet. For example, with a shift of 3:</p>
+    <ul>
+        <li><strong>A</strong> becomes <strong>D</strong></li>
+        <li><strong>B</strong> becomes <strong>E</strong></li>
+        <li><strong>C</strong> becomes <strong>F</strong></li>
+    </ul>
+    <p>This means that a message like "HELLO" would be encrypted as "KHOOR" with a shift of 3. The process is reversible: the same key can be used to decrypt the ciphertext back to the original plaintext.</p>
+    <p>The simplicity of the Caesar cipher makes it an excellent introduction to the concepts of encryption and decryption, but it also highlights vulnerabilities associated with classical ciphers, such as the ease of frequency analysis. Despite its weaknesses, the Caesar cipher remains a fundamental educational tool in the study of cryptography.</p>
+    <p>Below is a visual representation of the Caesar cipher with a shift of 3:</p>
+    <img src="../../images/cry8.jpeg" alt="Caesar Cipher Diagram" />
+</div>
+
+        </div>
+        <div class="wh">
+            <h2>Symmetric Key Ciphers</h2>
+            <p>We know that in symmetric cryptography, a single key is used for both encryption and decryption. A cipher
+                is the
+                algorithm or method used to perform this encryption. Symmetric key ciphers use the same secret key to
+                transform readable data (plaintext) into an unreadable format (ciphertext) and back again. </p>
+
+            <ul>
+                <li>Stream and Block ciphers are the two main types of symmetric key ciphers, each differing in how
+                    they process data during encryption.</li>
+                <li>Before diving into stream and block ciphers, it's important to understand two key principles
+                    used in cryptographic methods: confusion and diffusion. These concepts help enhance the security
+                    of the encryption, making it harder for attackers to decipher the original message.</li>
+            </ul>
+            <div class="in">
+                <h3>Confusion and Diffusion</h3>
+                <p>Encryption algorithms rely heavily on two important properties to ensure the security of data:
+                    confusion and diffusion. These concepts were introduced by Claude Shannon and play a key role in
+                    making encryption more secure by hiding patterns between plaintext and ciphertext.</p>
+
+                <ul>
+                    <li><strong>Confusion:</strong> This property focuses on making the relationship between the
+                        encryption key and the ciphertext as complex as possible. In other words, confusion aims to
+                        obscure the connection between the plaintext and the resulting ciphertext. Even if a third
+                        party
+                        has access to the ciphertext, they should be unable to determine the plaintext or the key
+                        used
+                        for encryption. A cipher that relies heavily on confusion makes it difficult to trace how
+                        specific keys relate to the ciphertext, protecting the data from being decrypted easily.
+                    </li>
+
+                    <li><strong>Diffusion:</strong> The diffusion property ensures that any small change in the
+                        plaintext leads to significant and unpredictable changes in the ciphertext. This is achieved
+                        by
+                        making each bit of the plaintext affect multiple bits of the ciphertext. If even a single
+                        bit of
+                        the plaintext is altered, the corresponding ciphertext should differ drastically, enhancing
+                        the
+                        security of the encryption.</li>
+                </ul>
+
+                <p>Both confusion and diffusion are essential for building a strong encryption system. While
+                    confusion
+                    hides the relationship between the key and the ciphertext, diffusion spreads out the influence
+                    of
+                    each bit across the ciphertext to protect against pattern recognition.</p>
+            </div>
+
+            <div class="in">
+                <h3>Stream Ciphers</h3>
+                <p>Stream ciphers encrypt data one bit or one byte at a time, processing the input continuously as it is
+                    fed into the encryption algorithm. This method makes stream ciphers efficient for real-time
+                    applications, where data is transmitted in a steady stream, such as in network communications or
+                    streaming services.</p>
+
+                <ul>
+                    <li>In a stream cipher, each plaintext digit is encrypted individually, using a corresponding digit
+                        from a keystream. The key is often combined with the plaintext using the XOR (exclusive OR)
+                        operation, resulting in a ciphertext stream.</li>
+                    <li>The process is simple and fast, making stream ciphers ideal for environments where speed is
+                        critical.</li>
+                    <li>Stream ciphers typically use confusion as their primary security property, ensuring that the
+                        relationship between the key and ciphertext is as obscured as possible.</li>
+                </ul>
+                <img src="../../images/cry6.jpeg" alt="Stream Cipher Diagram">
+                <h4>Stream Cipher Example</h4>
+                <p>A classic example of a stream cipher is the Vernam cipher. In this method, each bit of the plaintext
+                    is XORed with a corresponding bit of the key stream to produce the ciphertext.</p>
+
+
+            </div>
+
+            <div class="in">
+                <h3>Block Ciphers</h3>
+                <p>Unlike stream ciphers, block ciphers work by dividing the plaintext into fixed-size blocks and
+                    encrypting each block individually. These blocks can vary in size, with common block sizes being 64
+                    bits or 128 bits, depending on the algorithm used.</p>
+
+                <ul>
+                    <li>A block cipher encrypts entire blocks of data at once, rather than processing the data bit by
+                        bit or byte by byte as stream ciphers do.</li>
+                    <li>Block ciphers utilize both confusion and diffusion properties, making them highly secure by
+                        obscuring both the relationship between the key and the ciphertext, and ensuring that even minor
+                        changes in the plaintext result in drastic changes in the ciphertext.</li>
+                </ul>
+                <img src="../../images/cry7.jpeg" alt="Block Cipher Diagram">
+
+                <div class="wh">
+                    <h3>Types of Block Ciphers</h3>
+                    <p>Block ciphers are symmetric key algorithms that encrypt data in fixed-size blocks. They use the
+                        same key for both encryption and decryption, transforming readable plaintext into ciphertext
+                        through a series of rounds and transformations. The most notable block ciphers include the
+                        Advanced Encryption Standard (AES) and the Data Encryption Standard (DES). Understanding these
+                        ciphers provides insight into the security and efficiency of data encryption.</p>
+
+                    <p><strong>1. Advanced Encryption Standard (AES)</strong></p>
+                    <p>AES is a widely used symmetric key encryption standard established to replace DES. Here are its
+                        key features:</p>
+                    <ul>
+                        <li><strong>Block Size:</strong> AES operates on blocks of 128 bits.</li>
+                        <li><strong>Key Sizes:</strong> It supports key lengths of 128, 192, or 256 bits, providing
+                            flexibility in security levels.</li>
+                        <li><strong>Rounds:</strong> The encryption process consists of 10 rounds for 128-bit keys, 12
+                            for 192-bit keys, and 14 for 256-bit keys.</li>
+                        <li><strong>Security:</strong> AES is considered highly secure, resistant to most attack
+                            vectors, and is used globally across various industries, including government, finance, and
+                            healthcare.</li>
+                        <li><strong>Established:</strong> Adopted as a federal standard by the U.S. National Institute
+                            of Standards and Technology (NIST) in 2001.</li>
+                    </ul>
+
+                    <p><strong>2. Data Encryption Standard (DES)</strong></p>
+                    <p>DES was one of the earliest block ciphers and was widely used for data encryption until it became
+                        obsolete due to vulnerabilities. Key aspects include:</p>
+                    <ul>
+                        <li><strong>Block Size:</strong> DES operates on blocks of 64 bits.</li>
+                        <li><strong>Key Size:</strong> It uses a 56-bit key (with 8 bits reserved for parity), which is
+                            relatively short by modern standards.</li>
+                        <li><strong>Rounds:</strong> The encryption process consists of 16 rounds of transformations.
+                        </li>
+                        <li><strong>Security:</strong> DES is now considered insecure due to its small key size, making
+                            it susceptible to brute-force attacks.</li>
+                        <li><strong>Established:</strong> Adopted as a federal standard in 1977, DES was widely used
+                            until the late 1990s.</li>
+                    </ul>
+
+                    <p><strong>Comparison of AES and DES</strong></p>
+                    <p>Both AES and DES serve as fundamental examples of block ciphers, but they differ significantly in
+                        their security and efficiency:</p>
+                    <ul>
+                        <li><strong>Security Level:</strong> AES is designed to be secure against modern attack methods,
+                            while DES's short key length makes it vulnerable.</li>
+                        <li><strong>Performance:</strong> AES generally provides better performance on modern hardware
+                            due to its more efficient algorithm.</li>
+                        <li><strong>Usage:</strong> AES is the current standard for encryption, while DES has largely
+                            been phased out in favor of stronger algorithms.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="in">
+                <h3>Comparing Stream and Block Ciphers</h3>
+                <p>Both stream and block ciphers are widely used in cryptography, but they differ in how they process
+                    data and the encryption methods they use. The choice between the two depends on the specific
+                    requirements of the application, such as speed, security, and the nature of the data being
+                    encrypted.</p>
+
+                <ul>
+                    <li><strong>Input Size:</strong> Stream ciphers process data bit by bit or byte by byte, whereas
+                        block ciphers process data in fixed-size blocks.</li>
+                    <li><strong>Design Complexity:</strong> Stream ciphers tend to have a more complex design due to the
+                        need for continuous encryption, while block ciphers use more structured designs based on
+                        predefined block sizes.</li>
+                    <li><strong>Encryption Principle:</strong> Stream ciphers primarily use confusion, while block
+                        ciphers rely on both confusion and diffusion.</li>
+                    <li><strong>Speed:</strong> Stream ciphers are generally faster than block ciphers because they
+                        encrypt data continuously without needing to wait for a full block of data.</li>
+                    <li><strong>Decryption:</strong> Stream ciphers often use simple XOR operations for decryption,
+                        while block ciphers use more complex decryption algorithms that reverse the encryption process.
+                    </li>
+                </ul>
+            </div>
+
+            <p>Stream ciphers offer speed and simplicity for real-time data encryption, while block
+                ciphers provide stronger security by encrypting data in chunks. Understanding the differences
+                between these two ciphers is critical for choosing the right encryption method for a specific
+                application.</p>
+        </div>
+
+    </div>
+    <div class="wh">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://youtu.be/3adBPqIB4Tw?si=MWM9Oej5l-brYgcg" target="_blank">Stream Cipher and Block
+                    Cipher Video Lecture &neArr;</a></li>
+        </ul>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>

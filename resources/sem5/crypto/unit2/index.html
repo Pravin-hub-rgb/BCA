@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Block Ciphers</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Modern Block Ciphers</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Modern Block Ciphers</h1>
+        <ul>
+            <li>In cryptography, block ciphers play a crucial role in encrypting data securely. A block cipher works by
+                dividing the data into fixed-size blocks (usually 64 or 128 bits) and encrypting each block
+                individually. This is different from stream ciphers, which process data bit by bit. Block ciphers ensure
+                security by using two essential properties: confusion (making the relationship between the ciphertext
+                and key as complex as possible) and diffusion (spreading out the influence of one plaintext symbol over
+                many ciphertext symbols).</li>
+            <li>One of the earliest block ciphers was the Data Encryption Standard (DES), developed in the 1970s. DES
+                set the foundation for block cipher design, but over time, it became vulnerable to attacks due to the
+                increase in computational power. To address these limitations, modern block ciphers like Advanced
+                Encryption Standard (AES) were introduced, providing stronger security and better performance.</li>
+            <li>In this unit, we will explore both older and modern block ciphers. We'll start by looking at the
+                fundamental components and design principles of block ciphers, then move on to specific examples like
+                DES and AES. Understanding these concepts is key to seeing how encryption has evolved to meet modern
+                security demands. As we explore each cipher, we will see how cryptography has improved to handle today's
+                threats while building on the principles of early systems like DES.</li>
+        </ul>
+        <div class="wh">
+            <h2>Modern Block Ciphers Components</h2>
+            <ul>
+                <li>In modern cryptography, block ciphers are widely used to secure data. These ciphers break the
+                    plaintext (the data we want to protect) into fixed-size chunks, or "blocks," and then encrypt each
+                    block using a complex series of steps. Each of these steps involves mathematical operations and
+                    transformations that make it nearly impossible for unauthorized users to recover the original data
+                    without the correct key. </li>
+                <li>To understand how block ciphers work, we need to look at their key components. These components are
+                    like building blocks of the encryption process, each serving a unique purpose in turning readable
+                    data into ciphertext (encrypted data).</li>
+            </ul>
+            <div class="in">
+                <h3>S-Box</h3>
+                <ul>
+                    <li>An S-Box, or Substitution Box, is a critical component in modern block ciphers. Its job is to
+                        take a small set of input bits and transform them into a different set of output bits. This
+                        process is known as substitution, where one set of values is substituted for another to confuse
+                        the relationship between the plaintext and the ciphertext. This confusion is an essential part
+                        of encryption because it makes it harder for attackers to detect patterns and break the cipher.
+                    </li>
+                    <li>In simpler terms, the S-Box replaces bits of the input with new bits according to a predefined
+                        table. This substitution makes it extremely difficult for attackers to predict or
+                        reverse-engineer the encryption process without knowing the key.</li>
+                    <li>The S-Box is predefined by the designers of the encryption algorithm and is standardized to
+                        provide consistent, secure encryption. Its primary purpose is to make the cipher resistant to
+                        cryptographic attacks like differential and linear cryptanalysis. A well-designed S-Box ensures
+                        that even small changes in the input result in unpredictable changes in the output, enhancing
+                        security.</li>
+                </ul>
+                <p><strong>Simple Example:</strong></p>
+                <p>Imagine we have an input of 2 bits. The S-Box for this system might be a simple table like this:</p>
+                <img src="../../images/cry9.png" alt="">
+                <p>How it works:</p>
+                <ul>
+                    <li>Suppose our input is 01. According to the table, the output will be 10.</li>
+                    <li>The substitution is straightforward: you just replace the input with the corresponding output
+                        based on the S-Box.</li>
+                </ul>
+                <p>This simple substitution hides the original bits and makes it harder for someone to understand what
+                    the input was by looking at the output.</p>
+                <p><strong>Role of the S-Box in Encryption:</strong></p>
+                <ul>
+                    <li>The goal of the S-Box is to introduce confusion in the encryption process. Confusion means that
+                        the relationship between the key and the ciphertext is obscured. An attacker should not be able
+                        to easily deduce what key was used just by analyzing the ciphertext.</li>
+                    <li>To make it effective, modern block ciphers typically use many S-Boxes, performing multiple
+                        rounds of substitution on the data, often combined with other transformations (like
+                        permutations). This makes it extremely difficult to reverse the encryption without knowing the
+                        key.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>P-Box</h3>
+                <ul>
+                    <li>The P-Box, or Permutation Box, is a crucial component of modern block ciphers. Its role is to
+                        shuffle the positions of the input bits without changing their values. This process is known as
+                        permutation, and it is essential for adding diffusion to the encryption process. Diffusion
+                        ensures
+                        that each bit of the plaintext influences many bits of the ciphertext, making it harder for
+                        attackers to trace the encryption back to the original message.</li>
+                    <li>In simpler terms, the P-Box rearranges bits in the input data according to a predefined pattern.
+                        While the S-Box changes the actual values of the bits, the P-Box only changes their positions.
+                        This
+                        bit shuffling plays a critical role in making the encryption more resistant to attacks.</li>
+                    <li>The P-Box is predefined by the encryption algorithm's designers and is standardized to ensure
+                        security. The purpose of the P-Box is to spread the effect of individual bits throughout the
+                        entire
+                        data block, making it difficult for attackers to find patterns that could help them break the
+                        cipher.</li>
+                </ul>
+                <p><strong>Simple Example:</strong></p>
+                <p>Let’s say we have an 8-bit input: 10111001. The P-Box will rearrange the positions of these bits
+                    based on
+                    a predefined pattern. Assume the predefined permutation pattern is:</p>
+                <img src="../../images/cry10.png" alt="">
+                <p>How it works:</p>
+                <ul>
+                    <li>Now, using this pattern, the input 10111001 will be permuted as follows:
+                        <ul>
+                            <li>Bit in position 1 (1) moves to position 4.</li>
+                            <li>Bit in position 2 (0) stays in position 2.</li>
+                            <li>Bit in position 3 (1) moves to position 6.</li>
+                            <li>Bit in position 4 (1) moves to position 8.</li>
+                            <li>Bit in position 5 (1) moves to position 1.</li>
+                            <li>Bit in position 6 (0) moves to position 7.</li>
+                            <li>Bit in position 7 (0) moves to position 5.</li>
+                            <li>Bit in position 8 (1) moves to position 3.</li>
+                        </ul>
+                    </li>
+                    <li>The output after applying the P-Box will be: 11100110.</li>
+                </ul>
+                <p>This rearrangement spreads the influence of each bit across the entire block, adding an extra layer
+                    of
+                    security.</p>
+                <p><strong>Role of the P-Box in Encryption:</strong></p>
+                <ul>
+                    <li>The main goal of the P-Box is to introduce diffusion into the encryption process. Diffusion
+                        means
+                        that changes in the plaintext should spread throughout the ciphertext. Even a small change in
+                        the
+                        plaintext should result in significant, unpredictable changes in the ciphertext.</li>
+                    <li>Similar to the S-Box, modern block ciphers often use multiple P-Boxes in various rounds of
+                        encryption, combined with other transformations. This makes the overall encryption process
+                        highly
+                        secure and resistant to cryptanalysis.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Exclusive OR (XOR)</h3>
+                <ul>
+                    <li>The Exclusive OR, or XOR, is a fundamental logical operation used extensively in cryptography,
+                        especially in modern block ciphers. The XOR operation compares two input bits and produces an
+                        output
+                        bit based on a simple rule: the output is 1 if the input bits are different, and 0 if they are
+                        the
+                        same.</li>
+                    <li>XOR is widely used because it is a reversible operation. In encryption, it allows bits to be
+                        flipped
+                        in a predictable way, but without the key (or original bits), it is difficult for an attacker to
+                        reverse the operation. This makes XOR useful for combining keys with plaintext to produce
+                        ciphertext.</li>
+                    <li>In modern block ciphers, XOR is often used in combination with S-Boxes and P-Boxes to create
+                        secure,
+                        complex encryption systems. Its ability to provide both diffusion and confusion, when used
+                        correctly, makes it a critical component in many encryption algorithms.</li>
+                </ul>
+
+                <p><strong>Simple Example:</strong></p>
+                <p>Consider two 4-bit inputs: <code>1010</code> and <code>1100</code>. The XOR operation compares each
+                    bit
+                    from both inputs:</p>
+                <img src="../../images/cry11.png" alt="">
+                <p>How it works:</p>
+                <ul>
+                    <li>First bit: <code>1 XOR 1 = 0</code> (since both bits are the same)</li>
+                    <li>Second bit: <code>0 XOR 1 = 1</code> (since the bits are different)</li>
+                    <li>Third bit: <code>1 XOR 0 = 1</code> (since the bits are different)</li>
+                    <li>Fourth bit: <code>0 XOR 0 = 0</code> (since both bits are the same)</li>
+                </ul>
+                <p>The result of the XOR operation is <code>0110</code>.</p>
+
+                <p><strong>Role of XOR in Encryption:</strong></p>
+                <ul>
+                    <li>XOR is crucial in cryptography because of its reversibility. If you apply XOR twice with the
+                        same
+                        key, you get back the original data. This property allows encryption and decryption to work:
+                        encrypt
+                        with XOR, and decrypt by applying XOR again with the same key.</li>
+                    <li>XOR is used to combine the plaintext with the key during encryption. For example, if you XOR the
+                        key
+                        with the plaintext, you get ciphertext. To decrypt, you XOR the ciphertext with the same key,
+                        which
+                        reveals the original plaintext.</li>
+                    <li>In modern block ciphers, XOR is used repeatedly in various stages of encryption to ensure that
+                        changes in the plaintext or key result in unpredictable changes in the ciphertext, thereby
+                        enhancing
+                        security.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Circular Shift</h3>
+                <ul>
+                    <li>A Circular Shift, also known as a rotation, is a technique used in modern block ciphers to
+                        rearrange bits in a specific way. Unlike a standard shift, where bits are moved to the left or
+                        right with zeros filling the gaps, a circular shift wraps the bits around, creating a continuous
+                        loop.</li>
+                    <li>This process enhances diffusion in the encryption process. Diffusion means that a change in one
+                        bit of the input will affect multiple bits in the output, which increases security. Circular
+                        shifts are often combined with other transformations like S-Boxes and P-Boxes to form complex
+                        encryption algorithms.</li>
+                </ul>
+
+                <p><strong>Example:</strong></p>
+                <p>For instance, if we have a 4-bit input: <strong>1011</strong>, performing a circular left shift by 1
+                    results in: <strong>0111</strong>. Here, the leftmost bit '1' moves to the rightmost position,
+                    illustrating how the bits wrap around.</p>
+
+                <p><strong>Role of Circular Shift in Encryption:</strong></p>
+                <ul>
+                    <li>The main goal of using circular shifts in encryption is to achieve better diffusion. This
+                        obscures the relationship between the plaintext and ciphertext, making it harder for attackers
+                        to decipher the encrypted data.</li>
+                    <li>In modern block ciphers, circular shifts are applied in multiple rounds, ensuring extensive
+                        transformation of the data, which enhances overall security.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Product Cipher</h3>
+                <ul>
+                    <li>A Product Cipher is a type of encryption that combines multiple encryption methods to enhance
+                        security. By using more than one encryption technique, it increases the complexity of the
+                        encryption process, making it more resistant to cryptographic attacks.</li>
+                    <li>This approach typically involves applying a series of transformations, such as substitutions and
+                        permutations, in succession. The idea is to layer these operations to obscure the relationship
+                        between the plaintext and ciphertext.</li>
+                </ul>
+
+                <p><strong>Example:</strong></p>
+                <p>Imagine we have a plaintext block and we want to encrypt it using two methods: an S-Box for
+                    substitution followed by a P-Box for permutation. The process would look like this:</p>
+                <ul>
+                    <li>Step 1: Apply the S-Box to the plaintext to produce an intermediate output.</li>
+                    <li>Step 2: Use the P-Box on the intermediate output to create the final ciphertext.</li>
+                </ul>
+
+                <p>This combination of methods ensures that even if one method is compromised, the overall security of
+                    the product cipher remains intact due to the additional layers of encryption.</p>
+
+                <p><strong>Role of Product Ciphers in Encryption:</strong></p>
+                <ul>
+                    <li>The primary goal of product ciphers is to enhance security by using multiple layers of
+                        encryption. This significantly complicates any attempts to analyze or break the cipher, as
+                        attackers would need to decipher each layer individually.</li>
+                    <li>Modern encryption algorithms often use product ciphers because they combine the strengths of
+                        different techniques, providing a robust framework for secure communication.</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Thoughts of Feistel Design</h2>
+            <p>Having explored the concept of product ciphers, we now delve into the Feistel design, a critical
+                framework that enhances the security of block ciphers. While product ciphers layer various encryption
+                techniques, the Feistel structure uniquely organizes these processes to allow for a more efficient and
+                secure encryption method. This design is foundational for many modern encryption algorithms, including
+                DES. Understanding the principles behind the Feistel design is essential as it demonstrates how multiple
+                rounds of processing can effectively obscure relationships between plaintext and ciphertext, thereby
+                strengthening overall security.</p>
+            <div class="in">
+                <h3>Feistel Cipher</h3>
+                <p>The Feistel cipher is a symmetric encryption method used in modern block ciphers. Named after Horst
+                    Feistel, this design breaks the encryption process into multiple rounds, enhancing security while
+                    maintaining efficiency. The structure allows for both encryption and decryption to use the same
+                    algorithm, making it versatile.</p>
+                <h3>How the Feistel Cipher Works</h3>
+                <p>The Feistel cipher operates on a block of plaintext, dividing it into two halves. The encryption
+                    process involves multiple rounds, where each round applies a series of transformations using a round
+                    key derived from the original encryption key. Here's a step-by-step explanation of how the Feistel
+                    cipher functions:</p>
+                <ul>
+                    <li><strong>Input:</strong> The plaintext is split into two halves: <em>Left (L)</em> and <em>Right
+                            (R)</em>.</li>
+                    <li><strong>Round Function:</strong> In each round, a function (often denoted as <em>F</em>)
+                        processes the right half and the round key (K1, K2, etc.) through an XOR operation.</li>
+                    <li><strong>XOR Operation:</strong> The output of the round function is then XORed with the left
+                        half.</li>
+                    <li><strong>Swapping:</strong> After each round, the halves are swapped. This means the output from
+                        the first half becomes the input for the second round, and vice versa.</li>
+                    <li><strong>Repetition:</strong> This process is repeated for a specified number of rounds (usually
+                        16 or more).</li>
+                    <li><strong>Final Output:</strong> After completing all rounds, the combined halves produce the
+                        final ciphertext.</li>
+                </ul>
+                <img src="../../images/cry12.jpeg" alt="">
+
+                <h3>Key Points</h3>
+                <ul>
+                    <li>The Feistel structure allows for both encryption and decryption using the same function,
+                        enhancing its efficiency.</li>
+                    <li>By repeating the process for multiple rounds, the Feistel cipher effectively obscures the
+                        relationship between plaintext and ciphertext, increasing security.</li>
+                    <li>This design forms the basis for well-known encryption standards like DES (Data Encryption
+                        Standard).</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="wh">
+            <h2>Data Encryption Standard (DES)</h2>
+            <ul>
+                <li>Symmetric key-block cipher which means its having same key for encryption + decryption</li>
+                <li>published by (NIST) NAtional institute of standards and technology</li>
+                <li>DES is block cipher</li>
+                <li>and as we already know about fiestel cipher so basicallly DES uses 16 rounds and each round is a
+                    fiestel
+                    round</li>
+                <li>It became widely used for secure data transmission. DES encrypts data in fixed-size blocks of 64
+                    bits
+                    and uses a 56-bit key to control the encryption process. Symmetric key cryptography means the same
+                    key
+                    is used for both encryption and decryption.</li>
+                <li>However, due to advances in computing power, DES has become less secure over time because its key
+                    length
+                    (56 bits) is vulnerable to brute-force attacks. For this reason, DES has largely been replaced by
+                    stronger encryption algorithms like AES, but understanding DES is important for learning about the
+                    history of cryptography and encryption techniques.</li>
+                <li>Steps of DES are:
+                    <ol>
+                        <li>Initial Permutation (IP): The 64-bit plaintext is rearranged based on a predefined table.
+                        </li>
+                        <li>16 Feistel Rounds: The data goes through 16 rounds of Feistel structure processing, where
+                            each
+                            round uses a different 48-bit subkey.</li>
+                        <li>Final Permutation (FP): After the 16 rounds, the bits are rearranged again to form the
+                            64-bit
+                            ciphertext.</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>General Structure of DES:</h3>
+                <img src="../../images/cry13.jpeg" alt="">
+                <p><strong>Explanation of the General Structure of DES:</strong></p>
+                <ul>
+                    <li>In DES, encryption starts with a 64-bit plaintext. This plaintext first goes through an Initial
+                        Permutation (IP), where the bits are rearranged based on a fixed table. After this, the data
+                        undergoes 16 rounds of encryption, following a Feistel cipher structure.</li>
+                    <li>In each round, the plaintext is split into two halves: the left (L) and right (R). The right
+                        half is
+                        transformed, and the left half is XORed with the transformed right half. This process ensures
+                        confusion and diffusion, key cryptographic principles that scramble the data to secure it.</li>
+                    <li>At the end of 16 rounds, the two halves are recombined and passed through a Final Permutation
+                        (FP),
+                        which rearranges the bits again. This gives the final 64-bit ciphertext.</li>
+                    <li>For the 16 rounds, we need different keys. DES uses a 56-bit cipher key, but it generates a
+                        48-bit
+                        subkey for each round through the round key generation process. Even though we start with a
+                        56-bit
+                        key, each round uses a different 48-bit subkey.</li>
+                    <li>Remember, DES follows the Feistel cipher model, so the encryption process can be easily reversed
+                        during decryption.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Inital and final permutation</h3>
+                <ul>
+                    <li>The Data Encryption Standard (DES) uses an initial permutation (IP) and a final permutation (FP)
+                        as
+                        part of its encryption and decryption process. These permutations do not contribute to the
+                        security
+                        of the algorithm but serve to reorder the bits in a structured way before and after the core
+                        encryption process (Feistel rounds).</li>
+                </ul>
+                <p><strong>Inital Permutation (IP)</strong></p>
+                <ul>
+                    <li>The initial permutation occurs once at the start of DES, before the 16 Feistel rounds begin.
+                    </li>
+                    <li>It rearranges the 64 bits of plaintext into a new order based on a predefined table.</li>
+                </ul>
+                <p>Initial Permutation Table (IP Table)</p>
+                <img src="../../images/cry14.png" alt="">
+                <ul>
+                    <li>In this example, the 1st bit of the plaintext is moved to the 58th position, the 2nd bit to the
+                        50th
+                        position, and so on, following this table. The table continues for all 64 bits. This reordering
+                        of
+                        bits makes the structure of the message harder to analyze but does not encrypt the data itself.
+                    </li>
+                </ul>
+                <p><strong>Purpose of Initial and Final Permutations</strong></p>
+                <ul>
+                    <li>Increase complexity: While the initial and final permutations do not directly enhance security,
+                        they
+                        increase the complexity of analyzing the DES process. The initial permutation scrambles the
+                        input
+                        data, and the final permutation undoes the scrambling after encryption.</li>
+                    <li>Prepare data for Feistel rounds: The initial permutation reorders bits to create a format that
+                        feeds
+                        into the Feistel structure, which performs the core encryption.</li>
+                </ul>
+                <p><strong>Final Permutation (FP)</strong></p>
+                <ul>
+                    <li>The final permutation occurs after the 16 Feistel rounds. It is the exact inverse of the initial
+                        permutation, restoring the bit order so that the output appears scrambled in the same way the
+                        plaintext was originally.</li>
+                </ul>
+                <p>Final Permutation Table (FP Table)</p>
+                <img src="../../images/cry15.png" alt="">
+                <ul>
+                    <li>In this table, the 58th bit from the result of the Feistel rounds becomes the 1st bit of the
+                        final
+                        ciphertext. This reverse operation ensures that the bit positions are restored after being
+                        scrambled
+                        by the initial permutation.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Rounds:</h3>
+                <ul>
+                    <li>There are 16 rounds and each round is a Fiestel Cipher.</li>
+                    <li>In the Feistel cipher structure used by DES, the 64-bit plaintext is divided into two equal
+                        halves:
+                        <ul>
+                            <li>The left half, denoted as L1, is 32 bits.</li>
+                            <li>The right half, denoted as R1, is also 32 bits.</li>
+                        </ul>
+                        <p>Only the right half (R1) and the first round key (K1) are passed through the DES function.
+                            The
+                            output of this DES function is then XORed with the left half (L1). After this XOR operation,
+                            the
+                            left and right halves are swapped. This process of dividing, processing, XORing, and
+                            swapping
+                            continues for a total of 16 rounds. Each round uses a unique 48-bit round key.</p>
+                        <p>The DES function plays a crucial role in each round. Therefore, it is important to understand
+                            the
+                            structure and operations within the DES function to comprehend how the encryption works in
+                            DES.
+                        </p>
+                    </li>
+                </ul>
+                <img src="../../images/cry16.jpeg" alt="">
+                <h3>DES Function</h3>
+                <ul>
+                    <li>The DES function applies a 48-bit key to the rightmost 32 bits of the input data block to
+                        produce a
+                        32-bit output.</li>
+                    <li>The following components are involved in this function:
+                        <ol>
+                            <li><strong>Expansion P-Box:</strong> Expands the 32-bit input to 48 bits by duplicating
+                                certain
+                                bits to create 8 groups of 6 bits.</li>
+                            <li><strong>Whitener (XOR Operation):</strong> The expanded 48-bit data is XORed with a
+                                48-bit
+                                subkey derived from the main key.</li>
+                            <li><strong>Group of S-Boxes:</strong> The 48-bit output from the XOR operation is passed
+                                through 8 substitution boxes (S-boxes). Each S-box reduces 6 bits of input into 4 bits
+                                of
+                                output, resulting in a 32-bit output.</li>
+                            <li><strong>Straight P-Box:</strong> This 32-bit output is permuted through a straight
+                                P-Box,
+                                which reorders the bits in a predefined manner, producing the final 32-bit output.</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <p><strong>Function Diagram:</strong></p>
+                <img src="../../images/cry17.jpeg" alt="DES Function Diagram">
+
+                <p>The explanation of the DES function is as follows: <br>
+                    The 32-bit right half of the input block is first sent to the <strong>Expansion P-Box</strong>,
+                    which
+                    expands it to 48 bits by replicating certain bits. This 48-bit value is then XORed with a 48-bit
+                    subkey
+                    generated from the main DES key. The result of this XOR operation is passed through 8
+                    <strong>S-Boxes</strong>, where each group of 6 bits is substituted with a 4-bit output, leading to
+                    a
+                    final output of 32 bits. <br>
+                    This 32-bit output is then permuted using the <strong>Straight P-Box</strong>, which rearranges the
+                    bits
+                    into a fixed order, producing the final 32-bit result, which is combined back into the overall DES
+                    structure.
+                </p>
+
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Cryptanalysis</h2>
+            <p>
+                <strong>Cryptanalysis</strong> is the study of methods used to break cryptographic systems and decrypt
+                messages without knowing the secret key. The main goal of cryptanalysis is to discover weaknesses or
+                vulnerabilities in the algorithms that allow an attacker to bypass the encryption and access the
+                original data. Cryptanalysis is considered a critical part of cryptography because it helps improve the
+                security of encryption methods by identifying potential flaws.
+                <br><br>
+                There are various techniques used in cryptanalysis, but two common types that focus on analyzing block
+                ciphers are <strong>Differential Cryptanalysis</strong> and <strong>Linear Cryptanalysis</strong>. These
+                methods are particularly important in testing the strength of algorithms like the Data Encryption
+                Standard (DES).
+            </p>
+
+            <div class="in">
+                <h3>Differential Cryptanalysis</h3>
+                <p>
+                    <strong>Differential Cryptanalysis</strong> is one of the most well-known techniques used to break
+                    block
+                    ciphers. It was developed in the late 1980s and involves analyzing how differences in the input data
+                    affect the differences in the output data. The goal is to study the propagation of differences
+                    through
+                    the cipher and exploit patterns that can reveal information about the key.
+                </p>
+                <ul>
+                    <li><strong>Basic Concept:</strong> In differential cryptanalysis, an attacker examines pairs of
+                        plaintexts that have specific differences (such as flipping certain bits) and compares how these
+                        differences propagate through multiple rounds of encryption.</li>
+                    <li><strong>Objective:</strong> The goal is to find correlations between input differences and
+                        output
+                        differences that occur with higher probabilities than expected by random chance. By identifying
+                        these patterns, an attacker can make educated guesses about parts of the secret key.</li>
+                    <li><strong>Application to DES:</strong> Differential cryptanalysis was one of the first attacks
+                        that
+                        showed DES has some vulnerabilities, although DES is still considered secure against this attack
+                        when a full 16-round encryption process is used.</li>
+                </ul>
+
+                <h4>Steps in Differential Cryptanalysis:</h4>
+                <ol>
+                    <li><strong>Choose a Pair of Plaintexts:</strong> The attacker selects two plaintexts that differ by
+                        a
+                        specific amount, usually by flipping certain bits.</li>
+                    <li><strong>Encrypt the Plaintexts:</strong> Both plaintexts are encrypted using the block cipher
+                        (without knowing the key).</li>
+                    <li><strong>Analyze the Differences:</strong> The attacker analyzes the difference between the
+                        ciphertexts and looks for patterns that are common or occur with higher probability.</li>
+                    <li><strong>Guess Part of the Key:</strong> Based on the observed patterns, the attacker can make
+                        guesses about part of the secret key and narrow down the possibilities.</li>
+                    <li><strong>Iterate the Process:</strong> This process is repeated with different pairs of
+                        plaintexts to
+                        gather more information about the key until the key is fully recovered.</li>
+                </ol>
+
+                <p>
+                    Differential cryptanalysis is a powerful attack that can break ciphers, but modern ciphers are
+                    designed
+                    with this attack in mind and have defenses to prevent it from being effective.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Linear Cryptanalysis</h3>
+                <p>
+                    <strong>Linear Cryptanalysis</strong> is another well-known method for breaking block ciphers. It
+                    was
+                    developed shortly after differential cryptanalysis and is based on finding linear approximations
+                    that
+                    describe the relationship between the plaintext, ciphertext, and key. The goal of linear
+                    cryptanalysis
+                    is to exploit statistical biases in these relationships to recover the key.
+                </p>
+                <ul>
+                    <li><strong>Basic Concept:</strong> In linear cryptanalysis, the attacker attempts to create linear
+                        equations that approximate the encryption process. These equations relate specific bits of the
+                        plaintext and ciphertext to bits of the key. By analyzing many such equations, the attacker can
+                        identify patterns that help them deduce the key.</li>
+                    <li><strong>Objective:</strong> The main objective is to find linear approximations that hold true
+                        with
+                        a probability higher than random chance (greater than 50%). The more often these approximations
+                        hold, the more information the attacker can gather about the key.</li>
+                    <li><strong>Application to DES:</strong> Linear cryptanalysis has been successfully used against
+                        DES,
+                        but like differential cryptanalysis, it is not effective against the full 16 rounds of DES
+                        encryption.</li>
+                </ul>
+
+                <h4>Steps in Linear Cryptanalysis:</h4>
+                <ol>
+                    <li><strong>Collect Plaintext and Ciphertext Pairs:</strong> The attacker collects a large number of
+                        known plaintext-ciphertext pairs that have been encrypted using the same secret key.</li>
+                    <li><strong>Analyze the Data:</strong> The attacker looks for linear patterns that relate specific
+                        bits
+                        of the plaintext and ciphertext to bits of the key.</li>
+                    <li><strong>Create Linear Approximation Equations:</strong> These linear equations approximate the
+                        encryption process. Each equation gives a clue about a small part of the key.</li>
+                    <li><strong>Count Occurrences:</strong> The attacker calculates how often these linear
+                        approximations
+                        hold true for the collected data. If the approximations hold true more than 50% of the time,
+                        they
+                        are considered useful.</li>
+                    <li><strong>Guess the Key:</strong> Based on the useful approximations, the attacker makes educated
+                        guesses about the key bits and iteratively refines the guesses.</li>
+                </ol>
+
+                <p>
+                    Linear cryptanalysis is more complex than differential cryptanalysis and often requires a large
+                    number
+                    of known plaintext-ciphertext pairs to succeed. However, it remains an important tool in evaluating
+                    the
+                    security of block ciphers.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Comparison of Differential and Linear Cryptanalysis</h3>
+                <p>
+                    Both differential and linear cryptanalysis are powerful tools for breaking block ciphers, but they
+                    use
+                    different approaches:
+                </p>
+                <ul>
+                    <li><strong>Differential Cryptanalysis:</strong> Focuses on analyzing how differences in input
+                        affect
+                        differences in output and looks for patterns in these differences.</li>
+                    <li><strong>Linear Cryptanalysis:</strong> Focuses on creating linear approximations between the
+                        input
+                        and output and looks for statistical biases in these approximations.</li>
+                </ul>
+            </div>
+
+            <p>
+                Modern cryptographic algorithms are designed with defenses against these attacks, but understanding them
+                is essential for evaluating the security of any cipher.
+            </p>
+        </div>
+        <div class="wh">
+            <h2>Block Cipher Design Principles</h2>
+            <p>
+                A <strong>block cipher</strong> is a method of encrypting text where a cryptographic key and algorithm
+                are applied to a block of data (often 64 or 128 bits) as a single unit, rather than one bit at a time
+                like in stream ciphers. The design of block ciphers is based on several principles that ensure the
+                cipher is secure and resistant to various forms of cryptanalysis.
+                <br><br>
+                There are three important design principles when creating a block cipher: the number of rounds, the
+                design of the function <strong>f</strong>, and the key schedule algorithm. These factors work together
+                to ensure that the encryption is strong, difficult to break, and resistant to known cryptanalysis
+                methods like differential and linear cryptanalysis.
+            </p>
+            <div class="in">
+                <h3>1. Number of Rounds</h3>
+                <p>
+                    The <strong>number of rounds</strong> in a block cipher refers to how many times the encryption
+                    process
+                    is applied to the data. Each round consists of several transformations that increase the complexity
+                    of
+                    the ciphertext, making it harder for an attacker to reverse-engineer or guess the original
+                    plaintext.
+                </p>
+                <ul>
+                    <li><strong>Why Rounds Matter:</strong> The more rounds a cipher has, the more difficult it becomes
+                        for
+                        an attacker to break it. Each round scrambles the data further, adding layers of complexity. In
+                        practice, ciphers like DES use 16 rounds, while more modern ciphers like AES can use 10, 12, or
+                        14
+                        rounds depending on the key size.</li>
+                    <li><strong>Security vs. Efficiency:</strong> While more rounds increase security, they also make
+                        encryption and decryption slower. The goal is to find a balance between security and
+                        performance.
+                    </li>
+                    <li><strong>Role in Cryptanalysis Resistance:</strong> Block ciphers are designed with enough rounds
+                        to
+                        resist cryptanalysis methods like differential and linear cryptanalysis. Each round adds more
+                        diffusion and confusion, which are key to making the encryption secure.</li>
+                </ul>
+                <p>
+                    In general, the number of rounds should be large enough to ensure that attacks become
+                    computationally
+                    infeasible. Fewer rounds may leave the cipher vulnerable to certain attacks, while too many rounds
+                    can
+                    lead to unnecessary inefficiency.
+                </p>
+            </div>
+            <div class="in">
+                <h3>2. Design of Function f</h3>
+                <p>
+                    The <strong>function f</strong> is a critical component of many block ciphers, especially in
+                    Feistel-based ciphers like DES. It is applied to part of the data and combined with the other half
+                    using
+                    operations like XOR. The security of the cipher heavily depends on how well the function f is
+                    designed.
+                </p>
+                <ul>
+                    <li><strong>Confusion and Diffusion:</strong> The function f should introduce confusion and
+                        diffusion in
+                        the data. Confusion refers to making the relationship between the key and ciphertext as complex
+                        as
+                        possible, while diffusion ensures that changes in the input are spread widely across the output.
+                    </li>
+                    <li><strong>Non-Linearity:</strong> The function f must be non-linear, meaning that it should be
+                        difficult to express as a simple mathematical formula. Non-linearity helps prevent attackers
+                        from
+                        using algebraic methods to break the cipher.</li>
+                    <li><strong>S-Boxes:</strong> In many block ciphers, function f includes substitution boxes
+                        (S-boxes),
+                        which map input bits to output bits in a complex, non-linear way. The design of S-boxes is
+                        crucial
+                        because weak S-boxes can lead to vulnerabilities.</li>
+                    <li><strong>Permutation (P-Boxes):</strong> Some ciphers also include P-boxes (permutation boxes)
+                        within
+                        function f. P-boxes rearrange the bits in the data, spreading out the influence of individual
+                        bits
+                        across the block to provide better diffusion.</li>
+                </ul>
+                <p>
+                    The design of function f must be carefully tested to ensure it resists all known attacks. It must
+                    also
+                    be efficient so that encryption and decryption can be performed quickly without sacrificing
+                    security.
+                </p>
+            </div>
+            <div class="in">
+                <h3>3. Key Schedule Algorithm</h3>
+                <p>
+                    The <strong>key schedule algorithm</strong> is responsible for generating the subkeys used in each
+                    round
+                    of encryption. Instead of using the same key for every round, most block ciphers break the main key
+                    into
+                    several subkeys, which are then applied during the encryption process.
+                </p>
+                <ul>
+                    <li><strong>Generating Subkeys:</strong> The key schedule algorithm takes the original encryption
+                        key
+                        and derives several subkeys from it. Each round uses a different subkey, which adds complexity
+                        to
+                        the encryption process.</li>
+                    <li><strong>Security Considerations:</strong> The key schedule should ensure that the subkeys are
+                        sufficiently different from one another. If subkeys are too similar, it could weaken the
+                        encryption
+                        and make it more susceptible to attacks.</li>
+                    <li><strong>Role in Resisting Attacks:</strong> A strong key schedule algorithm helps protect
+                        against
+                        attacks like related-key attacks, where an attacker tries to exploit the relationship between
+                        different subkeys. It also prevents weaknesses that could arise if the same key is reused in
+                        every
+                        round.</li>
+                    <li><strong>Efficient Key Expansion:</strong> The key schedule must be efficient enough to generate
+                        subkeys quickly without compromising security. In some algorithms like AES, the key schedule
+                        includes both substitution and permutation steps to enhance security.</li>
+                </ul>
+                <p>
+                    A well-designed key schedule algorithm ensures that the block cipher remains secure even if an
+                    attacker
+                    knows part of the plaintext or ciphertext. It adds an extra layer of protection by diversifying how
+                    the
+                    key is used in each round.
+                </p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Block Cipher Modes of Operation</h2>
+            <p>
+                A block cipher works by encrypting data in fixed-size blocks (like 64 or 128 bits). To encrypt larger
+                messages, block ciphers need specific methods to handle data beyond a single block. These methods are
+                called <strong>modes of operation</strong>. Each mode describes how blocks of plaintext are encrypted or
+                decrypted, and each has its own strengths and weaknesses depending on the use case.
+            </p>
+            <p>
+                The most commonly used block cipher modes of operation are:
+            </p>
+            <ol>
+                <li>Electronic Codebook (ECB)</li>
+                <li>Cipher Block Chaining (CBC)</li>
+                <li>Cipher Feedback (CFB)</li>
+                <li>Output Feedback (OFB)</li>
+                <li>Counter Mode (CTR)</li>
+            </ol>
+            <div class="in">
+                <h3>1. Electronic Codebook (ECB)</h3>
+                <p>
+                    The <strong>Electronic Codebook (ECB)</strong> is the simplest mode of operation where each block of
+                    plaintext is encrypted separately with the same key.
+                </p>
+                <ul>
+                    <li> The plaintext is divided into blocks, and each block is encrypted
+                        individually using the block cipher. The same key is used for each block, and there is no link
+                        between blocks.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2. Cipher Block Chaining (CBC)</h3>
+                <p>
+                    The <strong>Cipher Block Chaining (CBC)</strong> mode improves upon ECB by introducing an initial
+                    random input known as the Initialization Vector (IV) and linking the encryption of each block to the
+                    previous one.
+                </p>
+                <ul>
+                    <li>In CBC, the plaintext block is XORed with the previous ciphertext block before
+                        encryption. This ensures that the encryption of each block depends on the previous one,
+                        adding security.</li>
+                    <li>The first block is XORed with an IV to prevent identical plaintext blocks from producing
+                        identical ciphertext blocks.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>3. Cipher Feedback (CFB)</h3>
+                <p>
+                    The <strong>Cipher Feedback (CFB)</strong> mode is a mode of operation that turns a block cipher
+                    into a stream cipher. It allows encryption of smaller units of data, such as bits or bytes, rather
+                    than blocks.
+                </p>
+                <ul>
+                    <li>CFB works by encrypting the previous ciphertext block (or IV for the first block) and
+                        then XORing the encrypted block with the plaintext. The result is the next ciphertext
+                        block.</li>
+                    <li>Like CBC, CFB uses an IV for the first block to ensure security, and the subsequent
+                        ciphertext blocks depend on the previous ones.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>4. Output Feedback (OFB)</h3>
+                <p>
+                    The <strong>Output Feedback (OFB)</strong> mode is similar to CFB but with a key difference: instead
+                    of encrypting the previous ciphertext block, OFB continuously encrypts the IV (or its output) to
+                    create a stream of key bits.
+                </p>
+                <ul>
+                    <li>In OFB, the IV is encrypted to produce a keystream, which is then XORed with the
+                        plaintext to produce ciphertext. This process continues for each subsequent block by
+                        encrypting the previous keystream output.</li>
+                    <li>This mode effectively turns a block cipher into a synchronous stream cipher.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>5. Counter Mode (CTR)</h3>
+                <p>
+                    The <strong>Counter Mode (CTR)</strong> is a highly efficient mode of operation that also turns a
+                    block cipher into a stream cipher. It is especially useful for parallel processing and offers many
+                    advantages over other modes.
+                </p>
+                <ul>
+                    <li>CTR works by encrypting a counter value (a unique number for each block) and then XORing
+                        the result with the plaintext to produce the ciphertext. The counter is incremented for
+                        each block.</li>
+                    <li>The counter ensures that each block is encrypted with a different key stream, even if
+                        the plaintext blocks are identical.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Multiple DES</h2>
+            <p>
+                <strong>Multiple DES (Data Encryption Standard)</strong> refers to the use of DES encryption multiple
+                times to increase security. While standard DES uses a single 56-bit key, Multiple DES applies the
+                encryption process more than once, using different keys. This method was introduced to overcome the
+                vulnerabilities of single DES.
+            </p>
+            <p>
+                The two most popular implementations of Multiple DES are:
+            </p>
+            <ol>
+                <li>Double DES (2DES)</li>
+                <li>Triple DES (3DES)</li>
+            </ol>
+            <div class="in">
+                <h3>1. Double DES (2DES)</h3>
+                <p>
+                    <strong>Double DES</strong> involves applying DES encryption twice using two different keys. The
+                    goal is
+                    to improve security by increasing the key length from 56 bits (in DES) to 112 bits.
+                </p>
+                <ul>
+                    <li><strong>How It Works:</strong>
+                        <ul>
+                            <li>In 2DES, the plaintext is first encrypted with the first key (K1), and the resulting
+                                ciphertext is then encrypted again with the second key (K2).</li>
+                            <li>Decryption involves reversing the process: first decrypting with K2 and then with K1.
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Double DES Process:</strong></li>
+
+                    <img src="../../images/cry18.jpeg" alt="">
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Increases key length from 56 bits to 112 bits, improving resistance to brute force
+                                attacks.
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Disadvantages:</strong>
+                        <ul>
+                            <li>Still vulnerable to certain cryptographic attacks, such as the
+                                <strong>meet-in-the-middle
+                                    attack</strong>, which reduces the effective key length to around 57 bits.
+                            </li>
+                            <li>Does not provide a significant security improvement over single DES due to the
+                                meet-in-the-middle attack.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2. Triple DES (3DES)</h3>
+                <p>
+                    <strong>Triple DES</strong> (also known as TDES or 3DES) was designed to further enhance security by
+                    applying DES three times with two or three different keys. This process creates a much stronger
+                    encryption method than Double DES.
+                </p>
+                <ul>
+                    <li><strong>How It Works:</strong>
+                        <ul>
+                            <li>3DES encrypts the plaintext with the first key (K1), then decrypts it with the second
+                                key (K2), and finally encrypts it again with the third key (K3). This triple application
+                                of DES increases security significantly.</li>
+                            <li>When using two keys (K1 = K3), the process is still called 3DES, but with only two
+                                unique keys.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Triple DES Process:</strong></li>
+                    <img src="../../images/cry19.jpeg" alt="">
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Increases the key length to 168 bits, making it much more resistant to brute force
+                                attacks than DES or 2DES.</li>
+                            <li>Provides significantly stronger security due to the three stages of encryption and
+                                decryption.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Disadvantages:</strong>
+                        <ul>
+                            <li>3DES is relatively slow compared to modern block ciphers like AES, as it applies DES
+                                three times.</li>
+                            <li>It is still vulnerable to certain attacks but far less so than 2DES.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Introduction to AES</h2>
+            <p>
+                <strong>Advanced Encryption Standard (AES)</strong> is a symmetric key encryption algorithm widely used
+                to secure sensitive data. AES was introduced as a replacement for the Data Encryption Standard (DES),
+                which became vulnerable to brute-force attacks due to its shorter key length. AES is known for its
+                speed, security, and efficiency, making it the preferred standard for modern encryption.
+            </p>
+
+            <div class="in">
+                <h3>Why AES Replaced DES</h3>
+                <p>
+                    DES, with its 56-bit key length, was susceptible to brute-force attacks. As computational power
+                    increased, breaking DES became more feasible. To address these vulnerabilities, the National
+                    Institute
+                    of Standards and Technology (NIST) initiated a search for a stronger encryption algorithm. In 2001,
+                    NIST
+                    selected AES, which uses longer key lengths and is much harder to break than DES.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>AES Key Features</h3>
+                <ul>
+                    <li><strong>Key Length:</strong> AES supports key sizes of 128, 192, or 256 bits, offering stronger
+                        security than DES’s 56-bit key.</li>
+                    <li><strong>Block Size:</strong> AES encrypts data in blocks of 128 bits, unlike DES, which uses
+                        64-bit
+                        blocks.</li>
+                    <li><strong>Speed and Efficiency:</strong> AES is much faster than DES, especially on modern
+                        hardware,
+                        as it is designed for both software and hardware efficiency.</li>
+                    <li><strong>Security:</strong> AES provides excellent security against all known cryptographic
+                        attacks,
+                        making it highly reliable for securing sensitive data.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>How AES Works</h3>
+                <p>
+                    AES is a block cipher that operates on fixed-size blocks of data (128 bits) and applies several
+                    rounds
+                    of encryption to transform the plaintext into ciphertext. The number of rounds depends on the key
+                    length:
+                </p>
+                <ul>
+                    <li>10 rounds for 128-bit keys</li>
+                    <li>12 rounds for 192-bit keys</li>
+                    <li>14 rounds for 256-bit keys</li>
+                </ul>
+
+                <h4>Main Steps of AES Encryption</h4>
+                <ul>
+                    <li><strong>1. Key Expansion:</strong> The original key is expanded into multiple round keys, one
+                        for
+                        each round of encryption.</li>
+                    <li><strong>2. Initial Round (AddRoundKey):</strong> The initial key is XORed with the plaintext
+                        block.
+                    </li>
+                    <li><strong>3. Rounds:</strong> Each round involves the following steps:
+                        <ol>
+                            <li><strong>SubBytes:</strong> A non-linear substitution step where each byte of the block
+                                is
+                                replaced using a substitution table (S-box).</li>
+                            <li><strong>ShiftRows:</strong> The rows of the block are shifted cyclically to the left,
+                                increasing diffusion.</li>
+                            <li><strong>MixColumns:</strong> Columns of the block are mixed together using linear
+                                algebra to
+                                enhance security (not used in the final round).</li>
+                            <li><strong>AddRoundKey:</strong> The current block is XORed with the round key generated
+                                from
+                                the original key.</li>
+                        </ol>
+                    </li>
+                    <li><strong>4. Final Round:</strong> The last round omits the MixColumns step and consists of
+                        SubBytes,
+                        ShiftRows, and AddRoundKey operations.</li>
+                </ul>
+            </div>
+
+
+            <div class="in">
+                <h3>Security Strength of AES</h3>
+                <p>
+                    AES is highly secure due to its use of longer key lengths and more complex encryption rounds
+                    compared to DES. Its strength lies in its resistance to various cryptographic attacks:
+                </p>
+                <ul>
+                    <li><strong>Brute-Force Attacks:</strong> AES’s key lengths (128, 192, and 256 bits) make
+                        brute-force attacks impractical, even with modern computing power.</li>
+                    <li><strong>Linear and Differential Cryptanalysis:</strong> AES is designed to resist both linear
+                        and differential cryptanalysis, which are common methods for breaking symmetric ciphers.</li>
+                    <li><strong>Side-Channel Attacks:</strong> While AES itself is secure, implementations of AES must
+                        be protected against side-channel attacks, such as timing attacks and power analysis attacks.
+                    </li>
+                </ul>
+            </div>
+            <p>
+                AES has become the global standard for symmetric key encryption due to its high security, efficiency,
+                and flexibility. It is widely used in applications such as secure communications, data storage, and
+                payment systems. Unlike DES, which had limitations due to its shorter key length and vulnerabilities to
+                attacks, AES offers stronger encryption with more complex rounds, making it highly resistant to modern
+                cryptographic threats.
+            </p>
+
+        </div>
+    </div>
+    <div class="wh">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=uVeChiA_yv0" target="_blank">Feistel Cipher Video Lecture
+                    &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=QjSWXj4gKBw" target="_blank">DES Introduction, General
+                    Structure, DES Function, DES Key Generation, DES Rounds video lecture &neArr;</a></li>
+            <li><a href="https://chatgpt.com" target="_blank">ChatGPT - Guru &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

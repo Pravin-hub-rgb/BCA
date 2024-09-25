@@ -1,93 +1,4 @@
-// // Function to update commit info and theme and semester
-// document.addEventListener("DOMContentLoaded", function () {
-//   updateCommitInfo();
-//   setInterval(updateCommitInfo, 3600000); // Update every hour
-
-//   // Load the saved theme and apply it
-//   const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no saved theme
-//   setTheme(savedTheme); // Apply the saved or default theme
-
-//   // Load the saved semester
-//   loadSemester();
-
-//   // Update Highlight.js stylesheet based on the current theme
-//   const linkElement = document.getElementById('highlightStylesheet');
-//   if (linkElement) {
-//     linkElement.href = savedTheme === 'dark'
-//       ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css'
-//       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/arduino-light.min.css';
-//   }
-// });
-
-// // Function to save the selected semester to localStorage
-// function saveSemester() {
-//   const semesterElement = document.getElementById("semester");
-//   if (semesterElement) {
-//     const semester = semesterElement.value;
-//     localStorage.setItem("selectedSemester", semester);
-//     showSemester(semester);
-//   }
-// }
-
-// // Function to load the saved semester from localStorage
-// function loadSemester() {
-//   const savedSemester = localStorage.getItem("selectedSemester");
-//   const semesterElement = document.getElementById("semester");
-//   if (semesterElement) {
-//     const semesterToLoad = savedSemester || "1"; // Default to "1" if no saved semester
-//     semesterElement.value = semesterToLoad;
-//     showSemester(semesterToLoad);
-//   }
-// }
-
-// // Function to display the selected semester's content
-// function showSemester(semester) {
-//   const semDivs = document.querySelectorAll(".sem");
-//   semDivs.forEach(div => {
-//     if (div.getAttribute("data-semester") === semester) {
-//       div.classList.add("activesem");
-//     } else {
-//       div.classList.remove("activesem");
-//     }
-//   });
-// }
-
-// // Function to set the theme
-// function setTheme(theme) {
-//   // Update the theme in localStorage
-//   localStorage.setItem('theme', theme);
-
-//   // Apply or remove the dark-mode class based on the selected theme
-//   if (theme === 'dark') {
-//     document.body.classList.add('dark-mode');
-//   } else {
-//     document.body.classList.remove('dark-mode');
-//   }
-
-//   // Update the theme select value
-//   const themeSelect = document.getElementById('themeSelect');
-//   if (themeSelect) {
-//     themeSelect.value = theme;
-//   }
-// }
-
-// // Event listener for semester change
-// const semesterElement = document.getElementById("semester");
-// if (semesterElement) {
-//   semesterElement.addEventListener('change', saveSemester);
-// }
-
-// // Event listener for theme change
-// const themeSelect = document.getElementById('themeSelect');
-// if (themeSelect) {
-//   themeSelect.addEventListener('change', (event) => {
-//     setTheme(event.target.value);
-//   });
-// }
-
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM fully loaded and parsed");
-
   // Update commit info
   updateCommitInfo();
   setInterval(updateCommitInfo, 3600000); // Update every hour
@@ -103,31 +14,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const themeSelectDesktop = document.getElementById('themeSelectDesktop');
 
   if (themeSelectMobile) {
-    console.log("Adding event listener to themeSelectMobile");
     themeSelectMobile.addEventListener('change', (event) => {
-      console.log("Theme changed via mobile select");
       setTheme(event.target.value);
     });
-  } else {
-    console.log("themeSelectMobile element not found");
   }
 
   if (themeSelectDesktop) {
-    console.log("Adding event listener to themeSelectDesktop");
     themeSelectDesktop.addEventListener('change', (event) => {
-      console.log("Theme changed via desktop select");
       setTheme(event.target.value);
     });
-  } else {
-    console.log("themeSelectDesktop element not found");
   }
 
   // Add event listener for semester change
   const semesterElement = document.getElementById("semester");
   if (semesterElement) {
     semesterElement.addEventListener('change', saveSemester);
-  } else {
-    console.log("semester element not found");
   }
 });
 
@@ -166,7 +67,6 @@ function showSemester(semester) {
 
 // Function to set the theme
 function setTheme(theme) {
-  console.log("Setting theme:", theme); // Debug log
   // Update the theme in localStorage
   localStorage.setItem('theme', theme);
 
@@ -342,4 +242,113 @@ allPre.forEach((tag) => {
   if (tag.firstChild) tag.firstChild.textContent = "";
   if (tag.lastChild) tag.lastChild.textContent = "";
 });
+
+
+// ****************** Searching Functionality ******************
+const subjects = [
+  { name: "Programming Concepts Using C Language", path: "./resources/sem1/programming concepts using C language/index.html" },
+  { name: "Programming Concept Using 'C' lab", path: "./resources/sem1/Programming in 'C' lab/index.html" },
+  { name: "PC Packages Lab", path: "./resources/sem1/PC packages lab/index.html" },
+  { name: "Computer Fundamentals and Information Technology", path: "./resources/sem1/Computer Fundamentals and Information Technology/index.html" },
+  { name: "Mathematical Foundation of Computer Science", path: "./resources/sem1/Mathematical Foundation of Computer Science/index.html" },
+  { name: "Professional Communication -1", path: "./resources/sem1/professional_communication-1/index.html" },
+  { name: "Health Education", path: "./resources/sem1/health_edu/health.html" },
+  { name: "Principle of Management", path: "./resources/sem1/principle_of_management/index.html" },
+  { name: "Data Structures and File Organization", path: "./resources/sem2/datastructure_and_FO/index.html" },
+  { name: "Data Structures lab", path: "./resources/sem2/datastructure_lab/index.html" },
+  { name: "Advance Concepts of 'C' Programming", path: "./resources/sem2/advance_C/index.html" },
+  { name: "Object Oriented Programming Using C++", path: "./resources/sem2/OOPS_using_C++/index.html" },
+  { name: "Operating System", path: "./resources/sem2/operating_sys/index.html" },
+  { name: "Digital Electronics", path: "./resources/sem2/digital_electronics/index.html" },
+  { name: "Discrete Mathematical Structures and Graph Theory", path: "./resources/sem2/maths/index.html" },
+  { name: "Wellness and Stress Management", path: "./resources/sem2/wellness/index.html" },
+  { name: "Data Communication and Computer Networks", path: "./resources/sem3/datatbc301/index.html" },
+  { name: "Database Management System", path: "./resources/sem3/dbmstbc302/index.html" },
+  { name: "DBMS Lab", path: "./resources/sem3/dbmslab/index.html" },
+  { name: "Java Programming", path: "./resources/sem3/javatbc303/index.html" },
+  { name: "Java lab", path: "./resources/sem3/javalab/index.html" },
+  { name: "Computer Organization and Architecture", path: "./resources/sem3/coatbc304/index.html" },
+  { name: "Software Engineering", path: "./resources/sem3/softetbc305/index.html" },
+  { name: "Career Skills-I", path: "./resources/sem3/careerxbc301/index.html" },
+  { name: "Data Analytics Using Python", path: "./resources/sem4/python_tbc401/index.html" },
+  { name: "Microprocessor", path: "./resources/sem4/micro_tbc402/index.html" },
+  { name: "Software Project Management and Information Systems", path: "./resources/sem4/soft_pro_tbc403/index.html" },
+  { name: "Web Technologies", path: "./resources/sem4/web_tbc404/index.html" },
+  { name: "Computer Based Numerical & Statistical Techniques", path: "./resources/sem4/comp_num_tbc405/index.html" },
+  { name: "Career Skills", path: "./resources/sem4/cs/index.html" },
+  { name: "CBNST Lab", path: "./resources/sem4/cbnstlab/index.html" },
+  { name: "Python lab", path: "./resources/sem4/pythonlab/index.html" },
+  { name: "Web Technologies lab", path: "./resources/sem4/weblab/index.html" },
+  { name: "Android Programming", path: "./resources/sem5/ap/index.html" },
+  { name: "Android Programming Lab", path: "./resources/sem5/aplab/index.html" },
+  { name: "Cryptography", path: "./resources/sem5/crypto/index.html" },
+  { name: "Optimization Techniques", path: "./resources/sem5/ot/index.html" },
+  { name: "Programming with .Net", path: "./resources/sem5/net/index.html" },
+  { name: "C# .Net Lab", path: "./resources/sem5/netlab/index.html" },
+  { name: "Soft Computing", path: "./resources/sem5/sc/index.html" }
+];
+
+
+
+const searchInput = document.getElementById('search');
+const suggestionsContainer = document.getElementById('suggestions');
+
+// Handle input event (when the user types)
+searchInput.addEventListener('input', function() {
+    const query = this.value.trim().toLowerCase();
+    
+    if (query === "") {
+        suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
+    } else {
+        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+        const suggestions = subjects.filter(subject => regex.test(subject.name));
+        displaySuggestions(suggestions);
+    }
+});
+
+// Handle focusout event (when the input loses focus)
+searchInput.addEventListener('focusout', function() {
+    const query = this.value.trim().toLowerCase();
+    
+    if (query === "") {
+        suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
+    }
+});
+
+// Handle focusin event (when the input regains focus)
+searchInput.addEventListener('focusin', function() {
+    const query = this.value.trim().toLowerCase();
+    
+    if (query !== "") {
+        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+        const suggestions = subjects.filter(subject => regex.test(subject.name));
+        displaySuggestions(suggestions);
+    }
+});
+
+function displaySuggestions(suggestions) {
+  const suggestionsContainer = document.getElementById('suggestions');
+  suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+  if (suggestions.length === 0) {
+      suggestionsContainer.innerText = "Not available"; // Show 'Not available' if no match
+  } else {
+      const ul = document.createElement('ul'); // Create a <ul> element to hold the list
+
+      suggestions.forEach(subject => {
+          const li = document.createElement('li'); // Create an <li> element
+          const anchor = document.createElement('a'); // Create an <a> element
+
+          anchor.innerText = subject.name; // Set the anchor text to the subject name
+          anchor.href = subject.path;      // Set the href attribute to the subject path
+
+          li.appendChild(anchor);          // Append the <a> to the <li>
+          ul.appendChild(li);              // Append the <li> to the <ul>
+      });
+
+      suggestionsContainer.appendChild(ul); // Append the <ul> to the container
+  }
+}
 
