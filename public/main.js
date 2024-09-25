@@ -364,7 +364,24 @@ searchInput.addEventListener('input', function () {
   } else {
     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`\\b${escapedQuery}`, 'i');
-    const suggestions = subjects.filter(subject => regex.test(subject.name));
+
+    // Filter subjects based on the search query
+    const suggestions = subjects
+      .filter(subject => regex.test(subject.name))
+      .sort((a, b) => {
+        // Prioritize subjects that start with the query
+        const aStartsWith = a.name.toLowerCase().startsWith(query);
+        const bStartsWith = b.name.toLowerCase().startsWith(query);
+
+        if (aStartsWith && !bStartsWith) {
+          return -1;
+        } else if (!aStartsWith && bStartsWith) {
+          return 1;
+        } else {
+          return a.name.localeCompare(b.name); // Otherwise sort alphabetically
+        }
+      });
+
     displaySuggestions(suggestions);
   }
 });
