@@ -88,7 +88,7 @@ function setTheme(theme) {
   // Update the theme select values
   const themeSelectMobile = document.getElementById('themeSelectMobile');
   const themeSelectDesktop = document.getElementById('themeSelectDesktop');
-  
+
   if (themeSelectMobile) {
     themeSelectMobile.value = theme;
   }
@@ -290,65 +290,100 @@ const subjects = [
 
 
 
+// const searchInput = document.getElementById('search');
+// const suggestionsContainer = document.getElementById('suggestions');
+
+// // Handle input event (when the user types)
+// searchInput.addEventListener('input', function() {
+//     const query = this.value.trim().toLowerCase();
+
+//     if (query === "") {
+//         suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
+//     } else {
+//         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+//         const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+//         const suggestions = subjects.filter(subject => regex.test(subject.name));
+//         displaySuggestions(suggestions);
+//     }
+// });
+
+// // Handle focusout event (when the input loses focus)
+// searchInput.addEventListener('focusout', function() {
+//     const query = this.value.trim().toLowerCase();
+
+//     if (query === "") {
+//         suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
+//     }
+// });
+
+// // Handle focusin event (when the input regains focus)
+// searchInput.addEventListener('focusin', function() {
+//     const query = this.value.trim().toLowerCase();
+
+//     if (query !== "") {
+//         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+//         const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+//         const suggestions = subjects.filter(subject => regex.test(subject.name));
+//         displaySuggestions(suggestions);
+//     }
+// });
+
+// function displaySuggestions(suggestions) {
+//   const suggestionsContainer = document.getElementById('suggestions');
+//   suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+//   if (suggestions.length === 0) {
+//       suggestionsContainer.innerText = "Not available"; // Show 'Not available' if no match
+//   } else {
+//       const ul = document.createElement('ul'); // Create a <ul> element to hold the list
+
+//       suggestions.forEach(subject => {
+//           const li = document.createElement('li'); // Create an <li> element
+//           const anchor = document.createElement('a'); // Create an <a> element
+
+//           anchor.innerText = subject.name; // Set the anchor text to the subject name
+//           anchor.href = subject.path;      // Set the href attribute to the subject path
+
+//           li.appendChild(anchor);          // Append the <a> to the <li>
+//           ul.appendChild(li);              // Append the <li> to the <ul>
+//       });
+
+//       suggestionsContainer.appendChild(ul); // Append the <ul> to the container
+//   }
+// }
+
+
 const searchInput = document.getElementById('search');
 const suggestionsContainer = document.getElementById('suggestions');
 
-// Handle input event (when the user types)
-searchInput.addEventListener('input', function() {
-    const query = this.value.trim().toLowerCase();
-    
-    if (query === "") {
-        suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
-    } else {
-        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`\\b${escapedQuery}`, 'i');
-        const suggestions = subjects.filter(subject => regex.test(subject.name));
-        displaySuggestions(suggestions);
-    }
-});
+searchInput.addEventListener('input', function () {
+  const query = this.value.trim().toLowerCase();
 
-// Handle focusout event (when the input loses focus)
-searchInput.addEventListener('focusout', function() {
-    const query = this.value.trim().toLowerCase();
-    
-    if (query === "") {
-        suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
-    }
-});
-
-// Handle focusin event (when the input regains focus)
-searchInput.addEventListener('focusin', function() {
-    const query = this.value.trim().toLowerCase();
-    
-    if (query !== "") {
-        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`\\b${escapedQuery}`, 'i');
-        const suggestions = subjects.filter(subject => regex.test(subject.name));
-        displaySuggestions(suggestions);
-    }
+  if (query === "") {
+    suggestionsContainer.style.display = 'none'; // Hide suggestions if input is empty
+  } else {
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+    const suggestions = subjects.filter(subject => regex.test(subject.name));
+    displaySuggestions(suggestions);
+  }
 });
 
 function displaySuggestions(suggestions) {
-  const suggestionsContainer = document.getElementById('suggestions');
   suggestionsContainer.innerHTML = ''; // Clear previous suggestions
 
-  if (suggestions.length === 0) {
-      suggestionsContainer.innerText = "Not available"; // Show 'Not available' if no match
+  if (suggestions.length === 0 && searchInput.value.trim() !== "") {
+    suggestionsContainer.innerText = "Not available"; // Show 'Not available' if no match
+    suggestionsContainer.style.display = 'block'; // Make it visible
+  } else if (suggestions.length > 0) {
+    suggestions.forEach(subject => {
+      const anchor = document.createElement('a');
+      anchor.innerText = subject.name;
+      anchor.href = subject.path; // Entire anchor is now clickable
+      suggestionsContainer.appendChild(anchor);
+    });
+    suggestionsContainer.style.display = 'block'; // Show suggestions dropdown
   } else {
-      const ul = document.createElement('ul'); // Create a <ul> element to hold the list
-
-      suggestions.forEach(subject => {
-          const li = document.createElement('li'); // Create an <li> element
-          const anchor = document.createElement('a'); // Create an <a> element
-
-          anchor.innerText = subject.name; // Set the anchor text to the subject name
-          anchor.href = subject.path;      // Set the href attribute to the subject path
-
-          li.appendChild(anchor);          // Append the <a> to the <li>
-          ul.appendChild(li);              // Append the <li> to the <ul>
-      });
-
-      suggestionsContainer.appendChild(ul); // Append the <ul> to the container
+    suggestionsContainer.style.display = 'none'; // Hide the dropdown if no input or no match
   }
 }
-
