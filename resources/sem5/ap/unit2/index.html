@@ -256,6 +256,93 @@ Toast.makeText(this, "Hello, World!", Toast.LENGTH_SHORT).show();
                     seconds).</li>
                 <li><strong>.show()</strong>: This method ensures that the toast is actually displayed to the user.</li>
             </ol>
+            <div class="in">
+                <h3>Simple program in which when we click on a button a Toast message is displayed.</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private int i = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        Button myBtn = findViewById(R.id.button);
+        myBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                i = i + 1;
+                Toast.makeText(MainActivity.this, "No. of times button is clicked = " + i , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toast Demo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#5DE063"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.584" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <img src="../../images/toast.png" alt="">
+            </div>
         </div>
         <div class="wh">
             <h2>Android Activity Lifecycle - Sample Program</h2>

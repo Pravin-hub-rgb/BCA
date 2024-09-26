@@ -23,7 +23,183 @@
     </div>
     <div class="content-box">
         <h1>Android Programming Lab</h1>
-        
+        <div class="wh">
+            <h3>Create a simple application to change colors of background of any textbox with the click of a button.</h3>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    MainActivity.java
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+package com.example.myapplication;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private String colors[] = {"#FF9800","#03A9F4", "#9067D9", "#FFEB3B"};
+    private int i = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        Button myBtn = findViewById(R.id.button);
+        TextView myTxt = findViewById(R.id.textView);
+        myBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                myTxt.setBackgroundColor(Color.parseColor(colors[i]));
+                i++;
+                if(i>3){
+                    i = 0;
+                }
+            }
+        });
+    }
+
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">activity_main.xml</button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#5DE063"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
+
+    &lt;TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="252dp"
+        android:background="#FFEB3B"
+        android:text="Changing Background Colors"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h3>Create a simple app to change background colour on button click.</h3>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">MainActivity.java</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+package com.example.myapplication;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private String colors[] = {"#FF9800","#03A9F4", "#9067D9", "#FFEB3B"};
+    private int i = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        View rootview = findViewById(R.id.main);
+        Button myBtn = findViewById(R.id.button);
+        myBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                rootview.setBackgroundColor(Color.parseColor(colors[i]));
+                i++;
+                if(i>3){
+                    i = 0;
+                }
+            }
+        });
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">activity_main.xml</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#5DE063"
+        android:text="Click Me to change Background Color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
         <!--
     <div class="wh">
         <div class='code'>
@@ -33,7 +209,7 @@
             </button>
             <div class="panel">
                 <pre>
-                    <code class="language-c#">
+                    <code class="language-java">
                     </code>
                 </pre>
             </div>
