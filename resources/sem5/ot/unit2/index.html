@@ -883,6 +883,126 @@
                     </ul>
 
                 </div>
+                <div class="wh">
+                    <p><strong>Maximize Z = 3x1 + 2x2 + 5x3</strong></p>
+                    <p><strong>Subject to the constraints:</strong></p>
+                    <p>
+                        <strong>x1 + x2 + x3 ≤ 9</strong><br>
+                        <strong>2x1 + 3x2 + 5x3 ≤ 30</strong><br>
+                        <strong>2x1 - x2 - x3 ≤ 8</strong><br>
+                        <strong>xi ≥ 0</strong>
+                    </p>
+
+                    <ul>
+                        <li>Convert the constraints by adding slack variables:
+                            <br>Maximize Z = 3x1 + 2x2 + 5x3 + 0x4 + 0x5 + 0x6
+                            <br>Subject to:
+                            <br>x1 + x2 + x3 + x4 = 9
+                            <br>2x1 + 3x2 + 5x3 + x5 = 30
+                            <br>2x1 - x2 - x3 + x6 = 8
+                            <br>xi ≥ 0
+                        </li>
+
+                        <li>Create the initial Simplex tableau:
+                            <pre>
+            <code>
+           | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
+  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
+----------------------------------------------
+  0  | x4  |   9 |   1  |   1  |   1  |   1  |   0  |   0  | (Row 1)
+  0  | x5  |  30 |   2  |   3  |   5  |   0  |   1  |   0  | (Row 2)
+  0  | x6  |   8 |   2  |  -1  |  -1  |   0  |   0  |   1  | (Row 3)
+            </code>
+        </pre>
+                        </li>
+
+                        <li>Perform the Simplex iteration by identifying the entering and exiting variables:
+                            <pre>
+            <code>
+           | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
+  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
+----------------------------------------------
+  0  | x4  |   9 |   1  |   1  |   1  |   1  |   0  |   0  | (Row 1)
+  0  | x5  |  30 |   2  |   3  |   5  |   0  |   1  |   0  | (Row 2)
+  0  | x6  |   8 |   2  |  -1  |  -1  |   0  |   0  |   1  | (Row 3)
+----------------------------------------------
+       Zj  |     |   0  |   0  |   0  |   0  |   0  |   0  |
+       Cj  |     |   3  |   2  |   5  |   0  |   0  |   0  |
+  Zj - Cj  |     |  -3  |  -2  |  -5  |   0  |   0  |   0  |
+            </code>
+        </pre>
+                            The most negative value in Zj - Cj is -5, so x3 enters the basis. We calculate the minimum
+                            ratio to determine the exiting variable:
+                            <br>Row 1: 9/1 = 9
+                            <br>Row 2: 30/5 = 6 (smallest ratio)
+                            <br>Row 3: 8/-1 (ignored because it’s negative)
+                            <br>Thus, x5 exits, and x3 replaces x5 in the basis.
+                        </li>
+
+                        <li>Perform the pivot on the key element (5 in Row 2, x3 column), and update the tableau:
+                            <br>for row 2 we are dividing it by 5
+                            <br>for row 1 we are doing row 1 - row 2 (new)
+                            <br>for row 3 we are doing row 3 + row 2 (new)
+                            <pre>
+            <code>
+           | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
+  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
+-------------------------------------------------------------------
+  0  | x4  |   3 |   3/5|   2/5|   0  |   1  |  -1/5|   0  | (Row 1)
+  5  | x3  |   6 |   2/5|   3/5|   1  |   0  |   1/5|   0  | (Row 2)
+  0  | x6  |  14 |  12/5|  -2/5|   0  |   0  |   1/5|   1  | (Row 3)
+--------------------------------------------------------------------
+            </code>
+        </pre>
+                        </li>
+
+                        <li>Compute Zj - Cj again:
+                            <pre>
+            <code>
+           | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
+  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
+----------------------------------------------
+  0  | x4  |   3 |   3/5|   2/5|   0  |   1  |  -1/5|   0  | (Row 1)
+  5  | x3  |   6 |   2/5|   3/5|   1  |   0  |   1/5|   0  | (Row 2)
+  0  | x6  |  14 |  12/5|  -2/5|   0  |   0  |   1/5|   1  | (Row 3)
+----------------------------------------------
+       Zj  |     |   2  |   3  |   5  |   0  |   1  |   0  |
+       Cj  |     |   3  |   2  |   5  |   0  |   0  |   0  |
+  Zj - Cj  |     |  -1  |   1  |   0  |   0  |   1  |   0  |
+            </code>
+        </pre>
+        The most negative value in Zj - Cj is -1, so x1 enters the basis. We calculate the minimum
+                            ratio to determine the exiting variable:
+                            <br>Row 1: 3/(3/5) = 5 (smallest ratio)
+                            <br>Row 2: 30/2 = 15 
+                            <br>Row 3: 14/(12/5) = 5.833
+                            <br>Thus, x4 exits, and x1 replaces x4 in the basis.
+                        </li>
+
+                        <li>
+                            now we wil put 1 at key element place which is 3/5 and at row 2 and row 3 we will put 0 below the key element.
+                            <br>for row 1 we will do row 1 * 5/3
+                            <br>for row 2 we will do row 2 - 2/5 * row 1(new)
+                            <br>for row 3 we will do row 3 - 12/5 * row 1 (new)
+                            <br>
+                            <pre>
+                                <code>
+           | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
+  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
+-------------------------------------------------------------------
+  3  | x1  |   5 |   1  |   2/3|   0  |  5/3 |  -1/3|   0  | (Row 1) new
+  5  | x3  |   4 |   0  |   1/3|   1  | -2/3 |   1/3|   0  | (Row 2)
+  0  | x6  |   2 |   0  |   -2 |   0  |  -4  |   1  |   1  | (Row 3)
+--------------------------------------------------------------------
+  Zj - Cj  |     |   0  |   5/3|   0  |   5/3|   2/3|   0  |
+                                </code>
+                            </pre>
+                            As now all Zj - Cj values are postive, hence we have our optimal solution
+                            <br>so, x1 = 5, x2 = 0 and x3 = 4
+                            <br>We put this in Z cost function we get max Z = 35
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
