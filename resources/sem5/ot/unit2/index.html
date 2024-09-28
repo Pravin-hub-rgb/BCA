@@ -1105,22 +1105,31 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
             </div>
             <div class="in">
                 <h3>Two Phase Method</h3>
-                <p>The Two-Phase Method is used to solve Linear Programming Problems (LPP) when the problem involves artificial variables, typically in the case of equality constraints or greater-than-or-equal-to (≥) constraints. It ensures that a feasible solution is found even when such variables are introduced. The method is divided into two phases:
-                    <ol>
-                        <li>Phase 1:
-                            <ul>
-                                <li>The goal is to minimize the sum of artificial variables, ensuring that they are driven to zero.</li>
-                                <li>The original LPP is modified by adding artificial variables and creating an auxiliary objective function (minimizing the sum of these variables).</li>
-                                <li>Solve the modified problem using the simplex method. If the optimal solution of the auxiliary problem has a value of zero for the artificial variables, it means a feasible solution is found.</li>
-                            </ul>
-                        </li>
-                        <li>Phase 2:
-                            <ul>
-                                <li>After obtaining a feasible solution from Phase 1, the artificial variables are removed from the problem.</li>
-                                <li>The original objective function is restored, and the feasible solution is used as the starting point for solving the original LPP using the simplex method.</li>
-                            </ul>
-                        </li>
-                    </ol>
+                <p>The Two-Phase Method is used to solve Linear Programming Problems (LPP) when the problem involves
+                    artificial variables, typically in the case of equality constraints or greater-than-or-equal-to (≥)
+                    constraints. It ensures that a feasible solution is found even when such variables are introduced.
+                    The method is divided into two phases:
+                <ol>
+                    <li>Phase 1:
+                        <ul>
+                            <li>The goal is to minimize the sum of artificial variables, ensuring that they are driven
+                                to zero.</li>
+                            <li>The original LPP is modified by adding artificial variables and creating an auxiliary
+                                objective function (minimizing the sum of these variables).</li>
+                            <li>Solve the modified problem using the simplex method. If the optimal solution of the
+                                auxiliary problem has a value of zero for the artificial variables, it means a feasible
+                                solution is found.</li>
+                        </ul>
+                    </li>
+                    <li>Phase 2:
+                        <ul>
+                            <li>After obtaining a feasible solution from Phase 1, the artificial variables are removed
+                                from the problem.</li>
+                            <li>The original objective function is restored, and the feasible solution is used as the
+                                starting point for solving the original LPP using the simplex method.</li>
+                        </ul>
+                    </li>
+                </ol>
                 </p>
                 <div class="in">
                     <p><strong>Min Z = x1 + x2</strong>
@@ -1141,7 +1150,7 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
                             <br>Max z' = -x1 - x2 + 0x3 + 0x4 - x5 - x6
                             <br>
                             <strong>Phase 1:</strong>
-                            <br>for phase 1 our max z' function becomes 0x1 + 0x2 + 0x3 + 0x4 - x5 - x6 
+                            <br>for phase 1 our max z' function becomes 0x1 + 0x2 + 0x3 + 0x4 - x5 - x6
                             <br> Max z' = -x5 - x6
                             <br>Following are the constraints
                             <br>2x1 + x2 - x3 + 0x4 + x5 + 0x6 = 4
@@ -1169,7 +1178,8 @@ CB  | Xb |  b   |  x1   |  x2    |  x3  |  x4  |  x5  |  x6  |
                             <br>Thus, 7 becomes our key value, and we need to make it 1.
                             <br>x6 is the outgoing variable.
                         </li>
-                        <li>Remember, in the 2 phase method also, we don't write the outgoing variable in the next table, so we
+                        <li>Remember, in the 2 phase method also, we don't write the outgoing variable in the next
+                            table, so we
                             will not write the x6 column.
                             <br>To make 7 into 1, we will perform the following operations:
                             <br>For row 2, divide row 2 by 7.
@@ -1212,10 +1222,11 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
                             Now, as all Zj - Cj values are ≥ 0, so our phase 1 is ended
                         </li>
                         <li><strong>Phase 2:</strong>
-                        <br>now for phase 2 our objective function becomes:
-                    <br>Max z' = -x1 - x2 + 0x3 + 0x4</li>
-                    <li>
-                        <pre>
+                            <br>now for phase 2 our objective function becomes:
+                            <br>Max z' = -x1 - x2 + 0x3 + 0x4
+                        </li>
+                        <li>
+                            <pre>
                             <code>
           |  Cj  |  -1  |  -1    |   0     |   0   
  CB | Xb  |  b   |  x1  |  x2    |  x3     |  x4  
@@ -1226,13 +1237,152 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
   Zj - Cj |       |   0  |   0   | 6/13    |  1/13
                             </code>
                         </pre>
-                         Now, as all Zj-Cj values are >= 0, so we have found our optimal solution 
-                         <br>x1 = 21/13 and x2 = 10/13
-                         <br>min z = 31/13
-                    </li>
+                            Now, as all Zj-Cj values are >= 0, so we have found our optimal solution
+                            <br>x1 = 21/13 and x2 = 10/13
+                            <br>min z = 31/13
+                        </li>
                     </ul>
-
                 </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Transportation Problem</h2>
+            <ul>
+                <li>In the transportation problem, we aim to minimize transportation costs for a business while
+                    maximizing overall profit.</li>
+                <li>Suppose you are running a business, and you need to transport materials to 4 different destinations
+                    from 4 supply locations. You are aware of the transportation costs from each location, the demand at
+                    each destination, and the available supply at each source. The model used to minimize the
+                    transportation cost while balancing supply and demand is known as the Transportation Model.</li>
+                <li>Usually, the transportation problem involves minimization, but in some cases, we may need to
+                    maximize certain factors, such as profit. In such scenarios, a different approach or method is
+                    applied to solve the problem effectively.</li>
+            </ul>
+
+            <div class="in">
+                <!-- <h3>Example Probelm</h3>
+                <p>Let's understand transportation problem with some example problem:</p>
+                <p><strong>Q- A manufacturing firm has three plants located at three different citites all producing the same product. The total supply potential at the firm is absorbed by four large customer . The details are given below</strong></p> -->
+                <h3>Methods of finding the inital feasible solution</h3>
+                <ol>
+                    <li>Nort-west corner rule</li>
+                    <li>Least cost method</li>
+                    <li>Vogel's Approximation Method</li>
+                </ol>
+            </div>
+            <div class="in">
+                <p><strong>Basic Feasible Solution (BFS):</strong></p>
+                <ul>
+                    <li>The Transportation Problem is a special case of Linear Programming Problems (LPP), so the
+                        definition of a Basic Feasible Solution (BFS) is similar to that in LPP.</li>
+                    <li>In the case of the Transportation Problem, there are only (m + n - 1) basic variables out of a
+                        total of m * n variables. Here, <em>m</em> represents the number of rows (suppliers) and
+                        <em>n</em> represents the number of columns (destinations) in the transportation problem.
+                        Therefore, the BFS of a transportation problem consists of at most (m + n - 1) variables, with
+                        the remaining variables being zero.</li>
+                </ul>
+
+                <p><strong>Example Problem - Find the Initial BFS (Basic Feasible Solution) of the Following
+                        Transportation Problem:</strong></p>
+                <pre>
+                    <code>
+                                        |  Warehouse
+    Factory |  w1  |  w2  |  w3  |  w4  | Capacity
+----------------------------------------------------
+        F1  |  19  |  30  |  50  |  10  |   7
+        F2  |  70  |  30  |  40  |  60  |   9
+        F3  |  40  |   8  |  70  |  20  |  18
+----------------------------------------------------
+Warehouse   |   5  |   8  |   7  |  14  |
+Requirement |
+                    </code>
+                </pre>
+
+                <ul>
+                    <li>We will solve this using the <strong>North-West Corner Rule</strong>.</li>
+                    <li>First, we check if the supply and demand are balanced. This means the total supply should equal
+                        the total demand. In this case, the total capacity (7 + 9 + 18 = 34) is equal to the total
+                        requirement (5 + 8 + 7 + 14 = 34), so the problem is balanced.</li>
+                    <li>In the North-West Corner method, we start at the top-left (north-west) corner of the cost matrix
+                        and assign the supply or demand, whichever is smaller, to that cell. We then subtract the
+                        smaller value from the larger one and move to the next cell, following the north-west direction
+                        until all supplies and demands are met.</li>
+                    <li>
+                        Start with top-left and assign smallest supply or demand.
+                        <pre>
+                            <code>
+    Factory |  w1      |  w2  |  w3  |  w4  | Capacity
+----------------------------------------------------
+        F1  |  19 (5)  |  30  |  50  |  10  |   7-5=2
+        F2  |  70      |  30  |  40  |  60  |   9
+        F3  |  40      |   8  |  70  |  20  |  18
+----------------------------------------------------
+Requirement | 5-5=0    |   8  |   7  |  14  |
+                            </code>
+                        </pre>
+                        now we will remove the column 1
+                        <br>again we assign 
+                        <pre>
+                            <code>
+    Factory |  w2    |  w3  |  w4  | Capacity
+----------------------------------------------------
+        F1  |  30(2) |  50  |  10  |   2-2=0
+        F2  |  30    |  40  |  60  |   9
+        F3  |   8    |  70  |  20  |  18
+----------------------------------------------------
+Requirement | 8-2=6  |   7  |  14  |
+                            </code>
+                        </pre>
+                        now we remove row 1
+                        <pre>
+                            <code>
+    Factory |  w2     |  w3  |  w4  | Capacity
+----------------------------------------------------
+        F2  |  30(6)  |  40  |  60  |   9-6=3
+        F3  |   8     |  70  |  20  |  18
+----------------------------------------------------
+Requirement |  6-6=0  |   7  |  14  |
+                            </code>
+                        </pre>
+                        now we remove column 1
+                        <pre>
+                            <code>
+    Factory |  w3     |  w4  | Capacity
+--------------------------------------------
+        F2  |  40(3)  |  60  |   3-3=0
+        F3  |  70     |  20  |  18
+--------------------------------------------
+Requirement |  7-3=4  |  14  |
+                            </code>
+                        </pre>
+                        now we remove row 1
+                        <br>Now only 2 values are left so we can directly assign.
+                        <pre>
+                            <code>
+    Factory |  w3     |  w4      | Capacity
+-----------------------------------------------
+        F3  |  70(4)  |  20(14)  |  18-4-14=0
+-----------------------------------------------
+Requirement |   4-4=0 |  14-14=0 |
+                            </code>
+                        </pre>
+                        so finaly we have:
+                        <pre>   
+                            <code>
+    Factory |  w1      |    w2   |     w3  |     w4   | Capacity
+----------------------------------------------------------------
+        F1  |  19 (5)  |  30(2)  |  50     |  10      |   7
+        F2  |  70      |  30(6)  |  40(3)  |  60      |   9
+        F3  |  40      |   8     |  70(4)  |  20(14)  |  18
+----------------------------------------------------------------
+Requirement |   5      |   8  |   7  |  14  |
+                            </code>
+                        </pre>
+                        Now we will find its transportation cost:
+                        <br>(19 * 5) + (30 * 2) + (30 * 6) + (40 * 3) + (70 * 4) + (20 * 14)
+                        <br>= 1015
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
