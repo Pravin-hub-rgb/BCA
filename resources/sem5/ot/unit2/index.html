@@ -961,26 +961,27 @@
             <code>
            | Cj  |   3  |   2  |   5  |   0  |   0  |   0  |
   CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |
-----------------------------------------------
+---------------------------------------------------------------------
   0  | x4  |   3 |   3/5|   2/5|   0  |   1  |  -1/5|   0  | (Row 1)
   5  | x3  |   6 |   2/5|   3/5|   1  |   0  |   1/5|   0  | (Row 2)
   0  | x6  |  14 |  12/5|  -2/5|   0  |   0  |   1/5|   1  | (Row 3)
-----------------------------------------------
+---------------------------------------------------------------------
        Zj  |     |   2  |   3  |   5  |   0  |   1  |   0  |
        Cj  |     |   3  |   2  |   5  |   0  |   0  |   0  |
   Zj - Cj  |     |  -1  |   1  |   0  |   0  |   1  |   0  |
             </code>
         </pre>
-        The most negative value in Zj - Cj is -1, so x1 enters the basis. We calculate the minimum
+                            The most negative value in Zj - Cj is -1, so x1 enters the basis. We calculate the minimum
                             ratio to determine the exiting variable:
                             <br>Row 1: 3/(3/5) = 5 (smallest ratio)
-                            <br>Row 2: 30/2 = 15 
+                            <br>Row 2: 30/2 = 15
                             <br>Row 3: 14/(12/5) = 5.833
                             <br>Thus, x4 exits, and x1 replaces x4 in the basis.
                         </li>
 
                         <li>
-                            now we wil put 1 at key element place which is 3/5 and at row 2 and row 3 we will put 0 below the key element.
+                            now we wil put 1 at key element place which is 3/5 and at row 2 and row 3 we will put 0
+                            below the key element.
                             <br>for row 1 we will do row 1 * 5/3
                             <br>for row 2 we will do row 2 - 2/5 * row 1(new)
                             <br>for row 3 we will do row 3 - 12/5 * row 1 (new)
@@ -1002,6 +1003,104 @@
                             <br>We put this in Z cost function we get max Z = 35
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Big M method</h3>
+                <p>The Big M Method is an approach used to solve linear programming problems (LPP) involving artificial
+                    variables when the problem includes greater-than-or-equal-to (≥) or equality (=) constraints. It
+                    allows converting such constraints into a standard form suitable for solving using the Simplex
+                    method.</p>
+                <div class="in">
+                    <p><strong>Min Z = x1 + x2</strong>
+                        <br>Constraints:
+                        <br>2x1 + x2 ≥ 4
+                        <br>x1 + 7x2 ≥ 7
+                        <br>x1 ≥ 0
+                    </p>
+                    <ul>
+                        <li>First, we have to convert it into a maximization function.
+                            <br>For that, we will multiply it by -1.
+                            <br>Max z' = -x1 - x2
+                            <br>Since we have ≥, we need to subtract a surplus variable.
+                            <br>2x1 + x2 - x3 + 0x4 = 4
+                            <br>x1 + 7x2 + 0x3 - x4 = 7
+                            <br>Now, the problem is that we don't have a unit matrix, so we add 2 more variables called
+                            artificial variables.
+                            <br>Max z' = -x1 - x2 + 0x3 + 0x4 - Mx5 - Mx6
+                            <br>2x1 + x2 - x3 + 0x4 + x5 + 0x6 = 4
+                            <br>x1 + 7x2 + 0x3 - x4 + 0x5 + x6 = 7
+                            <br>This M is a very large value, which is why we call it the Big M method.
+                        </li>
+                        <li>
+                            <pre>
+                                <code>
+         |  Cj  |  -1   |  -1    |   0  |   0  |  -M  |  -M  |
+CB | Xb  |  b   |  x1   |  x2    |  x3  |  x4  |  x5  |  x6  |
+------------------------------------------------------------------------
+-M  | x5  |  4   |  2    |  1    |  -1  |  0   |  1   |  0   | (Row 1)
+-M  | x6  |  7   |  1    |  7    |  0   |  -1  |  0   |  1   | (Row 2)
+------------------------------------------------------------------------
+      Zj  |      | -3M   | -8M   |  M   |  M   |  -M  |  -M  |
+      Cj  |      |  -1   |  -1   |  0   |  0   |  0   |  0   |
+  Zj - Cj |      | -3M+1 | -8M+1 |  M   |  M   |  0   |  0   |
+                                </code>
+                            </pre>
+                            Since M is a large value, suppose it is 100, then the most negative value will be -8M+1. So
+                            in this column, x2 is the entering variable.
+                            <br>Now, we will find the minimum ratio to identify the outgoing variable.
+                            <br>Row 1 ratio of b/x2 = 4/1 = 4
+                            <br>Row 2 ratio of b/x2 = 7/7 = 1 (this is the minimum ratio value).
+                            <br>Thus, 7 becomes our key value, and we need to make it 1.
+                            <br>x6 is the outgoing variable.
+                        </li>
+                        <li>Remember, in the Big M method, we don't write the outgoing variable in the next table, so we
+                            will not write the x6 column.
+                            <br>To make 7 into 1, we will perform the following operations:
+                            <br>For row 2, divide row 2 by 7.
+                            <br>For row 1, subtract the new row 2 from row 1.
+                            <pre>
+                                <code>
+         |  Cj   | -1        |  -1  |   0  |   0      |  -M  
+CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5  
+---------------------------------------------------------------
+-M  | x5  |  3   | 13/7      |  0   |  -1  |  1/7     |  1   (Row 1)
+-1  | x2  |  1   |  1/7      |  1   |   0  | -1/7     |  0   (Row 2) new
+---------------------------------------------------------------
+      Zj  |      |(-13M-1)/7 |  -1  |  M    |(-M+1)/7 |  -M  
+      Cj  |      |  -1       |  -1  |  0    |  0      |  0  
+  Zj - Cj |      |(-13M-8)/7 |  0   |  M    |(-M+1)/7 |  0  
+                                </code>
+                            </pre>
+                            Here, (-13M-8)/7 is the most negative, which makes x1 the entering variable.
+                            <br>Now, find the ratio of b and x1 to identify the outgoing variable.
+                            <br>Row 1 ratio of b/x1 = 21/13
+                            <br>Row 2 ratio of b/x1 = 7
+                            <br>Thus, 21/13 is the smallest ratio, making x5 the outgoing variable, and 13/7 is the key
+                            value.
+                        </li>
+                        <li>For row 1, we will multiply row 1 by 7/13.
+                            <br>For row 2, we will perform the following operation: row 2 = row 2 - 1/7 * row 1 (new).
+                            <pre>
+                                <code>
+          |  Cj  |  -1  |  -1  |   0   |   0   
+ CB | Xb  |  b   |  x1  |  x2  |  x3   |  x4  
+---------------------------------------------------
+-1  | x1  | 21/13 |   1  |  0    | -7/13 | 1/13  (Row 1) new
+-1  | x2  | 10/13 |   0  |  1    |  1/13 | -2/13 (Row 2) 
+----------------------------------------------------
+      Zj  |       |  -1  |  -1  |  6/13  |  1/13  
+      Cj  |       |  -1  |  -1  |  0     |  0    
+  Zj - Cj |       |   0  |   0  |  6/13  |  1/13  
+                                </code>
+                            </pre>
+                            Now, as all Zj - Cj values are ≥ 0, we have found our optimal solution.
+                            <br>x1 = 21/13
+                            <br>x2 = 10/13
+                            <br>Min Z = (21/13) + (10/13) = 31/13
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>
