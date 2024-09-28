@@ -1011,7 +1011,7 @@
                     variables when the problem includes greater-than-or-equal-to (≥) or equality (=) constraints. It
                     allows converting such constraints into a standard form suitable for solving using the Simplex
                     method.</p>
-                <div class="in">
+                <div class="wh">
                     <p><strong>Min Z = x1 + x2</strong>
                         <br>Constraints:
                         <br>2x1 + x2 ≥ 4
@@ -1131,7 +1131,7 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
                     </li>
                 </ol>
                 </p>
-                <div class="in">
+                <div class="wh">
                     <p><strong>Min Z = x1 + x2</strong>
                         <br>Constraints:
                         <br>2x1 + x2 ≥ 4
@@ -1279,7 +1279,8 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
                         total of m * n variables. Here, <em>m</em> represents the number of rows (suppliers) and
                         <em>n</em> represents the number of columns (destinations) in the transportation problem.
                         Therefore, the BFS of a transportation problem consists of at most (m + n - 1) variables, with
-                        the remaining variables being zero.</li>
+                        the remaining variables being zero.
+                    </li>
                 </ul>
 
                 <p><strong>Example Problem - Find the Initial BFS (Basic Feasible Solution) of the Following
@@ -1321,7 +1322,7 @@ Requirement | 5-5=0    |   8  |   7  |  14  |
                             </code>
                         </pre>
                         now we will remove the column 1
-                        <br>again we assign 
+                        <br>again we assign
                         <pre>
                             <code>
     Factory |  w2    |  w3  |  w4  | Capacity
@@ -1367,7 +1368,7 @@ Requirement |   4-4=0 |  14-14=0 |
                             </code>
                         </pre>
                         so finaly we have:
-                        <pre>   
+                        <pre>
                             <code>
     Factory |  w1      |    w2   |     w3  |     w4   | Capacity
 ----------------------------------------------------------------
@@ -1383,6 +1384,94 @@ Requirement |   5      |   8  |   7  |  14  |
                         <br>= 1015
                     </li>
                 </ul>
+                <p><strong>Solving the Same Question Using the <em>Least Cost Method</em></strong></p>
+                <ul>
+                    <li>
+                        In this method, we find the minimum cost and assign the minimum value from either the supply or
+                        demand.
+                        <br>Here, the minimum cost is 8, so we allocate accordingly.
+                        <pre>
+            <code>
+ Factory |  w1  |  w2     |  w3  |  w4  |   D
+-------------------------------------------------
+     F1  |  19  |  30     |  50  |  10  |   7
+     F2  |  70  |  30     |  40  |  60  |   9
+     F3  |  40  |   8(8)  |  70  |  20  |  18-8=10
+-------------------------------------------------
+      S  |   5  |   8-8=0 |   7  |  14  |  34
+            </code>
+        </pre>
+                        Now, we remove the <em>w2</em> column.
+                        <br>Then, we assign the next smallest cost.
+                        <pre>
+            <code>
+ Factory |  w1  |  w3  |  w4     |   D
+-------------------------------------------------
+     F1  |  19  |  50  |  10(7)  |   7-7=0
+     F2  |  70  |  40  |  60     |   9
+     F3  |  40  |  70  |  20     |  10
+-------------------------------------------------
+      S  |   5  |   7  |  14-7=7 |  34
+            </code>
+        </pre>
+                        Now, we remove row 1.
+                        <br>Then, we assign the next smallest cost.
+                        <pre>
+            <code>
+ Factory |  w1  |  w3  |  w4     |   D
+-----------------------------------------
+     F2  |  70  |  40  |  60     |   9
+     F3  |  40  |  70  |  20(7)  |  10-7=3
+-----------------------------------------
+      S  |   5  |   7  |   7-7=0 |  34
+            </code>
+        </pre>
+                        Now, we remove the <em>w4</em> column.
+                        <br>Since we have two minimum values, we can allocate to either one of them.
+                        <pre>
+            <code>
+ Factory |  w1  |  w3     |  D
+-------------------------------
+     F2  |  70  |  40(7)  |  9-7=2
+     F3  |  40  |  70     |  3
+-------------------------------
+      S  |   5  |   7-7=0 |  
+            </code>
+        </pre>
+                        Now, we remove the <em>w3</em> column.
+                        <pre>
+            <code>
+ Factory |  w1     |  D
+-----------------------
+     F2  |  70(2)  |  2-2=0
+     F3  |  40(3)  |  3-3=0
+-----------------------
+      S  | 5-2-3=0 |  
+            </code>
+        </pre>
+                        So finally, we have:
+                        <pre>
+                            <code>
+ Factory |  w1     |  w2    |  w3    |  w4  
+----------------------------------------------
+     F1  |  19     |  30    |  50    |  10(7)  
+     F2  |  70(2)  |  30    |  40(7) |  60  
+     F3  |  40(3)  |  8(8)  |  70    |  20(7)  
+                            </code>
+                        </pre>
+                        The number of allocations should be <em>m + n - 1</em>:
+                        <br>3 + 4 - 1 = 6
+                        <br>And we also have 6 allocations, so we did it correctly.
+                        <br>Now, we will find the transportation cost using the Least Cost Method:
+                        <br>(10 * 7) + (70 * 2) + (40 * 7) + (40 * 3) + (8 * 8) + (20 * 7)
+                        <br>70 + 140 + 280 + 120 + 64 + 140 = 814
+                        <br>So, we know that using the North-West Corner Rule, the transportation cost was 1015, and
+                        using the Least Cost Method, the cost is 814. When we solve this same question using Vogel's
+                        Approximation Method, the cost will decrease further, making it the best method for solving
+                        transportation problems.
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
