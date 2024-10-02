@@ -30,6 +30,53 @@ document.addEventListener("DOMContentLoaded", function () {
   if (semesterElement) {
     semesterElement.addEventListener('change', saveSemester);
   }
+
+  // COPY BUTTON 
+  // Function to create and insert copy buttons
+  function addCopyButtons() {
+    // Select all relevant pre/code elements
+    const codeBlocks = document.querySelectorAll('.panel pre code, .code > pre code, .npanel pre code');
+
+    codeBlocks.forEach(codeBlock => {
+      // Create the copy button
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-btn'; // Add class for styling
+      copyButton.textContent = 'Copy Code'; // Set button text
+      copyButton.onclick = function () {
+        copyCode(copyButton, codeBlock); // Pass button and code block
+      };
+
+      // Get the parent <pre> element
+      const preElement = codeBlock.parentElement; // This is the <pre> tag
+
+      // Set the button position
+      preElement.style.position = 'relative'; // Ensure positioning context
+
+      // Insert the button into the parent <pre> element
+      preElement.appendChild(copyButton);
+    });
+  }
+
+  function copyCode(button, codeBlock) {
+    // Create a temporary textarea element to hold the code for copying
+    const textarea = document.createElement('textarea');
+    textarea.value = codeBlock.innerText; // Get the text inside <code>
+    document.body.appendChild(textarea);
+    textarea.select(); // Select the text
+    document.execCommand('copy'); // Copy the text to clipboard
+    document.body.removeChild(textarea); // Remove the textarea
+
+    // Change the button text to "Copied"
+    button.textContent = 'Copied';
+
+    // Change the button text back to "Copy Code" after 2 seconds
+    setTimeout(() => {
+      button.textContent = 'Copy Code';
+    }, 2000);
+  }
+
+  // Add buttons after DOM content is loaded
+  addCopyButtons();
 });
 
 // Function to save the selected semester to localStorage
