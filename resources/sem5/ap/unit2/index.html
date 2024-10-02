@@ -863,28 +863,28 @@ public class MainActivity extends AppCompatActivity {
                 <pre>
                             <code>
 &lt;?xml version="1.0" encoding="utf-8"?>
-&lt;androidx.constraintlayout.widget.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
+                            &lt;androidx.constraintlayout.widget.ConstraintLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:context=".MainActivity">
 
-    &lt;Button
-    android:id="@+id/startServiceBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Start Service" />
+                            &lt;Button
+                            android:id="@+id/startServiceBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Service" />
 
-    &lt;Button
-    android:id="@+id/stopServiceBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Stop Service"
-    android:layout_below="@id/startServiceBtn"
-    android:layout_marginTop="20dp" />
-&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            &lt;Button
+                            android:id="@+id/stopServiceBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stop Service"
+                            android:layout_below="@id/startServiceBtn"
+                            android:layout_marginTop="20dp" />
+                            &lt;/androidx.constraintlayout.widget.ConstraintLayout>
                             </code>
                             </pre>
             </div>
@@ -1113,6 +1113,83 @@ public class MainActivity extends AppCompatActivity {
     </div>
     <div class="wh">
         <h2>Broadcast Receivers</h2>
+        <p>First we should know about Broadcast.</p>
+        <ul>
+            <li>In Android, a broadcast is a system-wide message that can be sent and received by apps. The Android
+                system sends these messages to inform apps of various system events or changes (such as the device being
+                low on battery or a change in network connectivity). Apps can also send custom broadcasts to notify
+                other apps or components within the same app.</li>
+        </ul>
+        <p><strong>How Broadcasts Work</strong></p>
+        <ul>
+            <li>Sender (Broadcast): The entity that sends the message (intent) when a system event or app event occurs.
+            </li>
+            <li>Receiver (Broadcast Receiver): The entity that receives and processes the broadcast message.</li>
+        </ul>
+        <p>When a broadcast is sent, it can either be ordered (delivered to one receiver at a time, in priority order)
+            or unordered (delivered to all receivers simultaneously).</p>
+        <p><strong>Types of Broadcasts Based on Delivery</strong></p>
+        <ol>
+            <li><strong>Ordered Broadcasts</strong>
+                <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared priority
+                (defined in the IntentFilter). Each receiver can modify the broadcast data or even stop the broadcast
+                from being sent to other receivers by calling abortBroadcast().
+                <ul>
+                    <li>Ordered: Receivers are called one after another based on priority.</li>
+                    <li>Modifiable: Receivers can modify or abort the broadcast.</li>
+                    <li>Use Case: Ordered broadcasts are useful when you want certain receivers to process an event
+                        before others. For example, when an SMS is received, a spam filter app might check it before
+                        passing it to the default messaging app.</li>
+                </ul>
+                Implementing it in manifest file:
+                <pre>
+                    <code>
+&lt;receiver android:name=".MyReceiver" android:priority="100">
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.SMS_RECEIVED" />
+    &lt;/intent-filter>
+&lt;/receiver>
+
+                    </code>
+                </pre>
+                Implementing in java code:
+                <pre>
+                    <code>
+Intent intent = new Intent("com.example.ORDERED_BROADCAST");
+sendOrderedBroadcast(intent, null);
+                    </code>
+                </pre>
+            </li>
+            <li><strong>Unordered (Normal) Broadcasts</strong>
+                <br>Unordered broadcasts are sent asynchronously to all receivers at the same time. The system does not
+                guarantee the order of execution, and receivers cannot modify or abort the broadcast. Each receiver
+                processes the broadcast independently and at its own pace.
+                <ul>
+                    <li>Asynchronous: All receivers receive the broadcast simultaneously.</li>
+                    <li>Immutable: Receivers cannot modify the broadcast or abort it.</li>
+                    <li>Use Case: This is typically used for less critical notifications, such as informing multiple
+                        apps that Wi-Fi has been disconnected. </li>
+                </ul>
+                Implementing it on manifest file:
+                <pre>
+                    <code>
+&lt;receiver android:name=".MyReceiver">
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.AIRPLANE_MODE" />
+    &lt;/intent-filter>
+&lt;/receiver>
+                    </code>
+                </pre>
+                Implementing it on java code:
+                <pre>
+                    <code>
+Intent intent = new Intent("com.example.UNORDERED_BROADCAST");
+sendBroadcast(intent);  // This is a normal broadcast
+                    </code>
+                </pre>
+            </li>
+        </ol>
+        <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
         <ul>
             <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
                 other apps or the system itself. It allows your app to receive system-wide broadcast announcements, such
