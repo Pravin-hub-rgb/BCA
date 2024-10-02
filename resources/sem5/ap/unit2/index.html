@@ -198,177 +198,36 @@
                 interruptions or multitasking. Activities provide the foundation for user interaction by managing the
                 screen, handling user inputs, and maintaining their states as they transition through various lifecycle
                 stages.</p>
-        </div>
-        <div class="wh">
-            <h2>Android Toast</h2>
-            <p>A <strong>Toast</strong> is a small message that pops up on the screen for a short duration, providing
-                feedback to the user. Unlike a dialog, a toast does not block user interaction with the app, making it
-                useful for showing non-intrusive messages like "Task completed," "Network error," or "File saved
-                successfully."</p>
-
-            <h3>Why Use a Toast?</h3>
-            <ul>
-                <li>Non-intrusive way to show messages.</li>
-                <li>Does not require user action to disappear (auto-dismissed after a set duration).</li>
-                <li>Useful for brief notifications or status updates.</li>
-                <li>Ideal for informing the user of a background task's completion.</li>
-            </ul>
-
-            <h3>Basic Syntax of Toast</h3>
-            <p>In Android, a <code>Toast</code> message can be created and displayed using the following syntax:</p>
-
-            <pre>
-                <code>
-Toast.makeText(context, message, duration).show();
-                </code>
-            </pre>
-
-            <p>Let’s break this down:</p>
-
-            <h3>Arguments Passed to a Toast</h3>
-            <ul>
-                <li><strong>Context</strong>: The context in which the toast is created. This is usually the current
-                    Activity. The context provides the necessary information about the app environment to the toast.
-                    Example: <code>this</code> or <code>getApplicationContext()</code>.</li>
-                <li><strong>Message</strong>: The text or message you want to display to the user. This can be a simple
-                    string or a string resource. Example: <code>"Hello, World!"</code>.</li>
-                <li><strong>Duration</strong>: The length of time the toast should appear on the screen. There are two
-                    predefined values:
-                    <ul>
-                        <li><code>Toast.LENGTH_SHORT</code>: Displays the toast for a short period (~2 seconds).</li>
-                        <li><code>Toast.LENGTH_LONG</code>: Displays the toast for a longer period (~3.5 seconds).</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h3>Example of a Basic Toast</h3>
-            <pre>
-        <code>
-Toast.makeText(this, "Hello, World!", Toast.LENGTH_SHORT).show();
-        </code>
-    </pre>
-
-            <p><strong>Step-by-Step Explanation:</strong></p>
-            <ol>
-                <li><strong>this</strong>: Refers to the current activity context.</li>
-                <li><strong>"Hello, World!"</strong>: This is the message that will be displayed on the screen.</li>
-                <li><strong>Toast.LENGTH_SHORT</strong>: The duration for which the toast will be shown (approximately 2
-                    seconds).</li>
-                <li><strong>.show()</strong>: This method ensures that the toast is actually displayed to the user.</li>
-            </ol>
             <div class="in">
-                <h3>Simple program in which when we click on a button a Toast message is displayed.</h3>
+                <h3>Android Activity Lifecycle - Sample Program</h3>
+
+                <p>We already know that the Android Activity Lifecycle describes the different states an activity
+                    goes
+                    through
+                    from
+                    its creation
+                    to its destruction. Below is a sample Android program that uses <strong>Toast</strong> messages
+                    to
+                    indicate
+                    when different lifecycle methods are called. This will help you understand how activities
+                    transition
+                    through these states.</p>
+                <p>In this example, we'll implement a simple Android activity that displays a Toast message for each
+                    lifecycle method:</p>
+                <ul>
+                    <li><strong>onCreate()</strong></li>
+                    <li><strong>onStart()</strong></li>
+                    <li><strong>onResume()</strong></li>
+                    <li><strong>onPause()</strong></li>
+                    <li><strong>onStop()</strong></li>
+                    <li><strong>onDestroy()</strong></li>
+                </ul>
                 <div class="code">
                     <div class="dotc"></div>
-                    <button class="ac">MainActivity.java</button>
+                    <button class="ac">Activity Lifecycle Program Code</button>
                     <div class="panel">
                         <pre>
-                            <code>
-package com.example.myapplication;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
-    private int i = 0;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        Button myBtn = findViewById(R.id.button);
-        myBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                i = i + 1;
-                Toast.makeText(MainActivity.this, "No. of times button is clicked = " + i , Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-}
-                            </code>
-                        </pre>
-                    </div>
-                </div>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <button class="ac">activity_main.xml</button>
-                    <div class="panel">
-                        <pre>
-                            <code>
-&lt;?xml version="1.0" encoding="utf-8"?>
-&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    &lt;TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Toast Demo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
-    &lt;Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#5DE063"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.584" />
-
-&lt;/androidx.constraintlayout.widget.ConstraintLayout>
-                            </code>
-                        </pre>
-                    </div>
-                </div>
-                <img src="../../images/toast.png" alt="">
-            </div>
-        </div>
-        <div class="wh">
-            <h2>Android Activity Lifecycle - Sample Program</h2>
-
-            <p>We already know that the Android Activity Lifecycle describes the different states an activity goes
-                through
-                from
-                its creation
-                to its destruction. Below is a sample Android program that uses <strong>Toast</strong> messages to
-                indicate
-                when different lifecycle methods are called. This will help you understand how activities transition
-                through these states.</p>
-            <p>In this example, we'll implement a simple Android activity that displays a Toast message for each
-                lifecycle method:</p>
-            <ul>
-                <li><strong>onCreate()</strong></li>
-                <li><strong>onStart()</strong></li>
-                <li><strong>onResume()</strong></li>
-                <li><strong>onPause()</strong></li>
-                <li><strong>onStop()</strong></li>
-                <li><strong>onDestroy()</strong></li>
-            </ul>
-
-            <h3>Activity Lifecycle Program Code</h3>
-            <pre>
-                <code>
+                    <code>
 package com.example.lifecycleexample;
 
 import android.os.Bundle;
@@ -414,66 +273,88 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Destroyed", Toast.LENGTH_SHORT).show();
     }
 }
-                </code>
-            </pre>
-            <h3>Explanation of the Program</h3>
-            <p>This program demonstrates how to use <code>Toast</code> messages to track the lifecycle of an Android
-                activity. Here’s what each lifecycle method does:</p>
+                    </code>
+                </pre>
+                    </div>
+                </div>
+                <h3>Explanation of the Program</h3>
+                <p>This program demonstrates how to use <code>Toast</code> messages to track the lifecycle of an
+                    Android
+                    activity. Here’s what each lifecycle method does:</p>
 
-            <ul>
-                <li><strong>onCreate():</strong> Called when the activity is first created. This is where you initialize
-                    your UI components and perform setup tasks. In this method, we show a Toast message saying "Activity
-                    Created".</li>
-                <li><strong>onStart():</strong> Called when the activity is becoming visible to the user. This method is
-                    used for actions that need to occur when the activity is visible but not yet interactive. Here, we
-                    display a Toast message saying "Activity Started".</li>
-                <li><strong>onResume():</strong> Called when the activity starts interacting with the user. This is
-                    where you should start processes or actions that need to be active while the activity is in the
-                    foreground. We use a Toast message saying "Activity Resumed" in this method.</li>
-                <li><strong>onPause():</strong> Called when the activity is no longer in the foreground but still
-                    visible. This method is used to save data or stop processes that should not continue while the
-                    activity is partially obscured. The Toast message "Activity Paused" is shown here.</li>
-                <li><strong>onStop():</strong> Called when the activity is no longer visible to the user. Use this
-                    method to release resources that are not needed while the activity is stopped. We show a Toast
-                    message saying "Activity Stopped" in this method.</li>
-                <li><strong>onDestroy():</strong> Called before the activity is destroyed. This method is where you
-                    perform final cleanup of resources. A Toast message saying "Activity Destroyed" is shown in this
-                    method to indicate that the activity is about to be removed from memory.</li>
-            </ul>
-            <h3>Example Scenario:</h3>
-            <ul>
-                <li><strong>Open the app:</strong>
-                    <ul>
-                        <li>You'll first see the "Activity Started" message followed by "Activity Resumed" because the
-                            activity is initialized and ready for interaction.</li>
-                    </ul>
-                </li>
-                <li><strong>Press the home button (sending the app to the background):</strong>
-                    <ul>
-                        <li>The "Activity Paused" message will appear first, followed by the "Activity Stopped" message
-                            when the activity is completely out of view.</li>
-                    </ul>
-                </li>
-                <li><strong>Switch back to the app from the recent apps menu:</strong>
-                    <ul>
-                        <li>The "Activity Started" and "Activity Resumed" messages will appear again as the activity
-                            comes back to the foreground.</li>
-                    </ul>
-                </li>
-                <li><strong>Close the app (press the back button):</strong>
-                    <ul>
-                        <li>The "Activity Paused", "Activity Stopped", and finally "Activity Destroyed" messages will
-                            appear in sequence, signaling the activity is fully closed.</li>
-                    </ul>
-                </li>
-            </ul>
-            <img src="../../images/started2.png" alt="">
-            <img src="../../images/resumed.png" alt="">
-            <img src="../../images/paused.png" alt="">
-            <img src="../../images/stopped.png" alt="">
+                <ul>
+                    <li><strong>onCreate():</strong> Called when the activity is first created. This is where you
+                        initialize
+                        your UI components and perform setup tasks. In this method, we show a Toast message saying
+                        "Activity
+                        Created".</li>
+                    <li><strong>onStart():</strong> Called when the activity is becoming visible to the user. This
+                        method is
+                        used for actions that need to occur when the activity is visible but not yet interactive.
+                        Here,
+                        we
+                        display a Toast message saying "Activity Started".</li>
+                    <li><strong>onResume():</strong> Called when the activity starts interacting with the user. This
+                        is
+                        where you should start processes or actions that need to be active while the activity is in
+                        the
+                        foreground. We use a Toast message saying "Activity Resumed" in this method.</li>
+                    <li><strong>onPause():</strong> Called when the activity is no longer in the foreground but
+                        still
+                        visible. This method is used to save data or stop processes that should not continue while
+                        the
+                        activity is partially obscured. The Toast message "Activity Paused" is shown here.</li>
+                    <li><strong>onStop():</strong> Called when the activity is no longer visible to the user. Use
+                        this
+                        method to release resources that are not needed while the activity is stopped. We show a
+                        Toast
+                        message saying "Activity Stopped" in this method.</li>
+                    <li><strong>onDestroy():</strong> Called before the activity is destroyed. This method is where
+                        you
+                        perform final cleanup of resources. A Toast message saying "Activity Destroyed" is shown in
+                        this
+                        method to indicate that the activity is about to be removed from memory.</li>
+                </ul>
+                <h3>Example Scenario:</h3>
+                <ul>
+                    <li><strong>Open the app:</strong>
+                        <ul>
+                            <li>You'll first see the "Activity Started" message followed by "Activity Resumed"
+                                because
+                                the
+                                activity is initialized and ready for interaction.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Press the home button (sending the app to the background):</strong>
+                        <ul>
+                            <li>The "Activity Paused" message will appear first, followed by the "Activity Stopped"
+                                message
+                                when the activity is completely out of view.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Switch back to the app from the recent apps menu:</strong>
+                        <ul>
+                            <li>The "Activity Started" and "Activity Resumed" messages will appear again as the
+                                activity
+                                comes back to the foreground.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Close the app (press the back button):</strong>
+                        <ul>
+                            <li>The "Activity Paused", "Activity Stopped", and finally "Activity Destroyed" messages
+                                will
+                                appear in sequence, signaling the activity is fully closed.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="../../images/started2.png" alt="">
+                <img src="../../images/resumed.png" alt="">
+                <img src="../../images/paused.png" alt="">
+                <img src="../../images/stopped.png" alt="">
+            </div>
         </div>
         <div class="wh">
-            <h2>What is a Service in Android?</h2>
+            <h2>Service</h2>
             <p>A Service in Android is a component that runs in the background to perform long-running operations
                 without needing to interact with the user. It doesn't provide a user interface but works to:
             <ul>
@@ -492,8 +373,10 @@ public class MainActivity extends AppCompatActivity {
             <p>Services are helpful for running tasks in the background, such as playing music, downloading files, or
                 handling long-running computations.</p>
             <h3> Why Do We Need Intents for Services?</h3>
-            <p>n Android, Intents are messaging objects used to communicate between different app components. When it
+            <p>
+                In Android, Intents are messaging objects used to communicate between different app components. When it
                 comes to Services, Intents are essential because:
+            </p>
             <ul>
                 <li>We use Intents to start and stop services.</li>
                 <li>Intents allow you to pass data to the Service.</li>
@@ -504,7 +387,6 @@ public class MainActivity extends AppCompatActivity {
                     </ul>
                 </li>
             </ul>
-            </p>
             <div class="in">
                 <h3>Intent</h3>
                 <p>An Intent is a messaging object that allows you to request an action from another component, such as
@@ -518,13 +400,16 @@ public class MainActivity extends AppCompatActivity {
                                 <p>An Explicit Intent directly specifies the component (usually an Activity or Service)
                                     that you want to start. This is useful when you know the class name of the component
                                     you want to interact with.</p>
+                                <p><strong>When to use:</strong> Explicit Intents are generally used when you want to
+                                    communicate <strong>within your app</strong> to start activities, services, or other
+                                    components.</p>
                                 <p><strong>Example:</strong> Starting a new Activity within the same app.</p>
                                 <pre>
-                                    <code>
+                <code>
 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 startActivity(intent);
-                                    </code>
-                                </pre>
+                </code>
+            </pre>
                                 <p>In this example, <strong>MainActivity.this</strong> is the context, and
                                     <strong>SecondActivity.class</strong> is the class of the Activity we want to start.
                                 </p>
@@ -532,16 +417,19 @@ startActivity(intent);
                             <li><strong>Implicit Intent:</strong>
                                 <p>An Implicit Intent does not specify the component to be started. Instead, it defines
                                     an action to be performed, allowing any app that can handle that action to respond.
-                                    This is useful for actions that could be handled by multiple applications.</p>
+                                </p>
+                                <p><strong>When to use:</strong> Implicit Intents are typically used when you want to
+                                    communicate <strong>outside your app</strong> or let the system choose the most
+                                    appropriate app to handle the task (like sharing content or opening a web page).</p>
                                 <p><strong>Example:</strong> Sharing content across apps.</p>
                                 <pre>
-                                    <code>
+                <code>
 Intent shareIntent = new Intent(Intent.ACTION_SEND);
 shareIntent.setType("text/plain");
 shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello, check this out!");
 startActivity(Intent.createChooser(shareIntent, "Share via"));
-                                    </code>
-                                </pre>
+                </code>
+            </pre>
                                 <p>In this example, <strong>Intent.ACTION_SEND</strong> indicates that we want to share
                                     some text. The <strong>setType()</strong> method specifies the type of data being
                                     shared, and <strong>putExtra()</strong> adds the actual text content. The
@@ -551,6 +439,7 @@ startActivity(Intent.createChooser(shareIntent, "Share via"));
                             </li>
                         </ol>
                     </li>
+
                 </ul>
 
 
@@ -688,25 +577,25 @@ public class SecondActivity extends AppCompatActivity {
 
             </div>
             <div class="in">
-                <h3>Android Service Lifecycle</h3>
+        <h3>Android Service Lifecycle</h3>
 
+        <p>
+            In Android, a Service is a component that runs in the background to perform long-running operations
+            or to perform work for remote processes. Unlike Activities, Services do not have a user interface
+            and can continue running even if the user switches to another application. Understanding the
+            lifecycle of a Service is crucial for managing its operations and resources effectively.
+        </p>
+
+        <h3>Key Lifecycle Methods</h3>
+
+        <ol>
+            <li>
+                <h4>onCreate()</h4>
                 <p>
-                    In Android, a Service is a component that runs in the background to perform long-running operations
-                    or to perform work for remote processes. Unlike Activities, Services do not have a user interface
-                    and can continue running even if the user switches to another application. Understanding the
-                    lifecycle of a Service is crucial for managing its operations and resources effectively.
+                    Called when the service is first created. This is where you perform one-time initialization
+                    tasks, such as setting up resources.
                 </p>
-
-                <h3>Key Lifecycle Methods</h3>
-
-                <ol>
-                    <li>
-                        <h4>onCreate()</h4>
-                        <p>
-                            Called when the service is first created. This is where you perform one-time initialization
-                            tasks, such as setting up resources.
-                        </p>
-                        <pre>
+                <pre>
                             <code>
 @Override
 public void onCreate() {
@@ -715,27 +604,27 @@ public void onCreate() {
 }
                             </code>
                         </pre>
-                    </li>
+            </li>
 
-                    <li>
-                        <h4>onStartCommand()</h4>
-                        <p>
-                            Called every time a client starts the service using <code>startService()</code>. This method
-                            allows the service to perform its operations.
-                        </p>
-                        <p>
-                            It returns an integer that indicates how the system should handle the service if it is
-                            killed:
-                        </p>
-                        <ul>
-                            <li><code>START_NOT_STICKY</code>: The service will not be recreated until an explicit
-                                request is made.</li>
-                            <li><code>START_STICKY</code>: The service will be recreated, but the last intent will not
-                                be delivered.</li>
-                            <li><code>START_REDELIVER_INTENT</code>: The service will be recreated, and the last intent
-                                will be redelivered.</li>
-                        </ul>
-                        <pre>
+            <li>
+                <h4>onStartCommand()</h4>
+                <p>
+                    Called every time a client starts the service using <code>startService()</code>. This method
+                    allows the service to perform its operations.
+                </p>
+                <p>
+                    It returns an integer that indicates how the system should handle the service if it is
+                    killed:
+                </p>
+                <ul>
+                    <li><code>START_NOT_STICKY</code>: The service will not be recreated until an explicit
+                        request is made.</li>
+                    <li><code>START_STICKY</code>: The service will be recreated, but the last intent will not
+                        be delivered.</li>
+                    <li><code>START_REDELIVER_INTENT</code>: The service will be recreated, and the last intent
+                        will be redelivered.</li>
+                </ul>
+                <pre>
                             <code>
 @Override
 public int onStartCommand(Intent intent, int flags, int startId) {
@@ -744,19 +633,19 @@ public int onStartCommand(Intent intent, int flags, int startId) {
 }
                             </code>
                         </pre>
-                    </li>
+            </li>
 
-                    <li>
-                        <h4>onBind()</h4>
-                        <p>
-                            Called when a client binds to the service using <strong>bindService()</strong>. This method is
-                            used for bound services, allowing clients to interact with the service.
-                        </p>
-                        <p>
-                            It must return an <strong>IBinder</strong> object. If the service is not intended to be bound,
-                            it should return <strong>null</strong>.
-                        </p>
-                        <pre>
+            <li>
+                <h4>onBind()</h4>
+                <p>
+                    Called when a client binds to the service using <strong>bindService()</strong>. This method is
+                    used for bound services, allowing clients to interact with the service.
+                </p>
+                <p>
+                    It must return an <strong>IBinder</strong> object. If the service is not intended to be bound,
+                    it should return <strong>null</strong>.
+                </p>
+                <pre>
                             <code>
 @Nullable
 @Override
@@ -765,15 +654,15 @@ public IBinder onBind(Intent intent) {
 }
                             </code>
                         </pre>
-                    </li>
+            </li>
 
-                    <li>
-                        <h4>onUnbind()</h4>
-                        <p>
-                            Called when all clients have disconnected from a particular interface published by the
-                            service. This can be used to perform cleanup if needed.
-                        </p>
-                        <pre>
+            <li>
+                <h4>onUnbind()</h4>
+                <p>
+                    Called when all clients have disconnected from a particular interface published by the
+                    service. This can be used to perform cleanup if needed.
+                </p>
+                <pre>
                             <code>
 @Override
 public boolean onUnbind(Intent intent) {
@@ -782,15 +671,15 @@ public boolean onUnbind(Intent intent) {
 }
                             </code>
                         </pre>
-                    </li>
+            </li>
 
-                    <li>
-                        <h4>onDestroy()</h4>
-                        <p>
-                            Called when the service is no longer used and is being destroyed. This is where you should
-                            clean up resources, such as stopping threads or releasing resources.
-                        </p>
-                        <pre>
+            <li>
+                <h4>onDestroy()</h4>
+                <p>
+                    Called when the service is no longer used and is being destroyed. This is where you should
+                    clean up resources, such as stopping threads or releasing resources.
+                </p>
+                <pre>
                             <code>
 @Override
 public void onDestroy() {
@@ -799,40 +688,45 @@ public void onDestroy() {
 }
                         </code>
                     </pre>
-                    </li>
-                </ol>
+            </li>
+        </ol>
 
-                <h3>Summary of the Service Lifecycle</h3>
-                <ul>
-                    <li><strong>Creation</strong>: <code>onCreate()</code> is called once when the service is created.
-                    </li>
-                    <li><strong>Starting</strong>: <code>onStartCommand()</code> is called every time the service is
-                        started.</li>
-                    <li><strong>Binding</strong>: <code>onBind()</code> is called when a client binds to the service;
-                        return <code>null</code> if not needed.</li>
-                    <li><strong>Unbinding</strong>: <code>onUnbind()</code> is called when clients unbind from the
-                        service.</li>
-                    <li><strong>Destruction</strong>: <code>onDestroy()</code> is called when the service is stopped and
-                        needs to release resources.</li>
-                </ul>
+        <h3>Summary of the Service Lifecycle</h3>
+        <ul>
+            <li><strong>Creation</strong>: <code>onCreate()</code> is called once when the service is created.
+            </li>
+            <li><strong>Starting</strong>: <code>onStartCommand()</code> is called every time the service is
+                started.</li>
+            <li><strong>Binding</strong>: <code>onBind()</code> is called when a client binds to the service;
+                return <code>null</code> if not needed.</li>
+            <li><strong>Unbinding</strong>: <code>onUnbind()</code> is called when clients unbind from the
+                service.</li>
+            <li><strong>Destruction</strong>: <code>onDestroy()</code> is called when the service is stopped and
+                needs to release resources.</li>
+        </ul>
             </div>
             <div class="in">
                 <h3>What is a Started Service?</h3>
                 <ul>
-                    <li>A started service is a type of service that is explicitly started by a component (usually an Activity or BroadcastReceiver) and continues running in the background until it completes its task or is explicitly stopped. This type of service is used for tasks that don't require direct interaction with the service after it starts, like downloading a file or playing audio.</li>
+                    <li>A started service is a type of service that is explicitly started by a component (usually an Activity or
+                        BroadcastReceiver) and continues running in the background until it completes its task or is explicitly
+                        stopped. This type of service is used for tasks that don't require direct interaction with the service
+                        after it starts, like downloading a file or playing audio.</li>
                 </ul>
                 <h3>Creating a Started Service Example: Playing a Default Ringtone</h3>
-                <p>Now that you understand Intents and how they work, let's move on to an example of using an Intent to start a Service. In this case, we will create a Service to play a default ringtone.</p>
-                
+                <p>Now that you understand Intents and how they work, let's move on to an example of using an Intent to start a
+                    Service. In this case, we will create a Service to play a default ringtone.</p>
+        
                 <p><strong>Step 1: Create the Service Class</strong></p>
-                <ul>
-                    <li>In this example, we will use the MediaPlayer class to play a ringtone in the background. The Service will be started and stopped using Intents.</li>
-                </ul>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <button class="ac">MyService.java</button>
-                    <div class="panel">
-                        <pre>
+<ul>
+            <li>In this example, we will use the MediaPlayer class to play a ringtone in the background. The Service
+                will be started and stopped using Intents.</li>
+        </ul>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">MyRingtoneService.java</button>
+            <div class="panel">
+                <pre>
                             <code>
 package com.example.myapplication;
 
@@ -845,7 +739,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class MyService extends Service {
+public class MyRingtoneService extends Service {
 
     private MediaPlayer mPlayer;
 
@@ -882,26 +776,31 @@ public class MyService extends Service {
 }
                             </code>
                         </pre>
-                    </div>
-                </div>
-                <p><strong>Explanation:</strong></p>
-                <ul>
-                    <li>The <code>MyService</code> class extends the <code>Service</code> class.</li>
-                    <li><strong>MediaPlayer:</strong> This class is used to control playback of audio files. We will use it to play the default ringtone.</li>
-                    <li><strong>onCreate():</strong> This method is called when the service is first created. Here, we show a toast message indicating that the service has been created.</li>
-                    <li><strong>onStartCommand():</strong> This method is called every time the service is started. We create a MediaPlayer instance to play the default ringtone, set it to loop, and start the playback. We also display a toast message indicating that the service has started.</li>
-                    <li><strong>onDestroy():</strong> This method is called when the service is being destroyed. We stop the MediaPlayer and release its resources to prevent memory leaks.</li>
-                </ul>
-                
-                <p><strong>Step 2: Start and Stop the Service from an Activity</strong></p>
-                <ul>
-                    <li>We’ll use Intents to start and stop the service from MainActivity.</li>
-                </ul>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <button class="ac">MainActivity.java</button>
-                    <div class="panel">
-                        <pre>
+            </div>
+            </div>
+<p><strong>Explanation:</strong></p>
+        <ul>
+            <li>The <code>MyRingtoneService</code> class extends the <code>Service</code> class.</li>
+            <li><strong>MediaPlayer:</strong> This class is used to control playback of audio files. We will use it to
+                play the default ringtone.</li>
+            <li><strong>onCreate():</strong> This method is called when the service is first created. Here, we show a
+                toast message indicating that the service has been created.</li>
+            <li><strong>onStartCommand():</strong> This method is called every time the service is started. We create a
+                MediaPlayer instance to play the default ringtone, set it to loop, and start the playback. We also
+                display a toast message indicating that the service has started.</li>
+            <li><strong>onDestroy():</strong> This method is called when the service is being destroyed. We stop the
+                MediaPlayer and release its resources to prevent memory leaks.</li>
+        </ul>
+
+        <p><strong>Step 2: Start and Stop the Service from an Activity</strong></p>
+        <ul>
+            <li>We’ll use Intents to start and stop the service from MainActivity.</li>
+        </ul>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">MainActivity.java</button>
+            <div class="panel">
+                <pre>
                             <code>
 package com.example.myapplication;
 
@@ -925,7 +824,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent serviceIntent = new Intent(MainActivity.this, MyService.class);
+                Intent serviceIntent = new Intent(MainActivity.this, MyRingtoneService.class);
                 startService(serviceIntent); // Start the service
             }
         });
@@ -933,7 +832,7 @@ public class MainActivity extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent serviceIntent = new Intent(MainActivity.this, MyService.class);
+                Intent serviceIntent = new Intent(MainActivity.this, MyRingtoneService.class);
                 stopService(serviceIntent); // Stop the service
             }
         });
@@ -941,57 +840,59 @@ public class MainActivity extends AppCompatActivity {
 }
                             </code>
                         </pre>
-                    </div>
-                </div>
-                <p><strong>Explanation:</strong></p>
-                <ul>
-                    <li>The <code>MainActivity</code> class is where we manage our user interface.</li>
-                    <li>We define two buttons: one to start the service and another to stop it.</li>
-                    <li><strong>startButton:</strong> When clicked, it creates an Explicit Intent for <code>MyService</code> and calls <code>startService()</code> to start the service.</li>
-                    <li><strong>stopButton:</strong> When clicked, it creates an Explicit Intent for <code>MyService</code> and calls <code>stopService()</code> to stop the service.</li>
-                </ul>
-                
-                <p><strong>Step 3: Update the Layout</strong></p>
-                <ul>
-                    <li>The layout needs two buttons: one to start the service and one to stop it.</li>
-                </ul>
-                <div class="code">
-                    <div class="dotc"></div>
-                    <button class="ac">activity_main.xml</button>
-                    <div class="panel">
-                        <pre>
+            </div>
+        </div>
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li>The <strong>MainActivity</strong> class is where we manage our user interface.</li>
+            <li>We define two buttons: one to start the service and another to stop it.</li>
+            <li><strong>startButton:</strong> When clicked, it creates an Explicit Intent for <strong>MyRingtoneService</strong> and
+                calls <strong>startService()</strong> to start the service.</li>
+            <li><strong>stopButton:</strong> When clicked, it creates an Explicit Intent for <strong>MyRingtoneService</strong> and
+                calls <strong>stopService()</strong> to stop the service.</li>
+        </ul>
+
+        <p><strong>Step 3: Update the Layout</strong></p>
+        <ul>
+            <li>The layout needs two buttons: one to start the service and one to stop it.</li>
+        </ul>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">activity_main.xml</button>
+            <div class="panel">
+                <pre>
                             <code>
 &lt;?xml version="1.0" encoding="utf-8"?>
-                            &lt;androidx.constraintlayout.widget.ConstraintLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:context=".MainActivity">
+&lt;androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
 
-                            &lt;Button
-                            android:id="@+id/startServiceBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Start Service" />
+    &lt;Button
+    android:id="@+id/startServiceBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Start Service" />
 
-                            &lt;Button
-                            android:id="@+id/stopServiceBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Stop Service"
-                            android:layout_below="@id/startServiceBtn"
-                            android:layout_marginTop="20dp" />
-                            &lt;/androidx.constraintlayout.widget.ConstraintLayout>
+    &lt;Button
+    android:id="@+id/stopServiceBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Stop Service"
+    android:layout_below="@id/startServiceBtn"
+    android:layout_marginTop="20dp" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
                             </code>
                             </pre>
             </div>
         </div>
         <p><strong>Explanation:</strong></p>
         <ul>
-            <li>We create a <code>LinearLayout</code> with two buttons: <code>startButton</code> and
-                <code>stopButton</code>.
+            <li>We create a <strong>LinearLayout</strong> with two buttons: <strong>startButton</strong> and
+                <strong>stopButton</strong>.
             </li>
             <li>These buttons will allow the user to control the ringtone playback.</li>
         </ul>
@@ -1006,8 +907,8 @@ public class MainActivity extends AppCompatActivity {
                 </pre>
         <p><strong>Explanation:</strong></p>
         <ul>
-            <li>In the <code>AndroidManifest.xml</code>, we declare our service using
-                <code>&lt;service android:name=".MyService" /></code>.
+            <li>In the <strong>AndroidManifest.xml</strong>, we declare our service using
+                <strong>&lt;service android:name=".MyRingtoneService" /></strong>.
             </li>
             <li>This allows the Android system to know about our Service, enabling it to be started and stopped as
                 needed.</li>
@@ -1015,29 +916,36 @@ public class MainActivity extends AppCompatActivity {
 
         <p><strong>Summary of the Program:</strong></p>
         <ul>
-            <li>We created a Service called <code>MyService</code> that plays a default ringtone using the
-                <code>MediaPlayer</code> class.
+            <li>We created a Service called <strong>MyRingtoneService</strong> that plays a default ringtone using the
+                <strong>MediaPlayer</strong> class.
             </li>
-            <li>The service can be started and stopped using buttons in the <code>MainActivity</code>, which uses
+            <li>The service can be started and stopped using buttons in the <strong>MainActivity</strong>, which
+                uses
                 Intents to communicate with the Service.</li>
-            <li>We also ensured that the service is properly declared in the AndroidManifest.xml to allow the Android
+            <li>We also ensured that the service is properly declared in the AndroidManifest.xml to allow the
+                Android
                 system to manage it.</li>
-            <li>This example demonstrates how to create a Service, manage audio playback, and use Intents to control the
+            <li>This example demonstrates how to create a Service, manage audio playback, and use Intents to control
+                the
                 Service from an Activity, providing a practical understanding of service management in Android.</li>
         </ul>
     </div>
     <div class="in">
         <h3>What is Bound Services in Android</h3>
         <ul>
-            <li>A Bound Service is one that provides a client-server interface to allow components (like an Activity) to
+            <li>A Bound Service is one that provides a client-server interface to allow components (like an
+                Activity) to
                 bind, communicate, and perform tasks. When an Activity binds to a service, the service provides an
-                interface for the activity to interact with it. The service runs only as long as at least one client is
+                interface for the activity to interact with it. The service runs only as long as at least one client
+                is
                 bound to it.</li>
             <li>Key Concepts of Bound Service:
                 <ul>
-                    <li>Binding: When a component (like an Activity) binds to the service, it uses a ServiceConnection
+                    <li>Binding: When a component (like an Activity) binds to the service, it uses a
+                        ServiceConnection
                         object.</li>
-                    <li>Unbinding: Once the component no longer needs to interact with the service, it can unbind, and
+                    <li>Unbinding: Once the component no longer needs to interact with the service, it can unbind,
+                        and
                         the service may stop running if no other component is bound to it.</li>
                 </ul>
             </li>
@@ -1049,7 +957,8 @@ public class MainActivity extends AppCompatActivity {
             <li>Service Class:
                 <ul>
                     <li>Create a service class by extending the Service class.</li>
-                    <li>Override the onBind() method to return an instance of IBinder. This is how the client (Activity)
+                    <li>Override the onBind() method to return an instance of IBinder. This is how the client
+                        (Activity)
                         interacts with the service.</li>
                 </ul>
             </li>
@@ -1196,131 +1105,140 @@ public class MainActivity extends AppCompatActivity {
         <p>In this example:
         <ul>
             <li>We start the service using bindService() and unbind it using unbindService().</li>
-            <li>The BoundedService class generates a random number and returns it to the Activity when requested.</li>
+            <li>The BoundedService class generates a random number and returns it to the Activity when requested.
+            </li>
         </ul>
         </p>
     </div>
     </div>
     <div class="wh">
-        <h2>Adapters in Android</h2>
+        <h2>Broadcast Receivers</h2>
         <ul>
-            <li>An Adapter in Android acts as a bridge between a data source (like an array or database) and a UI
-                component
-                (like a ListView or GridView). Adapters are responsible for creating the views that represent each item
-                in the
-                data set.</li>
-            <li>Types of Adapters:
-                <ul>
-                    <li><strong>ArrayAdapter:</strong> Used to bind arrays to ListView or GridView.</li>
-                    <li><strong>SimpleAdapter:</strong> Used to bind data from a List of Maps.</li>
-                    <li><strong>CustomAdapter:</strong> A user-defined adapter that you can customize according to your
-                        needs.
-                    </li>
-                </ul>
-            </li>
+            <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
+                other apps or the system itself. It allows your app to receive system-wide broadcast announcements, such
+                as network changes, incoming SMS, power connection status, etc. It is a critical component in making
+                apps more interactive and responsive to system events.</li>
+            <li>For example, a fitness app can listen for battery status changes and reduce its background processing
+                when the battery is low.</li>
         </ul>
+        <div class="in">
+            <h3>How Broadcast Receivers Work</h3>
+            <ul>
+                <li>We know that Broadcast Receivers in Android are essential components that allow applications to
+                    listen for and respond to system-wide broadcast announcements. These broadcasts can indicate various
+                    events, such as changes in connectivity, battery status, or system boot. By using Broadcast
+                    Receivers, apps can perform actions or update their state based on these events, enhancing user
+                    experience and ensuring that the app responds dynamically to the environment.</li>
+                <li>Two fundamental concepts that facilitate the functioning of Broadcast Receivers are Broadcast
+                    Intents and Intent Filters.</li>
+            </ul>
+            <p><strong>Broadcast Intent</strong></p>
+            <ul>
+                <li>Broadcasts are delivered using an Intent, a message object containing the broadcast details.</li>
+                <li>Example: An app listening for low battery broadcasts will receive an intent with the action
+                    <strong>Intent.ACTION_BATTERY_LOW</strong>.
+                </li>
+            </ul>
+            <p><strong>Intent Filters</strong></p>
+            <ul>
+                <li>Receivers are registered with an Intent Filter, which specifies what types of broadcasts the
+                    receiver will handle.</li>
+                <li>Example: A weather app might register for android.intent.action.BOOT_COMPLETED to start background
+                    updates after the device boots up.</li>
+            </ul>
+        </div>
+        <p>Broadcast receivers are typically created in two ways:
+        <ol>
+            <li>Static Registration (via Manifest)</li>
+            <li>Dynamic Registration (via Code)</li>
+        </ol>
+        </p>
+        <div class="in">
+            <h3>1. Static Registration (via Manifest)</h3>
+            <ul>
+                <li>This type of receiver is registered in the <strong>AndroidManifest.xml</strong> file. It runs even
+                    when the app is not in the foreground or not running at all.
+                    <ul>
+                        <li>Use Case: A file-sharing app may need to listen for network changes, so it continues sharing
+                            files even if the app isn't open.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Steps:</strong></p>
+            <ol>
+                <li><strong>Declare the Receiver in the AndroidManifest.xml:</strong>
+                    <pre>
+                    <code>
+&lt;receiver android:name=".MyBroadcastReceiver"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.BOOT_COMPLETED"/&gt;
+        &lt;action android:name="android.intent.action.POWER_CONNECTED"/&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+                    </code>
+                </pre>
+                </li>
+                <li><strong>Request Required Permissions:</strong>
+                    <br>Depending on the actions your receiver handles, you may need to declare permissions in the
+                    <strong>AndroidManifest.xml</strong>. For example:
+                    <pre>
+                    <code>
+&lt;uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/&gt;
+                    </code>
+                </pre>
+                </li>
+                <li><strong>Implement the Broadcast Receiver:</strong>
+                    <br>You will need to create a class that extends <strong>BroadcastReceiver</strong> and override the
+                    <strong>onReceive()</strong> method to define the actions to take when the broadcast is received.
+                    <pre>
+                    <code>
+package com.example.myapplication;
 
-        <p><strong>Understanding ListView</strong></p>
-        <ul>
-            <li><strong>ListView:</strong> A ListView is a UI component that displays a scrollable list of items. Each
-                item in
-                the list can be customized with different layouts and can contain text, images, or any other UI element.
-            </li>
-        </ul>
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
 
-        <p><strong>Example: Using ArrayAdapter to Display a List of Strings</strong></p>
-
-        <h3>Step 1: Add ListView in XML Layout</h3>
-        <ul>
-            <li>First, you need to add a ListView to your XML layout file (e.g., <code>activity_main.xml</code>). Here's
-                how to
-                do it:</li>
-            <pre>
-        <code>
-&lt;ListView
-    android:id="@+id/myListXML"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@android:color/darker_gray"
-    android:dividerHeight="1dp" /&gt;
-        </code>
-    </pre>
-            <li>This code creates a ListView that takes up the entire screen. The <strong>divider</strong> attribute
-                adds a
-                line
-                between list items.</li>
-        </ul>
-
-        <h3>Step 2: Create the Activity Class</h3>
-        <div class="code">
-            <div class="dotc"></div>
-            <button class="ac">MainActivity.java</button>
-            <div class="panel">
-                <pre>
-            <code>
-package com.example.mybcaadapter;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-public class MainActivity extends AppCompatActivity {
-
-    ListView myListView;
-    String myArr[] = {"GEHU-BHIMTAL", "GEHU-HLD", "GEHU-DDN"};  // Array of strings
-
+public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Reference the ListView from the layout
-        myListView = findViewById(R.id.myListXML);
-
-        // Create an ArrayAdapter to bind the data to the ListView
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArr);
-        myListView.setAdapter(myAdapter);  // Set the adapter for the ListView
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
+            // Start tracking steps or syncing data
+            Toast.makeText(context, "Boot completed! Starting fitness tracking.", Toast.LENGTH_SHORT).show();
+        } else if (Intent.ACTION_POWER_CONNECTED.equals(action)) {
+            // Handle power connected event
+            Toast.makeText(context, "Power connected!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
-            </code>
-        </pre>
-            </div>
+                    </code>
+                </pre>
+                </li>
+            </ol>
         </div>
+        <div class="in">
+            <h3>Dynamic Registration (via Code)</h3>
+            <ul>
+                <li>A receiver can be registered dynamically in your Java code. This registration only exists while your
+                    app is running, meaning the receiver listens for broadcasts only while the app is active.
+                    <ul>
+                        <li><strong>Use Case:</strong> A podcast app can listen for headphone connection/disconnection
+                            events only while the app is running.</li>
 
-        <h3>Explanation of the Code:</h3>
-        <ul>
-            <li>The <strong>myListView</strong> variable is used to reference the ListView in your layout.</li>
-            <li><strong>String myArr[] = {"GEHU-BHIMTAL", "GEHU-HLD", "GEHU-DDN"};</strong> initializes an array of
-                strings
-                that
-                will be displayed in the ListView.</li>
-            <li>In the <strong>onCreate</strong> method, we set the content view to the layout and link the ListView
-                using
-                <strong>findViewById</strong>.
-            </li>
-            <li>An <strong>ArrayAdapter</strong> is created to bind the string array to the ListView. The second
-                parameter
-                specifies a built-in layout for the list items (<strong>android.R.layout.simple_list_item_1</strong>).
-            </li>
-            <li>Finally, we set the adapter to the ListView using <strong>setAdapter</strong>, which populates the
-                ListView
-                with the
-                data.</li>
-        </ul>
+                    </ul>
+                </li>
 
-        <p>This example demonstrates how to create a ListView in Android, bind data using an ArrayAdapter, and display a
-            simple
-            list of items.</p>
-    </div>
-    <div class="wh">
-        <h2>Broadcast Receivers</h2>
-        <p>turning ON and OFF of bluetooth</p>
-        <div class="code">
-            <div class="dotc"></div>
-            <button class="ac">MainActivity.java</button>
-            <div class="panel">
-                <pre>
+            </ul>
+            <p><strong>Steps:</strong></p>
+            <ol>
+                <li><strong>Register a Receiver Dynamically in an Activity or Service:</strong>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
                     <code>
 package com.example.myapplication;
 
@@ -1347,13 +1265,15 @@ public class MainActivity extends AppCompatActivity {
 }
                     </code>
                 </pre>
-            </div>
-        </div>
-        <div class="code">
-            <div class="dotc"></div>
-            <button class="ac">MyBroadcast.java</button>
-            <div class="panel">
-                <pre>
+                        </div>
+                    </div>
+                </li>
+                <li><strong>Implement the Broadcast Receiver:</strong>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MyBroadcast.java</button>
+                        <div class="panel">
+                            <pre>
                     <code>
 package com.example.myapplication;
 
@@ -1382,9 +1302,854 @@ public class MyBroadcast extends BroadcastReceiver {
 }
                     </code>
                 </pre>
-            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <p><strong>Unregistering the Receiver</strong></p>
+            <ul>
+                <li>You must unregister dynamically registered receivers when they are no longer needed to avoid memory
+                    leaks. You can do this in the <strong>onStop()</strong> or <strong>onDestroy()</strong> method of
+                    your activity or service:
+                    <pre>
+                    <code>
+unregisterReceiver(myBroadcast);
+                    </code>
+                </pre>
+                </li>
+            </ul>
         </div>
     </div>
+    <div class="wh">
+        <h2>Views</h2>
+        <p>In Android, a View is the basic building block of the user interface. Every element you see on the
+            screen, whether it's a button, an image, or a text field, is a type of View. Views define how the
+            content should be displayed and how the user can interact with it. Android's View class is the parent
+            class for all UI components (like buttons, text views, etc.).</p>
+
+        <p><strong>Characteristics of Views:</strong></p>
+        <ul>
+            <li><strong>UI Elements:</strong> Views represent all the elements that are displayed on the
+                screen—buttons, text fields, images, checkboxes, etc.</li>
+            <li><strong>Layout Control:</strong> Views can control their size, shape, position, and overall
+                appearance using layout attributes.</li>
+            <li><strong>Event Handling:</strong> Views respond to user interactions, such as clicks, touches, and
+                gestures.</li>
+        </ul>
+
+        <p><strong>Hierarchical Structure:</strong></p>
+        <ul>
+            <li>Android UI is based on a <strong>hierarchy of views</strong>. At the top is a
+                <strong>ViewGroup</strong>, which can contain multiple <strong>Views</strong> (like Button,
+                TextView, EditText) or even other ViewGroups. The relationship between these views and view groups
+                forms a tree structure.
+            </li>
+            <li><strong>ViewGroup:</strong> A special kind of View that can contain other views. Examples include
+                <strong>LinearLayout</strong>, <strong>ConstraintLayout</strong>, and
+                <strong>RelativeLayout</strong>.
+            </li>
+        </ul>
+
+        <p><strong>Basic View Types:</strong></p>
+        <ul>
+            <li><strong>Button:</strong> A clickable element that triggers an action.</li>
+            <li><strong>TextView:</strong> Displays static text to the user.</li>
+            <li><strong>EditText:</strong> A text field where users can input text.</li>
+            <li><strong>ImageView:</strong> Displays an image.</li>
+            <li><strong>ListView:</strong> A list of items that can scroll vertically.</li>
+        </ul>
+
+        <p><strong>Attributes of a View:</strong></p>
+        <ul>
+            <li><strong>Size:</strong> Each view has a width and height. This can be defined as
+                <strong>wrap_content</strong> (size adjusts to content) or <strong>match_parent</strong> (fills the
+                available space).
+            </li>
+            <li><strong>Positioning:</strong> Views are placed in layouts using attributes like
+                <strong>layout_width</strong>, <strong>layout_height</strong>, <strong>padding</strong>, and
+                <strong>margin</strong>.
+            </li>
+            <li><strong>ID:</strong> Every view can be assigned an ID using the <strong>android:id</strong>
+                attribute, which allows the program to interact with it in the code.</li>
+        </ul>
+
+        <p><strong>Interacting with Views:</strong></p>
+        <ul>
+            <li>Views not only display content but also handle user interaction through <strong>event
+                    listeners</strong>. For example, a button can have a <strong>setOnClickListener</strong> to
+                handle clicks, and an EditText can respond to text changes.</li>
+        </ul>
+        <p>Now we will try to understand each view one by one.</p>
+        <div class="in">
+            <h3>Button</h3>
+            <p>A <strong>Button</strong> is a view that users can tap to perform actions. It is one of the most
+                common UI elements used for interacting with the app. Buttons are often used to trigger events like
+                submitting a form, navigating to another screen, or starting a process.</p>
+
+            <p><strong>XML Definition:</strong></p>
+            <pre>
+                    <code>
+&lt;Button
+    android:id=&quot;@+id/button_example&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Click Me&quot;
+    android:onClick=&quot;onButtonClick&quot; /&gt;
+                    </code>
+                </pre>
+
+            <p>This XML code defines a simple button with the text "Click Me" displayed on it. The
+                <strong>android:onClick</strong> attribute is used to specify a method in your activity that will be
+                called when the button is clicked.
+            </p>
+
+            <p><strong>Attributes of Button:</strong></p>
+            <ul>
+                <li><strong>android:id:</strong> A unique identifier for the button. You will use this ID to refer
+                    to the button in your Java or Kotlin code.</li>
+                <li><strong>android:layout_width:</strong> Specifies the width of the button. It can be set to
+                    <strong>wrap_content</strong> (adjusts to the button's content) or <strong>match_parent</strong>
+                    (fills
+                    the available width).
+                </li>
+                <li><strong>android:layout_height:</strong> Specifies the height of the button. Similar to the
+                    width, it can be set to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                <li><strong>android:text:</strong> Sets the text displayed on the button.</li>
+                <li><strong>android:onClick:</strong> Specifies the name of a method in your activity that will be
+                    called when the button is clicked.</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre>
+                    <code>
+public void onButtonClick(View view) {
+    // Perform action on button click
+    Toast.makeText(getApplicationContext(), &quot;Button clicked!&quot;, Toast.LENGTH_SHORT).show();
+}
+                    </code>
+                </pre>
+
+            <p>In this code example, the <stong>onButtonClick</stong> method is defined in your activity. When the
+                button is clicked, this method is called, and a <strong>Toast</strong> message saying "Button
+                clicked!"
+                is displayed.</p>
+
+            <p><strong>Another way of performing something by clicking the Button:</strong></p>
+            <pre>
+                    <code>
+Button buttonExample = findViewById(R.id.button_example);
+buttonExample.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        // Perform action on click
+        Toast.makeText(getApplicationContext(), &quot;Button clicked!&quot;, Toast.LENGTH_SHORT).show();
+    }
+});
+                    </code>
+                </pre>
+
+            <p>In this example, the button is assigned a click listener using <strong>setOnClickListener</strong>.
+                When
+                the user clicks the button, a <strong>Toast</strong> message is displayed.</p>
+
+            <p><strong>Button Events:</strong></p>
+            <ul>
+                <li><strong>onClick:</strong> The most common event triggered by a button is the
+                    <strong>onClick</strong> event. When the button is clicked, the strong inside the
+                    <strong>onClick</strong>
+                    listener is executed.
+                </li>
+            </ul>
+
+        </div>
+        <div class="in">
+            <h3>Edit Text</h3>
+            <p><strong>Edit Text</strong> is a user interface element that allows users to enter and modify text. It
+                is commonly used for forms, search fields, and any place where user input is required. Edit Text
+                provides various input types and attributes to customize its behavior and appearance.</p>
+
+            <p><strong>XML Definition:</strong></p>
+            <pre>
+                    <code>
+&lt;EditText
+    android:id=&quot;@+id/edit_text_example&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:hint=&quot;Enter text here&quot; /&gt;
+                    </code>
+                </pre>
+
+            <p>This XML code defines an Edit Text field with a hint "Enter text here" displayed when the field is
+                empty. The user can input text into this field.</p>
+
+            <p><strong>Attributes of Edit Text:</strong></p>
+            <ul>
+                <li><strong>android:id:</strong> A unique identifier for the Edit Text field. You will use this ID
+                    to refer to the field in your Java or Kotlin code.</li>
+                <li><strong>android:layout_width:</strong> Specifies the width of the Edit Text. It can be set to
+                    <strong>wrap_content</strong> or <strong>match_parent</strong>.
+                </li>
+                <li><strong>android:layout_height:</strong> Specifies the height of the Edit Text. Similar to the
+                    width, it can be set to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                <li><strong>android:hint:</strong> Displays a hint in the Edit Text when it is empty, guiding users
+                    on what to enter.</li>
+                <li><strong>android:inputType:</strong> Defines the type of data expected (e.g., text, number,
+                    email). This can affect the keyboard layout presented to the user.</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre>
+                    <code>
+EditText editTextExample = findViewById(R.id.edit_text_example);
+String userInput = editTextExample.getText().toString();
+Toast.makeText(getApplicationContext(), userInput, Toast.LENGTH_SHORT).show();
+                    </code>
+                </pre>
+
+            <p>In this code example, the Edit Text is referenced by its ID, and the text entered by the user is
+                retrieved using <strong>getText()</strong>. This text is then displayed in a <strong>Toast</strong>
+                message
+                when you want to show it, for example, after a button click.</p>
+
+            <p><strong>Example Use Case:</strong></p>
+            <p>Edit Text fields are commonly used in login forms, search bars, and anywhere users need to input
+                text. For example, a user can enter their name, email address, or any other information required by
+                the application.</p>
+        </div>
+        <div class="in">
+            <h3>Radio Button</h3>
+            <p>A <strong>Radio Button</strong> is a user interface element that allows users to select one option
+                from a set of choices. Radio buttons are typically used when a user needs to choose a single option
+                among multiple alternatives, such as selecting a gender, payment method, or preferences.</p>
+
+            <p><strong>XML Definition:</strong></p>
+            <pre>
+                    <code>
+&lt;RadioGroup
+    android:id=&quot;@+id/radio_group_example&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;&gt;
+    &lt;RadioButton
+        android:id=&quot;@+id/radio_button_option1&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Option 1&quot; /&gt;
+    &lt;RadioButton
+        android:id=&quot;@+id/radio_button_option2&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Option 2&quot; /&gt;
+&lt;/RadioGroup&gt;
+                    </code>
+                </pre>
+
+            <p>This XML code defines a <strong>RadioGroup</strong> that contains two radio buttons: "Option 1" and
+                "Option 2." The <strong>RadioGroup</strong> ensures that only one radio button within the group can
+                be
+                selected at any time.</p>
+
+            <p><strong>Attributes of Radio Button:</strong></p>
+            <ul>
+                <li><strong>android:id:</strong> A unique identifier for each radio button. You will use these IDs
+                    to refer to the buttons in your Java or Kotlin code.</li>
+                <li><strong>android:layout_width:</strong> Specifies the width of the radio button. It can be set to
+                    <strong>wrap_content</strong> or <strong>match_parent</strong>.
+                </li>
+                <li><strong>android:layout_height:</strong> Specifies the height of the radio button. Similar to the
+                    width, it can be set to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                <li><strong>android:text:</strong> Sets the text displayed next to the radio button.</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre>
+                    <code>
+RadioGroup radioGroup = findViewById(R.id.radio_group_example);
+radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        RadioButton selectedRadioButton = findViewById(checkedId);
+        String selectedText = selectedRadioButton.getText().toString();
+        Toast.makeText(getApplicationContext(), &quot;Selected: &quot; + selectedText, Toast.LENGTH_SHORT).show();
+    }
+});
+                    </code>
+                </pre>
+
+            <p>In this code example, a listener is set on the <strong>RadioGroup</strong> to detect when a radio
+                button
+                is selected. The <strong>onCheckedChanged</strong> method retrieves the selected radio button and
+                displays its text in a <strong>Toast</strong> message.</p>
+
+            <p><strong>Example Use Case:</strong></p>
+            <p>Radio buttons are commonly used in forms where the user must select a single option, such as gender
+                (Male/Female), or preferences like subscription plans (Basic/Premium). They enhance user experience
+                by ensuring that only one choice can be selected at a time.</p>
+
+        </div>
+        <div class="in">
+            <h3>Image View</h3>
+            <p>An <strong>Image View</strong> is a user interface element that displays images in an Android
+                application. It is commonly used to show graphics, logos, or photos. Image View can load images from
+                various sources, including drawable resources, files, or URLs.</p>
+
+            <p><strong>XML Definition:</strong></p>
+            <pre>
+                    <code>
+&lt;ImageView
+    android:id=&quot;@+id/image_view_example&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:src=&quot;@drawable/sample_image&quot; /&gt;
+                    </code>
+                </pre>
+
+            <p>This XML code defines an Image View that displays an image resource named "sample_image" from the
+                drawable folder. The width and height are set to wrap the content of the image.</p>
+
+            <p><strong>Attributes of Image View:</strong></p>
+            <ul>
+                <li><strong>android:id:</strong> A unique identifier for the Image View. You will use this ID to
+                    refer to the view in your Java or Kotlin code.</li>
+                <li><strong>android:layout_width:</strong> Specifies the width of the Image View. It can be set to
+                    <strong>wrap_content</strong> or <strong>match_parent</strong>.
+                </li>
+                <li><strong>android:layout_height:</strong> Specifies the height of the Image View. Similar to the
+                    width, it can be set to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                <li><strong>android:src:</strong> Sets the image resource to be displayed in the Image View. This
+                    can reference drawable resources, files, or image URLs.</li>
+                <li><strong>android:contentDescription:</strong> Provides a description of the image for
+                    accessibility purposes.</li>
+            </ul>
+
+            <p><strong>Java Code Example:</strong></p>
+            <pre>
+                    <code>
+ImageView imageViewExample = findViewById(R.id.image_view_example);
+imageViewExample.setImageResource(R.drawable.new_image);
+                    </code>
+                </pre>
+
+            <p>In this code example, the Image View is referenced by its ID, and the image displayed is changed to
+                "new_image" from the drawable resources using the <strong>setImageResource()</strong> method.</p>
+
+            <p><strong>Example Use Case:</strong></p>
+            <p>Image Views are commonly used for displaying profile pictures, icons, or any other graphics in your
+                application. They enhance the visual appeal and usability of your app by providing relevant images.
+            </p>
+
+        </div>
+        <div class="in">
+            <h3>Toast</h3>
+            <p>A <strong>Toast</strong> is a small message that pops up on the screen for a short duration,
+                providing
+                feedback to the user. Unlike a dialog, a toast does not block user interaction with the app, making
+                it
+                useful for showing non-intrusive messages like "Task completed," "Network error," or "File saved
+                successfully."</p>
+
+            <h3>Why Use a Toast?</h3>
+            <ul>
+                <li>Non-intrusive way to show messages.</li>
+                <li>Does not require user action to disappear (auto-dismissed after a set duration).</li>
+                <li>Useful for brief notifications or status updates.</li>
+                <li>Ideal for informing the user of a background task's completion.</li>
+            </ul>
+
+            <h3>Basic Syntax of Toast</h3>
+            <p>In Android, a <code>Toast</code> message can be created and displayed using the following syntax:</p>
+
+            <pre>
+                <code>
+Toast.makeText(context, message, duration).show();
+                </code>
+            </pre>
+
+            <p>Let’s break this down:</p>
+
+            <h3>Arguments Passed to a Toast</h3>
+            <ul>
+                <li><strong>Context</strong>: The context in which the toast is created. This is usually the current
+                    Activity. The context provides the necessary information about the app environment to the toast.
+                    Example: <code>this</code> or <code>getApplicationContext()</code>.</li>
+                <li><strong>Message</strong>: The text or message you want to display to the user. This can be a
+                    simple
+                    string or a string resource. Example: <code>"Hello, World!"</code>.</li>
+                <li><strong>Duration</strong>: The length of time the toast should appear on the screen. There are
+                    two
+                    predefined values:
+                    <ul>
+                        <li><code>Toast.LENGTH_SHORT</code>: Displays the toast for a short period (~2 seconds).
+                        </li>
+                        <li><code>Toast.LENGTH_LONG</code>: Displays the toast for a longer period (~3.5 seconds).
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Example of a Basic Toast</h3>
+            <pre>
+        <code>
+Toast.makeText(this, "Hello, World!", Toast.LENGTH_SHORT).show();
+        </code>
+    </pre>
+
+            <p><strong>Step-by-Step Explanation:</strong></p>
+            <ol>
+                <li><strong>this</strong>: Refers to the current activity context.</li>
+                <li><strong>"Hello, World!"</strong>: This is the message that will be displayed on the screen.</li>
+                <li><strong>Toast.LENGTH_SHORT</strong>: The duration for which the toast will be shown
+                    (approximately 2
+                    seconds).</li>
+                <li><strong>.show()</strong>: This method ensures that the toast is actually displayed to the user.
+                </li>
+            </ol>
+            <div class="wh">
+                <h3>Simple program in which when we click on a button a Toast message is displayed.</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private int i = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        Button myBtn = findViewById(R.id.button);
+        myBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                i = i + 1;
+                Toast.makeText(MainActivity.this, "No. of times button is clicked = " + i , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+                            &lt;androidx.constraintlayout.widget.ConstraintLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/main"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:context=".MainActivity">
+
+                            &lt;TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Toast Demo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.486"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.091" />
+
+                            &lt;Button
+                            android:id="@+id/button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#5DE063"
+                            android:text="Button"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView"
+                            app:layout_constraintVertical_bias="0.584" />
+
+                            &lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                            </pre>
+                    </div>
+                </div>
+                <img src="../../images/toast.png" alt="">
+            </div>
+
+        </div>
+        <div class="in">
+            <h3>Adapter</h3>
+            <ul>
+                <li>An Adapter in Android acts as a bridge between a data source (like an array or database) and a
+                    UI
+                    component
+                    (like a ListView or GridView). Adapters are responsible for creating the views that represent
+                    each item
+                    in the
+                    data set.</li>
+                <li>Types of Adapters:
+                    <ul>
+                        <li><strong>ArrayAdapter:</strong> Used to bind arrays to ListView or GridView.</li>
+                        <li><strong>SimpleAdapter:</strong> Used to bind data from a List of Maps.</li>
+                        <li><strong>CustomAdapter:</strong> A user-defined adapter that you can customize according
+                            to your
+                            needs.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="wh">
+                <h3>List View</h3>
+                <p>A <strong>List View</strong> is a user interface element that displays a scrollable list of
+                    items. It is used to show multiple items in a single view, allowing users to scroll through the
+                    list and select individual items. List Views are commonly used for displaying data in a
+                    structured format, such as contact lists, email inboxes, or product listings.</p>
+
+                <p><strong>XML Definition:</strong></p>
+                <pre>
+                        <code>
+&lt;ListView
+    android:id=&quot;@+id/list_view_example&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+                        </code>
+                    </pre>
+
+                <p>This XML code defines a List View that takes up the full width of the parent and adjusts its
+                    height according to the content.</p>
+
+                <p><strong>Attributes of List View:</strong></p>
+                <ul>
+                    <li><strong>android:id:</strong> A unique identifier for the List View. You will use this ID to
+                        refer to the view in your Java or Kotlin code.</li>
+                    <li><strong>android:layout_width:</strong> Specifies the width of the List View. It can be set
+                        to <code>wrap_content</code> or <code>match_parent</code>.</li>
+                    <li><strong>android:layout_height:</strong> Specifies the height of the List View. This can also
+                        be set to <code>wrap_content</code> or <code>match_parent</code>.</li>
+                </ul>
+
+                <p>To populate a List View, an adapter is required to connect the List View to the data source. The
+                    adapter creates a view for each item in the data set and binds the data to those views.</p>
+
+                <p><strong>Example Code for List View with ArrayAdapter:</strong></p>
+                <pre>
+                        <code>
+ListView listViewExample = findViewById(R.id.list_view_example);
+String[] items = {&quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;};
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_list_item_1, items);
+listViewExample.setAdapter(adapter);
+                        </code>
+                    </pre>
+                <p><strong>Example: Using ArrayAdapter to Display a List of Strings</strong></p>
+
+                <p><strong>Step 1: Add ListView in XML Layout</strong></p>
+                <ul>
+                    <li>First, you need to add a ListView to your XML layout file (e.g.,
+                        <strong>activity_main.xml</strong>). Here's
+                        how to
+                        do it:
+                    </li>
+                    <pre>
+                        <code>
+&lt;ListView
+    android:id="@+id/myListXML"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@android:color/darker_gray"
+    android:dividerHeight="1dp" /&gt;
+                        </code>
+                    </pre>
+                    <li>This code creates a ListView that takes up the entire screen. The <strong>divider</strong>
+                        attribute
+                        adds a
+                        line
+                        between list items.</li>
+                </ul>
+
+                <p><strong>Step 2: Create the Activity Class</strong></p>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+            <code>
+package com.example.mybcaadapter;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView myListView;
+    String myArr[] = {"GEHU-BHIMTAL", "GEHU-HLD", "GEHU-DDN"};  // Array of strings
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Reference the ListView from the layout
+        myListView = findViewById(R.id.myListXML);
+
+        // Create an ArrayAdapter to bind the data to the ListView
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArr);
+        myListView.setAdapter(myAdapter);  // Set the adapter for the ListView
+    }
+}
+            </code>
+        </pre>
+                    </div>
+                </div>
+
+                <p><strong>Explanation of the Code:</strong></p>
+                <ul>
+                    <li>The <strong>myListView</strong> variable is used to reference the ListView in your layout.
+                    </li>
+                    <li><strong>String myArr[] = {"GEHU-BHIMTAL", "GEHU-HLD", "GEHU-DDN"};</strong> initializes an
+                        array
+                        of
+                        strings
+                        that
+                        will be displayed in the ListView.</li>
+                    <li>In the <strong>onCreate</strong> method, we set the content view to the layout and link the
+                        ListView
+                        using
+                        <strong>findViewById</strong>.
+                    </li>
+                    <li>An <strong>ArrayAdapter</strong> is created to bind the string array to the ListView. The
+                        second
+                        parameter
+                        specifies a built-in layout for the list items
+                        (<strong>android.R.layout.simple_list_item_1</strong>).
+                    </li>
+                    <li>Finally, we set the adapter to the ListView using <strong>setAdapter</strong>, which
+                        populates
+                        the
+                        ListView
+                        with the
+                        data.</li>
+                </ul>
+
+                <p>This example demonstrates how to create a ListView in Android, bind data using an ArrayAdapter,
+                    and
+                    display a
+                    simple
+                    list of items.</p>
+            </div>
+            <div class="wh">
+                <h3>Grid View</h3>
+                <p>A <strong>Grid View</strong> is a user interface element that displays items in a two-dimensional
+                    grid. It is used when you want to present data in a tabular format, allowing users to see
+                    multiple items simultaneously. Grid Views are commonly used for displaying images, product
+                    listings, or any data that benefits from a grid layout.</p>
+                <p>Similar to List Views, Grid Views also require an adapter to populate the grid with items. The
+                    adapter defines how each item will be displayed in the grid format.</p>
+
+                <p><strong>XML Definition:</strong></p>
+                <pre>
+                        <code>
+&lt;GridView
+    android:id=&quot;@+id/grid_view_example&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:numColumns=&quot;2&quot; /&gt;
+                        </code>
+                    </pre>
+
+                <p>This XML code defines a Grid View that occupies the full width of the parent and adjusts its
+                    height based on the content. The <strong>numColumns</strong> attribute specifies the number of
+                    columns in the grid.</p>
+
+                <p><strong>Attributes of Grid View:</strong></p>
+                <ul>
+                    <li><strong>android:id:</strong> A unique identifier for the Grid View. You will use this ID to
+                        refer to the view in your Java or Kotlin strong.</li>
+                    <li><strong>android:layout_width:</strong> Specifies the width of the Grid View. It can be set
+                        to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                    <li><strong>android:layout_height:</strong> Specifies the height of the Grid View. This can also
+                        be set to <strong>wrap_content</strong> or <strong>match_parent</strong>.</li>
+                    <li><strong>android:numColumns:</strong> Defines the number of columns to display in the grid.
+                    </li>
+                </ul>
+
+                <p><strong>Java Code Example:</strong></p>
+                <pre>
+                        <code>
+GridView gridViewExample = findViewById(R.id.grid_view_example);
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_list_item_1, items);
+gridViewExample.setAdapter(adapter);
+                        </code>
+                    </pre>
+
+                <p>In this code example, an ArrayAdapter is used to populate the Grid View with a list of items. The
+                    Grid View is referenced by its ID, and the adapter binds the data to the Grid View.</p>
+
+                <p><strong>Example Use Case:</strong></p>
+                <p>Grid Views are commonly used for displaying images, such as photo galleries, icon sets, or
+                    product thumbnails. They provide an organized layout that allows users to view multiple items at
+                    once.</p>
+
+                <p>In summary, the <strong>Grid View</strong> view is essential for presenting data in a structured
+                    format, enhancing user experience by providing a visually appealing layout for multiple items.
+                </p>
+
+            </div>
+            <div class="wh">
+                <h3>Spinner</h3>
+                <p>A <strong>Spinner</strong> in Android is a UI element that allows users to select an item from a
+                    dropdown menu. It is similar to a dropdown list in web development and is often used when you
+                    want to provide users with multiple choices in a compact view. When a Spinner is tapped, it
+                    shows a list of options, and the selected item is displayed in the Spinner view.</p>
+
+                <p><strong>XML Definition:</strong></p>
+                <pre>
+                        <code>
+&lt;Spinner
+    android:id=&quot;@+id/spinner_example&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+                        </code>
+                    </pre>
+
+                <p>This XML code defines a Spinner that adjusts its width and height according to its content.</p>
+
+                <p><strong>Java Code Example:</strong></p>
+                <pre>
+                        <code>
+// Define the Spinner
+Spinner spinnerExample = findViewById(R.id.spinner_example);
+
+// Create an array of options for the Spinner
+String[] items = { "Option 1", "Option 2", "Option 3" };
+
+// Create an ArrayAdapter to populate the Spinner with items
+ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_dropdown_item, items);
+
+// Set the adapter to the Spinner
+spinnerExample.setAdapter(adapter);
+
+// Handle Spinner item selection
+spinnerExample.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+        String selectedItem = parent.getItemAtPosition(position).toString();
+        // Do something with the selected item
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView&lt;?&gt; parent) {
+        // Optional: Handle case when no item is selected
+    }
+});
+                        </code>
+                    </pre>
+
+                <p>In this example, the Spinner is populated with an array of items using an
+                    <strong>ArrayAdapter</strong>. The <strong>setOnItemSelectedListener()</strong> method is used
+                    to handle
+                    the action when a user selects an item from the dropdown list.
+                </p>
+
+                <p><strong>Attributes of Spinner:</strong></p>
+                <ul>
+                    <li><strong>android:id:</strong> A unique identifier for the Spinner that is used to reference
+                        it in Java code.</li>
+                    <li><strong>android:layout_width:</strong> Specifies the width of the Spinner. It can be set to
+                        <strong>wrap_content</strong> or <strong>match_parent</strong>.
+                    </li>
+                    <li><strong>android:layout_height:</strong> Specifies the height of the Spinner, similar to the
+                        width attribute.</li>
+                </ul>
+
+                <p><strong>Example Use Case:</strong></p>
+                <p>Spinners are commonly used in forms where users need to select an option from a predefined list,
+                    such as selecting a country, choosing a category, or picking a time range. They provide a clean
+                    and space-efficient way to present multiple options.</p>
+
+            </div>
+        </div>
+        <div class="in">
+            <h2>ToggleButton</h2>
+            <p>A <strong>ToggleButton</strong> in Android is a user interface element that acts like a switch. It
+                allows the user to toggle between two states: ON and OFF. It's similar to a CheckBox but provides a
+                visual toggle to indicate the state of the button.</p>
+
+            <p><strong>XML Definition:</strong></p>
+            <pre>
+                    <code>
+&lt;ToggleButton
+    android:id=&quot;@+id/toggle_button_example&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:textOn=&quot;ON&quot;
+    android:textOff=&quot;OFF&quot; /&gt;
+                    </code>
+                </pre>
+
+            <p>This XML code defines a ToggleButton with two states: "ON" and "OFF". When the button is in the ON
+                state, it shows the "ON" text, and when in the OFF state, it shows the "OFF" text.</p>
+
+            <p><strong>Java Code Example:</strong></p>
+            <pre>
+                    <code>
+// Define the ToggleButton
+ToggleButton toggleButton = findViewById(R.id.toggle_button_example);
+
+// Set an OnClickListener to handle state changes
+toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            // The toggle is enabled (ON)
+            Toast.makeText(getApplicationContext(), &quot;Toggle is ON&quot;, Toast.LENGTH_SHORT).show();
+        } else {
+            // The toggle is disabled (OFF)
+            Toast.makeText(getApplicationContext(), &quot;Toggle is OFF&quot;, Toast.LENGTH_SHORT).show();
+        }
+    }
+});
+                    </code>
+                </pre>
+
+            <p>In this example, the ToggleButton is controlled using the <code>setOnCheckedChangeListener()</code>
+                method, which handles the state change (ON/OFF). A Toast message is displayed depending on the state
+                of the button.</p>
+
+            <p><strong>Attributes of ToggleButton:</strong></p>
+            <ul>
+                <li><strong>android:id:</strong> A unique identifier for the ToggleButton, used to reference it in
+                    Java code.</li>
+                <li><strong>android:textOn:</strong> Text to display when the button is in the ON state.</li>
+                <li><strong>android:textOff:</strong> Text to display when the button is in the OFF state.</li>
+                <li><strong>android:layout_width:</strong> Specifies the width of the ToggleButton, which can be set
+                    to <code>wrap_content</code> or <code>match_parent</code>.</li>
+                <li><strong>android:layout_height:</strong> Specifies the height of the ToggleButton, similar to the
+                    width attribute.</li>
+            </ul>
+
+            <p><strong>Example Use Case:</strong></p>
+            <p>A ToggleButton is typically used for settings, where you want to allow the user to enable or disable
+                a feature (like turning on/off Wi-Fi, sound, or notifications).</p>
+
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
