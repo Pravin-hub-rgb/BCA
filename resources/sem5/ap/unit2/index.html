@@ -1313,6 +1313,78 @@ public class MainActivity extends AppCompatActivity {
             simple
             list of items.</p>
     </div>
+    <div class="wh">
+        <h2>Broadcast services</h2>
+        <p>turning ON and OFF the bluetooth</p>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">MainActivity.java</button>
+            <div class="panel">
+                <pre>
+                    <code>
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.bluetooth.BluetoothAdapter;
+import android.content.IntentFilter;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+    MyBroadcast myBroadcast = new MyBroadcast();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter myIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(myBroadcast, myIntent);
+    }
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">MyBroadcast.java</button>
+            <div class="panel">
+                <pre>
+                    <code>
+package com.example.myapplication;
+
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class MyBroadcast extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
+            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+            switch (state){
+                case BluetoothAdapter.STATE_ON:
+                    Toast.makeText(context, "Bluetooth ON", Toast.LENGTH_SHORT).show();
+                    break;
+                case BluetoothAdapter.STATE_OFF:
+                    Toast.makeText(context, "Bluetooth OFF", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>

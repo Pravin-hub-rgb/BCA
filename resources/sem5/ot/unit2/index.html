@@ -15,7 +15,13 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
         <div class="fix-column-links">
-            <a href="#" class="link"></a>
+            <a href="#t1" class="link">Graphical Method</a>
+            <a href="#t2" class="link">Simplex Method</a>
+            <a href="#t3" class="link">Big M Method</a>
+            <a href="#t4" class="link">Two Phase Method</a>
+            <a href="#t5" class="link">Transportation Method</a>
+            <a href="#t6" class="link">Assignment Problem</a>
+            <a href="#t7" class="link">Travelling Problem</a>
             <div class="botbut">
                 <a href="" class="link">Next Topic &rarr;</a>
                 <a href="" class="link">&larr; Previous Topic</a>
@@ -91,7 +97,7 @@
                     Together, these components form the LPP model, which helps in decision-making for optimal outcomes.
                 </li>
             </ul>
-            <div class="in">
+            <div id="t1" class="in">
                 <h3>Graphical Method to Solve LPP</h3>
                 <div class="wh">
                     <p><strong>Problem Statement:</strong></p>
@@ -608,7 +614,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="in">
+            <div id="t2" class="in">
                 <h3>Simplex Method to Solve LPP</h3>
                 <div class="wh">
                     <!-- <p><strong>Max Z = 5x1 + 3x2
@@ -1005,7 +1011,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="in">
+            <div id="t3" class="in">
                 <h3>Big M method</h3>
                 <p>The Big M Method is an approach used to solve linear programming problems (LPP) involving artificial
                     variables when the problem includes greater-than-or-equal-to (≥) or equality (=) constraints. It
@@ -1103,7 +1109,7 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
 
                 </div>
             </div>
-            <div class="in">
+            <div id="t4" class="in">
                 <h3>Two Phase Method</h3>
                 <p>The Two-Phase Method is used to solve Linear Programming Problems (LPP) when the problem involves
                     artificial variables, typically in the case of equality constraints or greater-than-or-equal-to (≥)
@@ -1245,7 +1251,7 @@ CB | Xb  |  b    |  x1       |  x2  |  x3  |  x4      |  x5
                 </div>
             </div>
         </div>
-        <div class="wh">
+        <div id="t5" class="wh">
             <h2>Transportation Problem</h2>
             <ul>
                 <li>In the transportation problem, we aim to minimize transportation costs for a business while
@@ -1469,6 +1475,645 @@ Requirement |   5      |   8  |   7  |  14  |
                         using the Least Cost Method, the cost is 814. When we solve this same question using Vogel's
                         Approximation Method, the cost will decrease further, making it the best method for solving
                         transportation problems.
+                    </li>
+                </ul>
+                <p>Again Solving this above question using <strong>Vogel's Approximation Method</strong></p>
+                <pre>
+                    <code>
+ Factory |  w1  |  w2  |  w3  |  w4  |   D
+---------------------------------------------
+     F1  |  19  |  30  |  50  |  10  |   7
+     F2  |  70  |  30  |  40  |  60  |   9
+     F3  |  40  |   8  |  70  |  20  |  18
+---------------------------------------------
+      S  |   5  |   8  |   7  |  14  |  34
+                    </code>
+                </pre>
+                <ul>
+                    <li>Here we first mention the penalties for each row and column.
+                        <br>We find 2 smallest cost in a row or column and write down there difference.
+                        <br>Then we look for biggest penalty and look for smallest cost in that row or column and simply
+                        assign.
+                        <pre>
+                            <code>
+ Factory |  w1  |  w2   |  w3  |  w4  |   D     |  P
+---------------------------------------------------------
+     F1  |  19  |  30   |  50  |  10  |   7     |  (9)
+     F2  |  70  |  30   |  40  |  60  |   9     |  (10)
+     F3  |  40  | 8(8)  |  70  |  20  | 18-8=10 |  (12)
+---------------------------------------------------------
+      S  |   5  | 8-8=0 |   7  |  14  |  
+      P  | (21) | (22)  | (10) | (10) |  
+                    ↓
+             Biggest Penalty
+                            </code>
+                        </pre>
+                        Now we will remove w2 column
+                        <pre>
+                            <code>
+ Factory |  w1   |  w3  |  w4  |   D    |  P
+------------------------------------------------------
+     F1  | 19(5) |  50  |  10  | 7-5=2  |  (9)
+     F2  |  70   |  40  |  60  |   9    |  (20)
+     F3  |  40   |  70  |  20  |  10    |  (20)
+------------------------------------------------------
+      S  | 5-5=0 |   7  |  14  |  
+      P  | (21)  | (10) | (10) |  
+             ↓
+      Biggest Penalty
+                            </code>
+                        </pre>
+                        Now we remove the w1 column
+                        <pre>
+                            <code>
+ Factory |  w3  |  w4    |  D      |  P
+-------------------------------------------
+     F1  |  50  |  10    |  2      |  (40)
+     F2  |  40  |  60    |  9      |  (20)
+     F3  |  70  | 20(10) | 10-10=0 |  (50) → Biggest Penalty
+-------------------------------------------
+      S  |   7  | 14-10=4|  
+      P  | (10) | (10)   |  
+                            </code>
+                        </pre>
+                        Now we remove row 3
+                        <pre>
+                            <code>
+ Factory |  w3  |  w4   |  D    |  P
+-------------------------------------------
+     F1  |  50  | 10(2) | 2-2=0 |  (40)
+     F2  |  40  |  60   |  9    |  (20)
+-------------------------------------------
+      S  |   7  | 4-2=2 |  
+      P  | (10) | (50)  |  
+                   ↓
+            Biggest Penalty
+                            </code>
+                        </pre>
+                        Now we will remove row 1
+                        <pre>
+                            <code>
+ Factory |  w3   |  w4   |  D      |  P
+-------------------------------------------
+     F2  | 40(7) | 60(2) | 9-7-2=0 |  (20)
+-------------------------------------------
+      S  | 7-7=0 | 2-2=0 |
+                            </code>
+                        </pre>
+                        Finally we have:
+                        <pre>
+                            <code>
+ Factory |  w1   |  w2  |  w3   |  w4  
+-------------------------------------
+     F1  | 19(5) |  30  |  50   |  10(2)  
+     F2  |  70   |  30  | 40(7) |  60(2)  
+     F3  |  40   | 8(8) |  70   |  20(10)  
+                            </code>
+                        </pre>
+                        Transportation cost:
+                        <br>
+                        (19 * 5) + (10 * 2) + (40 * 7) + (60 * 2) + (8 * 8) + (20 * 10)
+                        <br>=779
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Optimality Test</h3>
+                <p>This test helps in determining whether the current solution to an optimization problem is optimal. It
+                    evaluates if any further improvements can be made to the solution. If the solution satisfies the
+                    optimality criteria, it is declared the best possible solution; otherwise, adjustments are made to
+                    improve the results, and the process is repeated.</p>
+
+                <ul>
+                    <li>First, we have to find the total transportation cost then we can apply optimality test.</li>
+                    <li>Finding transportation cost for the following problem using Vogel's Approximation Method:
+                        <pre>
+                            <code>
+    |  D1 |  D2 |  D3 |  D4 | Avail
+-------------------------------------
+ O1 |  1  |  2  |  1  |  4  |  30
+ O2 |  3  |  3  |  2  |  1  |  50
+ O3 |  4  |  2  |  5  |  9  |  20
+-------------------------------------
+Req | 20  | 40  | 30  | 10  | 100
+                            </code>
+                        </pre>
+                        Writing penalities
+                        <br>Note: if we have smallest cost which are same like 2, 2 then we don't subtract them instead
+                        we find another just bigger then them.
+                        <pre>
+                            <code>
+    |  D1 |  D2 |  D3 |  D4    | Avail    |  P
+----------------------------------------------------
+ O1 |  1  |  2  |  1  |  4     |  30      |  (1)
+ O2 |  3  |  3  |  2  | 1(10)  | 50-10=40 |  (1)
+ O3 |  4  |  2  |  5  |  9     |  20      |  (2)
+---------------------------------------------------
+Req | 20  | 40  | 30  | 10-10=0   
+  P | (2) | (1) | (1) | (3)  
+                         ↓
+                  Biggest Penalty
+                            </code>
+                        </pre>
+                        Remove D4 column
+                        <pre>
+                            <code>
+    |  D1     |  D2 |  D3 |   Avail  |  P
+-----------------------------------------------
+ O1 | 1(20)   |  2  |  1  | 30-20=10 |  (1)
+ O2 |  3      |  3  |  2  |  40      |  (1)
+ O3 |  4      |  2  |  5  |  20      |  (2)
+-----------------------------------------------
+Req | 20-20=0 | 40  | 30  |    
+  P |  (2)    | (1) | (1) |   
+        ↓
+ Biggest Penalty
+                            </code>
+                        </pre>
+                        Remove D1 column
+                        <pre>
+                            <code>
+    |  D2      |  D3 |  Avail  |  P
+----------------------------------------------------
+ O1 |  2       |  1  |  10     | (1)
+ O2 |  3       |  2  |  40     | (1)
+ O3 | 2(20)    |  5  | 20-20=0 | (2)  → Biggest Penalty
+---------------------------------------------------
+Req | 40-20=20 | 30  |    
+  P |   (1)    | (1) |
+                            </code>
+                        </pre>
+                        Remove row 3
+                        <br>Now as we have same penalties then we can take the row or column with smallest supply or
+                        demand
+                        <pre>
+                            <code>
+    |  D2  |  D3      |  Avail  |  P
+------------------------------------------
+ O1 |  2   | 1(10)    | 10-10=0 | (1)
+ O2 |  3   |  2       |  40     | (1)
+------------------------------------------
+Req |  20  | 30-10=20 |    
+  P | (1)  | (1)      |
+                            </code>
+                        </pre>
+                        remove row 1
+                        <pre>
+                            <code>
+    |  D2     |  D3     | Avail      |  P
+------------------------------------------
+ O2 | 3(20)   | 2(20)   | 40-20-20=0 | (1)
+------------------------------------------
+Req | 20-20=0 | 20-20=0 |    
+  P | (1)   | (1)   
+                            </code>
+                        </pre>
+                        Finally we have
+                        <pre>
+                            <code>
+    |    D1   |    D2   |    D3   |  D4 
+-------------------------------------------
+ O1 |  1(20)  |  2      |  1(10)  |  4  
+ O2 |  3      |  3(20)  |  2(20)  |  1(10) 
+ O3 |  4      |  2(20)  |  5      |  9  
+                            </code>
+                        </pre>
+                        Total transportation cost = 20 + 10 + 60 + 40 + 10 + 40 = 180
+                    </li>
+                    <li>Now we have found transportation cost now we will perform the optimality test using <strong>MODI
+                            (Modification) method</strong>:</li>
+                    <li>For allocated cell Cij = ui + vj
+                        <pre>
+                            <code>
+    |    D1   |    D2   |    D3   |   D4   |  
+-------------------------------------------------
+ O1 |  1(20)  |    .    |  1(10)  |   .    |  u1 = -1
+ O2 |    .    |  3(20)  |  2(20)  |  1(10) |  u2 = 0
+ O3 |    .    |  2(20)  |   .     |   .    |  u3 = -1
+ -------------------------------------------
+         v1       v2        v3        v4
+          2        3         2         1
+                            </code>
+                        </pre>
+                        We put vi or ui as zero where there are most allocated cost in a row or column. so in the above
+                        table at row 3 we have the most allocated cost so we will put u2 = 0
+                        <br>Now for non allocated cell cij - (ui + vj) >= 0
+                        <pre>
+                            <code>
+    |    D1   |    D2   |    D3   |  D4   |
+-------------------------------------------
+ O1 |    .    |   2(2)  |    .    |  4(0) |  u1 = -1
+ O2 |  3(2)   |   .     |    .    |   .   |  u2 = 0
+ O3 |  4(1)   |   .     |  5(1)   |  9(0) |  u3 = -1
+ ------------------------------------------ 
+       v1        v2         v3       v4
+        2        3          2        1
+                            </code>
+                        </pre>
+                        Now here for all cij - (ui + vj) the difference is >= 0
+                        <br>so transportation cost 180 is optimal. which means we can't decrease it cost less than 180.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="t6" class="wh">
+            <h3>Assignment Problem</h3>
+            <ul>
+                <li>Assignment problem is special type of transportation problem where number of origin is equal to
+                    number of destination </li>
+                <li>for understanding suppose we have 4 people and we have 4 work and those 4 people have expertise
+                    in some work for example one person is good at driving another one is good at running, another
+                    one is good at dancing and last one is expert in fighting and also all of them can do each work
+                    also but the work they are expertise they do it in less time so we have to figure out what work
+                    to assign to which person so that overall time for completing the whole work is less.</li>
+                <li>We use Hungarian method to solve Assignment Problem.</li>
+            </ul>
+            <p><strong>Application of Assignment Problem:</strong></p>
+            <ol>
+                <li>To minimize the total cost/time required to complete task.</li>
+                <li>To assign a best job to best person.</li>
+                <li>To assign vehicles to the routes.</li>
+                <li>To assign sales representative to the sales teritories.</li>
+                <li>In minimizing the time of arrival and departure of airlines.</li>
+            </ol>
+            <div class="in">
+                <p><strong>Example problem:
+                        <br>Q- Solve the following assignment problem using the Hungarian Method:
+                    </strong></p>
+                <pre>
+    <code>
+    | J1 | J2 | J3 |
+--------------------
+ P1 | 10 | 20 | 30 |  
+ P2 | 20 | 10 | 40 | 
+ P3 | 50 | 30 | 20 |
+--------------------  
+    </code>
+</pre>
+                <ul>
+                    <li>First, we perform row reduction, followed by column reduction, and then we allocate the tasks.
+                        <br>Row reduction: We find the smallest cost in each row and subtract it from every cost in that
+                        particular row.
+                        <pre>
+            <code>
+    | J1 | J2 | J3 |
+--------------------
+ P1 | 10 | 20 | 30 |  row 1's minimum cost = 10 
+ P2 | 20 | 10 | 40 |  row 2's minimum cost = 10 
+ P3 | 50 | 30 | 20 |  row 3's minimum cost = 20
+--------------------
+
+    |    J1    |    J2    |    J3    |
+--------------------------------------
+ P1 | 10-10=0  | 20-10=10 | 30-10=20 |  
+ P2 | 20-10=10 | 10-10=0  | 40-10=30 | 
+ P3 | 50-20=30 | 30-20=10 | 20-20=0  |
+---------------------------------------
+
+    | J1 | J2 | J3 |
+--------------------
+ P1 | 0  | 10 | 20 |  
+ P2 | 10 | 0  | 30 | 
+ P3 | 30 | 10 | 0  |
+--------------------
+            </code>
+        </pre>
+                    </li>
+                    <li>Next, we perform column reduction. Since the minimum value in each column is 0, the matrix
+                        remains unchanged.
+                        <pre>
+            <code>
+    | J1 | J2 | J3 |
+--------------------
+ P1 | 0  | 10 | 20 |  
+ P2 | 10 | 0  | 30 | 
+ P3 | 30 | 10 | 0  |
+--------------------
+            </code>
+        </pre>
+                    </li>
+                    <li>Now we proceed with the allocation:
+                        <br>Wherever there is a 0, that cost will be assigned to the corresponding job-person pair.
+                        <pre>
+            <code>
+                     | Cost |
+-----------------------------
+               P1-J1 |  10  |  
+               P2-J2 |  10  | 
+               P3-J3 |  20  |
+-----------------------------
+Total Assignment Cost: 40
+            </code>
+        </pre>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <p><strong>Another Example:</strong></p>
+                <p><strong>Q- Solve the following problem using the Hungarian Assignment Method:</strong></p>
+                <pre>
+    <code>
+    | J1 | J2 | J3 | J4 |
+----+----+----+----+----+
+ P1 | 12 | 30 | 21 | 15 |
+ P2 | 18 | 33 |  9 | 31 |
+ P3 | 44 | 25 | 24 | 21 |
+ P4 | 23 | 30 | 28 | 14 |
+----+----+----+----+----+
+    </code>
+</pre>
+                <ul>
+                    <li>Row reduction:
+                        <pre>
+            <code>
+    |    J1    |    J2    |    J3    |    J4    |
+----+----------+----------+----------+----------+
+ P1 | 12-12=0  | 30-12=18 | 21-12=9  | 15-12=3  |
+ P2 | 18-9=9   | 33-9=24  |  9-9=0   | 31-9=22  |
+ P3 | 44-21=23 | 25-21=4  | 24-21=3  | 21-21=0  |
+ P4 | 23-14=9  | 30-14=16 | 28-14=14 | 14-14=0  |
+----+----------+----------+----------+----------+
+
+It becomes:
+
+    | J1 | J2 | J3 | J4 |
+----+----+----+----+----+
+ P1 |  0 | 18 |  9 |  3 |
+ P2 |  9 | 24 |  0 | 22 |
+ P3 | 23 |  4 |  3 |  0 |
+ P4 |  9 | 16 | 14 |  0 |
+----+----+----+----+----+
+            </code>
+        </pre>
+                    </li>
+                    <li>Column reduction:
+                        <pre>
+            <code>
+    | J1 |    J2   | J3 | J4 |
+----+----+---------+----+----+
+ P1 |  0 | 18-4=14 |  9 |  3 |
+ P2 |  9 | 24-4=20 |  0 | 22 |
+ P3 | 23 |  4-4=0  |  3 |  0 |
+ P4 |  9 | 16-4=12 | 14 |  0 |
+----+----+----+----+---------+
+
+It becomes:
+
+    | J1 | J2 | J3 | J4 |
+----+----+----+----+----+
+ P1 |  0 | 14 |  9 |  3 |
+ P2 |  9 | 20 |  0 | 22 |
+ P3 | 23 |  0 |  3 |  0 |
+ P4 |  9 | 12 | 14 |  0 |
+----+----+----+----+----+
+            </code>
+        </pre>
+                    </li>
+                    <li>Assignment:
+                        <br>Select the rows where 0 appears only once.
+                        <br>Once a job is assigned to a person, it cannot be reassigned, so the remaining 0s will be
+                        assigned to the unassigned person.
+                        <pre>
+            <code>
+    |   J1 |   J2 |  J3  |  J4   |
+----+------+------+------+-------+
+ P1 |  0 A | 14   |  9   |    3  |
+ P2 |  9   | 20   |  0 A |  22   |
+ P3 | 23   |  0 A |  3   |  0 C |
+ P4 |  9   |  12  | 14   |  0 A  |
+----+------+------+------+-------+
+A - assigned 
+C - can't assign
+            </code>
+        </pre>
+                        <pre>
+            <code>
+          | Cost |
+----------+-------
+    P1-J1 |  12
+    P2-J3 |   9
+    P3-J2 |  25
+    P4-J4 |  14
+----------+-------
+  Total Assignment Cost: 60 /-
+            </code>
+        </pre>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <p><strong>Q- Four professors are each capable of teaching any one of the four different subects. Class
+                        preparation time (in hrs) for different topics varies from professor to professor and is given
+                        in the table. Each professor should be assigned only one subject. Find the schedule so as to
+                        minimize the total subject preparation time for all subjects/professor.</strong></p>
+                <pre>
+                    <code>
+    | S1 | S2 | S3 | S4 |
+----+----+----+----+----+
+ P1 |  2 | 10 |  9 |  7 |
+ P2 | 15 |  4 | 14 |  8 |
+ P3 | 13 | 14 | 16 | 11 |
+ P4 |  3 | 15 | 13 |  8 |
+----+----+----+----+----+
+                    </code>
+                </pre>
+            </div>
+            <div class="in">
+                <h3>Unbalanced Assignment Problem</h3>
+                <p>In an unbalanced assignment problem, the number of rows (tasks) is not equal to the number of columns
+                    (jobs). This happens when the number of tasks to be assigned differs from the number of resources or
+                    workers available. To handle such cases, we convert the unbalanced problem into a balanced one by
+                    adding dummy rows or columns. These dummy rows or columns are introduced with a cost of zero for all
+                    their elements, ensuring that the problem becomes balanced while keeping the integrity of the
+                    assignment process intact. This way, each task can still be assigned to a worker, or a job can be
+                    assigned to a task, without any imbalance.
+                    For example:</p>
+                <pre>
+    <code>
+    Original Matrix (Unbalanced):
+       | J1 | J2 | J3 |
+-------+----+----+----+
+    P1 | 15 | 20 | 35 |  
+    P2 | 25 | 30 | 25 |  
+-------+----+----+----+
+
+    After adding a dummy row to balance the matrix:
+
+    | J1 | J2 | J3 |
+----+----+----+----+
+ P1 | 15 | 20 | 35 |  
+ P2 | 25 | 30 | 25 |  
+ D1 |  0 |  0 |  0 |  
+----+----+----+----+
+
+    Now the problem is balanced, and you can apply the usual steps of row reduction, column reduction, and assignment using the Hungarian Method.
+    </code>
+</pre>
+
+            </div>
+            <div class="in">
+                <h3>Maximization Problem:</h3>
+                <p>In assignment problems, the objective is usually to minimize the total cost. However, in some cases,
+                    the goal is to maximize the total profit or benefit. These are called maximization problems. The
+                    Hungarian method, which is typically used for minimization problems, can also be applied to
+                    maximization problems with a slight modification.
+                    To solve a maximization problem, we convert it into a minimization problem. This is done by
+                    subtracting each element of the given matrix from the highest element in the matrix. This
+                    transformation effectively inverts the problem, allowing us to use the same Hungarian Method steps
+                    of row reduction, column reduction, and allocation for maximization problems.
+                    For example:</p>
+                <pre>
+                    <code>
+Original Profit Matrix (Maximization):
+   | J1 | J2 | J3 |
+---+----+----+----+
+P1 | 50 | 60 | 40 |  
+P2 | 70 | 80 | 60 |  
+P3 | 65 | 55 | 45 |  
+---+----+----+----+
+
+Step 1: Find the maximum value in the matrix (which is 80 here) and subtract each element from this value:
+
+| J1     |   J2     |   J3     |
+---------+----------+----------+
+80-50=30 | 80-60=20 | 80-40=40 |
+80-70=10 | 80-80=0  | 80-60=20 |
+80-65=15 | 80-55=25 | 80-45=35 |
+---------+----------+----------+
+
+Resulting Cost Matrix (for minimization):
+     | J1 | J2 | J3 |
+-----+----+----+----+
+ P1  | 30 | 20 | 40 |  
+ P2  | 10 |  0 | 20 |  
+ P3  | 15 | 25 | 35 |  
+-----+----+----+----+
+                    </code>
+                </pre>
+                <p> Now, you can apply the usual steps of the Hungarian Method to this transformed matrix to find the
+                    optimal assignment.</p>
+            </div>
+            <div id="t7" class="in">
+                <h3>Travelling Salesman Problem</h3>
+                <p><strong>Conditions:</strong>
+                <ol>
+                    <li>No place is to be visited twice before the tour of all places is completed. This means that each
+                        location must be visited exactly once during the tour, ensuring a complete path through all
+                        designated points without repetition.</li>
+                    <li>Going from one place to itself is not allowed. This condition emphasizes that the salesman must
+                        travel to different locations, and returning to the starting point without visiting other places
+                        is not an option during the tour.</li>
+                </ol>
+                </p>
+                <p><strong>Application of TSP:</strong>
+                <ul>
+                    <li><strong>Postal Deliveries:</strong> In postal delivery systems, TSP can be used to optimize the
+                        routes that delivery vehicles take to minimize travel distance and time while ensuring all
+                        delivery points are reached.</li>
+                    <li><strong>Inspection:</strong> TSP is applicable in scenarios where inspections are required at
+                        multiple sites (e.g., infrastructure inspections), allowing inspectors to plan efficient routes
+                        that cover all sites with minimal travel.</li>
+                    <li><strong>Cable Connection:</strong> In telecommunications and networking, TSP can help design
+                        optimal routes for laying cables between multiple points, ensuring the least distance is
+                        covered, which can reduce costs and time.</li>
+                    <li><strong>School Bus Routes:</strong> TSP can be utilized to determine the most efficient routes
+                        for school buses, ensuring that all student pickups and drop-offs are conducted with minimal
+                        travel time and distance. </li>
+                </ul>
+                </p>
+                <p><strong>Q- Solve the TSP given by:</strong></p>
+                <pre>
+    <code>
+     |  A  |  B  |  C  |  D  |  E
+-----------------------------------                        
+  A  |  ∞  |  2  |  5  |  7  |  1
+  B  |  6  |  ∞  |  3  |  8  |  2
+  C  |  8  |  7  |  ∞  |  4  |  7
+  D  | 12  |  4  |  6  |  ∞  |  5
+  E  |  1  |  3  |  2  |  8  |  ∞
+    </code>
+</pre>
+                <ul>
+                    <li>∞ is there to show that we can't go from A to A, B to B, and so on.
+                        <br>Note: In the Traveling Salesman Problem (TSP), you must visit all places exactly once, and
+                        the tour must return to the starting point. The path cannot repeat the same place until the tour
+                        is complete.
+                    </li>
+                    <li><strong>Row Reduction:</strong>
+                        <br>We will perform row reduction by subtracting the smallest value in each row from all
+                        elements in that row:
+                        <pre>
+            <code>
+     |  A  |  B  |  C  |  D  |  E
+-----------------------------------                        
+  A  |  ∞  |  1  |  4  |  6  |  0
+  B  |  4  |  ∞  |  1  |  6  |  0
+  C  |  4  |  3  |  ∞  |  0  |  3
+  D  |  8  |  0  |  2  |  ∞  |  1
+  E  |  0  |  2  |  1  |  7  |  ∞
+            </code>
+        </pre>
+                    </li>
+                    <li><strong>Column Reduction:</strong>
+                        <br>We now perform column reduction by subtracting the smallest value in each column from all
+                        elements in that column:
+                        <pre>
+            <code>
+     |  A   |  B  |  C   |  D   |  E
+-----------------------------------                        
+  A  |  ∞   |  1  |  3   |  6   |  0A
+  B  |  4   |  ∞  |  0A  |  6   |  0C
+  C  |  4   |  3  |  ∞   |  0A  |  3
+  D  |  8   |  0A |  1   |  ∞   |  1
+  E  |  0A  |  2  |  0C  |  7   |  ∞
+            </code>
+        </pre>
+                        Now, we try to assign paths, but there will be no complete cycle. This means the current
+                        solution is not optimal.
+                    </li>
+                    <li><strong>Assigning Greater Than Zero:</strong>
+                        <br>We now look for the next smallest value greater than zero, which is 1, and attempt to make
+                        assignments:
+                        <pre>
+            <code>
+     |  A  |  B  |  C   |  D  |  E
+-----------------------------------                        
+  A  |  ∞  |  1A  |  3  |  6  |  0C
+  B  |  4  |  ∞   |  0C |  6  |  0A
+  C  |  4  |  3   |  ∞  |  0A |  3
+  D  |  8  |  0C  |  1A |  ∞  |  1C
+  E  |  0A |  2   |  0C |  7  |  ∞
+            </code>
+        </pre>
+                        There is still no complete cycle, so we adjust the assignments.
+                    </li>
+                    <li><strong>Adjusting Assignments:</strong>
+                        <br>We adjust the assignments further to ensure a complete cycle is formed:
+                        <pre>
+            <code>
+     |  A  |  B  |  C  |  D  |  E
+-----------------------------------                        
+  A  |  ∞  |  1A |  3  |  6  |  0C
+  B  |  4  |  ∞  |  0A |  6  |  0C
+  C  |  4  |  3  |  ∞  |  0A |  3
+  D  |  8  |  0C |  1C |  ∞  |  1A
+  E  |  0A |  2  |  0C |  7  |  ∞
+            </code>
+        </pre>
+                        The cycle is now complete: A - B - C - D - E - A, which forms the optimal solution.
+                    </li>
+                    <li><strong>Calculating the Total Cost:</strong>
+                        <br>The total cost of the optimal tour is the sum of the selected paths:
+                        <ul>
+                            <li>From A to B: 2</li>
+                            <li>From B to C: 3</li>
+                            <li>From C to D: 4</li>
+                            <li>From D to E: 5</li>
+                            <li>From E to A: 1</li>
+                        </ul>
+                        So, the total TSP cost = 2 + 3 + 4 + 5 + 1 = 15.
                     </li>
                 </ul>
 

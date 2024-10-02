@@ -246,7 +246,9 @@ allPre.forEach((tag) => {
 
 // ****************** Searching Functionality ******************
 const subjects = [
+  { name: "C Programming", path: "./resources/sem1/programming concepts using C language/index.html" },
   { name: "Programming Concepts Using C Language", path: "./resources/sem1/programming concepts using C language/index.html" },
+  { name: "C Programming Lab", path: "./resources/sem1/Programming in 'C' lab/index.html" },
   { name: "Programming Concept Using 'C' lab", path: "./resources/sem1/Programming in 'C' lab/index.html" },
   { name: "PC Packages Lab", path: "./resources/sem1/PC packages lab/index.html" },
   { name: "Computer Fundamentals and Information Technology", path: "./resources/sem1/Computer Fundamentals and Information Technology/index.html" },
@@ -257,7 +259,8 @@ const subjects = [
   { name: "Data Structures and File Organization", path: "./resources/sem2/datastructure_and_FO/index.html" },
   { name: "Data Structures lab", path: "./resources/sem2/datastructure_lab/index.html" },
   { name: "Advance Concepts of 'C' Programming", path: "./resources/sem2/advance_C/index.html" },
-  { name: "Object Oriented Programming Using C++", path: "./resources/sem2/OOPS_using_C++/index.html" },
+  { name: "C++", path: "./resources/sem2/OOPS_using_C++/index.html" },
+  // { name: "Object Oriented Programming Using C++", path: "./resources/sem2/OOPS_using_C++/index.html" },
   { name: "Operating System", path: "./resources/sem2/operating_sys/index.html" },
   { name: "Digital Electronics", path: "./resources/sem2/digital_electronics/index.html" },
   { name: "Discrete Mathematical Structures and Graph Theory", path: "./resources/sem2/maths/index.html" },
@@ -287,71 +290,6 @@ const subjects = [
   { name: "C# .Net Lab", path: "./resources/sem5/netlab/index.html" },
   { name: "Soft Computing", path: "./resources/sem5/sc/index.html" }
 ];
-
-
-
-// const searchInput = document.getElementById('search');
-// const suggestionsContainer = document.getElementById('suggestions');
-
-// // Handle input event (when the user types)
-// searchInput.addEventListener('input', function() {
-//     const query = this.value.trim().toLowerCase();
-
-//     if (query === "") {
-//         suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
-//     } else {
-//         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-//         const regex = new RegExp(`\\b${escapedQuery}`, 'i');
-//         const suggestions = subjects.filter(subject => regex.test(subject.name));
-//         displaySuggestions(suggestions);
-//     }
-// });
-
-// // Handle focusout event (when the input loses focus)
-// searchInput.addEventListener('focusout', function() {
-//     const query = this.value.trim().toLowerCase();
-
-//     if (query === "") {
-//         suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
-//     }
-// });
-
-// // Handle focusin event (when the input regains focus)
-// searchInput.addEventListener('focusin', function() {
-//     const query = this.value.trim().toLowerCase();
-
-//     if (query !== "") {
-//         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-//         const regex = new RegExp(`\\b${escapedQuery}`, 'i');
-//         const suggestions = subjects.filter(subject => regex.test(subject.name));
-//         displaySuggestions(suggestions);
-//     }
-// });
-
-// function displaySuggestions(suggestions) {
-//   const suggestionsContainer = document.getElementById('suggestions');
-//   suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-
-//   if (suggestions.length === 0) {
-//       suggestionsContainer.innerText = "Not available"; // Show 'Not available' if no match
-//   } else {
-//       const ul = document.createElement('ul'); // Create a <ul> element to hold the list
-
-//       suggestions.forEach(subject => {
-//           const li = document.createElement('li'); // Create an <li> element
-//           const anchor = document.createElement('a'); // Create an <a> element
-
-//           anchor.innerText = subject.name; // Set the anchor text to the subject name
-//           anchor.href = subject.path;      // Set the href attribute to the subject path
-
-//           li.appendChild(anchor);          // Append the <a> to the <li>
-//           ul.appendChild(li);              // Append the <li> to the <ul>
-//       });
-
-//       suggestionsContainer.appendChild(ul); // Append the <ul> to the container
-//   }
-// }
-
 
 const searchInput = document.getElementById('search');
 const suggestionsContainer = document.getElementById('suggestions');
