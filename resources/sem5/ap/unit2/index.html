@@ -1128,7 +1128,136 @@ public class MainActivity extends AppCompatActivity {
         </ul>
         <p>When a broadcast is sent, it can either be ordered (delivered to one receiver at a time, in priority order)
             or unordered (delivered to all receivers simultaneously).</p>
-        <p><strong>Types of Broadcasts Based on Delivery</strong></p>
+        <div class="in">
+            <h3>System Broadcasts</h3>
+            <p>System broadcasts in Android are implicit intents sent by the operating system to notify apps of certain
+                system-wide events. These broadcasts signal changes in the system's state or environment, such as device
+                booting up, power connection status, airplane mode toggling, and more. Apps can register broadcast
+                receivers to listen for these system events, either statically (via the AndroidManifest.xml) or
+                dynamically (via code). Understanding and using these broadcasts helps apps to react accordingly to
+                system changes, providing a more responsive and efficient user experience.</p>
+            <ul>
+                <li> <strong>Intent.ACTION_BOOT_COMPLETED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device has finished booting up.</li>
+                        <li><strong>Use Case:</strong> Start background services or schedule tasks after boot.</li>
+                        <li><strong>Example:</strong> A file-syncing app starts syncing files automatically after
+                            booting.</li>
+
+                    </ul>
+                </li>
+                <li>
+                    <strong>Intent.ACTION_POWER_CONNECTED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device is plugged into a power source.</li>
+                        <li><strong>Use Case:</strong> Start power-intensive processes, such as syncing large files.</li>
+                        <li><strong>Example:</strong> A media app starts downloading large updates when connected to a charger.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_POWER_DISCONNECTED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device is unplugged from a power source.</li>
+                        <li><strong>Use Case:</strong> Stop power-consuming processes or reduce background activity.</li>
+                        <li><strong>Example:</strong> A cloud-backup app pauses uploading data when power is disconnected.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_BATTERY_LOW</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the battery level is critically low.</li>
+                        <li><strong>Use Case:</strong> Adjust app behavior to reduce battery consumption.</li>
+                        <li><strong>Example:</strong> A game app reduces graphics quality to conserve battery.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_AIRPLANE_MODE_CHANGED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the airplane mode is enabled or disabled.</li>
+                        <li><strong>Use Case:</strong> Disable/enable network-related features or tasks.</li>
+                        <li><strong>Example:</strong> A messaging app suspends sending messages while airplane mode is on.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_MEDIA_BUTTON</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when a media button, such as play/pause, is pressed.</li>
+                        <li><strong>Use Case:</strong> Control media playback via hardware buttons or headset controls.</li>
+                        <li><strong>Example:</strong> A music app pauses/plays tracks when the user presses the headphone button.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_SHUTDOWN</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device is shutting down.</li>
+                        <li><strong>Use Case:</strong> Save data, stop background tasks, or log out of services.</li>
+                        <li><strong>Example:</strong> A note-taking app automatically saves unsaved notes before shutdown.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_DATE_CHANGED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the date changes at midnight.</li>
+                        <li><strong>Use Case:</strong> Update date-dependent data or perform daily tasks.</li>
+                        <li><strong>Example:</strong> A fitness app resets daily step counts at midnight.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_SCREEN_ON / Intent.ACTION_SCREEN_OFF</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the screen is turned on or off.</li>
+                        <li><strong>Use Case:</strong> Pause/resume activities or services based on screen activity.</li>
+                        <li><strong>Example:</strong> A video app pauses playback when the screen turns off.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_USER_PRESENT</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the user unlocks the device after the screen was off.</li>
+                        <li><strong>Use Case:</strong> Resume background tasks or services when the user is active.</li>
+                        <li><strong>Example:</strong> A weather app updates the forecast when the user unlocks the device.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_TIMEZONE_CHANGED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device’s time zone has changed.</li>
+                        <li><strong>Use Case:</strong> Update time-sensitive data or reconfigure tasks based on the new time zone.</li>
+                        <li><strong>Example:</strong> A calendar app adjusts event times when the time zone changes.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_PACKAGE_ADDED / Intent.ACTION_PACKAGE_REMOVED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when a package (app) is installed or uninstalled on the device.</li>
+                        <li><strong>Use Case:</strong> Adjust app behavior based on the availability of other apps.</li>
+                        <li><strong>Example:</strong> An antivirus app scans a newly installed app for security risks.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Intent.ACTION_CONFIGURATION_CHANGED</strong>
+                    <ul>
+                        <li><strong>Description:</strong> Sent when the device configuration changes, such as orientation or locale.</li>
+                        <li><strong>Use Case:</strong> Adjust app UI/UX based on the new configuration.</li>
+                        <li><strong>Example:</strong> A media player app switches between landscape and portrait layouts.</li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="in">
+        <h3>Types of Broadcasts Based on Delivery</h3>
         <ol>
             <li><strong>Ordered Broadcasts</strong>
                 <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared priority
@@ -1189,6 +1318,7 @@ sendBroadcast(intent);  // This is a normal broadcast
                 </pre>
             </li>
         </ol>
+    </div>
         <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
         <ul>
             <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
@@ -1296,7 +1426,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             </ol>
         </div>
         <div class="in">
-            <h3>Dynamic Registration (via Code)</h3>
+            <h3>2. Dynamic Registration (via Code)</h3>
             <ul>
                 <li>A receiver can be registered dynamically in your Java code. This registration only exists while your
                     app is running, meaning the receiver listens for broadcasts only while the app is active.
