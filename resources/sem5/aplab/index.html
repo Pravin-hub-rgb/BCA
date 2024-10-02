@@ -134,28 +134,33 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout; // Import ConstraintLayout
 
 public class MainActivity extends AppCompatActivity {
-    private String colors[] = {"#FF9800","#03A9F4", "#9067D9", "#FFEB3B"};
-    private int i = 0;
+    // Array of colors to change the background
+    private String colors[] = {"#FF9800", "#03A9F4", "#9067D9", "#FFEB3B"};
+    private int i = 0; // Index for the colors array
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        View rootview = findViewById(R.id.main);
+        setContentView(R.layout.activity_main); // Set the content view to the layout defined in XML
+
+        // Directly cast the main layout to ConstraintLayout
+        ConstraintLayout mainLayout = findViewById(R.id.main);
         Button myBtn = findViewById(R.id.button);
-        myBtn.setOnClickListener(new View.OnClickListener()
-        {
+
+        // Set the click listener on the button
+        myBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rootview.setBackgroundColor(Color.parseColor(colors[i]));
-                i++;
-                if(i>3){
-                    i = 0;
+                // Change the background color of the main layout
+                mainLayout.setBackgroundColor(Color.parseColor(colors[i]));
+                i++; // Move to the next color
+                if (i > 3) {
+                    i = 0; // Reset to the first color if out of bounds
                 }
             }
         });
