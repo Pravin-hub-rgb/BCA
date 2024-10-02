@@ -362,13 +362,90 @@ public class MainActivity extends AppCompatActivity {
                 <li>Run even if the app is not in the foreground.</li>
             </ul>
             </p>
-            <h3>Types of Services:</h3>
-            <ul>
-                <li><strong>Started Service:</strong> Starts when an app component (like an Activity) calls
-                    startService(). It runs in the background until the task is complete or the service is stopped.</li>
-                <li><strong>Bound Service:</strong> Runs when an application component binds to it using bindService().
-                    It allows interaction between components.</li>
-            </ul>
+            <div class="in">
+                <h3>Types of Services:</h3>
+                <ol>
+                    <li>
+                        <strong>Started Service:</strong>
+                        <p>
+                            A <strong>Started Service</strong> is initiated by calling <strong>startService()</strong>
+                            from an application component like an <strong>Activity</strong> or
+                            <strong>BroadcastReceiver</strong>.
+                            Once started, the service runs in the background independently of the component that started
+                            it. It continues to run until it either finishes its task or is explicitly stopped using
+                            <strong>stopService()</strong> or <strong>stopSelf()</strong>.
+                        </p>
+                        <p><strong>Behavior:</strong></p>
+                        <ul>
+                            <li>Doesn’t return results to the calling component (like an <strong>Activity</strong>).
+                            </li>
+                            <li>Suitable for long-running operations that don’t need user interaction.</li>
+                        </ul>
+                        <p><strong>Use Case:</strong></p>
+                        <ul>
+                            <li>A music app could use a started service to play music in the background, allowing it to
+                                continue playing even if the user navigates away from the app or the activity is
+                                destroyed.</li>
+                        </ul>
+                        <p><strong>Example:</strong></p>
+                        <ul>
+                            <li>Downloading a file in the background without requiring any user interaction.</li>
+                        </ul>
+                        <p><strong>Lifecycle:</strong></p>
+                        <ul>
+                            <li>Starts with <code>startService()</code>.</li>
+                            <li>Runs indefinitely in the background.</li>
+                            <li>Stops with <code>stopSelf()</code> or <code>stopService()</code>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Bound Service:</strong>
+                        <p>
+                            A <strong>Bound Service</strong> allows an application component (like an
+                            <code>Activity</code>, <code>Fragment</code>, or another service) to <strong>bind</strong>
+                            to it using <code>bindService()</code>.
+                            This type of service provides a client-server interface. The client (the component that
+                            binds) can interact with the service, send requests, receive results, and communicate back
+                            and forth.
+                        </p>
+                        <p><strong>Behavior:</strong></p>
+                        <ul>
+                            <li>Unlike a started service, a bound service is <strong>tied to the lifecycle</strong> of
+                                the component that binds to it. When all clients unbind, the service is destroyed.</li>
+                            <li>This is useful for scenarios where the client needs continuous interaction with the
+                                service.</li>
+                        </ul>
+                        <p><strong>Use Case:</strong></p>
+                        <ul>
+                            <li>An app that needs continuous communication with a background service. For example, a
+                                fitness app that binds to a service to constantly receive real-time step count updates
+                                from a wearable device.</li>
+                        </ul>
+                        <p><strong>Example:</strong></p>
+                        <ul>
+                            <li>A messaging app could bind to a service to receive new messages in real-time while the
+                                user is in the chat activity.</li>
+                        </ul>
+                        <p><strong>Lifecycle:</strong></p>
+                        <ul>
+                            <li>A bound service starts with <strong>bindService()</strong>.</li>
+                            <li>Runs as long as any component is bound to it.</li>
+                            <li>Stops when the last component unbinds (using <strong>unbindService()</strong>).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>Key Differences Between Started and Bounded Services</h3>
+                <img src="../../images/ap12.png" alt="">
+                <h3>Example Scenarios for Both Types:</h3>
+                <ul>
+                    <li><strong>Started Service:</strong>
+                        <p>Imagine a news app that downloads articles in the background. You don't need to interact with the download, so a started service runs the task in the background and continues until it's done or you stop it.</p>
+                    </li>
+                    <li><strong>Bound Service:</strong>
+                        <p>Suppose you’re developing a music app that allows the user to control playback (play, pause, skip) from the app interface while continuously interacting with the service. The app would bind to a service so the user can control the playback through the UI, and once the user closes the UI, the service can stop.</p>
+                    </li>
+                </ul>
+            </div>
             <h3>Why Use a Service?</h3>
             <p>Services are helpful for running tasks in the background, such as playing music, downloading files, or
                 handling long-running computations.</p>
@@ -1150,20 +1227,24 @@ public class MainActivity extends AppCompatActivity {
                     <strong>Intent.ACTION_POWER_CONNECTED</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the device is plugged into a power source.</li>
-                        <li><strong>Use Case:</strong> Start power-intensive processes, such as syncing large files.</li>
-                        <li><strong>Example:</strong> A media app starts downloading large updates when connected to a charger.</li>
+                        <li><strong>Use Case:</strong> Start power-intensive processes, such as syncing large files.
+                        </li>
+                        <li><strong>Example:</strong> A media app starts downloading large updates when connected to a
+                            charger.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_POWER_DISCONNECTED</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the device is unplugged from a power source.</li>
-                        <li><strong>Use Case:</strong> Stop power-consuming processes or reduce background activity.</li>
-                        <li><strong>Example:</strong> A cloud-backup app pauses uploading data when power is disconnected.</li>
+                        <li><strong>Use Case:</strong> Stop power-consuming processes or reduce background activity.
+                        </li>
+                        <li><strong>Example:</strong> A cloud-backup app pauses uploading data when power is
+                            disconnected.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_BATTERY_LOW</strong>
                     <ul>
@@ -1172,34 +1253,38 @@ public class MainActivity extends AppCompatActivity {
                         <li><strong>Example:</strong> A game app reduces graphics quality to conserve battery.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_AIRPLANE_MODE_CHANGED</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the airplane mode is enabled or disabled.</li>
                         <li><strong>Use Case:</strong> Disable/enable network-related features or tasks.</li>
-                        <li><strong>Example:</strong> A messaging app suspends sending messages while airplane mode is on.</li>
+                        <li><strong>Example:</strong> A messaging app suspends sending messages while airplane mode is
+                            on.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_MEDIA_BUTTON</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when a media button, such as play/pause, is pressed.</li>
-                        <li><strong>Use Case:</strong> Control media playback via hardware buttons or headset controls.</li>
-                        <li><strong>Example:</strong> A music app pauses/plays tracks when the user presses the headphone button.</li>
+                        <li><strong>Use Case:</strong> Control media playback via hardware buttons or headset controls.
+                        </li>
+                        <li><strong>Example:</strong> A music app pauses/plays tracks when the user presses the
+                            headphone button.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_SHUTDOWN</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the device is shutting down.</li>
                         <li><strong>Use Case:</strong> Save data, stop background tasks, or log out of services.</li>
-                        <li><strong>Example:</strong> A note-taking app automatically saves unsaved notes before shutdown.</li>
+                        <li><strong>Example:</strong> A note-taking app automatically saves unsaved notes before
+                            shutdown.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_DATE_CHANGED</strong>
                     <ul>
@@ -1208,70 +1293,80 @@ public class MainActivity extends AppCompatActivity {
                         <li><strong>Example:</strong> A fitness app resets daily step counts at midnight.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_SCREEN_ON / Intent.ACTION_SCREEN_OFF</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the screen is turned on or off.</li>
-                        <li><strong>Use Case:</strong> Pause/resume activities or services based on screen activity.</li>
+                        <li><strong>Use Case:</strong> Pause/resume activities or services based on screen activity.
+                        </li>
                         <li><strong>Example:</strong> A video app pauses playback when the screen turns off.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_USER_PRESENT</strong>
                     <ul>
-                        <li><strong>Description:</strong> Sent when the user unlocks the device after the screen was off.</li>
+                        <li><strong>Description:</strong> Sent when the user unlocks the device after the screen was
+                            off.</li>
                         <li><strong>Use Case:</strong> Resume background tasks or services when the user is active.</li>
-                        <li><strong>Example:</strong> A weather app updates the forecast when the user unlocks the device.</li>
+                        <li><strong>Example:</strong> A weather app updates the forecast when the user unlocks the
+                            device.</li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_TIMEZONE_CHANGED</strong>
                     <ul>
                         <li><strong>Description:</strong> Sent when the device’s time zone has changed.</li>
-                        <li><strong>Use Case:</strong> Update time-sensitive data or reconfigure tasks based on the new time zone.</li>
-                        <li><strong>Example:</strong> A calendar app adjusts event times when the time zone changes.</li>
+                        <li><strong>Use Case:</strong> Update time-sensitive data or reconfigure tasks based on the new
+                            time zone.</li>
+                        <li><strong>Example:</strong> A calendar app adjusts event times when the time zone changes.
+                        </li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_PACKAGE_ADDED / Intent.ACTION_PACKAGE_REMOVED</strong>
                     <ul>
-                        <li><strong>Description:</strong> Sent when a package (app) is installed or uninstalled on the device.</li>
+                        <li><strong>Description:</strong> Sent when a package (app) is installed or uninstalled on the
+                            device.</li>
                         <li><strong>Use Case:</strong> Adjust app behavior based on the availability of other apps.</li>
-                        <li><strong>Example:</strong> An antivirus app scans a newly installed app for security risks.</li>
+                        <li><strong>Example:</strong> An antivirus app scans a newly installed app for security risks.
+                        </li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <strong>Intent.ACTION_CONFIGURATION_CHANGED</strong>
                     <ul>
-                        <li><strong>Description:</strong> Sent when the device configuration changes, such as orientation or locale.</li>
+                        <li><strong>Description:</strong> Sent when the device configuration changes, such as
+                            orientation or locale.</li>
                         <li><strong>Use Case:</strong> Adjust app UI/UX based on the new configuration.</li>
-                        <li><strong>Example:</strong> A media player app switches between landscape and portrait layouts.</li>
+                        <li><strong>Example:</strong> A media player app switches between landscape and portrait
+                            layouts.</li>
                     </ul>
                 </li>
-                
+
             </ul>
         </div>
         <div class="in">
-        <h3>Types of Broadcasts Based on Delivery</h3>
-        <ol>
-            <li><strong>Ordered Broadcasts</strong>
-                <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared priority
-                (defined in the IntentFilter). Each receiver can modify the broadcast data or even stop the broadcast
-                from being sent to other receivers by calling abortBroadcast().
-                <ul>
-                    <li>Ordered: Receivers are called one after another based on priority.</li>
-                    <li>Modifiable: Receivers can modify or abort the broadcast.</li>
-                    <li>Use Case: Ordered broadcasts are useful when you want certain receivers to process an event
-                        before others. For example, when an SMS is received, a spam filter app might check it before
-                        passing it to the default messaging app.</li>
-                </ul>
-                Implementing it in manifest file:
-                <pre>
+            <h3>Types of Broadcasts Based on Delivery</h3>
+            <ol>
+                <li><strong>Ordered Broadcasts</strong>
+                    <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared priority
+                    (defined in the IntentFilter). Each receiver can modify the broadcast data or even stop the
+                    broadcast
+                    from being sent to other receivers by calling abortBroadcast().
+                    <ul>
+                        <li>Ordered: Receivers are called one after another based on priority.</li>
+                        <li>Modifiable: Receivers can modify or abort the broadcast.</li>
+                        <li>Use Case: Ordered broadcasts are useful when you want certain receivers to process an event
+                            before others. For example, when an SMS is received, a spam filter app might check it before
+                            passing it to the default messaging app.</li>
+                    </ul>
+                    Implementing it in manifest file:
+                    <pre>
                     <code>
 &lt;receiver android:name=".MyReceiver" android:priority="100">
     &lt;intent-filter>
@@ -1281,26 +1376,27 @@ public class MainActivity extends AppCompatActivity {
 
                     </code>
                 </pre>
-                Implementing in java code:
-                <pre>
+                    Implementing in java code:
+                    <pre>
                     <code>
 Intent intent = new Intent("com.example.ORDERED_BROADCAST");
 sendOrderedBroadcast(intent, null);
                     </code>
                 </pre>
-            </li>
-            <li><strong>Unordered (Normal) Broadcasts</strong>
-                <br>Unordered broadcasts are sent asynchronously to all receivers at the same time. The system does not
-                guarantee the order of execution, and receivers cannot modify or abort the broadcast. Each receiver
-                processes the broadcast independently and at its own pace.
-                <ul>
-                    <li>Asynchronous: All receivers receive the broadcast simultaneously.</li>
-                    <li>Immutable: Receivers cannot modify the broadcast or abort it.</li>
-                    <li>Use Case: This is typically used for less critical notifications, such as informing multiple
-                        apps that Wi-Fi has been disconnected. </li>
-                </ul>
-                Implementing it on manifest file:
-                <pre>
+                </li>
+                <li><strong>Unordered (Normal) Broadcasts</strong>
+                    <br>Unordered broadcasts are sent asynchronously to all receivers at the same time. The system does
+                    not
+                    guarantee the order of execution, and receivers cannot modify or abort the broadcast. Each receiver
+                    processes the broadcast independently and at its own pace.
+                    <ul>
+                        <li>Asynchronous: All receivers receive the broadcast simultaneously.</li>
+                        <li>Immutable: Receivers cannot modify the broadcast or abort it.</li>
+                        <li>Use Case: This is typically used for less critical notifications, such as informing multiple
+                            apps that Wi-Fi has been disconnected. </li>
+                    </ul>
+                    Implementing it on manifest file:
+                    <pre>
                     <code>
 &lt;receiver android:name=".MyReceiver">
     &lt;intent-filter>
@@ -1309,16 +1405,16 @@ sendOrderedBroadcast(intent, null);
 &lt;/receiver>
                     </code>
                 </pre>
-                Implementing it on java code:
-                <pre>
+                    Implementing it on java code:
+                    <pre>
                     <code>
 Intent intent = new Intent("com.example.UNORDERED_BROADCAST");
 sendBroadcast(intent);  // This is a normal broadcast
                     </code>
                 </pre>
-            </li>
-        </ol>
-    </div>
+                </li>
+            </ol>
+        </div>
         <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
         <ul>
             <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
