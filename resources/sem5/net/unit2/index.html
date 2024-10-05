@@ -146,10 +146,12 @@ bool isEmployed = true; // Boolean type (true or false)
                     </li>
                 </ul>
 
-                <h3>Working with Strings</h3>
-                <p>Strings in C# are sequences of characters used to represent text. You can manipulate strings using
-                    various methods provided by the <strong>string</strong> class.</p>
-                <pre>
+                <div class="wh">
+                    <h3>Working with Strings</h3>
+                    <p>Strings in C# are sequences of characters used to represent text. You can manipulate strings
+                        using
+                        various methods provided by the <strong>string</strong> class.</p>
+                    <pre>
                     <code>
 // Example of working with strings
 string greeting = "Hello, World!";
@@ -157,21 +159,219 @@ string upperCaseGreeting = greeting.ToUpper(); // Converts string to uppercase
 Console.WriteLine(upperCaseGreeting); // Output: HELLO, WORLD!
                     </code>
                 </pre>
+                    <p><strong>Common String Operations</strong></p>
+                    <ul>
+                        <li>
+                            <strong>Concatenation</strong>
+                            <p>Combining two or more strings. You can use the <strong>+</strong> operator or the
+                                <strong>String.Concat()</strong> method.
+                            </p>
+                            <pre>
+                                <code>
+string firstName = "John";
+string lastName = "Doe";
+string fullName = firstName + " " + lastName;  // John Doe
+// OR
+string fullName = String.Concat(firstName, " ", lastName);
+                                </code>
+                            </pre>
+                        </li>
 
-                <h3>Working with Dates and Time</h3>
-                <p>In C#, the <strong>DateTime</strong> structure is used to represent dates and times. You can retrieve
-                    the
-                    current date and time, format dates, and perform date arithmetic.</p>
-                <pre>
-                    <code>
-// Example of working with DateTime
-DateTime currentDate = DateTime.Now; // Gets the current date and time
-DateTime birthDate = new DateTime(1990, 5, 15); // Specifies a custom date
-TimeSpan ageSpan = currentDate - birthDate; // Calculates the difference between two dates
-int age = ageSpan.Days / 365; // Convert the difference to years
-Console.WriteLine($"Your age is {age} years."); // Output: Your age is (calculated age) years
-                    </code>
-                </pre>
+                        <li>
+                            <strong>Substring</strong>
+                            <p>Extracts a portion of the string based on starting position and length.</p>
+                            <pre>
+                                <code>
+string sentence = "Hello, World!";
+string sub = sentence.Substring(7, 5); // Output: World
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Length</strong>
+                            <p>Returns the number of characters in the string.</p>
+                            <pre>
+                                <code>
+int length = fullName.Length;  // Output: 8 for "John Doe"
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>String Interpolation</strong>
+                            <p>Inserting variables inside a string using the <strong>$</strong> symbol.</p>
+                            <pre>
+                                <code>
+string greeting = $"Hello, {firstName} {lastName}!";
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Uppercase / Lowercase Conversion</strong>
+                            <p>Convert a string to uppercase or lowercase.</p>
+                            <pre>
+                                <code>
+string lower = fullName.ToLower();  // john doe
+string upper = fullName.ToUpper();  // JOHN DOE
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Replace</strong>
+                            <p>Replaces occurrences of a specified character or substring.</p>
+                            <pre>
+                                <code>
+string replaced = fullName.Replace("Doe", "Smith");  // John Smith
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Split</strong>
+                            <p>Splits a string into an array of substrings based on a delimiter.</p>
+                            <pre>
+                                <code>
+string names = "John,Doe,Jane";
+string[] nameArray = names.Split(',');  // ["John", "Doe", "Jane"]
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Trim</strong>
+                            <p>Removes leading and trailing white spaces.</p>
+                            <pre>
+                                <code>
+string trimmed = "  Hello  ".Trim();  // Output: "Hello"
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Contains / StartsWith / EndsWith</strong>
+                            <p>Checks for substring or how a string starts or ends.</p>
+                            <pre>
+                                <code>
+bool contains = fullName.Contains("John");   // true
+bool starts = fullName.StartsWith("John");   // true
+bool ends = fullName.EndsWith("Doe");        // true
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong> String Comparison</strong>
+                            <p>Use <strong>Equals</strong> or <strong>CompareTo</strong> methods to compare two strings.</p>
+                            <pre>
+                                <code>
+bool areEqual = firstName.Equals("John");  // true
+int comparison = firstName.CompareTo(lastName);  // Negative value as "John" comes before "Doe"
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Working with Dates and Time</h3>
+                    <p>In C#, date and time are represented by the <strong>DateTime</strong> struct. It can store both date
+                        and time.</p>
+
+                    <p><strong>How to Define a Date</strong></p>
+                    <pre>
+                        <code>
+DateTime now = DateTime.Now;  // Current date and time
+DateTime specificDate = new DateTime(2023, 10, 4);  // Year, Month, Day
+    </code>
+</pre>
+
+                    <p><strong>Common Date Operations</strong></p>
+
+                    <ul>
+                        <li>
+                            <strong>Formatting Dates</strong>
+                            <p>You can format a date into different string representations.</p>
+                            <pre>
+                                <code>string formattedDate = now.ToString("MM/dd/yyyy");  // Output: 10/04/2024</code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Adding or Subtracting Days, Months, or Years</strong>
+                            <p>Methods like <code>AddDays()</code>, <code>AddMonths()</code>, and
+                                <strong>AddYears()</strong> are used for date arithmetic.</p>
+                            <pre>
+                                <code>
+DateTime futureDate = now.AddDays(5);  // Adds 5 days to current date
+DateTime pastDate = now.AddMonths(-2);  // Subtracts 2 months from current date
+            </code>
+        </pre>
+                        </li>
+
+                        <li>
+                            <strong>Comparing Dates</strong>
+                            <p>Dates can be compared using comparison operators or the <strong>CompareTo</strong> method.
+                            </p>
+                            <pre>
+                                <code>
+if (now > specificDate) {
+    // now is later than specificDate
+}
+
+int comparison = now.CompareTo(specificDate);  // 0: equal, 1: later, -1: earlier
+            </code>
+        </pre>
+                        </li>
+
+                        <li>
+                            <strong>Extracting Components</strong>
+                            <p>You can retrieve the year, month, day, etc., from a <code>DateTime</code> object.</p>
+                            <pre>
+                                <code>
+int year = now.Year;  // Output: 2024
+int month = now.Month;  // Output: 10
+int day = now.Day;  // Output: 4
+            </code>
+        </pre>
+                        </li>
+
+                        <li>
+                            <strong>Difference Between Two Dates</strong>
+                            <p>Use <strong>TimeSpan</strong> to calculate the difference between two dates.</p>
+                            <pre>
+                                <code>
+DateTime date1 = new DateTime(2024, 10, 1);
+DateTime date2 = new DateTime(2024, 10, 4);
+TimeSpan difference = date2 - date1;  // Output: 3 days
+            </code>
+        </pre>
+                        </li>
+
+                        <li>
+                            <strong>Parsing Strings into Dates</strong>
+                            <p>Convert a string into a <strong>DateTime</strong> object using <strong>DateTime.Parse()</strong>
+                                or <strong>DateTime.TryParse()</strong>.</p>
+                            <pre>
+                                <code>
+DateTime parsedDate = DateTime.Parse("2024-10-04");
+                                </code>
+                            </pre>
+                        </li>
+
+                        <li>
+                            <strong>Getting Current Date Only</strong>
+                            <p>You can use <code>DateTime.Today</code> to get the current date without the time
+                                component.</p>
+                            <pre>
+                                <code>
+DateTime today = DateTime.Today;  // Current date without time
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </div>
 
                 <h3>Converting Between Data Types</h3>
                 <p>Data type conversion allows transforming one data type into another. C# provides multiple ways to
@@ -249,7 +449,7 @@ Console.WriteLine(isParsed ? $"Parsed: {result}" : "Failed to parse"); // Output
             </div>
 
             <div class="in">
-                <h3>3. Comments</h3>
+                <h3>Comments</h3>
                 <p>Comments are used to explain code and are ignored by the compiler. There are two types of comments in
                     C#:</p>
                 <pre>
@@ -265,7 +465,7 @@ multi-line comment
             </div>
 
             <div class="in">
-                <h3>4. Operators in C#</h3>
+                <h3>Operators in C#</h3>
                 <p>C# supports various operators for performing calculations and comparisons.</p>
                 <ul>
                     <li><strong>Arithmetic Operators:</strong> Used for basic arithmetic operations.
@@ -642,18 +842,18 @@ class Program
 
             <div class="in">
                 <h3>Declaring and Initializing Arrays</h3>
-            <p>Before using arrays, you need to declare and initialize them. Here’s how:</p>
+                <p>Before using arrays, you need to declare and initialize them. Here’s how:</p>
 
-            <ul>
-                <li><strong>Declaration:</strong> Specifies the type of elements and the array name.</li>
-                <pre>
+                <ul>
+                    <li><strong>Declaration:</strong> Specifies the type of elements and the array name.</li>
+                    <pre>
                     <code>
 int[] numbers; // Declares an array of integers
                     </code>
                 </pre>
 
-                <li><strong>Initialization:</strong> Allocates memory for the array and assigns values.</li>
-                <pre>
+                    <li><strong>Initialization:</strong> Allocates memory for the array and assigns values.</li>
+                    <pre>
                     <code>
 numbers = new int[5]; // Initializes an array with 5 elements
 
@@ -662,20 +862,21 @@ int[] numbers = new int[] { 1, 2, 3, 4, 5 };
                     </code>
                 </pre>
 
-                <li><strong>Accessing Array Elements:</strong> Use the index to access or modify elements.</li>
-                <pre>
+                    <li><strong>Accessing Array Elements:</strong> Use the index to access or modify elements.</li>
+                    <pre>
                     <code>
 int firstNumber = numbers[0]; // Accesses the first element
 numbers[1] = 10; // Modifies the second element
                     </code>
                 </pre>
-            </ul>
+                </ul>
             </div>
             <div class="in">
                 <h3>Looping Through Arrays</h3>
-            <p>You can use loops to iterate through all elements of an array. The most common loop for this purpose is
-                the <strong>for</strong> loop:</p>
-            <pre>
+                <p>You can use loops to iterate through all elements of an array. The most common loop for this purpose
+                    is
+                    the <strong>for</strong> loop:</p>
+                <pre>
                 <code>
 int[] numbers = { 10, 20, 30, 40, 50 };
 for (int i = 0; i < numbers.Length; i++)
@@ -688,27 +889,30 @@ for (int i = 0; i < numbers.Length; i++)
 
             <div class="in">
                 <h3>Types of Arrays</h3>
-            <p>C# supports several types of arrays:</p>
-            <ul>
-                <li><strong>Single-Dimensional Arrays:</strong> The simplest type of array that stores data in a single
-                    line.</li>
-                <pre>
+                <p>C# supports several types of arrays:</p>
+                <ul>
+                    <li><strong>Single-Dimensional Arrays:</strong> The simplest type of array that stores data in a
+                        single
+                        line.</li>
+                    <pre>
                     <code>
 int[] singleDimArray = { 10, 20, 30, 40, 50 };
                     </code>
                 </pre>
 
-                <li><strong>Multi-Dimensional Arrays:</strong> Arrays with more than one dimension. Typically used for
-                    matrices.</li>
-                <pre>
+                    <li><strong>Multi-Dimensional Arrays:</strong> Arrays with more than one dimension. Typically used
+                        for
+                        matrices.</li>
+                    <pre>
                     <code>
 int[,] multiDimArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
                     </code>
                 </pre>
 
-                <li><strong>Jagged Arrays:</strong> Arrays of arrays, where each sub-array can have different lengths.
-                </li>
-                <pre>
+                    <li><strong>Jagged Arrays:</strong> Arrays of arrays, where each sub-array can have different
+                        lengths.
+                    </li>
+                    <pre>
                     <code>
 int[][] jaggedArray = new int[3][];
 jaggedArray[0] = new int[] { 1, 2 };
@@ -716,7 +920,7 @@ jaggedArray[1] = new int[] { 3, 4, 5 };
 jaggedArray[2] = new int[] { 6, 7, 8, 9 };
                     </code>
                 </pre>
-            </ul>
+                </ul>
             </div>
             <div class="in">
                 <h3>Advantages of Arrays</h3>
