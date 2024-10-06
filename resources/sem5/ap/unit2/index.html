@@ -1077,9 +1077,8 @@ public class MainActivity extends AppCompatActivity {
             <button class="ac">BoundedService.java</button>
             <div class="panel">
                 <pre>
-                                <code>
-package com.example.mybcaboundservice;
-
+                    <code>
+package com.example.myapplication;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -1115,8 +1114,8 @@ public class BoundedService extends Service {
         return noGenerator.nextInt(100);
     }
 }
-                                </code>
-                            </pre>
+                    </code>
+                </pre>
             </div>
         </div>
         <div class="code">
@@ -1124,12 +1123,13 @@ public class BoundedService extends Service {
             <button class="ac">MainActivity.java</button>
             <div class="panel">
                 <pre>
-                                <code>
-package com.example.mybcaboundservice;
+                    <code>
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -1150,10 +1150,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void start(View view){
+    public void startService(View view){
         // Binding the service
         myIntent = new Intent(MainActivity.this, BoundedService.class);
-        bindService(myIntent, sConnection, BIND_AUTO_CREATE);  // Automatically create and bind service
+        bindService(myIntent, sConnection, Context.BIND_AUTO_CREATE);  // Automatically create and bind service
         Toast.makeText(MainActivity.this, "Service Bounded", Toast.LENGTH_SHORT).show();
     }
 
@@ -1161,7 +1161,7 @@ public class MainActivity extends AppCompatActivity {
     private ServiceConnection sConnection= new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-           BoundedService.LocalBinder myBinder = (BoundedService.LocalBinder) iBinder;
+            BoundedService.LocalBinder myBinder = (BoundedService.LocalBinder) iBinder;
             bService = myBinder.getService();  // Get service instance
             bound = true;
         }
@@ -1172,14 +1172,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void stop(View view){
+    public void stopService(View view){
         // Unbind the service
         unbindService(sConnection);
         Toast.makeText(MainActivity.this, "Service UnBounded", Toast.LENGTH_SHORT).show();
         bound = false;
     }
 
-    public void displayNumber(View view){
+    public void displayRandomNumber(View view){
         if(bound){
             // Use the bound service to generate a random number
             int i = bService.getRandom();
@@ -1187,10 +1187,69 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-                                </code>
-                            </pre>
+                    </code>
+                </pre>
             </div>
         </div>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">activity_main.xml</button>
+            <div class="panel">
+                <pre>
+                    <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    &lt;Button
+        android:id="@+id/btn_start_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:onClick="startService" />
+
+    &lt;Button
+        android:id="@+id/btn_stop_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_service"
+        app:layout_constraintVertical_bias="0.2"
+        android:onClick="stopService" />
+
+    &lt;Button
+        android:id="@+id/btn_display_random_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Random Number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop_service"
+        app:layout_constraintVertical_bias="0.2"
+        android:onClick="displayRandomNumber" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <P>Add the following in AndroidManifest.xml file:</P>
+        <pre>
+            <code>
+&lt;service android:name=".BoundedService" />
+            </code>
+        </pre>
         <p>In this example:
         <ul>
             <li>We start the service using bindService() and unbind it using unbindService().</li>
