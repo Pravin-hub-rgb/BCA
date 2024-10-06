@@ -113,6 +113,69 @@ namespace HelloWorldApp // Namespace definition
                     <li><strong>Console.WriteLine:</strong> Used to print output to the console.</li>
                 </ul>
             </div>
+            <div class="in">
+                <h3>Understanding Namespace</h3>
+                <ul>
+                    <li>Here’s a simple C# program that demonstrates the concept of namespaces by creating two
+                        namespaces, each containing a class with a method. One namespace's method calls the other
+                        namespace's method, helping to understand how namespaces work.</li>
+                </ul>
+                <div class="npanel">
+                    <pre>
+                        <code>
+using System;
+
+namespace FirstNamespace
+{
+    // Class in the first namespace
+    public class FirstClass
+    {
+        public void DisplayMessage()
+        {
+            Console.WriteLine("Hello from the First Namespace!");
+        }
+    }
+}
+
+namespace SecondNamespace
+{
+    // Class in the second namespace
+    public class SecondClass
+    {
+        public void ShowMessage()
+        {
+            Console.WriteLine("Hello from the Second Namespace!");
+        }
+
+        // Method to call a method from FirstNamespace
+        public void CallFirstNamespaceMethod()
+        {
+            FirstNamespace.FirstClass firstClassObj = new FirstNamespace.FirstClass();
+            firstClassObj.DisplayMessage();
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creating an object of the SecondClass
+        SecondNamespace.SecondClass secondClassObj = new SecondNamespace.SecondClass();
+
+        // Call method of SecondNamespace
+        secondClassObj.ShowMessage();
+
+        // Call method from FirstNamespace through SecondNamespace
+        secondClassObj.CallFirstNamespaceMethod();
+
+        Console.ReadLine(); // Keep the console open
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
 
             <div class="in">
                 <h3>Variables and Data Types</h3>
@@ -121,12 +184,13 @@ namespace HelloWorldApp // Namespace definition
                     that determines the kind of values it can store and what operations can be performed on them.</p>
 
                 <pre>
-                        <code>// Examples of variable declarations in C#
+    <code>// Examples of variable declarations in C#
 int age = 25; // Integer type
 string name = "John"; // String type
 double salary = 5000.50; // Double type for floating-point numbers
+float temperature = 36.6f; // Float type for single-precision floating-point numbers
 bool isEmployed = true; // Boolean type (true or false)</code>
-                    </pre>
+</pre>
 
                 <ul>
                     <li><strong>int:</strong> Represents integer values (whole numbers). Example:
@@ -135,12 +199,19 @@ bool isEmployed = true; // Boolean type (true or false)</code>
                     <li><strong>string:</strong> Represents sequences of characters (text). Example:
                         <strong>string name = "John";</strong>
                     </li>
-                    <li><strong>double:</strong> Represents floating-point numbers (numbers with decimal points).
-                        Example: <strong>double salary = 5000.50;</strong></li>
+                    <li><strong>float:</strong> Represents single-precision floating-point numbers. A <strong>f</strong>
+                        suffix is
+                        required for float literals. Example: <strong>float temperature = 36.6f;</strong></li>
+                    <li><strong>double:</strong> Represents double-precision floating-point numbers (numbers with
+                        decimal points).
+                        Example: <strong>double salary = 5000.50;</strong>
+                    </li>
+                    
                     <li><strong>bool:</strong> Represents boolean values (true or false). Example:
                         <strong>bool isEmployed = true;</strong>
                     </li>
                 </ul>
+
 
                 <div class="wh">
                     <h3>Working with Strings</h3>
