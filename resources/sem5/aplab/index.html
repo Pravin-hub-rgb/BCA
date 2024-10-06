@@ -320,23 +320,417 @@ public class MainActivity extends AppCompatActivity {
                     </pre>
                 </div>
             </div>
-            <p>Note: Make sure to add <strong>android:onClick="funcAdd"</strong> on button.</p>
+            <p>Note: Make sure to add <strong>android:onClick="funcAdd"</strong> to the button in your XML file.</p>
+        </div>
+        <div class="wh">
+            <h3>Create a simple app to create a simple calculator.</h3>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    MainActivity.java
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextNumber1;
+    private EditText editTextNumber2;
+    private TextView textViewResult;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNumber1 = findViewById(R.id.editTextNumber);
+        editTextNumber2 = findViewById(R.id.editTextNumber2);
+        textViewResult = findViewById(R.id.textViewResult);
+
+        Button buttonAdd = findViewById(R.id.buttonAdd);
+        Button buttonSubtract = findViewById(R.id.buttonSubtract);
+        Button buttonMultiply = findViewById(R.id.buttonMultiply);
+        Button buttonDivide = findViewById(R.id.buttonDivide);
+
+        // Set up the listeners for the buttons
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate('+');
+            }
+        });
+
+        buttonSubtract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate('-');
+            }
+        });
+
+        buttonMultiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate('*');
+            }
+        });
+
+        buttonDivide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculate('/');
+            }
+        });
+    }
+
+    private void calculate(char operator) {
+        // Get input numbers
+        double num1 = Double.parseDouble(editTextNumber1.getText().toString());
+        double num2 = Double.parseDouble(editTextNumber2.getText().toString());
+        double result = 0;
+
+        // Perform calculation based on the operator
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                } else {
+                    textViewResult.setText("Cannot divide by zero!");
+                    return;
+                }
+                break;
+        }
+
+        // Display the result
+        textViewResult.setText("Result: " + result);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    activity_main.xml
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-xml">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter number"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter another number"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;Button
+        android:id="@+id/buttonSubtract"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Subtract"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;Button
+        android:id="@+id/buttonMultiply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Multiply"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubtract"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;Button
+        android:id="@+id/buttonDivide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Divide"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMultiply"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    &lt;TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Result: "
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDivide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h3>Create an app to set image on imageview.</h3>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    MainActivity.java
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare the ImageView
+    ImageView imageView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize the ImageView
+        imageView = findViewById(R.id.imageView);
+    }
+
+    // Method to set the image on ImageView when the button is clicked
+    public void setImage(View view) {
+        // Set the image resource from the drawable folder
+        imageView.setImageResource(R.drawable.sample_image);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    activity_main.xml
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-xml">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:contentDescription="Sample Image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    &lt;Button
+        android:id="@+id/btnSetImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Image"
+        android:layout_marginTop="20dp"
+        android:onClick="setImage"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>Note: Place your image in the res/drawable folder. You can do this by copying an image into the drawable directory in Android Studio</p>
+        </div>
+        <div class="wh">
+            <h3>Create a program to change image on button click.</h3>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    MainActivity.java
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+package com.example.imageswitcherapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare the ImageView
+    ImageView imageView;
+
+    // Flag to track which image is currently displayed
+    boolean isImage1 = true;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize the ImageView
+        imageView = findViewById(R.id.imageView);
+    }
+
+    // Method to change the image on ImageView when the button is clicked
+    public void changeImage(View view) {
+        if (isImage1) {
+            // Change to the second image
+            imageView.setImageResource(R.drawable.sample_image2);
+        } else {
+            // Change back to the first image
+            imageView.setImageResource(R.drawable.sample_image);
+        }
+        // Toggle the flag
+        isImage1 = !isImage1;
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    activity_main.xml
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-xml">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;ImageView
+        android:id="@+id/imageView"
+        android:layout_width="198dp"
+        android:layout_height="393dp"
+        android:layout_marginTop="28dp"
+        android:contentDescription="Image"
+        android:src="@drawable/sample_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    &lt;Button
+        android:id="@+id/btnChangeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:onClick="changeImage"
+        android:text="Change Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                        </code>
+                    </pre>
+                </div>
+            </div>
         </div>
         <!--
     <div class="wh">
-        <div class='code'>
-            <div class='dotc'></div>
-            <button class="ac">
-
-            </button>
-            <div class="panel">
-                <pre>
-                    <code class="language-java">
-                    </code>
-                </pre>
+            <h3>Create a simple app to create a simple calculator.</h3>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    MainActivity.java
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-java">
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    activity_main.xml
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-xml">
+                        </code>
+                    </pre>
+                </div>
             </div>
         </div>
-    </div>
 -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
         <script src="../../../public/main.js"></script>
