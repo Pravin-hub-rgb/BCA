@@ -206,12 +206,17 @@ bool isEmployed = true; // Boolean type (true or false)</code>
                         decimal points).
                         Example: <strong>double salary = 5000.50;</strong>
                     </li>
-                    
+
                     <li><strong>bool:</strong> Represents boolean values (true or false). Example:
                         <strong>bool isEmployed = true;</strong>
                     </li>
                 </ul>
-                <p><strong>Note:</strong> In C#, public methods and built-in method names (such as <strong>Console.WriteLine()</strong>) typically follow the <em>PascalCase</em> convention, where each word starts with a capital letter. However, not all function names are capitalized. Private or internal methods often follow the <em>camelCase</em> convention, where the first word starts with a lowercase letter and subsequent words are capitalized. This helps distinguish between public and private members in a class.</p>
+                <p><strong>Note:</strong> In C#, public methods and built-in method names (such as
+                    <strong>Console.WriteLine()</strong>) typically follow the <em>PascalCase</em> convention, where
+                    each word starts with a capital letter. However, not all function names are capitalized. Private or
+                    internal methods often follow the <em>camelCase</em> convention, where the first word starts with a
+                    lowercase letter and subsequent words are capitalized. This helps distinguish between public and
+                    private members in a class.</p>
 
 
                 <div class="wh">
@@ -362,7 +367,13 @@ string dateInput = Console.ReadLine();</code>
 DateTime parsedDate = DateTime.Parse(dateInput);
 Console.WriteLine("Parsed Date: " + parsedDate.ToString("yyyy-MM-dd"));</code>
 </pre>
-
+                    <p>In date formatting, "MM" and "mm" have different meanings in C# (and in most other date/time
+                        formatting systems):
+                    <ul>
+                        <li>MM (uppercase): Represents the month (from 01 to 12).</li>
+                        <li>mm (lowercase): Represents the minute (from 00 to 59).</li>
+                    </ul>
+                    </p>
                     <p><strong>Important Considerations:</strong></p>
                     <ul>
                         <li>If the input format doesn’t match the expected date format, an exception is thrown.</li>
@@ -517,11 +528,46 @@ int intNum = (int)doubleNum; // Cast explicitly, results in 10 (fractional part 
                         <strong>Convert.ToInt32()</strong>, <strong>ToString()</strong>, and <strong>Parse()</strong>.
                     </li>
                     <pre>
-                        <code>// Example of using Convert methods
+    <code>// Example of using Convert methods
 string strNum = "123";
 int num = Convert.ToInt32(strNum); // Converts string to integer
-double doubleValue = Convert.ToDouble(strNum); // Converts string to double</code>
-                    </pre>
+double doubleValue = Convert.ToDouble(strNum); // Converts string to double
+float floatValue = Convert.ToSingle(strNum); // Converts string to float
+bool boolValue = Convert.ToBoolean("true"); // Converts string to boolean
+long longValue = Convert.ToInt64(strNum); // Converts string to long</code>
+</pre>
+
+                    <ul>
+                        <li><strong>Convert.ToInt32():</strong> Converts a value to a 32-bit integer (int). Example:
+                            <strong>int num = Convert.ToInt32("123");</strong>
+                        </li>
+                        <li><strong>Convert.ToDouble():</strong> Converts a value to a double-precision floating-point
+                            number (double). Example:
+                            <strong>double num = Convert.ToDouble("123.45");</strong>
+                        </li>
+                        <li><strong>Convert.ToSingle():</strong> Converts a value to a single-precision floating-point
+                            number (float). Example:
+                            <strong>float num = Convert.ToSingle("123.45");</strong>
+                        </li>
+                        <li><strong>Convert.ToBoolean():</strong> Converts a value to a Boolean (true or false).
+                            Example:
+                            <strong>bool flag = Convert.ToBoolean("true");</strong>
+                        </li>
+                        <li><strong>Convert.ToInt64():</strong> Converts a value to a 64-bit integer (long). Example:
+                            <strong>long num = Convert.ToInt64("123456789");</strong>
+                        </li>
+                        <li><strong>Convert.ToDecimal():</strong> Converts a value to a decimal for precise financial
+                            calculations. Example:
+                            <strong>decimal num = Convert.ToDecimal("123.45");</strong>
+                        </li>
+                        <li><strong>Convert.ToString():</strong> Converts a value to a string. Example:
+                            <strong>string text = Convert.ToString(123);</strong>
+                        </li>
+                        <li><strong>Convert.ToDateTime():</strong> Converts a value to a DateTime object. Example:
+                            <strong>DateTime date = Convert.ToDateTime("2024-01-01");</strong>
+                        </li>
+                    </ul>
+
 
                     <li><strong>Using Parse Method:</strong> The <strong>Parse()</strong> method converts a string
                         representation of a number into a specific data type (e.g., int, double). This method throws an
