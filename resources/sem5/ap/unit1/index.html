@@ -1084,7 +1084,20 @@ public class MainActivity extends AppCompatActivity {
                     <ul>
                         <li>When your activity is temporarily destroyed (for example, when you rotate the phone or switch to another app), Android might want to recreate it later. To do this, it saves certain important data in the Bundle object.</li>
                         <li>If there's data in the Bundle, it means Android is trying to restore your activity to the way it was before it was destroyed. If the Bundle is null, it means the activity is starting fresh, with no previous saved state.</li>
+                        <li>Example: 
+
+                            Imagine you're using an app, and you rotate your phone. The screen changes from portrait to landscape. When this happens, Android destroys and recreates the activity. If you were filling out a form, you wouldn’t want to lose all the data you had entered. That’s where the Bundle comes in—it saves and restores that data for you.</li>
                     </ul>
+                </li>
+                <li>Why do we call super.onCreate(savedInstanceState)?
+                    <ol>
+                        <li>Ensures Proper Setup: When you call super.onCreate(savedInstanceState), you're allowing the parent class (AppCompatActivity) to do its part in setting up the activity. Android's internal systems rely on this to properly initialize things like the window, UI, and other components before your specific code runs.</li>
+                        <li>Maintains Lifecycle Consistency: Every time an activity goes through its lifecycle (e.g., being created, started, resumed), Android needs to ensure that the appropriate steps are taken to transition the activity from one state to another. The parent class (through super) knows how to handle these transitions. If you don't call super.onCreate(), you risk breaking this lifecycle consistency, and your app might behave unpredictably.</li>
+                        <li>Builds on Existing Functionality: By calling super, you're saying, "First, do everything the system needs to do for this stage of the lifecycle. Then, I’ll add my own code." It's like building on top of a solid foundation provided by Android.</li>
+                        <li>Example Analogy:
+
+                            Imagine you're a chef cooking in a kitchen. Before you start, you need the kitchen setup—stoves turned on, ingredients placed in the right spots, etc. Android's AppCompatActivity is like the kitchen staff who takes care of all this setup for you. When you call super.onCreate(), you're letting them do their job first, so when you start cooking (writing your own code), everything is ready to go!</li>
+                    </ol>
                 </li>
                 <li><strong>setContentView(R.layout.activity_main):</strong> This method sets the layout of the
                     activity, defined in the <i>activity_main.xml</i> file. It links the XML layout to the Java
