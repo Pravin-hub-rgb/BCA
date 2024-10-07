@@ -237,11 +237,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        // The Bundle parameter contains the activity's previously saved state.
-        // It allows the system to pass back any saved data (such as instance state),
-        // helping us restore the activity to its previous state after a configuration change
-        // (e.g., screen rotation) or when the activity is recreated.
         Toast.makeText(this, "Activity Created", Toast.LENGTH_SHORT).show();
     }
 
@@ -441,10 +436,15 @@ public class MainActivity extends AppCompatActivity {
                 <h3>Example Scenarios for Both Types:</h3>
                 <ul>
                     <li><strong>Started Service:</strong>
-                        <p>Imagine a news app that downloads articles in the background. You don't need to interact with the download, so a started service runs the task in the background and continues until it's done or you stop it.</p>
+                        <p>Imagine a news app that downloads articles in the background. You don't need to interact with
+                            the download, so a started service runs the task in the background and continues until it's
+                            done or you stop it.</p>
                     </li>
                     <li><strong>Bound Service:</strong>
-                        <p>Suppose you’re developing a music app that allows the user to control playback (play, pause, skip) from the app interface while continuously interacting with the service. The app would bind to a service so the user can control the playback through the UI, and once the user closes the UI, the service can stop.</p>
+                        <p>Suppose you’re developing a music app that allows the user to control playback (play, pause,
+                            skip) from the app interface while continuously interacting with the service. The app would
+                            bind to a service so the user can control the playback through the UI, and once the user
+                            closes the UI, the service can stop.</p>
                     </li>
                 </ul>
             </div>
@@ -688,21 +688,23 @@ public void onCreate() {
             <li>
                 <h4>onStartCommand()</h4>
                 <p>
-                    Called every time a client starts the service using <code>startService()</code>. This method
-                    allows the service to perform its operations.
-                </p>
-                <p>
-                    It returns an integer that indicates how the system should handle the service if it is
-                    killed:
-                </p>
-                <ul>
-                    <li><code>START_NOT_STICKY</code>: The service will not be recreated until an explicit
-                        request is made.</li>
-                    <li><code>START_STICKY</code>: The service will be recreated, but the last intent will not
-                        be delivered.</li>
-                    <li><code>START_REDELIVER_INTENT</code>: The service will be recreated, and the last intent
-                        will be redelivered.</li>
-                </ul>
+                    In Android, services run in the background to perform long-running tasks, like playing music, downloading files, etc. The onStartCommand() method is part of a Service's lifecycle and is called whenever the service is explicitly started using startService(). It handles the commands sent to the service.
+                    <br>The parameters in onStartCommand():
+                    </p>
+                <ol>
+                    <li>Intent intent
+                        <br>What it does: This is the Intent that started the service. Just like activities, services are often started using an Intent (which is a way of communicating what task needs to be done).
+                        <br>Why pass it?: The Intent contains information about what the service should do. For example, you could use the intent to tell the service to play a specific song or perform a certain task. In this case, you aren't using any data from the Intent, but it's passed to ensure the service has access to it, in case it needs to handle different tasks based on the incoming intent.
+                    </li>
+                    <li>int flags
+                        <br>What it does: The flags parameter gives additional information about how the service should be started. For example, there are flags like START_FLAG_REDELIVERY or START_FLAG_RETRY, which can influence how the service should behave if it was killed and restarted by the system.
+                        <br>Why pass it?: The flags help you handle special cases, like whether the service should restart if it’s killed due to low memory or whether it should process the same command again.
+                    </li>
+                    <li>int startId
+                        <br>What it does: The startId is a unique integer assigned to each start request (each call to startService()). This is helpful if you start the same service multiple times and need to track the start request so you can stop the service properly.
+                        <br>Why pass it?: You may want to stop the service once it finishes processing a specific request. You can do that by using the startId to identify which specific request to stop. This helps manage multiple service start requests efficiently.
+                    </li>
+                </ol>
                 <pre>
                             <code>
 @Override
@@ -712,6 +714,21 @@ public int onStartCommand(Intent intent, int flags, int startId) {
 }
                             </code>
                         </pre>
+                        <p><strong>The Return Value</strong></p>
+                        <pre>
+                            <code>return super.onStartCommand(intent, flags, startId);</code>
+                        </pre>
+                        <ul>
+                            <li>Why we return it: The onStartCommand() method must return an integer that tells the system how to handle the service if it gets killed by Android (which can happen if the system runs out of memory).</li>
+                            <li>Possible return values:
+                                <ul>
+                                    <li>START_NOT_STICKY: The system won’t restart the service if it gets killed. The service only runs as long as it’s explicitly started.</li>
+                                    <li>START_STICKY: The system will restart the service if it gets killed, but it will not redeliver the last Intent. This is useful for services like music players that need to keep running.</li>
+                                    <li>START_REDELIVER_INTENT: The system will restart the service if it gets killed and will redeliver the last Intent, ensuring the service completes the last request.</li>
+                                </ul>
+                            </li>
+                            <li>By returning super.onStartCommand(intent, flags, startId), you're allowing the system to handle the service's lifecycle in the default way. However, you can customize this return value based on how you want the service to behave.</li>
+                        </ul>
             </li>
 
             <li>
@@ -866,7 +883,8 @@ public class MyRingtoneService extends Service {
                 toast message indicating that the service has been created.</li>
             <li><strong>onStartCommand():</strong> This method is called every time the service is started. We create a
                 MediaPlayer instance to play the default ringtone, set it to loop, and start the playback. We also
-                display a toast message indicating that the service has started.</li>
+                display a toast message indicating that the service has started.
+           </li>
             <li><strong>onDestroy():</strong> This method is called when the service is being destroyed. We stop the
                 MediaPlayer and release its resources to prevent memory leaks.</li>
         </ul>
@@ -944,40 +962,40 @@ public class MainActivity extends AppCompatActivity {
                 <pre>
                     <code>
 &lt;?xml version="1.0" encoding="utf-8"?>
-&lt;androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+                            &lt;androidx.constraintlayout.widget.ConstraintLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:context=".MainActivity">
 
-    &lt;Button
-        android:id="@+id/startServiceBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Service"
-        app:layout_constraintBottom_toTopOf="@+id/stopServiceBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
+                            &lt;Button
+                            android:id="@+id/startServiceBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start Service"
+                            app:layout_constraintBottom_toTopOf="@+id/stopServiceBtn"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.558"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.396" />
 
-    &lt;Button
-        android:id="@+id/stopServiceBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/startServiceBtn"
-        android:layout_marginBottom="264dp"
-        android:text="Stop Service"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
-        app:layout_constraintStart_toStartOf="parent" />
-&lt;/androidx.constraintlayout.widget.ConstraintLayout>
-                    </code>
-                </pre>
+                            &lt;Button
+                            android:id="@+id/stopServiceBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/startServiceBtn"
+                            android:layout_marginBottom="264dp"
+                            android:text="Stop Service"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.554"
+                            app:layout_constraintStart_toStartOf="parent" />
+                            &lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                            </pre>
             </div>
         </div>
         <p><strong>Explanation:</strong></p>
