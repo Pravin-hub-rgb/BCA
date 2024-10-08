@@ -635,6 +635,12 @@ public class SecondActivity extends AppCompatActivity {
                         to
                         the <strong>MainActivity</strong>.</li>
                 </ul>
+                <p><strong>Declare SecondActivity in AndroidManifest.xml file:</strong></p>
+                <pre>
+                    <code>
+&lt;activity android:name=".SecondActivity" />
+                    </code>
+                </pre>
 
                 <p><strong>Method Breakdown:</strong></p>
                 <ul>
@@ -1676,16 +1682,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+// This class extends BroadcastReceiver, which allows the app to respond to system-wide broadcast events.
 public class MyBroadcast extends BroadcastReceiver {
+    
+    // The onReceive method is called when the BroadcastReceiver receives a broadcast event.
     @Override
     public void onReceive(Context context, Intent intent) {
+        
+        // Get the action from the broadcast Intent (in this case, we're interested in Bluetooth state changes).
         String action = intent.getAction();
-        if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
+
+        // Check if the action is related to Bluetooth state changes.
+        if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+
+            // Get the Bluetooth state from the intent (the state will be an integer value).
             int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-            switch (state){
+
+            // Use a switch statement to handle different Bluetooth states.
+            switch (state) {
+                
+                // If Bluetooth is turned on, show a "Bluetooth ON" message.
                 case BluetoothAdapter.STATE_ON:
                     Toast.makeText(context, "Bluetooth ON", Toast.LENGTH_SHORT).show();
                     break;
+                
+                // If Bluetooth is turned off, show a "Bluetooth OFF" message.
                 case BluetoothAdapter.STATE_OFF:
                     Toast.makeText(context, "Bluetooth OFF", Toast.LENGTH_SHORT).show();
                     break;
