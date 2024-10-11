@@ -8,6 +8,8 @@
     <title>Unit 2</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body class="bg-c">
@@ -116,12 +118,146 @@
                 </ol>
                 <p><strong>Confusion?</strong></p>
                 <ul>
-                    <li>Even though backpropagation involves "going backward," this backward flow occurs only during the training phase. The backpropagation algorithm computes the gradients of the error with respect to each weight in the network by working backward, but this process is purely for adjusting the weights and is not part of the actual inference or data flow during prediction.</li>
-                    <li>Thus, during inference or the actual operation of the network (when you're making predictions), the data still flows strictly in the forward direction—from inputs to outputs. This is why networks trained using backpropagation are still considered feedforward networks. The term "feedforward" refers to how information is processed when the network is used for predictions, not how it learns.</li>
-                    <li>BPN ko feedforward network ke under isliye include karte hain kyunki backward direction sirf training ke time pe hota hai. Jab hum network ko train karte hain, tab error ko piche ki taraf propagate karke weights adjust karte hain. Lekin jab actual prediction karte hain, yaani jab hum model ko real data dete hain, toh data sirf forward direction mai flow hota hai—input se output tak.
-<br>
-                        Yeh jo term 'feedforward' hai, yeh sirf prediction ke process ke baare mein hai, training ke time pe kya hota hai, usse nahi. Isliye, BPN ko feedforward neural network mana jata hai, kyunki prediction ke waqt data forward hi move karta hai.</li>
+                    <li>Even though backpropagation involves "going backward," this backward flow occurs only during the
+                        training phase. The backpropagation algorithm computes the gradients of the error with respect
+                        to each weight in the network by working backward, but this process is purely for adjusting the
+                        weights and is not part of the actual inference or data flow during prediction.</li>
+                    <li>Thus, during inference or the actual operation of the network (when you're making predictions),
+                        the data still flows strictly in the forward direction—from inputs to outputs. This is why
+                        networks trained using backpropagation are still considered feedforward networks. The term
+                        "feedforward" refers to how information is processed when the network is used for predictions,
+                        not how it learns.</li>
+                    <li>BPN ko feedforward network ke under isliye include karte hain kyunki backward direction sirf
+                        training ke time pe hota hai. Jab hum network ko train karte hain, tab error ko piche ki taraf
+                        propagate karke weights adjust karte hain. Lekin jab actual prediction karte hain, yaani jab hum
+                        model ko real data dete hain, toh data sirf forward direction mai flow hota hai—input se output
+                        tak.
+                        <br>
+                        Yeh jo term 'feedforward' hai, yeh sirf prediction ke process ke baare mein hai, training ke
+                        time pe kya hota hai, usse nahi. Isliye, BPN ko feedforward neural network mana jata hai, kyunki
+                        prediction ke waqt data forward hi move karta hai.
+                    </li>
                 </ul>
+                <div class="wh">
+                    <p><strong>Example Problem:</strong> Assume that the neurons have a sigmoid activation function,
+                        perform a forward pass and a backward pass on the network. Assume that the actual output of y is
+                        0.5 and learning rate is 1.</p>
+                    <img src="../../images/sc8.jpeg" alt="">
+                    <p><strong>Forward Pass</strong>: Compute output for y<sub>3</sub>, y<sub>4</sub> and y<sub>5</sub>.
+                    </p>
+                    <ul>
+                        <li>a<sub>j</sub> = \( \sum_{j} (w_ij * x_i) \)</li>
+                        <br>y<sub>j</sub> = f(aj) = <span class="ms">\( f(x) = \frac{1}{1 + e^{-a_j}} \)</span>
+                        <li>y<sub>3</sub> = f(a1) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-a_1}} \)</span>
+                            <br>a1 = (w<sub>13</sub> * x<sub>1</sub> ) + (w<sub>23</sub> * x<sub>2</sub>) = 0.755
+                            <br>y<sub>3</sub> = f(0.755) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.755}}
+                                \)</span> = 0.68
+
+                        </li>
+                        <li>y<sub>4</sub> = f(a2) = <span class="ms">\( f(a2) = \frac{1}{1 + e^{-a_2}} \)</span>
+                            <br>a2 = (w<sub>14</sub> * x<sub>1</sub> ) + (w<sub>24</sub> * x<sub>2</sub>) = 0.68
+                            <br>y<sub>4</sub> = f(0.68) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.68}} \)</span>
+                            = 0.6637
+
+                        </li>
+                        <li>y<sub>5</sub> = f(a3) = <span class="ms">\( f(a3) = \frac{1}{1 + e^{-a_1}} \)</span>
+                            <br>a3 = (w<sub>35</sub> * y<sub>3</sub> ) + (w<sub>45</sub> * y<sub>4</sub>) = 0.801
+                            <br>y<sub>5</sub> = f(0.801) = <span class="ms">\( f(a3) = \frac{1}{1 + e^{-0.801}}
+                                \)</span> = 0.69
+
+                        </li>
+                        <li><strong>Error = y<sub>target</sub> - y<sub>5</sub> = -0.19</strong></li>
+                    </ul>
+                    <p>To get closure to the desired output we need to update the weight.</p>
+                    <p><strong>Each Weight changed by:</strong></p>
+                    <ul>
+                        <li><span class="ms">&Delta;w<sub>ij</sub> = &eta;&delta;<sub>j</sub>O<sub>i</sub></span>
+                            <ul>
+                                <li>&delta;<sub>j</sub> = O<sub>j</sub>(1 - O<sub>j</sub>)(t<sub>j</sub> -
+                                    O<sub>j</sub>) if <i>j</i> is an output unit</li>
+                                <li>&delta;<sub>j</sub> = O<sub>j</sub>(1 - O<sub>j</sub>)\(
+                                    \sum_{k}\)&delta;<sub>k</sub>w<sub>kj</sub> if <i>j</i> is a hidden unit</li>
+                            </ul>
+                        </li>
+                        <li>where &eta; is a constant called the learning rate</li>
+                        <li>t<sub>j</sub> is the correct output for unit j</li>
+                        <li>&delta;<sub>j</sub> is the error measure for unit j</li>
+                    </ul>
+                    <p><strong>Backward Pass: Compute &delta;<sub>3</sub>, &delta;<sub>4</sub> and
+                            &delta;<sub>5</sub></strong></p>
+                    <img src="../../images/sc9.jpeg" alt="">
+                    <ul>
+                        <li>For output unit:
+                            <br>&delta;<sub>5</sub> = y<sub>5</sub>(1-y<sub>5</sub>)(y<sub>target</sub> - y<sub>5</sub>)
+                            <br> = 0.69*(1-0.69)*(05-0.69) = -0.0406
+                        </li>
+                        <li>For hidden unit:
+                            <br>&delta;<sub>3</sub> = y<sub>3</sub>(1-y<sub>3</sub>)w35*&delta;<sub>5</sub>
+                            <br>0.68*(1-0.68)*(0.3*(-0.0406)) = -0.00265
+                        </li>
+                        <li>For hidden unit:
+                            <br>&delta;<sub>4</sub> = y<sub>4</sub>(1-y<sub>4</sub>)w45*&delta;<sub>5</sub>
+                            <br>0.6637*(1-0.6637)*(0.9*(-0.0406)) = -0.0082
+                        </li>
+                    </ul>
+                    <p><strong>Compute new weights</strong></p>
+                    <p>&Delta;w<sub>ij</sub> = &eta;&Delta;<sub>j</sub>O<sub>i</sub></p>
+                    <ul>
+                        <li>&Delta;w<sub>13</sub> = &eta;&Delta;<sub>3</sub>x<sub>1</sub> = 1 * (-0.00265) * 0.35 =
+                            −0.0009275
+                            <br>&Delta;w<sub>13</sub>(new) = &Delta;w<sub>13</sub> + w<sub>13</sub>(old) = −0.0009275 +
+                            0.1 = 0.0991
+                        </li>
+                        <li>&Delta;w<sub>14</sub> = &eta;&Delta;<sub>4</sub>x<sub>1</sub> = 1 * (-0.0082) * 0.35 =
+                            -0.00287
+                            <br>&Delta;w<sub>14</sub>(new) = &Delta;w<sub>14</sub> + w<sub>14</sub>(old) = -0.00287 +
+                            0.4 = 0.3971
+                        </li>
+                        <li>&Delta;w<sub>23</sub> = &eta;&Delta;<sub>3</sub>x<sub>2</sub> = 1 * (-0.00265) * 0.9 =
+                            -0.002385
+                            <br>&Delta;w<sub>23</sub>(new) = &Delta;w<sub>23</sub> + w<sub>23</sub>(old) = -0.002385 +
+                            0.4 = 0.7976
+                        </li>
+                        <li>&Delta;w<sub>24</sub> = &eta;&Delta;<sub>4</sub>x<sub>2</sub> = 1 * (-0.0082) * 0.9 =
+                            -0.00738
+                            <br>&Delta;w<sub>24</sub>(new) = &Delta;w<sub>24</sub> + w<sub>24</sub>(old) = -0.00738 +
+                            0.6 = 0.5926
+                        </li>
+                        <li>&Delta;w<sub>35</sub> = &eta;&Delta;<sub>5</sub>y<sub>3</sub> = 1 * (-0.0406) * 0.68 =
+                            -0.0276
+                            <br>&Delta;w<sub>35</sub>(new) = &Delta;w<sub>35</sub> + w<sub>35</sub>(old) = -0.0276 + 0.3
+                            = 0.2724
+                        </li>
+                        <li>&Delta;w<sub>45</sub> = &eta;&Delta;<sub>5</sub>y<sub>4</sub> = 1 * (-0.0406) * 0.6637 =
+                            -0.0269
+                            <br>&Delta;w<sub>45</sub>(new) = &Delta;w<sub>45</sub> + w<sub>45</sub>(old) = -0.0269 + 0.9
+                            = 0.8731
+                        </li>
+                    </ul>
+                    <p><strong>Forward Pass: Compute output y<sub>3</sub>, y<sub>4</sub> and y<sub>5</sub>.</strong></p>
+                    <img src="../../images/sc10.jpeg" alt="">
+                    <ul>
+                        <li>y<sub>3</sub> = f(a1) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-a_1}} \)</span>
+                            <br>a1 = (w<sub>13</sub> * x<sub>1</sub> ) + (w<sub>23</sub> * x<sub>2</sub>) = 0.7525
+                            <br>y<sub>3</sub> = f(0.7525) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.7525}}
+                                \)</span> = 0.6797
+
+                        </li>
+                        <li>y<sub>4</sub> = f(a2) = <span class="ms">\( f(a2) = \frac{1}{1 + e^{-a_2}} \)</span>
+                            <br>a2 = (w<sub>14</sub> * x<sub>1</sub> ) + (w<sub>24</sub> * x<sub>2</sub>) = 0.6797
+                            <br>y<sub>4</sub> = f(0.6797) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.6797}} \)</span>
+                            = 0.6620
+
+                        </li>
+                        <li>y<sub>5</sub> = f(a3) = <span class="ms">\( f(a3) = \frac{1}{1 + e^{-a_1}} \)</span>
+                            <br>a3 = (w<sub>35</sub> * y<sub>3</sub> ) + (w<sub>45</sub> * y<sub>4</sub>) = 0.7631
+                            <br>y<sub>5</sub> = f(0.7631) = <span class="ms">\( f(a3) = \frac{1}{1 + e^{-0.7631}}
+                                \)</span> = 0.6820 (Network Output)
+
+                        </li>
+                        <li><strong>Error = y<sub>target</sub> - y<sub>5</sub> = -0.182</strong></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
