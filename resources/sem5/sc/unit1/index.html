@@ -26,8 +26,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit2/index.html" class="link">Next Topic &rarr;</a>
             </div>
         </div>
     </div>
@@ -1081,6 +1080,74 @@ Final Weights: W1 = 2, W2 = 2, B = -2
             </div>
         </div>
         <div class="wh">
+            <h2>Perceptron Learning Rule</h2>
+            <p>The Perceptron Learning Rule is an algorithm used to train a single-layer perceptron. The perceptron is a
+                simple binary classifier that decides the output based on the weighted sum of the inputs and a bias,
+                followed by an activation function. The learning rule adjusts the weights and bias to reduce
+                classification errors.</p>
+
+            <h3>Key Components of the Perceptron</h3>
+            <ul>
+                <li><strong>Weights (W):</strong> The strength of the connection between input neurons and the output
+                    neuron. Initialized randomly or to zero.</li>
+                <li><strong>Bias (B):</strong> An additional input that helps to shift the activation threshold of the
+                    neuron.</li>
+                <li><strong>Net Input (y_input):</strong> The sum of the weighted inputs and the bias. Calculated as:
+                    <br>
+\(
+y_{\text{input}} = B + \sum_{i} (x_i \cdot W_i)
+\)
+                </li>
+                <li><strong>Activation Function:</strong> A function that determines the final output of the perceptron.
+                    The most common one is the step function, used for binary classification.</li>
+            </ul>
+
+            <h3>Step Activation Function</h3>
+            <p>The step function is used to decide the perceptron's output based on the net input:</p>
+            <ul>
+                <li><strong>1</strong> if the net input is ≥ 0 (positive).</li>
+                <li><strong>-1</strong> if the net input is &lt; 0 (negative).</li>
+            </ul>
+            <p>Mathematically:
+                <br>\(
+                f(y_{\text{input}}) =
+                \begin{cases}
+                1 & \text{if } y_{\text{input}} \geq 0 \\
+                -1 & \text{if } y_{\text{input}} < 0 \end{cases} \) </p>
+
+                    <h3>Weight Update Rule (Learning Rule)</h3>
+                    <p>During training, the perceptron's weights and bias are updated based on the difference between
+                        the target output and the perceptron’s predicted output. The update rules are:
+                        <br>\(
+                        \Delta W_i = \alpha \cdot (T - y) \cdot x_i
+                        \)
+                        <br>\(
+                        \Delta B = \alpha \cdot (T - y)
+                        \)
+                    </p>
+                    <ul>
+                        <li><strong>Alpha (α):</strong> Learning rate (between 0 and 1).</li>
+                        <li><strong>T:</strong> The target output (desired output).</li>
+                        <li><strong>y:</strong> The actual output of the perceptron.</li>
+                        <li><strong>x_i:</strong> The input value.</li>
+                    </ul>
+
+                    <h3>Steps for Perceptron Training</h3>
+                    <ol>
+                        <li><strong>Initialize weights and bias:</strong> Set all weights and bias to zero or small
+                            random values.</li>
+                        <li><strong>For each training example:</strong>
+                            <ul>
+                                <li>Compute the net input.</li>
+                                <li>Apply the activation function to get the output.</li>
+                                <li>Update the weights and bias if the output does not match the target.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Repeat:</strong> Continue the process for multiple iterations until the perceptron
+                            correctly classifies all training examples or the error is sufficiently minimized.</li>
+                    </ol>
+        </div>
+        <div class="wh">
             <h2>Perceptron Neural Network</h2>
             <p><strong>Perceptron Neural Network</strong> is a foundational model in the field of <strong>Artificial
                     Neural Networks (ANNs)</strong>, operating under the paradigm of <strong>supervised
@@ -1210,12 +1277,11 @@ Final Weights: W1 = 2, W2 = 2, B = -2
 
                         <p>
                             y_input = B + Σ(x_i * W_i) <br>
-                            Apply activation function: <br>\( f(y\_input) = 
-                            \begin{cases} 
-                            1 & \text{if } y\_input > 0 \\ 
-                            0 & \text{if } y\_input = 0 \\ 
-                            -1 & \text{if } y\_input < 0 
-                            \end{cases} \) </p>
+                            Apply activation function: <br>\( f(y\_input) =
+                            \begin{cases}
+                            1 & \text{if } y\_input > 0 \\
+                            0 & \text{if } y\_input = 0 \\
+                            -1 & \text{if } y\_input < 0 \end{cases} \) </p>
 
                                 <p><strong>Step 3: Update Weights and Bias</strong></p>
 
@@ -1294,6 +1360,43 @@ Final Weights: W1 = 1, W2 = 1, B = -1
                                 </p>
                     </div>
         </div>
+        <div class="wh">
+            <h2>Delta Learning Rule / Widrow-Hoff Rule</h2>
+            <ul>
+                <li>
+                    The Widrow-Hoff rule is a supervised learning algorithm. Supervised learning involves a process
+                    where the desired output is compared with the actual output. The difference between the two (error)
+                    is used to adjust the weights. This process is repeated iteratively until the actual output is close
+                    to the desired output.
+                </li>
+                <li>
+                    The algorithm uses the difference between the actual output of the neuron and the desired output as
+                    the error signal for units in the output layer.
+                </li>
+                <li>
+                    In Widrow-Hoff learning, the correction to the synaptic weight is proportional to the error signal
+                    multiplied by the activation value, which is determined by the derivative of the transfer function.
+                </li>
+                <li>
+                    <b>Weight adjustment formula:</b>
+                    <br>&Delta;w<sub>new</sub> = &alpha;(t - y<sub>in</sub>) * x<sub>i</sub> + &Delta;w<sub>old</sub>
+                    <br><b>&alpha;</b> = learning rate: The learning rate controls how much the weights are adjusted in
+                    each iteration. It is a small positive value that ensures gradual convergence.
+                    <br><b>t</b> = target value: This is the desired output for a given input.
+                    <br><b>y<sub>in</sub></b> = net input to the output unit: This is the weighted sum of inputs to the
+                    neuron.
+                    <br>y<sub>in</sub>: \( \sum_{i=1}^{n} x_i w_i \)
+                </li>
+                <li>
+                    The delta rule is derived from gradient descent, meaning it tries to minimize the error by updating
+                    the weights in the direction that reduces the error.
+                </li>
+                <li>
+                    The perceptron learning rule stops after a finite number of steps, while the gradient descent
+                    approach continues indefinitely, converging asymptotically to the solution.
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="wh">
         <p>Reference</p>
@@ -1305,6 +1408,8 @@ Final Weights: W1 = 1, W2 = 1, B = -1
             <li><a href="https://youtu.be/fYBmBo_k5qg?si=YEGiypPLYJGBAsC5" target="_blank">Hebb Rule &neArr;</a>
             </li>
             <li><a href="https://youtu.be/_jwbyA5eqZg?si=m8D2TwWXWC6UNI8e" target="_blank">Perceptron &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=SWXOcipNST8" target="_blank">Delta Learning Rule &neArr;</a>
+            </li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
