@@ -245,7 +245,8 @@
                         </li>
                         <li>y<sub>4</sub> = f(a2) = <span class="ms">\( f(a2) = \frac{1}{1 + e^{-a_2}} \)</span>
                             <br>a2 = (w<sub>14</sub> * x<sub>1</sub> ) + (w<sub>24</sub> * x<sub>2</sub>) = 0.6797
-                            <br>y<sub>4</sub> = f(0.6797) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.6797}} \)</span>
+                            <br>y<sub>4</sub> = f(0.6797) = <span class="ms">\( f(a1) = \frac{1}{1 + e^{-0.6797}}
+                                \)</span>
                             = 0.6620
 
                         </li>
@@ -258,6 +259,439 @@
                         <li><strong>Error = y<sub>target</sub> - y<sub>5</sub> = -0.182</strong></li>
                     </ul>
                 </div>
+            </div>
+            <div class="in">
+                <h3>Radial Basis Function Network (RBFN)</h3>
+
+<p><strong>Radial Basis Function Network (RBFN)</strong> is a type of artificial neural network that is widely used for classification, regression, and function approximation tasks. It works by using radial basis functions as activation functions and is particularly good at handling non-linear data.</p>
+
+Key Concepts</strong></p>
+
+<ul>
+    <li>
+        <strong>Radial Basis Function</strong>: 
+        The core component of an RBFN is the <em>radial basis function</em>, which is used as the activation function. The most common radial basis function is the Gaussian function, which measures the distance between an input vector and a center point.
+    </li>
+    <li>
+        <strong>Three-Layer Structure</strong>: 
+        An RBFN typically has three layers:
+        <ul>
+            <li><strong>Input Layer</strong>: Receives the input data.</li>
+            <li><strong>Hidden Layer</strong>: Contains neurons that apply the radial basis function to the input data.</li>
+            <li><strong>Output Layer</strong>: Produces the final output, such as a classification label or regression value.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Centers and Weights</strong>: 
+        In RBFNs, each neuron in the hidden layer has a center point. The distance between the input and this center is calculated, and the radial basis function is applied to this distance. The output is then weighted and passed to the output layer.
+    </li>
+</ul>
+
+<p><strong>How RBFN Works</strong></p>
+
+<ul>
+    <li>
+        <strong>Training Process</strong>: 
+        Training an RBFN involves two steps:
+        <ul>
+            <li><strong>Step 1: Find Centers</strong>: First, the center points of the radial basis functions are determined using methods like k-means clustering.</li>
+            <li><strong>Step 2: Adjust Weights</strong>: Next, the weights between the hidden layer and output layer are learned through optimization techniques like least squares or gradient descent.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Non-linear Mapping</strong>:
+        RBFNs are effective for non-linear problems because the radial basis functions can map input data into a higher-dimensional space, making it easier to separate complex patterns.
+    </li>
+</ul>
+
+<p><strong>Why Use RBFN?</strong></p>
+
+<ul>
+    <li><strong>Handles Non-Linear Data</strong>: RBFNs are ideal for problems where the relationship between input and output is non-linear, such as complex classification or regression tasks.</li>
+    <li><strong>Fast Training</strong>: Compared to other types of neural networks, RBFNs can often be trained more quickly because only the weights between the hidden and output layers need to be optimized.</li>
+    <li><strong>Good for Function Approximation</strong>: RBFNs excel in approximating unknown functions, making them useful for tasks like time series prediction and control systems.</li>
+</ul>
+
+<p><strong>Real-World Example</strong></p>
+
+<p>Suppose you want to predict house prices based on features like location, size, and number of bedrooms. An RBFN can model the relationship between these features and house prices, even if the relationship is non-linear. After training, it can predict the price of a new house by applying radial basis functions to the input features and calculating the output based on learned weights.</p>
+
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Feedback Neural Networks (Recurrent Neural Networks)</h2>
+            <p>Feedback neural networks, also known as recurrent neural networks (RNNs), are a class of artificial
+                neural networks where connections between the neurons form directed cycles, allowing information to be
+                fed back into the network. Unlike feedforward networks where the information moves strictly in one
+                direction, feedback networks allow for loops, meaning the network can retain information about previous
+                inputs. This makes them suitable for tasks where the current output depends not only on the current
+                input but also on past inputs, like sequence prediction, time-series forecasting, and language modeling.
+            </p>
+            <p><strong>Key Components:</strong></p>
+            <ol>
+                <li>Input Layer: The layer where the input data is received, similar to feedforward networks.</li>
+                <li>Hidden Layers: These layers, like in feedforward networks, perform computations based on the input
+                    data. However, in feedback networks, hidden layers often retain information about previous inputs,
+                    enabling the network to learn from sequential patterns.</li>
+                <li>Output Layer: This layer produces the final prediction or classification result. The number of
+                    neurons depends on the task.</li>
+                <li>Recurrent Connections: The hallmark of feedback networks is their recurrent connections, where
+                    outputs of neurons can be fed back into themselves or previous layers. This feedback loop enables
+                    the network to retain memory over time, a feature that's crucial for tasks like sequential data
+                    processing.</li>
+                <li>Weights and Biases: Similar to feedforward networks, feedback networks have weights and biases that
+                    are adjusted during training to minimize the error between predicted and actual outputs.</li>
+                <li>Activation Functions: These are used to introduce non-linearity into the network, which helps in
+                    learning complex patterns.</li>
+            </ol>
+            <p><strong>Learning Process:</strong></p>
+            <p>The training of feedback neural networks involves propagating the error back through time, which is done
+                using algorithms such as Backpropagation Through Time (BPTT). Since the network has a memory of previous
+                inputs, learning becomes more complex compared to feedforward networks. Feedback networks are capable of
+                handling time-dependent data because they can learn from the temporal dependencies present in the input
+                sequences.</p>
+            <p><strong>Varianst of Feedback Networks</strong></p>
+            <p>There are several important types of feedback networks that specialize in different tasks.
+                <br>Two notable examples are:
+            <ol>
+                <li><strong>Hopfield Network</strong>: The Hopfield network is a type of recurrent neural network that
+                    serves as a content-addressable memory system. It's designed for associative memory and pattern
+                    recognition tasks. Each neuron in a Hopfield network is connected to every other neuron, forming a
+                    fully connected network. Once trained, the network can retrieve a stored pattern even from partial
+                    or noisy inputs.</li>
+                <li><strong>Bidirectional Associative Memory (BAM)</strong>: BAM is another type of recurrent neural
+                    network that is used for pattern recognition and associative memory. It can store pairs of patterns
+                    (input-output pairs), and given one part of the pair, it can retrieve the other. Unlike the Hopfield
+                    network, BAM works bidirectionally, meaning it can retrieve an output from a given input and vice
+                    versa. It's often used for applications requiring associative recall.</li>
+            </ol>
+            </p>
+            <div class="in">
+                <h3>Hopfield Network</h3>
+
+                <p>The <strong>Hopfield Network</strong> is a type of neural network used for remembering patterns and
+                    retrieving them when given incomplete or noisy information. Think of it like your brain recognizing
+                    a friend’s face even if they’re wearing sunglasses or a hat.</p>
+
+                    <p><strong>Key Concepts:</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Neurons and States</strong>:
+                        The Hopfield network is made up of simple units called <em>neurons</em>. Each neuron can have
+                        only two states: <strong>on</strong> or <strong>off</strong> (typically represented as
+                        <code>+1</code> and <code>-1</code>).
+                    </li>
+                    <li>
+                        <strong>Connections Between Neurons</strong>:
+                        Every neuron is connected to every other neuron, but <em>not to itself</em>. These connections
+                        have <em>weights</em>, which decide how strongly one neuron influences another.
+                    </li>
+                    <li>
+                        <strong>Pattern Storage</strong>:
+                        The Hopfield network can store patterns (like pictures, sounds, or any data). Once it learns a
+                        pattern, it can recall it from partial or distorted input. For example, if the network is
+                        trained to remember a face, it can still recognize it even if the face is blurry.
+                    </li>
+                    <li>
+                        <strong>How the Network Works</strong>:
+                        <ul>
+                            <li>
+                                <strong>Learning</strong>: The Hopfield network learns by adjusting the weights between
+                                neurons based on the patterns you give it. This process ensures that the network can
+                                later recall these patterns.
+                            </li>
+                            <li>
+                                <strong>Recall</strong>: When you give the network a part of a pattern (like a blurry
+                                version of a face), it updates the neuron states until it matches the closest pattern it
+                                remembers. This process happens in small steps, one neuron at a time.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Stable States</strong>:
+                        A Hopfield network has special stable states, called <em>attractors</em>. Once the network
+                        reaches a stable state, it stops changing. These stable states correspond to the patterns it has
+                        learned.
+                    </li>
+                    <li>
+                        <strong>Energy Minimization</strong>:
+                        Hopfield networks work by trying to minimize an "energy" function. This means the network always
+                        moves towards a more stable pattern, just like a ball rolling downhill until it reaches the
+                        bottom.
+                    </li>
+                </ul>
+
+                <p><strong>Why Use Hopfield Networks?</strong></p>
+
+                <ul>
+                    <li>They are great for <strong>associative memory</strong>, where you want to remember something
+                        based on partial input.</li>
+                    <li>They’re used in <strong>pattern recognition</strong>, such as recognizing handwriting, faces, or
+                        other types of data.</li>
+                </ul>
+
+                <p><strong>Real-World Example</strong></p>
+
+                <p>Imagine you give a Hopfield network a picture of a cat to remember. Later, you give it a blurry or
+                    incomplete version of the cat, and the network will fill in the missing details to recall the full
+                    image.</p>
+
+            </div>
+            <div class="in">
+                <h3>Bidirectional Associative Memory (BAM)</h3>
+
+                <p>The <strong>Bidirectional Associative Memory (BAM)</strong> is a type of recurrent neural network
+                    that can recall patterns in both directions. It was introduced by Bart Kosko in 1988 and is useful
+                    for associating pairs of patterns, where recalling one pattern can help retrieve its pair.</p>
+
+                    <p><strong>Key Concepts</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Bipolar Neurons</strong>:
+                        BAM uses <em>bipolar neurons</em>, meaning each neuron can have values of <code>+1</code> or
+                        <code>-1</code>. This is similar to Hopfield networks.
+                    </li>
+                    <li>
+                        <strong>Two-Layer Network</strong>:
+                        BAM consists of two layers of neurons, called the <em>X layer</em> and the <em>Y layer</em>.
+                        These two layers are connected, allowing the network to associate a pattern in the X layer with
+                        a pattern in the Y layer.
+                    </li>
+                    <li>
+                        <strong>Bidirectional Recall</strong>:
+                        The network can retrieve a pattern from one layer based on the input from the other layer. For
+                        example, if you input a pattern in the X layer, it can recall the corresponding pattern in the Y
+                        layer, and vice versa.
+                    </li>
+                </ul>
+
+                <p><strong>How BAM Works</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Learning Process</strong>:
+                        BAM learns by adjusting the weights between the neurons in the X and Y layers. When given a pair
+                        of patterns (one in each layer), it strengthens the connections between the neurons that are
+                        active in both patterns.
+                    </li>
+                    <li>
+                        <strong>Recall Process</strong>:
+                        During recall, if you give the network part of a pattern in the X layer, it will compute the
+                        corresponding pattern in the Y layer by using the learned weights, and vice versa. This happens
+                        in both directions, hence the term "bidirectional."
+                    </li>
+                </ul>
+
+                <p><strong>Associative Memory in BAM</strong></p>
+
+                <ul>
+                    <li>
+                        BAM is an <strong>associative memory</strong> network, meaning it stores patterns in pairs. It
+                        learns associations between two sets of patterns, so it can retrieve one based on the other.
+                    </li>
+                    <li>
+                        It is different from Hopfield networks because BAM can associate two completely different
+                        patterns, one in each layer. Hopfield networks only recall variations of the same pattern.
+                    </li>
+                </ul>
+
+                <p><strong>Why Use BAM?</strong></p>
+
+                <ul>
+                    <li>BAM is useful for <strong>pattern association</strong>, where two different sets of patterns
+                        need to be associated with each other.</li>
+                    <li>It can be applied in <strong>image recognition</strong>, <strong>language translation</strong>,
+                        and other tasks where pairs of related data need to be recalled together.</li>
+                </ul>
+
+                <h3>Real-World Example</h3>
+
+                <p>Imagine you train a BAM network to associate words in English with their French translations. When
+                    you input the English word "cat" into the X layer, the network will recall its French translation
+                    "chat" in the Y layer. You can also input "chat" into the Y layer, and the network will recall "cat"
+                    in the X layer.</p>
+
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Self-Organizing Feature Maps (SOFM)</h2>
+            <p>Self-Organizing Feature Maps (SOFMs), also known as Kohonen networks, are a type of artificial neural
+                network that use unsupervised learning to produce a low-dimensional representation (typically 2D) of
+                input data. Unlike supervised learning models, SOFMs learn from the structure of the data without
+                requiring labeled outputs. These networks are particularly useful for tasks like clustering, data
+                visualization, and dimensionality reduction. SOFMs are known for preserving the topological structure of
+                the input space, meaning similar inputs are mapped to nearby locations on the output map.</p>
+            <p><strong>Learning Process:</strong></p>
+            <p>SOFM training starts with random initialization of the weights. As each input is processed, the BMU is
+                found, and its weights, along with those of its neighbors, are updated to move closer to the input
+                vector. The learning rate and neighborhood size typically decrease over time, allowing the network to
+                fine-tune its mapping.
+                <br>SOFMs are used in a variety of applications, including pattern recognition, data clustering, and
+                feature extraction, due to their ability to group similar data points together and maintain topological
+                relationships.
+            </p>
+            <p><strong>Variants of Self-Organizing Feature Maps</strong></p>
+            <p>Several extensions and related models to SOFM have been developed, each with specific features for
+                different applications. Two notable variants are:</p>
+            <ol>
+                <li><strong>Self-Organizing Maps (SOM)</strong>: SOMs are the most well-known type of self-organizing
+                    feature maps, introduced by Teuvo Kohonen. They are widely used for tasks such as data clustering,
+                    pattern recognition, and visualization of high-dimensional data. The SOM algorithm reduces the
+                    dimensions of data by mapping input vectors into a two-dimensional grid while preserving their
+                    topological structure.</li>
+                <li><strong>Learning Vector Quantization (LVQ)</strong>: LVQ is a type of supervised learning algorithm
+                    based on the principles of self-organizing maps. It combines the clustering capability of SOMs with
+                    the ability to classify data. LVQ networks are trained using labeled data, and the weight vectors
+                    are adjusted to improve classification accuracy. LVQ is commonly used in classification problems
+                    where the goal is to assign inputs to predefined classes.</li>
+            </ol>
+            <div class="in">
+                <h3>Self-Organizing Maps (SOM)</h3>
+
+                <p><strong>Self-Organizing Maps (SOM)</strong>, also known as Kohonen maps (named after their inventor
+                    Teuvo Kohonen), are a type of unsupervised learning neural network. They are used for clustering and
+                    visualizing high-dimensional data by organizing similar data points together in a two-dimensional
+                    grid.</p>
+
+                    <p><strong>Key Concepts</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Unsupervised Learning</strong>:
+                        SOM uses <em>unsupervised learning</em>, meaning it does not require labeled data. Instead, it
+                        finds patterns and structures in the input data on its own, grouping similar inputs together.
+                    </li>
+                    <li>
+                        <strong>Topological Map</strong>:
+                        SOM creates a <em>topological map</em>, where similar input patterns are mapped close to each
+                        other on a two-dimensional grid, helping in visualizing high-dimensional data.
+                    </li>
+                    <li>
+                        <strong>Neurons and Grid</strong>:
+                        The network consists of a grid of neurons, where each neuron represents a specific group or
+                        cluster of input data. Each neuron has a weight vector, which adjusts to match the input data
+                        during training.
+                    </li>
+                </ul>
+
+                <p><strong>How SOM Works</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Training</strong>:
+                        SOM training involves presenting input data to the network and adjusting the weights of the
+                        neurons to better match the input. The process is iterative, and with each step, the neurons
+                        that are closest to the input adjust their weights more significantly.
+                    </li>
+                    <li>
+                        <strong>Best Matching Unit (BMU)</strong>:
+                        For each input, the neuron whose weight vector is closest to the input data (called the <em>Best
+                            Matching Unit</em>, or BMU) is identified. This BMU and its neighboring neurons update their
+                        weights to move closer to the input vector.
+                    </li>
+                    <li>
+                        <strong>Neighborhood Function</strong>:
+                        The adjustment of weights not only affects the BMU but also its neighbors. Neurons that are
+                        closer to the BMU adjust more than those further away. This creates a smooth transition on the
+                        map, grouping similar data points together.
+                    </li>
+                </ul>
+
+                <p><strong>Why Use SOM?</strong></p>
+
+                <ul>
+                    <li><strong>Data Visualization</strong>: SOM is commonly used for visualizing complex and
+                        high-dimensional data in a simple 2D format, making it easier to understand patterns and
+                        clusters.</li>
+                    <li><strong>Clustering</strong>: It is excellent for clustering similar data points together without
+                        any prior knowledge of the categories.</li>
+                    <li><strong>Dimensionality Reduction</strong>: SOM helps reduce the dimensions of data, while still
+                        preserving its structure, so you can analyze it more easily.</li>
+                </ul>
+
+                <p><strong>Real-World Example</strong></p>
+
+                <p>Suppose you have a dataset of customers’ shopping habits, including hundreds of variables like age,
+                    income, and products purchased. A SOM can help you organize these customers into groups based on
+                    similar shopping behaviors. Once trained, you can visualize these groups on a 2D map, where
+                    customers with similar habits are located near each other on the grid.</p>
+
+            </div>
+            <div class="in">
+                <h3>Learning Vector Quantization (LVQ)</h3>
+
+                <p><strong>Learning Vector Quantization (LVQ)</strong> is a supervised learning algorithm used for
+                    classification tasks. It is based on the competitive learning principle and works by finding
+                    prototypes that represent different classes in the data. LVQ is commonly used for pattern
+                    recognition, where each prototype acts as a representative of a specific class.</p>
+
+                    <p><strong>Key Concepts</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Supervised Learning</strong>:
+                        LVQ is a <em>supervised learning</em> algorithm, which means it requires labeled training data
+                        to learn how to classify inputs. The goal is to assign input data to predefined categories.
+                    </li>
+                    <li>
+                        <strong>Prototypes</strong>:
+                        LVQ uses <em>prototypes</em>, which are reference points that represent different classes in the
+                        data. These prototypes are adjusted during training to better match the input data and improve
+                        classification accuracy.
+                    </li>
+                    <li>
+                        <strong>Winner-Takes-All Rule</strong>:
+                        When an input vector is presented to the network, the prototype that is closest to the input is
+                        selected as the "winner." This winner prototype is updated to better match the input,
+                        reinforcing its representation of that class.
+                    </li>
+                </ul>
+
+                <p><strong>How LVQ Works</strong></p>
+
+                <ul>
+                    <li>
+                        <strong>Initialization</strong>:
+                        At the beginning, a set of prototypes is initialized. These prototypes represent the different
+                        classes in the training data, and their positions will be adjusted throughout the training
+                        process.
+                    </li>
+                    <li>
+                        <strong>Training Process</strong>:
+                        During training, input vectors are presented to the network, and the closest prototype (based on
+                        distance) is identified. If the prototype correctly represents the input class, it is moved
+                        closer to the input. If it belongs to a different class, it is moved further away.
+                    </li>
+                    <li>
+                        <strong>Adjustment of Prototypes</strong>:
+                        The movement of prototypes is done to reduce classification errors. Prototypes for the correct
+                        class are adjusted towards the input, while those for incorrect classes are adjusted away,
+                        helping the network to better classify new data.
+                    </li>
+                </ul>
+
+                <p><strong>Why Use LVQ?</strong></p>
+
+                <ul>
+                    <li><strong>Simple and Interpretable</strong>: LVQ provides a simple and interpretable way to
+                        classify data based on prototypes. The decision boundaries created are easy to visualize and
+                        understand.</li>
+                    <li><strong>Effective for Classification</strong>: LVQ is highly effective for classification
+                        problems, especially when there are clear clusters in the data that can be represented by
+                        prototypes.</li>
+                    <li><strong>Adaptable to Different Problems</strong>: LVQ can be applied to a wide variety of
+                        classification problems, from image recognition to medical diagnosis, making it versatile.</li>
+                </ul>
+
+                <p><strong>Real-World Example</strong></p>
+
+                <p>Imagine you are classifying different types of flowers based on features like petal length and width.
+                    Using LVQ, you can define prototypes for each flower type (such as roses, lilies, and tulips). As
+                    the network learns, these prototypes will adjust to represent each flower category more accurately,
+                    allowing the model to classify new flowers correctly.</p>
+
             </div>
         </div>
     </div>
