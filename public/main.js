@@ -1,3 +1,21 @@
+// ----------- Google Analytics Code ---------------- 
+loadGoogleAnalytics();
+
+function loadGoogleAnalytics() {
+    const script = document.createElement('script');
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-C2RD8JD2ZL"; // Replace with your tracking ID
+    script.async = true;
+    document.head.appendChild(script);
+
+    const gtagScript = document.createElement('script');
+    gtagScript.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C2RD8JD2ZL'); // Replace with your tracking ID
+    `;
+    document.head.appendChild(gtagScript);
+}
 document.addEventListener("DOMContentLoaded", function () {
   // Update commit info
   updateCommitInfo();
