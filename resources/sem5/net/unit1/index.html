@@ -101,42 +101,86 @@
                     </li>
                 </ul>
             </div>
-
             <div class="in">
                 <h3>Components Provided by .NET</h3>
                 <p>The .NET framework provides two main components:</p>
                 <ol>
-                    <li><strong>BCL (Base Class Library)</strong></li>
                     <li><strong>CLR (Common Language Runtime)</strong></li>
+                    <li><strong>BCL (Base Class Library)</strong></li>
                 </ol>
-
-                <h3>BCL (Base Class Library)</h3>
-                <ul>
-                    <li>The Base Class Library is designed by Microsoft. Without the BCL, we cannot write any code in
-                        the .NET framework. It is also known as the building blocks of .NET programs.</li>
-                    <li>The BCL contains predefined classes that are used for application development. These are
-                        installed on machines when the .NET framework is installed.</li>
-                </ul>
 
                 <h3>CLR (Common Language Runtime)</h3>
                 <ul>
-                    <li>CLR is the core component under the .NET framework responsible for converting MSIL (Microsoft
-                        Intermediate Language) code into native code, which can then be executed by the operating
-                        system.</li>
+                    <li>The CLR is the core runtime engine in the .NET framework responsible for executing applications.
+                    </li>
+                    <li>When .NET code is compiled, it is transformed into an Intermediate Language (IL). The CLR takes
+                        this IL code and compiles it into native machine code that can be executed by the operating
+                        system.
+                    <br><img src="../../images/net1.jpeg" alt=""></li>
+                    <li>The CLR handles important tasks such as:
+                        <ul>
+                            <li><strong>Memory Management:</strong> The CLR allocates and deallocates memory for .NET
+                                applications through a process called garbage collection.</li>
+                            <li><strong>Type Safety:</strong> It ensures that code adheres to strict type safety rules,
+                                preventing unsafe operations.</li>
+                            <li><strong>Exception Handling:</strong> The CLR provides a unified approach for handling
+                                runtime errors across different programming languages in .NET.</li>
+                            <li><strong>Security:</strong> It enforces code access security, managing what permissions
+                                the application has while running.</li>
+                        </ul>
+                    </li>
+                    <li>In short, the CLR is responsible for managing the execution of programs and providing essential
+                        services like memory management and security.</li>
+                        <li>In the .NET framework, the code is compiled twice:
+                            <ol>
+                                <li>First, the source code is compiled by the respective language compiler, which generates
+                                    intermediate code known as MSIL (Microsoft Intermediate Language) or IL (Intermediate
+                                    Language) or Managed Code.</li>
+                                <li>Then, MSIL is converted into native code (code specific to the operating system) using
+                                    the CLR.</li>
+                            </ol>
+                        </li>
                 </ul>
 
-                <img src="../../images/net1.jpeg" alt="">
+                <h3>BCL (Base Class Library)</h3>
                 <ul>
-                    <li>In the .NET framework, the code is compiled twice:
-                        <ol>
-                            <li>First, the source code is compiled by the respective language compiler, which generates
-                                intermediate code known as MSIL (Microsoft Intermediate Language) or IL (Intermediate
-                                Language) or Managed Code.</li>
-                            <li>Then, MSIL is converted into native code (code specific to the operating system) using
-                                the CLR.</li>
-                        </ol>
+                    <li>The BCL is a collection of reusable classes, interfaces, and value types provided by Microsoft,
+                        forming the foundation of all .NET applications.</li>
+                    <li>It contains predefined classes and functions that provide common functionalities like:
+                        <ul>
+                            <li><strong>I/O operations:</strong> Handling input and output for file and stream
+                                manipulation.</li>
+                            <li><strong>Data Structures:</strong> Offering standard data structures such as lists,
+                                dictionaries, queues, and more.</li>
+                            <li><strong>Networking:</strong> Providing classes to work with network protocols like HTTP
+                                and FTP.</li>
+                            <li><strong>Threading:</strong> Enabling support for multithreading and asynchronous
+                                programming.</li>
+                        </ul>
                     </li>
+                    <li>The BCL acts as a library of building blocks that developers can use to avoid rewriting common
+                        tasks from scratch, ensuring consistency across different applications.</li>
                 </ul>
+
+                <h3>How CLR and BCL Work Together</h3>
+                <p>The CLR and BCL work in harmony to provide an efficient execution environment for .NET applications:
+                </p>
+                <ul>
+                    <li>When a .NET application is compiled, the IL code references classes from the BCL. The BCL
+                        provides all the fundamental functionality needed to perform standard operations such as file
+                        handling, data manipulation, and more.</li>
+                    <li>The CLR takes this IL code and, at runtime, loads the necessary BCL components needed by the
+                        application. For example, if your code uses a `List`, the CLR loads the `List` class from the
+                        BCL.</li>
+                    <li>The CLR also manages memory allocation and garbage collection for objects created using the BCL
+                        types, ensuring that memory is efficiently managed.</li>
+                    <li>Additionally, the CLR enforces security and type safety when the application interacts with BCL
+                        components, preventing unsafe memory access or unauthorized operations.</li>
+                </ul>
+                <p>In summary, the BCL provides the necessary libraries for application development, while the CLR
+                    handles the runtime execution, memory management, and security, ensuring that the application runs
+                    smoothly and securely.</p>
+
             </div>
 
             <div class="in">
@@ -174,24 +218,50 @@
             </div>
             <div class="in">
                 <h3>Understanding the .NET Platform</h3>
-                <p>The .NET platform is a software development framework created by Microsoft. It provides a range of tools and services for building and running applications. To understand how the .NET platform works, it's important to explore some of its key components: the Common Language Runtime (CLR), Common Type System (CTS), Common Language Specification (CLS), and Common Intermediate Language (CIL). These elements work together to ensure that applications run smoothly across different languages and platforms. Additionally, the .NET platform supports platform independence, allowing applications to run on various operating systems.</p>
-            
+                <p>The .NET platform is a software development framework created by Microsoft. It provides a range of
+                    tools and services for building and running applications. To understand how the .NET platform works,
+                    it's important to explore some of its key components: the Common Language Runtime (CLR), Common Type
+                    System (CTS), Common Language Specification (CLS), and Common Intermediate Language (CIL). These
+                    elements work together to ensure that applications run smoothly across different languages and
+                    platforms. Additionally, the .NET platform supports platform independence, allowing applications to
+                    run on various operating systems.</p>
+
                 <h3>1. Common Language Runtime (CLR)</h3>
-                <p>The CLR is the heart of the .NET platform. It provides a managed environment where .NET applications are executed. The CLR handles essential tasks such as memory management, security, code verification, and exception handling. It also enables different .NET languages to work together seamlessly. When you run a .NET application, the CLR converts Intermediate Language (IL) code into machine code that the specific platform can execute.</p>
-            
+                <p>The CLR is the heart of the .NET platform. It provides a managed environment where .NET applications
+                    are executed. The CLR handles essential tasks such as memory management, security, code
+                    verification, and exception handling. It also enables different .NET languages to work together
+                    seamlessly. When you run a .NET application, the CLR converts Intermediate Language (IL) code into
+                    machine code that the specific platform can execute.</p>
+
                 <h3>2. Common Type System (CTS)</h3>
-                <p>The CTS is a crucial part of the .NET platform that defines a common set of data types that all .NET languages can use. It ensures that these types are consistent and compatible across different languages. By following CTS, developers can create components that work together smoothly, regardless of the language used to create them. The CTS helps in defining how types are represented and used in memory.</p>
-            
+                <p>The CTS is a crucial part of the .NET platform that defines a common set of data types that all .NET
+                    languages can use. It ensures that these types are consistent and compatible across different
+                    languages. By following CTS, developers can create components that work together smoothly,
+                    regardless of the language used to create them. The CTS helps in defining how types are represented
+                    and used in memory.</p>
+
                 <h3>3. Common Language Specification (CLS)</h3>
-                <p>The CLS is a subset of the CTS that outlines a set of rules and guidelines that .NET languages must follow to ensure interoperability. It defines a common set of features that all .NET languages should support. By adhering to CLS, developers can create components that are compatible with any .NET language, making it easier to integrate and use components across different languages.</p>
-            
+                <p>The CLS is a subset of the CTS that outlines a set of rules and guidelines that .NET languages must
+                    follow to ensure interoperability. It defines a common set of features that all .NET languages
+                    should support. By adhering to CLS, developers can create components that are compatible with any
+                    .NET language, making it easier to integrate and use components across different languages.</p>
+
                 <h3>4. Common Intermediate Language (CIL)</h3>
-                <p>CIL, also known as Intermediate Language (IL), is the intermediate code generated by .NET compilers. It is a platform-independent bytecode that the CLR can understand. When a .NET application is compiled, its source code is transformed into CIL. At runtime, the CLR performs Just-In-Time (JIT) compilation, converting CIL into native machine code specific to the target platform. This allows .NET applications to be decoupled from specific hardware and operating systems.</p>
-            
+                <p>CIL, also known as Intermediate Language (IL), is the intermediate code generated by .NET compilers.
+                    It is a platform-independent bytecode that the CLR can understand. When a .NET application is
+                    compiled, its source code is transformed into CIL. At runtime, the CLR performs Just-In-Time (JIT)
+                    compilation, converting CIL into native machine code specific to the target platform. This allows
+                    .NET applications to be decoupled from specific hardware and operating systems.</p>
+
                 <h3>5. Platform Independence in .NET</h3>
-                <p>Platform independence in .NET means that applications can run on different operating systems and hardware without needing to change the application's code. This is achieved through the use of CIL and the CLR. CIL serves as a platform-independent bytecode, while the CLR performs JIT compilation to convert CIL into machine code for the specific platform. Additionally, cross-platform libraries like ASP.NET Core and Xamarin help developers create applications that run on various platforms, such as Windows, macOS, Linux, iOS, and Android.</p>
+                <p>Platform independence in .NET means that applications can run on different operating systems and
+                    hardware without needing to change the application's code. This is achieved through the use of CIL
+                    and the CLR. CIL serves as a platform-independent bytecode, while the CLR performs JIT compilation
+                    to convert CIL into machine code for the specific platform. Additionally, cross-platform libraries
+                    like ASP.NET Core and Xamarin help developers create applications that run on various platforms,
+                    such as Windows, macOS, Linux, iOS, and Android.</p>
             </div>
-            
+
             <div class="in">
                 <h3>Managed Code and Unmanaged Code</h3>
 
@@ -296,31 +366,35 @@
 
                 <p>This conflict where DLLs get overwritten and cause applications to fail is known as <strong>DLL
                         Hell</strong>. It made maintaining applications very difficult.</p>
-                        <div class="wh">
-                            <h3>How .NET Solves DLL Hell</h3>
-                            <p>With .NET, Microsoft introduced assemblies and versioning to solve this problem:</p>
-                            <ul>
-                                <li>Each assembly in .NET is uniquely identified by its name, version number, culture, and public
-                                    key
-                                    token (for signed assemblies).</li>
-                                <li>This allows different versions of the same assembly to coexist on the system without overwriting
-                                    each other, eliminating the DLL Hell problem.</li>
-                                <li>Assemblies are stored in the <strong>Global Assembly Cache (GAC)</strong>, a special location on
-                                    the
-                                    machine that allows multiple versions of assemblies to be installed side by side.</li>
-                            </ul>
-            
-                        </div>
-                        <div class="wh">
-                            
-            <p><strong>Global Assembly Cache (GAC)</strong></p>
-            <p>The <strong>GAC</strong> is a centralized location in Windows where .NET assemblies are stored. The GAC
-                allows multiple versions of the same assembly to coexist, making it easier to manage different
-                applications that depend on different versions of a DLL.</p>
-                        </div>
+                <div class="wh">
+                    <h3>How .NET Solves DLL Hell</h3>
+                    <p>With .NET, Microsoft introduced assemblies and versioning to solve this problem:</p>
+                    <ul>
+                        <li>Each assembly in .NET is uniquely identified by its name, version number, culture, and
+                            public
+                            key
+                            token (for signed assemblies).</li>
+                        <li>This allows different versions of the same assembly to coexist on the system without
+                            overwriting
+                            each other, eliminating the DLL Hell problem.</li>
+                        <li>Assemblies are stored in the <strong>Global Assembly Cache (GAC)</strong>, a special
+                            location on
+                            the
+                            machine that allows multiple versions of assemblies to be installed side by side.</li>
+                    </ul>
+
+                </div>
+                <div class="wh">
+
+                    <p><strong>Global Assembly Cache (GAC)</strong></p>
+                    <p>The <strong>GAC</strong> is a centralized location in Windows where .NET assemblies are stored.
+                        The GAC
+                        allows multiple versions of the same assembly to coexist, making it easier to manage different
+                        applications that depend on different versions of a DLL.</p>
+                </div>
             </div>
 
-            
+
             <div class="in">
                 <h3>3. Versioning</h3>
                 <p><strong>Versioning</strong> is the technique used to assign different versions to assemblies,
