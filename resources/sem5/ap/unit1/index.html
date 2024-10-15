@@ -473,7 +473,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="in">
                 <h3>Android Runtime</h3>
                 <p>The Android Runtime (ART) is crucial for running Android applications. It replaces the older Dalvik
@@ -488,7 +487,6 @@
                         for better security and stability.</li>
                 </ul>
             </div>
-
             <div class="in">
                 <h3>Java API Framework</h3>
                 <p>This layer simplifies app development by providing APIs that allow apps to interact with system
@@ -507,7 +505,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="in">
                 <h3>Application Layer</h3>
                 <p>The top layer includes both system apps and third-party apps. System apps are pre-installed and
@@ -530,7 +527,40 @@
                         utilize similar system services and resources.</li>
                 </ul>
             </div>
-
+            <div class="in">
+                <h3>Step-by-step process of how all components work when you are running a music streaming app:</h3>
+            <ul>
+                <li>
+                    <p><strong>System Apps:</strong> Your app's icon is displayed in the launcher (part of system apps). When you tap on it, the launcher triggers the app's start process.</p>
+                    <p>At this point, your app is handled by the <strong>Java API Framework</strong>, but it’s still working through higher-level services provided by the system apps like the phone’s notification system and the background services that keep it alive.</p>
+                </li>
+            
+                <li>
+                    <p><strong>Java API Framework:</strong> Once the app is running, you see the app's interface, created using components like buttons, lists, etc. (provided by the <strong>Java API Framework</strong>).</p>
+                    <p>When you press "Play" to start a song, this framework handles user interaction and communicates the command (to play music) to the lower system layers.</p>
+                </li>
+            
+                <li>
+                    <p><strong>Android Runtime (ART):</strong> The code of your music app (written in Java or Kotlin) is being executed by the <strong>Android Runtime (ART)</strong>. This translates your app’s high-level code (like playing music) into machine code, so your phone can understand and run it efficiently.</p>
+                    <p>ART also manages memory for your app, ensuring it doesn’t consume too much, especially if you are multitasking.</p>
+                </li>
+            
+                <li>
+                    <p><strong>Native Libraries:</strong> Native libraries like <strong>OpenGL</strong> or <strong>Media Framework</strong> handle tasks like processing the music stream, controlling audio playback, or even rendering album art in the app.</p>
+                    <p>For example, once you hit "Play," the app uses native libraries to decode the music file and output sound through the speakers.</p>
+                </li>
+            
+                <li>
+                    <p><strong>Hardware Abstraction Layer (HAL):</strong> Now, your app needs to interact with the device's audio hardware (like speakers or headphones). It does this through the <strong>Hardware Abstraction Layer (HAL)</strong>, which acts as a bridge between the app and the hardware.</p>
+                    <p>The <strong>Audio HAL</strong> sends signals to the hardware, ensuring your music is played correctly through your headphones or speakers without your app needing to directly handle hardware instructions.</p>
+                </li>
+            
+                <li>
+                    <p><strong>Linux Kernel:</strong> At the lowest level, the <strong>Linux Kernel</strong> manages communication between hardware and software. For example, it makes sure the audio hardware is powered on, controls CPU and memory allocation, and handles network data (if you're streaming online music).</p>
+                    <p>If your app needs to download a song or stream from the internet, the kernel communicates with the network hardware (Wi-Fi or mobile data) to make that connection happen.</p>
+                </li>
+            </ul>
+            </div>
         </div>
 
         <div class="wh">
