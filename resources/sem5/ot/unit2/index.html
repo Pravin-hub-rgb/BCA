@@ -812,11 +812,12 @@
                             </ul>
                         </li>
 
-                        <li>Next, we perform the Simplex iteration. We want to bring x1 and x2 into the basis:
+                        <li>Next, we perform the Simplex iteration. We want to bring x<sub>1</sub> and x<sub>2</sub>
+                            into the basis:
                             <pre>
-            <code>
+                                <code>
            | Cj  |   5  |   3  |   0  |   0  |
-  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |
+  CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  |
 ----------------------------------------------
   0  | x3  |  15 |  3   |  5   |  1   |  0   | (Row 1)
   0  | x4  |  10 |  5   |  2   |  0   |  1   | (Row 2)
@@ -824,38 +825,54 @@
        Zj  |     |  0   |  0   |  0   |  0   |
        Cj  |     |  5   |  3   |  0   |  0   |
   Zj - Cj  |     | -5   | -3   |  0   |  0   |
-            </code>
-        </pre>
-                            Here, Zj - Cj row shows the difference between the calculated and actual costs. The most
-                            negative value, -5 (in the x1 column), indicates that x1 should enter the basis.
+                                </code>
+                            </pre>
 
-                            To decide which variable to remove from the basis (x3 or x4), we compute the minimum ratio
-                            of b values and the coefficients in the x1 column:
+                            <p>Here, the Z<sub>j</sub> row represents the total cost coefficients for each variable in
+                                the objective function. It is calculated using the universal formula:</p>
+                            <p><strong>Z<sub>j</sub> = CB * B</strong></p>
+                            <ul>
+                                <li><strong>CB</strong> is the cost coefficient of the basic variables.</li>
+                                <li><strong>B</strong> represents the matrix of basic variables' coefficients
+                                    corresponding to the current solution.</li>
+                                <li>This formula is used to calculate the values of Z<sub>j</sub> for each non-basic
+                                    variable, which gives the total cost of introducing each variable into the solution.
+                                </li>
+                            </ul>
+                            <p>The Z<sub>j</sub> - C<sub>j</sub> row shows the difference between the calculated
+                                Z<sub>j</sub> and the actual cost coefficient (C<sub>j</sub>). The most negative value,
+                                -5 (in the x<sub>1</sub> column), indicates that x<sub>1</sub> should enter the basis.
+                            </p>
+
+                            <p>To decide which variable to remove from the basis (x<sub>3</sub> or x<sub>4</sub>), we
+                                compute the minimum ratio of b values and the coefficients in the x<sub>1</sub> column:
+                            </p>
                             <pre>
-            <code>
+                                <code>
            | Cj  |   5  |   3  |   0  |   0  |
-  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  | min ratio
+  CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  | min ratio
 --------------------------------------------------------
   0  | x3  |  15 |  3   |  5   |  1   |  0   | 15/3 = 5
   0  | x4  |  10 |  5   |  2   |  0   |  1   | 10/5 = 2 → smallest ratio
-            </code>
-        </pre>
-                            As 2 is the smallest ratio, x4 is the outgoing variable, and x1 will replace x4 in the
-                            basis.
+                                </code>
+                            </pre>
+
+                            <p>As 2 is the smallest ratio, x<sub>4</sub> is the outgoing variable, and x<sub>1</sub>
+                                will replace x<sub>4</sub> in the basis.</p>
                         </li>
 
                         <li>Now, we pivot on the key element (5 in the x1 column, row 2). After performing row
                             operations, the updated tableau looks like this:
                             <pre>
-            <code>
+                                <code>
            | Cj  |   5  |   3  |   0  |   0  |
   CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |
 ----------------------------------------------
   0  | x3  |   9 |  0   | 19/5 |  1   | -3/5 | (Row 1)
   5  | x1  |   2 |  1   |  2/5 |  0   |  1/5 | (Row 2)
 ----------------------------------------------
-            </code>
-        </pre>
+                                </code>
+                            </pre>
                             Row 2 was divided by 5, and row 1 was updated using row 1 - 3 * (new row 2).
                         </li>
 
