@@ -796,7 +796,7 @@
                             <pre>
             <code>
            | Cj  |   5  |   3  |   0  |   0  |
-  CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  |
+  CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  |
 ----------------------------------------------
   0  | x3  |  15 |  3   |  5   |  1   |  0   |
   0  | x4  |  10 |  5   |  2   |  0   |  1   |
@@ -812,54 +812,64 @@
                             </ul>
                         </li>
 
-                        <li>Next, we perform the Simplex iteration. We want to bring x<sub>1</sub> and x<sub>2</sub>
-                            into the basis:
+                        <li>Next, we perform the Simplex iteration. We want to bring x1 and x2 into the basis:
                             <pre>
-                                <code>
-           | Cj  |   5  |   3  |   0  |   0  |
-  CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  |
+        <code>
+          | Cj  |   5  |   3  |   0  |   0  |
+ CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  |
 ----------------------------------------------
-  0  | x3  |  15 |  3   |  5   |  1   |  0   | (Row 1)
-  0  | x4  |  10 |  5   |  2   |  0   |  1   | (Row 2)
+ 0  | x3  |  15 |  3   |  5   |  1   |  0   | (Row 1)
+ 0  | x4  |  10 |  5   |  2   |  0   |  1   | (Row 2)
 ----------------------------------------------
-       Zj  |     |  0   |  0   |  0   |  0   |
-       Cj  |     |  5   |  3   |  0   |  0   |
-  Zj - Cj  |     | -5   | -3   |  0   |  0   |
-                                </code>
-                            </pre>
+      Zj  |     |  0   |  0   |  0   |  0   |
+      Cj  |     |  5   |  3   |  0   |  0   |
+ Zj - Cj  |     | -5   | -3   |  0   |  0   |
+        </code>
+    </pre>
 
-                            <p>Here, the Z<sub>j</sub> row represents the total cost coefficients for each variable in
-                                the objective function. It is calculated using the universal formula:</p>
-                            <p><strong>Z<sub>j</sub> = CB * B</strong></p>
+                            <p>
+                                To calculate <strong>Zj</strong>, we use the formula <strong>Zj = CB × B</strong>,
+                                where:
                             <ul>
-                                <li><strong>CB</strong> is the cost coefficient of the basic variables.</li>
-                                <li><strong>B</strong> represents the matrix of basic variables' coefficients
-                                    corresponding to the current solution.</li>
-                                <li>This formula is used to calculate the values of Z<sub>j</sub> for each non-basic
-                                    variable, which gives the total cost of introducing each variable into the solution.
-                                </li>
+                                <li><strong>CB</strong> is the cost coefficient of the basic variables in the basis
+                                    (here, x3 and x4).</li>
+                                <li><strong>B</strong> is the column for the variable we are calculating
+                                    <strong>Zj</strong> for.</li>
                             </ul>
-                            <p>The Z<sub>j</sub> - C<sub>j</sub> row shows the difference between the calculated
-                                Z<sub>j</sub> and the actual cost coefficient (C<sub>j</sub>). The most negative value,
-                                -5 (in the x<sub>1</sub> column), indicates that x<sub>1</sub> should enter the basis.
+                            For example, for the x1 column:
+                            <br>
+                            <strong>Zj(x1) = (CB(row1) × B(row1,x1)) + (CB(row2) × B(row2,x1))</strong><br>
+                            Substituting the values:
+                            <br>
+                            <strong>Zj(x1) = (0 × 3) + (0 × 5) = 0</strong>
+                            <br>
+                            Similarly, <strong>Zj</strong> for x2, x3, and x4 will be calculated. In this iteration,
+                            since all the current
+                            basic variables (x3 and x4) have cost coefficients of 0, all Zj values will be 0.
                             </p>
 
-                            <p>To decide which variable to remove from the basis (x<sub>3</sub> or x<sub>4</sub>), we
-                                compute the minimum ratio of b values and the coefficients in the x<sub>1</sub> column:
-                            </p>
+                            <p>After calculating Zj, we compute <strong>Zj - Cj</strong>, which shows the difference
+                                between the calculated and actual costs.
+                                The most negative value, -5 (in the x1 column), indicates that x1 should enter the
+                                basis.</p>
+
+                            <p>To decide which variable to remove from the basis (x3 or x4), we compute the minimum
+                                ratio of b values and the
+                                coefficients in the x1 column:</p>
                             <pre>
-                                <code>
-           | Cj  |   5  |   3  |   0  |   0  |
-  CB | Xb  |  B  |  x1  |  x2  |  x3  |  x4  | min ratio
+        <code>
+         | Cj  |   5  |   3  |   0  |   0  |
+CB | Xb  |  b  |  x1  |  x2  |  x3  |  x4  | min ratio
 --------------------------------------------------------
-  0  | x3  |  15 |  3   |  5   |  1   |  0   | 15/3 = 5
-  0  | x4  |  10 |  5   |  2   |  0   |  1   | 10/5 = 2 → smallest ratio
-                                </code>
-                            </pre>
+ 0  | x3  |  15 |  3   |  5   |  1   |  0   | 15/3 = 5
+ 0  | x4  |  10 |  5   |  2   |  0   |  1   | 10/5 = 2 → smallest ratio
+        </code>
+    </pre>
 
-                            <p>As 2 is the smallest ratio, x<sub>4</sub> is the outgoing variable, and x<sub>1</sub>
-                                will replace x<sub>4</sub> in the basis.</p>
+                            <p>As 2 is the smallest ratio, x4 is the outgoing variable, and x1 will replace x4 in the
+                                basis.</p>
                         </li>
+
 
                         <li>Now, we pivot on the key element (5 in the x1 column, row 2). After performing row
                             operations, the updated tableau looks like this:
