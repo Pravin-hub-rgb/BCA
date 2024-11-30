@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite Database</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="../unit5/index.html" class="link">Next Topic &rarr;</a>
+                <a href="../unit3/index.html" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>SQLite Database</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>SQLite Database</h1>
+        <div class="wh">
+            <h2>Introduction to SQLite Database</h2>
+            <p>SQLite is a lightweight, self-contained, and serverless database engine widely used in Android
+                development. It is an open-source database that stores data in a single file, making it an excellent
+                choice for mobile applications requiring local data storage.</p>
+            <p><strong>Key Features of SQLite:</strong></p>
+            <ul>
+                <li><strong>Serverless:</strong> SQLite does not require a separate server process to operate; it reads
+                    and writes directly to a database file on disk.</li>
+                <li><strong>Zero Configuration:</strong> No configuration or installation is needed to use SQLite in an
+                    application.</li>
+                <li><strong>Lightweight:</strong> Its small size and minimal resource requirements make it ideal for
+                    embedded systems and mobile devices.</li>
+                <li><strong>SQL Support:</strong> SQLite supports most of the SQL standards, allowing developers to
+                    perform complex queries and database operations.</li>
+                <li><strong>ACID Compliance:</strong> It ensures data integrity by supporting Atomicity, Consistency,
+                    Isolation, and Durability (ACID) principles.</li>
+            </ul>
+            <p><strong>Advantages of Using SQLite in Android:</strong></p>
+            <ul>
+                <li><strong>Easy Integration:</strong> SQLite is built into Android, so no external libraries are
+                    required.</li>
+                <li><strong>Offline Capability:</strong> Applications can store and retrieve data locally, enabling
+                    offline functionality.</li>
+                <li><strong>Scalable:</strong> Suitable for applications with moderate data storage requirements.</li>
+                <li><strong>No Administration:</strong> SQLite databases do not require maintenance or administration.
+                </li>
+            </ul>
+            <p><strong>Usage in Android Development:</strong></p>
+            <ul>
+                <li>SQLite databases are used to store structured data locally, such as user information, app settings,
+                    or cached data.</li>
+                <li>Android provides the <code>SQLiteOpenHelper</code> class to manage database creation and versioning.
+                </li>
+                <li>Database operations such as <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, and
+                    <code>SELECT</code> are performed using standard SQL commands.
+                </li>
+                <li>SQLite databases in Android are stored in the app's private storage, ensuring data security.</li>
+            </ul>
+            <p><strong>Common Use Cases:</strong></p>
+            <ul>
+                <li>Storing user preferences and settings.</li>
+                <li>Caching data for offline use.</li>
+                <li>Maintaining user-generated content, such as notes or tasks.</li>
+                <li>Local analytics or logging.</li>
+            </ul>
+            <h2>SQLiteOpenHelper Class</h2>
+            <p>The <strong>SQLiteOpenHelper</strong> class in Android provides a simplified way to manage database
+                creation, version management, and common database operations. It is an abstract class that you need to
+                extend to implement its functionality.</p>
+            <p><strong>Purpose of SQLiteOpenHelper:</strong></p>
+            <ul>
+                <li>To handle the creation of a new database.</li>
+                <li>To manage database version upgrades or downgrades.</li>
+                <li>To provide reusable methods for common database operations like opening or closing the database.
+                </li>
+            </ul>
+            <p><strong>Key Methods of SQLiteOpenHelper:</strong></p>
+            <ul>
+                <li><strong>onCreate(SQLiteDatabase db):</strong> This method is called when the database is first
+                    created. You define the schema (tables and columns) here.</li>
+                <li><strong>onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion):</strong> This method is called
+                    when the database needs to be upgraded, such as when the version number is incremented. You can
+                    modify the schema or handle migrations here.</li>
+                <li><strong>getWritableDatabase():</strong> Opens the database in read-write mode. You can use this to
+                    insert, update, or delete data.</li>
+                <li><strong>getReadableDatabase():</strong> Opens the database in read-only mode. You can use this to
+                    fetch data.</li>
+            </ul>
+            <p><strong>Advantages of SQLiteOpenHelper:</strong></p>
+            <ul>
+                <li>Simplifies database creation and version management.</li>
+                <li>Provides a structured way to handle database upgrades and downgrades.</li>
+                <li>Encapsulates common database operations for better code organization.</li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Querying a database: Inserting, searching, updating and deleting a record.</h2>
+            <div class="in">
+                <h3>Establishing Connection to SQLite Database</h3>
+                <ul>
+                    <li>When you're using SQLite in an Android app, the first thing you need is a connection to the
+                        database. This is where the <code>SQLiteOpenHelper</code> class comes into play. You don’t need
+                        to worry about manually opening or closing the database in most cases —
+                        <code>SQLiteOpenHelper</code> takes care of it for you.
+                    </li>
+                    <li>We create a separate file for the database helper class. In your project structure, navigate to
+                        <code>app > java > com.example.yourapplicationname</code>. Right-click and create a new Java
+                        class. Name it <code>DBHelper</code>, and extend <code>SQLiteOpenHelper</code> to manage the
+                        database.
+                    </li>
+                    <li>The <code>DBHelper</code> class contains three main functions: a constructor,
+                        <code>onCreate()</code>, and <code>onUpgrade()</code>.
+                    </li>
+                </ul>
+
+                <p><strong>Creating the Database Helper Class:</strong></p>
+                <div class="code">
+                    <pre>
+                        <code>
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    // Database name and version
+    private static final String DB_NAME = "stuDB.db"; // Name of the database file
+    private static final int DB_VERSION = 1; // Version number (start with 1)
+
+    // Constructor
+    public DBHelper(Context context) {
+        // Calls the parent constructor with database name, cursor factory, and version
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // This method is called when the database is created for the first time
+        // We will create the tables here
+
+        String createTableQuery = "CREATE TABLE stuData (" +
+                "stuID INTEGER PRIMARY KEY, " +  // Column for student ID
+                "stuName TEXT)";  // Column for student name
+
+        db.execSQL(createTableQuery);  // Execute the SQL query to create the table
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // This method is called when the database needs to be upgraded
+        // For now, we can leave it empty if we don't need upgrades
+        db.execSQL("DROP TABLE IF EXISTS stuData");  // Drop the existing table
+        onCreate(db);  // Recreate the table
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+
+                <p><strong>Code Breakdown:</strong></p>
+                <ol>
+                    <li><strong>Class Declaration:</strong>
+                        <p><code>public class DBHelper extends SQLiteOpenHelper</code></p>
+                        <p>The <code>DBHelper</code> class extends <code>SQLiteOpenHelper</code> to gain access to
+                            SQLite database functionality. <code>SQLiteOpenHelper</code> is a built-in class in Android
+                            that simplifies working with SQLite databases.</p>
+                    </li>
+
+                    <li><strong>Constructor:</strong>
+                        <p><code>public DBHelper(Context context)</code></p>
+                        <p>The constructor of <code>DBHelper</code> calls the <code>super()</code> method, which is from
+                            the <code>SQLiteOpenHelper</code> class. The constructor of <code>SQLiteOpenHelper</code>
+                            takes four parameters:</p>
+                        <ul>
+                            <li><strong>Context context:</strong> This is an Android component that provides access to
+                                system services like resources, files, or databases. It's passed to the superclass so
+                                that it can interact with the system’s resources, especially for database creation. In
+                                this case, <code>context</code> is typically the activity or application that calls the
+                                constructor (e.g., <code>MainActivity.this</code>).</li>
+                            <li><strong>String name (DB_NAME):</strong> This is the name of the database file. In this
+                                example, the database file will be named <code>stuDB.db</code>.</li>
+                            <li><strong>CursorFactory factory (null):</strong> This is typically set to null unless you
+                                need a custom cursor factory. A cursor factory is used to create cursors when querying
+                                the database. In most cases, passing null is sufficient.</li>
+                            <li><strong>int version (DB_VERSION):</strong> This is the version number of the database.
+                                Each time you change the database schema, you must increment the version number. In this
+                                case, it's set to 1, indicating the first version of the database.</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>onCreate(SQLiteDatabase db):</strong>
+                        <p>This method is called once when the database is created for the first time. Here, we create
+                            the <code>stuData</code> table with two columns:</p>
+                        <ul>
+                            <li><code>stuID</code> (integer, serves as the primary key)</li>
+                            <li><code>stuName</code> (text)</li>
+                        </ul>
+                        <p><code>db.execSQL(createTableQuery);</code> executes the SQL query to create the table.</p>
+                    </li>
+
+                    <li><strong>onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion):</strong>
+                        <p>This method is called when the database version is upgraded. For now, it drops the old table
+                            and recreates it by calling <code>onCreate(db)</code> again.</p>
+                        <ul>
+                            <li><code>db.execSQL("DROP TABLE IF EXISTS stuData");</code> drops the existing
+                                <code>stuData</code> table if it exists.
+                            </li>
+                            <li><code>onCreate(db);</code> recreates the table.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Using the DBHelper in our MainActivity</strong></p>
+                <ul>
+                    <li>Once the DBHelper class is set up, we need to create an instance of DBHelper in the activity
+                        (like MainActivity). This will automatically connect to the database when the app runs.</li>
+                </ul>
+                <div class="code">
+                    <pre>
+                        <code>
+import android.os.Bundle;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare an instance of the DBHelper class
+    DBHelper myDB;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Create a new instance of DBHelper
+        myDB = new DBHelper(this);  // 'this' refers to the current context (MainActivity)
+
+        // To check if the database is created successfully, show a message
+        Toast.makeText(this, "Database Connected", Toast.LENGTH_SHORT).show();
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="in">
+                    <h3>Working with SQL Queries in SQLite</h3>
+                    <p>SQL (Structured Query Language) is used to interact with databases. In Android's SQLite, you use SQL queries to perform various operations such as inserting, updating, selecting, and deleting data. Below are the key concepts and steps involved in working with SQL queries in SQLite:</p>
+                
+                    <p><strong>1. Executing SQL Queries</strong></p>
+                    <p>SQLiteDatabase provides methods like <code>execSQL()</code>, <code>rawQuery()</code>, and <code>insert()</code> to execute SQL statements. These methods allow you to perform different actions on the database:</p>
+                    <ul>
+                        <li><strong>execSQL():</strong> Used to execute SQL statements that don't return data, such as creating a table, inserting data, or updating/deleting records. Example: <code>db.execSQL("CREATE TABLE...")</code>.</li>
+                        <li><strong>rawQuery():</strong> Used for SELECT queries that return data. It returns a <code>Cursor</code> object, which you can loop through to get the result. Example: <code>Cursor cursor = db.rawQuery("SELECT * FROM table", null)</code>.</li>
+                        <li><strong>insert():</strong> Used for inserting data into a table. This method returns the row ID of the newly inserted record. Example: <code>db.insert("table", null, contentValues)</code>.</li>
+                    </ul>
+                
+                    <p><strong>2. Insert Data</strong></p>
+                    <p>To insert data into a table, you use the <code>insert()</code> method. This method inserts values into the specified columns in the table. The syntax is as follows:</p>
+                    <pre>
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put("column_name", value);
+                        long result = db.insert("table_name", null, contentValues);
+                    </pre>
+                    <p>The <code>insert()</code> method takes three parameters:
+                        <ul>
+                            <li><strong>table_name:</strong> The name of the table where the data will be inserted.</li>
+                            <li><strong>nullColumnHack:</strong> Usually set to <code>null</code>, it’s a safety mechanism for inserting data into empty tables.</li>
+                            <li><strong>contentValues:</strong> A <code>ContentValues</code> object that stores the column names and values you want to insert.</li>
+                        </ul>
+                    </p>
+                
+                    <p><strong>3. Query Data</strong></p>
+                    <p>To retrieve data from a table, you use the <code>rawQuery()</code> method. It executes a SELECT SQL statement and returns a <code>Cursor</code> object containing the result set. Here’s how you use it:</p>
+                    <pre>
+                        Cursor cursor = db.rawQuery("SELECT * FROM table_name", null);
+                    </pre>
+                    <p>The <code>rawQuery()</code> method takes two parameters:
+                        <ul>
+                            <li><strong>SQL Query:</strong> The SQL SELECT statement to fetch data from the table.</li>
+                            <li><strong>SelectionArgs:</strong> Optional parameters used for query filtering (e.g., where clause arguments).</li>
+                        </ul>
+                    </p>
+                
+                    <p>The <code>Cursor</code> object allows you to iterate over the result set. You can move through the rows using methods like <code>moveToNext()</code> and retrieve column data using methods like <code>getString()</code>, <code>getInt()</code>, etc. Example:</p>
+                    <pre>
+                        while (cursor.moveToNext()) {
+                            String data = cursor.getString(cursor.getColumnIndex("column_name"));
+                        }
+                    </pre>
+                
+                    <p><strong>4. Update Data</strong></p>
+                    <p>To modify existing data, you use the <code>update()</code> method. It takes the table name, the <code>ContentValues</code> object with the new values, and a WHERE clause to specify which records to update. Example:</p>
+                    <pre>
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put("column_name", new_value);
+                        db.update("table_name", contentValues, "column_name = ?", new String[]{old_value});
+                    </pre>
+                
+                    <p><strong>5. Delete Data</strong></p>
+                    <p>To delete data from a table, you use the <code>delete()</code> method. It requires the table name, a WHERE clause to specify which records to delete, and optional arguments. Example:</p>
+                    <pre>
+                        db.delete("table_name", "column_name = ?", new String[]{value_to_delete});
+                    </pre>
+                
+                    <p><strong>6. Best Practices</strong></p>
+                    <ul>
+                        <li>Always close the <code>Cursor</code> object after using it to free up resources.</li>
+                        <li>Use parameterized queries (i.e., with <code>rawQuery()</code>) to prevent SQL injection vulnerabilities.</li>
+                        <li>Use <code>ContentValues</code> to insert or update data rather than manually concatenating values into the SQL statement.</li>
+                    </ul>
+            </div>
+            <div class="in">
+                <h3>Inserting and Displaying data</h3>
+                <div class="in">
+                    <h3>Understanding Key Concepts for Database Operations</h3>
+                    
+                    <h3>1. ContentValues</h3>
+                    <p>The <strong>ContentValues</strong> class in Android is used to store key-value pairs where:</p>
+                    <ul>
+                        <li>The <strong>key</strong> represents the column name in the database table.</li>
+                        <li>The <strong>value</strong> is the data to be stored in that column.</li>
+                    </ul>
+                    <p>ContentValues are primarily used when inserting or updating data in the database.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre>
+                        <code>
+ContentValues cv = new ContentValues();
+cv.put("columnName", value);
+                        </code>
+                    </pre>
+                    <p><strong>Example:</strong> Storing a student ID and name:</p>
+                    <pre>
+                        <code>
+ContentValues cv = new ContentValues();
+cv.put("stuID", 1001);
+cv.put("stuName", "John Doe");
+                        </code>
+                    </pre>
+                    <p>The <code>cv</code> object can now be passed to database methods like <code>insert()</code> or <code>update()</code>.</p>
+                
+                    <h3>2. SQLiteDatabase</h3>
+                    <p>The <strong>SQLiteDatabase</strong> class provides methods to perform operations like reading, writing, and executing SQL commands on the database.</p>
+                    <p><strong>Key Methods:</strong></p>
+                    <ul>
+                        <li><code>getWritableDatabase()</code>: Opens the database in write mode, allowing data modification operations.</li>
+                        <li><code>getReadableDatabase()</code>: Opens the database in read-only mode, useful for fetching data without modifying it.</li>
+                        <li><code>insert(String table, String nullColumnHack, ContentValues values)</code>: Inserts data into a specified table.</li>
+                        <li><code>rawQuery(String sql, String[] selectionArgs)</code>: Executes a raw SQL SELECT query.</li>
+                    </ul>
+                
+                    <h3>3. Inserting Data</h3>
+                    <p>To insert data into a database table, use the <code>insert()</code> method. It requires:</p>
+                    <ul>
+                        <li><strong>table:</strong> The name of the table where data will be inserted.</li>
+                        <li><strong>nullColumnHack:</strong> A column that can be explicitly set to <code>NULL</code> if the ContentValues are empty (usually <code>null</code> is passed).</li>
+                        <li><strong>values:</strong> The <code>ContentValues</code> object containing the data to insert.</li>
+                    </ul>
+                    <p><strong>Syntax:</strong></p>
+                    <pre>
+                        <code>
+long result = db.insert("tableName", null, contentValues);
+                        </code>
+                    </pre>
+                    <p><strong>Example:</strong></p>
+                    <pre>
+                        <code>
+ContentValues cv = new ContentValues();
+cv.put("stuID", 1002);
+cv.put("stuName", "Jane Smith");
+
+long result = db.insert("stuData", null, cv);
+if (result == -1) {
+    // Insertion failed
+} else {
+    // Insertion successful
+}
+                        </code>
+                    </pre>
+                
+                    <h3>4. Cursor</h3>
+                    <p>The <strong>Cursor</strong> class allows access to the results of a database query. It provides methods to navigate and retrieve data.</p>
+                    <p><strong>Key Methods:</strong></p>
+                    <ul>
+                        <li><code>moveToNext()</code>: Moves to the next row of the result set.</li>
+                        <li><code>getCount()</code>: Returns the number of rows in the result set.</li>
+                        <li><code>getString(int columnIndex)</code>: Retrieves the value of the specified column as a string.</li>
+                    </ul>
+                    <p><strong>Example:</strong> Reading data from a Cursor:</p>
+                    <pre>
+                        <code>
+Cursor cursor = db.rawQuery("SELECT * FROM stuData", null);
+
+while (cursor.moveToNext()) {
+    int id = cursor.getInt(0); // Column 0: stuID
+    String name = cursor.getString(1); // Column 1: stuName
+}
+                        </code>
+                    </pre>
+                </div>
+                <div class="in">
+                    <h3>Demo Program of insertion and display</h3>
+                    <p>There are two buttons with onClick set to insertData and display functions.</p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+
+public class MainActivity  extends AppCompatActivity {
+    DBHelper myDB;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        myDB = new DBHelper(MainActivity.this);
+
+    }
+
+    public void insertData(View view){
+        int ID = 212345;
+        String name = "Preeti";
+        boolean myb = myDB.insertStuDetail(ID, name);
+
+        if (myb){
+            Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void display(View view){
+        Cursor cursor = myDB.displayData();
+        if (cursor.getCount()==0){
+            Toast.makeText(this, "Data not Found", Toast.LENGTH_SHORT).show();
+        }else{
+            StringBuffer buffer = new StringBuffer();
+
+            while(cursor.moveToNext()){
+                buffer.append("STUDENT ID:" + cursor.getString(0) + "\n");
+                buffer.append("STUDENT NAME: "+ cursor.getString(1) + "\n\n");
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("FROM DATABASE");
+            builder.setMessage(buffer);
+            builder.show();
+        }
+    }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">DBHelper.aja</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+public class DBHelper extends SQLiteOpenHelper {
+    private static final String DB_NAME = "stuDB.db";
+    private static final int DB_VERSION = 1;
+    public DBHelper(@Nullable Context context) {
+        super(context, DB_NAME, null, DB_VERSION); //Database Creation
+        Toast.makeText(context, "DATABASE CREATED", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table stuData(stuID Integer primary key, stuName Text)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP table if exists stuData");
+        onCreate(db);
+    }
+
+    public boolean insertStuDetail(int id, String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("stuID", id);
+        cv.put("stuName", name);
+
+        long result = db.insert("stuData", null, cv);
+        if(result==-1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public Cursor displayData(){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from stuData", null);
+        return cursor;
+    }
+
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>+ Updation + Deletion</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    &lt;TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SQLite Database Operations"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    &lt;Button
+        android:id="@+id/insertButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Insert Data"
+        android:onClick="insertData"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    &lt;Button
+        android:id="@+id/displayButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Display Data"
+        android:onClick="displayData"
+        app:layout_constraintTop_toBottomOf="@id/insertButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    &lt;Button
+        android:id="@+id/updateButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Update Data"
+        android:onClick="updateData"
+        app:layout_constraintTop_toBottomOf="@id/displayButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    &lt;Button
+        android:id="@+id/deleteButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete Data"
+        android:onClick="deleteData"
+        app:layout_constraintTop_toBottomOf="@id/updateButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    DBHelper databaseHelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        databaseHelper = new DBHelper(MainActivity.this);
+    }
+
+    // Insert student data into the database
+    public void insertData(View view) {
+        int studentId = 1256;
+        String studentName = "Preeti";
+        boolean isInserted = databaseHelper.insertStudentDetails(studentId, studentName);
+
+        if (isInserted) {
+            Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Data Insertion Failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Display all student data from the database
+    public void displayData(View view) {
+        Cursor cursor = databaseHelper.getAllStudentData();
+
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
+        } else {
+            StringBuffer buffer = new StringBuffer();
+
+            while (cursor.moveToNext()) {
+                buffer.append("STUDENT ID: " + cursor.getString(0) + "\n");
+                buffer.append("STUDENT NAME: " + cursor.getString(1) + "\n\n");
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Student Data");
+            builder.setMessage(buffer.toString());
+            builder.show();
+        }
+    }
+
+    // Update student data based on ID
+    public void updateData(View view) {
+        int studentId = 4566;
+        String updatedName = "Seema";
+        boolean isUpdated = databaseHelper.updateStudentData(studentId, updatedName);
+
+        if (isUpdated) {
+            Toast.makeText(this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Data Update Failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Delete student data based on ID
+    public void deleteData(View view) {
+        int studentId = 1002;
+        boolean isDeleted = databaseHelper.deleteStudentData(studentId);
+
+        if (isDeleted) {
+            Toast.makeText(this, "Data Deleted Successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Data Deletion Failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">DBHelper.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+public class DBHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "stuDB.db";
+    private static final int DATABASE_VERSION = 1;
+
+    // Table and column constants
+    private static final String TABLE_NAME = "stuData";
+    private static final String COLUMN_ID = "stuID";
+    private static final String COLUMN_NAME = "stuName";
+
+    public DBHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Toast.makeText(context, "Database Created Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase database) {
+        String createTableQuery = "CREATE TABLE " + TABLE_NAME + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                COLUMN_NAME + " TEXT)";
+        database.execSQL(createTableQuery);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+        String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        database.execSQL(dropTableQuery);
+        onCreate(database);
+    }
+
+    // Insert student details into the database
+    public boolean insertStudentDetails(int studentId, String studentName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_ID, studentId);
+        contentValues.put(COLUMN_NAME, studentName);
+
+        // If the insert is successful, it will return true
+        long insertionResult = database.insert(TABLE_NAME, null, contentValues);
+        return insertionResult > 0; // Return true if the row was inserted
+    }
+
+    // Retrieve all student data from the database
+    public Cursor getAllStudentData() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
+
+    // Update student details in the database
+    public boolean updateStudentData(int studentId, String studentName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME, studentName);
+
+        // Check if the student exists
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_ID + " = " + studentId, null);
+
+        if (cursor.getCount() > 0) {
+            // If the student exists, update the data
+            int updateResult = database.update(TABLE_NAME, contentValues,
+                    COLUMN_ID + " = ?", new String[]{String.valueOf(studentId)});
+            return updateResult > 0; // Return true if update is successful
+        } else {
+            return false; // Return false if student doesn't exist
+        }
+    }
+
+    // Delete student data from the database
+    public boolean deleteStudentData(int studentId) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Check if the student exists
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_ID + " = " + studentId, null);
+
+        if (cursor.getCount() > 0) {
+            // If the student exists, delete the data
+            int deleteResult = database.delete(TABLE_NAME,
+                    COLUMN_ID + " = ?", new String[]{String.valueOf(studentId)});
+            return deleteResult > 0; // Return true if deletion is successful
+        } else {
+            return false; // Return false if student doesn't exist
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

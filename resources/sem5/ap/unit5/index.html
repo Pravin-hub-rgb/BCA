@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#t1" class="link">SMS</a>
+            <a href="#t2" class="link">Sensors</a>
+            <div class="botbut">
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 5</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <div id="t1" class="wh">
+            <h2>Introduction to SMS in Android</h2>
+            <ul>
+                <li>
+                    SMS (Short Message Service) is a widely used feature in mobile devices, enabling the sending and
+                    receiving of text messages.
+                    In Android, the SmsManager class provides the functionality to send SMS programmatically from your
+                    application.
+                </li>
+                <li>
+                    Since SMS is a sensitive operation (it can lead to unwanted costs or spam), Android enforces strict
+                    permission checks
+                    to ensure that users have explicitly allowed apps to use SMS functionality.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Permission Model in Android</h3>
+                <p>Android permissions can be divided into two categories:</p>
+                <ul>
+                    <li>
+                        <strong>Static Permissions:</strong> These are defined in the
+                        <strong>AndroidManifest.xml</strong>
+                        file.
+                        They inform the system about the permissions your app requires. For example, to send SMS, the
+                        following permission must be added:
+                        <pre>
+<code>
+&lt;uses-permission android:name="android.permission.SEND_SMS" /&gt;
+</code>
+        </pre>
+                        <p>
+                            Adding this permission means your app declares its intention to send SMS. This permission
+                            will
+                            be checked when the app is installed.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Dynamic Permissions:</strong> Introduced in Android 6.0 (API level 23) and above, these
+                        require you to ask for the user's
+                        consent at runtime for sensitive permissions like SMS. This ensures that users are aware of what
+                        the
+                        app is doing and gives them control over whether to allow it or not.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+
+                <h3>Steps for Implementing SMS in Android</h3>
+                <p>To implement SMS functionality in Android, the following steps are required:</p>
+                <ul>
+                    <li>Add the static permission <strong>android.permission.SEND_SMS</strong> in the
+                        <strong>AndroidManifest.xml</strong> file.
+                    </li>
+                    <li>Check dynamically at runtime if the <strong>SEND_SMS</strong> permission is granted using the
+                        method
+                        <strong>checkSelfPermission</strong>.
+                    </li>
+                    <li>Request the permission dynamically using <strong>requestPermissions</strong> if it hasn't been
+                        granted.</li>
+                    <li>Use the <strong>SmsManager</strong> class to send the SMS programmatically once the permission
+                        is
+                        granted.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Complete Example Program</h3>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.mybcaapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    // Method to handle SMS sending
+    public void sendSMS(View view) {
+        // Check if the SEND_SMS permission is granted
+        if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            sendMySMS();
+        } else {
+            // Request the SEND_SMS permission
+            requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1);
+        }
+    }
+
+    // Method to send SMS
+    public void sendMySMS() {
+        String number = "xxxxxxxx89"; // Recipient's phone number
+        String message = "Hello from Android"; // SMS content
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, message, null, null);
+
+            Toast.makeText(this, "SMS sent", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "SMS not Sent", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+                        </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"&gt;
+
+    &lt;Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send SMS"
+        android:onClick="sendSMS"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" /&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">AndroidManifest.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mybcaapplication"&gt;
+
+    &lt;uses-permission android:name="android.permission.SEND_SMS" /&gt;
+
+    &lt;application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyBCAApplication"&gt;
+
+        &lt;activity android:name=".MainActivity"&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.MAIN" /&gt;
+                &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="in">
+                <h3>Explanation of Key Functions and Classes</h3>
+                <ul>
+                    <li>
+                        <strong>SmsManager:</strong>
+                        This is the main class used to send SMS messages. It provides methods to send text messages or
+                        even
+                        multimedia messages.
+                    </li>
+                    <li>
+                        <strong>checkSelfPermission(String permission):</strong>
+                        This method checks if a specific permission has been granted. It takes a permission string, such
+                        as
+                        <strong>Manifest.permission.SEND_SMS</strong>, and returns:
+                        <ul>
+                            <li><strong>PackageManager.PERMISSION_GRANTED:</strong> If the permission is granted.</li>
+                            <li><strong>PackageManager.PERMISSION_DENIED:</strong> If the permission is denied.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>requestPermissions(String[] permissions, int requestCode):</strong>
+                        This method requests permissions at runtime. It displays a system dialog to the user asking for
+                        consent. Parameters include:
+                        <ul>
+                            <li><strong>permissions:</strong> An array of permissions (e.g.,
+                                {Manifest.permission.SEND_SMS}).</li>
+                            <li><strong>requestCode:</strong> A unique code to identify the permission request.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>sendTextMessage:</strong>
+                        This is the main method of SmsManager for sending SMS. Key parameters:
+                        <ul>
+                            <li><strong>Destination Address:</strong> Recipient's phone number.</li>
+                            <li><strong>SC Address:</strong> Service center address (can be null to use the default).
+                            </li>
+                            <li><strong>Text:</strong> The SMS content.</li>
+                            <li><strong>SentIntent:</strong> Pending intent triggered when the SMS is sent (can be
+                                null).
+                            </li>
+                            <li><strong>DeliveryIntent:</strong> Pending intent triggered when the SMS is delivered (can
+                                be
+                                null).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh" id="t2">
+            <h2>Introduction to Sensor Devices</h2>
+
+            <div class="in">
+                <h3>What is a Sensor?</h3>
+                <p>
+                    A sensor is a device that detects or measures a physical quantity and converts it into a signal that
+                    can
+                    be understood by a machine or a system.
+                    In simpler terms, sensors act as the senses of machines, helping them to perceive the environment
+                    just
+                    as humans do with their eyes, ears, and other senses.
+                    For example, a temperature sensor can measure heat, and a light sensor can detect brightness.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>How Do Sensors Work?</h3>
+                <p>
+                    Sensors operate in several steps, converting physical phenomena into useful information:
+                </p>
+                <ol>
+                    <li>
+                        <strong>Physical Phenomenon:</strong> The sensor interacts with a physical quantity such as
+                        temperature, light, pressure, or motion.
+                        <br>Example: A thermometer interacts with heat to measure temperature.
+                    </li>
+                    <li>
+                        <strong>Transduction:</strong> The sensor converts the detected physical quantity into an
+                        electrical
+                        signal. This is the core functionality of any sensor.
+                        <br>Example: A photoresistor changes its resistance based on the intensity of light.
+                    </li>
+                    <li>
+                        <strong>Signal Processing:</strong> The raw electrical signal is processed to remove noise or
+                        enhance the desired information for better accuracy.
+                        <br>Example: A temperature sensor may have a circuit to smooth fluctuations in readings caused
+                        by
+                        sudden environmental changes.
+                    </li>
+                    <li>
+                        <strong>Output:</strong> The processed signal is either displayed, stored, or used to control a
+                        system or trigger an event.
+                        <br>Example: A pressure sensor in a car's tires might display the pressure on a screen or
+                        trigger an
+                        alarm if the pressure is too low.
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Types of Sensors</h3>
+                <p>Sensors come in many types, each designed to detect specific physical phenomena. Below are some
+                    commonly
+                    used types:</p>
+
+                <h4>1. Temperature Sensors</h4>
+                <p>These sensors measure temperature. Common types include:</p>
+                <ul>
+                    <li>
+                        <strong>Thermistors:</strong> Change resistance based on temperature.
+                        <br>Example: Used in thermostats to regulate room temperature.
+                    </li>
+                    <li>
+                        <strong>Thermocouples:</strong> Generate a small voltage when there is a temperature difference
+                        between two points.
+                        <br>Example: Commonly used in industrial machinery to monitor high temperatures.
+                    </li>
+                    <li>
+                        <strong>RTDs (Resistance Temperature Detectors):</strong> Their resistance changes linearly with
+                        temperature, offering accurate readings.
+                        <br>Example: Used in laboratories for precise temperature measurement.
+                    </li>
+                </ul>
+
+                <h4>2. Light Sensors</h4>
+                <p>These sensors detect light intensity. Types include:</p>
+                <ul>
+                    <li>
+                        <strong>Photoresistors:</strong> Change resistance with light intensity.
+                        <br>Example: Used in streetlights that turn on automatically at night.
+                    </li>
+                    <li>
+                        <strong>Photodiodes:</strong> Convert light into electrical current.
+                        <br>Example: Found in solar panels to generate electricity from sunlight.
+                    </li>
+                    <li>
+                        <strong>Phototransistors:</strong> Amplify the electrical current generated by light.
+                        <br>Example: Used in devices like TV remotes and light-sensitive alarms.
+                    </li>
+                </ul>
+
+                <h4>3. Pressure Sensors</h4>
+                <p>These sensors measure pressure and are often found in industrial and automotive applications. Types
+                    include:</p>
+                <ul>
+                    <li>
+                        <strong>Piezoresistive Sensors:</strong> Change resistance with applied pressure.
+                        <br>Example: Used in digital weighing scales.
+                    </li>
+                    <li>
+                        <strong>Capacitive Sensors:</strong> Measure pressure by detecting changes in capacitance.
+                        <br>Example: Used in touch-sensitive elevator buttons.
+                    </li>
+                    <li>
+                        <strong>Strain Gauge Sensors:</strong> Change resistance when strained.
+                        <br>Example: Used in bridges to monitor structural integrity.
+                    </li>
+                </ul>
+
+                <h4>4. Motion Sensors</h4>
+                <p>These sensors detect motion or movement. Examples include:</p>
+                <ul>
+                    <li>
+                        <strong>Accelerometers:</strong> Measure acceleration in various axes.
+                        <br>Example: Found in smartphones to enable screen rotation when the phone is tilted.
+                    </li>
+                    <li>
+                        <strong>Gyroscopes:</strong> Measure angular velocity or orientation.
+                        <br>Example: Used in drones to stabilize flight.
+                    </li>
+                    <li>
+                        <strong>Magnetometers:</strong> Detect magnetic fields.
+                        <br>Example: Found in digital compasses in smartphones.
+                    </li>
+                </ul>
+
+                <h4>5. Chemical Sensors</h4>
+                <p>These sensors detect chemical properties. Types include:</p>
+                <ul>
+                    <li>
+                        <strong>Gas Sensors:</strong> Detect the presence of specific gases.
+                        <br>Example: Carbon monoxide detectors in homes for safety.
+                    </li>
+                    <li>
+                        <strong>pH Sensors:</strong> Measure the acidity or alkalinity of a solution.
+                        <br>Example: Used in agriculture to test soil quality.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Applications of Sensors</h3>
+                <p>
+                    Sensors play a vital role in various fields, and their applications are nearly endless. Here are
+                    some
+                    common uses:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Smartphones:</strong> Sensors like accelerometers, gyroscopes, and proximity sensors
+                        enable
+                        features such as auto-rotation, gesture control, and adaptive brightness.
+                        <br>Example: Your phone screen turns off automatically when you hold it near your ear during a
+                        call
+                        (proximity sensor).
+                    </li>
+                    <li>
+                        <strong>Automotive Industry:</strong> Sensors improve safety and performance, such as airbag
+                        systems, tire pressure monitoring, and anti-lock brakes.
+                        <br>Example: A rear-view camera sensor assists in parking by detecting obstacles.
+                    </li>
+                    <li>
+                        <strong>Healthcare:</strong> Medical devices use sensors to monitor vital signs like heart rate,
+                        blood pressure, and glucose levels.
+                        <br>Example: Fitness trackers use motion sensors to count steps and monitor activity.
+                    </li>
+                    <li>
+                        <strong>Industrial Automation:</strong> Sensors control machinery and monitor manufacturing
+                        processes for quality and efficiency.
+                        <br>Example: Assembly lines use temperature and pressure sensors to maintain product standards.
+                    </li>
+                    <li>
+                        <strong>Home Automation:</strong> Sensors make homes smarter by enabling automatic lighting,
+                        climate
+                        control, and security systems.
+                        <br>Example: A motion sensor can turn lights on when you enter a room.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 3</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="wh">
+            <h2>Android Menu</h2>
+            <p>In Android, a menu is a collection of items that provide the user with specific actions. These actions
+                can be global, context-specific, or related to particular views or components within the application.
+                Menus help to organize the user interface and offer users ways to interact with the app's features
+                efficiently.</p>
+
+            <p><strong>Types of Android Menus:</strong></p>
+
+            <ol>
+                <li>
+                    <strong>Options Menu</strong>
+                    <p>The Options Menu is the primary menu that appears in the app's toolbar or action bar. It provides
+                        global actions such as "Settings", "Search", and other actions relevant throughout the app. It
+                        is accessed by tapping on the menu icon (three dots) in the toolbar.</p>
+                </li>
+
+                <li>
+                    <strong>Context Menu</strong>
+                    <p>The Context Menu appears when a user performs a long press on a specific view, such as a list
+                        item or button. It displays actions that are specific to the item being pressed, such as "Edit",
+                        "Delete", or "Share".</p>
+                </li>
+
+                <li>
+                    <strong>Overflow Menu</strong>
+                    <p>The Overflow Menu is part of the Options Menu and is accessed when there is not enough space in
+                        the toolbar to display all items. It is accessed by tapping the three vertical dots (overflow
+                        icon). This menu contains additional actions that can be accessed by the user when needed.</p>
+                </li>
+
+                <li>
+                    <strong>Popup Menu</strong>
+                    <p>The Popup Menu is a temporary menu that appears when a user interacts with a specific UI element,
+                        such as a button. It displays a list of items in a small window, providing context-specific
+                        actions related to that view or component.</p>
+                </li>
+            </ol>
+
+            <div class="in">
+                <h3>PopupMenu</h3>
+                <ul>
+                    <li>PopupMenu is a lightweight, easy-to-implement menu in Android that displays a small list of
+                        actions anchored to a particular view (like a Button).</li>
+                </ul>
+                <p><strong>Steps to Create a PopupMenu Demo Program:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Add a Button:</strong>
+                        <p>In <strong>activity_main.xml</strong>, add a Button that will act as the anchor point for the
+                            PopupMenu. Give it an ID and set its text to something like "Show Menu" for clarity.</p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+                            <code>
+&lt;Button
+    android:id="@+id/showMenuButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Show Menu" />
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <strong>Create the Menu Resource File:</strong>
+                        <p>The menu items to be displayed in the PopupMenu are defined in an XML file named
+                            <code>main_menu.xml</code>. Here’s how to create it:
+                        </p>
+                        <ol>
+                            <li>
+                                <strong>Create a Menu Folder:</strong>
+                                <ul>
+                                    <li>Right-click on the <strong>res</strong> folder.</li>
+                                    <li>Select <strong>New > Android Resource Directory</strong>.</li>
+                                    <li>Set the Resource Type to <strong>menu</strong>, and click OK.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Create a Menu File:</strong>
+                                <ul>
+                                    <li>Right-click on the newly created <strong>menu</strong> folder.</li>
+                                    <li>Select <strong>New > Menu Resource File</strong>.</li>
+                                    <li>Name it <strong>main_menu.xml</strong>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p>In the <strong>main_menu.xml</strong>, define the menu items:</p>
+                        <pre>
+                            <code>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;item
+        android:id="@+id/menu_item1"
+        android:title="Option 1" />
+    &lt;item
+        android:id="@+id/menu_item2"
+        android:title="Option 2" />
+&lt;/menu>
+                            </code>
+                        </pre>
+                        <p><strong>Why Use <code>main_menu.xml</code>?</strong></p>
+                        <ul>
+                            <li><strong>Separation of UI from Code:</strong> It keeps the UI structure separate from the
+                                logic, making it easier to update without modifying Java code.</li>
+                            <li><strong>Reusability:</strong> You can reuse the same menu file across multiple
+                                activities or fragments.</li>
+                            <li><strong>Customizability:</strong> Easily change icons, titles, or structure by editing
+                                the XML file, and the changes will automatically reflect in the UI.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Handle Button Click to Show the PopupMenu:</strong>
+                        <p>In the <code>MainActivity.java</code> file, write code to display the PopupMenu when the
+                            Button is clicked. This involves the following steps:</p>
+                        <ol>
+                            <li>
+                                <strong>Set an OnClickListener:</strong>
+                                <p>Use <strong>buttonObj.setOnClickListener()</strong> to detect clicks on the Button.
+                                    When
+                                    clicked, execute the code to display the PopupMenu.</p>
+                            </li>
+                            <li>
+                                <strong>Create a PopupMenu Object:</strong>
+                                <p>Use the <strong>PopupMenu</strong> constructor, passing two parameters:</p>
+                                <ul>
+                                    <li><strong>context</strong>: The activity where the menu is displayed (e.g.,
+                                        <strong>MainActivity.this</strong>).
+                                    </li>
+                                    <li><strong>anchor</strong>: The view to which the PopupMenu is attached (e.g., the
+                                        Button).</li>
+                                </ul>
+                                <p><strong>Example:</strong></p>
+                                <pre>
+                                    <code>
+PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
+                                    </code>
+                                </pre>
+                                <p>The <strong>anchor</strong> determines where the menu will appear (below or beside
+                                    the Button).
+                                </p>
+                            </li>
+                            <li>
+                                <strong>Inflate the Menu:</strong>
+                                <p>Use <strong>popupMenu.inflate()</strong> to load the menu structure from the XML
+                                    file:
+                                </p>
+                                <pre>
+                                    <code>
+popupMenu.inflate(R.menu.main_menu);
+                                    </code>
+                                </pre>
+                                <p>This links the menu resource file (<code>main_menu.xml</code>) to the PopupMenu.</p>
+                            </li>
+                            <li>
+                                <strong>Show the PopupMenu:</strong>
+                                <p>Call <code>popupMenu.show()</code> to display the menu:</p>
+                                <pre>
+                                    <code>
+popupMenu.show();
+        </code>
+                                </pre>
+                            </li>
+                            <li>
+                                <strong>Handle Menu Item Clicks:</strong>
+                                <p>Use <strong>popupMenu.setOnMenuItemClickListener()</strong> to handle what happens
+                                    when a
+                                    menu item is selected. Inside this, override <strong>onMenuItemClick()</strong> to
+                                    define the actions for each item:</p>
+                                <ol>
+                                    <li>
+                                        <strong>onMenuItemClick(MenuItem item):</strong> This method
+                                        detects which menu item was clicked.
+                                    </li>
+                                    <li>
+                                        <strong><strong>item.getItemId()</strong>:</strong> This function retrieves the
+                                        unique ID of the clicked menu item. Use a <strong>switch</strong> or
+                                        <strong>if</strong>
+                                        to identify the clicked item and take appropriate actions.
+                                    </li>
+                                </ol>
+                                <p><strong>Example:</strong></p>
+                                <pre>
+                                    <code>popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item1:
+                // Handle Option 1
+                return true;
+            case R.id.menu_item2:
+                // Handle Option 2
+                return true;
+            default:
+                return false;
+        }
+    }
+});
+</code>
+                                </pre>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+                <p><strong>Program Example:</strong></p>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;Button
+        android:id="@+id/popupMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">main_menu.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;item
+        android:id="@+id/home"
+        android:title="Home" />
+    &lt;item
+        android:id="@+id/edit"
+        android:title="Edit" />
+    &lt;item
+        android:id="@+id/exit"
+        android:title="Exit" />
+&lt;/menu>
+    
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    Button popupMenuButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        popupMenuButton = findViewById(R.id.popupMenuButton);
+        popupMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
+                popupMenu.inflate(R.menu.main_menu55);
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int id = item.getItemId();
+                        if(id == R.id.home)
+                        {
+                            Toast.makeText(MainActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
+                        } else if(id == R.id.edit)
+                        {
+                            Toast.makeText(MainActivity.this, "Edit Selected", Toast.LENGTH_SHORT).show();
+                        } else if(id == R.id.exit)
+                        {
+                            finish();
+                        }
+                        return true;
+                    }
+                });
+            }
+        });
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Context Menu</h3>
+                <ul>
+                    <li>A Context Menu in Android is a menu that appears when you long-press or right-click on a view
+                        (like a Button).</li>
+                </ul>
+                <p><strong>Steps to Create a Context Menu Demo Program:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Add a Button:</strong>
+                        <p>In <strong>activity_main.xml</strong>, add a Button that will act as the anchor point for the
+                            Context Menu. Give it an ID and set its text to something like "Show Context Menu" for
+                            clarity.</p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+                            <code>
+&lt;Button
+    android:id="@+id/showContextMenuButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Show Context Menu" />
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <strong>Register for Context Menu:</strong>
+                        <p>In <strong>MainActivity.java</strong>, you need to register the Button for the context menu.
+                            This allows the Button to trigger the context menu when long-pressed.</p>
+                        <p><strong>Function:</strong> <strong>registerForContextMenu(View view)</strong></p>
+                        <p><strong>Parameters:</strong>
+                        <ul>
+                            <li><strong>view</strong>: The view (e.g., Button) on which the context menu should be shown
+                                when long-pressed.</li>
+                        </ul>
+                        </p>
+                        <p>In your Java code:</p>
+                        <pre>
+                            <code>
+registerForContextMenu(btn);
+                            </code>
+                        </pre>
+                        <p>This method links the Button (or any other view) to the context menu, making it respond to
+                            long-press actions.</p>
+                    </li>
+                    <li>
+                        <strong>Create the Menu Resource File:</strong>
+                        <p>The menu items for the Context Menu are defined in an XML file, typically named
+                            <strong>main_menu.xml</strong>.
+                        </p>
+                        <ol>
+                            <li>
+                                <strong>Create a Menu Folder:</strong>
+                                <ul>
+                                    <li>Right-click on the <strong>res</strong> folder.</li>
+                                    <li>Select <strong>New > Android Resource Directory</strong>.</li>
+                                    <li>Set the Resource Type to <strong>menu</strong>, and click OK.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Create a Menu File:</strong>
+                                <ul>
+                                    <li>Right-click on the newly created <strong>menu</strong> folder.</li>
+                                    <li>Select <strong>New > Menu Resource File</strong>.</li>
+                                    <li>Name it <strong>main_menu.xml</strong>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p>In <strong>main_menu.xml</strong>, define the menu items:</p>
+                        <pre>
+                            <code>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;item
+        android:id="@+id/m1"
+        android:title="Home" />
+    &lt;item
+        android:id="@+id/m2"
+        android:title="Edit" />
+    &lt;item
+        android:id="@+id/m3"
+        android:title="Close" />
+&lt;/menu>
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <strong>Override onCreateContextMenu:</strong>
+                        <p>This function is called when the context menu is being created. It allows us to specify the
+                            structure of the context menu, such as the menu items.</p>
+                        <p><strong>Function:</strong>
+                            <code>onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)</code>
+                        </p>
+                        <p><strong>Parameters:</strong>
+                        <ul>
+                            <li><strong>menu</strong>: The ContextMenu object in which the menu items will be added.
+                            </li>
+                            <li><strong>v</strong>: The view that was long-pressed (e.g., the Button). It helps identify
+                                the
+                                source of the menu.</li>
+                            <li><strong>menuInfo</strong>: Contains additional information about the context menu. It's
+                                typically used when dealing with specific views like ListViews.</li>
+                        </ul>
+                        </p>
+                        <p>The <strong>getMenuInflater().inflate(R.menu.main_menu, menu)</strong> call inflates the
+                            <strong>main_menu.xml</strong> file into the context menu.
+                        </p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+                            <code>
+@Override
+public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    super.onCreateContextMenu(menu, v, menuInfo);
+}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <strong>Override onContextItemSelected:</strong>
+                        <p>This function is called when a menu item from the context menu is selected. It allows you to
+                            handle the user’s selection.</p>
+                        <p><strong>Function:</strong> <code>onContextItemSelected(MenuItem item)</code></p>
+                        <p><strong>Parameters:</strong>
+                        <ul>
+                            <li><strong>item</strong>: The menu item that was selected. You can use
+                                <strong>item.getItemId()</strong> to identify which menu item was chosen.
+                            </li>
+                        </ul>
+                        </p>
+                        <p>This function returns <strong>true</strong> if the item selection was handled successfully.
+                            If
+                            not, return <strong>false</strong>.</p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+                            <code>
+@Override
+public boolean onContextItemSelected(@NonNull MenuItem item) {
+    int id = item.getItemId();
+
+    if(id == R.id.m1) {
+        Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
+    } else if(id == R.id.m2) {
+        Toast.makeText(this, "Edit Selected", Toast.LENGTH_SHORT).show();
+    } else if(id == R.id.m3) {
+        finish();
+    }
+    return super.onContextItemSelected(item);
+}
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+                <p><strong>ContextMenu demo program:</strong></p>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activity_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;Button
+        android:id="@+id/contextMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Context Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">main_menu.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;item
+        android:id="@+id/home"
+        android:title="Home" />
+    &lt;item
+        android:id="@+id/edit"
+        android:title="Edit" />
+    &lt;item
+        android:id="@+id/exit"
+        android:title="Exit" />
+&lt;/menu>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    Button contextMenuButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        contextMenuButton = findViewById(R.id.contextMenuButton);
+        registerForContextMenu(contextMenuButton);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.home){
+            Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
+        } else if(id == R.id.edit)
+        {
+            Toast.makeText(this, "Edit Selected", Toast.LENGTH_SHORT).show();
+        } else if(id == R.id.exit) finish();
+        return super.onContextItemSelected(item);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Options Menu</h3>
+                <ul>
+                    <li>The <strong>Options Menu</strong> is the actual menu that is displayed within the Toolbar, and
+                        it contains
+                        items like
+                        "Search", "Settings", etc. The <strong>Toolbar</strong> simply provides a place to show this
+                        menu.</li>
+                    <li>It offers more flexibility than the default ActionBar by providing additional customization
+                        options
+                        like adding menus, custom layouts, or styling.</li>
+                </ul>
+                <p><strong>Steps to Create a Toolbar with Options Menu:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Include Toolbar in XML Layout:</strong>
+                        <p>In the <strong>activity_main.xml</strong> layout file, you need to include the
+                            <strong>Toolbar</strong> element to define the top bar of your application. It can be
+                            positioned at the top of the screen and customized as needed.
+                        </p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+                            <code>
+&lt;androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    android:titleTextColor="#FFFFFF" />
+                            </code>
+                        </pre>
+                        <p><strong>Attributes:</strong></p>
+                        <ul>
+                            <li><strong>android:id</strong>: The ID of the Toolbar, which is used to reference it in
+                                your Java code.</li>
+                            <li><strong>android:background</strong>: The background color of the Toolbar (can reference
+                                the app's theme color).</li>
+                            <li><strong>android:title</strong>: The title text shown in the center of the Toolbar.</li>
+                            <li><strong>android:titleTextColor</strong>: The color of the title text.</li>
+                            <li><strong>android:elevation</strong>: The shadow or elevation of the Toolbar, giving it a
+                                3D effect.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Set the Toolbar as ActionBar in Java:</strong>
+                        <p>Once you have defined the Toolbar in XML, you need to set it as the ActionBar
+                            programmatically in your
+                            <strong>MainActivity.java</strong> (or any activity where you want the Toolbar). This
+                            replaces the
+                            default ActionBar with the custom Toolbar.
+                        </p>
+                        <p><strong>Code Example:</strong></p>
+                        <pre>
+                            <code>
+Toolbar toolbar = findViewById(R.id.toolbar);
+setSupportActionBar(toolbar);
+                            </code>
+                        </pre>
+                        <p><strong>Explanation:</strong>
+                            The method <strong>setSupportActionBar(toolbar)</strong> is used to set the Toolbar as the
+                            app's
+                            ActionBar, allowing you to use features like a title, menus, and navigation icons.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Adding Menu to the Toolbar:</strong>
+                        <p>You can add a menu to the Toolbar to provide users with additional options. To do this, you
+                            need to
+                            override the <strong>onCreateOptionsMenu()</strong> method in your activity.</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li><strong>Create a Menu Resource File:</strong>
+                                <p>First, create a menu XML file (e.g., <code>toolbar_menu.xml</code>) inside the
+                                    <strong>res/menu/</strong> folder:
+                                </p>
+                                <pre>
+                                    <code>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+    &lt;item
+        android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:showAsAction="ifRoom" /&gt;
+    &lt;item
+        android:id="@+id/action_settings"
+        android:title="Settings"
+        android:showAsAction="never" /&gt;
+&lt;/menu&gt;
+                                    </code>
+                                </pre>
+                                <p>In this file:</p>
+                                <ul>
+                                    <li><strong>android:id</strong>: The ID for each menu item.</li>
+                                    <li><strong>android:title</strong>: The text that will be displayed for the menu
+                                        item.</li>
+                                    <li><strong>android:icon</strong>: The icon for the menu item (optional).</li>
+                                    <li><strong>android:showAsAction</strong>: Determines whether the menu item should
+                                        be shown in the action bar or overflow menu.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Inflate the Menu in Activity:</strong>
+                                <p>In the activity, override the <strong>onCreateOptionsMenu()</strong> method to load
+                                    the menu
+                                    and display it in the Toolbar:</p>
+                                <pre>
+                                    <code>
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+    return true;
+}
+                                    </code>
+                                </pre>
+                                <p>This links the <strong>toolbar_menu.xml</strong> file to the Toolbar and populates it
+                                    with the menu items.</p>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <strong>Handle Menu Item Clicks:</strong>
+                        <p>Once you have added menu items to the Toolbar, you need to handle their clicks using the
+                            <strong>onOptionsItemSelected()</strong> method. This is where you define what happens when
+                            each
+                            menu item is clicked.
+                        </p>
+                        <p><strong>Code Example:</strong></p>
+                        <pre>
+                            <code>
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+    if (id == R.id.action_search) {
+        Toast.makeText(this, "Search Clicked", Toast.LENGTH_SHORT).show();
+        return true;
+    } else if (id == R.id.action_settings) {
+        Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
+                            </code>
+                        </pre>
+                        <p>This method checks the ID of the clicked menu item and performs the corresponding action,
+                            such as showing a Toast message.</p>
+                    </li>
+                </ol>
+
+                <p><strong>Demo Program:</strong></p>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">activit_main.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&tl;?xml version="1.0" encoding="utf-8"?>
+&tl;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &tl;androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+&tl;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">main_menu.xml</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;item
+        android:id="@+id/home"
+        android:title="Home" />
+    &lt;item
+        android:id="@+id/edit"
+        android:title="Edit" />
+    &lt;item
+        android:id="@+id/exit"
+        android:title="Exit" />
+&lt;/menu>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="code">
+                    <div class="dotc"></div>
+                    <button class="ac">MainActivity.java</button>
+                    <div class="panel">
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+     Toolbar toolbar;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.home) {
+            Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.edit) {
+            Toast.makeText(this, "Edit Clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if(id == R.id.exit)
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="wh">
+            <h2>Android Layouts</h2>
+            <p>Layouts in Android define the structure and arrangement of views (UI components) in an application. They
+                act as containers for UI elements, specifying their position and behavior on the screen. Layouts are
+                written in XML and help in designing the user interface for different screen sizes and orientations.</p>
+            <p><strong>Types of Layouts:</strong></p>
+            <ol>
+                <li>
+                    <strong>LinearLayout:</strong>
+                    <p>A layout that arranges its child views in a single row (horizontally) or column (vertically).</p>
+                    <ul>
+                        <li>Use the <code>android:orientation</code> attribute to specify horizontal or vertical
+                            alignment.</li>
+                        <li>Child views are displayed one after another in the specified direction.</li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <div class="code">
+                        <pre>
+                <code>
+&lt;LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" /&gt;
+
+    &lt;Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me" /&gt;
+
+&lt;/LinearLayout&gt;
+                </code>
+            </pre>
+                    </div>
+                </li>
+                <li>
+                    <strong>RelativeLayout:</strong>
+                    <p>A layout where child views are positioned relative to each other or to the parent container.</p>
+                    <ul>
+                        <li>Attributes like <code>layout_below</code>, <code>layout_alignParentTop</code>, and
+                            <code>layout_toRightOf</code> are used to specify relationships.</li>
+                        <li>Allows for flexible placement of views without requiring nested layouts.</li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <div class="code">
+                    <pre>
+                <code>
+&lt;RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+
+    &lt;TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome!" /&gt;
+
+    &lt;Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me"
+        android:layout_below="@id/textView" /&gt;
+
+&lt;/RelativeLayout&gt;
+                </code>
+            </pre>
+        </div>
+                </li>
+                <li>
+                    <strong>ConstraintLayout:</strong>
+                    <p>A flexible and efficient layout that positions child views using constraints relative to other
+                        views or guidelines.</p>
+                    <ul>
+                        <li>Allows for creating complex designs with fewer nested layouts, improving performance.</li>
+                        <li>Supports features like chains, barriers, and guidelines for precise alignment.</li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <div class="code">
+                    <pre>
+                <code>
+&lt;androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+
+    &lt;TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" /&gt;
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent" /&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+                </code>
+            </pre>
+        </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="wh">
+            <h2>Widgets</h2>
+            <ul>
+                <li>Android widgets are UI components that allow users to interact with an app. These widgets provide
+                    various functionalities and are essential for building interactive and user-friendly interfaces.
+                </li>
+                <li>Following are some widgets that we are going to discuss.
+                    <ol>
+                        <li>Checkbox</li>
+                        <li>RadioButton</li>
+                        <li>Alert Dialog</li>
+                        <li>DatePicker</li>
+                        <li>TimePicker</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>RadioButton</h3>
+                <ul>
+                    <li>A RadioButton allows users to select one option from a group.
+                        <ul>
+                            <li>A RadioButton is a two-state widget, either checked (selected) or unchecked
+                                (unselected).</li>
+                            <li>You can directly set its state programmatically using setChecked(true/false) or query it
+                                using isChecked().</li>
+                        </ul>
+                    </li>
+                    <li>It is typically used within a RadioGroup to ensure only one selection is allowed at a time.
+                        <ul>
+                            <li>A RadioGroup is a container for grouping multiple RadioButton widgets.</li>
+                            <li>It enforces single selection, meaning only one RadioButton within the group can be
+                                selected at a time.</li>
+                            <li>Selecting one RadioButton automatically deselects the previously selected one.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Important Functions</p>
+                <ul>
+                    <li>For RadioGroup:
+                        <ul>
+                            <li>getCheckedRadioButtonId(): Returns the ID of the currently selected RadioButton in the
+                                group. If no button is selected, it returns -1.</li>
+                        </ul>
+                    </li>
+                    <li>For RadioButton:
+                        <ul>
+                            <li>isChecked(): Returns true if the button is selected, false otherwise.</li>
+                            <li>getText(): Returns the text associated with the RadioButton. Example:
+                                radioButton.getText().toString();</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <p><strong>Program to demonstrate the use of RadioGroup and RadioButton</strong></p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare views
+    private TextView tv;      // Displays the selected option or a message
+    private Button btn;       // Button to trigger the action
+    private RadioGroup rg;    // Group containing RadioButtons
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize views
+        tv = findViewById(R.id.tv);
+        btn = findViewById(R.id.button);
+        rg = findViewById(R.id.radioGroup);
+
+        // Set OnClickListener for the button
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the ID of the selected RadioButton
+                int radioId = rg.getCheckedRadioButtonId();
+
+                // Check if a RadioButton is selected
+                if (radioId == -1) {
+                    tv.setText("No Option is Selected"); // No selection
+                } else {
+                    // Find the selected RadioButton by ID
+                    RadioButton rb = findViewById(radioId);
+                    // Display the text of the selected RadioButton
+                    tv.setText("Selected Option: " + rb.getText().toString());
+                }
+            }
+        });
+    }
+}
+                            </code>
+                        </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">activity_main.xml</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="288dp"
+        android:layout_height="127dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.088">
+
+        &lt;RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Red" />
+
+        &lt;RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Green" />
+    &lt;/RadioGroup>
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.255" />
+
+    &lt;TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>CheckBox</h3>
+                <ul>
+                    <li>A CheckBox is a two-state button that can be either checked (selected) or unchecked
+                        (unselected).</li>
+                    <li>It is commonly used to allow users to make multiple selections from a list of options.</li>
+                    <li>It supports independent selections, meaning multiple CheckBox widgets can be selected
+                        simultaneously.</li>
+                </ul>
+                <div class="wh">
+                    <p><strong>Program to demonstrate the use of CheckBox</strong></p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare views
+    private CheckBox cbReading, cbTraveling, cbGaming, cbCooking;
+    private Button btnSubmit;
+    private TextView tvResult;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize views
+        cbReading = findViewById(R.id.checkbox_reading);
+        cbTraveling = findViewById(R.id.checkbox_traveling);
+        cbGaming = findViewById(R.id.checkbox_gaming);
+        cbCooking = findViewById(R.id.checkbox_cooking);
+        btnSubmit = findViewById(R.id.button_submit);
+        tvResult = findViewById(R.id.textView_result);
+
+        // Set OnClickListener for the button
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String result = "Your hobbies are: ";
+
+                // Check each checkbox and append the selected hobby
+                if (cbReading.isChecked()) {
+                    result += "Reading ";
+                }
+                if (cbTraveling.isChecked()) {
+                    result += "Traveling ";
+                }
+                if (cbGaming.isChecked()) {
+                    result += "Gaming ";
+                }
+                if (cbCooking.isChecked()) {
+                    result += "Cooking ";
+                }
+
+                // Display result or fallback message
+                if (result.equals("Your hobbies are: ")) {
+                    tvResult.setText("No hobbies selected.");
+                } else {
+                    tvResult.setText(result);
+                }
+            }
+        });
+    }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">activity_main.xml</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;CheckBox
+        android:id="@+id/checkbox_gaming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Gaming"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_traveling" />
+
+    &lt;CheckBox
+        android:id="@+id/checkbox_reading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:text="Reading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    &lt;Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_cooking" />
+
+    &lt;CheckBox
+        android:id="@+id/checkbox_traveling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Traveling"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_reading" />
+
+    &lt;CheckBox
+        android:id="@+id/checkbox_cooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Cooking"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_gaming" />
+
+    &lt;TextView
+        android:id="@+id/textView_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/button_submit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>DatePicker</h3>
+                <ul>
+                    <li>A DatePicker widget in Android allows users to select a specific date (day, month, year) via a
+                        calendar-like UI or spinner interface.</li>
+                    <li>It can be embedded in a layout as a widget or displayed as a dialog.</li>
+                    <li>It provides methods to retrieve or set the selected date programmatically.</li>
+                    <li>We can't drag and drop a DatePicker like Buttons or TextViews because it is a complex widget
+                        with multiple dynamic components (such as day, month, and year spinners or calendar views). It
+                        requires specific attributes and configurations (e.g., datePickerMode, listeners) that need to
+                        be defined in the XML or programmatically, making it unsuitable for direct drag-and-drop
+                        placement in the design editor.</li>
+                </ul>
+                <p>Key Methods:</p>
+                <ul>
+                    <li>getDayOfMonth(): Returns the currently selected day.</li>
+                    <li>getMonth(): Returns the currently selected month (zero-based, so January = 0).</li>
+                    <li>getYear(): Returns the currently selected year.</li>
+                    <li>setOnDateChangedListener(): A listener that triggers whenever the user changes the date.</li>
+                </ul>
+                <div class="wh">
+                    <p><strong>Example program</strong></p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+
+import android.os.Build;
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    DatePicker dp;
+    TextView tv;
+
+    @Override
+    protected void onCreate(Bundle s) {
+        super.onCreate(s);
+        setContentView(R.layout.activity_main);
+
+        // Initialize views
+        dp = findViewById(R.id.datePicker);
+        tv = findViewById(R.id.tv);
+
+        // Set date change listener (only for Android O and above)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            dp.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker dp, int year, int monthOfYear, int dayOfMonth) {
+                    int selectedMonth = dp.getMonth() + 1; // Convert zero-based month to 1-based
+                    int selectedDay = dp.getDayOfMonth();
+                    int selectedYear = dp.getYear();
+                    tv.setText("Date = " + selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                }
+            });
+        }
+    }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">activity_main.xml</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:datePickerMode="calendar" />
+
+    &lt;TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/datePicker"
+        app:layout_constraintTop_toTopOf="@+id/datePicker"
+        app:layout_constraintVertical_bias="0.733" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>TimePicker</h3>
+                <ul>
+                    <li>A TimePicker widget in Android allows users to select a specific time (hour and minute) via a
+                        spinner or clock interface.</li>
+                    <li>It can be embedded in a layout as a widget or displayed as a dialog.</li>
+                    <li>It provides methods to retrieve or set the selected time programmatically.</li>
+                    <li>We can't drag and drop a TimePicker like Buttons or TextViews because it is a dynamic widget
+                        with multiple components (such as hours and minutes spinners or clock view). It requires
+                        specific attributes and configurations (e.g., timePickerMode, listeners), making it unsuitable
+                        for direct drag-and-drop placement in the design editor.</li>
+                </ul>
+                <p>Key Methods:</p>
+                <ul>
+                    <li><strong>getHour()</strong>: Returns the currently selected hour (in 24-hour format).</li>
+                    <li><strong>getMinute()</strong>: Returns the currently selected minute.</li>
+                    <li><strong>setOnTimeChangedListener()</strong>: A listener that triggers whenever the user changes
+                        the time.</li>
+                </ul>
+                <div class="wh">
+                    <p><strong>Example program</strong></p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    TimePicker timePicker;
+    TextView tv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize views
+        timePicker = findViewById(R.id.timePicker);
+        tv = findViewById(R.id.tv);
+
+        // Set listener to react to time changes
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                // Use getter methods to fetch selected time
+                int selectedHour = timePicker.getHour();
+                int selectedMinute = timePicker.getMinute();
+                tv.setText("Time Changed: " + selectedHour + ":" + selectedMinute);
+
+                // Alternatively, you can use the listener's parameters:
+                // tv.setText("Time Changed: " + hourOfDay + ":" + minute);
+            }
+        });
+    }
+}
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">activity_main.xml</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner" />
+
+    &lt;TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:text="Time will appear here" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                    </code>
+                </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Alert Box</h3>
+                <ul>
+                    <li>An Alert Box in Android is a simple dialog that shows a message to the user and optionally
+                        includes actions (e.g., OK, Cancel).</li>
+                    <li>It is often used to display notifications, warnings, or confirmations.</li>
+                    <li>An AlertDialog is the most common way to implement an alert box, and it can include a title,
+                        message, buttons, and custom layouts.</li>
+                </ul>
+                <div class="wh">
+                    <p><strong>Example program</strong></p>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">MainActivity.java</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    Button showAlertButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize button
+        showAlertButton = findViewById(R.id.showAlertButton);
+
+        // Set button click listener
+        showAlertButton.setOnClickListener(v -> {
+            // Create an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Alert Box Example")
+                   .setMessage("This is a simple alert box.")
+                   .setPositiveButton("OK", (dialog, which) -> {
+                       // Action when OK button is clicked
+                       Toast.makeText(MainActivity.this, "OK clicked!", Toast.LENGTH_SHORT).show();
+                   })
+                   .setNegativeButton("Cancel", (dialog, which) -> {
+                       // Action when Cancel button is clicked
+                       Toast.makeText(MainActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
+                   })
+                   .show();
+        });
+    }
+}
+                            </code>
+                        </pre>
+                        </div>
+                    </div>
+                    <div class="code">
+                        <div class="dotc"></div>
+                        <button class="ac">activity_main.xml</button>
+                        <div class="panel">
+                            <pre>
+                                <code>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    &lt;Button
+        android:id="@+id/showAlertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Alert"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+&lt;/androidx.constraintlayout.widget.ConstraintLayout>
+                            </code>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
