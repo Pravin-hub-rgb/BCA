@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequencing Problem</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Sequencing Problem</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Sequencing Problem</h1>
+        <p><strong>Meaning:</strong> The Sequencing problem involves determining an optimal order or sequence for
+            performing a series of jobs across a number of facilities to minimize the total time or cost.</p>
+
+        <p><strong>Types of Job Sequencing Problems:</strong></p>
+        <ol type="I">
+            <li>Processing <em>n</em> jobs through 2 machines</li>
+            <li>Processing <em>n</em> jobs through 3 machines</li>
+            <li>Processing 2 jobs through <em>m</em> machines</li>
+            <li>Processing <em>n</em> jobs through <em>m</em> machines</li>
+            <li>Processing <em>n</em> jobs through 1 machine</li>
+        </ol>
+
+        <div class="wh">
+            <h2>Processing <em>n</em> Jobs Through 2 Machines</h2>
+            <p><strong>Description:</strong> There are 9 jobs, each of which must be processed on Machine 1 and Machine
+                2 in a specific order (M1 → M2). The processing times in hours are as follows:</p>
+            <pre>
+                <code>
++------------------------------------------------------------------+
+| Jobs:      |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
++------------------------------------------------------------------+
+| Machine 1: |  5  |  3  | 12  | 15  |  6  | 10  | 11  |  9  |  5  |
++------------------------------------------------------------------+
+| Machine 2: |  6  |  8  | 10  | 10  |  6  | 12  |  1  |  3  |  7  |
++------------------------------------------------------------------+
+                </code>
+            </pre>
+            <p><strong>Objective:</strong> Determine a sequence for these jobs that minimizes the total elapsed time.
+                Additionally, calculate the idle time for Machines 1 and 2.</p>
+
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Identify the optimal sequence by finding the minimum duration among Machine 1 (M1) and Machine 2
+                    (M2).</li>
+                <li>If the minimum duration is on M1, assign the job in forward order (left to right).</li>
+                <li>If the minimum duration is on M2, assign the job in reverse order (right to left).</li>
+            </ul>
+
+            <pre>
+                <code>
+M1 -------------&gt;
++--------------------------------------------+
+|    |    |    |    |    |    |    |    |    |
++--------------------------------------------+
+                             &lt;------------- M2
+                </code>
+            </pre>
+
+            <div class="in">
+                <h3>In Case of Tie:</h3>
+                <ol>
+                    <li>If a tie occurs on M1:
+                        <ul>
+                            <li>Check the corresponding value on M2.</li>
+                            <li>Assign the job with the smaller M2 value first in forward order (left to right).</li>
+                        </ul>
+                    </li>
+                    <li>If a tie occurs on M2:
+                        <ul>
+                            <li>Check the corresponding value on M1.</li>
+                            <li>Assign the job with the smaller M1 value first in reverse order (right to left).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Note:</strong> If there is still a tie after checking the opposite machine, select a job
+                        randomly.</li>
+                    <li>If the minimum value occurs on both M1 and M2 for the same job, this indicates an alternative
+                        optimal sequence is possible.</li>
+                </ol>
+            </div>
+            <p><strong>Now We Create the Optimal Job Sequence</strong></p>
+            <ul>
+                <li>
+                    The minimum value is <strong>1</strong>, and it is from Machine 2 (M2), so assign the job in reverse
+                    order (backward).
+                    <pre>
+                        <code>
++--------------------------------------------+
+|    |    |    |    |    |    |    |    |  7 |
++--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    The next minimum value is <strong>3</strong>, and it is from a different machine with no tie, so
+                    assign the job normally.
+                    <pre>
+                        <code>
++--------------------------------------------+
+|  2 |    |    |    |    |    |    |  8 |  7 |
++--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    The next minimum value is <strong>5</strong>, and it appears in two places for Machine 1 (M1). We
+                    check the corresponding values on Machine 2 (M2) and assign the job with the smaller value first.
+                    <pre>
+                        <code>
++--------------------------------------------+
+|  2 |  1 |  9 |    |    |    |    |  8 |  7 |
++--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    The next minimum value is <strong>6</strong>, and it appears in both M1 and M2 for the same job,
+                    leading to alternative optimal sequences.
+                    <pre>
+                        <code>
+   +--------------------------------------------+
+M1 |  2 |  1 |  9 |  5 |    |    |    |  8 |  7 |
+   +--------------------------------------------+
+
+   +--------------------------------------------+
+M2 |  2 |  1 |  9 |    |    |    |  5 |  8 |  7 |
+   +--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    The next minimum value is <strong>10</strong>, and it appears in three places, but for Machine 1
+                    (M1), it is in only one place, so we assign it first.
+                    <pre>
+                        <code>
+   +--------------------------------------------+
+M1 |  2 |  1 |  9 |  5 |  6 |    |    |  8 |  7 |
+   +--------------------------------------------+
+
+   +--------------------------------------------+
+M2 |  2 |  1 |  9 |  6 |    |    |  5 |  8 |  7 |
+   +--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    For the remaining two <strong>10s</strong> in M2, we check their corresponding values on M1 and
+                    assign the job with the smaller value first.
+                    <pre>
+                        <code>
+   +--------------------------------------------+
+M1 |  2 |  1 |  9 |  5 |  6 |  4 |  3 |  8 |  7 |
+   +--------------------------------------------+
+
+   +--------------------------------------------+
+M2 |  2 |  1 |  9 |  6 |  4 |  3 |  5 |  8 |  7 |
+   +--------------------------------------------+
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    Here, we have two optimal sequences. Either way, the total elapsed time will remain the same. For
+                    further calculations, we will use the first sequence.
+                </li>
+            </ul>
+            <p><strong>Computation of Total Elapsed Time and Idle Time for Machine 1 and Machine 2</strong></p>
+            <pre>
+                <code>
+ Jobs |            Machine 1          ||           Machine 2           | Idle Time for 
+      | Time In | Duration | Time Out || Time In | Duration | Time Out | Machine 2    
+------+---------+----------+----------++---------+----------+----------+---------------
+   2  |    0    |     3    |     3    ||    3    |     8    |    11    |     3
+   1  |    3    |     5    |     8    ||   11    |     6    |    17    |     -
+   9  |    8    |     5    |    13    ||   17    |     7    |    24    |     -
+   5  |   13    |     6    |    19    ||   24    |     6    |    30    |     -
+   6  |   19    |    10    |    29    ||   30    |    12    |    42    |     -
+   4  |   29    |    15    |    44    ||   44    |    10    |    54    |     2
+   3  |   44    |    12    |    56    ||   56    |    10    |    66    |     2
+   8  |   56    |     9    |    65    ||   66    |     3    |    69    |     -
+   7  |   65    |    11    |    76    ||   76    |     1    |    77    |     7
+---------------------------------------------------------------------------------------
+                                                                            14
+                </code>
+            </pre>
+            <p>The order is Machine 1 (M1) followed by Machine 2 (M2), meaning that after a job is processed on M1, it
+                moves to M2:</p>
+            <ul>
+                <li>
+                    <strong>Important Observations:</strong>
+                    <ul>
+                        <li>It is always the case that <strong>M1 Time Out ≤ M2 Time In</strong>. If not, M2 must wait
+                            until M1 finishes the job.</li>
+                        <li>The total elapsed time is <strong>77 hours</strong>. This is the total time taken to
+                            complete all jobs through both machines, including idle time.</li>
+                    </ul>
+                </li>
+                <li><strong>Computation of Idle Time:</strong>
+                    <ul>
+                        <li>
+                            <strong>Idle time for Machine 1:</strong>
+                            <br>Compare the last job's time out on M1 and M2. The difference between these times is the
+                            idle time for M1.
+                            <br>Last job M1 Time Out = <strong>76</strong>, Last job M2 Time Out = <strong>77</strong>.
+                            <br>Difference = <strong>1 hour</strong>.
+                            <br><strong>Idle Time for Machine 1 = 1 hour.</strong>
+                        </li>
+                        <li>
+                            <strong>Idle time for Machine 2:</strong>
+                            <br>The idle time for M2 is calculated as follows:
+                            <ul>
+                                <li>For the first job, the time out of M1 becomes the idle time for M2.</li>
+                                <li>For subsequent jobs, the idle time is the difference between M2's time in and the
+                                    previous job's time out, if any.</li>
+                            </ul>
+                            <br><strong>Total Idle Time for Machine 2 = 14 hours.</strong>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/playlist?list=PLabr9RWfBcnowGFvsQI07doSE6t8xXDTX" target="_blank">Sequencing Problem Playlist &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
