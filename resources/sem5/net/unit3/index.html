@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 3</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>C# .NET Object Oriented Programming (OOP)</h1>
+        <div class="wh">
+            <h2>Introduction to Object Oriented Programming</h2>
+            <ul>
+                <li><strong>What is Object-Oriented Programming?</strong>
+                    <p>Object-Oriented Programming (OOP) is a programming paradigm that uses objects and classes to
+                        organize and structure code. It allows for better code reusability, maintainability, and
+                        scalability.</p>
+                </li>
+                <li><strong>Principles of OOP:</strong>
+                    <ul>
+                        <li><strong>Encapsulation</strong>
+                            <p>Encapsulation is the concept of bundling data (attributes) and methods (functions) that
+                                operate on the data into a single unit or class. It also restricts access to some of the
+                                object's components, which can prevent the accidental modification of data.</p>
+                            <p><em>Example:</em> A class `Person` with private variables and public getter and setter
+                                methods to access them.</p>
+                        </li>
+                        <li><strong>Inheritance</strong>
+                            <p>Inheritance allows a class to inherit properties and methods from another class,
+                                promoting code reuse. The class that inherits is called the subclass, and the class from
+                                which it inherits is called the superclass.</p>
+                            <p><em>Example:</em> A class `Dog` inherits from the `Animal` class, and thus, it has all
+                                properties and methods of `Animal`.</p>
+                        </li>
+                        <li><strong>Polymorphism</strong>
+                            <p>Polymorphism allows objects of different classes to be treated as objects of a common
+                                superclass. It also allows methods to be implemented in multiple ways.</p>
+                            <p><em>Example:</em> A method `makeSound()` could be defined in both `Dog` and `Cat`
+                                classes, but the implementation will be different for each.</p>
+                        </li>
+                        <li><strong>Abstraction</strong>
+                            <p>Abstraction is the concept of hiding the complex implementation details and showing only
+                                the necessary features of an object. It is achieved using abstract classes and
+                                interfaces.</p>
+                            <p><em>Example:</em> A class `Car` can be abstract, providing a general blueprint for all
+                                car types, while specific car types like `ElectricCar` or `SportsCar` implement detailed
+                                features.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Classes and Objects</h2>
+            <div class="in">
+                <h3>Dividing code into classes</h3>
+                <ul>
+                    <li><strong>Dividing code into classes</strong>
+                        <p>In Object-Oriented Programming, classes serve as blueprints for creating objects. By dividing
+                            the
+                            code into different classes, you make the code more modular, easier to maintain, and
+                            reusable.
+                        </p>
+                        <p>A class can have attributes (properties) and methods (functions) that define the behavior of
+                            the
+                            objects created from the class.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Creating objects and instances of classes</h3>
+                <ul>
+                    <li><strong>Creating objects</strong>
+                        <p>Once a class is defined, you can create instances (objects) of that class. An object
+                            represents
+                            an individual instance of the class with its own set of data and behavior.</p>
+                        <p>The process of creating an object is known as instantiation.</p>
+                    </li>
+                </ul>
+
+                <h3>Example 1:</h3>
+                <pre>
+                    <code>
+class Car {
+    // Properties
+    string model;
+    int year;
+
+    // Method
+    void displayInfo() {
+        Console.WriteLine("Model: " + model);
+        Console.WriteLine("Year: " + year);
+    }
+}
+
+class Program {
+    static void Main() {
+        // Creating an object of the Car class
+        Car myCar = new Car();
+        myCar.model = "Toyota";
+        myCar.year = 2020;
+
+        // Calling method on the object
+        myCar.displayInfo();
+    }
+}
+                </code>
+            </pre>
+                <p><em>Explanation:</em> In this simple example, we define a class `Car` with properties `model` and
+                    `year`.
+                    We create an object `myCar` of the `Car` class, assign values to its properties, and call the method
+                    `displayInfo()` to display the car's information.</p>
+
+                <h3>Example 2:</h3>
+                <pre>
+                <code>
+class Animal {
+    // Properties
+    string name;
+    int age;
+
+    // Constructor to initialize properties
+    public Animal(string n, int a) {
+        name = n;
+        age = a;
+    }
+
+    // Method to display animal's details
+    public void displayDetails() {
+        Console.WriteLine("Name: " + name);
+        Console.WriteLine("Age: " + age);
+    }
+}
+
+class Program {
+    static void Main() {
+        // Creating objects of the Animal class
+        Animal dog = new Animal("Buddy", 3);
+        Animal cat = new Animal("Whiskers", 2);
+
+        // Calling method to display details
+        dog.displayDetails();
+        cat.displayDetails();
+    }
+}
+                </code>
+            </pre>
+                <p><em>Explanation:</em> In this example, we define a class `Animal` with a constructor to initialize
+                    its
+                    properties. We create two objects (`dog` and `cat`) of the `Animal` class, pass values to the
+                    constructor, and call the `displayDetails()` method to show their information.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Fields, Properties, Methods, and Events</h2>
+
+            <div class="in">
+                <h3>Adding fields to classes</h3>
+                <ul>
+                    <li><strong>Syntax for adding fields:</strong>
+                        <p>Fields are variables declared inside a class, used to store data. They can have various
+                            access
+                            modifiers (like public, private, etc.) to control access.</p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Field declaration
+    accessModifier type fieldName;
+}
+                            </code>
+                        </pre>
+                        <p><em>Example:</em> Here's how you can add fields to a class.</p>
+                        <pre>
+                            <code>
+class Person {
+    // Fields
+    private string name;
+    private int age;
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> The `Person` class has two private fields: `name` (a string) and `age`
+                            (an
+                            integer). These fields store the data for an instance of `Person`.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Defining and using methods in classes</h3>
+                <ul>
+                    <li><strong>Syntax for defining methods:</strong>
+                        <p>Methods define the behavior of a class. They can take parameters and return values. Methods
+                            are
+                            defined using the following syntax:</p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Method declaration
+    accessModifier returnType MethodName(parameters) {
+        // Method body
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Example:</em> Here's how you can define and use methods in a class.</p>
+                        <pre>
+                            <code>
+class Person {
+    private string name;
+    private int age;
+
+    // Method to display the person's details
+    public void DisplayDetails() {
+        Console.WriteLine("Name: " + name);
+        Console.WriteLine("Age: " + age);
+    }
+
+    // Method to set the person's details
+    public void SetDetails(string name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> The `Person` class has two methods: `DisplayDetails()` that prints the
+                            person's details and `SetDetails()` that assigns values to the `name` and `age` fields.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Creating Properties for Data Encapsulation</h3>
+                <ul>
+                    <li>
+                        <strong>What are properties?</strong>
+                        <p>
+                            Properties are members of a class that provide a controlled way to access private fields.
+                            They encapsulate data by restricting direct access and allowing only specific ways to read
+                            or modify it through
+                            <code>get</code> and <code>set</code> accessors.
+                        </p>
+                        <p>
+                            This ensures data integrity and allows us to add logic when reading or writing data, such as
+                            validation or transformation.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Syntax for defining properties:</strong>
+                        <p>
+                            A property is defined with a type, a name, and two optional accessors:
+                            <code>get</code> (to retrieve the value) and
+                            <code>set</code> (to assign a value).
+                        </p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Property declaration
+    public type PropertyName {
+        get { return field; }
+        set { field = value; }
+    }
+}
+                        </code>
+                    </pre>
+                    </li>
+                    <li>
+                        <strong>Example: Defining and Using Properties</strong>
+                        <pre>
+                            <code>
+class Person {
+    private string name; // A private field to store the name.
+
+    // Property to get and set the 'name' field.
+    public string Name {
+        get { return name; }
+        set { name = value; }
+    }
+}
+
+// Creating an object of the class and using the property.
+Person person = new Person(); // Creating an instance of the 'Person' class.
+person.Name = "Alice"; // Using the set accessor to assign a value.
+Console.WriteLine(person.Name); // Using the get accessor to retrieve the value.
+                            </code>
+                        </pre>
+                        <p>
+                            <em>Explanation:</em>
+                            In this example, the <code>Person</code> class has a private field <code>name</code>. The
+                            public property <code>Name</code> provides controlled access to this field.
+                            - The <code>get</code> accessor is used to retrieve the value of <code>name</code>.
+                            - The <code>set</code> accessor is used to assign a value to <code>name</code>, and you can
+                            add additional logic here, such as validation.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Using Object Initializer Syntax</strong>
+                        <p>
+                            Object initializer syntax allows you to set property values directly at the time of object
+                            creation, making the code concise and more readable. This is especially useful when you need
+                            to initialize multiple properties.
+                        </p>
+                        <pre>
+                            <code>
+class Person
+{
+    private string name;
+    private int age;
+
+    // Property for 'name'
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    // Property for 'age'
+    public int Age
+    {
+        get { return age; }
+        set 
+        { 
+            if (value >= 0) // Adding validation for age.
+                age = value; 
+            else
+                throw new ArgumentException("Age cannot be negative.");
+        }
+    }
+}
+
+// Using object initializer syntax
+Person person = new Person
+{
+    Name = "Alice", // Setting the 'Name' property.
+    Age = 22        // Setting the 'Age' property.
+};
+
+Console.WriteLine($"Name: {person.Name}, Age: {person.Age}");
+                            </code>
+                        </pre>
+                        <p>
+                            <em>Explanation:</em>
+                            In this example, the <code>Person</code> class has properties <code>Name</code> and
+                            <code>Age</code>. Instead of setting each property individually after creating the object,
+                            the object initializer syntax sets the values directly when the object is created.
+                        </p>
+                        <p>
+                            This approach improves code clarity and avoids the need for additional constructors, making
+                            it easier to initialize objects with multiple properties.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Why use properties?</strong>
+                        <p>
+                            Properties offer several advantages over public fields:
+                        </p>
+                        <ul>
+                            <li><strong>Encapsulation:</strong> Keeps the internal representation hidden and provides a
+                                controlled interface for accessing data.</li>
+                            <li><strong>Validation:</strong> Allows adding conditions to ensure valid data is assigned
+                                (e.g., checking if a value is non-empty or within a range).</li>
+                            <li><strong>Read-only or write-only properties:</strong> Using only a <code>get</code>
+                                accessor makes a property read-only, while using only a <code>set</code> accessor makes
+                                it write-only.</li>
+                            <li><strong>Convenience:</strong> Object initializer syntax makes it easy to create objects
+                                with pre-defined values.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Implementing events for class communication</h3>
+                <ul>
+                    <li><strong>Syntax for defining events:</strong>
+                        <p>Events are used to notify other classes or objects when something happens. Events in C# are
+                            typically associated with delegates.</p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Event declaration
+    public event EventHandler EventName;
+    
+    // Method to trigger the event
+    protected virtual void OnEventName() {
+        EventName?.Invoke(this, EventArgs.Empty);
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Example:</em> Here's how you can define and implement events in a class.</p>
+                        <pre>
+                            <code>
+class Timer {
+    private int seconds;
+
+    // Event declaration
+    public event EventHandler TimeUp;
+
+    // Property to set the seconds value
+    public int Seconds {
+        get { return seconds; }
+        set { seconds = value; }
+    }
+
+    // Method to start the timer
+    public void StartTimer() {
+        for (int i = seconds; i >= 0; i--) {
+            Console.WriteLine("Time remaining: " + i + " seconds");
+            System.Threading.Thread.Sleep(1000);  // Wait for 1 second
+        }
+        OnTimeUp();  // Trigger event when time is up
+    }
+
+    // Method to trigger the event
+    protected virtual void OnTimeUp() {
+        if (TimeUp != null) {
+            TimeUp(this, EventArgs.Empty);  // Notify subscribers
+        }
+    }
+}
+
+class Program {
+    static void Main() {
+        // Create Timer object
+        Timer timer = new Timer();
+        timer.Seconds = 5;
+
+        // Subscribe to the TimeUp event
+        timer.TimeUp += Timer_TimeUp;
+
+        // Start the timer
+        timer.StartTimer();
+    }
+
+    // Event handler
+    static void Timer_TimeUp(object sender, EventArgs e) {
+        Console.WriteLine("Time's up!");
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> In this example, the `Timer` class has an event `TimeUp`, which is
+                            triggered when the timer reaches zero. The `Program` class subscribes to this event and
+                            defines
+                            an event handler `Timer_TimeUp` that runs when the event is triggered.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Introduction to constructors</h2>
+            <ul>
+                <li><strong>What is a constructor?</strong>
+                    <p>A constructor is a special method used to initialize objects when they are created. It is called
+                        automatically when an object is instantiated from a class. Constructors help set up the initial
+                        state of the object.</p>
+                    <p>Constructors do not have a return type (not even void) and must have the same name as the class
+                        they belong to.</p>
+                    <p><em>Syntax:</em>
+                    <pre>
+                        <code>
+class ClassName {
+    // Constructor
+    public ClassName() {
+        // Initialization code
+    }
+}
+                        </code>
+                    </pre>
+                    </p>
+                    <p><em>Example:</em> Here's an example of a simple constructor.</p>
+                    <pre>
+                        <code>
+class Person {
+    private string name;
+
+    // Constructor to initialize the name field
+    public Person(string name) {
+        this.name = name;
+    }
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+                        </code>
+                    </pre>
+                    <p><em>Explanation:</em> The `Person` class has a constructor that takes a `string` parameter to
+                        initialize the `name` field when a new object is created.</p>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Default constructors vs parameterized constructors</h3>
+                <ul>
+                    <li><strong>Default Constructor</strong>
+                        <p>A default constructor is a constructor that does not take any parameters. It initializes an
+                            object with default values.</p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Default constructor
+    public ClassName() {
+        // Initialization code with default values
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Example:</em> Here's a default constructor.</p>
+                        <pre>
+                            <code>
+class Person {
+    private string name;
+
+    // Default constructor
+    public Person() {
+        name = "Unknown";  // Default value
+    }
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> The `Person` class has a default constructor that sets the `name` to
+                            `"Unknown"` if no value is provided during object creation.</p>
+                    </li>
+                    <li><strong>Parameterized Constructor</strong>
+                        <p>A parameterized constructor takes one or more arguments and allows you to initialize an
+                            object
+                            with specific values at the time of creation.</p>
+                        <pre>
+                            <code>
+class ClassName {
+    // Parameterized constructor
+    public ClassName(type parameter1, type parameter2) {
+        // Initialization code with specific values
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Example:</em> Here's a parameterized constructor.</p>
+                        <pre>
+                            <code>
+class Person {
+    private string name;
+    private int age;
+
+    // Parameterized constructor
+    public Person(string name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void DisplayInfo() {
+        Console.WriteLine("Name: " + name);
+        Console.WriteLine("Age: " + age);
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> The `Person` class has a parameterized constructor that takes `name`
+                            and
+                            `age` as parameters to initialize the object.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Constructor overloading</h3>
+                <ul>
+                    <li><strong>What is Constructor Overloading?</strong>
+                        <p>Constructor overloading refers to having multiple constructors in a class with different
+                            parameter lists. This allows you to create objects in different ways depending on the
+                            provided
+                            arguments.</p>
+                        <p>The constructors must differ in the number or type of parameters, but they must have the same
+                            name as the class.</p>
+                        <pre>
+                        <code>
+class ClassName {
+    // Overloaded constructors
+    public ClassName() {
+        // Default constructor
+    }
+
+    public ClassName(type parameter) {
+        // Constructor with one parameter
+    }
+
+    public ClassName(type parameter1, type parameter2) {
+        // Constructor with two parameters
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Example:</em> Here's an example of constructor overloading.</p>
+                        <pre>
+                        <code>
+class Person {
+    private string name;
+    private int age;
+
+    // Default constructor
+    public Person() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    // Parameterized constructor with name
+    public Person(string name) {
+        this.name = name;
+        age = 0;
+    }
+
+    // Parameterized constructor with name and age
+    public Person(string name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void DisplayInfo() {
+        Console.WriteLine("Name: " + name);
+        Console.WriteLine("Age: " + age);
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `Person` class demonstrates constructor overloading with three
+                            constructors: a default constructor, a constructor that takes only the `name`, and a
+                            constructor
+                            that takes both `name` and `age`.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Defining Scope & Visibility</h2>
+            <p>In object-oriented programming, access modifiers are used to set the visibility and accessibility of
+                class members (fields, properties, methods, etc.). By using the right access modifier, you can control
+                which parts of your class are accessible from outside the class and ensure that sensitive data is
+                protected while maintaining functionality.</p>
+            <div class="in">
+                <h3>Understanding access modifiers (public, private, protected, internal, protected internal)</h3>
+                <ul>
+                    <li><strong>What are Access Modifiers?</strong>
+                        <p>Access modifiers control the visibility and accessibility of class members to other classes
+                            or
+                            code outside of the class. The main access modifiers in C# are:</p>
+                        <ul>
+                            <li><strong>public:</strong> Allows access from anywhere, both inside and outside the class.
+                            </li>
+                            <li><strong>private:</strong> Restricts access to the class itself. No external class or
+                                object
+                                can access it.</li>
+                            <li><strong>protected:</strong> Allows access within the class and by derived (child)
+                                classes.
+                            </li>
+                            <li><strong>internal:</strong> Allows access within the same assembly (project), but not
+                                outside
+                                of it.</li>
+                            <li><strong>protected internal:</strong> Allows access to derived classes and classes within
+                                the
+                                same assembly.</li>
+                        </ul>
+                        <p><em>Syntax:</em>
+                        <pre>
+                        <code>
+class ClassName {
+    // Access modifier examples
+    public string publicField;
+    private int privateField;
+    protected string protectedField;
+    internal string internalField;
+    protected internal string protectedInternalField;
+}
+                        </code>
+                    </pre>
+                        </p>
+                        <p><em>Explanation:</em> The above code snippet demonstrates the declaration of class members
+                            with
+                            different access modifiers.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Controlling visibility and accessibility of class members</h3>
+                <ul>
+                    <li><strong>Public Access</strong>
+                        <p>When a class member is declared as <code>public</code>, it can be accessed from anywhere in
+                            the
+                            program, both within the class and from outside the class.</p>
+                        <pre>
+                            <code>
+class Person {
+    public string name;
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+
+class Program {
+    static void Main() {
+        Person person = new Person();
+        person.name = "John";  // Accessible because it's public
+        person.DisplayName();
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `name` field and `DisplayName()` method are declared as `public`,
+                            which
+                            allows them to be accessed directly from the `Program` class.</p>
+                    </li>
+
+                    <li><strong>Private Access</strong>
+                        <p>When a class member is declared as <code>private</code>, it can only be accessed within the
+                            class
+                            that defines it. It is not visible or accessible from outside the class.</p>
+                        <pre>
+                            <code>
+class Person {
+    private string name;
+
+    public void SetName(string name) {
+        this.name = name;  // Private field accessed via a public method
+    }
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+
+class Program {
+    static void Main() {
+        Person person = new Person();
+        person.SetName("Alice");  // Accessing private field through a public method
+        person.DisplayName();
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `name` field is private, so it can only be accessed within the
+                            `Person`
+                            class. We use the `SetName()` method (which is public) to assign a value to the private
+                            field.
+                        </p>
+                    </li>
+
+                    <li><strong>Protected Access</strong>
+                        <p>The <code>protected</code> modifier allows access to a class member only within the class
+                            that
+                            defines it and any derived (child) classes.</p>
+                        <pre>
+                        <code>
+class Animal {
+    protected string name;
+
+    public Animal(string name) {
+        this.name = name;
+    }
+}
+
+class Dog : Animal {
+    public Dog(string name) : base(name) {}
+
+    public void DisplayInfo() {
+        Console.WriteLine("Dog's name: " + name);  // Accessing protected field in derived class
+    }
+}
+
+class Program {
+    static void Main() {
+        Dog dog = new Dog("Max");
+        dog.DisplayInfo();
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `name` field is protected, so it can be accessed in the derived
+                            `Dog`
+                            class but not from outside the class hierarchy.</p>
+                    </li>
+
+                    <li><strong>Internal Access</strong>
+                        <p>The <code>internal</code> modifier allows access to a class member only within the same
+                            assembly
+                            (i.e., project). It is not accessible from other assemblies, even if they reference the
+                            current
+                            assembly.</p>
+                        <pre>
+                        <code>
+class Person {
+    internal string name;
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+
+class Program {
+    static void Main() {
+        Person person = new Person();
+        person.name = "John";  // Accessible because it's internal within the same assembly
+        person.DisplayName();
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `name` field is marked as internal, meaning it is accessible within
+                            the
+                            same project or assembly but not from other projects.</p>
+                    </li>
+
+                    <li><strong>Protected Internal Access</strong>
+                        <p>The <code>protected internal</code> modifier combines the features of both
+                            <code>protected</code>
+                            and <code>internal</code>. It allows access to class members from derived classes or from
+                            any
+                            class within the same assembly.
+                        </p>
+                        <pre>
+                        <code>
+class Person {
+    protected internal string name;
+
+    public void DisplayName() {
+        Console.WriteLine("Name: " + name);
+    }
+}
+
+class Program {
+    static void Main() {
+        Person person = new Person();
+        person.name = "Alice";  // Accessible because it's protected internal within the same assembly
+        person.DisplayName();
+    }
+}
+                        </code>
+                    </pre>
+                        <p><em>Explanation:</em> The `name` field is accessible in the `Program` class because it is
+                            within
+                            the same assembly and the field is marked as `protected internal`.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Garbage Collection</h2>
+            <p>Garbage collection in C# is an automatic memory management process. The garbage collector (GC) helps in
+                freeing up memory by removing objects that are no longer in use. This eliminates the need for manual
+                memory management and helps in preventing memory leaks and resource exhaustion.</p>
+            <div class="in">
+                <h3>What is garbage collection?</h3>
+                <ul>
+                    <li><strong>Definition:</strong>
+                        <p>Garbage collection is the process by which C# automatically reclaims memory occupied by
+                            objects
+                            that are no longer accessible. The garbage collector works by identifying objects that are
+                            not
+                            referenced by any part of the program and cleaning them up to free memory resources.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+GC.Collect();  // Force the garbage collector to run (rarely needed)
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>GC.Collect()</code> method forces the garbage collector to
+                            run,
+                            but it is generally not recommended to call it manually. The garbage collector runs
+                            automatically in the background when needed.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>How C# handles memory management through the garbage collector</h3>
+                <ul>
+                    <li><strong>Memory management in C#</strong>
+                        <p>In C#, memory management is automatically handled by the garbage collector (GC). The GC works
+                            in
+                            the background to manage the heap (where objects are stored) and ensures that objects no
+                            longer
+                            in use are removed. It tracks object references and cleans up memory when no references to
+                            an
+                            object remain.</p>
+                        <p><em>Key points about GC in C#:</em>
+                        <ul>
+                            <li>The garbage collector automatically frees memory when objects are no longer referenced.
+                            </li>
+                            <li>Objects are allocated memory on the heap.</li>
+                            <li>The garbage collector uses generations to optimize performance, grouping objects based
+                                on
+                                their lifetimes (young, old, etc.).</li>
+                        </ul>
+                        </p>
+                        <pre>
+                            <code>
+class Example {
+    public void CreateObject() {
+        // Object will be eligible for garbage collection once it goes out of scope
+        Example obj = new Example();
+    }
+}
+
+class Program {
+    static void Main() {
+        Example example = new Example();
+        example.CreateObject();  // The obj object will be eligible for garbage collection after this
+    }
+}
+                            </code>
+                        </pre>
+                        <p><em>Explanation:</em> In the above example, the <code>obj</code> object will be eligible for
+                            garbage collection once it goes out of scope. The GC will automatically remove the object
+                            from
+                            memory when it is no longer referenced.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Managing memory efficiently in OOP</h3>
+                <ul>
+                    <li><strong>Efficient memory management:</strong>
+                        <p>To manage memory efficiently, developers should follow best practices to ensure that objects
+                            are
+                            not unnecessarily holding onto memory resources. C# provides features like
+                            <code>Dispose()</code> and the <code>using</code> statement to help manage resources
+                            efficiently, particularly for unmanaged resources.
+                        </p>
+                        <p><em>Example of using the Dispose pattern:</em>
+                        <pre>
+                            <code>
+class Resource : IDisposable {
+    private bool disposed = false;
+
+    public void Dispose() {
+        if (!disposed) {
+            // Free unmanaged resources here
+            disposed = true;
+        }
+        GC.SuppressFinalize(this);  // Prevent GC from calling finalizer
+    }
+
+    ~Resource() {
+        Dispose();
+    }
+}
+
+class Program {
+    static void Main() {
+        using (Resource resource = new Resource()) {
+            // Use resource here
+        }  // Dispose will be automatically called when exiting the using block
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Dispose()</code> method is used to release unmanaged
+                            resources
+                            explicitly. The <code>using</code> statement ensures that the <code>Dispose()</code> method
+                            is
+                            automatically called when the resource is no longer needed, preventing memory leaks.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Inheritance and Polymorphism</h2>
+            <p>Inheritance and polymorphism are core concepts in object-oriented programming (OOP) that promote code
+                reuse and flexibility. Inheritance allows one class to inherit members (fields, properties, methods)
+                from another, while polymorphism enables the same method to behave differently depending on the object
+                it is acting on.</p>
+            <div class="in">
+                <h3>Inheritance: Creating derived classes from base classes</h3>
+                <ul>
+                    <li><strong>What is Inheritance?</strong>
+                        <p>Inheritance allows a class to derive properties and behaviors from another class. The class
+                            that
+                            inherits is called the derived class, and the class it inherits from is called the base
+                            class.
+                            This promotes code reuse and allows for creating more specialized classes based on general
+                            ones.
+                        </p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class BaseClass {
+    public void DisplayMessage() {
+        Console.WriteLine("Message from Base Class");
+    }
+}
+
+class DerivedClass : BaseClass {
+    // Derived class can use methods and properties from BaseClass
+    public void AdditionalMethod() {
+        Console.WriteLine("Additional method in Derived Class");
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> In this example, <code>DerivedClass</code> inherits the method
+                            <code>DisplayMessage()</code> from <code>BaseClass</code>. The derived class can also have
+                            additional methods.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Polymorphism: Using the same method signature for different implementations</h3>
+                <ul>
+                    <li><strong>What is Polymorphism?</strong>
+                        <p>Polymorphism allows objects of different types to be treated as objects of a common base
+                            type. It
+                            enables the same method signature to be used with different implementations depending on the
+                            object type. Polymorphism can be achieved through method overriding or method overloading.
+                        </p>
+                        <p><em>Types of Polymorphism:</em>
+                        <ul>
+                            <li><strong>Method Overloading:</strong> Defining multiple methods with the same name but
+                                different parameters.</li>
+                            <li><strong>Method Overriding:</strong> Redefining a method in a derived class that was
+                                already
+                                defined in a base class.</li>
+                        </ul>
+                        </p>
+
+                        <h4>Method Overloading</h4>
+                        <p><em>Example of Method Overloading:</em>
+                        <pre>
+                            <code>
+class Calculator {
+    public int Add(int a, int b) {
+        return a + b;
+    }
+
+    public double Add(double a, double b) {
+        return a + b;
+    }
+}
+
+class Program {
+    static void Main() {
+        Calculator calc = new Calculator();
+        Console.WriteLine(calc.Add(2, 3));  // Calls Add(int, int)
+        Console.WriteLine(calc.Add(2.5, 3.5));  // Calls Add(double, double)
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The method <code>Add()</code> is overloaded in the
+                            <code>Calculator</code>
+                            class to handle both integer and double parameters, providing different implementations
+                            depending on the argument types.
+                        </p>
+
+                        <h4>Method Overriding</h4>
+                        <p><em>Example of Method Overriding:</em>
+                        <pre>
+                            <code>
+class Animal {
+    public virtual void MakeSound() {
+        Console.WriteLine("Animal sound");
+    }
+}
+
+class Dog : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Bark");
+    }
+}
+
+class Program {
+    static void Main() {
+        Animal animal = new Animal();
+        animal.MakeSound();  // Outputs: Animal sound
+        
+        Dog dog = new Dog();
+        dog.MakeSound();  // Outputs: Bark
+        
+        Animal animalDog = new Dog();
+        animalDog.MakeSound();  // Outputs: Bark (polymorphism in action)
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> In this example, the <strong>Dog</strong> class overrides the
+                            <strong>MakeSound()</strong> method from the <strong>Animal</strong> class. When called on a
+                            <strong>Dog</strong> object, the overridden method executes. This is an example of
+                            polymorphism
+                            where the method behavior changes based on the object type, even though the same method name
+                            is
+                            used.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Overloading Methods</h2>
+            <p>Method overloading is a feature in C# that allows you to define multiple methods with the same name but
+                different parameter types, number of parameters, or both. This enables the method to perform similar
+                operations on different types of data, increasing flexibility and improving code readability.</p>
+            <div class="in">
+                <h3>Method overloading: Defining multiple methods with the same name but different parameters</h3>
+                <ul>
+                    <li><strong>What is Method Overloading?</strong>
+                        <p>Method overloading allows a class to have multiple methods with the same name but different
+                            signatures. The method signature is determined by the number and types of parameters. The
+                            compiler differentiates between these methods based on the parameters passed during the
+                            method
+                            call.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class MyClass {
+    public int Add(int a, int b) {
+        return a + b;
+    }
+
+    public double Add(double a, double b) {
+        return a + b;
+    }
+
+    public string Add(string a, string b) {
+        return a + " " + b;
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> In this example, the method <code>Add()</code> is overloaded to handle
+                            different parameter types: integers, doubles, and strings. Each version of the method
+                            performs
+                            the same operation (addition), but on different types of data.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Practical use cases of method overloading</h3>
+                <ul>
+                    <li><strong>Use case 1: Handling different data types with the same method name</strong>
+                        <p>Method overloading is particularly useful when you want to perform the same operation on
+                            different types of data without having to create separate method names for each data type.
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Display {
+    public void Show(int number) {
+        Console.WriteLine("Integer: " + number);
+    }
+
+    public void Show(string message) {
+        Console.WriteLine("String: " + message);
+    }
+
+    public void Show(double value) {
+        Console.WriteLine("Double: " + value);
+    }
+}
+
+class Program {
+    static void Main() {
+        Display display = new Display();
+        display.Show(100);  // Calls Show(int)
+        display.Show("Hello, World!");  // Calls Show(string)
+        display.Show(3.14);  // Calls Show(double)
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Show()</code> method is overloaded to handle three different
+                            types of input: integers, strings, and doubles. This way, the same method name is used for
+                            different types of data without needing to create separate method names like
+                            <code>ShowInt()</code>, <code>ShowString()</code>, etc.
+                        </p>
+                    </li>
+
+                    <li><strong>Use case 2: Performing operations based on the number of parameters</strong>
+                        <p>Method overloading is also useful when performing operations that require different numbers
+                            of
+                            parameters. This allows the same method name to handle cases where the number of parameters
+                            may
+                            vary.</p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Calculator {
+    public int Multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int Multiply(int a, int b, int c) {
+        return a * b * c;
+    }
+}
+
+class Program {
+    static void Main() {
+        Calculator calc = new Calculator();
+        Console.WriteLine(calc.Multiply(2, 3));  // Calls Multiply(int, int)
+        Console.WriteLine(calc.Multiply(2, 3, 4));  // Calls Multiply(int, int, int)
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Multiply()</code> method is overloaded to handle
+                            multiplication
+                            of two or three integers. The correct method is selected based on the number of parameters
+                            passed during the method call.</p>
+                    </li>
+
+                    <li><strong>Use case 3: Default values with overloaded methods</strong>
+                        <p>You can combine method overloading with optional parameters to create methods that behave
+                            differently based on the parameters passed.</p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Logger {
+    public void Log(string message) {
+        Console.WriteLine("Log: " + message);
+    }
+
+    public void Log(string message, int level) {
+        Console.WriteLine("Log Level " + level + ": " + message);
+    }
+}
+
+class Program {
+    static void Main() {
+        Logger logger = new Logger();
+        logger.Log("System started.");  // Calls Log(string)
+        logger.Log("System error.", 2);  // Calls Log(string, int)
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Log()</code> method is overloaded to accept either a single
+                            string message or a string message with a log level. This provides flexibility in logging
+                            without requiring separate method names for different log levels.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Error Handling and Exception Management</h2>
+            <p>In C#, error handling and exception management are crucial for building reliable applications. Exceptions
+                are runtime errors that disrupt the normal flow of the program. By using the <strong>try</strong>,
+                <strong>catch</strong>, and <strong>finally</strong> blocks, we can catch and handle exceptions
+                gracefully.
+                Additionally, we can create custom exceptions to handle specific error scenarios.
+            </p>
+            <div class="in">
+                <h3>Understanding exceptions in C#</h3>
+                <ul>
+                    <li><strong>What are exceptions?</strong>
+                        <p>Exceptions are abnormal events that occur during the execution of a program, often due to
+                            runtime
+                            errors like division by zero, file access issues, or invalid input. These errors can cause a
+                            program to crash unless they are caught and handled.</p>
+                        <p><em>Common exception types:</em>
+                        <ul>
+                            <li><strong>System.Exception</strong>: The base class for all exceptions.</li>
+                            <li><strong>System.ArgumentException</strong>: Occurs when a method receives invalid
+                                arguments.
+                            </li>
+                            <li><strong>System.IO.IOException</strong>: Occurs when there is an error with file I/O
+                                operations.</li>
+                            <li><strong>System.NullReferenceException</strong>: Occurs when trying to use a reference
+                                that
+                                is null.</li>
+                        </ul>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Throwing exceptions using the throw keyword</h3>
+                <ul>
+                    <li><strong>What is the <strong>throw</strong> keyword?</strong>
+                        <p>The <strong>throw</strong> keyword in C# is used to explicitly throw an exception, signaling
+                            that
+                            something has gone wrong in the program. You can throw a predefined exception or create a
+                            new
+                            one.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+throw new Exception("An error occurred.");
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Program {
+    static void Main() {
+        try {
+            int x = 5;
+            if (x == 5) {
+                throw new InvalidOperationException("Invalid operation due to x being 5.");
+            }
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> In this example, the <code>throw</code> keyword is used to manually
+                            throw
+                            an <code>InvalidOperationException</code> when the variable <code>x</code> is equal to 5.
+                            The
+                            exception is caught by the <code>catch</code> block and its message is displayed.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Handling exceptions with try...catch...finally blocks</h3>
+                <ul>
+                    <li><strong>What are <code>try</code>, <code>catch</code>, and <code>finally</code> blocks?</strong>
+                        <p>The <code>try</code> block contains code that might throw an exception. The
+                            <code>catch</code>
+                            block handles the exception if it occurs. The <code>finally</code> block, if used, will
+                            always
+                            execute, regardless of whether an exception was thrown or not, making it ideal for cleanup
+                            operations.
+                        </p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+try {
+    // Code that may throw an exception
+} catch (ExceptionType ex) {
+    // Code to handle the exception
+} finally {
+    // Cleanup code (optional)
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Program {
+    static void Main() {
+        try {
+            int[] numbers = { 1, 2, 3 };
+            Console.WriteLine(numbers[5]);  // This will throw an exception
+        }
+        catch (IndexOutOfRangeException ex) {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+        finally {
+            Console.WriteLine("This will always execute.");
+        }
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The program attempts to access an element of the array that is out of
+                            bounds, which throws an <code>IndexOutOfRangeException</code>. The <code>catch</code> block
+                            handles the exception, and the <code>finally</code> block executes regardless of whether an
+                            exception was thrown or not, printing a cleanup message.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Custom exceptions in C#</h3>
+                <ul>
+                    <li><strong>What are custom exceptions?</strong>
+                        <p>Custom exceptions are user-defined exceptions that allow you to create more specific error
+                            messages for your application. Custom exceptions inherit from the base
+                            <code>Exception</code>
+                            class and can include additional data or functionality.
+                        </p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class MyCustomException : Exception {
+    public MyCustomException(string message) : base(message) { }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class MyCustomException : Exception {
+    public MyCustomException(string message) : base(message) { }
+}
+
+class Program {
+    static void Main() {
+        try {
+            throw new MyCustomException("This is a custom exception.");
+        }
+        catch (MyCustomException ex) {
+            Console.WriteLine("Caught custom exception: " + ex.Message);
+        }
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> In this example, we define a custom exception
+                            <code>MyCustomException</code> that inherits from the <code>Exception</code> class. When the
+                            exception is thrown, it is caught by the <code>catch</code> block, and the custom message is
+                            displayed.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Simplifying Maintenance Through Inheritance</h2>
+            <p>Inheritance in C# simplifies code maintenance by allowing common functionality to be shared across
+                multiple classes. By using base classes and derived subclasses, we can avoid code duplication, improve
+                reusability, and make extending functionality easier. This promotes better organization and reduces the
+                overall complexity of the codebase.</p>
+
+            <h3>The role of inheritance in simplifying code maintenance</h3>
+            <ul>
+                <li><strong>Why inheritance simplifies maintenance:</strong>
+                    <p>Inheritance allows common functionality to be written once in a base class and inherited by
+                        derived classes. This reduces duplication and ensures that changes made to the base class are
+                        reflected in all subclasses, making maintenance easier and more efficient.</p>
+                    <p><em>Example:</em>
+                    <pre>
+<code>
+class Animal {
+    public void Eat() {
+        Console.WriteLine("Animal is eating.");
+    }
+}
+
+class Dog : Animal {
+    public void Bark() {
+        Console.WriteLine("Dog is barking.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Dog dog = new Dog();
+        dog.Eat();  // Inherited from Animal class
+        dog.Bark(); // Specific to Dog class
+    }
+}
+</code>
+        </pre>
+                    </p>
+                    <p><em>Explanation:</em> The <code>Eat()</code> method is defined once in the base class
+                        <code>Animal</code>. The derived class <code>Dog</code> inherits this method and adds its own
+                        functionality (the <code>Bark()</code> method). If the <code>Eat()</code> method needs to be
+                        updated, it only needs to be changed in one place (the <code>Animal</code> class).
+                    </p>
+                </li>
+            </ul>
+
+            <h3>Implementing a base class and deriving subclasses</h3>
+            <ul>
+                <li><strong>What is a base class?</strong>
+                    <p>A base class is a class that contains common functionality that can be shared by multiple derived
+                        classes. The derived classes inherit the members of the base class, either using them as-is or
+                        overriding them for custom behavior.</p>
+                    <p><em>Syntax:</em>
+                    <pre>
+<code>
+class BaseClass {
+    public void Display() {
+        Console.WriteLine("This is the base class.");
+    }
+}
+
+class DerivedClass : BaseClass {
+    // Can use Display method or override it
+}
+</code>
+        </pre>
+                    </p>
+                    <p><em>Example:</em>
+                    <pre>
+<code>
+class Shape {
+    public void Draw() {
+        Console.WriteLine("Drawing a shape.");
+    }
+}
+
+class Circle : Shape {
+    // Inherits Draw method
+}
+
+class Program {
+    static void Main() {
+        Circle circle = new Circle();
+        circle.Draw();  // Inherited from Shape class
+    }
+}
+</code>
+        </pre>
+                    </p>
+                    <p><em>Explanation:</em> The <code>Circle</code> class inherits the <code>Draw()</code> method from
+                        the base class <code>Shape</code>. This eliminates the need to redefine the drawing behavior for
+                        each specific shape.</p>
+                </li>
+            </ul>
+
+            <h3>Benefits of inheritance in extending functionality</h3>
+            <ul>
+                <li><strong>How inheritance makes extending functionality easier:</strong>
+                    <p>With inheritance, we can easily extend the functionality of existing classes. When new features
+                        or behavior are needed, we can create new derived classes that inherit the functionality of the
+                        base class and add or modify methods without changing the original base class code.</p>
+                    <p><em>Example:</em>
+                    <pre>
+<code>
+class Vehicle {
+    public void Start() {
+        Console.WriteLine("Vehicle is starting.");
+    }
+}
+
+class Car : Vehicle {
+    public void Drive() {
+        Console.WriteLine("Car is driving.");
+    }
+}
+
+class Truck : Vehicle {
+    public void LoadCargo() {
+        Console.WriteLine("Truck is loading cargo.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Car car = new Car();
+        car.Start();  // Inherited from Vehicle
+        car.Drive();  // Specific to Car
+
+        Truck truck = new Truck();
+        truck.Start();  // Inherited from Vehicle
+        truck.LoadCargo();  // Specific to Truck
+    }
+}
+</code>
+        </pre>
+                    </p>
+                    <p><em>Explanation:</em> Both <code>Car</code> and <code>Truck</code> classes inherit the
+                        <code>Start()</code> method from the base class <code>Vehicle</code>. They also extend
+                        functionality with their own methods (<code>Drive()</code> for the <code>Car</code> class and
+                        <code>LoadCargo()</code> for the <code>Truck</code> class). This enables easy extension of
+                        functionality without modifying the base class.
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Simplifying Maintenance Through Inheritance</h2>
+            <p>Inheritance in C# simplifies code maintenance by allowing common functionality to be shared across
+                multiple classes. By using base classes and derived subclasses, we can avoid code duplication, improve
+                reusability, and make extending functionality easier. This promotes better organization and reduces the
+                overall complexity of the codebase.</p>
+            <div class="in">
+                <h3>The role of inheritance in simplifying code maintenance</h3>
+                <ul>
+                    <li><strong>Why inheritance simplifies maintenance:</strong>
+                        <p>Inheritance allows common functionality to be written once in a base class and inherited by
+                            derived classes. This reduces duplication and ensures that changes made to the base class
+                            are
+                            reflected in all subclasses, making maintenance easier and more efficient.</p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Animal {
+    public void Eat() {
+        Console.WriteLine("Animal is eating.");
+    }
+}
+
+class Dog : Animal {
+    public void Bark() {
+        Console.WriteLine("Dog is barking.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Dog dog = new Dog();
+        dog.Eat();  // Inherited from Animal class
+        dog.Bark(); // Specific to Dog class
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Eat()</code> method is defined once in the base class
+                            <code>Animal</code>. The derived class <code>Dog</code> inherits this method and adds its
+                            own
+                            functionality (the <code>Bark()</code> method). If the <code>Eat()</code> method needs to be
+                            updated, it only needs to be changed in one place (the <code>Animal</code> class).
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Implementing a base class and deriving subclasses</h3>
+                <ul>
+                    <li><strong>What is a base class?</strong>
+                        <p>A base class is a class that contains common functionality that can be shared by multiple
+                            derived
+                            classes. The derived classes inherit the members of the base class, either using them as-is
+                            or
+                            overriding them for custom behavior.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class BaseClass {
+    public void Display() {
+        Console.WriteLine("This is the base class.");
+    }
+}
+
+class DerivedClass : BaseClass {
+    // Can use Display method or override it
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Shape {
+    public void Draw() {
+        Console.WriteLine("Drawing a shape.");
+    }
+}
+
+class Circle : Shape {
+    // Inherits Draw method
+}
+
+class Program {
+    static void Main() {
+        Circle circle = new Circle();
+        circle.Draw();  // Inherited from Shape class
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Circle</code> class inherits the <code>Draw()</code> method
+                            from
+                            the base class <code>Shape</code>. This eliminates the need to redefine the drawing behavior
+                            for
+                            each specific shape.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Benefits of inheritance in extending functionality</h3>
+                <ul>
+                    <li><strong>How inheritance makes extending functionality easier:</strong>
+                        <p>With inheritance, we can easily extend the functionality of existing classes. When new
+                            features
+                            or behavior are needed, we can create new derived classes that inherit the functionality of
+                            the
+                            base class and add or modify methods without changing the original base class code.</p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Vehicle {
+    public void Start() {
+        Console.WriteLine("Vehicle is starting.");
+    }
+}
+
+class Car : Vehicle {
+    public void Drive() {
+        Console.WriteLine("Car is driving.");
+    }
+}
+
+class Truck : Vehicle {
+    public void LoadCargo() {
+        Console.WriteLine("Truck is loading cargo.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Car car = new Car();
+        car.Start();  // Inherited from Vehicle
+        car.Drive();  // Specific to Car
+
+        Truck truck = new Truck();
+        truck.Start();  // Inherited from Vehicle
+        truck.LoadCargo();  // Specific to Truck
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> Both <strong>Car</strong> and <strong>Truck</strong> classes inherit
+                            the
+                            <strong>Start()</strong> method from the base class <strong>Vehicle</strong>. They also
+                            extend
+                            functionality with their own methods (<strong>Drive()</strong> for the <strong>Car</strong>
+                            class
+                            and
+                            <strong>LoadCargo()</strong> for the <strong>Truck</strong> class). This enables easy
+                            extension of
+                            functionality without modifying the base class.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Virtual and Abstract Methods</h2>
+            <p>Virtual and abstract methods provide mechanisms for defining methods in base classes that can be
+                overridden or implemented by derived classes. These features help create flexible and extensible code.
+                Virtual methods provide default implementations that can be overridden, while abstract methods must be
+                implemented by any derived class.</p>
+            <div class="in">
+                <h3>Defining virtual methods in base classes</h3>
+                <ul>
+                    <li><strong>What are virtual methods?</strong>
+                        <p>A virtual method is defined in a base class and provides a default implementation. Derived
+                            classes can override the virtual method to provide their own specific implementation.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class BaseClass {
+    public virtual void Display() {
+        Console.WriteLine("Base class display method.");
+    }
+}
+
+class DerivedClass : BaseClass {
+    public override void Display() {
+        Console.WriteLine("Derived class display method.");
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Animal {
+    public virtual void Speak() {
+        Console.WriteLine("Animal speaks.");
+    }
+}
+
+class Dog : Animal {
+    public override void Speak() {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Animal myAnimal = new Animal();
+        myAnimal.Speak();  // Output: Animal speaks.
+        
+        Dog myDog = new Dog();
+        myDog.Speak();     // Output: Dog barks.
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Speak()</code> method in the <code>Animal</code> class is
+                            virtual, meaning it can be overridden in the <code>Dog</code> class. When
+                            <code>Speak()</code>
+                            is called on a <code>Dog</code> object, it uses the overridden method, not the base class
+                            implementation.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Understanding abstract methods and classes</h3>
+                <ul>
+                    <li><strong>What are abstract methods?</strong>
+                        <p>Abstract methods are declared in an abstract class and do not provide an implementation.
+                            These
+                            methods must be implemented by any non-abstract class that inherits from the abstract class.
+                            An
+                            abstract class cannot be instantiated directly.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+abstract class BaseClass {
+    public abstract void Display();
+}
+
+class DerivedClass : BaseClass {
+    public override void Display() {
+        Console.WriteLine("Implemented in Derived class.");
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+abstract class Animal {
+    public abstract void Speak();
+}
+
+class Dog : Animal {
+    public override void Speak() {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Dog myDog = new Dog();
+        myDog.Speak();  // Output: Dog barks.
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Speak()</code> method in the <code>Animal</code> class is
+                            abstract, meaning that any derived class (like <code>Dog</code>) must provide an
+                            implementation
+                            for this method. The <code>Dog</code> class implements the <code>Speak()</code> method.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Differences between virtual and abstract methods</h3>
+                <ul>
+                    <li><strong>Key differences:</strong>
+                        <p><em>1. Implementation:</em> A virtual method provides a default implementation in the base
+                            class,
+                            while an abstract method does not provide an implementation and must be implemented by
+                            derived
+                            classes.</p>
+                        <p><em>2. Override requirement:</em> A virtual method can be optionally overridden in derived
+                            classes, whereas an abstract method must be overridden in all non-abstract derived classes.
+                        </p>
+                        <p><em>3. Class type:</em> A class containing a virtual method can be instantiated, whereas a
+                            class
+                            containing an abstract method must be abstract itself and cannot be instantiated directly.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Method Overriding</h2>
+            <p>Method overriding allows a derived class to provide its own implementation of a method that is already
+                defined in its base class. It ensures that the most specific implementation of a method is called, even
+                when using a base class reference. Method overriding is a key feature of polymorphism in object-oriented
+                programming.</p>
+            <div class="in">
+                <h3>Overriding base class methods in derived classes</h3>
+                <ul>
+                    <li><strong>What is method overriding?</strong>
+                        <p>Method overriding occurs when a derived class redefines a base class method with the same
+                            signature. It allows the derived class to provide a specific behavior that is different from
+                            the
+                            base class.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class BaseClass {
+    public virtual void Display() {
+        Console.WriteLine("Base class Display method.");
+    }
+}
+
+class DerivedClass : BaseClass {
+    public override void Display() {
+        Console.WriteLine("Derived class Display method.");
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Animal {
+    public virtual void Speak() {
+        Console.WriteLine("Animal speaks.");
+    }
+}
+
+class Dog : Animal {
+    public override void Speak() {
+        Console.WriteLine("Dog barks.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Animal myAnimal = new Animal();
+        myAnimal.Speak();  // Output: Animal speaks.
+
+        Animal myDog = new Dog();
+        myDog.Speak();  // Output: Dog barks.
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>Speak()</code> method in the <code>Animal</code> class is
+                            virtual
+                            and is overridden in the <code>Dog</code> class. When the <code>myDog</code> object (of type
+                            <code>Animal</code>) calls the <code>Speak()</code> method, the overridden version in
+                            <code>Dog</code> is executed.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Using the override keyword in derived classes</h3>
+                <ul>
+                    <li><strong>Why use the override keyword?</strong>
+                        <p>The <code>override</code> keyword explicitly indicates that a method in a derived class is
+                            overriding a virtual or abstract method in its base class. It ensures clarity and prevents
+                            accidental redefinition of methods that are not intended to be overridden.</p>
+                        <p><em>Syntax:</em>
+                        <pre>
+                            <code>
+class BaseClass {
+    public virtual void ShowMessage() {
+        Console.WriteLine("Base class message.");
+    }
+}
+
+class DerivedClass : BaseClass {
+    public override void ShowMessage() {
+        Console.WriteLine("Derived class message.");
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Vehicle {
+    public virtual void StartEngine() {
+        Console.WriteLine("Starting engine in Vehicle.");
+    }
+}
+
+class Car : Vehicle {
+    public override void StartEngine() {
+        Console.WriteLine("Starting engine in Car.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Vehicle myVehicle = new Car();
+        myVehicle.StartEngine();  // Output: Starting engine in Car.
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The <code>StartEngine()</code> method in <code>Vehicle</code> is
+                            overridden
+                            in the <code>Car</code> class using the <code>override</code> keyword. When a
+                            <code>Car</code>
+                            object (referenced as <code>Vehicle</code>) calls the method, the overridden version in
+                            <code>Car</code> is executed.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Practical examples of method overriding</h3>
+                <ul>
+                    <li><strong>Practical use case:</strong>
+                        <p>Consider a scenario where you have a base class defining a general behavior, and subclasses
+                            that
+                            specify the behavior for different types. Method overriding ensures that the correct
+                            implementation is called at runtime.</p>
+                        <p><em>Example:</em>
+                        <pre>
+                            <code>
+class Employee {
+    public virtual void CalculateSalary() {
+        Console.WriteLine("Calculating salary for general employee.");
+    }
+}
+
+class Manager : Employee {
+    public override void CalculateSalary() {
+        Console.WriteLine("Calculating salary for manager with bonuses.");
+    }
+}
+
+class Intern : Employee {
+    public override void CalculateSalary() {
+        Console.WriteLine("Calculating stipend for intern.");
+    }
+}
+
+class Program {
+    static void Main() {
+        Employee emp1 = new Manager();
+        emp1.CalculateSalary();  // Output: Calculating salary for manager with bonuses.
+
+        Employee emp2 = new Intern();
+        emp2.CalculateSalary();  // Output: Calculating stipend for intern.
+    }
+}
+                            </code>
+                        </pre>
+                        </p>
+                        <p><em>Explanation:</em> The base class <strong>Employee</strong> defines a virtual method
+                            <strong>CalculateSalary()</strong>. Subclasses <strong>Manager</strong> and
+                            <strong>Intern</strong>
+                            override
+                            this method to provide specific implementations. This enables polymorphism, where the
+                            appropriate method is called based on the actual type of the object.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
