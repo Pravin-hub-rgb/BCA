@@ -688,6 +688,7 @@ public class MainActivity extends AppCompatActivity {
                         <p><strong>Code Example:</strong></p>
                         <pre>
                             <code>
+// Toolbar - androidx.appcompat.widget wala
 Toolbar toolbar = findViewById(R.id.toolbar);
 setSupportActionBar(toolbar);
                             </code>
@@ -1607,20 +1608,22 @@ public class MainActivity extends AppCompatActivity {
         showAlertButton = findViewById(R.id.showAlertButton);
 
         // Set button click listener
-        showAlertButton.setOnClickListener(v -> {
-            // Create an AlertDialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Alert Box Example")
-                   .setMessage("This is a simple alert box.")
-                   .setPositiveButton("OK", (dialog, which) -> {
-                       // Action when OK button is clicked
-                       Toast.makeText(MainActivity.this, "OK clicked!", Toast.LENGTH_SHORT).show();
-                   })
-                   .setNegativeButton("Cancel", (dialog, which) -> {
-                       // Action when Cancel button is clicked
-                       Toast.makeText(MainActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
-                   })
-                   .show();
+        showAlertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Alert Box Example")
+                        .setMessage("This is a simple alert box.")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // Action when OK button is clicked
+                            Toast.makeText(MainActivity.this, "OK clicked!", Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton("Cancel", (dialog, which) -> {
+                            // Action when Cancel button is clicked
+                            Toast.makeText(MainActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
+                        })
+                        .show();
+            }
         });
     }
 }
