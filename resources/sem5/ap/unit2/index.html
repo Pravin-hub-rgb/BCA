@@ -37,7 +37,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="../unit3/index.html" class="link">Next Topic &rarr;</a>
                 <a href="../unit1/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
@@ -352,13 +352,14 @@ public class MainActivity extends AppCompatActivity {
         </div>
         <div class="wh">
             <h2>Service</h2>
-            <p>A Service in Android is a component that runs in the background to perform long-running operations
-                without needing to interact with the user. It doesn't provide a user interface but works to:
             <ul>
-                <li>Perform tasks like downloading data, playing music, or managing notifications.</li>
-                <li>Run even if the app is not in the foreground.</li>
+                <li>A Service in Android is a component that runs in the background to perform long-running operations
+                    without needing to interact with the user. It doesn't provide a user interface but works to:
+                    <ul>
+                        <li>Perform tasks like downloading data, playing music, or managing notifications.</li>
+                        <li>Run even if the app is not in the foreground.</li>
+                    </ul></li>
             </ul>
-            </p>
             <div class="in">
                 <h3>Types of Services:</h3>
                 <ol>
@@ -596,6 +597,7 @@ public class MainActivity extends AppCompatActivity {
             <code>
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -1658,8 +1660,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Create an IntentFilter to specify what the receiver should listen for
         IntentFilter myIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        // Register the BroadcastReceiver to start listening for Bluetooth state changes
         registerReceiver(myBroadcast, myIntent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(myBroadcast);
     }
 }
                     </code>
@@ -1718,6 +1728,34 @@ public class MyBroadcast extends BroadcastReceiver {
                 </pre>
                         </div>
                     </div>
+                    <ul>
+                        <li><strong>onReceive(Context context, Intent intent):</strong> 
+                            This is the core method of the BroadcastReceiver that is triggered whenever a matching broadcast is received. 
+                            It takes two parameters:
+                            <ul>
+                                <li><strong>Context context:</strong> 
+                                    This provides access to application-specific resources and services, such as showing a Toast, starting an activity, or accessing shared preferences.
+                                </li>
+                                <li><strong>Intent intent:</strong> 
+                                    This carries details about the broadcast, such as the action (e.g., BluetoothAdapter.ACTION_STATE_CHANGED) 
+                                    and any additional data (extras) included in the broadcast. 
+                                    The action helps identify what kind of event occurred.
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Action Handling:</strong> 
+                            The <code>getAction()</code> method is used to retrieve the type of broadcast. In this example, the receiver checks 
+                            if the action is <code>BluetoothAdapter.ACTION_STATE_CHANGED</code>, indicating a Bluetooth state change.
+                        </li>
+                        <li><strong>Extracting Data:</strong> 
+                            The <code>getIntExtra()</code> method extracts the Bluetooth state (e.g., ON, OFF) from the broadcast's intent. 
+                            The key <code>BluetoothAdapter.EXTRA_STATE</code> is used to access the state, and <code>BluetoothAdapter.ERROR</code> serves as a fallback value.
+                        </li>
+                        <li><strong>Switch Statement:</strong> 
+                            The state is handled using a switch statement. Based on the state, a Toast message is displayed to inform the user 
+                            whether Bluetooth is ON or OFF.
+                        </li>
+                    </ul>
                 </li>
             </ol>
             <p><strong>Unregistering the Receiver</strong></p>
