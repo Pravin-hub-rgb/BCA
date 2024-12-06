@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Encrption Algorithm</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Advanced Encrption Algorithm</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Advanced Encrption Algorithm</h1>
+        <p>Advanced Encryption Algorithms (AEA) are sophisticated techniques used to secure data and ensure
+            confidentiality in modern cryptographic systems. These algorithms are designed to provide robust protection
+            against unauthorized access by leveraging complex mathematical operations. This unit explores some of the
+            widely used encryption algorithms, such as Blowfish, International Data Encryption Algorithm (IDEA), and
+            RC-5, along with their unique features and applications. Additionally, it delves into key concepts like
+            Symmetric Key Distribution, which facilitates secure key sharing, and Random Number Generators, critical for
+            generating unpredictable keys. Lastly, the Placement of the Encryption Function is examined, highlighting
+            its significance in optimizing security and system performance.</p>
+        <div class="wh">
+            <h2>Blowfish Algorithm</h2>
+            <ul>
+                <li>Blowfish is a block cipher encryption algorithm.</li>
+                <li>It follows symmetric key cryptography, where the same key is used for both encryption and
+                    decryption.</li>
+                <li>Input size (block size) is fixed at 64 bits.</li>
+                <li>The key size is variable, ranging from 32 to 448 bits.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Properties</h3>
+                <ul>
+                    <li>Fast encryption and decryption process, making it suitable for real-time applications.</li>
+                    <li>Requires less memory, making it efficient for resource-constrained environments.</li>
+                    <li>Simple to understand and implement compared to other complex encryption algorithms.</li>
+                    <li>Highly secure due to the use of a variable-length key, allowing for flexibility in security
+                        strength.</li>
+                    <li>Resistant to known cryptographic attacks like brute force due to its key size flexibility.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Blowfish Algorithm Steps</h3>
+                <p>The Blowfish algorithm consists of two main steps:</p>
+                <ol>
+                    <li><strong>Key Generation</strong>: Generates subkeys and initializes the algorithm components.
+                    </li>
+                    <li><strong>Data Encryption</strong>: Encrypts plaintext using the generated keys and the block
+                        cipher process.</li>
+                </ol>
+            </div>
+
+            <div class="in">
+                <h3>Key Generation</h3>
+                <ol>
+                    <li>
+                        Keys are stored in an array:
+                        <ul>
+                            <li>Array elements: k1, k2, k3, ..., kn where 1 ≤ n ≤ 14.</li>
+                            <li>Each key block has a length of 32 bits.</li>
+                            <li>The total key length can be up to 448 bits (32 × 14), which is a multiple of 32.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Initialize the P-array:
+                        <ul>
+                            <li>The P-array consists of 18 subkeys: P1, P2, P3, ..., P18.</li>
+                            <li>Each element in the P-array is 32 bits long.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Initialize the S-boxes:
+                        <ul>
+                            <li>There are 4 S-boxes, each containing 256 entries.</li>
+                            <li>
+                                Example for S-box initialization:
+                                <ul>
+                                    <li>S1: s0, s1, ..., s255</li>
+                                    <li>S2: s0, s1, ..., s255</li>
+                                    <li>The same pattern applies for S3 and S4.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Initialize each element of the P-array and S-boxes with predefined hexadecimal values.</li>
+                    <li>
+                        Perform XOR operations to further initialize the P-array:
+                        <ul>
+                            <li>P1 = P1 XOR K1</li>
+                            <li>P2 = P2 XOR K2</li>
+                            <li>... (continue for all key values)</li>
+                            <li>When all 14 keys are used, restart from K1 for the remaining P-array elements.</li>
+                            <li>
+                                Example:
+                                <ul>
+                                    <li>P15 = P15 XOR K1</li>
+                                    <li>P18 = P18 XOR K4</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Process a 64-bit block of plaintext (initially all bits are 0) to generate subkeys:
+                        <ul>
+                            <li>Initial plaintext: (0, 0, 0, ..., 0)</li>
+                            <li>Subkeys are generated and used in the encryption process.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Data Encryption</h3>
+                <ul>
+                    <li>
+                        The plaintext size is 64 bits, which is divided into two halves:
+                        <ul>
+                            <li>The left half (L) consists of the first 32 bits.</li>
+                            <li>The right half (R) consists of the remaining 32 bits.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The encryption process involves the following steps:
+                        <ul>
+                            <li>The left half (L) is XORed with the first subkey (P1).</li>
+                            <li>The result of this XOR operation (denoted as `x`) is input to the function `F` to
+                                produce an output (denoted as `y`).</li>
+                            <li>The output `y` is XORed with the right half (R).</li>
+                            <li>After XORing, the left and right halves are swapped.</li>
+                            <li>This process is repeated for all 18 subkeys in the P-array (P1 to P18).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        After processing through all 18 rounds:
+                        <ul>
+                            <li>The final left (L) and right (R) halves are combined to form a 64-bit block of
+                                ciphertext.</li>
+                            <li>The swapping step ensures the encryption provides strong diffusion and security.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="../../images/cry23.jpeg" alt="">
+
+                <h3>Understanding the Function (F)</h3>
+                <ul>
+                    <li>
+                        The input to the function `F` is 32 bits, which is divided into four 8-bit segments:
+                        <ul>
+                            <li>Each 8-bit segment is independently processed by one of the four S-boxes (S1, S2, S3,
+                                S4).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The output of the S-boxes undergoes the following operations:
+                        <ul>
+                            <li>The output of S-box 1 is XORed with the output of S-box 2.</li>
+                            <li>The result of this XOR operation is then XORed with the output of S-box 3.</li>
+                            <li>Finally, the result is XORed with the output of S-box 4.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The final output of the function `F` is a 32-bit value (denoted as `y`), which is used in the
+                        encryption process.
+                    </li>
+                    <li>
+                        The purpose of the function `F` is to provide a non-linear transformation of the input,
+                        contributing to the algorithm's security by introducing confusion and diffusion.
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=ngqtEbxQLBE" target="_blank">Blowfish Algorithm &neArr;</a>
+            </li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
