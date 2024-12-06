@@ -345,6 +345,230 @@
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <h2>Symmetric Key Distribution</h2>
+            <ul>
+                <li>Symmetric key cryptography requires both sender and receiver to use the same secret key for
+                    encryption and decryption.</li>
+                <li>The major challenge lies in securely sharing this secret key between the communicating parties.</li>
+                <li>Several methods exist for key distribution, each with its own advantages and drawbacks.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Methods of Symmetric Key Distribution</h3>
+                <h4>1. Pre-Shared Key</h4>
+                <ul>
+                    <li>The secret key is manually shared between the sender and receiver before communication begins.
+                    </li>
+                    <li>This can be done using secure channels such as:
+                        <ul>
+                            <li>Face-to-face meetings.</li>
+                            <li>Delivery by trusted couriers.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Simple and direct for small-scale systems.</li>
+                            <li>Does not require additional infrastructure.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Not practical for large-scale or geographically distributed systems.</li>
+                            <li>Risk of key interception during transmission.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
+                <ul>
+                    <li>A trusted third party, called a Key Distribution Center (KDC), facilitates the secure exchange
+                        of keys.</li>
+                    <li>Steps:
+                        <ol>
+                            <li>The sender and receiver each establish a secure connection with the KDC.</li>
+                            <li>The KDC generates a unique session key for communication between the two parties.</li>
+                            <li>This session key is securely transmitted to both parties by the KDC.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Eliminates the need for direct key sharing between sender and receiver.</li>
+                            <li>Scalable for larger systems.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>The KDC becomes a single point of failure.</li>
+                            <li>Requires additional infrastructure and trust in the KDC.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
+                <ul>
+                    <li>Public key cryptography is used to securely exchange symmetric keys.</li>
+                    <li>Steps:
+                        <ol>
+                            <li>The sender encrypts the symmetric key with the receiver's public key.</li>
+                            <li>The encrypted key is transmitted to the receiver.</li>
+                            <li>The receiver decrypts the key using their private key.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Secure even over insecure channels.</li>
+                            <li>Scalable for large systems.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Requires a functioning PKI infrastructure.</li>
+                            <li>Introduces additional computational overhead.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>4. Diffie-Hellman Key Exchange</h4>
+                <ul>
+                    <li>A mathematical algorithm allows two parties to generate a shared symmetric key over an insecure
+                        channel.</li>
+                    <li>Steps:
+                        <ol>
+                            <li>Both parties agree on a public base and a public modulus.</li>
+                            <li>Each party selects a private key and generates a public value using the agreed
+                                parameters.</li>
+                            <li>They exchange public values and compute the shared secret key using their private key.
+                            </li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Secure key generation over insecure channels.</li>
+                            <li>No prior shared secret is required.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Vulnerable to man-in-the-middle attacks if authentication is not used.</li>
+                            <li>Limited to key agreement, not encryption itself.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Challenges in Symmetric Key Distribution</h3>
+                <ul>
+                    <li>Ensuring secure key transfer without interception.</li>
+                    <li>Managing keys in systems with a large number of users.</li>
+                    <li>Handling key revocation and replacement in case of compromise.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Random Number Generators in Cryptography</h2>
+            <ul>
+                <li>Random numbers are crucial in cryptography for tasks like key generation, nonce creation, and secure
+                    communication.</li>
+                <li>They ensure unpredictability, making cryptographic algorithms secure against attacks.</li>
+                <li>There are two main types of random number generators:
+                    <ul>
+                        <li><strong>True Random Number Generators (TRNGs)</strong></li>
+                        <li><strong>Pseudo-Random Number Generators (PRNGs)</strong></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Types of Random Number Generators</h3>
+
+                <h4>1. True Random Number Generators (TRNGs)</h4>
+                <ul>
+                    <li>Generate randomness based on physical phenomena such as:
+                        <ul>
+                            <li>Thermal noise.</li>
+                            <li>Electromagnetic interference.</li>
+                            <li>Radioactive decay.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Non-deterministic: Results cannot be predicted.</li>
+                            <li>Highly secure for cryptographic applications.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Slower than PRNGs due to dependency on physical events.</li>
+                            <li>Requires specialized hardware to collect randomness.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>2. Pseudo-Random Number Generators (PRNGs)</h4>
+                <ul>
+                    <li>Generate randomness using mathematical algorithms based on a seed value.</li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Deterministic: Output depends on the seed, making it reproducible if the seed is known.
+                            </li>
+                            <li>Faster than TRNGs and suitable for software implementations.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Less secure if the seed or algorithm is compromised.</li>
+                            <li>Not truly random, as the randomness relies on the algorithm's complexity.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Cryptographically Secure PRNGs (CSPRNGs)</h3>
+                <ul>
+                    <li>A special class of PRNGs designed for cryptographic applications.</li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Passes stringent randomness tests, ensuring unpredictability.</li>
+                            <li>Resilient against attacks, even if part of the output is known.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Examples:</strong>
+                        <ul>
+                            <li>Yarrow Algorithm.</li>
+                            <li>Fortuna Algorithm.</li>
+                            <li>Dual_EC_DRBG (now deprecated due to vulnerabilities).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Applications in Cryptography</h3>
+                <ul>
+                    <li><strong>Key Generation:</strong> Random numbers are used to generate cryptographic keys that are
+                        unpredictable.</li>
+                    <li><strong>Initialization Vectors (IVs):</strong> Randomness ensures that IVs are unique for each
+                        encryption operation.</li>
+                    <li><strong>Nonces:</strong> Unique random values prevent replay attacks in protocols.</li>
+                    <li><strong>Salt Values:</strong> Random salts ensure secure password hashing by preventing rainbow
+                        table attacks.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Challenges in Random Number Generation</h3>
+                <ul>
+                    <li><strong>Bias:</strong> Random numbers must be uniformly distributed without any bias.</li>
+                    <li><strong>Predictability:</strong> Ensuring unpredictability is critical, especially for PRNGs.
+                    </li>
+                    <li><strong>Entropy Source:</strong> TRNGs rely on sufficient entropy from physical phenomena, which
+                        can be limited.</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
@@ -356,7 +580,8 @@
                     &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=4Z0xa13oov4" target="_blank">RC-5 Algorithm Video lecture
                     &neArr;</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=4Z0xa13oov4" target="_blank">RC-5 Algorithm video lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=4Z0xa13oov4" target="_blank">RC-5 Algorithm video lecture
+                    &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>

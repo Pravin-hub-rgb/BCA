@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Function</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Hash Function</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Hash Function</h1>
+        <p>Hash functions are fundamental building blocks in modern cryptography, playing a pivotal role in ensuring
+            data security, integrity, and authentication across various digital systems. A hash function is a
+            mathematical algorithm that takes an input, such as a message or file, and produces a fixed-length string of
+            characters, known as a hash value or digest. This output is unique to the input data; even the slightest
+            change in the input results in a completely different hash. This property makes hash functions essential for
+            detecting unauthorized modifications to data, as any tampering becomes immediately apparent through a
+            mismatch in hash values.</p>
+        <p><strong>This topic is divided into several important areas for a deeper understanding:</strong></p>
+        <ol>
+            <li><strong>Message Authentication & Hash Functions:</strong> This section focuses on how hash functions are
+                used to verify the authenticity and integrity of messages, ensuring that they come from a legitimate
+                source and have not been altered in transit.
+                <ul>
+                    <li>Authentication Requirements: These outline the basic principles needed to establish trust in
+                        communication systems. The primary goals include verifying the sender’s identity, ensuring the
+                        message's content remains intact, and preventing unauthorized access or alterations.</li>
+                    <li>Authentication Functions: These are specific techniques used to meet authentication
+                        requirements. They often rely on cryptographic methods to ensure that the communication remains
+                        secure and trustworthy.</li>
+                    <li>Message Authentication Codes (MACs): A MAC is a cryptographic tool that combines a secret key
+                        with the message to generate a code. This code ensures that both the sender and recipient can
+                        verify the message’s authenticity and integrity, as only they possess the key required to
+                        generate or verify the MAC.</li>
+                    <li>Hash Functions: These are algorithms that provide a unique fingerprint for data. Hash functions
+                        are widely used in systems where data integrity is critical, such as verifying file downloads,
+                        securing passwords, and blockchain technology.</li>
+                    <li>Security of Hash Functions and MACs: This subtopic addresses potential vulnerabilities in hash
+                        functions and MACs, such as collision attacks (when two different inputs produce the same hash)
+                        and key management issues. It also explores strategies to enhance their robustness against such
+                        threats.</li>
+                </ul>
+            </li>
+            <li><strong>Specific Hash Algorithms:</strong> Two widely recognized hash algorithms are discussed in
+                detail:
+                <ul>
+                    <li>MD-5 (Message Digest Algorithm 5): This algorithm was once a popular choice for creating 128-bit
+                        hash values. It played a significant role in the early days of cryptography by offering a fast
+                        and efficient way to generate digests. However, its use has significantly declined due to
+                        vulnerabilities, such as susceptibility to collision attacks, making it unsuitable for
+                        high-security applications today.</li>
+                    <li>Secure Hash Algorithm (SHA-512): A member of the Secure Hash Algorithm family, SHA-512 generates
+                        a 512-bit hash value, offering a much higher level of security compared to older algorithms like
+                        MD-5. It is widely adopted in modern cryptographic applications, including SSL/TLS certificates,
+                        blockchain systems, and digital signatures, where robust data protection is critical.</li>
+                </ul>
+            </li>
+            <li><strong>Digital Signatures: </strong>
+                Digital signatures are advanced cryptographic tools used to verify the authenticity and integrity of
+                messages or digital documents. They are the digital equivalent of handwritten signatures, providing a
+                secure method for validating the identity of the sender and the originality of the data.
+                <ul>
+                    <li>Digital Signature Standard (DSS): This standard defines the framework for implementing secure
+                        digital signature schemes, ensuring consistency and reliability across different systems. It
+                        forms the basis for many digital signature protocols used today.</li>
+                    <li>Authentication Protocol: This refers to the specific steps and procedures involved in using
+                        digital signatures to validate the identity of a sender during communication. Authentication
+                        protocols are critical in scenarios like secure email communication, online transactions, and
+                        digital contract signing.</li>
+                    <li>Digital Signature Algorithm (DSA): DSA is a widely used cryptographic algorithm for creating
+                        digital signatures. It ensures that the signature is unique to the message and can be verified
+                        by the recipient without compromising security. DSA plays a crucial role in maintaining trust in
+                        digital interactions.</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="wh">
+            <h2>Message Authentication</h2>
+            <ul>
+                <li>Message authentication is the process of verifying the identity of the sender and ensuring the
+                    integrity of the message.</li>
+                <li>For example, if you work in Organization XYZ and receive a message from someone in Organization ABC,
+                    you need to verify that the message actually came from that person in ABC and was not altered during
+                    transmission.</li>
+                <li>Message authentication is crucial for preventing unauthorized access or tampering of sensitive
+                    information.</li>
+                <li>How is this done? Through an authenticator, which can be a number, a hash code, an alphabetic
+                    string, or an alphanumeric string.</li>
+                <li>These authenticators are generated by an authentication function to ensure both message integrity
+                    and sender authenticity.</li>
+                <li>There are three main types of authentication functions:
+                    <ol>
+                        <li><strong>Message Encryption</strong></li>
+                        <li><strong>Message Authentication Code (MAC)</strong></li>
+                        <li><strong>Hash Functions (H)</strong></li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Message Encryption</h3>
+                <ul>
+                    <li>Encryption is the process of converting plaintext into ciphertext using an encryption algorithm
+                        and a secret key.</li>
+                    <li>In the context of message authentication, the encrypted message (ciphertext) serves as proof of
+                        authenticity, as only the intended recipient (who has the decryption key) can read the message.
+                    </li>
+                    <li>This method ensures that even if the message is intercepted, an attacker cannot read it without
+                        the decryption key, which can be used as an authenticator.</li>
+                    <li>However, message encryption alone does not verify the source of the message, which is why
+                        additional methods like MAC and hash functions are used for complete message authentication.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Message Authentication Code (MAC)</h3>
+                <ul>
+                    <li>A Message Authentication Code (MAC) is a fixed-length code generated by an authentication
+                        function, which takes the message and a secret key as inputs.</li>
+                    <li>The MAC ensures both the integrity and authenticity of the message. If the message changes
+                        during transmission, the MAC will not match when verified by the recipient.</li>
+                    <li>The formula for a MAC is as follows: <code>C(MK) = MAC</code>, where:
+                        <ul>
+                            <li><strong>C</strong> represents the authentication function.</li>
+                            <li><strong>M</strong> is the message being sent.</li>
+                            <li><strong>K</strong> is the secret key shared between the sender and receiver.</li>
+                            <li>The <strong>output (o/p)</strong> is the MAC code, which acts as a "signature" for the
+                                message.</li>
+                        </ul>
+                    </li>
+                    <li>MACs are commonly used in various security protocols like SSL/TLS to verify the authenticity and
+                        integrity of transmitted messages.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Hash Functions (H)</h3>
+                <ul>
+                    <li>Hash functions are similar to MACs but do not use a secret key. Instead, they take the message
+                        and produce a fixed-length hash code.</li>
+                    <li>The output of a hash function is typically referred to as the hash value or hash code.</li>
+                    <li>The formula for a hash function is as follows: <code>H(M) = h</code>, where:
+                        <ul>
+                            <li><strong>H</strong> represents the hash function.</li>
+                            <li><strong>M</strong> is the message being sent.</li>
+                            <li><strong>h</strong> is the resulting hash code, a fixed-length string representing the
+                                message.</li>
+                        </ul>
+                    </li>
+                    <li>The hash code serves as a fingerprint for the message. Even a small change in the message will
+                        result in a completely different hash code, making it easy to detect any tampering.</li>
+                    <li>Hash functions are widely used in digital signatures, blockchain technologies, and various
+                        security protocols to ensure data integrity.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Comparison of Authentication Functions</h3>
+                <ul>
+                    <li><strong>Message Encryption</strong> provides confidentiality but does not authenticate the
+                        sender. It ensures that only the intended recipient can read the message.</li>
+                    <li><strong>MAC</strong> offers both authenticity and integrity. It ensures that the message has not
+                        been altered and that it was sent by the claimed sender, provided the secret key remains secure.
+                    </li>
+                    <li><strong>Hash Functions</strong> ensure message integrity by producing a unique hash value for a
+                        given message. They cannot verify the sender's identity unless combined with digital signatures
+                        or other forms of authentication.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>MD-5 (Message Digest Algorithm 5)</h2>
+            <ul>
+                <li>
+                    MD5 is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value. It is
+                    primarily used for verifying data integrity and generating checksums for data comparison.
+                </li>
+                <li>Developed by Ron Rivest in 1991 as an improvement over previous hash functions like MD4.</li>
+                <li>It is fast, making it ideal for applications requiring quick hashing, but it produces a 128-bit
+                    message digest, which is relatively short by modern standards.</li>
+                <li>Although MD5 is still used in some contexts, it is no longer considered secure against collision
+                    attacks due to vulnerabilities discovered over time. However, it is still widely used for file
+                    integrity checks and basic hashing tasks.</li>
+            </ul>
+            <div class="in">
+                <h3>Working Steps:</h3>
+                <ol>
+                    <li>
+                        <strong>Padding:</strong> Padding involves adding extra bits to the original message to ensure
+                        that its total length is 64 bits less than an exact multiple of 512 bits.
+                        <br><strong>Example:</strong>
+                        <br>Original message length = 1000 bits
+                        <br>Calculate the next multiple of 512 that is greater than 1000 bits:
+                        <br>512 * 3 = 1536 bits
+                        <br>Subtract 64 bits from 1536 to get 1472 bits
+                        <br>Padding needed = 1472 - 1000 = 472 bits
+                        <br>Thus, 472 bits of padding are added to the original 1000-bit message to make the total
+                        length 1472 bits.
+                    </li>
+                    <li>
+                        <strong>Appending the Original Length:</strong> After padding, the original length of the
+                        message (before padding) is appended to the message.
+                        <br>Calculate the original message length modulo 2<sup>64</sup>:
+                        <br>For example, if the original length is 1000 bits, calculate 1000 mod 2<sup>64</sup>.
+                        <br>The result is a 64-bit representation of the original message length.
+                        <br>This step ensures that the total length of the message (original + padding + length) becomes
+                        an exact multiple of 512 bits.
+                    </li>
+                    <li>
+                        <strong>Dividing into 512-bit Blocks:</strong> The padded and length-appended message is then
+                        divided into 512-bit blocks.
+                        <br>For example, a message of 1472 bits will be divided into three 512-bit blocks.
+                    </li>
+                    <li>
+                        <strong>Initializing the Chaining Variables:</strong> MD5 uses four 32-bit chaining variables,
+                        denoted as A, B, C, and D. These variables are initialized with specific predefined hexadecimal
+                        values:
+                        <br>A = 0x67452301
+                        <br>B = 0xefcdab89
+                        <br>C = 0x98badcfe
+                        <br>D = 0x10325476
+                        <br>These initial values serve as the starting point for the hashing process.
+                    </li>
+                    <li>
+                        <strong>Processing Each 512-bit Block:</strong> Each 512-bit block undergoes a series of
+                        transformations to update the chaining variables.
+                        <br>Steps involved:
+                        <ol>
+                            <li><strong>Copy Chaining Variables:</strong> The current values of A, B, C, and D are
+                                copied to temporary variables (a, b, c, d) to preserve the current state.</li>
+                            <li><strong>Divide Block into 16 Words:</strong> The 512-bit block is divided into sixteen
+                                32-bit words, labeled M<sub>0</sub>, M<sub>1</sub>, ..., M<sub>15</sub>.</li>
+                            <li><strong>Perform Four Rounds of Operations:</strong> MD5 consists of four main rounds,
+                                each containing 16 operations. Each round uses different non-linear functions and
+                                predefined constants to mix the data:
+                                <ul>
+                                    <li><strong>Round 1:</strong> Utilizes a specific function to process each word and
+                                        mix the bits.</li>
+                                    <li><strong>Round 2:</strong> Applies a different function to further diffuse the
+                                        data.</li>
+                                    <li><strong>Round 3:</strong> Continues the mixing process with another unique
+                                        function.</li>
+                                    <li><strong>Round 4:</strong> Finalizes the mixing with the last function.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Update Chaining Variables:</strong> After processing the block, the temporary
+                                variables (a, b, c, d) are added to the original chaining variables (A, B, C, D). This
+                                incorporates the changes from the current block into the overall hash state.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>Final Output:</strong> Once all 512-bit blocks have been processed, the final values of
+                        the chaining variables A, B, C, and D are concatenated to form the final 128-bit MD5 hash value.
+                        <br>This hash value is typically represented as a 32-character hexadecimal string, serving as a
+                        unique fingerprint of the original input message.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=4lVaf-fCYdE" target="_blank">Message Authentication video
+                    lecture &neArr;</a></li>
+            <li><a href="https://youtu.be/7ZKwKVn4utw?si=mtkyZptk7XMrvDRl" target="_blank">MD-5 video lecture
+                    &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
