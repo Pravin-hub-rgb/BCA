@@ -198,12 +198,165 @@
 
             </div>
         </div>
+        <div class="wh">
+            <h2>IDEA Algorithm (International Data Encryption Algorithm)</h2>
+            <ul>
+                <li>It is a block cipher algorithm.</li>
+                <li>It follows symmetric key cryptography.</li>
+                <li>Uses a Feistel structure for its operations.</li>
+                <li>The input plaintext size is 64 bits, divided into four 16-bit blocks.</li>
+                <li>The key size is 128 bits, which is expanded into 52 subkeys.</li>
+                <li>Number of rounds = 17 (16 primary rounds + 1 final transformation round).</li>
+                <li>Odd-numbered rounds use <strong>4 keys</strong>, while even-numbered rounds use only <strong>2
+                        keys</strong>.</li>
+                <li>The goal of each round is to scramble and mix the data so much that it becomes completely
+                    unrecognizable by the end.</li>
+            </ul>
+            <div class="in">
+                <h3>Working</h3>
+                <ul>
+                    <li>The plaintext of 64 bits is divided into 4 equal parts, each of size 16 bits.</li>
+                    <li>These 4 parts are denoted as X1, X2, X3, and X4.</li>
+                    <li>The algorithm involves 17 rounds, out of which 16 are primary rounds and the 17th is a final
+                        transformation round.</li>
+                    <li>Each round processes the input blocks using specific subkeys from the 52 subkeys generated
+                        during the key expansion phase.</li>
+                    <li><strong>For each round:</strong>
+                        <ul>
+                            <li>Subkeys are applied to the blocks using modular addition, modular multiplication, and
+                                XOR operations.</li>
+                            <li>Data blocks are mixed to ensure confusion and diffusion.</li>
+                            <li>Odd and even rounds have distinct operations, explained further below.</li>
+                        </ul>
+                    </li>
+                    <li>The final transformation round applies the last 4 subkeys (K49, K50, K51, K52) to the blocks.
+                    </li>
+                    <li>After all rounds, the 4 resulting 16-bit blocks are concatenated to form the 64-bit ciphertext.
+                    </li>
+                </ul>
+                <img src="../../images/cry24.jpeg" alt="">
+            </div>
+            <div class="in">
+                <h3>What Happens in Each Round?</h3>
+                <p>Each round involves processing the 4 parts (X1, X2, X3, X4) using subkeys and simple operations to
+                    create layers of scrambling. Here's how it works:</p>
+
+                <p><strong>Odd Rounds (e.g., Round 1, 3, 5...):</strong></p>
+                <ul>
+                    <li><strong>4 subkeys</strong> are used, one for each part: X1, X2, X3, and X4.</li>
+                    <li>The keys are applied directly to the parts, followed by rearrangements and combinations to mix
+                        the data.</li>
+                    <li>The result is passed to the next round.</li>
+                </ul>
+
+                <p><strong>Even Rounds (e.g., Round 2, 4, 6...):</strong></p>
+                <ul>
+                    <li><strong>2 subkeys</strong> are used instead of 4, making these rounds slightly different from
+                        the odd rounds.</li>
+                    <li>The keys are applied to specific parts of the data, followed by scrambling and rearrangements.
+                    </li>
+                    <li>This adds another layer of complexity to the scrambled data.</li>
+                </ul>
+
+                <p><strong>Final Round (Round 17):</strong></p>
+                <ul>
+                    <li>The 4 parts (X1, X2, X3, X4) are processed with the last set of subkeys.</li>
+                    <li>This step finalizes the ciphertext.</li>
+                    <li>The scrambled 4 parts are combined into the final 64-bit ciphertext.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>RC5 Algorithm (Rivest Cipher)</h2>
+            <ul>
+                <li>A symmetric key block cipher encryption algorithm.</li>
+                <li>Processes two-word blocks at a time; the plaintext is divided into two equal-sized blocks.</li>
+                <li>It has three main parameters:
+                    <ol>
+                        <li><strong>w</strong>: Word size (16, 32, or 64 bits).</li>
+                        <li><strong>r</strong>: Number of rounds (can range from 0 to 255).</li>
+                        <li><strong>b</strong>: Key size in bits (ranges from 0 to 255).</li>
+                    </ol>
+                    <p>These parameters are chosen based on the requirements of the input plaintext.</p>
+                </li>
+                <li>The algorithm consists of three main components:
+                    <ol>
+                        <li><strong>Key Expansion</strong>: Expands the secret key into a series of subkeys.</li>
+                        <li><strong>Encryption</strong>: Transforms plaintext into ciphertext using subkeys.</li>
+                        <li><strong>Decryption</strong>: Reverses the encryption process to retrieve the original
+                            plaintext.</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Block Diagram</h3>
+                <ul>
+                    <li>The secret key is first processed through the <strong>Key Expansion Algorithm</strong> to
+                        generate multiple subkeys. For example, a 128-bit secret key can be expanded into a sequence of
+                        subkeys depending on the block size.</li>
+                    <li>These subkeys are then used during the encryption rounds to transform the plaintext into
+                        ciphertext.</li>
+                    <li>During decryption, the same subkeys are used in reverse order to retrieve the original
+                        plaintext.</li>
+                </ul>
+                <img src="../../images/cry25.jpeg" alt="">
+            </div>
+
+            <div class="in">
+                <h3>What Happens in Each Stage?</h3>
+                <h4>1. Key Expansion</h4>
+                <ul>
+                    <li>Key expansion is a preprocessing step that generates a large number of subkeys from the original
+                        secret key.</li>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li>The plaintext of 64 bits is divided into two equal blocks: A (32 bits) and B (32 bits).</li>
+                    <li>The secret key is expanded into a subkey array <strong>S</strong>, containing 2(r+1) subkeys
+                        (e.g., S[0], S[1], ..., S[2r+1]).</li>
+                    <li>Initial values for A and B are created by adding the first two subkeys:
+                        <ul>
+                            <li><strong>A = A + S[0]</strong></li>
+                            <li><strong>B = B + S[1]</strong></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>2. Encryption</h4>
+                <ul>
+                    <li>Encryption involves multiple rounds of transformations using subkeys.</li>
+                    <li>Each round performs the following steps:
+                        <ol>
+                            <li>A is updated using a combination of bitwise operations (XOR, left rotation) and addition
+                                with a subkey.</li>
+                            <li>B is updated in a similar manner using the next subkey.</li>
+                        </ol>
+                    </li>
+                    <li>After completing all rounds, the output is combined to form the final ciphertext.</li>
+                </ul>
+
+                <h4>3. Decryption</h4>
+                <ul>
+                    <li>The decryption process reverses the encryption steps.</li>
+                    <li>It uses the same subkeys, but applies them in reverse order.</li>
+                    <li>By undoing the operations (e.g., subtracting instead of adding, reversing rotations), the
+                        ciphertext is converted back into the original plaintext.</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=ngqtEbxQLBE" target="_blank">Blowfish Algorithm &neArr;</a>
+            <li><a href="https://www.youtube.com/watch?v=ngqtEbxQLBE" target="_blank">Blowfish Algorithm Video lecture
+                    &neArr;</a>
             </li>
+            <li><a href="https://www.youtube.com/watch?v=909pwcyqVFQ" target="_blank">IDEA Algorithm Video lecture
+                    &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=4Z0xa13oov4" target="_blank">RC-5 Algorithm Video lecture
+                    &neArr;</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=4Z0xa13oov4" target="_blank">RC-5 Algorithm video lecture &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
