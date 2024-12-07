@@ -602,31 +602,33 @@ public class Program
                         <code class="language-c#">
 using System;
 
-// Base class
-public class Animal
+// Base class Vehicle
+public class Vehicle
 {
-    // Method to speak (will be overridden by child class)
-    public virtual void Speak()
+    // Virtual method to drive, can be overridden by derived classes
+    public virtual void Drive()
     {
-        Console.WriteLine("Animal makes a sound");
+        Console.WriteLine("The vehicle is driving.");
     }
 }
 
-public class Dog : Animal
+// Derived class Car
+public class Car : Vehicle
 {
-    // Overriding the Speak method in the derived class
-    public override void Speak()
+    // Overriding the Drive method in the derived class
+    public override void Drive()
     {
-        Console.WriteLine("Dog barks");
+        Console.WriteLine("The car is driving on the road.");
     }
 }
 
-public class Cat : Animal
+// Derived class Bike
+public class Bike : Vehicle
 {
-    // Overriding the Speak method in the derived class
-    public override void Speak()
+    // Overriding the Drive method in the derived class
+    public override void Drive()
     {
-        Console.WriteLine("Cat meows");
+        Console.WriteLine("The bike is riding on the road.");
     }
 }
 
@@ -650,15 +652,16 @@ public class Program
     public static void Main()
     {
         // Demonstrating Method Overriding
-        Animal myAnimal = new Animal();
-        myAnimal.Speak();  // Calls the base class version
+        // Creating objects of Vehicle, Car, and Bike
+        Vehicle myVehicle = new Vehicle();
+        myVehicle.Drive();  // Calls the base class version
 
-        Dog myDog = new Dog();
-        myDog.Speak();  // Calls the overridden version in Dog
+        Car myCar = new Car();
+        myCar.Drive();  // Calls the overridden version in Car
 
-        Cat myCat = new Cat();
-        myCat.Speak();  // Calls the overridden version in Cat
-
+        Bike myBike = new Bike();
+        myBike.Drive();  // Calls the overridden version in Bike
+        
         // Demonstrating Method Overloading
         Calculator calculator = new Calculator();
         Console.WriteLine("Sum of 2 and 3: " + calculator.Add(2, 3));  // Calls the first Add method
