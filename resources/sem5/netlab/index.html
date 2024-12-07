@@ -661,11 +661,66 @@ public class Program
 
         Bike myBike = new Bike();
         myBike.Drive();  // Calls the overridden version in Bike
-        
+
         // Demonstrating Method Overloading
         Calculator calculator = new Calculator();
         Console.WriteLine("Sum of 2 and 3: " + calculator.Add(2, 3));  // Calls the first Add method
         Console.WriteLine("Sum of 2, 3, and 4: " + calculator.Add(2, 3, 4));  // Calls the second Add method
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Demonstrate the use of Exception Handling
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        try
+        {
+            Console.WriteLine("Enter the numerator:");
+            int numerator = int.Parse(Console.ReadLine()); // Convert input to integer
+
+            Console.WriteLine("Enter the denominator:");
+            int denominator = int.Parse(Console.ReadLine()); // Convert input to integer
+
+            // Division operation
+            int result = numerator / denominator;
+
+            Console.WriteLine($"Result: {numerator} / {denominator} = {result}");
+        }
+        catch (DivideByZeroException)
+        {
+            // Handles division by zero
+            Console.WriteLine("Error: Cannot divide by zero.");
+        }
+        catch (FormatException)
+        {
+            // Handles invalid input (non-numeric input)
+            Console.WriteLine("Error: Please enter valid numeric values.");
+        }
+        catch (Exception ex)
+        {
+            // Handles any other unexpected exceptions
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        finally
+        {
+            // This block always executes
+            Console.WriteLine("Thank you for using the calculator!");
+        }
     }
 }
                         </code>
