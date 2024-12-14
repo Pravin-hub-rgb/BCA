@@ -285,25 +285,25 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
                 <p>For \( A \times B \), we calculate the minimum of the membership values of \( A \) and \( B \) for
                     each pair:</p>
                 <p class="mc">
-\[
-A \times B = \begin{pmatrix}
-\min(0, 0.2) & \min(0, 1) & \min(0, 0.8) & \min(0, 0) \\
-\min(0.8, 0.2) & \min(0.8, 1) & \min(0.8, 0.8) & \min(0.8, 0) \\
-\min(0.6, 0.2) & \min(0.6, 1) & \min(0.6, 0.8) & \min(0.6, 0) \\
-\min(1, 0.2) & \min(1, 1) & \min(1, 0.8) & \min(1, 0)
-\end{pmatrix}
-\]
+                    \[
+                    A \times B = \begin{pmatrix}
+                    \min(0, 0.2) & \min(0, 1) & \min(0, 0.8) & \min(0, 0) \\
+                    \min(0.8, 0.2) & \min(0.8, 1) & \min(0.8, 0.8) & \min(0.8, 0) \\
+                    \min(0.6, 0.2) & \min(0.6, 1) & \min(0.6, 0.8) & \min(0.6, 0) \\
+                    \min(1, 0.2) & \min(1, 1) & \min(1, 0.8) & \min(1, 0)
+                    \end{pmatrix}
+                    \]
                 </p>
                 <p>Which simplifies to:</p>
                 <p class="mc">
-\[
-A \times B = \begin{pmatrix}
-0 & 0 & 0 & 0 \\
-0.2 & 0.8 & 0.8 & 0 \\
-0.2 & 0.6 & 0.6 & 0 \\
-0.2 & 1 & 0.8 & 0
-\end{pmatrix}
-\]
+                    \[
+                    A \times B = \begin{pmatrix}
+                    0 & 0 & 0 & 0 \\
+                    0.2 & 0.8 & 0.8 & 0 \\
+                    0.2 & 0.6 & 0.6 & 0 \\
+                    0.2 & 1 & 0.8 & 0
+                    \end{pmatrix}
+                    \]
                 </p>
 
                 <p><strong>Step 2: Complement of \( A \), \( A^c \)</strong></p>
@@ -413,19 +413,153 @@ A \times B = \begin{pmatrix}
                 </p>
             </div>
         </div>
+        <div class="wh">
+            <h2>Fuzzy Inference System</h2>
+            <p>A Fuzzy Inference System (FIS) is a framework for reasoning and decision-making under uncertainty using
+                fuzzy logic. It processes input variables and generates outputs based on a set of fuzzy rules. FIS is
+                widely used in control systems, pattern recognition, and decision-making applications. It bridges the
+                gap between human-like reasoning and computational systems by working with approximate information
+                rather than precise data.</p>
+            <p>Fuzzy Inference Systems are applied in a wide range of fields to handle uncertain or imprecise data. Some
+                real-life applications include:
+            <ul>
+                <li><strong>Automatic Climate Control:</strong> FIS is used in air conditioning systems to adjust
+                    temperature and humidity levels based on user preferences and environmental conditions.</li>
+                <li><strong>Washing Machines:</strong> Modern washing machines use FIS to determine the optimal washing
+                    cycle based on load size, fabric type, and dirt level.</li>
+                <li><strong>Automotive Systems:</strong> In cars, FIS is applied for functions such as anti-lock braking
+                    systems (ABS), gear shifting, and adaptive cruise control.</li>
+                <li><strong>Healthcare:</strong> FIS helps in diagnosis support systems, where patient symptoms are
+                    analyzed to suggest possible conditions and treatments.</li>
+                <li><strong>Stock Market Analysis:</strong> FIS models are employed to analyze trends and make
+                    predictions in stock trading under uncertain market conditions.</li>
+                <li><strong>Robotics:</strong> Robots use FIS for navigation and decision-making in uncertain
+                    environments.</li>
+            </ul>
+            </p>
+            <div class="in">
+                <h3>Functional Blocks of FIS</h3>
+                <p>The following five functional blocks are essential for constructing a FIS:
+                <ol>
+                    <li><strong>Rule Base:</strong> It contains a collection of fuzzy <em>if-then</em> rules that define
+                        the relationship between input and output variables.</li>
+                    <li><strong>Database:</strong> It defines the membership functions of fuzzy sets used in the fuzzy
+                        rules, providing the necessary information for fuzzification and inference.</li>
+                    <li><strong>Decision-Making Unit:</strong> This unit applies the fuzzy rules to the input data to
+                        derive fuzzy outputs. It combines the results of all applicable rules.</li>
+                    <li><strong>Fuzzification Interface Unit:</strong> It converts crisp (precise) input values into
+                        fuzzy sets using membership functions. This step is crucial for handling imprecise or uncertain
+                        data.</li>
+                    <li><strong>Defuzzification Interface Unit:</strong> It converts the fuzzy output of the inference
+                        process into crisp values for actionable results, making the system usable in real-world
+                        scenarios.</li>
+                </ol>
+                </p>
+            </div>
+            <div class="in">
+                <h3>Block Diagram of FIS</h3>
+                <img src="../../images/sc14.jpeg" alt="Block Diagram of Fuzzy Inference System">
+                <p>The block diagram of a Fuzzy Inference System (FIS) illustrates the flow of data through its
+                    functional components. The diagram typically consists of the following parts:
+                <ol>
+                    <li><strong>Input:</strong> Crisp input values are provided to the system.</li>
+                    <li><strong>Fuzzification:</strong> Converts crisp inputs into fuzzy sets using membership
+                        functions.</li>
+                    <li><strong>Inference Engine:</strong> Processes fuzzy inputs using the rule base and database to
+                        generate fuzzy outputs.</li>
+                    <li><strong>Defuzzification:</strong> Converts fuzzy outputs into crisp values suitable for
+                        real-world use.</li>
+                    <li><strong>Output:</strong> The final crisp output is delivered, which can be used in
+                        decision-making or control applications.</li>
+                </ol>
+                </p>
+            </div>
+            <div class="in">
+                <h3>Working of FIS</h3>
+                <p>The working of the Fuzzy Inference System (FIS) consists of the following steps:</p>
+                <ol>
+                    <li>
+                        <strong>Fuzzification:</strong> The fuzzification unit applies various fuzzification methods to
+                        convert crisp input values into fuzzy inputs using membership functions.
+                    </li>
+                    <li>
+                        <strong>Knowledge Base:</strong> A knowledge base, which includes both the rule base (fuzzy
+                        if-then rules) and the database (membership functions), is used to process the fuzzy inputs.
+                    </li>
+                    <li>
+                        <strong>Inference Mechanism:</strong> The inference engine applies the fuzzy rules to the fuzzy
+                        inputs to generate fuzzy outputs. This step combines all applicable rules and determines the
+                        degree to which each output is activated.
+                    </li>
+                    <li>
+                        <strong>Defuzzification:</strong> The defuzzification unit converts the fuzzy output into a
+                        crisp output, making it usable for decision-making or control applications in real-world
+                        scenarios.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="in">
+                <h3>Methods of FIS</h3>
+                <p>The following are the two important methods of Fuzzy Inference Systems, differing in the way they
+                    define the consequent of fuzzy rules:</p>
+                <ol>
+                    <li><strong>Mamdani Fuzzy Inference System:</strong> A widely used approach that represents the
+                        consequent of fuzzy rules as fuzzy sets. It uses a max-min (or max-product) composition method
+                        and requires defuzzification to produce a crisp output.</li>
+                    <li><strong>Takagi-Sugeno Fuzzy Model (TS Model):</strong> This approach represents the consequent
+                        of fuzzy rules as a mathematical function (e.g., linear or constant). It simplifies the
+                        defuzzification process and is suitable for control applications requiring precise outputs.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Mamdani Fuzzy Inference System</h3>
+                <p>The Mamdani Fuzzy Inference System is one of the earliest and most popular FIS methods. It is
+                    characterized by its use of fuzzy sets for both the antecedent and consequent of rules. The steps
+                    involved include:</p>
+                <ol>
+                    <li><strong>Fuzzification:</strong> Converting crisp inputs into fuzzy sets using membership
+                        functions.</li>
+                    <li><strong>Rule Evaluation:</strong> Applying fuzzy rules and combining the results using fuzzy
+                        operators (e.g., AND, OR).</li>
+                    <li><strong>Aggregation:</strong> Combining the outputs of all fuzzy rules into a single fuzzy set.
+                    </li>
+                    <li><strong>Defuzzification:</strong> Converting the aggregated fuzzy set into a crisp output using
+                        methods like the centroid or bisector method.</li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>Takagi-Sugeno Fuzzy Model</h3>
+                <p>The Takagi-Sugeno Fuzzy Model is designed for precise and computationally efficient outputs. It
+                    differs from the Mamdani method in the following ways:</p>
+                <ol>
+                    <li><strong>Consequent Representation:</strong> The consequent of rules is represented as a linear
+                        or constant mathematical function instead of a fuzzy set.</li>
+                    <li><strong>Rule Evaluation:</strong> The rules are evaluated similarly to Mamdani, but the output
+                        is directly calculated using the functions defined in the consequents.</li>
+                    <li><strong>Defuzzification:</strong> The weighted average method is typically used, making the
+                        defuzzification process straightforward and fast.</li>
+                </ol>
+                <p>This model is commonly used in engineering and control systems due to its efficiency and ability to
+                    handle large-scale problems.</p>
+                </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="" target="_blank">(Video Lecture) &neArr;</a></li>
+            <li><a href="https://youtu.be/J8QD3jkjwDw?si=UfaFbCVu9hc4M9yn" target="_blank">Fuzzy Rule (Video Lecture)
+                    &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=vdFrIDF88VE" target="_blank">Fuzzy Inference System (Video
+                    Lecture) &neArr;</a></li>
         </ul>
     </div>
 
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
         </script>
-        
-          
+
+
 
     <script src="../../../../public/main.js"></script>
 </body>
