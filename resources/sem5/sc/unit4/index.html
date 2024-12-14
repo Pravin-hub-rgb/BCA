@@ -158,6 +158,261 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
                 </li>
             </ul>
         </div>
+        <div class="wh">
+            <h2>Fuzzy Rule / Fuzzy Implication / Fuzzy If-Then Rule</h2>
+            <ul>
+                <li>
+                    A fuzzy implication (also called a fuzzy if-then rule or fuzzy conditional statement) is a rule used
+                    in fuzzy logic systems to describe relationships between fuzzy sets in natural language terms.
+                    These rules are the foundation of fuzzy inference systems, where decisions are made based on fuzzy
+                    conditions and their outcomes.
+                </li>
+                <li>
+                    The basic structure of a fuzzy rule can take the following forms:
+                    <ol type="i">
+                        <li><strong>If <em>x</em> is <em>A</em>, then <em>y</em> is <em>B</em></strong>.</li>
+                        <li><strong>If <em>x</em> is <em>A</em>, then <em>y</em> is <em>B</em>; else <em>y</em> is
+                                <em>C</em></strong>.</li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Explanation of Forms:</strong>
+                    <ul>
+                        <li>
+                            <strong>Form 1:</strong> <em>If x is A, then y is B</em>
+                            <br>
+                            This means that when the value of <em>x</em> belongs to the fuzzy set <em>A</em> (to some
+                            degree), the value of <em>y</em> is associated with the fuzzy set <em>B</em>.
+                            The strength of the relationship between <em>x</em> and <em>y</em> depends on their
+                            respective membership values.
+                            <ul>
+                                <li>
+                                    <strong>Example:</strong>
+                                    <ul>
+                                        <li>If a mango is yellow, then the mango is sweet.</li>
+                                        <li>Here:
+                                            <ul>
+                                                <li><em>x</em> = mango color.</li>
+                                                <li><em>A</em> = "yellow" (a fuzzy set with values between 0 and 1).
+                                                </li>
+                                                <li><em>y</em> = mango taste.</li>
+                                                <li><em>B</em> = "sweet" (a fuzzy set with values between 0 and 1).</li>
+                                            </ul>
+                                        </li>
+                                        <li>If a mango is 70% yellow (membership = 0.7), it is inferred to be 70% sweet.
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Form 2:</strong> <em>If x is A, then y is B; else y is C</em>
+                            <br>
+                            This means that if <em>x</em> does not belong to the fuzzy set <em>A</em> (or belongs
+                            weakly), <em>y</em> will instead belong to a different fuzzy set <em>C</em>. This adds an
+                            alternative outcome when the primary condition is not satisfied.
+                            <ul>
+                                <li>
+                                    <strong>Example:</strong>
+                                    <ul>
+                                        <li>If a mango is yellow, then the mango is sweet; else, it is sour.</li>
+                                        <li>Here:
+                                            <ul>
+                                                <li><em>x</em> = mango color.</li>
+                                                <li><em>A</em> = "yellow".</li>
+                                                <li><em>y</em> = mango taste.</li>
+                                                <li><em>B</em> = "sweet".</li>
+                                                <li><em>C</em> = "sour".</li>
+                                            </ul>
+                                        </li>
+                                        <li>If a mango is 50% yellow (membership = 0.5), it is inferred to be 50% sweet
+                                            and not sour.</li>
+                                        <li>If a mango is not yellow (membership = 0), it is fully sour (membership = 1
+                                            for sour).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Applications of Fuzzy Rules:</strong>
+                    <ul>
+                        <li>Controlling appliances: If the room is hot, then reduce fan speed.</li>
+                        <li>Weather prediction: If the sky is cloudy, then there is a high chance of rain.</li>
+                        <li>Decision-making: If the workload is high, then assign more resources; else, reduce
+                            resources.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>If x is A, then y is B:</strong>
+                    <br>
+                    The implication relation <strong>R</strong> can be written as:
+                    <strong>R = (A × B) ∪ (A<sup>c</sup> × Y)</strong>
+                </li>
+                <li>
+                    <strong>If x is A, then y is B; else y is C:</strong>
+                    <br>
+                    The implication relation <strong>R</strong> can be written as:
+                    <strong>R = (A × B) ∪ (A<sup>c</sup> × C)</strong>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Question:</h3>
+                <p><strong>Let \( X = \{a, b, c, d\} \), \( Y = \{1, 2, 3, 4\} \) and
+                        <br> \( A = \{(a, 0), (b, 0.8), (c, 0.6), (d, 1)\} \)
+                        <br> \( B = \{(1, 0.2), (2, 1), (3, 0.8), (4, 0)\} \)
+                        <br> \( C = \{(1, 0), (2, 0.4), (3, 1), (4, 0.8)\} \)
+                        <br> Here, \( X \) and \( Y \) are sets, and \( A \), \( B \), \( C \) are fuzzy sets.
+                        <br> Determine the implication relations:
+                        <ul>
+                            <li>If \( X \) is \( A \), then \( Y \) is \( B \).</li>
+                            <li>If \( X \) is \( A \), then \( Y \) is \( B \), else \( Y \) is \( C \).</li>
+                        </ul>
+                    </strong></p>
+
+                <p><strong>Solution:</strong></p>
+
+                <p><strong>If \( X \) is \( A \), then \( Y \) is \( B \):</strong></p>
+                <p>
+                    The implication relation is defined as:
+                    \[
+                    R = (A \times B) \cup (A^c \times Y)
+                    \]
+                </p>
+
+                <p><strong>Step 1: Cartesian Product \( A \times B \)</strong></p>
+                <p>For \( A \times B \), we calculate the minimum of the membership values of \( A \) and \( B \) for
+                    each pair:</p>
+                <p class="mc">
+\[
+A \times B = \begin{pmatrix}
+\min(0, 0.2) & \min(0, 1) & \min(0, 0.8) & \min(0, 0) \\
+\min(0.8, 0.2) & \min(0.8, 1) & \min(0.8, 0.8) & \min(0.8, 0) \\
+\min(0.6, 0.2) & \min(0.6, 1) & \min(0.6, 0.8) & \min(0.6, 0) \\
+\min(1, 0.2) & \min(1, 1) & \min(1, 0.8) & \min(1, 0)
+\end{pmatrix}
+\]
+                </p>
+                <p>Which simplifies to:</p>
+                <p class="mc">
+\[
+A \times B = \begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0.2 & 0.8 & 0.8 & 0 \\
+0.2 & 0.6 & 0.6 & 0 \\
+0.2 & 1 & 0.8 & 0
+\end{pmatrix}
+\]
+                </p>
+
+                <p><strong>Step 2: Complement of \( A \), \( A^c \)</strong></p>
+                <p>The complement \( A^c \) is computed by subtracting each membership value in \( A \) from 1:</p>
+                <p class="mc">
+                    \[
+                    A^c = \{(a, 1), (b, 0.2), (c, 0.4), (d, 0)\}
+                    \]
+                </p>
+
+                <p><strong>Step 3: Cartesian Product \( A^c \times Y \)</strong></p>
+                <p>For \( A^c \times Y \), we pair each element of \( A^c \) with each element of \( Y \) and compute
+                    the minimum of their membership values. Since \( Y = \{(1, 1), (2, 1), (3, 1), (4, 1)\} \), each
+                    element in \( Y \) has the membership value of 1:</p>
+                <p class="mc">
+                    \[
+                    A^c \times Y = \begin{pmatrix}
+                    \min(1, 1) & \min(1, 1) & \min(1, 1) & \min(1, 1) \\
+                    \min(0.2, 1) & \min(0.2, 1) & \min(0.2, 1) & \min(0.2, 1) \\
+                    \min(0.4, 1) & \min(0.4, 1) & \min(0.4, 1) & \min(0.4, 1) \\
+                    \min(0, 1) & \min(0, 1) & \min(0, 1) & \min(0, 1)
+                    \end{pmatrix}
+                    \]
+                </p>
+                <p>Which simplifies to:</p>
+                <p class="mc">
+                    \[
+                    A^c \times Y = \begin{pmatrix}
+                    1 & 1 & 1 & 1 \\
+                    0.2 & 0.2 & 0.2 & 0.2 \\
+                    0.4 & 0.4 & 0.4 & 0.4 \\
+                    0 & 0 & 0 & 0
+                    \end{pmatrix}
+                    \]
+                </p>
+
+                <p><strong>Step 4: Union of \( A \times B \) and \( A^c \times Y \)</strong></p>
+                <p>We now compute the union of \( A \times B \) and \( A^c \times Y \) by taking the element-wise
+                    maximum of the two matrices:</p>
+                <p class="mc">
+                    \[
+                    R = (A \times B) \cup (A^c \times Y) = \begin{pmatrix}
+                    \max(0, 1) & \max(0, 1) & \max(0, 1) & \max(0, 1) \\
+                    \max(0.2, 0.2) & \max(0.8, 0.2) & \max(0.8, 0.2) & \max(0, 0.2) \\
+                    \max(0.2, 0.4) & \max(0.6, 0.4) & \max(0.6, 0.4) & \max(0, 0.4) \\
+                    \max(0.2, 0) & \max(1, 0) & \max(0.8, 0) & \max(0, 0)
+                    \end{pmatrix}
+                    \]
+                </p>
+                <p>Which simplifies to:</p>
+                <p class="mc">
+                    \[
+                    R = \begin{pmatrix}
+                    1 & 1 & 1 & 1 \\
+                    0.2 & 0.8 & 0.8 & 0.2 \\
+                    0.4 & 0.6 & 0.6 & 0.4 \\
+                    0.2 & 1 & 0.8 & 0
+                    \end{pmatrix}
+                    \]
+                </p>
+
+                <p><strong>Final Answer:</strong></p>
+                <p class="mc">
+                    \[
+                    R = \begin{pmatrix}
+                    1 & 1 & 1 & 1 \\
+                    0.2 & 0.8 & 0.8 & 0.2 \\
+                    0.4 & 0.6 & 0.6 & 0.4 \\
+                    0.2 & 1 & 0.8 & 0
+                    \end{pmatrix}
+                    \]
+                </p>
+                <p><strong>2. If X is A, then Y is B, else Y is C:</strong></p>
+                <p>For this case, we need to compute \( R = (A \times B) \cup (A^c \times C) \), similar to the previous
+                    calculation. However, this step also includes the condition for "else Y is C" when \( X \) is not in
+                    \( A \).</p>
+
+                <p>Step 1: Complement of A (\(A^c\)) is the same as before:</p>
+                <p class="mc">
+                    \[
+                    A^c = \{(a, 1), (b, 0.2), (c, 0.4), (d, 0)\}
+                    \]
+                </p>
+
+                <p>Step 2: Compute \( A^c \times C \) (same as before):</p>
+                <p class="mc">
+                    \[
+                    A^c \times C = \begin{pmatrix}
+                    0 & 0.4 & 1 & 0.8 \\
+                    0 & 0.2 & 0.2 & 0.2 \\
+                    0 & 0.4 & 0.4 & 0.4 \\
+                    0 & 0 & 0 & 0
+                    \end{pmatrix}
+                    \]
+                </p>
+
+                <p>Step 3: Union of \( (A \times B) \) and \( (A^c \times C) \) (same as before):</p>
+                <p class="mc">
+                    R = (A × B) ∪ (A<sup>c</sup> × C) = \begin{pmatrix}
+                    0 & 0.4 & 1 & 0.8 \\
+                    0.2 & 0.8 & 0.8 & 0.2 \\
+                    0.2 & 0.6 & 0.6 & 0.4 \\
+                    0.2 & 1 & 0.8 & 0
+                    \end{pmatrix}
+                </p>
+                <p>This is the final result for the implication relation where "If X is A, then Y is B, else Y is C.
+                </p>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
@@ -165,6 +420,13 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
             <li><a href="" target="_blank">(Video Lecture) &neArr;</a></li>
         </ul>
     </div>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        
+          
+
     <script src="../../../../public/main.js"></script>
 </body>
 

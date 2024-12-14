@@ -15,6 +15,7 @@
 
         .math {
             font-size: 20px;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -500,13 +501,16 @@
                         &mu;<sub>B</sub>(Y))</strong>
                 </li>
             </ul>
-            <pre>
-                <code>             _ a       b _
-μ<sub>R</sub>(X, Y) = a | 0.2     0.5 |
-           b | 0.5     0.6 |
-           c | 0.4     0.4 |
-              -           -                </code>
-            </pre>
+            <p class="mc">
+\[
+\mu_R(X, Y) =
+\begin{pmatrix}
+a & 0.2 & 0.5 \\
+b & 0.5 & 0.6 \\
+c & 0.4 & 0.4
+\end{pmatrix}
+\]
+                </p>                
             <ul>
                 <li>The matrix representing a fuzzy relation is called the <strong>"Fuzzy Matrix"</strong>.</li>
             </ul>
@@ -522,63 +526,110 @@
                         <span class="math">&mu;<sub>R&Union;S</sub>(X, Y) = max(&mu;<sub>R</sub>(X, Y),
                             &mu;<sub>S</sub>(X, Y))</span>
                         <br><strong>Example:</strong>
-                        <pre>
-                <code>            _  a       b _
-μ<sub>R</sub>(X, Y) = a | 0.2     0.2 |
-           b | 0.5     0.6 |
-           c | 0.4     0.4 |
-              -           -   
-              _ a       b _
-μ<sub>S</sub>(X, Y) = a | 0.3     0.5 |
-           b | 0.1     0.4 |
-           c | 0.3     0.6 |
-              -           -
-               _ a        b _
-μ<sub>R&Union;S</sub>(X, Y) = a | 0.3     0.5 |
-             b | 0.5     0.6 |
-             c | 0.4     0.6 |
-                -           -                </code>
-            </pre>
+                        <p class="mc">
+                            \[
+                            \mu_R(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.2 & 0.2 \\
+                            b & 0.5 & 0.6 \\
+                            c & 0.4 & 0.4
+                            \end{pmatrix}
+                            \]
+                            </p>
+                            
+                            <p class="mc">
+                            \[
+                            \mu_S(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.3 & 0.5 \\
+                            b & 0.1 & 0.4 \\
+                            c & 0.3 & 0.6
+                            \end{pmatrix}
+                            \]
+                            </p>
+                            
+                            <p class="mc">
+                            \[
+                            \mu_{R \cup S}(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.3 & 0.5 \\
+                            b & 0.5 & 0.6 \\
+                            c & 0.4 & 0.6
+                            \end{pmatrix}
+                            \]
+                            </p>
                     </li>
                     <li>
                         <strong>Intersection:</strong>
                         <span class="math">&mu;<sub>R&cap;S</sub>(X, Y) = min(&mu;<sub>R</sub>(X, Y),
                             &mu;<sub>S</sub>(X, Y))</span>
                         <br><strong>Example:</strong>
-                        <pre>
-                <code>            _  a       b _
-μ<sub>R</sub>(X, Y) = a | 0.2     0.2 |
-           b | 0.5     0.6 |
-           c | 0.4     0.4 |
-              -           -   
-              _ a       b _
-μ<sub>S</sub>(X, Y) = a | 0.3     0.5 |
-           b | 0.1     0.4 |
-           c | 0.3     0.6 |
-              -           - 
-               _ a        b _
-μ<sub>R&cap;S</sub>(X, Y) = a | 0.2     0.2 |
-             b | 0.1     0.4 |
-             c | 0.3     0.4 |
-                -           -                </code>
-            </pre>
+                        <p class="mc">
+                            \[
+                            \mu_R(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.2 & 0.2 \\
+                            b & 0.5 & 0.6 \\
+                            c & 0.4 & 0.4
+                            \end{pmatrix}
+                            \]
+                            </p>
+                            
+                            <p class="mc">
+                            \[
+                            \mu_S(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.3 & 0.5 \\
+                            b & 0.1 & 0.4 \\
+                            c & 0.3 & 0.6
+                            \end{pmatrix}
+                            \]
+                            </p>
+                            
+                            <p class="mc">
+                            \[
+                            \mu_{R \cap S}(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.2 & 0.2 \\
+                            b & 0.1 & 0.4 \\
+                            c & 0.3 & 0.4
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>Complement:</strong>
                         <span class="math">&mu;<sub>R<sup>c</sup></sub>(X, Y) = 1 - &mu;<sub>R</sub>(X, Y)</span>
                         <br><strong>Example:</strong>
-                        <pre>
-                <code>             _ a       b _
-μ<sub>R</sub>(X, Y) = a | 0.2     0.2 |
-           b | 0.5     0.6 |
-           c | 0.4     0.4 |
-              -           -
-               _ a       b _
-μ<sub>R<sup>c</sup></sub>(X, Y) = a | 0.8     0.8 |
-            b | 0.5     0.4 |
-            c | 0.6     0.6 |
-               -           -                </code>
-            </pre>
+                        <p class="mc">
+                            \[
+                            \mu_R(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.2 & 0.2 \\
+                            b & 0.5 & 0.6 \\
+                            c & 0.4 & 0.4
+                            \end{pmatrix}
+                            \]
+                            </p>
+                            
+                            <p class="mc">
+                            \[
+                            \mu_{R^c}(X, Y) =
+                            \begin{pmatrix}
+                             & a & b \\
+                            a & 0.8 & 0.8 \\
+                            b & 0.5 & 0.4 \\
+                            c & 0.6 & 0.6
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                 </ol>
             </div>
@@ -605,9 +656,9 @@
                                 by taking the maximum value of the minimum membership values between \( R(x, y) \) and
                                 \( S(y, z) \) for all \( y \) in \( Y \).
                                 <br>
-                                <span class="math">
+                                <p class="mc">
                                     \(\mu_{R \circ S}(x, z) = \max_{y \in Y} \big(\min(\mu_R(x, y), \mu_S(y, z))\big)\)
-                                </span>
+                                </p>
                             </li>
                             <li>
                                 <strong>Fuzzy Max-Product Composition:</strong>
@@ -616,9 +667,9 @@
                                 by taking the maximum value of the product of the membership values \( R(x, y) \) and \(
                                 S(y, z) \) for all \( y \) in \( Y \).
                                 <br>
-                                <span class="math">
+                                <p class="mc">
                                     \(\mu_{R \circ S}(x, z) = \max_{y \in Y} \big(\mu_R(x, y) \cdot \mu_S(y, z)\big)\)
-                                </span>
+                                </p>
                             </li>
                         </ol>
                     </li>
@@ -635,225 +686,301 @@
                 </div>
                 <div class="in">
                 <p><strong>Example Question: Fuzzy Max-Min Composition</strong></p>
-                <pre>
-    <code>          _  y1      y2 _
-R<sub>x,y</sub> = x1 |  0.6     0.3 |
-       x2 |  0.2     0.9 |
-           -            -
-           _ z1    z2    z3 _
-S<sub>y,z</sub> = y1 |   1    0.5    0.3 |
-      y2 |  0.8   0.4    0.7 |
-          -                 -
-
-           _ z1     z2     z3 _
-μ<sub>R∘S</sub> = x1 |   ?      ?      ?   |
-      x2 |   ?      ?      ?   |
-          -                   -    </code>
-</pre>
+                <p class="mc">
+                    \[
+                    R_{x,y} =
+                    \begin{pmatrix}
+                     & y1 & y2 \\
+                    x1 & 0.6 & 0.3 \\
+                    x2 & 0.2 & 0.9
+                    \end{pmatrix}
+                    \]
+                    </p>
+                    
+                    <p class="mc">
+                    \[
+                    S_{y,z} =
+                    \begin{pmatrix}
+                     & z1 & z2 & z3 \\
+                    y1 & 1 & 0.5 & 0.3 \\
+                    y2 & 0.8 & 0.4 & 0.7
+                    \end{pmatrix}
+                    \]
+                    </p>
+                    
+                    <p class="mc">
+                    \[
+                    \mu_{R \circ S} =
+                    \begin{pmatrix}
+                     & z1 & z2 & z3 \\
+                    x1 & ? & ? & ? \\
+                    x2 & ? & ? & ?
+                    \end{pmatrix}
+                    \]
+                    </p>                    
                 <p>Now we will find each element of the resulting fuzzy relation using the formula for max-min
                     composition:
-                    <span class="math">
+                    <p class="mc">
                         \(\mu_{R \circ S}(x, z) = \max_{y \in Y} \big(\min(\mu_R(x, y), \mu_S(y, z))\big)\)
-                    </span>
+                    </p>
                 </p>
                 <ul>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>1</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_1) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_1)), \min(\mu_R(x_1,
-                        y_2), \mu_S(y_2, z_1))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_1, z_1) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_1)), \min(\mu_R(x_1,
+                            y_2), \mu_S(y_2, z_1))\big)\)</p>
                         <br>= \(\max\big(\min(0.6, 1), \min(0.3, 0.8)\big)\)
                         <br>= \(\max(0.6, 0.3)\)
                         <br>= 0.6
-                        <pre>
-            <code>          _ z1    z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6    ?     ?  |
-       x2 |  ?     ?     ?  |
-           -               -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & ? & ? \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>2</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_2) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_2)), \min(\mu_R(x_1,
-                        y_2), \mu_S(y_2, z_2))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_1, z_2) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_2)), \min(\mu_R(x_1,
+                            y_2), \mu_S(y_2, z_2))\big)\)</p>
                         <br>= \(\max\big(\min(0.6, 0.5), \min(0.3, 0.4)\big)\)
                         <br>= \(\max(0.5, 0.3)\)
                         <br>= 0.5
-                        <pre>
-            <code>          _ z1    z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.5    ?  |
-       x2 |   ?     ?     ? |
-           -               -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.5 & ? \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>3</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_3) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_3)), \min(\mu_R(x_1,
-                        y_2), \mu_S(y_2, z_3))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_1, z_3) = \max\big(\min(\mu_R(x_1, y_1), \mu_S(y_1, z_3)), \min(\mu_R(x_1,
+                            y_2), \mu_S(y_2, z_3))\big)\)</p>
                         <br>= \(\max\big(\min(0.6, 0.3), \min(0.3, 0.7)\big)\)
                         <br>= \(\max(0.3, 0.3)\)
                         <br>= 0.3
-                        <pre>
-            <code>          _ z1    z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.5   0.3 |
-       x2 |   ?      ?    ? |
-           -               -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.5 & 0.3 \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>1</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_1) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_1)), \min(\mu_R(x_2,
-                        y_2), \mu_S(y_2, z_1))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_2, z_1) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_1)), \min(\mu_R(x_2,
+                            y_2), \mu_S(y_2, z_1))\big)\)</p>
                         <br>= \(\max\big(\min(0.2, 1), \min(0.9, 0.8)\big)\)
                         <br>= \(\max(0.2, 0.8)\)
                         <br>= 0.8
-                        <pre>
-                            <code>         _ z1    z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.5   0.3 |
-       x2 |  0.8     ?    ? |
-           -               -                        </code>
-                    </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.5 & 0.3 \\
+                            x2 & 0.8 & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>2</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_2) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_2)), \min(\mu_R(x_2,
-                        y_2), \mu_S(y_2, z_2))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_2, z_2) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_2)), \min(\mu_R(x_2,
+                            y_2), \mu_S(y_2, z_2))\big)\)</p>
                         <br>= \(\max\big(\min(0.2, 0.5), \min(0.9, 0.4)\big)\)
                         <br>= \(\max(0.2, 0.4)\)
                         <br>= 0.4
-                        <pre>
-            <code>          _ z1    z2   z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.5   0.3 |
-       x2 |  0.8   0.4    ? |
-           -               -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.5 & 0.3 \\
+                            x2 & 0.8 & 0.4 & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>3</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_3) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_3)), \min(\mu_R(x_2,
-                        y_2), \mu_S(y_2, z_3))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_2, z_3) = \max\big(\min(\mu_R(x_2, y_1), \mu_S(y_1, z_3)), \min(\mu_R(x_2,
+                            y_2), \mu_S(y_2, z_3))\big)\)</p>
                         <br>= \(\max\big(\min(0.2, 0.3), \min(0.9, 0.7)\big)\)
                         <br>= \(\max(0.2, 0.7)\)
                         <br>= 0.7
-                        <pre>
-            <code>          _ z1    z2   z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.5   0.3 |
-       x2 |  0.8   0.4   0.7 |
-           -                -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.5 & 0.3 \\
+                            x2 & 0.8 & 0.4 & 0.7
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                 </ul>
                 </div>
                 <div class="in">
                 <p><strong>Example Question: Max-Product Composition</strong></p>
-                <pre>
-    <code>         _   y1     y2 _
-R<sub>x,y</sub> = x1 |  0.6     0.3 |
-       x2 |  0.2     0.9 |
-           -            -
-           _ z1    z2     z3 _
-S<sub>y,z</sub> = y1 |   1    0.5    0.3 |
-      y2 |  0.8    0.4    0.7 |
-          -                  -
-
-           _ z1     z2     z3  _
-μ<sub>R∘S</sub> = x1 |   ?      ?      ?   |
-      x2 |   ?      ?      ?   |
-          -                   -    </code>
-</pre>
+                <p class="mc">
+                    \[
+                    R_{x,y} =
+                    \begin{pmatrix}
+                     & y1 & y2 \\
+                    x1 & 0.6 & 0.3 \\
+                    x2 & 0.2 & 0.9
+                    \end{pmatrix}
+                    \]
+                    
+                    \[
+                    S_{y,z} =
+                    \begin{pmatrix}
+                     & z1 & z2 & z3 \\
+                    y1 & 1 & 0.5 & 0.3 \\
+                    y2 & 0.8 & 0.4 & 0.7
+                    \end{pmatrix}
+                    \]
+                    
+                    \[
+                    \mu_{R \circ S} =
+                    \begin{pmatrix}
+                     & z1 & z2 & z3 \\
+                    x1 & ? & ? & ? \\
+                    x2 & ? & ? & ?
+                    \end{pmatrix}
+                    \]
+                    </p>                    
                 <p>Now we will find each element of the resulting fuzzy relation using the formula for max-product
                     composition:
-                    <span class="math">
+                    <p class="mc">
                         \(\mu_{R \circ S}(x, z) = \max_{y \in Y} \big(\mu_R(x, y) \cdot \mu_S(y, z)\big)\)
-                    </span>
+                    </p>
                 </p>
                 <ul>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>1</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_1) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_1)), (\mu_R(x_1, y_2)
-                        \cdot \mu_S(y_2, z_1))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_1, z_1) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_1)), (\mu_R(x_1, y_2)
+                            \cdot \mu_S(y_2, z_1))\big)\)</p>
                         <br>= \(\max\big((0.6 \cdot 1), (0.3 \cdot 0.8)\big)\)
                         <br>= \(\max(0.6, 0.24)\)
                         <br>= 0.6
-                        <pre>
-            <code>         _   z1     z2     z3 _
-μ<sub>R∘S</sub> = x1 |  0.6      ?      ?   |
-      x2 |   ?       ?      ?   |
-          -                    -
-            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & ? & ? \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>2</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_2) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_2)), (\mu_R(x_1, y_2)
-                        \cdot \mu_S(y_2, z_2))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_1, z_2) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_2)), (\mu_R(x_1, y_2)
+                            \cdot \mu_S(y_2, z_2))\big)\)</p>
                         <br>= \(\max\big((0.6 \cdot 0.5), (0.3 \cdot 0.4)\big)\)
                         <br>= \(\max(0.3, 0.12)\)
                         <br>= 0.3
-                        <pre>
-            <code>         _   z1     z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.3      ?  |
-       x2 |  ?      ?      ?  |
-           -                 -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.3 & ? \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>1</sub>, z<sub>3</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_1, z_3) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_3)), (\mu_R(x_1, y_2)
+                        <p class="mc">
+                            \(\mu_{R∘S}(x_1, z_3) = \max\big((\mu_R(x_1, y_1) \cdot \mu_S(y_1, z_3)), (\mu_R(x_1, y_2)
                         \cdot \mu_S(y_2, z_3))\big)\)
+                        </p>
                         <br>= \(\max\big((0.6 \cdot 0.3), (0.3 \cdot 0.7)\big)\)
                         <br>= \(\max(0.18, 0.21)\)
                         <br>= 0.21
-                        <pre>
-            <code>         _  z1    z2     z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.3   0.21 |
-      x2 |   ?     ?      ?  |
-          -                 -
-            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.3 & 0.21 \\
+                            x2 & ? & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>1</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_1) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_1)), (\mu_R(x_2, y_2)
-                        \cdot \mu_S(y_2, z_1))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_2, z_1) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_1)), (\mu_R(x_2, y_2)
+                            \cdot \mu_S(y_2, z_1))\big)\)</p>
                         <br>= \(\max\big((0.2 \cdot 1), (0.9 \cdot 0.8)\big)\)
                         <br>= \(\max(0.2, 0.72)\)
                         <br>= 0.72
-                        <pre>
-            <code>         _   z1   z2     z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.3   0.21 |
-       x2 |  0.72   ?     ?  |
-           -                   -            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.3 & 0.21 \\
+                            x2 & 0.72 & ? & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>2</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_2) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_2)), (\mu_R(x_2, y_2)
-                        \cdot \mu_S(y_2, z_2))\big)\)
+                        <p class="mc"><br> \(\mu_{R∘S}(x_2, z_2) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_2)), (\mu_R(x_2, y_2)
+                            \cdot \mu_S(y_2, z_2))\big)\)</p>
                         <br>= \(\max\big((0.2 \cdot 0.5), (0.9 \cdot 0.4)\big)\)
                         <br>= \(\max(0.1, 0.36)\)
                         <br>= 0.36
-                        <pre>
-            <code>         _   z1    z2    z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.3   0.21 |
-      x2 |  0.72   0.36    ? |
-          -                 -
-            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.3 & 0.21 \\
+                            x2 & 0.72 & 0.36 & ?
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                     <li>
                         <strong>For (x<sub>2</sub>, z<sub>3</sub>):</strong>
-                        <br> \(\mu_{R∘S}(x_2, z_3) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_3)), (\mu_R(x_2, y_2)
-                        \cdot \mu_S(y_2, z_3))\big)\)
+                        <p class="mc">\(\mu_{R∘S}(x_2, z_3) = \max\big((\mu_R(x_2, y_1) \cdot \mu_S(y_1, z_3)), (\mu_R(x_2, y_2)
+                            \cdot \mu_S(y_2, z_3))\big)\)</p>
                         <br>= \(\max\big((0.2 \cdot 0.3), (0.9 \cdot 0.7)\big)\)
                         <br>= \(\max(0.06, 0.63)\)
                         <br>= 0.63
-                        <pre>
-            <code>         _  z1    z2     z3 _
-μ<sub>R∘S</sub> = x1 |  0.6   0.3   0.21 |
-      x2 |  0.72  0.36  0.63 |
-          -                 -
-            </code>
-        </pre>
+                        <p class="mc">
+                            \[
+                            \mu_{R \circ S} =
+                            \begin{pmatrix}
+                             & z1 & z2 & z3 \\
+                            x1 & 0.6 & 0.3 & 0.21 \\
+                            x2 & 0.72 & 0.36 & 0.63
+                            \end{pmatrix}
+                            \]
+                            </p>                            
                     </li>
                 </ul>
 
