@@ -412,6 +412,219 @@
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <h2>Encoding</h2>
+            <ul>
+                <li>Encoding is the process of representing individual genes in a format suitable for solving a given
+                    problem. The choice of encoding depends on the nature of the problem being addressed.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Types of Encoding</h3>
+
+                <p><strong>1. Binary Encoding:</strong></p>
+                <ul>
+                    <li>Binary encoding is the most common method of encoding, where each chromosome is represented as a
+                        binary string (sequence of 0s and 1s).</li>
+                    <li>Example:
+                        <br>Chromosome 1: 1 0 1 1 0 1 1 0 0 1
+                        <br>Chromosome 2: 0 1 1 0 0 0 1 0 1 1
+                    </li>
+                    <li>Each chromosome consists of a binary string where each bit represents a characteristic of the
+                        solution. Every string represents a solution, but not necessarily the optimal one.</li>
+                </ul>
+
+                <p><strong>2. Octal Encoding:</strong></p>
+                <ul>
+                    <li>In octal encoding, chromosomes are represented using octal numbers (base-8).</li>
+                    <li>Example:
+                        <br>Chromosome 1: 7 3 1 4
+                        <br>Chromosome 2: 6 5 2 0
+                    </li>
+                    <li>Each digit in the octal number represents a specific property or parameter of the solution.</li>
+                </ul>
+
+                <p><strong>3. Hexadecimal Encoding:</strong></p>
+                <ul>
+                    <li>Hexadecimal encoding uses hexadecimal numbers (base-16) to represent chromosomes. This encoding
+                        allows for compact representation of larger values.</li>
+                    <li>Example:
+                        <br>Chromosome 1: A F 2 9
+                        <br>Chromosome 2: B 4 D 3
+                    </li>
+                    <li>Each hexadecimal digit can encode values from 0 to 15, making it useful for specific problems
+                        requiring high compactness.</li>
+                </ul>
+
+                <p><strong>4. Permutation Encoding:</strong></p>
+                <ul>
+                    <li>Permutation encoding is used for problems where the solution involves an ordered sequence of
+                        items, such as the Traveling Salesman Problem (TSP).</li>
+                    <li>Example:
+                        <br>Chromosome 1: [3, 5, 1, 4, 2]
+                        <br>Chromosome 2: [2, 4, 3, 5, 1]
+                    </li>
+                    <li>Each number in the sequence represents a specific item, task, or city in the solution.</li>
+                </ul>
+
+                <p><strong>5. Value Encoding:</strong></p>
+                <ul>
+                    <li>In value encoding, chromosomes are represented as sequences of real numbers or other data types
+                        suitable for the problem.</li>
+                    <li>Example:
+                        <br>Chromosome 1: [12.5, 18.2, 7.8, 15.4]
+                        <br>Chromosome 2: [10.0, 20.5, 8.1, 14.9]
+                    </li>
+                    <li>This type of encoding is ideal for problems involving continuous variables or real-valued
+                        solutions, such as neural network weights or optimization of physical systems.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Parent Selection in Genetic Algorithm</h2>
+            <ul>
+                <li>Parent selection is the process of selecting parents that will mate and recombine to create
+                    offspring for the next generation.</li>
+                <li>The choice of parent solutions determines whether the next generation will be optimized, making it
+                    one of the crucial factors in a genetic algorithm.</li>
+                <li>Different techniques for parent selection include:
+                    <ol>
+                        <li>Fitness Proportionate Selection</li>
+                        <li>Tournament Selection</li>
+                        <li>Rank Selection</li>
+                        <li>Random Selection</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Fitness Proportionate Selection</h3>
+                <ul>
+                    <li>In this method, every individual has a chance of being selected as a parent, with a probability
+                        proportional to its fitness.</li>
+                    <li>Fitter individuals are more likely to be selected, increasing the likelihood of propagating
+                        their traits to the next generation.</li>
+                    <li>Types of fitness proportionate selection:
+                        <ol>
+                            <li>Roulette Wheel Selection</li>
+                            <li>Stochastic Universal Sampling</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Roulette Wheel Selection</h3>
+                <ul>
+                    <li>In this technique, the selection probability for each individual is represented as a segment on
+                        a circular wheel, where the size of the segment is proportional to the fitness value of the
+                        individual.</li>
+                    <li>Example:
+                        <br>- Individual A (Fitness: 50) → Segment size: 50%
+                        <br>- Individual B (Fitness: 30) → Segment size: 30%
+                        <br>- Individual C (Fitness: 20) → Segment size: 20%
+                        <br>A random spin of the wheel determines which individual is selected.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Crossover and Its Types</h2>
+            <ul>
+                <li>Crossover is a genetic operator that combines (mates) two chromosomes (parents) to produce a new
+                    chromosome (offspring).</li>
+                <li>The main idea behind crossover is that the new chromosome may be better than both parents if it
+                    inherits the best characteristics from each parent.</li>
+            </ul>
+
+            <div class="in">
+                <h3>Types of Crossover</h3>
+                <p><strong>1: One-Point Crossover</strong></p>
+                <ul>
+                    <li>In one-point crossover, a single crossover point is selected on the parent chromosomes. The
+                        segments of the parents' chromosomes before and after the crossover point are swapped to produce
+                        offspring.</li>
+                    <li>Example:
+                        <br>- Parent 1: A B | C D E F G H
+                        <br>- Parent 2: X Y | Z W Q R S T
+                        <br>- Offspring 1: A B | Z W Q R S T
+                        <br>- Offspring 2: X Y | C D E F G H
+                        <br>(Crossover occurs at position 2)
+                    </li>
+                </ul>
+
+                <p><strong>2: Two-Point Crossover</strong></p>
+                <ul>
+                    <li>In two-point crossover, two crossover points are selected on the parent chromosomes. The
+                        segments between the two points are swapped to create offspring.</li>
+                    <li>Example:
+                        <br>- Parent 1: A B C | D E | F G H
+                        <br>- Parent 2: X Y Z | W Q | R S T
+                        <br>- Offspring 1: A B C | W Q | F G H
+                        <br>- Offspring 2: X Y Z | D E | R S T
+                        <br>(Crossover points are at positions 3 and 5)
+                    </li>
+                </ul>
+
+                <p><strong>3: Uniform Crossover</strong></p>
+                <ul>
+                    <li>In uniform crossover, each gene (bit) from the parents is independently chosen with equal
+                        probability to be part of the offspring. This allows for more random combinations of traits.
+                    </li>
+                    <li>Example:
+                        <br>- Parent 1: A B C D E F G H
+                        <br>- Parent 2: X Y Z W Q R S T
+                        <br>- Offspring: A Y C W E R G T
+                        <br>(Randomly selected genes from each parent form the offspring)
+                    </li>
+                </ul>
+
+                <p><strong>4: Half-Uniform Crossover (HUX)</strong></p>
+                <ul>
+                    <li>In HUX, exactly half of the differing genes between the two parents are swapped to produce
+                        offspring. This method focuses on diversity while retaining half of the parental
+                        characteristics.</li>
+                    <li>Example:
+                        <br>- Parent 1: A B C D E F G H
+                        <br>- Parent 2: X Y Z W Q R S T
+                        <br>- Genes differing: All genes
+                        <br>- Offspring 1: A Y C D Q F S H
+                        <br>- Offspring 2: X B Z W E R G T
+                    </li>
+                </ul>
+
+                <p><strong>5: Three-Point Crossover</strong></p>
+                <ul>
+                    <li>In three-point crossover, three crossover points are selected, and segments between alternate
+                        points are swapped between the parents.</li>
+                    <li>Example:
+                        <br>- Parent 1: A B | C D | E F | G H
+                        <br>- Parent 2: X Y | Z W | Q R | S T
+                        <br>- Offspring 1: A B | Z W | E F | S T
+                        <br>- Offspring 2: X Y | C D | Q R | G H
+                        <br>(Crossover points are at positions 2, 4, and 6)
+                    </li>
+                </ul>
+
+                <p><strong>6: Shuffle Crossover</strong></p>
+                <ul>
+                    <li>In shuffle crossover, the genes in the parent chromosomes are randomly shuffled before
+                        crossover, and then the one-point or two-point crossover is applied. Afterward, the offspring
+                        genes are unshuffled back to the original order.</li>
+                    <li>Example:
+                        <br>- Original Parent 1: A B C D E F G H
+                        <br>- Original Parent 2: X Y Z W Q R S T
+                        <br>- Shuffled Parent 1: D C A E B H F G
+                        <br>- Shuffled Parent 2: W Z Y Q X S R T
+                        <br>- One-point crossover produces:
+                        <br>&nbsp;&nbsp;Offspring 1: D C A | Q X S R T
+                        <br>&nbsp;&nbsp;Offspring 2: W Z Y | E B H F G
+                        <br>- Unshuffled Offspring 1: A B C Q E F R H
+                        <br>- Unshuffled Offspring 2: X Y Z D B G S T
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
@@ -424,6 +637,8 @@
                     Algorithm video lecture &neArr;</a></li>
             <li><a href="https://youtu.be/SUPckNuMKoY?si=33g_PPpOc-VjsycK" target="_blank">Genetic Operators and their
                     types video lecture &neArr;</a></li>
+            <li><a href="https://youtu.be/nDKkRwpnakI?si=p0N9mv6KZKi_3HDJ" target="_blank">Encoding( Binary Encoding) in
+                    Genetic algorithm video lecture &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
