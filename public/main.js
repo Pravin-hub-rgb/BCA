@@ -335,7 +335,8 @@ const subjects = [
   { name: "Optimization Techniques", path: "./resources/sem5/ot/index.html" },
   { name: "Programming with .Net", path: "./resources/sem5/net/index.html" },
   { name: "C# .Net Lab", path: "./resources/sem5/netlab/index.html" },
-  { name: "Soft Computing", path: "./resources/sem5/sc/index.html" }
+  { name: "Soft Computing", path: "./resources/sem5/sc/index.html" },
+  { name: "Career Skills - III", path: "./resources/sem5/cs/index.html" }
 ];
 
 const searchInput = document.getElementById('search');
