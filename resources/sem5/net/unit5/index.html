@@ -40,6 +40,178 @@
     </div>
     <div class="content-box">
         <div class="wh">
+            <h2>Relational Database Concepts</h2>
+            <p>Relational databases store data in tables consisting of rows and columns. Structured Query Language (SQL)
+                is used to interact with relational databases.</p>
+
+            <div class="in">
+                <h3>1. Creating a Database</h3>
+                <ul>
+                    <li>To create a new database, use the following syntax:</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE DATABASE database_name;
+USE database_name;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Create and use a database named "school_management".</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE DATABASE school_management;
+USE school_management;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>2. Creating a Table</h3>
+                <ul>
+                    <li>To create a table within a database, define columns and data types:</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE TABLE table_name (
+    column1 data_type constraints,
+    column2 data_type constraints
+);
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Create a table named "students".</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT,
+    class VARCHAR(10),
+    admission_date DATE
+);
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>3. Inserting Data</h3>
+                <ul>
+                    <li>To add records to a table:</li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO table_name (column1, column2)
+VALUES (value1, value2);
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Insert data into the "students" table.</li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO students (name, age, class, admission_date)
+VALUES ('John Doe', 14, '8th', '2024-06-01');
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Insert Multiple Rows:</b></li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO students (name, age, class, admission_date)
+VALUES 
+('Jane Smith', 15, '9th', '2024-06-02'),
+('Sam Brown', 14, '8th', '2024-06-03');
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>4. Selecting Data</h3>
+                <ul>
+                    <li>To retrieve data from a table:</li>
+                </ul>
+                <pre>
+                    <code>
+SELECT column1, column2 FROM table_name;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Examples:</b></li>
+                </ul>
+                <pre>
+                    <code>
+-- Select all records:
+SELECT * FROM students;
+
+-- Select specific columns:
+SELECT name, age FROM students;
+
+-- With a condition:
+SELECT * FROM students WHERE age > 14;
+
+-- Sorting results:
+SELECT * FROM students ORDER BY age DESC;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>5. Updating Data</h3>
+                <ul>
+                    <li>To modify existing records in a table:</li>
+                </ul>
+                <pre>
+                    <code>
+UPDATE table_name
+SET column1 = value1
+WHERE condition;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Update the class of a student with ID 1.</li>
+                </ul>
+                <pre>
+                    <code>
+UPDATE students
+SET class = '9th'
+WHERE id = 1;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>6. Deleting Data</h3>
+                <ul>
+                    <li>To remove records from a table:</li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM table_name WHERE condition;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Delete a student record with ID 2.</li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM students
+WHERE id = 2;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Delete All Records (Use with Caution):</b></li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM students;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
             <h2>ADO & ADO.NET</h2>
             <p>
                 <strong>ADO</strong> (ActiveX Data Objects) and <strong>ADO.NET</strong> are technologies provided by
