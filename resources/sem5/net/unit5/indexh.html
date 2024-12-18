@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 5</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="wh">
+            <h2>Relational Database Concepts</h2>
+            <p>Relational databases store data in tables consisting of rows and columns. Structured Query Language (SQL)
+                is used to interact with relational databases.</p>
+
+            <div class="in">
+                <h3>1. Creating a Database</h3>
+                <ul>
+                    <li>To create a new database, use the following syntax:</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE DATABASE database_name;
+USE database_name;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Create and use a database named "school_management".</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE DATABASE school_management;
+USE school_management;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>2. Creating a Table</h3>
+                <ul>
+                    <li>To create a table within a database, define columns and data types:</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE TABLE table_name (
+    column1 data_type constraints,
+    column2 data_type constraints
+);
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Create a table named "students".</li>
+                </ul>
+                <pre>
+                    <code>
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT,
+    class VARCHAR(10),
+    admission_date DATE
+);
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>3. Inserting Data</h3>
+                <ul>
+                    <li>To add records to a table:</li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO table_name (column1, column2)
+VALUES (value1, value2);
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Insert data into the "students" table.</li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO students (name, age, class, admission_date)
+VALUES ('John Doe', 14, '8th', '2024-06-01');
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Insert Multiple Rows:</b></li>
+                </ul>
+                <pre>
+                    <code>
+INSERT INTO students (name, age, class, admission_date)
+VALUES 
+('Jane Smith', 15, '9th', '2024-06-02'),
+('Sam Brown', 14, '8th', '2024-06-03');
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>4. Selecting Data</h3>
+                <ul>
+                    <li>To retrieve data from a table:</li>
+                </ul>
+                <pre>
+                    <code>
+SELECT column1, column2 FROM table_name;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Examples:</b></li>
+                </ul>
+                <pre>
+                    <code>
+-- Select all records:
+SELECT * FROM students;
+
+-- Select specific columns:
+SELECT name, age FROM students;
+
+-- With a condition:
+SELECT * FROM students WHERE age > 14;
+
+-- Sorting results:
+SELECT * FROM students ORDER BY age DESC;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>5. Updating Data</h3>
+                <ul>
+                    <li>To modify existing records in a table:</li>
+                </ul>
+                <pre>
+                    <code>
+UPDATE table_name
+SET column1 = value1
+WHERE condition;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Update the class of a student with ID 1.</li>
+                </ul>
+                <pre>
+                    <code>
+UPDATE students
+SET class = '9th'
+WHERE id = 1;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="in">
+                <h3>6. Deleting Data</h3>
+                <ul>
+                    <li>To remove records from a table:</li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM table_name WHERE condition;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Example:</b> Delete a student record with ID 2.</li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM students
+WHERE id = 2;
+                    </code>
+                </pre>
+                <ul>
+                    <li><b>Delete All Records (Use with Caution):</b></li>
+                </ul>
+                <pre>
+                    <code>
+DELETE FROM students;
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>ADO & ADO.NET</h2>
+            <p>
+                Haan, toh baat karte hain ADO aur ADO.NET ke baare mein. Yeh dono hi Microsoft ki technologies hain jo
+                databases aur other data sources ko access aur manage karne ke liye use hoti hain. Bas farak yeh hai ki
+                ADO ek purani technology hai jo connected architecture use karti hai (matlab database se lagatar
+                connection chahiye), jabki ADO.NET ek advanced version hai jo disconnected architecture pe kaam karta
+                hai, aur efficiency aur performance ko improve karta hai.
+            </p>
+            <div class="in">
+                <h3><strong>ADO (ActiveX Data Objects)</strong></h3>
+                <ul>
+                    <li>Yeh ek technology hai jo databases aur other data sources ke saath interact karne ke liye use
+                        hoti hai. Iska kaam hai ek unified programming interface dena, jisme developer ko har data
+                        source ke liye alag-alag cheez seekhni ki zarurat nahi hoti.</li>
+                    <li>ADO mein applications ko long-lived database connections ki zarurat hoti hai, matlab database
+                        connection kaafi der tak open rehta hai. Isse database resources lock hote hain, jo kabhi-kabhi
+                        problematic ho sakta hai.</li>
+                    <li>ADO ek Connection object use karta hai database ke saath connection banane ke liye.</li>
+                    <li>Data ko manage karne ke liye RecordSet object ka use hota hai, jo ek query ke result ko ya
+                        specific data source ke data ko hold karta hai.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3><strong>ADO.NET</strong></h3>
+                <ul>
+                    <li>Ab baat karte hain ADO.NET ki, jo ki ADO ka advanced successor hai aur .NET framework ke sath
+                        introduce kiya gaya tha. Yeh alag-alag data sources ko access karne ke liye consistent aur
+                        powerful tools provide karta hai.</li>
+                    <li>ADO.NET mein long-lived connections ki zarurat nahi hoti, aur yeh disconnected architecture use
+                        karta hai jo performance aur scalability ko kaafi improve karta hai.</li>
+                    <li>Data ko represent aur manipulate karne ke liye DataSets aur DataAdapters jaise alag objects ka
+                        use hota hai, jo data access ko fast aur efficient banate hain.</li>
+                    <li>ADO.NET ka ek bada plus point hai iski XML ke saath seamless integration. Data ko XML format
+                        mein easily represent aur store kiya ja sakta hai.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3><strong>Differences between ADO and ADO.NET</strong></h3>
+                <img src="../../images/net2.jpeg" alt="">
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Data Providers by .NET Framework</h2>
+            <p><strong>Data Providers</strong> .NET Framework mein wo components hote hain jo applications ko data
+                sources jaise SQL Server, Oracle, aur doosre sources se interact karne mein madad karte hain. Yeh
+                providers data source se connection manage karte hain, commands execute karte hain, aur results retrieve
+                karte hain. Har provider ek specific data source ke saath kaam karne ke liye design kiya jata hai.</p>
+
+            <ol>
+                <li>
+                    <strong>.NET Framework Data Provider for SQL Server:</strong> Yeh provider Microsoft SQL Server ko
+                    access karne ke liye optimized hai. Iske liye <strong>System.Data.SqlClient</strong> namespace ki
+                    zarurat hoti hai aur yeh SQL Server databases ko efficiently aur securely access karta hai.
+                </li>
+                <li>
+                    <strong>.NET Framework Data Provider for OLE DB:</strong> Yeh provider un data sources ko connect
+                    karne ke liye use hota hai jo OLE DB (Object Linking and Embedding, Database) ka use karte hain.
+                    Isme <strong>System.Data.OleDb</strong> namespace ki zarurat hoti hai aur yeh legacy databases ke
+                    liye ideal hai.
+                </li>
+                <li>
+                    <strong>.NET Framework Data Provider for ODBC:</strong> ODBC (Open Database Connectivity) ek
+                    standard API hai jo database management systems ko access karne ke liye use hoti hai. Yeh provider
+                    ODBC drivers use karke data sources ko connect karta hai aur iske liye
+                    <strong>System.Data.Odbc</strong> namespace ki zarurat hoti hai.
+                </li>
+                <li>
+                    <strong>.NET Framework Data Provider for Oracle:</strong> Yeh provider specifically Oracle databases
+                    ke saath kaam karne ke liye design kiya gaya hai. Isme <strong>System.Data.OracleClient</strong>
+                    namespace ki zarurat hoti hai (jo recent .NET versions mein deprecated hai lekin legacy systems ke
+                    liye abhi bhi relevant hai).
+                </li>
+            </ol>
+
+            <h2>.NET Framework Data Provider Objects</h2>
+            <p>.NET Framework data provider kuch core objects provide karta hai jo data operations ko manage karte hain:
+            </p>
+
+            <ol>
+                <li>
+                    <strong>Connection:</strong> Yeh object data source ke saath connection establish aur manage karne
+                    ke liye use hota hai. Jaise, SQL Server database ke liye <strong>SqlConnection</strong> object use
+                    kiya jata hai.
+                </li>
+                <li>
+                    <strong>Command:</strong> Yeh SQL queries ya stored procedures ko execute karne ke liye use hota
+                    hai. Example ke liye, <strong>SqlCommand</strong> SQL Server ke liye aur
+                    <strong>OleDbCommand</strong> OLE DB ke liye use hota hai.
+                </li>
+                <li>
+                    <strong>Data Reader:</strong> Yeh forward-only, read-only access provide karta hai data ko jo
+                    database se retrieve hota hai. Example ke liye, <strong>SqlDataReader</strong> SQL Server ke saath
+                    use hota hai.
+                </li>
+                <li>
+                    <strong>Data Adapter:</strong> Yeh bridge ka kaam karta hai database aur <strong>DataSet</strong> ke
+                    beech. Iska use data ko database se retrieve karne aur uske baad modifications ke baad database mein
+                    update karne ke liye hota hai.
+                </li>
+            </ol>
+
+            <p>.NET mein data provider model kaafi flexible hai aur developers ko alag-alag types ke databases ke saath
+                interact karne ki suvidha deta hai, jisme har database technology ke liye specific namespaces aur
+                classes diye gaye hain. In providers ka use karke developers efficiently data-driven applications likh
+                sakte hain aur different data sources ke saath compatibility maintain kar sakte hain.</p>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>
