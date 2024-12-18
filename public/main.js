@@ -77,6 +77,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add buttons after DOM content is loaded
   addCopyButtons();
+
+  // Hinglish wala code
+  // Select all mixed-notes sections
+  const mixedNotesSections = document.querySelectorAll(".mixed-notes");
+
+  mixedNotesSections.forEach(function (section) {
+    // Create the toggle button
+    const toggleButton = document.createElement("button");
+    toggleButton.textContent = "Switch to Hinglish";
+    toggleButton.classList.add("toggle-notes");
+
+    // Append the button to the section
+    section.appendChild(toggleButton);
+
+    // Add event listener for toggling notes
+    toggleButton.addEventListener("click", function () {
+      const englishNotes = section.querySelector(".english");
+      const hinglishNotes = section.querySelector(".hinglish");
+
+      // Toggle visibility
+      if (englishNotes.style.display === "none") {
+        englishNotes.style.display = "block";
+        hinglishNotes.style.display = "none";
+        toggleButton.textContent = "Switch to Hinglish";
+      } else {
+        englishNotes.style.display = "none";
+        hinglishNotes.style.display = "block";
+        toggleButton.textContent = "Switch to English";
+      }
+    });
+  });
 });
 
 // Function to save the selected semester to localStorage
@@ -390,3 +421,38 @@ function displaySuggestions(suggestions) {
     suggestionsContainer.style.display = 'none'; // Hide the dropdown if no input or no match
   }
 }
+
+
+// Hinglish to English
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Select all mixed-notes sections
+//   const mixedNotesSections = document.querySelectorAll(".mixed-notes");
+
+//   mixedNotesSections.forEach(function (section) {
+//       // Create the toggle button
+//       const toggleButton = document.createElement("button");
+//       toggleButton.textContent = "Switch to Hinglish";
+//       toggleButton.classList.add("toggle-notes");
+
+//       // Append the button to the section
+//       section.appendChild(toggleButton);
+
+//       // Add event listener for toggling notes
+//       toggleButton.addEventListener("click", function () {
+//           const englishNotes = section.querySelector(".english");
+//           const hinglishNotes = section.querySelector(".hinglish");
+
+//           // Toggle visibility
+//           if (englishNotes.style.display === "none") {
+//               englishNotes.style.display = "block";
+//               hinglishNotes.style.display = "none";
+//               toggleButton.textContent = "Switch to Hinglish";
+//           } else {
+//               englishNotes.style.display = "none";
+//               hinglishNotes.style.display = "block";
+//               toggleButton.textContent = "Switch to English";
+//           }
+//       });
+//   });
+// });
