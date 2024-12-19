@@ -358,97 +358,236 @@ public class MainActivity extends AppCompatActivity {
                     <ul>
                         <li>Perform tasks like downloading data, playing music, or managing notifications.</li>
                         <li>Run even if the app is not in the foreground.</li>
-                    </ul></li>
+                    </ul>
+                </li>
             </ul>
-            <div class="in">
-                <h3>Types of Services:</h3>
-                <ol>
-                    <li>
-                        <strong>Started Service:</strong>
-                        <p>
-                            A <strong>Started Service</strong> is initiated by calling <strong>startService()</strong>
-                            from an application component like an <strong>Activity</strong> or
-                            <strong>BroadcastReceiver</strong>.
-                            Once started, the service runs in the background independently of the component that started
-                            it. It continues to run until it either finishes its task or is explicitly stopped using
-                            <strong>stopService()</strong> or <strong>stopSelf()</strong>.
-                        </p>
-                        <p><strong>Behavior:</strong></p>
-                        <ul>
-                            <li>Doesn’t return results to the calling component (like an <strong>Activity</strong>).
-                            </li>
-                            <li>Suitable for long-running operations that don’t need user interaction.</li>
-                        </ul>
-                        <p><strong>Use Case:</strong></p>
-                        <ul>
-                            <li>A music app could use a started service to play music in the background, allowing it to
-                                continue playing even if the user navigates away from the app or the activity is
-                                destroyed.</li>
-                        </ul>
-                        <p><strong>Example:</strong></p>
-                        <ul>
-                            <li>Downloading a file in the background without requiring any user interaction.</li>
-                        </ul>
-                        <p><strong>Lifecycle:</strong></p>
-                        <ul>
-                            <li>Starts with <code>startService()</code>.</li>
-                            <li>Runs indefinitely in the background.</li>
-                            <li>Stops with <code>stopSelf()</code> or <code>stopService()</code>.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Bound Service:</strong>
-                        <p>
-                            A <strong>Bound Service</strong> allows an application component (like an
-                            <code>Activity</code>, <code>Fragment</code>, or another service) to <strong>bind</strong>
-                            to it using <code>bindService()</code>.
-                            This type of service provides a client-server interface. The client (the component that
-                            binds) can interact with the service, send requests, receive results, and communicate back
-                            and forth.
-                        </p>
-                        <p><strong>Behavior:</strong></p>
-                        <ul>
-                            <li>Unlike a started service, a bound service is <strong>tied to the lifecycle</strong> of
-                                the component that binds to it. When all clients unbind, the service is destroyed.</li>
-                            <li>This is useful for scenarios where the client needs continuous interaction with the
-                                service.</li>
-                        </ul>
-                        <p><strong>Use Case:</strong></p>
-                        <ul>
-                            <li>An app that needs continuous communication with a background service. For example, a
-                                fitness app that binds to a service to constantly receive real-time step count updates
-                                from a wearable device.</li>
-                        </ul>
-                        <p><strong>Example:</strong></p>
-                        <ul>
-                            <li>A messaging app could bind to a service to receive new messages in real-time while the
-                                user is in the chat activity.</li>
-                        </ul>
-                        <p><strong>Lifecycle:</strong></p>
-                        <ul>
-                            <li>A bound service starts with <strong>bindService()</strong>.</li>
-                            <li>Runs as long as any component is bound to it.</li>
-                            <li>Stops when the last component unbinds (using <strong>unbindService()</strong>).</li>
-                        </ul>
-                    </li>
-                </ol>
-                <h3>Key Differences Between Started and Bounded Services</h3>
-                <img src="../../images/ap12.png" alt="">
-                <h3>Example Scenarios for Both Types:</h3>
-                <ul>
-                    <li><strong>Started Service:</strong>
-                        <p>Imagine a news app that downloads articles in the background. You don't need to interact with
-                            the download, so a started service runs the task in the background and continues until it's
-                            done or you stop it.</p>
-                    </li>
-                    <li><strong>Bound Service:</strong>
-                        <p>Suppose you’re developing a music app that allows the user to control playback (play, pause,
-                            skip) from the app interface while continuously interacting with the service. The app would
-                            bind to a service so the user can control the playback through the UI, and once the user
-                            closes the UI, the service can stop.</p>
-                    </li>
-                </ul>
+            <div class="mixed-notes">
+                <div class="in hinglish">
+                    <h3>Types of Services:</h3>
+                    <ol>
+                        <li>
+                            <strong>Started Service:</strong>
+                            <p>
+                                A <strong>Started Service</strong> ek aisi service hai jo Android me application
+                                component (jaise ki <strong>Activity</strong>) ke through start hoti hai aur
+                                independently chalti hai, even agar initiating component destroy ho jaye. Ye un tasks ke
+                                liye suitable hai jo app close hone ke baad bhi chalni chahiye (jaise file download
+                                karna).
+                            </p>
+                            <p>
+                                <strong>Started Service</strong> ko start karne ke liye, <strong>startService()</strong>
+                                call kiya jata hai kisi application component se, jaise <strong>Activity</strong> ya
+                                <strong>BroadcastReceiver</strong>. Ek baar service start ho jaye, toh wo background me
+                                independent tarike se chalti rehti hai, jab tak wo apna task complete nahi kar leti ya
+                                phir manually stop na kiya jaye using <strong>stopService()</strong> ya
+                                <strong>stopSelf()</strong>.
+                            </p>
+                            <p><strong>Behavior:</strong></p>
+                            <ul>
+                                <li>Ye long-running operations ke liye useful hai jo user interaction nahi maangte.</li>
+                            </ul>
+                            <p><strong>Use Case:</strong></p>
+                            <ul>
+                                <li>Ek music app apne background me music chalane ke liye started service ka use kar
+                                    sakta hai, taaki music chalna continue rahe, chahe user app se nikal jaye ya
+                                    activity destroy ho jaye.</li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <ul>
+                                <li>File ko background me download karna bina kisi user interaction ke.</li>
+                            </ul>
+                            <p><strong>Lifecycle:</strong></p>
+                            <ul>
+                                <li>Starts with <code>startService()</code>.</li>
+                                <li>Background me indefinitely chalti hai.</li>
+                                <li>Stops with <strong>stopSelf()</strong> ya <strong>stopService()</strong>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Bound Service:</strong>
+                            <p>
+                                <strong>Bound Service</strong> ek aisi service hai jo doosre components (jaise
+                                <strong>Activity</strong>) ko allow karti hai ki wo usse bind ho kar directly interact
+                                kar sake via an interface. Service ka lifecycle us component ke lifecycle se tied hota
+                                hai jo usse bind karta hai, matlab service tab tak chalti hai jab tak koi component bind
+                                hai.
+                            </p>
+                            <p>
+                                <strong>Bound Service</strong> ek application component (jaise <strong>Activity</strong>,
+                                <strong>Fragment</strong>, ya koi aur service) ko <strong>bind</strong> karne ki facility
+                                deti hai using <strong>bindService()</strong>. Is type ki service ek client-server interface
+                                provide karti hai. Client (jo component bind karta hai) service ke saath interact kar
+                                sakta hai, requests bhej sakta hai, results le sakta hai, aur communication kar sakta
+                                hai.
+                            </p>
+                            <p><strong>Behavior:</strong></p>
+                            <ul>
+                                <li>Started service ke comparison me, bound service ka <strong>lifecycle</strong> us
+                                    component ke lifecycle ke saath tied hota hai jo bind hota hai. Jab sabhi clients
+                                    unbind ho jate hain, service destroy ho jati hai.</li>
+                                <li>Ye un scenarios me useful hai jahan client ko service ke saath continuous
+                                    interaction ki zarurat hoti hai.</li>
+                            </ul>
+                            <p><strong>Use Case:</strong></p>
+                            <ul>
+                                <li>Agar ek fitness app ko real-time step count updates chahiye from a wearable device,
+                                    toh wo bound service ko use karke service se continuously interact kar sakta hai.
+                                </li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <ul>
+                                <li>Ek messaging app service ke saath bind ho sakta hai taaki wo real-time messages
+                                    receive kar sake jab user chat activity me ho.</li>
+                            </ul>
+                            <p><strong>Lifecycle:</strong></p>
+                            <ul>
+                                <li>A bound service starts with <strong>bindService()</strong>.</li>
+                                <li>Jab tak koi component bind hai, tab tak service chalti rehti hai.</li>
+                                <li>Service tab stop hoti hai jab last component unbind ho jata hai using
+                                    <strong>unbindService()</strong>.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <h3>Key Differences Between Started and Bounded Services</h3>
+                    <img src="../../images/ap12.png" alt="">
+                    <h3>Example Scenarios for Both Types:</h3>
+                    <ul>
+                        <li><strong>Started Service:</strong>
+                            <p>Socho ek news app hai jo articles background me download kar raha hai. Aapko download ke
+                                saath interact karne ki zarurat nahi hai, toh started service background me task ko
+                                chalaye rakhegi aur jab tak wo complete nahi hota, ya aap usse stop nahi karte, tab tak
+                                chalti rahegi.</p>
+                        </li>
+                        <li><strong>Bound Service:</strong>
+                            <p>Imagine karo ek music app banate waqt, jo user ko playback control (play, pause, skip)
+                                allow karta hai app interface se, jabki wo service ke saath continuously interact kar
+                                raha hota hai. App service ko bind karega taaki user playback ko UI ke through control
+                                kar sake, aur jab user UI band karega, tab service bhi stop ho sakti hai.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in english">
+                    <h3>Types of Services:</h3>
+                    <ol>
+                        <li>
+                            <strong>Started Service:</strong>
+                            <p>
+                                A <strong>Started Service</strong> is a service in Android that is initiated (started)
+                                by an
+                                application component (like an
+                                <strong>Activity</strong>) and runs independently, even if the initiating component is
+                                destroyed. It is suitable for tasks
+                                that should continue running even if the user closes the app (e.g., downloading a file).
+                            </p>
+                            <p>
+                                A <strong>Started Service</strong> is initiated by calling
+                                <strong>startService()</strong>
+                                from an application component
+                                like an <strong>Activity</strong> or <strong>BroadcastReceiver</strong>. Once started,
+                                the
+                                service runs in the background
+                                independently of the component that started it. It continues to run until it either
+                                finishes
+                                its task or is explicitly
+                                stopped using <strong>stopService()</strong> or <strong>stopSelf()</strong>.
+                            </p>
+                            <p><strong>Behavior:</strong></p>
+                            <ul>
+                                <li>Doesn’t return results to the calling component (like an <strong>Activity</strong>).
+                                </li>
+                                <li>Suitable for long-running operations that don’t need user interaction.</li>
+                            </ul>
+                            <p><strong>Use Case:</strong></p>
+                            <ul>
+                                <li>A music app could use a started service to play music in the background, allowing it
+                                    to
+                                    continue playing even if the
+                                    user navigates away from the app or the activity is destroyed.</li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <ul>
+                                <li>Downloading a file in the background without requiring any user interaction.</li>
+                            </ul>
+                            <p><strong>Lifecycle:</strong></p>
+                            <ul>
+                                <li>Starts with <strong>startService()</strong>.</li>
+                                <li>Runs indefinitely in the background.</li>
+                                <li>Stops with <strong>stopSelf()</strong> or <strong>stopService()</strong>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Bound Service:</strong>
+                            <p>
+                                A <strong>Bound Service</strong> is a service that allows other components (like an
+                                <strong>Activity</strong>) to bind
+                                to it and interact with it directly via an interface. The service lifecycle is tied to
+                                the
+                                component that is bound to it,
+                                meaning the service stops when no components are bound.
+                            </p>
+                            <p>
+                                A <strong>Bound Service</strong> allows an application component (like an
+                                <strong>Activity</strong>, <strong>Fragment</strong>,
+                                or another service) to <strong>bind</strong> to it using <strong>bindService()</strong>.
+                                This
+                                type of service provides a
+                                client-server interface. The client (the component that binds) can interact with the
+                                service, send requests, receive results,
+                                and communicate back and forth.
+                            </p>
+                            <p><strong>Behavior:</strong></p>
+                            <ul>
+                                <li>Unlike a started service, a bound service is <strong>tied to the lifecycle</strong>
+                                    of
+                                    the component that binds to it.
+                                    When all clients unbind, the service is destroyed.</li>
+                                <li>This is useful for scenarios where the client needs continuous interaction with the
+                                    service.</li>
+                            </ul>
+                            <p><strong>Use Case:</strong></p>
+                            <ul>
+                                <li>An app that needs continuous communication with a background service. For example, a
+                                    fitness app that binds to a
+                                    service to constantly receive real-time step count updates from a wearable device.
+                                </li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <ul>
+                                <li>A messaging app could bind to a service to receive new messages in real-time while
+                                    the
+                                    user is in the chat activity.</li>
+                            </ul>
+                            <p><strong>Lifecycle:</strong></p>
+                            <ul>
+                                <li>A bound service starts with <strong>bindService()</strong>.</li>
+                                <li>Runs as long as any component is bound to it.</li>
+                                <li>Stops when the last component unbinds (using <strong>unbindService()</strong>).</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <h3>Key Differences Between Started and Bounded Services</h3>
+                    <img src="../../images/ap12.png" alt="">
+                    <h3>Example Scenarios for Both Types:</h3>
+                    <ul>
+                        <li><strong>Started Service:</strong>
+                            <p>Imagine a news app that downloads articles in the background. You don't need to interact
+                                with
+                                the download, so a started service runs the task in the background and continues until
+                                it's
+                                done or you stop it.</p>
+                        </li>
+                        <li><strong>Bound Service:</strong>
+                            <p>Suppose you’re developing a music app that allows the user to control playback (play,
+                                pause,
+                                skip) from the app interface while continuously interacting with the service. The app
+                                would
+                                bind to a service so the user can control the playback through the UI, and once the user
+                                closes the UI, the service can stop.</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
             <h3>Why Use a Service?</h3>
             <p>Services are helpful for running tasks in the background, such as playing music, downloading files, or
                 handling long-running computations.</p>
@@ -485,11 +624,11 @@ public class MainActivity extends AppCompatActivity {
                                     components.</p>
                                 <p><strong>Example:</strong> Starting a new Activity within the same app.</p>
                                 <pre>
-                <code>
+                                    <code>
 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 startActivity(intent);
-                </code>
-            </pre>
+                                    </code>
+                                </pre>
                                 <p>In this example, <strong>MainActivity.this</strong> is the context, and
                                     <strong>SecondActivity.class</strong> is the class of the Activity we want to start.
                                 </p>
@@ -503,13 +642,13 @@ startActivity(intent);
                                     appropriate app to handle the task (like sharing content or opening a web page).</p>
                                 <p><strong>Example:</strong> Sharing content across apps.</p>
                                 <pre>
-                <code>
+                                    <code>
 Intent shareIntent = new Intent(Intent.ACTION_SEND);
 shareIntent.setType("text/plain");
 shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello, check this out!");
 startActivity(Intent.createChooser(shareIntent, "Share via"));
-                </code>
-            </pre>
+                                    </code>
+                                </pre>
                                 <p>In this example, <strong>Intent.ACTION_SEND</strong> indicates that we want to share
                                     some text. The <strong>setType()</strong> method specifies the type of data being
                                     shared, and <strong>putExtra()</strong> adds the actual text content. The
@@ -1729,30 +1868,38 @@ public class MyBroadcast extends BroadcastReceiver {
                         </div>
                     </div>
                     <ul>
-                        <li><strong>onReceive(Context context, Intent intent):</strong> 
-                            This is the core method of the BroadcastReceiver that is triggered whenever a matching broadcast is received. 
+                        <li><strong>onReceive(Context context, Intent intent):</strong>
+                            This is the core method of the BroadcastReceiver that is triggered whenever a matching
+                            broadcast is received.
                             It takes two parameters:
                             <ul>
-                                <li><strong>Context context:</strong> 
-                                    This provides access to application-specific resources and services, such as showing a Toast, starting an activity, or accessing shared preferences.
+                                <li><strong>Context context:</strong>
+                                    This provides access to application-specific resources and services, such as showing
+                                    a Toast, starting an activity, or accessing shared preferences.
                                 </li>
-                                <li><strong>Intent intent:</strong> 
-                                    This carries details about the broadcast, such as the action (e.g., BluetoothAdapter.ACTION_STATE_CHANGED) 
-                                    and any additional data (extras) included in the broadcast. 
+                                <li><strong>Intent intent:</strong>
+                                    This carries details about the broadcast, such as the action (e.g.,
+                                    BluetoothAdapter.ACTION_STATE_CHANGED)
+                                    and any additional data (extras) included in the broadcast.
                                     The action helps identify what kind of event occurred.
                                 </li>
                             </ul>
                         </li>
-                        <li><strong>Action Handling:</strong> 
-                            The <code>getAction()</code> method is used to retrieve the type of broadcast. In this example, the receiver checks 
-                            if the action is <code>BluetoothAdapter.ACTION_STATE_CHANGED</code>, indicating a Bluetooth state change.
+                        <li><strong>Action Handling:</strong>
+                            The <code>getAction()</code> method is used to retrieve the type of broadcast. In this
+                            example, the receiver checks
+                            if the action is <code>BluetoothAdapter.ACTION_STATE_CHANGED</code>, indicating a Bluetooth
+                            state change.
                         </li>
-                        <li><strong>Extracting Data:</strong> 
-                            The <code>getIntExtra()</code> method extracts the Bluetooth state (e.g., ON, OFF) from the broadcast's intent. 
-                            The key <code>BluetoothAdapter.EXTRA_STATE</code> is used to access the state, and <code>BluetoothAdapter.ERROR</code> serves as a fallback value.
+                        <li><strong>Extracting Data:</strong>
+                            The <code>getIntExtra()</code> method extracts the Bluetooth state (e.g., ON, OFF) from the
+                            broadcast's intent.
+                            The key <code>BluetoothAdapter.EXTRA_STATE</code> is used to access the state, and
+                            <code>BluetoothAdapter.ERROR</code> serves as a fallback value.
                         </li>
-                        <li><strong>Switch Statement:</strong> 
-                            The state is handled using a switch statement. Based on the state, a Toast message is displayed to inform the user 
+                        <li><strong>Switch Statement:</strong>
+                            The state is handled using a switch statement. Based on the state, a Toast message is
+                            displayed to inform the user
                             whether Bluetooth is ON or OFF.
                         </li>
                     </ul>
