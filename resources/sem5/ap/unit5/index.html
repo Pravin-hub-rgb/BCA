@@ -40,68 +40,223 @@
     </div>
     <div class="content-box">
         <div id="t1" class="wh">
-            <h2>Introduction to SMS in Android</h2>
-            <ul>
-                <li>
-                    SMS (Short Message Service) is a widely used feature in mobile devices, enabling the sending and
-                    receiving of text messages.
-                    In Android, the SmsManager class provides the functionality to send SMS programmatically from your
-                    application.
-                </li>
-                <li>
-                    Since SMS is a sensitive operation (it can lead to unwanted costs or spam), Android enforces strict
-                    permission checks
-                    to ensure that users have explicitly allowed apps to use SMS functionality.
-                </li>
-            </ul>
-            <div class="in">
-                <h3>Permission Model in Android</h3>
-                <p>Android permissions can be divided into two categories:</p>
-                <ul>
-                    <li>
-                        <strong>Static Permissions:</strong> These are defined in the
-                        <strong>AndroidManifest.xml</strong>
-                        file.
-                        They inform the system about the permissions your app requires. For example, to send SMS, the
-                        following permission must be added:
-                        <pre>
-<code>
+            <div class="mixed-notes">
+                <div class="hinglish">
+                    <h2>Introduction to SMS in Android</h2>
+                    <ul>
+                        <li>
+                            SMS (Short Message Service) ek popular feature hai mobile devices mein, jo text messages
+                            send aur receive karne ki facility deta hai.
+                            Android mein, SmsManager class ka use karke aap programmatically SMS bhej sakte ho apne
+                            application se.
+                        </li>
+                        <li>
+                            Kyunki SMS ek sensitive operation hai (ye unwanted costs ya spam create kar sakta hai),
+                            Android strict permission checks enforce karta hai
+                            taaki users ko clearly pata ho ki unhone app ko SMS functionality use karne ki permission di
+                            hai.
+                        </li>
+                    </ul>
+                    <div class="in">
+                        <h3>Permission Model in Android</h3>
+                        <p>Android permissions do categories mein divide ki gayi hain:</p>
+                        <ul>
+                            <li>
+                                <strong>Static Permissions:</strong> Ye <strong>AndroidManifest.xml</strong> file mein
+                                define hoti hain.
+                                Ye system ko batati hain ki aapki app ko kaun kaun si permissions chahiye. Jaise, SMS
+                                bhejne ke liye aapko
+                                ye permission add karni hoti hai:
+                                <pre>
+                                    <code>
 &lt;uses-permission android:name="android.permission.SEND_SMS" /&gt;
-</code>
-        </pre>
-                        <p>
-                            Adding this permission means your app declares its intention to send SMS. This permission
-                            will
-                            be checked when the app is installed.
+                                    </code>
+                                </pre>
+                                <p>
+                                    Is permission ko add karne ka matlab hai ki aapki app SMS bhejne ka intention
+                                    declare kar rahi hai.
+                                    Ye permission tab check hoti hai jab app install ki ja rahi hoti hai.
+                                </p>
+                            </li>
+                            <li>
+                                <strong>Dynamic Permissions:</strong> Android 6.0 (API level 23) aur uske baad introduce
+                                ki gayi, ye sensitive permissions
+                                (jaise SMS) ke liye runtime par user se consent maangti hain. Iska purpose hai ki user
+                                aware ho ki app kya kar rahi hai
+                                aur user ko ye control mile ki wo isse allow kare ya nahi.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="in">
+                        <h3>Steps for Implementing SMS in Android</h3>
+                        <p>Android mein SMS functionality implement karne ke liye ye steps follow karne padenge:</p>
+                        <ul>
+                            <li><strong>AndroidManifest.xml</strong> file mein static permission
+                                <strong>android.permission.SEND_SMS</strong> add karein.
+                            </li>
+                            <li>Runtime par check karein ki <strong>SEND_SMS</strong> permission granted hai ya nahi,
+                                <strong>checkSelfPermission</strong> method ka use karke.
+                            </li>
+                            <li>Agar permission nahi di gayi hai, to <strong>requestPermissions</strong> method ka use
+                                karke dynamically permission maangein.</li>
+                            <li>Jab permission mil jaye, tab <strong>SmsManager</strong> class ka use karke SMS
+                                programmatically bhejein.</li>
+                        </ul>
+                    </div>
+                    <div class="in">
+                        <h3>SmsManager Class</h3>
+                        <p>SmsManager Android ka primary class hai jo SMS bhejne ke liye use hota hai. Ye developers ko
+                            text messages (SMS) aur multimedia messages (MMS) dono bhejne ki facility deta hai. Iske
+                            kuch important points hain:
+                        <ul>
+                            <li>Ye programmatically messages bhej sakta hai bina default messaging app ko open kiye.
+                            </li>
+                            <li>Ye single-part aur multi-part messages dono ko support karta hai. Multi-part messages ka
+                                use long texts ke liye hota hai jo single SMS ke character limit (generally 160
+                                characters) se zyada ho jate hain.</li>
+                            <li>Ye data messages bhejne ki bhi facility deta hai, jo binary data wale SMS hote hain.
+                            </li>
+                        </ul>
                         </p>
-                    </li>
-                    <li>
-                        <strong>Dynamic Permissions:</strong> Introduced in Android 6.0 (API level 23) and above, these
-                        require you to ask for the user's
-                        consent at runtime for sensitive permissions like SMS. This ensures that users are aware of what
-                        the
-                        app is doing and gives them control over whether to allow it or not.
-                    </li>
-                </ul>
-            </div>
-            <div class="in">
+                        <p><strong>SmsManager ka ek simple example SMS bhejne ke liye:</strong></p>
+                        <pre>
+                            <code>
+SmsManager smsManager = SmsManager.getDefault();
+smsManager.sendTextMessage(
+    "1234567890",  // Destination phone number
+    null,          // SMS Center number (null for default)
+    "Hello, this is a test message!", // Message content
+    null,          // Sent intent (for sent notification)
+    null           // Delivery intent (for delivery notification)
+);
+                            </code>
+                        </pre>
+                        <p>Is class ko use karne ke liye <strong>AndroidManifest.xml</strong> file mein appropriate
+                            permission declare karni hoti hai, jaise:</p>
+                        <pre>
+                            <code>
+&lt;uses-permission android:name="android.permission.SEND_SMS" />
+                            </code>
+                        </pre>
+                    </div>
 
-                <h3>Steps for Implementing SMS in Android</h3>
-                <p>To implement SMS functionality in Android, the following steps are required:</p>
-                <ul>
-                    <li>Add the static permission <strong>android.permission.SEND_SMS</strong> in the
-                        <strong>AndroidManifest.xml</strong> file.
-                    </li>
-                    <li>Check dynamically at runtime if the <strong>SEND_SMS</strong> permission is granted using the
-                        method
-                        <strong>checkSelfPermission</strong>.
-                    </li>
-                    <li>Request the permission dynamically using <strong>requestPermissions</strong> if it hasn't been
-                        granted.</li>
-                    <li>Use the <strong>SmsManager</strong> class to send the SMS programmatically once the permission
-                        is
-                        granted.</li>
-                </ul>
+                </div>
+
+                <div class="english">
+                    <h2>Introduction to SMS in Android</h2>
+                    <ul>
+                        <li>
+                            SMS (Short Message Service) is a widely used feature in mobile devices, enabling the sending
+                            and
+                            receiving of text messages.
+                            In Android, the SmsManager class provides the functionality to send SMS programmatically
+                            from
+                            your
+                            application.
+                        </li>
+                        <li>
+                            Since SMS is a sensitive operation (it can lead to unwanted costs or spam), Android enforces
+                            strict
+                            permission checks
+                            to ensure that users have explicitly allowed apps to use SMS functionality.
+                        </li>
+                    </ul>
+                    <div class="in">
+                        <h3>Permission Model in Android</h3>
+                        <p>Android permissions can be divided into two categories:</p>
+                        <ul>
+                            <li>
+                                <strong>Static Permissions:</strong> These are defined in the
+                                <strong>AndroidManifest.xml</strong>
+                                file.
+                                They inform the system about the permissions your app requires. For example, to send
+                                SMS,
+                                the
+                                following permission must be added:
+                                <pre>
+                                    <code>
+&lt;uses-permission android:name="android.permission.SEND_SMS" /&gt;
+                                    </code>
+                                </pre>
+                                <p>
+                                    Adding this permission means your app declares its intention to send SMS. This
+                                    permission
+                                    will
+                                    be checked when the app is installed.
+                                </p>
+                            </li>
+                            <li>
+                                <strong>Dynamic Permissions:</strong> Introduced in Android 6.0 (API level 23) and
+                                above,
+                                these
+                                require you to ask for the user's
+                                consent at runtime for sensitive permissions like SMS. This ensures that users are aware
+                                of
+                                what
+                                the
+                                app is doing and gives them control over whether to allow it or not.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="in">
+                        <h3>Steps for Implementing SMS in Android</h3>
+                        <p>To implement SMS functionality in Android, the following steps are required:</p>
+                        <ul>
+                            <li>Add the static permission <strong>android.permission.SEND_SMS</strong> in the
+                                <strong>AndroidManifest.xml</strong> file.
+                            </li>
+                            <li>Check dynamically at runtime if the <strong>SEND_SMS</strong> permission is granted
+                                using
+                                the
+                                method
+                                <strong>checkSelfPermission</strong>.
+                            </li>
+                            <li>Request the permission dynamically using <strong>requestPermissions</strong> if it
+                                hasn't
+                                been
+                                granted.</li>
+                            <li>Use the <strong>SmsManager</strong> class to send the SMS programmatically once the
+                                permission
+                                is
+                                granted.</li>
+                        </ul>
+                    </div>
+                    <div class="in">
+                        <h3>SmsManager Class</h3>
+                        <p>SmsManager is the primary class in Android used for sending SMS messages. It allows
+                            developers to
+                            send both text messages (SMS) and multimedia messages (MMS). It provides various methods to
+                            customize the message-sending process. Some key points about SmsManager are:
+                        <ul>
+                            <li>It can send messages programmatically without opening the default messaging app.</li>
+                            <li>It supports both single-part and multi-part messages. Multi-part messages are useful for
+                                long texts that exceed the character limit of a single SMS (usually 160 characters).
+                            </li>
+                            <li>It also enables sending data messages, which are SMS messages containing binary data.
+                            </li>
+                        </ul>
+                        </p>
+                        <p><strong>An example usage of SmsManager to send a simple SMS:</strong></p>
+                        <pre>
+                            <code>
+SmsManager smsManager = SmsManager.getDefault();
+smsManager.sendTextMessage(
+    "1234567890",  // Destination phone number
+    null,          // SMS Center number (null for default)
+    "Hello, this is a test message!", // Message content
+    null,          // Sent intent (for sent notification)
+    null           // Delivery intent (for delivery notification)
+);
+                            </code>
+                        </pre>
+                        <p>This class requires the appropriate permissions in the AndroidManifest file, such as:</p>
+                        <pre>
+                            <code>
+&lt;uses-permission android:name="android.permission.SEND_SMS" />
+                            </code>
+                        </pre>
+                    </div>
+                </div>
             </div>
             <div class="in">
                 <h3>Complete Example Program</h3>
@@ -322,89 +477,100 @@ public class MainActivity extends AppCompatActivity {
                 </div>
                 <div class="in">
                     <h3>Types of Sensors</h3>
-                    <p>Sensors alag-alag types ke hote hain, har ek specific physical phenomena detect karne ke liye design kiya gaya hai. Following are some common types of sensors:</p>
-                
+                    <p>Sensors alag-alag types ke hote hain, har ek specific physical phenomena detect karne ke liye
+                        design kiya gaya hai. Following are some common types of sensors:</p>
+
                     <h4>1. Temperature Sensors</h4>
                     <p>Yeh sensors temperature measure karte hain. Common types include:</p>
                     <ul>
                         <li>
-                            <strong>Thermistors:</strong> Temperature ke basis par apni resistance change karte hain.  
+                            <strong>Thermistors:</strong> Temperature ke basis par apni resistance change karte hain.
                             <br>Example: Thermostats me use hote hain room temperature regulate karne ke liye.
                         </li>
                         <li>
-                            <strong>Thermocouples:</strong> Jab do points ke beech temperature difference hota hai to ek chhota voltage generate karte hain.  
-                            <br>Example: Industrial machinery me high temperatures monitor karne ke liye commonly use hote hain.
+                            <strong>Thermocouples:</strong> Jab do points ke beech temperature difference hota hai to ek
+                            chhota voltage generate karte hain.
+                            <br>Example: Industrial machinery me high temperatures monitor karne ke liye commonly use
+                            hote hain.
                         </li>
                         <li>
-                            <strong>RTDs (Resistance Temperature Detectors):</strong> Inki resistance temperature ke sath linearly change hoti hai, jo accurate readings deti hai.  
+                            <strong>RTDs (Resistance Temperature Detectors):</strong> Inki resistance temperature ke
+                            sath linearly change hoti hai, jo accurate readings deti hai.
                             <br>Example: Laboratories me precise temperature measurement ke liye use hote hain.
                         </li>
                     </ul>
-                
+
                     <h4>2. Light Sensors</h4>
                     <p>Yeh sensors light intensity detect karte hain. Types include:</p>
                     <ul>
                         <li>
-                            <strong>Photoresistors:</strong> Light intensity ke basis par apni resistance change karte hain.  
+                            <strong>Photoresistors:</strong> Light intensity ke basis par apni resistance change karte
+                            hain.
                             <br>Example: Streetlights me use hote hain jo raat me automatically on ho jate hain.
                         </li>
                         <li>
-                            <strong>Photodiodes:</strong> Light ko electrical current me convert karte hain.  
+                            <strong>Photodiodes:</strong> Light ko electrical current me convert karte hain.
                             <br>Example: Solar panels me use hote hain sunlight se electricity generate karne ke liye.
                         </li>
                         <li>
-                            <strong>Phototransistors:</strong> Light ke generate kiye gaye electrical current ko amplify karte hain.  
+                            <strong>Phototransistors:</strong> Light ke generate kiye gaye electrical current ko amplify
+                            karte hain.
                             <br>Example: TV remotes aur light-sensitive alarms me use hote hain.
                         </li>
                     </ul>
-                
+
                     <h4>3. Pressure Sensors</h4>
-                    <p>Yeh sensors pressure measure karte hain aur zyada tar industrial aur automotive applications me milte hain. Types include:</p>
+                    <p>Yeh sensors pressure measure karte hain aur zyada tar industrial aur automotive applications me
+                        milte hain. Types include:</p>
                     <ul>
                         <li>
-                            <strong>Piezoresistive Sensors:</strong> Applied pressure ke sath apni resistance change karte hain.  
+                            <strong>Piezoresistive Sensors:</strong> Applied pressure ke sath apni resistance change
+                            karte hain.
                             <br>Example: Digital weighing scales me use hote hain.
                         </li>
                         <li>
-                            <strong>Capacitive Sensors:</strong> Capacitance me changes detect karke pressure measure karte hain.  
+                            <strong>Capacitive Sensors:</strong> Capacitance me changes detect karke pressure measure
+                            karte hain.
                             <br>Example: Touch-sensitive elevator buttons me use hote hain.
                         </li>
                         <li>
-                            <strong>Strain Gauge Sensors:</strong> Jab strain apply hoti hai to resistance change karte hain.  
+                            <strong>Strain Gauge Sensors:</strong> Jab strain apply hoti hai to resistance change karte
+                            hain.
                             <br>Example: Bridges me structural integrity monitor karne ke liye use hote hain.
                         </li>
                     </ul>
-                
+
                     <h4>4. Motion Sensors</h4>
                     <p>Yeh sensors motion ya movement detect karte hain. Examples include:</p>
                     <ul>
                         <li>
-                            <strong>Accelerometers:</strong> Alag-alag axes me acceleration measure karte hain.  
-                            <br>Example: Smartphones me use hote hain screen rotation enable karne ke liye jab phone tilt hota hai.
+                            <strong>Accelerometers:</strong> Alag-alag axes me acceleration measure karte hain.
+                            <br>Example: Smartphones me use hote hain screen rotation enable karne ke liye jab phone
+                            tilt hota hai.
                         </li>
                         <li>
-                            <strong>Gyroscopes:</strong> Angular velocity ya orientation measure karte hain.  
+                            <strong>Gyroscopes:</strong> Angular velocity ya orientation measure karte hain.
                             <br>Example: Drones me flight stabilize karne ke liye use hote hain.
                         </li>
                         <li>
-                            <strong>Magnetometers:</strong> Magnetic fields detect karte hain.  
+                            <strong>Magnetometers:</strong> Magnetic fields detect karte hain.
                             <br>Example: Smartphones ke digital compasses me use hote hain.
                         </li>
                     </ul>
-                
+
                     <h4>5. Chemical Sensors</h4>
                     <p>Yeh sensors chemical properties detect karte hain. Types include:</p>
                     <ul>
                         <li>
-                            <strong>Gas Sensors:</strong> Specific gases ki presence detect karte hain.  
+                            <strong>Gas Sensors:</strong> Specific gases ki presence detect karte hain.
                             <br>Example: Homes me carbon monoxide detectors safety ke liye use hote hain.
                         </li>
                         <li>
-                            <strong>pH Sensors:</strong> Solution ki acidity ya alkalinity measure karte hain.  
+                            <strong>pH Sensors:</strong> Solution ki acidity ya alkalinity measure karte hain.
                             <br>Example: Agriculture me soil quality test karne ke liye use hote hain.
                         </li>
                     </ul>
-                </div>                
+                </div>
                 <div class="in">
                     <h3>Applications of Sensors</h3>
                     <p>
