@@ -413,9 +413,12 @@ public class MainActivity extends AppCompatActivity {
                                 hai.
                             </p>
                             <p>
-                                <strong>Bound Service</strong> ek application component (jaise <strong>Activity</strong>,
-                                <strong>Fragment</strong>, ya koi aur service) ko <strong>bind</strong> karne ki facility
-                                deti hai using <strong>bindService()</strong>. Is type ki service ek client-server interface
+                                <strong>Bound Service</strong> ek application component (jaise
+                                <strong>Activity</strong>,
+                                <strong>Fragment</strong>, ya koi aur service) ko <strong>bind</strong> karne ki
+                                facility
+                                deti hai using <strong>bindService()</strong>. Is type ki service ek client-server
+                                interface
                                 provide karti hai. Client (jo component bind karta hai) service ke saath interact kar
                                 sakta hai, requests bhej sakta hai, results le sakta hai, aur communication kar sakta
                                 hai.
@@ -444,7 +447,8 @@ public class MainActivity extends AppCompatActivity {
                                 <li>A bound service starts with <strong>bindService()</strong>.</li>
                                 <li>Jab tak koi component bind hai, tab tak service chalti rehti hai.</li>
                                 <li>Service tab stop hoti hai jab last component unbind ho jata hai using
-                                    <strong>unbindService()</strong>.</li>
+                                    <strong>unbindService()</strong>.
+                                </li>
                             </ul>
                         </li>
                     </ol>
@@ -1426,203 +1430,619 @@ public class MainActivity extends AppCompatActivity {
         </p>
     </div>
     </div>
-    <div class="wh">
-        <h2>Broadcast Receivers</h2>
-        <p>First we should know about Broadcast.</p>
-        <ul>
-            <li>In Android, a broadcast is a system-wide message that can be sent and received by apps. The Android
-                system sends these messages to inform apps of various system events or changes (such as the device being
-                low on battery or a change in network connectivity). Apps can also send custom broadcasts to notify
-                other apps or components within the same app.</li>
-        </ul>
-        <p><strong>How Broadcasts Work</strong></p>
-        <ul>
-            <li>Sender (Broadcast): The entity that sends the message (intent) when a system event or app event occurs.
-            </li>
-            <li>Receiver (Broadcast Receiver): The entity that receives and processes the broadcast message.</li>
-        </ul>
-        <p>When a broadcast is sent, it can either be ordered (delivered to one receiver at a time, in priority order)
-            or unordered (delivered to all receivers simultaneously).</p>
-        <div class="in">
-            <h3>System Broadcasts</h3>
-            <p>System broadcasts in Android are implicit intents sent by the operating system to notify apps of certain
-                system-wide events. These broadcasts signal changes in the system's state or environment, such as device
-                booting up, power connection status, airplane mode toggling, and more. Apps can register broadcast
-                receivers to listen for these system events, either statically (via the AndroidManifest.xml) or
-                dynamically (via code). Understanding and using these broadcasts helps apps to react accordingly to
-                system changes, providing a more responsive and efficient user experience.</p>
+    <div class="mixed-notes">
+        <div class="wh hinglish">
+            <h2>Broadcast Receivers</h2>
+            <p>First we should know about Broadcast.</p>
             <ul>
-                <li> <strong>Intent.ACTION_BOOT_COMPLETED</strong>
-                    <ul>
-                        <li><strong>Description:</strong> Sent when the device has finished booting up.</li>
-                        <li><strong>Use Case:</strong> Start background services or schedule tasks after boot.</li>
-                        <li><strong>Example:</strong> A file-syncing app starts syncing files automatically after
-                            booting.</li>
-
-                    </ul>
-                </li>
-                <li>
-                    <strong>Intent.ACTION_POWER_CONNECTED</strong>
-                    <ul>
-                        <li><strong>Description:</strong> Sent when the device is plugged into a power source.</li>
-                        <li><strong>Use Case:</strong> Start power-intensive processes, such as syncing large files.
-                        </li>
-                        <li><strong>Example:</strong> A media app starts downloading large updates when connected to a
-                            charger.</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <strong>Intent.ACTION_POWER_DISCONNECTED</strong>
-                    <ul>
-                        <li><strong>Description:</strong> Sent when the device is unplugged from a power source.</li>
-                        <li><strong>Use Case:</strong> Stop power-consuming processes or reduce background activity.
-                        </li>
-                        <li><strong>Example:</strong> A cloud-backup app pauses uploading data when power is
-                            disconnected.</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <strong>Intent.ACTION_BATTERY_LOW</strong>
-                    <ul>
-                        <li><strong>Description:</strong> Sent when the battery level is critically low.</li>
-                        <li><strong>Use Case:</strong> Adjust app behavior to reduce battery consumption.</li>
-                        <li><strong>Example:</strong> A game app reduces graphics quality to conserve battery.</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <strong>Intent.ACTION_SHUTDOWN</strong>
-                    <ul>
-                        <li><strong>Description:</strong> Sent when the device is shutting down.</li>
-                        <li><strong>Use Case:</strong> Save data, stop background tasks, or log out of services.</li>
-                        <li><strong>Example:</strong> A note-taking app automatically saves unsaved notes before
-                            shutdown.</li>
-                    </ul>
+                <li>Android mein, broadcast ek system-wide message hota hai jo apps ke beech bheja aur receive kiya ja
+                    sakta hai.
+                    Android system ye messages bhejta hai jab system events ya changes hote hain
+                    (jaise device ka low battery pe hona ya network connectivity change hona).
+                    Apps apne custom broadcasts bhi bhej sakte hain dusre apps ko notify karne ke liye
+                    ya apne hi app ke components ko inform karne ke liye.
                 </li>
             </ul>
-        </div>
-        <div class="in">
-            <h3>Types of Broadcasts Based on Delivery</h3>
+            <p><strong>How Broadcasts Work?</strong></p>
+            <ul>
+                <li><strong>Sender (Broadcast):</strong> Ye wo entity hoti hai jo ek message (intent) bhejti hai jab koi
+                    system ya app event hota hai.</li>
+                <li><strong>Receiver (Broadcast Receiver):</strong> Ye wo entity hoti hai jo broadcast message receive
+                    karke usko process karti hai.</li>
+            </ul>
+            <p>Jab ek broadcast bheja jata hai, toh ye ya to ordered ho sakta hai
+                (ek receiver ko ek time pe, priority ke order mein deliver hota hai)
+                ya unordered ho sakta hai (sabhi receivers ko ek saath deliver hota hai).</p>
+            <div class="in">
+                <h3>System Broadcasts</h3>
+                <p>System broadcasts Android mein woh implicit intents hote hain jo operating system bhejta hai
+                    apps ko notify karne ke liye jab kuch system-wide events hote hain.
+                    Ye broadcasts system ki state ya environment mein hone wale changes ko signal karte hain,
+                    jaise device ka boot hona, power connect/disconnect status, airplane mode ka toggle hona, and many
+                    more.
+                    Apps in system events ko sunne ke liye broadcast receivers register kar sakti hain, ya to statically
+                    (AndroidManifest.xml ke through) ya dynamically (code ke through).
+                    In broadcasts ko samajhna aur use karna apps ko system changes ke according react karne mein madad
+                    karta hai,
+                    jisse user experience aur bhi responsive aur efficient hota hai.</p>
+                <p><strong>Following are some broadcast intents which Android uses to monitor system and environmental
+                        state changes</strong></p>
+                <ul>
+                    <li>
+                        <strong>Intent.ACTION_BOOT_COMPLETED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Jab device ka boot complete ho jata hai, tab ye intent
+                                bheja jata hai.</li>
+                            <li><strong>Use Case:</strong> Background services start karna ya tasks schedule karna boot
+                                ke baad.</li>
+                            <li><strong>Example:</strong> Ek file-syncing app boot hone ke baad files syncing
+                                automatically shuru kar deta hai.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_POWER_CONNECTED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Jab device power source se connect hota hai, tab ye intent
+                                bheja jata hai.</li>
+                            <li><strong>Use Case:</strong> Power-intensive processes start karna, jaise large files sync
+                                karna.</li>
+                            <li><strong>Example:</strong> Ek media app charger connect hone par large updates download
+                                karna shuru karta hai.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_POWER_DISCONNECTED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Jab device power source se unplug hota hai, tab ye intent
+                                bheja jata hai.</li>
+                            <li><strong>Use Case:</strong> Power-consuming processes stop karna ya background activity
+                                kam karna.</li>
+                            <li><strong>Example:</strong> Ek cloud-backup app power disconnect hone par data upload
+                                pause kar deta hai.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_BATTERY_LOW</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Jab battery level critically low hoti hai, tab ye intent
+                                bheja jata hai.</li>
+                            <li><strong>Use Case:</strong> App ka behavior adjust karna taaki battery consumption kam
+                                ho.</li>
+                            <li><strong>Example:</strong> Ek game app graphics quality reduce kar deta hai battery
+                                bachane ke liye.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_SHUTDOWN</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Jab device shutdown hone wala hota hai, tab ye intent
+                                bheja jata hai.</li>
+                            <li><strong>Use Case:</strong> Data save karna, background tasks stop karna, ya services se
+                                log out karna.</li>
+                            <li><strong>Example:</strong> Ek note-taking app shutdown hone se pehle unsaved notes
+                                automatically save kar deta hai.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Types of Broadcasts Based on Delivery</h3>
+                <ol>
+                    <li><strong>Ordered Broadcasts</strong>
+                        <br>Ordered broadcasts ek-ek karke receivers ko bheji jaati hain, unki declared priority ke
+                        hisaab se
+                        (IntentFilter mein define ki gayi hoti hai). Har receiver broadcast ka data modify kar sakta hai
+                        ya broadcast ko aage bhejne se rok sakta hai by calling <code>abortBroadcast()</code>.
+                        <ul>
+                            <li><strong>Ordered:</strong> Receivers ko unki priority ke hisaab se ek ke baad ek call
+                                kiya jata hai.</li>
+                            <li><strong>Modifiable:</strong> Receivers broadcast ko modify ya abort kar sakte hain.</li>
+                            <li><strong>Use Case:</strong> Ordered broadcasts un situations mein useful hote hain jahan
+                                kuch
+                                receivers ko event pehle process karna ho. Example: Jab SMS receive hota hai, to ek spam
+                                filter
+                                app pehle check kar sakta hai, uske baad message default messaging app ko pass hoga.
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Unordered (Normal) Broadcasts</strong>
+                        <br>Unordered broadcasts sabhi receivers ko ek saath asynchronously bheji jaati hain.
+                        System execution order guarantee nahi karta, aur receivers broadcast ko modify ya abort nahi kar
+                        sakte.
+                        Har receiver apne pace pe broadcast process karta hai.
+                        <ul>
+                            <li><strong>Asynchronous:</strong> Sabhi receivers ek saath broadcast receive karte hain.
+                            </li>
+                            <li><strong>Immutable:</strong> Receivers broadcast ko modify ya abort nahi kar sakte.</li>
+                            <li><strong>Use Case:</strong> Ye usually less critical notifications ke liye use hota hai,
+                                jaise
+                                multiple apps ko inform karna ki Wi-Fi disconnect ho gaya hai.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
+            <ul>
+                <li>Ek Broadcast Receiver Android mein ek aisa component hota hai jo applications ko doosre apps ya
+                    system se
+                    aane wale messages (broadcasts) ka response dene ka help deta hai. Isse aapka app
+                    system-wide broadcast announcements jaise network changes, incoming SMS, power connection status,
+                    etc.
+                    ko receive kar sakta hai. Ye apps ko system events ke liye zyada interactive aur responsive banata
+                    hai.</li>
+                <li>Example: Ek fitness app battery status changes ko sun sakta hai aur jab battery low ho, toh apne
+                    background
+                    processing ko reduce kar sakta hai.</li>
+            </ul>
+            <div class="in">
+                <h3>How Broadcast Receiver Works?</h3>
+                <ul>
+                    <li>We know Broadcast Receivers Android mein important components hain jo apps ko
+                        system-wide
+                        broadcast announcements sunne aur response dene ka mauka dete hain. Ye broadcasts connectivity,
+                        battery
+                        status, ya system boot jaise events ko indicate karte hain. Broadcast Receivers ka use karke
+                        apps in events
+                        ke basis pe apne actions perform kar sakte hain ya apni state update kar sakte hain, jo user
+                        experience ko
+                        enhance karta hai aur app ko environment ke saath dynamic response dene mein madad karta hai.
+                    </li>
+                    <li>Do basic concepts jo Broadcast Receivers ke kaam ko asaan banate hain, wo hain Broadcast Intents
+                        aur
+                        Intent Filters.</li>
+                </ul>
+                <p><strong>Broadcast Intent</strong></p>
+                <ul>
+                    <li>Broadcasts ek Intent ke through deliver kiye jaate hain, jo ek message object hota hai jo
+                        broadcast
+                        details ko contain karta hai.</li>
+                    <li>Example: Agar ek app low battery broadcast sun raha hai, toh wo ek intent receive karega jisme
+                        action
+                        <strong>Intent.ACTION_BATTERY_LOW</strong> hoga.
+                    </li>
+                </ul>
+                <p><strong>Intent Filters</strong></p>
+                <ul>
+                    <li>Receivers ko ek Intent Filter ke saath register kiya jaata hai, jo specify karta hai ki receiver
+                        kis
+                        type ke broadcasts ko handle karega.</li>
+                    <li>Example: Ek weather app might register for android.intent.action.BOOT_COMPLETED taaki device
+                        boot hone
+                        ke baad background updates start kar sake.</li>
+                </ul>
+            </div>
+            <p>Broadcast receivers ko aam taur par do tareekon se banaya jaata hai:
             <ol>
-                <li><strong>Ordered Broadcasts</strong>
-                    <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared priority
-                    (defined in the IntentFilter). Each receiver can modify the broadcast data or even stop the
-                    broadcast
-                    from being sent to other receivers by calling abortBroadcast().
-                    <ul>
-                        <li>Ordered: Receivers are called one after another based on priority.</li>
-                        <li>Modifiable: Receivers can modify or abort the broadcast.</li>
-                        <li>Use Case: Ordered broadcasts are useful when you want certain receivers to process an event
-                            before others. For example, when an SMS is received, a spam filter app might check it before
-                            passing it to the default messaging app.</li>
-                    </ul>
-                    Implementing it in manifest file:
-                    <pre>
-                    <code>
-&lt;receiver android:name=".MyReceiver" android:priority="100">
-    &lt;intent-filter>
-        &lt;action android:name="android.intent.action.SMS_RECEIVED" />
-    &lt;/intent-filter>
-&lt;/receiver>
-                    </code>
-                </pre>
-                    Implementing in java code:
-                    <pre>
-                    <code>
-Intent intent = new Intent("com.example.ORDERED_BROADCAST");
-sendOrderedBroadcast(intent, null);
-                    </code>
-                </pre>
-                </li>
-                <li><strong>Unordered (Normal) Broadcasts</strong>
-                    <br>Unordered broadcasts are sent asynchronously to all receivers at the same time. The system does
-                    not
-                    guarantee the order of execution, and receivers cannot modify or abort the broadcast. Each receiver
-                    processes the broadcast independently and at its own pace.
-                    <ul>
-                        <li>Asynchronous: All receivers receive the broadcast simultaneously.</li>
-                        <li>Immutable: Receivers cannot modify the broadcast or abort it.</li>
-                        <li>Use Case: This is typically used for less critical notifications, such as informing multiple
-                            apps that Wi-Fi has been disconnected. </li>
-                    </ul>
-                    Implementing it on manifest file:
-                    <pre>
-                    <code>
-&lt;receiver android:name=".MyReceiver">
-    &lt;intent-filter>
-        &lt;action android:name="android.intent.action.AIRPLANE_MODE" />
-    &lt;/intent-filter>
-&lt;/receiver>
-                    </code>
-                </pre>
-                    Implementing it on java code:
-                    <pre>
-                    <code>
-Intent intent = new Intent("com.example.UNORDERED_BROADCAST");
-sendBroadcast(intent);  // This is a normal broadcast
-                    </code>
-                </pre>
-                </li>
+                <li>Static Registration (via Manifest)</li>
+                <li>Dynamic Registration (via Code)</li>
             </ol>
+            </p>
+            <div class="in">
+                <h3>1. Static Registration (via Manifest)</h3>
+                <ul>
+                    <li>Is type ka receiver <strong>AndroidManifest.xml</strong> file mein register hota hai. Ye tab bhi
+                        chalega
+                        jab app foreground mein na ho ya bilkul bhi na chal raha ho.
+                        <ul>
+                            <li>Use Case: Ek file-sharing app ko network changes sunna zaroori ho sakta hai, taaki wo
+                                files share
+                                karte rahe, chahe app open na ho.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li><strong>Receiver ko AndroidManifest.xml mein declare karo:</strong>
+                        <pre>
+                            <code>
+&lt;receiver android:name=".MyBroadcastReceiver"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.BOOT_COMPLETED"/&gt;
+        &lt;action android:name="android.intent.action.POWER_CONNECTED"/&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+                            </code>
+                        </pre>
+                    </li>
+                    <li><strong>Zaroori permissions request karo:</strong>
+                        <br>Agar aapka receiver kisi action ko handle karta hai, toh aapko
+                        <strong>AndroidManifest.xml</strong> mein
+                        permissions declare karni pad sakti hain. Jaise:
+                        <pre>
+                            <code>
+&lt;uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/&gt;
+                            </code>
+                        </pre>
+                    </li>
+                    <li><strong>Broadcast Receiver implement karo:</strong>
+                        <br>Aapko ek class banani hogi jo <strong>BroadcastReceiver</strong> ko extend kare aur
+                        <strong>onReceive()</strong>
+                        method ko override karke actions define karni hongi jo broadcast receive hone par perform karni
+                        hain.
+                        <pre>
+                            <code>
+package com.example.myapplication;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class MyBroadcastReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
+            // Steps track karna ya data sync karna shuru karo
+            Toast.makeText(context, "Boot completed! Starting fitness tracking.", Toast.LENGTH_SHORT).show();
+        } else if (Intent.ACTION_POWER_CONNECTED.equals(action)) {
+            // Power connected event handle karo
+            Toast.makeText(context, "Power connected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>2. Dynamic Registration (via Code)</h3>
+                <ul>
+                    <li>A receiver ko aap apne Java code mein dynamically register kar sakte hain. Ye registration tab
+                        tak rahega
+                        jab tak aapka app chal raha ho, matlab receiver sirf app ke active hone par broadcasts ko sunta
+                        hai.
+                        <ul>
+                            <li><strong>Use Case:</strong> Ek podcast app sirf tab headphone connection/disconnection
+                                events ko sun sakta
+                                hai jab app chal raha ho.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li><strong>Activity ya Service mein Receiver ko Dynamically Register karo:</strong>
+                        <div class="code">
+                            <div class="dotc"></div>
+                            <button class="ac">MainActivity.java</button>
+                            <div class="panel">
+                                <pre>
+                                    <code>
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.bluetooth.BluetoothAdapter;
+import android.content.IntentFilter;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+    MyBroadcast myBroadcast = new MyBroadcast();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // IntentFilter create karo taaki receiver ko specify karo ki kis event ko sunna hai
+        IntentFilter myIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        // BroadcastReceiver ko register karo Bluetooth state changes ko sunne ke liye
+        registerReceiver(myBroadcast, myIntent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(myBroadcast);
+    }
+}
+                                    </code>
+                                </pre>
+                            </div>
+                        </div>
+                    </li>
+                    <li><strong>Broadcast Receiver Implement karo:</strong>
+                        <div class="code">
+                            <div class="dotc"></div>
+                            <button class="ac">MyBroadcast.java</button>
+                            <div class="panel">
+                                <pre>
+                                    <code>
+package com.example.myapplication;
+
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+// Ye class BroadcastReceiver ko extend karti hai, jo app ko system-wide broadcast events ko respond karne mein madad karti hai.
+public class MyBroadcast extends BroadcastReceiver {
+    
+    // onReceive method tab call hota hai jab BroadcastReceiver ko koi broadcast milta hai.
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        
+        // Broadcast Intent se action nikaalo (yahan Bluetooth state changes ke liye interested hain).
+        String action = intent.getAction();
+
+        // Check karo ki action Bluetooth state changes se related hai ya nahi.
+        if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+
+            // Intent se Bluetooth state nikaalo (ye integer value hogi).
+            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
+            // Bluetooth states ko handle karne ke liye switch statement use karo.
+            switch (state) {
+                
+                // Agar Bluetooth on hai, toh "Bluetooth ON" message show karo.
+                case BluetoothAdapter.STATE_ON:
+                    Toast.makeText(context, "Bluetooth ON", Toast.LENGTH_SHORT).show();
+                    break;
+                
+                // Agar Bluetooth off hai, toh "Bluetooth OFF" message show karo.
+                case BluetoothAdapter.STATE_OFF:
+                    Toast.makeText(context, "Bluetooth OFF", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+}
+                                    </code>
+                                </pre>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><strong>onReceive(Context context, Intent intent):</strong>
+                                Ye BroadcastReceiver ka core method hai jo tab trigger hota hai jab matching broadcast
+                                receive hota hai.
+                                Iske do parameters hote hain:
+                                <ul>
+                                    <li><strong>Context context:</strong>
+                                        Ye application-specific resources aur services tak access deta hai, jaise Toast
+                                        show karna,
+                                        activity start karna, ya shared preferences access karna.
+                                    </li>
+                                    <li><strong>Intent intent:</strong>
+                                        Ye broadcast ke details ko carry karta hai, jaise action (e.g.,
+                                        BluetoothAdapter.ACTION_STATE_CHANGED)
+                                        aur koi extra data jo broadcast mein ho. Action help karta hai event ko identify
+                                        karne mein.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Action Handling:</strong>
+                                <code>getAction()</code> method use karke broadcast ka type retrieve karte hain. Is
+                                example mein receiver check karta hai
+                                agar action <code>BluetoothAdapter.ACTION_STATE_CHANGED</code> hai, matlab Bluetooth
+                                state change hua hai.
+                            </li>
+                            <li><strong>Data Extract Karna:</strong>
+                                <code>getIntExtra()</code> method Bluetooth state (e.g., ON, OFF) nikaalne ke liye use
+                                hota hai.
+                                <code>BluetoothAdapter.EXTRA_STATE</code> key state ko access karne ke liye use hoti
+                                hai, aur
+                                <code>BluetoothAdapter.ERROR</code> fallback value ke liye hoti hai.
+                            </li>
+                            <li><strong>Switch Statement:</strong>
+                                State ko handle karne ke liye switch statement use hota hai. State ke basis par Toast
+                                message display hota hai
+                                jo user ko inform karta hai ki Bluetooth ON hai ya OFF.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Receiver Ko Unregister Karna</strong></p>
+                <ul>
+                    <li>Aapko dynamically registered receivers ko unregister karna zaroori hai jab unki ab zarurat na
+                        ho, taaki memory leaks na ho.
+                        Aap ise <strong>onStop()</strong> ya <strong>onDestroy()</strong> method mein kar sakte hain:
+                        <pre>
+                            <code>
+unregisterReceiver(myBroadcast);
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-        <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
-        <ul>
-            <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
-                other apps or the system itself. It allows your app to receive system-wide broadcast announcements, such
-                as network changes, incoming SMS, power connection status, etc. It is a critical component in making
-                apps more interactive and responsive to system events.</li>
-            <li>For example, a fitness app can listen for battery status changes and reduce its background processing
-                when the battery is low.</li>
-        </ul>
-        <div class="in">
-            <h3>How Broadcast Receivers Work</h3>
+
+        <div class="wh english">
+            <h2>Broadcast Receivers</h2>
+            <p>First we should know about Broadcast.</p>
             <ul>
-                <li>We know that Broadcast Receivers in Android are essential components that allow applications to
-                    listen for and respond to system-wide broadcast announcements. These broadcasts can indicate various
-                    events, such as changes in connectivity, battery status, or system boot. By using Broadcast
-                    Receivers, apps can perform actions or update their state based on these events, enhancing user
-                    experience and ensuring that the app responds dynamically to the environment.</li>
-                <li>Two fundamental concepts that facilitate the functioning of Broadcast Receivers are Broadcast
-                    Intents and Intent Filters.</li>
+                <li>In Android, a broadcast is a system-wide message that can be sent and received by apps. The Android
+                    system sends these messages to inform apps of various system events or changes (such as the device
+                    being
+                    low on battery or a change in network connectivity). Apps can also send custom broadcasts to notify
+                    other apps or components within the same app.</li>
             </ul>
-            <p><strong>Broadcast Intent</strong></p>
+            <p><strong>How Broadcasts Work?</strong></p>
             <ul>
-                <li>Broadcasts are delivered using an Intent, a message object containing the broadcast details.</li>
-                <li>Example: An app listening for low battery broadcasts will receive an intent with the action
-                    <strong>Intent.ACTION_BATTERY_LOW</strong>.
+                <li>Sender (Broadcast): The entity that sends the message (intent) when a system event or app event
+                    occurs.
                 </li>
+                <li>Receiver (Broadcast Receiver): The entity that receives and processes the broadcast message.</li>
             </ul>
-            <p><strong>Intent Filters</strong></p>
+            <p>When a broadcast is sent, it can either be ordered (delivered to one receiver at a time, in priority
+                order)
+                or unordered (delivered to all receivers simultaneously).</p>
+            <div class="in">
+                <h3>System Broadcasts</h3>
+                <p>System broadcasts in Android are implicit intents sent by the operating system to notify apps of
+                    certain
+                    system-wide events. These broadcasts signal changes in the system's state or environment, such as
+                    device
+                    booting up, power connection status, airplane mode toggling, and more. Apps can register broadcast
+                    receivers to listen for these system events, either statically (via the AndroidManifest.xml) or
+                    dynamically (via code). Understanding and using these broadcasts helps apps to react accordingly to
+                    system changes, providing a more responsive and efficient user experience.</p>
+                <p><strong>Following are some broadcast intents which Android uses to monitor system and environmental
+                        state changes</strong></p>
+                <ul>
+                    <li> <strong>Intent.ACTION_BOOT_COMPLETED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Sent when the device has finished booting up.</li>
+                            <li><strong>Use Case:</strong> Start background services or schedule tasks after boot.</li>
+                            <li><strong>Example:</strong> A file-syncing app starts syncing files automatically after
+                                booting.</li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Intent.ACTION_POWER_CONNECTED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Sent when the device is plugged into a power source.</li>
+                            <li><strong>Use Case:</strong> Start power-intensive processes, such as syncing large files.
+                            </li>
+                            <li><strong>Example:</strong> A media app starts downloading large updates when connected to
+                                a
+                                charger.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_POWER_DISCONNECTED</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Sent when the device is unplugged from a power source.
+                            </li>
+                            <li><strong>Use Case:</strong> Stop power-consuming processes or reduce background activity.
+                            </li>
+                            <li><strong>Example:</strong> A cloud-backup app pauses uploading data when power is
+                                disconnected.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_BATTERY_LOW</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Sent when the battery level is critically low.</li>
+                            <li><strong>Use Case:</strong> Adjust app behavior to reduce battery consumption.</li>
+                            <li><strong>Example:</strong> A game app reduces graphics quality to conserve battery.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Intent.ACTION_SHUTDOWN</strong>
+                        <ul>
+                            <li><strong>Description:</strong> Sent when the device is shutting down.</li>
+                            <li><strong>Use Case:</strong> Save data, stop background tasks, or log out of services.
+                            </li>
+                            <li><strong>Example:</strong> A note-taking app automatically saves unsaved notes before
+                                shutdown.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Types of Broadcasts Based on Delivery</h3>
+                <ol>
+                    <li><strong>Ordered Broadcasts</strong>
+                        <br>Ordered broadcasts are sent to receivers one at a time, in the order of their declared
+                        priority
+                        (defined in the IntentFilter). Each receiver can modify the broadcast data or even stop the
+                        broadcast
+                        from being sent to other receivers by calling abortBroadcast().
+                        <ul>
+                            <li>Ordered: Receivers are called one after another based on priority.</li>
+                            <li>Modifiable: Receivers can modify or abort the broadcast.</li>
+                            <li>Use Case: Ordered broadcasts are useful when you want certain receivers to process an
+                                event
+                                before others. For example, when an SMS is received, a spam filter app might check it
+                                before
+                                passing it to the default messaging app.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Unordered (Normal) Broadcasts</strong>
+                        <br>Unordered broadcasts are sent asynchronously to all receivers at the same time. The system
+                        does
+                        not
+                        guarantee the order of execution, and receivers cannot modify or abort the broadcast. Each
+                        receiver
+                        processes the broadcast independently and at its own pace.
+                        <ul>
+                            <li>Asynchronous: All receivers receive the broadcast simultaneously.</li>
+                            <li>Immutable: Receivers cannot modify the broadcast or abort it.</li>
+                            <li>Use Case: This is typically used for less critical notifications, such as informing
+                                multiple
+                                apps that Wi-Fi has been disconnected. </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <p><strong>Now Let's talk about Broadcast Receivers</strong></p>
             <ul>
-                <li>Receivers are registered with an Intent Filter, which specifies what types of broadcasts the
-                    receiver will handle.</li>
-                <li>Example: A weather app might register for android.intent.action.BOOT_COMPLETED to start background
-                    updates after the device boots up.</li>
+                <li>A Broadcast Receiver in Android enables applications to respond to messages (called broadcasts) from
+                    other apps or the system itself. It allows your app to receive system-wide broadcast announcements,
+                    such
+                    as network changes, incoming SMS, power connection status, etc. It is a critical component in making
+                    apps more interactive and responsive to system events.</li>
+                <li>For example, a fitness app can listen for battery status changes and reduce its background
+                    processing
+                    when the battery is low.</li>
             </ul>
-        </div>
-        <p>Broadcast receivers are typically created in two ways:
-        <ol>
-            <li>Static Registration (via Manifest)</li>
-            <li>Dynamic Registration (via Code)</li>
-        </ol>
-        </p>
-        <div class="in">
-            <h3>1. Static Registration (via Manifest)</h3>
-            <ul>
-                <li>This type of receiver is registered in the <strong>AndroidManifest.xml</strong> file. It runs even
-                    when the app is not in the foreground or not running at all.
-                    <ul>
-                        <li>Use Case: A file-sharing app may need to listen for network changes, so it continues sharing
-                            files even if the app isn't open.</li>
-                    </ul>
-                </li>
-            </ul>
-            <p><strong>Steps:</strong></p>
+            <div class="in">
+                <h3>How Broadcast Receivers Work</h3>
+                <ul>
+                    <li>We know that Broadcast Receivers in Android are essential components that allow applications to
+                        listen for and respond to system-wide broadcast announcements. These broadcasts can indicate
+                        various
+                        events, such as changes in connectivity, battery status, or system boot. By using Broadcast
+                        Receivers, apps can perform actions or update their state based on these events, enhancing user
+                        experience and ensuring that the app responds dynamically to the environment.</li>
+                    <li>Two fundamental concepts that facilitate the functioning of Broadcast Receivers are Broadcast
+                        Intents and Intent Filters.</li>
+                </ul>
+                <p><strong>Broadcast Intent</strong></p>
+                <ul>
+                    <li>Broadcasts are delivered using an Intent, a message object containing the broadcast details.
+                    </li>
+                    <li>Example: An app listening for low battery broadcasts will receive an intent with the action
+                        <strong>Intent.ACTION_BATTERY_LOW</strong>.
+                    </li>
+                </ul>
+                <p><strong>Intent Filters</strong></p>
+                <ul>
+                    <li>Receivers are registered with an Intent Filter, which specifies what types of broadcasts the
+                        receiver will handle.</li>
+                    <li>Example: A weather app might register for android.intent.action.BOOT_COMPLETED to start
+                        background
+                        updates after the device boots up.</li>
+                </ul>
+            </div>
+            <p>Broadcast receivers are typically created in two ways:
             <ol>
-                <li><strong>Declare the Receiver in the AndroidManifest.xml:</strong>
-                    <pre>
+                <li>Static Registration (via Manifest)</li>
+                <li>Dynamic Registration (via Code)</li>
+            </ol>
+            </p>
+            <div class="in">
+                <h3>1. Static Registration (via Manifest)</h3>
+                <ul>
+                    <li>This type of receiver is registered in the <strong>AndroidManifest.xml</strong> file. It runs
+                        even
+                        when the app is not in the foreground or not running at all.
+                        <ul>
+                            <li>Use Case: A file-sharing app may need to listen for network changes, so it continues
+                                sharing
+                                files even if the app isn't open.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li><strong>Declare the Receiver in the AndroidManifest.xml:</strong>
+                        <pre>
                     <code>
 &lt;receiver android:name=".MyBroadcastReceiver"&gt;
     &lt;intent-filter&gt;
@@ -1632,21 +2052,23 @@ sendBroadcast(intent);  // This is a normal broadcast
 &lt;/receiver&gt;
                     </code>
                 </pre>
-                </li>
-                <li><strong>Request Required Permissions:</strong>
-                    <br>Depending on the actions your receiver handles, you may need to declare permissions in the
-                    <strong>AndroidManifest.xml</strong>. For example:
-                    <pre>
+                    </li>
+                    <li><strong>Request Required Permissions:</strong>
+                        <br>Depending on the actions your receiver handles, you may need to declare permissions in the
+                        <strong>AndroidManifest.xml</strong>. For example:
+                        <pre>
                     <code>
 &lt;uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/&gt;
 &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/&gt;
                     </code>
                 </pre>
-                </li>
-                <li><strong>Implement the Broadcast Receiver:</strong>
-                    <br>You will need to create a class that extends <strong>BroadcastReceiver</strong> and override the
-                    <strong>onReceive()</strong> method to define the actions to take when the broadcast is received.
-                    <pre>
+                    </li>
+                    <li><strong>Implement the Broadcast Receiver:</strong>
+                        <br>You will need to create a class that extends <strong>BroadcastReceiver</strong> and override
+                        the
+                        <strong>onReceive()</strong> method to define the actions to take when the broadcast is
+                        received.
+                        <pre>
                     <code>
 package com.example.myapplication;
 
@@ -1670,30 +2092,32 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 }
                     </code>
                 </pre>
-                </li>
-            </ol>
-        </div>
-        <div class="in">
-            <h3>2. Dynamic Registration (via Code)</h3>
-            <ul>
-                <li>A receiver can be registered dynamically in your Java code. This registration only exists while your
-                    app is running, meaning the receiver listens for broadcasts only while the app is active.
-                    <ul>
-                        <li><strong>Use Case:</strong> A podcast app can listen for headphone connection/disconnection
-                            events only while the app is running.</li>
+                    </li>
+                </ol>
+            </div>
+            <div class="in">
+                <h3>2. Dynamic Registration (via Code)</h3>
+                <ul>
+                    <li>A receiver can be registered dynamically in your Java code. This registration only exists while
+                        your
+                        app is running, meaning the receiver listens for broadcasts only while the app is active.
+                        <ul>
+                            <li><strong>Use Case:</strong> A podcast app can listen for headphone
+                                connection/disconnection
+                                events only while the app is running.</li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 
-            </ul>
-            <p><strong>Steps:</strong></p>
-            <ol>
-                <li><strong>Register a Receiver Dynamically in an Activity or Service:</strong>
-                    <div class="code">
-                        <div class="dotc"></div>
-                        <button class="ac">MainActivity.java</button>
-                        <div class="panel">
-                            <pre>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li><strong>Register a Receiver Dynamically in an Activity or Service:</strong>
+                        <div class="code">
+                            <div class="dotc"></div>
+                            <button class="ac">MainActivity.java</button>
+                            <div class="panel">
+                                <pre>
                     <code>
 package com.example.myapplication;
 
@@ -1728,15 +2152,15 @@ public class MainActivity extends AppCompatActivity {
 }
                     </code>
                 </pre>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li><strong>Implement the Broadcast Receiver:</strong>
-                    <div class="code">
-                        <div class="dotc"></div>
-                        <button class="ac">MyBroadcast.java</button>
-                        <div class="panel">
-                            <pre>
+                    </li>
+                    <li><strong>Implement the Broadcast Receiver:</strong>
+                        <div class="code">
+                            <div class="dotc"></div>
+                            <button class="ac">MyBroadcast.java</button>
+                            <div class="panel">
+                                <pre>
                     <code>
 package com.example.myapplication;
 
@@ -1780,58 +2204,64 @@ public class MyBroadcast extends BroadcastReceiver {
 }
                     </code>
                 </pre>
+                            </div>
                         </div>
-                    </div>
-                    <ul>
-                        <li><strong>onReceive(Context context, Intent intent):</strong>
-                            This is the core method of the BroadcastReceiver that is triggered whenever a matching
-                            broadcast is received.
-                            It takes two parameters:
-                            <ul>
-                                <li><strong>Context context:</strong>
-                                    This provides access to application-specific resources and services, such as showing
-                                    a Toast, starting an activity, or accessing shared preferences.
-                                </li>
-                                <li><strong>Intent intent:</strong>
-                                    This carries details about the broadcast, such as the action (e.g.,
-                                    BluetoothAdapter.ACTION_STATE_CHANGED)
-                                    and any additional data (extras) included in the broadcast.
-                                    The action helps identify what kind of event occurred.
-                                </li>
-                            </ul>
-                        </li>
-                        <li><strong>Action Handling:</strong>
-                            The <code>getAction()</code> method is used to retrieve the type of broadcast. In this
-                            example, the receiver checks
-                            if the action is <code>BluetoothAdapter.ACTION_STATE_CHANGED</code>, indicating a Bluetooth
-                            state change.
-                        </li>
-                        <li><strong>Extracting Data:</strong>
-                            The <code>getIntExtra()</code> method extracts the Bluetooth state (e.g., ON, OFF) from the
-                            broadcast's intent.
-                            The key <code>BluetoothAdapter.EXTRA_STATE</code> is used to access the state, and
-                            <code>BluetoothAdapter.ERROR</code> serves as a fallback value.
-                        </li>
-                        <li><strong>Switch Statement:</strong>
-                            The state is handled using a switch statement. Based on the state, a Toast message is
-                            displayed to inform the user
-                            whether Bluetooth is ON or OFF.
-                        </li>
-                    </ul>
-                </li>
-            </ol>
-            <p><strong>Unregistering the Receiver</strong></p>
-            <ul>
-                <li>You must unregister dynamically registered receivers when they are no longer needed to avoid memory
-                    leaks. You can do this in the <strong>onStop()</strong> or <strong>onDestroy()</strong> method of
-                    your activity or service:
-                    <pre>
-                    <code>
+                        <ul>
+                            <li><strong>onReceive(Context context, Intent intent):</strong>
+                                This is the core method of the BroadcastReceiver that is triggered whenever a matching
+                                broadcast is received.
+                                It takes two parameters:
+                                <ul>
+                                    <li><strong>Context context:</strong>
+                                        This provides access to application-specific resources and services, such as
+                                        showing
+                                        a Toast, starting an activity, or accessing shared preferences.
+                                    </li>
+                                    <li><strong>Intent intent:</strong>
+                                        This carries details about the broadcast, such as the action (e.g.,
+                                        BluetoothAdapter.ACTION_STATE_CHANGED)
+                                        and any additional data (extras) included in the broadcast.
+                                        The action helps identify what kind of event occurred.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Action Handling:</strong>
+                                The <code>getAction()</code> method is used to retrieve the type of broadcast. In this
+                                example, the receiver checks
+                                if the action is <code>BluetoothAdapter.ACTION_STATE_CHANGED</code>, indicating a
+                                Bluetooth
+                                state change.
+                            </li>
+                            <li><strong>Extracting Data:</strong>
+                                The <code>getIntExtra()</code> method extracts the Bluetooth state (e.g., ON, OFF) from
+                                the
+                                broadcast's intent.
+                                The key <code>BluetoothAdapter.EXTRA_STATE</code> is used to access the state, and
+                                <code>BluetoothAdapter.ERROR</code> serves as a fallback value.
+                            </li>
+                            <li><strong>Switch Statement:</strong>
+                                The state is handled using a switch statement. Based on the state, a Toast message is
+                                displayed to inform the user
+                                whether Bluetooth is ON or OFF.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Unregistering the Receiver</strong></p>
+                <ul>
+                    <li>You must unregister dynamically registered receivers when they are no longer needed to avoid
+                        memory
+                        leaks. You can do this in the <strong>onStop()</strong> or <strong>onDestroy()</strong> method
+                        of
+                        your activity or service:
+                        <pre>
+                        <code>
 unregisterReceiver(myBroadcast);
-                    </code>
-                </pre>
-                </li>
-            </ul>
+                        </code>
+                    </pre>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="wh">
