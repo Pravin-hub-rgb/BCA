@@ -342,47 +342,47 @@ public class MainActivity extends AppCompatActivity {
                     Below are the key concepts and steps involved in working with SQL queries in SQLite:</p>
 
                 <p><strong>1. Executing SQL Queries</strong></p>
-                <p>SQLiteDatabase provides methods like <code>execSQL()</code>, <code>rawQuery()</code>, and
-                    <code>insert()</code> to execute SQL statements. These methods allow you to perform different
+                <p>SQLiteDatabase provides methods like <strong>execSQL()</strong>, <strong>rawQuery()</strong>, and
+                    <strong>insert()</strong> to execute SQL statements. These methods allow you to perform different
                     actions on the database:</p>
                 <ul>
                     <li><strong>execSQL():</strong> Used to execute SQL statements that don't return data, such as
                         creating a table, inserting data, or updating/deleting records. Example:
-                        <code>db.execSQL("CREATE TABLE...")</code>.</li>
+                        <strong>db.execSQL("CREATE TABLE...")</strong>.</li>
                     <li><strong>rawQuery():</strong> Used for SELECT queries that return data. It returns a
-                        <code>Cursor</code> object, which you can loop through to get the result. Example:
-                        <code>Cursor cursor = db.rawQuery("SELECT * FROM table", null)</code>.</li>
+                        <strong>Cursor</strong> object, which you can loop through to get the result. Example:
+                        <strong>Cursor cursor = db.rawQuery("SELECT * FROM table", null)</strong>.</li>
                     <li><strong>insert():</strong> Used for inserting data into a table. This method returns the row ID
-                        of the newly inserted record. Example: <code>db.insert("table", null, contentValues)</code>.
+                        of the newly inserted record. Example: <strong>db.insert("table", null, contentValues)</strong>.
                     </li>
                 </ul>
 
                 <p><strong>2. Insert Data</strong></p>
-                <p>To insert data into a table, you use the <code>insert()</code> method. This method inserts values
+                <p>To insert data into a table, you use the <strong>insert()</strong> method. This method inserts values
                     into the specified columns in the table. The syntax is as follows:</p>
                 <pre>
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("column_name", value);
                         long result = db.insert("table_name", null, contentValues);
                     </pre>
-                <p>The <code>insert()</code> method takes three parameters:
+                <p>The <strong>insert()</strong> method takes three parameters:
                 <ul>
                     <li><strong>table_name:</strong> The name of the table where the data will be inserted.</li>
-                    <li><strong>nullColumnHack:</strong> Usually set to <code>null</code>, it’s a safety mechanism for
+                    <li><strong>nullColumnHack:</strong> Usually set to <strong>null</strong>, it’s a safety mechanism for
                         inserting data into empty tables.</li>
-                    <li><strong>contentValues:</strong> A <code>ContentValues</code> object that stores the column names
+                    <li><strong>contentValues:</strong> A <strong>ContentValues</strong> object that stores the column names
                         and values you want to insert.</li>
                 </ul>
                 </p>
 
                 <p><strong>3. Query Data</strong></p>
-                <p>To retrieve data from a table, you use the <code>rawQuery()</code> method. It executes a SELECT SQL
-                    statement and returns a <code>Cursor</code> object containing the result set. Here’s how you use it:
+                <p>To retrieve data from a table, you use the <strong>rawQuery()</strong> method. It executes a SELECT SQL
+                    statement and returns a <strong>Cursor</strong> object containing the result set. Here’s how you use it:
                 </p>
                 <pre>
                         Cursor cursor = db.rawQuery("SELECT * FROM table_name", null);
                     </pre>
-                <p>The <code>rawQuery()</code> method takes two parameters:
+                <p>The <strong>rawQuery()</strong> method takes two parameters:
                 <ul>
                     <li><strong>SQL Query:</strong> The SQL SELECT statement to fetch data from the table.</li>
                     <li><strong>SelectionArgs:</strong> Optional parameters used for query filtering (e.g., where clause
@@ -390,9 +390,9 @@ public class MainActivity extends AppCompatActivity {
                 </ul>
                 </p>
 
-                <p>The <code>Cursor</code> object allows you to iterate over the result set. You can move through the
-                    rows using methods like <code>moveToNext()</code> and retrieve column data using methods like
-                    <code>getString()</code>, <code>getInt()</code>, etc. Example:</p>
+                <p>The <strong>Cursor</strong> object allows you to iterate over the result set. You can move through the
+                    rows using methods like <strong>moveToNext()</strong> and retrieve column data using methods like
+                    <strong>getString()</strong>, <strong>getInt()</strong>, etc. Example:</p>
                 <pre>
                         while (cursor.moveToNext()) {
                             String data = cursor.getString(cursor.getColumnIndex("column_name"));
@@ -400,8 +400,8 @@ public class MainActivity extends AppCompatActivity {
                     </pre>
 
                 <p><strong>4. Update Data</strong></p>
-                <p>To modify existing data, you use the <code>update()</code> method. It takes the table name, the
-                    <code>ContentValues</code> object with the new values, and a WHERE clause to specify which records
+                <p>To modify existing data, you use the <strong>update()</strong> method. It takes the table name, the
+                    <strong>ContentValues</strong> object with the new values, and a WHERE clause to specify which records
                     to update. Example:</p>
                 <pre>
                         ContentValues contentValues = new ContentValues();
@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                     </pre>
 
                 <p><strong>5. Delete Data</strong></p>
-                <p>To delete data from a table, you use the <code>delete()</code> method. It requires the table name, a
+                <p>To delete data from a table, you use the <strong>delete()</strong> method. It requires the table name, a
                     WHERE clause to specify which records to delete, and optional arguments. Example:</p>
                 <pre>
                         db.delete("table_name", "column_name = ?", new String[]{value_to_delete});
@@ -418,10 +418,10 @@ public class MainActivity extends AppCompatActivity {
 
                 <p><strong>6. Best Practices</strong></p>
                 <ul>
-                    <li>Always close the <code>Cursor</code> object after using it to free up resources.</li>
-                    <li>Use parameterized queries (i.e., with <code>rawQuery()</code>) to prevent SQL injection
+                    <li>Always close the <strong>Cursor</strong> object after using it to free up resources.</li>
+                    <li>Use parameterized queries (i.e., with <strong>rawQuery()</strong>) to prevent SQL injection
                         vulnerabilities.</li>
-                    <li>Use <code>ContentValues</code> to insert or update data rather than manually concatenating
+                    <li>Use <strong>ContentValues</strong> to insert or update data rather than manually concatenating
                         values into the SQL statement.</li>
                 </ul>
             </div>
@@ -452,31 +452,31 @@ cv.put("stuID", 1001);
 cv.put("stuName", "John Doe");
                         </code>
                     </pre>
-                    <p>The <code>cv</code> object can now be passed to database methods like <code>insert()</code> or
-                        <code>update()</code>.</p>
+                    <p>The <strong>cv</strong> object can now be passed to database methods like <strong>insert()</strong> or
+                        <strong>update()</strong>.</p>
 
                     <h3>2. SQLiteDatabase</h3>
                     <p>The <strong>SQLiteDatabase</strong> class provides methods to perform operations like reading,
                         writing, and executing SQL commands on the database.</p>
                     <p><strong>Key Methods:</strong></p>
                     <ul>
-                        <li><code>getWritableDatabase()</code>: Opens the database in write mode, allowing data
+                        <li><strong>getWritableDatabase()</strong>: Opens the database in write mode, allowing data
                             modification operations.</li>
-                        <li><code>getReadableDatabase()</code>: Opens the database in read-only mode, useful for
+                        <li><strong>getReadableDatabase()</strong>: Opens the database in read-only mode, useful for
                             fetching data without modifying it.</li>
-                        <li><code>insert(String table, String nullColumnHack, ContentValues values)</code>: Inserts data
+                        <li><strong>insert(String table, String nullColumnHack, ContentValues values)</strong>: Inserts data
                             into a specified table.</li>
-                        <li><code>rawQuery(String sql, String[] selectionArgs)</code>: Executes a raw SQL SELECT query.
+                        <li><strong>rawQuery(String sql, String[] selectionArgs)</strong>: Executes a raw SQL SELECT query.
                         </li>
                     </ul>
 
                     <h3>3. Inserting Data</h3>
-                    <p>To insert data into a database table, use the <code>insert()</code> method. It requires:</p>
+                    <p>To insert data into a database table, use the <strong>insert()</strong> method. It requires:</p>
                     <ul>
                         <li><strong>table:</strong> The name of the table where data will be inserted.</li>
-                        <li><strong>nullColumnHack:</strong> A column that can be explicitly set to <code>NULL</code> if
-                            the ContentValues are empty (usually <code>null</code> is passed).</li>
-                        <li><strong>values:</strong> The <code>ContentValues</code> object containing the data to
+                        <li><strong>nullColumnHack:</strong> A column that can be explicitly set to <strong>NULL</strong> if
+                            the ContentValues are empty (usually <strong>null</strong> is passed).</li>
+                        <li><strong>values:</strong> The <strong>ContentValues</strong> object containing the data to
                             insert.</li>
                     </ul>
                     <p><strong>Syntax:</strong></p>
@@ -506,9 +506,9 @@ if (result == -1) {
                         methods to navigate and retrieve data.</p>
                     <p><strong>Key Methods:</strong></p>
                     <ul>
-                        <li><code>moveToNext()</code>: Moves to the next row of the result set.</li>
-                        <li><code>getCount()</code>: Returns the number of rows in the result set.</li>
-                        <li><code>getString(int columnIndex)</code>: Retrieves the value of the specified column as a
+                        <li><strong>moveToNext()</strong>: Moves to the next row of the result set.</li>
+                        <li><strong>getCount()</strong>: Returns the number of rows in the result set.</li>
+                        <li><strong>getString(int columnIndex)</strong>: Retrieves the value of the specified column as a
                             string.</li>
                     </ul>
                     <p><strong>Example:</strong> Reading data from a Cursor:</p>
