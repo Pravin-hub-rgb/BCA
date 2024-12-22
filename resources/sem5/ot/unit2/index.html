@@ -1351,36 +1351,6 @@ Requirement |
                     <li>First, we check if the supply and demand are balanced. This means the total supply should equal
                         the total demand. In this case, the total capacity (7 + 9 + 18 = 34) is equal to the total
                         requirement (5 + 8 + 7 + 14 = 34), so the problem is balanced.</li>
-                    <li>If the supply and demand are not balanced, we add a row or column with 0s. This allows us to
-                        equalize the supply and demand. For example, let's say the supply is 35 and the demand is 34.
-                        In this case, we would add a dummy warehouse with a demand of 1 (35 - 34) and assign 0 costs to
-                        it.
-                        The new table would look like this:
-                    </li>
-                </ul>
-
-                <pre>
-                    <code>
-                                          dummy|  Warehouse
-    Factory |  w1  |  w2  |  w3  |  w4  | col  | Capacity
-------------------------------------------------------------
-        F1  |  19  |  30  |  50  |  10  |  0   |   7
-        F2  |  70  |  30  |  40  |  60  |  0   |   9
-        F3  |  40  |   8  |  70  |  20  |  0   |  18
-------------------------------------------------------------
-Warehouse   |   5  |   8  |   7  |  14  |  1   |
-Requirement |
-                    </code>
-                </pre>
-
-                <ul>
-                    <li>In this modified case, a dummy warehouse (w5) is added with a demand of 1 to balance the supply
-                        and demand.</li>
-                    <li>Similarly, if the total demand is greater than the total supply, we add a dummy factory row with
-                        a supply of 0.</li>
-                </ul>
-
-                <ul>
                     <li>In the North-West Corner method, we start at the top-left (north-west) corner of the cost
                         matrix
                         and assign the supply or demand, whichever is smaller, to that cell. We then subtract the
@@ -1651,6 +1621,64 @@ Requirement |   5      |   8  |   7  |  14  |
                         <br>=779
                     </li>
                 </ul>
+                <div class="in">
+                    <h3>What if supply and demand are not equal??</h3>
+                    <p><strong>Example Problem - Find the Initial BFS (Basic Feasible Solution) of the Following
+                            Transportation Problem:</strong></p>
+                    <pre>
+    <code>
+            |  w1  |  w2  |  w3  | Capacity
+------------------------------------------------------------
+        F1  |  10  |  0   |  0   |   10
+        F2  |  0   |  14  |  1   |   15
+        F3  |  2   |  0   |  9   |   20
+------------------------------------------------------------
+Warehouse   |  12  |  14  |  10  |
+Requirement |
+    </code>
+</pre>
+
+                    <ul>
+                        <li>Checking if the supply and demand are balanced. This means the total supply should
+                            equal
+                            the total demand. In this case:
+                            <ul>
+                                <li><strong>Total supply</strong> = 10 (F1) + 15 (F2) + 20 (F3) = <strong>45</strong>
+                                </li>
+                                <li><strong>Total demand</strong> = 12 (w1) + 14 (w2) + 10 (w3) = <strong>36</strong>
+                                </li>
+                            </ul>
+                            Since the total supply (45) is greater than the total demand (36), the problem is
+                            unbalanced.
+                        </li>
+                        <li>When the supply is greater than the demand, we need to add a <strong>dummy
+                                warehouse</strong> with a demand equal to the difference between the total supply and
+                            total demand. In this case, the difference is 9 (45 - 36 = 9), so we add a dummy warehouse
+                            (w4) with a demand of 9.</li>
+                        <li>The new transportation table will include this dummy warehouse (w4) with a demand of 9, and
+                            we add a column of 0s for this dummy warehouse (w4) since it's not actually supplying any
+                            products. The table now looks like this:</li>
+                    </ul>
+
+                    <pre>
+    <code>
+            |  w1  |  w2  |  w3  |  w4  | Capacity
+------------------------------------------------------------
+        F1  |  10  |  0   |  0   |  0   |   10
+        F2  |  0   |  14  |  1   |  0   |   15
+        F3  |  2   |  0   |  9   |  0   |   20
+------------------------------------------------------------
+Warehouse   |  12  |  14  |  10  |  9   |
+Requirement |
+    </code>
+</pre>
+
+                    <ul>
+                        <li>Now the total supply (45) and total demand (45) are balanced, and we can proceed to solve
+                            the problem using any method.</li>
+                    </ul>
+
+                </div>
             </div>
             <div class="in">
                 <h3>Optimality Test</h3>
