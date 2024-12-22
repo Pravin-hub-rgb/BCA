@@ -834,7 +834,8 @@
                                 <li><strong>CB</strong> is the cost coefficient of the basic variables in the basis
                                     (here, x3 and x4).</li>
                                 <li><strong>B</strong> is the column for the variable we are calculating
-                                    <strong>Zj</strong> for.</li>
+                                    <strong>Zj</strong> for.
+                                </li>
                             </ul>
                             For example, for the x1 column:
                             <br>
@@ -1350,9 +1351,41 @@ Requirement |
                     <li>First, we check if the supply and demand are balanced. This means the total supply should equal
                         the total demand. In this case, the total capacity (7 + 9 + 18 = 34) is equal to the total
                         requirement (5 + 8 + 7 + 14 = 34), so the problem is balanced.</li>
-                    <li>In the North-West Corner method, we start at the top-left (north-west) corner of the cost matrix
+                    <li>If the supply and demand are not balanced, we add a row or column with 0s. This allows us to
+                        equalize the supply and demand. For example, let's say the supply is 35 and the demand is 34.
+                        In this case, we would add a dummy warehouse with a demand of 1 (35 - 34) and assign 0 costs to
+                        it.
+                        The new table would look like this:
+                    </li>
+                </ul>
+
+                <pre>
+                    <code>
+                                        |  Warehouse
+    Factory |  w1  |  w2  |  w3  |  w4  | Capacity
+------------------------------------------------------------
+        F1  |  19  |  30  |  50  |  10  |  0   |   7
+        F2  |  70  |  30  |  40  |  60  |  0   |   9
+        F3  |  40  |   8  |  70  |  20  |  0   |  18
+------------------------------------------------------------
+Warehouse   |   5  |   8  |   7  |  14  |  1   |
+Requirement |
+                    </code>
+                </pre>
+
+                <ul>
+                    <li>In this modified case, a dummy warehouse (w5) is added with a demand of 1 to balance the supply
+                        and demand.</li>
+                    <li>Similarly, if the total demand is greater than the total supply, we add a dummy factory row with
+                        a supply of 0.</li>
+                </ul>
+
+                <ul>
+                    <li>In the North-West Corner method, we start at the top-left (north-west) corner of the cost
+                        matrix
                         and assign the supply or demand, whichever is smaller, to that cell. We then subtract the
-                        smaller value from the larger one and move to the next cell, following the north-west direction
+                        smaller value from the larger one and move to the next cell, following the north-west
+                        direction
                         until all supplies and demands are met.</li>
                     <li>
                         Start with top-left and assign smallest supply or demand.
@@ -1433,7 +1466,8 @@ Requirement |   5      |   8  |   7  |  14  |
                 <p><strong>Solving the Same Question Using the <em>Least Cost Method</em></strong></p>
                 <ul>
                     <li>
-                        In this method, we find the minimum cost and assign the minimum value from either the supply or
+                        In this method, we find the minimum cost and assign the minimum value from either the supply
+                        or
                         demand.
                         <br>Here, the minimum cost is 8, so we allocate accordingly.
                         <pre>
@@ -1532,7 +1566,8 @@ Requirement |   5      |   8  |   7  |  14  |
                 <ul>
                     <li>Here we first mention the penalties for each row and column.
                         <br>We find 2 smallest cost in a row or column and write down there difference.
-                        <br>Then we look for biggest penalty and look for smallest cost in that row or column and simply
+                        <br>Then we look for biggest penalty and look for smallest cost in that row or column and
+                        simply
                         assign.
                         <pre>
                             <code>
