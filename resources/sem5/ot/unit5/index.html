@@ -284,6 +284,93 @@
                 <img src="../../images/ot15.jpeg" alt="">
             </div>
         </div>
+        <div class="wh">
+            <h2>Critical Path</h2>
+            <ul>
+                <li>
+                    It is the chain of activities with the longest time durations. These activities are called critical
+                    activities.
+                    They are critical in the sense that a delay in any of them results in a delay in the completion of
+                    the project.
+                </li>
+            </ul>
+            <p><strong>Steps to Find the Critical Path:</strong></p>
+            <ol>
+                <li>Calculate the time schedule for each activity.</li>
+                <li>Calculate the time schedule for the completion of the entire project.</li>
+                <li>Identify the critical activities and find the critical path.</li>
+            </ol>
+            <div class="in">
+                <p><strong>Q: Tasks A, B, C, ..., H, and I constitute a project. The precedence relationships
+                        are:</strong></p>
+                <ul>
+                    <li>A &lt; D, A &lt; E; B &lt; F; D &lt; F; C &lt; G; C &lt; H; F &lt; I; G &lt; I</li>
+                    <li>Draw a network diagram to represent the project and find the critical path, when the time (in
+                        days) for each task is as follows:</li>
+                </ul>
+                <pre>
+                    <code>
+Activity |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I
+---------+-----+-----+-----+-----+-----+-----+-----+-----+-----
+   Time  |  8  | 10  |  8  | 10  | 16  | 17  | 18  | 14  |  9
+                    </code>
+                </pre>
+
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>A &lt; D means D is preceded by A. Now we will create a table which contains precedence.</li>
+                    <li>
+                        <pre>
+                            <code>
++------------+----- +-------------+
+|  Activity  | Time | Preceded By |
++------------+--------------------+
+|      A     |   8  |     -       |
+|      B     |  10  |     -       |
+|      C     |   8  |     -       |
+|      D     |  10  |     A       |
+|      E     |  16  |     A       |
+|      F     |  17  |    B, D     |
+|      G     |  18  |     C       |
+|      H     |  14  |     C       |
+|      I     |   9  |    F, G     |
++------------+------+-------------+
+                            </code>
+                        </pre>
+                    </li>
+                    <li>Network Diagram:
+                        <br><img src="../../images/ot16.jpeg" alt="">
+                    </li>
+                    <li>
+                        Now that we have drawn the network diagram, the next step is to calculate the earliest and latest times for each event.
+                        <br>To calculate the <strong>earliest time</strong>, we use the <strong>forward pass method</strong>. In this method:
+                        <ul>
+                            <li>Start from the initial node (starting point) of the network.</li>
+                            <li>As you move to the next node, add the duration of the corresponding activity to the earliest time of the current node.</li>
+                            <li>If there are multiple incoming activities to a node, select the maximum of the calculated times as the earliest time for that node.</li>
+                        </ul>
+                        To calculate the <strong>latest time</strong>, we use the <strong>backward pass method</strong>. In this method:
+                        <ul>
+                            <li>Start from the final node (ending point) of the network and assign it the same value as its earliest time.</li>
+                            <li>As you move backward to the preceding nodes, subtract the duration of the corresponding activity from the latest time of the current node.</li>
+                            <li>If there are multiple outgoing activities from a node, select the minimum of the calculated times as the latest time for that node.</li>
+                        </ul>
+                        The earliest and latest times help determine the <strong>total float</strong> of each activity, which is the difference between the latest time and the earliest time. Activities with zero float are critical and form the <strong>critical path</strong>.
+                    </li>
+                </ul>
+                <img src="../../images/ot17.jpeg" alt="">
+                <ul>
+                    <li>E<sub>6</sub> is the completion of the project.</li>
+                    <li>Now we have found earlest and latest time for each node now we check at which node value of E and L are same:
+                        <br>[L1 = 0 = E1], [L2 = 8 = E2], [L4 = 18 = E4] and [E6 = 18 = L6]
+                        <br>Now joining them we will get our critical  path.
+                        <br>So Critical Path = 1 &rarr; 2 &rarr; 4 &rarr; 5 &rarr; 6 
+                        <br>in terms of activites critical path = A &rarr; D &rarr; F &rarr; I.
+                    </li>
+                </ul>
+                <img src="../../images/ot18.jpeg" alt="">
+            </div>
+        </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
