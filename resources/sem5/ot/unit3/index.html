@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <style>
-        .font-inc{
+        .font-inc {
             font-size: 22px;
         }
     </style>
@@ -441,12 +441,16 @@ Player A     A2 |   4   -3 |   -3
                         </li>
                     </ol>
                 </li>
-                <li>A mixed strategy is when a player doesn’t stick to just one choice (pure strategy) but instead assigns probabilities to multiple choices. It’s like saying, “I’ll pick option A 60% of the time and option B 40% of the time.” This way, the player keeps their opponent guessing and ensures a better outcome in games where no single choice (pure strategy) is the best.</li>
+                <li>A mixed strategy is when a player doesn’t stick to just one choice (pure strategy) but instead
+                    assigns probabilities to multiple choices. It’s like saying, “I’ll pick option A 60% of the time and
+                    option B 40% of the time.” This way, the player keeps their opponent guessing and ensures a better
+                    outcome in games where no single choice (pure strategy) is the best.</li>
             </ul>
             <div class="in">
                 <h3>2x2 Games Without Saddle Point</h3>
-                <p>Consider a 2x2 two-person zero-sum game without any saddle point, having the pay-ff matrix for player A as:
-                    <pre>
+                <p>Consider a 2x2 two-person zero-sum game without any saddle point, having the pay-ff matrix for player
+                    A as:
+                <pre>
                         <code>
                   Player B
                   B1    B2   
@@ -456,8 +460,8 @@ Player A     A2 | a21   a22 |
                  -         -
                         </code>
                     </pre>
-                    The optimum mixed strategies,
-                    <pre>
+                The optimum mixed strategies,
+                <pre>
                         <code>
             -         -
         A1 |  A1    A2 |   
@@ -470,22 +474,24 @@ S B  =  A2 |  q1    q2 |
             -         -
                         </code>
                     </pre>
-                    
+
                 </p>
-                <p class="mc font-inc">where,  \( p_1 = \frac{a_{22} - a_{21}}{(a_{11} + a_{22}) - (a_{12} + a_{21})} \)
+                <p class="mc font-inc">where, \( p_1 = \frac{a_{22} - a_{21}}{(a_{11} + a_{22}) - (a_{12} + a_{21})} \)
                 </p>
                 <p>p1 + p2 = 1 &rarr; p2 = 1 - p1</p>
                 <p class="mc font-inc">\( q_1 = \frac{a_{22} - a_{12}}{(a_{11} + a_{22}) - (a_{12} + a_{21})} \)
-                    
+
                 </p>
                 <p>q1 + q2 = 1 &rarr; q2 = 1 - q1</p>
                 <p>The value of the game :</p>
-                <p class="mc font-inc">\( r = \frac{a_{11}a_{22} - a_{12}a_{21}}{(a_{11} + a_{22}) - (a_{12} + a_{21})} \)
-                    
+                <p class="mc font-inc">\( r = \frac{a_{11}a_{22} - a_{12}a_{21}}{(a_{11} + a_{22}) - (a_{12} + a_{21})}
+                    \)
+
                 </p>
 
                 <div class="in">
-                    <p><strong>Q:</strong> Solve the following pay-off matrix. Also determine the optimal strategies and value of the game.</p>
+                    <p><strong>Q:</strong> Solve the following pay-off matrix. Also determine the optimal strategies and
+                        value of the game.</p>
                     <pre>
                         <code>
                 Player B 
@@ -500,25 +506,179 @@ Player A     |  3    4 |
                         <li>
                             <pre>
                                 <code>
-                    -         -
-                A1 |  A1    A2 |   
-        S A  =  A2 |  p1    p2 |   
-                    -         -
-        
-                    -         -
-                A1 |  B1    B2 |   
-        S B  =  A2 |  q1    q2 |   
-                    -         -
+            -         -
+        A1 |  A1    A2 |   
+S A  =  A2 |  p1    p2 |   
+            -         -
+
+            -         -
+        A1 |  B1    B2 |   
+S B  =  A2 |  q1    q2 |   
+            -         -
                                 </code>
                             </pre>
                             p1 = (4 - 3) / ((5 + 4) - (1 + 3)) = 1/5
                             <br>p2 = 1 - p1 = 4/5
-                            <br>q1 = (4 - 1) / ((5 + 4) - (1 + 3)) = 3 /5 
+                            <br>q1 = (4 - 1) / ((5 + 4) - (1 + 3)) = 3 /5
                             <br>q2 = 1 - 3/5 = 2/5
                         </li>
                         <li>Value of the game = 17/5</li>
                         <li>&there4; Optimum mixed strategy = SA = (1/5, 4/5) and SB = (3/5, 2/5)</li>
                     </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Dominance Property</h3>
+                <p>The principle of dominance is a simple way to simplify a game matrix. It says that if one strategy is
+                    clearly better than another in all situations, we can ignore the weaker strategy. This helps reduce
+                    the size of the payoff matrix without affecting the optimal solution.</p>
+                <p>Let’s break it down:</p>
+                <ul>
+                    <li>
+                        A strategy <strong>dominates</strong> another strategy if it is better (or at least not worse)
+                        in every
+                        possible condition.
+                        <ul>
+                            <li>For example, if you’re comparing two rows (strategies for Player A) and one row always
+                                has better payoffs than the other, you can ignore the weaker row.</li>
+                            <li>Similarly, for columns (strategies for Player B), if one column always gives worse
+                                payoffs than another, you can ignore it.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>How does this help?</strong>
+                        <p>By applying the dominance property, we can shrink the payoff matrix. This makes solving the
+                            game easier without changing the final result.</p>
+                    </li>
+                </ul>
+                <p><strong>The Rules of Dominance:</strong></p>
+                <ol type="i">
+                    <li>
+                        <strong>Row Dominance:</strong>
+                        <p>If all the values in one row (say Row k) are less than or equal to the values in another row
+                            (say Row r), then Row k is dominated by Row r and can be ignored.</p>
+                    </li>
+                    <li>
+                        <strong>Column Dominance:</strong>
+                        <p>If all the values in one column (say Column k) are greater than or equal to the values in
+                            another column (say Column r), then Column k is dominated by Column r and can be ignored.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Reducing the Payoff Matrix:</strong>
+                        <p>We can delete dominated rows and columns to make the matrix smaller. This makes calculations
+                            easier without affecting the optimal strategies.</p>
+                    </li>
+                    <li>
+                        <strong>Combination Dominance:</strong>
+                        <p>Sometimes, a linear combination of rows or columns can dominate another row or column. In
+                            that case, the dominated row or column can still be removed. This is less common but follows
+                            the same idea.</p>
+                    </li>
+                </ol>
+                <p><strong>In simple terms:</strong></p>
+                <p>The dominance property helps us focus only on the important strategies by removing weaker ones. It’s
+                    like cleaning up unnecessary options in a game to make solving it faster and simpler!</p>
+                <div class="in">
+                    <p><strong>Q:</strong> Solve the following game:</p>
+                    <pre>
+    <code>
+               Player B 
+            -            -
+           |  1    7    2 |   
+Player A   |  6    2    7 | 
+           |  5    1    6 |    
+            -            -
+    </code>
+</pre>
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                        <li>
+                            <p><strong>Step 1: Check for a Saddle Point:</strong></p>
+                            <p>A saddle point exists if the max of the row minima equals the min of the column maxima.
+                                Let’s calculate these:</p>
+                            <ul>
+                                <li><strong>Row Minima:</strong>
+                                    <ul>
+                                        <li>Row 1: Min(1, 7, 2) = 1</li>
+                                        <li>Row 2: Min(6, 2, 7) = 2</li>
+                                        <li>Row 3: Min(5, 1, 6) = 1</li>
+                                    </ul>
+                                    Max(Row Minima) = 2
+                                </li>
+                                <li><strong>Column Maxima:</strong>
+                                    <ul>
+                                        <li>Column 1: Max(1, 6, 5) = 6</li>
+                                        <li>Column 2: Max(7, 2, 1) = 7</li>
+                                        <li>Column 3: Max(2, 7, 6) = 7</li>
+                                    </ul>
+                                    Min(Column Maxima) = 6
+                                </li>
+                            </ul>
+                            <p>Since Max(Row Minima) ≠ Min(Column Maxima), there is no saddle point. We proceed using
+                                the <strong>dominance property</strong>.</p>
+                        </li>
+                        <li>
+                            <p><strong>Step 2: Apply Dominance Property:</strong></p>
+                            <p>We simplify the matrix by identifying dominated rows or columns and removing them:</p>
+                            <ol>
+                                <li><strong>Compare Columns:</strong>
+                                    <p>Let’s compare the columns pairwise:</p>
+                                    <ul>
+                                        <li><strong>Column 1 vs Column 3:</strong>
+                                            <p>Column 1: (1, 6, 5) | Column 3: (2, 7, 6)</p>
+                                            <p>All values in Column 3 are greater than or equal to the corresponding
+                                                values in Column 1. This means <strong>Column 1 is dominated by Column
+                                                    3</strong>. We remove Column 1.</p>
+                                        </li>
+                                    </ul>
+                                    <p>Updated matrix after removing Column 1:</p>
+                                    <pre>
+                    <code>
+             Player B 
+            -       -
+           |  7    2 |   
+Player A   |  2    7 | 
+           |  1    6 |    
+            -       -
+                    </code>
+                </pre>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <p><strong>Step 3: Eliminate Dominated Rows:</strong></p>
+                            <p>We compare the rows in the updated matrix:</p>
+                            <pre>
+    <code>
+            Player B 
+           -       -
+          |  7    2 |   
+Player A  |  2    7 | 
+          |  1    6 |    
+           -       -
+    </code>
+</pre>
+                            <ul>
+                                <li><strong>Compare Row 1 and Row 3:</strong>
+                                    <p>Row 1: (7, 2) | Row 3: (1, 6)</p>
+                                    <p>All values in Row 1 are greater than or equal to the corresponding values in Row
+                                        3. This means **Row 3 is dominated by Row 1**, and we can remove Row 3.</p>
+                                </li>
+                            </ul>
+                            <p>Updated matrix after removing Row 3:</p>
+                            <pre>
+    <code>
+             Player B 
+            -       -
+           |  7    2 |   
+Player A   |  2    7 | 
+            -       -
+    </code>
+</pre>
+
+                        </li>
+                        <li>Now we have this 2x2 so we can further solve it.</li>
                 </div>
             </div>
         </div>
