@@ -178,11 +178,11 @@
                     For example, in a 2x2 payoff matrix:
                     <p class="mc">
                         \[
-            \begin{pmatrix}
-            3 & 5 \\
-            6 & 4 \\
-            \end{pmatrix}
-            \]
+                        \begin{pmatrix}
+                        3 & 5 \\
+                        6 & 4 \\
+                        \end{pmatrix}
+                        \]
                     </p>
                     - Find the minimum value in each row: Row 1 = 3, Row 2 = 4. <br>
                     - Find the maximum value in each column: Column 1 = 6, Column 2 = 5.<br>
@@ -217,13 +217,199 @@
                     </ol>
                 </li>
             </ul>
+            <div class="in">
+                <p><strong>Q1:</strong> Solve the game whose pay-off matrix is given below:</p>
+                <pre>
+                <code>
+                          Player B
+                   B1   B2   B3   B4   B5 
+    -----------------------------------------
+             A1 |  -2    0    0    5    3 |
+Player A     A2 |   3    2    1    2    2 |
+             A3 |  -4   -3    0   -2    6 |
+             A4 |   5    3   -4    2   -6 |
+    -----------------------------------------
+                </code>
+            </pre>
+                <p>Let’s solve this step by step:</p>
+                <p><strong>Step 1:</strong> First, we look at the <em>row minima</em>. These values tell us the worst
+                    outcome for Player A if they pick each row. Player A wants to make sure they get the best possible
+                    payoff, even in the worst case. So, they will choose the row with the highest row minimum.</p>
+                <ul>
+                    <li>Row Minima:
+                        <ul>
+                            <li>Row A1: -2</li>
+                            <li>Row A2: 1</li>
+                            <li>Row A3: -4</li>
+                            <li>Row A4: -6</li>
+                        </ul>
+                    </li>
+                    <li>Max(Row Minima) = Max(-2, 1, -4, -6) = 1</li>
+                </ul>
+                <p><strong>Step 2:</strong> Next, we look at the <em>column maxima</em>. These values tell us the best
+                    outcome for Player B if they pick each column. Player B wants to limit Player A's gain as much as
+                    possible, so they will choose the column with the lowest column maximum.</p>
+                <ul>
+                    <li>Column Maxima:
+                        <ul>
+                            <li>Column B1: 5</li>
+                            <li>Column B2: 3</li>
+                            <li>Column B3: 1</li>
+                            <li>Column B4: 5</li>
+                            <li>Column B5: 6</li>
+                        </ul>
+                    </li>
+                    <li>Min(Column Maxima) = Min(5, 3, 1, 5, 6) = 1</li>
+                </ul>
+                <pre>
+                <code>
+           <pre>
+                <code>
+                          Player B
+                   B1   B2   B3   B4   B5 | Row Minima
+    -----------------------------------------------
+             A1 |  -2    0    0    5    3 |   -2
+Player A     A2 |   3    2    1    2    2 |    1
+             A3 |  -4   -3    0   -2    6 |   -4
+             A4 |   5    3   -4    2   -6 |   -6
+    -----------------------------------------------
+  Column Maxima     5    3    1    5    6
+                </code>
+            </pre>
+                </code>
+                </pre>
+                <p><strong>Step 3:</strong> Compare the results:</p>
+                <ul>
+                    <li>Max(Row Minima) = 1</li>
+                    <li>Min(Column Maxima) = 1</li>
+                </ul>
+                <p>Since these two values are equal, there is a <strong>saddle point</strong> in this game.</p>
+                <p><strong>Value of the game = 1</strong></p>
+                <p>The position of the saddle point tells us the optimal strategy for both players. It is:</p>
+                <ul>
+                    <li>Optimal Strategy: (A2, B3)</li>
+                </ul>
+                <p><strong>In simple terms:</strong></p>
+                <p>Player A wants the highest guaranteed payoff (the best of the worst cases), so they focus on the row
+                    minima. Player B wants to limit Player A's gain as much as possible, so they focus on the column
+                    maxima.
+                    When these two match, a saddle point exists, and the game is solved!</p>
+            </div>
+            <div class="in">
+                <p><strong>Q2:</strong> Determine which of the following two-person zero-sum games are strictly
+                    determinable and fair. Provide the optimum strategy for each player in the case of strictly
+                    determinable games.</p>
+                <pre>
+    <code>
+(i)
+                  Player B
+                   B1   B2   
+                -         -
+             A1 |  -5    2 |   
+Player A     A2 |  -7   -4 |   
+                 -        -
+
+(ii)
+                  Player B
+                  B1   B2   
+                -        -
+             A1 |  1    1 |   
+Player A     A2 |  4   -3 |   
+                 -       -
+    </code>
+</pre>
+                <ul>
+                    <li><strong>For (i):</strong>
+                        <pre>
+            <code>
+(i)
+                  Player B
+                   B1   B2   
+                -         -  Row Minima
+             A1 |  -5    2 |   -5
+Player A     A2 |  -7   -4 |   -7
+                 -        -
+    Column Maxima  -5    2
+            </code>
+        </pre>
+                        <p>Step 1: Find the Row Minima and Column Maxima:</p>
+                        <ul>
+                            <li>Row Minima:
+                                <ul>
+                                    <li>Row A1: Min(-5, 2) = -5</li>
+                                    <li>Row A2: Min(-7, -4) = -7</li>
+                                </ul>
+                            </li>
+                            <li>Max(Row Minima) = Max(-5, -7) = -5</li>
+                            <li>Column Maxima:
+                                <ul>
+                                    <li>Column B1: Max(-5, -7) = -5</li>
+                                    <li>Column B2: Max(2, -4) = 2</li>
+                                </ul>
+                            </li>
+                            <li>Min(Column Maxima) = Min(-5, 2) = -5</li>
+                        </ul>
+                        <p>Step 2: Compare Max(Row Minima) and Min(Column Maxima):</p>
+                        <p>Since Max(Row Minima) = Min(Column Maxima) = -5, the game is strictly determinable.</p>
+                        <p>Step 3: Value of the game and optimal strategy:</p>
+                        <ul>
+                            <li>Value of the game = -5</li>
+                            <li>Optimal strategy: (A1, B1) — Player A chooses A1, and Player B chooses B1.</li>
+                        </ul>
+                    </li>
+                    <li><strong>For (ii):</strong>
+                        <pre>
+            <code>
+(ii)
+                  Player B
+                  B1   B2   
+                -        -  Row Minima
+             A1 |   1    1 |    1
+Player A     A2 |   4   -3 |   -3
+                 -        -
+    Column Maxima   4    1
+            </code>
+        </pre>
+                        <p>Step 1: Find the Row Minima and Column Maxima:</p>
+                        <ul>
+                            <li>Row Minima:
+                                <ul>
+                                    <li>Row A1: Min(1, 1) = 1</li>
+                                    <li>Row A2: Min(4, -3) = -3</li>
+                                </ul>
+                            </li>
+                            <li>Max(Row Minima) = Max(1, -3) = 1</li>
+                            <li>Column Maxima:
+                                <ul>
+                                    <li>Column B1: Max(1, 4) = 4</li>
+                                    <li>Column B2: Max(1, -3) = 1</li>
+                                </ul>
+                            </li>
+                            <li>Min(Column Maxima) = Min(4, 1) = 1</li>
+                        </ul>
+                        <p>Step 2: Compare Max(Row Minima) and Min(Column Maxima):</p>
+                        <p>Since Max(Row Minima) = 1 and Min(Column Maxima) = 1, the game is strictly determinable.</p>
+                        <p>Step 3: Value of the game and optimal strategy:</p>
+                        <ul>
+                            <li>Value of the game = 1</li>
+                            <li>Optimal strategy: (A1, B1) — Player A chooses A1, and Player B chooses B1.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Summary:</strong></p>
+                <ul>
+                    <li>Game (i) is strictly determinable with a value of -5 and an optimal strategy of (A1, B1).</li>
+                    <li>Game (ii) is strictly determinable with a value of 1 and an optimal strategy of (A1, B1).</li>
+                </ul>
+            </div>
         </div>
 
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=5_KdL4M-R7A&list=PL23dd-8zssJAdGmsSofO4UaRyEXZDtm7a&index=76" target="_blank">Game Theory in Operation
+            <li><a href="https://www.youtube.com/watch?v=5_KdL4M-R7A&list=PL23dd-8zssJAdGmsSofO4UaRyEXZDtm7a&index=76"
+                    target="_blank">Game Theory in Operation
                     Research (PlayList) &neArr;</a></li>
         </ul>
     </div>
