@@ -469,139 +469,478 @@
                 <p>The ElGamal Cryptosystem consists of three main stages: Key Generation, Encryption, and Decryption.
                     Each of these stages uses modular arithmetic, and it relies on the difficulty of solving the
                     discrete logarithm problem. Let’s go through them in detail:</p>
-                    <div class="in">
-                        <h3>1. Key Generation</h3>
-                        <p>The first step in the ElGamal Cryptosystem is generating the public and private keys. Here’s how the key generation process works:</p>
-                        <ul>
-                            <li><strong>Step 1: Choose a Large Prime \( p \)</strong>
-                                <ul>
-                                    <li>Select a large prime number \( p \), which will serve as the modulus for the system. The size of \( p \) determines the strength of the cryptosystem.</li>
-                                    <li>Example: \( p = 353 \).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 2: Choose a Primitive Root \( g \) Modulo \( p \)</strong>
-                                <ul>
-                                    <li>Select a number \( g \) (called a generator or primitive root) that is a generator of the multiplicative group of integers modulo \( p \). This means that \( g \) has the property that its powers generate all the integers from 1 to \( p-1 \) when taken modulo \( p \).</li>
-                                    <li>Example: If \( p = 353 \), then \( g = 3 \) might be a valid primitive root modulo \( p \).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 3: Choose a Secret Private Key \( x \)</strong>
-                                <ul>
-                                    <li>Select a private key \( x \), which is a secret random number. This key will be kept private by the user.</li>
-                                    <li>Example: \( x = 123 \).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 4: Compute the Public Key</strong>
-                                <ul>
-                                    <li>Calculate the public key \( h \) using the formula:
-                                        \[
-                                        h = g^x \mod p
-                                        \]
-                                    </li>
-                                    <li>The public key consists of the triplet \( (p, g, h) \), where \( p \) is the prime modulus, \( g \) is the primitive root, and \( h \) is the result of raising \( g \) to the power of the private key \( x \).</li>
-                                    <li>Example:
-                                        \[
-                                        h = 3^{123} \mod 353 = 179
-                                        \]
-                                        Public Key: \( (p, g, h) = (353, 3, 179) \).<br>
-                                        Private Key: \( x = 123 \).
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="in">
-                        <h3>2. Encryption</h3>
-                        <p>Once the public key is available, encryption can be done by anyone who wants to send a message securely. Here’s how encryption works:</p>
-                        <ul>
-                            <li><strong>Step 1: Represent the Message</strong>
-                                <ul>
-                                    <li>Convert the message \( m \) into a number \( m \) such that \( m \) is smaller than \( p \). This can be done by converting text to ASCII codes or using other encoding schemes.</li>
-                                    <li>Example: Let’s say the message \( m = 42 \).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 2: Choose a Random Number \( y \)</strong>
-                                <ul>
-                                    <li>Select a random number \( y \) that is less than \( p-1 \). This random number adds probabilistic encryption, meaning it will make each encryption of the same message result in a different ciphertext.</li>
-                                    <li>Example: \( y = 67 \).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 3: Compute the Ciphertext</strong>
-                                <ul>
-                                    <li>The ciphertext consists of two components, \( C_1 \) and \( C_2 \), which are computed as:
-                                        \[
-                                        C_1 = g^y \mod p
-                                        \]
-                                        \[
-                                        C_2 = m \cdot h^y \mod p
-                                        \]
-                                    </li>
-                                    <li>\( C_1 \) is the result of raising \( g \) to the power of the random number \( y \) modulo \( p \), and \( C_2 \) is the product of the message \( m \) and \( h^y \mod p \), where \( h \) is part of the public key.</li>
-                                    <li>Example:
-                                        \[
-                                        C_1 = 3^{67} \mod 353 = 268
-                                        \]
-                                        \[
-                                        C_2 = 42 \cdot 179^{67} \mod 353 = 144
-                                        \]
-                                        The ciphertext is then \( (C_1, C_2) = (268, 144) \), which is sent to the recipient.
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="in">
-                        <h3>3. Decryption</h3>
-                        <p>Decryption in the ElGamal Cryptosystem is done by the receiver using their private key. Here’s how the decryption process works:</p>
-                        <ul>
-                            <li><strong>Step 1: Compute the Shared Secret</strong>
-                                <ul>
-                                    <li>The receiver uses their private key \( x \) and the received \( C_1 \) to compute a shared secret \( s \) as:
-                                        \[
-                                        s = C_1^x \mod p
-                                        \]
-                                    </li>
-                                    <li>Example:
-                                        \[
-                                        s = 268^{123} \mod 353 = 179
-                                        \]
-                                        Notice that \( s \) is the same as \( h^y \mod p \) from the encryption step.
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 2: Compute the Inverse of \( s \)</strong>
-                                <ul>
-                                    <li>The receiver computes the modular inverse of \( s \) modulo \( p \), denoted \( s^{-1} \), which is used to recover the original message.</li>
-                                    <li>Example:
-                                        \[
-                                        s^{-1} = 179^{-1} \mod 353 = 319
-                                        \]
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><strong>Step 3: Recover the Original Message</strong>
-                                <ul>
-                                    <li>The original message \( m \) is recovered by multiplying \( C_2 \) with the inverse of \( s \):
-                                        \[
-                                        m = C_2 \cdot s^{-1} \mod p
-                                        \]
-                                    </li>
-                                    <li>Example:
-                                        \[
-                                        m = 144 \cdot 319 \mod 353 = 42
-                                        \]
-                                        The original message \( m = 42 \) is successfully recovered.
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="in">
+                    <h3>1. Key Generation</h3>
+                    <p>The first step in the ElGamal Cryptosystem is generating the public and private keys. Here’s how
+                        the key generation process works:</p>
+                    <ul>
+                        <li><strong>Step 1: Choose a Large Prime \( p \)</strong>
+                            <ul>
+                                <li>Select a large prime number \( p \), which will serve as the modulus for the system.
+                                    The size of \( p \) determines the strength of the cryptosystem.</li>
+                                <li>Example: \( p = 353 \).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 2: Choose a Primitive Root \( g \) Modulo \( p \)</strong>
+                            <ul>
+                                <li>Select a number \( g \) (called a generator or primitive root) that is a generator
+                                    of the multiplicative group of integers modulo \( p \). This means that \( g \) has
+                                    the property that its powers generate all the integers from 1 to \( p-1 \) when
+                                    taken modulo \( p \).</li>
+                                <li>Example: If \( p = 353 \), then \( g = 3 \) might be a valid primitive root modulo
+                                    \( p \).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 3: Choose a Secret Private Key \( x \)</strong>
+                            <ul>
+                                <li>Select a private key \( x \), which is a secret random number. This key will be kept
+                                    private by the user.</li>
+                                <li>Example: \( x = 123 \).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 4: Compute the Public Key</strong>
+                            <ul>
+                                <li>Calculate the public key \( h \) using the formula:
+                                    \[
+                                    h = g^x \mod p
+                                    \]
+                                </li>
+                                <li>The public key consists of the triplet \( (p, g, h) \), where \( p \) is the prime
+                                    modulus, \( g \) is the primitive root, and \( h \) is the result of raising \( g \)
+                                    to the power of the private key \( x \).</li>
+                                <li>Example:
+                                    \[
+                                    h = 3^{123} \mod 353 = 179
+                                    \]
+                                    Public Key: \( (p, g, h) = (353, 3, 179) \).<br>
+                                    Private Key: \( x = 123 \).
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>2. Encryption</h3>
+                    <p>Once the public key is available, encryption can be done by anyone who wants to send a message
+                        securely. Here’s how encryption works:</p>
+                    <ul>
+                        <li><strong>Step 1: Represent the Message</strong>
+                            <ul>
+                                <li>Convert the message \( m \) into a number \( m \) such that \( m \) is smaller than
+                                    \( p \). This can be done by converting text to ASCII codes or using other encoding
+                                    schemes.</li>
+                                <li>Example: Let’s say the message \( m = 42 \).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 2: Choose a Random Number \( y \)</strong>
+                            <ul>
+                                <li>Select a random number \( y \) that is less than \( p-1 \). This random number adds
+                                    probabilistic encryption, meaning it will make each encryption of the same message
+                                    result in a different ciphertext.</li>
+                                <li>Example: \( y = 67 \).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 3: Compute the Ciphertext</strong>
+                            <ul>
+                                <li>The ciphertext consists of two components, \( C_1 \) and \( C_2 \), which are
+                                    computed as:
+                                    \[
+                                    C_1 = g^y \mod p
+                                    \]
+                                    \[
+                                    C_2 = m \cdot h^y \mod p
+                                    \]
+                                </li>
+                                <li>\( C_1 \) is the result of raising \( g \) to the power of the random number \( y \)
+                                    modulo \( p \), and \( C_2 \) is the product of the message \( m \) and \( h^y \mod
+                                    p \), where \( h \) is part of the public key.</li>
+                                <li>Example:
+                                    \[
+                                    C_1 = 3^{67} \mod 353 = 268
+                                    \]
+                                    \[
+                                    C_2 = 42 \cdot 179^{67} \mod 353 = 144
+                                    \]
+                                    The ciphertext is then \( (C_1, C_2) = (268, 144) \), which is sent to the
+                                    recipient.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="in">
+                    <h3>3. Decryption</h3>
+                    <p>Decryption in the ElGamal Cryptosystem is done by the receiver using their private key. Here’s
+                        how the decryption process works:</p>
+                    <ul>
+                        <li><strong>Step 1: Compute the Shared Secret</strong>
+                            <ul>
+                                <li>The receiver uses their private key \( x \) and the received \( C_1 \) to compute a
+                                    shared secret \( s \) as:
+                                    \[
+                                    s = C_1^x \mod p
+                                    \]
+                                </li>
+                                <li>Example:
+                                    \[
+                                    s = 268^{123} \mod 353 = 179
+                                    \]
+                                    Notice that \( s \) is the same as \( h^y \mod p \) from the encryption step.
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 2: Compute the Inverse of \( s \)</strong>
+                            <ul>
+                                <li>The receiver computes the modular inverse of \( s \) modulo \( p \), denoted \(
+                                    s^{-1} \), which is used to recover the original message.</li>
+                                <li>Example:
+                                    \[
+                                    s^{-1} = 179^{-1} \mod 353 = 319
+                                    \]
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Step 3: Recover the Original Message</strong>
+                            <ul>
+                                <li>The original message \( m \) is recovered by multiplying \( C_2 \) with the inverse
+                                    of \( s \):
+                                    \[
+                                    m = C_2 \cdot s^{-1} \mod p
+                                    \]
+                                </li>
+                                <li>Example:
+                                    \[
+                                    m = 144 \cdot 319 \mod 353 = 42
+                                    \]
+                                    The original message \( m = 42 \) is successfully recovered.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="in">
                 <h3>Why is the ElGamal Cryptosystem Secure?</h3>
                 <ul>
-                    <li>The security of ElGamal is based on the discrete logarithm problem. Given a large prime \( p \), a generator \( g \), and a number \( h = g^x \mod p \), it is computationally difficult to find the exponent \( x \) that satisfies this equation. This difficulty makes ElGamal resistant to attacks.</li>
-                    <li>The probabilistic nature of ElGamal encryption means that even if an attacker intercepts multiple ciphertexts, they cannot easily deduce any information about the messages.</li>
+                    <li>The security of ElGamal is based on the discrete logarithm problem. Given a large prime \( p \),
+                        a generator \( g \), and a number \( h = g^x \mod p \), it is computationally difficult to find
+                        the exponent \( x \) that satisfies this equation. This difficulty makes ElGamal resistant to
+                        attacks.</li>
+                    <li>The probabilistic nature of ElGamal encryption means that even if an attacker intercepts
+                        multiple ciphertexts, they cannot easily deduce any information about the messages.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Key Management</h2>
+            <p>
+                In the world of cryptography, key management is one of the most crucial aspects of securing information.
+                It refers to the set of processes and technologies used to generate, distribute, store, use, rotate,
+                and eventually dispose of cryptographic keys. Without effective key management, even the most advanced
+                encryption algorithms can be rendered useless.
+            </p>
+            <p>
+                Think of cryptographic keys as the "passwords" that unlock encrypted data. The management of these keys
+                is as important as the strength of the encryption itself. A weak, lost, or compromised key can
+                jeopardize
+                the security of an entire system. Therefore, key management ensures that keys remain safe, accessible
+                only
+                to authorized users, and used correctly within cryptographic protocols.
+            </p>
+            <div class="in">
+                <h3>Why is Key Management Important?</h3>
+                <ul>
+                    <li>Confidentiality is maintained: No unauthorized person should access the keys.</li>
+                    <li>Integrity is preserved: Keys must not be altered or corrupted.</li>
+                    <li>Availability is ensured: Authorized users must have access to the keys when needed.</li>
+                </ul>
+                <p>Inadequate key management can lead to:</p>
+                <ul>
+                    <li>Data breaches if keys are stolen.</li>
+                    <li>Loss of data if keys are lost or corrupted.</li>
+                    <li>Non-compliance with industry regulations and standards like GDPR, PCI-DSS, or FIPS.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>The Key Lifecycle</h3>
+                <ul>
+                    <li>
+                        <strong>Key Generation:</strong>
+                        <ul>
+                            <li>Keys are generated using secure algorithms (e.g., RSA, AES, ECC) to ensure they are
+                                random and unique.</li>
+                            <li>This process should occur in a trusted and controlled environment, often using
+                                specialized hardware like HSMs (Hardware Security Modules).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Distribution:</strong>
+                        <ul>
+                            <li>Once a key is created, it needs to be securely distributed to the intended users or
+                                systems.</li>
+                            <li>For symmetric keys (e.g., AES), secure channels like Diffie-Hellman key exchange or
+                                physical transfer may be used.</li>
+                            <li>For asymmetric keys (e.g., RSA), the public key can be shared openly, but the private
+                                key must be kept secure.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Storage:</strong>
+                        <ul>
+                            <li>Keys are stored in secure locations to prevent unauthorized access. This might include:
+                            </li>
+                            <ul>
+                                <li>Encrypted databases.</li>
+                                <li>Hardware Security Modules (HSMs): Devices specifically designed to generate, store,
+                                    and manage cryptographic keys securely.</li>
+                                <li>Secure Enclaves or Trusted Execution Environments (TEEs) in modern processors.</li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Usage:</strong>
+                        <ul>
+                            <li>Keys are used for encryption, decryption, signing, and verifying.</li>
+                            <li>They must be protected during use to prevent exposure in memory or to malicious
+                                programs.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Rotation:</strong>
+                        <ul>
+                            <li>Regularly replacing old keys with new ones is essential for minimizing the impact of a
+                                key being compromised.</li>
+                            <li>Rotation ensures that the same key is not used indefinitely, reducing the risk of
+                                attacks like key exhaustion.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Revocation and Expiry:</strong>
+                        <ul>
+                            <li>Keys should have a predefined lifespan. When a key is no longer needed or is
+                                compromised, it must be revoked.</li>
+                            <li>Revocation ensures that the key cannot be used for encryption or decryption anymore.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Key Destruction:</strong>
+                        <ul>
+                            <li>When a key has reached the end of its lifecycle, it must be securely destroyed to
+                                prevent any chance of recovery.</li>
+                            <li>Secure methods like zeroization (overwriting memory) or physical destruction are often
+                                employed.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Key Management in Symmetric and Asymmetric Systems</h3>
+                <ul>
+                    <li>
+                        <strong>Symmetric Key Management:</strong>
+                        <ul>
+                            <li>In symmetric encryption (e.g., AES), the same key is used for encryption and decryption.
+                            </li>
+                            <li>Key management challenges:</li>
+                            <ul>
+                                <li>Key Distribution: How to securely share the key between parties.</li>
+                                <li>Key Size: Larger keys provide more security but require more storage and
+                                    computational power.</li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Asymmetric Key Management:</strong>
+                        <ul>
+                            <li>In asymmetric encryption (e.g., RSA, ECC), a public-private key pair is used.</li>
+                            <li>The public key is openly shared, while the private key must be kept secret.</li>
+                            <li>Key management challenges:</li>
+                            <ul>
+                                <li>Private Key Security: Protecting the private key from unauthorized access is
+                                    critical.</li>
+                                <li>Key Revocation: Revoking a compromised public key requires effective communication
+                                    to all users.</li>
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Key Management Techniques</h3>
+                <ul>
+                    <li>Manual Key Management:</li>
+                    <ul>
+                        <li>Suitable for small-scale applications or short-term keys.</li>
+                        <li>Keys are manually created, shared, and managed by individuals.</li>
+                        <li>Challenges: Prone to human error, scalability issues, and higher risk of key compromise.
+                        </li>
+                    </ul>
+                    <li>Automated Key Management:</li>
+                    <ul>
+                        <li>Uses software or hardware systems to manage keys throughout their lifecycle.</li>
+                        <li>Benefits:</li>
+                        <ul>
+                            <li>Reduces human error.</li>
+                            <li>Scales easily for large systems.</li>
+                            <li>Provides better logging and auditing for compliance.</li>
+                        </ul>
+                    </ul>
+                    <li>Centralized Key Management:</li>
+                    <ul>
+                        <li>All keys are managed from a single central location or system, such as a Key Management
+                            System (KMS).</li>
+                        <li>Examples: AWS KMS, Azure Key Vault, Google Cloud KMS.</li>
+                        <li>Advantages:</li>
+                        <ul>
+                            <li>Simplifies administration.</li>
+                            <li>Ensures consistent policies across the organization.</li>
+                        </ul>
+                    </ul>
+                    <li>Decentralized Key Management:</li>
+                    <ul>
+                        <li>Keys are managed locally at individual endpoints.</li>
+                        <li>Suitable for systems with highly distributed architecture.</li>
+                        <li>Challenge: Ensuring consistent policies across all nodes.</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Challenges in Key Management</h3>
+                <ul>
+                    <li>Key Theft: Attackers targeting keys stored on vulnerable systems.</li>
+                    <li>Key Distribution: Securely sharing symmetric keys across untrusted networks.</li>
+                    <li>Scalability: Managing keys in large-scale systems with thousands of users or devices.</li>
+                    <li>Compliance: Meeting industry standards for encryption and key management (e.g., FIPS, GDPR,
+                        PCI-DSS).</li>
+                    <li>Backup and Recovery: Ensuring keys are backed up securely and can be recovered if lost or
+                        corrupted.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Best Practices for Key Management</h3>
+                <ul>
+                    <li>Use Secure Key Storage: Always use hardware security modules (HSMs), encrypted databases, or
+                        TEEs for storing keys.</li>
+                    <li>Enforce Strong Key Policies: Define policies for key length, rotation frequency, and expiry to
+                        align with security standards.</li>
+                    <li>Implement Multi-Factor Authentication (MFA): Add additional layers of security for accessing
+                        private keys.</li>
+                    <li>Audit Key Usage: Regularly monitor and log key usage to detect any unauthorized access or
+                        anomalies.</li>
+                    <li>Encrypt Keys: Use one key to encrypt another (key wrapping) to add another layer of protection.
+                    </li>
+                    <li>Restrict Key Access: Ensure only authorized users or systems have access to keys. Use principles
+                        like least privilege and role-based access control (RBAC).</li>
+                    <li>Plan for Key Compromise: Have a clear strategy for revoking and replacing keys in case of
+                        compromise.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Applications of Key Management</h3>
+                <ul>
+                    <li>Cloud Security: Managing encryption keys for data stored in cloud services like AWS, Azure, and
+                        Google Cloud.</li>
+                    <li>Enterprise Security: Protecting sensitive data, email communication, and network traffic in
+                        businesses.</li>
+                    <li>IoT Security: Managing keys for millions of connected devices in IoT ecosystems.</li>
+                    <li>Digital Payments: Securing transaction data in payment systems like credit cards and e-wallets.
+                    </li>
+                    <li>Secure Messaging: Protecting messages in end-to-end encrypted apps like WhatsApp or Signal.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>What is Public Key Distribution?</h2>
+            <p>Public Key Distribution is a process used to securely share public keys between people or systems so they
+                can communicate securely. You might be wondering, "What’s a public key, and why do I need to distribute
+                it?" Let’s back up a bit to understand this better.</p>
+            <p>Remember from our earlier conversation about asymmetric cryptography? In that system, there are two keys:
+                a public key and a private key. The public key is used to encrypt messages, and the private key is used
+                to decrypt them. The trick with public key cryptography is that you can share your public key with
+                anyone, but you must keep your private key secret. This allows people to send you encrypted messages
+                without needing to worry about someone intercepting the key—because the private key is only with you.
+            </p>
+            <p>But here's the catch: To encrypt a message to you, someone needs your public key. And this is where
+                public key distribution comes in. It’s all about making sure that the public key gets to the right
+                person, and it happens in a way that is secure and reliable. Without it, you could give your public key
+                to the wrong person (a hacker), and they could impersonate you or intercept your messages.</p>
+
+            <div class="in">
+                <h3>Why is Public Key Distribution Important?</h3>
+                <p>When you want someone to send you a confidential message, you need them to have your public key so
+                    they can encrypt their message for you. But you can't just post your public key on a billboard or
+                    send it through a regular email—it needs to be authentic. If someone else gets a hold of your public
+                    key and pretends to be you, they could trick others into sending sensitive information to them.</p>
+                <p>So, the main goal of public key distribution is to ensure that when people get your public key,
+                    they’re sure it actually belongs to you and hasn’t been tampered with by a third party. It needs to
+                    be trusted and verified.</p>
+            </div>
+
+            <div class="in">
+                <h3>How Does Public Key Distribution Work?</h3>
+                <p>Now that we know why it’s important, let’s look at how public key distribution happens. There are a
+                    few different methods to distribute public keys securely:</p>
+                <ul>
+                    <li><strong>Manual Distribution:</strong> The simplest way is for you to physically hand someone
+                        your public key. For example, if you’re meeting someone in person, you could give them a USB
+                        drive with your public key on it. This way, you control the transfer of the key, and you know
+                        it’s safe. However, this method isn’t very practical for large-scale systems or for people who
+                        are far away from each other. Plus, it doesn’t scale well.</li>
+                    <li><strong>Public Key Infrastructure (PKI):</strong> PKI is a more sophisticated system for
+                        distributing public keys. It involves Certificate Authorities (CAs), which are trusted
+                        organizations that issue digital certificates. These certificates verify that a public key
+                        belongs to a specific person or organization. When you want to send an encrypted message to
+                        someone, you can trust the CA’s certificate to make sure the public key really belongs to the
+                        person you’re trying to communicate with. Think of it like getting a government-issued ID card.
+                        If you show your ID to someone, they know it’s authentic because the government verified it.
+                        Similarly, a CA verifies the public key’s authenticity.</li>
+                    <li><strong>Key Servers:</strong> Another way to distribute public keys is through key servers,
+                        which are online directories where people can upload and download public keys. When you want to
+                        find someone’s public key, you can search for it on the key server. The key servers make it easy
+                        to distribute and manage public keys, but they rely on being trustworthy sources, just like the
+                        CAs. One popular system that uses key servers is PGP (Pretty Good Privacy), which is used for
+                        encrypting emails and files.</li>
+                    <li><strong>Web of Trust:</strong> The Web of Trust is a more decentralized way of distributing
+                        public keys. Instead of relying on a central authority like a CA, individuals personally verify
+                        each other’s public keys. When you meet someone you trust, you can exchange and verify public
+                        keys directly. This can create a network of trust between individuals, forming a "web." PGP also
+                        uses this method, where users can sign each other's public keys to vouch for their authenticity.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>How Do You Know a Public Key is Legitimate?</h3>
+                <p>One of the challenges with public key distribution is verifying that the public key you receive is
+                    authentic. If someone intercepts a public key during distribution, they could give you their own key
+                    instead. This is where digital certificates and signature verification come into play.</p>
+                <ul>
+                    <li><strong>Digital Certificates:</strong> When you download a public key from a trusted source
+                        (like a CA or key server), the key is often bundled with a digital certificate. This certificate
+                        proves that the public key belongs to the person or organization that it claims to. The
+                        certificate is signed by a trusted third party, ensuring its legitimacy.</li>
+                    <li><strong>Digital Signatures:</strong> If you’ve received a public key from someone, they can also
+                        sign the key with their private key. This helps you confirm that the key really belongs to them
+                        and hasn’t been tampered with.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>What Are the Risks of Public Key Distribution?</h3>
+                <p>Even though public key distribution is a great way to enable secure communication, it’s not without
+                    risks. Some potential risks include:</p>
+                <ul>
+                    <li><strong>Man-in-the-Middle Attacks:</strong> If an attacker intercepts your public key while it’s
+                        being sent and replaces it with their own, they could decrypt the message before passing it on
+                        to the real recipient. This is why it’s so important to use trusted methods like digital
+                        certificates or key servers for distribution.</li>
+                    <li><strong>Fake Certificates:</strong> If a CA is compromised or unreliable, they might issue fake
+                        certificates that authenticate fraudulent public keys. This can be a big security issue, which
+                        is why many systems constantly monitor and validate the reliability of CAs.</li>
+                    <li><strong>Key Revocation:</strong> If your private key is ever compromised, it’s crucial to revoke
+                        your public key. Public key distribution systems should have a way to revoke keys when necessary
+                        to avoid further issues.</li>
                 </ul>
             </div>
         </div>
