@@ -210,38 +210,45 @@
     <div class="wh">
         <h2>IDEA Algorithm (International Data Encryption Algorithm)</h2>
         <ul>
-            <li>It is a block cipher algorithm.</li>
-            <li>It follows symmetric key cryptography.</li>
-            <li>Uses a Feistel structure for its operations.</li>
-            <li>The input plaintext size is 64 bits, divided into four 16-bit blocks.</li>
-            <li>The key size is 128 bits, which is expanded into 52 subkeys.</li>
-            <li>Number of rounds = 17 (16 primary rounds + 1 final transformation round).</li>
-            <li>Odd-numbered rounds use <strong>4 keys</strong>, while even-numbered rounds use only <strong>2
-                    keys</strong>.</li>
-            <li>The goal of each round is to scramble and mix the data so much that it becomes completely
-                unrecognizable by the end.</li>
+            <li><strong>IDEA</strong> ek block cipher algorithm hai, jo data ko fixed-size blocks mein encrypt karta
+                hai.</li>
+            <li>Yeh <strong>symmetric key cryptography</strong> follow karta hai, matlab encryption aur decryption ke
+                liye same key use hoti hai.</li>
+            <li>IDEA apne operations ke liye <strong>Feistel structure</strong> ka use karta hai, jo ek popular method
+                hai block ciphers mein.</li>
+            <li>Input plaintext ka size 64 bits hota hai, jise 4 equal 16-bit blocks mein divide kiya jata hai.</li>
+            <li>Key size 128 bits hoti hai, jo 52 subkeys mein expand hoti hai.</li>
+            <li>Number of rounds 17 hote hain: 16 primary rounds aur 1 final transformation round.</li>
+            <li>Odd-numbered rounds mein <strong>4 keys</strong> use hoti hain, jabki even-numbered rounds mein sirf
+                <strong>2 keys</strong> use hoti hain.</li>
+            <li>Har round ka goal yeh hota hai ki data ko itna scramble aur mix kiya jaye ki akhir tak woh completely
+                unrecognizable ho jaye.</li>
         </ul>
+
         <div class="in">
             <h3>Working</h3>
             <ul>
-                <li>The plaintext of 64 bits is divided into 4 equal parts, each of size 16 bits.</li>
-                <li>These 4 parts are denoted as X1, X2, X3, and X4.</li>
-                <li>The algorithm involves 17 rounds, out of which 16 are primary rounds and the 17th is a final
-                    transformation round.</li>
-                <li>Each round processes the input blocks using specific subkeys from the 52 subkeys generated
-                    during the key expansion phase.</li>
-                <li><strong>For each round:</strong>
+                <li>64-bit plaintext ko pehle 4 equal parts mein divide kiya jata hai, har part ka size 16 bits hota
+                    hai.</li>
+                <li>In parts ko hum X1, X2, X3, aur X4 ke naam se denote karte hain.</li>
+                <li>IDEA algorithm mein 17 rounds hote hain, jisme 16 primary rounds aur 17th round final transformation
+                    round hota hai.</li>
+                <li>Har round mein input blocks ko specific subkeys ke saath process kiya jata hai, jo 52 subkeys
+                    generate hoti hain key expansion phase mein.</li>
+                <li><strong>Har round ke liye:</strong>
                     <ul>
-                        <li>Subkeys are applied to the blocks using modular addition, modular multiplication, and
-                            XOR operations.</li>
-                        <li>Data blocks are mixed to ensure confusion and diffusion.</li>
-                        <li>Odd and even rounds have distinct operations, explained further below.</li>
+                        <li>Subkeys ko blocks pe apply kiya jata hai modular addition, modular multiplication, aur XOR
+                            operations ke through.</li>
+                        <li>Data blocks ko mix kiya jata hai taaki confusion aur diffusion ensure ho sake (yeh concepts
+                            encryption ke security ko badhate hain).</li>
+                        <li>Odd aur even rounds ke operations alag hote hain, jo ki niche aur explain kiye gaye hain.
+                        </li>
                     </ul>
                 </li>
-                <li>The final transformation round applies the last 4 subkeys (K49, K50, K51, K52) to the blocks.
-                </li>
-                <li>After all rounds, the 4 resulting 16-bit blocks are concatenated to form the 64-bit ciphertext.
-                </li>
+                <li>Final transformation round mein last 4 subkeys (K49, K50, K51, K52) ko blocks pe apply kiya jata
+                    hai.</li>
+                <li>Jab saare rounds complete ho jate hain, toh 4 resulting 16-bit blocks ko concatenate karte hain aur
+                    64-bit ciphertext banata hai.</li>
             </ul>
             <img src="../../images/cry24.jpeg" alt="">
         </div>
@@ -356,124 +363,122 @@
     </div>
     <div class="wh">
         <h2>Symmetric Key Distribution</h2>
-        <ul>
-            <li>Symmetric key cryptography requires both sender and receiver to use the same secret key for
-                encryption and decryption.</li>
-            <li>The major challenge lies in securely sharing this secret key between the communicating parties.</li>
-            <li>Several methods exist for key distribution, each with its own advantages and drawbacks.</li>
-        </ul>
+<ul>
+    <li><strong>Symmetric key cryptography</strong> mein sender aur receiver ko same secret key use karni padti hai encryption aur decryption ke liye.</li>
+    <li>Sabse bada challenge yeh hai ki yeh secret key dono parties ke beech securely kaise share ki jaye.</li>
+    <li>Kayi methods hain key distribution ke liye, har method ke apne advantages aur drawbacks hote hain.</li>
+</ul>
 
-        <div class="in">
-            <h3>Methods of Symmetric Key Distribution</h3>
-            <h4>1. Pre-Shared Key</h4>
+< class="in">
+    <h3>Methods of Symmetric Key Distribution</h3>
+    
+    <h4>1. Pre-Shared Key</h4>
+    <ul>
+        <li>Is method mein, secret key ko manually sender aur receiver ke beech pehle se share kiya jata hai, communication shuru hone se pehle.</li>
+        <li>Yeh key sharing secure channels ke through ki ja sakti hai, jaise:
             <ul>
-                <li>The secret key is manually shared between the sender and receiver before communication begins.
-                </li>
-                <li>This can be done using secure channels such as:
-                    <ul>
-                        <li>Face-to-face meetings.</li>
-                        <li>Delivery by trusted couriers.</li>
-                    </ul>
-                </li>
-                <li><strong>Advantages:</strong>
-                    <ul>
-                        <li>Simple and direct for small-scale systems.</li>
-                        <li>Does not require additional infrastructure.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>Not practical for large-scale or geographically distributed systems.</li>
-                        <li>Risk of key interception during transmission.</li>
-                    </ul>
-                </li>
+                <li>Face-to-face meetings.</li>
+                <li>Trusted couriers ke through delivery.</li>
             </ul>
+        </li>
+        <li><strong>Advantages:</strong>
+            <ul>
+                <li>Small-scale systems ke liye simple aur direct hai.</li>
+                <li>Koi additional infrastructure ki zaroorat nahi hoti.</li>
+            </ul>
+        </li>
+        <li><strong>Drawbacks:</strong>
+            <ul>
+                <li>Large-scale ya geographically distributed systems ke liye yeh practical nahi hai.</li>
+                <li>Key transmission ke dauran interception ka risk hota hai, matlab key ko secure nahi rakha ja sakta hai.</li>
+            </ul>
+        </li>
+    </ul>
 
-            <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
+    <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
+    <ul>
+        <li>Is method mein, ek trusted third party hoti hai, jise <strong>Key Distribution Center (KDC)</strong> kehte hain, jo securely keys ka exchange facilitate karta hai.</li>
+        <li><strong>Steps:</strong>
+            <ol>
+                <li>Sender aur receiver apne-apne secure connections establish karte hain KDC ke saath.</li>
+                <li>KDC ek unique session key generate karta hai jo sender aur receiver ke beech communication ke liye use hota hai.</li>
+                <li>Yeh session key securely KDC ke through dono parties ko transmit ki jati hai.</li>
+            </ol>
+        </li>
+        <li><strong>Advantages:</strong>
             <ul>
-                <li>A trusted third party, called a Key Distribution Center (KDC), facilitates the secure exchange
-                    of keys.</li>
-                <li>Steps:
-                    <ol>
-                        <li>The sender and receiver each establish a secure connection with the KDC.</li>
-                        <li>The KDC generates a unique session key for communication between the two parties.</li>
-                        <li>This session key is securely transmitted to both parties by the KDC.</li>
-                    </ol>
-                </li>
-                <li><strong>Advantages:</strong>
-                    <ul>
-                        <li>Eliminates the need for direct key sharing between sender and receiver.</li>
-                        <li>Scalable for larger systems.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>The KDC becomes a single point of failure.</li>
-                        <li>Requires additional infrastructure and trust in the KDC.</li>
-                    </ul>
-                </li>
+                <li>Sender aur receiver ke beech direct key sharing ki zaroorat nahi hoti.</li>
+                <li>Larger systems ke liye scalable hai, matlab yeh badhe systems mein bhi efficiently kaam karta hai.</li>
             </ul>
+        </li>
+        <li><strong>Drawbacks:</strong>
+            <ul>
+                <li>KDC ek single point of failure ban jata hai, matlab agar KDC compromised ho jaye, toh poora system risk pe aa jata hai.</li>
+                <li>Isme additional infrastructure ki zaroorat hoti hai aur KDC pe trust bhi zaroori hai, jo kabhi kabhi risky ho sakta hai.</li>
+            </ul>
+        </li>
+    </ul>
 
-            <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
-            <ul>
-                <li>Public key cryptography is used to securely exchange symmetric keys.</li>
-                <li>Steps:
-                    <ol>
-                        <li>The sender encrypts the symmetric key with the receiver's public key.</li>
-                        <li>The encrypted key is transmitted to the receiver.</li>
-                        <li>The receiver decrypts the key using their private key.</li>
-                    </ol>
-                </li>
-                <li><strong>Advantages:</strong>
-                    <ul>
-                        <li>Secure even over insecure channels.</li>
-                        <li>Scalable for large systems.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>Requires a functioning PKI infrastructure.</li>
-                        <li>Introduces additional computational overhead.</li>
-                    </ul>
-                </li>
-            </ul>
 
-            <h4>4. Diffie-Hellman Key Exchange</h4>
+    <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
+    <ul>
+        <li><strong>Public key cryptography</strong> ka use symmetric keys ko securely exchange karne ke liye hota hai.</li>
+        <li><strong>Steps:</strong>
+            <ol>
+                <li>Sender receiver ke public key se symmetric key ko encrypt karta hai.</li>
+                <li>Yeh encrypted key receiver ko transmit ki jati hai.</li>
+                <li>Receiver apne private key se encrypted key ko decrypt karta hai.</li>
+            </ol>
+        </li>
+        <li><strong>Advantages:</strong>
             <ul>
-                <li>A mathematical algorithm allows two parties to generate a shared symmetric key over an insecure
-                    channel.</li>
-                <li>Steps:
-                    <ol>
-                        <li>Both parties agree on a public base and a public modulus.</li>
-                        <li>Each party selects a private key and generates a public value using the agreed
-                            parameters.</li>
-                        <li>They exchange public values and compute the shared secret key using their private key.
-                        </li>
-                    </ol>
-                </li>
-                <li><strong>Advantages:</strong>
-                    <ul>
-                        <li>Secure key generation over insecure channels.</li>
-                        <li>No prior shared secret is required.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>Vulnerable to man-in-the-middle attacks if authentication is not used.</li>
-                        <li>Limited to key agreement, not encryption itself.</li>
-                    </ul>
-                </li>
+                <li>Yeh method insecure channels par bhi secure hota hai, matlab key ko transfer karte waqt uski security maintained rehti hai.</li>
+                <li>Yeh method large systems ke liye scalable hai, matlab bade networks ya systems mein efficiently kaam kar sakta hai.</li>
             </ul>
+        </li>
+        <li><strong>Drawbacks:</strong>
+            <ul>
+                <li>Yeh method ek functioning <strong>PKI (Public Key Infrastructure)</strong> ki zaroorat hoti hai, jo ki setup aur maintain karna thoda complex ho sakta hai.</li>
+                <li>Yeh additional computational overhead bhi introduce karta hai, matlab systems ko zyada processing power ki zaroorat hoti hai.</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h4>4. Diffie-Hellman Key Exchange</h4>
+    <ul>
+        <li><strong>Diffie-Hellman</strong> ek mathematical algorithm hai jo do parties ko insecure channel ke through ek shared symmetric key generate karne mein madad karta hai.</li>
+        <li><strong>Steps:</strong>
+            <ol>
+                <li>Dono parties ek public base aur public modulus ke upar agreement karte hain.</li>
+                <li>Har party apni private key select karti hai aur agreed parameters ka use karke ek public value generate karti hai.</li>
+                <li>Public values exchange hone ke baad, dono parties apne private key ka use karke shared secret key compute karte hain.</li>
+            </ol>
+        </li>
+        <li><strong>Advantages:</strong>
+            <ul>
+                <li>Insecure channels par bhi secure key generation hota hai, matlab yeh method unsafe networks pe bhi kaam karta hai.</li>
+                <li>Is method ko use karne ke liye koi prior shared secret key ki zaroorat nahi hoti, jo ek extra benefit hai.</li>
+            </ul>
+        </li>
+        <li><strong>Drawbacks:</strong>
+            <ul>
+                <li>Agar authentication use na kiya jaye toh <strong>man-in-the-middle attacks</strong> ka risk hota hai, jisme attacker communication ko intercept kar sakta hai.</li>
+                <li>Yeh method sirf key agreement ke liye hota hai, actual encryption ke liye nahi.</li>
+            </ul>
+        </li>
+    </ul>
+    
         </div>
 
         <div class="in">
             <h3>Challenges in Symmetric Key Distribution</h3>
             <ul>
-                <li>Ensuring secure key transfer without interception.</li>
-                <li>Managing keys in systems with a large number of users.</li>
-                <li>Handling key revocation and replacement in case of compromise.</li>
+                <li><strong>Secure key transfer without interception</strong>: Yeh challenge hai ki key ko securely transfer kiya jaye bina kisi third party ke usse intercept kiye. Agar key ko beech mein koi attack kar le, toh poora encryption process compromised ho sakta hai.</li>
+                <li><strong>Managing keys in large systems</strong>: Jab ek system mein bohot saare users ho, tab keys ko manage karna thoda mushkil ho jata hai. Har user ke liye unique keys generate karna aur unhe securely manage karna complex ho sakta hai.</li>
+                <li><strong>Handling key revocation and replacement</strong>: Agar kisi key ko compromise ho jaata hai (yaani wo leak ho gayi ho), toh usse revoke karna aur nayi key replace karna zaroori hota hai. Yeh process properly handle karna challenging ho sakta hai, kyunki har jaga par naye keys distribute karne padte hain.</li>
             </ul>
         </div>
+        
     </div>
     <div class="wh">
         <h2>Random Number Generators in Cryptography</h2>
