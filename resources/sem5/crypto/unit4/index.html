@@ -944,6 +944,120 @@
                 </ul>
             </div>
         </div>
+        <div class="wh">
+            <h2>What Are Mathematical Foundations in Cryptography?</h2>
+            <p>When we talk about the mathematical foundations of cryptography, we’re referring to the basic
+                mathematical principles and theorems that make modern cryptography work. Cryptography relies heavily on
+                math to create secure systems for encrypting and decrypting information. Among the many mathematical
+                tools used, number theory plays a big role because it helps us work with properties of numbers like
+                divisibility, remainders, and modular arithmetic.</p>
+            <p>Now, two key theorems—Fermat’s Little Theorem and Euler’s Theorem—are at the heart of these foundations.
+                They’re essential for understanding how many cryptographic algorithms, like RSA, work. So, let’s break
+                these down step by step.</p>
+
+            <div class="in">
+                <h3>Fermat’s Little Theorem</h3>
+                <h4>What Is It?</h4>
+                <p>Fermat’s Little Theorem is a simple yet powerful rule in number theory. It deals with prime numbers
+                    and modular arithmetic. The theorem states:</p>
+                <blockquote>
+                    If <em>p</em> is a prime number and <em>a</em> is any integer such that <em>a</em> is not divisible
+                    by <em>p</em>, then:<br>
+                    <strong>a<sup>p−1</sup> ≡ 1 (mod p)</strong>
+                </blockquote>
+                <p>In simpler terms:</p>
+                <ul>
+                    <li>Take any number <em>a</em>.</li>
+                    <li>Raise it to the power of <em>p−1</em>, where <em>p</em> is a prime number.</li>
+                    <li>When you divide the result by <em>p</em>, the remainder will always be 1.</li>
+                </ul>
+                <h4>Example:</h4>
+                <p>Let’s take <em>a = 2</em> and <em>p = 7</em> (since 7 is a prime number).</p>
+                <p>
+                    2<sup>7−1</sup> = 2<sup>6</sup> = 64<br>
+                    Now divide 64 by 7. The remainder is 1, so:<br>
+                    <strong>2<sup>6</sup> ≡ 1 (mod 7)</strong>
+                </p>
+                <h4>Why Is This Useful?</h4>
+                <p>Fermat’s Little Theorem helps us work with very large numbers in cryptography. Instead of directly
+                    calculating massive powers, we can simplify them using modular arithmetic. This makes encryption and
+                    decryption processes much faster and more efficient.</p>
+            </div>
+
+            <div class="in">
+                <h3>Euler’s Theorem</h3>
+                <h4>What Is It?</h4>
+                <p>Euler’s Theorem is a generalization of Fermat’s Little Theorem. It works not just for prime numbers
+                    but for any integers that are coprime (two numbers are coprime if their greatest common divisor is
+                    1). The theorem states:</p>
+                <blockquote>
+                    If <em>n</em> is a positive integer and <em>a</em> is an integer such that gcd(<em>a, n</em>) = 1,
+                    then:<br>
+                    <strong>a<sup>ϕ(n)</sup> ≡ 1 (mod n)</strong>
+                </blockquote>
+                <p>Here, ϕ(<em>n</em>) is called Euler’s totient function, which counts the number of integers less than
+                    <em>n</em> that are coprime with <em>n</em>.</p>
+                <h4>Totient Function:</h4>
+                <ul>
+                    <li>For a prime number <em>p</em>, ϕ(<em>p</em>) = <em>p−1</em> (because all numbers less than
+                        <em>p</em> are coprime with <em>p</em>).</li>
+                    <li>For a composite number <em>n = p<sub>1</sub><sup>e<sub>1</sub></sup> ⋅
+                            p<sub>2</sub><sup>e<sub>2</sub></sup> ⋅ …</em>,<br>
+                        ϕ(<em>n</em>) = <em>n ⋅ (1−1/p<sub>1</sub>) ⋅ (1−1/p<sub>2</sub>) ⋅ …</em>.
+                    </li>
+                </ul>
+                <h4>Example:</h4>
+                <p>Let’s take <em>n = 10</em> and <em>a = 3</em>.</p>
+                <ol>
+                    <li>Calculate ϕ(<em>10</em>):<br>
+                        The prime factors of 10 are 2 and 5.<br>
+                        ϕ(<em>10</em>) = 10 ⋅ (1−1/2) ⋅ (1−1/5) = 10 ⋅ 1/2 ⋅ 4/5 = 4.
+                    </li>
+                    <li>Apply Euler’s Theorem:<br>
+                        3<sup>ϕ(10)</sup> = 3<sup>4</sup> = 81.<br>
+                        Divide 81 by 10: The remainder is 1, so:<br>
+                        <strong>3<sup>4</sup> ≡ 1 (mod 10)</strong>.
+                    </li>
+                </ol>
+                <h4>Why Is This Useful?</h4>
+                <p>Euler’s Theorem is a cornerstone of RSA encryption, where it ensures that encryption and decryption
+                    operations work correctly. The totient function ϕ(<em>n</em>) plays a key role in generating secure
+                    keys.</p>
+            </div>
+
+            <div class="in">
+                <h3>Key Differences Between Fermat’s and Euler’s Theorems</h3>
+                <ul>
+                    <li><strong>Scope:</strong><br>
+                        Fermat’s Little Theorem applies only to prime numbers.<br>
+                        Euler’s Theorem applies to any positive integer <em>n</em>, as long as <em>a</em> is coprime
+                        with <em>n</em>.
+                    </li>
+                    <li><strong>Basis:</strong><br>
+                        Fermat’s Little Theorem is a special case of Euler’s Theorem where <em>n</em> is a prime number.
+                        In that case, ϕ(<em>n</em>) = <em>n−1</em>.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>How Are These Theorems Used in Cryptography?</h3>
+                <ul>
+                    <li><strong>RSA Algorithm:</strong><br>
+                        Both theorems help us understand how modular exponentiation works, which is the backbone of RSA.
+                        In RSA, ϕ(<em>n</em>) is used to generate the private and public keys securely.
+                    </li>
+                    <li><strong>Efficient Computation:</strong><br>
+                        They allow us to simplify calculations involving very large numbers, which are common in
+                        cryptography.
+                    </li>
+                    <li><strong>Security:</strong><br>
+                        The difficulty of reversing these calculations without the private key is what makes encryption
+                        secure.
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
