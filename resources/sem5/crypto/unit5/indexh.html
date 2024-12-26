@@ -250,90 +250,46 @@
                     <h3>Working Steps:</h3>
                     <ol>
                         <li>
-                            <strong>Padding:</strong> Padding involves adding extra bits to the original message to
-                            ensure
-                            that its total length is 64 bits less than an exact multiple of 512 bits.
-                            <br><strong>Example:</strong>
-                            <br>Original message length = 1000 bits
-                            <br>Calculate the next multiple of 512 that is greater than 1000 bits:
-                            <br>512 * 3 = 1536 bits
-                            <br>Subtract 64 bits from 1536 to get 1472 bits
-                            <br>Padding needed = 1472 - 1000 = 472 bits
-                            <br>Thus, 472 bits of padding are added to the original 1000-bit message to make the total
-                            length 1472 bits.
+                            <strong>Padding the Message:</strong>  
+                            Sabse pehle, message ko MD5 ke processing requirements ke hisaab se adjust kiya jata hai. Iska matlab hai ki message ki length ko 512 bits ka multiple banane ke liye extra bits (padding) add ki jati hain. Lekin, last ke 64 bits agle step ke liye reserve hote hain. Yeh ensure karta hai ki MD5 message ko sahi tarike se process kar sake.
+                            <br><em>Example:</em> Agar aapka message 400 bits ka hai, toh extra padding add karke usse 512 bits ka banaya jayega.
                         </li>
                         <li>
-                            <strong>Appending the Original Length:</strong> After padding, the original length of the
-                            message (before padding) is appended to the message.
-                            <br>Calculate the original message length modulo 2<sup>64</sup>:
-                            <br>For example, if the original length is 1000 bits, calculate 1000 mod 2<sup>64</sup>.
-                            <br>The result is a 64-bit representation of the original message length.
-                            <br>This step ensures that the total length of the message (original + padding + length)
-                            becomes
-                            an exact multiple of 512 bits.
+                            <strong>Adding the Original Length:</strong>  
+                            Padding ke baad, message ki original length (padding ke pehle ki) ko message ke end mein 64-bit binary format mein add kiya jata hai. Yeh MD5 ko actual input ki length ka record rakhne mein madad karta hai.
+                            <br><em>Example:</em> Agar original message 400 bits ka tha, toh yeh value as 64-bit binary format ke roop mein add ki jayegi.
                         </li>
                         <li>
-                            <strong>Dividing into 512-bit Blocks:</strong> The padded and length-appended message is
-                            then
-                            divided into 512-bit blocks.
-                            <br>For example, a message of 1472 bits will be divided into three 512-bit blocks.
+                            <strong>Breaking into 512-bit Blocks:</strong>  
+                            Ab padded message (original length ke saath) ko 512-bit ke chunks mein tod diya jata hai. Har chunk ek block ke roop mein treat hota hai aur sequentially process hota hai.
+                            <br><em>Example:</em> Agar message 1024 bits ka ban gaya hai, toh yeh 2 blocks mein divide hoga.
                         </li>
                         <li>
-                            <strong>Initializing the Chaining Variables:</strong> MD5 uses four 32-bit chaining
-                            variables,
-                            denoted as A, B, C, and D. These variables are initialized with specific predefined
-                            hexadecimal
-                            values:
-                            <br>A = 0x67452301
-                            <br>B = 0xefcdab89
-                            <br>C = 0x98badcfe
-                            <br>D = 0x10325476
-                            <br>These initial values serve as the starting point for the hashing process.
+                            <strong>Setting Up Variables:</strong>  
+                            MD5 kuch predefined variables (A, B, C, D) ka use karta hai jo intermediate results ko store karte hain. In variables ko ek specific initial value se shuru kiya jata hai, aur processing ke dauraan update kiya jata hai.  
+                            <br><em>Tip:</em> Yeh variables basically mathematical calculations ke base points hain.
                         </li>
                         <li>
-                            <strong>Processing Each 512-bit Block:</strong> Each 512-bit block undergoes a series of
-                            transformations to update the chaining variables.
-                            <br>Steps involved:
-                            <ol>
-                                <li><strong>Copy Chaining Variables:</strong> The current values of A, B, C, and D are
-                                    copied to temporary variables (a, b, c, d) to preserve the current state.</li>
-                                <li><strong>Divide Block into 16 Words:</strong> The 512-bit block is divided into
-                                    sixteen
-                                    32-bit words, labeled M<sub>0</sub>, M<sub>1</sub>, ..., M<sub>15</sub>.</li>
-                                <li><strong>Perform Four Rounds of Operations:</strong> MD5 consists of four main
-                                    rounds,
-                                    each containing 16 operations. Each round uses different non-linear functions and
-                                    predefined constants to mix the data:
-                                    <ul>
-                                        <li><strong>Round 1:</strong> Utilizes a specific function to process each word
-                                            and
-                                            mix the bits.</li>
-                                        <li><strong>Round 2:</strong> Applies a different function to further diffuse
-                                            the
-                                            data.</li>
-                                        <li><strong>Round 3:</strong> Continues the mixing process with another unique
-                                            function.</li>
-                                        <li><strong>Round 4:</strong> Finalizes the mixing with the last function.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Update Chaining Variables:</strong> After processing the block, the
-                                    temporary
-                                    variables (a, b, c, d) are added to the original chaining variables (A, B, C, D).
-                                    This
-                                    incorporates the changes from the current block into the overall hash state.</li>
-                            </ol>
+                            <strong>Processing Each Block:</strong>  
+                            Har 512-bit block ko process karne ke liye yeh steps follow hote hain:  
+                            <ul>
+                                <li>Block ko 16 chhoti pieces (32 bits har ek) mein tod diya jata hai.</li>
+                                <li>Phir block 4 rounds ki calculations se guzarata hai, jo data ko mix aur transform karte hain mathematical aur logical operations ke zariye.</li>
+                                <li>Har block ke process hone ke baad, results ko A, B, C, aur D ke initial values mein add karke update kiya jata hai, taaki agle block ke liye ready ho.</li>
+                            </ul>
+                            <em>Example:</em> Har round data ko transform karke ek naye form mein le jata hai, jo hash ke final output mein contribute karta hai.
                         </li>
                         <li>
-                            <strong>Final Output:</strong> Once all 512-bit blocks have been processed, the final values
-                            of
-                            the chaining variables A, B, C, and D are concatenated to form the final 128-bit MD5 hash
-                            value.
-                            <br>This hash value is typically represented as a 32-character hexadecimal string, serving
-                            as a
-                            unique fingerprint of the original input message.
+                            <strong>Producing the Final Hash:</strong>  
+                            Jab saare blocks process ho jate hain, toh A, B, C, aur D ke final values ko combine karke ek 128-bit ka hash banaya jata hai. Is hash ko phir ek 32-character hexadecimal string ke form mein represent kiya jata hai.  
+                            <br><strong>Key Takeaway:</strong> MD5 hash ek digital fingerprint ki tarah hota hai. Agar input mein chhoti si bhi change hoti hai, toh hash completely alag hoga. Is wajah se yeh verification ke liye secure aur unique hota hai.
+                            <br><em>Example:</em> "hello" aur "Hello" ka MD5 hash completely different hoga.
                         </li>
                     </ol>
                 </div>
+                
+                
+                
             </div>
             <div class="in">
                 <h3>SHA (Secure Hash Algorithm)</h3>

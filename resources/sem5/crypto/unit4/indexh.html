@@ -17,8 +17,8 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="../unit5/index.html" class="link">Next Topic &rarr;</a>
-                <a href="../unit3/index.html" class="link">&larr; Previous Topic</a>
+                <a href="../unit5/indexh.html" class="link">Next Topic &rarr;</a>
+                <a href="../unit3/indexh.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -1147,6 +1147,194 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="wh">
+            <h2>Placement of Encryption Function</h2>
+<ul>
+    <li>
+        <strong>Encryption Function ka Placement:</strong> Jab hum encryption function ke placement ki baat karte hain, toh iska matlab hota hai ki ek system ya network mein encryption exactly kahan perform ho raha hai. Sochiye, encryption ek secret message ko ek secure envelope mein bandhne jaisa hai, taaki koi bhi isse bina permission ke na padh sake. Par yeh secure envelope kahan bandhna chahiye? Sender ke paas? Beech mein kahin? Ya phir receiver ke paas? 
+        <br>Encryption function ka placement depend karta hai kai cheezon par, jaise:
+        <ul>
+            <li>System ki security requirements</li>
+            <li>System design</li>
+            <li>Network mein data ka flow</li>
+        </ul>
+        In factors ko dekhte hue decide hota hai ki encryption kahaan perform kiya jaye.
+    </li>
+</ul>
+<div class="in">
+    <h3>What is the Encryption Function?</h3>
+    <ul>
+        <li>
+            <strong>Encryption Function Samajhiye:</strong> Yeh ek process hai jisme readable data (plaintext) ko unreadable format (ciphertext) mein convert kiya jata hai, ek key aur encryption algorithm ka use karke. Yani, plaintext ek tarah se "secret code" mein badal diya jata hai, jo sirf wahi decode kar sakta hai jiske paas sahi key ho.
+        </li>
+        <li>
+            Encryption function ek lock ki tarah kaam karta hai jo data ko protect karta hai. Par iska placement ka matlab hai ki system ya network ke kis part mein yeh lock lagta hai. Yahan teen common placements hote hain:
+            <ul>
+                <li>
+                    <strong>Source Device Par (Data Creation Point):</strong> 
+                    Jab data create hota hai (jaise aapke phone ya computer par), wahin par encryption perform kiya jaye. Iska fayda yeh hai ki data pura journey ke dauraan encrypted rahta hai. Example: WhatsApp messages, jo aapke phone par hi encrypt ho jate hain.
+                </li>
+                <li>
+                    <strong>Network Mein Kahin (Intermediate Points):</strong>
+                    Kabhi-kabhi encryption network ke beech ke elements, jaise ek server ya router par hoti hai. Yeh tab helpful hai jab source device par encryption karna feasible na ho ya kisi specific network segment ko protect karna ho. Example: VPNs jo aapke internet traffic ko ek secured channel ke through route karte hain.
+                </li>
+                <li>
+                    <strong>Destination Par (Storage/Processing Point):</strong>
+                    Jab data finally kisi database ya server par store hota hai, tab encryption apply hoti hai. Iska matlab hai ki data storage par bhi unauthorized access se protected rahta hai. Example: Bank ki customer details jo encrypted databases mein stored hoti hain.
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="in">
+    <h3>Why Does Placement Matter?</h3>
+    <ul>
+        <li>
+            <strong>Placement Ka Matlab Kyu Zaruri Hai?</strong> Encryption function ki placement kisi bhi system ya network ke kaafi important aspects ko directly impact karti hai. Yeh teen main cheezon par asar daalti hai:
+            <ul>
+                <li>
+                    <strong>Security:</strong> Placement se yeh decide hota hai ki data kitna aur kiske against protect kiya ja raha hai. Agar encryption source device par ho, to data pura transmission ke dauraan secure rahega. Agar network ke kisi beech ke point par ho, toh kuch segments secure rahenge, par har stage nahi. 
+                    <br><em>Example:</em> Agar aap WhatsApp par message bhejte hain, toh wo aapke phone par encrypt hota hai, taaki pura message journey mein secure rahe.
+                </li>
+                <li>
+                    <strong>Performance:</strong> Encryption karne ke liye processing power lagti hai. Placement directly system ya network ki speed ko impact karta hai. Agar har jagah encryption apply karna ho, toh performance slow ho sakti hai.
+                    <br><em>Example:</em> VPN services mein encryption hoti hai, par yeh thoda speed reduce kar sakti hai kyunki har packet encrypt aur decrypt hota hai.
+                </li>
+                <li>
+                    <strong>Cost and Complexity:</strong> Placement ke saath resource requirements aur infrastructure ka cost bhi badhta hai. Kuch placements mein hardware/software ki coordination zyada zaruri hoti hai, jo system ko complex aur costly bana sakti hai.
+                    <br><em>Example:</em> Agar ek company apne pura network encrypt karna chahti hai, toh unhe multiple encryption devices install karne honge, jo zyada cost aur setup complexity laata hai.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Right Placement Chunna:</strong> Har system ke needs ke hisaab se ek perfect balance achieve karna zaruri hai between security, performance, aur cost. Placement aapke system ke goals ko suit karni chahiye, na ki ek hi solution sab systems ke liye use ho.
+            <br><em>Example:</em> A simple e-commerce website might encrypt only at the storage level (customer card details), while a banking application might encrypt at multiple points (source, network, and destination).
+        </li>
+    </ul>
+</div>
+
+<div class="in">
+    <h3>Common Approaches to Placement</h3>
+    <ul>
+        <li>
+            <strong>End-to-End Encryption (E2EE):</strong>
+            <ul>
+                <li><strong>What It Means:</strong> End-to-End Encryption ka matlab hai ki encryption sender ke device par hota hai aur decryption receiver ke device par. Isme beech mein koi bhi intermediary (servers, routers, etc.) data ko access nahi kar sakte.</li>
+                <li><strong>Examples:</strong> WhatsApp aur Signal jese messaging apps use E2EE to ensure ki messages sirf sender aur receiver ke beech hi accessible ho.</li>
+                <li><strong>Advantages:</strong>
+                    <ul>
+                        <li>Highest security provide karta hai kyunki data ko end user ke devices par encrypt aur decrypt kiya jaata hai.</li>
+                        <li>No middleman (jaise servers ya routers) data ko access kar sakte hain, jo security ko aur strong banaata hai.</li>
+                    </ul>
+                </li>
+                <li><strong>Disadvantages:</strong>
+                    <ul>
+                        <li>Device par zyada processing power ki zarurat padti hai, jo performance ko slow kar sakta hai.</li>
+                        <li>Large-scale systems mein multiple parties ke liye implement karna challenging ho sakta hai, kyunki har device par encryption and decryption manage karna complicated ho sakta hai.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Link Encryption:</strong>
+            <ul>
+                <li><strong>What It Means:</strong> Link encryption mein har communication link par encryption apply hota hai. Data har link ke through encrypted hota hai aur har node (e.g., routers, servers) par decrypt hota hai, aur wahan se next link ke liye dobara encrypt hota hai.</li>
+                <li><strong>Examples:</strong> VPNs ka use hota hai link encryption mein, jisme internet pe data securely transmit hota hai.</li>
+                <li><strong>Advantages:</strong>
+                    <ul>
+                        <li>Data transmission ke dauraan intercept hone se protect hota hai.</li>
+                        <li>Large networks mein jahan kai nodes hote hain, wahan isko implement karna relatively easy hota hai.</li>
+                    </ul>
+                </li>
+                <li><strong>Disadvantages:</strong>
+                    <ul>
+                        <li>Intermediate nodes par data decrypt hota hai, jo un points par data ko vulnerable banaata hai.</li>
+                        <li>E2EE ke comparison mein security kam hoti hai, kyunki intermediate nodes par data accessible ho sakta hai.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Device-Level Encryption:</strong>
+            <ul>
+                <li><strong>What It Means:</strong> Isme encryption directly device par hota hai jahan data store ya create hota hai. Yeh encryption data ko secure karta hai jab wo device par stored ho, na ki jab wo transmit ho raha ho.</li>
+                <li><strong>Examples:</strong> Agar aapka smartphone stolen ho jata hai, toh built-in device encryption ensures ki aapka data protected rahega.</li>
+                <li><strong>Advantages:</strong>
+                    <ul>
+                        <li>Secures data at rest (stored data) - device ko chhupane ya churaane par bhi data protected rahega.</li>
+                        <li>Even agar device kho jata hai ya chura liya jaata hai, encrypted data ko koi access nahi kar sakta.</li>
+                    </ul>
+                </li>
+                <li><strong>Disadvantages:</strong>
+                    <ul>
+                        <li>Network par data transmission ke dauraan encryption nahi hota, jo ki transmission stage par data ko vulnerable banaata hai.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Application-Level Encryption:</strong>
+            <ul>
+                <li><strong>What It Means:</strong> Application-level encryption mein data ko transmit ya store karne se pehle application layer par encrypt kiya jaata hai. Yeh encryption specific applications ke liye hota hai.</li>
+                <li><strong>Examples:</strong> Jab aap payment gateway par apne credit card details enter karte hain, toh yeh data encrypt hota hai before sending it to the server.</li>
+                <li><strong>Advantages:</strong>
+                    <ul>
+                        <li>Data par direct control deta hai, jaise ki kis data ko encrypt karna hai aur kis data ko nahi.</li>
+                        <li>Sensitive information (jaise passwords, payment details) ko protect karne ke liye effective hai.</li>
+                    </ul>
+                </li>
+                <li><strong>Disadvantages:</strong>
+                    <ul>
+                        <li>Yeh encryption sirf application ki scope mein hi kaam karta hai, aur network-level encryption ke comparison mein uska coverage limited hota hai.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Network-Level Encryption:</strong>
+            <ul>
+                <li><strong>What It Means:</strong> Network-level encryption mein encryption network layer pe hota hai, jo ki network ke through transmit hone wale data ko secure karta hai.</li>
+                <li><strong>Examples:</strong> Protocols jaise HTTPS, SSL/TLS, aur IPsec network traffic ko encrypt karte hain.</li>
+                <li><strong>Advantages:</strong>
+                    <ul>
+                        <li>Network ke har data packet ko secure karta hai, jo broad protection provide karta hai.</li>
+                        <li>Large-scale networks mein implement karna relatively simple hota hai, kyunki ek hi layer par encryption manage kiya jaata hai.</li>
+                    </ul>
+                </li>
+                <li><strong>Disadvantages:</strong>
+                    <ul>
+                        <li>Data endpoints (jaise sender ya receiver devices) par encrypt nahi hota, jo endpoints ko vulnerable banaata hai.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="in">
+    <h3>Choosing the Right Placement</h3>
+    <ul>
+        <li>Encryption function ka placement choose karna kuch important factors pe depend karta hai, jo system ki security aur performance ko balance karte hain:</li>
+        <ul>
+            <li><strong>Type of Data:</strong> Agar aapke paas sensitive information hai, jaise passwords ya personal data, toh application-level encryption zyada appropriate hoga. Jabki general traffic ke liye network-level encryption kaafi hota hai, kyunki yeh data ko network ke dauraan secure karta hai.</li>
+            <li><strong>Threat Model:</strong> Aap kis tarah ke attacks se protect ho rahe hain? Agar aapko internet pe hackers se bachna hai, toh aapko end-to-end encryption (E2EE) jaisi strong protection ki zarurat ho sakti hai. Agar rogue employees ya device ki physical theft se risk hai, toh device-level encryption ya application-level encryption useful ho sakte hain.</li>
+            <li><strong>System Resources:</strong> Kuch placements, jaise E2EE, zyada processing power maangte hain, jo har system mein feasible nahi hota. Toh system ke resources aur performance needs ko dhyaan mein rakhein jab encryption placement choose karein.</li>
+        </ul>
+    </ul>
+</div>
+
+<div class="in">
+    <h3>Real-World Use Cases</h3>
+    <ul>
+        <li><strong>Messaging Apps:</strong> Jaise WhatsApp aur Signal mein end-to-end encryption use hota hai, taaki sender aur receiver ke alawa koi bhi message ko access na kar sake. Yeh ensure karta hai ki aapka conversation private rahe, even though it passes through multiple servers or networks.</li>
+        <li><strong>Online Banking:</strong> Online banking apps application-level encryption use karti hain jaise passwords, account details protect karne ke liye. Iske saath hi, network-level encryption bhi hota hai jo secure transmission ko ensure karta hai, taaki aapka data hacking attempts ke against safe rahe.</li>
+        <li><strong>VPNs:</strong> Virtual Private Networks (VPNs) link encryption ka use karte hain taaki aapka internet traffic public networks pe secure rahe. Jab aap VPN use karte hain, toh data encrypted hota hai, isliye hackers ya malicious entities data ko intercept nahi kar sakte.</li>
+        <li><strong>File Storage:</strong> Agar aap apne important files ko device par store karte hain, toh device-level encryption ensure karta hai ki agar koi aapka device chura le, toh wo data unauthorized access ke liye accessible na ho. Yeh especially helpful hai agar aapka device sensitive information store karta hai, jaise work documents ya personal records.</li>
+    </ul>
+</div>
+
         </div>
     </div>
     <script type="text/javascript" async

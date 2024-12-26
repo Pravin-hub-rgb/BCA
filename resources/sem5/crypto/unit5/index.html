@@ -218,90 +218,39 @@
                     <h3>Working Steps:</h3>
                     <ol>
                         <li>
-                            <strong>Padding:</strong> Padding involves adding extra bits to the original message to
-                            ensure
-                            that its total length is 64 bits less than an exact multiple of 512 bits.
-                            <br><strong>Example:</strong>
-                            <br>Original message length = 1000 bits
-                            <br>Calculate the next multiple of 512 that is greater than 1000 bits:
-                            <br>512 * 3 = 1536 bits
-                            <br>Subtract 64 bits from 1536 to get 1472 bits
-                            <br>Padding needed = 1472 - 1000 = 472 bits
-                            <br>Thus, 472 bits of padding are added to the original 1000-bit message to make the total
-                            length 1472 bits.
+                            <strong>Padding the Message:</strong>  
+                            The first step is to adjust the message length so it fits MD5’s requirements. Extra bits (padding) are added to the message to make its total length a multiple of 512 bits (minus 64 bits reserved for the next step). This ensures MD5 can process the message properly.
                         </li>
                         <li>
-                            <strong>Appending the Original Length:</strong> After padding, the original length of the
-                            message (before padding) is appended to the message.
-                            <br>Calculate the original message length modulo 2<sup>64</sup>:
-                            <br>For example, if the original length is 1000 bits, calculate 1000 mod 2<sup>64</sup>.
-                            <br>The result is a 64-bit representation of the original message length.
-                            <br>This step ensures that the total length of the message (original + padding + length)
-                            becomes
-                            an exact multiple of 512 bits.
+                            <strong>Adding the Original Length:</strong>  
+                            Once padding is done, the original length of the message (before padding) is added at the end in a 64-bit binary format. This helps MD5 keep track of the actual length of the original input.
                         </li>
                         <li>
-                            <strong>Dividing into 512-bit Blocks:</strong> The padded and length-appended message is
-                            then
-                            divided into 512-bit blocks.
-                            <br>For example, a message of 1472 bits will be divided into three 512-bit blocks.
+                            <strong>Breaking into 512-bit Blocks:</strong>  
+                            The padded message, along with the added length, is split into chunks of 512 bits. These blocks are processed one by one.
                         </li>
                         <li>
-                            <strong>Initializing the Chaining Variables:</strong> MD5 uses four 32-bit chaining
-                            variables,
-                            denoted as A, B, C, and D. These variables are initialized with specific predefined
-                            hexadecimal
-                            values:
-                            <br>A = 0x67452301
-                            <br>B = 0xefcdab89
-                            <br>C = 0x98badcfe
-                            <br>D = 0x10325476
-                            <br>These initial values serve as the starting point for the hashing process.
+                            <strong>Setting Up Variables:</strong>  
+                            MD5 uses four predefined variables (A, B, C, D) to store intermediate results. These variables start with specific values and are updated during processing.
                         </li>
                         <li>
-                            <strong>Processing Each 512-bit Block:</strong> Each 512-bit block undergoes a series of
-                            transformations to update the chaining variables.
-                            <br>Steps involved:
-                            <ol>
-                                <li><strong>Copy Chaining Variables:</strong> The current values of A, B, C, and D are
-                                    copied to temporary variables (a, b, c, d) to preserve the current state.</li>
-                                <li><strong>Divide Block into 16 Words:</strong> The 512-bit block is divided into
-                                    sixteen
-                                    32-bit words, labeled M<sub>0</sub>, M<sub>1</sub>, ..., M<sub>15</sub>.</li>
-                                <li><strong>Perform Four Rounds of Operations:</strong> MD5 consists of four main
-                                    rounds,
-                                    each containing 16 operations. Each round uses different non-linear functions and
-                                    predefined constants to mix the data:
-                                    <ul>
-                                        <li><strong>Round 1:</strong> Utilizes a specific function to process each word
-                                            and
-                                            mix the bits.</li>
-                                        <li><strong>Round 2:</strong> Applies a different function to further diffuse
-                                            the
-                                            data.</li>
-                                        <li><strong>Round 3:</strong> Continues the mixing process with another unique
-                                            function.</li>
-                                        <li><strong>Round 4:</strong> Finalizes the mixing with the last function.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Update Chaining Variables:</strong> After processing the block, the
-                                    temporary
-                                    variables (a, b, c, d) are added to the original chaining variables (A, B, C, D).
-                                    This
-                                    incorporates the changes from the current block into the overall hash state.</li>
-                            </ol>
+                            <strong>Processing Each Block:</strong>  
+                            Each 512-bit block goes through the following steps:  
+                            <ul>
+                                <li>Split into 16 smaller pieces (32 bits each).</li>
+                                <li>Processed in four rounds of calculations that mix and transform the data using mathematical and logical operations.</li>
+                                <li>After processing, the results are added to the initial values of A, B, C, and D, updating them for the next block.</li>
+                            </ul>
                         </li>
                         <li>
-                            <strong>Final Output:</strong> Once all 512-bit blocks have been processed, the final values
-                            of
-                            the chaining variables A, B, C, and D are concatenated to form the final 128-bit MD5 hash
-                            value.
-                            <br>This hash value is typically represented as a 32-character hexadecimal string, serving
-                            as a
-                            unique fingerprint of the original input message.
+                            <strong>Producing the Final Hash:</strong>  
+                            After all blocks are processed, the final values of A, B, C, and D are combined to create a 128-bit hash. This hash is then represented as a 32-character hexadecimal string.  
+                            <br><strong>Key Takeaway:</strong> The MD5 hash is like a digital fingerprint of the input. Even a tiny change in the input creates a completely different hash, making it unique and secure for verification purposes.
                         </li>
                     </ol>
                 </div>
+                
+                
             </div>
             <div class="in">
                 <h3>SHA (Secure Hash Algorithm)</h3>
