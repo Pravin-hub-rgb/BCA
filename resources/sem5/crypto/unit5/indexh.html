@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Function</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Hash Function</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Hash Function</h1>
+        <p>Hash functions are fundamental building blocks in modern cryptography, playing a pivotal role in ensuring
+            data security, integrity, and authentication across various digital systems. A hash function is a
+            mathematical algorithm that takes an input, such as a message or file, and produces a fixed-length string of
+            characters, known as a hash value or digest. This output is unique to the input data; even the slightest
+            change in the input results in a completely different hash. This property makes hash functions essential for
+            detecting unauthorized modifications to data, as any tampering becomes immediately apparent through a
+            mismatch in hash values.</p>
+        <p><strong>This topic is divided into several important areas for a deeper understanding:</strong></p>
+        <ol>
+            <li><strong>Message Authentication & Hash Functions:</strong> This section focuses on how hash functions are
+                used to verify the authenticity and integrity of messages, ensuring that they come from a legitimate
+                source and have not been altered in transit.
+                <ul>
+                    <li>Authentication Requirements: These outline the basic principles needed to establish trust in
+                        communication systems. The primary goals include verifying the sender’s identity, ensuring the
+                        message's content remains intact, and preventing unauthorized access or alterations.</li>
+                    <li>Authentication Functions: These are specific techniques used to meet authentication
+                        requirements. They often rely on cryptographic methods to ensure that the communication remains
+                        secure and trustworthy.</li>
+                    <li>Message Authentication Codes (MACs): A MAC is a cryptographic tool that combines a secret key
+                        with the message to generate a code. This code ensures that both the sender and recipient can
+                        verify the message’s authenticity and integrity, as only they possess the key required to
+                        generate or verify the MAC.</li>
+                    <li>Hash Functions: These are algorithms that provide a unique fingerprint for data. Hash functions
+                        are widely used in systems where data integrity is critical, such as verifying file downloads,
+                        securing passwords, and blockchain technology.</li>
+                    <li>Security of Hash Functions and MACs: This subtopic addresses potential vulnerabilities in hash
+                        functions and MACs, such as collision attacks (when two different inputs produce the same hash)
+                        and key management issues. It also explores strategies to enhance their robustness against such
+                        threats.</li>
+                </ul>
+            </li>
+            <li><strong>Specific Hash Algorithms:</strong> Two widely recognized hash algorithms are discussed in
+                detail:
+                <ul>
+                    <li>MD-5 (Message Digest Algorithm 5): This algorithm was once a popular choice for creating 128-bit
+                        hash values. It played a significant role in the early days of cryptography by offering a fast
+                        and efficient way to generate digests. However, its use has significantly declined due to
+                        vulnerabilities, such as susceptibility to collision attacks, making it unsuitable for
+                        high-security applications today.</li>
+                    <li>Secure Hash Algorithm (SHA-512): A member of the Secure Hash Algorithm family, SHA-512 generates
+                        a 512-bit hash value, offering a much higher level of security compared to older algorithms like
+                        MD-5. It is widely adopted in modern cryptographic applications, including SSL/TLS certificates,
+                        blockchain systems, and digital signatures, where robust data protection is critical.</li>
+                </ul>
+            </li>
+            <li><strong>Digital Signatures: </strong>
+                Digital signatures are advanced cryptographic tools used to verify the authenticity and integrity of
+                messages or digital documents. They are the digital equivalent of handwritten signatures, providing a
+                secure method for validating the identity of the sender and the originality of the data.
+                <ul>
+                    <li>Digital Signature Standard (DSS): This standard defines the framework for implementing secure
+                        digital signature schemes, ensuring consistency and reliability across different systems. It
+                        forms the basis for many digital signature protocols used today.</li>
+                    <li>Authentication Protocol: This refers to the specific steps and procedures involved in using
+                        digital signatures to validate the identity of a sender during communication. Authentication
+                        protocols are critical in scenarios like secure email communication, online transactions, and
+                        digital contract signing.</li>
+                    <li>Digital Signature Algorithm (DSA): DSA is a widely used cryptographic algorithm for creating
+                        digital signatures. It ensures that the signature is unique to the message and can be verified
+                        by the recipient without compromising security. DSA plays a crucial role in maintaining trust in
+                        digital interactions.</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="wh">
+            <h2>Message Authentication</h2>
+            <ul>
+                <li><strong>Message Authentication ka Matlab:</strong> Jab ek message receive hota hai, toh humein yeh
+                    ensure karna hota hai ki yeh asli sender ne bheja hai aur beech mein message ke content ke saath koi
+                    chedh-chaad nahi hui hai. Yaani, sender ki identity aur message ki integrity dono verify karni hoti
+                    hai.</li>
+                <li><strong>Ek Practical Scenario:</strong> Sochiye aap Organization XYZ ke ek employee hain aur aapko
+                    Organization ABC se ek confidential message milta hai. Is situation mein aapko confirm karna hoga ki
+                    yeh message ABC ke genuine person ne bheja hai aur transmission ke dauraan kisi third-party ne isse
+                    modify nahi kiya.</li>
+                <li><strong>Importance of Message Authentication:</strong> Sensitive information ko unauthorized access
+                    aur tampering se bachane ke liye yeh bahut zaroori hai. Agar message authentication na ho, toh
+                    attackers confidential data ko manipulate ya fake messages forward kar sakte hain, jo bahut bade
+                    security risks create karta hai.</li>
+                <li><strong>Authentication Kaise Hota Hai?</strong> Yeh ek authenticator ke zariye kiya jaata hai.
+                    Authenticator basically ek code ya string hota hai jo message ke saath attach hota hai. Yeh
+                    authenticator kuch bhi ho sakta hai, jaise:
+                    <ul>
+                        <li>Ek numerical code</li>
+                        <li>Ek hash value</li>
+                        <li>Ek alphabetic string</li>
+                        <li>Ya ek alphanumeric code</li>
+                    </ul>
+                    Authenticator ka kaam hai message ki integrity aur sender ki authenticity ensure karna.
+                </li>
+                <li><strong>Authentication Functions:</strong> Yeh authenticators ek specific process ya function ke
+                    zariye generate hote hain, jo message ko protect karte hain. In functions ka main goal hota hai data
+                    integrity aur authenticity ko preserve karna. Teen primary authentication functions hote hain:
+                    <ol>
+                        <li>
+                            <strong>Message Encryption:</strong>
+                            Is technique mein pura message ko encrypt kiya jaata hai, taaki koi unauthorized person isse
+                            samajh na sake. Encryption ensure karta hai ki message sirf intended receiver hi decode kar
+                            sake. Yeh dono sender aur receiver ki identity ko bhi secure karta hai.
+                        </li>
+                        <li>
+                            <strong>Message Authentication Code (MAC):</strong>
+                            MAC ek special code hota hai jo message ke content ke saath attach hota hai. Receiver is
+                            code ko verify karke confirm karta hai ki message tampered nahi hua hai. Yeh ek symmetric
+                            key-based mechanism hota hai, yaani dono sender aur receiver ke paas ek shared secret key
+                            hoti hai.
+                        </li>
+                        <li>
+                            <strong>Hash Functions (H):</strong>
+                            Hash function ek mathematical operation hai jo message ko ek fixed-size hash value mein
+                            convert karta hai. Agar message mein ek bhi chhoti si change hoti hai, toh hash value
+                            completely change ho jaati hai. Isse aap easily detect kar sakte hain ki message tampered
+                            hua hai ya nahi. Yeh ek popular method hai kyunki yeh fast aur efficient hota hai.
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+
+
+            <div class="in">
+                <h3>Message Encryption</h3>
+                <ul>
+                    <li>Encryption is the process of converting plaintext into ciphertext using an encryption algorithm
+                        and a secret key.</li>
+                    <li>In the context of message authentication, the encrypted message (ciphertext) serves as proof of
+                        authenticity, as only the intended recipient (who has the decryption key) can read the message.
+                    </li>
+                    <li>This method ensures that even if the message is intercepted, an attacker cannot read it without
+                        the decryption key, which can be used as an authenticator.</li>
+                    <li>However, message encryption alone does not verify the source of the message, which is why
+                        additional methods like MAC and hash functions are used for complete message authentication.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Message Authentication Code (MAC)</h3>
+                <ul>
+                    <li>A Message Authentication Code (MAC) is a fixed-length code generated by an authentication
+                        function, which takes the message and a secret key as inputs.</li>
+                    <li>The MAC ensures both the integrity and authenticity of the message. If the message changes
+                        during transmission, the MAC will not match when verified by the recipient.</li>
+                    <li>The formula for a MAC is as follows: <code>C(MK) = MAC</code>, where:
+                        <ul>
+                            <li><strong>C</strong> represents the authentication function.</li>
+                            <li><strong>M</strong> is the message being sent.</li>
+                            <li><strong>K</strong> is the secret key shared between the sender and receiver.</li>
+                            <li>The <strong>output (o/p)</strong> is the MAC code, which acts as a "signature" for the
+                                message.</li>
+                        </ul>
+                    </li>
+                    <li>MACs are commonly used in various security protocols like SSL/TLS to verify the authenticity and
+                        integrity of transmitted messages.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Hash Functions (H)</h3>
+                <ul>
+                    <li>Hash functions are similar to MACs but do not use a secret key. Instead, they take the message
+                        and produce a fixed-length hash code.</li>
+                    <li>The output of a hash function is typically referred to as the hash value or hash code.</li>
+                    <li>The formula for a hash function is as follows: <code>H(M) = h</code>, where:
+                        <ul>
+                            <li><strong>H</strong> represents the hash function.</li>
+                            <li><strong>M</strong> is the message being sent.</li>
+                            <li><strong>h</strong> is the resulting hash code, a fixed-length string representing the
+                                message.</li>
+                        </ul>
+                    </li>
+                    <li>The hash code serves as a fingerprint for the message. Even a small change in the message will
+                        result in a completely different hash code, making it easy to detect any tampering.</li>
+                    <li>Hash functions are widely used in digital signatures, blockchain technologies, and various
+                        security protocols to ensure data integrity.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Comparison of Authentication Functions</h3>
+                <ul>
+                    <li><strong>Message Encryption</strong> provides confidentiality but does not authenticate the
+                        sender. It ensures that only the intended recipient can read the message.</li>
+                    <li><strong>MAC</strong> offers both authenticity and integrity. It ensures that the message has not
+                        been altered and that it was sent by the claimed sender, provided the secret key remains secure.
+                    </li>
+                    <li><strong>Hash Functions</strong> ensure message integrity by producing a unique hash value for a
+                        given message. They cannot verify the sender's identity unless combined with digital signatures
+                        or other forms of authentication.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Hash Algorithms</h2>
+            <div class="in">
+                <h2>MD-5 (Message Digest Algorithm 5)</h2>
+                <ul>
+                    <li>
+                        MD5 is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value.
+                        It is
+                        primarily used for verifying data integrity and generating checksums for data comparison.
+                    </li>
+                    <li>Developed by Ron Rivest in 1991 as an improvement over previous hash functions like MD4.</li>
+                    <li>It is fast, making it ideal for applications requiring quick hashing, but it produces a 128-bit
+                        message digest, which is relatively short by modern standards.</li>
+                    <li>Although MD5 is still used in some contexts, it is no longer considered secure against collision
+                        attacks due to vulnerabilities discovered over time. However, it is still widely used for file
+                        integrity checks and basic hashing tasks.</li>
+                </ul>
+                <div class="wh">
+                    <h3>Working Steps:</h3>
+                    <ol>
+                        <li>
+                            <strong>Padding:</strong> Padding involves adding extra bits to the original message to
+                            ensure
+                            that its total length is 64 bits less than an exact multiple of 512 bits.
+                            <br><strong>Example:</strong>
+                            <br>Original message length = 1000 bits
+                            <br>Calculate the next multiple of 512 that is greater than 1000 bits:
+                            <br>512 * 3 = 1536 bits
+                            <br>Subtract 64 bits from 1536 to get 1472 bits
+                            <br>Padding needed = 1472 - 1000 = 472 bits
+                            <br>Thus, 472 bits of padding are added to the original 1000-bit message to make the total
+                            length 1472 bits.
+                        </li>
+                        <li>
+                            <strong>Appending the Original Length:</strong> After padding, the original length of the
+                            message (before padding) is appended to the message.
+                            <br>Calculate the original message length modulo 2<sup>64</sup>:
+                            <br>For example, if the original length is 1000 bits, calculate 1000 mod 2<sup>64</sup>.
+                            <br>The result is a 64-bit representation of the original message length.
+                            <br>This step ensures that the total length of the message (original + padding + length)
+                            becomes
+                            an exact multiple of 512 bits.
+                        </li>
+                        <li>
+                            <strong>Dividing into 512-bit Blocks:</strong> The padded and length-appended message is
+                            then
+                            divided into 512-bit blocks.
+                            <br>For example, a message of 1472 bits will be divided into three 512-bit blocks.
+                        </li>
+                        <li>
+                            <strong>Initializing the Chaining Variables:</strong> MD5 uses four 32-bit chaining
+                            variables,
+                            denoted as A, B, C, and D. These variables are initialized with specific predefined
+                            hexadecimal
+                            values:
+                            <br>A = 0x67452301
+                            <br>B = 0xefcdab89
+                            <br>C = 0x98badcfe
+                            <br>D = 0x10325476
+                            <br>These initial values serve as the starting point for the hashing process.
+                        </li>
+                        <li>
+                            <strong>Processing Each 512-bit Block:</strong> Each 512-bit block undergoes a series of
+                            transformations to update the chaining variables.
+                            <br>Steps involved:
+                            <ol>
+                                <li><strong>Copy Chaining Variables:</strong> The current values of A, B, C, and D are
+                                    copied to temporary variables (a, b, c, d) to preserve the current state.</li>
+                                <li><strong>Divide Block into 16 Words:</strong> The 512-bit block is divided into
+                                    sixteen
+                                    32-bit words, labeled M<sub>0</sub>, M<sub>1</sub>, ..., M<sub>15</sub>.</li>
+                                <li><strong>Perform Four Rounds of Operations:</strong> MD5 consists of four main
+                                    rounds,
+                                    each containing 16 operations. Each round uses different non-linear functions and
+                                    predefined constants to mix the data:
+                                    <ul>
+                                        <li><strong>Round 1:</strong> Utilizes a specific function to process each word
+                                            and
+                                            mix the bits.</li>
+                                        <li><strong>Round 2:</strong> Applies a different function to further diffuse
+                                            the
+                                            data.</li>
+                                        <li><strong>Round 3:</strong> Continues the mixing process with another unique
+                                            function.</li>
+                                        <li><strong>Round 4:</strong> Finalizes the mixing with the last function.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Update Chaining Variables:</strong> After processing the block, the
+                                    temporary
+                                    variables (a, b, c, d) are added to the original chaining variables (A, B, C, D).
+                                    This
+                                    incorporates the changes from the current block into the overall hash state.</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <strong>Final Output:</strong> Once all 512-bit blocks have been processed, the final values
+                            of
+                            the chaining variables A, B, C, and D are concatenated to form the final 128-bit MD5 hash
+                            value.
+                            <br>This hash value is typically represented as a 32-character hexadecimal string, serving
+                            as a
+                            unique fingerprint of the original input message.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="in">
+                <h3>SHA (Secure Hash Algorithm)</h3>
+                <ul>
+                    <li><strong>Modified Version of MD-5:</strong> SHA is an improved version of the MD5 algorithm,
+                        designed to address its vulnerabilities and provide enhanced security.</li>
+                    <li><strong>Output Length:</strong> Unlike MD5, which produces a 128-bit output, SHA generates a
+                        160-bit output, making it more secure and harder to reverse-engineer.</li>
+                </ul>
+                <div class="wh">
+                    <h3>Working Steps:</h3>
+                    <ol>
+                        <li>
+                            <strong>Padding:</strong> Padding is added to the original message to make its length
+                            congruent to 448 modulo 512 (i.e., 64 bits less than a multiple of 512).
+                            <br>Padding begins with a single '1' bit followed by enough '0' bits to achieve the required
+                            length.
+                        </li>
+                        <li>
+                            <strong>Appending the Original Length:</strong> The original length of the message (before
+                            padding) is appended as a 64-bit value. This step ensures the final message length becomes
+                            an exact multiple of 512 bits.
+                        </li>
+                        <li>
+                            <strong>Dividing the Input into 512-bit Blocks:</strong> The padded and length-appended
+                            message is divided into 512-bit blocks for processing. Each block is handled independently
+                            during the hashing process.
+                        </li>
+                        <li>
+                            <strong>Initializing Chaining Variables:</strong> SHA uses five 32-bit chaining variables,
+                            denoted as A, B, C, D, and E. These variables are initialized with predefined hexadecimal
+                            values:
+                            <br>A = 0x67452301
+                            <br>B = 0xEFCDAB89
+                            <br>C = 0x98BADCFE
+                            <br>D = 0x10325476
+                            <br>E = 0xC3D2E1F0
+                        </li>
+                        <li>
+                            <strong>Processing Blocks:</strong> Each 512-bit block undergoes the following steps:
+                            <ol>
+                                <li><strong>Copy Variables:</strong> The current values of A, B, C, D, and E are copied
+                                    into corresponding temporary variables (a, b, c, d, e).</li>
+                                <li><strong>Divide into 32-bit Words:</strong> Each 512-bit block is divided into
+                                    sixteen 32-bit words, labeled W<sub>0</sub>, W<sub>1</sub>, ..., W<sub>15</sub>.
+                                    Additional words (W<sub>16</sub> to W<sub>79</sub>) are generated using bitwise
+                                    operations on the initial 16 words.</li>
+                                <li><strong>Perform Four Rounds:</strong> The hashing process involves four rounds of
+                                    operations, with each round consisting of 20 steps. Each step applies a non-linear
+                                    function, adds constants, and modifies the chaining variables:
+                                    <ul>
+                                        <li><strong>Round 1:</strong> Processes the input using bitwise logical
+                                            operations like AND, OR, and NOT.</li>
+                                        <li><strong>Round 2:</strong> Introduces more complex operations, including XOR.
+                                        </li>
+                                        <li><strong>Round 3:</strong> Continues with additional transformations to
+                                            diffuse data further.</li>
+                                        <li><strong>Round 4:</strong> Finalizes the mixing to ensure thorough diffusion
+                                            across all variables.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Update Variables:</strong> After processing, the temporary variables (a, b,
+                                    c, d, e) are added back to the original chaining variables (A, B, C, D, E) to
+                                    incorporate the changes from the current block.</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Digital Signature</h2>
+            <ul>
+                <li><strong>Real-World Relevance:</strong> Many of us are familiar with the concept of digital
+                    signatures, as we often use them in secure digital transactions, document signing, and
+                    authentication processes.</li>
+                <li><strong>Based on Asymmetric Key Cryptography:</strong> Digital signatures utilize asymmetric key
+                    cryptography, involving a pair of keys: a private key (kept secret) and a public key (shared
+                    publicly).</li>
+                <li><strong>Encryption and Decryption:</strong>
+                    <ul>
+                        <li><strong>Encryption:</strong> The private key is used to sign the message, creating the
+                            digital signature.</li>
+                        <li><strong>Decryption:</strong> The public key is used to verify the signature and validate the
+                            authenticity of the message.</li>
+                    </ul>
+                </li>
+                <li><strong>Primary Uses:</strong> Digital signatures serve two main purposes:
+                    <ul>
+                        <li><strong>Authentication:</strong> Ensures the message is from the intended sender.</li>
+                        <li><strong>Non-Repudiation:</strong> Prevents the sender from denying the authenticity of the
+                            signed message.</li>
+                    </ul>
+                </li>
+                <li><strong>Signature:</strong> Acts as proof of identity, verifying whether the message genuinely
+                    originated from the claimed sender.</li>
+            </ul>
+            <div class="in">
+                <h3>Working of Digital Signature</h3>
+                <img src="../../images/cry26.jpeg" alt="Digital Signature Workflow">
+                <ul>
+                    <li><strong>Sender's End (Encryption):</strong>
+                        <ol>
+                            <li>The sender (User A) uses their <strong>private key</strong> to encrypt the message. This
+                                private key is unique to the sender and remains confidential.</li>
+                            <li>The message and private key are passed through a <strong>Digital Signature Generation
+                                    Algorithm</strong>, which produces the digital signature.</li>
+                            <li>The generated digital signature is then combined with the original message, creating a
+                                package containing both.</li>
+                            <li>This package (message + signature) is sent to the receiver (User B).</li>
+                        </ol>
+                    </li>
+                    <li><strong>Receiver's End (Decryption):</strong>
+                        <ol>
+                            <li>The receiver uses the sender's <strong>public key</strong> to decrypt and verify the
+                                digital signature.</li>
+                            <li>The package (message + signature) is passed through a <strong>Digital Signature
+                                    Verification Algorithm</strong>, along with the sender's public key.</li>
+                            <li>The algorithm compares the received message with the digital signature to verify its
+                                validity:
+                                <ul>
+                                    <li>If the message matches the signature: The algorithm outputs
+                                        <strong>Valid</strong>, confirming the sender's authenticity and message
+                                        integrity.
+                                    </li>
+                                    <li>If the message does not match the signature: The algorithm outputs <strong>Not
+                                            Valid</strong>, indicating potential tampering or authenticity issues.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Digital Signature Standard (DSS)</h3>
+                <ul>
+                    <li><strong>Definition:</strong> The Digital Signature Standard (DSS) is a Federal Information
+                        Processing Standard (FIPS) specifying algorithms for digital signature generation and
+                        verification, primarily for ensuring data authenticity and integrity.</li>
+                    <li><strong>Established By:</strong> National Institute of Standards and Technology (NIST).</li>
+                    <li><strong>First Published:</strong> 1994 as FIPS PUB 186.</li>
+                    <li><strong>Purpose:</strong> Provides a secure method for digital signatures using public-key
+                        cryptography to authenticate the origin and integrity of digital data.</li>
+                </ul>
+                <div class="wh">
+                    <h3>Key Features of DSS</h3>
+                    <ul>
+                        <li><strong>Algorithm:</strong> DSS defines the Digital Signature Algorithm (DSA) as its core
+                            mechanism for generating and verifying digital signatures.</li>
+                        <li>Ensures signatures are unique for each document, preventing forgery.</li>
+                        <li>Does not encrypt data, only authenticates and verifies its integrity.</li>
+                        <li>Uses hash functions (e.g., SHA-1, SHA-256) to generate a message digest.</li>
+                        <li>Works with public-key cryptography, involving a pair of private and public keys.</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Working of DSS</h3>
+                    <ol>
+                        <li><strong>Key Generation:</strong>
+                            <ul>
+                                <li>Generate a private key (<em>x</em>) and compute the corresponding public key
+                                    (<em>y</em>).</li>
+                                <li>These keys are derived using the DSA algorithm parameters, including a prime number
+                                    (<em>p</em>), a subprime (<em>q</em>), and a generator (<em>g</em>).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Signature Generation:</strong>
+                            <ul>
+                                <li>Hash the message to produce a fixed-length message digest.</li>
+                                <li>Generate a random integer (<em>k</em>) and calculate two values:
+                                    <ul>
+                                        <li><em>r</em> = (<em>g<sup>k</sup> mod p</em>) mod <em>q</em>.</li>
+                                        <li><em>s</em> = (<em>k<sup>-1</sup> (H(m) + xr)) mod q</em>, where
+                                            <em>H(m)</em> is the message hash.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>The signature is the pair (<em>r</em>, <em>s</em>).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Signature Verification:</strong>
+                            <ul>
+                                <li>Receiver uses the sender’s public key to verify the signature:
+                                    <ul>
+                                        <li>Calculate the hash of the received message.</li>
+                                        <li>Compute:
+                                            <ul>
+                                                <li><em>w</em> = <em>s<sup>-1</sup> mod q</em>.</li>
+                                                <li><em>u1</em> = (<em>H(m)w</em>) mod <em>q</em>, <em>u2</em> =
+                                                    (<em>rw</em>) mod <em>q</em>.</li>
+                                                <li><em>v</em> = (<em>g<sup>u1</sup> * y<sup>u2</sup> mod p</em>) mod
+                                                    <em>q</em>.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>If <em>v</em> equals <em>r</em>, the signature is valid.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="wh">
+                    <h3>Advantages of DSS</h3>
+                    <ul>
+                        <li>Ensures data authenticity and integrity without encrypting the data.</li>
+                        <li>Relies on well-established mathematical principles for security.</li>
+                        <li>Efficient for signing and verifying large amounts of data.</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Applications of DSS</h3>
+                    <ul>
+                        <li>Used in secure email systems (e.g., S/MIME, PGP).</li>
+                        <li>Verifies authenticity in software distribution and updates.</li>
+                        <li>Commonly used in Public Key Infrastructure (PKI) systems for certificates.</li>
+                        <li>Ensures secure communications in blockchain and financial transactions.</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="in">
+                <h3>Authentication Protocol</h3>
+                <ul>
+                    <li><strong>Definition:</strong> A set of rules and processes used to verify the identity of
+                        entities (users, systems, or devices) communicating in a network.</li>
+                    <li><strong>Purpose:</strong> Ensures secure access and communication by confirming the legitimacy
+                        of the participating entities.</li>
+                    <li><strong>Key Features:</strong>
+                        <ul>
+                            <li>Prevents unauthorized access.</li>
+                            <li>Guards against impersonation and replay attacks.</li>
+                            <li>Maintains confidentiality and integrity of communication.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="wh">
+                    <h3>Types of Authentication Protocols</h3>
+                    <ul>
+                        <li><strong>Password-Based:</strong>
+                            <ul>
+                                <li>Relies on shared passwords or passphrases.</li>
+                                <li>Vulnerable to dictionary attacks and password theft.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Challenge-Response Protocol:</strong>
+                            <ul>
+                                <li>Uses a challenge (e.g., random number) and a secret key to verify identity.</li>
+                                <li>Prevents replay attacks as each session has a unique challenge.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Token-Based:</strong>
+                            <ul>
+                                <li>Utilizes physical or digital tokens for authentication.</li>
+                                <li>Examples: OTP (One-Time Password) tokens, smart cards.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Biometric-Based:</strong>
+                            <ul>
+                                <li>Involves unique biological traits (e.g., fingerprints, retina scans).</li>
+                                <li>Provides strong security but can be costly to implement.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Examples of Authentication Protocols</h3>
+                    <ul>
+                        <li><strong>Kerberos:</strong> A network authentication protocol using secret-key cryptography
+                            and a trusted third party for secure communication.</li>
+                        <li><strong>OAuth:</strong> A protocol for token-based authentication in web applications,
+                            allowing third-party access without sharing credentials.</li>
+                        <li><strong>SSL/TLS Handshake:</strong> Verifies the server and optionally the client during
+                            secure web connections.</li>
+                        <li><strong>RADIUS:</strong> Centralized authentication and authorization protocol for network
+                            access.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in">
+                <h3>Digital Signature Algorithm (DSA)</h3>
+                <ul>
+                    <li><strong>Definition:</strong> A Federal Information Processing Standard (FIPS) for digital
+                        signatures, introduced by the National Institute of Standards and Technology (NIST) in 1991.
+                    </li>
+                    <li><strong>Purpose:</strong> Ensures data authenticity and integrity by providing a secure digital
+                        signature mechanism.</li>
+                    <li><strong>Based On:</strong> Public key cryptography and modular arithmetic, similar to the
+                        discrete logarithm problem.</li>
+                </ul>
+                <div class="wh">
+                    <h3>Key Features of DSA</h3>
+                    <ul>
+                        <li>Used exclusively for generating and verifying digital signatures, not for encrypting data.
+                        </li>
+                        <li>Generates a pair of keys: private key (used for signing) and public key (used for
+                            verification).</li>
+                        <li>Produces a unique signature for every message, even if the same private key is used.</li>
+                        <li>Relies on mathematical properties to ensure security and prevent forgery.</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Working of DSA</h3>
+                    <ol>
+                        <li><strong>Key Generation:</strong>
+                            <ul>
+                                <li>Choose a prime number <em>p</em> and a number <em>q</em> (a prime divisor of
+                                    <em>p-1</em>).
+                                </li>
+                                <li>Generate a number <em>g</em>, a generator of the subgroup of <em>p</em>.</li>
+                                <li>Generate private key <em>x</em> (random number less than <em>q</em>).</li>
+                                <li>Compute public key <em>y</em> = <em>g^x mod p</em>.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Signing Process:</strong>
+                            <ul>
+                                <li>Generate a random integer <em>k</em> (less than <em>q</em>).</li>
+                                <li>Compute <em>r</em> = (<em>g^k mod p</em>) mod <em>q</em>.</li>
+                                <li>Compute <em>s</em> = (<em>k<sup>-1</sup>(H(m) + xr)) mod q</em>, where <em>H(m)</em>
+                                    is the hash of the message.</li>
+                                <li>The digital signature is the pair (<em>r, s</em>).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Verification Process:</strong>
+                            <ul>
+                                <li>Receiver verifies the signature using the sender's public key (<em>y</em>).</li>
+                                <li>Compute two values:
+                                    <ul>
+                                        <li><em>w</em> = <em>s<sup>-1</sup> mod q</em>.</li>
+                                        <li><em>u1</em> = (<em>H(m)w</em>) mod <em>q</em>, <em>u2</em> = (<em>rw</em>)
+                                            mod <em>q</em>.</li>
+                                    </ul>
+                                </li>
+                                <li>Compute <em>v</em> = (<em>g^u1 * y^u2 mod p</em>) mod <em>q</em>.</li>
+                                <li>If <em>v</em> = <em>r</em>, the signature is valid; otherwise, it is invalid.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="wh">
+                    <h3>Advantages of DSA</h3>
+                    <ul>
+                        <li>Provides high security and ensures message integrity.</li>
+                        <li>Efficient in signature generation and verification processes.</li>
+                        <li>Widely used in applications requiring legal digital signatures (e.g., certificates).</li>
+                    </ul>
+                </div>
+                <div class="wh">
+                    <h3>Applications of DSA</h3>
+                    <ul>
+                        <li>Used in secure email systems (e.g., PGP, S/MIME).</li>
+                        <li>Implemented in digital certificates and Public Key Infrastructure (PKI).</li>
+                        <li>Ensures authenticity in software distribution and updates.</li>
+                        <li>Used in blockchain systems for transaction validation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=4lVaf-fCYdE" target="_blank">Message Authentication video
+                    lecture &neArr;</a></li>
+            <li><a href="https://youtu.be/7ZKwKVn4utw?si=mtkyZptk7XMrvDRl" target="_blank">MD-5 video lecture
+                    &neArr;</a></li>
+            <li><a href="https://youtu.be/YBZRHb1o8x0?si=WbUqAPT2XiuROMeN" target="_blank">SHA video lecture &neArr;</a>
+            </li>
+            <li><a href="https://youtu.be/xPRdrzo46HI?si=aLVPTDTFpyVhZ3fO" target="_blank">Digital Signature video
+                    lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

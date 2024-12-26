@@ -295,22 +295,26 @@
         <div class="wh">
             <h2>RC5 Algorithm (Rivest Cipher)</h2>
             <ul>
-                <li>A symmetric key block cipher encryption algorithm.</li>
-                <li>Processes two-word blocks at a time; the plaintext is divided into two equal-sized blocks.</li>
-                <li>It has three main parameters:
+                <li>RC5 ek symmetric key block cipher encryption algorithm hai, jo same key ka use karta hai encryption
+                    aur decryption dono ke liye.</li>
+                <li>Yeh algorithm plaintext ko two-word blocks mein process karta hai; matlab plaintext ko do
+                    equal-sized blocks mein divide kiya jata hai.</li>
+                <li>RC5 ke teen main parameters hain:
                     <ol>
-                        <li><strong>w</strong>: Word size (16, 32, or 64 bits).</li>
-                        <li><strong>r</strong>: Number of rounds (can range from 0 to 255).</li>
-                        <li><strong>b</strong>: Key size in bits (ranges from 0 to 255).</li>
+                        <li><strong>w</strong>: Word size (yeh 16, 32, ya 64 bits ho sakta hai).</li>
+                        <li><strong>r</strong>: Number of rounds (0 se 255 ke beech kuch bhi ho sakta hai).</li>
+                        <li><strong>b</strong>: Key size in bits (yeh 0 se 255 ke range mein hoti hai).</li>
                     </ol>
-                    <p>These parameters are chosen based on the requirements of the input plaintext.</p>
+                    <p>Yeh parameters plaintext ke requirements ke basis par choose kiye jate hain.</p>
                 </li>
-                <li>The algorithm consists of three main components:
+                <li>Algorithm ke main components teen hain:
                     <ol>
-                        <li><strong>Key Expansion</strong>: Expands the secret key into a series of subkeys.</li>
-                        <li><strong>Encryption</strong>: Transforms plaintext into ciphertext using subkeys.</li>
-                        <li><strong>Decryption</strong>: Reverses the encryption process to retrieve the original
-                            plaintext.</li>
+                        <li><strong>Key Expansion</strong>: Original secret key ko expand karke subkeys ka ek series
+                            generate karta hai.</li>
+                        <li><strong>Encryption</strong>: Subkeys ka use karke plaintext ko ciphertext mein transform
+                            karta hai.</li>
+                        <li><strong>Decryption</strong>: Encryption steps ko reverse karke original plaintext ko
+                            retrieve karta hai.</li>
                     </ol>
                 </li>
             </ul>
@@ -318,30 +322,30 @@
             <div class="in">
                 <h3>Block Diagram</h3>
                 <ul>
-                    <li>The secret key is first processed through the <strong>Key Expansion Algorithm</strong> to
-                        generate multiple subkeys. For example, a 128-bit secret key can be expanded into a sequence of
-                        subkeys depending on the block size.</li>
-                    <li>These subkeys are then used during the encryption rounds to transform the plaintext into
-                        ciphertext.</li>
-                    <li>During decryption, the same subkeys are used in reverse order to retrieve the original
-                        plaintext.</li>
+                    <li>Secret key ko pehle <strong>Key Expansion Algorithm</strong> ke through process kiya jata hai
+                        taaki multiple subkeys generate ho sakein. Example ke liye, ek 128-bit secret key ko expand
+                        karke subkeys ki ek sequence banai ja sakti hai jo block size par depend karti hai.</li>
+                    <li>Encryption rounds ke dauraan yeh subkeys plaintext ko ciphertext mein transform karte hain.</li>
+                    <li>Decryption mein, wahi subkeys reverse order mein use hoti hain taaki original plaintext wapas
+                        mil sake.</li>
                 </ul>
-                <img src="../../images/cry25.jpeg" alt="">
+                <img src="../../images/cry25.jpeg" alt="Block Diagram of RC5">
             </div>
 
             <div class="in">
                 <h3>What Happens in Each Stage?</h3>
                 <h4>1. Key Expansion</h4>
                 <ul>
-                    <li>Key expansion is a preprocessing step that generates a large number of subkeys from the original
-                        secret key.</li>
+                    <li>Yeh preprocessing step hai jo secret key se ek large number of subkeys generate karta hai.</li>
                 </ul>
                 <p><strong>Steps:</strong></p>
                 <ol>
-                    <li>The plaintext of 64 bits is divided into two equal blocks: A (32 bits) and B (32 bits).</li>
-                    <li>The secret key is expanded into a subkey array <strong>S</strong>, containing 2(r+1) subkeys
-                        (e.g., S[0], S[1], ..., S[2r+1]).</li>
-                    <li>Initial values for A and B are created by adding the first two subkeys:
+                    <li>64-bit plaintext ko do equal blocks mein divide kiya jata hai: <strong>A (32 bits)</strong> aur
+                        <strong>B (32 bits)</strong>.
+                    </li>
+                    <li>Secret key ko expand karke ek subkey array <strong>S</strong> banaya jata hai, jo 2(r+1) subkeys
+                        rakhta hai (e.g., S[0], S[1], ..., S[2r+1]).</li>
+                    <li>Aur phir A aur B ke initial values yeh hoti hain:
                         <ul>
                             <li><strong>A = A + S[0]</strong></li>
                             <li><strong>B = B + S[1]</strong></li>
@@ -351,26 +355,29 @@
 
                 <h4>2. Encryption</h4>
                 <ul>
-                    <li>Encryption involves multiple rounds of transformations using subkeys.</li>
-                    <li>Each round performs the following steps:
+                    <li>Encryption mein multiple rounds hote hain, jisme transformations subkeys ke saath ki jati hain.
+                    </li>
+                    <li>Har round mein:
                         <ol>
-                            <li>A is updated using a combination of bitwise operations (XOR, left rotation) and addition
-                                with a subkey.</li>
-                            <li>B is updated in a similar manner using the next subkey.</li>
+                            <li><strong>A</strong>: Bitwise operations (XOR, left rotation) aur addition subkey ke saath
+                                ki jati hai taaki A update ho.</li>
+                            <li><strong>B</strong>: Usi tarah bitwise operations aur agle subkey ke saath update hota
+                                hai.</li>
                         </ol>
                     </li>
-                    <li>After completing all rounds, the output is combined to form the final ciphertext.</li>
+                    <li>Sab rounds ke baad, A aur B ko combine karke final ciphertext banaya jata hai.</li>
                 </ul>
 
                 <h4>3. Decryption</h4>
                 <ul>
-                    <li>The decryption process reverses the encryption steps.</li>
-                    <li>It uses the same subkeys, but applies them in reverse order.</li>
-                    <li>By undoing the operations (e.g., subtracting instead of adding, reversing rotations), the
-                        ciphertext is converted back into the original plaintext.</li>
+                    <li>Decryption ka process encryption steps ko reverse karta hai.</li>
+                    <li>Same subkeys ka use hota hai, lekin reverse order mein apply kiya jata hai.</li>
+                    <li>Operations ko undo kiya jata hai (e.g., addition ko subtract karna, rotations ko reverse karna)
+                        taaki ciphertext se original plaintext wapas mile.</li>
                 </ul>
             </div>
         </div>
+
         <div class="wh">
             <h2>Symmetric Key Distribution</h2>
             <ul>
@@ -383,162 +390,142 @@
                 </li>
             </ul>
 
-            < class="in">
+            <div class="in">
                 <h3>Methods of Symmetric Key Distribution</h3>
-
                 <h4>1. Pre-Shared Key</h4>
-                <ul>
-                    <li>Is method mein, secret key ko manually sender aur receiver ke beech pehle se share kiya jata
-                        hai,
-                        communication shuru hone se pehle.</li>
-                    <li>Yeh key sharing secure channels ke through ki ja sakti hai, jaise:
-                        <ul>
-                            <li>Face-to-face meetings.</li>
-                            <li>Trusted couriers ke through delivery.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Advantages:</strong>
-                        <ul>
-                            <li>Small-scale systems ke liye simple aur direct hai.</li>
-                            <li>Koi additional infrastructure ki zaroorat nahi hoti.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Drawbacks:</strong>
-                        <ul>
-                            <li>Large-scale ya geographically distributed systems ke liye yeh practical nahi hai.</li>
-                            <li>Key transmission ke dauran interception ka risk hota hai, matlab key ko secure nahi
-                                rakha ja
-                                sakta hai.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
-                <ul>
-                    <li>Is method mein, ek trusted third party hoti hai, jise <strong>Key Distribution Center
-                            (KDC)</strong>
-                        kehte hain, jo securely keys ka exchange facilitate karta hai.</li>
-                    <li><strong>Steps:</strong>
-                        <ol>
-                            <li>Sender aur receiver apne-apne secure connections establish karte hain KDC ke saath.</li>
-                            <li>KDC ek unique session key generate karta hai jo sender aur receiver ke beech
-                                communication
-                                ke liye use hota hai.</li>
-                            <li>Yeh session key securely KDC ke through dono parties ko transmit ki jati hai.</li>
-                        </ol>
-                    </li>
-                    <li><strong>Advantages:</strong>
-                        <ul>
-                            <li>Sender aur receiver ke beech direct key sharing ki zaroorat nahi hoti.</li>
-                            <li>Larger systems ke liye scalable hai, matlab yeh badhe systems mein bhi efficiently kaam
-                                karta hai.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Drawbacks:</strong>
-                        <ul>
-                            <li>KDC ek single point of failure ban jata hai, matlab agar KDC compromised ho jaye, toh
-                                poora
-                                system risk pe aa jata hai.</li>
-                            <li>Isme additional infrastructure ki zaroorat hoti hai aur KDC pe trust bhi zaroori hai, jo
-                                kabhi kabhi risky ho sakta hai.</li>
-                        </ul>
-                    </li>
-                </ul>
+<ul>
+    <li><strong>Pre-Shared Key (PSK)</strong> ek aisa method hai jisme sender aur receiver ek secret key ko manually share karte hain, communication start hone se pehle.</li>
+    <li>Yeh key securely share karne ke liye secure channels ka use kiya jata hai, jaise:
+        <ul>
+            <li><strong>Face-to-face meetings:</strong> Dono parties ek doosre se directly milke key exchange kar sakte hain.</li>
+            <li><strong>Trusted couriers:</strong> Kisi reliable messenger ya service ke through key ko deliver kiya jata hai.</li>
+        </ul>
+    </li>
+    <li><strong>Advantages:</strong>
+        <ul>
+            <li><strong>Simple aur direct:</strong> Small-scale systems ke liye yeh approach straightforward aur asaan hoti hai.</li>
+            <li><strong>Infrastructure-free:</strong> Is method mein kisi additional hardware ya software ki zarurat nahi hoti.</li>
+        </ul>
+    </li>
+    <li><strong>Drawbacks:</strong>
+        <ul>
+            <li><strong>Scalability issue:</strong> Large-scale ya geographically spread systems ke liye yeh practical nahi hai, kyunki manually har receiver tak key pahuchana mushkil hota hai.</li>
+            <li><strong>Interception risk:</strong> Agar key transmission ke dauraan intercept ho gayi, to security compromise ho sakti hai.</li>
+        </ul>
+    </li>
+</ul>
 
 
-                <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
-                <ul>
-                    <li><strong>Public key cryptography</strong> ka use symmetric keys ko securely exchange karne ke
-                        liye
-                        hota hai.</li>
-                    <li><strong>Steps:</strong>
-                        <ol>
-                            <li>Sender receiver ke public key se symmetric key ko encrypt karta hai.</li>
-                            <li>Yeh encrypted key receiver ko transmit ki jati hai.</li>
-                            <li>Receiver apne private key se encrypted key ko decrypt karta hai.</li>
-                        </ol>
-                    </li>
-                    <li><strong>Advantages:</strong>
-                        <ul>
-                            <li>Yeh method insecure channels par bhi secure hota hai, matlab key ko transfer karte waqt
-                                uski
-                                security maintained rehti hai.</li>
-                            <li>Yeh method large systems ke liye scalable hai, matlab bade networks ya systems mein
-                                efficiently kaam kar sakta hai.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Drawbacks:</strong>
-                        <ul>
-                            <li>Yeh method ek functioning <strong>PKI (Public Key Infrastructure)</strong> ki zaroorat
-                                hoti
-                                hai, jo ki setup aur maintain karna thoda complex ho sakta hai.</li>
-                            <li>Yeh additional computational overhead bhi introduce karta hai, matlab systems ko zyada
-                                processing power ki zaroorat hoti hai.</li>
-                        </ul>
-                    </li>
-                </ul>
+<h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
+<ul>
+    <li><strong>Key Distribution Center (KDC):</strong> Yeh ek trusted third party hoti hai jo secure key exchange ko facilitate karti hai.</li>
+    <li><strong>Steps involved:</strong>
+        <ol>
+            <li><strong>Secure connection establish karna:</strong> Sender aur receiver dono apne secure connection KDC ke saath setup karte hain.</li>
+            <li><strong>Session key generation:</strong> KDC ek unique session key generate karta hai jo sender aur receiver ke beech communication ke liye use hoti hai.</li>
+            <li><strong>Session key ka secure transmission:</strong> KDC yeh session key securely dono parties ko transmit karta hai.</li>
+        </ol>
+    </li>
+    <li><strong>Advantages:</strong>
+        <ul>
+            <li><strong>No direct key sharing:</strong> Sender aur receiver ko directly key exchange karne ki zarurat nahi hoti, jo security ko badhata hai.</li>
+            <li><strong>Scalable:</strong> Yeh approach bade aur distributed systems ke liye kaafi effective hai.</li>
+        </ul>
+    </li>
+    <li><strong>Drawbacks:</strong>
+        <ul>
+            <li><strong>Single point of failure:</strong> Agar KDC fail ho jaye ya compromise ho jaye, toh pura system impact hoga.</li>
+            <li><strong>Additional infrastructure:</strong> Is approach ke liye KDC setup karna padta hai, aur KDC par trust karna zaruri hota hai.</li>
+        </ul>
+    </li>
+</ul>
 
-                <h4>4. Diffie-Hellman Key Exchange</h4>
+
+
+<h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
+<ul>
+    <li><strong>Public Key Cryptography:</strong> Yeh method symmetric keys ko securely exchange karne ke liye public key cryptography ka use karta hai.</li>
+    <li><strong>Steps involved:</strong>
+        <ol>
+            <li><strong>Encrypt symmetric key:</strong> Sender symmetric key ko receiver ke public key se encrypt karta hai.</li>
+            <li><strong>Transmit encrypted key:</strong> Sender encrypted key ko receiver tak bhejta hai.</li>
+            <li><strong>Decrypt symmetric key:</strong> Receiver apni private key ka use karke encrypted key ko decrypt karta hai.</li>
+        </ol>
+    </li>
+    <li><strong>Advantages:</strong>
+        <ul>
+            <li><strong>Secure communication:</strong> Yeh method insecure channels par bhi secure communication ensure karta hai.</li>
+            <li><strong>Scalable:</strong> Bade aur complex systems ke liye effective hai.</li>
+        </ul>
+    </li>
+    <li><strong>Drawbacks:</strong>
+        <ul>
+            <li><strong>PKI infrastructure requirement:</strong> Is method ke liye ek functioning PKI (Public Key Infrastructure) setup hona zaruri hai.</li>
+            <li><strong>Computational overhead:</strong> Encryption aur decryption ki wajah se system par additional computational load aata hai.</li>
+        </ul>
+    </li>
+</ul>
+
+
+<h4>4. Diffie-Hellman Key Exchange</h4>
+<ul>
+    <li><strong>What is it?</strong> Diffie-Hellman ek mathematical algorithm hai jo do parties ko insecure channel par bhi ek shared symmetric key generate karne ki permission deta hai.</li>
+    <li><strong>How does it work?</strong>
+        <ol>
+            <li><strong>Agree on public parameters:</strong> Dono parties ek public base aur ek public modulus par agree karte hain.</li>
+            <li><strong>Generate private and public values:</strong> Har party apna ek private key select karti hai aur public base aur modulus ka use karke ek public value generate karti hai.</li>
+            <li><strong>Exchange and compute shared key:</strong> Dono parties apne public values exchange karte hain aur apne private key ka use karke shared secret key compute karte hain.</li>
+        </ol>
+    </li>
+    <li><strong>Advantages:</strong>
+        <ul>
+            <li><strong>Secure communication:</strong> Yeh method insecure channels par securely shared key generate karta hai.</li>
+            <li><strong>No pre-shared secret required:</strong> Pehle se koi secret share karne ki zarurat nahi hoti.</li>
+        </ul>
+    </li>
+    <li><strong>Drawbacks:</strong>
+        <ul>
+            <li><strong>Man-in-the-middle attack risk:</strong> Agar authentication ka use nahi kiya gaya, to yeh attacks ke liye vulnerable ho sakta hai.</li>
+            <li><strong>Limited functionality:</strong> Yeh sirf key agreement ke liye hai, encryption ke liye nahi.</li>
+        </ul>
+    </li>
+</ul>
+
+
+
+            </div>
+
+            <div class="in">
+                <h3>Challenges in Symmetric Key Distribution</h3>
                 <ul>
-                    <li><strong>Diffie-Hellman</strong> ek mathematical algorithm hai jo do parties ko insecure channel
-                        ke
-                        through ek shared symmetric key generate karne mein madad karta hai.</li>
-                    <li><strong>Steps:</strong>
-                        <ol>
-                            <li>Dono parties ek public base aur public modulus ke upar agreement karte hain.</li>
-                            <li>Har party apni private key select karti hai aur agreed parameters ka use karke ek public
-                                value generate karti hai.</li>
-                            <li>Public values exchange hone ke baad, dono parties apne private key ka use karke shared
-                                secret key compute karte hain.</li>
-                        </ol>
-                    </li>
-                    <li><strong>Advantages:</strong>
-                        <ul>
-                            <li>Insecure channels par bhi secure key generation hota hai, matlab yeh method unsafe
-                                networks
-                                pe bhi kaam karta hai.</li>
-                            <li>Is method ko use karne ke liye koi prior shared secret key ki zaroorat nahi hoti, jo ek
-                                extra benefit hai.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Drawbacks:</strong>
-                        <ul>
-                            <li>Agar authentication use na kiya jaye toh <strong>man-in-the-middle attacks</strong> ka
-                                risk
-                                hota hai, jisme attacker communication ko intercept kar sakta hai.</li>
-                            <li>Yeh method sirf key agreement ke liye hota hai, actual encryption ke liye nahi.</li>
-                        </ul>
-                    </li>
+                    <li><strong>Secure key transfer without interception</strong>: Yeh challenge hai ki key ko securely
+                        transfer
+                        kiya jaye bina kisi third party ke usse intercept kiye. Agar key ko beech mein koi attack kar
+                        le,
+                        toh
+                        poora encryption process compromised ho sakta hai.</li>
+                    <li><strong>Managing keys in large systems</strong>: Jab ek system mein bohot saare users ho, tab
+                        keys
+                        ko
+                        manage karna thoda mushkil ho jata hai. Har user ke liye unique keys generate karna aur unhe
+                        securely
+                        manage karna complex ho sakta hai.</li>
+                    <li><strong>Handling key revocation and replacement</strong>: Agar kisi key ko compromise ho jaata
+                        hai
+                        (yaani wo leak ho gayi ho), toh usse revoke karna aur nayi key replace karna zaroori hota hai.
+                        Yeh
+                        process properly handle karna challenging ho sakta hai, kyunki har jaga par naye keys distribute
+                        karne
+                        padte hain.</li>
                 </ul>
+            </div>
 
         </div>
-
-        <div class="in">
-            <h3>Challenges in Symmetric Key Distribution</h3>
-            <ul>
-                <li><strong>Secure key transfer without interception</strong>: Yeh challenge hai ki key ko securely
-                    transfer
-                    kiya jaye bina kisi third party ke usse intercept kiye. Agar key ko beech mein koi attack kar le,
-                    toh
-                    poora encryption process compromised ho sakta hai.</li>
-                <li><strong>Managing keys in large systems</strong>: Jab ek system mein bohot saare users ho, tab keys
-                    ko
-                    manage karna thoda mushkil ho jata hai. Har user ke liye unique keys generate karna aur unhe
-                    securely
-                    manage karna complex ho sakta hai.</li>
-                <li><strong>Handling key revocation and replacement</strong>: Agar kisi key ko compromise ho jaata hai
-                    (yaani wo leak ho gayi ho), toh usse revoke karna aur nayi key replace karna zaroori hota hai. Yeh
-                    process properly handle karna challenging ho sakta hai, kyunki har jaga par naye keys distribute
-                    karne
-                    padte hain.</li>
-            </ul>
-        </div>
-
-
         <div class="wh">
             <h2>Random Number Generators in Cryptography</h2>
             <ul>
-                <li>Random numbers are crucial in cryptography for tasks like key generation, nonce creation, and secure
+                <li>Random numbers are crucial in cryptography for tasks like key generation, nonce creation, and
+                    secure
                     communication.</li>
                 <li>They ensure unpredictability, making cryptographic algorithms secure against attacks.</li>
                 <li>There are two main types of random number generators:
@@ -580,7 +567,8 @@
                     <li>Generate randomness using mathematical algorithms based on a seed value.</li>
                     <li><strong>Features:</strong>
                         <ul>
-                            <li>Deterministic: Output depends on the seed, making it reproducible if the seed is known.
+                            <li>Deterministic: Output depends on the seed, making it reproducible if the seed is
+                                known.
                             </li>
                             <li>Faster than TRNGs and suitable for software implementations.</li>
                         </ul>
@@ -617,12 +605,15 @@
             <div class="in">
                 <h3>Applications in Cryptography</h3>
                 <ul>
-                    <li><strong>Key Generation:</strong> Random numbers are used to generate cryptographic keys that are
+                    <li><strong>Key Generation:</strong> Random numbers are used to generate cryptographic keys that
+                        are
                         unpredictable.</li>
-                    <li><strong>Initialization Vectors (IVs):</strong> Randomness ensures that IVs are unique for each
+                    <li><strong>Initialization Vectors (IVs):</strong> Randomness ensures that IVs are unique for
+                        each
                         encryption operation.</li>
                     <li><strong>Nonces:</strong> Unique random values prevent replay attacks in protocols.</li>
-                    <li><strong>Salt Values:</strong> Random salts ensure secure password hashing by preventing rainbow
+                    <li><strong>Salt Values:</strong> Random salts ensure secure password hashing by preventing
+                        rainbow
                         table attacks.</li>
                 </ul>
             </div>
@@ -631,9 +622,11 @@
                 <h3>Challenges in Random Number Generation</h3>
                 <ul>
                     <li><strong>Bias:</strong> Random numbers must be uniformly distributed without any bias.</li>
-                    <li><strong>Predictability:</strong> Ensuring unpredictability is critical, especially for PRNGs.
+                    <li><strong>Predictability:</strong> Ensuring unpredictability is critical, especially for
+                        PRNGs.
                     </li>
-                    <li><strong>Entropy Source:</strong> TRNGs rely on sufficient entropy from physical phenomena, which
+                    <li><strong>Entropy Source:</strong> TRNGs rely on sufficient entropy from physical phenomena,
+                        which
                         can be limited.</li>
                 </ul>
             </div>
@@ -642,7 +635,8 @@
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=ngqtEbxQLBE" target="_blank">Blowfish Algorithm Video lecture
+            <li><a href="https://www.youtube.com/watch?v=ngqtEbxQLBE" target="_blank">Blowfish Algorithm Video
+                    lecture
                     &neArr;</a>
             </li>
             <li><a href="https://www.youtube.com/watch?v=909pwcyqVFQ" target="_blank">IDEA Algorithm Video lecture
