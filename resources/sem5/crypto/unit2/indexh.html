@@ -83,264 +83,273 @@
         <div class="wh">
             <h2>Modern Block Ciphers Components</h2>
             <ul>
-                <li>In modern cryptography, block ciphers are widely used to secure data. These ciphers break the
-                    plaintext (the data we want to protect) into fixed-size chunks, or "blocks," and then encrypt each
-                    block using a complex series of steps. Each of these steps involves mathematical operations and
-                    transformations that make it nearly impossible for unauthorized users to recover the original data
-                    without the correct key. </li>
-                <li>To understand how block ciphers work, we need to look at their key components. These components are
-                    like building blocks of the encryption process, each serving a unique purpose in turning readable
-                    data into ciphertext (encrypted data).</li>
+                <li>Modern cryptography mein block ciphers kaafi commonly use hote hain data ko secure karne ke liye. In
+                    ciphers ka kaam hai plaintext (yaani jo data aapko protect karna hai) ko fixed-size chunks ya blocks
+                    mein todna aur fir har block ko ek complex series of steps ke through encrypt karna.</li>
+                <li>Har step mein mathematical operations aur transformations hote hain jo itne complex hote hain ki
+                    bina sahi key ke original data ko recover karna almost impossible ho jata hai.</li>
+                <li>Block ciphers kaise kaam karte hain ye samajhne ke liye humein unke key components ko samajhna hoga.
+                    Ye components encryption process ke building blocks jaise hote hain, aur har ek ka apna alag purpose
+                    hota hai jo readable data ko ciphertext (encrypted data) mein badal dete hain.</li>
             </ul>
+
             <div class="in">
                 <h3>S-Box</h3>
                 <ul>
-                    <li>An S-Box, or Substitution Box, is a critical component in modern block ciphers. Its job is to
-                        take a small set of input bits and transform them into a different set of output bits. This
-                        process is known as substitution, where one set of values is substituted for another to confuse
-                        the relationship between the plaintext and the ciphertext. This confusion is an essential part
-                        of encryption because it makes it harder for attackers to detect patterns and break the cipher.
-                    </li>
-                    <li>In simpler terms, the S-Box replaces bits of the input with new bits according to a predefined
-                        table. This substitution makes it extremely difficult for attackers to predict or
-                        reverse-engineer the encryption process without knowing the key.</li>
-                    <li>The S-Box is predefined by the designers of the encryption algorithm and is standardized to
-                        provide consistent, secure encryption. Its primary purpose is to make the cipher resistant to
-                        cryptographic attacks like differential and linear cryptanalysis. A well-designed S-Box ensures
-                        that even small changes in the input result in unpredictable changes in the output, enhancing
-                        security.</li>
+                    <li><strong>S-Box ka matlab:</strong> Substitution Box. Ye modern block ciphers ka ek important
+                        component hota hai. Iska kaam hai ek small set of input bits lena aur unhe ek alag set of output
+                        bits mein transform karna. Is process ko substitution kehte hain.</li>
+                    <li><strong>Confusion introduce karna:</strong> S-Box ka purpose hai plaintext aur ciphertext ke
+                        beech ka relationship confuse karna. Jab attacker patterns ko detect nahi kar pata, tab cipher
+                        todna mushkil ho jata hai.</li>
+                    <li>S-Box predefined hota hai, jo encryption algorithm ke designers ke dwara banaya jata hai. Iska
+                        design aise hota hai ki ye cryptographic attacks (jaise differential aur linear cryptanalysis)
+                        se resistant rahe.</li>
+                    <li>Ek well-designed S-Box ensure karta hai ki agar input mein thoda bhi change ho, toh output
+                        unpredictable ho jaye. Isse encryption aur secure ho jata hai.</li>
                 </ul>
-                <p><strong>Simple Example:</strong></p>
-                <p>Imagine we have an input of 2 bits. The S-Box for this system might be a simple table like this:</p>
+                <p><strong>Ek simple example dekhein:</strong></p>
+                <p>Sochiye humare paas 2 bits ka input hai. Uska S-Box kuch aisa ho sakta hai:</p>
                 <img src="../../images/cry9.png" alt="">
-                <p>How it works:</p>
+                <p><strong>Kaise kaam karta hai:</strong></p>
                 <ul>
-                    <li>Suppose our input is 01. According to the table, the output will be 10.</li>
-                    <li>The substitution is straightforward: you just replace the input with the corresponding output
-                        based on the S-Box.</li>
+                    <li>Agar input 01 hai, toh S-Box table ke hisaab se output hoga 10.</li>
+                    <li>Substitution process simply input bits ko S-Box ke according replace kar deta hai.</li>
                 </ul>
-                <p>This simple substitution hides the original bits and makes it harder for someone to understand what
-                    the input was by looking at the output.</p>
-                <p><strong>Role of the S-Box in Encryption:</strong></p>
+                <p>Ye substitution original bits ko hide kar deta hai aur output dekh ke input samajhna mushkil bana
+                    deta hai.</p>
+                <p><strong>S-Box ka encryption mein role:</strong></p>
                 <ul>
-                    <li>The goal of the S-Box is to introduce confusion in the encryption process. Confusion means that
-                        the relationship between the key and the ciphertext is obscured. An attacker should not be able
-                        to easily deduce what key was used just by analyzing the ciphertext.</li>
-                    <li>To make it effective, modern block ciphers typically use many S-Boxes, performing multiple
-                        rounds of substitution on the data, often combined with other transformations (like
-                        permutations). This makes it extremely difficult to reverse the encryption without knowing the
-                        key.</li>
+                    <li>S-Box ka goal hai encryption process mein confusion dalna. Confusion ka matlab hai ki key aur
+                        ciphertext ke beech ka relationship obscure ho jaye, taki attacker ciphertext analyze karke key
+                        deduce na kar sake.</li>
+                    <li>Effective banane ke liye modern block ciphers generally bohot saari S-Boxes ka use karte hain
+                        aur multiple rounds of substitution karte hain. Iske saath permutations jaise aur
+                        transformations bhi hote hain. Ye sab milke encryption process ko itna difficult bana dete hain
+                        ki bina key ke usse reverse karna lagbhag impossible ho jata hai.</li>
                 </ul>
             </div>
+
 
             <div class="in">
                 <h3>P-Box</h3>
                 <ul>
-                    <li>The P-Box, or Permutation Box, is a crucial component of modern block ciphers. Its role is to
-                        shuffle the positions of the input bits without changing their values. This process is known as
-                        permutation, and it is essential for adding diffusion to the encryption process. Diffusion
-                        ensures
-                        that each bit of the plaintext influences many bits of the ciphertext, making it harder for
-                        attackers to trace the encryption back to the original message.</li>
-                    <li>In simpler terms, the P-Box rearranges bits in the input data according to a predefined pattern.
-                        While the S-Box changes the actual values of the bits, the P-Box only changes their positions.
-                        This
-                        bit shuffling plays a critical role in making the encryption more resistant to attacks.</li>
-                    <li>The P-Box is predefined by the encryption algorithm's designers and is standardized to ensure
-                        security. The purpose of the P-Box is to spread the effect of individual bits throughout the
-                        entire
-                        data block, making it difficult for attackers to find patterns that could help them break the
-                        cipher.</li>
+                    <li><strong>P-Box ka matlab:</strong> Permutation Box. Ye modern block ciphers ka ek crucial
+                        component hota hai. Iska kaam hai input bits ki positions ko shuffle karna bina unki values ko
+                        badle. Is process ko permutation kehte hain.</li>
+                    <li><strong>Diffusion introduce karna:</strong> P-Box ka main purpose hai encryption process mein
+                        diffusion dalna. Diffusion ka matlab hai ki plaintext ke har bit ka influence ciphertext ke
+                        multiple bits par ho. Isse attacker ke liye encryption ko trace karke original message tak
+                        pahunchna mushkil ho jata hai.</li>
+                    <li><strong>Simple explanation:</strong> Agar S-Box bits ki values badalta hai, toh P-Box sirf unki
+                        positions ko rearrange karta hai. Ye bit shuffling encryption ko zyada secure banati hai.</li>
+                    <li>P-Box predefined hota hai, algorithm ke designers ke dwara banaya jata hai, aur standardized
+                        hota hai. Iska purpose hai har bit ka effect pure data block mein spread karna, taki patterns ko
+                        detect karna mushkil ho.</li>
                 </ul>
                 <p><strong>Simple Example:</strong></p>
-                <p>Let’s say we have an 8-bit input: 10111001. The P-Box will rearrange the positions of these bits
-                    based on
-                    a predefined pattern. Assume the predefined permutation pattern is:</p>
+                <p>Maan lijiye humare paas ek 8-bit input hai: <code>10111001</code>. P-Box iske bits ko ek predefined
+                    pattern ke according rearrange karega. Maan lijiye predefined permutation pattern kuch aisa hai:</p>
                 <img src="../../images/cry10.png" alt="">
-                <p>How it works:</p>
+                <p><strong>Kaise kaam karta hai:</strong></p>
                 <ul>
-                    <li>Now, using this pattern, the input 10111001 will be permuted as follows:
+                    <li>Is pattern ke hisaab se, input <code>10111001</code> ko permute karte hain:
                         <ul>
-                            <li>Bit in position 1 (1) moves to position 4.</li>
-                            <li>Bit in position 2 (0) stays in position 2.</li>
-                            <li>Bit in position 3 (1) moves to position 6.</li>
-                            <li>Bit in position 4 (1) moves to position 8.</li>
-                            <li>Bit in position 5 (1) moves to position 1.</li>
-                            <li>Bit in position 6 (0) moves to position 7.</li>
-                            <li>Bit in position 7 (0) moves to position 5.</li>
-                            <li>Bit in position 8 (1) moves to position 3.</li>
+                            <li>Position 1 par jo bit hai (1), wo position 4 par chali jayegi.</li>
+                            <li>Position 2 par jo bit hai (0), wahi position 2 par rahegi.</li>
+                            <li>Position 3 par jo bit hai (1), wo position 6 par chali jayegi.</li>
+                            <li>Position 4 par jo bit hai (1), wo position 8 par chali jayegi.</li>
+                            <li>Position 5 par jo bit hai (1), wo position 1 par chali jayegi.</li>
+                            <li>Position 6 par jo bit hai (0), wo position 7 par chali jayegi.</li>
+                            <li>Position 7 par jo bit hai (0), wo position 5 par chali jayegi.</li>
+                            <li>Position 8 par jo bit hai (1), wo position 3 par chali jayegi.</li>
                         </ul>
                     </li>
-                    <li>The output after applying the P-Box will be: 11100110.</li>
+                    <li>Is permutation ke baad output hoga: <code>11100110</code>.</li>
                 </ul>
-                <p>This rearrangement spreads the influence of each bit across the entire block, adding an extra layer
-                    of
-                    security.</p>
-                <p><strong>Role of the P-Box in Encryption:</strong></p>
+                <p>Ye rearrangement har bit ka influence pure block mein spread karta hai, jo ek extra layer of security
+                    add karta hai.</p>
+                <p><strong>P-Box ka encryption mein role:</strong></p>
                 <ul>
-                    <li>The main goal of the P-Box is to introduce diffusion into the encryption process. Diffusion
-                        means
-                        that changes in the plaintext should spread throughout the ciphertext. Even a small change in
-                        the
-                        plaintext should result in significant, unpredictable changes in the ciphertext.</li>
-                    <li>Similar to the S-Box, modern block ciphers often use multiple P-Boxes in various rounds of
-                        encryption, combined with other transformations. This makes the overall encryption process
-                        highly
-                        secure and resistant to cryptanalysis.</li>
+                    <li><strong>Diffusion dalna:</strong> P-Box ka main goal hai diffusion introduce karna. Diffusion ka
+                        matlab hai ki plaintext ke chhote se change ka bhi ciphertext par significant aur unpredictable
+                        effect ho.</li>
+                    <li>Modern block ciphers generally multiple P-Boxes ka use karte hain, har round mein alag
+                        transformations ke saath. Ye overall encryption process ko highly secure aur cryptanalysis se
+                        resistant banata hai.</li>
                 </ul>
-
             </div>
+
             <div class="in">
                 <h3>Exclusive OR (XOR)</h3>
                 <ul>
-                    <li>The Exclusive OR, or XOR, is a fundamental logical operation used extensively in cryptography,
-                        especially in modern block ciphers. The XOR operation compares two input bits and produces an
-                        output
-                        bit based on a simple rule: the output is 1 if the input bits are different, and 0 if they are
-                        the
-                        same.</li>
-                    <li>XOR is widely used because it is a reversible operation. In encryption, it allows bits to be
-                        flipped
-                        in a predictable way, but without the key (or original bits), it is difficult for an attacker to
-                        reverse the operation. This makes XOR useful for combining keys with plaintext to produce
-                        ciphertext.</li>
-                    <li>In modern block ciphers, XOR is often used in combination with S-Boxes and P-Boxes to create
-                        secure,
-                        complex encryption systems. Its ability to provide both diffusion and confusion, when used
-                        correctly, makes it a critical component in many encryption algorithms.</li>
+                    <li><strong>XOR ka matlab:</strong> Exclusive OR ek logical operation hai jo cryptography mein
+                        extensively use hoti hai, especially in modern block ciphers. Iska ek simple rule hai: agar dono
+                        input bits alag ho (different), toh output 1 hota hai; agar same ho, toh output 0 hota hai.</li>
+                    <li><strong>Reversible operation:</strong> XOR ka sabse bada advantage ye hai ki ye reversible hoti
+                        hai. Encryption mein, ye bits ko predictable way mein flip karne deti hai, lekin bina key ke
+                        isko reverse karna mushkil hota hai. Isi wajah se XOR ko plaintext aur key ko combine karke
+                        ciphertext banane ke liye use kiya jata hai.</li>
+                    <li>Modern block ciphers mein, XOR ka S-Boxes aur P-Boxes ke saath combination hota hai jo secure
+                        aur complex encryption systems banata hai. Iska role confusion aur diffusion dono provide karne
+                        ka hota hai, jo cryptographic security ke liye critical hai.</li>
                 </ul>
 
                 <p><strong>Simple Example:</strong></p>
-                <p>Consider two 4-bit inputs: <code>1010</code> and <code>1100</code>. The XOR operation compares each
-                    bit
-                    from both inputs:</p>
+                <p>Chaliye ek example dekhte hain. Maan lijiye do 4-bit inputs hain: <code>1010</code> aur
+                    <code>1100</code>. XOR operation har bit ko compare karta hai:
+                </p>
                 <img src="../../images/cry11.png" alt="">
-                <p>How it works:</p>
+                <p><strong>Kaise kaam karta hai:</strong></p>
                 <ul>
-                    <li>First bit: <code>1 XOR 1 = 0</code> (since both bits are the same)</li>
-                    <li>Second bit: <code>0 XOR 1 = 1</code> (since the bits are different)</li>
-                    <li>Third bit: <code>1 XOR 0 = 1</code> (since the bits are different)</li>
-                    <li>Fourth bit: <code>0 XOR 0 = 0</code> (since both bits are the same)</li>
+                    <li>Pehla bit: <code>1 XOR 1 = 0</code> (kyunki dono bits same hain)</li>
+                    <li>Dusra bit: <code>0 XOR 1 = 1</code> (kyunki bits alag hain)</li>
+                    <li>Tisra bit: <code>1 XOR 0 = 1</code> (kyunki bits alag hain)</li>
+                    <li>Chautha bit: <code>0 XOR 0 = 0</code> (kyunki dono bits same hain)</li>
                 </ul>
-                <p>The result of the XOR operation is <code>0110</code>.</p>
+                <p>Is XOR operation ka result hoga: <code>0110</code>.</p>
 
-                <p><strong>Role of XOR in Encryption:</strong></p>
+                <p><strong>XOR ka encryption mein role:</strong></p>
                 <ul>
-                    <li>XOR is crucial in cryptography because of its reversibility. If you apply XOR twice with the
-                        same
-                        key, you get back the original data. This property allows encryption and decryption to work:
-                        encrypt
-                        with XOR, and decrypt by applying XOR again with the same key.</li>
-                    <li>XOR is used to combine the plaintext with the key during encryption. For example, if you XOR the
-                        key
-                        with the plaintext, you get ciphertext. To decrypt, you XOR the ciphertext with the same key,
-                        which
-                        reveals the original plaintext.</li>
-                    <li>In modern block ciphers, XOR is used repeatedly in various stages of encryption to ensure that
-                        changes in the plaintext or key result in unpredictable changes in the ciphertext, thereby
-                        enhancing
-                        security.</li>
+                    <li><strong>Reversibility:</strong> XOR cryptography mein isliye important hai kyunki ye reversible
+                        hota hai. Agar aap XOR operation do baar same key ke saath lagate ho, toh original data wapas
+                        milta hai. Ye property encryption aur decryption ke liye kaam aati hai.</li>
+                    <li><strong>Plaintext aur key combine karna:</strong> XOR ko plaintext aur key ko combine karne ke
+                        liye use kiya jata hai. Example ke liye, agar aap plaintext ko key ke saath XOR karte ho, toh
+                        ciphertext milta hai. Decrypt karne ke liye, ciphertext ko same key ke saath XOR karte ho, aur
+                        original plaintext wapas mil jata hai.</li>
+                    <li>Modern block ciphers mein, XOR ko encryption ke different stages mein baar-baar use kiya jata
+                        hai. Isse plaintext ya key ke chhote se change ka bhi ciphertext par unpredictable aur major
+                        effect hota hai, jo security ko enhance karta hai.</li>
                 </ul>
             </div>
+
             <div class="in">
                 <h3>Circular Shift</h3>
                 <ul>
-                    <li>A Circular Shift, also known as a rotation, is a technique used in modern block ciphers to
-                        rearrange bits in a specific way. Unlike a standard shift, where bits are moved to the left or
-                        right with zeros filling the gaps, a circular shift wraps the bits around, creating a continuous
-                        loop.</li>
-                    <li>This process enhances diffusion in the encryption process. Diffusion means that a change in one
-                        bit of the input will affect multiple bits in the output, which increases security. Circular
-                        shifts are often combined with other transformations like S-Boxes and P-Boxes to form complex
-                        encryption algorithms.</li>
+                    <li><strong>Circular Shift kya hai:</strong> Circular Shift, ya rotation, ek technique hai jo modern
+                        block ciphers mein use hoti hai bits ko ek specific tarike se rearrange karne ke liye. Standard
+                        shift se alag, jisme bits ko left ya right move kiya jata hai aur gaps ko zeros se fill kiya
+                        jata hai, Circular Shift mein bits wrap ho jati hain, ek continuous loop create karte hue.</li>
+                    <li><strong>Encryption mein fayda:</strong> Circular Shift diffusion enhance karta hai. Diffusion ka
+                        matlab hai ki agar input ke ek bit mein change karein, toh uska asar output ke multiple bits par
+                        hota hai. Ye security ko badhata hai. Circular Shifts ko aksar S-Boxes aur P-Boxes ke saath
+                        combine kiya jata hai taaki complex encryption algorithms ban sakein.</li>
                 </ul>
 
                 <p><strong>Example:</strong></p>
-                <p>For instance, if we have a 4-bit input: <strong>1011</strong>, performing a circular left shift by 1
-                    results in: <strong>0111</strong>. Here, the leftmost bit '1' moves to the rightmost position,
-                    illustrating how the bits wrap around.</p>
+                <p>Maan lijiye ek 4-bit input hai: <strong>1011</strong>. Agar hum ek circular left shift karein by 1,
+                    toh result hoga: <strong>0111</strong>. Yaha, leftmost bit '1' rightmost position par shift ho jata
+                    hai, jo dikhata hai ki kaise bits wrap hote hain.</p>
 
-                <p><strong>Role of Circular Shift in Encryption:</strong></p>
+                <p><strong>Encryption mein Circular Shift ka role:</strong></p>
                 <ul>
-                    <li>The main goal of using circular shifts in encryption is to achieve better diffusion. This
-                        obscures the relationship between the plaintext and ciphertext, making it harder for attackers
-                        to decipher the encrypted data.</li>
-                    <li>In modern block ciphers, circular shifts are applied in multiple rounds, ensuring extensive
-                        transformation of the data, which enhances overall security.</li>
+                    <li><strong>Diffusion achieve karna:</strong> Circular Shift ka main goal hai better diffusion lana.
+                        Isse plaintext aur ciphertext ke beech ka relationship obscure ho jata hai, jo attackers ke liye
+                        encrypted data ko samajhna mushkil bana deta hai.</li>
+                    <li><strong>Multiple rounds mein use:</strong> Modern block ciphers mein, Circular Shifts multiple
+                        rounds mein apply kiya jata hai, jo data ko extensively transform karta hai aur overall security
+                        enhance karta hai.</li>
                 </ul>
             </div>
+
             <div class="in">
                 <h3>Product Cipher</h3>
                 <ul>
-                    <li>A Product Cipher is a type of encryption that combines multiple encryption methods to enhance
-                        security. By using more than one encryption technique, it increases the complexity of the
-                        encryption process, making it more resistant to cryptographic attacks.</li>
-                    <li>This approach typically involves applying a series of transformations, such as substitutions and
-                        permutations, in succession. The idea is to layer these operations to obscure the relationship
-                        between the plaintext and ciphertext.</li>
+                    <li><strong>Product Cipher kya hai:</strong> Product Cipher ek encryption technique hai jo multiple
+                        methods ko combine karti hai security enhance karne ke liye. Jab hum ek se zyada encryption
+                        techniques ka use karte hain, toh encryption process zyada complex ho jata hai, jo cryptographic
+                        attacks ke against resistant hota hai.</li>
+                    <li><strong>Kaise kaam karta hai:</strong> Isme usually ek series of transformations apply ki jati
+                        hain, jaise substitutions aur permutations. In transformations ko layer karte hain taaki
+                        plaintext aur ciphertext ke beech ka relationship obscure ho jaye.</li>
                 </ul>
 
                 <p><strong>Example:</strong></p>
-                <p>Imagine we have a plaintext block and we want to encrypt it using two methods: an S-Box for
-                    substitution followed by a P-Box for permutation. The process would look like this:</p>
+                <p>Sochiye ek plaintext block hai jo encrypt karna hai using do methods: pehle S-Box for substitution
+                    aur phir P-Box for permutation. Process kuch is tarah hoga:</p>
                 <ul>
-                    <li>Step 1: Apply the S-Box to the plaintext to produce an intermediate output.</li>
-                    <li>Step 2: Use the P-Box on the intermediate output to create the final ciphertext.</li>
+                    <li>Step 1: Pehle plaintext par S-Box apply karo taaki ek intermediate output mile.</li>
+                    <li>Step 2: Intermediate output par P-Box lagao taaki final ciphertext generate ho.</li>
                 </ul>
 
-                <p>This combination of methods ensures that even if one method is compromised, the overall security of
-                    the product cipher remains intact due to the additional layers of encryption.</p>
+                <p><strong>Fayda kya hai:</strong> Ye combination ensure karta hai ki agar ek method compromise ho bhi
+                    jaye, toh bhi additional encryption layers ki wajah se overall security intact rahe.</p>
 
-                <p><strong>Role of Product Ciphers in Encryption:</strong></p>
+                <p><strong>Encryption mein Product Ciphers ka role:</strong></p>
                 <ul>
-                    <li>The primary goal of product ciphers is to enhance security by using multiple layers of
-                        encryption. This significantly complicates any attempts to analyze or break the cipher, as
-                        attackers would need to decipher each layer individually.</li>
-                    <li>Modern encryption algorithms often use product ciphers because they combine the strengths of
-                        different techniques, providing a robust framework for secure communication.</li>
+                    <li><strong>Security badhane ka goal:</strong> Product Ciphers ka main goal hai security ko enhance
+                        karna by using multiple layers of encryption. Ye encryption ko itna complicated bana deta hai ki
+                        attackers ke liye har layer ko individually break karna bahut mushkil hota hai.</li>
+                    <li><strong>Modern algorithms ka base:</strong> Aaj ke modern encryption algorithms mein Product
+                        Ciphers kaafi common hain kyunki ye alag-alag techniques ke strengths ko combine karke ek robust
+                        aur secure communication framework dete hain.</li>
                 </ul>
-
             </div>
+
         </div>
         <div class="wh">
             <h2>Thoughts of Feistel Design</h2>
-            <p>Ab tak humne product ciphers ke concept ko samjha hai, aur ab hum Feistel design ko explore karenge, jo
-                block ciphers ki security ko enhance karta hai. Product ciphers different encryption techniques ko layer
-                karte hain, jabki Feistel structure in processes ko ek specific tarike se organize karta hai, jisse
-                encryption zyada efficient aur secure ban jaata hai. Yeh design modern encryption algorithms ke liye
-                foundation hai, jaise ki DES (Data Encryption Standard). Feistel design ke principles ko samajhna
-                zaroori hai kyunki yeh dikhata hai ki kaise multiple rounds of processing plaintext aur ciphertext ke
-                beech ke relationships ko obscure kar sakte hain, jisse security ko strengthen kiya jaata hai.</p>
+            <p>Product ciphers ka concept samajhne ke baad, ab hum Feistel design par baat karte hain. Ye ek critical
+                framework hai jo block ciphers ki security ko enhance karta hai. Jab product ciphers multiple encryption
+                techniques ko layer karte hain, Feistel structure in processes ko organize karta hai in a unique way, jo
+                encryption ko zyada efficient aur secure banata hai. Ye design modern encryption algorithms ka
+                foundation hai, jaise DES (Data Encryption Standard). Feistel design ke principles samajhna zaruri hai
+                kyunki ye batata hai ki multiple processing rounds kaise plaintext aur ciphertext ke beech ka
+                relationship effectively obscure karte hain, jo overall security ko strengthen karta hai.</p>
 
             <div class="in">
                 <h3>Feistel Cipher</h3>
-                <p>Feistel cipher ek symmetric encryption method hai jo modern block ciphers mein use hota hai. Iska
-                    naam Horst Feistel ke naam par rakha gaya hai, jo is design ke creator the. Feistel design
-                    encryption process ko multiple rounds mein todta hai, jisse security enhance hoti hai aur efficiency
-                    bhi maintained rehti hai. Yeh structure yeh allow karta hai ki encryption aur decryption dono same
-                    algorithm se kiye ja sakein, jo isse kaafi versatile banata hai.</p>
+                <p><strong>Feistel Cipher kya hai:</strong> Feistel cipher ek symmetric encryption method hai jo modern
+                    block ciphers mein use hoti hai. Iska naam Horst Feistel ke naam par rakha gaya hai. Is design mein
+                    encryption process ko multiple rounds mein tod diya jata hai, jo security ko enhance karta hai aur
+                    process efficient bhi banata hai. Feistel structure ki khaas baat ye hai ki encryption aur
+                    decryption ke liye ek hi algorithm use hota hai, jo ise versatile banata hai.</p>
 
                 <h3>How the Feistel Cipher Works</h3>
-                <p>Feistel cipher plaintext ke block par kaam karta hai, jisme plaintext ko do halves mein divide kiya
-                    jaata hai. Encryption process multiple rounds mein hota hai, aur har round mein transformations ka
-                    ek series apply kiya jaata hai using a round key jo original encryption key se derive kiya jaata
-                    hai. Chaliye, step-by-step samajhte hain ki Feistel cipher kaise kaam karta hai:</p>
+                <p>Chaliye Feistel cipher kaam kaise karta hai, uska ek step-by-step breakdown dekhte hain. Is process
+                    mein plaintext ko ek block mein liya jata hai aur usse do halves mein divide kiya jata hai. Multiple
+                    rounds mein transformations apply hote hain, jisme ek round key (jo original encryption key se
+                    derive hoti hai) ka use hota hai. Yahan har step ko detail mein samjhte hain:</p>
 
                 <ul>
-                    <li><strong>Input:</strong> Sabse pehle, plaintext ko do halves mein divide kiya jaata hai: <em>Left
-                            (L)</em> aur <em>Right (R)</em>.</li>
-                    <li><strong>Round Function:</strong> Har round mein ek function (usually <em>F</em>) right half aur
-                        round key (K1, K2, etc.) ko process karta hai ek XOR operation ke through.</li>
-                    <li><strong>XOR Operation:</strong> Round function ka output left half ke saath XOR kiya jaata hai,
-                        jisse ek naya value milta hai.</li>
-                    <li><strong>Swapping:</strong> Har round ke baad, halves ko swap kiya jaata hai. Matlab, pehle round
-                        ka output second round mein input ke roop mein use hota hai, aur second round ka output pehle
-                        round ke liye input ban jaata hai.</li>
-                    <li><strong>Repetition:</strong> Yeh process ek specified number of rounds ke liye repeat hota hai
-                        (usually 16 ya usse zyada rounds).</li>
-                    <li><strong>Final Output:</strong> Jab saare rounds complete ho jaate hain, to combined halves final
-                        ciphertext banate hain jo encrypted data hota hai.</li>
+                    <li><strong>Step 1: Input Splitting</strong><br>
+                        Plaintext block ko do parts mein tod diya jata hai:
+                        <em>Left Half (L)</em> aur <em>Right Half (R)</em>. Yeh splitting encryption ka pehla step hai.
+                    </li>
+
+                    <li><strong>Step 2: Round Function (F)</strong><br>
+                        Har round mein ek function apply hota hai, jise <em>F</em> kehte hain. Yeh function right half
+                        (R) ko process karta hai ek round key ke saath (jaise K1, K2, etc.). Yeh step data ko modify
+                        karte hue unpredictable banata hai.</li>
+
+                    <li><strong>Step 3: XOR Operation</strong><br>
+                        Jo output round function (F) se milta hai, usse left half (L) ke saath XOR (Exclusive OR)
+                        operation ke zariye combine kiya jata hai. Yeh step confusion aur diffusion ka ek powerful
+                        mechanism hai jo data ki security badhata hai.</li>
+
+                    <li><strong>Step 4: Swapping</strong><br>
+                        XOR operation ke baad left aur right halves ko swap kar diya jata hai. Right half (R) naya left
+                        half (L) ban jata hai, aur modified left half (L) naya right half (R) ban jata hai. Yeh step har
+                        round ke baad repeat hota hai.</li>
+
+                    <li><strong>Step 5: Repetition</strong><br>
+                        Yeh pura process multiple rounds ke liye repeat hota hai. Typically, 16 ya usse zyada rounds
+                        hote hain, jisme har round ki key alag hoti hai. Zyada rounds hone ki wajah se encryption kaafi
+                        strong ho jata hai.</li>
+
+                    <li><strong>Step 6: Final Output</strong><br>
+                        Jab saare rounds complete ho jate hain, to left aur right halves ko combine karke final
+                        ciphertext produce hota hai. Yeh ciphertext kisi ke liye bhi samajhna mushkil banata hai, jab
+                        tak unke paas correct key na ho.</li>
                 </ul>
+
+                <p><strong>Understanding Feistel Cipher:</strong><br>
+                    Feistel cipher ka strength uski repetitive nature aur reversible process mein hai. Encryption aur
+                    decryption dono same algorithm ka use karke kiye jate hain, jo simplicity aur efficiency ensure
+                    karta hai. Yehi reason hai ki Feistel structure par based algorithms, jaise DES, cryptography ke
+                    world mein itne popular hain.</p>
+
 
                 <img src="../../images/cry12.jpeg" alt="">
 
@@ -536,118 +545,79 @@
         </div>
         <div class="wh">
             <h2>Cryptanalysis</h2>
-            <p>
-                <strong>Cryptanalysis</strong> is the study of methods used to break cryptographic systems and decrypt
-                messages without knowing the secret key. The main goal of cryptanalysis is to discover weaknesses or
-                vulnerabilities in the algorithms that allow an attacker to bypass the encryption and access the
-                original data. Cryptanalysis is considered a critical part of cryptography because it helps improve the
-                security of encryption methods by identifying potential flaws.
-                <br><br>
-                There are various techniques used in cryptanalysis, but two common types that focus on analyzing block
-                ciphers are <strong>Differential Cryptanalysis</strong> and <strong>Linear Cryptanalysis</strong>. These
-                methods are particularly important in testing the strength of algorithms like the Data Encryption
-                Standard (DES).
-            </p>
+<p>
+    <strong>Cryptanalysis:</strong> Cryptanalysis ek fascinating field hai jo cryptographic systems ko todne ya unhe samajhne ki koshish karta hai bina secret key ke. Simple terms mein, ye study un techniques ka hota hai jo attackers use karte hain taaki encrypted messages ka original data nikal sakein. Cryptanalysis ka main goal hota hai algorithms ki vulnerabilities aur weaknesses ko dhoondhna, jo attackers ko encryption bypass karne ka mauka de sakti hain.
+</p>
+<p>
+    Yeh cryptography ka ek important part hai kyunki iska focus sirf attacks par nahi, balki security ko improve karne par bhi hota hai. Jab cryptanalysis se flaws identify hote hain, tab encryption methods ko zyada strong banaya ja sakta hai.
+</p>
+<p>
+    Cryptanalysis ke different techniques hain, lekin block ciphers ko analyze karne ke liye jo do most common methods use hote hain, wo hain:
+</p>
+<ul>
+    <li><strong>Differential Cryptanalysis:</strong> Is method mein encrypted data ke andar patterns ko dhoondhne ki koshish ki jati hai. Attackers dekhte hain ki plaintext ke small changes ciphertext mein kaise changes laate hain. Is analysis ka goal hota hai algorithm ke andar ki vulnerabilities ka pata lagana aur round keys tak pahunchna.</li>
+    
+    <li><strong>Linear Cryptanalysis:</strong> Is technique mein mathematical relationships ka use kiya jata hai plaintext, ciphertext, aur encryption key ke beech. Attackers kuch plaintext-ciphertext pairs ke analysis se encryption process ka model banate hain aur key ko deduce karne ki koshish karte hain.</li>
+</ul>
+<p>
+    Yeh dono methods cryptography ke testing tools jaise kaam karte hain, jo algorithms ki strength ko evaluate karte hain. Famous block cipher algorithms jaise <strong>Data Encryption Standard (DES)</strong> inhi methods ke against test kiye gaye hain. Agar koi algorithm in techniques ke against resist kar paye, to samjha jata hai ki wo kaafi strong hai.
+</p>
+<p>
+    Overall, cryptanalysis ka role sirf encryption todna nahi, balki security ke standards ko improve karna bhi hai. Isliye, cryptographers aur security researchers dono ke liye is field ka samajhna equally zaruri hai!
+</p>
 
-            <div class="in">
-                <h3>Differential Cryptanalysis</h3>
-                <p>
-                    <strong>Differential Cryptanalysis</strong> is one of the most well-known techniques used to break
-                    block
-                    ciphers. It was developed in the late 1980s and involves analyzing how differences in the input data
-                    affect the differences in the output data. The goal is to study the propagation of differences
-                    through
-                    the cipher and exploit patterns that can reveal information about the key.
-                </p>
-                <ul>
-                    <li><strong>Basic Concept:</strong> In differential cryptanalysis, an attacker examines pairs of
-                        plaintexts that have specific differences (such as flipping certain bits) and compares how these
-                        differences propagate through multiple rounds of encryption.</li>
-                    <li><strong>Objective:</strong> The goal is to find correlations between input differences and
-                        output
-                        differences that occur with higher probabilities than expected by random chance. By identifying
-                        these patterns, an attacker can make educated guesses about parts of the secret key.</li>
-                    <li><strong>Application to DES:</strong> Differential cryptanalysis was one of the first attacks
-                        that
-                        showed DES has some vulnerabilities, although DES is still considered secure against this attack
-                        when a full 16-round encryption process is used.</li>
-                </ul>
 
-                <h4>Steps in Differential Cryptanalysis:</h4>
-                <ol>
-                    <li><strong>Choose a Pair of Plaintexts:</strong> The attacker selects two plaintexts that differ by
-                        a
-                        specific amount, usually by flipping certain bits.</li>
-                    <li><strong>Encrypt the Plaintexts:</strong> Both plaintexts are encrypted using the block cipher
-                        (without knowing the key).</li>
-                    <li><strong>Analyze the Differences:</strong> The attacker analyzes the difference between the
-                        ciphertexts and looks for patterns that are common or occur with higher probability.</li>
-                    <li><strong>Guess Part of the Key:</strong> Based on the observed patterns, the attacker can make
-                        guesses about part of the secret key and narrow down the possibilities.</li>
-                    <li><strong>Iterate the Process:</strong> This process is repeated with different pairs of
-                        plaintexts to
-                        gather more information about the key until the key is fully recovered.</li>
-                </ol>
+<div class="in">
+    <h3>Differential Cryptanalysis</h3>
+    <p>
+        <strong>Differential Cryptanalysis:</strong> Differential cryptanalysis ek kaafi well-known aur powerful technique hai jo block ciphers ko todne ke liye use hoti hai. Yeh technique 1980s ke end mein develop hui thi aur iska focus hota hai yeh analyze karna ki jab input data mein kuch differences kiye jate hain, toh un differences ka output data par kya effect padta hai. Iska main goal hota hai cipher ke through differences ka propagation samajhna aur un patterns ko exploit karna jo key ke baare mein information reveal kar sake.
+    </p>
+    <ul>
+        <li><strong>Basic Concept:</strong> Differential cryptanalysis mein, attacker do plaintexts ke pairs ko examine karta hai jisme specific differences hote hain (jaise kuch bits ko flip karna) aur yeh dekhna hota hai ki yeh differences encryption ke multiple rounds ke through kaise propagate karte hain.</li>
+        <li><strong>Objective:</strong> Is technique ka main goal hota hai input differences aur output differences ke beech correlations dhoondhna, jo expected random chance se zyada probability ke saath ho. Jab attacker aise patterns identify kar leta hai, toh wo secret key ke kuch hisson ke baare mein educated guesses kar sakta hai.</li>
+        <li><strong>Application to DES:</strong> Differential cryptanalysis wo pehla attack tha jise use karke DES cipher ki kuch vulnerabilities expose hui thi. Halanki, agar DES mein 16 full rounds ka encryption process use hota hai, toh yeh attack DES ko break nahi kar pata.</li>
+    </ul>
 
-                <p>
-                    Differential cryptanalysis is a powerful attack that can break ciphers, but modern ciphers are
-                    designed
-                    with this attack in mind and have defenses to prevent it from being effective.
-                </p>
-            </div>
+    <h4>Steps in Differential Cryptanalysis:</h4>
+    <ol>
+        <li><strong>Choose a Pair of Plaintexts:</strong> Sabse pehle attacker do aise plaintexts select karta hai jo ek specific amount se differ karte hain, jaise kuch bits ko flip karna.</li>
+        <li><strong>Encrypt the Plaintexts:</strong> Dono plaintexts ko block cipher se encrypt kiya jata hai, bina key ke jaana.</li>
+        <li><strong>Analyze the Differences:</strong> Ab attacker ciphertexts ke beech differences ko analyze karta hai aur dekhta hai ki kaunse patterns common hain ya high probability ke saath occur kar rahe hain.</li>
+        <li><strong>Guess Part of the Key:</strong> Observed patterns ki basis par, attacker secret key ke kuch hisson ke baare mein guess karne ki koshish karta hai aur key ki possibilities ko narrow down karta hai.</li>
+        <li><strong>Iterate the Process:</strong> Yeh process repeat hota hai different plaintext pairs ke saath, taaki aur information gather ki ja sake aur key ko fully recover kiya ja sake.</li>
+    </ol>
 
-            <div class="in">
-                <h3>Linear Cryptanalysis</h3>
-                <p>
-                    <strong>Linear Cryptanalysis</strong> is another well-known method for breaking block ciphers. It
-                    was
-                    developed shortly after differential cryptanalysis and is based on finding linear approximations
-                    that
-                    describe the relationship between the plaintext, ciphertext, and key. The goal of linear
-                    cryptanalysis
-                    is to exploit statistical biases in these relationships to recover the key.
-                </p>
-                <ul>
-                    <li><strong>Basic Concept:</strong> In linear cryptanalysis, the attacker attempts to create linear
-                        equations that approximate the encryption process. These equations relate specific bits of the
-                        plaintext and ciphertext to bits of the key. By analyzing many such equations, the attacker can
-                        identify patterns that help them deduce the key.</li>
-                    <li><strong>Objective:</strong> The main objective is to find linear approximations that hold true
-                        with
-                        a probability higher than random chance (greater than 50%). The more often these approximations
-                        hold, the more information the attacker can gather about the key.</li>
-                    <li><strong>Application to DES:</strong> Linear cryptanalysis has been successfully used against
-                        DES,
-                        but like differential cryptanalysis, it is not effective against the full 16 rounds of DES
-                        encryption.</li>
-                </ul>
+    <p>
+        Differential cryptanalysis ek powerful attack hai jo ciphers ko break kar sakta hai, lekin modern ciphers is attack ko dhyaan mein rakh kar design kiye gaye hain aur unmein aise defenses hoti hain jo is attack ko ineffective bana deti hain.
+    </p>
+</div>
 
-                <h4>Steps in Linear Cryptanalysis:</h4>
-                <ol>
-                    <li><strong>Collect Plaintext and Ciphertext Pairs:</strong> The attacker collects a large number of
-                        known plaintext-ciphertext pairs that have been encrypted using the same secret key.</li>
-                    <li><strong>Analyze the Data:</strong> The attacker looks for linear patterns that relate specific
-                        bits
-                        of the plaintext and ciphertext to bits of the key.</li>
-                    <li><strong>Create Linear Approximation Equations:</strong> These linear equations approximate the
-                        encryption process. Each equation gives a clue about a small part of the key.</li>
-                    <li><strong>Count Occurrences:</strong> The attacker calculates how often these linear
-                        approximations
-                        hold true for the collected data. If the approximations hold true more than 50% of the time,
-                        they
-                        are considered useful.</li>
-                    <li><strong>Guess the Key:</strong> Based on the useful approximations, the attacker makes educated
-                        guesses about the key bits and iteratively refines the guesses.</li>
-                </ol>
 
-                <p>
-                    Linear cryptanalysis is more complex than differential cryptanalysis and often requires a large
-                    number
-                    of known plaintext-ciphertext pairs to succeed. However, it remains an important tool in evaluating
-                    the
-                    security of block ciphers.
-                </p>
-            </div>
+<div class="in">
+    <h3>Linear Cryptanalysis</h3>
+    <p>
+        <strong>Linear Cryptanalysis:</strong> Linear cryptanalysis bhi ek famous technique hai jo block ciphers ko todne ke liye use hoti hai. Yeh differential cryptanalysis ke baad develop hui thi aur iska focus hota hai linear approximations dhoondhna jo plaintext, ciphertext aur key ke beech relationship ko describe karte hain. Is technique ka main goal yeh hota hai ki in relationships mein jo statistical biases hain, unhe exploit karte hue secret key ko recover kiya ja sake.
+    </p>
+    <ul>
+        <li><strong>Basic Concept:</strong> Linear cryptanalysis mein attacker linear equations create karta hai jo encryption process ko approximate karte hain. Yeh equations plaintext aur ciphertext ke specific bits ko key ke bits ke saath relate karte hain. Jab attacker in equations ko analyze karta hai, toh wo un patterns ko identify kar sakta hai jo key ke baare mein information deduce karne mein madadgar hote hain.</li>
+        <li><strong>Objective:</strong> Is technique ka main objective yeh hota hai ki linear approximations dhoondhe jayein jo random chance se zyada probability ke saath true hote hain (50% se zyada). Jitni zyada baar yeh approximations true hote hain, utna zyada information attacker ko key ke baare mein milta hai.</li>
+        <li><strong>Application to DES:</strong> Linear cryptanalysis ko DES par successfully apply kiya gaya hai, lekin jaise differential cryptanalysis ke case mein hota hai, yeh attack full 16 rounds ke DES encryption par effective nahi hota.</li>
+    </ul>
+
+    <h4>Steps in Linear Cryptanalysis:</h4>
+    <ol>
+        <li><strong>Collect Plaintext and Ciphertext Pairs:</strong> Sabse pehle attacker ko known plaintext-ciphertext pairs collect karne padte hain jo same secret key se encrypt kiye gaye hote hain. In pairs ki madad se attacker encryption process ko samajhne ki koshish karta hai.</li>
+        <li><strong>Analyze the Data:</strong> Attackers collected data ko analyze karte hain aur dekhte hain ki kya koi linear patterns hain jo specific bits of plaintext aur ciphertext ko key ke bits ke saath relate karte hain.</li>
+        <li><strong>Create Linear Approximation Equations:</strong> Ab attacker linear equations banata hai jo encryption process ko approximate karte hain. Har equation key ke ek chhote hissa ke baare mein clue deta hai.</li>
+        <li><strong>Count Occurrences:</strong> Phir attacker yeh calculate karta hai ki yeh linear approximations collected data mein kitni baar true hoti hain. Agar yeh approximations 50% se zyada time true hoti hain, toh unhe useful samjha jata hai.</li>
+        <li><strong>Guess the Key:</strong> Useful approximations ke basis par, attacker key ke bits ke baare mein educated guesses karta hai aur phir un guesses ko iteratively refine karta hai.</li>
+    </ol>
+
+    <p>
+        Linear cryptanalysis differential cryptanalysis se thoda complex hai aur isko successfully apply karne ke liye attacker ko kaafi saari known plaintext-ciphertext pairs ki zarurat hoti hai. Phir bhi, yeh block ciphers ki security evaluate karte waqt ek important tool hai.
+    </p>
+</div>
+
 
             <div class="in">
                 <h3>Comparison of Differential and Linear Cryptanalysis</h3>
@@ -797,13 +767,10 @@
         <div class="wh">
             <h2>Block Cipher Modes of Operation</h2>
             <p>
-                A block cipher works by encrypting data in fixed-size blocks (like 64 or 128 bits). To encrypt larger
-                messages, block ciphers need specific methods to handle data beyond a single block. These methods are
-                called <strong>modes of operation</strong>. Each mode describes how blocks of plaintext are encrypted or
-                decrypted, and each has its own strengths and weaknesses depending on the use case.
+                Block cipher ek encryption technique hoti hai jo data ko fixed-size blocks (jaise 64 ya 128 bits) mein encrypt karti hai. Jab larger messages ko encrypt karna ho, toh block ciphers ko specific methods ki zarurat hoti hai jo ek block se zyada data ko handle kar sakein. In methods ko <strong>modes of operation</strong> kaha jata hai. Har mode yeh define karta hai ki blocks of plaintext ko kaise encrypt ya decrypt kiya jata hai, aur har mode ke apne strengths aur weaknesses hote hain, jo use case par depend karte hain.
             </p>
             <p>
-                The most commonly used block cipher modes of operation are:
+                Sabse commonly used block cipher modes of operation hain:
             </p>
             <ol>
                 <li>Electronic Codebook (ECB)</li>
@@ -812,78 +779,62 @@
                 <li>Output Feedback (OFB)</li>
                 <li>Counter Mode (CTR)</li>
             </ol>
+        
             <div class="in">
                 <h3>1. Electronic Codebook (ECB)</h3>
                 <p>
-                    The <strong>Electronic Codebook (ECB)</strong> is the simplest mode of operation where each block of
-                    plaintext is encrypted separately with the same key.
+                    <strong>Electronic Codebook (ECB)</strong> sabse simple mode hai jisme har plaintext block ko alag se encrypt kiya jata hai, aur har block ko same key se encrypt kiya jata hai.
                 </p>
                 <ul>
-                    <li> The plaintext is divided into blocks, and each block is encrypted
-                        individually using the block cipher. The same key is used for each block, and there is no link
-                        between blocks.</li>
+                    <li>Plaintext ko blocks mein divide kiya jata hai, aur har block ko alag se encrypt kiya jata hai using the block cipher. Har block ke liye wahi key use hoti hai, aur blocks ke beech koi link nahi hota.</li>
                 </ul>
             </div>
+        
             <div class="in">
                 <h3>2. Cipher Block Chaining (CBC)</h3>
                 <p>
-                    The <strong>Cipher Block Chaining (CBC)</strong> mode improves upon ECB by introducing an initial
-                    random input known as the Initialization Vector (IV) and linking the encryption of each block to the
-                    previous one.
+                    <strong>Cipher Block Chaining (CBC)</strong> mode, ECB ko improve karta hai by introducing an initial random input called Initialization Vector (IV) aur har block ke encryption ko previous block ke saath link karte hai.
                 </p>
                 <ul>
-                    <li>In CBC, the plaintext block is XORed with the previous ciphertext block before
-                        encryption. This ensures that the encryption of each block depends on the previous one,
-                        adding security.</li>
-                    <li>The first block is XORed with an IV to prevent identical plaintext blocks from producing
-                        identical ciphertext blocks.</li>
+                    <li>CBC mein, plaintext block ko XOR kiya jata hai previous ciphertext block ke saath pehle encryption karne se. Isse ensure hota hai ki har block ka encryption pehle wale block par depend kare, jo security badhata hai.</li>
+                    <li>Pehla block, IV ke saath XOR hota hai taaki identical plaintext blocks identical ciphertext blocks na produce karen.</li>
                 </ul>
             </div>
+        
             <div class="in">
                 <h3>3. Cipher Feedback (CFB)</h3>
                 <p>
-                    The <strong>Cipher Feedback (CFB)</strong> mode is a mode of operation that turns a block cipher
-                    into a stream cipher. It allows encryption of smaller units of data, such as bits or bytes, rather
-                    than blocks.
+                    <strong>Cipher Feedback (CFB)</strong> mode block cipher ko stream cipher mein convert karta hai. Yeh chhote data units (jaise bits ya bytes) ko encrypt karne ki ability deta hai, blocks ke bajaye.
                 </p>
                 <ul>
-                    <li>CFB works by encrypting the previous ciphertext block (or IV for the first block) and
-                        then XORing the encrypted block with the plaintext. The result is the next ciphertext
-                        block.</li>
-                    <li>Like CBC, CFB uses an IV for the first block to ensure security, and the subsequent
-                        ciphertext blocks depend on the previous ones.</li>
+                    <li>CFB kaam karta hai previous ciphertext block ko encrypt karte hue (ya first block ke liye IV ko encrypt karke) aur phir encrypted block ko plaintext ke saath XOR kiya jata hai. Isse agla ciphertext block milta hai.</li>
+                    <li>Jaise CBC mein hota hai, CFB mein bhi IV ka use hota hai pehle block ke liye taaki security maintain ho sake, aur subsequent ciphertext blocks pehle wale block par depend karte hain.</li>
                 </ul>
             </div>
+        
             <div class="in">
                 <h3>4. Output Feedback (OFB)</h3>
                 <p>
-                    The <strong>Output Feedback (OFB)</strong> mode is similar to CFB but with a key difference: instead
-                    of encrypting the previous ciphertext block, OFB continuously encrypts the IV (or its output) to
-                    create a stream of key bits.
+                    <strong>Output Feedback (OFB)</strong> mode CFB ke similar hai, lekin ek key difference ke saath: OFB mein previous ciphertext block ko encrypt karne ki jagah, IV (ya uska output) ko continuously encrypt kiya jata hai taaki ek stream of key bits generate ho sake.
                 </p>
                 <ul>
-                    <li>In OFB, the IV is encrypted to produce a keystream, which is then XORed with the
-                        plaintext to produce ciphertext. This process continues for each subsequent block by
-                        encrypting the previous keystream output.</li>
-                    <li>This mode effectively turns a block cipher into a synchronous stream cipher.</li>
+                    <li>OFB mein, IV ko encrypt karte hain taaki ek keystream ban sake, jo phir plaintext ke saath XOR kiya jata hai taaki ciphertext produce ho. Yeh process har block ke liye continue hoti hai jab tak agla keystream output encrypt nahi ho jata.</li>
+                    <li>Yeh mode effectively block cipher ko synchronous stream cipher mein convert kar deta hai.</li>
                 </ul>
             </div>
+        
             <div class="in">
                 <h3>5. Counter Mode (CTR)</h3>
                 <p>
-                    The <strong>Counter Mode (CTR)</strong> is a highly efficient mode of operation that also turns a
-                    block cipher into a stream cipher. It is especially useful for parallel processing and offers many
-                    advantages over other modes.
+                    <strong>Counter Mode (CTR)</strong> ek highly efficient mode hai jo block cipher ko stream cipher mein convert karta hai. Yeh mode parallel processing ke liye useful hai aur dusre modes ki comparison mein kaafi advantages provide karta hai.
                 </p>
                 <ul>
-                    <li>CTR works by encrypting a counter value (a unique number for each block) and then XORing
-                        the result with the plaintext to produce the ciphertext. The counter is incremented for
-                        each block.</li>
-                    <li>The counter ensures that each block is encrypted with a different key stream, even if
-                        the plaintext blocks are identical.</li>
+                    <li>CTR mein, counter value (har block ke liye unique number) ko encrypt kiya jata hai, aur phir result ko plaintext ke saath XOR kiya jata hai taaki ciphertext ban sake. Har block ke liye counter increment hota hai.</li>
+                    <li>Counter yeh ensure karta hai ki har block alag key stream se encrypt ho, chahe plaintext blocks identical ho.</li>
                 </ul>
             </div>
         </div>
+        
         <div class="wh">
             <h2>Multiple DES</h2>
             <p>
@@ -954,7 +905,8 @@
                             <li>Double DES ab bhi kuch cryptographic attacks ke liye vulnerable hai, jaise
                                 <strong>meet-in-the-middle attack</strong>, jo effectively key length ko 57 bits tak
                                 reduce kar deta hai. Matlab, yeh attack security ko thoda compromise kar sakta hai, aur
-                                isse Double DES utni secure nahi rehti jitni expected thi.</li>
+                                isse Double DES utni secure nahi rehti jitni expected thi.
+                            </li>
                             <li>Meet-in-the-middle attack ke wajah se, Double DES ka security improvement single DES ke
                                 comparison mein utna significant nahi hota. Matlab, yeh attack key ko asani se reduce
                                 kar sakta hai aur isse overall security ko weaken kar deta hai.</li>
@@ -1113,7 +1065,7 @@
 
         </div>
     </div>
-    <div class="wh">
+    <div class="content-box">
         <p>Reference</p>
         <ul>
             <li><a href="https://www.youtube.com/watch?v=uVeChiA_yv0" target="_blank">Feistel Cipher Video Lecture
