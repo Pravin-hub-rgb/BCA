@@ -87,502 +87,557 @@
                         cipher process ka use karke encrypt kiya jata hai.</li>
                 </ol>
             </div>
-        </div>
-        <div class="in">
-            <h3>Key Generation</h3>
-            <ol>
-                <li>
-                    Keys are stored in an array:
-                    <ul>
-                        <li>Array elements: k1, k2, k3, ..., kn where 1 ≤ n ≤ 14.</li>
-                        <li>Each key block has a length of 32 bits.</li>
-                        <li>The total key length can be up to 448 bits (32 × 14), which is a multiple of 32.</li>
-                    </ul>
-                </li>
-                <li>
-                    Initialize the P-array:
-                    <ul>
-                        <li>The P-array consists of 18 subkeys: P1, P2, P3, ..., P18.</li>
-                        <li>Each element in the P-array is 32 bits long.</li>
-                    </ul>
-                </li>
-                <li>
-                    Initialize the S-boxes:
-                    <ul>
-                        <li>There are 4 S-boxes, each containing 256 entries.</li>
-                        <li>
-                            Example for S-box initialization:
-                            <ul>
-                                <li>S1: s0, s1, ..., s255</li>
-                                <li>S2: s0, s1, ..., s255</li>
-                                <li>The same pattern applies for S3 and S4.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>Initialize each element of the P-array and S-boxes with predefined hexadecimal values.</li>
-                <li>
-                    Perform XOR operations to further initialize the P-array:
-                    <ul>
-                        <li>P1 = P1 XOR K1</li>
-                        <li>P2 = P2 XOR K2</li>
-                        <li>... (continue for all key values)</li>
-                        <li>When all 14 keys are used, restart from K1 for the remaining P-array elements.</li>
-                        <li>
-                            Example:
-                            <ul>
-                                <li>P15 = P15 XOR K1</li>
-                                <li>P18 = P18 XOR K4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    Process a 64-bit block of plaintext (initially all bits are 0) to generate subkeys:
-                    <ul>
-                        <li>Initial plaintext: (0, 0, 0, ..., 0)</li>
-                        <li>Subkeys are generated and used in the encryption process.</li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-        <div class="in">
-            <h3>Data Encryption</h3>
-            <ul>
-                <li>
-                    The plaintext size is 64 bits, which is divided into two halves:
-                    <ul>
-                        <li>The left half (L) consists of the first 32 bits.</li>
-                        <li>The right half (R) consists of the remaining 32 bits.</li>
-                    </ul>
-                </li>
-                <li>
-                    The encryption process involves the following steps:
-                    <ul>
-                        <li>The left half (L) is XORed with the first subkey (P1).</li>
-                        <li>The result of this XOR operation (denoted as `x`) is input to the function `F` to
-                            produce an output (denoted as `y`).</li>
-                        <li>The output `y` is XORed with the right half (R).</li>
-                        <li>After XORing, the left and right halves are swapped.</li>
-                        <li>This process is repeated for all 18 subkeys in the P-array (P1 to P18).</li>
-                    </ul>
-                </li>
-                <li>
-                    After processing through all 18 rounds:
-                    <ul>
-                        <li>The final left (L) and right (R) halves are combined to form a 64-bit block of
-                            ciphertext.</li>
-                        <li>The swapping step ensures the encryption provides strong diffusion and security.</li>
-                    </ul>
-                </li>
-            </ul>
-            <img src="../../images/cry23.jpeg" alt="">
 
-            <h3>Understanding the Function (F)</h3>
-            <ul>
-                <li>
-                    The input to the function `F` is 32 bits, which is divided into four 8-bit segments:
-                    <ul>
-                        <li>Each 8-bit segment is independently processed by one of the four S-boxes (S1, S2, S3,
-                            S4).</li>
-                    </ul>
-                </li>
-                <li>
-                    The output of the S-boxes undergoes the following operations:
-                    <ul>
-                        <li>The output of S-box 1 is XORed with the output of S-box 2.</li>
-                        <li>The result of this XOR operation is then XORed with the output of S-box 3.</li>
-                        <li>Finally, the result is XORed with the output of S-box 4.</li>
-                    </ul>
-                </li>
-                <li>
-                    The final output of the function `F` is a 32-bit value (denoted as `y`), which is used in the
-                    encryption process.
-                </li>
-                <li>
-                    The purpose of the function `F` is to provide a non-linear transformation of the input,
-                    contributing to the algorithm's security by introducing confusion and diffusion.
-                </li>
-            </ul>
-
-        </div>
-    </div>
-    <div class="wh">
-        <h2>IDEA Algorithm (International Data Encryption Algorithm)</h2>
-        <ul>
-            <li><strong>IDEA</strong> ek block cipher algorithm hai, jo data ko fixed-size blocks mein encrypt karta
-                hai.</li>
-            <li>Yeh <strong>symmetric key cryptography</strong> follow karta hai, matlab encryption aur decryption ke
-                liye same key use hoti hai.</li>
-            <li>IDEA apne operations ke liye <strong>Feistel structure</strong> ka use karta hai, jo ek popular method
-                hai block ciphers mein.</li>
-            <li>Input plaintext ka size 64 bits hota hai, jise 4 equal 16-bit blocks mein divide kiya jata hai.</li>
-            <li>Key size 128 bits hoti hai, jo 52 subkeys mein expand hoti hai.</li>
-            <li>Number of rounds 17 hote hain: 16 primary rounds aur 1 final transformation round.</li>
-            <li>Odd-numbered rounds mein <strong>4 keys</strong> use hoti hain, jabki even-numbered rounds mein sirf
-                <strong>2 keys</strong> use hoti hain.</li>
-            <li>Har round ka goal yeh hota hai ki data ko itna scramble aur mix kiya jaye ki akhir tak woh completely
-                unrecognizable ho jaye.</li>
-        </ul>
-
-        <div class="in">
-            <h3>Working</h3>
-            <ul>
-                <li>64-bit plaintext ko pehle 4 equal parts mein divide kiya jata hai, har part ka size 16 bits hota
-                    hai.</li>
-                <li>In parts ko hum X1, X2, X3, aur X4 ke naam se denote karte hain.</li>
-                <li>IDEA algorithm mein 17 rounds hote hain, jisme 16 primary rounds aur 17th round final transformation
-                    round hota hai.</li>
-                <li>Har round mein input blocks ko specific subkeys ke saath process kiya jata hai, jo 52 subkeys
-                    generate hoti hain key expansion phase mein.</li>
-                <li><strong>Har round ke liye:</strong>
-                    <ul>
-                        <li>Subkeys ko blocks pe apply kiya jata hai modular addition, modular multiplication, aur XOR
-                            operations ke through.</li>
-                        <li>Data blocks ko mix kiya jata hai taaki confusion aur diffusion ensure ho sake (yeh concepts
-                            encryption ke security ko badhate hain).</li>
-                        <li>Odd aur even rounds ke operations alag hote hain, jo ki niche aur explain kiye gaye hain.
-                        </li>
-                    </ul>
-                </li>
-                <li>Final transformation round mein last 4 subkeys (K49, K50, K51, K52) ko blocks pe apply kiya jata
-                    hai.</li>
-                <li>Jab saare rounds complete ho jate hain, toh 4 resulting 16-bit blocks ko concatenate karte hain aur
-                    64-bit ciphertext banata hai.</li>
-            </ul>
-            <img src="../../images/cry24.jpeg" alt="">
-        </div>
-        <div class="in">
-            <h3>What Happens in Each Round?</h3>
-            <p>Each round involves processing the 4 parts (X1, X2, X3, X4) using subkeys and simple operations to
-                create layers of scrambling. Here's how it works:</p>
-
-            <p><strong>Odd Rounds (e.g., Round 1, 3, 5...):</strong></p>
-            <ul>
-                <li><strong>4 subkeys</strong> are used, one for each part: X1, X2, X3, and X4.</li>
-                <li>The keys are applied directly to the parts, followed by rearrangements and combinations to mix
-                    the data.</li>
-                <li>The result is passed to the next round.</li>
-            </ul>
-
-            <p><strong>Even Rounds (e.g., Round 2, 4, 6...):</strong></p>
-            <ul>
-                <li><strong>2 subkeys</strong> are used instead of 4, making these rounds slightly different from
-                    the odd rounds.</li>
-                <li>The keys are applied to specific parts of the data, followed by scrambling and rearrangements.
-                </li>
-                <li>This adds another layer of complexity to the scrambled data.</li>
-            </ul>
-
-            <p><strong>Final Round (Round 17):</strong></p>
-            <ul>
-                <li>The 4 parts (X1, X2, X3, X4) are processed with the last set of subkeys.</li>
-                <li>This step finalizes the ciphertext.</li>
-                <li>The scrambled 4 parts are combined into the final 64-bit ciphertext.</li>
-            </ul>
-        </div>
-    </div>
-    <div class="wh">
-        <h2>RC5 Algorithm (Rivest Cipher)</h2>
-        <ul>
-            <li>A symmetric key block cipher encryption algorithm.</li>
-            <li>Processes two-word blocks at a time; the plaintext is divided into two equal-sized blocks.</li>
-            <li>It has three main parameters:
+            <div class="in">
+                <h3>Key Generation</h3>
                 <ol>
-                    <li><strong>w</strong>: Word size (16, 32, or 64 bits).</li>
-                    <li><strong>r</strong>: Number of rounds (can range from 0 to 255).</li>
-                    <li><strong>b</strong>: Key size in bits (ranges from 0 to 255).</li>
+                    <li>
+                        Keys are stored in an array:
+                        <ul>
+                            <li>Array elements: k1, k2, k3, ..., kn where 1 ≤ n ≤ 14.</li>
+                            <li>Each key block has a length of 32 bits.</li>
+                            <li>The total key length can be up to 448 bits (32 × 14), which is a multiple of 32.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Initialize the P-array:
+                        <ul>
+                            <li>The P-array consists of 18 subkeys: P1, P2, P3, ..., P18.</li>
+                            <li>Each element in the P-array is 32 bits long.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Initialize the S-boxes:
+                        <ul>
+                            <li>There are 4 S-boxes, each containing 256 entries.</li>
+                            <li>
+                                Example for S-box initialization:
+                                <ul>
+                                    <li>S1: s0, s1, ..., s255</li>
+                                    <li>S2: s0, s1, ..., s255</li>
+                                    <li>The same pattern applies for S3 and S4.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Initialize each element of the P-array and S-boxes with predefined hexadecimal values.</li>
+                    <li>
+                        Perform XOR operations to further initialize the P-array:
+                        <ul>
+                            <li>P1 = P1 XOR K1</li>
+                            <li>P2 = P2 XOR K2</li>
+                            <li>... (continue for all key values)</li>
+                            <li>When all 14 keys are used, restart from K1 for the remaining P-array elements.</li>
+                            <li>
+                                Example:
+                                <ul>
+                                    <li>P15 = P15 XOR K1</li>
+                                    <li>P18 = P18 XOR K4</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Process a 64-bit block of plaintext (initially all bits are 0) to generate subkeys:
+                        <ul>
+                            <li>Initial plaintext: (0, 0, 0, ..., 0)</li>
+                            <li>Subkeys are generated and used in the encryption process.</li>
+                        </ul>
+                    </li>
                 </ol>
-                <p>These parameters are chosen based on the requirements of the input plaintext.</p>
-            </li>
-            <li>The algorithm consists of three main components:
-                <ol>
-                    <li><strong>Key Expansion</strong>: Expands the secret key into a series of subkeys.</li>
-                    <li><strong>Encryption</strong>: Transforms plaintext into ciphertext using subkeys.</li>
-                    <li><strong>Decryption</strong>: Reverses the encryption process to retrieve the original
-                        plaintext.</li>
-                </ol>
-            </li>
-        </ul>
+            </div>
+            <div class="in">
+                <h3>Data Encryption</h3>
+                <ul>
+                    <li>
+                        The plaintext size is 64 bits, which is divided into two halves:
+                        <ul>
+                            <li>The left half (L) consists of the first 32 bits.</li>
+                            <li>The right half (R) consists of the remaining 32 bits.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The encryption process involves the following steps:
+                        <ul>
+                            <li>The left half (L) is XORed with the first subkey (P1).</li>
+                            <li>The result of this XOR operation (denoted as `x`) is input to the function `F` to
+                                produce an output (denoted as `y`).</li>
+                            <li>The output `y` is XORed with the right half (R).</li>
+                            <li>After XORing, the left and right halves are swapped.</li>
+                            <li>This process is repeated for all 18 subkeys in the P-array (P1 to P18).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        After processing through all 18 rounds:
+                        <ul>
+                            <li>The final left (L) and right (R) halves are combined to form a 64-bit block of
+                                ciphertext.</li>
+                            <li>The swapping step ensures the encryption provides strong diffusion and security.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="../../images/cry23.jpeg" alt="">
 
-        <div class="in">
-            <h3>Block Diagram</h3>
-            <ul>
-                <li>The secret key is first processed through the <strong>Key Expansion Algorithm</strong> to
-                    generate multiple subkeys. For example, a 128-bit secret key can be expanded into a sequence of
-                    subkeys depending on the block size.</li>
-                <li>These subkeys are then used during the encryption rounds to transform the plaintext into
-                    ciphertext.</li>
-                <li>During decryption, the same subkeys are used in reverse order to retrieve the original
-                    plaintext.</li>
-            </ul>
-            <img src="../../images/cry25.jpeg" alt="">
+                <h3>Understanding the Function (F)</h3>
+                <ul>
+                    <li>
+                        The input to the function `F` is 32 bits, which is divided into four 8-bit segments:
+                        <ul>
+                            <li>Each 8-bit segment is independently processed by one of the four S-boxes (S1, S2, S3,
+                                S4).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The output of the S-boxes undergoes the following operations:
+                        <ul>
+                            <li>The output of S-box 1 is XORed with the output of S-box 2.</li>
+                            <li>The result of this XOR operation is then XORed with the output of S-box 3.</li>
+                            <li>Finally, the result is XORed with the output of S-box 4.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The final output of the function `F` is a 32-bit value (denoted as `y`), which is used in the
+                        encryption process.
+                    </li>
+                    <li>
+                        The purpose of the function `F` is to provide a non-linear transformation of the input,
+                        contributing to the algorithm's security by introducing confusion and diffusion.
+                    </li>
+                </ul>
+
+            </div>
         </div>
 
-        <div class="in">
-            <h3>What Happens in Each Stage?</h3>
-            <h4>1. Key Expansion</h4>
+        <div class="wh">
+            <h2>IDEA Algorithm (International Data Encryption Algorithm)</h2>
             <ul>
-                <li>Key expansion is a preprocessing step that generates a large number of subkeys from the original
-                    secret key.</li>
-            </ul>
-            <p><strong>Steps:</strong></p>
-            <ol>
-                <li>The plaintext of 64 bits is divided into two equal blocks: A (32 bits) and B (32 bits).</li>
-                <li>The secret key is expanded into a subkey array <strong>S</strong>, containing 2(r+1) subkeys
-                    (e.g., S[0], S[1], ..., S[2r+1]).</li>
-                <li>Initial values for A and B are created by adding the first two subkeys:
-                    <ul>
-                        <li><strong>A = A + S[0]</strong></li>
-                        <li><strong>B = B + S[1]</strong></li>
-                    </ul>
+                <li><strong>IDEA</strong> ek block cipher algorithm hai, jo data ko fixed-size blocks mein encrypt karta
+                    hai.</li>
+                <li>Yeh <strong>symmetric key cryptography</strong> follow karta hai, matlab encryption aur decryption
+                    ke
+                    liye same key use hoti hai.</li>
+                <li>IDEA apne operations ke liye <strong>Feistel structure</strong> ka use karta hai, jo ek popular
+                    method
+                    hai block ciphers mein.</li>
+                <li>Input plaintext ka size 64 bits hota hai, jise 4 equal 16-bit blocks mein divide kiya jata hai.</li>
+                <li>Key size 128 bits hoti hai, jo 52 subkeys mein expand hoti hai.</li>
+                <li>Number of rounds 17 hote hain: 16 primary rounds aur 1 final transformation round.</li>
+                <li>Odd-numbered rounds mein <strong>4 keys</strong> use hoti hain, jabki even-numbered rounds mein sirf
+                    <strong>2 keys</strong> use hoti hain.
                 </li>
-            </ol>
+                <li>Har round ka goal yeh hota hai ki data ko itna scramble aur mix kiya jaye ki akhir tak woh
+                    completely
+                    unrecognizable ho jaye.</li>
+            </ul>
 
-            <h4>2. Encryption</h4>
+            <div class="in">
+                <h3>Working</h3>
+                <ul>
+                    <li>64-bit plaintext ko pehle 4 equal parts mein divide kiya jata hai, har part ka size 16 bits hota
+                        hai.</li>
+                    <li>In parts ko hum X1, X2, X3, aur X4 ke naam se denote karte hain.</li>
+                    <li>IDEA algorithm mein 17 rounds hote hain, jisme 16 primary rounds aur 17th round final
+                        transformation
+                        round hota hai.</li>
+                    <li>Har round mein input blocks ko specific subkeys ke saath process kiya jata hai, jo 52 subkeys
+                        generate hoti hain key expansion phase mein.</li>
+                    <li><strong>Har round ke liye:</strong>
+                        <ul>
+                            <li>Subkeys ko blocks pe apply kiya jata hai modular addition, modular multiplication, aur
+                                XOR
+                                operations ke through.</li>
+                            <li>Data blocks ko mix kiya jata hai taaki confusion aur diffusion ensure ho sake (yeh
+                                concepts
+                                encryption ke security ko badhate hain).</li>
+                            <li>Odd aur even rounds ke operations alag hote hain, jo ki niche aur explain kiye gaye
+                                hain.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Final transformation round mein last 4 subkeys (K49, K50, K51, K52) ko blocks pe apply kiya jata
+                        hai.</li>
+                    <li>Jab saare rounds complete ho jate hain, toh 4 resulting 16-bit blocks ko concatenate karte hain
+                        aur
+                        64-bit ciphertext banata hai.</li>
+                </ul>
+                <img src="../../images/cry24.jpeg" alt="">
+            </div>
+            <div class="in">
+                <h3>What Happens in Each Round?</h3>
+                <p>Each round involves processing the 4 parts (X1, X2, X3, X4) using subkeys and simple operations to
+                    create layers of scrambling. Here's how it works:</p>
+
+                <p><strong>Odd Rounds (e.g., Round 1, 3, 5...):</strong></p>
+                <ul>
+                    <li><strong>4 subkeys</strong> are used, one for each part: X1, X2, X3, and X4.</li>
+                    <li>The keys are applied directly to the parts, followed by rearrangements and combinations to mix
+                        the data.</li>
+                    <li>The result is passed to the next round.</li>
+                </ul>
+
+                <p><strong>Even Rounds (e.g., Round 2, 4, 6...):</strong></p>
+                <ul>
+                    <li><strong>2 subkeys</strong> are used instead of 4, making these rounds slightly different from
+                        the odd rounds.</li>
+                    <li>The keys are applied to specific parts of the data, followed by scrambling and rearrangements.
+                    </li>
+                    <li>This adds another layer of complexity to the scrambled data.</li>
+                </ul>
+
+                <p><strong>Final Round (Round 17):</strong></p>
+                <ul>
+                    <li>The 4 parts (X1, X2, X3, X4) are processed with the last set of subkeys.</li>
+                    <li>This step finalizes the ciphertext.</li>
+                    <li>The scrambled 4 parts are combined into the final 64-bit ciphertext.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>RC5 Algorithm (Rivest Cipher)</h2>
             <ul>
-                <li>Encryption involves multiple rounds of transformations using subkeys.</li>
-                <li>Each round performs the following steps:
+                <li>A symmetric key block cipher encryption algorithm.</li>
+                <li>Processes two-word blocks at a time; the plaintext is divided into two equal-sized blocks.</li>
+                <li>It has three main parameters:
                     <ol>
-                        <li>A is updated using a combination of bitwise operations (XOR, left rotation) and addition
-                            with a subkey.</li>
-                        <li>B is updated in a similar manner using the next subkey.</li>
+                        <li><strong>w</strong>: Word size (16, 32, or 64 bits).</li>
+                        <li><strong>r</strong>: Number of rounds (can range from 0 to 255).</li>
+                        <li><strong>b</strong>: Key size in bits (ranges from 0 to 255).</li>
+                    </ol>
+                    <p>These parameters are chosen based on the requirements of the input plaintext.</p>
+                </li>
+                <li>The algorithm consists of three main components:
+                    <ol>
+                        <li><strong>Key Expansion</strong>: Expands the secret key into a series of subkeys.</li>
+                        <li><strong>Encryption</strong>: Transforms plaintext into ciphertext using subkeys.</li>
+                        <li><strong>Decryption</strong>: Reverses the encryption process to retrieve the original
+                            plaintext.</li>
                     </ol>
                 </li>
-                <li>After completing all rounds, the output is combined to form the final ciphertext.</li>
             </ul>
 
-            <h4>3. Decryption</h4>
-            <ul>
-                <li>The decryption process reverses the encryption steps.</li>
-                <li>It uses the same subkeys, but applies them in reverse order.</li>
-                <li>By undoing the operations (e.g., subtracting instead of adding, reversing rotations), the
-                    ciphertext is converted back into the original plaintext.</li>
-            </ul>
+            <div class="in">
+                <h3>Block Diagram</h3>
+                <ul>
+                    <li>The secret key is first processed through the <strong>Key Expansion Algorithm</strong> to
+                        generate multiple subkeys. For example, a 128-bit secret key can be expanded into a sequence of
+                        subkeys depending on the block size.</li>
+                    <li>These subkeys are then used during the encryption rounds to transform the plaintext into
+                        ciphertext.</li>
+                    <li>During decryption, the same subkeys are used in reverse order to retrieve the original
+                        plaintext.</li>
+                </ul>
+                <img src="../../images/cry25.jpeg" alt="">
+            </div>
+
+            <div class="in">
+                <h3>What Happens in Each Stage?</h3>
+                <h4>1. Key Expansion</h4>
+                <ul>
+                    <li>Key expansion is a preprocessing step that generates a large number of subkeys from the original
+                        secret key.</li>
+                </ul>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li>The plaintext of 64 bits is divided into two equal blocks: A (32 bits) and B (32 bits).</li>
+                    <li>The secret key is expanded into a subkey array <strong>S</strong>, containing 2(r+1) subkeys
+                        (e.g., S[0], S[1], ..., S[2r+1]).</li>
+                    <li>Initial values for A and B are created by adding the first two subkeys:
+                        <ul>
+                            <li><strong>A = A + S[0]</strong></li>
+                            <li><strong>B = B + S[1]</strong></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>2. Encryption</h4>
+                <ul>
+                    <li>Encryption involves multiple rounds of transformations using subkeys.</li>
+                    <li>Each round performs the following steps:
+                        <ol>
+                            <li>A is updated using a combination of bitwise operations (XOR, left rotation) and addition
+                                with a subkey.</li>
+                            <li>B is updated in a similar manner using the next subkey.</li>
+                        </ol>
+                    </li>
+                    <li>After completing all rounds, the output is combined to form the final ciphertext.</li>
+                </ul>
+
+                <h4>3. Decryption</h4>
+                <ul>
+                    <li>The decryption process reverses the encryption steps.</li>
+                    <li>It uses the same subkeys, but applies them in reverse order.</li>
+                    <li>By undoing the operations (e.g., subtracting instead of adding, reversing rotations), the
+                        ciphertext is converted back into the original plaintext.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="wh">
-        <h2>Symmetric Key Distribution</h2>
-<ul>
-    <li><strong>Symmetric key cryptography</strong> mein sender aur receiver ko same secret key use karni padti hai encryption aur decryption ke liye.</li>
-    <li>Sabse bada challenge yeh hai ki yeh secret key dono parties ke beech securely kaise share ki jaye.</li>
-    <li>Kayi methods hain key distribution ke liye, har method ke apne advantages aur drawbacks hote hain.</li>
-</ul>
+        <div class="wh">
+            <h2>Symmetric Key Distribution</h2>
+            <ul>
+                <li><strong>Symmetric key cryptography</strong> mein sender aur receiver ko same secret key use karni
+                    padti
+                    hai encryption aur decryption ke liye.</li>
+                <li>Sabse bada challenge yeh hai ki yeh secret key dono parties ke beech securely kaise share ki jaye.
+                </li>
+                <li>Kayi methods hain key distribution ke liye, har method ke apne advantages aur drawbacks hote hain.
+                </li>
+            </ul>
 
-< class="in">
-    <h3>Methods of Symmetric Key Distribution</h3>
-    
-    <h4>1. Pre-Shared Key</h4>
-    <ul>
-        <li>Is method mein, secret key ko manually sender aur receiver ke beech pehle se share kiya jata hai, communication shuru hone se pehle.</li>
-        <li>Yeh key sharing secure channels ke through ki ja sakti hai, jaise:
-            <ul>
-                <li>Face-to-face meetings.</li>
-                <li>Trusted couriers ke through delivery.</li>
-            </ul>
-        </li>
-        <li><strong>Advantages:</strong>
-            <ul>
-                <li>Small-scale systems ke liye simple aur direct hai.</li>
-                <li>Koi additional infrastructure ki zaroorat nahi hoti.</li>
-            </ul>
-        </li>
-        <li><strong>Drawbacks:</strong>
-            <ul>
-                <li>Large-scale ya geographically distributed systems ke liye yeh practical nahi hai.</li>
-                <li>Key transmission ke dauran interception ka risk hota hai, matlab key ko secure nahi rakha ja sakta hai.</li>
-            </ul>
-        </li>
-    </ul>
+            < class="in">
+                <h3>Methods of Symmetric Key Distribution</h3>
 
-    <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
-    <ul>
-        <li>Is method mein, ek trusted third party hoti hai, jise <strong>Key Distribution Center (KDC)</strong> kehte hain, jo securely keys ka exchange facilitate karta hai.</li>
-        <li><strong>Steps:</strong>
-            <ol>
-                <li>Sender aur receiver apne-apne secure connections establish karte hain KDC ke saath.</li>
-                <li>KDC ek unique session key generate karta hai jo sender aur receiver ke beech communication ke liye use hota hai.</li>
-                <li>Yeh session key securely KDC ke through dono parties ko transmit ki jati hai.</li>
-            </ol>
-        </li>
-        <li><strong>Advantages:</strong>
-            <ul>
-                <li>Sender aur receiver ke beech direct key sharing ki zaroorat nahi hoti.</li>
-                <li>Larger systems ke liye scalable hai, matlab yeh badhe systems mein bhi efficiently kaam karta hai.</li>
-            </ul>
-        </li>
-        <li><strong>Drawbacks:</strong>
-            <ul>
-                <li>KDC ek single point of failure ban jata hai, matlab agar KDC compromised ho jaye, toh poora system risk pe aa jata hai.</li>
-                <li>Isme additional infrastructure ki zaroorat hoti hai aur KDC pe trust bhi zaroori hai, jo kabhi kabhi risky ho sakta hai.</li>
-            </ul>
-        </li>
-    </ul>
+                <h4>1. Pre-Shared Key</h4>
+                <ul>
+                    <li>Is method mein, secret key ko manually sender aur receiver ke beech pehle se share kiya jata
+                        hai,
+                        communication shuru hone se pehle.</li>
+                    <li>Yeh key sharing secure channels ke through ki ja sakti hai, jaise:
+                        <ul>
+                            <li>Face-to-face meetings.</li>
+                            <li>Trusted couriers ke through delivery.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Small-scale systems ke liye simple aur direct hai.</li>
+                            <li>Koi additional infrastructure ki zaroorat nahi hoti.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Large-scale ya geographically distributed systems ke liye yeh practical nahi hai.</li>
+                            <li>Key transmission ke dauran interception ka risk hota hai, matlab key ko secure nahi
+                                rakha ja
+                                sakta hai.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>2. Using a Trusted Third Party (Key Distribution Center)</h4>
+                <ul>
+                    <li>Is method mein, ek trusted third party hoti hai, jise <strong>Key Distribution Center
+                            (KDC)</strong>
+                        kehte hain, jo securely keys ka exchange facilitate karta hai.</li>
+                    <li><strong>Steps:</strong>
+                        <ol>
+                            <li>Sender aur receiver apne-apne secure connections establish karte hain KDC ke saath.</li>
+                            <li>KDC ek unique session key generate karta hai jo sender aur receiver ke beech
+                                communication
+                                ke liye use hota hai.</li>
+                            <li>Yeh session key securely KDC ke through dono parties ko transmit ki jati hai.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Sender aur receiver ke beech direct key sharing ki zaroorat nahi hoti.</li>
+                            <li>Larger systems ke liye scalable hai, matlab yeh badhe systems mein bhi efficiently kaam
+                                karta hai.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>KDC ek single point of failure ban jata hai, matlab agar KDC compromised ho jaye, toh
+                                poora
+                                system risk pe aa jata hai.</li>
+                            <li>Isme additional infrastructure ki zaroorat hoti hai aur KDC pe trust bhi zaroori hai, jo
+                                kabhi kabhi risky ho sakta hai.</li>
+                        </ul>
+                    </li>
+                </ul>
 
 
-    <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
-    <ul>
-        <li><strong>Public key cryptography</strong> ka use symmetric keys ko securely exchange karne ke liye hota hai.</li>
-        <li><strong>Steps:</strong>
-            <ol>
-                <li>Sender receiver ke public key se symmetric key ko encrypt karta hai.</li>
-                <li>Yeh encrypted key receiver ko transmit ki jati hai.</li>
-                <li>Receiver apne private key se encrypted key ko decrypt karta hai.</li>
-            </ol>
-        </li>
-        <li><strong>Advantages:</strong>
-            <ul>
-                <li>Yeh method insecure channels par bhi secure hota hai, matlab key ko transfer karte waqt uski security maintained rehti hai.</li>
-                <li>Yeh method large systems ke liye scalable hai, matlab bade networks ya systems mein efficiently kaam kar sakta hai.</li>
-            </ul>
-        </li>
-        <li><strong>Drawbacks:</strong>
-            <ul>
-                <li>Yeh method ek functioning <strong>PKI (Public Key Infrastructure)</strong> ki zaroorat hoti hai, jo ki setup aur maintain karna thoda complex ho sakta hai.</li>
-                <li>Yeh additional computational overhead bhi introduce karta hai, matlab systems ko zyada processing power ki zaroorat hoti hai.</li>
-            </ul>
-        </li>
-    </ul>
-    
-    <h4>4. Diffie-Hellman Key Exchange</h4>
-    <ul>
-        <li><strong>Diffie-Hellman</strong> ek mathematical algorithm hai jo do parties ko insecure channel ke through ek shared symmetric key generate karne mein madad karta hai.</li>
-        <li><strong>Steps:</strong>
-            <ol>
-                <li>Dono parties ek public base aur public modulus ke upar agreement karte hain.</li>
-                <li>Har party apni private key select karti hai aur agreed parameters ka use karke ek public value generate karti hai.</li>
-                <li>Public values exchange hone ke baad, dono parties apne private key ka use karke shared secret key compute karte hain.</li>
-            </ol>
-        </li>
-        <li><strong>Advantages:</strong>
-            <ul>
-                <li>Insecure channels par bhi secure key generation hota hai, matlab yeh method unsafe networks pe bhi kaam karta hai.</li>
-                <li>Is method ko use karne ke liye koi prior shared secret key ki zaroorat nahi hoti, jo ek extra benefit hai.</li>
-            </ul>
-        </li>
-        <li><strong>Drawbacks:</strong>
-            <ul>
-                <li>Agar authentication use na kiya jaye toh <strong>man-in-the-middle attacks</strong> ka risk hota hai, jisme attacker communication ko intercept kar sakta hai.</li>
-                <li>Yeh method sirf key agreement ke liye hota hai, actual encryption ke liye nahi.</li>
-            </ul>
-        </li>
-    </ul>
-    
+                <h4>3. Using Symmetric Encryption with Public Key Infrastructure (PKI)</h4>
+                <ul>
+                    <li><strong>Public key cryptography</strong> ka use symmetric keys ko securely exchange karne ke
+                        liye
+                        hota hai.</li>
+                    <li><strong>Steps:</strong>
+                        <ol>
+                            <li>Sender receiver ke public key se symmetric key ko encrypt karta hai.</li>
+                            <li>Yeh encrypted key receiver ko transmit ki jati hai.</li>
+                            <li>Receiver apne private key se encrypted key ko decrypt karta hai.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Yeh method insecure channels par bhi secure hota hai, matlab key ko transfer karte waqt
+                                uski
+                                security maintained rehti hai.</li>
+                            <li>Yeh method large systems ke liye scalable hai, matlab bade networks ya systems mein
+                                efficiently kaam kar sakta hai.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Yeh method ek functioning <strong>PKI (Public Key Infrastructure)</strong> ki zaroorat
+                                hoti
+                                hai, jo ki setup aur maintain karna thoda complex ho sakta hai.</li>
+                            <li>Yeh additional computational overhead bhi introduce karta hai, matlab systems ko zyada
+                                processing power ki zaroorat hoti hai.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>4. Diffie-Hellman Key Exchange</h4>
+                <ul>
+                    <li><strong>Diffie-Hellman</strong> ek mathematical algorithm hai jo do parties ko insecure channel
+                        ke
+                        through ek shared symmetric key generate karne mein madad karta hai.</li>
+                    <li><strong>Steps:</strong>
+                        <ol>
+                            <li>Dono parties ek public base aur public modulus ke upar agreement karte hain.</li>
+                            <li>Har party apni private key select karti hai aur agreed parameters ka use karke ek public
+                                value generate karti hai.</li>
+                            <li>Public values exchange hone ke baad, dono parties apne private key ka use karke shared
+                                secret key compute karte hain.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Advantages:</strong>
+                        <ul>
+                            <li>Insecure channels par bhi secure key generation hota hai, matlab yeh method unsafe
+                                networks
+                                pe bhi kaam karta hai.</li>
+                            <li>Is method ko use karne ke liye koi prior shared secret key ki zaroorat nahi hoti, jo ek
+                                extra benefit hai.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Agar authentication use na kiya jaye toh <strong>man-in-the-middle attacks</strong> ka
+                                risk
+                                hota hai, jisme attacker communication ko intercept kar sakta hai.</li>
+                            <li>Yeh method sirf key agreement ke liye hota hai, actual encryption ke liye nahi.</li>
+                        </ul>
+                    </li>
+                </ul>
+
         </div>
 
         <div class="in">
             <h3>Challenges in Symmetric Key Distribution</h3>
             <ul>
-                <li><strong>Secure key transfer without interception</strong>: Yeh challenge hai ki key ko securely transfer kiya jaye bina kisi third party ke usse intercept kiye. Agar key ko beech mein koi attack kar le, toh poora encryption process compromised ho sakta hai.</li>
-                <li><strong>Managing keys in large systems</strong>: Jab ek system mein bohot saare users ho, tab keys ko manage karna thoda mushkil ho jata hai. Har user ke liye unique keys generate karna aur unhe securely manage karna complex ho sakta hai.</li>
-                <li><strong>Handling key revocation and replacement</strong>: Agar kisi key ko compromise ho jaata hai (yaani wo leak ho gayi ho), toh usse revoke karna aur nayi key replace karna zaroori hota hai. Yeh process properly handle karna challenging ho sakta hai, kyunki har jaga par naye keys distribute karne padte hain.</li>
+                <li><strong>Secure key transfer without interception</strong>: Yeh challenge hai ki key ko securely
+                    transfer
+                    kiya jaye bina kisi third party ke usse intercept kiye. Agar key ko beech mein koi attack kar le,
+                    toh
+                    poora encryption process compromised ho sakta hai.</li>
+                <li><strong>Managing keys in large systems</strong>: Jab ek system mein bohot saare users ho, tab keys
+                    ko
+                    manage karna thoda mushkil ho jata hai. Har user ke liye unique keys generate karna aur unhe
+                    securely
+                    manage karna complex ho sakta hai.</li>
+                <li><strong>Handling key revocation and replacement</strong>: Agar kisi key ko compromise ho jaata hai
+                    (yaani wo leak ho gayi ho), toh usse revoke karna aur nayi key replace karna zaroori hota hai. Yeh
+                    process properly handle karna challenging ho sakta hai, kyunki har jaga par naye keys distribute
+                    karne
+                    padte hain.</li>
             </ul>
         </div>
-        
-    </div>
-    <div class="wh">
-        <h2>Random Number Generators in Cryptography</h2>
-        <ul>
-            <li>Random numbers are crucial in cryptography for tasks like key generation, nonce creation, and secure
-                communication.</li>
-            <li>They ensure unpredictability, making cryptographic algorithms secure against attacks.</li>
-            <li>There are two main types of random number generators:
+
+
+        <div class="wh">
+            <h2>Random Number Generators in Cryptography</h2>
+            <ul>
+                <li>Random numbers are crucial in cryptography for tasks like key generation, nonce creation, and secure
+                    communication.</li>
+                <li>They ensure unpredictability, making cryptographic algorithms secure against attacks.</li>
+                <li>There are two main types of random number generators:
+                    <ul>
+                        <li><strong>True Random Number Generators (TRNGs)</strong></li>
+                        <li><strong>Pseudo-Random Number Generators (PRNGs)</strong></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="in">
+                <h3>Types of Random Number Generators</h3>
+
+                <h4>1. True Random Number Generators (TRNGs)</h4>
                 <ul>
-                    <li><strong>True Random Number Generators (TRNGs)</strong></li>
-                    <li><strong>Pseudo-Random Number Generators (PRNGs)</strong></li>
+                    <li>Generate randomness based on physical phenomena such as:
+                        <ul>
+                            <li>Thermal noise.</li>
+                            <li>Electromagnetic interference.</li>
+                            <li>Radioactive decay.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Non-deterministic: Results cannot be predicted.</li>
+                            <li>Highly secure for cryptographic applications.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Slower than PRNGs due to dependency on physical events.</li>
+                            <li>Requires specialized hardware to collect randomness.</li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-        </ul>
 
-        <div class="in">
-            <h3>Types of Random Number Generators</h3>
+                <h4>2. Pseudo-Random Number Generators (PRNGs)</h4>
+                <ul>
+                    <li>Generate randomness using mathematical algorithms based on a seed value.</li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Deterministic: Output depends on the seed, making it reproducible if the seed is known.
+                            </li>
+                            <li>Faster than TRNGs and suitable for software implementations.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drawbacks:</strong>
+                        <ul>
+                            <li>Less secure if the seed or algorithm is compromised.</li>
+                            <li>Not truly random, as the randomness relies on the algorithm's complexity.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-            <h4>1. True Random Number Generators (TRNGs)</h4>
-            <ul>
-                <li>Generate randomness based on physical phenomena such as:
-                    <ul>
-                        <li>Thermal noise.</li>
-                        <li>Electromagnetic interference.</li>
-                        <li>Radioactive decay.</li>
-                    </ul>
-                </li>
-                <li><strong>Features:</strong>
-                    <ul>
-                        <li>Non-deterministic: Results cannot be predicted.</li>
-                        <li>Highly secure for cryptographic applications.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>Slower than PRNGs due to dependency on physical events.</li>
-                        <li>Requires specialized hardware to collect randomness.</li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="in">
+                <h3>Cryptographically Secure PRNGs (CSPRNGs)</h3>
+                <ul>
+                    <li>A special class of PRNGs designed for cryptographic applications.</li>
+                    <li><strong>Features:</strong>
+                        <ul>
+                            <li>Passes stringent randomness tests, ensuring unpredictability.</li>
+                            <li>Resilient against attacks, even if part of the output is known.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Examples:</strong>
+                        <ul>
+                            <li>Yarrow Algorithm.</li>
+                            <li>Fortuna Algorithm.</li>
+                            <li>Dual_EC_DRBG (now deprecated due to vulnerabilities).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-            <h4>2. Pseudo-Random Number Generators (PRNGs)</h4>
-            <ul>
-                <li>Generate randomness using mathematical algorithms based on a seed value.</li>
-                <li><strong>Features:</strong>
-                    <ul>
-                        <li>Deterministic: Output depends on the seed, making it reproducible if the seed is known.
-                        </li>
-                        <li>Faster than TRNGs and suitable for software implementations.</li>
-                    </ul>
-                </li>
-                <li><strong>Drawbacks:</strong>
-                    <ul>
-                        <li>Less secure if the seed or algorithm is compromised.</li>
-                        <li>Not truly random, as the randomness relies on the algorithm's complexity.</li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="in">
+                <h3>Applications in Cryptography</h3>
+                <ul>
+                    <li><strong>Key Generation:</strong> Random numbers are used to generate cryptographic keys that are
+                        unpredictable.</li>
+                    <li><strong>Initialization Vectors (IVs):</strong> Randomness ensures that IVs are unique for each
+                        encryption operation.</li>
+                    <li><strong>Nonces:</strong> Unique random values prevent replay attacks in protocols.</li>
+                    <li><strong>Salt Values:</strong> Random salts ensure secure password hashing by preventing rainbow
+                        table attacks.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Challenges in Random Number Generation</h3>
+                <ul>
+                    <li><strong>Bias:</strong> Random numbers must be uniformly distributed without any bias.</li>
+                    <li><strong>Predictability:</strong> Ensuring unpredictability is critical, especially for PRNGs.
+                    </li>
+                    <li><strong>Entropy Source:</strong> TRNGs rely on sufficient entropy from physical phenomena, which
+                        can be limited.</li>
+                </ul>
+            </div>
         </div>
-
-        <div class="in">
-            <h3>Cryptographically Secure PRNGs (CSPRNGs)</h3>
-            <ul>
-                <li>A special class of PRNGs designed for cryptographic applications.</li>
-                <li><strong>Features:</strong>
-                    <ul>
-                        <li>Passes stringent randomness tests, ensuring unpredictability.</li>
-                        <li>Resilient against attacks, even if part of the output is known.</li>
-                    </ul>
-                </li>
-                <li><strong>Examples:</strong>
-                    <ul>
-                        <li>Yarrow Algorithm.</li>
-                        <li>Fortuna Algorithm.</li>
-                        <li>Dual_EC_DRBG (now deprecated due to vulnerabilities).</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="in">
-            <h3>Applications in Cryptography</h3>
-            <ul>
-                <li><strong>Key Generation:</strong> Random numbers are used to generate cryptographic keys that are
-                    unpredictable.</li>
-                <li><strong>Initialization Vectors (IVs):</strong> Randomness ensures that IVs are unique for each
-                    encryption operation.</li>
-                <li><strong>Nonces:</strong> Unique random values prevent replay attacks in protocols.</li>
-                <li><strong>Salt Values:</strong> Random salts ensure secure password hashing by preventing rainbow
-                    table attacks.</li>
-            </ul>
-        </div>
-
-        <div class="in">
-            <h3>Challenges in Random Number Generation</h3>
-            <ul>
-                <li><strong>Bias:</strong> Random numbers must be uniformly distributed without any bias.</li>
-                <li><strong>Predictability:</strong> Ensuring unpredictability is critical, especially for PRNGs.
-                </li>
-                <li><strong>Entropy Source:</strong> TRNGs rely on sufficient entropy from physical phenomena, which
-                    can be limited.</li>
-            </ul>
-        </div>
-    </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
