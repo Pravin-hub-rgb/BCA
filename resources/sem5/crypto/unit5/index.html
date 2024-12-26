@@ -218,39 +218,50 @@
                     <h3>Working Steps:</h3>
                     <ol>
                         <li>
-                            <strong>Padding the Message:</strong>  
-                            The first step is to adjust the message length so it fits MD5’s requirements. Extra bits (padding) are added to the message to make its total length a multiple of 512 bits (minus 64 bits reserved for the next step). This ensures MD5 can process the message properly.
+                            <strong>Padding the Message:</strong>
+                            The first step is to adjust the message length so it fits MD5’s requirements. Extra bits
+                            (padding) are added to the message to make its total length a multiple of 512 bits (minus 64
+                            bits reserved for the next step). This ensures MD5 can process the message properly.
                         </li>
                         <li>
-                            <strong>Adding the Original Length:</strong>  
-                            Once padding is done, the original length of the message (before padding) is added at the end in a 64-bit binary format. This helps MD5 keep track of the actual length of the original input.
+                            <strong>Adding the Original Length:</strong>
+                            Once padding is done, the original length of the message (before padding) is added at the
+                            end in a 64-bit binary format. This helps MD5 keep track of the actual length of the
+                            original input.
                         </li>
                         <li>
-                            <strong>Breaking into 512-bit Blocks:</strong>  
-                            The padded message, along with the added length, is split into chunks of 512 bits. These blocks are processed one by one.
+                            <strong>Breaking into 512-bit Blocks:</strong>
+                            The padded message, along with the added length, is split into chunks of 512 bits. These
+                            blocks are processed one by one.
                         </li>
                         <li>
-                            <strong>Setting Up Variables:</strong>  
-                            MD5 uses four predefined variables (A, B, C, D) to store intermediate results. These variables start with specific values and are updated during processing.
+                            <strong>Setting Up Variables:</strong>
+                            MD5 uses four predefined variables (A, B, C, D) to store intermediate results. These
+                            variables start with specific values and are updated during processing.
                         </li>
                         <li>
-                            <strong>Processing Each Block:</strong>  
-                            Each 512-bit block goes through the following steps:  
+                            <strong>Processing Each Block:</strong>
+                            Each 512-bit block goes through the following steps:
                             <ul>
                                 <li>Split into 16 smaller pieces (32 bits each).</li>
-                                <li>Processed in four rounds of calculations that mix and transform the data using mathematical and logical operations.</li>
-                                <li>After processing, the results are added to the initial values of A, B, C, and D, updating them for the next block.</li>
+                                <li>Processed in four rounds of calculations that mix and transform the data using
+                                    mathematical and logical operations.</li>
+                                <li>After processing, the results are added to the initial values of A, B, C, and D,
+                                    updating them for the next block.</li>
                             </ul>
                         </li>
                         <li>
-                            <strong>Producing the Final Hash:</strong>  
-                            After all blocks are processed, the final values of A, B, C, and D are combined to create a 128-bit hash. This hash is then represented as a 32-character hexadecimal string.  
-                            <br><strong>Key Takeaway:</strong> The MD5 hash is like a digital fingerprint of the input. Even a tiny change in the input creates a completely different hash, making it unique and secure for verification purposes.
+                            <strong>Producing the Final Hash:</strong>
+                            After all blocks are processed, the final values of A, B, C, and D are combined to create a
+                            128-bit hash. This hash is then represented as a 32-character hexadecimal string.
+                            <br><strong>Key Takeaway:</strong> The MD5 hash is like a digital fingerprint of the input.
+                            Even a tiny change in the input creates a completely different hash, making it unique and
+                            secure for verification purposes.
                         </li>
                     </ol>
                 </div>
-                
-                
+
+
             </div>
             <div class="in">
                 <h3>SHA (Secure Hash Algorithm)</h3>
@@ -264,61 +275,63 @@
                     <h3>Working Steps:</h3>
                     <ol>
                         <li>
-                            <strong>Padding:</strong> Padding is added to the original message to make its length
-                            congruent to 448 modulo 512 (i.e., 64 bits less than a multiple of 512).
-                            <br>Padding begins with a single '1' bit followed by enough '0' bits to achieve the required
+                            <strong>Padding the Message:</strong>
+                            Padding is added to the message so that its length is 64 bits less than a multiple of 512.
+                            This is done by first adding a "1" bit, followed by enough "0" bits to reach the required
                             length.
                         </li>
                         <li>
-                            <strong>Appending the Original Length:</strong> The original length of the message (before
-                            padding) is appended as a 64-bit value. This step ensures the final message length becomes
-                            an exact multiple of 512 bits.
+                            <strong>Adding the Original Length:</strong>
+                            The original length of the message (before padding) is added as a 64-bit value to the end of
+                            the message. This ensures that the final message length is a perfect multiple of 512 bits.
                         </li>
                         <li>
-                            <strong>Dividing the Input into 512-bit Blocks:</strong> The padded and length-appended
-                            message is divided into 512-bit blocks for processing. Each block is handled independently
+                            <strong>Dividing the Message into 512-bit Blocks:</strong>
+                            The padded message is split into 512-bit blocks. These blocks are processed one by one
                             during the hashing process.
                         </li>
                         <li>
-                            <strong>Initializing Chaining Variables:</strong> SHA uses five 32-bit chaining variables,
-                            denoted as A, B, C, D, and E. These variables are initialized with predefined hexadecimal
-                            values:
-                            <br>A = 0x67452301
-                            <br>B = 0xEFCDAB89
-                            <br>C = 0x98BADCFE
-                            <br>D = 0x10325476
-                            <br>E = 0xC3D2E1F0
+                            <strong>Initializing Chaining Variables:</strong>
+                            SHA uses five 32-bit variables (A, B, C, D, and E) to keep track of the calculation. These
+                            variables are initialized with specific starting values.
                         </li>
                         <li>
-                            <strong>Processing Blocks:</strong> Each 512-bit block undergoes the following steps:
+                            <strong>Processing Each Block:</strong>
+                            Each 512-bit block goes through these steps:
                             <ol>
                                 <li><strong>Copy Variables:</strong> The current values of A, B, C, D, and E are copied
-                                    into corresponding temporary variables (a, b, c, d, e).</li>
-                                <li><strong>Divide into 32-bit Words:</strong> Each 512-bit block is divided into
-                                    sixteen 32-bit words, labeled W<sub>0</sub>, W<sub>1</sub>, ..., W<sub>15</sub>.
-                                    Additional words (W<sub>16</sub> to W<sub>79</sub>) are generated using bitwise
-                                    operations on the initial 16 words.</li>
-                                <li><strong>Perform Four Rounds:</strong> The hashing process involves four rounds of
-                                    operations, with each round consisting of 20 steps. Each step applies a non-linear
-                                    function, adds constants, and modifies the chaining variables:
+                                    into temporary variables (a, b, c, d, e).</li>
+                                <li><strong>Divide into Words:</strong> The block is split into 16 smaller 32-bit pieces
+                                    (W₀ to W₁₅). Then, more words (W₁₆ to W₇₉) are generated using operations on the
+                                    initial words.</li>
+                                <li><strong>Perform Four Rounds:</strong> There are four rounds of operations on the
+                                    words, each consisting of 20 steps. Each round involves applying functions, adding
+                                    constants, and modifying the variables:
                                     <ul>
-                                        <li><strong>Round 1:</strong> Processes the input using bitwise logical
-                                            operations like AND, OR, and NOT.</li>
-                                        <li><strong>Round 2:</strong> Introduces more complex operations, including XOR.
+                                        <li><strong>Round 1:</strong> Basic logical operations like AND, OR, and NOT.
                                         </li>
-                                        <li><strong>Round 3:</strong> Continues with additional transformations to
-                                            diffuse data further.</li>
-                                        <li><strong>Round 4:</strong> Finalizes the mixing to ensure thorough diffusion
-                                            across all variables.</li>
+                                        <li><strong>Round 2:</strong> More complex operations, including XOR.</li>
+                                        <li><strong>Round 3:</strong> Further transformations to mix the data.</li>
+                                        <li><strong>Round 4:</strong> Final operations to ensure the data is well-mixed.
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><strong>Update Variables:</strong> After processing, the temporary variables (a, b,
-                                    c, d, e) are added back to the original chaining variables (A, B, C, D, E) to
-                                    incorporate the changes from the current block.</li>
+                                <li><strong>Update Variables:</strong> After the block is processed, the temporary
+                                    variables (a, b, c, d, e) are added back to the original variables (A, B, C, D, E),
+                                    incorporating the changes.</li>
                             </ol>
+                        </li>
+                        <li>
+                            <strong>Final Output:</strong>
+                            After all the blocks have been processed, the final values of A, B, C, D, and E are
+                            concatenated to produce the final 160-bit hash value. This hash is typically represented as
+                            a 40-character hexadecimal string, which serves as a unique identifier for the original
+                            message.
                         </li>
                     </ol>
                 </div>
+
+
             </div>
         </div>
         <div class="wh">
@@ -424,7 +437,8 @@
                                     <ul>
                                         <li><em>r</em> = (<em>g<sup>k</sup> mod p</em>) mod <em>q</em>.</li>
                                         <li><em>s</em> = (<em>k<sup>-1</sup> (H(m) + xr)) mod q</em>, where
-                                            <em>H(m)</em> is the message hash.</li>
+                                            <em>H(m)</em> is the message hash.
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>The signature is the pair (<em>r</em>, <em>s</em>).</li>
@@ -441,7 +455,8 @@
                                                 <li><em>u1</em> = (<em>H(m)w</em>) mod <em>q</em>, <em>u2</em> =
                                                     (<em>rw</em>) mod <em>q</em>.</li>
                                                 <li><em>v</em> = (<em>g<sup>u1</sup> * y<sup>u2</sup> mod p</em>) mod
-                                                    <em>q</em>.</li>
+                                                    <em>q</em>.
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>If <em>v</em> equals <em>r</em>, the signature is valid.</li>

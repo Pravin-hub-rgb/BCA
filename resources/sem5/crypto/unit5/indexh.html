@@ -235,17 +235,24 @@
                 <h2>MD-5 (Message Digest Algorithm 5)</h2>
                 <ul>
                     <li>
-                        MD5 is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value.
-                        It is
-                        primarily used for verifying data integrity and generating checksums for data comparison.
+                        MD5 ek widely used cryptographic hash function hai jo ek 128-bit (16-byte) hash value produce karta hai. Yeh primarily data integrity verify karne ke liye aur checksums generate karne ke liye use hota hai. Hash function ek mathematical process hai jo kisi input data (message, file, etc.) ko ek fixed-size output mein convert karta hai. MD5 ka output hamesha 128-bit hota hai, chahe input ka size kuch bhi ho.
+                        <br><em>Example:</em> Agar aap "Hello" ko MD5 ke through pass karenge, toh aapko ek unique 32-character hexadecimal string milegi.
                     </li>
-                    <li>Developed by Ron Rivest in 1991 as an improvement over previous hash functions like MD4.</li>
-                    <li>It is fast, making it ideal for applications requiring quick hashing, but it produces a 128-bit
-                        message digest, which is relatively short by modern standards.</li>
-                    <li>Although MD5 is still used in some contexts, it is no longer considered secure against collision
-                        attacks due to vulnerabilities discovered over time. However, it is still widely used for file
-                        integrity checks and basic hashing tasks.</li>
+                    <li>
+                        MD5 ko 1991 mein Ron Rivest ne develop kiya tha, aur yeh purane hash functions jaise MD4 ke comparison mein behtar aur fast tha. Fast hone ki wajah se, yeh un applications ke liye ideal hai jahan quick hashing ki zarurat hoti hai. Lekin, iska 128-bit message digest aaj ke standards ke comparison mein chhota ho sakta hai.
+                    </li>
+                    <li>
+                        MD5 ka major use file integrity check karna aur data verify karna hai. Jab aap koi file download karte hain, toh aap uske saath MD5 checksum bhi dekh sakte hain, jo aapko yeh verify karne mein madad karta hai ki file mein koi tampering nahi hui hai. Agar file ko modify kiya jaye, toh checksum change ho jata hai, aur yeh tampering ko detect karne mein madad karta hai.
+                    </li>
+                    <li>
+                        MD5 ab secure nahi mana jata, especially collision attacks ke against. Collision attack ek aisi situation hoti hai jahan do alag-alag inputs same hash produce karte hain. Yeh dangerous ho sakta hai kyunki attacker kisi fake data ko original data ke jaise bana sakta hai, jo MD5 hash ke basis par match karega. Isliye MD5 ko critical aur sensitive applications mein use nahi kiya jata.
+                    </li>
+                    <li>
+                        Halanki MD5 abhi bhi kuch basic hashing tasks mein use hota hai, lekin security ke high standards ke liye yeh recommended nahi hai. Aaj bhi file integrity checks aur quick hashing tasks ke liye MD5 ka use hota hai, lekin secure encryption aur password storage mein iska use nahi hota.
+                    </li>
                 </ul>
+                
+
                 <div class="wh">
                     <h3>Working Steps:</h3>
                     <ol>
@@ -293,71 +300,57 @@
             </div>
             <div class="in">
                 <h3>SHA (Secure Hash Algorithm)</h3>
-                <ul>
-                    <li><strong>Modified Version of MD-5:</strong> SHA is an improved version of the MD5 algorithm,
-                        designed to address its vulnerabilities and provide enhanced security.</li>
-                    <li><strong>Output Length:</strong> Unlike MD5, which produces a 128-bit output, SHA generates a
-                        160-bit output, making it more secure and harder to reverse-engineer.</li>
-                </ul>
-                <div class="wh">
-                    <h3>Working Steps:</h3>
-                    <ol>
-                        <li>
-                            <strong>Padding:</strong> Padding is added to the original message to make its length
-                            congruent to 448 modulo 512 (i.e., 64 bits less than a multiple of 512).
-                            <br>Padding begins with a single '1' bit followed by enough '0' bits to achieve the required
-                            length.
-                        </li>
-                        <li>
-                            <strong>Appending the Original Length:</strong> The original length of the message (before
-                            padding) is appended as a 64-bit value. This step ensures the final message length becomes
-                            an exact multiple of 512 bits.
-                        </li>
-                        <li>
-                            <strong>Dividing the Input into 512-bit Blocks:</strong> The padded and length-appended
-                            message is divided into 512-bit blocks for processing. Each block is handled independently
-                            during the hashing process.
-                        </li>
-                        <li>
-                            <strong>Initializing Chaining Variables:</strong> SHA uses five 32-bit chaining variables,
-                            denoted as A, B, C, D, and E. These variables are initialized with predefined hexadecimal
-                            values:
-                            <br>A = 0x67452301
-                            <br>B = 0xEFCDAB89
-                            <br>C = 0x98BADCFE
-                            <br>D = 0x10325476
-                            <br>E = 0xC3D2E1F0
-                        </li>
-                        <li>
-                            <strong>Processing Blocks:</strong> Each 512-bit block undergoes the following steps:
-                            <ol>
-                                <li><strong>Copy Variables:</strong> The current values of A, B, C, D, and E are copied
-                                    into corresponding temporary variables (a, b, c, d, e).</li>
-                                <li><strong>Divide into 32-bit Words:</strong> Each 512-bit block is divided into
-                                    sixteen 32-bit words, labeled W<sub>0</sub>, W<sub>1</sub>, ..., W<sub>15</sub>.
-                                    Additional words (W<sub>16</sub> to W<sub>79</sub>) are generated using bitwise
-                                    operations on the initial 16 words.</li>
-                                <li><strong>Perform Four Rounds:</strong> The hashing process involves four rounds of
-                                    operations, with each round consisting of 20 steps. Each step applies a non-linear
-                                    function, adds constants, and modifies the chaining variables:
-                                    <ul>
-                                        <li><strong>Round 1:</strong> Processes the input using bitwise logical
-                                            operations like AND, OR, and NOT.</li>
-                                        <li><strong>Round 2:</strong> Introduces more complex operations, including XOR.
-                                        </li>
-                                        <li><strong>Round 3:</strong> Continues with additional transformations to
-                                            diffuse data further.</li>
-                                        <li><strong>Round 4:</strong> Finalizes the mixing to ensure thorough diffusion
-                                            across all variables.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Update Variables:</strong> After processing, the temporary variables (a, b,
-                                    c, d, e) are added back to the original chaining variables (A, B, C, D, E) to
-                                    incorporate the changes from the current block.</li>
-                            </ol>
-                        </li>
-                    </ol>
-                </div>
+<ul>
+    <li><strong>MD5 ka Modified Version:</strong> SHA, MD5 algorithm ka ek improved version hai, jo MD5 ke vulnerabilities ko address karne aur zyada security dene ke liye design kiya gaya hai. MD5 ke kuch weaknesses jaise collision attacks ko dhyan mein rakhte hue, SHA ko is tarah se develop kiya gaya hai ki woh zyada secure aur reliable ho. Jab MD5 ko collision attacks ke against safe nahi mana gaya, tab SHA ka use badh gaya tha.
+    </li>
+    <li><strong>Output Length:</strong> MD5 ke comparison mein, jo sirf 128-bit output deta hai, SHA 160-bit output produce karta hai. Iska matlab hai ki SHA ka hash aur zyada complex hota hai aur usse reverse-engineer karna mushkil hota hai. Zyada bits hone ki wajah se, sha256 (SHA ka ek version) aur sha512 jese aur secure variants bhi exist karte hain jo aur zyada bits produce karte hain, aur inka use highly sensitive data ke liye hota hai.
+    </li>
+</ul>
+
+<div class="wh">
+    <h3>Working Steps</h3>
+    <ol>
+        <li>
+            <strong>Padding the Message:</strong>
+            Padding ko message mein add kiya jaata hai taaki message ka length 512 ke multiple ban sake. Yeh "1" bit add karke start hota hai, phir enough "0" bits add kiye jaate hain taaki total length required multiple tak pahunch sake.
+        </li>
+        <li>
+            <strong>Adding the Original Length:</strong>
+            Original message ka length (jo padding ke pehle tha) ko 64-bit ke format mein message ke end mein add kiya jaata hai. Yeh ensure karta hai ki final message ka length bilkul 512 bits ke multiple ho.
+        </li>
+        <li>
+            <strong>Dividing the Message into 512-bit Blocks:</strong>
+            Padding ke baad message ko 512-bit blocks mein divide kar diya jaata hai. Har ek block ko separately process kiya jaata hai during hashing.
+        </li>
+        <li>
+            <strong>Initializing Chaining Variables:</strong>
+            SHA algorithm five 32-bit variables ka use karta hai (A, B, C, D, aur E), jo calculation ko track karte hain. Yeh variables specific starting values se initialize hote hain.
+        </li>
+        <li>
+            <strong>Processing Each Block:</strong>
+            Har 512-bit block ko process karne ke liye yeh steps follow kiye jaate hain:
+            <ol>
+                <li><strong>Copy Variables:</strong> A, B, C, D, aur E ki current values ko temporary variables (a, b, c, d, e) mein copy kiya jaata hai.</li>
+                <li><strong>Divide into Words:</strong> Block ko 16 chhote 32-bit pieces (W₀ se W₁₅) mein divide kiya jaata hai. Phir aur zyada words (W₁₆ se W₇₉) generate kiye jaate hain initial words par operations kar ke.</li>
+                <li><strong>Perform Four Rounds:</strong> Har block pe 4 rounds hoti hain, har round mein 20 steps hote hain. Har round mein different functions, constants aur variables modify kiye jaate hain:
+                    <ul>
+                        <li><strong>Round 1:</strong> Basic logical operations jaise AND, OR, NOT.</li>
+                        <li><strong>Round 2:</strong> Complex operations jaise XOR perform kiye jaate hain.</li>
+                        <li><strong>Round 3:</strong> Data ko aur mix karne ke liye transformations hoti hain.</li>
+                        <li><strong>Round 4:</strong> Final operations jisse data achhe se mix ho jaata hai.</li>
+                    </ul>
+                </li>
+                <li><strong>Update Variables:</strong> Jab block process ho jaata hai, temporary variables (a, b, c, d, e) ko original variables (A, B, C, D, E) mein add kar liya jaata hai, changes incorporate karte hue.</li>
+            </ol>
+        </li>
+        <li>
+            <strong>Final Output:</strong>
+            Jab saare blocks process ho jaate hain, to A, B, C, D, aur E ke final values ko concatenate karke final 160-bit hash generate kiya jaata hai. Yeh hash typically 40-character hexadecimal string ke form mein represent hota hai, jo original message ka unique identifier ban jaata hai.
+        </li>
+    </ol>
+</div>
+
+
             </div>
         </div>
         <div class="wh">
