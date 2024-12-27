@@ -432,6 +432,58 @@ c & 0.4 & 0.4
                 <li>The matrix representing a fuzzy relation is called the <strong>"Fuzzy Matrix"</strong>.</li>
             </ul>
             <div class="in">
+                <h3>Cartesian Product</h3>
+<p>
+    Consider the two fuzzy sets:
+    <br>
+    A = {0.4/x<sub>1</sub> + 0.3/x<sub>2</sub> + 0.2/x<sub>3</sub>} 
+    <br>
+    B = {0.3/y<sub>1</sub> + 0.5/y<sub>2</sub>} 
+    <br>
+    The Cartesian product of two fuzzy sets is calculated by finding the minimum value of the membership grades of their corresponding elements. For each pair (x, y), we compute:
+    <br>
+    &mu;<sub>R</sub>(x<sub>i</sub>, y<sub>j</sub>) = min(&mu;<sub>A</sub>(x<sub>i</sub>), &mu;<sub>B</sub>(y<sub>j</sub>))
+</p>
+<p>
+    Let us calculate for all pairs:
+    <br>
+    1. &mu;<sub>R</sub>(x<sub>1</sub>, y<sub>1</sub>) = min(0.4, 0.3) = 0.3
+    <br>
+    2. &mu;<sub>R</sub>(x<sub>1</sub>, y<sub>2</sub>) = min(0.4, 0.5) = 0.4
+    <br>
+    3. &mu;<sub>R</sub>(x<sub>2</sub>, y<sub>1</sub>) = min(0.3, 0.3) = 0.3
+    <br>
+    4. &mu;<sub>R</sub>(x<sub>2</sub>, y<sub>2</sub>) = min(0.3, 0.5) = 0.3
+    <br>
+    5. &mu;<sub>R</sub>(x<sub>3</sub>, y<sub>1</sub>) = min(0.2, 0.3) = 0.2
+    <br>
+    6. &mu;<sub>R</sub>(x<sub>3</sub>, y<sub>2</sub>) = min(0.2, 0.5) = 0.2
+</p>
+<p>
+    Now, we can represent the Cartesian product in matrix form:
+</p>
+<p class="mc">
+    \[
+    \mu_R(X, Y) =
+    \begin{pmatrix}
+       & y_1 & y_2 \\
+    x_1 & 0.3 & 0.4 \\
+    x_2 & 0.3 & 0.3 \\
+    x_3 & 0.2 & 0.2
+    \end{pmatrix}
+    \]
+</p>
+<p>
+    Here:
+    <ul>
+        <li>The rows correspond to elements of set A: x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>.</li>
+        <li>The columns correspond to elements of set B: y<sub>1</sub>, y<sub>2</sub>.</li>
+        <li>Each cell represents the membership value calculated using the "min" operation.</li>
+    </ul>
+</p>
+
+            </div>
+            <div class="in">
                 <h3>Operations on Fuzzy Relations</h3>
                 <p>
                     Previously, we learned about operations on fuzzy sets. Now, we explore operations between two fuzzy
