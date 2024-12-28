@@ -420,115 +420,146 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
         </div>
         <div class="wh">
             <h2>Membership Function</h2>
-<ul>
-    <li>
-        <strong>What is it?</strong> 
-        A membership function is a function that specifies the degree or level to which a given input belongs to a set.
-    </li>
-    <li>
-        <strong>Degree of Membership:</strong> 
-        It specifies the extent to which a particular input belongs to a set. The value of the degree of membership is always between 0 and 1. This value is also called the membership value of an element \( x \) in the set \( A \). 
-    </li>
-    <li>
-        <strong>Understanding with an Example:</strong> 
-        Let's say we have a set \( A \) and an element \( x \) is a member of this set. 
-        <ul>
-            <li>If the membership value is \( 0.6 \), it means that \( x \) partially belongs to set \( A \) to a degree of 0.6.</li>
-            <li>If the membership value is \( 0.9 \), it means \( x \) belongs to set \( A \) more strongly (to a higher degree).</li>
-            <li>If the membership value is \( 1 \), it means \( x \) fully belongs to set \( A \).</li>
-            <li>If the membership value is \( 0 \), it means \( x \) does not belong to set \( A \) at all.</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Mathematical Definition:</strong> 
-        A fuzzy set \( A \) of a universe \( X \) is defined by the membership function \( \mu_A(x) \), which represents the degree of membership of \( x \) in set \( A \).
-        <ul>
-            <li>For example, to determine the membership function for an element \( x \) in set \( A \), it is represented as \( \mu_A(x) \).</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Example:</strong>
-        <ul>
-            <li>\( \mu_A(x) = [x, 0.3] \): This means \( x \) belongs to set \( A \) with a degree of 0.3, i.e., it partially belongs to \( A \).</li>
-            <li>The membership function \( \mu_A(x) : X \to [0, 1] \) indicates that the membership value must be within the range [0, 1].</li>
-            <li>\( \mu_A(x) = 1 \): \( x \) fully belongs to \( A \).</li>
-            <li>\( \mu_A(x) = 0 \): \( x \) does not belong to \( A \).</li>
-            <li>\( 0 < \mu_A(x) < 1 \): \( x \) partially belongs to \( A \).</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Applications:</strong> 
-        Membership functions are widely used in the fuzzification and defuzzification processes in fuzzy logic systems. They help in converting crisp inputs into fuzzy values and vice versa.
-    </li>
-</ul>
-<div class="in">
-    <h3>Graphical Representation of Membership Function</h3>
-<img src="../../images/sc17.jpeg" alt="Graph diagram of temperature categories: very cold, cold, warm, hot, very hot">
-<ul>
-    <li>
-        The membership function represents different temperature categories: [very cold, cold, warm, hot, very hot].
-    </li>
-    <li>
-        Let’s understand how the graph works:
-        <ul>
-            <li>
-                When the temperature is below 0 degrees Celsius, it fully belongs to the "very cold" category because the membership function (&mu;<sub>A</sub>(x)) value is 1. This means the temperature is completely categorized as "very cold."
-            </li>
-            <li>
-                As the temperature increases from 0 to 5 degrees Celsius, the &mu;<sub>A</sub>(x) value for "very cold" gradually decreases. By the time it reaches 5 degrees Celsius, the &mu;<sub>A</sub>(x) value for "very cold" becomes 0. This indicates that the temperature no longer belongs to the "very cold" category.
-            </li>
-            <li>
-                During the same range (0 to 5 degrees Celsius), the &mu;<sub>A</sub>(x) value for "cold" starts increasing. For example, it might go from 0.1 to 0.2 to 0.3, and so on. At 5 degrees Celsius, the &mu;<sub>A</sub>(x) value for "cold" becomes 1, meaning the temperature fully belongs to the "cold" category.
-            </li>
-            <li>
-                From 5 to 10 degrees Celsius, the temperature remains fully in the "cold" category, as indicated by the &mu;<sub>A</sub>(x) value of 1. A similar pattern is shown for other categories like "warm," "hot," and "very hot" in the graph.
-            </li>
-        </ul>
-    </li>
-</ul>
-
-</div>
-        </div>
-        <div class="wh">
-            <h2>Membership Function Features</h2>
-            <p>A is a fuzzy set, and x is a member of A. These features of the membership function can be understood by
-                plotting them on a graph:</p>
-            <ol>
-                <li><strong>Support:</strong> The support of a fuzzy set is the set of all elements x for which the
-                    membership value &mu;<sub>A</sub>(x) is greater than 0.
-                    <br><strong>Meaning:</strong> It represents all points where the fuzzy set has some degree of
-                    membership, no matter how small.
-                    <br><strong>Mathematical Representation:</strong>
-                    <br>Support(A) = {x | &mu;<sub>A</sub>(x) > 0}
-                    <br><strong>Example:</strong> If &mu;<sub>A</sub>(x) > 0 for elements x = 1, 2, 3, then the support
-                    of the set A is {1, 2, 3}.
-                </li>
-                <li><strong>Core:</strong> The core of a fuzzy set is the set of all elements x for which the membership
-                    value &mu;<sub>A</sub>(x) is exactly equal to 1.
-                    <br><strong>Meaning:</strong> It represents the points that fully belong to the fuzzy set with the
-                    maximum membership value.
-                    <br><strong>Mathematical Representation:</strong>
-                    <br>Core(A) = {x | &mu;<sub>A</sub>(x) = 1}
-                    <br><strong>Example:</strong> If &mu;<sub>A</sub>(x) = 1 for elements x = 5 and x = 6, then the core
-                    of the set A is {5, 6}.
-                </li>
-                <li><strong>Boundary:</strong> The boundary of a fuzzy set consists of all elements x where the
-                    membership value is strictly between 0 and 1.
-                    <br><strong>Meaning:</strong> It represents the elements that belong to the fuzzy set partially
-                    (neither fully included nor completely excluded).
-                    <br><strong>Mathematical Representation:</strong>
-                    <br>Boundary(A) = {x | 0 < &mu;<sub>A</sub>(x) < 1} <br><strong>Example:</strong> If
-                            &mu;<sub>A</sub>(x) = 0.4 for x = 4 and &mu;<sub>A</sub>(x) = 0.8 for x = 7, then the
-                            boundary of the set A includes {4, 7}.
-                </li>
-            </ol>
-            <img src="../../images/sc12.jpeg" alt="Graph showing membership function features">
-            <p><strong>For better understanding watch following videos:</strong></p>
             <ul>
-                <li><a href="https://youtu.be/k7OppSz4mCg?si=5xzlioa93Z159ij-" target="_blank">Membership Functions in fuzzy sets &neArr;</a></li>
-                <li><a href="https://youtu.be/mwgtV_eqccs?si=T2c2eSml3FmfHpgN" target="_blank">Types of Membership Function  &neArr;</a></li>
+                <li>
+                    <strong>What is it?</strong>
+                    A membership function is a function that specifies the degree or level to which a given input
+                    belongs to a set.
+                </li>
+                <li>
+                    <strong>Degree of Membership:</strong>
+                    It specifies the extent to which a particular input belongs to a set. The value of the degree of
+                    membership is always between 0 and 1. This value is also called the membership value of an element
+                    \( x \) in the set \( A \).
+                </li>
+                <li>
+                    <strong>Understanding with an Example:</strong>
+                    Let's say we have a set \( A \) and an element \( x \) is a member of this set.
+                    <ul>
+                        <li>If the membership value is \( 0.6 \), it means that \( x \) partially belongs to set \( A \)
+                            to a degree of 0.6.</li>
+                        <li>If the membership value is \( 0.9 \), it means \( x \) belongs to set \( A \) more strongly
+                            (to a higher degree).</li>
+                        <li>If the membership value is \( 1 \), it means \( x \) fully belongs to set \( A \).</li>
+                        <li>If the membership value is \( 0 \), it means \( x \) does not belong to set \( A \) at all.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Mathematical Definition:</strong>
+                    A fuzzy set \( A \) of a universe \( X \) is defined by the membership function \( \mu_A(x) \),
+                    which represents the degree of membership of \( x \) in set \( A \).
+                    <ul>
+                        <li>For example, to determine the membership function for an element \( x \) in set \( A \), it
+                            is represented as \( \mu_A(x) \).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Example:</strong>
+                    <ul>
+                        <li>\( \mu_A(x) = [x, 0.3] \): This means \( x \) belongs to set \( A \) with a degree of 0.3,
+                            i.e., it partially belongs to \( A \).</li>
+                        <li>The membership function \( \mu_A(x) : X \to [0, 1] \) indicates that the membership value
+                            must be within the range [0, 1].</li>
+                        <li>\( \mu_A(x) = 1 \): \( x \) fully belongs to \( A \).</li>
+                        <li>\( \mu_A(x) = 0 \): \( x \) does not belong to \( A \).</li>
+                        <li>\( 0 < \mu_A(x) < 1 \): \( x \) partially belongs to \( A \).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Applications:</strong>
+                    Membership functions are widely used in the fuzzification and defuzzification processes in fuzzy
+                    logic systems. They help in converting crisp inputs into fuzzy values and vice versa.
+                </li>
             </ul>
+            <div class="in">
+                <h3>Graphical Representation of Membership Function</h3>
+                <img src="../../images/sc17.jpeg"
+                    alt="Graph diagram of temperature categories: very cold, cold, warm, hot, very hot">
+                <ul>
+                    <li>
+                        The membership function represents different temperature categories: [very cold, cold, warm,
+                        hot, very hot].
+                    </li>
+                    <li>
+                        Let’s understand how the graph works:
+                        <ul>
+                            <li>
+                                When the temperature is below 0 degrees Celsius, it fully belongs to the "very cold"
+                                category because the membership function (&mu;<sub>A</sub>(x)) value is 1. This means
+                                the temperature is completely categorized as "very cold."
+                            </li>
+                            <li>
+                                As the temperature increases from 0 to 5 degrees Celsius, the &mu;<sub>A</sub>(x) value
+                                for "very cold" gradually decreases. By the time it reaches 5 degrees Celsius, the
+                                &mu;<sub>A</sub>(x) value for "very cold" becomes 0. This indicates that the temperature
+                                no longer belongs to the "very cold" category.
+                            </li>
+                            <li>
+                                During the same range (0 to 5 degrees Celsius), the &mu;<sub>A</sub>(x) value for "cold"
+                                starts increasing. For example, it might go from 0.1 to 0.2 to 0.3, and so on. At 5
+                                degrees Celsius, the &mu;<sub>A</sub>(x) value for "cold" becomes 1, meaning the
+                                temperature fully belongs to the "cold" category.
+                            </li>
+                            <li>
+                                From 5 to 10 degrees Celsius, the temperature remains fully in the "cold" category, as
+                                indicated by the &mu;<sub>A</sub>(x) value of 1. A similar pattern is shown for other
+                                categories like "warm," "hot," and "very hot" in the graph.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Membership Function Features</h3>
+                <p>A is a fuzzy set, and x is a member of A. These features of the membership function can be understood by
+                    plotting them on a graph:</p>
+                <ol>
+                    <li><strong>Support:</strong> The support of a fuzzy set is the set of all elements x for which the
+                        membership value &mu;<sub>A</sub>(x) is greater than 0.
+                        <br><strong>Meaning:</strong> It represents all points where the fuzzy set has some degree of
+                        membership, no matter how small.
+                        <br><strong>Mathematical Representation:</strong>
+                        <br>Support(A) = {x | &mu;<sub>A</sub>(x) > 0}
+                        <br><strong>Example:</strong> If &mu;<sub>A</sub>(x) > 0 for elements x = 1, 2, 3, then the support
+                        of the set A is {1, 2, 3}.
+                    </li>
+                    <li><strong>Core:</strong> The core of a fuzzy set is the set of all elements x for which the membership
+                        value &mu;<sub>A</sub>(x) is exactly equal to 1.
+                        <br><strong>Meaning:</strong> It represents the points that fully belong to the fuzzy set with the
+                        maximum membership value.
+                        <br><strong>Mathematical Representation:</strong>
+                        <br>Core(A) = {x | &mu;<sub>A</sub>(x) = 1}
+                        <br><strong>Example:</strong> If &mu;<sub>A</sub>(x) = 1 for elements x = 5 and x = 6, then the core
+                        of the set A is {5, 6}.
+                    </li>
+                    <li><strong>Boundary:</strong> The boundary of a fuzzy set consists of all elements x where the
+                        membership value is strictly between 0 and 1.
+                        <br><strong>Meaning:</strong> It represents the elements that belong to the fuzzy set partially
+                        (neither fully included nor completely excluded).
+                        <br><strong>Mathematical Representation:</strong>
+                        <br>Boundary(A) = {x | 0 < &mu;<sub>A</sub>(x) < 1} <br><strong>Example:</strong> If
+                                &mu;<sub>A</sub>(x) = 0.4 for x = 4 and &mu;<sub>A</sub>(x) = 0.8 for x = 7, then the
+                                boundary of the set A includes {4, 7}.
+                    </li>
+                </ol>
+                <img src="../../images/sc12.jpeg" alt="Graph showing membership function features">
+            </div>
+            <div class="in">
+                <h3>Types of Membership Function</h3>
+                <p><strong>1: Triangular Membership Function</strong></p>
+                <img src="../../images/sc18.jpeg" alt="">
+                <p><strong>2: Trapezoidal Membership Function</strong></p>
+                <img src="../../images/sc19.jpeg" alt="">
+                <p><strong>3: Gaussian Membership Function</strong></p>
+                <img src="../../images/sc20.jpeg" alt="">
+                <p><strong>4: Sigmoidal Membership Function</strong></p>
+                <p>This function is mainly used in ANN.</p>
+                <img src="../../images/sc21.jpeg" alt="">
+            </div>
         </div>
+
         <div class="wh">
             <h2>Discrete and Continuous Membership Functions</h2>
 
@@ -620,8 +651,14 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
             <div class="in">
                 <h3>Understanding Fuzzification and Defuzzification</h3>
                 <ol>
-                    <li>Fuzzification is the process of converting crisp (precise and numerical) input values into fuzzy sets using predefined membership functions. This step allows a system to handle imprecise, uncertain, or vague data by mapping input values to linguistic terms (e.g., "low," "medium," "high") represented as fuzzy sets.</li>
-                    <li>Defuzzification is the process of converting fuzzy outputs generated by the inference engine into crisp (precise and numerical) values. It translates the fuzzy results into actionable outputs by applying methods like the centroid of area, bisector, or mean of maxima, making the output usable in real-world scenarios.</li>
+                    <li>Fuzzification is the process of converting crisp (precise and numerical) input values into fuzzy
+                        sets using predefined membership functions. This step allows a system to handle imprecise,
+                        uncertain, or vague data by mapping input values to linguistic terms (e.g., "low," "medium,"
+                        "high") represented as fuzzy sets.</li>
+                    <li>Defuzzification is the process of converting fuzzy outputs generated by the inference engine
+                        into crisp (precise and numerical) values. It translates the fuzzy results into actionable
+                        outputs by applying methods like the centroid of area, bisector, or mean of maxima, making the
+                        output usable in real-world scenarios.</li>
                 </ol>
             </div>
             <div class="in">
@@ -710,17 +747,20 @@ Fast: µ(x) = {0 at 60 km/h, 0.8 at 100 km/h, 1 at 120 km/h}                    
                 </ol>
                 <p>This model is commonly used in engineering and control systems due to its efficiency and ability to
                     handle large-scale problems.</p>
-                </div>
+            </div>
         </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
+            <li><a href="https://youtu.be/k7OppSz4mCg?si=5xzlioa93Z159ij-" target="_blank">Membership Functions in fuzzy sets &neArr;</a></li>
+            <li><a href="https://youtu.be/mwgtV_eqccs?si=T2c2eSml3FmfHpgN" target="_blank">Types of Membership Function  &neArr;</a></li>
             <li><a href="https://youtu.be/J8QD3jkjwDw?si=UfaFbCVu9hc4M9yn" target="_blank">Fuzzy Rule (Video Lecture)
                     &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=vdFrIDF88VE" target="_blank">Fuzzy Inference System (Video
                     Lecture) &neArr;</a></li>
         </ul>
+
     </div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
