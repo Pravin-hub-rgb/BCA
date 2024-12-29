@@ -667,7 +667,7 @@ Input Layer       Hidden Layer       Output Layer
                     theory, paving the way for more complex learning algorithms and structures in modern artificial
                     intelligence.</p>
             </div>
-            <!-- <div class="in">
+             <div class="in">
                 <h3>ANDNOT Function Implementation Using McCulloch-Pitts Neuron</h3>
 
                 <p><strong>1. Truth Table of ANDNOT Function</strong></p>
@@ -766,116 +766,9 @@ Input Layer       Hidden Layer       Output Layer
                     \end{cases}\)
                 </p>
                 <p>This function confirms that the neuron will fire (output 1) only when \(X_1\) is equal to 1 and
-                    \(X_2\) is equal to 0, effectively implementing the ANDNOT logical function. The simplicity of the
-                    McCulloch-Pitts model highlights its significance as a foundational concept in neural network
-                    theory, paving the way for more complex learning algorithms and structures in modern artificial
-                    intelligence.</p>
-            </div> -->
-            <div class="in">
-                <h3>XOR Function Implementation Using McCulloch-Pitts Neuron</h3>
-
-                <p><strong>1. Truth Table of XOR Function</strong></p>
-                <p>The truth table for the XOR function demonstrates how the outputs are determined based on the inputs.
-                    In this case, we have two inputs: \(X_1\) and \(X_2\), and \(Y\) is the output. The XOR function
-                    outputs a high signal (1) only when the inputs are different (one high and one low). This behavior
-                    can be represented as follows:</p>
-                <pre>
-                    <code>
-+---------+---------+--------+
-| Input X1| Input X2| Output |
-+---------+---------+--------+
-|    0    |    0    |   0    |
-|    0    |    1    |   1    |
-|    1    |    0    |   1    |
-|    1    |    1    |   0    |
-+---------+---------+--------+
-                    </code>
-                </pre>
-                <p>From the truth table, we observe that the output is high (1) when one of the inputs is high and the
-                    other is low, while it is low (0) when both inputs are the same. This binary relationship
-                    establishes the foundation for how the McCulloch-Pitts neuron will function for the XOR operation.
-                </p>
-
-                <p><strong>2. Understanding Weights and Threshold</strong></p>
-                <p>It is essential to note that the McCulloch-Pitts neuron does not utilize a built-in training
-                    algorithm. Therefore, we need to analyze the input combinations to determine the appropriate weights
-                    and threshold values required for the desired output behavior.</p>
-                <p>For implementing the XOR function, we can assume the following weights for our inputs:</p>
-                <ul>
-                    <li>\(W_1 = 1\)</li>
-                    <li>\(W_2 = 1\)</li>
-                    <li>\(W_3 = -2\) (for a simulated bias)</li>
-                </ul>
-                <p>These weights suggest that both inputs contribute positively to the net input, while the bias acts to
-                    reduce the output when both inputs are high. With these assumptions, we can calculate the net input
-                    at the output neuron based on various input combinations:</p>
-
-                <p><strong>Net Input Calculations</strong></p>
-                <p>Let’s compute the net input \(y_n\) for each possible combination of inputs:</p>
-                <p>1. For inputs \(X_1 = 0\) and \(X_2 = 0\):</p>
-                <p>
-                    \(y_n = (X_1 \cdot W_1) + (X_2 \cdot W_2) + W_3 = (0 \cdot 1) + (0 \cdot 1) + (-2) = -2\)
-                </p>
-                <p>In this scenario, both inputs are low, resulting in a net input of -2.</p>
-
-                <p>2. For inputs \(X_1 = 0\) and \(X_2 = 1\):</p>
-                <p>
-                    \(y_n = (0 \cdot 1) + (1 \cdot 1) + (-2) = -1\)
-                </p>
-                <p>Here, the second input is high while the first is low, yielding a net input of -1.</p>
-
-                <p>3. For inputs \(X_1 = 1\) and \(X_2 = 0\):</p>
-                <p>
-                    \(y_n = (1 \cdot 1) + (0 \cdot 1) + (-2) = -1\)
-                </p>
-                <p>In this case, the first input is high while the second is low, resulting in a net input of -1.</p>
-
-                <p>4. For inputs \(X_1 = 1\) and \(X_2 = 1\):</p>
-                <p>
-                    \(y_n = (1 \cdot 1) + (1 \cdot 1) + (-2) = 0\)
-                </p>
-                <p>Both inputs being high produces a net input of 0, indicating that the neuron does not fire.</p>
-
-                <p><strong>3. Determining the Threshold Value</strong></p>
-                <p>To ensure that the McCulloch-Pitts neuron fires (outputs 1) only when the inputs are different, we
-                    need to establish an appropriate threshold value, denoted as \(\theta\). Based on our previous
-                    calculations, we can conclude:</p>
-                <ul>
-                    <li>If \(\theta \leq 0\), the neuron will fire when one of the inputs is 1 and the other is 0.</li>
-                    <li>If \(\theta > 0\), the neuron will not fire when both inputs are high (1).</li>
-                </ul>
-                <p>Thus, we determine that the threshold value \(\theta\) should be set to 0 to achieve the desired
-                    behavior of the XOR function.</p>
-
-                <p>Additionally, we can calculate the threshold value using the following equation:</p>
-                <p>
-                    \(\theta \geq n \cdot W - P\)
-                </p>
-                <p>Where:</p>
-                <ul>
-                    <li>\(n\) is the number of neurons in the input layer (in this case, \(n = 2\)).</li>
-                    <li>\(W\) is the positive weight (here, \(W = 1\)).</li>
-                    <li>\(P\) is the negative weight (in this case, \(P = 2\)).</li>
-                </ul>
-                <p>Substituting these values into the equation gives:</p>
-                <p>
-                    \(\theta \geq 2 \cdot 1 - 2 = 0\)
-                </p>
-                <p>Thus, both methods confirm that the threshold value should be set to 0.</p>
-
-                <p><strong>4. Final Activation Function</strong></p>
-                <p>The final activation function for the McCulloch-Pitts neuron can be expressed mathematically as:</p>
-                <p>
-                    \(F(y_n) = \begin{cases}
-                    1 & \text{if } y_n \geq 0 \\
-                    0 & \text{otherwise}
-                    \end{cases}\)
-                </p>
-                <p>This function confirms that the neuron will fire (output 1) only when the inputs differ, effectively
-                    implementing the XOR logical function. The XOR function serves as a critical example in neural
-                    network theory, showcasing the limitations of simple models and paving the way for more advanced
-                    learning algorithms and structures in artificial intelligence.</p>
-            </div>
+                    \(X_2\) is equal to 0, effectively implementing the ANDNOT logical function. </p>
+            </div> 
+            
         </div>
         <div class="wh">
             <h2>Hebb Network / Hebbian Rule</h2>
