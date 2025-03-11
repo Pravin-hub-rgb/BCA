@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 2</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="wh">
+            <h2>Data Warehouse Architecture</h2>
+            <div class="in">
+                <h3>2-Tier Architecture</h3>
+
+                <p>The <strong>2-Tier Architecture</strong> is a client-server architecture commonly used in database
+                    systems, including data warehouses. In this setup, the system is divided into two layers: the client
+                    layer (end-user layer) and the server layer (data source layer). It is a simpler, faster
+                    architecture but has limitations when dealing with large-scale systems.</p>
+
+                <h4>Key Features of 2-Tier Architecture</h4>
+
+                <ul>
+                    <li><strong>Client-Server Architecture:</strong> In this model, the client (end-user) directly
+                        communicates with the server, where the data is stored and managed.</li>
+                    <li><strong>Available Sources:</strong> The server layer may include sources like operational
+                        databases, external data systems, or an existing data warehouse.</li>
+                    <li><strong>Not Expandable:</strong> This architecture is typically not expandable in terms of
+                        handling large numbers of end users or big datasets efficiently.</li>
+                    <li><strong>Limited User Support:</strong> It struggles to support large numbers of concurrent users
+                        due to limited scalability.</li>
+                    <li><strong>Easy to Maintain:</strong> As it has only two layers, maintenance is simpler and quicker
+                        compared to more complex architectures.</li>
+                    <li><strong>Fast Communication:</strong> Direct communication between the client and server allows
+                        faster data transfer and response times.</li>
+                </ul>
+
+                <h4>How It Works</h4>
+
+                <p>In a 2-Tier architecture, the client (end-user) sends a request to the server, which processes the
+                    request, retrieves the necessary data from the data source, and sends a response back to the client.
+                </p>
+
+                <p><strong>Example:</strong> A retail company’s data warehouse uses a 2-tier architecture. The sales
+                    team (client) directly queries the database (server) for daily sales data. The system processes the
+                    query and provides the requested data to the sales team.</p>
+
+                <h4>Diagram of 2-Tier Architecture</h4>
+                <img src="../../images/dw4.jpeg" alt="">
+                <p><strong>1. End-User Layer:</strong> This represents the clients (end-users) who request information
+                    from the system.</p>
+                <p><strong>2. Server Layer:</strong> The server processes the client’s request and interacts with the
+                    data source (data warehouse or database) to retrieve the necessary data.</p>
+
+                <p><strong>Example scenario:</strong> A manager (end-user) requests a sales report. The client sends a
+                    query to the server. The server queries the database for the required data and returns the report to
+                    the manager.</p>
+
+                <p>The 2-tier architecture is ideal for smaller systems that do not require handling a large number of
+                    concurrent users or complex data. It is easy to implement, provides fast communication, and is
+                    simple to maintain. However, it is not expandable and does not support large-scale data processing,
+                    making it unsuitable for organizations that need to scale up.</p>
+
+                <ul>
+                    <li><strong>Best for:</strong> Small to medium-sized systems with limited data volume and user
+                        traffic.</li>
+                    <li><strong>Not ideal for:</strong> Large-scale systems with complex data or a large number of
+                        users.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>3-Tier Architecture</h3>
+
+                <p>The <strong>3-Tier Architecture</strong> is one of the most widely used architectures in data
+                    warehousing. It divides the system into three distinct layers: the bottom tier (Database), the
+                    middle tier (OLAP Server), and the top tier (Client Layer). This architecture is designed to provide
+                    a scalable, efficient solution for handling large volumes of data and numerous end-users.</p>
+
+                <h4>Key Features of 3-Tier Architecture</h4>
+
+                <ul>
+                    <li><strong>Most Widely Used:</strong> The 3-tier architecture is the most common setup for
+                        enterprise-level data warehouses because it provides scalability, flexibility, and supports
+                        large-scale data operations.</li>
+                    <li><strong>Separation of Concerns:</strong> It separates data management, business logic, and user
+                        interaction into distinct layers, making the system more organized and easier to maintain.</li>
+                    <li><strong>Scalability:</strong> The architecture can handle a growing number of users and
+                        increasing data volumes efficiently.</li>
+                    <li><strong>Flexibility:</strong> Each tier can be optimized independently for performance and
+                        scalability.</li>
+                </ul>
+
+                <h4>How It Works</h4>
+                <img src="../../images/dw5.jpeg" alt="">
+                <p>In a 3-tier architecture, data flows through three layers:</p>
+
+                <h3>1️⃣ Bottom Tier: Database (RDBMS)</h3>
+
+                <p>The bottom tier is where the <strong>data resides</strong>. It is typically a relational database
+                    management system (RDBMS) like <strong>Oracle, SQL Server, or MySQL</strong>. In this layer, raw
+                    data is cleaned, transformed, and loaded (ETL process) before being stored for analysis.</p>
+
+                <ul>
+                    <li><strong>Data Cleaning:</strong> The raw data is cleaned to remove inconsistencies.</li>
+                    <li><strong>Data Transformation:</strong> The data is transformed into a consistent format for
+                        analysis.</li>
+                    <li><strong>Data Storage:</strong> After cleaning and transformation, the data is stored in tables
+                        or other structures for efficient querying.</li>
+                </ul>
+
+                <p><strong>Example:</strong> A company’s sales data, after being cleaned (removing invalid entries like
+                    incorrect transaction dates) and transformed (standardizing the format), is loaded into the database
+                    for analysis.</p>
+
+                <h3>2️⃣ Middle Tier: OLAP Server</h3>
+
+                <p>The middle tier is the <strong>OLAP (Online Analytical Processing) server</strong>, which is
+                    responsible for performing business logic and processing queries. The OLAP server provides
+                    multidimensional analysis capabilities, allowing users to perform complex queries efficiently.</p>
+
+                <ul>
+                    <li><strong>Business Logic:</strong> This layer applies rules and logic for aggregating and
+                        transforming data according to business needs.</li>
+                    <li><strong>Multidimensional Analysis:</strong> The OLAP server enables data to be analyzed across
+                        different dimensions, like time, geography, and product categories.</li>
+                    <li><strong>Query Processing:</strong> It processes user queries quickly, using indexing and caching
+                        to speed up response times.</li>
+                </ul>
+
+                <p><strong>Example:</strong> A manager queries sales performance by region, time period, and product
+                    category. The OLAP server retrieves and aggregates the data from the database based on these
+                    dimensions.</p>
+
+
+                <h3>3️⃣ Top Tier: Front-End Client Layer (Query Tools)</h3>
+
+                <p>The top tier consists of <strong>front-end client tools</strong> that allow end-users to interact
+                    with the system. These tools are used for querying, reporting, and analysis. The front-end tools
+                    include tools like <strong>BI tools (Business Intelligence), reporting tools, and custom
+                        dashboards</strong>.</p>
+
+                <ul>
+                    <li><strong>User Interface:</strong> Provides a user-friendly interface for non-technical users to
+                        interact with the data.</li>
+                    <li><strong>Query Tools:</strong> Allows users to run queries, generate reports, and visualize data.
+                    </li>
+                    <li><strong>Access to OLAP Server:</strong> The client tools communicate with the OLAP server to
+                        fetch the processed data and present it to the user.</li>
+                </ul>
+
+                <p><strong>Example:</strong> A business analyst uses a reporting tool (like Tableau or Power BI) to
+                    visualize sales data by region and create interactive reports for management.</p>
+
+
+                <p>The 3-tier architecture provides a robust and scalable solution for large-scale data management and
+                    analysis. By separating the system into three layers, organizations can optimize each layer for its
+                    specific function, making the system efficient and flexible.</p>
+
+                <ul>
+                    <li><strong>Best for:</strong> Large organizations with complex data and multiple users requiring
+                        advanced analytical capabilities.</li>
+                    <li><strong>Not ideal for:</strong> Small systems or organizations with limited resources.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>4-Tier Architecture</h3>
+
+                <p>The <strong>4-Tier Architecture</strong> is a more advanced and flexible architecture used in data management and application development. It divides the system into four distinct layers: Database, Application, Presentation, and Client. This architecture allows for more separation of concerns, better scalability, and improved performance when dealing with complex systems.</p>
+                
+                <h4>Key Features of 4-Tier Architecture</h4>
+                
+                <ul>
+                    <li><strong>Increased Separation of Concerns:</strong> By adding the presentation layer and separating the business logic from the data access, it enables easier management of each component.</li>
+                    <li><strong>Scalable:</strong> The architecture supports scaling up and down as needed by managing different layers independently.</li>
+                    <li><strong>Flexible and Maintainable:</strong> Each layer can be developed and maintained independently, which makes it easier to implement changes without affecting the whole system.</li>
+                    <li><strong>Enhanced Security:</strong> The layers are isolated, which can lead to improved security by limiting access to sensitive data.</li>
+                </ul>
+                
+                <h4>How It Works</h4>
+                
+                <p>In the 4-Tier Architecture, the system is divided into four layers that interact with each other in a sequential flow:</p>
+                
+                
+                
+                <h3>1️⃣ Database Layer</h3>
+                
+                <p>The <strong>Database Layer</strong> is the bottom-most layer and holds the data for the system. This layer typically includes a relational database management system (RDBMS), where raw data is stored and managed.</p>
+                
+                <ul>
+                    <li><strong>Data Storage:</strong> Raw data is stored in the database in a structured format.</li>
+                    <li><strong>Data Access:</strong> This layer is responsible for providing data to the application layer through data access mechanisms.</li>
+                    <li><strong>Data Integrity:</strong> Ensures that the data is accurate and consistent.</li>
+                </ul>
+                
+                <p><strong>Example:</strong> A company’s employee records are stored in a database, including personal information, salary details, and job history.</p>
+                
+                
+                
+                <h3>2️⃣ Application Layer</h3>
+                
+                <p>The <strong>Application Layer</strong> is where the business logic is implemented. This layer acts as the intermediary between the database and the client, processing data and managing transactions.</p>
+                
+                <ul>
+                    <li><strong>Business Logic:</strong> Handles the core functionality, processing user requests and ensuring that data is manipulated according to the business rules.</li>
+                    <li><strong>Data Manipulation:</strong> This layer retrieves data from the database, processes it, and sends it to the presentation layer.</li>
+                    <li><strong>Business Objects:</strong> Contains business-related data structures that are used to carry out specific business operations.</li>
+                </ul>
+                
+                <p><strong>Example:</strong> The business logic could include rules for calculating employee bonuses based on performance, experience, and salary.</p>
+                
+                
+                
+                <h3>3️⃣ Presentation Layer</h3>
+                
+                <p>The <strong>Presentation Layer</strong> is the interface between the application and the end user. It is responsible for presenting data to the user and receiving input from the client (user).</p>
+                
+                <ul>
+                    <li><strong>Controller:</strong> The controller receives the user input from the client, processes the data, and sends requests to the business logic layer for further processing.</li>
+                    <li><strong>View:</strong> The view is responsible for rendering the data from the business logic layer in a format that the user can interact with, such as a web page or application screen.</li>
+                    <li><strong>User Interface:</strong> The presentation layer provides the user interface, allowing users to interact with the system and make requests.</li>
+                </ul>
+                
+                <p><strong>Example:</strong> A user views their employee information on a webpage. The controller sends a request to the business logic to fetch the necessary data, and the view displays the data on the screen.</p>
+                
+                
+                
+                <h3>4️⃣ Client Layer</h3>
+                
+                <p>The <strong>Client Layer</strong> is where the user interacts with the system. It is typically a user’s device (like a desktop, tablet, or smartphone) that communicates with the system to access the application.</p>
+                
+                <ul>
+                    <li><strong>User Interaction:</strong> The client layer allows users to make requests and interact with the application through input forms, buttons, and other interface components.</li>
+                    <li><strong>Communication with Presentation Layer:</strong> The client communicates with the presentation layer to submit queries and receive responses.</li>
+                </ul>
+                
+                <p><strong>Example:</strong> A user opens a web browser and logs into the company’s HR portal, which is the client interacting with the application layers behind the scenes.</p>
+
+                <h3>Diagram</h3>
+                <img src="../../images/dw6.jpeg" alt="">
+                <ul>
+
+                    <li>In the 4-Tier Architecture, when a user makes a request, it is first sent to the Presentation Layer where the Controller receives the request. The controller processes the request and forwards it to the Business Logic (or Business Objects) for further handling. From there, it moves to the Data Access Layer, where it fetches the relevant data from the Database. Once the data is retrieved, it is sent back to the Application Layer and passed to the Model, which processes it according to the business rules. Finally, the processed data moves back to the View in the Presentation Layer, where it is formatted and displayed to the user. This flow ensures that each layer performs its specific function, providing an organized, efficient process for data retrieval and presentation to the user.</li>
+                </ul>
+                
+                <p>The 4-tier architecture is an advanced, flexible approach to managing large, complex systems. By splitting the architecture into four distinct layers, it allows for better separation of concerns, scalability, and easier maintenance. It is ideal for applications that require high levels of performance, security, and user interaction.</p>
+                
+                <ul>
+                    <li><strong>Best for:</strong> Large-scale enterprise applications, especially those requiring complex business logic and a high level of user interaction.</li>
+                    <li><strong>Not ideal for:</strong> Small applications with less complex logic and limited user interaction.</li>
+                </ul>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=ig1j8-DJl8U" target="_blank">Data Warehouse Architecture Video Lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+</body>
+
+</html>

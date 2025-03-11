@@ -110,6 +110,38 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Select all compact and extended notes sections
+const compactExtendedSections = document.querySelectorAll(".compact-extended");
+
+compactExtendedSections.forEach(function (section) {
+  // Create the toggle button
+  const toggleButton = document.createElement("button");
+  toggleButton.textContent = "Compact"; // Initial text for Compact mode
+  toggleButton.classList.add("toggle-len-notes");
+
+  // Append the button to the section
+  section.appendChild(toggleButton);
+
+  // Add event listener for toggling notes
+  toggleButton.addEventListener("click", function () {
+    const compactNotes = section.querySelector(".compact");
+    const extendedNotes = section.querySelector(".extended");
+
+    // Toggle visibility
+    if (compactNotes.style.display === "none") {
+      compactNotes.style.display = "block";
+      extendedNotes.style.display = "none";
+      toggleButton.textContent = "Compact"; // Change button text to Compact
+    } else {
+      compactNotes.style.display = "none";
+      extendedNotes.style.display = "block";
+      toggleButton.textContent = "Extended"; // Change button text to Extended
+    }
+  });
+});
+
+
+
 // Function to save the selected semester to localStorage
 function saveSemester() {
   const semesterElement = document.getElementById("semester");

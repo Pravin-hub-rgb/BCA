@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Programs Basics</title>
+    <link rel="icon" href="../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="./index.html"><img src="../../../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>Computer Graphics Program Basics</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Computer Graphics Program Basics</h1>
+        <div class="wh">
+            <h3>Setting Up a Basic Graphics Environment:</h3>
+            <ul>
+                <li>
+                    First, we need to include the <strong>graphics.h</strong> header file. It is an old graphics library
+                    used in C programming,
+                    especially in older compilers like Turbo C. This library provides functions that let you draw things
+                    like points, lines, circles,
+                    and shapes directly on the screen.
+                    <br><br>
+                    This library is mostly used in DOS-based systems (like Turbo C) and doesn't work natively on modern
+                    systems like Linux or macOS.
+                    But if you're using Turbo C or an old DOS-based system, it's perfect for learning basic graphics
+                    programming.
+                </li>
+                <li>Before we start drawing anything, we need to set up a basic environment where we can render
+                    graphics.</li>
+                <li>
+                    <strong>Initialize the Graphics Mode:</strong> To open a graphics window and start drawing, we use
+                    the <strong>initgraph()</strong> function.
+                    <pre>
+                        <code>
+int gd = DETECT, gm;
+initgraph(&gd, &gm, "");
+                        </code>
+                    </pre>
+                    This will set up a graphics window for you to draw in.
+                    <ul>
+                        <li>Here, <strong>gd</strong> stands for graphics driver, and <strong>gm</strong> stands for
+                            graphics mode.</li>
+                        <li><strong>DETECT</strong> is a macro defined in the <strong>graphics.h</strong> library. It is
+                            not a keyword in the C language itself
+                            but a constant used by the graphics system.</li>
+                        <li><strong>DETECT</strong> automatically detects the graphics driver on your system, so you
+                            don’t have to manually specify one.
+                            This makes it easier for the program to run on different systems.</li>
+                        <li><strong>gm</strong> will store the mode of the graphics system once it's initialized. It
+                            doesn't require a specific value;
+                            it gets set by the <strong>initgraph()</strong> function.</li>
+                        <li>When passed to <strong>initgraph()</strong>, <strong>DETECT</strong> tells the program to
+                            automatically detect the graphics driver
+                            based on your system’s configuration. This eliminates the need for you to manually specify
+                            the graphics driver.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>initgraph(&gd, &gm, "");</strong> - This is the key function to initialize the graphics
+                    system.
+                    <ul>
+                        <li><strong>&gd</strong> and <strong>&gm</strong> are pointers to the variables we defined
+                            earlier. They are passed to the
+                            <strong>initgraph()</strong> function so that the system can initialize the correct graphics
+                            driver and mode.
+                        </li>
+                        <li>The third parameter is an empty string <strong>""</strong> here, which tells the function to
+                            use the default path for
+                            the graphics driver files. If you were running Turbo C, this might be set to a directory
+                            path where the graphics driver is located.</li>
+                        <li>After calling <strong>initgraph()</strong>, the <strong>gm</strong> variable will hold the
+                            graphics mode value that was detected by <strong>DETECT</strong>.
+                            The graphics mode represents things like the screen resolution or color depth that the
+                            system will use for displaying graphics.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Closing the Graphics Mode:</strong> Once you are done with drawing, you should close the
+                    graphics mode using the
+                    <strong>closegraph()</strong> function.
+                    <pre>
+            closegraph();
+        </pre>
+                    <ul>
+                        <li><strong>closegraph()</strong> shuts down the graphics system and deallocates any memory used
+                            for graphics.</li>
+                        <li>It ensures that the system returns to text mode properly after graphics operations are
+                            completed.</li>
+                        <li>Failing to call <strong>closegraph()</strong> may leave the screen in an unpredictable
+                            state, especially in older systems.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Program to draw a pixel</h3>
+            <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen. The
+                following program demonstrates how to draw a pixel.</p>
+            <pre>
+                <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;stdio.h>     // Standard I/O for getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and store graphics mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics system
+
+    putpixel(200, 200, WHITE);  // Draw a white pixel at (200, 200)
+
+    getchar();  // Wait for user input before closing (alternative to getch())
+    closegraph();  // Close the graphics window
+
+    return 0;  // Return success
+}
+                </code>
+            </pre>
+            <p>Explaination of the code</p>
+            <ul>
+                <li>#include &lt;graphics.h>
+                    <ul>
+                        <li>This is a special graphics library that allows us to draw points, lines, shapes, and colors
+                            in C.</li>
+                        <li>It’s not a standard C library—you need to install it separately if you're using GCC on
+                            Linux.</li>
+                        <li>Functions like initgraph(), putpixel(), and closegraph() come from this library.</li>
+                    </ul>
+                </li>
+                <li>#include &lt;stdio.h>
+                    <ul>
+                        <li>This is the standard input-output library in C.</li>
+                        <li>We included this because we need to use getchar(), which waits for user input before closing
+                            the graphics window.</li>
+                        <li>It replaces conio.h, which doesn’t work in modern compilers.</li>
+                    </ul>
+                </li>
+                <li>int gd = DETECT, gm; (Variables for Graphic Mode)
+                    <ul>
+                        <li>gd stands for Graphics Driver.</li>
+                        <li>gm stands for Graphics Mode.</li>
+                        <li>DETECT is a macro (predefined constant) in graphics.h that tells the compiler to
+                            automatically detect the best graphics driver.</li>
+                        <li>gm is an integer variable that will store the graphics mode (like resolution or color
+                            depth).</li>
+                    </ul>
+                </li>
+                <li>initgraph(&gd, &gm, ""); (Initializing the Graphics System)
+                    <ul>
+                        <li>initgraph() is the function that starts the graphics mode.</li>
+                        <li>It takes three arguments:
+                            <ol>
+                                <li>&gd → The address of the gd variable (so it can store the detected graphics driver).
+                                </li>
+                                <li>&gm → The address of the gm variable (so it can store the detected graphics mode).
+                                </li>
+                                <li>"" → This is supposed to be the path to the graphics driver files, but we leave it
+                                    empty because modern systems handle this automatically.</li>
+                            </ol>
+                        </li>
+                        <li>What happens after calling initgraph()?
+                            <ul>
+                                <li>The system enters graphics mode.</li>
+                                <li>A new graphics window opens where we can start drawing.</li>
+                                <li>The graphics driver and mode are selected automatically.</li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>putpixel(200, 200, WHITE);
+                    (Drawing a Pixel) <ul>
+                        <li>putpixel(x, y, color) is a function that draws a single pixel on the screen.</li>
+                        <li>Arguments:
+                            <ul>
+                                <li>x = 200 → The horizontal position (200 pixels from the left).</li>
+                                <li>y = 200 → The vertical position (200 pixels from the top).</li>
+                                <li>WHITE → This is a predefined color constant in graphics.h.</li>
+                            </ul>
+                        </li>
+                        <li>How does the coordinate system work?
+                            <ul>
+                                <li>The top-left corner of the screen is (0,0).</li>
+                                <li>The x-axis increases to the right, and the y-axis increases downward.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>getchar();
+                    (Waiting for User Input)
+                    <ul>
+                        <li>When the program finishes running, the graphics window will close immediately unless we
+                            pause it.</li>
+                        <li>getchar(); waits for the user to press Enter, keeping the graphics window open.</li>
+                        <li>This is an alternative to getch(), which was in conio.h (not supported in modern compilers).
+                        </li>
+                    </ul>
+                </li>
+                <li>closegraph();
+
+                    <ul>
+                        <li>It closes the graphics window and returns to normal text mode.</li>
+                        <li>Without this function, the program might leave the system in an unstable graphics state.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Drawing a Horizontal Line</h3>
+            <p>Now that we understand how to display a single pixel, let’s move to the next step: drawing a horizontal
+                line.</p>
+            <p><strong>Concept of Drawing a Horizontal Line</strong></p>
+            <ul>
+                <li>A horizontal line means all the y-coordinates remain the same, while the x-coordinates change from a
+                    starting point to an ending point.</li>
+                <li>For example:
+                    <ul>
+                        <li>If we want a line from (100, 200) to (300, 200):
+                            <ul>
+                                <li>y = 200 remains constant.</li>
+                                <li>x changes from 100 to 300.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Program to Draw a Horizontal Line</strong></p>
+            <pre>
+                <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;stdio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x1 = 100, x2 = 300, y = 200;  // Start and end points of the line
+
+    for (int x = x1; x <= x2; x++) {
+        putpixel(x, y, WHITE);  // Draw white pixels along the x-axis
+    }
+
+    getchar();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+                </code>
+            </pre>
+            <p>output:</p>
+            <img src="../images/cg3.png" alt="">
+            <p><strong>Program to Draw a Vertical Line</strong>: Here the x coordinate will remain same while y
+                coordinate will change.</p>
+            <pre>
+                <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;stdio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x = 200, y1 = 100, y2 = 300;  // Starting and ending y-coordinates
+
+    for (int y = y1; y <= y2; y++) {
+        putpixel(x, y, WHITE);  // Draw white pixels along the y-axis
+    }
+
+    getchar();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+                </code>
+            </pre>
+            <p>Output:</p>
+            <img src="../images/cg4.png" alt="">
+            <h3>Program to Draw a Square</h3>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">Using Putpixel function</button>
+                <div class="panel">
+                    <pre>
+                        <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;stdio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x1 = 100, y1 = 100;   // Top-left corner of the square
+    int side_length = 200;     // Length of the side of the square
+
+    // Draw top side (horizontal line)
+    for (int x = x1; x <= x1 + side_length; x++) {
+        putpixel(x, y1, WHITE);  // Draw white pixels
+    }
+
+    // Draw right side (vertical line)
+    for (int y = y1; y <= y1 + side_length; y++) {
+        putpixel(x1 + side_length, y, WHITE);  // Draw white pixels
+    }
+
+    // Draw bottom side (horizontal line)
+    for (int x = x1; x <= x1 + side_length; x++) {
+        putpixel(x, y1 + side_length, WHITE);  // Draw white pixels
+    }
+
+    // Draw left side (vertical line)
+    for (int y = y1; y <= y1 + side_length; y++) {
+        putpixel(x1, y, WHITE);  // Draw white pixels
+    }
+
+    getchar();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <p> In graphics.h, there is a built-in function to draw rectangles directly, which makes things a lot simpler
+            compared to manually drawing each side using loops.</p>
+        <p><strong>The rectangle() Function</strong></p>
+        <p>The rectangle() function is part of the graphics.h library and allows you to easily draw a rectangle by just
+            specifying two opposite corners (top-left and bottom-right).</p>
+        <p>Syntax of rectangle()</p>
+        <pre>
+            <code>
+rectangle(int x1, int y1, int x2, int y2);
+            </code>
+        </pre>
+        <p>Where:
+        <ul>
+            <li>(x1, y1) is the top-left corner of the rectangle.</li>
+            <li>(x2, y2) is the bottom-right corner of the rectangle.</li>
+        </ul>
+        </p>
+        <p>How It Works:</p>
+        <ul>
+            <li>You don’t need to manually draw the four sides of the rectangle using loops.</li>
+            <li>Simply call rectangle() with the two corner coordinates, and the function will automatically draw the
+                rectangle for you.</li>
+        </ul>
+        <div class="code">
+            <div class="dotc"></div>
+            <button class="ac">
+                Example Program to Draw a Square Using rectangle()
+            </button>
+            <div class="panel">
+                <pre>
+                    <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;stdio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x1 = 100, y1 = 100;  // Top-left corner of the square
+    int side_length = 200;    // Length of the side of the square
+
+    // Bottom-right corner will be (x1 + side_length, y1 + side_length)
+    rectangle(x1, y1, x1 + side_length, y1 + side_length);  // Draw the square
+
+    getchar();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Line Drawing</h2>
+            <div class="in">
+                <h3>DDA (Digital Differential Analyzer)</h3>
+                <p>
+                    The <strong>Digital Differential Analyzer (DDA) Algorithm</strong> gets its name from its underlying
+                    principles. The term <strong>"Digital"</strong> refers to the fact that this algorithm operates in a
+                    discrete digital space, meaning it works with pixel positions rather than continuous mathematical
+                    functions. The term <strong>"Differential"</strong> comes from the way the algorithm incrementally
+                    calculates the next point in the line using small differences (\( dx \) and \( dy \)) rather than
+                    solving an equation directly. Finally, <strong>"Analyzer"</strong> is derived from early analog
+                    computing methods, where a <strong>Differential Analyzer</strong> was a mechanical device used for
+                    solving differential equations. The DDA algorithm follows a similar approach but in a digital
+                    manner, analyzing and computing the next pixel position step by step. This makes it an efficient and
+                    systematic way to draw lines in computer graphics.
+                </p>
+
+                <div class="wh compact-extended">
+                    <div class="compact">
+                        <p><strong>Step-by-Step Algorithm:</strong></p>
+                        <ul>
+
+
+                            <li><strong>Take Input:</strong></li>
+                            <ul>
+                                <li>Read the starting point \( (x_1, y_1) \) and the ending point \( (x_2, y_2) \).</li>
+                            </ul>
+
+                            <li><strong>Calculate the Differences:</strong></li>
+                            <ul>
+                                <li>Compute the change in \( x \) and \( y \):</li>
+                                <ul>
+                                    <li>\( dx = x_2 - x_1 \)</li>
+                                    <li>\( dy = y_2 - y_1 \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Determine the Number of Steps:</strong></li>
+                            <ul>
+                                <li>The number of steps is the maximum of \( |dx| \) and \( |dy| \), which ensures
+                                    smooth pixel plotting:</li>
+                                <ul>
+                                    <li>\( \text{steps} = \max(|dx|, |dy|) \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Compute the Increment Values:</strong></li>
+                            <ul>
+                                <li>Compute the increments for \( x \) and \( y \) to move step by step:</li>
+                                <ul>
+                                    <li>\( x_{\text{inc}} = \frac{dx}{\text{steps}} \)</li>
+                                    <li>\( y_{\text{inc}} = \frac{dy}{\text{steps}} \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Initialize Starting Position:</strong></li>
+                            <ul>
+                                <li>Set the starting point:</li>
+                                <ul>
+                                    <li>\( x = x_1, y = y_1 \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Plot the Pixels:</strong></li>
+                            <ul>
+                                <li>Repeat for \( \text{steps} \) iterations:</li>
+                                <ul>
+                                    <li>Plot the pixel at the current \( (x, y) \) position using:</li>
+                                    <ul>
+                                        <li>\( \text{putpixel}(\text{round}(x), \text{round}(y), \text{WHITE}) \)</li>
+                                    </ul>
+                                    <li>Update \( x \) and \( y \):</li>
+                                    <ul>
+                                        <li>\( x = x + x_{\text{inc}} \)</li>
+                                        <li>\( y = y + y_{\text{inc}} \)</li>
+                                    </ul>
+                                </ul>
+                            </ul>
+
+                            <li><strong>End of Algorithm:</strong></li>
+                            <ul>
+                                <li>The loop completes, and the full line is drawn from \( (x_1, y_1) \) to \( (x_2,
+                                    y_2) \).</li>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div class="extended">
+                        <p><strong>Step-by-Step Algorithm:</strong></p>
+                        <ul>
+                            <li><strong>Step 1: Understand the Goal</strong></li>
+                            <ul>
+                                <li>You want to draw a line between two points on the screen, for example, from point
+                                    (x1, y1)
+                                    to (x2, y2). Imagine a grid of squares (like pixels on the screen), and your job is
+                                    to
+                                    calculate which squares (pixels) to color so that they form a straight line between
+                                    the two
+                                    points.</li>
+                            </ul>
+
+                            <li><strong>Step 2: Calculate the differences (dx and dy)</strong></li>
+                            <ul>
+                                <li>First, you need to know how far the line goes in both the x direction (left to
+                                    right) and
+                                    the y direction (up to down). You calculate the differences as follows:</li>
+                                <ul>
+                                    <li>dx = x2 - x1 (the horizontal difference)</li>
+                                    <li>dy = y2 - y1 (the vertical difference)</li>
+                                </ul>
+                                <li>These values tell you how much the line moves horizontally and vertically.</li>
+                            </ul>
+
+                            <li><strong>Step 3: Determine the number of steps</strong></li>
+                            <ul>
+                                <li>Now, the next thing you need to figure out is how many steps it will take to draw
+                                    the line
+                                    from the start to the end point. This depends on which direction the line moves
+                                    more—horizontal or vertical. In other words, the line might be steeper (more
+                                    vertical) or
+                                    flatter (more horizontal).</li>
+                                <li>To figure out how many steps, you take the larger of the two differences (dx and
+                                    dy):</li>
+                                <ul>
+                                    <li>Steps = max(dx, dy)</li>
+                                </ul>
+                                <li>This ensures that you take enough steps to cover the longest direction, whether it's
+                                    horizontal or vertical.</li>
+                            </ul>
+
+                            <li><strong>Step 4: Calculate the increment for each step</strong></li>
+                            <ul>
+                                <li>Now that you know how many steps you need, you need to figure out how much to move
+                                    horizontally (x) and vertically (y) at each step. You calculate the increments like
+                                    this:
+                                </li>
+                                <ul>
+                                    <li>x increment = dx / steps</li>
+                                    <li>y increment = dy / steps</li>
+                                </ul>
+                                <li>These increments tell you how much you should increase x and y by for each step you
+                                    take.
+                                    For example, if dx is 4 and dy is 2, and you decide to take 4 steps, the x increment
+                                    would
+                                    be 1 (4 / 4), and the y increment would be 0.5 (2 / 4). This means, with each step,
+                                    you
+                                    increase x by 1 and y by 0.5.</li>
+                            </ul>
+
+                            <li><strong>Step 5: Start plotting the points</strong></li>
+                            <ul>
+                                <li>Now you can start plotting the points. You begin at the starting point (x1, y1).
+                                    From there,
+                                    you add the increments to the current x and y values at each step, one step at a
+                                    time.</li>
+                                <li>For example, if you’re at point (x1, y1), then after the first step, you’ll have:
+                                </li>
+                                <ul>
+                                    <li>new x = x1 + x increment</li>
+                                    <li>new y = y1 + y increment</li>
+                                </ul>
+                                <li>You repeat this process for each step until you reach the end point (x2, y2).</li>
+                            </ul>
+
+                            <li><strong>Step 6: Round the values to integers</strong></li>
+                            <ul>
+                                <li>Since pixels on the screen can only have integer values (you can’t have a "half"
+                                    pixel), you
+                                    need to round the new x and y values to the nearest whole numbers.</li>
+                                <li>This rounding is what makes the line look like it’s following a continuous path but
+                                    is
+                                    actually drawn pixel by pixel.</li>
+                            </ul>
+
+                            <li><strong>Step 7: Plot the pixel</strong></li>
+                            <ul>
+                                <li>After rounding, you plot the pixel at the new coordinates (x, y) and move to the
+                                    next step.
+                                </li>
+                                <li>Repeat this process until you have plotted all the necessary pixels, and you’ll have
+                                    a
+                                    straight line from (x1, y1) to (x2, y2)!</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>How does the DDA algorithm in computer graphics differ from the mathematical DDA approach?</h3>
+                <ul>
+                    <li>In the mathematical DDA approach, we deal with real numbers and continuous values, which allows
+                        for precise calculations of points along a line using the slope equation. This method is ideal
+                        for theoretical calculations, where fractional or decimal values are acceptable and represent
+                        continuous motion or changes. However, in computer graphics, the situation is different. Since a
+                        pixel on a screen can only represent discrete integer coordinates, fractional or decimal values
+                        are not possible. Therefore, in the computer graphics version of DDA, we must approximate the
+                        line by using integer pixel values, rounding the computed coordinates to the nearest whole
+                        number. This ensures that the line is drawn using valid pixel positions on the screen, which can
+                        only accept discrete values rather than continuous ones. This adjustment is the main reason why
+                        the mathematical approach and the computer graphics approach to DDA differ, despite both being
+                        based on the same fundamental concept.</li>
+                </ul>
+                <p>The <strong>Digital Differential Analyzer (DDA) algorithm</strong> exists in both
+                    <strong>mathematical theory</strong> and <strong>computer graphics</strong>, but their
+                    implementation and purpose differ. The key difference comes from how they handle <strong>continuous
+                        vs. discrete values</strong>.
+                </p>
+
+                <h3>1. Mathematical DDA Approach</h3>
+
+                <p>This version of DDA is based on <strong>numerical methods</strong> and is often used in
+                    <strong>mathematical analysis and analog computations</strong>. The main idea is to compute
+                    <strong>small incremental changes</strong> to approximate a curve or a function over time.
+                </p>
+
+                <strong>How It Works:</strong>
+                <ul>
+                    <li>Uses the <strong>slope equation</strong> of a line:
+                        \[
+                        y = mx + c
+                        \]
+                    </li>
+                    <li>Takes <strong>small continuous steps</strong> along the x-axis to compute corresponding
+                        y-values.</li>
+                    <li>Works in <strong>real numbers</strong> (e.g., 2.5, 3.8) without worrying about integer
+                        constraints.</li>
+                    <li>Used in applications like solving <strong>differential equations</strong> or <strong>simulating
+                            motion</strong>.</li>
+                </ul>
+
+                <strong>Example:</strong>
+                <p>If we need to draw a line from (2,3) to (6,7), the slope is:</p>
+
+                \[
+                m = \frac{(y_2 - y_1)}{(x_2 - x_1)} = \frac{7 - 3}{6 - 2} = 1
+                \]
+
+                <p>Then, by incrementing <strong>x by small steps</strong> (like 0.1), we calculate y-values
+                    accordingly.</p>
+
+                <p><strong>Problem in Computer Graphics:</strong> The output might be (2,3), (2.1,3.1), (2.2,3.2), etc.
+                    <strong>But pixels can’t be placed at fractional coordinates!</strong>
+                </p>
+
+                <h3>2. Computer Graphics DDA Algorithm</h3>
+
+                <p>Since computer screens use <strong>pixels</strong>, the DDA algorithm must ensure that a line is
+                    drawn using <strong>only integer coordinates</strong>.</p>
+
+                <strong>How It Works:</strong>
+                <ul>
+                    <li>Instead of using the slope equation directly, it finds the <strong>number of steps</strong>
+                        required to move from the start to the endpoint.</li>
+                    <li>Uses <strong>incremental steps</strong> in either <strong>x or y</strong>, ensuring only
+                        <strong>integer coordinates</strong> are chosen.
+                    </li>
+                    <li>Uses <strong>rounding</strong> to pick the closest pixel to represent the actual line.</li>
+                </ul>
+
+                <strong>Algorithm Steps:</strong>
+                <ul>
+                    <li>Calculate <strong>\( dx = x_2 - x_1 \)</strong> and <strong>\( dy = y_2 - y_1 \)</strong>.</li>
+                    <li>Determine the <strong>number of steps</strong> based on the greater of \( dx \) or \( dy \).
+                    </li>
+                    <li>Compute the <strong>incremental change</strong> in x and y per step:
+                        \[
+                        x_{\text{inc}} = \frac{dx}{\text{steps}}, \quad y_{\text{inc}} = \frac{dy}{\text{steps}}
+                        \]
+                    </li>
+                    <li>Start from \( (x_1, y_1) \) and <strong>round the values to nearest integer pixels</strong>.
+                    </li>
+                    <li>Repeat until reaching \( (x_2, y_2) \).</li>
+                </ul>
+
+                <strong>Example:</strong>
+                <p>If we need to draw a line from (2,3) to (6,7):</p>
+
+                <ul>
+                    <li>\( dx = 4, dy = 4 \)</li>
+                    <li>Steps = max(4,4) = <strong>4</strong></li>
+                    <li>x increment = \( dx/steps = 1 \)</li>
+                    <li>y increment = \( dy/steps = 1 \)</li>
+                </ul>
+
+                <p>Thus, the pixel points would be:</p>
+
+                <ul>
+                    <li>(2,3)</li>
+                    <li>(3,4)</li>
+                    <li>(4,5)</li>
+                    <li>(5,6)</li>
+                    <li>(6,7)</li>
+                </ul>
+
+                <p><strong>All integer coordinates, perfect for a screen.</strong></p>
+            </div>
+            <div class="in">
+                <h3>Bresenham's Line Drawing Algorithm</h3>
+                <p>Bresenham's Line Drawing Algorithm is another popular technique for drawing straight lines in
+                    computer graphics. It is known for being more efficient than the DDA algorithm because it uses only
+                    integer arithmetic, avoiding the floating-point calculations that DDA uses. The algorithm makes
+                    decisions on whether to move horizontally or diagonally based on the error (decision parameter),
+                    which ensures that the line drawn appears continuous and smooth on pixel grids. Bresenham’s
+                    algorithm is especially efficient for raster displays where pixel placement is crucial.</p>
+                <p><strong>Goal of the algorithm</strong></p>
+                <ul>
+                    <li>You want to draw a straight line between two points \( (x_1, y_1) \) and \( (x_2, y_2) \). The
+                        algorithm helps determine which pixels to color to form a straight line. It avoids using
+                        floating-point numbers, relying only on integer arithmetic, making it faster and more efficient
+                        for drawing lines on pixel grids (like on a computer screen).</li>
+                </ul>
+                <div class="wh compact-extended">
+                    <div class="compact">
+                        <p><strong>Step-by-Step Algorithm:</strong></p>
+                        <ul>
+                            <li><strong>Take Input:</strong></li>
+                            <ul>
+                                <li>Read the starting point \( (x_1, y_1) \) and the ending point \( (x_2, y_2) \).</li>
+                            </ul>
+
+                            <li><strong>Calculate the Differences (dx and dy):</strong></li>
+                            <ul>
+                                <li>Compute the change in \( x \) and \( y \):</li>
+                                <ul>
+                                    <li>\( dx = x_2 - x_1 \)</li>
+                                    <li>\( dy = y_2 - y_1 \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Initialize the Decision Parameter (p):</strong></li>
+                            <ul>
+                                <li>Calculate the initial value of \( p \):</li>
+                                <ul>
+                                    <li>\( p = 2 \cdot dy - dx \)</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Start Plotting the Line:</strong></li>
+                            <ul>
+                                <li>Set the starting point \( (x, y) = (x_1, y_1) \).</li>
+                                <li>Plot the first pixel at \( (x_1, y_1) \).</li>
+                            </ul>
+
+                            <li><strong>Loop to Plot the Remaining Points:</strong></li>
+                            <ul>
+                                <li>While \( x < x_2 \) (or until the end point is reached), repeat:</li>
+                                        <ul>
+                                            <li>If \( p < 0 \), move horizontally:</li>
+                                                    <ul>
+                                                        <li>Increment \( x \) by 1, keep \( y \) the same.</li>
+                                                        <li>Update \( p \) using: \( p = p + 2 \cdot dy \).</li>
+                                                    </ul>
+                                            <li>If \( p \geq 0 \), move diagonally:</li>
+                                            <ul>
+                                                <li>Increment both \( x \) and \( y \) by 1.</li>
+                                                <li>Update \( p \) using: \( p = p + 2 \cdot dy - 2 \cdot dx \).</li>
+                                            </ul>
+                                            <li>Plot the new pixel at the updated \( (x, y) \) position.</li>
+                                        </ul>
+                            </ul>
+
+                            <li><strong>End of Algorithm:</strong></li>
+                            <ul>
+                                <li>The loop completes, and the full line is drawn from \( (x_1, y_1) \) to \( (x_2,
+                                    y_2) \).</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <div class="extended">
+                        <p><strong>Step-by-Step Algorithm</strong></p>
+                        <ul>
+                            <li><strong>Step 1: Understand the Problem</strong></li>
+                            <ul>
+                                <li>Imagine you have a grid (the screen or canvas) made of pixels. You need to draw a
+                                    line
+                                    from one point to another. The problem is that the line may not always align exactly
+                                    with the pixel grid, so we have to figure out the best way to choose the pixels that
+                                    form a straight line between the two points.</li>
+                            </ul>
+
+                            <li><strong>Step 2: Calculate the Differences (dx and dy)</strong></li>
+                            <ul>
+                                <li>You need to know how far the line will move in both the \( x \) and \( y \)
+                                    directions.
+                                    This tells you how much you need to adjust the \( x \) and \( y \) coordinates as
+                                    you
+                                    move along the line.</li>
+                                <ul>
+                                    <li>\( dx = x_2 - x_1 \) (the difference in the \( x \)-coordinates, or how much the
+                                        line moves horizontally).</li>
+                                    <li>\( dy = y_2 - y_1 \) (the difference in the \( y \)-coordinates, or how much the
+                                        line moves vertically).</li>
+                                </ul>
+                                <li>These values are key to determining how the line is drawn.</li>
+                            </ul>
+
+                            <li><strong>Step 3: Initialize the Decision Parameter (p)</strong></li>
+                            <ul>
+                                <li>Bresenham’s algorithm uses a decision parameter \( p \) to help decide whether to
+                                    move
+                                    horizontally or diagonally at each step. This parameter helps us determine if the
+                                    line
+                                    should go straight to the right or slightly up (diagonally).</li>
+                                <ul>
+                                    <li>The initial value of \( p \) is calculated using:</li>
+                                    <ul>
+                                        <li>\( p = 2 \times dy - dx \)</li>
+                                    </ul>
+                                    <li>This helps determine whether you should move just horizontally or diagonally.
+                                    </li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Step 4: Start Plotting the Line</strong></li>
+                            <ul>
+                                <li>Now that you know the starting point \( (x_1, y_1) \), the first step is to plot the
+                                    first pixel \( (x_1, y_1) \).</li>
+                                <ul>
+                                    <li>Start with the current coordinates \( (x, y) = (x_1, y_1) \).</li>
+                                    <li>Plot the first pixel using \( \text{putpixel}(x, y, \text{color}) \) where \( x
+                                        \)
+                                        and \( y \) are the coordinates of the starting point.</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Step 5: Loop to Plot the Remaining Points</strong></li>
+                            <ul>
+                                <li>Now that the first pixel is plotted, you need to move along the line and plot the
+                                    rest
+                                    of the pixels. This is where the decision parameter \( p \) helps you decide if the
+                                    next
+                                    point should be directly to the right or diagonally up.</li>
+                                <li><strong>While Loop Condition:</strong> You will continue plotting until \( x \)
+                                    reaches
+                                    \( x_2 \), meaning the line has reached the end point.</li>
+                                <ul>
+                                    <li>If \( p < 0 \):</li>
+                                            <ul>
+                                                <li>This means that moving horizontally is the best choice.</li>
+                                                <li>You increase \( x \) by 1 (move to the right), but \( y \) stays the
+                                                    same.</li>
+                                                <li>Update \( p \) using the formula: \( p = p + 2 \times dy \) (we add
+                                                    \( 2
+                                                    \times dy \) to the current value of \( p \)).</li>
+                                            </ul>
+
+                                    <li>If \( p \geq 0 \):</li>
+                                    <ul>
+                                        <li>This means that moving diagonally (both \( x \) and \( y \)) will get you
+                                            closer
+                                            to the line.</li>
+                                        <li>You increase \( x \) by 1 (move to the right), and also increase \( y \) by
+                                            1
+                                            (move up).</li>
+                                        <li>Update \( p \) using the formula: \( p = p + 2 \times dy - 2 \times dx \)
+                                            (we
+                                            add \( 2 \times dy \) and subtract \( 2 \times dx \) from the current value
+                                            of
+                                            \( p \)).</li>
+                                    </ul>
+
+                                    <li>Plot the Pixel: After updating \( p \), plot the pixel at the new coordinates \(
+                                        (x,
+                                        y) \).</li>
+                                </ul>
+                            </ul>
+
+                            <li><strong>Step 6: Continue Until You Reach the End Point</strong></li>
+                            <ul>
+                                <li>You keep repeating the steps until \( x \) equals \( x_2 \), meaning you've reached
+                                    the
+                                    end of the line. At each step, you either move horizontally or diagonally based on
+                                    the
+                                    decision parameter \( p \). As you plot each pixel, the line will start to form.
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../public/main.js"></script>
+</body>
+
+</html>

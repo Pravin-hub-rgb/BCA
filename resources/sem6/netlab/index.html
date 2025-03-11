@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.NET C# Lab</title>
+    <link rel="icon" href="../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="../../../index.html"><img src="../../../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>.NET C# Lab</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>.NET C# Lab</h1>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to find the largest of three numbers
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input and read three numbers
+        Console.Write("Enter the first number: ");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        int num2 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the third number: ");
+        int num3 = int.Parse(Console.ReadLine());
+
+        // Find the largest number using the ternary operator
+        int largest = (num1 > num2)
+                        ? ((num1 > num3) ? num1 : num3)
+                        : ((num2 > num3) ? num2 : num3);
+
+        // Output the largest number
+        Console.WriteLine("The largest number is: " + largest);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program to check if a given number is an Armstrong number:
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input
+        Console.Write("Enter a number: ");
+        int number = int.Parse(Console.ReadLine());
+
+        // Calculate the number of digits
+        int originalNumber = number;
+        int numberOfDigits = number.ToString().Length;
+        int sum = 0;
+
+        // Calculate the sum of each digit raised to the power of the number of digits
+        while (number > 0)
+        {
+            int digit = number % 10;
+            sum += (int)Math.Pow(digit, numberOfDigits);
+            number /= 10;
+        }
+
+        // Check if the number is an Armstrong number
+        if (sum == originalNumber)
+        {
+            Console.WriteLine(originalNumber + " is an Armstrong number.");
+        }
+        else
+        {
+            Console.WriteLine(originalNumber + " is not an Armstrong number.");
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Program that reads a number from the user and prints it in reverse order
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input
+        Console.Write("Enter a number: ");
+        int number = int.Parse(Console.ReadLine());
+
+        // Variable to store the reversed number
+        int reversedNumber = 0;
+
+        // Reverse the number
+        while (number > 0)
+        {
+            int digit = number % 10; // Get the last digit
+            reversedNumber = (reversedNumber * 10) + digit; // Append digit to reversed number
+            number /= 10; // Remove the last digit from the original number
+        }
+
+        // Output the reversed number
+        Console.WriteLine("The reversed number is: " + reversedNumber);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    program that prints the multiplication table for a given number
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input
+        Console.Write("Enter a number to print its table: ");
+        int number = int.Parse(Console.ReadLine());
+
+        // Print the multiplication table
+        Console.WriteLine("Multiplication table for " + number + ":");
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine(number + " x " + i + " = " + (number * i));
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    program that calculates the factorial of a given number
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input
+        Console.Write("Enter a number to find its factorial: ");
+        int number = int.Parse(Console.ReadLine());
+
+        // Call the Factorial function and store the result
+        long result = Factorial(number);
+
+        // Output the result
+        Console.WriteLine("The factorial of " + number + " is: " + result);
+    }
+
+    // Function to calculate factorial
+    static long Factorial(int n)
+    {
+        long factorial = 1;
+
+        for (int i = 1; i <= n; i++)
+        {
+            factorial *= i; // Multiply factorial by current number
+        }
+
+        return factorial;
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    program that determines if a given number is prime or not
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user for input
+        Console.Write("Enter a number to check if it is prime: ");
+        int number = int.Parse(Console.ReadLine());
+
+        // Call the IsPrime function and store the result
+        bool isPrime = IsPrime(number);
+
+        // Output the result
+        if (isPrime)
+        {
+            Console.WriteLine(number + " is a prime number.");
+        }
+        else
+        {
+            Console.WriteLine(number + " is not a prime number.");
+        }
+    }
+
+    // Function to check if a number is prime
+    static bool IsPrime(int n)
+    {
+        // Check for numbers less than 2
+        if (n < 2)
+            return false;
+
+        // Check from 2 to the square root of n
+        for (int i = 2; i * i <= n; i++)
+        {
+            if (n % i == 0)
+                return false; // n is divisible by i, hence not prime
+        }
+
+        return true; // n is prime
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Find Max and Min in an Array
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Input array size
+        Console.Write("Enter the number of elements in the array: ");
+        int size = int.Parse(Console.ReadLine());
+        
+        // Initialize the array
+        int[] array = new int[size];
+        
+        // Input array elements
+        Console.WriteLine("Enter the elements of the array:");
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Element {i + 1}: ");
+            array[i] = int.Parse(Console.ReadLine());
+        }
+        
+        // Find max and min elements
+        (int max, int min) = FindMaxAndMin(array);
+        
+        // Display results
+        Console.WriteLine($"Maximum element: {max}");
+        Console.WriteLine($"Minimum element: {min}");
+    }
+    
+    static (int, int) FindMaxAndMin(int[] array)
+    {
+        if (array.Length == 0)
+        {
+            throw new ArgumentException("Array cannot be empty.");
+        }
+        
+        int max = array[0];
+        int min = array[0];
+        
+        foreach (int element in array)
+        {
+            if (element > max)
+            {
+                max = element;
+            }
+            if (element < min)
+            {
+                min = element;
+            }
+        }
+        
+        return (max, min);
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Binary Search Program
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Example sorted array
+        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+        
+        Console.Write("Enter the number to search: ");
+        int target = int.Parse(Console.ReadLine());
+        
+        int index = BinarySearch(sortedArray, target);
+        
+        if (index != -1)
+        {
+            Console.WriteLine($"Number {target} found at index {index}.");
+        }
+        else
+        {
+            Console.WriteLine($"Number {target} not found in the array.");
+        }
+    }
+    
+    static int BinarySearch(int[] array, int target)
+    {
+        int left = 0;
+        int right = array.Length - 1;
+        
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            
+            // Check if the target is at the mid index
+            if (array[mid] == target)
+            {
+                return mid; // Target found
+            }
+            
+            // If the target is greater, ignore the left half
+            if (array[mid] < target)
+            {
+                left = mid + 1;
+            }
+            // If the target is smaller, ignore the right half
+            else
+            {
+                right = mid - 1;
+            }
+        }
+        
+        // Target is not present in the array
+        return -1;
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    program that takes an array of integers as input from the user, reverses the array
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Input array size
+        Console.Write("Enter the number of elements in the array: ");
+        int size = int.Parse(Console.ReadLine());
+        
+        // Initialize the array
+        int[] array = new int[size];
+        
+        // Input array elements
+        Console.WriteLine("Enter the elements of the array:");
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Element {i + 1}: ");
+            array[i] = int.Parse(Console.ReadLine());
+        }
+        
+        // Reverse the array
+        ReverseArray(array);
+        
+        // Display the reversed array
+        Console.WriteLine("Reversed array:");
+        foreach (int element in array)
+        {
+            Console.Write(element + " ");
+        }
+        Console.WriteLine();
+    }
+    
+    static void ReverseArray(int[] array)
+    {
+        int left = 0;
+        int right = array.Length - 1;
+        
+        while (left < right)
+        {
+            // Swap elements at left and right indices
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+            
+            // Move indices towards the center
+            left++;
+            right--;
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="wh">
+                <div class='code'>
+                    <div class='dotc'></div>
+                    <button class="ac">
+                        Create a Person class with fields like Name and Age, methods like DisplayInfo(), and properties
+                        to encapsulate the fields. Instantiate the class and call its methods in a console application.
+                    </button>
+                    <div class="panel">
+                        <pre>
+                            <code class="language-c#">
+using System;
+public class Person
+{
+	private string name;
+	private int age;
+	public string Name
+	{
+		set {name = value;}
+		get {return name;}
+	}
+	public int Age
+	{
+		set {age = value;}
+		get {return age;}
+	}
+	public void displayInfo()
+	{
+		Console.WriteLine("Name = " + Name + ", Age = " + Age);
+	}
+}
+public class Program
+{
+	public static void Main()
+	{
+		Person personObj = new Person()
+        {
+            Name = "Harry",
+            Age = 22
+        };
+		personObj.displayInfo();
+	}
+}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Implementation of Inheritance
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+public class User
+{
+    public string name;
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Name = {name}");
+    }
+}
+
+public class Teacher : User
+{
+    public int teacherId;
+    public string subject;
+
+    public void DisplayTeacherInfo()
+    {
+        Console.WriteLine($"Role = Teacher");
+        Console.WriteLine($"Name = {name}");
+        Console.WriteLine($"Teacher ID = {teacherId}");
+        Console.WriteLine($"Subject = {subject}");
+    }
+}
+
+public class Student : User
+{
+    public int studentId;
+    public int classId;
+
+    public void DisplayStudentInfo()
+    {
+        Console.WriteLine($"Role = Student");
+        Console.WriteLine($"Name = {name}");
+        Console.WriteLine($"Student ID = {studentId}");
+        Console.WriteLine($"Class = {classId}");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Teacher teacher1 = new Teacher
+        {
+            name = "Harish",
+            teacherId = 55677,
+            subject = "English"
+        };
+        teacher1.DisplayTeacherInfo();
+
+        Console.WriteLine();
+
+        Student student1 = new Student
+        {
+            name = "Rajesh",
+            studentId = 454543,
+            classId = 6
+        };
+        student1.DisplayStudentInfo();
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Demonstrate the use of Method Overloading and Method Overriding.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+// Base class Vehicle
+public class Vehicle
+{
+    // Virtual method to drive, can be overridden by derived classes
+    public virtual void Drive()
+    {
+        Console.WriteLine("The vehicle is driving.");
+    }
+}
+
+// Derived class Car
+public class Car : Vehicle
+{
+    // Overriding the Drive method in the derived class
+    public override void Drive()
+    {
+        Console.WriteLine("The car is driving on the road.");
+    }
+}
+
+// Derived class Bike
+public class Bike : Vehicle
+{
+    // Overriding the Drive method in the derived class
+    public override void Drive()
+    {
+        Console.WriteLine("The bike is riding on the road.");
+    }
+}
+
+public class Calculator
+{
+    // Method overloading - same method name, different number of parameters
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Overloaded method with different number of parameters
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Demonstrating Method Overriding
+        // Creating objects of Vehicle, Car, and Bike
+        Vehicle myVehicle = new Vehicle();
+        myVehicle.Drive();  // Calls the base class version
+
+        Car myCar = new Car();
+        myCar.Drive();  // Calls the overridden version in Car
+
+        Bike myBike = new Bike();
+        myBike.Drive();  // Calls the overridden version in Bike
+
+        // Demonstrating Method Overloading
+        Calculator calculator = new Calculator();
+        Console.WriteLine("Sum of 2 and 3: " + calculator.Add(2, 3));  // Calls the first Add method
+        Console.WriteLine("Sum of 2, 3, and 4: " + calculator.Add(2, 3, 4));  // Calls the second Add method
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Demonstrate the use of Exception Handling
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        try
+        {
+            Console.WriteLine("Enter the numerator:");
+            int numerator = int.Parse(Console.ReadLine()); // Convert input to integer
+
+            Console.WriteLine("Enter the denominator:");
+            int denominator = int.Parse(Console.ReadLine()); // Convert input to integer
+
+            // Division operation
+            int result = numerator / denominator;
+
+            Console.WriteLine($"Result: {numerator} / {denominator} = {result}");
+        }
+        catch (DivideByZeroException)
+        {
+            // Handles division by zero
+            Console.WriteLine("Error: Cannot divide by zero.");
+        }
+        catch (FormatException)
+        {
+            // Handles invalid input (non-numeric input)
+            Console.WriteLine("Error: Please enter valid numeric values.");
+        }
+        catch (Exception ex)
+        {
+            // Handles any other unexpected exceptions
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        finally
+        {
+            // This block always executes
+            Console.WriteLine("Thank you for using the calculator!");
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div class="wh">
+        <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">
+
+            </button>
+            <div class="panel">
+                <pre>
+                    <code class="language-c#">
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script src="../../../public/main.js"></script>
+</body>
+
+</html>

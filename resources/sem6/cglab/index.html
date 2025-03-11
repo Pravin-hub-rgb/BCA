@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Lab</title>
+    <link rel="icon" href="../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body>
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="../../../index.html"><img src="../../../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>Computer Graphics Lab</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <h1>Computer Graphics Lab</h1>
+        <a href="./basics.html">Computer Graphics Program Basics &neArr;</a>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Digital Differential Algorithm
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+// DDA Algorithm Function
+void dda(int x1, int y1, int x2, int y2) {
+    // Calculate differences in x and y
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    
+    // Calculate steps required
+    int steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+    
+    // Calculate increments for x and y
+    float xInc = dx / steps;
+    float yInc = dy / steps;
+    
+    // Start at the first point
+    float x = x1;
+    float y = y1;
+    
+    // Plot all points
+    for (int i = 0; i &lt; steps; i++) {
+        putpixel(round(x), round(y), WHITE);  // Plot the pixel
+        x += xInc;
+        y += yInc;
+    }
+}
+
+int main() {
+    int x1, y1, x2, y2;
+    
+    // Input coordinates
+    printf("Enter (x1, y1) for first coordinate: ");
+    scanf("%d%d", &x1, &y1);
+    printf("Enter (x2, y2) for second coordinate: ");
+    scanf("%d%d", &x2, &y2);
+    
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+    
+    // Call the DDA function
+    dda(x1, y1, x2, y2);
+    
+    // Keep the window open until user presses Enter
+    printf("Press Enter to exit...");
+    getchar();
+    getchar();
+
+    // Close the graphics window
+    closegraph();
+    
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Bresenham's Line Drawing Algorithm
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
+
+void bresenhamLine(int x1, int y1, int x2, int y2) {
+    int x = x1, y = y1;
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    int p = (2 * dy) - dx; // Initial decision parameter
+
+    // Plot the first point
+    putpixel(x, y, WHITE);
+
+    // Draw the line
+    while (x <= x2) {
+        if (p < 0) {
+            // Move horizontally
+            x = x + 1;
+            p = p + 2 * dy;
+        } else {
+            // Move diagonally
+            x = x + 1;
+            y = y + 1;
+            p = p + 2 * dy - 2 * dx;
+        }
+        putpixel(x, y, WHITE); // Plot the next pixel
+    }
+}
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    int x1, y1, x2, y2;
+    printf("Enter the coordinates of the first point (x1 y1): ");
+    scanf("%d %d", &x1, &y1);
+    printf("Enter the coordinates of the second point (x2 y2): ");
+    scanf("%d %d", &x2, &y2);
+
+    bresenhamLine(x1, y1, x2, y2);
+
+    // Keep the window open until user presses Enter
+    printf("Press Enter to exit...");
+    getchar();
+    getchar();
+    closegraph(); // Close the graphics window
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div class="wh">
+        <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">
+
+            </button>
+            <div class="panel">
+                <pre>
+                    <code class="language-c#">
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+-->
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../../../public/main.js"></script>
+</body>
+
+</html>
