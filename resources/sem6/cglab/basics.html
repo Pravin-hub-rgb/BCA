@@ -865,8 +865,173 @@ int main() {
                             </ul>
                         </ul>
                     </div>
-
                 </div>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Making Different shapes like Traffic Light Simulation,
+                Smiley Face,
+                Moving Car Animation,
+                Hut Drawing with Colors,
+                Bar Graph,
+                Arc Animation with Circles,
+                Basic Circle Drawing with Color Filling</h2>
+            <div class="in">
+                <h3>Traffic light simulation</h3>
+                <p>We want to simulate a traffic light system using graphics. The traffic light will change colors, and
+                    we’ll display "STOP", "READY", and "GO" at the appropriate times. It's a simple simulation where
+                    each color appears on the screen for a short time.</p>
+                <ul>
+                    <li><strong>Midpoint Calculation (midx, midy)</strong></li>
+                    <pre>
+                            <code>
+midx = getmaxx() / 2;
+midy = getmaxy() / 2;
+                            </code>
+                        </pre>
+                    <ul>
+                        <li>getmaxx() and getmaxy() give the maximum screen width and height in pixels, respectively. So
+                            getmaxx()/2 and getmaxy()/2 calculate the center of the screen.</li>
+                        <li>Why the center? Because we want the traffic light to be displayed in the middle of the
+                            screen, so the midpoint helps position everything neatly.</li>
+                    </ul>
+
+                    <li><strong>Displaying the Introductory Text</strong></li>
+                    <ul>
+                        <li>Next, we display a welcome message and prompt the user to press any key to start the
+                            simulation.</li>
+                    </ul>
+                    <pre>
+                        <code>
+setcolor(RED);
+settextstyle(SCRIPT_FONT, HORIZ_DIR, 3);
+settextjustify(CENTER_TEXT, CENTER_TEXT);
+outtextxy(midx, midy-10, "Traffic Light Simulation");
+outtextxy(midx, midy+10, "Press any key to start");
+getch();
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>setcolor(RED);: This sets the color that we'll use for drawing. Here, we set it to red, so
+                            everything we draw will be red unless we change it later.</li>
+                        <li>settextstyle(SCRIPT_FONT, HORIZ_DIR, 3): Configures the text style. We use a script font
+                            (for a stylish look) and set the size to 3 (large size).</li>
+                        <li>settextjustify(CENTER_TEXT, CENTER_TEXT);: This is important! This function determines how
+                            the text will be aligned when we draw it. By setting both horizontal and vertical alignment
+                            to CENTER_TEXT, we’re saying:
+                            <ul>
+                                <li>"Center the text both horizontally and vertically at the point we specify later."
+                                </li>
+                            </ul>
+                        </li>
+                        <li>outtextxy(midx, midy-10, "Traffic Light Simulation"): Displays the text "Traffic Light
+                            Simulation" slightly above the center of the screen.</li>
+                        <li>outtextxy(midx, midy+10, "Press any key to start"): Displays the prompt "Press any key to
+                            start" just below the first text.</li>
+                        <li>getch(): Pauses the program and waits for the user to press any key before moving on.</li>
+                        <li>After the user presses a key, we clear the screen to prepare for the next stage of the
+                            simulation.</li>
+                    </ul>
+                    <pre>
+                        <code>
+cleardevice();
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>cleardevice(): Clears the screen of any previously drawn graphics or text. This ensures we
+                            start with a clean canvas before drawing the traffic light.</li>
+                    </ul>
+                    <li><strong>Drawing the Traffic Light Border and STOP Light</strong></li>
+                    <ul>
+                        <li>Now, let’s get into the main part of the program where we draw the traffic light.</li>
+                    </ul>
+                    <pre>
+                        <code>
+setcolor(WHITE);
+settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
+rectangle(midx-30, midy-80, midx+30, midy+80);
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>setcolor(WHITE);: We set the color to white here because the traffic light border is drawn
+                            in white.</li>
+                        <li>settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);: This resets the text style to default after we've
+                            finished setting up the title text.</li>
+                        <li>rectangle(midx-30, midy-80, midx+30, midy+80);: This draws the outer rectangle for the
+                            traffic light, with the coordinates defined relative to the center point (midx, midy). The
+                            rectangle is 60 pixels wide and 160 pixels tall.</li>
+                    </ul>
+                    <li><strong>Drawing the STOP Light (Red)</strong></li>
+                    <pre>
+                        <code>
+circle(midx, midy-50, 22);
+setfillstyle(SOLID_FILL, RED);
+floodfill(midx, midy-50, WHITE);
+setcolor(BLUE);
+outtextxy(midx, midy-50, "STOP");
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>circle(midx, midy-50, 22);: This draws a circle above the center of the rectangle to
+                            represent the STOP light. The circle is 22 pixels in radius and is positioned 50 pixels
+                            above the center.</li>
+                        <li>setfillstyle(SOLID_FILL, RED);: This sets the fill color to red for the circle.</li>
+                        <li>floodfill(midx, midy-50, WHITE);: This function fills the inside of the circle with red. It
+                            starts from the center of the circle and fills everything enclosed by the white color (the
+                            background).</li>
+                        <li>setcolor(BLUE);: This sets the color for the text to blue.</li>
+                        <li>outtextxy(midx, midy-50, "STOP");: This places the word "STOP" at the center of the red
+                            circle.</li>
+                    </ul>
+                    <li><strong>Pausing Before Switching to the Next Signal</strong></li>
+                    <pre>
+                        <code>
+usleep(2000000);
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>usleep(2000000);: This pauses the program for 2 seconds (2,000,000 microseconds) so the
+                            "STOP" light stays on the screen for a while before switching to the next signal.</li>
+                    </ul>
+                    <li><strong>Ready and Go Signals (Same as STOP but with Changes)</strong></li>
+                    <pre>
+                        <code>
+graphdefaults();
+cleardevice();
+setcolor(WHITE);
+rectangle(midx-30, midy-80, midx+30, midy+80);
+circle(midx, midy, 20);
+setfillstyle(SOLID_FILL, YELLOW);
+floodfill(midx, midy, WHITE);
+setcolor(BLUE);
+outtextxy(midx-18, midy-3, "READY");
+
+cleardevice();
+setcolor(WHITE);
+rectangle(midx-30, midy-80, midx+30, midy+80);
+circle(midx, midy+50, 22);
+setfillstyle(SOLID_FILL, GREEN);
+floodfill(midx, midy+50, WHITE);
+setcolor(BLUE);
+outtextxy(midx-7, midy+48, "GO");
+
+                        </code>
+                    </pre>
+
+                    <li><strong>Final Step: Waiting for Exit</strong></li>
+                    <pre>
+                        <code>
+setcolor(RED);
+settextstyle(SCRIPT_FONT, HORIZ_DIR, 4);
+outtextxy(midx-150, midy+100, "Press any key to exit...");
+getch(); // Wait for user input before exiting
+closegraph();
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>After showing the "GO" signal, we display a message to let the user know they can exit the program.</li>
+                    </ul>
+                </ul>
             </div>
         </div>
     </div>
