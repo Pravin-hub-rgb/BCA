@@ -110,7 +110,7 @@ initgraph(&gd, &gm, "");
             <pre>
                 <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;stdio.h>     // Standard I/O for getchar()
+#include &lt;conio.h>     // Standard I/O for getchar()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and store graphics mode
@@ -119,7 +119,7 @@ int main() {
 
     putpixel(200, 200, WHITE);  // Draw a white pixel at (200, 200)
 
-    getchar();  // Wait for user input before closing (alternative to getch())
+    getch();  // Wait for user input before closing (alternative to getch())
     closegraph();  // Close the graphics window
 
     return 0;  // Return success
@@ -237,7 +237,7 @@ int main() {
             <pre>
                 <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;stdio.h>     // For getchar()
+#include &lt;conio.h>     // For getchar()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and mode
@@ -250,7 +250,7 @@ int main() {
         putpixel(x, y, WHITE);  // Draw white pixels along the x-axis
     }
 
-    getchar();  // Wait for user input before closing
+    getch();  // Wait for user input before closing
     closegraph();  // Close graphics mode
 
     return 0;
@@ -264,7 +264,7 @@ int main() {
             <pre>
                 <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;stdio.h>     // For getchar()
+#include &lt;conio.h>     // For getchar()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and mode
@@ -277,7 +277,7 @@ int main() {
         putpixel(x, y, WHITE);  // Draw white pixels along the y-axis
     }
 
-    getchar();  // Wait for user input before closing
+    getch();  // Wait for user input before closing
     closegraph();  // Close graphics mode
 
     return 0;
@@ -294,7 +294,7 @@ int main() {
                     <pre>
                         <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;stdio.h>     // For getchar()
+#include &lt;conio.h>     // For getchar()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and mode
@@ -324,7 +324,7 @@ int main() {
         putpixel(x1, y, WHITE);  // Draw white pixels
     }
 
-    getchar();  // Wait for user input before closing
+    getch();  // Wait for user input before closing
     closegraph();  // Close graphics mode
 
     return 0;
@@ -366,7 +366,7 @@ rectangle(int x1, int y1, int x2, int y2);
                 <pre>
                     <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;stdio.h>     // For getchar()
+#include &lt;conio.h>     // For getchar()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and mode
@@ -379,7 +379,7 @@ int main() {
     // Bottom-right corner will be (x1 + side_length, y1 + side_length)
     rectangle(x1, y1, x1 + side_length, y1 + side_length);  // Draw the square
 
-    getchar();  // Wait for user input before closing
+    getch();  // Wait for user input before closing
     closegraph();  // Close graphics mode
 
     return 0;
@@ -387,6 +387,120 @@ int main() {
                     </code>
                 </pre>
             </div>
+            <p><strong>The circle() Function</strong></p>
+            <p>The <code>circle()</code> function is part of the <code>graphics.h</code> library and allows you to
+                easily draw a circle by just specifying the center and radius.</p>
+
+            <p>Syntax of circle()</p>
+            <pre>
+    <code>
+circle(int x, int y, int radius);
+    </code>
+</pre>
+
+            <p>Where:</p>
+            <ul>
+                <li>(x, y) is the center of the circle.</li>
+                <li><code>radius</code> is the distance from the center to the edge of the circle.</li>
+            </ul>
+
+            <p>How It Works:</p>
+            <ul>
+                <li>You don’t need to manually calculate points on the circle.</li>
+                <li>Simply call <code>circle()</code> with the center coordinates and radius, and the function will
+                    automatically draw the circle for you.</li>
+            </ul>
+
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">
+                    Example Program to Draw a Circle Using circle()
+                </button>
+                <div class="panel">
+                    <pre>
+            <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;conio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x = 200, y = 200;  // Center of the circle
+    int radius = 100;      // Radius of the circle
+
+    circle(x, y, radius);  // Draw the circle
+
+    getch();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+            </code>
+        </pre>
+                </div>
+            </div>
+            <p><strong>The ellipse() Function</strong></p>
+            <p>The <code>ellipse()</code> function is part of the <code>graphics.h</code> library and allows you to
+                easily draw an ellipse by specifying the center, axes, and angle.</p>
+
+            <p>Syntax of ellipse()</p>
+            <pre>
+    <code>
+ellipse(int x, int y, int startAngle, int endAngle, int xRadius, int yRadius);
+    </code>
+</pre>
+
+            <p>Where:</p>
+            <ul>
+                <li>(x, y) is the center of the ellipse.</li>
+                <li><code>startAngle</code> is the starting angle (in degrees) where drawing begins.</li>
+                <li><code>endAngle</code> is the ending angle (in degrees) where drawing stops.</li>
+                <li><code>xRadius</code> is the horizontal radius (width of the ellipse).</li>
+                <li><code>yRadius</code> is the vertical radius (height of the ellipse).</li>
+            </ul>
+
+            <p>How It Works:</p>
+            <ul>
+                <li>If you want a full ellipse, set <code>startAngle = 0</code> and <code>endAngle = 360</code>.</li>
+                <li>You can use different values for <code>xRadius</code> and <code>yRadius</code> to create stretched
+                    or squished ellipses.</li>
+                <li>The function automatically handles the calculations, so you just need to specify the parameters.
+                </li>
+            </ul>
+
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">
+                    Example Program to Draw an Ellipse Using ellipse()
+                </button>
+                <div class="panel">
+                    <pre>
+            <code>
+#include &lt;graphics.h>  // Graphics library for drawing
+#include &lt;conio.h>     // For getchar()
+
+int main() {
+    int gd = DETECT, gm;  // Detect graphics driver and mode
+
+    initgraph(&gd, &gm, "");  // Initialize graphics mode
+
+    int x = 250, y = 250;  // Center of the ellipse
+    int xRadius = 150, yRadius = 100;  // Horizontal and vertical radius
+
+    ellipse(x, y, 0, 360, xRadius, yRadius);  // Draw a full ellipse
+
+    getch();  // Wait for user input before closing
+    closegraph();  // Close graphics mode
+
+    return 0;
+}
+            </code>
+        </pre>
+                </div>
+            </div>
+
         </div>
         <div class="wh">
             <h2>Line Drawing</h2>
@@ -1096,7 +1210,8 @@ arc(300, 340, 200, 340, 50);
                     </code>
                 </pre>
                 <p>Here, 200° to 340° makes the arc curve downwards instead of upwards.</p>
-                <p>Only the Arc was the tricky part and we have learned about it and we already know about circle so we just have to place bigger circle for the face and smaller circles for the eyes.</p>
+                <p>Only the Arc was the tricky part and we have learned about it and we already know about circle so we
+                    just have to place bigger circle for the face and smaller circles for the eyes.</p>
             </div>
         </div>
     </div>
