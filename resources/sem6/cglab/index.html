@@ -234,7 +234,6 @@ void main()
                         <code class="language-c#">
 #include&lt;graphics.h>
 #include&lt;stdio.h>
-#include&lt;unistd.h>
 
 void main()
 {
@@ -263,7 +262,7 @@ void main()
    setcolor(BLUE);
    outtextxy(midx, midy-50, "STOP");
    
-   usleep(2000000); // 2-second delay
+   delay(2000000); // 2-second delay
 
    graphdefaults();
    cleardevice();
@@ -277,7 +276,7 @@ void main()
    setcolor(BLUE);
    outtextxy(midx-18, midy-3, "READY");
 
-   usleep(2000000); // 2-second delay
+   delay(2000000); // 2-second delay
    cleardevice();
    setcolor(WHITE);
    
@@ -331,6 +330,212 @@ void main() {
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Moving Car
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;conio.h>
+int main()
+{
+    int i, gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+    outtextxy(25, 240, "Press any key to view the moving car");
+    
+    getch();
+    
+    for (i = 0; i <= 420; i = i + 10)
+    {
+        cleardevice(); // Clear screen first
+        
+        // Car back body
+        rectangle(50 + i, 275, 150 + i, 400);
+        // Car front body
+        rectangle(150 + i, 350, 200 + i, 400);
+        // Wheels
+        circle(75 + i, 410, 10);
+        circle(175 + i, 410, 10);
+        
+        delay(100000); // Adjust speed
+    }
+    
+    getch();
+    closegraph();
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Hut
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+
+int main() {
+    int gd = DETECT, gm;
+    
+    // Initialize the graphics mode
+    initgraph(&gd, &gm, "");
+
+    // Set the drawing color to WHITE
+    setcolor(WHITE);
+
+    // Draw the left wall of the hut (Main structure)
+    rectangle(150, 180, 250, 300);
+
+    // Draw the right extension of the hut (Additional room)
+    rectangle(250, 180, 420, 300);
+
+    // Draw the door in the left wall
+    rectangle(180, 250, 220, 300);
+
+    // Draw the left slope of the roof
+    line(200, 100, 150, 180);
+
+    // Draw the right slope of the main roof
+    line(200, 100, 250, 180);
+
+    // Draw the extension of the roof (connecting part)
+    line(200, 100, 370, 100);
+
+    // Draw the right slope of the extended roof
+    line(370, 100, 420, 180);
+
+    // Fill the left wall with brown color
+    setfillstyle(SOLID_FILL, BROWN);
+    floodfill(152, 182, WHITE);
+
+    // Fill the right extension with brown color
+    floodfill(252, 182, WHITE);
+
+    // Fill the door with blue color
+    setfillstyle(SLASH_FILL, BLUE);
+    floodfill(182, 252, WHITE);
+
+    // Fill the main roof with green color
+    setfillstyle(HATCH_FILL, GREEN);
+    floodfill(200, 105, WHITE);
+    floodfill(210, 105, WHITE);
+
+    // Add a delay so that the hut remains visible
+    delay(2000000);
+
+    // Close the graphics mode
+    closegraph();
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Rainbow
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;conio.h>
+
+void main() {
+    int gdriver = DETECT, gmode;
+    int x, y, i;
+
+    // Initialize graphics mode
+    initgraph(&gdriver, &gmode, "C:\\Turboc3\\BGI");
+
+    // Get the center of the screen
+    x = getmaxx() / 2;
+    y = getmaxy() / 2;
+
+    // Draw multiple arcs expanding outward
+    for (i = 30; i < 200; i++) {
+        delay(100);                  // Small delay for animation effect
+        setcolor(i / 10);            // Change color dynamically
+        arc(x, y, 0, 180, i - 10);   // Draw half-circle arcs with increasing radius
+    }
+
+    getch();  // Wait for user input before exiting
+    closegraph();  // Close graphics mode
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Bar Graph
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;conio.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    // Set text style and display the title
+    settextstyle(BOLD_FONT, HORIZ_DIR, 2);
+    outtextxy(275, 0, "BAR GRAPH");
+
+    // Draw X and Y axes
+    setlinestyle(SOLID_LINE, 0, 2);
+    line(90, 410, 90, 50);   // Y-axis
+    line(90, 410, 590, 410); // X-axis
+
+    // Draw arrowheads for axes
+    line(85, 60, 90, 50);
+    line(95, 60, 90, 50);
+    line(585, 405, 590, 410);
+    line(585, 415, 590, 410);
+
+    // Label the axes
+    outtextxy(65, 60, "Y");
+    outtextxy(570, 420, "X");
+    outtextxy(70, 415, "O"); // Origin label
+
+    // Draw bars with color fill
+    setfillstyle(XHATCH_FILL, RED);
+    bar(150, 80, 200, 410);
+    bar(225, 100, 275, 410);
+    bar(300, 120, 350, 410);
+    bar(375, 170, 425, 410);
+    bar(450, 135, 500, 410);
+
+    getch();      // Wait for user input
+    closegraph(); // Close graphics mode
+    return 0;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+
         <!--
     <div class="wh">
         <div class='code'>
