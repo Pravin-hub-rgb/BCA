@@ -318,7 +318,7 @@ fibonacci(n)  # Call the function
                 </div>
             </div>
         </div>
-        
+
         <div class="wh">
             <div class='code'>
                 <div class='dotc'></div>
@@ -351,12 +351,13 @@ count_word_frequency(text)  # Call the function with user input
                 </div>
             </div>
         </div>
-        
+
         <div class="wh">
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-                    Check the strength of a password based on rules (e.g., length, uppercase, lowercase, digits, special characters).
+                    Check the strength of a password based on rules (e.g., length, uppercase, lowercase, digits, special
+                    characters).
                 </button>
                 <div class="panel">
                     <pre>
@@ -395,12 +396,12 @@ print(password_strength(password))  # Print whether password is strong or weak
                 </div>
             </div>
         </div>
-        
+
         <div class="wh">
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-    Reverse a string without using built-in functions
+                    Reverse a string without using built-in functions
                 </button>
                 <div class="panel">
                     <pre>
@@ -417,21 +418,197 @@ print(reverse_string("Python"))  # Output: nohtyP
                 </div>
             </div>
         </div>
-        <!--
+
         <div class="wh">
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-    
+                    Find the second largest number in a list
                 </button>
                 <div class="panel">
                     <pre>
                         <code class="language-python">
+def second_largest_sort(lst):
+    if len(lst) < 2:
+        return "List must have at least two numbers."
+    
+    lst = list(set(lst))  # Remove duplicates to avoid issues
+    # set(lst) converts the list into a set, which automatically removes duplicate values.
+    # list(set(lst)) converts it back into a list, so we can sort it and find the second largest.
+    
+    lst.sort()  # Sort the list in ascending order
+    
+    return lst[-2]  # Second last element is the second largest
+
+# Example usage
+numbers = [10, 20, 5, 40, 30, 40]
+print(second_largest_sort(numbers))  # Output: 30
                         </code>
                     </pre>
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Merge two dictionaries into one
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+
+merged_dict = {}  # Empty dictionary to store merged key-value pairs
+
+# First loop for dict1
+for key in dict1:  
+    merged_dict[key] = dict1[key]  # Copy key-value pairs from dict1
+
+# Second loop for dict2
+for key in dict2:  
+    merged_dict[key] = dict2[key]  # Copy key-value pairs from dict2
+
+print(merged_dict)
+# Output: {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Find common elements between two lists.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+
+common_elements = []  # Empty list to store common elements
+
+for item in list1:
+    if item in list2:  # Check if item is in list2
+        common_elements.append(item)
+
+print("Common Elements:", common_elements)
+# Output: Common Elements: [4, 5]
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Remove duplicates from a list while preserving the order
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+def remove_duplicates(lst):
+    unique_list = []  # Create an empty list to store unique elements
+    for item in lst:
+        if item not in unique_list:  # Only add if it's not already present
+            unique_list.append(item)
+    return unique_list
+
+# Example usage
+numbers = [1, 2, 2, 3, 4, 4, 5, 1, 6]
+print(remove_duplicates(numbers))
+# Output: [1, 2, 3, 4, 5, 6]
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Check if two strings are anagrams (contain the same characters in a different order
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+def are_anagrams(str1, str2):
+    return sorted(str1.lower()) == sorted(str2.lower())  # Convert to lowercase before sorting
+
+# Example usage
+print(are_anagrams("Listen", "Silent"))  # Output: True
+print(are_anagrams("Hello", "World"))    # Output: False
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+    Find the longest word in a given sentence
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+def longest_word(sentence):
+    words = sentence.split()  # Split the sentence into a list of words
+    longest = ""  # Initialize an empty string to keep track of the longest word
+    
+    for word in words:
+        if len(word) > len(longest):  # Compare lengths of the words
+            longest = word  # Update the longest word
+    
+    return longest
+
+# Example usage
+print(longest_word("I am learning Python programming"))  # Output: programming
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    Generate a random password of a specified length
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-python">
+import random
+import string
+
+def generate_password(length):
+    # Create the pool using string methods
+    all_characters = string.ascii_letters + string.digits + string.punctuation
+
+    # Create an empty password string
+    password = ""
+
+    # Loop to add random characters to the password
+    for i in range(length):
+        password += random.choice(all_characters)
+
+    return password
+
+# Example usage
+password_length = int(input("Enter the length of the password: "))
+print(f"Generated Password: {generate_password(password_length)}")
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!--
 
     <div class="wh">
         <div class='code'>

@@ -33,7 +33,7 @@ else:
     # Check the strength of a password based on rules (e.g., length, uppercase, lowercase, digits, special characters). X
     # Count the number of words in a text file. 
     # Check if a number is prime. X
-    # Reverse a string without using built-in functions.
+    # Reverse a string without using built-in functions. X
     # Find the second largest number in a list.
     # Merge two dictionaries into one.
     # Find common elements between two lists.
