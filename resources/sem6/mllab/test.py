@@ -2,18 +2,18 @@ import numpy as np
 
 my_arr = np.array([2,3,4,5,1,55])
 
-def min_max_arr(arr):
-    max = arr[0]
-    min = arr[0]
-    for ele in arr:
-        if ele < min:
-            min = ele 
-        elif ele > max:
-            max = ele 
-    print(f"Max = {max}")
-    print(f"Min = {min}")
+search = int(input("Enter a searching element :"))
 
-min_max_arr(my_arr)
+def search_ele(arr, ele):
+    for i in arr:
+        if i == ele:
+            return i
+    return -1
+
+if(search_ele(my_arr, search) == -1):
+    print(f"Element not found")
+else:
+    print("")
 
 
     # WAP to add two numbers. X
@@ -25,7 +25,7 @@ min_max_arr(my_arr)
     # WAP to print the factorial of a given number. X
     # Write a function to check whether a given number is a palindrome or not. X
     # WAP function to sum all the numbers in a given list. X
-    # Write a function to print the minimum and maximum numbers from a given array.
+    # Write a function to print the minimum and maximum numbers from a given array. X
     # Write a function to perform a linear search.
     # WAP to print prime numbers from 1 to 300.
     # WAP to print the user information.
