@@ -1,19 +1,16 @@
-import numpy as np
+num = 23
 
-my_arr = np.array([2,3,4,5,1,55])
+def check_prime(n):
+    for i in range(2, int(n ** 0.5) - 1):
+        if(n % i == 0):
+            return -1
+        else:
+            return 1
 
-search = int(input("Enter a searching element :"))
-
-def search_ele(arr, ele):
-    for i in arr:
-        if i == ele:
-            return i
-    return -1
-
-if(search_ele(my_arr, search) == -1):
-    print(f"Element not found")
+if(check_prime(num) == 1):
+    print("Prime")
 else:
-    print("")
+    print("Not prime")
 
 
     # WAP to add two numbers. X
@@ -33,9 +30,9 @@ else:
     # Check if a string is a palindrome X
     # Generate the Fibonacci sequence up to n terms. X
     # Count the frequency of each word in a given text. X
-    # Check the strength of a password based on rules (e.g., length, uppercase, lowercase, digits, special characters).
-    # Count the number of words in a text file.
-    # Check if a number is prime.
+    # Check the strength of a password based on rules (e.g., length, uppercase, lowercase, digits, special characters). X
+    # Count the number of words in a text file. 
+    # Check if a number is prime. X
     # Reverse a string without using built-in functions.
     # Find the second largest number in a list.
     # Merge two dictionaries into one.
@@ -44,4 +41,3 @@ else:
     # Check if two strings are anagrams (contain the same characters in a different order
     # Generate a random password of a specified length.
     # Find the longest word in a given sentence.
-    # Calculate the factorial of a number using recursion.
