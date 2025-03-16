@@ -32,11 +32,6 @@
                     especially in older compilers like Turbo C. This library provides functions that let you draw things
                     like points, lines, circles,
                     and shapes directly on the screen.
-                    <br><br>
-                    This library is mostly used in DOS-based systems (like Turbo C) and doesn't work natively on modern
-                    systems like Linux or macOS.
-                    But if you're using Turbo C or an old DOS-based system, it's perfect for learning basic graphics
-                    programming.
                 </li>
                 <li>Before we start drawing anything, we need to set up a basic environment where we can render
                     graphics.</li>
@@ -46,7 +41,7 @@
                     <pre>
                         <code>
 int gd = DETECT, gm;
-initgraph(&gd, &gm, "");
+initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
                         </code>
                     </pre>
                     This will set up a graphics window for you to draw in.
@@ -69,24 +64,46 @@ initgraph(&gd, &gm, "");
                     </ul>
                 </li>
                 <li>
-                    <strong>initgraph(&gd, &gm, "");</strong> - This is the key function to initialize the graphics
-                    system.
+                    <strong>Setting Up Graphics in Turbo C3:</strong>
                     <ul>
-                        <li><strong>&gd</strong> and <strong>&gm</strong> are pointers to the variables we defined
-                            earlier. They are passed to the
-                            <strong>initgraph()</strong> function so that the system can initialize the correct graphics
-                            driver and mode.
-                        </li>
-                        <li>The third parameter is an empty string <strong>""</strong> here, which tells the function to
-                            use the default path for
-                            the graphics driver files. If you were running Turbo C, this might be set to a directory
-                            path where the graphics driver is located.</li>
-                        <li>After calling <strong>initgraph()</strong>, the <strong>gm</strong> variable will hold the
-                            graphics mode value that was detected by <strong>DETECT</strong>.
-                            The graphics mode represents things like the screen resolution or color depth that the
-                            system will use for displaying graphics.</li>
+                        <li>If you are using <strong>Turbo C3</strong>, ensure that the <strong>BGI (Borland Graphics
+                                Interface) files</strong> are present in the correct directory.</li>
+                        <li>The default path in Turbo C3 is: <code>"C:\\TURBOC3\\BGI"</code>.</li>
+                        <li>If the path is incorrect, Turbo C3 may throw an error when initializing graphics.</li>
                     </ul>
                 </li>
+                <li>
+                    <strong>Common Errors and Fixes in Turbo C3:</strong>
+                    <ul>
+                        <li><strong>BGI Error: "Graphics not initialized"</strong>
+                            <ul>
+                                <li>Ensure that the BGI files exist in the specified path.</li>
+                                <li>Try providing the full path explicitly instead of an empty string.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Error: "Cannot run in full-screen mode" (on modern systems)</strong>
+                            <ul>
+                                <li>Turbo C3 is a DOS-based compiler and does not support full-screen graphics in modern
+                                    Windows versions.</li>
+                                <li>Use <strong>DOSBox</strong> to run Turbo C3 properly.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Exiting Graphics Mode Properly in Turbo C3:</strong>
+                    <pre>
+                        <code>
+closegraph();
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>Always call <strong>closegraph();</strong> at the end of your program to properly exit
+                            graphics mode and return to text mode.</li>
+                        <li>Failing to do this may leave your system screen in an unstable state.</li>
+                    </ul>
+                </li>
+
                 <li>
                     <strong>Closing the Graphics Mode:</strong> Once you are done with drawing, you should close the
                     graphics mode using the
@@ -107,7 +124,8 @@ closegraph();
                 </li>
             </ul>
             <h3>Program to draw a pixel</h3>
-            <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen. The
+            <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen.
+                The
                 following program demonstrates how to draw a pixel.</p>
             <pre>
                 <code>
@@ -117,7 +135,7 @@ closegraph();
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and store graphics mode
 
-    initgraph(&gd, &gm, "");  // Initialize graphics system
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");  // Initialize graphics system
 
     putpixel(200, 200, WHITE);  // Draw a white pixel at (200, 200)
 
@@ -132,7 +150,8 @@ int main() {
             <ul>
                 <li>#include &lt;graphics.h>
                     <ul>
-                        <li>This is a special graphics library that allows us to draw points, lines, shapes, and colors
+                        <li>This is a special graphics library that allows us to draw points, lines, shapes, and
+                            colors
                             in C.</li>
                         <li>It’s not a standard C library—you need to install it separately if you're using GCC on
                             Linux.</li>
@@ -142,7 +161,8 @@ int main() {
                 <li>#include &lt;stdio.h>
                     <ul>
                         <li>This is the standard input-output library in C.</li>
-                        <li>We included this because we need to use getchar(), which waits for user input before closing
+                        <li>We included this because we need to use getchar(), which waits for user input before
+                            closing
                             the graphics window.</li>
                         <li>It replaces conio.h, which doesn’t work in modern compilers.</li>
                     </ul>
@@ -157,7 +177,7 @@ int main() {
                             depth).</li>
                     </ul>
                 </li>
-                <li>initgraph(&gd, &gm, ""); (Initializing the Graphics System)
+                <li>initgraph(&gd, &gm, "C:\\TURBOC3\\BGI"); (Initializing the Graphics System)
                     <ul>
                         <li>initgraph() is the function that starts the graphics mode.</li>
                         <li>It takes three arguments:
@@ -166,20 +186,23 @@ int main() {
                                 </li>
                                 <li>&gm → The address of the gm variable (so it can store the detected graphics mode).
                                 </li>
-                                <li>"" → This is supposed to be the path to the graphics driver files, but we leave it
-                                    empty because modern systems handle this automatically.</li>
+                                <li>"C:\\TURBOC3\\BGI" → This is the path to the graphics driver files used by Turbo C3.
+                                    On older systems, this path is required to locate the graphics drivers. On modern
+                                    systems, however, this path may not be needed if you're using an emulator or a
+                                    different graphics setup.</li>
                             </ol>
                         </li>
                         <li>What happens after calling initgraph()?
                             <ul>
                                 <li>The system enters graphics mode.</li>
                                 <li>A new graphics window opens where we can start drawing.</li>
-                                <li>The graphics driver and mode are selected automatically.</li>
+                                <li>The graphics driver and mode are selected based on the provided path and system
+                                    configuration.</li>
                             </ul>
                         </li>
-
                     </ul>
                 </li>
+
                 <li>putpixel(200, 200, WHITE);
                     (Drawing a Pixel) <ul>
                         <li>putpixel(x, y, color) is a function that draws a single pixel on the screen.</li>
@@ -204,7 +227,8 @@ int main() {
                         <li>When the program finishes running, the graphics window will close immediately unless we
                             pause it.</li>
                         <li>getchar(); waits for the user to press Enter, keeping the graphics window open.</li>
-                        <li>This is an alternative to getch(), which was in conio.h (not supported in modern compilers).
+                        <li>This is an alternative to getch(), which was in conio.h (not supported in modern
+                            compilers).
                         </li>
                     </ul>
                 </li>
@@ -218,11 +242,13 @@ int main() {
                 </li>
             </ul>
             <h3>Drawing a Horizontal Line</h3>
-            <p>Now that we understand how to display a single pixel, let’s move to the next step: drawing a horizontal
+            <p>Now that we understand how to display a single pixel, let’s move to the next step: drawing a
+                horizontal
                 line.</p>
             <p><strong>Concept of Drawing a Horizontal Line</strong></p>
             <ul>
-                <li>A horizontal line means all the y-coordinates remain the same, while the x-coordinates change from a
+                <li>A horizontal line means all the y-coordinates remain the same, while the x-coordinates change
+                    from a
                     starting point to an ending point.</li>
                 <li>For example:
                     <ul>
@@ -340,7 +366,8 @@ int main() {
                 simpler
                 compared to manually drawing each side using loops.</p>
             <p><strong>The rectangle() Function</strong></p>
-            <p>The rectangle() function is part of the graphics.h library and allows you to easily draw a rectangle by
+            <p>The rectangle() function is part of the graphics.h library and allows you to easily draw a rectangle
+                by
                 just
                 specifying two opposite corners (top-left and bottom-right).</p>
             <p>Syntax of rectangle()</p>
@@ -358,7 +385,8 @@ rectangle(int x1, int y1, int x2, int y2);
             <p>How It Works:</p>
             <ul>
                 <li>You don’t need to manually draw the four sides of the rectangle using loops.</li>
-                <li>Simply call rectangle() with the two corner coordinates, and the function will automatically draw
+                <li>Simply call rectangle() with the two corner coordinates, and the function will automatically
+                    draw
                     the
                     rectangle for you.</li>
             </ul>
@@ -394,7 +422,8 @@ int main() {
                 </div>
             </div>
             <p><strong>The circle() Function</strong></p>
-            <p>The <strong>circle()</strong> function is part of the <strong>graphics.h</strong> library and allows you
+            <p>The <strong>circle()</strong> function is part of the <strong>graphics.h</strong> library and allows
+                you
                 to
                 easily draw a circle by just specifying the center and radius.</p>
 
@@ -448,7 +477,8 @@ int main() {
                 </div>
             </div>
             <p><strong>The ellipse() Function</strong></p>
-            <p>The <strong>ellipse()</strong> function is part of the <strong>graphics.h</strong> library and allows you
+            <p>The <strong>ellipse()</strong> function is part of the <strong>graphics.h</strong> library and allows
+                you
                 to
                 easily draw an ellipse by specifying the center, axes, and angle.</p>
 
@@ -470,7 +500,8 @@ ellipse(int x, int y, int startAngle, int endAngle, int xRadius, int yRadius);
 
             <p>How It Works:</p>
             <ul>
-                <li>If you want a full ellipse, set <strong>startAngle = 0</strong> and <strong>endAngle = 360</strong>.
+                <li>If you want a full ellipse, set <strong>startAngle = 0</strong> and <strong>endAngle =
+                        360</strong>.
                 </li>
                 <li>You can use different values for <strong>xRadius</strong> and <strong>yRadius</strong> to create
                     stretched
