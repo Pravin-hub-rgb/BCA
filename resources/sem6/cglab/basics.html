@@ -125,12 +125,11 @@ closegraph();
             </ul>
             <h3>Program to draw a pixel</h3>
             <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen.
-                The
-                following program demonstrates how to draw a pixel.</p>
+                The following program demonstrates how to draw a pixel.</p>
             <pre>
                 <code>
-#include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;conio.h>     // Standard I/O for getchar()
+#include &lt;graphics.h&gt;  // Graphics library for drawing
+#include &lt;conio.h&gt;     // Console input-output library for getch()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and store graphics mode
@@ -139,32 +138,31 @@ int main() {
 
     putpixel(200, 200, WHITE);  // Draw a white pixel at (200, 200)
 
-    getch();  // Wait for user input before closing (alternative to getch())
+    getch();  // Wait for user input before closing
     closegraph();  // Close the graphics window
 
     return 0;  // Return success
 }
                 </code>
             </pre>
-            <p>Explaination of the code</p>
+            <p>Explanation of the code:</p>
             <ul>
-                <li>#include &lt;graphics.h>
+                <li>#include &lt;graphics.h&gt;
                     <ul>
-                        <li>This is a special graphics library that allows us to draw points, lines, shapes, and
-                            colors
+                        <li>This is a special graphics library that allows us to draw points, lines, shapes, and colors
                             in C.</li>
                         <li>It’s not a standard C library—you need to install it separately if you're using GCC on
-                            Linux.</li>
+                            Linux or other non-Turbo C compilers.</li>
                         <li>Functions like initgraph(), putpixel(), and closegraph() come from this library.</li>
                     </ul>
                 </li>
-                <li>#include &lt;stdio.h>
+                <li>#include &lt;conio.h&gt;
                     <ul>
-                        <li>This is the standard input-output library in C.</li>
-                        <li>We included this because we need to use getchar(), which waits for user input before
-                            closing
+                        <li>This is the console input-output library in C.</li>
+                        <li>We included this because we need to use getch(), which waits for user input before closing
                             the graphics window.</li>
-                        <li>It replaces conio.h, which doesn’t work in modern compilers.</li>
+                        <li>It replaces stdio.h for functions like getch() that are specific to console-based
+                            operations.</li>
                     </ul>
                 </li>
                 <li>int gd = DETECT, gm; (Variables for Graphic Mode)
@@ -172,7 +170,7 @@ int main() {
                         <li>gd stands for Graphics Driver.</li>
                         <li>gm stands for Graphics Mode.</li>
                         <li>DETECT is a macro (predefined constant) in graphics.h that tells the compiler to
-                            automatically detect the best graphics driver.</li>
+                            automatically detect the best graphics driver available.</li>
                         <li>gm is an integer variable that will store the graphics mode (like resolution or color
                             depth).</li>
                     </ul>
@@ -203,8 +201,8 @@ int main() {
                     </ul>
                 </li>
 
-                <li>putpixel(200, 200, WHITE);
-                    (Drawing a Pixel) <ul>
+                <li>putpixel(200, 200, WHITE); (Drawing a Pixel)
+                    <ul>
                         <li>putpixel(x, y, color) is a function that draws a single pixel on the screen.</li>
                         <li>Arguments:
                             <ul>
@@ -221,19 +219,17 @@ int main() {
                         </li>
                     </ul>
                 </li>
-                <li>getchar();
-                    (Waiting for User Input)
+                <li>getch(); (Waiting for User Input)
                     <ul>
                         <li>When the program finishes running, the graphics window will close immediately unless we
                             pause it.</li>
-                        <li>getchar(); waits for the user to press Enter, keeping the graphics window open.</li>
-                        <li>This is an alternative to getch(), which was in conio.h (not supported in modern
-                            compilers).
-                        </li>
+                        <li>getch(); waits for the user to press any key, keeping the graphics window open.</li>
+                        <li>This is a function from conio.h, commonly used in Turbo C. It allows pausing the program
+                            until
+                            a key is pressed. (Alternately, you can use getchar() in place of getch()).</li>
                     </ul>
                 </li>
                 <li>closegraph();
-
                     <ul>
                         <li>It closes the graphics window and returns to normal text mode.</li>
                         <li>Without this function, the program might leave the system in an unstable graphics state.
@@ -241,6 +237,7 @@ int main() {
                     </ul>
                 </li>
             </ul>
+
             <h3>Drawing a Horizontal Line</h3>
             <p>Now that we understand how to display a single pixel, let’s move to the next step: drawing a
                 horizontal
