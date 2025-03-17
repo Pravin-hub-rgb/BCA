@@ -359,11 +359,22 @@ void main() {
     int gd = DETECT, gm;
     initgraph(&gd, &gm, "C:\\Turboc3\\BGI"); // Path required in Turbo C, but not in modern compilers
 
-    // Draw smiley face
-    circle(300, 300, 150);  // Head
-    circle(250, 250, 20);   // Left Eye
-    circle(350, 250, 20);   // Right Eye
-    arc(300, 340, 200, 340, 50);  // Smiley mouth
+    int faceRadius = 100;  // Face size
+    int eyeRadius = 15;    // Eye size
+    int mouthRadius = 50;  // Mouth arc size
+
+    // Draw Face (Big Circle, just border)
+    setcolor(WHITE);
+    circle(midx, midy, faceRadius);  // Face border
+
+    // Draw Left Eye (Just border)
+    circle(midx - 35, midy - 30, eyeRadius);  // Left eye border
+
+    // Draw Right Eye (Just border)
+    circle(midx + 35, midy - 30, eyeRadius);  // Right eye border
+
+    // Draw Smile (Arc) - Happy face
+    arc(midx, midy + 10, 200, 340, mouthRadius);  // Smile arc
 
     getch(); // Wait for user input
     closegraph();
