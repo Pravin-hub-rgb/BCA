@@ -1027,52 +1027,79 @@ int main() {
                 Bar Graph,
                 Arc Animation with Circles,
                 Basic Circle Drawing with Color Filling</h2>
-                <div class="in">
-                    <h3>Traffic Light</h3>
-                    <p>This program draws a simple traffic light with three circles inside a rectangular box.</p>
-                
-                    <ul>
-                        <li><strong>Midpoint Calculation</strong></li>
-                        <p>We calculate the center of the screen to position the traffic light properly.</p>
-                        <pre>
-                            <code>
+            <div class="in">
+                <h3>Traffic Light</h3>
+                <p>This program draws a simple traffic light with three circles inside a rectangular box.</p>
+
+                <ul>
+                    <li><strong>Defining Dimensions</strong></li>
+                    <p>We first define the width, height, and radius of the circles to maintain proper spacing.</p>
+                    <pre>
+                        <code>
+int rect_width = 60;
+int rect_height = 160;
+int radius = 22;
+                        </code>
+                    </pre>
+
+                    <li><strong>Midpoint Calculation</strong></li>
+                    <p>We calculate the center of the screen to position the traffic light properly.</p>
+                    <pre>
+                        <code>
 midx = getmaxx() / 2;
 midy = getmaxy() / 2;
-                            </code>
-                        </pre>
-                
-                        <li><strong>Drawing the Traffic Light</strong></li>
-                        <p>We draw a white rectangle as the traffic light body and three circles inside it, filled with red, yellow, and green.</p>
-                        <pre>
-                            <code>
+                        </code>
+                    </pre>
+
+                    <li><strong>Drawing the Traffic Light</strong></li>
+                    <p>We draw a white rectangle as the traffic light body and three circles inside it.
+                        The circles are evenly spaced inside the rectangle.</p>
+                    <pre>
+                        <code>
 setcolor(WHITE);
-rectangle(midx-30, midy-80, midx+30, midy+80); // Traffic light border
+rectangle(midx - rect_width / 2, midy - rect_height / 2, 
+          midx + rect_width / 2, midy + rect_height / 2); // Traffic light border
+
+int gap = rect_height / 4; // Space between lights
 
 setfillstyle(SOLID_FILL, RED);
-circle(midx, midy-50, 20);
-floodfill(midx, midy-50, WHITE); // Red light
+circle(midx, midy - gap, radius);
+floodfill(midx, midy - gap, WHITE); // Red light
 
 setfillstyle(SOLID_FILL, YELLOW);
-circle(midx, midy, 20);
+circle(midx, midy, radius);
 floodfill(midx, midy, WHITE); // Yellow light
 
 setfillstyle(SOLID_FILL, GREEN);
-circle(midx, midy+50, 20);
-floodfill(midx, midy+50, WHITE); // Green light
+circle(midx, midy + gap, radius);
+floodfill(midx, midy + gap, WHITE); // Green light
                         </code>
                     </pre>
-                
-                        <li><strong>Final Step</strong></li>
-                        <p>The program waits for user input before closing.</p>
-                        <pre>
-                            <code>
+
+                    <li><strong>Understanding Circle Placement</strong></li>
+                    <p>
+                        The middle circle is placed at <strong>midy</strong> (center of rectangle).
+                        The top and bottom circles are spaced based on the rectangle height:
+                    </p>
+                    <ul>
+                        <li><strong>Top Circle:</strong> Moved up by <code>gap</code> → <code>midy - gap</code></li>
+                        <li><strong>Middle Circle:</strong> Placed at center → <code>midy</code></li>
+                        <li><strong>Bottom Circle:</strong> Moved down by <code>gap</code> → <code>midy + gap</code>
+                        </li>
+                    </ul>
+
+                    <li><strong>Final Step</strong></li>
+                    <p>The program waits for user input before closing.</p>
+                    <pre>
+                        <code>
 getch();
 closegraph();
-                        </code>
-                    </pre>
-                    </ul>
-                </div>
-                
+                    </code>
+                </pre>
+                </ul>
+            </div>
+
+
             <!-- <div class="in">
                 <h3>Traffic light</h3>
                 <p>We want to simulate a traffic light system using graphics. The traffic light will change colors, and
@@ -1283,13 +1310,13 @@ closegraph();
                 <p>Example: Drawing a Smiley Mouth</p>
                 <pre>
                     <code>
-arc(300, 340, 20, 160, 50);
+arc(300, 340, 200, 340, 50); 
                     </code>
                 </pre>
                 <p>Flip the Smile (Make it a sad face)</p>
                 <pre>
                     <code>
-arc(300, 340, 200, 340, 50);  
+arc(300, 340, 20, 160, 50); 
                     </code>
                 </pre>
                 <p>Here, 200° to 340° makes the arc curve downwards instead of upwards.</p>
