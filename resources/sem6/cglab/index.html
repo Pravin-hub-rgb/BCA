@@ -520,15 +520,15 @@ void main() {
     // Initialize graphics mode
     initgraph(&gdriver, &gmode, "C:\\Turboc3\\BGI");
 
-    // Get the center of the screen
-    x = getmaxx() / 2;
-    y = getmaxy() / 2;
+    int mx = getmaxx() / 2;
+    int my = getmaxy() / 2;
+    int i;
 
-    // Draw multiple arcs expanding outward
-    for (i = 30; i < 200; i++) {
-        delay(100);                  // Small delay for animation effect
-        setcolor(i / 10);            // Change color dynamically
-        arc(x, y, 0, 180, i - 10);   // Draw half-circle arcs with increasing radius
+    for (i = 0; i < 7; i++) {
+        int rOff = i * 10;  // Radius offset
+        setcolor(100 + rOff);  // Dynamic color selection
+        arc(mx, my, 0, 180, 80 + rOff);  // Expanding arc effect
+        delay(100);
     }
 
     getch();  // Wait for user input before exiting
