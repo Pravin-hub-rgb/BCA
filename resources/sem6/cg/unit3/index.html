@@ -283,12 +283,224 @@
                 <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
 
             </div>
+            <div class="in">
+                <h3>Bresenham's Line Drawing Algorithm</h3>
+                <ul>
+                    <li>We are familiar with the DDA (Digital Differential Analyzer) algorithm for line drawing, right?
+                        It works by calculating the slope of the line and incrementing the coordinates in steps, using
+                        floating-point arithmetic. While DDA provides a simple and straightforward way to draw lines,
+                        the main drawback is that it uses floating-point calculations, which can lead to rounding errors
+                        and less efficient performance.</li>
+                    <li>This is where Bresenham's Line Drawing Algorithm comes in. Unlike DDA, which uses floating-point
+                        calculations, Bresenham's algorithm works entirely with integer arithmetic. This means it avoids
+                        the use of floating-point numbers, leading to more accurate and efficient calculations. The
+                        result is a much faster and more precise way to draw lines on digital screens, without the risk
+                        of rounding errors.</li>
+                </ul>
+
+                <p><strong>Definition: </strong>The Bresenham's Line Drawing Algorithm is an efficient way to draw a
+                    straight line between two points in computer graphics. The algorithm uses integer calculations to
+                    avoid the use of floating-point operations, making it faster and suitable for raster display
+                    systems.</p>
+
+                <ul>
+                    <li><strong>Step 1: Given Two Points</strong>
+                        <p>We are given two points (x1, y1) and (x2, y2), which define the start and end of the line.
+                        </p>
+                    </li>
+
+                    <li><strong>Step 2: Calculate Differences</strong>
+                        <p>Calculate the differences in X and Y:</p>
+                        <p class="ms">
+                            \[
+                            \Delta X = x2 - x1, \quad \Delta Y = y2 - y1
+                            \]
+                        </p>
+                    </li>
+
+                    <li><strong>Step 3: Calculate the Slope</strong>
+                        <p>The slope m is calculated as:</p>
+                        <p class="ms">
+                            \[
+                            m = \frac{\Delta Y}{\Delta X}
+                            \]
+                        </p>
+                    </li>
+
+                    <li><strong>Step 4: Initialize the Decision Parameter</strong>
+                        <p>We initialize the decision parameter p based on the differences in X and Y:</p>
+                        <p class="ms">
+                            \[
+                            p = 2 \Delta Y - \Delta X
+                            \]
+                        </p>
+                    </li>
+
+                    <li><strong>Step 5: Check the Slope</strong>
+                        <p>Now, we check whether the slope m is less than 1 or greater than or equal to 1. The algorithm
+                            proceeds differently depending on the slope value:</p>
+
+                        <ul>
+                            <li><strong>Case 1: When m < 1 (Shallow Line - that is more horizontal than
+                                        vertical)</strong>
+                                        <p>If the slope is less than 1, the line is shallow. We increment X by 1 for
+                                            each step, adjusting Y accordingly:</p>
+
+                                        <ul>
+                                            <li>If p < 0: <p class="ms">
+                                                    \[
+                                                    x_{i+1} = x_i + 1, \quad y_{i+1} = y_i
+                                                    \]
+                                                    </p>
+                                            </li>
+                                            <li>Update the decision parameter p:
+                                                <p class="ms">
+                                                    \[
+                                                    p = p + 2 \Delta Y
+                                                    \]
+                                                </p>
+                                            </li>
+                                            <li>If p ≥ 0:
+                                                <p class="ms">
+                                                    \[
+                                                    x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                                    \]
+                                                </p>
+                                            </li>
+                                            <li>Update the decision parameter p:
+                                                <p class="ms">
+                                                    \[
+                                                    p = p + 2 \Delta Y - 2 \Delta X
+                                                    \]
+                                                </p>
+                                            </li>
+                                        </ul>
+                            </li>
+
+                            <li><strong>Case 2: When m ≥ 1 (Steep Line - that is more vertical than horizontal)</strong>
+                                <p>If the slope is greater than or equal to 1, the line is steep. We increment Y by 1
+                                    for each step, adjusting X accordingly:</p>
+
+                                <ul>
+                                    <li>If p < 0: <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i, \quad y_{i+1} = y_i + 1
+                                            \]
+                                            </p>
+                                    </li>
+                                    <li>Update the decision parameter p:
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta X
+                                            \]
+                                        </p>
+                                    </li>
+                                    <li>If p ≥ 0:
+                                        <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                            \]
+                                        </p>
+                                    </li>
+                                    <li>Update the decision parameter p:
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta X - 2 \Delta Y
+                                            \]
+                                        </p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Step 6: Continue Until the End Point is Reached</strong>
+                        <p>We continue the process, updating the decision parameter p and plotting the pixels from (x1,
+                            y1) to (x2, y2), until we reach the endpoint (x2, y2).</p>
+                    </li>
+                </ul>
+                <p><strong>Bresenham's Line Drawing Algorithm: Example</strong></p>
+                <p>We are going to use Bresenham's Line Drawing Algorithm to draw a line between the points (1, 1) and
+                    (5, 3).</p>
+                <h4>Given Two Points:</h4>
+                <p>(x1, y1) = (1, 1), (x2, y2) = (5, 3)</p>
+                <h4>Step 1: Calculate Differences</h4>
+                <p>First, we calculate the differences in the x and y coordinates:</p>
+                <p>
+                    \[
+                    \Delta X = x2 - x1 = 5 - 1 = 4, \quad \Delta Y = y2 - y1 = 3 - 1 = 2
+                    \]
+                </p>
+                <h4>Step 2: Calculate the Slope</h4>
+                <p>The slope \( m \) is calculated as:</p>
+                <p>
+                    \[
+                    m = \frac{\Delta Y}{\Delta X} = \frac{2}{4} = 0.5
+                    \]
+                </p>
+                <p>Since the slope is less than 1 (\( m < 1 \)), we will increment X by 1 in each step, adjusting Y
+                        accordingly based on the value of the decision parameter.</p>
+                        <h4>Step 3: Initialize the Decision Parameter</h4>
+                        <p>The decision parameter \( p \) is initialized as:</p>
+                        <p>
+                            \[
+                            p = 2 \Delta Y - \Delta X = 2 \times 2 - 4 = 0
+                            \]
+                        </p>
+                        <p>This decision parameter will help us decide whether to increment Y in each step of the
+                            algorithm.</p>
+                        <h4>Now, we will plot the points step by step:</h4>
+                        <ul>
+                            <li><strong>At (1, 1):</strong> The initial point is (1, 1). The decision parameter \( p = 0
+                                \).</li>
+                            <li><strong>At (2, 1):</strong> We increment X by 1 (from 1 to 2). Since \( p \geq 0 \), we
+                                increment Y (from 1 to 2). The next point is (2, 2). We update \( p \) as:</li>
+                            <p>
+                                \[
+                                p = p + 2 \Delta Y - 2 \Delta X = 0 + 2 \times 2 - 2 \times 4 = -4
+                                \]
+                            </p>
+                            <li><strong>At (3, 2):</strong> We increment X by 1 (from 2 to 3). Since \( p < 0 \), Y
+                                    remains the same (still 2). We update \( p \) as:</li>
+                                    <p>
+                                        \[
+                                        p = p + 2 \Delta Y = -4 + 2 \times 2 = 0
+                                        \]
+                                    </p>
+                            <li><strong>At (4, 2):</strong> We increment X by 1 (from 3 to 4). Since \( p \geq 0 \), we
+                                increment Y (from 2 to 3). The next point is (4, 3). We update \( p \) as:</li>
+                            <p>
+                                \[
+                                p = p + 2 \Delta Y - 2 \Delta X = 0 + 2 \times 2 - 2 \times 4 = -4
+                                \]
+                            </p>
+                            <li><strong>At (5, 3):</strong> We increment X by 1 (from 4 to 5). Since \( p < 0 \), Y
+                                    remains the same (still 3). We've reached our destination point.</li>
+                        </ul>
+                        <h4>Table of Calculated Points:</h4>
+                        <pre>
+                            <code>
+ x | y      | p      | Action
+---+--------+--------+---------------------------
+ 1 | 1      | 0      | Start point
+ 2 | 2      | -4     | Increment X and Y (p ≥ 0)
+ 3 | 2      | 0      | Increment X only (p < 0)
+ 4 | 3      | -4     | Increment X and Y (p ≥ 0)
+ 5 | 3      | Final  | Destination point
+                            </code>
+                        </pre>
+                        <p>The points (1, 1), (2, 2), (3, 2), (4, 3), and (5, 3) are plotted following Bresenham's
+                            algorithm. The decision parameter is used to determine whether to increment Y in each step
+                            as we always increment X by 1.</p>
+            </div>
         </div>
     </div>
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://youtu.be/0PgMv8sdXtg?si=VlsQV54bnHx0upso" target="_blank">3.4- DDA Line Drawing Algorithm In Computer Graphics Hindi | Digital Differential Analyzer Youtube Lecture &neArr;</a></li>
+            <li><a href="https://youtu.be/0PgMv8sdXtg?si=VlsQV54bnHx0upso" target="_blank">3.4- DDA Line Drawing
+                    Algorithm In Computer Graphics Hindi | Digital Differential Analyzer Youtube Lecture &neArr;</a>
+            </li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
