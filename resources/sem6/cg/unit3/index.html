@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#" class="link"></a>
+            <div class="botbut">
+                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Unit 3</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="wh">
+            <h2>Line Drawing Algorithm</h2>
+            <div class="in">
+                <h3>DDA Line Drawing Algorithm</h3>
+
+                <p>The DDA (Digital Differential Analyzer) line drawing algorithm is an efficient method for drawing
+                    lines in computer graphics. It uses simple calculations to determine the coordinates of each pixel
+                    along a line.</p>
+
+                <h3>Steps to Draw a Line using DDA Algorithm</h3>
+
+                <ul>
+                    <li><strong>Step 1: Given Two Points</strong>
+                        <p>We are given two points, which define the start and end of the line:</p>
+                        <ul>
+                            <li><strong>Point 1 (x1, y1)</strong> – Start point of the line.</li>
+                            <li><strong>Point 2 (x2, y2)</strong> – End point of the line.</li>
+                        </ul>
+                        <p>The points (x1, y1) and (x2, y2) will define the start and end of the line.</p>
+                    </li>
+
+                    <li><strong>Step 2: Calculate Differences</strong>
+                        <p>We calculate the differences in the X and Y coordinates:</p>
+                        <p class="ms">
+                            \[
+                            \Delta X = x2 - x1
+                            \]
+                        </p>
+                        <p class="ms">
+                            \[
+                            \Delta Y = y2 - y1
+                            \]
+                        </p>
+                        <p>The values of ΔX and ΔY will help in determining the slope and how to increment X or Y.</p>
+                    </li>
+
+                    <li><strong>Step 3: Calculate the Slope</strong>
+                        <p>The slope (m) of the line is calculated as:</p>
+                        <p class="ms">
+                            \[
+                            m = \frac{\Delta Y}{\Delta X}
+                            \]
+                        </p>
+                        <p>This gives us the direction of the line, which helps in deciding whether to increment X or Y.
+                        </p>
+                    </li>
+
+                    <li><strong>Step 4: Decide Whether to Increment X or Y</strong>
+                        <p>Now, we decide how to move along the line. There are two cases:</p>
+
+                        <ul>
+                            <li><strong>Case 1: When ΔX ≥ ΔY (X changes more than Y)</strong>
+                                <p>In this case, we increment X by 1 in each step. To find the corresponding Y, we use
+                                    the slope:</p>
+                                <p class="ms">
+                                    \[
+                                    \Delta Y = m \times \Delta X
+                                    \]
+                                </p>
+                                <p>Since we are incrementing X by 1 (i.e., ΔX = 1), we substitute this into the
+                                    equation:</p>
+                                <p class="ms">
+                                    \[
+                                    y_{i+1} = y_i + m
+                                    \]
+                                </p>
+                                <p>Now, we increment X by 1:</p>
+                                <p class="ms">
+                                    \[
+                                    x_{i+1} = x_i + 1
+                                    \]
+                                </p>
+                            </li>
+
+                            <li><strong>Case 2: When ΔY > ΔX (Y changes more than X)</strong>
+                                <p>In this case, we increment Y by 1 in each step. To find the corresponding X, we
+                                    rearrange the slope formula:</p>
+                                <p class="ms">
+                                    \[
+                                    \Delta X = \frac{\Delta Y}{m}
+                                    \]
+                                </p>
+                                <p>Since we are incrementing Y by 1 (i.e., ΔY = 1), we substitute this into the
+                                    equation:</p>
+                                <p class="ms">
+                                    \[
+                                    x_{i+1} = x_i + \frac{1}{m}
+                                    \]
+                                </p>
+                                <p>Now, we increment Y by 1:</p>
+                                <p class="ms">
+                                    \[
+                                    y_{i+1} = y_i + 1
+                                    \]
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Step 5: Continue Until the End Point is Reached</strong>
+                        <p>Start at (x1, y1) and keep calculating the next coordinates using the steps above until
+                            reaching (x2, y2). Round the values to get the closest integer pixel positions.</p>
+                    </li>
+                </ul>
+                <p><strong>Example: Line from (2, 3) to (6, 8)</strong></p>
+
+                <p><strong>Given:</strong></p>
+                <ul>
+                    <li><strong>Point 1 (x1, y1) = (2, 3)</strong></li>
+                    <li><strong>Point 2 (x2, y2) = (6, 8)</strong></li>
+                </ul>
+
+                <p>First, calculate the differences:</p>
+                <p class="ms">
+                    \[
+                    \Delta X = 6 - 2 = 4, \quad \Delta Y = 8 - 3 = 5
+                    \]
+                </p>
+
+                <p>Next, calculate the slope:</p>
+                <p class="ms">
+                    \[
+                    m = \frac{5}{4} = 1.25
+                    \]
+                </p>
+
+                <p>Since ΔY > ΔX, we increment Y and calculate X for each step. Here’s the calculation for the points:
+                </p>
+
+                <ul>
+                    <li><strong>Start at (2, 3).</strong></li>
+                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 3 + 1.25 = 4.25
+                        \]
+                    </p>
+                    <li>The next point is (3, 4.25).</li>
+
+                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 4.25 + 1.25 = 5.5
+                        \]
+                    </p>
+                    <li>The next point is (4, 5.5).</li>
+
+                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 5.5 + 1.25 = 6.75
+                        \]
+                    </p>
+                    <li>The next point is (5, 6.75).</li>
+
+                    <li><strong>Final point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 6.75 + 1.25 = 8
+                        \]
+                    </p>
+                    <li>The next point is (6, 8), which is the end point.</li>
+                </ul>
+
+                <p>Here’s the table of values:</p>
+                <pre>
+                    <code>
+  x  |	y
+-----+-----
+  2  |	3
+  3  |	4.25
+  4  |	5.5
+  5  |	6.75
+  6  |	8
+                    </code>
+                </pre>
+
+                <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
+                <p><strong>Example: Line from (1, 1) to (4, 3)</strong></p>
+
+                <p><strong>Given:</strong></p>
+                <ul>
+                    <li><strong>Point 1 (x1, y1) = (1, 1)</strong></li>
+                    <li><strong>Point 2 (x2, y2) = (4, 3)</strong></li>
+                </ul>
+
+                <p>First, calculate the differences:</p>
+                <p class="ms">
+                    \[
+                    \Delta X = 4 - 1 = 3, \quad \Delta Y = 3 - 1 = 2
+                    \]
+                </p>
+
+                <p>Next, calculate the slope:</p>
+                <p class="ms">
+                    \[
+                    m = \frac{2}{3} \approx 0.6667
+                    \]
+                </p>
+
+                <p>Since ΔX > ΔY, we increment X and calculate Y for each step. Here’s the calculation for the points:
+                </p>
+
+                <ul>
+                    <li><strong>Start at (1, 1).</strong></li>
+                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 1 + 0.6667 = 1.6667
+                        \]
+                    </p>
+                    <li>The next point is (2, 1.6667).</li>
+
+                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 1.6667 + 0.6667 = 2.3333
+                        \]
+                    </p>
+                    <li>The next point is (3, 2.3333).</li>
+
+                    <li><strong>Final point:</strong> Increment X by 1, calculate Y:</li>
+                    <p class="ms">
+                        \[
+                        Y_{\text{next}} = Y + m = 2.3333 + 0.6667 = 3
+                        \]
+                    </p>
+                    <li>The next point is (4, 3), which is the end point.</li>
+                </ul>
+
+                <p>Here’s the table of values:</p>
+                <pre>
+                    <code>
+  x  |	y
+-----+-----
+  1  |	1
+  2  |	1.6667
+  3  |	2.3333
+  4  |	3
+                    </code>
+                </pre>
+
+
+                <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://youtu.be/0PgMv8sdXtg?si=VlsQV54bnHx0upso" target="_blank">3.4- DDA Line Drawing Algorithm In Computer Graphics Hindi | Digital Differential Analyzer Youtube Lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="../../../../public/main.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>
