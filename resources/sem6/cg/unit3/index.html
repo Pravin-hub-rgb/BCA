@@ -18,7 +18,7 @@
             <a href="#" class="link"></a>
             <div class="botbut">
                 <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit2/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -65,6 +65,7 @@
                             \Delta X = x2 - x1
                             \]
                         </p>
+                        <br>
                         <p class="ms">
                             \[
                             \Delta Y = y2 - y1
@@ -163,39 +164,47 @@
                     \]
                 </p>
 
-                <p>Since ΔY > ΔX, we increment Y and calculate X for each step. Here’s the calculation for the points:
-                </p>
+                <p>Since ΔY > ΔX, we increment Y by 1 and calculate X for each step. Here’s the calculation for the
+                    points:</p>
 
                 <ul>
                     <li><strong>Start at (2, 3).</strong></li>
-                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <li><strong>Next point:</strong> Increment Y by 1, calculate X:</li>
                     <p class="ms">
                         \[
-                        Y_{\text{next}} = Y + m = 3 + 1.25 = 4.25
+                        X_{\text{next}} = X + \frac{1}{m} = 2 + \frac{1}{1.25} = 2.8
                         \]
                     </p>
-                    <li>The next point is (3, 4.25).</li>
+                    <li>The next point is (2.8, 4).</li>
 
-                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <li><strong>Next point:</strong> Increment Y by 1, calculate X:</li>
                     <p class="ms">
                         \[
-                        Y_{\text{next}} = Y + m = 4.25 + 1.25 = 5.5
+                        X_{\text{next}} = X + \frac{1}{m} = 2.8 + \frac{1}{1.25} = 3.6
                         \]
                     </p>
-                    <li>The next point is (4, 5.5).</li>
+                    <li>The next point is (3.6, 5).</li>
 
-                    <li><strong>Next point:</strong> Increment X by 1, calculate Y:</li>
+                    <li><strong>Next point:</strong> Increment Y by 1, calculate X:</li>
                     <p class="ms">
                         \[
-                        Y_{\text{next}} = Y + m = 5.5 + 1.25 = 6.75
+                        X_{\text{next}} = X + \frac{1}{m} = 3.6 + \frac{1}{1.25} = 4.4
                         \]
                     </p>
-                    <li>The next point is (5, 6.75).</li>
+                    <li>The next point is (4.4, 6).</li>
 
-                    <li><strong>Final point:</strong> Increment X by 1, calculate Y:</li>
+                    <li><strong>Next point:</strong> Increment Y by 1, calculate X:</li>
                     <p class="ms">
                         \[
-                        Y_{\text{next}} = Y + m = 6.75 + 1.25 = 8
+                        X_{\text{next}} = X + \frac{1}{m} = 4.4 + \frac{1}{1.25} = 5.2
+                        \]
+                    </p>
+                    <li>The next point is (5.2, 7).</li>
+
+                    <li><strong>Final point:</strong> Increment Y by 1, calculate X:</li>
+                    <p class="ms">
+                        \[
+                        X_{\text{next}} = X + \frac{1}{m} = 5.2 + \frac{1}{1.25} = 6
                         \]
                     </p>
                     <li>The next point is (6, 8), which is the end point.</li>
@@ -204,17 +213,19 @@
                 <p>Here’s the table of values:</p>
                 <pre>
                     <code>
-  x  |	y
+  y  |	x
 -----+-----
-  2  |	3
-  3  |	4.25
-  4  |	5.5
-  5  |	6.75
-  6  |	8
+  3  |	2
+  4  |	2.8
+  5  |	3.6
+  6  |	4.4
+  7  |	5.2
+  8  |	6
                     </code>
                 </pre>
 
                 <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
+
                 <p><strong>Example: Line from (1, 1) to (4, 3)</strong></p>
 
                 <p><strong>Given:</strong></p>
@@ -496,21 +507,24 @@
         </div>
         <div class="wh">
             <h2>Midpoint Circle Drawing Algorithm (Mathematical Approach)</h2>
-        
-            <p>The Midpoint Circle Algorithm is an efficient method for drawing circles using only integer calculations. It avoids floating-point arithmetic, making it faster for computers.</p>
-        
+
+            <p>The Midpoint Circle Algorithm is an efficient method for drawing circles using only integer calculations.
+                It avoids floating-point arithmetic, making it faster for computers.</p>
+
             <h3>Why Do We Need This Algorithm?</h3>
-            
+
             <p>A circle is defined by the equation:</p>
             <p class="ms">
                 \[
                 x^2 + y^2 = r^2
                 \]
             </p>
-            <p>However, solving for \( y \) requires square roots and floating-point calculations, which are inefficient. The Midpoint Circle Algorithm helps determine the next pixel using integer calculations only.</p>
-        
+            <p>However, solving for \( y \) requires square roots and floating-point calculations, which are
+                inefficient. The Midpoint Circle Algorithm helps determine the next pixel using integer calculations
+                only.</p>
+
             <h3>Steps to Draw a Circle using the Midpoint Algorithm</h3>
-        
+
             <ul>
                 <li><strong>Step 1: Start from (0, r) and Consider the Next Point</strong>
                     <p>We start at \( (0, r) \), the top of the circle (90°), and move towards the 45° line.</p>
@@ -521,7 +535,7 @@
                     </ul>
                     <p>We need a way to decide which point is closer to the actual circle.</p>
                 </li>
-        
+
                 <li><strong>Step 2: Define the Midpoint Decision Parameter</strong>
                     <p>To make this decision, we use the midpoint between the two possible points:</p>
                     <p class="ms">
@@ -531,7 +545,7 @@
                     </p>
                     <p>We check whether this midpoint is inside or outside the circle to decide the next point.</p>
                 </li>
-        
+
                 <li><strong>Step 3: Using the Circle Equation to Check the Midpoint</strong>
                     <p>The equation of a circle is:</p>
                     <p class="ms">
@@ -545,30 +559,35 @@
                         p = f(x+1, y - \frac{1}{2}) = (x+1)^2 + (y - \frac{1}{2})^2 - r^2
                         \]
                     </p>
-                    <p>To avoid fractions, we multiply everything by 2 and simplify. The initial decision parameter at \( (0, r) \) is:</p>
+                    <p>To avoid fractions, we multiply everything by 2 and simplify. The initial decision parameter at
+                        \( (0, r) \) is:</p>
                     <p class="ms">
                         \[
                         p = 1 - r
                         \]
                     </p>
                 </li>
-        
+
                 <li><strong>Step 4: Decision Making and Updating \( p \)</strong>
-                    <p>At each step, we check the midpoint \( (x+1, y - \frac{1}{2}) \) using the decision parameter \( p \).</p>
-        
+                    <p>At each step, we check the midpoint \( (x+1, y - \frac{1}{2}) \) using the decision parameter \(
+                        p \).</p>
+
                     <ul>
                         <li><strong>Case 1: If \( p < 0 \) (Midpoint is inside the circle) → Move Right</strong>
-                            <p>Since the midpoint is inside the circle, the actual circle passes above it, so we move right to \( (x+1, y) \).</p>
-                            <p>We update the decision parameter:</p>
-                            <p class="ms">
-                                \[
-                                p_{\text{new}} = p + 2x + 3
-                                \]
-                            </p>
+                                    <p>Since the midpoint is inside the circle, the actual circle passes above it, so we
+                                        move right to \( (x+1, y) \).</p>
+                                    <p>We update the decision parameter:</p>
+                                    <p class="ms">
+                                        \[
+                                        p_{\text{new}} = p + 2x + 3
+                                        \]
+                                    </p>
                         </li>
-        
-                        <li><strong>Case 2: If \( p \geq 0 \) (Midpoint is outside or on the circle) → Move Diagonally Down-Right</strong>
-                            <p>Since the midpoint is outside the circle, the actual circle passes below it, so we move diagonally to \( (x+1, y-1) \).</p>
+
+                        <li><strong>Case 2: If \( p \geq 0 \) (Midpoint is outside or on the circle) → Move Diagonally
+                                Down-Right</strong>
+                            <p>Since the midpoint is outside the circle, the actual circle passes below it, so we move
+                                diagonally to \( (x+1, y-1) \).</p>
                             <p>We update the decision parameter:</p>
                             <p class="ms">
                                 \[
@@ -578,9 +597,10 @@
                         </li>
                     </ul>
                 </li>
-        
+
                 <li><strong>Step 5: Stopping Condition – When Do We Stop?</strong>
-                    <p>We start at \( (0, r) \) (top of the circle at 90°) and move downward until we reach the 45° line.</p>
+                    <p>We start at \( (0, r) \) (top of the circle at 90°) and move downward until we reach the 45°
+                        line.</p>
                     <p>We stop when:</p>
                     <p class="ms">
                         \[
@@ -595,7 +615,7 @@
                         <li>Beyond this point, values will mirror the already-calculated points.</li>
                     </ul>
                 </li>
-        
+
                 <li><strong>Why Are We Calculating Only 1/8th of the Circle?</strong>
                     <p>We calculate only 1/8th of the circle because:</p>
                     <ul>
@@ -606,20 +626,20 @@
                     <p>By using symmetry, we save computation time and ensure efficient drawing of the full circle.</p>
                 </li>
             </ul>
-        
+
             <div class="in">
                 <h3>Example: Draw a Circle with Center (0,0) and Radius 5</h3>
-            
+
                 <h3>Step 1: Given Information</h3>
                 <ul>
                     <li><strong>Center of the Circle:</strong> \( (0,0) \)</li>
                     <li><strong>Radius:</strong> \( r = 5 \)</li>
                 </ul>
-            
+
                 <h3>Step 2: Initial Setup</h3>
-                <p>We start from the topmost point of the circle at \( (0,5) \).  
-                   The decision parameter helps us determine the next point.</p>
-            
+                <p>We start from the topmost point of the circle at \( (0,5) \).
+                    The decision parameter helps us determine the next point.</p>
+
                 <h3>Step 3: Compute Initial Decision Parameter</h3>
                 <p>The initial decision parameter is given by:</p>
                 <p class="ms">
@@ -633,16 +653,16 @@
                     p_0 = 1 - 5 = -4
                     \]
                 </p>
-            
+
                 <h3>Step 4: Compute Points Step by Step</h3>
                 <p>We use the decision rule:</p>
                 <ul>
                     <li><strong>If \( p_k < 0 \):</strong> Next point is \( (x+1, y) \), update \( p \) using:
-                        <p class="ms">
-                            \[
-                            p_{\text{new}} = p + 2x + 3
-                            \]
-                        </p>
+                                <p class="ms">
+                                    \[
+                                    p_{\text{new}} = p + 2x + 3
+                                    \]
+                                </p>
                     </li>
                     <li><strong>If \( p_k \geq 0 \):</strong> Next point is \( (x+1, y-1) \), update \( p \) using:
                         <p class="ms">
@@ -652,25 +672,25 @@
                         </p>
                     </li>
                 </ul>
-            
+
                 <h3>Step-by-Step Calculations</h3>
                 <p>Starting from \( (0,5) \):</p>
-            
+
                 <ul>
-                    <li><strong>Step 1:</strong> \( p_0 = -4 \) (since \( p < 0 \), move to \( (1,5) \))  
-                        \( p_1 = -4 + 2(0) + 3 = -1 \)</li>
-            
-                    <li><strong>Step 2:</strong> \( p_1 = -1 \) (since \( p < 0 \), move to \( (2,5) \))  
-                        \( p_2 = -1 + 2(1) + 3 = 4 \)</li>
-            
-                    <li><strong>Step 3:</strong> \( p_2 = 4 \) (since \( p \geq 0 \), move to \( (3,4) \))  
+                    <li><strong>Step 1:</strong> \( p_0 = -4 \) (since \( p < 0 \), move to \( (1,5) \)) \( p_1=-4 +
+                            2(0) + 3=-1 \)</li>
+
+                    <li><strong>Step 2:</strong> \( p_1 = -1 \) (since \( p < 0 \), move to \( (2,5) \)) \( p_2=-1 +
+                            2(1) + 3=4 \)</li>
+
+                    <li><strong>Step 3:</strong> \( p_2 = 4 \) (since \( p \geq 0 \), move to \( (3,4) \))
                         \( p_3 = 4 + 2(2) - 2(5) + 5 = 3 \)</li>
-            
-                    <li><strong>Step 4:</strong> \( p_3 = 3 \) (since \( p \geq 0 \), move to \( (4,3) \))  
+
+                    <li><strong>Step 4:</strong> \( p_3 = 3 \) (since \( p \geq 0 \), move to \( (4,3) \))
                         <strong>Stop here because \( x \geq y \) ( \( x = 4, y = 3 \) )</strong>
                     </li>
                 </ul>
-            
+
                 <h3>Final Points</h3>
                 <pre>
                     <code>
@@ -683,12 +703,12 @@
   4  |  3
                     </code>
                 </pre>
-            
+
                 <p>These points are calculated for one-eighth of the circle.</p>
             </div>
-            
+
         </div>
-        
+
     </div>
     <div class="content-box">
         <p>Reference</p>
@@ -696,7 +716,8 @@
             <li><a href="https://youtu.be/0PgMv8sdXtg?si=VlsQV54bnHx0upso" target="_blank">3.4- DDA Line Drawing
                     Algorithm In Computer Graphics Hindi | Digital Differential Analyzer Youtube Lecture &neArr;</a>
             </li>
-            <li><a href="https://www.youtube.com/watch?v=Sm7oUNq2rSM" target="_blank">Mid Point Circle Drawing Youtube Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=Sm7oUNq2rSM" target="_blank">Mid Point Circle Drawing Youtube
+                    Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script src="../../../../public/main.js"></script>
