@@ -315,123 +315,123 @@
                     avoid the use of floating-point operations, making it faster and suitable for raster display
                     systems.</p>
 
-                <ul>
-                    <li><strong>Step 1: Given Two Points</strong>
-                        <p>We are given two points (x1, y1) and (x2, y2), which define the start and end of the line.
-                        </p>
-                    </li>
-
-                    <li><strong>Step 2: Calculate Differences</strong>
-                        <p>Calculate the differences in X and Y:</p>
-                        <p class="ms">
-                            \[
-                            \Delta X = x2 - x1, \quad \Delta Y = y2 - y1
-                            \]
-                        </p>
-                    </li>
-
-                    <li><strong>Step 3: Calculate the Slope</strong>
-                        <p>The slope m is calculated as:</p>
-                        <p class="ms">
-                            \[
-                            m = \frac{\Delta Y}{\Delta X}
-                            \]
-                        </p>
-                    </li>
-
-                    <li><strong>Step 4: Initialize the Decision Parameter</strong>
-                        <p>We initialize the decision parameter p based on the differences in X and Y:</p>
-                        <p class="ms">
-                            \[
-                            p = 2 \Delta Y - \Delta X
-                            \]
-                        </p>
-                    </li>
-
-                    <li><strong>Step 5: Check the Slope</strong>
-                        <p>Now, we check whether the slope m is less than 1 or greater than or equal to 1. The algorithm
-                            proceeds differently depending on the slope value:</p>
-
-                        <ul>
-                            <li><strong>Case 1: When m < 1 (Shallow Line - that is more horizontal than
-                                        vertical)</strong>
-                                        <p>If the slope is less than 1, the line is shallow. We increment X by 1 for
-                                            each step, adjusting Y accordingly:</p>
-
-                                        <ul>
-                                            <li>If p < 0: <p class="ms">
-                                                    \[
-                                                    x_{i+1} = x_i + 1, \quad y_{i+1} = y_i
-                                                    \]
-                                                    </p>
-                                            </li>
-                                            <li>Update the decision parameter p:
-                                                <p class="ms">
-                                                    \[
-                                                    p = p + 2 \Delta Y
-                                                    \]
-                                                </p>
-                                            </li>
-                                            <li>If p ≥ 0:
-                                                <p class="ms">
-                                                    \[
-                                                    x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
-                                                    \]
-                                                </p>
-                                            </li>
-                                            <li>Update the decision parameter p:
-                                                <p class="ms">
-                                                    \[
-                                                    p = p + 2 \Delta Y - 2 \Delta X
-                                                    \]
-                                                </p>
-                                            </li>
-                                        </ul>
-                            </li>
-
-                            <li><strong>Case 2: When m ≥ 1 (Steep Line - that is more vertical than horizontal)</strong>
-                                <p>If the slope is greater than or equal to 1, the line is steep. We increment Y by 1
-                                    for each step, adjusting X accordingly:</p>
-
-                                <ul>
-                                    <li>If p < 0: <p class="ms">
-                                            \[
-                                            x_{i+1} = x_i, \quad y_{i+1} = y_i + 1
-                                            \]
-                                            </p>
-                                    </li>
-                                    <li>Update the decision parameter p:
-                                        <p class="ms">
-                                            \[
-                                            p = p + 2 \Delta X
-                                            \]
-                                        </p>
-                                    </li>
-                                    <li>If p ≥ 0:
-                                        <p class="ms">
-                                            \[
-                                            x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
-                                            \]
-                                        </p>
-                                    </li>
-                                    <li>Update the decision parameter p:
-                                        <p class="ms">
-                                            \[
-                                            p = p + 2 \Delta X - 2 \Delta Y
-                                            \]
-                                        </p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li><strong>Step 6: Continue Until the End Point is Reached</strong>
-                        <p>We continue the process, updating the decision parameter p and plotting the pixels from (x1,
-                            y1) to (x2, y2), until we reach the endpoint (x2, y2).</p>
-                    </li>
+                    <ul>
+                        <li><strong>Step 1: Given Two Points</strong>
+                            <p>We are given two points <strong>(x1, y1)</strong> and <strong>(x2, y2)</strong>, which define the start and end of the line.</p>
+                        </li>
                     
-                </ul>
+                        <li><strong>Step 2: Calculate Differences</strong>
+                            <p>First, we calculate the differences in X and Y:</p>
+                            <p class="ms">
+                                \[
+                                \Delta X = x2 - x1, \quad \Delta Y = y2 - y1
+                                \]
+                            </p>
+                            <p><strong>Important:</strong> These values of <strong>ΔX</strong> and <strong>ΔY</strong> are <strong>calculated once at the beginning</strong> and remain the same throughout the algorithm. When updating the decision parameter <strong>p</strong>, we always use these initial values and do not recalculate them based on the updated <strong>x</strong> and <strong>y</strong>.</p>
+                        </li>
+                    
+                        <li><strong>Step 3: Calculate the Slope</strong>
+                            <p>The slope <strong>m</strong> is calculated as:</p>
+                            <p class="ms">
+                                \[
+                                m = \frac{\Delta Y}{\Delta X}
+                                \]
+                            </p>
+                            <p>We use this to determine whether the line is <strong>shallow</strong> or <strong>steep</strong>.</p>
+                        </li>
+                    
+                        <li><strong>Step 4: Initialize the Decision Parameter</strong>
+                            <p>The decision parameter <strong>p</strong> is initialized using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                            <p class="ms">
+                                \[
+                                p = 2\Delta Y - \Delta X
+                                \]
+                            </p>
+                            <p><strong>Important:</strong> When updating <strong>p</strong> in later steps, we <strong>always use the original ΔX and ΔY</strong> that were calculated at the beginning.</p>
+                        </li>
+                    
+                        <li><strong>Step 5: Check the Slope</strong>
+                            <p>Now, we check whether the slope <strong>m</strong> is less than 1 or greater than or equal to 1. The algorithm behaves differently based on this value:</p>
+                    
+                            <ul>
+                                <li><strong>Case 1: When <strong>m &lt; 1</strong> (Shallow Line - More Horizontal)</strong>
+                                    <p>If <strong>m &lt; 1</strong>, we <strong>always</strong> increment <strong>x</strong> by 1 and decide whether to increment <strong>y</strong>.</p>
+                                    <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:</p>
+                    
+                                    <ul>
+                                        <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 = y1</strong>. We continue until we reach <strong>x2</strong>.</li>
+                                        <li>If <strong>p &lt; 0</strong>:  
+                                            <p class="ms">
+                                                \[
+                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i
+                                                \]
+                                            </p>
+                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <p class="ms">
+                                                \[
+                                                p = p + 2 \Delta Y
+                                                \]
+                                            </p>
+                                        </li>
+                                        <li>If <strong>p &ge; 0</strong>:  
+                                            <p class="ms">
+                                                \[
+                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                                \]
+                                            </p>
+                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <p class="ms">
+                                                \[
+                                                p = p + 2 \Delta Y - 2 \Delta X
+                                                \]
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                    
+                                <li><strong>Case 2: When <strong>m &ge; 1</strong> (Steep Line - More Vertical)</strong>
+                                    <p>If <strong>m &ge; 1</strong>, we <strong>always</strong> increment <strong>y</strong> by 1 and decide whether to increment <strong>x</strong>.</p>
+                                    <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:</p>
+                    
+                                    <ul>
+                                        <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 = y1</strong>. We continue until we reach <strong>y2</strong>.</li>
+                                        <li>If <strong>p &lt; 0</strong>:  
+                                            <p class="ms">
+                                                \[
+                                                x_{i+1} = x_i, \quad y_{i+1} = y_i + 1
+                                                \]
+                                            </p>
+                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <p class="ms">
+                                                \[
+                                                p = p + 2 \Delta X
+                                                \]
+                                            </p>
+                                        </li>
+                                        <li>If <strong>p &ge; 0</strong>:  
+                                            <p class="ms">
+                                                \[
+                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                                \]
+                                            </p>
+                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <p class="ms">
+                                                \[
+                                                p = p + 2 \Delta X - 2 \Delta Y
+                                                \]
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    
+                        <li><strong>Step 6: Continue Until the End Point is Reached</strong>
+                            <p>We continue applying the rules above, updating <strong>p</strong> and plotting the points step by step from <strong>(x1, y1)</strong> to <strong>(x2, y2)</strong>.</p>
+                            <p><strong>Important:</strong> The values of <strong>ΔX</strong> and <strong>ΔY</strong> <strong>never change</strong> during this process. When updating <strong>p</strong>, we do not recalculate them using the new <strong>x</strong> and <strong>y</strong>. Instead, we always use the original values calculated at the beginning.</p>
+                        </li>
+                    </ul>
+                    
                 <hr>
                 <p><strong>Bresenham's Line Drawing Algorithm: Example</strong></p>
 
