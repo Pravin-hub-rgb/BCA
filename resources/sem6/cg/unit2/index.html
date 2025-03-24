@@ -269,27 +269,29 @@ Mathematics for Computer Graphics
             <p>When a vector is multiplied by a number (scalar), its direction stays the same, but its length changes.
             </p>
 
-            <p>Mathematically, if we have a vector:</p>
+            <p>Mathematically, if we have a vector: <span class="ms">\[
+                \mathbf{A} = (x, y, z)
+                \]</span></p>
 
-            \[
-            \mathbf{A} = (x, y, z)
-            \]
+            
 
-            <p>And we multiply it by a scalar \( k \):</p>
+            <p>And we multiply it by a scalar \( k \): <br> <span class="ms">\[
+                k \mathbf{A} = (k \cdot x, k \cdot y, k \cdot z)
+                \]</span></p>
 
-            \[
-            k \mathbf{A} = (k \cdot x, k \cdot y, k \cdot z)
-            \]
+            
 
             <p><strong>Example:</strong></p>
             <ul>
                 <li>\( \mathbf{A} = (2, -3, 4) \)</li>
-                <li>Multiply by \( k = 3 \):</li>
-            </ul>
-
-            \[
+                <li>Multiply by \( k = 3 \): <br> <span class="ms">
+                    \[
             3 \mathbf{A} = (3 \cdot 2, 3 \cdot (-3), 3 \cdot 4) = (6, -9, 12)
             \]
+                </span></li>
+            </ul>
+
+            
 
             <p>In computer graphics, this is used for scaling objects. If you want to double an object’s size, you
                 multiply its vectors by 2.</p>
@@ -308,15 +310,17 @@ Mathematics for Computer Graphics
 
             <p>Mathematically, the dot product of two vectors \( \mathbf{A} \) and \( \mathbf{B} \) is:</p>
 
-            \[
+            <span class="ms">
+                \[
             \mathbf{A} \cdot \mathbf{B} = x_1 x_2 + y_1 y_2 + z_1 z_2
             \]
 
-            <p>Or in another form:</p>
+            </span>
+            <p>Or in another form: <span class="ms">\[
+                \mathbf{A} \cdot \mathbf{B} = |\mathbf{A}| |\mathbf{B}| \cos \theta
+                \]</span></p>
 
-            \[
-            \mathbf{A} \cdot \mathbf{B} = |\mathbf{A}| |\mathbf{B}| \cos \theta
-            \]
+            
 
             <p>where:</p>
             <ul>
@@ -357,15 +361,16 @@ Mathematics for Computer Graphics
                 middle finger points in another (vector B), your thumb will naturally point in a third direction; this is
                 the cross product.</p>
 
-            <p>Mathematically, for two vectors:</p>
+            <p>Mathematically, for two vectors: <span class="ms">\[
+                \mathbf{A} = (x_1, y_1, z_1), \quad \mathbf{B} = (x_2, y_2, z_2)
+                \]</span></p>
 
-            \[
-            \mathbf{A} = (x_1, y_1, z_1), \quad \mathbf{B} = (x_2, y_2, z_2)
-            \]
+            
 
             <p>Their cross product is:</p>
 
-            \[
+            <span class="ms">
+                \[
             \mathbf{A} \times \mathbf{B} =
             \begin{vmatrix}
             \mathbf{i} & \mathbf{j} & \mathbf{k} \\
@@ -373,22 +378,25 @@ Mathematics for Computer Graphics
             x_2 & y_2 & z_2
             \end{vmatrix}
             \]
+            </span>
 
             <p>Expanding this determinant:</p>
 
-            \[
+            <span class="ms">
+                \[
             \mathbf{A} \times \mathbf{B} =
             \left( y_1 z_2 - z_1 y_2 \right) \mathbf{i} -
             \left( x_1 z_2 - z_1 x_2 \right) \mathbf{j} +
             \left( x_1 y_2 - y_1 x_2 \right) \mathbf{k}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
             <ul>
                 <li>\( \mathbf{A} = (1, 2, 3) \)</li>
                 <li>\( \mathbf{B} = (4, 5, 6) \)</li>
             </ul>
-
+            <span class="ms">
             \[
             \mathbf{A} \times \mathbf{B} =
             \begin{vmatrix}
@@ -410,6 +418,7 @@ Mathematics for Computer Graphics
             \[
             = (-3, 6, -3)
             \]
+        </span>
 
             <p>The cross product is widely used in graphics for calculating surface normals (which affect lighting),
                 physics simulations (torque and rotational motion), and determining perpendicular directions.</p>
@@ -420,7 +429,7 @@ Mathematics for Computer Graphics
         <div class="wh">
             <h3>Matrices and Operations Related to Matrices</h3>
 
-            <p>Alright! Let’s talk about <strong>matrices</strong>. You can think of a matrix as a table of numbers
+            <p>You can think of a matrix as a table of numbers
                 arranged in rows and columns. It’s like a spreadsheet or a grid where each number is placed in a
                 specific position.</p>
 
@@ -429,10 +438,12 @@ Mathematics for Computer Graphics
 
             <p>A matrix is usually represented as:</p>
 
-            \[
+            <span class="ms">
+                \[
             A = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1n} \\ a_{21} & a_{22} & \dots & a_{2n} \\ \vdots & \vdots
             & \ddots & \vdots \\ a_{m1} & a_{m2} & \dots & a_{mn} \end{bmatrix}
             \]
+            </span>
 
             <p>Here:</p>
             <ul>
@@ -441,11 +452,11 @@ Mathematics for Computer Graphics
                 <li>\( a_{ij} \) represents the element at row \( i \) and column \( j \)</li>
             </ul>
 
-            <p>For example, this is a **2×3 matrix** (2 rows, 3 columns):</p>
+            <p>For example, this is a <strong>2×3 matrix</strong> (2 rows, 3 columns):</p>
 
-            \[
-            B = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}
-            \]
+            <span class="ms">\[
+                B = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}
+                \]</span>
 
             <p>Matrices are used in computer graphics for transformations like rotation, scaling, and translation.</p>
 
@@ -455,16 +466,18 @@ Mathematics for Computer Graphics
 
             <p>For two matrices:</p>
 
-            \[
-            A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}, \quad
-            B = \begin{bmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{bmatrix}
-            \]
+            <span class="ms">\[
+                A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}, \quad
+                B = \begin{bmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{bmatrix}
+                \]</span>
 
             <p>Their sum is:</p>
 
-            \[
+            <span class="ms">
+                \[
             A + B = \begin{bmatrix} a_{11} + b_{11} & a_{12} + b_{12} \\ a_{21} + b_{21} & a_{22} + b_{22} \end{bmatrix}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
             <ul>
@@ -472,22 +485,26 @@ Mathematics for Computer Graphics
                 <li>\( B = \begin{bmatrix} 1 & 6 \\ 7 & 2 \end{bmatrix} \)</li>
             </ul>
 
-            \[
+           <span class="ms"> \[
             A + B = \begin{bmatrix} 2+1 & 3+6 \\ 4+7 & 5+2 \end{bmatrix} = \begin{bmatrix} 3 & 9 \\ 11 & 7 \end{bmatrix}
-            \]
+            \]</span>
 
             <p>Similarly, for subtraction:</p>
 
-            \[
+            <span class="ms">
+                \[
             A - B = \begin{bmatrix} a_{11} - b_{11} & a_{12} - b_{12} \\ a_{21} - b_{21} & a_{22} - b_{22} \end{bmatrix}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
 
-            \[
+            <span class="ms">
+                \[
             A - B = \begin{bmatrix} 2-1 & 3-6 \\ 4-7 & 5-2 \end{bmatrix} = \begin{bmatrix} 1 & -3 \\ -3 & 3
             \end{bmatrix}
             \]
+            </span>
 
             <p>Matrix addition and subtraction are useful in image processing, blending effects, and performing
                 transformations in graphics.</p>
@@ -499,17 +516,21 @@ Mathematics for Computer Graphics
 
             <p>If we have:</p>
 
-            \[
+            <span class="ms">
+                \[
             A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}, \quad
             B = \begin{bmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{bmatrix}
             \]
+            </span>
 
             <p>Their product is:</p>
 
-            \[
+            <span class="ms">
+                \[
             A \times B = \begin{bmatrix} (a_{11}b_{11} + a_{12}b_{21}) & (a_{11}b_{12} + a_{12}b_{22}) \\ (a_{21}b_{11}
             + a_{22}b_{21}) & (a_{21}b_{12} + a_{22}b_{22}) \end{bmatrix}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
 
@@ -517,7 +538,7 @@ Mathematics for Computer Graphics
                 <li>\( A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \)</li>
                 <li>\( B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} \)</li>
             </ul>
-
+<span class="ms">
             \[
             A \times B = \begin{bmatrix} (1 \times 5 + 2 \times 7) & (1 \times 6 + 2 \times 8) \\ (3 \times 5 + 4 \times
             7) & (3 \times 6 + 4 \times 8) \end{bmatrix}
@@ -530,7 +551,7 @@ Mathematics for Computer Graphics
             \[
             = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
             \]
-
+        </span>
             <p><strong>Important rules of matrix multiplication:</strong></p>
             <ul>
                 <li>You can only multiply matrices if the number of columns in the first matrix matches the number of
@@ -556,15 +577,19 @@ Mathematics for Computer Graphics
 
             <p>For example, for a matrix \( A \) as:</p>
 
+           <span class="ms">
             \[
             A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}
             \]
+           </span>
 
             <p>The transpose \( A^T \) would be:</p>
 
-            \[
+            <span class="ms">
+                \[
             A^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}
             \]
+            </span>
 
             <p><strong>Important points:</strong></p>
             <ul>
@@ -592,24 +617,30 @@ Mathematics for Computer Graphics
 
             <p>If we have a 2×2 matrix:</p>
 
-            \[
+            <span class="ms">
+                \[
             A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}
             \]
+            </span>
 
             <p>The determinant of \( A \), denoted \( \text{det}(A) \), is calculated as:</p>
 
-            \[
+            <span class="ms">
+                \[
             \text{det}(A) = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
             <ul>
                 <li>\( A = \begin{bmatrix} 3 & 4 \\ 2 & 5 \end{bmatrix} \)</li>
             </ul>
 
-            \[
+            <span class="ms">
+                \[
             \text{det}(A) = (3 \cdot 5) - (4 \cdot 2) = 15 - 8 = 7
             \]
+            </span>
 
             <p>If the determinant of a matrix is <strong>zero</strong>, the matrix is said to be
                 <strong>singular</strong> and cannot be inverted. If the determinant is non-zero, the matrix is
@@ -620,18 +651,20 @@ Mathematics for Computer Graphics
 
             <p>The <strong>inverse</strong> of a matrix is another matrix that, when multiplied with the original
                 matrix, gives the identity matrix (a matrix with ones on the diagonal and zeros elsewhere). In other
-                words, if \( A \) is a matrix, its inverse is denoted \( A^{-1} \), and it satisfies:</p>
+                words, if \( A \) is a matrix, its inverse is denoted \( A^{-1} \), and it satisfies: <span class="ms">\[
+                    A \times A^{-1} = I
+                    \]</span></p>
 
-            \[
-            A \times A^{-1} = I
-            \]
+            
 
             <p>For a 2×2 matrix \( A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} \), its inverse
                 is given by:</p>
 
-            \[
+            <span class="ms">
+                \[
             A^{-1} = \frac{1}{\text{det}(A)} \begin{bmatrix} a_{22} & -a_{12} \\ -a_{21} & a_{11} \end{bmatrix}
             \]
+            </span>
 
             <p><strong>Example:</strong></p>
             <ul>
@@ -639,11 +672,13 @@ Mathematics for Computer Graphics
                 <li>We already know that \( \text{det}(A) = 7 \)</li>
             </ul>
 
-            \[
+            <span class="ms">
+                \[
             A^{-1} = \frac{1}{7} \begin{bmatrix} 5 & -4 \\ -2 & 3 \end{bmatrix} = \begin{bmatrix} \frac{5}{7} &
             \frac{-4}{7} \\ \frac{-2}{7} & \frac{3}{7} \end{bmatrix}
             \]
 
+            </span>
             <p>The inverse of a matrix is very useful in computer graphics for solving systems of equations, such as
                 when transforming points and objects in 3D space or finding the proper scale and rotation to apply.</p>
 
@@ -677,11 +712,11 @@ Mathematics for Computer Graphics
             <p><strong>Example:</strong> Let’s say we have the points \( P(1, 2) \) and \( Q(4, 6) \). The line segment
                 between them is \( \overline{PQ} \), and it represents a finite distance between the two points.</p>
 
-            <p>The length of a line segment can be calculated using the distance formula:</p>
+            <p>The length of a line segment can be calculated using the distance formula: <span class="ms">\[
+                \text{Length of the segment} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+                \]</span></p>
 
-            \[
-            \text{Length of the segment} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
-            \]
+            
 
             <p><strong>Example Calculation:</strong></p>
             <ul>
@@ -699,11 +734,13 @@ Mathematics for Computer Graphics
                 as x changes.</p>
 
             <p>If you have two points \( P(x_1, y_1) \) and \( Q(x_2, y_2) \), the slope \( m \) of the line passing
-                through these points is given by the formula:</p>
-
-            \[
+                through these points is given by the formula: <span class="ms">
+                    \[
             m = \frac{y_2 - y_1}{x_2 - x_1}
             \]
+                </span></p>
+
+            
 
             <p>This formula tells you how much the y-coordinate changes for a unit change in the x-coordinate. The
                 greater the value of the slope, the steeper the line.</p>
@@ -722,12 +759,12 @@ Mathematics for Computer Graphics
 
             <h3>Equation of a Line</h3>
 
-            <p>The equation of a line can be written in various forms, but one common form is the **slope-intercept
-                form**:</p>
+            <p>The equation of a line can be written in various forms, but one common form is the <strong>slope-intercept
+                form</strong>: <span class="ms">\[
+                    y = mx + b
+                    \]</span></p>
 
-            \[
-            y = mx + b
-            \]
+            
 
             <p>Where:</p>
             <ul>
@@ -742,17 +779,19 @@ Mathematics for Computer Graphics
                 <li>Substitute \( x = 1 \) and \( y = 2 \) into the equation \( y = mx + b \):</li>
             </ul>
 
-            \[
+            <span class="ms">
+                \[
             2 = \frac{4}{3}(1) + b \quad \Rightarrow \quad 2 = \frac{4}{3} + b \quad \Rightarrow \quad b = 2 -
             \frac{4}{3} = \frac{2}{3}
             \]
 
-            <p>The equation of the line is:</p>
+            </span>
+            <p>The equation of the line is: <span class="ms">\[
+                y = \frac{4}{3}x + \frac{2}{3}
+                \]
+    </span></p>
 
-            \[
-            y = \frac{4}{3}x + \frac{2}{3}
-            \]
-
+            
             <p>This tells you that the line has a slope of \( \frac{4}{3} \) and crosses the y-axis at \( \frac{2}{3}
                 \).</p>
 
@@ -781,12 +820,14 @@ Mathematics for Computer Graphics
             <p>For a line passing through two points \( A(x_0, y_0) \) and \( B(x_1, y_1) \), the parametric equations
                 are:</p>
 
-            \[
+            <span class="ms">
+                \[
             x = x_0 + t \cdot (x_1 - x_0)
             \]
             \[
             y = y_0 + t \cdot (y_1 - y_0)
             \]
+            </span>
 
             <p>Here, \( t \) is the parameter, and as it changes, the equations give the coordinates \( (x, y) \) of the
                 points on the line between and beyond points \( A \) and \( B \). The values of \( t \) will give us the
@@ -799,21 +840,25 @@ Mathematics for Computer Graphics
 
             <p>Using the general formula:</p>
 
-            \[
+            <span class="ms">
+                \[
             x = 2 + t \cdot (6 - 2) = 2 + 4t
             \]
             \[
             y = 3 + t \cdot (7 - 3) = 3 + 4t
             \]
+            </span>
 
             <p>So, the parametric equations for the line passing through \( A(2, 3) \) and \( B(6, 7) \) are:</p>
 
-            \[
+            <span class="ms">
+                \[
             x = 2 + 4t
             \]
             \[
             y = 3 + 4t
             \]
+            </span>
 
             <p>Now, let’s solve for some specific values of \( t \) to find points on the line.</p>
 
@@ -835,21 +880,25 @@ Mathematics for Computer Graphics
 
             <p>Using the formula:</p>
 
-            \[
+            <span class="ms">
+                \[
             x = 1 + t \cdot (4 - 1) = 1 + 3t
             \]
             \[
             y = 1 + t \cdot (4 - 1) = 1 + 3t
             \]
+            </span>
 
             <p>The parametric equations for the line are:</p>
 
-            \[
+            <span class="ms">
+                \[
             x = 1 + 3t
             \]
             \[
             y = 1 + 3t
             \]
+            </span>
 
             <p>Let’s find some points for different values of \( t \):</p>
 
@@ -898,12 +947,14 @@ Mathematics for Computer Graphics
 
                 <p>The parametric equations for a circle with center \( (h, k) \) and radius \( r \) are:</p>
 
-                \[
+                <span class="ms">
+                    \[
                 x = h + r \cdot \cos(t)
                 \]
                 \[
                 y = k + r \cdot \sin(t)
                 \]
+                </span>
 
                 <p>Here, \( t \) is the parameter, usually varying from \( 0 \) to \( 2\pi \), and as \( t \) changes,
                     the
@@ -912,12 +963,14 @@ Mathematics for Computer Graphics
                 <p><strong>Example:</strong> Let’s say we have a circle with center \( (0, 0) \) and radius \( 5 \). The
                     parametric equations would be:</p>
 
-                \[
+                <span class="ms">
+                    \[
                 x = 0 + 5 \cdot \cos(t) = 5 \cdot \cos(t)
                 \]
                 \[
                 y = 0 + 5 \cdot \sin(t) = 5 \cdot \sin(t)
                 \]
+                </span>
 
                 <p>As \( t \) varies from \( 0 \) to \( 2\pi \), the coordinates \( (x, y) \) trace out the circle.</p>
             </div>
@@ -929,12 +982,14 @@ Mathematics for Computer Graphics
                     (h, k) \), its semi-major axis \( a \) (the longest radius), and its semi-minor axis \( b \) (the
                     shortest radius). The parametric equations for an ellipse are:</p>
 
-                \[
+                <span class="ms">
+                    \[
                 x = h + a \cdot \cos(t)
                 \]
                 \[
                 y = k + b \cdot \sin(t)
                 \]
+                </span>
 
                 <p>Here, \( t \) is the parameter that varies from \( 0 \) to \( 2\pi \), and as \( t \) changes, the
                     points
@@ -944,12 +999,14 @@ Mathematics for Computer Graphics
                     \),
                     and semi-minor axis \( b = 3 \). The parametric equations for the ellipse are:</p>
 
+               <span class="ms">
                 \[
                 x = 0 + 6 \cdot \cos(t) = 6 \cdot \cos(t)
                 \]
                 \[
                 y = 0 + 3 \cdot \sin(t) = 3 \cdot \sin(t)
                 \]
+               </span>
 
                 <p>As \( t \) varies from \( 0 \) to \( 2\pi \), the points \( (x, y) \) trace out the ellipse.</p>
             </div>
@@ -962,12 +1019,14 @@ Mathematics for Computer Graphics
                     \(
                     (h, k) \), opening upwards or downwards, the parametric equations are:</p>
 
-                \[
+                <span class="ms">
+                    \[
                 x = t
                 \]
                 \[
                 y = a(t - h)^2 + k
                 \]
+                </span>
 
                 <p>Here, \( t \) is the parameter that represents the x-coordinate, and as \( t \) changes, the
                     y-coordinate
@@ -979,12 +1038,14 @@ Mathematics for Computer Graphics
                             upwards
                             with \( a = 1 \). The parametric equations would be:</p>
 
-                        \[
+                        <span class="ms">
+                            \[
                         x = t
                         \]
                         \[
                         y = t^2
                         \]
+                        </span>
 
                         <p>As \( t \) changes, the points \( (x, y) \) trace the parabola.</p>
                         </div>
@@ -996,12 +1057,14 @@ Mathematics for Computer Graphics
                             general equation for a hyperbola is \( \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 \), but we can
                             express it in parametric form. The parametric equations for a hyperbola are:</p>
 
-                        \[
+                        <span class="ms">
+                            \[
                         x = a \cdot \cosh(t)
                         \]
                         \[
                         y = b \cdot \sinh(t)
                         \]
+                        </span>
 
                         <p>Here, \( t \) is the parameter, \( \cosh(t) \) and \( \sinh(t) \) are the hyperbolic cosine
                             and
@@ -1013,12 +1076,12 @@ Mathematics for Computer Graphics
                             parametric
                             equations would be:</p>
 
-                        \[
-                        x = 3 \cdot \cosh(t)
-                        \]
-                        \[
-                        y = 2 \cdot \sinh(t)
-                        \]
+                        <span class="ms">\[
+                            x = 3 \cdot \cosh(t)
+                            \]
+                            \[
+                            y = 2 \cdot \sinh(t)
+                            \]</span>
 
                         <p>As \( t \) changes, the coordinates \( (x, y) \) trace the hyperbola.</p>
 
