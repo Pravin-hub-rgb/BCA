@@ -679,6 +679,96 @@ Mathematics for Computer Graphics
             \]
 
             </span>
+            <p><strong>Example:</strong></p>
+            <ul>
+            <li>\( A = \begin{bmatrix} 2 & 3 & 1 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \)</li>
+            <li>The determinant of \( A \) is calculated as:</li>
+            </ul>
+            <span class="ms">
+             \[
+             \text{det}(A) = 2 \begin{vmatrix} 5 & 6 \\ 8 & 9 \end{vmatrix}
+             - 3 \begin{vmatrix} 4 & 6 \\ 7 & 9 \end{vmatrix}
+             + 1 \begin{vmatrix} 4 & 5 \\ 7 & 8 \end{vmatrix}
+             \]
+             \[
+             \text{det}(A) = 2(5 \cdot 9 - 6 \cdot 8) - 3(4 \cdot 9 - 6 \cdot 7) + 1(4 \cdot 8 - 5 \cdot 7)
+             \]
+             \[
+             = 2(45 - 48) - 3(36 - 42) + 1(32 - 35)
+             \]
+             \[
+             = 2(-3) - 3(-6) + 1(-3)
+             \]
+             \[
+             = -6 + 18 - 3 = 9
+             \]
+            </span>
+            <p>So, \( \text{det}(A) = 9 \).</p>
+            
+            <p><strong>Step 1: Calculate the Cofactor Matrix</strong></p>
+            <p>The cofactor matrix \( C \) is formed by computing the cofactor of each element.</p>
+            <p>Formula: \( C_{ij} = (-1)^{i+j} \cdot M_{ij} \) where \( M_{ij} \) is the minor of element \( a_{ij} \).</p>
+            
+            <span class="ms">
+             \[
+             C_{11} = (-1)^{1+1} \begin{vmatrix} 5 & 6 \\ 8 & 9 \end{vmatrix} = (5 \cdot 9 - 6 \cdot 8) = 45 - 48 = -3
+             \]
+             \[
+             C_{12} = (-1)^{1+2} \begin{vmatrix} 4 & 6 \\ 7 & 9 \end{vmatrix} = -1 \cdot (4 \cdot 9 - 6 \cdot 7) = -1 \cdot (36 - 42) = -1 \cdot (-6) = 6
+             \]
+             \[
+             C_{13} = (-1)^{1+3} \begin{vmatrix} 4 & 5 \\ 7 & 8 \end{vmatrix} = (4 \cdot 8 - 5 \cdot 7) = 32 - 35 = -3
+             \]
+             \[
+             C_{21} = (-1)^{2+1} \begin{vmatrix} 3 & 1 \\ 8 & 9 \end{vmatrix} = -1 \cdot (3 \cdot 9 - 1 \cdot 8) = -1 \cdot (27 - 8) = -19
+             \]
+             \[
+             C_{22} = (-1)^{2+2} \begin{vmatrix} 2 & 1 \\ 7 & 9 \end{vmatrix} = (2 \cdot 9 - 1 \cdot 7) = 18 - 7 = 11
+             \]
+             \[
+             C_{23} = (-1)^{2+3} \begin{vmatrix} 2 & 3 \\ 7 & 8 \end{vmatrix} = -1 \cdot (2 \cdot 8 - 3 \cdot 7) = -1 \cdot (16 - 21) = 5
+             \]
+             \[
+             C_{31} = (-1)^{3+1} \begin{vmatrix} 3 & 1 \\ 5 & 6 \end{vmatrix} = (3 \cdot 6 - 1 \cdot 5) = 18 - 5 = 13
+             \]
+             \[
+             C_{32} = (-1)^{3+2} \begin{vmatrix} 2 & 1 \\ 4 & 6 \end{vmatrix} = -1 \cdot (2 \cdot 6 - 1 \cdot 4) = -1 \cdot (12 - 4) = -8
+             \]
+             \[
+             C_{33} = (-1)^{3+3} \begin{vmatrix} 2 & 3 \\ 4 & 5 \end{vmatrix} = (2 \cdot 5 - 3 \cdot 4) = 10 - 12 = -2
+             \]
+            </span>
+            
+            <p>The cofactor matrix is:</p>
+            <span class="ms">
+             \[
+             C = \begin{bmatrix} -3 & 6 & -3 \\ -19 & 11 & 5 \\ 13 & -8 & -2 \end{bmatrix}
+             \]
+            </span>
+            
+            <p><strong>Step 2: Find the Adjoint Matrix</strong></p>
+            <p>The adjoint matrix is the transpose of the cofactor matrix.</p>
+            <p>Formula: \( \text{adj}(A) = C^T \)</p>
+            
+            <span class="ms">
+             \[
+             \text{adj}(A) = C^T = \begin{bmatrix} -3 & -19 & 13 \\ 6 & 11 & -8 \\ -3 & 5 & -2 \end{bmatrix}
+             \]
+            </span>
+            
+            <p><strong>Step 3: Calculate the Inverse Matrix</strong></p>
+            <p>The inverse of matrix \( A \) is given by the formula:</p>
+            <p>Formula: \( A^{-1} = \frac{1}{\text{det}(A)} \cdot \text{adj}(A) \)</p>
+            
+            <span class="ms">
+             \[
+             A^{-1} = \frac{1}{9} \begin{bmatrix} -3 & -19 & 13 \\ 6 & 11 & -8 \\ -3 & 5 & -2 \end{bmatrix}
+             \]
+            
+             \[
+             = \begin{bmatrix} -\frac{1}{3} & -\frac{19}{9} & \frac{13}{9} \\ \frac{2}{3} & \frac{11}{9} & -\frac{8}{9} \\ -\frac{1}{3} & \frac{5}{9} & -\frac{2}{9} \end{bmatrix}
+             \]
+            </span>
             <p>The inverse of a matrix is very useful in computer graphics for solving systems of equations, such as
                 when transforming points and objects in 3D space or finding the proper scale and rotation to apply.</p>
 
