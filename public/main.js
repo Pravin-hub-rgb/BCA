@@ -217,6 +217,103 @@ function loadTheme() {
 
 
 // Function to update commit info
+
+// Function to update commit info
+function updateCommitInfo() {
+  var username = "Pravin-hub-rgb";
+  var repo = "BCA";
+  var perPage = 100; // Number of commits to fetch per page
+  var currentPage = 1; // Current page number
+  var commitCount = 0; // Initialize the commit count
+
+  // Fetch all commits using pagination
+  fetchCommits();
+
+  function fetchCommits() {
+    fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Add the number of commits in the current page to the commit count
+        commitCount += data.length;
+
+        // If there are more pages, fetch the next page
+        if (data.length === perPage) {
+          currentPage++;
+          fetchCommits();
+        } else {
+          // All commits have been fetched, update the HTML content
+          const commitCountElement = document.getElementById("commit-count");
+          if (commitCountElement) {
+            commitCountElement.textContent = commitCount;
+          }
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching commits:", error);
+      });
+  }
+
+  fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const latestCommitTime = new Date(data[0].commit.author.date);
+      const currentTime = new Date();
+
+      // Calculate the time difference in milliseconds
+      const timeDiffMilliseconds = currentTime - latestCommitTime;
+
+      // Format the time difference correctly
+      let timeAgoText = formatTimeAgo(timeDiffMilliseconds);
+
+      // Update the HTML content
+      const timeAgoElement = document.getElementById("time-ago");
+      if (timeAgoElement) {
+        timeAgoElement.textContent = timeAgoText;
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching latest commit:", error);
+    });
+}
+
+// Function to format time difference properly
+function formatTimeAgo(timeDiffMs) {
+  const timeDiffSeconds = Math.floor(timeDiffMs / 1000);
+  const timeDiffMinutes = Math.floor(timeDiffSeconds / 60);
+  const timeDiffHours = Math.floor(timeDiffMinutes / 60);
+  const timeDiffDays = Math.floor(timeDiffHours / 24);
+
+  const years = Math.floor(timeDiffDays / 365);
+  const remainingDaysAfterYears = timeDiffDays % 365;
+
+  const months = Math.floor(remainingDaysAfterYears / 30);
+  const remainingDaysAfterMonths = remainingDaysAfterYears % 30;
+
+  const weeks = Math.floor(remainingDaysAfterMonths / 7);
+  const remainingDays = remainingDaysAfterMonths % 7;
+
+  let parts = [];
+
+  if (years > 0) parts.push(`${years} ${years === 1 ? "year" : "years"}`);
+  if (months > 0) parts.push(`${months} ${months === 1 ? "month" : "months"}`);
+  if (weeks > 0) parts.push(`${weeks} ${weeks === 1 ? "week" : "weeks"}`);
+  if (remainingDays > 0) parts.push(`${remainingDays} ${remainingDays === 1 ? "day" : "days"}`);
+
+  return parts.length > 0 ? parts.join(", ") + " ago" : "just now";
+}
+
+
+/*
 function updateCommitInfo() {
   var username = "Pravin-hub-rgb";
   var repo = "BCA";
@@ -296,6 +393,10 @@ function updateCommitInfo() {
       console.error("Error fetching latest commit:", error);
     });
 }
+
+*/
+
+
 
 // Function to open the side panel
 function openNav() {
