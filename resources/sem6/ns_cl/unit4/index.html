@@ -77,11 +77,249 @@ Cybersecurity Foundations and Legal Framework
     └── Email-Based Fingerprinting
             </code>
         </pre>
-       <ul>
-        <li>When you're diving into the world of cybersecurity, it's not just about hacking or stopping viruses — there's also a strong legal backbone and technical foundation that holds everything together. In this unit, we begin with the basics of Cyber Law, where you'll understand what the terms cyber, cybercrime, and cybercriminals really mean, and how laws are used to regulate activities in the digital world.</li>
-        <li>We then move into the IT Act 2000, exploring why it was created, its scope, and how it legally recognizes electronic records and digital signatures. You’ll also see how the government uses these digital tools in official processes, making governance more tech-enabled.</li>
-        <li>Once the legal groundwork is laid, we’ll shift gears into the technical side — the basics of network security. Here, you’ll learn what IP addresses, port numbers, and sockets are, and how attackers try to hide or trace them. From there, we dig deeper into scanning techniques like traceroute, ping sweeping, and port scanning — which are often the first steps in discovering vulnerabilities. Finally, you’ll explore fingerprinting, which is all about identifying systems either actively or silently — sometimes just by analyzing emails.</li>
-       </ul>
+        <ul>
+            <li>When you're diving into the world of cybersecurity, it's not just about hacking or stopping viruses —
+                there's also a strong legal backbone and technical foundation that holds everything together. In this
+                unit, we begin with the basics of Cyber Law, where you'll understand what the terms cyber, cybercrime,
+                and cybercriminals really mean, and how laws are used to regulate activities in the digital world.</li>
+            <li>We then move into the IT Act 2000, exploring why it was created, its scope, and how it legally
+                recognizes electronic records and digital signatures. You’ll also see how the government uses these
+                digital tools in official processes, making governance more tech-enabled.</li>
+            <li>Once the legal groundwork is laid, we’ll shift gears into the technical side — the basics of network
+                security. Here, you’ll learn what IP addresses, port numbers, and sockets are, and how attackers try to
+                hide or trace them. From there, we dig deeper into scanning techniques like traceroute, ping sweeping,
+                and port scanning — which are often the first steps in discovering vulnerabilities. Finally, you’ll
+                explore fingerprinting, which is all about identifying systems either actively or silently — sometimes
+                just by analyzing emails.</li>
+        </ul>
+        <div class="wh">
+            <h2>How Does a File Reach Google Drive? Understanding MAC, IP, Port, and Sockets</h2>
+            <ul>
+                <li>
+                    Imagine you're sitting in your college computer lab, trying to upload a file to <strong>Google
+                        Drive</strong>. Have you ever wondered — how does that file actually travel from your computer
+                    all
+                    the way to Google’s server, which is not even in your college or your city? Let's break down this
+                    entire
+                    journey using the different types of addresses involved — <strong>MAC address</strong>, <strong>IP
+                        address</strong>, <strong>port number</strong>, and <strong>socket</strong>. We’ll also relate
+                    it to
+                    the actual devices you see around in your lab.
+                </li>
+                <li>
+                    Inside your lab, all the computers are connected to a <strong>switch</strong>. Usually, it's a
+                    24-port
+                    switch that physically connects computers using LAN cables. Now, to allow communication between
+                    these
+                    computers, each device needs a unique identifier — and that’s the <strong>MAC address</strong>.
+                    Think of
+                    it like your device’s permanent ID tag given by the manufacturer. It looks something like
+                    <code>3C:52:82:0A:65:AC</code> and is used only within the local network. The switch maintains a
+                    table
+                    of these MAC addresses to decide which computer is on which port, so it can send data directly to
+                    the
+                    correct system without flooding the entire network.
+                </li>
+
+                <li>
+                    But here’s the catch — the MAC address works only within the local area network (LAN). It’s useless
+                    when
+                    you’re trying to access a server outside your lab — like Google Drive. For external communication,
+                    we
+                    need something else: a <strong>logical address</strong>, which is your <strong>IP address</strong>.
+                </li>
+
+                <li>
+                    As soon as you try to upload a file, your system prepares to send a request to
+                    <code>drive.google.com</code>. But your computer doesn’t know the actual IP address of Google’s
+                    server,
+                    so it first contacts a <strong>DNS server</strong> — like looking up a phonebook — to get the real
+                    IP
+                    address of the website. For example, Google Drive might resolve to something like
+                    <code>142.250.67.14</code>.
+                </li>
+
+                <li>
+                    Once your system knows the IP, it can now send the request across the internet. This IP address is
+                    typically provided by your local router, which might get it from your ISP. The IP address works at
+                    the
+                    <strong>Network Layer</strong> and ensures your request knows where to go, even if it has to jump
+                    across
+                    cities or countries. Earlier, we used <strong>IPv4</strong> which is 32-bit (like
+                    <code>192.168.1.10</code>), but now we are shifting to <strong>IPv6</strong>, which is 128-bit,
+                    because
+                    the number of devices worldwide has grown rapidly.
+                </li>
+
+                <li>
+                    Now here’s another twist — when your request reaches Google’s server, how does it know you want to
+                    access Google Drive and not YouTube, Gmail, or some other service? That’s where the <strong>port
+                        number</strong> comes in. Each service on a server listens on a different port:
+                    <ul>
+                        <li>Web traffic (HTTPS) → Port <code>443</code></li>
+                        <li>Non-secure HTTP → Port <code>80</code></li>
+                        <li>File transfer (FTP) → Port <code>21</code></li>
+                    </ul>
+                </li>
+
+
+
+                <li>
+                    So your browser, while sending the request, also includes the port number (usually 443 for HTTPS) to
+                    specify which service it wants. Your own system also picks a random port temporarily (like
+                    <code>51004</code>) to identify this session.
+                </li>
+
+                <li>
+                    When you combine the IP address and the port number, it becomes a <strong>socket</strong>. For
+                    example,
+                    <code>142.250.67.14:443</code> is a socket — it represents a connection to Google Drive’s secure
+                    service. Likewise, your computer’s side might be represented as something like
+                    <code>192.168.1.5:51004</code>. Both sides now have sockets, and a session is established between
+                    them
+                    for file transfer.
+                </li>
+
+                <li>
+                    Here’s a quick overview of what just happened when you uploaded that file to Google Drive:
+                    <ul>
+                        <li>Your system prepares the file and sends the request.</li>
+                        <li>Within the lab:
+                            <ul>
+                                <li>The switch uses your MAC address to forward packets locally.</li>
+                            </ul>
+                        </li>
+                        <li>Outside the lab:
+                            <ul>
+                                <li>Your router assigns an IP address to talk to the internet.</li>
+                                <li>DNS resolves <code>drive.google.com</code> to its IP.</li>
+                                <li>Your browser uses port <code>443</code> to talk to Google Drive.</li>
+                                <li>A socket is formed using IP + Port.</li>
+                            </ul>
+                        </li>
+                        <li>The file is uploaded through this connection, and data flows both ways until it's complete.
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                <li>
+                    If you open a terminal and type <code>ipconfig</code> (on Windows) or <code>ifconfig</code> (on
+                    Linux),
+                    you can see your device’s MAC address and current IP address. This confirms how your system is
+                    uniquely
+                    identified both locally (by MAC) and globally (by IP).
+                </li>
+
+                <li>
+                    So the journey of your file — from your lab PC to Google Drive — involves local device identifiers
+                    (MAC), global routing (IP), service targeting (Port), and complete connection endpoints (Socket).
+                    Every
+                    part plays a crucial role in successful communication over a network.
+                </li>
+            </ul>
+            <div class="in">
+                <h3>Hiding and Tracing IP Addresses</h3>
+
+<p>
+Till now, we’ve understood how communication happens between devices over the internet using concepts like <strong>IP addresses</strong>, <strong>port numbers</strong>, and <strong>sockets</strong>. We saw how every device is assigned a unique logical address (IP) that helps identify it on the network. But that also means — anyone communicating with your device knows your IP. Now, in the world of networking and security, this leads us to two important needs: <strong>hiding your IP</strong> and <strong>tracing someone else's IP</strong>. Let's explore why and how both are done.
+</p>
+
+<p>
+Let’s say you’re browsing a website, or uploading something to Google Drive — your public IP address is visible to the other side. In general cases, this is harmless. But in situations where you want to protect your identity or location (for privacy or security reasons), <strong>IP hiding</strong> becomes useful.
+</p>
+
+<ul>
+  <li>
+    <strong>Hiding IP Address</strong> – Why and How?
+    <ul>
+      <li>
+        <strong>Why?</strong>
+        <ul>
+          <li>To protect personal privacy while browsing.</li>
+          <li>To access region-blocked services (e.g., streaming content not available in your country).</li>
+          <li>To prevent tracking or targeting by websites or hackers.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>How?</strong> There are several techniques:
+        <ul>
+          <li>
+            <strong>VPN (Virtual Private Network):</strong>
+            <ul>
+              <li>Encrypts your data and routes it through a different server (usually in another country).</li>
+              <li>Makes it look like your request is coming from the VPN server’s IP instead of your own.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Proxy Servers:</strong>
+            <ul>
+              <li>Acts as an intermediary between your device and the web.</li>
+              <li>Your IP is hidden from the target site, but proxies don’t always encrypt data.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tor Network:</strong>
+            <ul>
+              <li>Data is bounced through multiple volunteer-operated servers (nodes).</li>
+              <li>Highly anonymous but slower, often used for deep web or secure communications.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+On the other side of the story is <strong>IP tracing</strong>. Sometimes for security, legal, or investigative purposes, there’s a need to find out the source of a connection — who sent a suspicious packet? Where did an attack come from?
+</p>
+
+<ul>
+  <li>
+    <strong>Tracing an IP Address</strong> – When and How?
+    <ul>
+      <li>
+        <strong>When?</strong>
+        <ul>
+          <li>Investigating cyber crimes or DDoS attacks.</li>
+          <li>Tracking unauthorized access or hacking attempts.</li>
+          <li>Monitoring suspicious traffic in enterprise networks.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>How?</strong> IP tracing methods include:
+        <ul>
+          <li>
+            <strong>IP Header Inspection:</strong> Every packet carries source and destination IPs in its header. Firewalls or intrusion detection systems (IDS) can read this to detect sources.
+          </li>
+          <li>
+            <strong>Command-line Tools:</strong>
+            <ul>
+              <li><code>tracert</code> (Windows) or <code>traceroute</code> (Linux): Shows path packets take to reach a destination.</li>
+              <li><code>ping</code>: Confirms if a host is reachable and how long it takes.</li>
+              <li><code>whois</code>: Fetches ownership and location info about an IP address.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Packet Sniffing Tools:</strong> Tools like Wireshark can capture packets and reveal their source IPs, helping in detailed traffic analysis.
+          </li>
+          <li>
+            <strong>Log Analysis:</strong> Servers, routers, and firewalls maintain logs which record source IPs for each connection or attempt.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+So overall, <strong>hiding IP</strong> is about staying anonymous and secure, while <strong>tracing IP</strong> is about finding the origin of communication — both are key parts of <strong>network security</strong>. The goal isn't just to understand addresses like IP and ports, but also to know how they play a role in both protecting and investigating our digital communication.
+</p>
+
+            </div>
+        </div>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
