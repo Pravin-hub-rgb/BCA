@@ -48,9 +48,10 @@ body.dark-mode {
 /* Fixed height layout with sticky footer */
 html,
 body {
-  height: 100%;
+  /* height: 100%; */
   margin: 0;
   padding: 0;
+  overflow-y: auto;
 }
 
 body {
@@ -78,9 +79,11 @@ body:not(.dark-mode) {
   display: flex;
   flex-direction: column;
 }
-#searchbox-container > input {
+
+#searchbox-container>input {
   margin-top: 8px;
 }
+
 .content-area {
   flex: 1 0 auto;
   /* Take remaining space */
@@ -108,12 +111,13 @@ footer {
   outline: 1px solid grey;
 }
 
-.outer-sib-footer{
+.outer-sib-footer {
   display: flex;
   justify-content: space-between;
 }
-.social-box-2{
-  align-self:flex-end;
+
+.social-box-2 {
+  align-self: flex-end;
 }
 
 /* Rest of your styles remain unchanged */
@@ -312,7 +316,8 @@ img.social-logo {
   .sem-container>div {
     height: 65px !important;
   }
-  .outer-sib-footer{
+
+  .outer-sib-footer {
     display: block;
   }
 }
@@ -324,12 +329,14 @@ img.social-logo {
   display: flex;
   justify-content: center;
 }
-#semester-selector > div {
+
+#semester-selector>div {
   padding: 5px;
   border-radius: 10px;
   background-color: var(--sem-bg-color);
   border: 1px solid grey;
 }
+
 #semester-selector select {
   padding: 5px;
   font-size: 20px;
@@ -338,4 +345,320 @@ img.social-logo {
 #semester-selector select option {
   padding: 5px;
   font-size: 18px;
+}
+
+
+
+/* CSS from main page  */
+.sem {
+  display: none;
+}
+
+#semester {
+  cursor: pointer;
+}
+
+.sem.activesem {
+  display: block;
+}
+
+.container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: var(--container-border);
+  background-color: var(--sem-bg-color);
+}
+
+.desktop-container {
+  display: block;
+}
+
+.mobile-container {
+  display: none;
+}
+
+.theme-select {
+  background-color: var(--theme-select-bg-color);
+  color: var(--theme-select-color);
+  border: var(--theme-select-border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .container {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    height: auto;
+    padding: 10px 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .desktop-container {
+    display: none;
+  }
+
+  .mobile-container {
+    display: block;
+  }
+}
+
+/* *************************************************** search */
+#suggestions {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1000;
+  display: none;
+  box-sizing: border-box;
+}
+
+#suggestions a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+#suggestions a:hover {
+  background-color: #f0f0f0;
+}
+
+#search {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#searchbox-container {
+  position: relative;
+  width: 95vw;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.heart {
+  color: #E53946;
+  font-size: 1.5rem;
+}
+
+.clickable-link {
+  font-weight: bold;
+  color: var(--clickable-link-color);
+  transition: color 0.3s ease;
+}
+
+.clickable-link:hover {
+  color: #1565C0;
+}
+
+.social-box-2 {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.social-box-2 a {
+  margin: 0 10px;
+}
+
+.social-box-2 a:first-child img {
+  height: 38px;
+  width: 38px;
+}
+
+.social-box-2 img {
+  transition: opacity 0.3s ease;
+}
+
+.social-box-2 img:hover {
+  opacity: 0.6;
+}
+
+/* Commits terminal box  */
+.terminal-window {
+  width: 700px;
+  max-width: 100%;
+  margin: 20px auto;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.terminal-header {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444;
+}
+
+.terminal-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+}
+
+.terminal-button.close {
+  background-color: #ff5f56;
+}
+
+.terminal-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.terminal-button.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-content {
+  padding: 0;
+  background-color: #1e1e1e;
+  min-height: 300px;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+}
+
+.terminal-prompt {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.terminal-user {
+  color: #0f0;
+}
+
+.terminal-host {
+  color: #0f0;
+}
+
+.terminal-path {
+  color: #0080ff;
+}
+
+.terminal-symbol {
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.terminal-command {
+  color: #fff;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: #fff;
+  animation: blink 1s step-start infinite;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  50% {
+      opacity: 0;
+  }
+}
+
+#commit-log {
+  margin: 0;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#commit-messages {
+  color: #0f0;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+
+.commit-entry {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.commit-hash {
+  color: #f0ad4e;
+  margin-right: 10px;
+}
+
+.commit-date {
+  color: #5bc0de;
+  margin-right: 10px;
+}
+
+.commit-message {
+  color: #0f0;
+}
+
+.commit-stats {
+  color: #fff;
+  padding: 10px;
+  font-family: monospace;
+  border-bottom: 1px dotted #444;
+  background-color: #222;
+}
+
+.commit-stats-label {
+  color: #5bc0de;
+  margin-right: 5px;
+}
+
+.commit-count {
+  color: #f0ad4e;
+  margin-right: 10px;
+}
+
+.last-updated {
+  color: #0f0;
+}
+
+.terminal-section {
+  padding: 5px 0;
 }

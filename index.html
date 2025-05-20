@@ -22,153 +22,6 @@
     <link rel="manifest" href="/manifest.webmanifest">
     <!-- Favicon -->
     <link rel="icon" href="./public/logo/favicon_io/favicon.ico">
-
-    <style>
-        .sem {
-            display: none;
-        }
-
-        #semester {
-            cursor: pointer;
-        }
-
-        .sem.activesem {
-            display: block;
-        }
-
-        .container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: var(--container-border);
-            background-color: var(--sem-bg-color);
-        }
-
-        .desktop-container {
-            display: block;
-        }
-
-        .mobile-container {
-            display: none;
-        }
-
-        .theme-select {
-            background-color: var(--theme-select-bg-color);
-            color: var(--theme-select-color);
-            border: var(--theme-select-border);
-            border-radius: 4px;
-            padding: 2px 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 850px) {
-            .container {
-                position: relative;
-                top: auto;
-                right: auto;
-                left: auto;
-                height: auto;
-                padding: 10px 20px;
-                margin: 0 auto;
-                box-sizing: border-box;
-            }
-
-            .desktop-container {
-                display: none;
-            }
-
-            .mobile-container {
-                display: block;
-            }
-        }
-
-        /* *************************************************** search */
-        #suggestions {
-            position: absolute;
-            width: 100%;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            z-index: 1000;
-            display: none;
-            box-sizing: border-box;
-        }
-
-        #suggestions a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: black;
-            font-size: 16px;
-        }
-
-        #suggestions a:hover {
-            background-color: #f0f0f0;
-        }
-
-        #search {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        #searchbox-container {
-            position: relative;
-            width: 95vw;
-            margin: 0 auto;
-            max-width: 600px;
-        }
-
-        .footer-text {
-            text-align: center;
-            font-size: 1.2rem;
-        }
-
-        .heart {
-            color: #E53946;
-            font-size: 1.5rem;
-        }
-
-        .clickable-link {
-            font-weight: bold;
-            color: var(--clickable-link-color);
-            transition: color 0.3s ease;
-        }
-
-        .clickable-link:hover {
-            color: #1565C0;
-        }
-
-        .social-box-2 {
-            display: flex;
-            align-items: center;
-            justify-content: end;
-        }
-
-        .social-box-2 a {
-            margin: 0 10px;
-        }
-
-        .social-box-2 a:first-child img {
-            height: 38px;
-            width: 38px;
-        }
-
-        .social-box-2 img {
-            transition: opacity 0.3s ease;
-        }
-
-        .social-box-2 img:hover {
-            opacity: 0.6;
-        }
-    </style>
 </head>
 
 <body>
@@ -189,10 +42,10 @@
             </select>
         </div>
 
-        <h1 class="top-heading">BCA Notes
+        <!-- <h1 class="top-heading">BCA Notes
             <span id="small-head"><span id="commit-count"></span> Commits - Last updated: <span
                     id="time-ago"></span></span>
-        </h1>
+        </h1> -->
 
         <div id="searchbox-container">
             <input type="text" id="search" placeholder="Search for subjects...">
@@ -325,6 +178,53 @@
             </div>
         </main>
     </div>
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <button class="terminal-button close"></button>
+                <button class="terminal-button minimize"></button>
+                <button class="terminal-button maximize"></button>
+            </div>
+            <h3 class="terminal-title">pravin@nobara-pc:~/Desktop/Main/BCA</h3>
+            <div></div> <!-- Empty div for spacing -->
+        </div>
+        <div class="terminal-content">
+            <div class="terminal-prompt">
+                <span class="terminal-user">pravin</span>
+                <span class="terminal-symbol">@</span>
+                <span class="terminal-host">nobara-pc</span>
+                <span class="terminal-symbol">:</span>
+                <span class="terminal-path">~/Desktop/Main/BCA</span>
+                <span class="terminal-symbol">$</span>
+                <span class="terminal-command">git status</span>
+                <span class="terminal-cursor"></span>
+            </div>
+            <div class="commit-stats">
+                <div class="terminal-section">
+                    <span class="commit-stats-label">Total commits:</span>
+                    <span class="commit-count" id="terminal-commit-count">Loading...</span>
+                </div>
+                <div class="terminal-section">
+                    <span class="commit-stats-label">Last updated:</span>
+                    <span class="last-updated" id="terminal-time-ago">Calculating...</span>
+                </div>
+            </div>
+            <div class="terminal-prompt">
+                <span class="terminal-user">pravin</span>
+                <span class="terminal-symbol">@</span>
+                <span class="terminal-host">nobara-pc</span>
+                <span class="terminal-symbol">:</span>
+                <span class="terminal-path">~/Desktop/Main/BCA</span>
+                <span class="terminal-symbol">$</span>
+                <span class="terminal-command">git log -n 5 --oneline</span>
+                <span class="terminal-cursor"></span>
+            </div>
+            <div id="commit-log">
+                <div id="commit-messages">Loading recent commits...</div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="Social-plug-container">
             <div class="social-box">
@@ -360,6 +260,7 @@
             </div>
         </div>
     </footer>
+
     <script src="./public/main.js"></script>
 </body>
 
