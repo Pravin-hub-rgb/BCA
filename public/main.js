@@ -358,6 +358,12 @@ function updateCommitInfo() {
 // Function to format time difference properly
 function formatTimeAgo(timeDiffMs) {
   const timeDiffSeconds = Math.floor(timeDiffMs / 1000);
+  
+  // If less than a minute, show "just now"
+  if (timeDiffSeconds < 60) {
+    return "just now";
+  }
+  
   const timeDiffMinutes = Math.floor(timeDiffSeconds / 60);
   const timeDiffHours = Math.floor(timeDiffMinutes / 60);
   const timeDiffDays = Math.floor(timeDiffHours / 24);
@@ -371,12 +377,20 @@ function formatTimeAgo(timeDiffMs) {
   const weeks = Math.floor(remainingDaysAfterMonths / 7);
   const remainingDays = remainingDaysAfterMonths % 7;
 
+  // Hours and minutes after accounting for days
+  const remainingHours = timeDiffHours % 24;
+  const remainingMinutes = timeDiffMinutes % 60;
+
   let parts = [];
 
   if (years > 0) parts.push(`${years} ${years === 1 ? "year" : "years"}`);
   if (months > 0) parts.push(`${months} ${months === 1 ? "month" : "months"}`);
   if (weeks > 0) parts.push(`${weeks} ${weeks === 1 ? "week" : "weeks"}`);
   if (remainingDays > 0) parts.push(`${remainingDays} ${remainingDays === 1 ? "day" : "days"}`);
+  if (remainingHours > 0 && years === 0 && months === 0 && weeks === 0) 
+    parts.push(`${remainingHours} ${remainingHours === 1 ? "hour" : "hours"}`);
+  if (remainingMinutes > 0 && years === 0 && months === 0 && weeks === 0 && remainingDays === 0 && remainingHours === 0) 
+    parts.push(`${remainingMinutes} ${remainingMinutes === 1 ? "minute" : "minutes"}`);
 
   return parts.length > 0 ? parts.join(", ") + " ago" : "just now";
 }
