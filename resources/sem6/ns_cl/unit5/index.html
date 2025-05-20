@@ -15,10 +15,11 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="../index.html" class="home">back</a>
         <div class="fix-column-links">
-            <a href="#" class="link"></a>
+            <a href="#t1" class="link">Buffer Overflow Attacks</a>
+            <a href="#t2" class="link">Internal Attacks</a>
+            <a href="#t3" class="link">Denial of Service</a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -68,11 +69,446 @@ Cybersecurity Attack Vectors
             </code>
         </pre>
         <ul>
-            <li>When we talk about cybersecurity, one of the most important things to understand is how systems are attacked — these methods are known as attack vectors. In simple terms, an attack vector is the path or technique used by a hacker to break into a system or cause harm. In this unit, we’ll explore different categories of attack vectors that every IT or security student should know.</li>
-            <li>We’ll start with Buffer Overflow Attacks, which are more technical and involve manipulating memory to crash a system or take control of it — things like stack overflows, string overflows, and even heap or integer overflows fall under this.</li>
-            <li>Then we’ll move into Internal Attacks, which are all about threats that come from within the organization or through common user channels — like suspicious emails, mobile apps, instant messengers, and even physical methods like dumpster diving or shoulder surfing.</li>
-            <li>Finally, we’ll cover Denial of Service (DoS) Attacks, which are designed to overwhelm or crash systems so that real users can't access them. This includes notorious attacks like Ping of Death, SYN flooding, and even modern Distributed DoS (DDoS) methods that use multiple devices to attack at once.</li>
+            <li>When we talk about cybersecurity, one of the most important things to understand is how systems are
+                attacked — these methods are known as attack vectors. In simple terms, an attack vector is the path or
+                technique used by a hacker to break into a system or cause harm. In this unit, we’ll explore different
+                categories of attack vectors that every IT or security student should know.</li>
+            <li>We’ll start with Buffer Overflow Attacks, which are more technical and involve manipulating memory to
+                crash a system or take control of it — things like stack overflows, string overflows, and even heap or
+                integer overflows fall under this.</li>
+            <li>Then we’ll move into Internal Attacks, which are all about threats that come from within the
+                organization or through common user channels — like suspicious emails, mobile apps, instant messengers,
+                and even physical methods like dumpster diving or shoulder surfing.</li>
+            <li>Finally, we’ll cover Denial of Service (DoS) Attacks, which are designed to overwhelm or crash systems
+                so that real users can't access them. This includes notorious attacks like Ping of Death, SYN flooding,
+                and even modern Distributed DoS (DDoS) methods that use multiple devices to attack at once.</li>
         </ul>
+        <div id="t1" class="wh">
+            <h2>Buffer Overflow Attacks</h2>
+            <p>
+                Buffer overflow attacks are a classic and dangerous class of vulnerabilities that exploit the way memory
+                is handled in low-level languages like C and C++. These attacks occur when a program writes more data to
+                a buffer (like an array or string) than it was designed to hold, causing unexpected behavior. But why is
+                this dangerous? Because memory in programs is structured in predictable ways, overflowing one area can
+                let an attacker take control over critical parts of a program — even injecting and executing malicious
+                code.
+            </p>
+            <div class="in">
+                <h3>Stack Overflows</h3>
+                <p>
+                    The stack is a special region of memory where local variables and function calls are stored. It
+                    follows
+                    a last-in, first-out (LIFO) order. A stack overflow happens when we push more data onto the stack
+                    than
+                    it can hold. This is the most commonly exploited type of buffer overflow.
+                </p>
+                <ul>
+                    <li>Attackers often target the return address stored on the stack.</li>
+                    <li>By overflowing a local buffer (like a character array), they overwrite the return address with
+                        the
+                        location of their own malicious code.</li>
+                    <li>When the function tries to return, it jumps to the attacker's code instead of the intended
+                        return
+                        point.</li>
+                </ul>
+                <p>
+                    This kind of exploit can give attackers full control of the system if successful. It's one of the
+                    reasons functions like <code>gets()</code> or <code>strcpy()</code> are considered dangerous — they
+                    don’t check input size.
+                </p>
+            </div>
+            <div class="in">
+                <h3>String Overflows</h3>
+                <p>
+                    String overflows are a special case of buffer overflows where unbounded string input causes the
+                    overflow. They often happen when dealing with C-style strings (null-terminated character arrays).
+                </p>
+                <ul>
+                    <li>If a function doesn't limit how many characters it copies or reads into a buffer, it can write
+                        past
+                        the end of that buffer.</li>
+                    <li>This may overwrite adjacent memory, causing crashes, corrupted data, or exploitable conditions —
+                        just like stack overflows.</li>
+                </ul>
+                <p>
+                    Many famous attacks — like the Morris Worm — used string overflows to spread and execute code
+                    remotely.
+                    It's why functions like <code>strncpy()</code> and input validation are important.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Heap Overflows</h3>
+                <p>
+                    Unlike the stack, which handles temporary and scoped data, the heap is used for dynamically
+                    allocated
+                    memory (via <code>malloc()</code> or <code>new</code>). A heap overflow happens when data written to
+                    the
+                    heap overruns the boundary of its allocated space.
+                </p>
+                <ul>
+                    <li>Heap overflows don't target the return address but can corrupt heap metadata or function
+                        pointers.
+                    </li>
+                    <li>Attackers may exploit this to execute arbitrary code or manipulate program behavior.</li>
+                </ul>
+                <p>
+                    These attacks are harder to perform than stack overflows, but they're equally dangerous and harder
+                    to
+                    detect. Secure memory management and modern heap protection techniques (like heap canaries) help
+                    reduce
+                    this risk.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Integer Overflows</h3>
+                <p>
+                    Integer overflows happen when a calculation results in a number too large (or too small) to be
+                    stored in
+                    the intended data type. While this isn’t a buffer overflow by itself, it can lead to one.
+                </p>
+                <ul>
+                    <li>Imagine allocating a buffer using the result of an integer multiplication, but the value
+                        overflows
+                        and becomes very small.</li>
+                    <li>The program then allocates a small buffer but proceeds to copy a large amount of data into it —
+                        causing a buffer overflow.</li>
+                </ul>
+                <p>
+                    Integer overflows are often overlooked but serve as a stepping stone for more severe attacks,
+                    especially
+                    in systems where input sizes are calculated without proper checks.
+                </p>
+            </div>
+            <p>
+                Understanding all these types of overflows is critical for both attackers and defenders. Developers must
+                validate input sizes, use safe libraries, and leverage memory protection features in modern systems to
+                prevent such vulnerabilities.
+            </p>
+            <div class="in">
+                <h3>How to Protect Against Buffer Overflow Attacks</h3>
+                <p>Developers use several tricks and tools to stop buffer overflow attacks from messing with their
+                    programs. Here are some common ways they stay safe:</p>
+                <ul>
+                    <li>
+                        <strong>Write Code Carefully : </strong>
+                        Always check the size of the input, set boundaries, and use safer functions when dealing with
+                        strings. Basically, don’t trust user input blindly!
+                    </li>
+                    <li>
+                        <strong>Use Memory Safety Features : </strong>
+                        Features like ASLR (Address Space Layout Randomization) help make memory locations
+                        unpredictable. Also, marking parts of memory (like the stack or heap) as non-executable stops
+                        attackers from running malicious code there.
+                    </li>
+                    <li>
+                        <strong>Use Code Checking Tools : </strong>
+                        There are tools that scan your code (both while writing and during testing) to catch any buffer
+                        overflow issues before they become a problem.
+                    </li>
+                    <li>
+                        <strong>Run Code in a Safe Zone (Sandboxing) : </strong>
+                        If a program does get attacked, running it in a restricted space means it can’t do much harm.
+                        Also, separating user permissions keeps sensitive stuff safe.
+                    </li>
+                    <li>
+                        <strong>Watch for Weird Behavior at Runtime : </strong>
+                        Some tools keep an eye on how a program behaves while it’s running. If anything looks suspicious
+                        (like memory being accessed in a strange way), it can stop the program right away.
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Real-World Examples and Case Studies</h3>
+                <p>
+                    These vulnerabilities aren't just theoretical. Over the years, real-world incidents have shown how
+                    deadly buffer overflow attacks can be. Here's a look at some major examples across each category:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Stack Overflow – The Morris Worm (1988):</strong> One of the first and most famous worms
+                        spread across the internet using a stack buffer overflow in the <code>finger</code> service on
+                        Unix systems. It exploited poor input handling to execute remote code.
+                    </li>
+                    <li>
+                        <strong>String Overflow – Microsoft IIS Unicode Bug (2001):</strong> This vulnerability allowed
+                        attackers to send a long string in a web request, exploiting unvalidated Unicode input and
+                        crashing or compromising the server.
+                    </li>
+                    <li>
+                        <strong>Heap Overflow – Microsoft Windows GDI+ (2004):</strong> A heap-based overflow in image
+                        parsing routines (used when opening JPG files) could be triggered just by getting a user to open
+                        a crafted image, leading to remote code execution.
+                    </li>
+                    <li>
+                        <strong>Integer Overflow – Apple's "goto fail" Bug & Adobe Flash:</strong> Multiple integer
+                        overflow bugs have been found in Apple and Adobe products. In Adobe Flash, such overflows
+                        allowed memory mismanagement and code injection through malformed video files.
+                    </li>
+                </ul>
+                <p>
+                    These examples show that buffer overflow attacks affect every type of system — from web servers and
+                    desktop applications to operating systems. Developers must stay vigilant, and secure coding
+                    practices must always include bounds checking, safe memory handling, and modern protection
+                    mechanisms like ASLR (Address Space Layout Randomization), DEP (Data Execution Prevention), and
+                    stack canaries.
+                </p>
+            </div>
+        </div>
+        <div id="t2" class="wh">
+            <h2>Internal Attacks</h2>
+            <p>
+                When we think about cyberattacks, it's easy to imagine hackers breaking in from the outside. But many
+                serious security breaches come from within — through people or systems already inside the organization.
+                These are called internal attacks. They’re dangerous because the attacker often has legitimate access
+                and is trusted. Let’s explore how everyday tools and behaviors — like emails, mobile devices, and even
+                trash bins — can become sources of internal threats.
+            </p>
+            <div class="in">
+                <h3>Emails</h3>
+                <p>
+                    Emails are one of the most commonly used communication tools in organizations — and one of the most
+                    exploited. An insider with malicious intent can misuse email in various ways, from sending sensitive
+                    data out of the company to spreading malware internally.
+                </p>
+                <ul>
+                    <li>An employee might attach confidential files and forward them to a competitor or personal email.
+                    </li>
+                    <li>Even well-meaning employees can fall victim to phishing emails that appear internal but are
+                        actually crafted by attackers to steal login credentials.</li>
+                </ul>
+                <p>
+                    This is why email monitoring, employee training, and data loss prevention (DLP) tools are critical
+                    components of internal security.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Mobile Phones</h3>
+                <p>
+                    Almost everyone carries a smartphone into the workplace. While convenient, mobile phones can also be
+                    a source of data leakage or unauthorized recording.
+                </p>
+                <ul>
+                    <li>Insiders can use their phones to take pictures of confidential documents or screens.</li>
+                    <li>They might connect their phones to company computers and transfer sensitive data using USB
+                        tethering or Bluetooth.</li>
+                    <li>Even apps on a personal phone can silently record audio or log keystrokes if permissions are
+                        misused.</li>
+                </ul>
+                <p>
+                    This is why many companies enforce mobile device management (MDM) policies and restrict phone usage
+                    in high-security zones.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Instant Messengers</h3>
+                <p>
+                    Tools like Slack, WhatsApp, or Microsoft Teams are great for quick communication, but they can also
+                    become unmonitored channels for data leakage.
+                </p>
+                <ul>
+                    <li>An insider can easily copy and paste confidential data into a private message or group chat.
+                    </li>
+                    <li>Some attackers use messenger tools to coordinate with others during an internal breach.</li>
+                </ul>
+                <p>
+                    Even seemingly harmless jokes or links shared in a company chat could lead to social engineering or
+                    malware if not properly monitored.
+                </p>
+            </div>
+            <div class="in">
+                <h3>FTP Uploads</h3>
+                <p>
+                    FTP (File Transfer Protocol) is used to move large files across systems. It’s fast, but it’s also
+                    risky if not secured — especially when internal users have access.
+                </p>
+                <ul>
+                    <li>A rogue employee might upload confidential documents to an external FTP server they control.
+                    </li>
+                    <li>If FTP accounts are not properly monitored or logged, such activity can go undetected for long
+                        periods.</li>
+                </ul>
+                <p>
+                    Using secure alternatives like SFTP, coupled with access control and logging, can help prevent
+                    misuse.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Dumpster Diving</h3>
+                <p>
+                    Not all internal threats are digital. Dumpster diving refers to the act of digging through physical
+                    trash to find sensitive documents or hardware that was improperly discarded.
+                </p>
+                <ul>
+                    <li>An attacker could recover printed emails, old reports, or USB drives thrown into the bin without
+                        shredding or wiping.</li>
+                    <li>Even things like sticky notes with passwords or access codes can be valuable to someone digging
+                        through the trash.</li>
+                </ul>
+                <p>
+                    Proper document disposal policies and shred bins are simple but effective countermeasures.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Shoulder Surfing</h3>
+                <p>
+                    Sometimes, all it takes to breach a system is a good set of eyes. Shoulder surfing involves watching
+                    someone enter passwords, read confidential screens, or type sensitive information — often without
+                    them noticing.
+                </p>
+                <ul>
+                    <li>This can happen in open office layouts, cafes, elevators, or even during meetings.</li>
+                    <li>Insiders might memorize access credentials or take photos discreetly.</li>
+                </ul>
+                <p>
+                    Privacy filters, awareness training, and auto-lock policies for unattended computers help reduce
+                    this threat.
+                </p>
+            </div>
+            <h3>Bringing It All Together</h3>
+            <p>
+                Internal attacks don’t always look like "hacks" — they’re often subtle, low-tech, and driven by everyday
+                tools. What makes them especially dangerous is the attacker’s access and knowledge of the system.
+                Whether it's through emails, devices, messengers, or even physical observation, understanding these
+                internal threats helps organizations build layered defenses. Combining technology with employee
+                awareness is the key to keeping internal security strong.
+            </p>
+        </div>
+        <div id="t3" class="wh">
+            <h2>Understanding DoS (Denial of Service) Attacks</h2>
+
+            <p>
+                Imagine trying to enter a shop, but someone keeps blocking the doorway so customers can’t get in. That’s
+                what a Denial of Service (DoS) attack does to websites or online services — it overwhelms them with fake
+                traffic or corrupted requests so that real users can’t use them.
+            </p>
+
+            <p>
+                DoS attacks come in different flavors, and each one targets the system in a unique way. Let’s walk
+                through the most common types and see how they work.
+            </p>
+
+            <div class="in">
+                <h3>Ping of Death</h3>
+                <p>
+                    This attack sends oversized or malformed packets using the ping command. Normally, a computer can
+                    handle
+                    pings easily. But when it's flooded with these abnormal packets, it gets confused and crashes or
+                    freezes. It’s like someone sending you a puzzle with missing pieces — over and over again — until
+                    your
+                    brain gives up!
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Teardrop Attack</h3>
+                <p>
+                    In this attack, the data packets sent to a computer are broken into fragments — but not properly.
+                    When
+                    the system tries to put them back together, it fails and may crash. Think of trying to solve a
+                    jigsaw
+                    puzzle with wrongly shaped pieces that can’t fit — frustrating, right?
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>SYN Flooding</h3>
+                <p>
+                    This one takes advantage of how two computers start a conversation using a process called a
+                    "three-way
+                    handshake." The attacker floods the target with half-finished connections, never completing the
+                    handshake. This leaves the server hanging and eventually runs out of space to handle real users.
+                </p>
+
+                <ul>
+                    <li>Step 1: Attacker sends a SYN request (says "Hi!")</li>
+                    <li>Step 2: Server replies with SYN-ACK ("Hi back!")</li>
+                    <li>Step 3: But the attacker never replies with ACK — leaving the server waiting</li>
+                </ul>
+
+                <p>
+                    This keeps happening until the server is too busy to talk to anyone else.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Land Attacks</h3>
+                <p>
+                    A land attack sends a fake request to the server where the source and destination IP addresses are
+                    the
+                    same — it tricks the system into talking to itself endlessly. It’s like calling your own number and
+                    getting stuck in a loop with yourself!
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Smurf Attacks</h3>
+                <p>
+                    This one is clever. The attacker spoofs (fakes) their IP address and sends a ping request to many
+                    devices, asking them to reply to the victim’s IP. Suddenly, the victim is flooded with replies from
+                    hundreds or thousands of devices.
+                </p>
+
+                <ul>
+                    <li>The attacker sends an ICMP (ping) request to a broadcast address.</li>
+                    <li>All devices on that network reply to the victim’s IP.</li>
+                    <li>The victim gets overwhelmed with responses they didn’t ask for.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>UDP Flooding</h3>
+                <p>
+                    Here, the attacker bombards the target with tons of UDP packets on random ports. The system keeps
+                    looking for applications to handle these messages — and when it can’t find them, it replies with
+                    errors,
+                    which eats up resources fast.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Hybrid DoS Attacks</h3>
+                <p>
+                    Some attackers mix multiple types of attacks at once — maybe combining SYN flooding with a ping
+                    flood or
+                    mixing low and high-level techniques. These are harder to detect because they use more than one
+                    strategy
+                    to break the system.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Application-Specific Attacks</h3>
+                <p>
+                    These target particular applications like a web server, database, or login page. Instead of
+                    attacking
+                    the whole network, they hit the part of the app that does the most work — making it slow or
+                    completely
+                    unusable.
+                </p>
+            </div>
+
+            <div class="in">
+                <h3>Distributed Denial of Service (DDoS) Attacks</h3>
+                <p>
+                    DDoS is like a mega version of DoS. Instead of one attacker, many devices (often hacked ones called
+                    a
+                    “botnet”) work together to flood the target. It’s like hundreds of people trying to enter a small
+                    store
+                    all at once — no one else can get in, and the system collapses.
+                </p>
+
+                <ul>
+                    <li>These attacks are usually launched from thousands of infected computers.</li>
+                    <li>They can take down large websites, online stores, and even government services.</li>
+                </ul>
+            </div>
+
+            <p>
+                Defending against DoS and DDoS attacks is super important because these attacks don’t just crash
+                websites — they cost money, damage trust, and sometimes even threaten critical services.
+            </p>
+
+        </div>
     </div>
     <script src="../../../../public/main.js"></script>
 </body>
