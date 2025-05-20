@@ -1,7 +1,9 @@
+/* Modified CSS */
 * {
   margin: 0;
   padding: 0;
   transition: all 1s;
+  box-sizing: border-box;
 }
 
 /* Default theme (light) */
@@ -21,20 +23,21 @@
   --tele-bg-color: #04befe;
   --tele-bg-color-hover: #4ed0fc;
   --clickable-link-color: #1E88E5;
+  --top-heading-bg-color: transparent;
 }
 
 /* Dark theme overrides */
 body.dark-mode {
   --tele-bg-color-hover: rgb(214, 212, 212);
   --tele-bg-color: white;
-  --background-color: rgba(5, 8, 114, 1);
-  --background-image: radial-gradient(circle 610px at 5.2% 51.6%, rgba(5, 8, 114, 1) 0%, rgba(7, 3, 53, 1) 97.5%);
+  --background-image: url('./images/mainbgbca.jpg');
   --text-color: white;
   --link-color: whitesmoke;
   --accordion-bg-color: #eee;
   --accordion-hover-bg-color: #ccc;
-  --sem-bg-color: rgba(255, 255, 255, 0.123);
-  --footer-bg-image: rgba(255, 255, 255, 0.21);
+  --sem-bg-color: rgba(2, 3, 63, 0.733);
+  --top-heading-bg-color: rgba(2, 3, 63, 0.733);
+  --footer-bg-image: rgba(2, 3, 63, 0.733);
   --container-border: 1px solid rgba(255, 255, 255, 0.541);
   --theme-select-bg-color: #ffffff1f;
   --theme-select-color: #fff;
@@ -42,12 +45,64 @@ body.dark-mode {
   --clickable-link-color: #7ed9f5;
 }
 
+/* Fixed height layout with sticky footer */
+html,
 body {
-  background-image: var(--background-image);
-  color: var(--text-color);
-  font-family: "Kalam", cursive;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-color);
+  font-family: "Kalam", cursive;
+  min-height: 100vh;
+  /* Ensure at least full viewport height */
+}
+
+/* For light mode gradient */
+body:not(.dark-mode) {
+  background-size: 100% 100%;
+}
+
+.page-container {
+  flex: 1 0 auto;
+  /* Will grow but not shrink, taking available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1 0 auto;
+  /* Take remaining space */
+  padding: 20px;
+}
+
+.top-heading {
+  background-color: var(--top-heading-bg-color);
+  text-align: center;
+  padding: 5px;
+}
+
+/* Sticky footer */
+footer {
+  flex-shrink: 0;
+  /* Prevent footer from shrinking */
+  background: var(--footer-bg-image);
+  background-size: 100% 100%;
+  padding: 20px 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Rest of your styles remain unchanged */
 a {
   color: var(--link-color);
   font-size: 1.2rem;
@@ -83,12 +138,6 @@ h2 {
 #suggestions {
   padding: 0 5px;
 }
-
-/* .sem{
-  background-image: url('./images/bakground.jpg');
-  background-position: center;
-  background-size: cover;
-} */
 
 .sem,
 .sem-style {
@@ -132,13 +181,6 @@ h2 {
   }
 }
 
-footer {
-  background-image: var(--footer-bg-image);
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
 .sib-footer {
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
@@ -164,7 +206,6 @@ footer {
   border: none;
   border-radius: 15px;
   outline: none;
-  /* transition: 0.4s; */
   margin: 10px 0;
   font-family: "Kalam", cursive;
   font-size: 1.4rem;
@@ -222,7 +263,6 @@ footer {
   margin: 0 10px;
   cursor: pointer;
   background-color: var(--tele-bg-color);
-  /* background-image: var(--tele-bg-color); */
   text-align: center;
   color: black;
   padding: 10px 15px;
@@ -252,17 +292,15 @@ img.social-logo {
     font-size: 15px;
     margin: 0 5px;
   }
-
 }
 
 @media only screen and (max-width: 800px) {
   .sem-container>div {
     height: 65px !important;
-    color: red !important;
   }
 }
 
-/* New Front Page */
+/* Semester Selector */
 #semester-selector {
   font-size: 22px;
   padding: 10px;
