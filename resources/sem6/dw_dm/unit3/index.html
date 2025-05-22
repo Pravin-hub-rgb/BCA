@@ -8,6 +8,8 @@
     <title>Introduction to Data Mining</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -80,6 +82,333 @@ Introduction to Data Mining
                 data input to pattern output.</li>
         </ul>
         <div class="wh">
+            <h2>1. Basic Concepts of Data Mining</h2>
+            <div class="in">
+                <h3>What is Data Mining?</h3>
+                <ul>
+                    <li>Data mining is like finding hidden patterns or useful insights from a huge pile of data. It
+                        helps us understand what’s really going on behind the numbers—like trends, similarities, or odd
+                        things that stand out. Think of it like a smart tool that uses maths and algorithms to turn
+                        boring raw data into something meaningful so we can make better decisions.</li>
+                    <li>Data mining is the smart process of uncovering useful patterns, relationships, or unusual
+                        behaviors from large datasets. It uses a mix of statistics, machine learning, and database
+                        techniques to find hidden trends that aren't obvious at first glance. Methods like
+                        classification (grouping data), clustering (finding similar items), regression (predicting
+                        values), and association rule mining (like "people who buy X also buy Y") are commonly used.
+                        <ul>
+                            <li>Before mining begins, the data is usually cleaned and prepared. Then, different
+                                algorithms are applied to analyze it. This process is iterative, which means we often
+                                repeat steps—tweaking things and validating results—to make sure the insights are both
+                                accurate and useful in real-world decisions.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>KDD vs. Data Mining</h3>
+                <ul>
+                    <li>Knowledge Discovery in Databases (KDD) is the comprehensive process of extracting meaningful
+                        knowledge from raw data, encompassing multiple stages from data preparation to pattern
+                        interpretation. Data mining constitutes a critical step within the KDD process, specifically
+                        focused on applying computational algorithms to identify patterns in prepared datasets. The
+                        relationship between KDD and data mining is hierarchical, where data mining serves as the
+                        analytical core embedded within the broader KDD framework.</li>
+                    <li>The KDD process consists of five primary stages: data selection, preprocessing, transformation,
+                        data mining, and interpretation/evaluation. Data selection involves identifying and retrieving
+                        relevant datasets from various sources. Preprocessing cleanses the data by handling missing
+                        values, removing noise, and resolving inconsistencies. Transformation converts the data into
+                        appropriate formats through techniques like normalization or dimensionality reduction. Data
+                        mining then applies algorithms to discover patterns, followed by interpretation where results
+                        are assessed for validity and usefulness.</li>
+                    <li>Data mining specifically refers to the algorithmic stage of KDD, employing techniques such as
+                        classification, clustering, association rule mining, and outlier detection. These methods
+                        operate on the transformed data to uncover hidden patterns, correlations, or anomalies. While
+                        data mining focuses exclusively on pattern extraction, KDD encompasses the entire pipeline from
+                        raw data to actionable knowledge, including pre- and post-processing stages that ensure data
+                        quality and result relevance.</li>
+                    <li><strong>Key differences between KDD and data mining include:</strong>
+                        <ul>
+                            <li>Scope: KDD covers the complete knowledge extraction pipeline, while data mining focuses
+                                on pattern discovery algorithms</li>
+                            <li>Input: KDD begins with raw data, whereas data mining processes prepared datasets</li>
+                            <li>Output: KDD produces actionable knowledge, while data mining generates patterns/models
+                            </li>
+                            <li>Techniques: KDD incorporates data management and statistical methods alongside mining
+                                algorithms</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Data Mining Tools</h3>
+                <p>Data mining tools are software applications designed to implement data mining techniques efficiently.
+                    These tools provide functionalities for data preprocessing, algorithm execution, and result
+                    visualization. Common tools include:</p>
+                <ul>
+                    <li>Python/R Libraries (scikit-learn, TensorFlow, dplyr) for custom algorithm implementation</li>
+                    <li>Weka for machine learning and predictive modeling</li>
+                    <li>RapidMiner for workflow-based data mining</li>
+                    <li>KNIME for visual programming and analytics</li>
+                    <li>SQL-based tools (Microsoft SQL Server Analysis Services) for database-integrated mining</li>
+                </ul>
+                <p>These tools typically support tasks such as data cleaning, feature selection, model training, and
+                    performance evaluation. They often include built-in algorithms for classification, clustering, and
+                    association analysis, reducing the need for manual coding.</p>
+            </div>
+            <div class="in">
+                <h3>Applications of Data Mining</h3>
+                <p>Data mining is applied across various domains to solve complex problems and optimize processes. Key
+                    applications include:</p>
+                <ul>
+                    <li>Business Intelligence: Market basket analysis, customer segmentation, and churn prediction</li>
+                    <li>Healthcare: Disease pattern detection, drug efficacy analysis, and patient risk stratification
+                    </li>
+                    <li>Finance: Fraud detection, credit scoring, and stock market trend analysis</li>
+                    <li>Manufacturing: Predictive maintenance, quality control, and supply chain optimization</li>
+                    <li>Research: Scientific data analysis, hypothesis testing, and knowledge discovery</li>
+                </ul>
+                <p>In these applications, data mining techniques process historical or real-time data to generate
+                    insights that support strategic decisions. The choice of method depends on the problem
+                    type—supervised learning for labeled data, unsupervised learning for unlabeled data, and
+                    reinforcement learning for sequential decision-making. Results are typically validated using metrics
+                    like accuracy, precision, or F1-score to ensure reliability before deployment.</p>
+                <ul>
+                    <li>The integration of data mining with big data technologies (e.g., Hadoop, Spark) has expanded its
+                        scalability, enabling analysis of massive datasets distributed across clusters. This combination
+                        enhances processing speed and accommodates diverse data types, including text, images, and
+                        sensor data.</li>
+                    <li>Data mining continues to evolve with advancements in deep learning and automated machine
+                        learning (AutoML), which reduce manual intervention in model selection and hyperparameter
+                        tuning. However, challenges such as data privacy, algorithmic bias, and interpretability remain
+                        critical considerations in its implementation.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>2. Data Mining Query Languages (DMQLs)</h2>
+
+            <div class="in">
+                <h3>What Are Data Mining Query Languages?</h3>
+                <p>Let's begin with a simple question:</p>
+                <p>How do you "talk" to a data mining system and tell it exactly what patterns to find?</p>
+                <p>Just like we use SQL to query databases, we use Data Mining Query Languages (DMQLs) to query mining
+                    systems. These languages provide a structured way to define:</p>
+                <ul>
+                    <li>What data to analyze</li>
+                    <li>What patterns to look for</li>
+                    <li>Any hierarchies involved</li>
+                    <li>How results should be presented</li>
+                </ul>
+                <p>They help bridge the gap between raw data and meaningful knowledge.</p>
+            </div>
+
+            <h3>Components of Data Mining Query Languages</h3>
+
+            <div class="in">
+                <h4>1. Data Specification</h4>
+                <p>What it means: This part specifies which dataset, which table, or even which columns you want to
+                    mine.</p>
+                <p>Example (technical):</p>
+                <pre>
+                        <code>
+USE sales_data;
+SELECT * FROM transactions
+WHERE region = 'North';
+                        </code>
+                    </pre>
+                <p>Why it matters: You may have 50 tables, but you might only want to mine patterns from
+                    transactions where region = 'North'. This step helps filter the exact target data.</p>
+            </div>
+
+            <div class="in">
+                <h4>2. Specifying Kind of Knowledge to Be Mined</h4>
+                <p>What it means: This defines the type of pattern or knowledge you're looking for. It could be:</p>
+                <img src="../../images/dw18.svg" class="wb" alt="">
+                <p>Example (DMQL-style):</p>
+                <pre>
+                        <code>
+MINE CLASSIFICATION_RULES
+FROM customer_data
+FOR customer_type
+BASED ON age, income, location;
+                        </code>
+                    </pre>
+            </div>
+
+            <div class="in">
+                <h4>3. Hierarchy Specification</h4>
+                <p>What it means: This part allows you to define multi-level data relationships, especially useful
+                    in OLAP-style or multidimensional analysis.</p>
+                <p>Why it's useful: Let's say your data has:</p>
+                <ul>
+                    <li>Product → Category → Department</li>
+                    <li>Location → City → State → Country</li>
+                </ul>
+                <p>You can specify that you want to mine patterns at the "state" level instead of just "city".</p>
+                <p>Example:</p>
+                <pre>
+                        <code>
+DEFINE HIERARCHY location_hierarchy AS
+(location < city < state < country);
+                        </code>
+                    </pre>
+                <p>Now your queries can mine patterns like:</p>
+                <ul>
+                    <li>"Find top-selling product categories by state."</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h4>4. Pattern Presentation & Visualization Specification</h4>
+                <p>What it means: This part tells the system how to show the results after mining.</p>
+                <p>Why it matters: Raw patterns can be boring or too complex. So you can request:</p>
+                <ul>
+                    <li>Rules (e.g., "If age > 25, then buys insurance")</li>
+                    <li>Tables</li>
+                    <li>Charts (bar/pie/scatter)</li>
+                    <li>Decision trees</li>
+                    <li>Cluster graphs</li>
+                </ul>
+                <p>Example:</p>
+                <pre>
+                        <code>
+SHOW RESULTS AS decision_tree;
+                        </code>
+                    </pre>
+                <p>This makes the output more understandable for decision-makers.</p>
+            </div>
+
+            <div class="in">
+                <h4>5. Data Mining Languages (Actual DMQL Syntax)</h4>
+                <p>This refers to the actual language or syntax used for mining queries. Some common ones:</p>
+                <img src="../../images/dw19.svg" class="wb" alt="">
+                <p>A typical DMQL syntax may look like:</p>
+                <pre>
+                        <code>
+USE sales_data;
+MINE association_rules
+FROM transactions
+FOR item
+BASED ON item_list
+WITH support ≥ 0.2, confidence ≥ 0.6;
+                        </code>
+                    </pre>
+                <p>This tells the system to mine association rules with certain thresholds.</p>
+            </div>
+
+            <div class="in">
+                <h4>6. Standardization of Data Mining</h4>
+                <p>What it means: Every tool has its own version of data mining syntax, which creates compatibility
+                    issues.</p>
+                <p>So the goal is: To create standardized languages and frameworks that work across platforms—just
+                    like SQL is standardized for databases.</p>
+                <p>Organizations involved:</p>
+                <ul>
+                    <li>ISO (International Organization for Standardization)</li>
+                    <li>DMG (Data Mining Group) – Created PMML (Predictive Model Markup Language)</li>
+                    <li>W3C – Promoting data exchange formats</li>
+                </ul>
+                <p>Why it matters: Imagine you build a model in Oracle but want to use it in Python or
+                    Excel—standardization allows that by defining universal data mining languages and models.</p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>3. Data Mining Primitives</h2>
+
+            <div class="in">
+                <h3>First Things First — What Are Data Mining Primitives?</h3>
+                <p>Imagine you're placing an order for a pizza. You need to specify:</p>
+                <ul>
+                    <li>What kind of pizza you want</li>
+                    <li>Where it should be delivered</li>
+                    <li>How big you want it</li>
+                    <li>And how spicy or cheesy</li>
+                </ul>
+                <p>In data mining, we do something similar. We tell the system what kind of data we want to analyze,
+                    what we're trying to find, and how we want to measure success. These basic instructions are called
+                    Data Mining Primitives.</p>
+                <p>So in short:</p>
+                <ul>
+                    <li>Data mining primitives are the basic building blocks or ingredients that help us specify a data
+                        mining task clearly.</li>
+                </ul>
+                <p>These primitives help define what data to mine, what patterns to find, how to evaluate them, and how
+                    to present them.</p>
+            </div>
+
+                <h3>Let's Explore Each Part of Data Mining Primitives</h3>
+
+                <div class="in">
+                    <h4>1. Task-Relevant Data</h4>
+                    <p>Basic Idea:</p>
+                    <p>This simply means: Which data are we interested in?</p>
+                    <p>Not all data is useful. So before mining, we have to pick the relevant columns, tables, and
+                        conditions — just like how you'd filter out only 10th-grade student marks if you're analyzing
+                        exam trends.</p>
+                    <p>Technical Explanation:</p>
+                    <p>Task-relevant data refers to the subset of data that is useful for the mining task. It can
+                        include:</p>
+                    <ul>
+                        <li>Specific tables (e.g., sales)</li>
+                        <li>Specific attributes (e.g., product_name, region, revenue)</li>
+                        <li>Filtering conditions (e.g., WHERE year = 2024)</li>
+                    </ul>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+SELECT product_name, region, revenue
+FROM sales
+WHERE year = 2024;
+                        </code>
+                    </pre>
+                    <p>You're saying: "Mine only this part of the data, not everything."</p>
+                </div>
+
+                <div class="in">
+                    <h4>2. Mining Objectives</h4>
+                    <p>Basic Idea:</p>
+                    <p>Now that we know what data to look at, we need to define what we want to find.</p>
+                    <p>Are we trying to:</p>
+                    <ul>
+                        <li>Group similar things? (Clustering)</li>
+                        <li>Predict something? (Classification or regression)</li>
+                        <li>Find patterns like "people who buy X also buy Y"? (Association rules)</li>
+                    </ul>
+                    <p>That's what mining objectives define.</p>
+                    <p>Technical Explanation:</p>
+                    <p>Mining objectives define the type of knowledge to be mined. Examples:</p>
+                    <img src="../../images/dw20.svg" alt="" class="wb">
+                    <p>Example (DMQL-style):</p>
+                    <pre>
+                        <code>
+MINE classification_rules
+FROM customer_data
+FOR customer_type
+BASED ON age, income;
+                        </code>
+                    </pre>
+                </div>
+
+                <div class="in">
+                    <h4>3. Measures and Identification of Patterns</h4>
+                    <p>Basic Idea:</p>
+                    <p>How do we know if a pattern is important or not? We need measures or criteria to decide that —
+                        like saying "only show me patterns that happen frequently or are very confident".</p>
+                    <p>Think of it like filtering only the most spicy memes instead of boring ones</p>
+                    <p>Technical Explanation:</p>
+                    <p>In data mining, we use objective measures like:</p>
+                    <img src="../../images/dw21.svg" alt="" class="wb">
+                    <p>Example:</p>
+                    <ul>
+                        <li>Rule: If buys "milk" → buys "bread"</li>
+                        <li>Support = 20%</li>
+                        <li>Confidence = 80%</li>
+                        <li>Lift = 1.5</li>
+                    </ul>
+                    <p>These values tell the system if a pattern is worth showing or just random noise.</p>
+                </div>
+        </div>
+        <div class="wh">
             <h2>4. Architectures of Data Mining Systems</h2>
             <ul>
                 <li>Imagine this: in today’s world, billions of gigabytes of data are being created every single day
@@ -137,6 +466,7 @@ Introduction to Data Mining
                     Architecture video lecture &neArr;</a></li>
         </ul>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="../../../../public/main.js"></script>
 </body>
 
