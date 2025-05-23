@@ -616,31 +616,58 @@ img.social-logo {
   font-size: 14px;
   max-height: 90vh;
   overflow-y: auto;
+  /* Allow horizontal scrolling for long commit lines */
+  overflow-x: auto;
 }
 
 #commit-messages {
   color: #0f0;
   margin-top: 10px;
-  white-space: pre-wrap;
+  /* Remove pre-wrap to prevent text wrapping */
+  white-space: nowrap;
 }
 
+/* Fixed commit entry styling for single line display */
 .commit-entry {
   margin-bottom: 8px;
+  /* Force single line display */
+  white-space: nowrap;
+  overflow: hidden;
+  /* Add ellipsis for very long lines */
+  text-overflow: ellipsis;
+  /* Ensure it's a block element but maintains single line */
+  display: block;
   line-height: 1.4;
 }
 
 .commit-hash {
   color: #f0ad4e;
   margin-right: 10px;
+  /* Prevent the hash from breaking */
+  white-space: nowrap;
 }
 
 .commit-date {
   color: #5bc0de;
   margin-right: 10px;
+  /* Prevent date from breaking */
+  white-space: nowrap;
 }
 
 .commit-message {
   color: #0f0;
+  /* Ensure message doesn't wrap */
+  white-space: nowrap;
+}
+
+/* Style for automated commit indicator */
+.automated-indicator {
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.automated-commit {
+  opacity: 0.7;
 }
 
 .commit-stats {
