@@ -226,7 +226,7 @@
                 </pre>
 
                 <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
-<hr>
+                <hr>
                 <p><strong>Example: Line from (1, 1) to (4, 3)</strong></p>
 
                 <p><strong>Given:</strong></p>
@@ -315,214 +315,242 @@
                     avoid the use of floating-point operations, making it faster and suitable for raster display
                     systems.</p>
 
-                    <ul>
-                        <li><strong>Step 1: Given Two Points</strong>
-                            <p>We are given two points <strong>(x1, y1)</strong> and <strong>(x2, y2)</strong>, which define the start and end of the line.</p>
-                        </li>
-                    
-                        <li><strong>Step 2: Calculate Differences</strong>
-                            <p>First, we calculate the differences in X and Y:</p>
-                            <p class="ms">
-                                \[
-                                \Delta X = x2 - x1, \quad \Delta Y = y2 - y1
-                                \]
-                            </p>
-                            <p><strong>Important:</strong> These values of <strong>ΔX</strong> and <strong>ΔY</strong> are <strong>calculated once at the beginning</strong> and remain the same throughout the algorithm. When updating the decision parameter <strong>p</strong>, we always use these initial values and do not recalculate them based on the updated <strong>x</strong> and <strong>y</strong>.</p>
-                        </li>
-                    
-                        <li><strong>Step 3: Calculate the Slope</strong>
-                            <p>The slope <strong>m</strong> is calculated as:</p>
-                            <p class="ms">
-                                \[
-                                m = \frac{\Delta Y}{\Delta X}
-                                \]
-                            </p>
-                            <p>We use this to determine whether the line is <strong>shallow</strong> or <strong>steep</strong>.</p>
-                        </li>
-                    
-                        <li><strong>Step 4: Initialize the Decision Parameter</strong>
-                            <p>The decision parameter <strong>p</strong> is initialized using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
-                            <p class="ms">
-                                \[
-                                p = 2\Delta Y - \Delta X
-                                \]
-                            </p>
-                            <p><strong>Important:</strong> When updating <strong>p</strong> in later steps, we <strong>always use the original ΔX and ΔY</strong> that were calculated at the beginning.</p>
-                        </li>
-                    
-                        <li><strong>Step 5: Check the Slope</strong>
-                            <p>Now, we check whether the slope <strong>m</strong> is less than 1 or greater than or equal to 1. The algorithm behaves differently based on this value:</p>
-                    
-                            <ul>
-                                <li><strong>Case 1: When <strong>m &lt; 1</strong> (Shallow Line - More Horizontal)</strong>
-                                    <p>If <strong>m &lt; 1</strong>, we <strong>always</strong> increment <strong>x</strong> by 1 and decide whether to increment <strong>y</strong>.</p>
-                                    <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:</p>
-                    
-                                    <ul>
-                                        <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 = y1</strong>. We continue until we reach <strong>x2</strong>.</li>
-                                        <li>If <strong>p &lt; 0</strong>:  
-                                            <p class="ms">
-                                                \[
-                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i
-                                                \]
-                                            </p>
-                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
-                                            <p class="ms">
-                                                \[
-                                                p = p + 2 \Delta Y
-                                                \]
-                                            </p>
-                                        </li>
-                                        <li>If <strong>p &ge; 0</strong>:  
-                                            <p class="ms">
-                                                \[
-                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
-                                                \]
-                                            </p>
-                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
-                                            <p class="ms">
-                                                \[
-                                                p = p + 2 \Delta Y - 2 \Delta X
-                                                \]
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </li>
-                    
-                                <li><strong>Case 2: When <strong>m &ge; 1</strong> (Steep Line - More Vertical)</strong>
-                                    <p>If <strong>m &ge; 1</strong>, we <strong>always</strong> increment <strong>y</strong> by 1 and decide whether to increment <strong>x</strong>.</p>
-                                    <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:</p>
-                    
-                                    <ul>
-                                        <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 = y1</strong>. We continue until we reach <strong>y2</strong>.</li>
-                                        <li>If <strong>p &lt; 0</strong>:  
-                                            <p class="ms">
-                                                \[
-                                                x_{i+1} = x_i, \quad y_{i+1} = y_i + 1
-                                                \]
-                                            </p>
-                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
-                                            <p class="ms">
-                                                \[
-                                                p = p + 2 \Delta X
-                                                \]
-                                            </p>
-                                        </li>
-                                        <li>If <strong>p &ge; 0</strong>:  
-                                            <p class="ms">
-                                                \[
-                                                x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
-                                                \]
-                                            </p>
-                                            <p>Update <strong>p</strong> using the <strong>fixed</strong> <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
-                                            <p class="ms">
-                                                \[
-                                                p = p + 2 \Delta X - 2 \Delta Y
-                                                \]
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    
-                        <li><strong>Step 6: Continue Until the End Point is Reached</strong>
-                            <p>We continue applying the rules above, updating <strong>p</strong> and plotting the points step by step from <strong>(x1, y1)</strong> to <strong>(x2, y2)</strong>.</p>
-                            <p><strong>Important:</strong> The values of <strong>ΔX</strong> and <strong>ΔY</strong> <strong>never change</strong> during this process. When updating <strong>p</strong>, we do not recalculate them using the new <strong>x</strong> and <strong>y</strong>. Instead, we always use the original values calculated at the beginning.</p>
-                        </li>
-                    </ul>
-                    
+                <ul>
+                    <li><strong>Step 1: Given Two Points</strong>
+                        <p>We are given two points <strong>(x1, y1)</strong> and <strong>(x2, y2)</strong>, which define
+                            the start and end of the line.</p>
+                    </li>
+
+                    <li><strong>Step 2: Calculate Differences</strong>
+                        <p>First, we calculate the differences in X and Y:</p>
+                        <p class="ms">
+                            \[
+                            \Delta X = x2 - x1, \quad \Delta Y = y2 - y1
+                            \]
+                        </p>
+                        <p><strong>Important:</strong> These values of <strong>ΔX</strong> and <strong>ΔY</strong> are
+                            <strong>calculated once at the beginning</strong> and remain the same throughout the
+                            algorithm. When updating the decision parameter <strong>p</strong>, we always use these
+                            initial values and do not recalculate them based on the updated <strong>x</strong> and
+                            <strong>y</strong>.</p>
+                    </li>
+
+                    <li><strong>Step 3: Calculate the Slope</strong>
+                        <p>The slope <strong>m</strong> is calculated as:</p>
+                        <p class="ms">
+                            \[
+                            m = \frac{\Delta Y}{\Delta X}
+                            \]
+                        </p>
+                        <p>We use this to determine whether the line is <strong>shallow</strong> or
+                            <strong>steep</strong>.</p>
+                    </li>
+
+                    <li><strong>Step 4: Initialize the Decision Parameter</strong>
+                        <p>The decision parameter <strong>p</strong> is initialized using the fixed values of
+                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                        <p class="ms">
+                            \[
+                            p = 2\Delta Y - \Delta X
+                            \]
+                        </p>
+                        <p><strong>Important:</strong> When updating <strong>p</strong> in later steps, we
+                            <strong>always use the original ΔX and ΔY</strong> that were calculated at the beginning.
+                        </p>
+                    </li>
+
+                    <li><strong>Step 5: Check the Slope</strong>
+                        <p>Now, we check whether the slope <strong>m</strong> is less than 1 or greater than or equal to
+                            1. The algorithm behaves differently based on this value:</p>
+
+                        <ul>
+                            <li><strong>Case 1: When <strong>m &lt; 1</strong> (Shallow Line - More Horizontal)</strong>
+                                <p>If <strong>m &lt; 1</strong>, we <strong>always</strong> increment <strong>x</strong>
+                                    by 1 and decide whether to increment <strong>y</strong>.</p>
+                                <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:
+                                </p>
+
+                                <ul>
+                                    <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 =
+                                            y1</strong>. We continue until we reach <strong>x2</strong>.</li>
+                                    <li>If <strong>p &lt; 0</strong>:
+                                        <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i + 1, \quad y_{i+1} = y_i
+                                            \]
+                                        </p>
+                                        <p>Update <strong>p</strong> using the <strong>fixed</strong>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta Y
+                                            \]
+                                        </p>
+                                    </li>
+                                    <li>If <strong>p &ge; 0</strong>:
+                                        <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                            \]
+                                        </p>
+                                        <p>Update <strong>p</strong> using the <strong>fixed</strong>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta Y - 2 \Delta X
+                                            \]
+                                        </p>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li><strong>Case 2: When <strong>m &ge; 1</strong> (Steep Line - More Vertical)</strong>
+                                <p>If <strong>m &ge; 1</strong>, we <strong>always</strong> increment <strong>y</strong>
+                                    by 1 and decide whether to increment <strong>x</strong>.</p>
+                                <p>Using the fixed values of <strong>ΔX</strong> and <strong>ΔY</strong>, the steps are:
+                                </p>
+
+                                <ul>
+                                    <li><strong>Start:</strong> Let <strong>x0 = x1</strong> and <strong>y0 =
+                                            y1</strong>. We continue until we reach <strong>y2</strong>.</li>
+                                    <li>If <strong>p &lt; 0</strong>:
+                                        <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i, \quad y_{i+1} = y_i + 1
+                                            \]
+                                        </p>
+                                        <p>Update <strong>p</strong> using the <strong>fixed</strong>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta X
+                                            \]
+                                        </p>
+                                    </li>
+                                    <li>If <strong>p &ge; 0</strong>:
+                                        <p class="ms">
+                                            \[
+                                            x_{i+1} = x_i + 1, \quad y_{i+1} = y_i + 1
+                                            \]
+                                        </p>
+                                        <p>Update <strong>p</strong> using the <strong>fixed</strong>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                        <p class="ms">
+                                            \[
+                                            p = p + 2 \Delta X - 2 \Delta Y
+                                            \]
+                                        </p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Step 6: Continue Until the End Point is Reached</strong>
+                        <p>We continue applying the rules above, updating <strong>p</strong> and plotting the points
+                            step by step from <strong>(x1, y1)</strong> to <strong>(x2, y2)</strong>.</p>
+                        <p><strong>Important:</strong> The values of <strong>ΔX</strong> and <strong>ΔY</strong>
+                            <strong>never change</strong> during this process. When updating <strong>p</strong>, we do
+                            not recalculate them using the new <strong>x</strong> and <strong>y</strong>. Instead, we
+                            always use the original values calculated at the beginning.</p>
+                    </li>
+                </ul>
+
                 <hr>
                 <p><strong>Bresenham's Line Drawing Algorithm: Example</strong></p>
 
-<p>We will use Bresenham's Line Drawing Algorithm to draw a line between the points (1, 1) and (5, 3).</p>
+                <p>We will use Bresenham's Line Drawing Algorithm to draw a line between the points (1, 1) and (5, 3).
+                </p>
 
-<h4>Given Two Points:</h4>
-<p>Let the starting point be:</p>
-<p class="ms">
-    \[
-    x_0 = 1, \quad y_0 = 1
-    \]
-</p>
-<p>We continue until we reach:</p>
-<p class="ms">
-    \[
-    x = 5, \quad y = 3
-    \]
-</p>
+                <h4>Given Two Points:</h4>
+                <p>Let the starting point be:</p>
+                <p class="ms">
+                    \[
+                    x_0 = 1, \quad y_0 = 1
+                    \]
+                </p>
+                <p>We continue until we reach:</p>
+                <p class="ms">
+                    \[
+                    x = 5, \quad y = 3
+                    \]
+                </p>
 
-<h4>Step 1: Calculate Differences</h4>
-<p>First, we calculate the differences in the x and y coordinates:</p>
-<p class="ms">
-    \[
-    \Delta X = x_2 - x_1 = 5 - 1 = 4, \quad \Delta Y = y_2 - y_1 = 3 - 1 = 2
-    \]
-</p>
+                <h4>Step 1: Calculate Differences</h4>
+                <p>First, we calculate the differences in the x and y coordinates:</p>
+                <p class="ms">
+                    \[
+                    \Delta X = x_2 - x_1 = 5 - 1 = 4, \quad \Delta Y = y_2 - y_1 = 3 - 1 = 2
+                    \]
+                </p>
 
-<h4>Step 2: Compute Initial Decision Parameter</h4>
-<p>The decision parameter \( p \) is calculated as:</p>
-<p class="ms">
-    \[
-    p_0 = 2 \Delta Y - \Delta X = 2 \times 2 - 4 = 0
-    \]
-</p>
+                <h4>Step 2: Compute Initial Decision Parameter</h4>
+                <p>The decision parameter \( p \) is calculated as:</p>
+                <p class="ms">
+                    \[
+                    p_0 = 2 \Delta Y - \Delta X = 2 \times 2 - 4 = 0
+                    \]
+                </p>
 
-<h4>Step 3: Iterating Through Points</h4>
-<p>Since \( m < 1 \), we increment \( x \) by 1 at each step and decide whether to increment \( y \) based on \( p \).</p>
+                <h4>Step 3: Iterating Through Points</h4>
+                <p>Since \( m < 1 \), we increment \( x \) by 1 at each step and decide whether to increment \( y \)
+                        based on \( p \).</p>
 
-<ul>
-    <li><strong>Initially</strong>: \( x_0 = 1, y_0 = 1, p_0 = 0 \).</li>
-    
-    <li><strong>Step 1:</strong> Since \( p_0 \geq 0 \), we increment both \( x \) and \( y \):</li>
-    <p class="ms">
-        \[
-        x_1 = x_0 + 1 = 2, \quad y_1 = y_0 + 1 = 2
-        \]
-    </p>
-    <p>Update \( p \):</p>
-    <p class="ms">
-        \[
-        p_1 = p_0 + 2 \Delta Y - 2 \Delta X = 0 + 2(2) - 2(4) = -4
-        \]
-    </p>
+                        <ul>
+                            <li><strong>Initially</strong>: \( x_0 = 1, y_0 = 1, p_0 = 0 \).</li>
 
-    <li><strong>Step 2:</strong> Since \( p_1 < 0 \), we only increment \( x \):</li>
-    <p class="ms">
-        \[
-        x_2 = x_1 + 1 = 3, \quad y_2 = y_1 = 2
-        \]
-    </p>
-    <p>Update \( p \):</p>
-    <p class="ms">
-        \[
-        p_2 = p_1 + 2 \Delta Y = -4 + 2(2) = 0
-        \]
-    </p>
+                            <li><strong>Step 1:</strong> Since \( p_0 \geq 0 \), we increment both \( x \) and \( y \):
+                            </li>
+                            <p class="ms">
+                                \[
+                                x_1 = x_0 + 1 = 2, \quad y_1 = y_0 + 1 = 2
+                                \]
+                            </p>
+                            <p>Update \( p \):</p>
+                            <p class="ms">
+                                \[
+                                p_1 = p_0 + 2 \Delta Y - 2 \Delta X = 0 + 2(2) - 2(4) = -4
+                                \]
+                            </p>
 
-    <li><strong>Step 3:</strong> Since \( p_2 \geq 0 \), we increment both \( x \) and \( y \):</li>
-    <p class="ms">
-        \[
-        x_3 = x_2 + 1 = 4, \quad y_3 = y_2 + 1 = 3
-        \]
-    </p>
-    <p>Update \( p \):</p>
-    <p class="ms">
-        \[
-        p_3 = p_2 + 2 \Delta Y - 2 \Delta X = 0 + 2(2) - 2(4) = -4
-        \]
-    </p>
+                            <li><strong>Step 2:</strong> Since \( p_1 < 0 \), we only increment \( x \):</li>
+                                    <p class="ms">
+                                        \[
+                                        x_2 = x_1 + 1 = 3, \quad y_2 = y_1 = 2
+                                        \]
+                                    </p>
+                                    <p>Update \( p \):</p>
+                                    <p class="ms">
+                                        \[
+                                        p_2 = p_1 + 2 \Delta Y = -4 + 2(2) = 0
+                                        \]
+                                    </p>
 
-    <li><strong>Step 4:</strong> Since \( p_3 < 0 \), we only increment \( x \):</li>
-    <p class="ms">
-        \[
-        x_4 = x_3 + 1 = 5, \quad y_4 = y_3 = 3
-        \]
-    </p>
-    <p>Since we have reached \( x = 5, y = 3 \), we stop.</p>
-</ul>
+                            <li><strong>Step 3:</strong> Since \( p_2 \geq 0 \), we increment both \( x \) and \( y \):
+                            </li>
+                            <p class="ms">
+                                \[
+                                x_3 = x_2 + 1 = 4, \quad y_3 = y_2 + 1 = 3
+                                \]
+                            </p>
+                            <p>Update \( p \):</p>
+                            <p class="ms">
+                                \[
+                                p_3 = p_2 + 2 \Delta Y - 2 \Delta X = 0 + 2(2) - 2(4) = -4
+                                \]
+                            </p>
 
-<h4>Table of Calculated Points:</h4>
-<pre>
+                            <li><strong>Step 4:</strong> Since \( p_3 < 0 \), we only increment \( x \):</li>
+                                    <p class="ms">
+                                        \[
+                                        x_4 = x_3 + 1 = 5, \quad y_4 = y_3 = 3
+                                        \]
+                                    </p>
+                                    <p>Since we have reached \( x = 5, y = 3 \), we stop.</p>
+                        </ul>
+
+                        <h4>Table of Calculated Points:</h4>
+                        <pre>
     <code>
   X  | Y  | p  | Action
 -----+----+----+----------------------------
@@ -534,7 +562,9 @@
     </code>
 </pre>
 
-<p>The points (1,1), (2,2), (3,2), (4,3), and (5,3) are plotted following Bresenham's algorithm. The decision parameter is used to determine whether to increment Y in each step while always incrementing X by 1.</p>
+                        <p>The points (1,1), (2,2), (3,2), (4,3), and (5,3) are plotted following Bresenham's algorithm.
+                            The decision parameter is used to determine whether to increment Y in each step while always
+                            incrementing X by 1.</p>
 
             </div>
         </div>
@@ -707,25 +737,35 @@
                 </ul>
 
                 <h3>Step-by-Step Calculations</h3>
-<p>Starting from \( (0,5) \):</p>
+                <p>Starting from \( (0,5) \):</p>
 
-<ul>
-    <li><strong>Step 1:</strong> We start with \( p_0 = -4 \), which is calculated using the formula \( p_0 = 1 - r \) where \( r = 5 \).
-        <p>At this point, the current values of \( x = 0 \) and \( y = 5 \). Since \( p_0 < 0 \), we move horizontally to the right, meaning the next point will be \( (x+1, y) = (1, 5) \), and we update the decision parameter:</p>
-        <p class="ms">\( p_1 = p_0 + 2x + 3 = -4 + 2(0) + 3 = -1 \)</p>
-    </li>
+                <ul>
+                    <li><strong>Step 1:</strong> We start with \( p_0 = -4 \), which is calculated using the formula \(
+                        p_0 = 1 - r \) where \( r = 5 \).
+                        <p>At this point, the current values of \( x = 0 \) and \( y = 5 \). Since \( p_0 < 0 \), we
+                                move horizontally to the right, meaning the next point will be \( (x+1, y)=(1, 5) \),
+                                and we update the decision parameter:</p>
+                                <p class="ms">\( p_1 = p_0 + 2x + 3 = -4 + 2(0) + 3 = -1 \)</p>
+                    </li>
 
-    <li><strong>Step 2:</strong> Now we have \( p_1 = -1 \), and the current values of \( x = 1 \) and \( y = 5 \). Since \( p_1 < 0 \), we again move horizontally to the right, meaning the next point will be \( (x+1, y) = (2, 5) \). We update the decision parameter:</p>
-        <p class="ms">\( p_2 = p_1 + 2x + 3 = -1 + 2(1) + 3 = 4 \)</p>
-    </li>
+                    <li><strong>Step 2:</strong> Now we have \( p_1 = -1 \), and the current values of \( x = 1 \) and
+                        \( y = 5 \). Since \( p_1 < 0 \), we again move horizontally to the right, meaning the next
+                            point will be \( (x+1, y)=(2, 5) \). We update the decision parameter:</p>
+                            <p class="ms">\( p_2 = p_1 + 2x + 3 = -1 + 2(1) + 3 = 4 \)</p>
+                    </li>
 
-    <li><strong>Step 3:</strong> Now we have \( p_2 = 4 \), and the current values of \( x = 2 \) and \( y = 5 \). Since \( p_2 \geq 0 \), we move diagonally, meaning the next point will be \( (x+1, y-1) = (3, 4) \). We then update the decision parameter:</p>
-        <p class="ms">\( p_3 = p_2 + 2x - 2y + 5 = 4 + 2(2) - 2(5) + 5 = 3 \)</p>
-    </li>
+                    <li><strong>Step 3:</strong> Now we have \( p_2 = 4 \), and the current values of \( x = 2 \) and \(
+                        y = 5 \). Since \( p_2 \geq 0 \), we move diagonally, meaning the next point will be \( (x+1,
+                        y-1) = (3, 4) \). We then update the decision parameter:</p>
+                        <p class="ms">\( p_3 = p_2 + 2x - 2y + 5 = 4 + 2(2) - 2(5) + 5 = 3 \)</p>
+                    </li>
 
-    <li><strong>Step 4:</strong> Now we have \( p_3 = 3 \), and the current values of \( x = 3 \) and \( y = 4 \). Since \( p_3 \geq 0 \), we again move diagonally, meaning the next point will be \( (x+1, y-1) = (4, 3) \). However, since \( x = 4 \) and \( y = 3 \), we stop the algorithm here as the condition \( x \geq y \) is satisfied (we have completed one-eighth of the circle). </p>
-    </li>
-</ul>
+                    <li><strong>Step 4:</strong> Now we have \( p_3 = 3 \), and the current values of \( x = 3 \) and \(
+                        y = 4 \). Since \( p_3 \geq 0 \), we again move diagonally, meaning the next point will be \(
+                        (x+1, y-1) = (4, 3) \). However, since \( x = 4 \) and \( y = 3 \), we stop the algorithm here
+                        as the condition \( x \geq y \) is satisfied (we have completed one-eighth of the circle). </p>
+                    </li>
+                </ul>
 
 
                 <h3>Final Points</h3>
@@ -757,9 +797,9 @@
                     Video Lecture &neArr;</a></li>
         </ul>
     </div>
-    <script src="../../../../public/main.js"></script>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="module" src="../../../../public/main.js"></script>
 </body>
 
 </html>
