@@ -1,8 +1,13 @@
 // modules/ui/GitManager.js
 
 export class GitManager {
-  constructor(dataPath = '/git-data') {
-    this.dataPath = dataPath;
+  constructor(dataPath) {
+    if (!dataPath) {
+      const base = window.location.pathname.replace(/\/[^\/]+$/, "");
+      this.dataPath = `${base}/git-data`;
+    } else {
+      this.dataPath = dataPath;
+    }
   }
 
   init() {
