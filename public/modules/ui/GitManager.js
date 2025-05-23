@@ -2,8 +2,10 @@
 
 export class GitManager {
   constructor(dataPath) {
-    const basePath = window.location.pathname.split('/public')[0].replace(/\/+$/, '');
-    this.dataPath = dataPath || `${basePath}/git-data`;
+    // Normalize base path and avoid double slashes in URLs
+    const basePath = window.location.pathname.replace(/\/+$/, ''); // removes trailing slash if present
+    const cleanPath = (dataPath || `${basePath}/git-data`).replace(/\/{2,}/g, '/'); // remove accidental double slashes
+    this.dataPath = cleanPath;
   }
 
   init() {
