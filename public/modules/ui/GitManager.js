@@ -4,7 +4,8 @@ export class GitManager {
   constructor(dataPath) {
     // Normalize base path and avoid double slashes in URLs
     const basePath = window.location.pathname.replace(/\/+$/, ''); // removes trailing slash if present
-    const cleanPath = (dataPath || `${basePath}/git-data`).replace(/\/{2,}/g, '/'); // remove accidental double slashes
+    // Fix: Include 'public' in the path since files are in public/git-data/
+    const cleanPath = (dataPath || `${basePath}/public/git-data`).replace(/\/{2,}/g, '/'); // remove accidental double slashes
     this.dataPath = cleanPath;
   }
 
