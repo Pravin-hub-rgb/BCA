@@ -105,7 +105,7 @@ export class GitManager {
     const message = commit.commit?.message || '';
     const author = commit.author?.login || '';
     const committer = commit.committer?.login || '';
-    
+
     // Patterns for automated commits
     const automatedPatterns = [
       '🤖 Update commit data',
@@ -119,11 +119,11 @@ export class GitManager {
       'docs: update stats',
       'Update git data'
     ];
-    
-    const isAutomatedMessage = automatedPatterns.some(pattern => 
+
+    const isAutomatedMessage = automatedPatterns.some(pattern =>
       message.toLowerCase().includes(pattern.toLowerCase())
     );
-    
+
     const isAutomatedActor = [
       'github-actions[bot]',
       'dependabot[bot]',
@@ -135,7 +135,7 @@ export class GitManager {
       'renovate[bot]',
       'actions-user'
     ].includes(committer);
-    
+
     return isAutomatedMessage || isAutomatedActor;
   }
 
@@ -157,17 +157,17 @@ export class GitManager {
       author: c.author?.login,
       automated: this.isAutomatedCommit(c)
     })));
-    
+
     // Filter out automated commits to get development commits
     const developmentCommits = commits.filter(commit => !this.isAutomatedCommit(commit));
-    
+
     console.log('🔍 Development commits found:', developmentCommits.length);
     console.log('🔍 Development commit messages:', developmentCommits.map(c => c.commit?.message?.substring(0, 50) + '...'));
-    
+
     // Decide what to display based on what we have
     let commitsToShow = [];
     let displayNote = '';
-    
+
     if (developmentCommits.length >= 3) {
       // We have enough development commits - show only development ones
       commitsToShow = developmentCommits.slice(0, 5);
@@ -195,31 +195,31 @@ export class GitManager {
 
     // Clear and populate the element
     commitMessagesElement.innerHTML = displayNote;
-    
+
     commitsToShow.forEach((commit, index) => {
       try {
         const commitDiv = document.createElement("div");
         commitDiv.className = "commit-entry";
-        
+
         // Add visual indicator for automated commits
         const isAutomated = this.isAutomatedCommit(commit);
         if (isAutomated) {
           commitDiv.classList.add('automated-commit');
         }
-        
+
         const hash = (commit.sha || '').substring(0, 7);
         const message = commit.commit?.message || 'No message';
         const authorDate = commit.commit?.author?.date || commit.commit?.committer?.date;
 
         // Format date
         const date = new Date(authorDate);
-        const formattedDate = !isNaN(date.getTime()) ? 
-          date.toLocaleDateString() + " " + date.toLocaleTimeString() : 
+        const formattedDate = !isNaN(date.getTime()) ?
+          date.toLocaleDateString() + " " + date.toLocaleTimeString() :
           'Unknown date';
 
         // Clean up the message for display
         let displayMessage = message.split('\n')[0]; // Take first line only
-        
+
         if (isAutomated) {
           // Clean up automated commit messages
           displayMessage = displayMessage.replace(/^🤖\s*/, '').replace(/\s*\[skip ci\].*$/, '');
@@ -234,7 +234,7 @@ export class GitManager {
         }
 
         const automatedIndicator = isAutomated ? '<span class="automated-indicator">🤖</span>' : '';
-        
+
         commitDiv.innerHTML = `
           <span class="commit-hash">${hash}</span>
           <span class="commit-date">${formattedDate}</span>
@@ -247,40 +247,7 @@ export class GitManager {
         console.error(`❌ Error processing commit ${index}:`, error);
       }
     });
-    
-    // Add styling for automated commits if not already present
-    if (!document.querySelector('#automated-commit-styles')) {
-      const style = document.createElement('style');
-      style.id = 'automated-commit-styles';
-      style.textContent = `
-        .commit-entry.automated-commit {
-          opacity: 0.7;
-        }
-        .automated-indicator {
-          font-size: 0.8em;
-          margin-right: 4px;
-          color: #666;
-        }
-        .commit-entry {
-          margin-bottom: 4px;
-          padding: 2px 0;
-        }
-        .commit-hash {
-          font-family: monospace;
-          color: #0366d6;
-          margin-right: 8px;
-        }
-        .commit-date {
-          color: #666;
-          font-size: 0.9em;
-          margin-right: 8px;
-        }
-        .commit-message {
-          color: #333;
-        }
-      `;
-      document.head.appendChild(style);
-    }
+
   }
 
   formatTimeAgo(timeDiffMs) {
