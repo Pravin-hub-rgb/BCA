@@ -112,8 +112,22 @@ export class GitManager {
       return;
     }
 
+    // Filter out automated commits from GitHub Actions
+    const filteredCommits = commits.filter(commit => {
+      const message = commit.commit?.message || '';
+      const isAutomated = message.includes('🤖 Update commit data') || 
+                         message.includes('[skip ci]') ||
+                         commit.author?.login === 'github-actions[bot]';
+      return !isAutomated;
+    }).slice(0, 5); // Take only 5 real commits
+
+    if (filteredCommits.length === 0) {
+      commitMessagesElement.innerHTML = '<div style="color: #888; font-style: italic;">No recent development commits found</div>';
+      return;
+    }
+
     commitMessagesElement.innerHTML = '';
-    commits.forEach((commit, index) => {
+    filteredCommits.forEach((commit, index) => {
       try {
         const commitDiv = document.createElement("div");
         commitDiv.className = "commit-entry";
