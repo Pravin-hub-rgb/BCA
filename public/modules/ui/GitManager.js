@@ -134,20 +134,15 @@ export class GitManager {
         const hash = (commit.sha || '').substring(0, 7);
         const message = commit.commit?.message || 'No message';
         const authorDate = commit.commit?.author?.date || commit.commit?.committer?.date;
-        let dateString = 'Unknown date';
 
-        if (authorDate) {
-          const date = new Date(authorDate);
-          if (!isNaN(date.getTime())) dateString = date.toLocaleString();
-        }
+        // Format date like the original code
+        const date = new Date(authorDate);
+        const formattedDate = !isNaN(date.getTime()) ? 
+          date.toLocaleDateString() + " " + date.toLocaleTimeString() : 
+          'Unknown date';
 
-        const truncatedMessage = message.length > 80 ? message.substring(0, 77) + '...' : message;
-
-        commitDiv.innerHTML = `
-          <span class="commit-hash" title="${hash}">${hash}</span>
-          <span class="commit-date" title="${dateString}">${dateString}</span>
-          <span class="commit-message" title="${message}">${truncatedMessage}</span>
-        `;
+        // Don't truncate the message like the original
+        commitDiv.innerHTML = `<span class="commit-hash">${hash}</span><span class="commit-date">${formattedDate}</span><span class="commit-message">${message}</span>`;
 
         commitMessagesElement.appendChild(commitDiv);
       } catch (error) {
