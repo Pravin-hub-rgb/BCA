@@ -4,7 +4,8 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 document.addEventListener("DOMContentLoaded", function () {
   // Update commit info
-  updateCommitInfo();
+  // updateCommitInfo();
+  setTimeout(updateCommitInfo, 1000);
   setInterval(updateCommitInfo, 3600000); // Update every hour
 
   // Load and apply the saved theme
@@ -252,120 +253,144 @@ function loadTheme() {
   setTheme(savedTheme); // Apply the saved or default theme
 }
 
+// Debug version with detailed logging
 function updateCommitInfo() {
-  // Check if we have recent cached data
-  const now = Date.now();
-  if (commitDataCache && (now - lastFetchTime) < CACHE_DURATION) {
-    console.log('Using cached commit data');
-    displayCachedData();
-    return;
+  console.log('🔍 Starting commit info update...');
+  console.log('Current URL:', window.location.href);
+  console.log('Current origin:', window.location.origin);
+  console.log('Current pathname:', window.location.pathname);
+  
+  // Determine the correct base path
+  let basePath = '';
+  if (window.location.pathname.includes('/BCA/')) {
+    basePath = '/BCA';
   }
-
-  console.log('Fetching fresh commit data...');
   
-  // Use absolute path for better reliability
-  const dataPath = '/git-data';
-  const baseUrl = window.location.origin;
+  const dataPath = `${basePath}/git-data`;
+  console.log('Using data path:', dataPath);
   
-  // Add timestamp to prevent caching issues
+  // Add timestamp to prevent caching
   const timestamp = new Date().getTime();
   
-  // Set loading states immediately
+  // Test URLs
+  const urls = {
+    commits: `${dataPath}/recent-commits.json?t=${timestamp}`,
+    count: `${dataPath}/total-commits.txt?t=${timestamp}`,
+    timestamp: `${dataPath}/last-updated.txt?t=${timestamp}`
+  };
+  
+  console.log('URLs to fetch:', urls);
+  
+  // Set loading states
   setLoadingStates();
   
-  // Use Promise.allSettled to handle all requests independently
-  Promise.allSettled([
-    fetchWithTimeout(`${baseUrl}${dataPath}/recent-commits.json?t=${timestamp}`, 10000),
-    fetchWithTimeout(`${baseUrl}${dataPath}/total-commits.txt?t=${timestamp}`, 10000),
-    fetchWithTimeout(`${baseUrl}${dataPath}/last-updated.txt?t=${timestamp}`, 10000)
-  ]).then(results => {
-    const [commitsResult, countResult, timestampResult] = results;
-    
-    // Handle commits
-    if (commitsResult.status === 'fulfilled') {
-      commitsResult.value.json()
-        .then(data => {
-          if (Array.isArray(data) && data.length > 0) {
-            updateCommitMessages(data);
-            if (!commitDataCache) commitDataCache = {};
-            commitDataCache.commits = data;
-          } else {
-            throw new Error('Invalid commits data structure');
-          }
-        })
-        .catch(error => {
-          console.error('Error parsing commits JSON:', error);
-          handleCommitMessagesError();
-        });
-    } else {
-      console.error('Failed to fetch commits:', commitsResult.reason);
-      handleCommitMessagesError();
-    }
-    
-    // Handle commit count
-    if (countResult.status === 'fulfilled') {
-      countResult.value.text()
-        .then(count => {
-          const numCount = parseInt(count.trim());
-          if (!isNaN(numCount) && numCount > 0) {
-            document.getElementById("terminal-commit-count").textContent = numCount.toLocaleString();
-            if (!commitDataCache) commitDataCache = {};
-            commitDataCache.count = numCount;
-          } else {
-            throw new Error('Invalid commit count');
-          }
-        })
-        .catch(error => {
-          console.error('Error parsing commit count:', error);
-          document.getElementById("terminal-commit-count").textContent = "Error";
-        });
-    } else {
-      console.error('Failed to fetch commit count:', countResult.reason);
-      document.getElementById("terminal-commit-count").textContent = "Error";
-    }
-    
-    // Handle timestamp
-    if (timestampResult.status === 'fulfilled') {
-      timestampResult.value.text()
-        .then(timestamp => {
-          const cleanTimestamp = timestamp.trim();
-          const date = new Date(cleanTimestamp);
-          if (!isNaN(date.getTime())) {
-            const timeAgo = formatTimeAgo(new Date() - date);
-            document.getElementById("terminal-time-ago").textContent = timeAgo;
-            if (!commitDataCache) commitDataCache = {};
-            commitDataCache.timestamp = cleanTimestamp;
-          } else {
-            throw new Error('Invalid timestamp format');
-          }
-        })
-        .catch(error => {
-          console.error('Error parsing timestamp:', error);
-          document.getElementById("terminal-time-ago").textContent = "Error";
-        });
-    } else {
-      console.error('Failed to fetch timestamp:', timestampResult.reason);
-      document.getElementById("terminal-time-ago").textContent = "Error";
-    }
-    
-    // Update cache timestamp
-    lastFetchTime = now;
-  });
+  // Test each URL individually with detailed logging
+  testAndFetchCommits(urls.commits);
+  testAndFetchCount(urls.count);
+  testAndFetchTimestamp(urls.timestamp);
 }
 
-// Helper function for fetch with timeout
-function fetchWithTimeout(url, timeout = 8000) {
-  return Promise.race([
-    fetch(url, {
+async function testAndFetchCommits(url) {
+  console.log('🔍 Testing commits URL:', url);
+  try {
+    const response = await fetch(url, {
       headers: {
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache'
       }
-    }),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error(`Timeout after ${timeout}ms`)), timeout)
-    )
-  ]);
+    });
+    
+    console.log('Commits response status:', response.status);
+    console.log('Commits response headers:', [...response.headers.entries()]);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const text = await response.text();
+    console.log('Commits raw response (first 200 chars):', text.substring(0, 200));
+    
+    // Try to parse as JSON
+    const data = JSON.parse(text);
+    console.log('Commits parsed successfully:', data.length, 'commits');
+    
+    updateCommitMessages(data);
+    
+  } catch (error) {
+    console.error('❌ Commits fetch error:', error);
+    handleCommitMessagesError();
+  }
+}
+
+async function testAndFetchCount(url) {
+  console.log('🔍 Testing count URL:', url);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
+    
+    console.log('Count response status:', response.status);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const text = await response.text();
+    console.log('Count raw response:', `"${text}"`);
+    
+    const count = parseInt(text.trim());
+    console.log('Count parsed:', count);
+    
+    if (!isNaN(count) && count > 0) {
+      document.getElementById("terminal-commit-count").textContent = count.toLocaleString();
+      console.log('✅ Count updated successfully');
+    } else {
+      throw new Error(`Invalid count: "${text}"`);
+    }
+    
+  } catch (error) {
+    console.error('❌ Count fetch error:', error);
+    document.getElementById("terminal-commit-count").textContent = "Error";
+  }
+}
+
+async function testAndFetchTimestamp(url) {
+  console.log('🔍 Testing timestamp URL:', url);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    });
+    
+    console.log('Timestamp response status:', response.status);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const text = await response.text();
+    console.log('Timestamp raw response:', `"${text}"`);
+    
+    const date = new Date(text.trim());
+    console.log('Timestamp parsed:', date);
+    
+    if (!isNaN(date.getTime())) {
+      const timeAgo = formatTimeAgo(new Date() - date);
+      document.getElementById("terminal-time-ago").textContent = timeAgo;
+      console.log('✅ Timestamp updated successfully:', timeAgo);
+    } else {
+      throw new Error(`Invalid timestamp: "${text}"`);
+    }
+    
+  } catch (error) {
+    console.error('❌ Timestamp fetch error:', error);
+    document.getElementById("terminal-time-ago").textContent = "Error";
+  }
 }
 
 // Set loading states
@@ -374,29 +399,9 @@ function setLoadingStates() {
   const timeAgo = document.getElementById("terminal-time-ago");
   const commitMessages = document.getElementById("commit-messages");
   
-  if (commitCount && commitCount.textContent === "Loading...") {
-    commitCount.textContent = "Loading...";
-  }
-  if (timeAgo && timeAgo.textContent === "Calculating...") {
-    timeAgo.textContent = "Calculating...";
-  }
-  if (commitMessages && commitMessages.textContent === "Loading recent commits...") {
-    commitMessages.textContent = "Loading recent commits...";
-  }
-}
-
-// Display cached data
-function displayCachedData() {
-  if (commitDataCache.commits) {
-    updateCommitMessages(commitDataCache.commits);
-  }
-  if (commitDataCache.count) {
-    document.getElementById("terminal-commit-count").textContent = commitDataCache.count.toLocaleString();
-  }
-  if (commitDataCache.timestamp) {
-    const timeAgo = formatTimeAgo(new Date() - new Date(commitDataCache.timestamp));
-    document.getElementById("terminal-time-ago").textContent = timeAgo;
-  }
+  if (commitCount) commitCount.textContent = "Loading...";
+  if (timeAgo) timeAgo.textContent = "Calculating...";
+  if (commitMessages) commitMessages.textContent = "Loading recent commits...";
 }
 
 // Handle commit messages error
@@ -417,7 +422,7 @@ function handleCommitMessagesError() {
 function updateCommitMessages(commits) {
   const commitMessagesElement = document.getElementById("commit-messages");
   if (!commitMessagesElement) {
-    console.error('commit-messages element not found');
+    console.error('❌ commit-messages element not found');
     return;
   }
   
@@ -426,7 +431,6 @@ function updateCommitMessages(commits) {
     return;
   }
   
-  // Clear loading message
   commitMessagesElement.innerHTML = '';
   
   commits.forEach((commit, index) => {
@@ -434,7 +438,6 @@ function updateCommitMessages(commits) {
       const commitDiv = document.createElement("div");
       commitDiv.className = "commit-entry";
       
-      // Safely extract data with fallbacks
       const hash = (commit.sha || '').substring(0, 7) || 'unknown';
       const message = commit.commit?.message || 'No message';
       const authorDate = commit.commit?.author?.date || commit.commit?.committer?.date;
@@ -451,7 +454,6 @@ function updateCommitMessages(commits) {
         }
       }
       
-      // Truncate long commit messages
       const truncatedMessage = message.length > 80 ? 
         message.substring(0, 77) + '...' : message;
       
@@ -468,17 +470,14 @@ function updateCommitMessages(commits) {
   });
 }
 
-// Improved formatTimeAgo function with better error handling
 function formatTimeAgo(timeDiffMs) {
   try {
-    // Handle invalid input
     if (isNaN(timeDiffMs) || timeDiffMs < 0) {
       return "unknown";
     }
     
     const timeDiffSeconds = Math.floor(timeDiffMs / 1000);
     
-    // If less than a minute, show "just now"
     if (timeDiffSeconds < 60) {
       return "just now";
     }
@@ -489,13 +488,10 @@ function formatTimeAgo(timeDiffMs) {
 
     const years = Math.floor(timeDiffDays / 365);
     const remainingDaysAfterYears = timeDiffDays % 365;
-
     const months = Math.floor(remainingDaysAfterYears / 30);
     const remainingDaysAfterMonths = remainingDaysAfterYears % 30;
-
     const weeks = Math.floor(remainingDaysAfterMonths / 7);
     const remainingDays = remainingDaysAfterMonths % 7;
-
     const remainingHours = timeDiffHours % 24;
     const remainingMinutes = timeDiffMinutes % 60;
 
