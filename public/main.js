@@ -257,22 +257,16 @@ function loadTheme() {
 function updateCommitInfo() {
   console.log('🔍 Starting commit info update...');
   console.log('Current URL:', window.location.href);
-  console.log('Current origin:', window.location.origin);
   console.log('Current pathname:', window.location.pathname);
   
-  // Determine the correct base path
-  let basePath = '';
-  if (window.location.pathname.includes('/BCA/')) {
-    basePath = '/BCA';
-  }
-  
-  const dataPath = `${basePath}/git-data`;
+  // For GitHub Pages with repo name, we need the full path
+  const dataPath = '/BCA/git-data'; // Fixed path for your GitHub Pages setup
   console.log('Using data path:', dataPath);
   
   // Add timestamp to prevent caching
   const timestamp = new Date().getTime();
   
-  // Test URLs
+  // Test URLs - these should work for your GitHub Pages setup
   const urls = {
     commits: `${dataPath}/recent-commits.json?t=${timestamp}`,
     count: `${dataPath}/total-commits.txt?t=${timestamp}`,
@@ -301,7 +295,6 @@ async function testAndFetchCommits(url) {
     });
     
     console.log('Commits response status:', response.status);
-    console.log('Commits response headers:', [...response.headers.entries()]);
     
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
