@@ -1,34 +1,49 @@
-name: Update Commit Data
+# .github/workflows/update-github-data.yml
+name: Update Git Data
+
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:  # Allow manual triggering
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [ main, master ]  # Also run on pushes to capture new commits quickly
 
 jobs:
-  update-commits:
+  update-data:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0  # Fetch full history for accurate commit count
-      
+
     - name: Create data directory
       run: |
         mkdir -p public/git-data
-        
-    - name: Get commit data with error handling
+        echo "📁 Created data directory"
+
+    - name: Get repository data
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         set -e  # Exit on any error
         
-        echo "Fetching recent commits..."
-        # Get last 5 commits with retry logic
+        echo "🔍 Fetching repository data..."
+        
+        # Get total commit count using git (more accurate)
+        echo "📊 Getting total commit count..."
+        TOTAL_COMMITS=$(git rev-list --all --count)
+        echo "$TOTAL_COMMITS" > public/git-data/total-commits.txt
+        echo "✅ Total commits: $TOTAL_COMMITS"
+        
+        # Get recent commits (fetch 25 to account for automated commits)
+        echo "📝 Fetching recent commits (25 commits)..."
         for i in {1..3}; do
-          if curl -s -f -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/Pravin-hub-rgb/BCA/commits?per_page=5" \
+          if curl -s -f \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/commits?per_page=25" \
             > public/git-data/recent-commits.json; then
             echo "✅ Recent commits fetched successfully"
             break
@@ -38,33 +53,28 @@ jobs:
           fi
         done
         
-        # Validate JSON format
+        # Verify the commits were fetched and validate JSON
         if ! jq empty public/git-data/recent-commits.json 2>/dev/null; then
           echo "❌ Invalid JSON in recent-commits.json"
           exit 1
         fi
         
-        echo "Getting total commit count..."
-        # Use git directly for more reliable commit count
-        COMMIT_COUNT=$(git rev-list --count HEAD)
-        echo "Total commits found: $COMMIT_COUNT"
-        echo $COMMIT_COUNT > public/git-data/total-commits.txt
+        COMMIT_COUNT=$(jq length public/git-data/recent-commits.json)
+        echo "✅ Fetched $COMMIT_COUNT commits"
         
-        echo "Getting last updated timestamp..."
-        # Get the most recent commit date
+        # Get last updated timestamp (most recent commit date)
+        echo "🕐 Getting last updated timestamp..."
         LAST_COMMIT_DATE=$(git log -1 --format="%aI")
-        echo "Last commit date: $LAST_COMMIT_DATE"
-        echo $LAST_COMMIT_DATE > public/git-data/last-updated.txt
+        echo "$LAST_COMMIT_DATE" > public/git-data/last-updated.txt
+        echo "✅ Last commit date: $LAST_COMMIT_DATE"
         
         # Add a generation timestamp for debugging
         date -u +"%Y-%m-%dT%H:%M:%SZ" > public/git-data/generated-at.txt
-        
-        echo "✅ All data files generated successfully"
-        ls -la public/git-data/
+        echo "✅ Generated at: $(cat public/git-data/generated-at.txt)"
 
-    - name: Validate generated files
+    - name: Validate and debug generated files
       run: |
-        echo "Validating generated files..."
+        echo "🔍 Validating generated files..."
         
         # Check if all files exist and are not empty
         for file in recent-commits.json total-commits.txt last-updated.txt; do
@@ -76,38 +86,68 @@ jobs:
           fi
         done
         
-        # Show file contents for debugging
-        echo "=== File Contents ==="
-        echo "Recent commits (first 200 chars):"
-        head -c 200 public/git-data/recent-commits.json
-        echo -e "\n\nTotal commits:"
-        cat public/git-data/total-commits.txt
-        echo -e "\nLast updated:"
-        cat public/git-data/last-updated.txt
-        echo -e "\nGenerated at:"
-        cat public/git-data/generated-at.txt
+        echo ""
+        echo "=== DEBUGGING INFO ==="
+        echo "📁 Files in git-data directory:"
+        ls -la public/git-data/
+        
+        echo ""
+        echo "📊 Total commits: $(cat public/git-data/total-commits.txt)"
+        echo "🕐 Last updated: $(cat public/git-data/last-updated.txt)"
+        echo "⚡ Generated at: $(cat public/git-data/generated-at.txt)"
+        
+        echo ""
+        echo "📝 Recent commits summary (first 10):"
+        jq -r '.[] | "\(.commit.message | split("\n")[0]) - \(.author.login // "unknown")"' \
+          public/git-data/recent-commits.json | head -10
+        
+        echo ""
+        echo "🔍 Development vs Automated commit analysis:"
+        DEV_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i") | not) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
+        AUTO_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i")) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
+        echo "   Development commits found: $DEV_COMMITS"
+        echo "   Automated commits found: $AUTO_COMMITS"
+        
+        if [ "$DEV_COMMITS" -gt 0 ]; then
+          echo ""
+          echo "🎯 Development commits:"
+          jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i") | not) | "   - \(.commit.message | split("\n")[0])"' \
+            public/git-data/recent-commits.json | head -5
+        fi
 
     - name: Commit and push changes
       run: |
-        git config --global user.name "GitHub Actions Bot"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "GitHub Actions Bot"
         
-        # Check if there are changes
+        # Check if there are changes to commit
         if git diff --quiet public/git-data/; then
-          echo "No changes detected in git data files"
-        else
-          echo "Changes detected, committing..."
-          git add public/git-data/
-          git commit -m "🤖 Update commit data - $(date -u +'%Y-%m-%d %H:%M UTC') [skip ci]"
-          
-          # Push with retry logic
-          for i in {1..3}; do
-            if git push; then
-              echo "✅ Changes pushed successfully"
-              break
-            else
-              echo "❌ Push attempt $i failed, retrying..."
-              sleep 5
-            fi
-          done
+          echo "📝 No changes detected in git data files"
+          exit 0
         fi
+        
+        echo "📝 Changes detected, committing..."
+        git add public/git-data/
+        git commit -m "🤖 Update commit data - $(date -u +'%Y-%m-%d %H:%M UTC') [skip ci]"
+        
+        # Push with retry logic
+        for i in {1..3}; do
+          if git push; then
+            echo "✅ Changes pushed successfully"
+            break
+          else
+            echo "❌ Push attempt $i failed, retrying..."
+            sleep 5
+          fi
+        done
+
+    - name: Final summary
+      run: |
+        echo ""
+        echo "🎉 === WORKFLOW COMPLETED SUCCESSFULLY ==="
+        echo "📊 Total commits: $(cat public/git-data/total-commits.txt)"
+        echo "🕐 Last updated: $(cat public/git-data/last-updated.txt)"
+        echo "📝 Recent commits fetched: $(jq length public/git-data/recent-commits.json)"
+        echo "⚡ Data generated at: $(cat public/git-data/generated-at.txt)"
+        echo ""
+        echo "🔗 Your website should now show the updated commit information!"
