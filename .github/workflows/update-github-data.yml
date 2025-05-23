@@ -1,0 +1,45 @@
+name: Update Commit Data
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  update-commits:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Fetch commit data
+      run: |
+        # Create data directory
+        mkdir -p public/data
+        
+        # Get commit data
+        curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/Pravin-hub-rgb/BCA/commits?per_page=5" \
+          | jq 'map({sha: .sha, date: .commit.author.date, message: .commit.message})' \
+          > public/data/recent-commits.json
+
+        # Get total commit count (this might take a few seconds)
+        curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -I "https://api.github.com/repos/Pravin-hub-rgb/BCA/commits?per_page=1" \
+          | grep -i '^link:' | sed -e 's/.*page=\([0-9]*\)>; rel="last".*/\1/' \
+          | tee public/data/total-commits.txt
+
+        # Get latest commit timestamp
+        curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/Pravin-hub-rgb/BCA/commits?per_page=1" \
+          | jq -r '.[0].commit.author.date' \
+          > public/data/last-updated.txt
+
+    - name: Commit changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add public/data/
+        git commit -m "Update commit data" || echo "No changes to commit"
+        git push

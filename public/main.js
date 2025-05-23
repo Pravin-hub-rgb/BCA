@@ -250,110 +250,44 @@ function loadTheme() {
 
 // Function to update commit info
 function updateCommitInfo() {
-  var username = "Pravin-hub-rgb";
-  var repo = "BCA";
-  var perPage = 100; // Number of commits to fetch per page
-  var currentPage = 1; // Current page number
-  var commitCount = 0; // Initialize the commit count
+  // Load pre-generated data
+  fetch('/data/recent-commits.json')
+    .then(response => response.json())
+    .then(data => updateCommitMessages(data));
 
-  // Fetch all commits using pagination
-  fetchCommits();
+  fetch('/data/total-commits.txt')
+    .then(response => response.text())
+    .then(count => {
+      document.getElementById("terminal-commit-count").textContent = count;
+    });
 
-  function fetchCommits() {
-      fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=${perPage}&page=${currentPage}`)
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              return response.json();
-          })
-          .then(data => {
-              // Add the number of commits in the current page to the commit count
-              commitCount += data.length;
+  fetch('/data/last-updated.txt')
+    .then(response => response.text())
+    .then(timestamp => {
+      const timeAgo = formatTimeAgo(new Date() - new Date(timestamp));
+      document.getElementById("terminal-time-ago").textContent = timeAgo;
+    });
 
-              // If there are more pages, fetch the next page
-              if (data.length === perPage) {
-                  currentPage++;
-                  fetchCommits();
-              } else {
-                  // All commits have been fetched, update the HTML content
-                  const terminalCommitCountElement = document.getElementById("terminal-commit-count");
-                  if (terminalCommitCountElement) {
-                      terminalCommitCountElement.textContent = commitCount;
-                  }
-              }
-          })
-          .catch(error => {
-              console.error("Error fetching commits:", error);
-          });
+  // Update commit messages display
+  function updateCommitMessages(commits) {
+    const commitMessagesElement = document.getElementById("commit-messages");
+    commitMessagesElement.innerHTML = '';
+    
+    commits.forEach(commit => {
+      const commitDiv = document.createElement("div");
+      commitDiv.className = "commit-entry";
+      
+      const hash = commit.sha.substring(0, 7);
+      const date = new Date(commit.date).toLocaleString();
+      
+      commitDiv.innerHTML = `
+        <span class="commit-hash">${hash}</span>
+        <span class="commit-date">${date}</span>
+        <span class="commit-message">${commit.message}</span>
+      `;
+      commitMessagesElement.appendChild(commitDiv);
+    });
   }
-
-  fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-      })
-      .then(data => {
-          const latestCommitTime = new Date(data[0].commit.author.date);
-          const currentTime = new Date();
-
-          // Calculate the time difference in milliseconds
-          const timeDiffMilliseconds = currentTime - latestCommitTime;
-
-          // Format the time difference correctly
-          let timeAgoText = formatTimeAgo(timeDiffMilliseconds);
-
-          // Update the HTML content
-          const terminalTimeAgoElement = document.getElementById("terminal-time-ago");
-          if (terminalTimeAgoElement) {
-              terminalTimeAgoElement.textContent = timeAgoText;
-          }
-      })
-      .catch(error => {
-          console.error("Error fetching latest commit:", error);
-      });
-
-  // Fetch the last 5 commit messages with enhanced formatting
-  const commitMessagesElement = document.getElementById("commit-messages");
-  if (commitMessagesElement) {
-      commitMessagesElement.textContent = "Loading recent commits...";
-  }
-
-  fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=5`)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-      })
-      .then(data => {
-          commitMessagesElement.textContent = "";
-
-          data.forEach(commit => {
-              const commitDiv = document.createElement("div");
-              commitDiv.className = "commit-entry";
-
-              // Get short commit hash (7 characters)
-              const hash = commit.sha.substring(0, 7);
-
-              // Format date
-              const date = new Date(commit.commit.author.date);
-              const formattedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString();
-
-              // Create commit entry with hash, date and message
-              commitDiv.innerHTML = `<span class="commit-hash">${hash}</span><span class="commit-date">${formattedDate}</span><span class="commit-message">${commit.commit.message}</span>`;
-
-              commitMessagesElement.appendChild(commitDiv);
-          });
-      })
-      .catch(error => {
-          console.error("Error fetching commit messages:", error);
-          if (commitMessagesElement) {
-              commitMessagesElement.textContent = "Failed to load commits.";
-          }
-      });
 }
 // Function to format time difference properly
 function formatTimeAgo(timeDiffMs) {
