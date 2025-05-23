@@ -250,45 +250,69 @@ function loadTheme() {
 
 // Function to update commit info
 function updateCommitInfo() {
+  // Use relative paths since files are in same public directory
+  const dataPath = '/git-data'; // Changed from /data to /git-data
+  
   // Load pre-generated data
-  fetch('/data/recent-commits.json')
-    .then(response => response.json())
-    .then(data => updateCommitMessages(data));
-
-  fetch('/data/total-commits.txt')
-    .then(response => response.text())
-    .then(count => {
-      document.getElementById("terminal-commit-count").textContent = count;
+  fetch(`${dataPath}/recent-commits.json`)
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load commits');
+      return response.json();
+    })
+    .then(data => updateCommitMessages(data))
+    .catch(error => {
+      console.error('Error loading commits:', error);
+      document.getElementById("commit-messages").textContent = "Failed to load commits";
     });
 
-  fetch('/data/last-updated.txt')
-    .then(response => response.text())
+  fetch(`${dataPath}/total-commits.txt`)
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load commit count');
+      return response.text();
+    })
+    .then(count => {
+      document.getElementById("terminal-commit-count").textContent = count;
+    })
+    .catch(error => {
+      console.error('Error loading commit count:', error);
+      document.getElementById("terminal-commit-count").textContent = "Error";
+    });
+
+  fetch(`${dataPath}/last-updated.txt`)
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load timestamp');
+      return response.text();
+    })
     .then(timestamp => {
       const timeAgo = formatTimeAgo(new Date() - new Date(timestamp));
       document.getElementById("terminal-time-ago").textContent = timeAgo;
+    })
+    .catch(error => {
+      console.error('Error loading timestamp:', error);
+      document.getElementById("terminal-time-ago").textContent = "Error";
     });
 
-  // Update commit messages display
   function updateCommitMessages(commits) {
     const commitMessagesElement = document.getElementById("commit-messages");
-    commitMessagesElement.innerHTML = '';
+    if (!commitMessagesElement) return;
+    
+    commitMessagesElement.innerHTML = commits.length ? '' : 'No commits found';
     
     commits.forEach(commit => {
       const commitDiv = document.createElement("div");
       commitDiv.className = "commit-entry";
-      
       const hash = commit.sha.substring(0, 7);
-      const date = new Date(commit.date).toLocaleString();
-      
+      const date = new Date(commit.commit.author.date).toLocaleString();
       commitDiv.innerHTML = `
         <span class="commit-hash">${hash}</span>
         <span class="commit-date">${date}</span>
-        <span class="commit-message">${commit.message}</span>
+        <span class="commit-message">${commit.commit.message}</span>
       `;
       commitMessagesElement.appendChild(commitDiv);
     });
   }
 }
+
 // Function to format time difference properly
 function formatTimeAgo(timeDiffMs) {
   const timeDiffSeconds = Math.floor(timeDiffMs / 1000);
