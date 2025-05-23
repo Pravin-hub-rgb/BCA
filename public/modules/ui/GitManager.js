@@ -112,18 +112,30 @@ export class GitManager {
       return;
     }
 
+    // Debug: Log all commit messages first
+    console.log('🔍 All commits:', commits.map(c => c.commit?.message));
+    
     // Filter out automated commits from GitHub Actions
     const filteredCommits = commits.filter(commit => {
       const message = commit.commit?.message || '';
+      const author = commit.author?.login || '';
+      const committer = commit.committer?.login || '';
+      
       const isAutomated = message.includes('🤖 Update commit data') || 
                          message.includes('[skip ci]') ||
-                         commit.author?.login === 'github-actions[bot]';
+                         author === 'github-actions[bot]' ||
+                         committer === 'github-actions[bot]';
+      
+      console.log(`🔍 Commit "${message.substring(0, 50)}..." - Automated: ${isAutomated}`);
       return !isAutomated;
     }).slice(0, 5); // Take only 5 real commits
 
+    console.log('🔍 Filtered commits count:', filteredCommits.length);
+
     if (filteredCommits.length === 0) {
-      commitMessagesElement.innerHTML = '<div style="color: #888; font-style: italic;">No recent development commits found</div>';
-      return;
+      // If no real commits found, show the most recent 5 anyway but with a note
+      commitMessagesElement.innerHTML = '<div style="color: #888; font-style: italic; margin-bottom: 10px;">Recent commits (including automated updates):</div>';
+      filteredCommits.push(...commits.slice(0, 5));
     }
 
     commitMessagesElement.innerHTML = '';
