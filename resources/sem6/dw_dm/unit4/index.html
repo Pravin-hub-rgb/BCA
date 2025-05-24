@@ -58,11 +58,314 @@ Data Mining Techniques
             </code>
         </pre>
         <ul>
-            <li>Once you understand what data mining is, the next step is learning how to actually discover patterns in data — and that’s where Data Mining Techniques come in. These techniques are like different tools in your toolbox, each made for digging out a specific kind of insight.</li>
-            <li>We’ll start with Association Rules, which help uncover interesting relationships between items — like figuring out that people who buy bread often buy butter too. You’ll learn how these rules are mined from transactional databases (like shopping records) and relational databases, and how to measure the strength of these relationships using correlation analysis.</li>
-            <li>Next, we move on to Classification and Prediction, where you’ll see how data can be used to predict outcomes — for example, classifying emails as spam or not spam. Here, we focus on a popular method called decision tree induction, which builds flowchart-like models for decision making.</li>
-            <li>Finally, you’ll dive into Clustering Techniques, where the goal is to group similar data points together. You’ll explore the basics of clustering, and two main approaches: the partition method (like k-means clustering) and the hierarchical method (which builds nested clusters).</li>
+            <li>Once you understand what data mining is, the next step is learning how to actually discover patterns in
+                data — and that’s where Data Mining Techniques come in. These techniques are like different tools in
+                your toolbox, each made for digging out a specific kind of insight.</li>
+            <li>We’ll start with Association Rules, which help uncover interesting relationships between items — like
+                figuring out that people who buy bread often buy butter too. You’ll learn how these rules are mined from
+                transactional databases (like shopping records) and relational databases, and how to measure the
+                strength of these relationships using correlation analysis.</li>
+            <li>Next, we move on to Classification and Prediction, where you’ll see how data can be used to predict
+                outcomes — for example, classifying emails as spam or not spam. Here, we focus on a popular method
+                called decision tree induction, which builds flowchart-like models for decision making.</li>
+            <li>Finally, you’ll dive into Clustering Techniques, where the goal is to group similar data points
+                together. You’ll explore the basics of clustering, and two main approaches: the partition method (like
+                k-means clustering) and the hierarchical method (which builds nested clusters).</li>
         </ul>
+        <div class="wh">
+            <h2>Association Rules – Finding Hidden Patterns in Data</h2>
+
+            <ul>
+                <li>So imagine you're running a grocery store. Every day, hundreds of customers come in and buy
+                    different combinations of items.</li>
+                <li>Some buy bread and butter, some buy milk and cookies, and a few might even buy toothpaste with
+                    bananas (no judgment!).</li>
+                <li>Wouldn't it be helpful if you could figure out which items are often bought together?</li>
+                <li>That's exactly what Association Rules help with in data mining.</li>
+                <li>They're all about finding interesting relationships—or associations—between items in large datasets,
+                    especially in something like a transaction database.</li>
+            </ul>
+            <div class="in">
+                <h3>From Transaction Databases</h3>
+
+                <ul>
+                    <li>Let's stick with the grocery store example.</li>
+                    <li>Suppose you have a database of customer purchases that looks like this:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Items Bought</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Bread, Milk</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bread, Diaper, Beer</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Milk, Diaper, Beer, Cola</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Bread, Milk, Diaper, Beer</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Bread, Milk, Diaper, Cola</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>You might start seeing patterns like:</li>
+                    <li>"Customers who buy Bread and Milk also tend to buy Diapers."</li>
+                    <li>This can be written as an association rule:</li>
+                    <li>Bread + Milk → Diaper</li>
+                    <li>And to make it useful, we look at a few key measures:</li>
+                    <ul>
+                        <li>Support: How often does this combo occur?</li>
+                        <li>Confidence: When Bread and Milk are bought, how often is Diaper also bought?</li>
+                        <li>Lift: How much more likely is Diaper bought when Bread and Milk are bought, compared to
+                            random
+                            chance?</li>
+                    </ul>
+                    <li>These help us decide if a rule is truly valuable or just a coincidence.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>From Relational Databases</h3>
+
+                <ul>
+                    <li>Now, what if the data isn't neatly organized like that?</li>
+                    <li>Sometimes, we work with relational databases—basically, databases with multiple linked tables
+                        (like
+                        Customers, Orders, Products, etc.).</li>
+                    <li>Instead of just checking what items were bought together, we might want to explore associations
+                        across different tables.</li>
+                    <li>For example:</li>
+                    <li>"Customers aged 25-34 who buy protein bars also tend to buy bottled water."</li>
+                    <li>We're now using more structured data, maybe pulling age from a Customers table and purchases
+                        from an
+                        Orders table.</li>
+                    <li>Association rules here become a bit more complex but even more powerful, since you can factor in
+                        things like age, location, or time of day.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Correlation Analysis – Are These Items Really Related?</h3>
+
+                <ul>
+                    <li>Okay, so we've spotted some patterns. But how do we know they're not just random flukes?</li>
+                    <li>Let's say you find this rule:</li>
+                    <li>"Toothpaste → Bananas"</li>
+                    <li>Weird, right? Just because two items are often bought together doesn't mean they're really
+                        related.
+                    </li>
+                    <li>That's where correlation analysis comes in.</li>
+                    <li>It checks whether items are truly connected or just happen to appear together.</li>
+                    <li>This helps filter out misleading associations so that you don't make silly business decisions
+                        like
+                        placing toothpaste next to bananas (unless you're running a prank store).</li>
+                </ul>
+            </div>
+
+            <h3>Wrapping Up Association Rules</h3>
+
+            <ul>
+                <li>So to sum it up:</li>
+                <ul>
+                    <li>Association rules help find item combinations that occur together.</li>
+                    <li>They're most commonly used in transaction databases (like market basket analysis).</li>
+                    <li>But they can also be applied in more complex relational databases.</li>
+                    <li>And with correlation analysis, we separate meaningful rules from just coincidences.</li>
+                </ul>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Classification and Prediction – Making Smart Decisions from Data</h2>
+
+            <ul>
+                <li>Alright, so we just talked about how association rules help us find patterns, like "People who buy
+                    bread and milk also buy diapers." But what if you want to predict something? Like, based on a
+                    customer's previous shopping behavior, can we guess what they might buy next? Or in a medical
+                    setting, can we predict if a patient has a disease based on their symptoms?</li>
+                <li>That's where Classification and Prediction come into play. These techniques help us categorize data
+                    into classes (classification) or predict continuous values (prediction). For now, let's focus on
+                    classification using one popular method called Decision Tree Induction.</li>
+            </ul>
+
+            <h3>What is a Decision Tree?</h3>
+
+            <ul>
+                <li>Imagine you're playing a guessing game. Someone thinks of an animal, and you ask yes/no questions to
+                    figure out what it is:</li>
+                <ul>
+                    <li>Is it a mammal?</li>
+                    <ul>
+                        <li>Yes → Does it have stripes?</li>
+                        <ul>
+                            <li>Yes → It's a tiger!</li>
+                            <li>No → Maybe a lion.</li>
+                        </ul>
+                        <li>No → Does it fly?</li>
+                        <ul>
+                            <li>Yes → Probably a bird.</li>
+                        </ul>
+                    </ul>
+                </ul>
+                <li>This series of yes/no questions is basically a decision tree—a flowchart-like structure that splits
+                    data step-by-step based on certain features to arrive at a decision or classification.</li>
+                <li>In data mining, decision trees help us classify data points by splitting the data according to the
+                    most important features, eventually labeling each item with a class.</li>
+            </ul>
+
+            <div class="in">
+                <h3>How Does Decision Tree Induction Work?</h3>
+
+            <ul>
+                <li>Let's say you have a dataset of customers and you want to predict whether they will buy a new
+                    product. Each customer has features like age, income, and previous purchase history. Here's how
+                    decision tree induction works:</li>
+                <ul>
+                    <li>Start at the Root: The tree looks at the entire dataset and picks the feature that best splits
+                        the data into groups with similar outcomes. For example, maybe age splits customers well (young
+                        vs. old).</li>
+                    <li>Split the Data: Based on the chosen feature (say, age), divide the customers into groups.</li>
+                    <li>Repeat for Each Group: For each subgroup, the tree looks at the remaining features to find the
+                        next best split (maybe income).</li>
+                    <li>Keep Splitting Until...</li>
+                    <ul>
+                        <li>All data in a group belong to the same class (e.g., all will buy), or</li>
+                        <li>You run out of features, or</li>
+                        <li>The group gets too small.</li>
+                    </ul>
+                    <li>Make a Prediction: Each leaf node of the tree represents a final decision/class.</li>
+                </ul>
+            </ul>
+            </div>
+            <div class="in">
+                <h3>Example: Predicting if a Customer Will Buy a Laptop</h3>
+
+                <ul>
+                    <li>Here's a tiny example dataset:</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Age</th>
+                            <th>Income</th>
+                            <th>Student</th>
+                            <th>Buys Laptop?</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <=30< /td>
+                            <td>High</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <=30< /td>
+                            <td>High</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>31-40</td>
+                            <td>High</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>>40</td>
+                            <td>Medium</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>>40</td>
+                            <td>Low</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>The decision tree might look like this:</li>
+                    <ul>
+                        <li>Is Age <= 30?</li>
+                                <ul>
+                                    <li>Yes → Is Student?</li>
+                                    <ul>
+                                        <li>Yes → Buys Laptop = Yes</li>
+                                        <li>No → Buys Laptop = No</li>
+                                    </ul>
+                                    <li>No → Buys Laptop = Yes</li>
+                                </ul>
+                    </ul>
+                    <li>From this tree, if a customer is 28 and a student, the model predicts they will buy a laptop.
+                    </li>
+                </ul>
+            </div>
+            <div class="n">
+                <h3>How Does the Tree Choose the Best Feature?</h3>
+
+                <ul>
+                    <li>Great question! The tree uses something called information gain (or sometimes Gini index) —
+                        basically a way to measure which feature splits the data best by reducing uncertainty. The goal
+                        is
+                        to find splits that result in groups that are as pure as possible (meaning mostly one class).
+                    </li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Connecting to What We Learned Before</h3>
+
+                <ul>
+                    <li>Remember association rules showed us relationships in data? Decision trees take it a step
+                        further.
+                        Instead of just spotting which items often appear together, decision trees help us make
+                        decisions
+                        and predictions based on multiple features. This makes them super useful in applications like
+                        spam
+                        detection, medical diagnosis, and even loan approvals.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Why Are Decision Trees So Popular?</h3>
+
+                <ul>
+                    <li>Easy to Understand: The tree structure looks like a flowchart anyone can follow.</li>
+                    <li>Works With Different Data Types: Handles numbers and categories easily.</li>
+                    <li>No Need for Much Data Preparation: Doesn't need feature scaling or normalization.</li>
+                    <li>Visualizable: You can literally draw the tree and explain the decisions.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Summary</h3>
+
+                <ul>
+                    <li>Classification predicts discrete labels; prediction can also mean forecasting continuous values.
+                    </li>
+                    <li>Decision Tree Induction creates a tree that splits data based on the most informative features.
+                    </li>
+                    <li>The tree asks questions about data features step-by-step until it can confidently classify data
+                        points.</li>
+                    <li>It's intuitive, easy to visualize, and widely used in many real-world applications.</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script type="module" src="../../../../public/main.js"></script>
 </body>

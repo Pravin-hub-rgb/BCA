@@ -33,6 +33,11 @@
   --t-bg-color: rgb(0, 0, 0);
   --invert-color: white;
   --content-box-border: 1px solid gray;
+  --table-bg: #ffffff;
+  --table-header-bg: #f0f4f8;
+  --table-text: #000000;
+  --table-hover-bg: #e6f0ff;
+  --table-hover-text: #000000;
 }
 
 body.dark-mode {
@@ -66,6 +71,11 @@ body.dark-mode {
   --wb-bg-color: rgba(255, 255, 255, 0.394);
   --content-box-bg-color: #1cb5e02e;
   --div-index-border: 1px solid rgba(255, 255, 255, 0.322);
+  --table-bg: #1e293b;             /* Soft dark slate blue */
+  --table-header-bg: #273549;      /* Slightly brighter header */
+  --table-text: #e2e8f0;           /* Muted light gray-blue text */
+  --table-hover-bg: #3b4b61;       /* Soft hover blue */
+  --table-hover-text: #ffffff;     /* White for clear contrast */
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
@@ -583,4 +593,88 @@ iframe {
   color: var(--ac-text-color);
   /* background-color: #5DE063; */
   border: 1px solid black;
+}
+
+/* Wrapper to allow horizontal scroll on small screens */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  /* margin: 1rem; */
+  max-width: 800px; /* Prevents the table from becoming too wide */
+  /* padding: 0 1rem; */
+}
+
+/* Modern, responsive table */
+.new-table {
+  width: 100%;
+  table-layout: auto; /* Allows columns to size based on content */
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background-color: var(--table-bg);
+  color: var(--table-text);
+  border: var(--content-box-border);
+  border-radius: 8px;
+  border: none;
+  overflow: hidden;
+  box-shadow: var(--grad-shadow);
+  min-width: 300px; /* Ensures proper display on narrow screens */
+}
+
+/* Table cell padding and borders */
+.new-table th,
+.new-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap; /* Prevents text from wrapping weirdly */
+}
+
+/* Header styling */
+.new-table th {
+  background-color: var(--table-header-bg);
+  color: var(--table-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Uniform row background */
+.new-table tr {
+  background-color: var(--table-bg);
+}
+
+/* Hover effect for rows */
+.new-table tr:hover {
+  background-color: var(--table-hover-bg);
+  color: var(--table-hover-text);
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Text color fallback for cells */
+.new-table td {
+  color: var(--table-text);
+}
+
+/* Optional: nicer padding for edges */
+.new-table th:first-child,
+.new-table td:first-child {
+  padding-left: 20px;
+}
+
+.new-table th:last-child,
+.new-table td:last-child {
+  padding-right: 20px;
+}
+
+/* Optional: mobile responsiveness */
+@media (max-width: 480px) {
+  .new-table {
+    font-size: 14px;
+  }
+
+  .new-table th,
+  .new-table td {
+    padding: 8px 10px;
+  }
 }
