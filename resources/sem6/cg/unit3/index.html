@@ -332,7 +332,8 @@
                             <strong>calculated once at the beginning</strong> and remain the same throughout the
                             algorithm. When updating the decision parameter <strong>p</strong>, we always use these
                             initial values and do not recalculate them based on the updated <strong>x</strong> and
-                            <strong>y</strong>.</p>
+                            <strong>y</strong>.
+                        </p>
                     </li>
 
                     <li><strong>Step 3: Calculate the Slope</strong>
@@ -343,12 +344,14 @@
                             \]
                         </p>
                         <p>We use this to determine whether the line is <strong>shallow</strong> or
-                            <strong>steep</strong>.</p>
+                            <strong>steep</strong>.
+                        </p>
                     </li>
 
                     <li><strong>Step 4: Initialize the Decision Parameter</strong>
                         <p>The decision parameter <strong>p</strong> is initialized using the fixed values of
-                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                            <strong>ΔX</strong> and <strong>ΔY</strong>:
+                        </p>
                         <p class="ms">
                             \[
                             p = 2\Delta Y - \Delta X
@@ -380,7 +383,8 @@
                                             \]
                                         </p>
                                         <p>Update <strong>p</strong> using the <strong>fixed</strong>
-                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:
+                                        </p>
                                         <p class="ms">
                                             \[
                                             p = p + 2 \Delta Y
@@ -394,7 +398,8 @@
                                             \]
                                         </p>
                                         <p>Update <strong>p</strong> using the <strong>fixed</strong>
-                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:
+                                        </p>
                                         <p class="ms">
                                             \[
                                             p = p + 2 \Delta Y - 2 \Delta X
@@ -420,7 +425,8 @@
                                             \]
                                         </p>
                                         <p>Update <strong>p</strong> using the <strong>fixed</strong>
-                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:
+                                        </p>
                                         <p class="ms">
                                             \[
                                             p = p + 2 \Delta X
@@ -434,7 +440,8 @@
                                             \]
                                         </p>
                                         <p>Update <strong>p</strong> using the <strong>fixed</strong>
-                                            <strong>ΔX</strong> and <strong>ΔY</strong>:</p>
+                                            <strong>ΔX</strong> and <strong>ΔY</strong>:
+                                        </p>
                                         <p class="ms">
                                             \[
                                             p = p + 2 \Delta X - 2 \Delta Y
@@ -452,7 +459,8 @@
                         <p><strong>Important:</strong> The values of <strong>ΔX</strong> and <strong>ΔY</strong>
                             <strong>never change</strong> during this process. When updating <strong>p</strong>, we do
                             not recalculate them using the new <strong>x</strong> and <strong>y</strong>. Instead, we
-                            always use the original values calculated at the beginning.</p>
+                            always use the original values calculated at the beginning.
+                        </p>
                     </li>
                 </ul>
 
@@ -785,6 +793,80 @@
             </div>
 
         </div>
+        <div class="wh">
+            <h2>Clipping</h2>
+            <ul>
+                <li>
+                    Clipping is a process used in computer graphics to display only the portion of an object that lies
+                    within a defined region known as the <strong>clipping window</strong>. The clipping window is
+                    typically a rectangle on the XY-plane. Any part of the object (such as lines, shapes, or diagrams)
+                    that lies outside this window is discarded and not displayed. This process helps in rendering only
+                    the visible content, improving performance and visual clarity.
+                </li>
+            </ul>
+            <img class="wb" src="../../images/cg7.svg" alt="Clipping concept illustration">
+
+            <div class="in">
+                <h3>Point Clipping</h3>
+                <ul>
+                    <li>In point clipping, we work specifically with individual points rather than lines or shapes.</li>
+                    <li>We determine whether a given point lies inside or outside the clipping window.</li>
+                    <li>
+                        For example, consider two points: P1 (x₁, y₁) and P2 (x₂, y₂). If P1 is outside the clipping
+                        window and P2 is inside, we need a method to confirm this based on their coordinates.
+                    </li>
+                </ul>
+                <img src="../../images/cg8.svg" alt="Point clipping example" class="wb">
+
+                <ul>
+                    <li>
+                        To determine if a point lies inside the rectangular window, we use the boundary values:
+                        <strong>x<sub>min</sub>, x<sub>max</sub>, y<sub>min</sub>, and y<sub>max</sub></strong>.
+                    </li>
+                </ul>
+                <img src="../../images/cg9.svg" alt="Window boundaries for clipping" class="wb">
+
+                <ul>
+                    <li>
+                        If a point satisfies all four boundary conditions, it is considered inside the window.
+                        Otherwise, it is outside. Let the point be P(x, y). The conditions are:
+                        <ol>
+                            <li>x ≥ x<sub>min</sub></li>
+                            <li>x ≤ x<sub>max</sub></li>
+                            <li>y ≥ y<sub>min</sub></li>
+                            <li>y ≤ y<sub>max</sub></li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <p><strong>Numerical:</strong> Consider two points: P1 (5, 1) and P2 (6, 9), and a clipping window with
+                    the following boundaries:</p>
+                <ul>
+                    <li>x<sub>min</sub> = 2</li>
+                    <li>x<sub>max</sub> = 9</li>
+                    <li>y<sub>min</sub> = 3</li>
+                    <li>y<sub>max</sub> = 11</li>
+                </ul>
+                <img src="../../images/cg10.svg" alt="Numerical example for point clipping" class="wb">
+
+                <p><strong>Solution:</strong> Evaluate point P1 (5, 1):</p>
+                <ol>
+                    <li>5 ≥ 2 → True</li>
+                    <li>5 ≤ 9 → True</li>
+                    <li>1 ≥ 3 → False</li>
+                </ol>
+                <p>Since one condition is false, P1 is outside the clipping window.</p>
+
+                <p>Now evaluate point P2 (6, 9):</p>
+                <ol>
+                    <li>6 ≥ 2 → True</li>
+                    <li>6 ≤ 9 → True</li>
+                    <li>9 ≥ 3 → True</li>
+                    <li>9 ≤ 11 → True</li>
+                </ol>
+                <p>All conditions are satisfied, so P2 lies inside the clipping window.</p>
+            </div>
+        </div>
 
     </div>
     <div class="content-box">
@@ -795,6 +877,8 @@
             </li>
             <li><a href="https://www.youtube.com/watch?v=Sm7oUNq2rSM" target="_blank">Mid Point Circle Drawing Youtube
                     Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=J7OS_nI4W7Y" target="_blank">Point Clipping Explained in Hindi
+                    l Computer Graphics Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
