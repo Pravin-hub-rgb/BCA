@@ -5,7 +5,7 @@ import { NotesManager } from './modules/ui/NotesManager.js';
 import { NavigationManager } from './modules/ui/NavigationManager.js';
 import { SearchManager } from './modules/ui/SearchManager.js';
 import { SemesterManager } from './modules/ui/SemesterManager.js';
-import { GitManager } from './modules/ui/GitManager.js'; // 🔥 NEW
+import { GitManager } from './modules/ui/GitManager.js';
 
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize all managers
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const notesManager = new NotesManager();
   const navigationManager = new NavigationManager();
   const searchManager = new SearchManager();
-  const gitManager = new GitManager(); // 🔥 NEW
+  const gitManager = new GitManager();
   const uiManager = new UIManager();
 
   themeManager.init();
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   notesManager.init();
   navigationManager.init();
   searchManager.init();
-  gitManager.init(); // 🔥 NEW
+  gitManager.init();
   uiManager.init();
 
   // Optional: expose to window if retry button uses it

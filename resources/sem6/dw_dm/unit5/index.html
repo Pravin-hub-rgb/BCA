@@ -17,8 +17,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -56,10 +55,542 @@ Overview of Advanced Features of Data Mining
             </code>
         </pre>
         <ul>
-            <li>So far, you’ve seen how data mining works with structured data — like numbers, categories, and clearly organized tables. But in the real world, data comes in all shapes and sizes, and that’s where the advanced features of data mining come into play.</li>
-            <li>This unit explores how we mine complex and unstructured data types that go way beyond spreadsheets. We begin by looking at complex data objects — which could include combinations of text, images, spatial data, and more. Then we dig into specialized databases, such as spatial databases (used in mapping and GPS), multimedia databases (involving images, audio, video), and time series or sequence data (used in stock markets, weather forecasts, and biological sequences).</li>
-            <li>We also touch on the exciting area of text mining, which is all about extracting meaning from large volumes of unstructured text — think emails, documents, or social media posts. Finally, we wrap up with mining the World Wide Web, where we explore how search engines and recommendation systems use data mining techniques to make sense of the massive, messy information available online.</li>
+            <li>So far, you’ve seen how data mining works with structured data — like numbers, categories, and clearly
+                organized tables. But in the real world, data comes in all shapes and sizes, and that’s where the
+                advanced features of data mining come into play.</li>
+            <li>This unit explores how we mine complex and unstructured data types that go way beyond spreadsheets. We
+                begin by looking at complex data objects — which could include combinations of text, images, spatial
+                data, and more. Then we dig into specialized databases, such as spatial databases (used in mapping and
+                GPS), multimedia databases (involving images, audio, video), and time series or sequence data (used in
+                stock markets, weather forecasts, and biological sequences).</li>
+            <li>We also touch on the exciting area of text mining, which is all about extracting meaning from large
+                volumes of unstructured text — think emails, documents, or social media posts. Finally, we wrap up with
+                mining the World Wide Web, where we explore how search engines and recommendation systems use data
+                mining techniques to make sense of the massive, messy information available online.</li>
         </ul>
+        <div class="wh">
+            <h2>Mining Complex Data Objects — When Data Isn't Just Tables and Numbers</h2>
+
+            <ul>
+                <li>Up until now, in our data mining journey, we've mostly dealt with fairly simple, structured
+                    data—like rows and columns in spreadsheets or relational databases. Think of sales data, customer
+                    info, or product catalogs. It's neat, tabular, and easy to analyze with traditional data mining
+                    techniques.</li>
+                <li>But here's the thing: real-world data is often messier and way more complex.</li>
+                <li>Imagine the kind of data people interact with every day:</li>
+                <ul>
+                    <li>Images and videos.</li>
+                    <li>GPS locations.</li>
+                    <li>Text messages and social media posts.</li>
+                    <li>Clicks and browsing patterns online.</li>
+                </ul>
+                <li>All of these are examples of complex data objects. They don't fit nicely into a single table or a
+                    simple number format, but they still contain valuable patterns we want to discover. And that's where
+                    Mining Complex Data Objects comes in.</li>
+            </ul>
+
+            <h3>So, What Is a Complex Data Object?</h3>
+
+            <ul>
+                <li>Let's break it down.</li>
+                <li>A complex data object is any piece of data that's more than just a simple number or text string. It
+                    could be:</li>
+                <ul>
+                    <li>A graph (like a social network)</li>
+                    <li>A multimedia file (image, audio, video)</li>
+                    <li>A spatial location (like a GPS point on a map)</li>
+                    <li>A sequence (like the steps a user takes in an app)</li>
+                    <li>Or even a combination of many types (like an Instagram post that includes text, image, tags, and
+                        location)</li>
+                </ul>
+                <li>Traditional data mining tools weren't designed for these types of data. So we need special
+                    techniques to handle their structure, relationships, and formats.</li>
+            </ul>
+
+            <h3>Why Is Mining Complex Data Challenging?</h3>
+
+            <ul>
+                <li>Let's use an example: suppose you're analyzing images of animals to identify species.</li>
+                <li>Unlike a simple product table where you just compare prices, here you're working with pixels,
+                    colors, and shapes. There's no obvious "column" that says "This is a cat." You have to figure it out
+                    based on patterns in the image.</li>
+                <li>The same applies to:</li>
+                <ul>
+                    <li>Tracking movement through GPS data</li>
+                    <li>Understanding emotions in videos</li>
+                    <li>Finding frequent patterns in clickstreams (like the steps users take on a website)</li>
+                </ul>
+                <li>In each case, the form of the data is part of the challenge. You need techniques that can work with
+                    structures like:</li>
+                <ul>
+                    <li>Graphs (for relationships)</li>
+                    <li>Sequences (for order of events)</li>
+                    <li>Multimedia (for patterns in images/audio)</li>
+                </ul>
+            </ul>
+
+            <h3>How Do We Mine These Complex Objects?</h3>
+
+            <ul>
+                <li>To work with complex data, researchers and engineers have adapted existing methods and created new
+                    ones. A few key ideas include:</li>
+                <ul>
+                    <li>Feature Extraction: Transform the complex object into something more "digestible." For example,
+                        convert an image into a set of numbers representing color intensity, edges, or texture.</li>
+                    <li>Similarity Measures: For complex objects, we need new ways to compare them. For instance, two
+                        images might be considered "similar" if they have similar color histograms—even if they're not
+                        pixel-perfect copies.</li>
+                    <li>Graph and Tree Mining: When data is connected (like a website's link structure or a family
+                        tree), we use specialized algorithms that understand those shapes.</li>
+                    <li>Pattern Discovery in Sequences: For clickstreams, DNA sequences, or time-based actions, we look
+                        for repeating patterns or trends.</li>
+                    <li>Multimodal Mining: This is where it gets really exciting—we combine data from multiple sources!
+                        For example, analyzing a YouTube video using its image content, audio, and comments all at once.
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Mining in Specialized Databases — Because Not All Data Lives in Tables</h2>
+
+            <ul>
+                <li>So, we've already looked at complex data objects, which showed us that real-world data can be way
+                    more diverse than numbers and text. Now, we're zooming in on some specific types of databases that
+                    store this rich data.</li>
+                <li>These are specialized databases—designed to handle unique formats like maps, videos, or time-based
+                    events. Mining these requires not only different techniques but also a good understanding of what
+                    makes each type of data special.</li>
+                <li>Let's walk through them one by one.</li>
+            </ul>
+            <div class="in">
+                <h3>Spatial Databases — Mining Data with a Sense of Place</h3>
+
+                <ul>
+                    <li>Think Google Maps. Or the weather app. Or Uber. All of these use spatial data—data that's
+                        connected
+                        to a location on Earth.</li>
+                    <li>A spatial database stores data like:</li>
+                    <ul>
+                        <li>Coordinates (latitude, longitude)</li>
+                        <li>Maps and routes</li>
+                        <li>Regions and boundaries (like city limits or delivery zones)</li>
+                    </ul>
+                    <li>Why mine spatial data?</li>
+                    <li>Because it helps us answer questions like:</li>
+                    <ul>
+                        <li>Where do traffic jams most frequently occur?</li>
+                        <li>Which areas are prone to flooding?</li>
+                        <li>Where should a new store be opened for maximum customers?</li>
+                    </ul>
+                    <li>What's different here?</li>
+                    <li>Unlike plain data, spatial data has position, distance, and direction. So we use techniques
+                        like:
+                    </li>
+                    <ul>
+                        <li>Clustering nearby points (e.g., grouping cities by temperature patterns)</li>
+                        <li>Spatial association rules (e.g., "areas with high humidity often report more allergies")
+                        </li>
+                        <li>Neighborhood-based analysis (what's happening around a given point?)</li>
+                    </ul>
+                    <li>Spatial mining is especially useful in urban planning, logistics, delivery services, disaster
+                        response, and even location-based marketing.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Multimedia Databases — Mining Beyond Text and Numbers</h3>
+
+                <ul>
+                    <li>Now think about YouTube, Spotify, or your photo gallery. These platforms deal with multimedia
+                        data—images, audio, video, and more.</li>
+                    <li>A multimedia database stores:</li>
+                    <ul>
+                        <li>Pictures and videos</li>
+                        <li>Sound files</li>
+                        <li>Metadata (like resolution, duration, tags, timestamps)</li>
+                    </ul>
+                    <li>Why mine multimedia data?</li>
+                    <li>To find patterns like:</li>
+                    <ul>
+                        <li>What kind of videos go viral?</li>
+                        <li>How can we group images by content?</li>
+                        <li>Which sound patterns match a specific word or speaker?</li>
+                    </ul>
+                    <li>How is it done?</li>
+                    <li>We often start by extracting features:</li>
+                    <ul>
+                        <li>For images: color, edges, shapes</li>
+                        <li>For audio: frequency, tempo, pitch</li>
+                        <li>For video: motion, scene changes</li>
+                    </ul>
+                    <li>Once those features are turned into numbers, we can apply familiar mining techniques like
+                        clustering
+                        or classification. For instance:</li>
+                    <ul>
+                        <li>"Group these photos by whether they contain outdoor scenery or indoor settings."</li>
+                    </ul>
+                    <li>Multimedia mining is widely used in entertainment, security (face or voice recognition), content
+                        recommendation, and even healthcare (like analyzing MRI scans).</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Time Series and Sequence Data — Following Patterns Over Time</h3>
+
+                <ul>
+                    <li>Now picture:</li>
+                    <ul>
+                        <li>Stock market charts</li>
+                        <li>Daily temperature logs</li>
+                        <li>Heartbeat data from a fitness tracker</li>
+                    </ul>
+                    <li>All of these are examples of time series data—data points collected over time, usually in
+                        sequence.
+                    </li>
+                    <li>A time series is just a series of values recorded at regular intervals, like:</li>
+                    <pre>
+                    <code>
+Day 1: 20°C  
+Day 2: 22°C  
+Day 3: 25°C  
+... and so on.
+                </code>
+            </pre>
+                    <li>Why mine time-based data?</li>
+                    <li>Because time holds patterns. With time series mining, we can:</li>
+                    <ul>
+                        <li>Predict future values (forecasting)</li>
+                        <li>Detect anomalies (like a sudden spike in heart rate)</li>
+                        <li>Identify trends (like rising sales every December)</li>
+                    </ul>
+                    <li>Common tasks include:</li>
+                    <ul>
+                        <li>Trend analysis: What's increasing or decreasing over time?</li>
+                        <li>Seasonality detection: Are there repeating cycles?</li>
+                        <li>Sequential pattern mining: What actions or events tend to follow each other?</li>
+                        <li>For example: "Users who view product A often end up buying product B two days later."</li>
+                    </ul>
+                    <li>These techniques are critical in finance, weather forecasting, healthcare, and customer behavior
+                        analysis.</li>
+                </ul>
+            </div>
+            <h3>Wrapping Up – All About the Right Tool for the Right Data</h3>
+
+            <ul>
+                <li>So, when we talk about Mining in Specialized Databases, we're really saying: "Let's use the right
+                    method for the right kind of data."</li>
+                <ul>
+                    <li>Spatial databases need a sense of place and proximity.</li>
+                    <li>Multimedia databases need to extract and understand rich features from visual or audio content.
+                    </li>
+                    <li>Time series and sequence data require attention to order and timing.</li>
+                </ul>
+                <li>Each of these brings its own flavor to data mining, and mastering them means you're one step closer
+                    to working with real-world data—whether it's coming from a GPS device, a camera, or a smartwatch.
+                </li>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Mining Text Databases — Turning Words into Knowledge</h2>
+
+            <ul>
+                <li>So far, we've talked about mining data that has clear structure—like locations, timestamps, or
+                    images. But now we're heading into a different kind of jungle: text data.</li>
+                <li>Text is tricky. It's unstructured, messy, and full of meaning that isn't always easy for a computer
+                    to understand.</li>
+                <li>Think about it:</li>
+                <ul>
+                    <li>A review that says "This product is fire🔥" is probably positive.</li>
+                    <li>But a review that says "This phone catches fire🔥" is... a big problem.</li>
+                </ul>
+                <li>Same word, very different meanings.</li>
+                <li>That's the challenge—and magic—of text mining.</li>
+            </ul>
+            <div class="in">
+                <h3>What is Text Mining?</h3>
+
+                <ul>
+                    <li>Text mining is the process of extracting useful information and patterns from text data. It's
+                        like
+                        teaching a computer to read and understand language—not just as a string of letters, but as
+                        something meaningful.</li>
+                    <li>Some key goals of text mining include:</li>
+                    <ul>
+                        <li>Finding topics in a collection of documents.</li>
+                        <li>Detecting sentiment (is this positive or negative?).</li>
+                        <li>Grouping similar texts together (like clustering).</li>
+                        <li>Identifying important keywords or phrases.</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Why Do We Mine Text?</h3>
+
+                <ul>
+                    <li>Because text is everywhere:</li>
+                    <ul>
+                        <li>Businesses want to analyze customer reviews.</li>
+                        <li>Governments might monitor social media for public sentiment.</li>
+                        <li>Search engines (like Google) need to rank documents.</li>
+                        <li>Chatbots (like me!) need to understand questions.</li>
+                    </ul>
+                    <li>Mining text helps us turn all that wordy data into structured insights we can actually use.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>How Does Text Mining Work?</h3>
+
+                <ul>
+                    <li>Let's walk through how text mining typically works, step by step.</li>
+                </ul>
+
+                <h3>1. Text Preprocessing – Cleaning the Mess</h3>
+
+                <ul>
+                    <li>Text data isn't ready to be mined right away. First, we have to clean it up. This step is like
+                        preparing ingredients before cooking.</li>
+                    <li>We do things like:</li>
+                    <ul>
+                        <li>Tokenization: Breaking text into individual words or terms (called "tokens").</li>
+                        <pre><code>"I love ice cream" → ["I", "love", "ice", "cream"]</code></pre>
+                        <li>Stop word removal: Removing common but meaningless words like "is", "the", "and".</li>
+                        <li>Stemming or Lemmatization: Reducing words to their root form.</li>
+                        <pre><code>"running", "runs", "ran" → "run"</code></pre>
+                    </ul>
+                    <li>Why do all this? Because we want to focus on the core meaning of the text.</li>
+                </ul>
+
+                <h3>2. Feature Extraction – Making Text Understandable to Machines</h3>
+
+                <ul>
+                    <li>Now that the text is cleaned, we need to turn it into something a computer can
+                        understand—usually
+                        numbers.</li>
+                    <li>One popular method is:</li>
+                    <ul>
+                        <li>Bag of Words: Counts how often each word appears in a document.</li>
+                        <ul>
+                            <li>It doesn't care about word order, just frequency.</li>
+                        </ul>
+                        <li>TF-IDF (Term Frequency-Inverse Document Frequency): A smarter version that also considers
+                            how
+                            unique a word is across documents.</li>
+                        <ul>
+                            <li>Common words like "good" might appear everywhere, but a word like "revolutionary" may be
+                                more telling.</li>
+                        </ul>
+                    </ul>
+                    <li>Newer methods even use word embeddings like Word2Vec or BERT that capture context and meaning
+                        better.</li>
+                </ul>
+
+                <h3>3. Text Mining Techniques – Finding the Patterns</h3>
+
+                <ul>
+                    <li>Once the text is converted into features, we can apply various data mining techniques:</li>
+                    <ul>
+                        <li>Classification: Predict categories (e.g., spam or not spam).</li>
+                        <li>Clustering: Group similar documents (e.g., news articles by topic).</li>
+                        <li>Sentiment Analysis: Figure out if the tone is positive, negative, or neutral.</li>
+                        <li>Topic Modeling: Discover the main themes across a set of documents (e.g., politics, sports,
+                            entertainment).</li>
+                    </ul>
+                    <li>Imagine scanning thousands of customer reviews and automatically figuring out which ones are
+                        about
+                        battery life, which ones mention price, and which are about camera quality. That's topic
+                        modeling in
+                        action.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Real-Life Examples</h3>
+
+                <ul>
+                    <li>Email Filters: Use classification to detect spam.</li>
+                    <li>Twitter Analysis: Track public opinion during elections.</li>
+                    <li>Customer Support: Automatically tag complaints by issue type.</li>
+                    <li>Legal or Medical Fields: Scan large sets of documents to extract key terms or flag sensitive
+                        info.
+                    </li>
+                </ul>
+            </div>
+            <h3>Connecting the Dots</h3>
+            <ul>
+                <li>Just like spatial, multimedia, and time-series mining, text mining is about adapting to the format
+                    of your data. You can't treat a tweet the same way you treat a stock price or an image.</li>
+                <li>What makes text unique is:</li>
+                <ul>
+                    <li>It's rich in meaning, but unstructured.</li>
+                    <li>Small changes in language can have big changes in meaning.</li>
+                    <li>You often need both linguistic understanding and statistical techniques to mine it effectively.
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="wh">
+            <h2>Mining the World Wide Web — Making Sense of the Internet Jungle</h2>
+
+            <ul>
+                <li>The internet is massive. Billions of web pages, blogs, tweets, videos, reviews—you name it. It's the
+                    largest and most dynamic collection of human knowledge, opinions, and interactions.</li>
+                <li>But here's the problem: the web is messy. It's:</li>
+                <ul>
+                    <li>Unstructured (like text or images),</li>
+                    <li>Semi-structured (like HTML pages),</li>
+                    <li>Ever-changing (new content added every second),</li>
+                    <li>And spread across millions of websites.</li>
+                </ul>
+                <li>Web mining is the art of making sense of all this chaos.</li>
+            </ul>
+            <div class="in">
+                <h3>So, What is Web Mining?</h3>
+
+                <ul>
+                    <li>At its core, Web Mining means using data mining techniques to discover patterns and insights
+                        from the web. It includes:</li>
+                    <ul>
+                        <li>Web Content Mining – Mining the actual content on web pages.</li>
+                        <li>Web Structure Mining – Mining the links and connections between pages.</li>
+                        <li>Web Usage Mining – Mining user behavior (what people click, search, buy).</li>
+                    </ul>
+                    <li>Let's go through them one by one with simple examples.</li>
+                </ul>
+
+                <h3>1. Web Content Mining — Digging Into What's on the Page</h3>
+
+                <ul>
+                    <li>This is the most obvious kind: looking at what's actually on the webpage.</li>
+                    <li>That includes:</li>
+                    <ul>
+                        <li>Text (blogs, news, reviews)</li>
+                        <li>Images</li>
+                        <li>Videos</li>
+                        <li>Metadata (titles, tags, alt text)</li>
+                    </ul>
+                    <li>It's like what we learned in text mining, just applied to web pages.</li>
+                    <li>Example:</li>
+                    <li>Let's say you want to find the most popular pizza toppings from thousands of food blogs. A web
+                        content miner would:</li>
+                    <ul>
+                        <li>Crawl blogs and extract relevant text</li>
+                        <li>Clean it up (like removing ads or repeated content)</li>
+                        <li>Analyze frequency of words like "pepperoni", "mushroom", or "pineapple"</li>
+                    </ul>
+                    <li>This technique is used by:</li>
+                    <ul>
+                        <li>Search engines to rank relevant pages</li>
+                        <li>E-commerce sites to understand product descriptions</li>
+                        <li>News aggregators to cluster similar stories</li>
+                    </ul>
+                </ul>
+
+                <h3>2. Web Structure Mining — Exploring the Web's Skeleton</h3>
+
+                <ul>
+                    <li>The web is basically a huge graph of interconnected pages—one page links to another, and
+                        another, and so on.</li>
+                    <li>Web Structure Mining analyzes this link structure to discover relationships between pages.</li>
+                    <li>Real-life example:</li>
+                    <li>When you Google something, how does it decide what shows up on top?</li>
+                    <li>One key method is PageRank—a famous algorithm used by Google that counts how many pages link to
+                        a page. If a page is linked by many others (especially trustworthy ones), it's probably
+                        important.</li>
+                    <ul>
+                        <li>Think of it like popularity at a party. If everyone's talking about one person, they're
+                            probably a big deal.</li>
+                    </ul>
+                    <li>Other uses include:</li>
+                    <ul>
+                        <li>Detecting communities (like groups of pages about sports or politics)</li>
+                        <li>Identifying spam or fake websites</li>
+                        <li>Recommending similar content</li>
+                    </ul>
+                </ul>
+
+                <h3>3. Web Usage Mining — Understanding What Users Actually Do</h3>
+
+                <ul>
+                    <li>Now let's look behind the scenes at what you and I do when we browse.</li>
+                    <li>Web Usage Mining focuses on user behavior:</li>
+                    <ul>
+                        <li>Which pages we visit</li>
+                        <li>What we click on</li>
+                        <li>How long we stay</li>
+                        <li>What we buy</li>
+                    </ul>
+                    <li>This data is collected from:</li>
+                    <ul>
+                        <li>Server logs</li>
+                        <li>Cookies</li>
+                        <li>Clickstreams (paths taken through a site)</li>
+                    </ul>
+                    <li>Example:</li>
+                    <li>Ever noticed how after viewing a phone on Amazon, you start seeing ads for that phone
+                        everywhere?</li>
+                    <li>That's web usage mining in action. It analyzes your click behavior and uses that pattern to
+                        target you with related content or products.</li>
+                    <li>Other examples:</li>
+                    <ul>
+                        <li>Netflix recommending shows</li>
+                        <li>Online stores suggesting "frequently bought together"</li>
+                        <li>Website designers improving layout based on popular paths</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Putting It All Together</h3>
+
+                <ul>
+                    <li>Let's take an example of YouTube:</li>
+                    <ul>
+                        <li>Web content mining helps YouTube understand what's in the video titles, tags, and
+                            descriptions.</li>
+                        <li>Web structure mining looks at links between videos, such as playlists or channel
+                            recommendations.</li>
+                        <li>Web usage mining sees what you've watched, liked, or searched—and uses that to recommend the
+                            next video.</li>
+                    </ul>
+                    <li>Cool, right?</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Why is Web Mining Important?</h3>
+
+                <ul>
+                    <li>Because the internet is our biggest source of knowledge today. With web mining, we can:</li>
+                    <ul>
+                        <li>Improve search engines (like Google or Bing)</li>
+                        <li>Personalize user experiences (like Netflix or Spotify)</li>
+                        <li>Monitor trends and opinions (like social media analysis)</li>
+                        <li>Help businesses understand their customers better</li>
+                    </ul>
+                    <li>But of course, there are challenges too:</li>
+                    <ul>
+                        <li>Privacy concerns (how much tracking is too much?)</li>
+                        <li>Information overload (too much data to process)</li>
+                        <li>Data quality (not everything online is true or useful)</li>
+                    </ul>
+                    <li>That's why web mining isn't just technical—it's also ethical.</li>
+                </ul>
+            </div>
+
+            <div class="in">
+                <h3>Final Thoughts — The Big Picture</h3>
+
+                <ul>
+                    <li>You've now completed the circle:</li>
+                    <ul>
+                        <li>From mining complex data to specialized formats</li>
+                        <li>From text to the entire web</li>
+                        <li>From raw content to deep insights</li>
+                    </ul>
+                    <li>Web Mining combines everything we've learned—text mining, structure analysis, pattern detection,
+                        and user behavior. It's the real-world application of everything you've studied in data mining.
+                    </li>
+                    <li>So next time you search on Google or get a video recommendation, just remember—you now
+                        understand the magic behind it.</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
