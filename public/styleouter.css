@@ -503,11 +503,12 @@ img.social-logo {
   background-color: #1e1e1e;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  overflow-x: auto;      /* Horizontal scroll on entire terminal */
+  overflow-y: hidden;    /* Hide vertical scroll here */
 }
 
-@media screen and  (max-width: 850px){
-  .terminal-window{
+@media screen and (max-width: 850px) {
+  .terminal-window {
     width: 96%;
   }
 }
@@ -560,7 +561,8 @@ img.social-logo {
   background-color: #1e1e1e;
   min-height: 300px;
   white-space: nowrap;
-  overflow-x: auto;
+  overflow-x: visible;   /* Changed from auto to visible */
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
 }
 
@@ -605,7 +607,7 @@ img.social-logo {
 
 @keyframes blink {
   50% {
-      opacity: 0;
+    opacity: 0;
   }
 }
 
@@ -616,51 +618,48 @@ img.social-logo {
   font-size: 14px;
   max-height: 90vh;
   overflow-y: auto;
-  /* Allow horizontal scrolling for long commit lines */
-  overflow-x: auto;
+  overflow-x: visible;         /* allow content to overflow horizontally */
+  white-space: nowrap;
+  display: inline-block;       /* let it grow horizontally */
+  min-width: max-content;      /* trigger parent scroll if content is long */
 }
 
 #commit-messages {
   color: #0f0;
   margin-top: 10px;
-  /* Remove pre-wrap to prevent text wrapping */
   white-space: nowrap;
+  display: block;
+  min-width: max-content;
+  overflow: visible;
 }
 
 /* Fixed commit entry styling for single line display */
 .commit-entry {
   margin-bottom: 8px;
-  /* Force single line display */
-  white-space: nowrap;
-  overflow: hidden;
-  /* Add ellipsis for very long lines */
-  text-overflow: ellipsis;
-  /* Ensure it's a block element but maintains single line */
+  white-space: nowrap;  /* no wrapping */
+  overflow: visible;    /* prevent scroll */
   display: block;
   line-height: 1.4;
+  /* Remove any width restrictions */
 }
 
 .commit-hash {
   color: #f0ad4e;
   margin-right: 10px;
-  /* Prevent the hash from breaking */
   white-space: nowrap;
 }
 
 .commit-date {
   color: #5bc0de;
   margin-right: 10px;
-  /* Prevent date from breaking */
   white-space: nowrap;
 }
 
 .commit-message {
   color: #0f0;
-  /* Ensure message doesn't wrap */
   white-space: nowrap;
 }
 
-/* Style for automated commit indicator */
 .automated-indicator {
   margin-right: 5px;
   font-size: 12px;
