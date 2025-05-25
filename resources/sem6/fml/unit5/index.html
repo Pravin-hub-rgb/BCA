@@ -19,8 +19,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -62,11 +61,2037 @@ Validation Techniques & Supervised Learning Algorithms
             </code>
         </pre>
         <ul>
-            <li>When you're building machine learning models, it's not just about choosing the right algorithm — it's also about making sure your model actually works well on unseen data. That's why in this unit, we cover two essential parts of any ML project: Validation Techniques and Supervised Learning Algorithms.</li>
-            <li>We begin with validation techniques, which help us evaluate our models properly. You'll learn about simple methods like the hold-out method, where data is split into training and testing sets, and more advanced ones like K-Fold Cross Validation, Leave-One-Out, and Bootstrapping — all of which help ensure your results are trustworthy and not just lucky guesses.</li>
-            <li>Then, we move into the world of supervised learning algorithms, where the model learns from labeled data. We’ll explore popular techniques like Linear Regression and Logistic Regression for prediction tasks, Decision Trees for making rule-based decisions, and Support Vector Machines (SVM) for handling complex boundaries between classes. You’ll also get to know K-Nearest Neighbours (KNN) for simple yet effective classification, Naive Bayes for probabilistic prediction, the CN2 Algorithm for rule learning, and Artificial Neural Networks (ANNs) — the building blocks of deep learning.</li>
+            <li>When you're building machine learning models, it's not just about choosing the right algorithm — it's
+                also about making sure your model actually works well on unseen data. That's why in this unit, we cover
+                two essential parts of any ML project: Validation Techniques and Supervised Learning Algorithms.</li>
+            <li>We begin with validation techniques, which help us evaluate our models properly. You'll learn about
+                simple methods like the hold-out method, where data is split into training and testing sets, and more
+                advanced ones like K-Fold Cross Validation, Leave-One-Out, and Bootstrapping — all of which help ensure
+                your results are trustworthy and not just lucky guesses.</li>
+            <li>Then, we move into the world of supervised learning algorithms, where the model learns from labeled
+                data. We’ll explore popular techniques like Linear Regression and Logistic Regression for prediction
+                tasks, Decision Trees for making rule-based decisions, and Support Vector Machines (SVM) for handling
+                complex boundaries between classes. You’ll also get to know K-Nearest Neighbours (KNN) for simple yet
+                effective classification, Naive Bayes for probabilistic prediction, the CN2 Algorithm for rule learning,
+                and Artificial Neural Networks (ANNs) — the building blocks of deep learning.</li>
         </ul>
+        <div class="wh">
+            <h2>What Are Validation Techniques, Anyway?</h2>
+            <ul>
+                <li>Before we jump into the Hold-Out Method, let’s understand why validation matters in machine
+                    learning.</li>
+                <li>Imagine you’re learning to bake a cake. You practice by baking it 10 times using your recipe notes.
+                    After a while, you get really good at making that same cake. But then your friend gives you a new
+                    recipe to try—and suddenly, your cake flops. Why? Because you were only practicing with one version,
+                    and now you’ve encountered something different.</li>
+                <li>That’s exactly what happens in machine learning models. They might perform great on the data they’ve
+                    seen (called training data), but when faced with new data (called test data), they might mess up.
+                </li>
+                <li>
+                    <strong>So, validation techniques help us measure how well a model will perform on new, unseen
+                        data.</strong>
+                </li>
+            </ul>
+            <div class="in">
+                <h3>1. The Hold-Out Method — Your First Validation Tool</h3>
+                <ul>
+                    <li>Let’s start with the most basic method: the Hold-Out Method.</li>
+                    <li>This technique is super simple and widely used, especially when you’re just getting started.
+                    </li>
+                </ul>
+
+                <h4>What is it?</h4>
+                <ul>
+                    <li>In the Hold-Out Method, we split our dataset into two parts:</li>
+                    <ul>
+                        <li>One part is for training the model.</li>
+                        <li>The other part is for testing the model.</li>
+                    </ul>
+                    <li>This helps us evaluate how well the model learned and how well it might do on future, unseen
+                        data.</li>
+                </ul>
+
+                <h4>Real-Life Analogy</h4>
+                <ul>
+                    <li>Think of it like this:</li>
+                    <li>You’re preparing for an exam using a question bank of 100 questions.</li>
+                    <ul>
+                        <li>You practice using 70 questions (training).</li>
+                        <li>You save the remaining 30 questions to test yourself later (testing).</li>
+                    </ul>
+                    <li>If you do well on the test set, it means you’ve really learned something—not just memorized.
+                    </li>
+                </ul>
+
+                <h4>How Do You Split the Data?</h4>
+                <ul>
+                    <li>There’s no strict rule, but a common ratio is:</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Set Type</th>
+                            <th>Percentage of Data</th>
+                        </tr>
+                        <tr>
+                            <td>Training Set</td>
+                            <td>70% – 80%</td>
+                        </tr>
+                        <tr>
+                            <td>Testing Set</td>
+                            <td>20% – 30%</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>For example, if you have 1,000 data points:</li>
+                    <ul>
+                        <li>800 go into training</li>
+                        <li>200 go into testing</li>
+                    </ul>
+                    <li>This is sometimes called a 70-30 split or 80-20 split.</li>
+                </ul>
+
+                <h4>Advantages of the Hold-Out Method</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Advantage</th>
+                            <th>Explanation</th>
+                        </tr>
+                        <tr>
+                            <td>Simple & Quick</td>
+                            <td>Very easy to implement and understand</td>
+                        </tr>
+                        <tr>
+                            <td>Fast</td>
+                            <td>Great for large datasets because it’s not computationally heavy</td>
+                        </tr>
+                        <tr>
+                            <td>Widely Used</td>
+                            <td>Useful in early model development and when time is limited</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Disadvantages of the Hold-Out Method</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Disadvantage</th>
+                            <th>Explanation</th>
+                        </tr>
+                        <tr>
+                            <td>High Variance</td>
+                            <td>Results depend heavily on how the data is split — if the test set is too easy or too
+                                hard,
+                                it skews performance</td>
+                        </tr>
+                        <tr>
+                            <td>Wasted Data</td>
+                            <td>We don’t use the test data during training at all, even though it might be helpful</td>
+                        </tr>
+                        <tr>
+                            <td>Overfitting Risk</td>
+                            <td>If the training data isn’t representative, the model may learn poorly</td>
+                        </tr>
+                    </table>
+                </div>
+                <h3>When Should You Use the Hold-Out Method?</h3>
+                <ul>
+                    <li>Use it when:</li>
+                    <ul>
+                        <li>You have a lot of data and a quick test is okay.</li>
+                        <li>You’re in the early stage of model experimentation.</li>
+                        <li>You need to benchmark models before doing more advanced validation like cross-validation.
+                        </li>
+                    </ul>
+                </ul>
+
+                <h3>Sample Use Case</h3>
+                <ul>
+                    <li>Let’s say you’re building a model to predict whether emails are spam or not. You have 10,000
+                        emails:</li>
+                    <ul>
+                        <li>8,000 go to the training set to teach the model what spam looks like.</li>
+                        <li>2,000 go to the testing set to evaluate how well the model works on emails it hasn’t seen
+                            before.</li>
+                    </ul>
+                    <li>If the model gets 95% accuracy on the training set but only 70% on the test set, that's a red
+                        flag —the model has likely overfitted, meaning it memorized the training data but didn’t learn
+                        how to generalize.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>2.K-Fold Cross Validation</h3>
+                <ul>
+                    <li>Imagine you're studying for an exam using 100 questions. With the Hold-Out Method, you practice
+                        with 80 and test yourself on 20. But what if those 20 were unusually easy or hard? Your test
+                        score might not reflect your actual ability.</li>
+                    <li>K-Fold Cross Validation solves that problem by making sure every part of your data gets a turn
+                        being tested.</li>
+                </ul>
+
+                <h4>Here’s the core idea:</h4>
+                <ul>
+                    <li>You divide your dataset into K equal parts, called folds.</li>
+                    <li>Then you run K rounds of training and testing:</li>
+                    <ul>
+                        <li>In each round, you use K−1 folds for training and 1 fold for testing.</li>
+                    </ul>
+                    <li>Each fold gets used once as the test set.</li>
+                    <li>After all K rounds, you average the results to get a better estimate of your model’s true
+                        performance.</li>
+                </ul>
+
+                <h4>Let’s See an Example: 5-Fold Cross Validation</h4>
+                <ul>
+                    <li>Say you have 100 data points, and you choose K = 5.</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Fold</th>
+                            <th>Training Data</th>
+                            <th>Testing Data</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Folds 2, 3, 4, 5</td>
+                            <td>Fold 1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Folds 1, 3, 4, 5</td>
+                            <td>Fold 2</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Folds 1, 2, 4, 5</td>
+                            <td>Fold 3</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Folds 1, 2, 3, 5</td>
+                            <td>Fold 4</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Folds 1, 2, 3, 4</td>
+                            <td>Fold 5</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>After all 5 rounds, you average the test results to get one final performance score.</li>
+                </ul>
+
+                <h4>Real-Life Analogy</h4>
+                <ul>
+                    <li>Think of it like a group of friends reviewing your speech. You have 5 friends (folds). Instead
+                        of showing your speech to just one friend (like in Hold-Out), you:</li>
+                    <ul>
+                        <li>Show it to 4 of them for feedback and practice (training),</li>
+                        <li>Then present it to the 5th to see how you perform under pressure (testing),</li>
+                        <li>Repeat this so every friend gets a turn as the audience.</li>
+                    </ul>
+                    <li>At the end, you average everyone’s feedback to know how good your speech really is.</li>
+                </ul>
+
+                <h4>Why Use K-Fold Instead of Hold-Out?</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>Hold-Out Method</th>
+                            <th>K-Fold Cross Validation</th>
+                        </tr>
+                        <tr>
+                            <td>Simplicity</td>
+                            <td>Very simple</td>
+                            <td>A bit more complex</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td>Can vary a lot</td>
+                            <td>More reliable estimate</td>
+                        </tr>
+                        <tr>
+                            <td>Use of data</td>
+                            <td>Uses part of the data</td>
+                            <td>Uses all data for testing (eventually)</td>
+                        </tr>
+                        <tr>
+                            <td>Risk of bias</td>
+                            <td>High (depends on split)</td>
+                            <td>Low (every point is tested)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>So in a nutshell: Hold-Out is quick, but K-Fold is smart.</li>
+                </ul>
+
+                <h4>How to Choose K?</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>K Value</th>
+                            <th>When to Use</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Common in practice</td>
+                            <td>Less computation time</td>
+                            <td>Slightly less precise</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Very popular</td>
+                            <td>Balanced accuracy and effort</td>
+                            <td>More computation</td>
+                        </tr>
+                        <tr>
+                            <td>N (data size)</td>
+                            <td>Called Leave-One-Out</td>
+                            <td>Most precise</td>
+                            <td>Very slow on large datasets</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>For most problems, K = 5 or K = 10 is the sweet spot.</li>
+                </ul>
+
+                <h4>Limitations of K-Fold Cross Validation</h4>
+                <ul>
+                    <li>While it's a great method, it’s not perfect:</li>
+                    <ul>
+                        <li><strong>Computational Cost:</strong> It takes K times longer than Hold-Out because you train
+                            K models.</li>
+                        <li><strong>Still Random:</strong> If the folds aren't stratified (i.e., balanced in class
+                            distribution), results may be misleading.</li>
+                        <li><strong>Data Leakage Risk:</strong> If you accidentally let test data influence training,
+                            you can ruin the whole point of validation. Be careful with preprocessing!</li>
+                    </ul>
+                </ul>
+
+                <h4>Wrapping It All Up</h4>
+                <ul>
+                    <li>So to sum up, K-Fold Cross Validation is like testing your model from every angle. It:</li>
+                    <ul>
+                        <li>Reduces bias and variance,</li>
+                        <li>Uses the entire dataset effectively,</li>
+                        <li>Gives a more trustworthy picture of your model’s performance.</li>
+                    </ul>
+                    <li>It’s a big step up from the Hold-Out Method and is widely used in real-world machine learning
+                        projects and competitions.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>3. Leave-One-Out Validation</h3>
+                <ul>
+                    <li>Imagine you're trying to learn a new skill—say cooking. You’ve got a collection of 10 recipes
+                        (your dataset). You want to test how good your overall cooking is.</li>
+                    <li>Now, instead of leaving out a big chunk of your recipes to test like in the Hold-Out Method, or
+                        even splitting it into 5 parts like in 5-Fold Cross Validation, you leave out just one recipe at
+                        a time to test yourself.</li>
+                    <li>That’s Leave-One-Out Validation in a nutshell.</li>
+                </ul>
+
+                <h4>Definition:</h4>
+                <ul>
+                    <li>Leave-One-Out Validation means:</li>
+                    <ul>
+                        <li>For a dataset with n examples, you:</li>
+                        <ul>
+                            <li>Use n-1 examples to train the model.</li>
+                            <li>Use the 1 remaining example to test.</li>
+                        </ul>
+                        <li>Repeat this n times, each time leaving out a different example.</li>
+                        <li>Finally, you average the performance across all n tests.</li>
+                    </ul>
+                    <li>It’s like giving every single data point its own personal spotlight.</li>
+                </ul>
+
+                <h4>Let’s Take a Mini Example</h4>
+                <ul>
+                    <li>Say you have a small dataset:</li>
+                    <ul>
+                        <li>
+                            <pre><code>Data = [A, B, C, D]</code></pre>
+                        </li>
+                    </ul>
+                    <li>You’ll do 4 rounds (since n = 4):</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Round</th>
+                            <th>Training Set</th>
+                            <th>Test Set</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>B, C, D</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>A, C, D</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>A, B, D</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>A, B, C</td>
+                            <td>D</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>In each round, you train the model using 3 data points and test it on the 1 point you left out.
+                        After 4 rounds, you combine the results for your final evaluation.</li>
+                </ul>
+
+                <h4>Why Use Leave-One-Out?</h4>
+                <ul>
+                    <li>Here’s a little comparison:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>What It Does</th>
+                            <th>When to Use</th>
+                        </tr>
+                        <tr>
+                            <td>Hold-Out</td>
+                            <td>One-time split</td>
+                            <td>Quick but may be biased</td>
+                        </tr>
+                        <tr>
+                            <td>K-Fold</td>
+                            <td>Split into K parts</td>
+                            <td>More balanced, less biased</td>
+                        </tr>
+                        <tr>
+                            <td>Leave-One-Out</td>
+                            <td>Train n times, each time with n-1</td>
+                            <td>Most thorough, least biased</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li><strong>Pros:</strong></li>
+                    <ul>
+                        <li>You get the maximum use of your data for training in each round.</li>
+                        <li>Since every data point is tested, no example is ignored.</li>
+                        <li>Great when you have a small dataset, and every data point is valuable.</li>
+                    </ul>
+                    <li><strong>Cons:</strong></li>
+                    <ul>
+                        <li>Computationally expensive: If you have 1000 data points, you train the model 1000 times!
+                        </li>
+                        <li>Not practical for very large datasets.</li>
+                        <li>Can be sensitive to noisy data (i.e., if one weird point is tested alone, it might give an
+                            unreliable result).</li>
+                    </ul>
+                </ul>
+
+                <h4>Real-Life Analogy</h4>
+                <ul>
+                    <li>Imagine a teacher who wants to evaluate each student’s understanding without using the same test
+                        for all. So they:</li>
+                    <ul>
+                        <li>Teach the whole class except for one student,</li>
+                        <li>Ask that one student to answer questions,</li>
+                        <li>Repeat this until every student has had their own solo test.</li>
+                    </ul>
+                    <li>At the end, the teacher gets a fair sense of how well each student might perform individually.
+                    </li>
+                    <li>That’s exactly what Leave-One-Out does — it treats each example as equally important for
+                        testing.</li>
+                </ul>
+
+                <h4>When Should You Use LOO?</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Situation</th>
+                            <th>Should You Use LOO?</th>
+                        </tr>
+                        <tr>
+                            <td>You have very little data</td>
+                            <td> Yes</td>
+                        </tr>
+                        <tr>
+                            <td>You want a low-bias evaluation</td>
+                            <td> Yes</td>
+                        </tr>
+                        <tr>
+                            <td>You have limited time/resources</td>
+                            <td> No</td>
+                        </tr>
+                        <tr>
+                            <td>You’re working with big data</td>
+                            <td> No</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>So LOO is a great option when accuracy matters more than speed, especially in small research
+                        datasets or medical studies where data is scarce.</li>
+                </ul>
+
+                <h4>Wrapping It Up</h4>
+                <ul>
+                    <li>So far in validation techniques, here’s how things stack up:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>Speed</th>
+                            <th>Accuracy</th>
+                            <th>Data Usage</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td>Hold-Out</td>
+                            <td>Fast</td>
+                            <td>Low</td>
+                            <td>Partial</td>
+                            <td>Quick & dirty checks</td>
+                        </tr>
+                        <tr>
+                            <td>K-Fold</td>
+                            <td>Medium</td>
+                            <td>Medium–High</td>
+                            <td>All (rotated)</td>
+                            <td>General-purpose ML</td>
+                        </tr>
+                        <tr>
+                            <td>Leave-One-Out</td>
+                            <td>Slow</td>
+                            <td>Very High</td>
+                            <td>All (1 test at a time)</td>
+                            <td>Small, precious datasets</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>In the end, Leave-One-Out Validation gives you a super-detailed view of your model’s
+                        performance, at the cost of time and processing power.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>4. Bootstrapping</h3>
+                <ul>
+                    <li>Bootstrapping is a resampling technique. That means instead of splitting the dataset in one
+                        fixed way (like Hold-Out or K-Fold), we create many new datasets by randomly picking examples
+                        from the original dataset — and here’s the twist — with replacement.</li>
+                </ul>
+
+                <h4>"With Replacement" Means:</h4>
+                <ul>
+                    <li>You can pick the same data point more than once in a single sample.</li>
+                    <li>Imagine you have a bag with 5 different colored balls (your dataset), and you draw one, write
+                        down the color, and then put it back in the bag before drawing again. That’s sampling with
+                        replacement.</li>
+                </ul>
+
+                <h4>Example Time!</h4>
+                <ul>
+                    <li>Suppose we have a small dataset of 5 items:</li>
+                    <ul>
+                        <li>
+                            <pre><code>Data = [A, B, C, D, E]</code></pre>
+                        </li>
+                    </ul>
+                    <li>Now we want to create a bootstrapped sample of 5 items (same size as original). A possible
+                        random sample with replacement could be:</li>
+                    <ul>
+                        <li>
+                            <pre><code>Sample 1 = [B, C, C, E, A]</code></pre>
+                        </li>
+                    </ul>
+                    <li>Notice:</li>
+                    <ul>
+                        <li>It still has 5 items (same as original).</li>
+                        <li>Item 'C' appears twice.</li>
+                        <li>Item 'D' is missing (this can happen!).</li>
+                    </ul>
+                    <li>We can create many such samples — say 1000 — and for each one, train our model and test it on
+                        the data points not included in that sample. The idea is to get a better estimate of how the
+                        model might perform in general.</li>
+                </ul>
+
+                <h4>Why Do We Use Bootstrapping?</h4>
+                <ul>
+                    <li>Sometimes, especially when data is limited, we can’t afford to hold out a lot of it for testing.
+                        Bootstrapping lets us:</li>
+                    <ul>
+                        <li>Make the most out of small datasets.</li>
+                        <li>Estimate the accuracy or error of a model reliably.</li>
+                        <li>Reduce bias in model evaluation.</li>
+                        <li>Generate multiple models (like in bagging or Random Forests).</li>
+                    </ul>
+                    <li>It’s a very flexible approach and doesn’t assume any specific structure about your data.</li>
+                </ul>
+
+                <h4>How Bootstrapping Works (Step-by-Step)</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Step</th>
+                            <th>What Happens</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>From your dataset of size n, sample n instances with replacement.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Train your model on this sample.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Test the model on the data points that weren’t selected (called "out-of-bag").</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Repeat this process many times (e.g., 1000 rounds).</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Average the results for a final performance estimate.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Let’s Compare With Other Methods</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>Uses All Data?</th>
+                            <th>Repeated Rounds</th>
+                            <th>Biased?</th>
+                            <th>Fast?</th>
+                            <th>Ideal For</th>
+                        </tr>
+                        <tr>
+                            <td>Hold-Out</td>
+                            <td> No</td>
+                            <td> No</td>
+                            <td> Yes</td>
+                            <td> Fast</td>
+                            <td>Large datasets</td>
+                        </tr>
+                        <tr>
+                            <td>K-Fold</td>
+                            <td> Yes (rotates)</td>
+                            <td> Yes</td>
+                            <td> Less</td>
+                            <td>Moderate</td>
+                            <td>Most cases</td>
+                        </tr>
+                        <tr>
+                            <td>Leave-One-Out</td>
+                            <td> Yes</td>
+                            <td> Yes (many)</td>
+                            <td> No</td>
+                            <td> Slow</td>
+                            <td>Small, precious datasets</td>
+                        </tr>
+                        <tr>
+                            <td>Bootstrapping</td>
+                            <td> Yes (reused)</td>
+                            <td> Yes (many)</td>
+                            <td> No</td>
+                            <td> Depends</td>
+                            <td>Estimating model accuracy</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Real-Life Analogy</h4>
+                <ul>
+                    <li>Think of bootstrapping like this:</li>
+                    <ul>
+                        <li>You’re trying to figure out how good your friend is at solving puzzles. But you only have 10
+                            puzzles. Instead of giving all at once or splitting them, you keep reshuffling those 10
+                            puzzles, giving a different combination each time — some repeated, some skipped. Over time,
+                            you get a solid idea of their average performance across all types of challenges.</li>
+                    </ul>
+                </ul>
+
+                <h4>Where Bootstrapping Shines</h4>
+                <ul>
+                    <li>In ensemble learning: Bootstrapping is the secret sauce behind algorithms like Bagging and
+                        Random Forests.</li>
+                    <li>In confidence interval estimation: You can estimate uncertainty of predictions.</li>
+                    <li>In real-world cases where getting new data is hard, but you want to simulate more data
+                        situations.</li>
+                </ul>
+
+                <h4>Final Thoughts</h4>
+                <ul>
+                    <li>Bootstrapping may seem like magic at first — reusing the same data to act like we have new data
+                        — but it’s a statistically sound, clever trick. It’s a bit like trying out different
+                        combinations of ingredients from your kitchen to see how many tasty dishes you can make without
+                        going shopping again!</li>
+                    <li>So with bootstrapping, even a small dataset can go a long way.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Supervised Learning Algorithms: An Overview</h2>
+            <ul>
+                <li>So, you’re diving into Supervised Learning — one of the most popular branches of machine learning.
+                    The idea here is pretty simple: you train your model on labeled data, meaning your data already has
+                    the answers (labels), and the model learns to predict those answers for new data.</li>
+                <li>There are many algorithms in this space, each with its own style and strengths. Here’s a quick list
+                    of the major ones you’ll come across:</li>
+                <ul>
+                    <li>Linear Regression</li>
+                    <li>Logistic Regression</li>
+                    <li>Decision Trees</li>
+                    <li>Support Vector Machine (SVM)</li>
+                    <li>K-Nearest Neighbours (KNN)</li>
+                    <li>CN2 Algorithm</li>
+                    <li>Naive Bayes</li>
+                    <li>Artificial Neural Networks (ANN)</li>
+                </ul>
+                <li>Each of these tackles different problems and data types, but today, let’s start simple and build a
+                    strong foundation by understanding the very first one: Linear Regression.</li>
+            </ul>
+            <div class="in">
+                <h3>What is Linear Regression?</h3>
+                <ul>
+                    <li>At its core, Linear Regression is a way to predict a number — a continuous value — based on some
+                        input data.</li>
+                    <li>Imagine you want to predict the price of a house based on its size. You might have data on
+                        several houses: their sizes and prices. Linear regression helps you draw a straight line that
+                        best fits this data, so when you get a new house size, you can guess the price!</li>
+                </ul>
+
+                <h4>Breaking It Down:</h4>
+                <ul>
+                    <li>Input (Feature): The thing you know (e.g., house size in square feet).</li>
+                    <li>Output (Target): The thing you want to predict (e.g., house price in dollars).</li>
+                    <li>Model: A straight line that connects input to output.</li>
+                </ul>
+
+                <ul>
+                    <li>Mathematically, it looks like:
+                        <pre><code>y=mx+c
+y=mx+c
+</code></pre>
+                    </li>
+                    <li>Where:
+                        <ul>
+                            <li><strong>y</strong> = predicted output (house price)</li>
+                            <li><strong>x</strong> = input feature (house size)</li>
+                            <li><strong>m</strong> = slope (how price changes with size)</li>
+                            <li><strong>c</strong> = intercept (price when size is zero)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Real-Life Example: Predicting House Prices</h4>
+                <ul>
+                    <li>Suppose we have this tiny dataset:</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>House Size (sq ft)</th>
+                            <th>Price (in $1000s)</th>
+                        </tr>
+                        <tr>
+                            <td>800</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>1000</td>
+                            <td>180</td>
+                        </tr>
+                        <tr>
+                            <td>1200</td>
+                            <td>210</td>
+                        </tr>
+                        <tr>
+                            <td>1500</td>
+                            <td>260</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>Plotting these points, you’d see they roughly line up in a straight line going up — bigger
+                        house, higher price.</li>
+                    <li>Linear regression tries to find the best line through these points.</li>
+                </ul>
+
+                <h4>How Does Linear Regression Find This Line?</h4>
+                <ul>
+                    <li>It uses a method called Least Squares — the goal is to minimize the total “distance” (error)
+                        between the actual prices and the prices predicted by the line.</li>
+                    <li>Imagine throwing darts at a line: you want the line positioned so that the darts land as close
+                        as possible to it.</li>
+                </ul>
+
+                <h4>Visual Understanding</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Data Point</th>
+                            <th>Actual Price</th>
+                            <th>Predicted Price</th>
+                            <th>Error (Distance)</th>
+                        </tr>
+                        <tr>
+                            <td>House 1</td>
+                            <td>150</td>
+                            <td>155</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>House 2</td>
+                            <td>180</td>
+                            <td>185</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>House 3</td>
+                            <td>210</td>
+                            <td>215</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>House 4</td>
+                            <td>260</td>
+                            <td>255</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>Least squares tries to make these errors as small as possible.</li>
+                </ul>
+
+                <h4>Why Use Linear Regression?</h4>
+                <ul>
+                    <li>Simple and fast to understand and train.</li>
+                    <li>Works well when the relationship between input and output is roughly linear.</li>
+                    <li>Provides a clear mathematical formula you can interpret.</li>
+                    <li>Good starting point before trying complex models.</li>
+                </ul>
+
+                <h4>Quick Summary Table</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Goal</td>
+                            <td>Predict continuous output</td>
+                        </tr>
+                        <tr>
+                            <td>Model Type</td>
+                            <td>Linear (straight line)</td>
+                        </tr>
+                        <tr>
+                            <td>Input</td>
+                            <td>Numeric features</td>
+                        </tr>
+                        <tr>
+                            <td>Output</td>
+                            <td>Continuous numerical value</td>
+                        </tr>
+                        <tr>
+                            <td>Training Method</td>
+                            <td>Least Squares (minimize error)</td>
+                        </tr>
+                        <tr>
+                            <td>Real-life Example</td>
+                            <td>Predicting house prices, stock prices, salary</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Wrapping It Up</h4>
+                <ul>
+                    <li>Linear Regression is like drawing the best straight line through your data points to make
+                        predictions. It’s simple, intuitive, and a great starting point for learning machine learning.
+                    </li>
+                    <li>Next up, you might want to explore Logistic Regression — which, despite the name, is used for
+                        classification (predicting categories). Let me know if you want to jump there!</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Logistic Regression: What’s It All About?</h3>
+                <ul>
+                    <li>If you remember, Linear Regression was about predicting continuous numbers — like the price of a
+                        house or a person’s salary. But what if you want to solve a different kind of problem — one
+                        where you want to classify things? For example:</li>
+                    <ul>
+                        <li>Will an email be spam or not spam?</li>
+                        <li>Is a patient’s test result positive or negative?</li>
+                        <li>Will a customer buy a product or not buy?</li>
+                    </ul>
+                    <li>For problems like these, where the answer is a category or class instead of a number, we use
+                        classification algorithms. And one of the simplest and most widely used is Logistic Regression.
+                    </li>
+                </ul>
+
+                <h4>How Does Logistic Regression Work?</h4>
+                <ul>
+                    <li>Unlike linear regression, logistic regression predicts a probability — a number between 0 and 1
+                        — that represents how likely something belongs to a particular class. For example, “There’s an
+                        80% chance this email is spam.”</li>
+                </ul>
+
+                <h4>The Core Idea: The Logistic Function (Sigmoid)</h4>
+                <ul>
+                    <li>Logistic regression uses a special curve called the sigmoid function to squeeze any number into
+                        a value between 0 and 1.</li>
+                    <li>The formula looks like this:</li>
+                </ul>
+                <p class="ms">
+                    \( \sigma(z) = \frac{1}{1 + e^{-z}} \)
+                </p>
+                <ul>
+                    <li>Where:</li>
+                    <ul>
+                        <li><strong>z</strong> is a linear combination of input features (like \( z = mx + c \) in
+                            linear regression)</li>
+                        <li><strong>e</strong> is Euler’s number (about 2.718)</li>
+                    </ul>
+                    <li>The sigmoid curve is “S” shaped — it takes any real number and converts it into a probability.
+                    </li>
+                </ul>
+
+                <h4>Simple Real-Life Example: Predicting if Someone Will Play Basketball</h4>
+                <ul>
+                    <li>Imagine you want to predict if someone will play basketball today based on the temperature.
+                        Here’s some data:</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Temperature (°F)</th>
+                            <th>Played Basketball? (Yes=1, No=0)</th>
+                        </tr>
+                        <tr>
+                            <td>55</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>65</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>75</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>85</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>Logistic regression will fit a curve that outputs the probability of playing basketball at each
+                        temperature.</li>
+                    <ul>
+                        <li>At 55°F, the model might say: 20% chance → probably no.</li>
+                        <li>At 85°F, it might say: 90% chance → probably yes.</li>
+                    </ul>
+                </ul>
+
+                <h4>Decision Boundary</h4>
+                <ul>
+                    <li>When we use logistic regression, we usually set a cutoff (called a threshold) to decide the
+                        class.</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Probability Predicted</th>
+                            <th>Final Decision</th>
+                        </tr>
+                        <tr>
+                            <td>≥ 0.5</td>
+                            <td>Yes (Class 1)</td>
+                        </tr>
+                        <tr>
+                            <td>&lt; 0.5</td>
+                            <td>No (Class 0)</td>
+                        </tr>
+                    </table>
+                </div>
+                <ul>
+                    <li>This means if the model predicts a 0.7 probability, we say “Yes,” but if it predicts 0.3, we say
+                        “No.”</li>
+                </ul>
+
+                <h4>How Is Logistic Regression Different From Linear Regression?</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Linear Regression</th>
+                            <th>Logistic Regression</th>
+                        </tr>
+                        <tr>
+                            <td>Predicts</td>
+                            <td>Continuous numeric values</td>
+                            <td>Probabilities (between 0 and 1)</td>
+                        </tr>
+                        <tr>
+                            <td>Output type</td>
+                            <td>Any real number</td>
+                            <td>Values squeezed into (0,1) by sigmoid</td>
+                        </tr>
+                        <tr>
+                            <td>Use case</td>
+                            <td>Regression problems</td>
+                            <td>Binary classification problems</td>
+                        </tr>
+                        <tr>
+                            <td>Model output</td>
+                            <td>Straight line</td>
+                            <td>S-shaped sigmoid curve</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Why Is Logistic Regression So Popular?</h4>
+                <ul>
+                    <li>It’s easy to understand and implement.</li>
+                    <li>It outputs probabilities, which gives us more insight than just “yes/no.”</li>
+                    <li>Works well when the relationship between features and the log-odds of the outcome is linear.
+                    </li>
+                    <li>It’s a great starting point for binary classification problems.</li>
+                </ul>
+
+                <h4>To Wrap Up</h4>
+                <ul>
+                    <li>Logistic Regression is your go-to algorithm when you want to classify data into two classes and
+                        get a probability that tells you how confident the model is. It uses the clever sigmoid function
+                        to map any input into a probability between 0 and 1, and based on a cutoff, it decides the
+                        class.</li>
+                    <li>Next, you might want to explore Decision Trees, which are more like asking a series of “yes/no”
+                        questions to classify data. Let me know if you want me to explain that too!</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Decision Trees</h3>
+                <ul>
+                    <li>Imagine you want to decide what to eat for dinner. Instead of flipping a coin, you ask yourself
+                        some simple questions like:</li>
+                    <ul>
+                        <li>Do I want something healthy?</li>
+                        <li>Do I want something quick to make?</li>
+                        <li>Am I in the mood for something spicy?</li>
+                    </ul>
+                    <li>This kind of step-by-step questioning is exactly what Decision Trees do—but for data!</li>
+                </ul>
+
+                <h4>What is a Decision Tree?</h4>
+                <ul>
+                    <li>A Decision Tree is a popular machine learning algorithm that helps you make decisions based on a
+                        series of questions (called splits) about the data. It looks like a flowchart or a tree,
+                        starting from a single question at the root and branching out into other questions or final
+                        answers at the leaves.</li>
+                    <li>Each internal node represents a test on an attribute (like “Is temperature &gt; 70°F?”), and
+                        each branch represents the outcome of that test (Yes/No). The leaves represent the final
+                        decision or class (like “Play basketball” or “Don’t play”).</li>
+                </ul>
+
+                <h4>Why Use Decision Trees?</h4>
+                <ul>
+                    <li>Easy to understand and interpret (you can even draw it!)</li>
+                    <li>Handles both categorical and numerical data</li>
+                    <li>No need to normalize or scale data</li>
+                    <li>Works well for classification and regression tasks</li>
+                </ul>
+
+                <h4>Real-Life Example: Should You Play Basketball?</h4>
+                <ul>
+                    <li>Let’s say you want to decide if you should play basketball today. You have these features:</li>
+                    <ul>
+                        <li>Temperature</li>
+                        <li>Is it raining?</li>
+                        <li>Is it a weekday?</li>
+                    </ul>
+                    <li>Here’s a simple decision tree for this:</li>
+                </ul>
+
+                <img src="../../images/ml2.svg" alt="" class="wb">
+
+                <h4>How Does a Decision Tree Learn?</h4>
+                <ul>
+                    <li>The tree learns by splitting the data based on features that best separate the classes. The goal
+                        is to make groups that are as pure as possible — meaning most of the examples in a group belong
+                        to one class.</li>
+                </ul>
+
+                <h4>Measuring the Quality of Splits: Entropy and Information Gain</h4>
+                <ul>
+                    <li>To decide the best question to ask at each step, the tree uses concepts like:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Term</th>
+                            <th>What it Means</th>
+                        </tr>
+                        <tr>
+                            <td>Entropy</td>
+                            <td>A measure of uncertainty or disorder in the data. Lower entropy means purer groups.</td>
+                        </tr>
+                        <tr>
+                            <td>Information Gain</td>
+                            <td>How much uncertainty is reduced by splitting on a feature. The best split maximizes this
+                                gain.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Quick Example of Entropy</h4>
+                <ul>
+                    <li>Suppose you have a group with:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Class</th>
+                            <th>Number of Samples</th>
+                        </tr>
+                        <tr>
+                            <td>Play</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Don’t Play</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>This group is mostly “Play,” so entropy is low (less uncertain). If the group were half “Play”
+                        and half “Don’t Play,” entropy would be higher (more uncertain).</li>
+                </ul>
+
+                <h4>Advantages and Limitations</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Advantages</th>
+                            <th>Limitations</th>
+                        </tr>
+                        <tr>
+                            <td>Easy to interpret and visualize</td>
+                            <td>Can easily overfit (too complex)</td>
+                        </tr>
+                        <tr>
+                            <td>Handles different data types</td>
+                            <td>Small changes in data can change tree drastically</td>
+                        </tr>
+                        <tr>
+                            <td>Requires little data preprocessing</td>
+                            <td>Might be biased towards features with more levels</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>To Summarize</h4>
+                <ul>
+                    <li>Decision Trees are like asking a series of simple questions to reach a conclusion.</li>
+                    <li>They split data step by step to create pure groups.</li>
+                    <li>They use measures like entropy and information gain to decide the best splits.</li>
+                    <li>Great for beginners because the output is easy to understand and explain.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Support Vector Machine (SVM): Finding the Best Boundary</h3>
+                <ul draggable="true">
+                    <li>Imagine you have a basket full of apples and oranges scattered on a table, and you want to
+                        separate them using a straight line so that all apples are on one side and all oranges on the
+                        other. Sounds simple, right?</li>
+                    <li>This is exactly the kind of problem that Support Vector Machines (SVM) help solve — they find
+                        the best possible boundary to separate different classes of data.</li>
+                </ul>
+
+                <h4>What is SVM?</h4>
+                <ol>
+                    <li>SVM is a powerful supervised learning algorithm used mostly for classification tasks (though it
+                        can be used for regression too). It tries to find a line (in 2D), or a plane/hyperplane (in
+                        higher dimensions), that separates different classes with the maximum margin — meaning the
+                        boundary that is as far away as possible from the nearest data points of each class.</li>
+                </ol>
+
+                <h4>Key Concepts in SVM</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Concept</th>
+                            <th>Explanation</th>
+                        </tr>
+                        <tr>
+                            <td>Hyperplane</td>
+                            <td>The decision boundary that separates classes.</td>
+                        </tr>
+                        <tr>
+                            <td>Margin</td>
+                            <td>The gap or distance between the hyperplane and closest data points of each class. SVM
+                                maximizes this margin.</td>
+                        </tr>
+                        <tr>
+                            <td>Support Vectors</td>
+                            <td>The data points closest to the hyperplane — these “support” or define the boundary.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Visualizing SVM in 2D</h4>
+                <p>Imagine emgoies belonging to two classes, apple and orange:</p>
+
+                <img src="../../images/ml3.svg" alt="" class="wb">
+                <p>But it picks the line that has the biggest “gap” or margin between the nearest apple and orange
+                    .</p>
+
+                <h4>Why Maximize the Margin?</h4>
+                <p>A bigger margin means better generalization — the model will perform better on new data, not
+                    just the training data. Think of it as drawing a fence between apples and oranges, and you want
+                    the fence far enough from the nearest fruits so no one’s mistakenly included on the wrong side.
+                </p>
+
+                <h4>What if Data Isn’t Linearly Separable?</h4>
+                <p>Sometimes, the apples and oranges are all mixed up, and no straight line can separate them
+                    cleanly.</p>
+                <p>Example:</p>
+
+                <img src="../../images/ml4.svg" alt="" class="wb">
+
+                <p>In such cases, SVM uses a trick called the Kernel Trick:</p>
+                <ul>
+                    <li>It maps data into a higher-dimensional space where the classes become linearly separable.
+                    </li>
+                    <li>Think of it like lifting the fruits off the table into 3D, where a flat sheet (plane) can
+                        separate them easily.</li>
+                </ul>
+
+                <h4>Common Kernels in SVM</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Kernel Type</th>
+                            <th>Use Case</th>
+                            <th>What It Does</th>
+                        </tr>
+                        <tr>
+                            <td>Linear Kernel</td>
+                            <td>When data is linearly separable</td>
+                            <td>No mapping; just draws a straight line</td>
+                        </tr>
+                        <tr>
+                            <td>Polynomial Kernel</td>
+                            <td>When data needs a curved boundary</td>
+                            <td>Maps data into polynomial higher dimension</td>
+                        </tr>
+                        <tr>
+                            <td>Radial Basis Function (RBF)</td>
+                            <td>When data is very complex</td>
+                            <td>Maps data into infinite-dimensional space for maximum flexibility</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Real-Life Example</h4>
+                <ul>
+                    <li>Imagine you’re an email spam filter. Your algorithm needs to decide whether an email is spam or
+                        not based on features like:</li>
+                    <ul>
+                        <li>Number of links</li>
+                        <li>Certain keywords</li>
+                        <li>Sender reputation</li>
+                    </ul>
+                    <li>SVM will try to find the best boundary that separates spam emails from non-spam emails by
+                        considering these features, ensuring it’s robust even with tricky examples close to the decision
+                        boundary.</li>
+                </ul>
+
+                <h4>Advantages and Disadvantages of SVM</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Advantages</th>
+                            <th>Disadvantages</th>
+                        </tr>
+                        <tr>
+                            <td>Works well with high-dimensional data</td>
+                            <td>Can be slow on very large datasets</td>
+                        </tr>
+                        <tr>
+                            <td>Effective when number of features &gt; number of samples</td>
+                            <td>Choosing the right kernel can be tricky</td>
+                        </tr>
+                        <tr>
+                            <td>Good at finding clear margins of separation</td>
+                            <td>Less interpretable compared to decision trees</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Quick Summary</h4>
+                <ul>
+                    <li>SVM tries to find the best boundary (hyperplane) to separate classes with the largest margin.
+                    </li>
+                    <li>Uses support vectors (closest points) to define this boundary.</li>
+                    <li>When data is messy, SVM uses the Kernel Trick to separate data in higher dimensions.</li>
+                    <li>Very useful in classification problems like spam detection, image recognition, and more.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>K-Nearest Neighbours (KNN) – What's the Vibe?</h3>
+
+                <ul>
+                    <li>Imagine you're in a new city and you're craving pizza. You open Google Maps, and it shows
+                        several restaurants nearby. You spot a few labeled “Pizza,” and based on what’s closest to you,
+                        you decide where to go.</li>
+                    <li>That’s kind of how KNN works! It looks at the nearest neighbors (data points) to decide which
+                        class a new data point should belong to.</li>
+                </ul>
+
+                <h4>But What Is KNN Really?</h4>
+                <ul>
+                    <li>KNN is a supervised learning algorithm used for classification (and sometimes regression). The
+                        idea is simple:</li>
+                    <ul>
+                        <li>To classify a new data point, KNN looks at the ‘K’ closest points in the training data and
+                            assigns the class that is most common among them.</li>
+                    </ul>
+                    <li>Let’s break it down!</li>
+                </ul>
+
+                <h4>Step-by-Step: How KNN Works</h4>
+                <ul>
+                    <li>Choose K – the number of neighbors you want to look at (like 3, 5, etc.).</li>
+                    <li>Calculate the distance between the new point and all existing data points (usually using
+                        Euclidean distance).</li>
+                    <li>Pick the K nearest neighbors – those closest to the new point.</li>
+                    <li>Vote – The majority class among these K neighbors wins.</li>
+                    <li>Assign the class to the new point.</li>
+                </ul>
+
+                <h4>Real-Life Analogy</h4>
+                <ul>
+                    <li>Suppose you move into a new apartment and want to guess whether it’s in a residential or
+                        commercial zone. You look at your 3 nearest buildings:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Neighbour</th>
+                            <th>Type</th>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>Residential</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>Commercial</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>Residential</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>So, 2 out of 3 are residential → your guess? You're probably in a residential area!</li>
+                </ul>
+
+                <h4>Distance Matters</h4>
+                <ul>
+                    <li>The whole KNN idea revolves around distance:</li>
+                    <ul>
+                        <li>The most common metric? <strong>Euclidean Distance</strong> (straight-line distance).</li>
+                    </ul>
+                </ul>
+
+                <ul>
+                    <li>Here’s the Euclidean distance formula for 2 points:</li>
+                </ul>
+
+                <p class="ms">Distance = \((x_2 − x_1)^2 + (y_2 − y_1)^2\)</p>
+
+                <h4>Example: Classifying Fruits</h4>
+                <ul>
+                    <li>Let’s say we want to classify a new fruit based on weight and texture:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Fruit</th>
+                            <th>Weight (grams)</th>
+                            <th>Texture (1 = smooth, 0 = bumpy)</th>
+                            <th>Class</th>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>150</td>
+                            <td>1</td>
+                            <td>Apple</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>170</td>
+                            <td>0</td>
+                            <td>Orange</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>140</td>
+                            <td>1</td>
+                            <td>Apple</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>Now, we get a new fruit with weight = 160, texture = 1. We compute distances to all 3 and find
+                        the 2 nearest neighbors (K=2). Suppose both are Apples → classify it as Apple.</li>
+                </ul>
+
+                <h4>Choosing the Right 'K'</h4>
+                <ul>
+                    <li>This is important!</li>
+                    <ul>
+                        <li>If K is too small (like 1), it might be sensitive to noise.</li>
+                        <li>If K is too large, it may include points from other classes and mess things up.</li>
+                    </ul>
+                    <li>A good practice is to try multiple K values using cross-validation.</li>
+                </ul>
+
+                <h4>Pros and Cons</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>👍 Pros</th>
+                            <th>👎 Cons</th>
+                        </tr>
+                        <tr>
+                            <td>Simple to understand</td>
+                            <td>Slower with large datasets</td>
+                        </tr>
+                        <tr>
+                            <td>No training step needed</td>
+                            <td>Requires good choice of K and distance</td>
+                        </tr>
+                        <tr>
+                            <td>Adapts easily to new data</td>
+                            <td>Not great with high-dimensional data</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>A Few Tips</h4>
+                <ul>
+                    <li>Scale your data (e.g., normalize features), or else distance calculations will be off.</li>
+                    <li>Works best when features are numeric and meaningful.</li>
+                    <li>It’s called a lazy learner because it doesn’t learn a model — it just stores data and waits
+                        until a prediction is needed.</li>
+                </ul>
+
+                <h4>Wrapping Up</h4>
+                <ul>
+                    <li>KNN is like that friend who always asks the neighbors before making a decision. It's simple,
+                        doesn’t require complex math to understand, and is surprisingly powerful for small datasets.
+                    </li>
+                    <li>Next time you look at a new item and want to decide what it might be — just imagine KNN looking
+                        at its nearby buddies and voting based on majority.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>CN2 Algorithm</h3>
+                <ul>
+                    <li>Alright! So far, you’ve seen things like Decision Trees, KNN, and SVM, right? All of these are
+                        different approaches to solving classification problems — where we’re trying to put stuff into
+                        the right category.</li>
+                    <li>Now enter: CN2 Algorithm — not as famous as others, but it's a rule-based learner. That means
+                        instead of learning a big tree or finding a boundary (like in SVM), it learns IF-THEN rules.
+                    </li>
+                    <li>Think of it like this:</li>
+                    <ul>
+                        <li><strong>IF</strong> a person is above 60 AND has shortness of breath → <strong>THEN</strong>
+                            risk = high</li>
+                        <li><strong>IF</strong> student has attendance > 90% AND assignment = submitted →
+                            <strong>THEN</strong> result = pass
+                        </li>
+                    </ul>
+                    <li>That's the kind of stuff CN2 creates — clear, readable rules.</li>
+                </ul>
+                <h4>CN2 in Simple Words</h4>
+                <ul>
+                    <li>CN2 is used for classification problems.</li>
+                    <li>It creates a set of rules that help you decide what category a new data point belongs to.</li>
+                    <li>It tries to find general rules that are accurate and not too specific.</li>
+                    <li>The algorithm searches through possible combinations of conditions and picks the ones that
+                        perform best.</li>
+                </ul>
+
+                <h4>Why “CN2”?</h4>
+                <ul>
+                    <li>The name CN2 comes from its predecessor, CN, and this was its improved version (hence CN “2”).
+                        It was developed to handle noisy data better and avoid overly complex rules.</li>
+                </ul>
+
+                <h4>How Does CN2 Work?</h4>
+                <ul>
+                    <li>Let’s break the process down.</li>
+                    <li>Step 1: Start with all training data.</li>
+                    <li>Step 2: Generate possible rules.</li>
+                    <li>It looks for conditions that can split the data well, like:</li>
+                    <ul>
+                        <li>age > 30</li>
+                        <li>income = high</li>
+                        <li>gender = female</li>
+                    </ul>
+                    <li>Step 3: Evaluate each rule.</li>
+                    <li>It checks:</li>
+                    <ul>
+                        <li>How accurate is this rule?</li>
+                        <li>How many examples does it cover?</li>
+                        <li>Is it better than random guessing?</li>
+                    </ul>
+                    <li>Step 4: Pick the best rule and remove the covered examples.</li>
+                    <li>Step 5: Repeat until no more good rules are found.</li>
+                </ul>
+
+                <h4>A Mini Example</h4>
+                <ul>
+                    <li>Let’s say you're trying to predict whether someone buys a product based on age and salary.</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Age</th>
+                            <th>Salary</th>
+                            <th>Buys?</th>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>Low</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>High</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>35</td>
+                            <td>High</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>40</td>
+                            <td>Low</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>High</td>
+                            <td>Yes</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>CN2 might generate rules like:</li>
+                    <ul>
+                        <li><strong>IF</strong> salary = High → <strong>THEN</strong> Buys = Yes</li>
+                        <li><strong>IF</strong> age < 30 AND salary=Low → <strong>THEN</strong> Buys = No</li>
+                    </ul>
+                    <li>See how it finds meaningful patterns?</li>
+                </ul>
+
+                <h4>How Is CN2 Different from Decision Trees?</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Decision Trees</th>
+                            <th>CN2 Algorithm</th>
+                        </tr>
+                        <tr>
+                            <td>Builds a tree structure</td>
+                            <td>Builds IF-THEN rules</td>
+                        </tr>
+                        <tr>
+                            <td>Each path = one rule</td>
+                            <td>Rules are independent</td>
+                        </tr>
+                        <tr>
+                            <td>Easy to visualize</td>
+                            <td>Easy to read</td>
+                        </tr>
+                        <tr>
+                            <td>Can be less flexible</td>
+                            <td>More flexible rule selection</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>While both aim to split data into classes, CN2 can express more flexible conditions because it’s
+                        not locked into a tree structure.</li>
+                </ul>
+
+                <h4>Pros and Cons of CN2</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                        <tr>
+                            <td>Produces human-readable rules</td>
+                            <td>Can be slow for large datasets</td>
+                        </tr>
+                        <tr>
+                            <td>Handles noisy data fairly well</td>
+                            <td>Might not scale well</td>
+                        </tr>
+                        <tr>
+                            <td>Flexible, avoids overfitting</td>
+                            <td>Less popular, so fewer tools</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Where Is It Used?</h4>
+                <ul>
+                    <li>In medical diagnosis (like generating health rules)</li>
+                    <li>In credit scoring systems</li>
+                    <li>In decision support systems</li>
+                    <li>Basically, anywhere you want clear rules from data!</li>
+                </ul>
+
+                <h4>Summary</h4>
+                <ul>
+                    <li>So, CN2 is like a smart rule-writer. Instead of drawing boundaries or trees, it writes logic
+                        like:</li>
+                    <ul>
+                        <li><strong>IF</strong> conditions → <strong>THEN</strong> class</li>
+                    </ul>
+                    <li>This makes the model interpretable and practical, especially when you want to explain your
+                        decisions clearly.</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>First Things First: What is Naive Bayes?</h3>
+
+                <ul>
+                    <li>Alright, so you've probably heard of probabilities in everyday life:</li>
+                    <ul>
+                        <li>
+                            <pre><code>"There's a 70% chance it will rain today."</code></pre>
+                        </li>
+                    </ul>
+                    <li>Naive Bayes is a supervised learning algorithm that uses probability to predict categories or
+                        classes. It’s based on Bayes’ Theorem — a mathematical rule for updating our guess about
+                        something based on new evidence.</li>
+                    <li>The “Naive” part? It assumes that all the features (like age, income, color, etc.) are
+                        independent of each other. That’s a pretty strong assumption — and usually not true — but
+                        surprisingly, it works well in many real-world cases!</li>
+                </ul>
+
+                <h4>Real-Life Analogy: Spam Filter</h4>
+                <ul>
+                    <li>Imagine you work for an email company like Gmail. You want to build a system that can predict
+                        whether an email is spam or not.</li>
+                    <li>You have past data showing which words (like “win”, “free”, “lottery”) appear frequently in spam
+                        emails, and which words (like “project”, “meeting”) show up in normal ones.</li>
+                    <li>Using Naive Bayes, your system can look at the words in a new email and calculate the
+                        probability of it being spam or not — and make a decision.</li>
+                </ul>
+
+                <h4>Bayes' Theorem (In a Friendly Way)</h4>
+                <ul>
+                    <li>Here’s the formula (don’t worry, we’ll explain it simply):</li>
+                    <ul>
+                        <li>
+                            <p class="ms">P(A∣B)=\frac{P(B∣A)⋅P(A)}{P(B)}</p>
+                        </li>
+                    </ul>
+                    <li>What it means in plain English:</li>
+                    <ul>
+                        <li>The chance of A happening given B is based on:</li>
+                        <ul>
+                            <li>How likely B is if A is true,</li>
+                            <li>How common A is in general,</li>
+                            <li>And how common B is overall.</li>
+                        </ul>
+                    </ul>
+                    <li>For Naive Bayes:</li>
+                    <ul>
+                        <li><strong>A</strong> = Class (e.g., Spam or Not Spam)</li>
+                        <li><strong>B</strong> = Evidence/Features (e.g., Words in the email)</li>
+                    </ul>
+                    <li>We use this to compute which class (spam/not spam) is most probable for the given features.</li>
+                </ul>
+
+                <h4>Example: Classifying Fruits</h4>
+                <ul>
+                    <li>Imagine you're trying to guess the type of fruit based on color and size.</li>
+                    <li>You have this training data:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Fruit</th>
+                        </tr>
+                        <tr>
+                            <td>Red</td>
+                            <td>Small</td>
+                            <td>Cherry</td>
+                        </tr>
+                        <tr>
+                            <td>Green</td>
+                            <td>Large</td>
+                            <td>Watermelon</td>
+                        </tr>
+                        <tr>
+                            <td>Yellow</td>
+                            <td>Medium</td>
+                            <td>Banana</td>
+                        </tr>
+                        <tr>
+                            <td>Red</td>
+                            <td>Large</td>
+                            <td>Apple</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>Now, a new fruit comes in that is Red and Large. What fruit is it?</li>
+                    <li>Using Naive Bayes:</li>
+                    <ul>
+                        <li>Check how often each fruit appears (prior probability).</li>
+                        <li>Check how often red or large appear with each fruit (likelihood).</li>
+                        <li>Calculate probabilities.</li>
+                        <li>Choose the fruit with the highest probability.</li>
+                    </ul>
+                </ul>
+
+                <h4>Step-by-Step: How Naive Bayes Works</h4>
+                <ul>
+                    <li>Let’s say you’re building a spam filter:</li>
+                    <ul>
+                        <li>Prepare the data</li>
+                        <ul>
+                            <li>Emails labeled as spam or not.</li>
+                            <li>Extract features (like word frequency).</li>
+                        </ul>
+                        <li>Calculate Prior Probabilities</li>
+                        <ul>
+                            <li>% of emails that are spam.</li>
+                            <li>% of emails that are not spam.</li>
+                        </ul>
+                        <li>Calculate Likelihoods</li>
+                        <ul>
+                            <li>How often each word appears in spam.</li>
+                            <li>How often it appears in non-spam.</li>
+                        </ul>
+                        <li>Apply Bayes’ Theorem</li>
+                        <ul>
+                            <li>Use the formula to find the probability of spam vs. not spam.</li>
+                        </ul>
+                        <li>Pick the class with the highest probability</li>
+                    </ul>
+                </ul>
+
+                <h4>Simple Table Example</h4>
+                <ul>
+                    <li>Let's try this:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Word</th>
+                            <th>Spam Count</th>
+                            <th>Not Spam Count</th>
+                        </tr>
+                        <tr>
+                            <td>Free</td>
+                            <td>20</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Offer</td>
+                            <td>18</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Meeting</td>
+                            <td>1</td>
+                            <td>15</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>If an email has the words: “Free Offer”, it’s more likely to be spam.</li>
+                    <li>If it says: “Meeting”, it’s likely not spam.</li>
+                    <li>Naive Bayes would calculate probabilities for both cases and choose the higher one.</li>
+                </ul>
+
+                <h4>Pros and Cons</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                        <tr>
+                            <td>Simple and fast</td>
+                            <td>Assumes independence between features</td>
+                        </tr>
+                        <tr>
+                            <td>Works well with text data</td>
+                            <td>Doesn’t handle numeric data well (by default)</td>
+                        </tr>
+                        <tr>
+                            <td>Good with high-dimensional data</td>
+                            <td>Struggles if features are dependent</td>
+                        </tr>
+                        <tr>
+                            <td>Easy to implement</td>
+                            <td>Needs clean and preprocessed data</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Where Is It Used?</h4>
+                <ul>
+                    <li>Spam Filters</li>
+                    <li>Sentiment Analysis (positive/negative reviews)</li>
+                    <li>News Categorization (politics, sports, etc.)</li>
+                    <li>Medical Diagnosis</li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Artificial Neural Networks (ANN) – Explained Like You’re New to It</h3>
+
+                <ul>
+                    <li>Welcome to the world of Artificial Neural Networks, or ANN for short. If you've ever heard
+                        people talk about "AI" or "machine learning" and wondered what’s going on behind the scenes,
+                        neural networks are one of the main engines driving all that magic. Let's explore it step by
+                        step in a simple, friendly way.</li>
+                </ul>
+
+                <h4>What Are Artificial Neural Networks?</h4>
+                <ul>
+                    <li>Think of your brain. It's made up of billions of neurons, right? Each neuron receives
+                        information, processes it, and passes it on. Now, Artificial Neural Networks are inspired by
+                        this biological structure. They try to mimic how a human brain works—at least in a very
+                        simplified, mathematical way.</li>
+                    <li>In essence, ANN is a type of machine learning model that is especially powerful for tasks like
+                        image recognition, speech processing, and even playing games.</li>
+                </ul>
+
+                <h4>Basic Structure of ANN</h4>
+                <ul>
+                    <li>An Artificial Neural Network has three main types of layers:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Layer Name</th>
+                            <th>What It Does</th>
+                        </tr>
+                        <tr>
+                            <td>Input Layer</td>
+                            <td>Takes the raw data (e.g., pixels from an image)</td>
+                        </tr>
+                        <tr>
+                            <td>Hidden Layer(s)</td>
+                            <td>Processes the data through connected nodes (neurons)</td>
+                        </tr>
+                        <tr>
+                            <td>Output Layer</td>
+                            <td>Produces the result (e.g., is this a cat or a dog?)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>Each of these layers contains neurons, and each connection between neurons has a weight, which
+                        decides how strong that connection is.</li>
+                    <li>Imagine the layers like this:</li>
+                </ul>
+
+                <pre>
+                    <code>
+Input Layer        Hidden Layers (1 or more)         Output Layer
+[Feature 1]  --->  [Neuron] --> [Neuron] --->       [Result]
+[Feature 2]  --->  [Neuron] --> [Neuron] --->       [Result]
+...
+                    </code>
+                </pre>
+
+                <h4>A Real-Life Example: Predicting If an Email Is Spam</h4>
+                <ul>
+                    <li>Let’s say you're building a system to check if an email is spam or not spam.</li>
+                    <ul>
+                        <li>Input Layer: Words from the email like “free,” “win,” “offer,” etc. are turned into numbers.
+                        </li>
+                        <li>Hidden Layer: These numbers are passed through neurons that try to identify patterns (maybe
+                            spam emails have lots of “win a prize” kind of phrases).</li>
+                        <li>Output Layer: Returns something like [1, 0] for Spam and [0, 1] for Not Spam.</li>
+                    </ul>
+                </ul>
+
+                <h4>How Does ANN Learn?</h4>
+                <ul>
+                    <li>This part is fascinating! ANNs learn using a process called backpropagation. Let’s break that
+                        down:</li>
+                    <ul>
+                        <li>Forward Propagation: Data flows from input to output.</li>
+                        <li>Error Calculation: The network checks how far its prediction is from the actual result.</li>
+                        <li>Backpropagation: It goes back and adjusts the weights to reduce the error.</li>
+                        <li>Repeat: It does this many times, slowly improving its predictions.</li>
+                    </ul>
+                    <li>Over time, the network “learns” which patterns lead to correct outputs.</li>
+                </ul>
+
+                <h4>Activation Functions</h4>
+                <ul>
+                    <li>Neurons in the network decide what to pass forward using something called an activation
+                        function. These help the network introduce non-linearity, which means it can understand complex
+                        patterns.</li>
+                    <li>Here are a few common ones:</li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Activation Function</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>Sigmoid</td>
+                            <td>Squashes values between 0 and 1</td>
+                        </tr>
+                        <tr>
+                            <td>ReLU (Rectified Linear Unit)</td>
+                            <td>Converts negatives to 0 and keeps positives</td>
+                        </tr>
+                        <tr>
+                            <td>Tanh</td>
+                            <td>Squashes between -1 and 1</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul>
+                    <li>These help decide whether a neuron should “fire” or not.</li>
+                </ul>
+
+                <h4>Why Use ANN?</h4>
+                <ul>
+                    <li>Because it's super flexible and can handle complex patterns that other models struggle with.
+                    </li>
+                    <li>Applications:</li>
+                    <ul>
+                        <li>Image recognition (e.g., Google Photos)</li>
+                        <li>Speech-to-text (e.g., Siri)</li>
+                        <li>Self-driving cars</li>
+                        <li>Predicting diseases from X-rays</li>
+                        <li>Even generating music or art!</li>
+                    </ul>
+                </ul>
+
+                <h4>Pros and Cons of ANN</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                        <tr>
+                            <td>Learns complex patterns</td>
+                            <td>Needs a lot of data</td>
+                        </tr>
+                        <tr>
+                            <td>Can adapt over time</td>
+                            <td>Training takes time and resources</td>
+                        </tr>
+                        <tr>
+                            <td>Useful for unstructured data</td>
+                            <td>Often hard to interpret ("black box")</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Summary</h4>
+                <ul>
+                    <li>Artificial Neural Networks are like mini-brains for computers. They are made of layers of
+                        neurons that pass data, make predictions, and improve themselves through learning. While they
+                        need a lot of data and power, they can be incredibly accurate for the right tasks.</li>
+                </ul>
+
+            </div>
+        </div>
     </div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>

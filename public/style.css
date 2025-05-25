@@ -71,11 +71,13 @@ body.dark-mode {
   --wb-bg-color: rgba(255, 255, 255, 0.394);
   --content-box-bg-color: #1cb5e02e;
   --div-index-border: 1px solid rgba(255, 255, 255, 0.322);
-  --table-bg: #1e293b;             /* Soft dark slate blue */
-  --table-header-bg: #273549;      /* Slightly brighter header */
-  --table-text: #e2e8f0;           /* Muted light gray-blue text */
-  --table-hover-bg: #3b4b61;       /* Soft hover blue */
-  --table-hover-text: #ffffff;     /* White for clear contrast */
+  --table-bg: #121f3d;             /* Very dark midnight blue */
+  --table-header-bg: #1e3a8a;      /* Strong royal blue for header */
+  --table-text: #bfdbfe;           /* Soft light blue text */
+  --table-hover-bg: #2563eb;       /* Bright, vivid blue hover */
+  --table-hover-text: #ffffff;     /* Crisp white for contrast */
+  
+  
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
@@ -595,42 +597,45 @@ iframe {
   border: 1px solid black;
 }
 
-/* Wrapper to allow horizontal scroll on small screens */
+/* Wrapper for table */
 .table-wrapper {
   width: 100%;
-  overflow-x: auto;
-  /* margin: 1rem; */
-  max-width: 800px; /* Prevents the table from becoming too wide */
-  /* padding: 0 1rem; */
+  max-width: 800px;
 }
 
-/* Modern, responsive table */
+/* Wrapper for table */
+.table-wrapper {
+  width: 100%;
+  max-width: 800px;
+  overflow-x: visible; /* Default: no scroll */
+}
+
+/* Responsive table */
 .new-table {
   width: 100%;
-  table-layout: auto; /* Allows columns to size based on content */
+  table-layout: auto;
   border-collapse: collapse;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   background-color: var(--table-bg);
   color: var(--table-text);
-  border: var(--content-box-border);
   border-radius: 8px;
-  border: none;
   overflow: hidden;
   box-shadow: var(--grad-shadow);
-  min-width: 300px; /* Ensures proper display on narrow screens */
+  min-width: 300px;
 }
 
-/* Table cell padding and borders */
+/* Table cell styling */
 .new-table th,
 .new-table td {
   padding: 12px 16px;
   text-align: left;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  white-space: nowrap; /* Prevents text from wrapping weirdly */
+  white-space: normal;
+  word-wrap: break-word;
 }
 
-/* Header styling */
+/* Header */
 .new-table th {
   background-color: var(--table-header-bg);
   color: var(--table-text);
@@ -639,24 +644,22 @@ iframe {
   letter-spacing: 0.5px;
 }
 
-/* Uniform row background */
+/* Row and hover */
 .new-table tr {
   background-color: var(--table-bg);
 }
 
-/* Hover effect for rows */
 .new-table tr:hover {
   background-color: var(--table-hover-bg);
   color: var(--table-hover-text);
   transition: background-color 0.2s ease-in-out;
 }
 
-/* Text color fallback for cells */
 .new-table td {
   color: var(--table-text);
 }
 
-/* Optional: nicer padding for edges */
+/* Edge padding */
 .new-table th:first-child,
 .new-table td:first-child {
   padding-left: 20px;
@@ -667,14 +670,19 @@ iframe {
   padding-right: 20px;
 }
 
-/* Optional: mobile responsiveness */
-@media (max-width: 480px) {
+/* ✅ Responsive scroll below 680px */
+@media (max-width: 680px) {
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
   .new-table {
     font-size: 14px;
+    min-width: 600px; /* Ensures table is wider than container, so scroll kicks in */
   }
 
   .new-table th,
   .new-table td {
-    padding: 8px 10px;
+    font-size: 12px;
   }
 }

@@ -1061,7 +1061,42 @@
                 </ul>
 
                 <img src="../../images/cg20.svg" alt="Polygon Clipping Example Output" class="wb">
-
+                <p>
+                    In the process of polygon clipping, we evaluate each edge (line segment) of the polygon based on how its two endpoints — vertex \( v_1 \) and vertex \( v_2 \) — relate to the current clipping boundary.
+                    Each edge can fall into one of four possible cases:
+                </p>
+                
+                <ol>
+                    <li>
+                        <strong>Case 1: Outside to Inside (v₁ is outside, v₂ is inside)</strong><br>
+                        The line segment enters the clipping window. In this case, we calculate the <strong>intersection point \( v_1' \)</strong> with the clipping boundary and also include \( v_2 \) (since it's inside).<br>
+                        <strong>Output:</strong> \( v_1', v_2 \)
+                    </li>
+                
+                    <li>
+                        <strong>Case 2: Inside to Outside (v₁ is inside, v₂ is outside)</strong><br>
+                        The line segment exits the clipping window. We compute the <strong>intersection point \( v_2' \)</strong>, but we do not include \( v_2 \) (since it’s outside).<br>
+                        <strong>Output:</strong> \( v_2' \)
+                    </li>
+                
+                    <li>
+                        <strong>Case 3: Inside to Inside (both v₁ and v₂ are inside)</strong><br>
+                        The entire edge is within the clipping window, so we keep the second vertex \( v_2 \) as part of the output polygon.<br>
+                        <strong>Output:</strong> \( v_2 \)
+                    </li>
+                
+                    <li>
+                        <strong>Case 4: Outside to Outside (both v₁ and v₂ are outside)</strong><br>
+                        The edge lies completely outside the clipping boundary, so it does not contribute to the output polygon.<br>
+                        <strong>Output:</strong> Nothing
+                    </li>
+                </ol>
+                
+                <p>
+                    This case-by-case approach is applied repeatedly for each edge of the polygon as it is clipped against each boundary (Left, Right, Top, Bottom).
+                    The output polygon at each stage becomes the input for the next boundary.
+                </p>
+                
             </div>
         </div>
 
