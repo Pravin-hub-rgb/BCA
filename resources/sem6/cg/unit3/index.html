@@ -8,6 +8,8 @@
     <title>Unit 3</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -39,6 +41,28 @@
     <div class="content-box">
         <div class="wh">
             <h2>Line Drawing Algorithm</h2>
+            <h3>Unit Structure</h3>
+            <pre>
+                <code>
+Computer Graphics: Drawing, Clipping, and Filling Algorithms
+|
+├── 1. Line Drawing Algorithms
+│   ├── DDA Algorithm
+│   ├── Bresenham’s Line Algorithm
+│   └── Circle and Ellipse Generation Algorithm
+│
+├── 2. Clipping
+│   ├── Point Clipping
+│   ├── Line Clipping
+│   └── Polygon Clipping
+│
+└── 3. Filling
+    ├── Inside Tests
+    ├── Flood Fill Algorithm
+    ├── Boundary-Fill Algorithm
+    └── Scan-Line Polygon Fill Algorithm
+                </code>
+            </pre>
             <div class="in">
                 <h3>DDA Line Drawing Algorithm</h3>
 
@@ -1062,42 +1086,434 @@
 
                 <img src="../../images/cg20.svg" alt="Polygon Clipping Example Output" class="wb">
                 <p>
-                    In the process of polygon clipping, we evaluate each edge (line segment) of the polygon based on how its two endpoints — vertex \( v_1 \) and vertex \( v_2 \) — relate to the current clipping boundary.
+                    In the process of polygon clipping, we evaluate each edge (line segment) of the polygon based on how
+                    its two endpoints — vertex \( v_1 \) and vertex \( v_2 \) — relate to the current clipping boundary.
                     Each edge can fall into one of four possible cases:
                 </p>
-                
+
                 <ol>
                     <li>
                         <strong>Case 1: Outside to Inside (v₁ is outside, v₂ is inside)</strong><br>
-                        The line segment enters the clipping window. In this case, we calculate the <strong>intersection point \( v_1' \)</strong> with the clipping boundary and also include \( v_2 \) (since it's inside).<br>
+                        The line segment enters the clipping window. In this case, we calculate the <strong>intersection
+                            point \( v_1' \)</strong> with the clipping boundary and also include \( v_2 \) (since it's
+                        inside).<br>
                         <strong>Output:</strong> \( v_1', v_2 \)
                     </li>
-                
+
                     <li>
                         <strong>Case 2: Inside to Outside (v₁ is inside, v₂ is outside)</strong><br>
-                        The line segment exits the clipping window. We compute the <strong>intersection point \( v_2' \)</strong>, but we do not include \( v_2 \) (since it’s outside).<br>
+                        The line segment exits the clipping window. We compute the <strong>intersection point \( v_2'
+                            \)</strong>, but we do not include \( v_2 \) (since it’s outside).<br>
                         <strong>Output:</strong> \( v_2' \)
                     </li>
-                
+
                     <li>
                         <strong>Case 3: Inside to Inside (both v₁ and v₂ are inside)</strong><br>
-                        The entire edge is within the clipping window, so we keep the second vertex \( v_2 \) as part of the output polygon.<br>
+                        The entire edge is within the clipping window, so we keep the second vertex \( v_2 \) as part of
+                        the output polygon.<br>
                         <strong>Output:</strong> \( v_2 \)
                     </li>
-                
+
                     <li>
                         <strong>Case 4: Outside to Outside (both v₁ and v₂ are outside)</strong><br>
-                        The edge lies completely outside the clipping boundary, so it does not contribute to the output polygon.<br>
+                        The edge lies completely outside the clipping boundary, so it does not contribute to the output
+                        polygon.<br>
                         <strong>Output:</strong> Nothing
                     </li>
                 </ol>
-                
+
                 <p>
-                    This case-by-case approach is applied repeatedly for each edge of the polygon as it is clipped against each boundary (Left, Right, Top, Bottom).
+                    This case-by-case approach is applied repeatedly for each edge of the polygon as it is clipped
+                    against each boundary (Left, Right, Top, Bottom).
                     The output polygon at each stage becomes the input for the next boundary.
                 </p>
-                
+
             </div>
+        </div>
+        <div class="wh">
+            <h2>Filling</h2>
+
+            <ul>
+                <li>Imagine you’ve drawn an outline of a shape — like a triangle or a closed blob — on a digital
+                    canvas. Now, you want to fill that shape with color. That’s exactly what filling is.</li>
+                <li>But before a computer can do that, it has to answer a very simple but important question:
+                    <ul>
+                        <li><strong>“Which pixels are inside the shape and which are outside?”</strong></li>
+                    </ul>
+                </li>
+                <li>That’s where Inside Tests come in.</li>
+                <li>And one of the most commonly used methods for this is the Edge-Based Inside Test, also called the
+                    Odd-Even Rule.</li>
+            </ul>
+            <div class="in">
+                <h3>The Core Idea of the Odd-Even Rule</h3>
+
+                <ul>
+                    <li>It’s kind of like a game:
+                        <ul>
+                            <li>Pick the pixel (point) you want to test.</li>
+                            <li>From that point, draw an imaginary horizontal line to the right.</li>
+                            <li>Count how many times that line crosses the edges of the polygon.</li>
+                            <li>Now check the number:
+                                <ul>
+                                    <li>If it’s odd → the point is inside the shape.</li>
+                                    <li>If it’s even → the point is outside the shape.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>That’s it! Simple logic.</li>
+                </ul>
+
+                <h4>A Fun Analogy: Walking into a Room</h4>
+
+                <ul>
+                    <li>Imagine standing outside a house. You walk in through the front door (1 crossing), walk through
+                        a
+                        hallway (no crossing), and then exit through the back door (2nd crossing).</li>
+                    <li>You entered and then exited — 2 crossings → you're outside.</li>
+                    <li>But if you just stepped through the front door and stayed inside — 1 crossing → you’re inside.
+                    </li>
+                    <li>That’s exactly how the Odd-Even rule works.</li>
+                </ul>
+
+                <h4>Point Example (Inside)</h4>
+
+                <ul>
+                    <li>Let’s say we have a triangle like this: <br>
+                        <img src="../../images/cg25.svg" alt="" class="wb">
+                    </li>
+                    <li>We’re testing the point ●.</li>
+                    <li>We draw a ray from ● to the right → it crosses 1 edge of the triangle.</li>
+                    <li><strong>= That’s an odd number → so ● is inside the triangle!</strong></li>
+                </ul>
+
+                <h4>Another Point Example (Outside)</h4>
+
+                <ul>
+                    <li>Now look at this: <br>
+                        <img src="../../images/cg26.svg" alt="" class="wb">
+                    </li>
+                    <li>Here, the point ● is clearly outside.</li>
+                    <li>You draw a ray to the right → it crosses 0 edges.</li>
+                    <li><strong>= That’s even → so the point is outside.</strong></li>
+                </ul>
+
+                <h4>Summary Table</h4>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>What Happens</th>
+                            <th>Result</th>
+                        </tr>
+                        <tr>
+                            <td>Crosses 0 edges (even)</td>
+                            <td>Outside ❌</td>
+                        </tr>
+                        <tr>
+                            <td>Crosses 1 edge (odd)</td>
+                            <td>Inside ✅</td>
+                        </tr>
+                        <tr>
+                            <td>Crosses 2 edges (even)</td>
+                            <td>Outside ❌</td>
+                        </tr>
+                        <tr>
+                            <td>Crosses 3 edges (odd)</td>
+                            <td>Inside ✅</td>
+                        </tr>
+                        <tr>
+                            <td>… and so on…</td>
+                            <td>…</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Pros of This Method</h4>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Simple Logic</td>
+                            <td>Just count how many edges your ray crosses</td>
+                        </tr>
+                        <tr>
+                            <td>Fast to Compute</td>
+                            <td>Very efficient for regular polygons</td>
+                        </tr>
+                        <tr>
+                            <td>Works Well for</td>
+                            <td>Convex or simple (non-complex) polygons</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Limitations</h4>
+
+                <ul>
+                    <li>This method can get confused with:
+                        <ul>
+                            <li>Polygons that cross themselves</li>
+                            <li>Very complex shapes with holes</li>
+                        </ul>
+                    </li>
+                    <li>For those, we use more advanced methods like the Winding Number Rule.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Flood Fill Algorithm</h3>
+
+                <h4>Overview</h4>
+                <ul>
+                    <li>The Flood Fill algorithm is used in computer graphics to fill a connected region with a specific
+                        color. Starting from a seed point, it recursively (or iteratively) fills all neighboring pixels
+                        of the same initial color with a new color, until it reaches the boundary of the region.</li>
+                    <li>It is commonly implemented in paint applications (e.g., the "bucket" tool in MS Paint) and is an
+                        essential part of region filling in raster graphics.</li>
+                </ul>
+
+                <h4>Key Idea</h4>
+                <ul>
+                    <li>Given:
+                        <ul>
+                            <li>A starting point (x, y)</li>
+                            <li>A target color (the color to be replaced)</li>
+                            <li>A fill color (the new color to apply)</li>
+                        </ul>
+                    </li>
+                    <li>The algorithm replaces the target color with the fill color at the seed point and continues this
+                        process for all connected pixels that have the same target color.</li>
+                </ul>
+
+                <h4>Variants</h4>
+                <ul>
+                    <li>Flood fill can be implemented in two ways, based on how many neighboring pixels are considered:
+                    </li>
+                </ul>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Variant</th>
+                            <th>Neighbors Considered</th>
+                            <th>Directions</th>
+                        </tr>
+                        <tr>
+                            <td>4-connected fill</td>
+                            <td>Up, Down, Left, Right</td>
+                            <td>4 directions</td>
+                        </tr>
+                        <tr>
+                            <td>8-connected fill</td>
+                            <td>Includes diagonals as well</td>
+                            <td>8 directions</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>4-Connected Pixels</h4>
+                <img src="../../images/cg27.svg" alt="" class="wb">
+
+                <h4>8-Connected Pixels</h4>
+<img src="../../images/cg28.svg" class="wb" alt="">
+
+                <h4>Recursive Algorithm (4-Connected)</h4>
+                <h4>Pseudocode</h4>
+                <pre>
+                    <code>
+void FloodFill(int x, int y, int targetColor, int fillColor) {
+    if (getPixel(x, y) != targetColor || getPixel(x, y) == fillColor)
+        return;
+
+    setPixel(x, y, fillColor);
+
+    FloodFill(x+1, y, targetColor, fillColor); // right
+    FloodFill(x-1, y, targetColor, fillColor); // left
+    FloodFill(x, y+1, targetColor, fillColor); // down
+    FloodFill(x, y-1, targetColor, fillColor); // up
+}
+</code>
+</pre>
+
+                <h4>Working Mechanism</h4>
+                <ul>
+                    <li>Check Base Case: If the current pixel’s color is not the target color or is already filled,
+                        return.</li>
+                    <li>Change Color: Set the pixel’s color to the new fill color.</li>
+                    <li>Recursively Call: Apply the algorithm to each of the neighboring pixels.</li>
+                    <li>This continues until all connected pixels with the target color are replaced.</li>
+                </ul>
+
+                <h4>Limitations</h4>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Issue</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Stack Overflow</td>
+                            <td>Recursive implementation may cause stack overflow for large fill areas.</td>
+                        </tr>
+                        <tr>
+                            <td>Performance</td>
+                            <td>Slow for large images; may be improved using an iterative queue-based approach.</td>
+                        </tr>
+                        <tr>
+                            <td>Edge Leakage</td>
+                            <td>Incorrect fill may occur if boundary conditions are not carefully checked.</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="in">
+            <h3>Boundary-Fill Algorithm – Technical Notes</h3>
+
+<h4>Overview</h4>
+<ul>
+  <li>The Boundary-Fill Algorithm is a region-filling technique in raster graphics. It is used to fill closed figures by starting from a seed point inside the boundary and spreading outwards until a boundary color is encountered.</li>
+  <li>Unlike Flood Fill (which fills all areas of a target color), Boundary Fill works based on a boundary color, and fills everything inside that boundary regardless of the initial color.</li>
+</ul>
+
+<h4>Use Case Example</h4>
+<ul>
+  <li>Think of coloring a circle drawn on a canvas. You don’t want the color to leak outside the circle, so you define the circle outline as the boundary, and begin filling from a point inside the circle. The algorithm fills all connected pixels until it hits the edge of the circle (boundary color).</li>
+</ul>
+
+<h4>Types of Boundary Fill</h4>
+<div class="table-wrapper">
+  <table class="new-table">
+    <tr>
+      <th>Type</th>
+      <th>Connectivity</th>
+      <th>Neighbors Considered</th>
+    </tr>
+    <tr>
+      <td>4-connected fill</td>
+      <td>4-directional</td>
+      <td>Top, Bottom, Left, Right</td>
+    </tr>
+    <tr>
+      <td>8-connected fill</td>
+      <td>8-directional</td>
+      <td>Includes diagonals as well</td>
+    </tr>
+  </table>
+</div>
+
+<h4>4-Connected Pixels</h4>
+<img src="../../images/cg27.svg" alt="" class="wb">
+
+<h4>8-Connected Pixels</h4>
+<img src="../../images/cg28.svg" alt="" class="wb">
+
+<h4>Algorithm Steps</h4>
+<ul>
+  <li><strong>Inputs:</strong>
+    <ul>
+      <li>x, y → Starting seed point (inside region)</li>
+      <li>boundaryColor → Color of the edge/boundary</li>
+      <li>fillColor → Color to fill inside the region</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Recursive Pseudocode (4-connected)</h4>
+<pre>
+    <code>
+void BoundaryFill4(int x, int y, int fillColor, int boundaryColor) {
+    int current = getPixel(x, y);
+
+    if (current != boundaryColor && current != fillColor) {
+        setPixel(x, y, fillColor);
+
+        BoundaryFill4(x+1, y, fillColor, boundaryColor); // right
+        BoundaryFill4(x-1, y, fillColor, boundaryColor); // left
+        BoundaryFill4(x, y+1, fillColor, boundaryColor); // down
+        BoundaryFill4(x, y-1, fillColor, boundaryColor); // up
+    }
+}
+</code>
+</pre>
+<ul>
+  <li><strong>Note:</strong> For 8-connected version, add diagonal calls too.</li>
+</ul>
+
+<h4>Important Conditions</h4>
+<ul>
+  <li>The fill stops when a boundary color pixel is encountered.</li>
+  <li>Filling does not overwrite pixels already filled (to prevent infinite recursion).</li>
+  <li>The algorithm assumes that the boundary forms a closed loop.</li>
+</ul>
+
+<h4>Working Mechanism (Step-by-Step)</h4>
+<ul>
+  <li>Read the color at the current pixel.</li>
+  <li>If it's neither the boundaryColor nor the fillColor, fill it with fillColor.</li>
+  <li>Recursively apply the fill operation to neighboring pixels.</li>
+</ul>
+
+<h4>Iterative Approach (Optional)</h4>
+<ul>
+  <li>Just like in Flood Fill, the recursive version may lead to stack overflow on large regions. An iterative method using a stack (manual DFS) is safer in practice.</li>
+</ul>
+
+<h4>Boundary Fill vs Flood Fill – Comparison</h4>
+<div class="table-wrapper">
+  <table class="new-table">
+    <tr>
+      <th>Feature</th>
+      <th>Boundary Fill</th>
+      <th>Flood Fill</th>
+    </tr>
+    <tr>
+      <td>Stops at</td>
+      <td>Boundary color</td>
+      <td>When pixel color ≠ target color</td>
+    </tr>
+    <tr>
+      <td>Requires</td>
+      <td>A closed boundary</td>
+      <td>Uniform region color</td>
+    </tr>
+    <tr>
+      <td>Fills</td>
+      <td>All area inside a boundary</td>
+      <td>All area of the same color</td>
+    </tr>
+    <tr>
+      <td>Risk of leak</td>
+      <td>High if boundary is not properly closed</td>
+      <td>Less if target color is correct</td>
+    </tr>
+    <tr>
+      <td>Real-life analogy</td>
+      <td>Coloring inside a drawn circle</td>
+      <td>Replacing color inside same-colored region</td>
+    </tr>
+  </table>
+</div>
+
+<h4>Example (Conceptual)</h4>
+<ul>
+  <li>Assume we have a black-bordered rectangle on screen (black is boundary color). The inner area is white.
+    <ul>
+      <li>Seed Point: (100, 100)</li>
+      <li>boundaryColor: black</li>
+      <li>fillColor: red</li>
+    </ul>
+  </li>
+  <li>The algorithm starts at (100, 100) and colors every pixel red until it touches the black boundary.</li>
+</ul>
+
         </div>
 
     </div>
@@ -1107,9 +1523,11 @@
             <li><a href="https://youtu.be/0PgMv8sdXtg?si=VlsQV54bnHx0upso" target="_blank">3.4- DDA Line Drawing
                     Algorithm In Computer Graphics Hindi | Digital Differential Analyzer Youtube Lecture &neArr;</a>
             </li>
-            <li><a href="https://www.youtube.com/watch?v=Sm7oUNq2rSM" target="_blank">Mid Point Circle Drawing Youtube
+            <li><a href="https://www.youtube.com/watch?v=Sm7oUNq2rSM" target="_blank">Mid Point Circle Drawing
+                    Youtube
                     Video Lecture &neArr;</a></li>
-            <li><a href="https://www.youtube.com/watch?v=J7OS_nI4W7Y" target="_blank">Point Clipping Explained in Hindi
+            <li><a href="https://www.youtube.com/watch?v=J7OS_nI4W7Y" target="_blank">Point Clipping Explained in
+                    Hindi
                     l Computer Graphics Video Lecture &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=MkMK8LvLOjs" target="_blank">Cohen Sutherland Line Clipping
                     Algorithm Video Lecture &neArr;</a></li>
@@ -1119,6 +1537,7 @@
     </div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
