@@ -950,7 +950,7 @@
                         <li>\( y_{\min} = 2 \)</li>
                         <li>\( y_{\max} = 6 \)</li>
                     </ul>
-                
+
                     <li><strong>Given Line Endpoints:</strong></li>
                     <ul>
                         <li>Point A: \( (0, 3) \) → Region code: <code>0001</code> (Left)</li>
@@ -958,16 +958,16 @@
                     </ul>
                 </ul>
                 <img src="../../images/cg18.svg" alt="" class="wb">
-                
+
                 <h4>Step 1: Calculate the slope of the line (m)</h4>
                 <p>
                     \[
                     m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{7 - 3}{7 - 0} = \frac{4}{7}
                     \]
                 </p>
-                
-                
-                
+
+
+
                 <h4>Step 2: Clip Point A (Left Region: <strong>0001</strong>) against Left Boundary \( x = 2 \)</h4>
                 <p>We use the vertical clipping formula to find the new y-coordinate:</p>
                 <p>
@@ -979,9 +979,9 @@
                     \]
                 </p>
                 <p>New intersection point A′ is: \( (2, 4.14) \)</p>
-                
-                
-                
+
+
+
                 <h4>Step 3: Clip Point B (Top Region: <code>1000</code>) against Top Boundary \( y = 6 \)</h4>
                 <p>Now use the horizontal clipping formula to find the new x-coordinate:</p>
                 <p>
@@ -993,9 +993,9 @@
                     \]
                 </p>
                 <p>New intersection point B′ is: \( (5.25, 6) \)</p>
-                
-                
-                
+
+
+
                 <h4>Final Clipped Line Segment</h4>
                 <ul>
                     <li>Start: \( A′ = (2, 4.14) \)</li>
@@ -1007,7 +1007,61 @@
                     <li><strong>Inside</strong> — clipped segment \( A′ \to B′ \)</li>
                     <li><strong>Top</strong> — point B was outside the top boundary</li>
                 </ol>
-                
+
+            </div>
+            <div class="in">
+                <h3>Polygon Clipping</h3>
+
+                <ul>
+                    <li>
+                        <strong>Polygon clipping</strong> refers to the process of removing (or "clipping") the parts of
+                        a polygon that lie outside a defined clipping window, typically a rectangular region.
+                    </li>
+                </ul>
+
+                <img src="../../images/cg19.svg" class="wb" alt="Left, Right, Top, Bottom Clipping Diagram">
+
+                <ul>
+                    <li>
+                        In the above diagram, polygon clipping is performed sequentially — we apply clipping against one
+                        boundary at a time: Left, Right, Top, and Bottom.
+                    </li>
+                    <li>
+                        Let's begin with <strong>left clipping</strong>. We conceptually draw a vertical boundary line
+                        at \( x = x_{\min} \). Everything to the left of this boundary is considered
+                        <strong>outside</strong> the window and is discarded. Everything to the right is
+                        <strong>inside</strong> and is retained.
+                    </li>
+                    <li>
+                        We repeat this process for the remaining boundaries:
+                        <ul>
+                            <li><strong>Right Clipping</strong>: Remove parts of the polygon where \( x > x_{\max} \)
+                            </li>
+                            <li><strong>Top Clipping</strong>: Remove parts where \( y > y_{\max} \)</li>
+                            <li><strong>Bottom Clipping</strong>: Remove parts where \( y < y_{\min} \)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        After clipping against all four sides, the final result is the portion of the polygon that lies
+                        entirely within the rectangular window.
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        During the clipping process, whenever a polygon edge crosses a window boundary, an
+                        <strong>intersection point</strong> is calculated. These intersection points become new vertices
+                        of the clipped polygon.
+                    </li>
+                    <li>
+                        The algorithm most commonly used for polygon clipping is the <strong>Sutherland–Hodgman polygon
+                            clipping algorithm</strong>, which works by processing one window edge at a time and
+                        outputting the resulting polygon step-by-step.
+                    </li>
+                </ul>
+
+                <img src="../../images/cg20.svg" alt="Polygon Clipping Example Output" class="wb">
+
             </div>
         </div>
 
@@ -1024,6 +1078,8 @@
                     l Computer Graphics Video Lecture &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=MkMK8LvLOjs" target="_blank">Cohen Sutherland Line Clipping
                     Algorithm Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=2Egy6PFehtU" target="_blank">Sutherland Hodgeman Polygon
+                    Clipping Algorithm Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
