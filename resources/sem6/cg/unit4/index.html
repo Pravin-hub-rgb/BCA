@@ -91,9 +91,587 @@ Computer Graphics: 2D and 3D Transformations
                 <li>In practice, transformations are often represented using matrices, which allow multiple
                     transformations to be combined into a single matrix operation using matrix multiplication.</li>
             </ul>
+            <div class="in">
+                <h3>Translation</h3>
+                <ul>
+                    <li>Translation is the process of moving an object along a straight path from one coordinate
+                        location to another.</li>
+                    <li>It is a type of rigid body transformation, meaning the shape and size of the object remain
+                        unchanged (no deformation or rotation occurs).</li>
+                </ul>
+                <img src="../../images/cg22.svg" alt="" class="wb">
 
+                <ul>
+                    <li><strong>(tx, ty)</strong> is called the translation vector or shift vector. It indicates how far
+                        the object is moved along the x and y axes.</li>
+                    <li>The translation equations are:<br>
+                        \( x' = x + t_x \)<br>
+                        \( y' = y + t_y \)
+                    </li>
+                    <li>The matrix representation of the translation is:
+                        <br>
+                        <p class="ms">
+                            \(
+                            \begin{bmatrix}
+                            x' \\
+                            y'
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                            1 & 0 \\
+                            0 & 1
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            x \\
+                            y
+                            \end{bmatrix}
+                            +
+                            \begin{bmatrix}
+                            t_x \\
+                            t_y
+                            \end{bmatrix}
+                            \)
+                        </p>
+                    </li>
+                </ul>
+                <!-- Question 1 -->
+                <p><strong>Q1:</strong> Translate a point \( P = (2, 4) \) using the translation vector \( T = (-1, 14)
+                    \). Find the new coordinates \( P' \).</p>
+                <ul>
+                    <li>
+                        Given: <br>
+                        \( P = (2, 4) \) <br>
+                        \( T = (t_x, t_y) = (-1, 14) \) <br><br>
+                        Apply translation: <br>
+                        \( P' = P + T \) <br>
+                        \( \Rightarrow P' = (x + t_x, \; y + t_y) \) <br>
+                        \( \Rightarrow P' = (2 + (-1), \; 4 + 14) \) <br>
+                        \( \Rightarrow P' = (1, \; 18) \)
+                    </li>
+                </ul>
+
+                <!-- Question 2 -->
+                <p><strong>Q2:</strong> Translate a polygon with vertices \( A(2, 7) \), \( B(7, 10) \), and \( C(10, 2)
+                    \) by 3 units in the X direction and 4 units in the Y direction.</p>
+                <ul>
+                    <li>
+                        Translation vector: \( T = (3, 4) \) <br><br>
+                        Apply translation to each point: <br>
+                        \( A' = (2 + 3, \; 7 + 4) = (5, \; 11) \) <br>
+                        \( B' = (7 + 3, \; 10 + 4) = (10, \; 14) \) <br>
+                        \( C' = (10 + 3, \; 2 + 4) = (13, \; 6) \)
+                    </li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Scaling</h3>
+                <ul>
+                    <li>Scaling is a transformation that changes the size of an object either by enlarging or shrinking
+                        it.</li>
+                    <li>It is applied by multiplying the original coordinates with scaling factors along the x and y
+                        axes.</li>
+                    <li>The shape of the object is preserved, but its size changes proportionally or non-proportionally
+                        depending on the scaling factors.</li>
+                </ul>
+
+                <img src="../../images/cg23.svg" alt="" class="wb">
+
+
+                <ul>
+                    <li><strong>(sx, sy)</strong> are the scaling factors along the x-axis and y-axis respectively.</li>
+                    <li>The scaling equations are:<br>
+                        \( x' = x \cdot s_x \)<br>
+                        \( y' = y \cdot s_y \)
+                    </li>
+                    <li>The matrix representation of scaling is:
+                        <p class="ms">
+                            \(
+                            \begin{bmatrix}
+                            x' \\
+                            y'
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                            s_x & 0 \\
+                            0 & s_y
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            x \\
+                            y
+                            \end{bmatrix}
+                            \)
+                        </p>
+                    </li>
+                </ul>
+
+                <!-- Question 1 -->
+                <p><strong>Q1:</strong> Scale a point \( P = (3, 5) \) using the scaling factors \( s_x = 2 \), \( s_y =
+                    3 \). Find the new coordinates \( P' \).</p>
+                <ul>
+                    <li>
+                        Given: <br>
+                        \( P = (3, 5) \) <br>
+                        \( s_x = 2, \; s_y = 3 \) <br><br>
+                        Apply scaling: <br>
+                        \( x' = x \cdot s_x = 3 \cdot 2 = 6 \) <br>
+                        \( y' = y \cdot s_y = 5 \cdot 3 = 15 \) <br>
+                        \( \Rightarrow P' = (6, \; 15) \)
+                    </li>
+                </ul>
+
+                <!-- Question 2 -->
+                <p><strong>Q2:</strong> Scale a triangle with vertices \( A(1, 2) \), \( B(4, 2) \), and \( C(1, 6) \)
+                    using scaling factors \( s_x = 0.5 \), \( s_y = 2 \).</p>
+                <ul>
+                    <li>
+                        Scaling vector: \( s_x = 0.5, \; s_y = 2 \) <br><br>
+                        Apply scaling to each point: <br>
+                        \( A' = (1 \cdot 0.5, \; 2 \cdot 2) = (0.5, \; 4) \) <br>
+                        \( B' = (4 \cdot 0.5, \; 2 \cdot 2) = (2, \; 4) \) <br>
+                        \( C' = (1 \cdot 0.5, \; 6 \cdot 2) = (0.5, \; 12) \)
+                    </li>
+                </ul>
+
+            </div>
+            <div class="in">
+                <h3>Reflection</h3>
+                <ul>
+                    <li>Reflection is a transformation that produces a mirror image of a shape or point across a
+                        specified axis (X-axis, Y-axis, or line \( y = x \)).</li>
+                    <li>The size and shape of the object remain unchanged, but the orientation may change depending on
+                        the axis of reflection.</li>
+                    <li>It is a rigid body transformation, meaning no distortion occurs—only position changes.</li>
+                </ul>
+
+                <img src="../../images/cg24.svg" alt="" class="wb">
+
+
+                <ul>
+                    <li><strong>Reflection axes:</strong>
+                        <ul>
+                            <li>X-axis → mirror across horizontal axis</li>
+                            <li>Y-axis → mirror across vertical axis</li>
+                            <li>Line \( y = x \) or \( y = -x \) → diagonal mirror</li>
+                        </ul>
+                    </li>
+                    <li>The reflection equations are:
+                        <br>
+                        - Across X-axis: \( x' = x, \; y' = -y \)<br>
+                        - Across Y-axis: \( x' = -x, \; y' = y \)<br>
+                        - Across line \( y = x \): \( x' = y, \; y' = x \)
+                    </li>
+                    <li>Matrix representations:
+                        <br><br>
+                        <strong>Across X-axis:</strong>
+                        <p class="ms">
+                            \(
+                            \begin{bmatrix}
+                            x' \\
+                            y'
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                            1 & 0 \\
+                            0 & -1
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            x \\
+                            y
+                            \end{bmatrix}
+                            \)
+                        </p>
+                        <br>
+                        <br>
+                        <strong>Across Y-axis:</strong>
+                        <p class="ms">
+                            \(
+                            \begin{bmatrix}
+                            x' \\
+                            y'
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                            -1 & 0 \\
+                            0 & 1
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            x \\
+                            y
+                            \end{bmatrix}
+                            \)
+                        </p>
+                        <br>
+                        <br>
+                        <strong>Across line \( y = x \):</strong>
+                        <p class="ms">
+                            \(
+                            \begin{bmatrix}
+                            x' \\
+                            y'
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                            0 & 1 \\
+                            1 & 0
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            x \\
+                            y
+                            \end{bmatrix}
+                            \)
+                        </p>
+                    </li>
+                </ul>
+
+                <!-- Question 1 -->
+                <p><strong>Q1:</strong> Reflect a point \( P = (3, 7) \) across the X-axis. Find the coordinates of \(
+                    P' \).</p>
+                <ul>
+                    <li>
+                        Given: <br>
+                        \( P = (3, 7) \) <br>
+                        Axis: X-axis <br><br>
+                        Apply reflection: <br>
+                        \( x' = x = 3 \) <br>
+                        \( y' = -y = -7 \) <br>
+                        \( \Rightarrow P' = (3, -7) \)
+                    </li>
+                </ul>
+
+                <!-- Question 2 -->
+                <p><strong>Q2:</strong> Reflect a triangle with vertices \( A(1, 4) \), \( B(5, 2) \), and \( C(3, 6) \)
+                    across the Y-axis.</p>
+                <ul>
+                    <li>
+                        Axis: Y-axis <br><br>
+                        Apply reflection to each point: <br>
+                        \( A' = (-1, 4) \) <br>
+                        \( B' = (-5, 2) \) <br>
+                        \( C' = (-3, 6) \)
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="wh">
+
+            <h2>Introduction to 3D Transformation</h2>
+
+            <ul>
+                <li>Okay, imagine you're playing a 3D video game. You're moving around the game world — going forward,
+                    rotating to see behind, or zooming in and out. What's actually happening behind the scenes is 3D
+                    Transformation.</li>
+
+                <li>Just like we had 2D transformations (moving, rotating, resizing in a flat plane), we now want to
+                    move and manipulate objects in a 3D space. This means we work with three axes:
+                    <ul>
+                        <li>X-axis → left–right</li>
+                        <li>Y-axis → up–down</li>
+                        <li>Z-axis → forward–backward (depth)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Why do we need 3D transformations?</h3>
+
+            <ul>
+                <li>To move objects around in a 3D world.</li>
+                <li>To rotate or scale them realistically.</li>
+                <li>To simulate how things look in the real world when seen from different angles.</li>
+                <li>So instead of dealing with points like (x, y) in 2D, we now deal with (x, y, z) in 3D.</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Transformation Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>Translation</td>
+                        <td>Move an object in 3D space</td>
+                        <td>Moving a cube 3 units up and 2 right</td>
+                    </tr>
+                    <tr>
+                        <td>Rotation</td>
+                        <td>Rotate around X, Y, or Z axis</td>
+                        <td>Turning a box 90° to the right</td>
+                    </tr>
+                    <tr>
+                        <td>Scaling</td>
+                        <td>Resize in 3D (wider/taller/etc.)</td>
+                        <td>Making a ball 2× bigger in all axes</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul>
+                <li>Let's now see how 3D gets converted into 2D for our screens!</li>
+            </ul>
+
+            <h2>Parallel Projection</h2>
+
+            <ul>
+                <li>Let's say you want to draw a 3D object (like a cube) on a 2D screen (like your laptop). But our
+                    screen is flat — so how do we show depth?</li>
+                <li>One way is parallel projection.</li>
+            </ul>
+
+            <h3>What is it?</h3>
+
+            <ul>
+                <li>Parallel projection is like tracing a shadow of a 3D object using light rays that are parallel to
+                    each other. No matter how far the object is, its size doesn't change on the screen.</li>
+
+                <li>Think of it like architectural blueprints:
+                    <ul>
+                        <li>A wall that is far away looks the same size as a closer wall.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Property</th>
+                        <th>Parallel Projection</th>
+                    </tr>
+                    <tr>
+                        <td>Depth perception</td>
+                        <td>No (objects look same size)</td>
+                    </tr>
+                    <tr>
+                        <td>Rays</td>
+                        <td>Parallel</td>
+                    </tr>
+                    <tr>
+                        <td>Use Case</td>
+                        <td>Engineering, CAD drawings</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Types of Parallel Projections:</h3>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Orthographic</td>
+                        <td>Projectors are perpendicular to the screen.</td>
+                    </tr>
+                    <tr>
+                        <td>Oblique</td>
+                        <td>Projectors are at an angle.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul>
+                <li>Orthographic is like a front-view or top-view drawing. Oblique adds a bit of angle to show more
+                    dimensions.</li>
+            </ul>
+
+            <h2>Perspective Projection</h2>
+
+            <ul>
+                <li>Now, let's make things look more realistic.</li>
+                <li>In real life, when you look at a road, it seems to narrow down as it goes farther, right? That's
+                    perspective.</li>
+            </ul>
+
+            <h3>What is Perspective Projection?</h3>
+
+            <ul>
+                <li>It uses rays that converge at a point (like your eye or a camera). So, objects closer to the viewer
+                    look bigger, and those far away look smaller — just like in real life!</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Property</th>
+                        <th>Perspective Projection</th>
+                    </tr>
+                    <tr>
+                        <td>Depth perception</td>
+                        <td>Yes (looks realistic)</td>
+                    </tr>
+                    <tr>
+                        <td>Rays</td>
+                        <td>Converging</td>
+                    </tr>
+                    <tr>
+                        <td>Use Case</td>
+                        <td>Games, 3D animations, VR</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul>
+                <li>There are different types of perspective projections:</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>One-point</td>
+                        <td>One vanishing point (like a hallway view)</td>
+                    </tr>
+                    <tr>
+                        <td>Two-point</td>
+                        <td>Two vanishing points (like a building corner)</td>
+                    </tr>
+                    <tr>
+                        <td>Three-point</td>
+                        <td>Adds a third vanishing point (for tall scenes)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>Visible Lines and Surfaces Identification</h2>
+
+            <ul>
+                <li>Alright, now we know how to project a 3D object onto 2D.</li>
+                <li>But there's a problem...</li>
+                <li>If you're looking at a cube, you don't want to see the back side of it, right?</li>
+                <li>So, we need to identify which lines and surfaces should be visible to the viewer.</li>
+            </ul>
+
+            <h3>How does it work?</h3>
+
+            <ul>
+                <li>The system checks:
+                    <ul>
+                        <li>Which faces are facing towards the camera/viewer.</li>
+                        <li>Which ones are turned away (and therefore invisible).</li>
+                    </ul>
+                </li>
+
+                <li>Imagine you're holding a cardboard box. You can see the front, top, and one side. The system
+                    calculates that and only shows those parts.</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Concept</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>Back-face culling</td>
+                        <td>Hide faces that point away from viewer</td>
+                    </tr>
+                    <tr>
+                        <td>Front-face rendering</td>
+                        <td>Show only visible surfaces</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul>
+                <li>This step cleans up the image and reduces the number of calculations needed in rendering.</li>
+            </ul>
+
+            <h2>Hidden Surface Removal Algorithms</h2>
+
+            <ul>
+                <li>Okay, final piece of the puzzle!</li>
+                <li>Now, imagine a 3D model of a city. There are tons of buildings, and some are in front of others.
+                </li>
+                <li>We don't want to draw things that are blocked from view, right? That wastes time and resources.</li>
+                <li>So we use Hidden Surface Removal Algorithms.</li>
+            </ul>
+
+            <h3>What do they do?</h3>
+
+            <ul>
+                <li>These algorithms figure out which surfaces or parts of objects are not visible from the viewer's
+                    position — and remove or skip them during rendering.</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Z-buffer</td>
+                        <td>Keeps track of depth (z-value) of each pixel and draws only the closest.</td>
+                    </tr>
+                    <tr>
+                        <td>Painter's Algorithm</td>
+                        <td>Draws far objects first, then closer ones on top (like painting layers).</td>
+                    </tr>
+                    <tr>
+                        <td>BSP Trees</td>
+                        <td>Breaks the scene into front/back using planes.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Real-world Example:</h3>
+
+            <ul>
+                <li>In video games, when you're walking through a building, the system uses these algorithms so you only
+                    see the visible walls — not all the ones behind or hidden.</li>
+            </ul>
+
+            <h3>Summary</h3>
+
+            <ul>
+                <li>Here's a quick table to wrap up what we just learned:</li>
+            </ul>
+
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <tr>
+                        <th>Topic</th>
+                        <th>Key Idea</th>
+                    </tr>
+                    <tr>
+                        <td>3D Transformation</td>
+                        <td>Moving/rotating/scaling 3D objects in space</td>
+                    </tr>
+                    <tr>
+                        <td>Parallel Projection</td>
+                        <td>Flat, non-realistic view (good for diagrams)</td>
+                    </tr>
+                    <tr>
+                        <td>Perspective Projection</td>
+                        <td>Realistic view with depth</td>
+                    </tr>
+                    <tr>
+                        <td>Visible Lines/Surfaces</td>
+                        <td>Identify what parts of 3D shapes should be shown</td>
+                    </tr>
+                    <tr>
+                        <td>Hidden Surface Removal Algorithms</td>
+                        <td>Hide or skip parts that are blocked or not visible to the viewer</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
+    <div class="content-box">
+        <p>Reference:</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=LJA8HlPfyQw" target="_blank">Transformation in 2D:
+                    Translation|Scaling|Rotation|Reflection|Shearing with numericals Video lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
