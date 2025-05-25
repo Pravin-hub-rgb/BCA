@@ -215,7 +215,7 @@
                 <pre>
                     <code>
   x   |  y
-------+------
++
   2   |  3
   2.8 |  4
   3.6 |  5
@@ -283,7 +283,7 @@
                 <pre>
                     <code>
   x  |	y
------+-----
+--+--
   1  |	1
   2  |	1.6667
   3  |	2.3333
@@ -561,7 +561,7 @@
                         <pre>
     <code>
   X  | Y  | p  | Action
------+----+----+----------------------------
+--+-+-+-
   1  | 1  |  0  | Initial point
   2  | 2  | -4  | Increment X, Increment Y (p ≥ 0)
   3  | 2  |  0  | Increment X only (p < 0)
@@ -780,7 +780,7 @@
                 <pre>
                     <code>
   x  |  y
------+-----
+--+--
   0  |  5
   1  |  5
   2  |  5
@@ -866,6 +866,149 @@
                 </ol>
                 <p>All conditions are satisfied, so P2 lies inside the clipping window.</p>
             </div>
+            <div class="in">
+                <h3>Line Clipping (Cohen–Sutherland Algorithm)</h3>
+                <ul>
+                    <li>The Cohen–Sutherland algorithm is used to clip lines to a rectangular clipping window. The goal
+                        is to identify which portion of a line lies within the window and discard the portion that lies
+                        outside.</li>
+                </ul>
+                <img class="wb" src="../../images/cg13.svg" alt="Basic concept of line clipping">
+
+                <ul>
+                    <li>To determine which part of the line is inside the clipping window, we use a 4-bit region code,
+                        also known as the TBRL code — representing Top, Bottom, Right, and Left. Each bit indicates
+                        whether the point lies outside the respective boundary.</li>
+                    <li>In the diagram below, the entire 2D plane is divided into 9 regions. The central region (region
+                        6) represents the clipping window.</li>
+                </ul>
+                <img src="../../images/cg11.svg" alt="9-region code layout for clipping" class="wb">
+
+                <ul>
+                    <li>
+                        Each region is assigned a unique 4-bit code based on its position relative to the clipping
+                        window. The code for the center region (inside the window) is <code>0000</code>, meaning the
+                        point lies within all four boundaries.
+                    </li>
+                </ul>
+                <img class="wb" src="../../images/cg12.svg" alt="Region codes with respect to center window">
+
+                <ul>
+                    <li>
+                        There are three possible cases for any line segment:
+                        <ol>
+                            <li>
+                                <strong>Completely Inside:</strong> A line with both endpoints having the region code
+                                <code>0000</code> lies entirely within the clipping window. No clipping is needed.
+                                <br>
+                                <img class="wb" src="../../images/cg14.svg" alt="Line completely inside">
+                            </li>
+                            <li>
+                                <strong>Completely Outside:</strong> If both endpoints of the line lie in the same
+                                region outside the window and share a common set bit in their region codes, the result
+                                of the bitwise AND operation is non-zero. This means the line is completely outside and
+                                can be rejected.
+                                <pre>
+<code>
+  0001
+& 0001
+-
+  0001
+</code>
+                </pre>
+                                <img src="../../images/cg15.svg" class="wb" alt="Line completely outside">
+                            </li>
+                            <li>
+                                <strong>Partially Inside (Intersecting):</strong> One endpoint lies inside the clipping
+                                window (region code <code>0000</code>), and the other lies outside (non-zero region
+                                code). In this case, the line intersects the boundary of the window, and clipping must
+                                be performed. <br>
+                                <img src="../../images/cg16.svg" class="wb" alt="Partially inside or outside">
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        While the completely inside and completely outside cases are straightforward, the partially
+                        inside case requires more work. You must calculate the intersection point of the line with the
+                        clipping window boundary. This intersection point is used to trim the portion of the line that
+                        lies outside the window.
+                        <br>
+                        Based on the diagram below, we retain the line from the intersection point (x′, y′) to the
+                        endpoint inside the window and discard the portion from the external point to (x′, y′).
+                        <br>
+                        <img src="../../images/cg17.svg" alt="Finding intersection points" class="wb">
+                    </li>
+                </ul>
+                <h3>Numerical Example: Line Clipping Through Three Regions (Left → Inside → Top)</h3>
+
+                <ul>
+                    <li><strong>Clipping Window Boundaries:</strong></li>
+                    <ul>
+                        <li>\( x_{\min} = 2 \)</li>
+                        <li>\( x_{\max} = 8 \)</li>
+                        <li>\( y_{\min} = 2 \)</li>
+                        <li>\( y_{\max} = 6 \)</li>
+                    </ul>
+                
+                    <li><strong>Given Line Endpoints:</strong></li>
+                    <ul>
+                        <li>Point A: \( (0, 3) \) → Region code: <code>0001</code> (Left)</li>
+                        <li>Point B: \( (7, 7) \) → Region code: <code>1000</code> (Top)</li>
+                    </ul>
+                </ul>
+                <img src="../../images/cg18.svg" alt="" class="wb">
+                
+                <h4>Step 1: Calculate the slope of the line (m)</h4>
+                <p>
+                    \[
+                    m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{7 - 3}{7 - 0} = \frac{4}{7}
+                    \]
+                </p>
+                
+                
+                
+                <h4>Step 2: Clip Point A (Left Region: <strong>0001</strong>) against Left Boundary \( x = 2 \)</h4>
+                <p>We use the vertical clipping formula to find the new y-coordinate:</p>
+                <p>
+                    \[
+                    y' = y_1 + m \cdot (x_{\text{clip}} - x_1)
+                    \]
+                    \[
+                    y' = 3 + \frac{4}{7} \cdot (2 - 0) = 3 + \frac{8}{7} = \frac{29}{7} \approx 4.14
+                    \]
+                </p>
+                <p>New intersection point A′ is: \( (2, 4.14) \)</p>
+                
+                
+                
+                <h4>Step 3: Clip Point B (Top Region: <code>1000</code>) against Top Boundary \( y = 6 \)</h4>
+                <p>Now use the horizontal clipping formula to find the new x-coordinate:</p>
+                <p>
+                    \[
+                    x' = x_2 + \frac{1}{m} \cdot (y_{\text{clip}} - y_2)
+                    \]
+                    \[
+                    x' = 7 + \frac{1}{\frac{4}{7}} \cdot (6 - 7) = 7 - \frac{7}{4} = \frac{21}{4} = 5.25
+                    \]
+                </p>
+                <p>New intersection point B′ is: \( (5.25, 6) \)</p>
+                
+                
+                
+                <h4>Final Clipped Line Segment</h4>
+                <ul>
+                    <li>Start: \( A′ = (2, 4.14) \)</li>
+                    <li>End: \( B′ = (5.25, 6) \)</li>
+                </ul>
+                <p>This visible segment lies entirely within the clipping window. The original segment went through:</p>
+                <ol>
+                    <li><strong>Left</strong> — point A was outside on the left</li>
+                    <li><strong>Inside</strong> — clipped segment \( A′ \to B′ \)</li>
+                    <li><strong>Top</strong> — point B was outside the top boundary</li>
+                </ol>
+                
+            </div>
         </div>
 
     </div>
@@ -879,6 +1022,8 @@
                     Video Lecture &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=J7OS_nI4W7Y" target="_blank">Point Clipping Explained in Hindi
                     l Computer Graphics Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=MkMK8LvLOjs" target="_blank">Cohen Sutherland Line Clipping
+                    Algorithm Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
