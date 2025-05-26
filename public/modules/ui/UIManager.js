@@ -126,7 +126,7 @@ export class UIManager {
   // Removing space in pre and code tags
   cleanPreTags() {
     const allPre = document.querySelectorAll('pre');
-    const allCode = document.querySelectorAll('code');
+    // const allCode = document.querySelectorAll('code');
     
     // Clean pre tags
     allPre.forEach((tag) => {
@@ -134,9 +134,9 @@ export class UIManager {
     });
     
     // Clean code tags
-    allCode.forEach((tag) => {
-      this.cleanWhitespaceFromElement(tag);
-    });
+    // allCode.forEach((tag) => {
+    //   this.cleanWhitespaceFromElement(tag);
+    // });
   }
 
   // Helper function to remove leading and trailing whitespace text nodes

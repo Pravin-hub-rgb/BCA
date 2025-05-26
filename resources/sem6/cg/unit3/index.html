@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3</title>
+    <title>Drawing, Clipping, and Filling Algorithms</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <link rel="stylesheet" id="highlightStylesheet"
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div>
-            <h2>Unit 3</h2>
+            <h2>Drawing, Clipping, and Filling Algorithms</h2>
         </div>
     </div>
     <div class="content-box">
@@ -236,18 +236,39 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 </ul>
 
                 <p>Here’s the table of values:</p>
-                <pre>
-                    <code>
-  x   |  y
-+
-  2   |  3
-  2.8 |  4
-  3.6 |  5
-  4.4 |  6
-  5.2 |  7
-  6   |  8
-                    </code>
-                </pre>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                      <tr>
+                        <th>x</th>
+                        <th>y</th>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>2.8</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>3.6</td>
+                        <td>5</td>
+                      </tr>
+                      <tr>
+                        <td>4.4</td>
+                        <td>6</td>
+                      </tr>
+                      <tr>
+                        <td>5.2</td>
+                        <td>7</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>8</td>
+                      </tr>
+                    </table>
+                  </div>
+                  
 
                 <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
                 <hr>
@@ -304,16 +325,31 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 </ul>
 
                 <p>Here’s the table of values:</p>
-                <pre>
-                    <code>
-  x  |	y
---+--
-  1  |	1
-  2  |	1.6667
-  3  |	2.3333
-  4  |	3
-                    </code>
-                </pre>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                      <tr>
+                        <th>x</th>
+                        <th>y</th>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>1.6667</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>2.3333</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>3</td>
+                      </tr>
+                    </table>
+                  </div>
+                  
 
 
                 <p>This table shows the calculated points from the start to the end point using the DDA algorithm.</p>
@@ -489,7 +525,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 </ul>
 
                 <hr>
-                <p><strong>Bresenham's Line Drawing Algorithm: Example</strong></p>
+                <h4>Bresenham's Line Drawing Algorithm: Example</h4>
 
                 <p>We will use Bresenham's Line Drawing Algorithm to draw a line between the points (1, 1) and (5, 3).
                 </p>
@@ -922,20 +958,20 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 <img src="../../images/cg10.svg" alt="Numerical example for point clipping" class="wb">
 
                 <p><strong>Solution:</strong> Evaluate point P1 (5, 1):</p>
-                <ol>
+                <ul>
                     <li>5 ≥ 2 → True</li>
                     <li>5 ≤ 9 → True</li>
                     <li>1 ≥ 3 → False</li>
-                </ol>
+                </ul>
                 <p>Since one condition is false, P1 is outside the clipping window.</p>
 
                 <p>Now evaluate point P2 (6, 9):</p>
-                <ol>
+                <ul>
                     <li>6 ≥ 2 → True</li>
                     <li>6 ≤ 9 → True</li>
                     <li>9 ≥ 3 → True</li>
                     <li>9 ≤ 11 → True</li>
-                </ol>
+                </ul>
                 <p>All conditions are satisfied, so P2 lies inside the clipping window.</p>
             </div>
             <div class="in">
@@ -952,7 +988,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                         also known as the TBRL code — representing Top, Bottom, Right, and Left. Each bit indicates
                         whether the point lies outside the respective boundary.</li>
                     <li>In the diagram below, the entire 2D plane is divided into 9 regions. The central region (region
-                        6) represents the clipping window.</li>
+                        5) represents the clipping window.</li>
                 </ul>
                 <img src="../../images/cg11.svg" alt="9-region code layout for clipping" class="wb">
 
@@ -982,9 +1018,9 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                                 can be rejected.
                                 <pre>
 <code>
-  0001
+   _ 0001
 & 0001
--
+-------
   0001
 </code>
                 </pre>
@@ -1032,7 +1068,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 <img src="../../images/cg18.svg" alt="" class="wb">
 
                 <h4>Step 1: Calculate the slope of the line (m)</h4>
-                <p>
+                <p class="ms">
                     \[
                     m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{7 - 3}{7 - 0} = \frac{4}{7}
                     \]
@@ -1042,7 +1078,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
 
                 <h4>Step 2: Clip Point A (Left Region: <strong>0001</strong>) against Left Boundary \( x = 2 \)</h4>
                 <p>We use the vertical clipping formula to find the new y-coordinate:</p>
-                <p>
+                <p class="ms">
                     \[
                     y' = y_1 + m \cdot (x_{\text{clip}} - x_1)
                     \]
@@ -1056,7 +1092,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
 
                 <h4>Step 3: Clip Point B (Top Region: <code>1000</code>) against Top Boundary \( y = 6 \)</h4>
                 <p>Now use the horizontal clipping formula to find the new x-coordinate:</p>
-                <p>
+                <p class="ms">
                     \[
                     x' = x_2 + \frac{1}{m} \cdot (y_{\text{clip}} - y_2)
                     \]
