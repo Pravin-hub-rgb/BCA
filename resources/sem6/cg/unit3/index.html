@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
     <link rel="stylesheet" id="highlightStylesheet"
-    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -19,7 +19,7 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
+                <a href="../unit4/index.html" class="link">Next Topic &rarr;</a>
                 <a href="../unit2/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
@@ -582,17 +582,47 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                         </ul>
 
                         <h4>Table of Calculated Points:</h4>
-                        <pre>
-    <code>
-  X  | Y  | p  | Action
---+-+-+-
-  1  | 1  |  0  | Initial point
-  2  | 2  | -4  | Increment X, Increment Y (p ≥ 0)
-  3  | 2  |  0  | Increment X only (p < 0)
-  4  | 3  | -4  | Increment X, Increment Y (p ≥ 0)
-  5  | 3  |  -  | Increment X only, reached endpoint
-    </code>
-</pre>
+                        <div class="table-wrapper">
+                            <table class="new-table">
+                                <tr>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>p</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>Initial point</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>-4</td>
+                                    <td>Increment X, Increment Y (p ≥ 0)</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>Increment X only (p &lt; 0)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>-4</td>
+                                    <td>Increment X, Increment Y (p ≥ 0)</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>3</td>
+                                    <td>-</td>
+                                    <td>Increment X only, reached endpoint</td>
+                                </tr>
+                            </table>
+                        </div>
+
 
                         <p>The points (1,1), (2,2), (3,2), (4,3), and (5,3) are plotted following Bresenham's algorithm.
                             The decision parameter is used to determine whether to increment Y in each step while always
@@ -801,17 +831,35 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
 
 
                 <h3>Final Points</h3>
-                <pre>
-                    <code>
-  x  |  y
---+--
-  0  |  5
-  1  |  5
-  2  |  5
-  3  |  4
-  4  |  3
-                    </code>
-                </pre>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>x</th>
+                            <th>y</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+
 
                 <p>These points are calculated for one-eighth of the circle.</p>
             </div>
@@ -1320,7 +1368,7 @@ Computer Graphics: Drawing, Clipping, and Filling Algorithms
                 <img src="../../images/cg27.svg" alt="" class="wb">
 
                 <h4>8-Connected Pixels</h4>
-<img src="../../images/cg28.svg" class="wb" alt="">
+                <img src="../../images/cg28.svg" class="wb" alt="">
 
                 <h4>Recursive Algorithm (4-Connected)</h4>
                 <h4>Pseudocode</h4>
@@ -1373,61 +1421,67 @@ void FloodFill(int x, int y, int targetColor, int fillColor) {
                 </div>
 
             </div>
-        </div>
-        <div class="in">
-            <h3>Boundary-Fill Algorithm – Technical Notes</h3>
 
-<h4>Overview</h4>
-<ul>
-  <li>The Boundary-Fill Algorithm is a region-filling technique in raster graphics. It is used to fill closed figures by starting from a seed point inside the boundary and spreading outwards until a boundary color is encountered.</li>
-  <li>Unlike Flood Fill (which fills all areas of a target color), Boundary Fill works based on a boundary color, and fills everything inside that boundary regardless of the initial color.</li>
-</ul>
+            <div class="in">
+                <h3>Boundary-Fill Algorithm – Technical Notes</h3>
 
-<h4>Use Case Example</h4>
-<ul>
-  <li>Think of coloring a circle drawn on a canvas. You don’t want the color to leak outside the circle, so you define the circle outline as the boundary, and begin filling from a point inside the circle. The algorithm fills all connected pixels until it hits the edge of the circle (boundary color).</li>
-</ul>
+                <h4>Overview</h4>
+                <ul>
+                    <li>The Boundary-Fill Algorithm is a region-filling technique in raster graphics. It is used to fill
+                        closed figures by starting from a seed point inside the boundary and spreading outwards until a
+                        boundary color is encountered.</li>
+                    <li>Unlike Flood Fill (which fills all areas of a target color), Boundary Fill works based on a
+                        boundary color, and fills everything inside that boundary regardless of the initial color.</li>
+                </ul>
 
-<h4>Types of Boundary Fill</h4>
-<div class="table-wrapper">
-  <table class="new-table">
-    <tr>
-      <th>Type</th>
-      <th>Connectivity</th>
-      <th>Neighbors Considered</th>
-    </tr>
-    <tr>
-      <td>4-connected fill</td>
-      <td>4-directional</td>
-      <td>Top, Bottom, Left, Right</td>
-    </tr>
-    <tr>
-      <td>8-connected fill</td>
-      <td>8-directional</td>
-      <td>Includes diagonals as well</td>
-    </tr>
-  </table>
-</div>
+                <h4>Use Case Example</h4>
+                <ul>
+                    <li>Think of coloring a circle drawn on a canvas. You don’t want the color to leak outside the
+                        circle, so you define the circle outline as the boundary, and begin filling from a point inside
+                        the circle. The algorithm fills all connected pixels until it hits the edge of the circle
+                        (boundary color).</li>
+                </ul>
 
-<h4>4-Connected Pixels</h4>
-<img src="../../images/cg27.svg" alt="" class="wb">
+                <h4>Types of Boundary Fill</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Type</th>
+                            <th>Connectivity</th>
+                            <th>Neighbors Considered</th>
+                        </tr>
+                        <tr>
+                            <td>4-connected fill</td>
+                            <td>4-directional</td>
+                            <td>Top, Bottom, Left, Right</td>
+                        </tr>
+                        <tr>
+                            <td>8-connected fill</td>
+                            <td>8-directional</td>
+                            <td>Includes diagonals as well</td>
+                        </tr>
+                    </table>
+                </div>
 
-<h4>8-Connected Pixels</h4>
-<img src="../../images/cg28.svg" alt="" class="wb">
+                <h4>4-Connected Pixels</h4>
+                <img src="../../images/cg27.svg" alt="" class="wb">
 
-<h4>Algorithm Steps</h4>
-<ul>
-  <li><strong>Inputs:</strong>
-    <ul>
-      <li>x, y → Starting seed point (inside region)</li>
-      <li>boundaryColor → Color of the edge/boundary</li>
-      <li>fillColor → Color to fill inside the region</li>
-    </ul>
-  </li>
-</ul>
+                <h4>8-Connected Pixels</h4>
+                <img src="../../images/cg28.svg" alt="" class="wb">
 
-<h4>Recursive Pseudocode (4-connected)</h4>
-<pre>
+                <h4>Algorithm Steps</h4>
+                <ul>
+                    <li><strong>Inputs:</strong>
+                        <ul>
+                            <li>x, y → Starting seed point (inside region)</li>
+                            <li>boundaryColor → Color of the edge/boundary</li>
+                            <li>fillColor → Color to fill inside the region</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Recursive Pseudocode (4-connected)</h4>
+                <pre>
     <code>
 void BoundaryFill4(int x, int y, int fillColor, int boundaryColor) {
     int current = getPixel(x, y);
@@ -1443,79 +1497,82 @@ void BoundaryFill4(int x, int y, int fillColor, int boundaryColor) {
 }
 </code>
 </pre>
-<ul>
-  <li><strong>Note:</strong> For 8-connected version, add diagonal calls too.</li>
-</ul>
+                <ul>
+                    <li><strong>Note:</strong> For 8-connected version, add diagonal calls too.</li>
+                </ul>
 
-<h4>Important Conditions</h4>
-<ul>
-  <li>The fill stops when a boundary color pixel is encountered.</li>
-  <li>Filling does not overwrite pixels already filled (to prevent infinite recursion).</li>
-  <li>The algorithm assumes that the boundary forms a closed loop.</li>
-</ul>
+                <h4>Important Conditions</h4>
+                <ul>
+                    <li>The fill stops when a boundary color pixel is encountered.</li>
+                    <li>Filling does not overwrite pixels already filled (to prevent infinite recursion).</li>
+                    <li>The algorithm assumes that the boundary forms a closed loop.</li>
+                </ul>
 
-<h4>Working Mechanism (Step-by-Step)</h4>
-<ul>
-  <li>Read the color at the current pixel.</li>
-  <li>If it's neither the boundaryColor nor the fillColor, fill it with fillColor.</li>
-  <li>Recursively apply the fill operation to neighboring pixels.</li>
-</ul>
+                <h4>Working Mechanism (Step-by-Step)</h4>
+                <ul>
+                    <li>Read the color at the current pixel.</li>
+                    <li>If it's neither the boundaryColor nor the fillColor, fill it with fillColor.</li>
+                    <li>Recursively apply the fill operation to neighboring pixels.</li>
+                </ul>
 
-<h4>Iterative Approach (Optional)</h4>
-<ul>
-  <li>Just like in Flood Fill, the recursive version may lead to stack overflow on large regions. An iterative method using a stack (manual DFS) is safer in practice.</li>
-</ul>
+                <h4>Iterative Approach (Optional)</h4>
+                <ul>
+                    <li>Just like in Flood Fill, the recursive version may lead to stack overflow on large regions. An
+                        iterative method using a stack (manual DFS) is safer in practice.</li>
+                </ul>
 
-<h4>Boundary Fill vs Flood Fill – Comparison</h4>
-<div class="table-wrapper">
-  <table class="new-table">
-    <tr>
-      <th>Feature</th>
-      <th>Boundary Fill</th>
-      <th>Flood Fill</th>
-    </tr>
-    <tr>
-      <td>Stops at</td>
-      <td>Boundary color</td>
-      <td>When pixel color ≠ target color</td>
-    </tr>
-    <tr>
-      <td>Requires</td>
-      <td>A closed boundary</td>
-      <td>Uniform region color</td>
-    </tr>
-    <tr>
-      <td>Fills</td>
-      <td>All area inside a boundary</td>
-      <td>All area of the same color</td>
-    </tr>
-    <tr>
-      <td>Risk of leak</td>
-      <td>High if boundary is not properly closed</td>
-      <td>Less if target color is correct</td>
-    </tr>
-    <tr>
-      <td>Real-life analogy</td>
-      <td>Coloring inside a drawn circle</td>
-      <td>Replacing color inside same-colored region</td>
-    </tr>
-  </table>
-</div>
+                <h4>Boundary Fill vs Flood Fill – Comparison</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>Boundary Fill</th>
+                            <th>Flood Fill</th>
+                        </tr>
+                        <tr>
+                            <td>Stops at</td>
+                            <td>Boundary color</td>
+                            <td>When pixel color ≠ target color</td>
+                        </tr>
+                        <tr>
+                            <td>Requires</td>
+                            <td>A closed boundary</td>
+                            <td>Uniform region color</td>
+                        </tr>
+                        <tr>
+                            <td>Fills</td>
+                            <td>All area inside a boundary</td>
+                            <td>All area of the same color</td>
+                        </tr>
+                        <tr>
+                            <td>Risk of leak</td>
+                            <td>High if boundary is not properly closed</td>
+                            <td>Less if target color is correct</td>
+                        </tr>
+                        <tr>
+                            <td>Real-life analogy</td>
+                            <td>Coloring inside a drawn circle</td>
+                            <td>Replacing color inside same-colored region</td>
+                        </tr>
+                    </table>
+                </div>
 
-<h4>Example (Conceptual)</h4>
-<ul>
-  <li>Assume we have a black-bordered rectangle on screen (black is boundary color). The inner area is white.
-    <ul>
-      <li>Seed Point: (100, 100)</li>
-      <li>boundaryColor: black</li>
-      <li>fillColor: red</li>
-    </ul>
-  </li>
-  <li>The algorithm starts at (100, 100) and colors every pixel red until it touches the black boundary.</li>
-</ul>
+                <h4>Example (Conceptual)</h4>
+                <ul>
+                    <li>Assume we have a black-bordered rectangle on screen (black is boundary color). The inner area is
+                        white.
+                        <ul>
+                            <li>Seed Point: (100, 100)</li>
+                            <li>boundaryColor: black</li>
+                            <li>fillColor: red</li>
+                        </ul>
+                    </li>
+                    <li>The algorithm starts at (100, 100) and colors every pixel red until it touches the black
+                        boundary.</li>
+                </ul>
 
+            </div>
         </div>
-
     </div>
     <div class="content-box">
         <p>Reference</p>
@@ -1537,7 +1594,7 @@ void BoundaryFill4(int x, int y, int fillColor, int boundaryColor) {
     </div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
