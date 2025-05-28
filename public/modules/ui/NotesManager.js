@@ -91,24 +91,72 @@ export class NotesManager {
     }
   
     // Compact/Extended notes toggle functionality
+    // setupCompactExtendedToggle() {
+    //   // Select all compact and extended notes sections
+    //   const compactExtendedSections = document.querySelectorAll(".compact-extended");
+  
+    //   compactExtendedSections.forEach((section) => {
+    //     // Create the toggle button
+    //     const toggleButton = document.createElement("button");
+    //     toggleButton.textContent = "Compact"; // Initial text for Compact mode
+    //     toggleButton.classList.add("toggle-len-notes");
+  
+    //     // Append the button to the section
+    //     section.appendChild(toggleButton);
+  
+    //     // Add event listener for toggling notes
+    //     toggleButton.addEventListener("click", () => {
+    //       const compactNotes = section.querySelector(".compact");
+    //       const extendedNotes = section.querySelector(".extended");
+  
+    //       // Toggle visibility
+    //       if (compactNotes.style.display === "none") {
+    //         compactNotes.style.display = "block";
+    //         extendedNotes.style.display = "none";
+    //         toggleButton.textContent = "Compact"; // Change button text to Compact
+    //       } else {
+    //         compactNotes.style.display = "none";
+    //         extendedNotes.style.display = "block";
+    //         toggleButton.textContent = "Extended"; // Change button text to Extended
+    //       }
+    //     });
+    //   });
+    // }
+
     setupCompactExtendedToggle() {
       // Select all compact and extended notes sections
       const compactExtendedSections = document.querySelectorAll(".compact-extended");
-  
+    
       compactExtendedSections.forEach((section) => {
         // Create the toggle button
         const toggleButton = document.createElement("button");
         toggleButton.textContent = "Compact"; // Initial text for Compact mode
         toggleButton.classList.add("toggle-len-notes");
-  
+    
         // Append the button to the section
         section.appendChild(toggleButton);
-  
+    
+        // ✅ Add top margin to the first h2 and h3 in .compact and .extended
+        ["compact", "extended"].forEach(type => {
+          const noteSection = section.querySelector(`.${type}`);
+          if (noteSection) {
+            const firstH2 = noteSection.querySelector("h2");
+            const firstH3 = noteSection.querySelector("h3");
+    
+            if (firstH2) {
+              firstH2.style.marginTop = "28px";
+            }
+            if (firstH3) {
+              firstH3.style.marginTop = "28px";
+            }
+          }
+        });
+    
         // Add event listener for toggling notes
         toggleButton.addEventListener("click", () => {
           const compactNotes = section.querySelector(".compact");
           const extendedNotes = section.querySelector(".extended");
-  
+    
           // Toggle visibility
           if (compactNotes.style.display === "none") {
             compactNotes.style.display = "block";
@@ -122,4 +170,5 @@ export class NotesManager {
         });
       });
     }
+    
   }
