@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Attack Vectors</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#t1" class="link">Buffer Overflow Attacks</a>
+            <a href="#t2" class="link">Internal Attacks</a>
+            <a href="#t3" class="link">Denial of Service</a>
+            <div class="botbut">
+                <a href="../unit4/index.html" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Cybersecurity Attack Vectors</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <pre>
+            <code>
+Cybersecurity Attack Vectors
+├── 1. Buffer Overflow Attacks
+│   ├── Stack Overflows
+│   ├── String Overflows
+│   ├── Heap Overflows
+│   └── Integer Overflows
+│
+├── 2. Internal Attacks
+│   ├── Emails
+│   ├── Mobile Phones
+│   ├── Instant Messengers
+│   ├── FTP Uploads
+│   ├── Dumpster Diving
+│   └── Shoulder Surfing
+│
+└── 3. DoS (Denial of Service) Attacks
+    ├── Ping of Death
+    ├── Teardrop
+    ├── SYN Flooding
+    ├── Land Attacks
+    ├── Smurf Attacks
+    ├── UDP Flooding
+    ├── Hybrid DoS Attacks
+    ├── Application Specific Attacks
+    └── Distributed DoS (DDoS) Attacks
+            </code>
+        </pre>
+        <ul>
+            <li>When we talk about cybersecurity, one of the most important things to understand is how systems are
+                attacked — these methods are known as attack vectors. In simple terms, an attack vector is the path or
+                technique used by a hacker to break into a system or cause harm. In this unit, we’ll explore different
+                categories of attack vectors that every IT or security student should know.</li>
+            <li>We’ll start with Buffer Overflow Attacks, which are more technical and involve manipulating memory to
+                crash a system or take control of it — things like stack overflows, string overflows, and even heap or
+                integer overflows fall under this.</li>
+            <li>Then we’ll move into Internal Attacks, which are all about threats that come from within the
+                organization or through common user channels — like suspicious emails, mobile apps, instant messengers,
+                and even physical methods like dumpster diving or shoulder surfing.</li>
+            <li>Finally, we’ll cover Denial of Service (DoS) Attacks, which are designed to overwhelm or crash systems
+                so that real users can't access them. This includes notorious attacks like Ping of Death, SYN flooding,
+                and even modern Distributed DoS (DDoS) methods that use multiple devices to attack at once.</li>
+        </ul>
+        <div id="t1" class="wh">
+          <h2>Buffer Overflow Attacks</h2>
+          <p>
+            Buffer overflow attacks ek purani par dangerous security problem hoti hai, especially low-level languages jaise C aur C++ mein. Ye attack tab hota hai jab ek program memory buffer mein us capacity se zyada data likhne ki koshish karta hai. Lekin ye itna risky kyun hota hai?
+          </p>
+          <p>
+            Zyada tar systems mein memory ek fixed tareeke se arranged hoti hai. Agar data galat jagah chala gaya, toh important information overwrite ho sakti hai — jaise ki program ko next kaha jaana hai. Kabhi-kabhi attacker apna code bhi insert karke program ka control le leta hai.
+          </p>
+        
+          <h3>Types of Buffer Overflow Attacks</h3>
+          <p>
+            Chalo ab dekhte hain ki buffer overflow alag-alag tareeko se kaise hota hai, aur attacker ise kaise use karte hain.
+          </p>
+        
+          <div class="in">
+            <h4>1. Stack Overflow</h4>
+            <p>
+              Stack wo jagah hoti hai jahan program local variables aur function calls ko store karta hai. Ye ek stack of plates ki tarah kaam karta hai — last-in, first-out (LIFO). Stack overflow tab hota hai jab stack mein limit se zyada data push ho jaata hai.
+            </p>
+            <ul>
+              <li>Attackers usually stack mein stored return address ko overwrite karne ki koshish karte hain.</li>
+              <li>Woh ek local buffer (jaise character array) ko apne data se overflow kar dete hain.</li>
+              <li>Jab function return karta hai, toh woh original jagah jaane ke bajay attacker ke code pe jump kar jaata hai.</li>
+            </ul>
+            <p>
+              Ye sabse common aur dangerous buffer overflow type hai. Isiliye unsafe functions jaise <code>gets()</code> ya <code>strcpy()</code> ko avoid kiya jaata hai kyunki ye input size check nahi karte.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h4>2. String Overflow</h4>
+            <p>
+              String overflow bhi ek type ka buffer overflow hota hai jahan input itna lamba hota hai ki string buffer ke bahar chala jaata hai. Ye mostly C-style strings mein hota hai (null-terminated character arrays).
+            </p>
+            <ul>
+              <li>Agar koi function fixed-size string buffer mein zyada characters copy kar de, toh nearby memory corrupt ho sakti hai.</li>
+              <li>Isse program crash ho sakta hai, data kharab ho sakta hai, ya security ka risk ho jaata hai — bilkul stack overflow ki tarah.</li>
+            </ul>
+            <p>
+              Pehla bada internet worm — Morris Worm — ne string overflow ka use kiya tha spread hone ke liye. Isiliye <code>strncpy()</code> jaise safe functions aur input validation zaroori hote hain.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h4>3. Heap Overflow</h4>
+            <p>
+              Heap wo memory area hota hai jo dynamically allocate ki jaati hai — jaise <code>malloc()</code> ya <code>new</code> ke through. Heap overflow tab hota hai jab heap mein diya gaya space cross kar diya jaata hai.
+            </p>
+            <ul>
+              <li>Ye return address ko overwrite nahi karta, lekin heap metadata ya function pointers ko corrupt kar sakta hai.</li>
+              <li>Isse attacker program ki working badal sakta hai ya apna code run karwa sakta hai.</li>
+            </ul>
+            <p>
+              Heap overflows stack se thode tricky hote hain, par utne hi dangerous. Achhi baat ye hai ki aajkal heap canaries jaise protection use kiye jaate hain jo inhe detect aur prevent karte hain.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h4>4. Integer Overflow</h4>
+            <p>
+              Integer overflow tab hota hai jab calculation ka result variable ke max value se zyada ho jaata hai. Akela ye buffer overflow nahi hota, lekin aksar uska reason ban jaata hai.
+            </p>
+            <ul>
+              <li>Jaise agar program buffer ka size kisi multiplication se calculate karta hai jo overflow kar jaaye, toh result chhota ho sakta hai.</li>
+              <li>Phir jab program us chhoti buffer mein zyada data store karne ki koshish karega, toh buffer overflow ho jaayega.</li>
+            </ul>
+            <p>
+              Aise bugs dhyaan se nahi dekhe jaate, lekin ye serious vulnerability tak le ja sakte hain.
+            </p>
+          </div>
+        
+          <h3>Buffer Overflow Attacks se Kaise Bacha Jaaye</h3>
+          <p>
+            Developers aur security teams kuch strategies use karte hain buffer overflow se bachne ke liye. Chalo dekhte hain kaise:
+          </p>
+          <ul>
+            <li>
+              <strong>1. Safe Code Likho:</strong> Input sizes ko check karo aur safer functions ka use karo. User input par blindly bharosa mat karo — hamesha validate karo!
+            </li>
+            <li>
+              <strong>2. Memory Safety Features ka Use Karo:</strong> Jaise ASLR (Address Space Layout Randomization) attacker ke liye code ki location guess karna mushkil bana deta hai. Memory ko non-executable mark karna bhi help karta hai.
+            </li>
+            <li>
+              <strong>3. Static aur Dynamic Analysis Tools:</strong> Ye tools code ko likhne ya test karne ke dauraan scan karte hain aur buffer overflow bugs ko pehle hi pakad lete hain.
+            </li>
+            <li>
+              <strong>4. Sandboxing:</strong> Programs ko ek limited environment mein chalana help karta hai taaki agar kuch galat ho, toh damage limited rahe.
+            </li>
+            <li>
+              <strong>5. Runtime Behavior Monitoring:</strong> Kuch systems program ke run hone ke dauraan uske behavior ko dekhte hain. Agar kuch unusual hota hai — jaise memory access ka pattern — toh program ko turant rok dete hain.
+            </li>
+          </ul>
+        
+          <h3>Buffer Overflow Attacks ke Real-World Examples</h3>
+          <p>
+            Ye attacks sirf theory tak limited nahi hain. Chalo kuch famous real-world examples dekhte hain jahan buffer overflows ne kaafi nuksaan kiya:
+          </p>
+          <ul>
+            <li>
+              <strong>Stack Overflow – Morris Worm (1988):</strong> Pehla internet worm stack buffer overflow ka use karke Unix ke <code>finger</code> service mein remote code run karta tha aur jaldi spread ho gaya.
+            </li>
+            <li>
+              <strong>String Overflow – Microsoft IIS Unicode Bug (2001):</strong> Ek long Unicode string ne Microsoft ke web server mein buffer overflow cause kiya, jisse attacker server ka full control le sakte the.
+            </li>
+            <li>
+              <strong>Heap Overflow – Microsoft Windows GDI+ (2004):</strong> Windows ka image files handle karne ka tareeka faulty tha, jisse ek malicious JPG file se code execute ho sakta tha.
+            </li>
+            <li>
+              <strong>Integer Overflow – Apple ka "goto fail" & Adobe Flash:</strong> Apple aur Adobe ke software mein integer overflow ki wajah se memory galat tareeke se manage hui, aur malicious video ya network data se code injection possible ho gaya.
+            </li>
+          </ul>
+          <p>
+            Ye examples dikhate hain ki buffer overflow problems kisi bhi system ko affect kar sakti hain — chaahe personal PC ho ya bada web server. Isiliye secure coding, proper testing, aur memory protection features bahut important hote hain.
+          </p>
+        </div>
+        <div id="t2" class="wh">
+          <h2>Internal Attacks</h2>
+          <p>
+            Jab hum cyberattacks ke baare mein sochte hain, toh dimaag mein aksar bahar ke hackers aate hain jo system ko todne ki koshish karte hain. Lekin surprising baat yeh hai ki kai baar sabse bada danger organization ke andar se hi hota hai. Inhe hum <strong>internal attacks</strong> kehte hain — aur yeh isliye aur bhi risky hote hain kyunki attacker ke paas pehle se hi access hota hai aur uspe trust bhi hota hai.
+          </p>
+          <p>
+            Internal threats employees, contractors ya careless behavior ke through bhi aa sakte hain. Chalo dekhte hain kaise normal tools jaise emails, mobile phones, ya kabhi-kabhi dustbin tak misuse ho sakte hain security todne ke liye.
+          </p>
+        
+          <div class="in">
+            <h3>Emails</h3>
+            <p>
+              Email ek important communication tool hai — aur unfortunately, insiders ke liye yeh damage karne ka asaan tareeka bhi ban sakta hai.
+            </p>
+            <ul>
+              <li>Koi employee confidential files attach karke unhe apne personal ya kisi competitor ke email pe bhej sakta hai.</li>
+              <li>Achhe employees bhi kabhi-kabhi phishing emails ke chakkar mein aa jaate hain, jo andar se aaye jaise lagte hain lekin asal mein login details churaane ke liye banaye jaate hain.</li>
+            </ul>
+            <p>
+              Isse bachne ke liye companies email monitoring, employee training aur data loss prevention (DLP) jaise tools ka use karti hain.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h3>Mobile Phones</h3>
+            <p>
+              Aajkal smartphones sabke paas hain — aur yeh life easy banate hain, lekin saath hi workplace ke liye security risks bhi le aate hain.
+            </p>
+            <ul>
+              <li>Koi confidential screen ya document ka photo le sakta hai.</li>
+              <li>Phones ko USB ya Bluetooth ke through computers se connect karke bina permission ke data transfer kiya ja sakta hai.</li>
+              <li>Kuch apps agar zyada permissions le lein, toh wo chupke se conversation record kar sakte hain ya kya type ho raha hai uska record rakh sakte hain.</li>
+            </ul>
+            <p>
+              Isliye companies Mobile Device Management (MDM) tools ka use karti hain aur sensitive areas mein phone use ko limit kar deti hain.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h3>Instant Messengers</h3>
+            <p>
+              Slack, WhatsApp, ya Microsoft Teams jaise messaging tools team communication ko fast banate hain — lekin yehi tools data leak ka secret rasta bhi ban sakte hain.
+            </p>
+            <ul>
+              <li>Koi bhi insider private chat ya group mein sensitive data paste kar sakta hai.</li>
+              <li>Attackers inhi messenger tools ka use kar sakte hain breach ke time apna kaam coordinate karne ke liye.</li>
+            </ul>
+            <p>
+              Simple dikhne wale messages ya links bhi agar monitor na kiye jaayein, toh bade issues create kar sakte hain.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h3>FTP Uploads</h3>
+            <p>
+              FTP (File Transfer Protocol) se files fast transfer ki jaati hain — lekin insiders isse galat tareeke se bhi use kar sakte hain.
+            </p>
+            <ul>
+              <li>Koi private company documents ko kisi bahar ke FTP server pe upload kar sakta hai jo uske control mein ho.</li>
+              <li>Agar FTP activity properly monitor na ki jaaye, toh aise actions kaafi time tak unnoticed reh sakte hain.</li>
+            </ul>
+            <p>
+              Secure options jaise SFTP, access control aur logging ka use karke is misuse ko roka ja sakta hai.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h3>Dumpster Diving</h3>
+            <p>
+              Har threat computer ka nahi hota. Dumpster diving ka matlab hai physical trash (kooda) ko check karna taaki usmein se sensitive materials mil sakein jo galti se fek diye gaye hoon.
+            </p>
+            <ul>
+              <li>Kisi ko trash se print ki gayi emails, reports ya purane USB drives mil sakte hain.</li>
+              <li>Sticky notes jisme passwords ya access codes likhe hote hain, attackers ke liye jackpot ban sakte hain.</li>
+            </ul>
+            <p>
+              Simple steps jaise documents ko shred karna aur secure bins use karna aise risks se bacha sakta hai.
+            </p>
+          </div>
+        
+          <div class="in">
+            <h3>Shoulder Surfing</h3>
+            <p>
+              Kabhi-kabhi attacker bas chup-chaap dekh raha hota hai — isse shoulder surfing kehte hain. Yeh tab hota hai jab koi person dusre ko passwords type karte, private data dekhte ya kuch important likhte dekh leta hai bina uske pata chale.
+            </p>
+            <ul>
+              <li>Yeh shared offices, elevators ya coffee shops jaisi jagahon pe ho sakta hai.</li>
+              <li>Insiders ya to yaad rakh lete hain ya photo le lete hain us cheez ka jo unhone dekha.</li>
+            </ul>
+            <p>
+              Screen privacy filters, auto-lock settings, aur employees ko alert rehna sikhana aise risk ko kaafi kam kar sakta hai.
+            </p>
+          </div>
+        
+          <h3>Bringing It All Together</h3>
+          <p>
+            Internal attacks hamesha high-tech hacks nahi hote — kai baar ye simple daily actions hote hain jo notice hi nahi hote. Unka dangerous hona isliye bhi hai kyunki jo person involved hota hai, usse already system ka knowledge aur access dono hota hai.
+          </p>
+          <p>
+            Emails aur mobile devices se leke trash aur nazar rakhne tak, insider threat kaafi forms mein aa sakta hai. Isliye sirf tools ka use karna kaafi nahi hai — employees ke beech awareness ka culture banana bhi zaroori hai.
+          </p>
+        </div>
+        
+        <div class="wh" id="t3">
+          <h2>Understanding DoS (Denial of Service) Attacks</h2>
+      
+          <p>
+              Socho, tum ek shop mein ja rahe ho, par koi baar-baar darwaza rok raha hai jiski wajah se customers andar nahi ja paate. Bilkul waise hi Denial of Service (DoS) attack websites ya online services ke saath hota hai — ye unko fake traffic ya kharaab requests se itna overload kar deta hai ki asli users un tak access nahi kar pate.
+          </p>
+      
+          <p>
+              DoS attacks alag-alag tareeke ke hote hain, har ek system ko alag style mein target karta hai. Chalo kuch common types ko samajhte hain aur dekhte hain ye kaise kaam karte hain.
+          </p>
+      
+          <div class="in">
+              <h3>Ping of Death</h3>
+              <p>
+                  Is attack mein system ko bada ya galat bana hua data packets bheja jata hai ping command ke through. Computer aam taur pe ping ko easily handle kar leta hai, par jab abnormal packets baar-baar aate hain, toh system crash ya freeze ho jata hai. Socho jaise tumhe baar-baar incomplete puzzle mil raha ho jise solve karna mushkil ho jaye!
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Teardrop Attack</h3>
+              <p>
+                  Ismein data packets chhote-chhote tukdon mein tod diye jate hain, par system un tukdon ko sahi se jod nahi pata. Jab system try karta hai pieces ko wapas milane, toh fail ho jata hai aur crash ho sakta hai. Bilkul waise jaise jigsaw puzzle ke tukde jo match hi nahi karte — kaafi frustrating, hai na?
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>SYN Flooding</h3>
+              <p>
+                  Ye attack un cheezon ka fayda uthata hai jo do computers communication start karne ke liye karte hain, jise "three-way handshake" kehte hain. Attacker bahut saare half-open connection requests bhejta hai, par kabhi complete nahi karta. Isse server wait karta reh jata hai aur apni resources khatam kar deta hai asli users ko serve karne ke liye.
+              </p>
+              <ul>
+                  <li>Step 1: Attacker SYN request bhejta hai (jaise "Hi!")</li>
+                  <li>Step 2: Server reply karta hai SYN-ACK se ("Hi wapas!")</li>
+                  <li>Step 3: Attacker ACK se reply nahi karta, server hang ho jata hai</li>
+              </ul>
+              <p>
+                  Ye cycle tab tak chalta rehta hai jab tak server aur connections handle nahi kar pata.
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Land Attacks</h3>
+              <p>
+                  Land attack system ko confuse karta hai by sending ek request jisme source aur destination IP address same hota hai. System khud se baat karta rehta hai — jaise tum apne hi phone number par call karte raho aur phir us loop mein phas jao.
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Smurf Attacks</h3>
+              <p>
+                  Ye smart attack attacker ka IP address chhupa ke ping requests bhejta hai kai devices ko, aur un devices ko bolta hai ki sab reply kare victim ke IP address ko. Fir victim par hazaaron devices se replies ka flood aa jata hai.
+              </p>
+              <ul>
+                  <li>Attacker ek ICMP (ping) request broadcast address ko bhejta hai.</li>
+                  <li>Network ke sab devices victim ke IP ko reply karte hain.</li>
+                  <li>Victim un requests ka overload ho jata hai jo usne maange hi nahi the.</li>
+              </ul>
+          </div>
+      
+          <div class="in">
+              <h3>UDP Flooding</h3>
+              <p>
+                  Is attack mein target par bahut saare UDP packets bheje jaate hain random ports par. System in packets ko handle karne ke liye apps dhoondta hai, par jab kuch nahi milta, toh error messages bhejne lagta hai jo jaldi resources khatam kar dete hain.
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Hybrid DoS Attacks</h3>
+              <p>
+                  Kuch attackers ek saath kai tareeke milake attack karte hain — jaise SYN flooding ke saath ping floods ya doosre methods. Ye hybrid attacks detect karna mushkil hota hai kyunki ye system ko overwhelm karne ke liye multiple strategies use karte hain.
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Application-Specific Attacks</h3>
+              <p>
+                  Ye attacks specific applications ko target karte hain — jaise web server, database, ya login page — pura network nahi. Ye app ke uss part ko overload kar dete hain jo sabse zyada kaam karta hai, jiski wajah se wo slow ya use karne layak nahi rehta.
+              </p>
+          </div>
+      
+          <div class="in">
+              <h3>Distributed Denial of Service (DDoS) Attacks</h3>
+              <p>
+                  DDoS attacks DoS attacks se kaafi zyada powerful hote hain. Ek attacker ki jagah, kai compromised devices ka network (jise "botnet" kehte hain) ek saath target ko flood karta hai. Socho, sau log ek chhoti shop mein ek saath ghusne ki koshish kar rahe hain — koi aur nahi ghus pata, aur system gir jata hai.
+              </p>
+              <ul>
+                  <li>Hazaaron infected computers aam taur par in attacks mein hote hain.</li>
+                  <li>DDoS attacks bade websites, online stores, aur government services ko bhi down kar sakte hain.</li>
+              </ul>
+          </div>
+      
+          <p>
+              DoS aur DDoS attacks se bachav bahut zaroori hai kyunki ye sirf websites ko crash nahi karte — ye paise ka nuksaan karte hain, bharosa todte hain, aur kabhi-kabhi important services ko bhi disrupt kar dete hain.
+          </p>
+      </div>
+      
+    </div>
+    <script type="module" src="../../../../public/main.js"></script>
+</body>
+
+</html>
