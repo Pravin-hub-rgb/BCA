@@ -62,21 +62,11 @@ jobs:
         COMMIT_COUNT=$(jq length public/git-data/recent-commits.json)
         echo "✅ Fetched $COMMIT_COUNT commits"
         
-        # Get last updated timestamp from DEVELOPMENT commits only (not automated ones)
-        echo "🕐 Getting last development commit timestamp..."
-        
-        # Find the most recent non-automated commit
-        LAST_DEV_COMMIT_DATE=$(git log --format="%aI" --grep="🤖" --grep="\[skip ci\]" --grep="Update commit data" --grep="GitHub Actions" --grep="Automated commit" --grep="Auto-update" --grep="CI:" --grep="chore: update data" --grep="docs: update stats" --grep="Update git data" --invert-grep -1 | head -1)
-        
-        if [ -n "$LAST_DEV_COMMIT_DATE" ]; then
-          echo "$LAST_DEV_COMMIT_DATE" > public/git-data/last-updated.txt
-          echo "✅ Last development commit date: $LAST_DEV_COMMIT_DATE"
-        else
-          # Fallback to most recent commit if no development commits found
-          LAST_COMMIT_DATE=$(git log -1 --format="%aI")
-          echo "$LAST_COMMIT_DATE" > public/git-data/last-updated.txt
-          echo "⚠️ No development commits found, using last commit date: $LAST_COMMIT_DATE"
-        fi
+        # Get last updated timestamp (most recent commit date)
+        echo "🕐 Getting last updated timestamp..."
+        LAST_COMMIT_DATE=$(git log -1 --format="%aI")
+        echo "$LAST_COMMIT_DATE" > public/git-data/last-updated.txt
+        echo "✅ Last commit date: $LAST_COMMIT_DATE"
         
         # Add a generation timestamp for debugging
         date -u +"%Y-%m-%dT%H:%M:%SZ" > public/git-data/generated-at.txt
@@ -103,7 +93,7 @@ jobs:
         
         echo ""
         echo "📊 Total commits: $(cat public/git-data/total-commits.txt)"
-        echo "🕐 Last updated (development): $(cat public/git-data/last-updated.txt)"
+        echo "🕐 Last updated: $(cat public/git-data/last-updated.txt)"
         echo "⚡ Generated at: $(cat public/git-data/generated-at.txt)"
         
         echo ""
@@ -113,20 +103,16 @@ jobs:
         
         echo ""
         echo "🔍 Development vs Automated commit analysis:"
-        DEV_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data|GitHub Actions|Automated commit|Auto-update|CI:|chore: update data|docs: update stats|Update git data"; "i") | not) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
-        AUTO_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data|GitHub Actions|Automated commit|Auto-update|CI:|chore: update data|docs: update stats|Update git data"; "i")) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
+        DEV_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i") | not) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
+        AUTO_COMMITS=$(jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i")) | .commit.message | split("\n")[0]' public/git-data/recent-commits.json | wc -l)
         echo "   Development commits found: $DEV_COMMITS"
         echo "   Automated commits found: $AUTO_COMMITS"
         
         if [ "$DEV_COMMITS" -gt 0 ]; then
           echo ""
           echo "🎯 Development commits:"
-          jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data|GitHub Actions|Automated commit|Auto-update|CI:|chore: update data|docs: update stats|Update git data"; "i") | not) | "   - \(.commit.message | split("\n")[0])"' \
+          jq -r '.[] | select(.commit.message | test("🤖|\\[skip ci\\]|Update commit data"; "i") | not) | "   - \(.commit.message | split("\n")[0])"' \
             public/git-data/recent-commits.json | head -5
-            
-          echo ""
-          echo "🎯 Most recent development commit date:"
-          git log --format="   %aI - %s" --grep="🤖" --grep="\[skip ci\]" --grep="Update commit data" --grep="GitHub Actions" --grep="Automated commit" --grep="Auto-update" --grep="CI:" --grep="chore: update data" --grep="docs: update stats" --grep="Update git data" --invert-grep -1 | head -1
         fi
 
     - name: Commit and push changes
@@ -160,7 +146,7 @@ jobs:
         echo ""
         echo "🎉 === WORKFLOW COMPLETED SUCCESSFULLY ==="
         echo "📊 Total commits: $(cat public/git-data/total-commits.txt)"
-        echo "🕐 Last updated (development): $(cat public/git-data/last-updated.txt)"
+        echo "🕐 Last updated: $(cat public/git-data/last-updated.txt)"
         echo "📝 Recent commits fetched: $(jq length public/git-data/recent-commits.json)"
         echo "⚡ Data generated at: $(cat public/git-data/generated-at.txt)"
         echo ""
