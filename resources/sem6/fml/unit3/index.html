@@ -247,14 +247,214 @@ Unsupervised Learning Algorithms
                     <li>Cluster A (Centroid ≈ 19, 400): C1, C4</li>
                     <li>Cluster B (Centroid ≈ 35.6, 1240): C2, C3, C5, C6, C7</li>
                 </ul>
+            </div>
+            <div class="in">
+                <h3>Silhouette Score (Clustering Evaluation)</h3>
+
+                <p>
+                    After performing clustering (like K-Means), it's important to check how good the clustering
+                    actually is.
+                    One of the most popular ways to evaluate clustering quality is using the <strong>Silhouette
+                        Score</strong>.
+                </p>
+
+                <h4>What is Silhouette Score?</h4>
+                <p>
+                    Silhouette Score tells us how well a data point fits into its own cluster and how far it is from
+                    the other clusters.
+                    It gives a score between <strong>-1</strong> and <strong>1</strong> for each point:
+                </p>
+                <ul>
+                    <li><strong>+1:</strong> Perfectly assigned to its cluster.</li>
+                    <li><strong>0:</strong> On the boundary between two clusters.</li>
+                    <li><strong>Negative:</strong> Possibly assigned to the wrong cluster.</li>
+                </ul>
+
+                <h4>Formula</h4>
+                <p class="ms">
+                    For a single data point <code>i</code>:
+                    <br />
+                    Let:
+                    <br />
+                    <code>a(i)</code> = average distance from <code>i</code> to all other points in the <strong>same
+                        cluster</strong>
+                    <br />
+                    <code>b(i)</code> = average distance from <code>i</code> to all points in the <strong>nearest
+                        other cluster</strong>
+                    <br /><br />
+                    Then:
+                    <br />
+                    <code>S(i) = (b(i) - a(i)) / max(a(i), b(i))</code>
+                </p>
+
+                <h4>Steps to Calculate Silhouette Score</h4>
+                <ul>
+                    <li>Step 1: Perform clustering (e.g., K-Means).</li>
+                    <li>Step 2: For each point:
+                        <ul>
+                            <li>Find <code>a(i)</code> = avg. distance to other points in same cluster.</li>
+                            <li>Find <code>b(i)</code> = avg. distance to points in the nearest other cluster.</li>
+                            <li>Calculate silhouette score for that point.</li>
+                        </ul>
+                    </li>
+                    <li>Step 3: Take the average of all <code>S(i)</code> to get the overall Silhouette Score.</li>
+                </ul>
+
+                <h4>Simple Example</h4>
+                <p>Assume we have 4 points clustered into 2 clusters:</p>
+
+                <ul>
+                    <li><strong>Cluster A:</strong> P1 = (1, 2), P2 = (2, 2)</li>
+                    <li><strong>Cluster B:</strong> P3 = (8, 8), P4 = (9, 9)</li>
+                </ul>
+
+                <p>Let’s calculate Silhouette Score for P1:</p>
+                <ul>
+                    <li><strong>a(P1):</strong> Distance to P2
+                        <br />
+                        <code>a = √((2-1)² + (2-2)²) = √(1) = 1.0</code>
+                    </li>
+                    <li><strong>b(P1):</strong> Avg distance to P3 and P4
+                        <br />
+                        <code>
+                          d1 = √((8-1)² + (8-2)²) = √(49 + 36) = √85 ≈ 9.22
+                          <br />
+                          d2 = √((9-1)² + (9-2)²) = √(64 + 49) = √113 ≈ 10.63
+                          <br />
+                          b = (9.22 + 10.63) / 2 ≈ 9.93
+                        </code>
+                    </li>
+                    <li>
+                        <strong>Silhouette Score for P1:</strong>
+                        <br />
+                        <code>
+                          S = (b - a) / max(a, b) = (9.93 - 1) / 9.93 ≈ 0.899
+                        </code>
+                    </li>
+                </ul>
+
+                <h4>Interpretation</h4>
+                <p>
+                    Since P1’s score is close to 1, it means it's nicely separated and properly clustered.
+                    If most points have high scores, your clustering is good. If many have low or negative scores,
+                    your clusters may overlap or be wrongly assigned.
+                </p>
+
+                <h4>Advantages of Silhouette Score</h4>
+                <ul>
+                    <li>Easy to understand and visualize.</li>
+                    <li>Works without ground truth labels.</li>
+                    <li>Can help decide the optimal number of clusters (K).</li>
+                </ul>
+
                 <h4>Limitations</h4>
                 <ul>
-                    <li>Results depend heavily on the order of data points.</li>
-                    <li>May be less stable than batch K-Means.</li>
-                    <li>Still requires choosing the value of K manually.</li>
+                    <li>Computationally expensive on large datasets.</li>
+                    <li>Assumes convex cluster shapes (works best with spherical clusters).</li>
                 </ul>
-            </div>
 
+                <h4>Note:</h4>
+                <p>
+                    You can also use libraries like <code>sklearn.metrics.silhouette_score()</code> in Python to
+                    calculate this automatically.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Hierarchical Clustering</h3>
+              
+                <p>
+                  Hierarchical clustering builds a hierarchy of clusters. Unlike K-Means, it does not require
+                  choosing the number of clusters (K) beforehand. There are two main approaches:
+                </p>
+              
+                <h4>Types of Hierarchical Clustering</h4>
+                <ul>
+                  <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and keep merging the closest pairs until one cluster remains.</li>
+                  <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep splitting it into smaller clusters.</li>
+                </ul>
+              
+                <h4>Distance Measurement (Linkage Methods)</h4>
+                <ul>
+                  <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two clusters.</li>
+                  <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two clusters.</li>
+                  <li><strong>Average Linkage:</strong> Average of all pairwise distances between points in two clusters.</li>
+                </ul>
+              
+                <h4>Example: Agglomerative Clustering</h4>
+                <p>Given 1D data points: <code>[1, 5, 8, 10, 19, 20]</code></p>
+              
+                <p>Step-by-step using <strong>single linkage</strong>:</p>
+                <ol>
+                  <li>Start with each point as its own cluster:
+                    <br />
+                    [1], [5], [8], [10], [19], [20]
+                  </li>
+              
+                  <li>Find the closest pair (minimum distance):  
+                    <br />
+                    Distance(19, 20) = 1 → Merge → [19, 20]
+                  </li>
+              
+                  <li>Next closest:  
+                    <br />
+                    Distance(8, 10) = 2 → Merge → [8, 10]
+                  </li>
+              
+                  <li>Next closest:  
+                    <br />
+                    Distance(5, 8) = 3 → Merge → [5, 8, 10]
+                  </li>
+              
+                  <li>Next closest:  
+                    <br />
+                    Distance(1, 5) = 4 → Merge → [1, 5, 8, 10]
+                  </li>
+              
+                  <li>Final merge:
+                    <br />
+                    Distance(10, 19) = 9 → Merge all → [1, 5, 8, 10, 19, 20]
+                  </li>
+                </ol>
+              <img src="../../images/ml5.svg" alt="" class="wb">
+                <h4>Dendrogram</h4>
+                <p>
+                  A dendrogram is a tree-like diagram that shows the sequence of merges (or splits).
+                  You can “cut” the dendrogram at any level to get the desired number of clusters.
+                </p>
+              
+                <h4>Divisive Clustering (Top-Down)</h4>
+                <p>
+                  This method starts with all points in one big cluster and splits them recursively.
+                  It's less common and computationally heavier than agglomerative.
+                </p>
+              
+                <p>Steps:</p>
+                <ol>
+                  <li>Start with all points in one cluster: [1, 5, 8, 10, 19, 20]</li>
+                  <li>Split into two clusters based on large distance gap → [1, 5, 8, 10] and [19, 20]</li>
+                  <li>Keep splitting each sub-cluster until each point is separate.</li>
+                </ol>
+              <img src="../../images/ml6.svg" alt="" class="wb">
+                <h4>Advantages</h4>
+                <ul>
+                  <li>No need to pre-define K (number of clusters).</li>
+                  <li>Produces a full cluster hierarchy.</li>
+                  <li>Works well with small datasets and dendrograms help visualize structure.</li>
+                </ul>
+              
+                <h4>Limitations</h4>
+                <ul>
+                  <li>Computationally expensive for large datasets.</li>
+                  <li>Not suitable for streaming or dynamic data.</li>
+                  <li>Once a merge/split happens, it can't be undone.</li>
+                </ul>
+              
+                <h4>Note:</h4>
+                <p>
+                  Use libraries like <code>scipy.cluster.hierarchy</code> in Python to create dendrograms and perform clustering automatically.
+                </p>
+              </div>
+              
         </div>
     </div>
     <div class="content-box">
@@ -262,6 +462,8 @@ Unsupervised Learning Algorithms
         <ul>
             <li><a href="https://www.youtube.com/watch?v=5FpsGnkbEpM" target="_blank">K-mean Clustering with Numerical
                     Example | Unsupervised Learning | Machine🖥️ Learning 🙇‍♂️🙇 Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=zxQF8Rmpk1M" target="_blank"> Hierarchical Clustering |
+                    Agglomerative vs Divisive with examples Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
