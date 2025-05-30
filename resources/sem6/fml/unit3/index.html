@@ -8,6 +8,8 @@
     <title>Unsupervised Learning Algorithms</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -461,408 +463,1062 @@ Unsupervised Learning Algorithms
                 </p>
             </div>
 
-        </div>
-        <div class="in">
-            <h3>DBSCAN Clustering Algorithm</h3>
 
+            <div class="in">
+                <h3>DBSCAN Clustering Algorithm</h3>
+
+                <p>
+                    DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering
+                    algorithm
+                    that groups together points that are closely packed, marking points that lie alone in low-density
+                    regions
+                    as noise. It is especially useful when clusters have irregular shapes.
+                </p>
+
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Epsilon (ε):</strong> The maximum radius of the neighborhood around a point. Think of it
+                        as
+                        how far you look around a person to find friends.</li>
+                    <li><strong>MinPts:</strong> Minimum number of points required to form a dense region (cluster).
+                        Like
+                        minimum people needed in a group to call it a crowd.</li>
+                    <li><strong>Core Point:</strong> A point that has at least MinPts neighbors within ε radius.</li>
+                    <li><strong>Border Point:</strong> A point that has fewer than MinPts neighbors but lies within the
+                        neighborhood of a core point.</li>
+                    <li><strong>Noise Point:</strong> A point that is neither core nor border (isolated points).</li>
+                </ul>
+
+                <h4>Real-Life Analogy: Mall Supervisor</h4>
+                <p>
+                    Imagine you are a supervisor in a mall watching the crowd. You define your neighborhood radius (ε)
+                    as
+                    how far you look around a person to see if they are in a crowd. You decide that if a group has at
+                    least
+                    4 people (MinPts), you call it a crowd (cluster). If someone is with enough people nearby, they are
+                    a
+                    <em>core point</em>. If they are near a crowd but don't have enough people themselves, they are a
+                    <em>border point</em>. People wandering alone far from any crowd are <em>noise</em>.
+                </p>
+
+                <h4>Example Dataset</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Point</th>
+                                <th>X</th>
+                                <th>Y</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P1</td>
+                                <td>4.5</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>P2</td>
+                                <td>5</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>P3</td>
+                                <td>6</td>
+                                <td>6.5</td>
+                            </tr>
+                            <tr>
+                                <td>P4</td>
+                                <td>7</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>P5</td>
+                                <td>9</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>P6</td>
+                                <td>7</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>P7</td>
+                                <td>8</td>
+                                <td>3.5</td>
+                            </tr>
+                            <tr>
+                                <td>P8</td>
+                                <td>9</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>P9</td>
+                                <td>4</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>P10</td>
+                                <td>3</td>
+                                <td>7.5</td>
+                            </tr>
+                            <tr>
+                                <td>P11</td>
+                                <td>4</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>P12</td>
+                                <td>3.5</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Parameters</h4>
+                <ul>
+                    <li><strong>Epsilon (ε):</strong> 1.9 (radius to search neighbors)</li>
+                    <li><strong>MinPts:</strong> 4 (minimum points to form a cluster)</li>
+                </ul>
+
+                <h4>Euclidean Distance Formula</h4>
+                <p>To find distance between two points \(P_i = (x_i, y_i)\) and \(P_j = (x_j, y_j)\):</p>
+                <p class="ms">
+                    \( d = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2} \)
+                </p>
+
+                <h4>Distance Table (All Pairwise Distances)</h4>
+                <p>Calculated distances between points (rounded to 2 decimals):</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>P1</th>
+                                <th>P2</th>
+                                <th>P3</th>
+                                <th>P4</th>
+                                <th>P5</th>
+                                <th>P6</th>
+                                <th>P7</th>
+                                <th>P8</th>
+                                <th>P9</th>
+                                <th>P10</th>
+                                <th>P11</th>
+                                <th>P12</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P1</td>
+                                <td>0.00</td>
+                                <td>1.12</td>
+                                <td>2.12</td>
+                                <td>3.91</td>
+                                <td>6.02</td>
+                                <td>5.59</td>
+                                <td>5.70</td>
+                                <td>5.41</td>
+                                <td>4.03</td>
+                                <td>1.58</td>
+                                <td>2.06</td>
+                                <td>3.16</td>
+                            </tr>
+                            <tr>
+                                <td>P2</td>
+                                <td>1.12</td>
+                                <td>0.00</td>
+                                <td>1.12</td>
+                                <td>2.83</td>
+                                <td>5.00</td>
+                                <td>4.47</td>
+                                <td>4.61</td>
+                                <td>4.47</td>
+                                <td>3.16</td>
+                                <td>2.06</td>
+                                <td>1.41</td>
+                                <td>2.50</td>
+                            </tr>
+                            <tr>
+                                <td>P3</td>
+                                <td>2.12</td>
+                                <td>1.12</td>
+                                <td>0.00</td>
+                                <td>1.80</td>
+                                <td>3.91</td>
+                                <td>3.64</td>
+                                <td>3.61</td>
+                                <td>3.35</td>
+                                <td>3.20</td>
+                                <td>3.16</td>
+                                <td>2.06</td>
+                                <td>2.92</td>
+                            </tr>
+                            <tr>
+                                <td>P4</td>
+                                <td>3.91</td>
+                                <td>2.83</td>
+                                <td>1.80</td>
+                                <td>0.00</td>
+                                <td>2.24</td>
+                                <td>2.00</td>
+                                <td>1.80</td>
+                                <td>2.00</td>
+                                <td>3.16</td>
+                                <td>4.72</td>
+                                <td>3.16</td>
+                                <td>3.50</td>
+                            </tr>
+                            <tr>
+                                <td>P5</td>
+                                <td>6.02</td>
+                                <td>5.00</td>
+                                <td>3.91</td>
+                                <td>2.24</td>
+                                <td>0.00</td>
+                                <td>2.24</td>
+                                <td>1.12</td>
+                                <td>1.00</td>
+                                <td>5.00</td>
+                                <td>6.95</td>
+                                <td>5.39</td>
+                                <td>5.59</td>
+                            </tr>
+                            <tr>
+                                <td>P6</td>
+                                <td>5.59</td>
+                                <td>4.47</td>
+                                <td>3.64</td>
+                                <td>2.00</td>
+                                <td>2.24</td>
+                                <td>0.00</td>
+                                <td>1.12</td>
+                                <td>2.83</td>
+                                <td>3.16</td>
+                                <td>6.02</td>
+                                <td>4.24</td>
+                                <td>4.03</td>
+                            </tr>
+                            <tr>
+                                <td>P7</td>
+                                <td>5.70</td>
+                                <td>4.61</td>
+                                <td>3.61</td>
+                                <td>1.80</td>
+                                <td>1.12</td>
+                                <td>1.12</td>
+                                <td>0.00</td>
+                                <td>1.80</td>
+                                <td>4.03</td>
+                                <td>6.40</td>
+                                <td>4.72</td>
+                                <td>4.74</td>
+                            </tr>
+                            <tr>
+                                <td>P8</td>
+                                <td>5.41</td>
+                                <td>4.47</td>
+                                <td>3.35</td>
+                                <td>2.00</td>
+                                <td>1.00</td>
+                                <td>2.83</td>
+                                <td>1.80</td>
+                                <td>0.00</td>
+                                <td>5.10</td>
+                                <td>6.50</td>
+                                <td>5.10</td>
+                                <td>5.50</td>
+                            </tr>
+                            <tr>
+                                <td>P9</td>
+                                <td>4.03</td>
+                                <td>3.16</td>
+                                <td>3.20</td>
+                                <td>3.16</td>
+                                <td>5.00</td>
+                                <td>3.16</td>
+                                <td>4.03</td>
+                                <td>5.10</td>
+                                <td>0.00</td>
+                                <td>3.64</td>
+                                <td>2.00</td>
+                                <td>1.12</td>
+                            </tr>
+                            <tr>
+                                <td>P10</td>
+                                <td>1.58</td>
+                                <td>2.06</td>
+                                <td>3.16</td>
+                                <td>4.72</td>
+                                <td>6.95</td>
+                                <td>6.02</td>
+                                <td>6.40</td>
+                                <td>6.50</td>
+                                <td>3.64</td>
+                                <td>0.00</td>
+                                <td>1.80</td>
+                                <td>2.55</td>
+                            </tr>
+                            <tr>
+                                <td>P11</td>
+                                <td>2.06</td>
+                                <td>1.41</td>
+                                <td>2.06</td>
+                                <td>3.16</td>
+                                <td>5.39</td>
+                                <td>4.24</td>
+                                <td>4.72</td>
+                                <td>5.10</td>
+                                <td>2.00</td>
+                                <td>1.80</td>
+                                <td>0.00</td>
+                                <td>1.12</td>
+                            </tr>
+                            <tr>
+                                <td>P12</td>
+                                <td>3.16</td>
+                                <td>2.50</td>
+                                <td>2.92</td>
+                                <td>3.50</td>
+                                <td>5.59</td>
+                                <td>4.03</td>
+                                <td>4.74</td>
+                                <td>5.50</td>
+                                <td>1.12</td>
+                                <td>2.55</td>
+                                <td>1.12</td>
+                                <td>0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Step 1: Identify Neighbors of Each Point (Within ε = 1.9)</h4>
+                <p>Check which points are within distance 1.9 for each point:</p>
+                <ul>
+                    <li><strong>P1:</strong> P2 (1.12), P10 (1.58) → 2 neighbors + P1 = 3 total</li>
+                    <li><strong>P2:</strong> P1 (1.12), P3 (1.12), P11 (1.41) → 3 neighbors + P2 = 4 total</li>
+                    <li><strong>P3:</strong> P2 (1.12), P4 (1.80) → 2 neighbors + P3 = 3 total</li>
+                    <li><strong>P4:</strong> P3 (1.80), P7 (1.80) → 2 neighbors + P4 = 3 total</li>
+                    <li><strong>P5:</strong> P7 (1.12), P8 (1.00) → 2 neighbors + P5 = 3 total</li>
+                    <li><strong>P6:</strong> P7 (1.12) → 1 neighbor + P6 = 2 total</li>
+                    <li><strong>P7:</strong> P4 (1.80), P5 (1.12), P6 (1.12), P8 (1.80) → 4 neighbors + P7 = 5 total
+                    </li>
+                    <li><strong>P8:</strong> P5 (1.00), P7 (1.80) → 2 neighbors + P8 = 3 total</li>
+                    <li><strong>P9:</strong> P12 (1.12) → 1 neighbor + P9 = 2 total</li>
+                    <li><strong>P10:</strong> P1 (1.58), P11 (1.80) → 2 neighbors + P10 = 3 total</li>
+                    <li><strong>P11:</strong> P2 (1.41), P10 (1.80), P12 (1.12) → 3 neighbors + P11 = 4 total</li>
+                    <li><strong>P12:</strong> P9 (1.12), P11 (1.12) → 2 neighbors + P12 = 3 total</li>
+                </ul>
+
+                <h4>Step 2: Identify Core, Border, and Noise Points</h4>
+                <ul>
+                    <li><strong>Core Points (≥ MinPts = 4 total points including itself):</strong>
+                        <ul>
+                            <li><strong>P2:</strong> Has 4 total points (P1, P3, P11, and itself) → Core</li>
+                            <li><strong>P7:</strong> Has 5 total points (P4, P5, P6, P8, and itself) → Core</li>
+                            <li><strong>P11:</strong> Has 4 total points (P2, P10, P12, and itself) → Core</li>
+                        </ul>
+                    </li>
+                    <li><strong>Border Points (less than 4 total points but within ε of a core point):</strong>
+                        <ul>
+                            <li><strong>P1:</strong> Connected to core point P2</li>
+                            <li><strong>P3:</strong> Connected to core point P2</li>
+                            <li><strong>P4:</strong> Connected to core point P7</li>
+                            <li><strong>P5:</strong> Connected to core point P7</li>
+                            <li><strong>P6:</strong> Connected to core point P7</li>
+                            <li><strong>P8:</strong> Connected to core point P7</li>
+                            <li><strong>P10:</strong> Connected to core point P11</li>
+                            <li><strong>P12:</strong> Connected to core point P11</li>
+                        </ul>
+                    </li>
+                    <li><strong>Noise Points (not core and not connected to any core point):</strong>
+                        <ul>
+                            <li><strong>P9:</strong> Only connected to P12, but not within ε of any core point</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Step 3: Form Clusters</h4>
+                <p>Since core points P2 and P11 are connected through their mutual neighborhood (distance 1.41 < 1.9),
+                        they form one large cluster:</p>
+                        <ul>
+                            <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)
+                                <ul>
+                                    <li>Core points: P2, P11</li>
+                                    <li>Border points: P1, P3, P10, P12</li>
+                                </ul>
+                            </li>
+                            <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)
+                                <ul>
+                                    <li>Core point: P7</li>
+                                    <li>Border points: P4, P5, P6, P8</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <img src="../../images/ml7.svg" alt="">
+                        <h4>Summary</h4>
+                        <ul>
+                            <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)</li>
+                            <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)</li>
+                            <li><strong>Noise Points:</strong> P9 (1 point)</li>
+                        </ul>
+
+                        <h4>Why DBSCAN is Useful?</h4>
+                        <p>
+                            - It can find clusters of arbitrary shapes.<br>
+                            - It automatically identifies noise points.<br>
+                            - It does not require specifying the number of clusters upfront.<br>
+                        </p>
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Dimensionality Reduction Techniques</h2>
             <p>
-                DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm
-                that groups together points that are closely packed, marking points that lie alone in low-density
-                regions
-                as noise. It is especially useful when clusters have irregular shapes.
+                When working with datasets that have a lot of features (or columns), it becomes tricky to visualize,
+                analyze, and build models effectively. That’s where dimensionality reduction techniques come in. In this
+                session, we'll explore what high-dimensional data is, why it's a problem, and how we can handle it using
+                methods like Principal Component Analysis (PCA).
             </p>
 
-            <h4>Key Concepts</h4>
+            <h4>Understanding the Curse of Dimensionality</h4>
+            <p>
+                The more features (also called dimensions) your dataset has, the more complex things get. This
+                complexity leads to a challenge often referred to as the <strong>"Curse of Dimensionality"</strong>, or
+                more casually, the <strong>"Problem of Plenty"</strong>.
+            </p>
+
+            <h4>What Does "Problem of Plenty" Mean?</h4>
+            <p>
+                It describes the difficulties that arise when datasets have too many dimensions. While more data sounds
+                good, too many features can actually make analysis harder instead of easier.
+            </p>
+
+            <h4>What Are Dimensions in Data?</h4>
+            <p>
+                In data science, each feature or column in your dataset is considered a dimension. Here's how dimensions
+                look visually:
+            </p>
             <ul>
-                <li><strong>Epsilon (ε):</strong> The maximum radius of the neighborhood around a point. Think of it as
-                    how far you look around a person to find friends.</li>
-                <li><strong>MinPts:</strong> Minimum number of points required to form a dense region (cluster). Like
-                    minimum people needed in a group to call it a crowd.</li>
-                <li><strong>Core Point:</strong> A point that has at least MinPts neighbors within ε radius.</li>
-                <li><strong>Border Point:</strong> A point that has fewer than MinPts neighbors but lies within the
-                    neighborhood of a core point.</li>
-                <li><strong>Noise Point:</strong> A point that is neither core nor border (isolated points).</li>
+                <li><strong>1 Dimension</strong>: A straight line</li>
+                <li><strong>2 Dimensions</strong>: A flat plane (like an x-y graph)</li>
+                <li><strong>3 Dimensions</strong>: A cube or 3D space</li>
+                <li><strong>4 or More Dimensions</strong>: Cannot be visualized easily — they exist only mathematically
+                </li>
             </ul>
 
-            <h4>Real-Life Analogy: Mall Supervisor</h4>
+            <h4>Why Are Too Many Dimensions a Problem?</h4>
+            <p>There are two main reasons:</p>
+
+            <h4>1. Difficult Data Representation</h4>
+            <ul>
+                <li>Visualizing data with many dimensions is nearly impossible</li>
+                <li>Human intuition doesn’t work well beyond 3 dimensions</li>
+            </ul>
+
+            <h4>2. Poor Model Performance</h4>
             <p>
-                Imagine you are a supervisor in a mall watching the crowd. You define your neighborhood radius (ε) as
-                how far you look around a person to see if they are in a crowd. You decide that if a group has at least
-                4 people (MinPts), you call it a crowd (cluster). If someone is with enough people nearby, they are a
-                <em>core point</em>. If they are near a crowd but don't have enough people themselves, they are a
-                <em>border point</em>. People wandering alone far from any crowd are <em>noise</em>.
+                High-dimensional data often causes a big difference between how well a model performs on the training
+                set and how poorly it performs on new, unseen data. This is known as the training vs. testing
+                performance gap.
+            </p>
+            <ul>
+                <li>Models may "memorize" the training data</li>
+                <li>But they fail to generalize to new data</li>
+                <li>This issue is a direct result of the curse of dimensionality</li>
+            </ul>
+
+            <h4>Putting It All Together</h4>
+            <p>
+                All these issues — difficulty in visualizing, analyzing, and modeling — come together to form what we
+                call the "Curse of Dimensionality" or "Problem of Plenty".
             </p>
 
-            <h4>Example Dataset</h4>
-            <div class="table-wrapper">
-                <table class="new-table">
-                    <thead>
-                        <tr>
-                            <th>Point</th>
-                            <th>X</th>
-                            <th>Y</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>P1</td>
-                            <td>4.5</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>P2</td>
-                            <td>5</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>P3</td>
-                            <td>6</td>
-                            <td>6.5</td>
-                        </tr>
-                        <tr>
-                            <td>P4</td>
-                            <td>7</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>P5</td>
-                            <td>9</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>P6</td>
-                            <td>7</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>P7</td>
-                            <td>8</td>
-                            <td>3.5</td>
-                        </tr>
-                        <tr>
-                            <td>P8</td>
-                            <td>9</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>P9</td>
-                            <td>4</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>P10</td>
-                            <td>3</td>
-                            <td>7.5</td>
-                        </tr>
-                        <tr>
-                            <td>P11</td>
-                            <td>4</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>P12</td>
-                            <td>3.5</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h4>Dimensionality Reduction to the Rescue: PCA</h4>
+            <p>
+                To deal with high-dimensional data, one of the most popular and effective techniques is
+                <strong>Principal Component Analysis (PCA)</strong>.
+            </p>
+
+            <h4>What is PCA?</h4>
+            <p>
+                PCA is a method that helps us reduce the number of dimensions in our dataset while keeping as much
+                important information as possible. It transforms the original features into a smaller set of new
+                features called <strong>principal components</strong>.
+            </p>
+
+            <h4>Why Use PCA?</h4>
+            <p>
+                When working with data that has many features (like 50 or more), we often want to know:
+            </p>
+            <ul>
+                <li>Which dimensions are actually useful for analysis?</li>
+                <li>Which ones contribute the most to variation in the data?</li>
+                <li>Which dimensions can be removed without losing important information?</li>
+            </ul>
+
+            <h4>How PCA Helps</h4>
+            <ul>
+                <li><strong>Dimension Selection</strong>: PCA identifies the features that carry the most meaningful
+                    information</li>
+                <li><strong>Dimension Reduction</strong>: PCA creates new features (principal components) that summarize
+                    the original data</li>
+                <li><strong>Information Preservation</strong>: It reduces the number of features while keeping the core
+                    structure of the data</li>
+            </ul>
+
+            <h4>Important Concept: It's Not Just About Deleting Features</h4>
+            <p>
+                Reducing dimensions doesn’t mean randomly removing columns. Proper dimensionality reduction involves:
+            </p>
+            <ul>
+                <li>Understanding which features are most important</li>
+                <li>Keeping or transforming those important features</li>
+                <li>Making sure we don’t lose key patterns in the process</li>
+                <li>Preserving the quality and meaning of the original dataset</li>
+            </ul>
+
+            <h4>PCA's Role Summarized</h4>
+            <ul>
+                <li>Finds which dimensions contribute most to data variation</li>
+                <li>Creates new dimensions (principal components) that carry essential information</li>
+                <li>Reduces overall dimensionality while keeping the important structure intact</li>
+            </ul>
+            <div class="in">
+                <h3>Low Variance Filter</h3>
+
+                <p>
+                    The Low Variance Filter is a simple and effective dimensionality reduction technique used during
+                    data preprocessing. It removes features (columns) from the dataset that show very little variation
+                    across observations.
+                    These features don’t contribute much in distinguishing data points and can be safely removed.
+                </p>
+
+                <h4>Key Concept</h4>
+                <ul>
+                    <li><strong>Variance:</strong> A measure of how much the values of a feature differ from the mean.
+                        Low variance means most values are similar.</li>
+                    <li><strong>Low Variance Filter:</strong> If the variance of a feature is lower than a threshold
+                        (e.g. 0.01), that feature is removed.</li>
+                </ul>
+
+                <h4>Why Use It?</h4>
+                <ul>
+                    <li>Speeds up training by reducing number of features.</li>
+                    <li>Eliminates features that carry almost no information.</li>
+                    <li>Reduces risk of overfitting by removing irrelevant data.</li>
+                </ul>
+
+                <h4>How It Works</h4>
+                <ol>
+                    <li>Compute variance of each feature.</li>
+                    <li>Compare variance with a defined threshold (e.g., 0.01).</li>
+                    <li>Drop features whose variance is below the threshold.</li>
+                </ol>
+
+                <h4>Example Dataset</h4>
+                <p>Suppose we have the following dataset:</p>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Feature A</th>
+                                <th>Feature B</th>
+                                <th>Feature C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>7</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>9</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>5</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>How to Calculate Variance</h4>
+                <p>
+                    Variance measures how spread out the values are. Here's the formula:
+                </p>
+                <p class="ms">
+                    \( \text{Variance} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2 \) <br />
+                    where \( \mu \) is the mean of the values.
+                </p>
+
+                <p><strong>Feature B Values:</strong> 7, 9, 5</p>
+                <ul>
+                    <li>Step 1: Mean (μ) = (7 + 9 + 5) / 3 = 7.0</li>
+                    <li>Step 2: Squared Differences from Mean:
+                        <ul>
+                            <li>(7 - 7)<sup>2</sup> = 0</li>
+                            <li>(9 - 7)<sup>2</sup> = 4</li>
+                            <li>(5 - 7)<sup>2</sup> = 4</li>
+                        </ul>
+                    </li>
+                    <li>Step 3: Variance = (0 + 4 + 4) / 3 = <strong>2.67</strong></li>
+                </ul>
+
+                <p><strong>Feature A:</strong> All values = 1 → Variance = 0</p>
+                <p><strong>Feature C:</strong> All values = 0 → Variance = 0</p>
+
+                <h4>Filter Step</h4>
+                <p>If threshold = 0.1, drop features with variance &lt; 0.1 → Drop Feature A and Feature C.</p>
+
+                <!-- <h4>Python Code Example</h4>
+                <pre>
+                    <code>
+from sklearn.feature_selection import VarianceThreshold
+              
+# Example dataset
+data = [[1, 7, 0],
+        [1, 9, 0],
+        [1, 5, 0]]
+
+# Apply filter with threshold 0.1
+selector = VarianceThreshold(threshold=0.1)
+filtered_data = selector.fit_transform(data)
+
+print(filtered_data)
+# Output will contain only Feature B
+              </code>
+            </pre> -->
+
+                <h4>When to Use</h4>
+                <ul>
+                    <li>Before training any machine learning model.</li>
+                    <li>During feature selection pipeline.</li>
+                    <li>When dataset has many irrelevant or constant columns.</li>
+                </ul>
+
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Doesn’t consider feature importance or target variable.</li>
+                    <li>Only removes features with low variance, not redundant ones with high variance.</li>
+                    <li>May miss removing uninformative features that still vary.</li>
+                </ul>
+
+                <h4>Note:</h4>
+                <p>
+                    A good practice is to combine Low Variance Filter with other feature selection methods like
+                    Correlation Filter, Backward Elimination, or PCA for better results.
+                </p>
+            </div>
+            <div class="in">
+                <h3>High Correlation Filter</h3>
+
+                <p>
+                    The High Correlation Filter is a feature selection technique used to eliminate redundant features
+                    that are strongly correlated with each other. When two or more features have a high correlation,
+                    they carry similar information. Keeping all of them leads to redundancy and may cause overfitting.
+                </p>
+
+                <h4>Key Concept</h4>
+                <ul>
+                    <li><strong>Correlation:</strong> A statistical measure that expresses the extent to which two
+                        features change together.</li>
+                    <li><strong>Correlation Coefficient (r):</strong> Value between -1 and +1 indicating direction and
+                        strength of correlation.
+                        <ul>
+                            <li>+1 → Perfect positive correlation</li>
+                            <li>-1 → Perfect negative correlation</li>
+                            <li>0 → No correlation</li>
+                        </ul>
+                    </li>
+                    <li><strong>Threshold:</strong> If |correlation| between two features &gt; 0.9 (or chosen
+                        threshold), remove one of them.</li>
+                </ul>
+
+                <h4>Why Use It?</h4>
+                <ul>
+                    <li>Removes redundant features with similar behavior.</li>
+                    <li>Reduces multicollinearity (problem for linear models).</li>
+                    <li>Improves model generalization and performance.</li>
+                </ul>
+
+                <h4>How It Works</h4>
+                <ol>
+                    <li>Compute correlation matrix of all features.</li>
+                    <li>Identify feature pairs with correlation above a chosen threshold (e.g., 0.9).</li>
+                    <li>Drop one feature from each highly correlated pair.</li>
+                </ol>
+
+                <h4>Example</h4>
+                <p>Suppose we have the following dataset:</p>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Feature X</th>
+                                <th>Feature Y</th>
+                                <th>Feature Z</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>6</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>10</td>
+                                <td>9</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Correlation matrix of the features:</p>
+
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>X</th>
+                                <th>Y</th>
+                                <th>Z</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>X</strong></td>
+                                <td>1.00</td>
+                                <td><strong>1.00</strong></td>
+                                <td>0.99</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Y</strong></td>
+                                <td><strong>1.00</strong></td>
+                                <td>1.00</td>
+                                <td>0.99</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Z</strong></td>
+                                <td>0.99</td>
+                                <td>0.99</td>
+                                <td>1.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    As we can see, the correlation between Feature X and Feature Y is <strong>1.00</strong>, which means
+                    they are
+                    perfectly positively correlated (Y = 2 × X). Therefore, we can drop either X or Y to remove
+                    redundancy.
+                </p>
+
+                <!-- <h4>Python Code Example</h4>
+                <pre>
+                    <code>
+import pandas as pd
+import numpy as np
+
+# Sample data
+df = pd.DataFrame({
+    'X': [1, 2, 3, 4, 5],
+    'Y': [2, 4, 6, 8, 10],
+    'Z': [5, 6, 7, 8, 9]
+})
+
+# Compute correlation matrix
+corr_matrix = df.corr().abs()
+
+# Select upper triangle of correlation matrix
+upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+
+# Drop features with correlation > 0.9
+to_drop = [column for column in upper.columns if any(upper[column] > 0.9)]
+df_filtered = df.drop(columns=to_drop)
+
+print(df_filtered)
+                    </code>
+                </pre> -->
+
+                <h4>When to Use</h4>
+                <ul>
+                    <li>When dataset has many numeric features.</li>
+                    <li>During preprocessing before model training.</li>
+                    <li>Especially useful in linear models (like regression) to avoid multicollinearity.</li>
+                </ul>
+
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Only works on numeric features.</li>
+                    <li>Does not consider relationship with target variable.</li>
+                    <li>Sometimes both correlated features may still be important for prediction (use with care).</li>
+                </ul>
+
+                <h4>Note:</h4>
+                <p>
+                    High Correlation Filter is usually used after removing constant/low variance features and before
+                    applying more complex techniques like PCA or Recursive Feature Elimination.
+                </p>
+            </div>
+            <div class="in">
+                <h3>Backward Feature Elimination</h3>
+
+                <p>
+                    Backward Feature Elimination is a wrapper-based feature selection technique where we start with all
+                    features
+                    and remove the least useful ones one by one. The goal is to find the smallest subset of features
+                    that still give the best model performance.
+                </p>
+
+                <h4>How It Works</h4>
+                <ol>
+                    <li>Start with all features in the dataset.</li>
+                    <li>Train the model and evaluate performance (e.g., using accuracy, R², etc.).</li>
+                    <li>Remove the feature that has the least impact on model performance (least significant).</li>
+                    <li>Repeat until removing more features worsens performance or desired number of features is
+                        reached.</li>
+                </ol>
+
+                <h4>Why Use It?</h4>
+                <ul>
+                    <li>Improves model performance by removing noise.</li>
+                    <li>Helps reduce overfitting.</li>
+                    <li>Makes the model simpler and faster to train.</li>
+                    <li>Especially useful when you have a lot of features.</li>
+                </ul>
+
+                <h4>Example (Simple)</h4>
+                <p>Suppose we are trying to predict a student's performance using these features:</p>
+                <ul>
+                    <li>Hours Studied</li>
+                    <li>Attendance</li>
+                    <li>Previous Grades</li>
+                    <li>Favorite Color</li>
+                </ul>
+
+                <p>
+                    We train a model using all 4 features. During backward elimination, we find that “Favorite Color”
+                    does not affect prediction. So we eliminate it.
+                    Then we check again and remove the next least useful feature if performance stays the same or
+                    improves.
+                </p>
+
+                <h4>When to Stop?</h4>
+                <ul>
+                    <li>When removing more features significantly reduces model accuracy.</li>
+                    <li>Or when a fixed number of top features is selected (e.g. top 5).</li>
+                </ul>
+
+
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Computationally expensive with many features.</li>
+                    <li>Doesn't work well with correlated features (multicollinearity).</li>
+                    <li>May remove a feature that is weak alone but strong in combination with others.</li>
+                </ul>
+
+                <h4>Tips</h4>
+                <ul>
+                    <li>Best used with linear models like Linear Regression or Logistic Regression.</li>
+                    <li>Combine with other techniques like Variance Filter or PCA for better results.</li>
+                </ul>
+
+                <h4>When to Use</h4>
+                <ul>
+                    <li>You have too many features and need to simplify the model.</li>
+                    <li>You want to keep only the most impactful variables.</li>
+                    <li>You want a more interpretable model with fewer predictors.</li>
+                </ul>
+            </div>
+            <div class="in">
+                <h3>Principal Component Analysis (PCA):</h3>
+                <p>Principal Component Analysis (PCA) might sound technical, but it’s really just a clever way of making
+                    large datasets easier to understand. When you have too many features or variables, PCA helps you
+                    simplify without losing the big picture. Think of it as a method to uncover the "essence" of your
+                    data.</p>
+
+                <h4>Why Do We Even Need PCA?</h4>
+
+                <h4>The Overfitting Problem</h4>
+                <p>Let’s say you’re training a machine learning model and you decide to feed it every possible feature.
+                    More features = more power, right? Not quite. Too many features can lead to overfitting—where the
+                    model becomes excellent at memorizing training data but terrible at generalizing to new data.</p>
+
+                <ul>
+                    <li>Models trained with too many features pick up noise instead of real patterns.</li>
+                    <li>This leads to great performance on training data but poor results on unseen data.</li>
+                </ul>
+
+                <h4>Visualizing Overfitting</h4>
+                <p>Imagine a scatter plot. A well-fitted model draws a line that follows the trend. An overfitted model,
+                    however, draws a squiggly line that tries to hit every single point, including outliers. It looks
+                    fancy but performs poorly.</p>
+
+                <ul>
+                    <li><strong>Well-fitted model:</strong> Captures trends, ignores noise.</li>
+                    <li><strong>Overfitted model:</strong> Matches every point, including irrelevant ones.</li>
+                </ul>
+
+                <p>This is where PCA becomes a game-changer.</p>
+
+                <h4>What PCA Brings to the Table</h4>
+
+                <h4>The Idea Behind PCA</h4>
+                <p>PCA suggests a smarter way: “Let’s not use all features. Instead, let’s create new ones that
+                    summarize the important parts of the data.”</p>
+
+                <ul>
+                    <li>Reduces the number of features (called dimensions).</li>
+                    <li>Captures the essential patterns.</li>
+                    <li>Makes models faster, simpler, and often more accurate.</li>
+                </ul>
+
+                <h4>How PCA Works—The Concept</h4>
+                <p>Think of your dataset as a 3D object. PCA looks at it from the best angles and creates simpler
+                    versions (like 2D shadows) that still carry most of the information. Each new "view" is called a
+                    principal component.</p>
+
+                <h4>How PCA Actually Works (Step by Step)</h4>
+
+                <h4>Step 1: Finding the First Principal Component (PC1)</h4>
+                <ul>
+                    <li>PCA looks for the direction where the data varies the most.</li>
+                    <li>It projects all data onto a line in that direction.</li>
+                    <li>This line becomes PC1—the first and most important new feature.</li>
+                </ul>
+
+                <h4>Step 2: Adding the Second Component (PC2)</h4>
+                <ul>
+                    <li>PC2 is found by rotating 90° from PC1—it’s completely independent.</li>
+                    <li>It captures the second-most variation in the data.</li>
+                </ul>
+
+                <h4>Step 3: More Components (PC3, PC4, ...)</h4>
+                <ul>
+                    <li>PCA keeps going until it has as many components as the original features.</li>
+                    <li>Each one captures a little less variation than the one before.</li>
+                    <li>All components are orthogonal (i.e., independent) of each other.</li>
+                </ul>
+
+                <h4>Behind the Scenes: What PCA Really Does</h4>
+                <ul>
+                    <li>Takes messy, correlated features.</li>
+                    <li>Transforms them into neat, uncorrelated ones.</li>
+                    <li>You can now focus on just the most useful features and ignore the rest.</li>
+                </ul>
+
+                <h4>Key Principles of PCA</h4>
+
+                <h4>1. You Can’t Create More Than You Start With</h4>
+                <ul>
+                    <li>If you have 5 original features, you can get a maximum of 5 principal components.</li>
+                    <li>But most of the time, just a few components will carry most of the value.</li>
+                </ul>
+
+                <p><strong>Example:</strong> From 100 original features, PCA might find that 10 components explain 95%
+                    of the data. You can safely use just those 10.</p>
+
+                <h4>2. Each Component Has Its Rank</h4>
+                <ul>
+                    <li>PC1 = most important (explains the most variation).</li>
+                    <li>PC2 = second-most important, and so on.</li>
+                </ul>
+
+                <p><strong>Pro Tip:</strong> In many real-world problems, the first two or three components often hold
+                    most of the insight.</p>
+
+                <h4>3. Components Are Independent (Orthogonal)</h4>
+                <ul>
+                    <li>No component can be predicted from another.</li>
+                    <li>Each adds unique, non-redundant information.</li>
+                </ul>
+
+                <p>This independence is what makes PCA so effective—it cuts out repetition and makes your models more
+                    efficient.</p>
+
+                <h4>The PCA Workflow: Before, During, and After</h4>
+
+                <h4>Before PCA</h4>
+                <ul>
+                    <li>Your dataset is huge with too many features.</li>
+                    <li>Overfitting is common and performance drops on new data.</li>
+                    <li>The data is hard to visualize and interpret.</li>
+                </ul>
+
+                <h4>During PCA</h4>
+                <ul>
+                    <li><strong>Analysis:</strong> Looks for patterns and variation.</li>
+                    <li><strong>Transformation:</strong> Creates new features (principal components).</li>
+                    <li><strong>Ranking:</strong> Orders them by how much variation they explain.</li>
+                    <li><strong>Selection:</strong> You decide how many components to keep.</li>
+                </ul>
+
+                <h4>After PCA</h4>
+                <ul>
+                    <li><strong>Cleaner data:</strong> Fewer, more meaningful features.</li>
+                    <li><strong>Better model performance:</strong> Generalizes well.</li>
+                    <li><strong>Faster computation:</strong> Less data = quicker results.</li>
+                    <li><strong>Improved visualization:</strong> Easier to plot and explore.</li>
+                    <li><strong>Noise reduction:</strong> Irrelevant features get filtered out.</li>
+                </ul>
+
+                <h4>Where PCA Is Used in the Real World</h4>
+
+                <h4>1. Image Compression & Recognition</h4>
+                <ul>
+                    <li>High-resolution images can have millions of features (pixels).</li>
+                    <li>PCA reduces this to a few hundred components.</li>
+                    <li>The image still looks the same to the human eye but is easier to process.</li>
+                </ul>
+
+                <h4>2. Customer Behavior Analysis</h4>
+                <ul>
+                    <li>Businesses collect tons of customer data.</li>
+                    <li>PCA helps uncover the key drivers of customer decisions.</li>
+                    <li>This insight helps improve marketing and product strategy.</li>
+                </ul>
+
+                <h4>3. Gene Expression Analysis</h4>
+                <ul>
+                    <li>Biologists study thousands of genes per patient sample.</li>
+                    <li>PCA finds which gene patterns matter most.</li>
+                    <li>It speeds up research and highlights meaningful biological clues.</li>
+                </ul>
+
+                <h4>Wrapping Up: Why Learn PCA?</h4>
+                <p>PCA isn’t just a math trick—it’s a practical tool that solves real-world problems in data science.
+                    Whether you’re cleaning up your dataset, improving model performance, or just trying to make sense
+                    of complicated data, PCA is a great skill to have in your toolkit.</p>
+
             </div>
 
-            <h4>Parameters</h4>
-            <ul>
-                <li><strong>Epsilon (ε):</strong> 1.9 (radius to search neighbors)</li>
-                <li><strong>MinPts:</strong> 4 (minimum points to form a cluster)</li>
-            </ul>
-
-            <h4>Euclidean Distance Formula</h4>
-            <p>To find distance between two points \(P_i = (x_i, y_i)\) and \(P_j = (x_j, y_j)\):</p>
-            <p class="ms">
-                \( d = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2} \)
-            </p>
-
-            <h4>Distance Table (All Pairwise Distances)</h4>
-            <p>Calculated distances between points (rounded to 2 decimals):</p>
-            <div class="table-wrapper">
-                <table class="new-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>P1</th>
-                            <th>P2</th>
-                            <th>P3</th>
-                            <th>P4</th>
-                            <th>P5</th>
-                            <th>P6</th>
-                            <th>P7</th>
-                            <th>P8</th>
-                            <th>P9</th>
-                            <th>P10</th>
-                            <th>P11</th>
-                            <th>P12</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>P1</td>
-                            <td>0.00</td>
-                            <td>1.12</td>
-                            <td>2.12</td>
-                            <td>3.91</td>
-                            <td>6.02</td>
-                            <td>5.59</td>
-                            <td>5.70</td>
-                            <td>5.41</td>
-                            <td>4.03</td>
-                            <td>1.58</td>
-                            <td>2.06</td>
-                            <td>3.16</td>
-                        </tr>
-                        <tr>
-                            <td>P2</td>
-                            <td>1.12</td>
-                            <td>0.00</td>
-                            <td>1.12</td>
-                            <td>2.83</td>
-                            <td>5.00</td>
-                            <td>4.47</td>
-                            <td>4.61</td>
-                            <td>4.47</td>
-                            <td>3.16</td>
-                            <td>2.06</td>
-                            <td>1.41</td>
-                            <td>2.50</td>
-                        </tr>
-                        <tr>
-                            <td>P3</td>
-                            <td>2.12</td>
-                            <td>1.12</td>
-                            <td>0.00</td>
-                            <td>1.80</td>
-                            <td>3.91</td>
-                            <td>3.64</td>
-                            <td>3.61</td>
-                            <td>3.35</td>
-                            <td>3.20</td>
-                            <td>3.16</td>
-                            <td>2.06</td>
-                            <td>2.92</td>
-                        </tr>
-                        <tr>
-                            <td>P4</td>
-                            <td>3.91</td>
-                            <td>2.83</td>
-                            <td>1.80</td>
-                            <td>0.00</td>
-                            <td>2.24</td>
-                            <td>2.00</td>
-                            <td>1.80</td>
-                            <td>2.00</td>
-                            <td>3.16</td>
-                            <td>4.72</td>
-                            <td>3.16</td>
-                            <td>3.50</td>
-                        </tr>
-                        <tr>
-                            <td>P5</td>
-                            <td>6.02</td>
-                            <td>5.00</td>
-                            <td>3.91</td>
-                            <td>2.24</td>
-                            <td>0.00</td>
-                            <td>2.24</td>
-                            <td>1.12</td>
-                            <td>1.00</td>
-                            <td>5.00</td>
-                            <td>6.95</td>
-                            <td>5.39</td>
-                            <td>5.59</td>
-                        </tr>
-                        <tr>
-                            <td>P6</td>
-                            <td>5.59</td>
-                            <td>4.47</td>
-                            <td>3.64</td>
-                            <td>2.00</td>
-                            <td>2.24</td>
-                            <td>0.00</td>
-                            <td>1.12</td>
-                            <td>2.83</td>
-                            <td>3.16</td>
-                            <td>6.02</td>
-                            <td>4.24</td>
-                            <td>4.03</td>
-                        </tr>
-                        <tr>
-                            <td>P7</td>
-                            <td>5.70</td>
-                            <td>4.61</td>
-                            <td>3.61</td>
-                            <td>1.80</td>
-                            <td>1.12</td>
-                            <td>1.12</td>
-                            <td>0.00</td>
-                            <td>1.80</td>
-                            <td>4.03</td>
-                            <td>6.40</td>
-                            <td>4.72</td>
-                            <td>4.74</td>
-                        </tr>
-                        <tr>
-                            <td>P8</td>
-                            <td>5.41</td>
-                            <td>4.47</td>
-                            <td>3.35</td>
-                            <td>2.00</td>
-                            <td>1.00</td>
-                            <td>2.83</td>
-                            <td>1.80</td>
-                            <td>0.00</td>
-                            <td>5.10</td>
-                            <td>6.50</td>
-                            <td>5.10</td>
-                            <td>5.50</td>
-                        </tr>
-                        <tr>
-                            <td>P9</td>
-                            <td>4.03</td>
-                            <td>3.16</td>
-                            <td>3.20</td>
-                            <td>3.16</td>
-                            <td>5.00</td>
-                            <td>3.16</td>
-                            <td>4.03</td>
-                            <td>5.10</td>
-                            <td>0.00</td>
-                            <td>3.64</td>
-                            <td>2.00</td>
-                            <td>1.12</td>
-                        </tr>
-                        <tr>
-                            <td>P10</td>
-                            <td>1.58</td>
-                            <td>2.06</td>
-                            <td>3.16</td>
-                            <td>4.72</td>
-                            <td>6.95</td>
-                            <td>6.02</td>
-                            <td>6.40</td>
-                            <td>6.50</td>
-                            <td>3.64</td>
-                            <td>0.00</td>
-                            <td>1.80</td>
-                            <td>2.55</td>
-                        </tr>
-                        <tr>
-                            <td>P11</td>
-                            <td>2.06</td>
-                            <td>1.41</td>
-                            <td>2.06</td>
-                            <td>3.16</td>
-                            <td>5.39</td>
-                            <td>4.24</td>
-                            <td>4.72</td>
-                            <td>5.10</td>
-                            <td>2.00</td>
-                            <td>1.80</td>
-                            <td>0.00</td>
-                            <td>1.12</td>
-                        </tr>
-                        <tr>
-                            <td>P12</td>
-                            <td>3.16</td>
-                            <td>2.50</td>
-                            <td>2.92</td>
-                            <td>3.50</td>
-                            <td>5.59</td>
-                            <td>4.03</td>
-                            <td>4.74</td>
-                            <td>5.50</td>
-                            <td>1.12</td>
-                            <td>2.55</td>
-                            <td>1.12</td>
-                            <td>0.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h4>Step 1: Identify Neighbors of Each Point (Within ε = 1.9)</h4>
-            <p>Check which points are within distance 1.9 for each point:</p>
-            <ul>
-                <li><strong>P1:</strong> P2 (1.12), P10 (1.58) → 2 neighbors + P1 = 3 total</li>
-                <li><strong>P2:</strong> P1 (1.12), P3 (1.12), P11 (1.41) → 3 neighbors + P2 = 4 total</li>
-                <li><strong>P3:</strong> P2 (1.12), P4 (1.80) → 2 neighbors + P3 = 3 total</li>
-                <li><strong>P4:</strong> P3 (1.80), P7 (1.80) → 2 neighbors + P4 = 3 total</li>
-                <li><strong>P5:</strong> P7 (1.12), P8 (1.00) → 2 neighbors + P5 = 3 total</li>
-                <li><strong>P6:</strong> P7 (1.12) → 1 neighbor + P6 = 2 total</li>
-                <li><strong>P7:</strong> P4 (1.80), P5 (1.12), P6 (1.12), P8 (1.80) → 4 neighbors + P7 = 5 total</li>
-                <li><strong>P8:</strong> P5 (1.00), P7 (1.80) → 2 neighbors + P8 = 3 total</li>
-                <li><strong>P9:</strong> P12 (1.12) → 1 neighbor + P9 = 2 total</li>
-                <li><strong>P10:</strong> P1 (1.58), P11 (1.80) → 2 neighbors + P10 = 3 total</li>
-                <li><strong>P11:</strong> P2 (1.41), P10 (1.80), P12 (1.12) → 3 neighbors + P11 = 4 total</li>
-                <li><strong>P12:</strong> P9 (1.12), P11 (1.12) → 2 neighbors + P12 = 3 total</li>
-            </ul>
-
-            <h4>Step 2: Identify Core, Border, and Noise Points</h4>
-            <ul>
-                <li><strong>Core Points (≥ MinPts = 4 total points including itself):</strong>
-                    <ul>
-                        <li><strong>P2:</strong> Has 4 total points (P1, P3, P11, and itself) → Core</li>
-                        <li><strong>P7:</strong> Has 5 total points (P4, P5, P6, P8, and itself) → Core</li>
-                        <li><strong>P11:</strong> Has 4 total points (P2, P10, P12, and itself) → Core</li>
-                    </ul>
-                </li>
-                <li><strong>Border Points (less than 4 total points but within ε of a core point):</strong>
-                    <ul>
-                        <li><strong>P1:</strong> Connected to core point P2</li>
-                        <li><strong>P3:</strong> Connected to core point P2</li>
-                        <li><strong>P4:</strong> Connected to core point P7</li>
-                        <li><strong>P5:</strong> Connected to core point P7</li>
-                        <li><strong>P6:</strong> Connected to core point P7</li>
-                        <li><strong>P8:</strong> Connected to core point P7</li>
-                        <li><strong>P10:</strong> Connected to core point P11</li>
-                        <li><strong>P12:</strong> Connected to core point P11</li>
-                    </ul>
-                </li>
-                <li><strong>Noise Points (not core and not connected to any core point):</strong>
-                    <ul>
-                        <li><strong>P9:</strong> Only connected to P12, but not within ε of any core point</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>Step 3: Form Clusters</h4>
-            <p>Since core points P2 and P11 are connected through their mutual neighborhood (distance 1.41 < 1.9), they form one large cluster:</p>
-            <ul>
-                <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)
-                    <ul>
-                        <li>Core points: P2, P11</li>
-                        <li>Border points: P1, P3, P10, P12</li>
-                    </ul>
-                </li>
-                <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)
-                    <ul>
-                        <li>Core point: P7</li>
-                        <li>Border points: P4, P5, P6, P8</li>
-                    </ul>
-                </li>
-            </ul>
-            <img src="../../images/ml7.svg" alt="">
-            <h4>Summary</h4>
-            <ul>
-                <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)</li>
-                <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)</li>
-                <li><strong>Noise Points:</strong> P9 (1 point)</li>
-            </ul>
-
-            <h4>Why DBSCAN is Useful?</h4>
-            <p>
-                - It can find clusters of arbitrary shapes.<br>
-                - It automatically identifies noise points.<br>
-                - It does not require specifying the number of clusters upfront.<br>
-            </p>
         </div>
-
     </div>
     <div class="content-box">
         <p>Reference:</p>
@@ -872,12 +1528,17 @@ Unsupervised Learning Algorithms
             <li><a href="https://www.youtube.com/watch?v=zxQF8Rmpk1M" target="_blank"> Hierarchical Clustering |
                     Agglomerative vs Divisive with examples Video Lecture &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=gFS_zmgvW_c" target="_blank"> DBSCAN Clustering Algorithm with
-                    Numerical example &neArr;</a></li>
+                    Numerical example Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=DQqgLyHVM4I" target="_blank">Dimensionality Reduction
+                    Techniques Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=83x5X66uWK0" target="_blank"> Basics Of Principal Component
+                    Analysis Part-1 Explained in Hindi ll Machine Learning Course Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
         </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
