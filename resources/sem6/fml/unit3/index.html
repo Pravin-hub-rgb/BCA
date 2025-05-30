@@ -361,101 +361,508 @@ Unsupervised Learning Algorithms
             </div>
             <div class="in">
                 <h3>Hierarchical Clustering</h3>
-              
+
                 <p>
-                  Hierarchical clustering builds a hierarchy of clusters. Unlike K-Means, it does not require
-                  choosing the number of clusters (K) beforehand. There are two main approaches:
+                    Hierarchical clustering builds a hierarchy of clusters. Unlike K-Means, it does not require
+                    choosing the number of clusters (K) beforehand. There are two main approaches:
                 </p>
-              
+
                 <h4>Types of Hierarchical Clustering</h4>
                 <ul>
-                  <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and keep merging the closest pairs until one cluster remains.</li>
-                  <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep splitting it into smaller clusters.</li>
+                    <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and keep
+                        merging the closest pairs until one cluster remains.</li>
+                    <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep splitting
+                        it into smaller clusters.</li>
                 </ul>
-              
+
                 <h4>Distance Measurement (Linkage Methods)</h4>
                 <ul>
-                  <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two clusters.</li>
-                  <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two clusters.</li>
-                  <li><strong>Average Linkage:</strong> Average of all pairwise distances between points in two clusters.</li>
+                    <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two clusters.
+                    </li>
+                    <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two clusters.
+                    </li>
+                    <li><strong>Average Linkage:</strong> Average of all pairwise distances between points in two
+                        clusters.</li>
                 </ul>
-              
+
                 <h4>Example: Agglomerative Clustering</h4>
                 <p>Given 1D data points: <code>[1, 5, 8, 10, 19, 20]</code></p>
-              
+
                 <p>Step-by-step using <strong>single linkage</strong>:</p>
                 <ol>
-                  <li>Start with each point as its own cluster:
-                    <br />
-                    [1], [5], [8], [10], [19], [20]
-                  </li>
-              
-                  <li>Find the closest pair (minimum distance):  
-                    <br />
-                    Distance(19, 20) = 1 → Merge → [19, 20]
-                  </li>
-              
-                  <li>Next closest:  
-                    <br />
-                    Distance(8, 10) = 2 → Merge → [8, 10]
-                  </li>
-              
-                  <li>Next closest:  
-                    <br />
-                    Distance(5, 8) = 3 → Merge → [5, 8, 10]
-                  </li>
-              
-                  <li>Next closest:  
-                    <br />
-                    Distance(1, 5) = 4 → Merge → [1, 5, 8, 10]
-                  </li>
-              
-                  <li>Final merge:
-                    <br />
-                    Distance(10, 19) = 9 → Merge all → [1, 5, 8, 10, 19, 20]
-                  </li>
+                    <li>Start with each point as its own cluster:
+                        <br />
+                        [1], [5], [8], [10], [19], [20]
+                    </li>
+
+                    <li>Find the closest pair (minimum distance):
+                        <br />
+                        Distance(19, 20) = 1 → Merge → [19, 20]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(8, 10) = 2 → Merge → [8, 10]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(5, 8) = 3 → Merge → [5, 8, 10]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(1, 5) = 4 → Merge → [1, 5, 8, 10]
+                    </li>
+
+                    <li>Final merge:
+                        <br />
+                        Distance(10, 19) = 9 → Merge all → [1, 5, 8, 10, 19, 20]
+                    </li>
                 </ol>
-              <img src="../../images/ml5.svg" alt="" class="wb">
+                <img src="../../images/ml5.svg" alt="" class="wb">
                 <h4>Dendrogram</h4>
                 <p>
-                  A dendrogram is a tree-like diagram that shows the sequence of merges (or splits).
-                  You can “cut” the dendrogram at any level to get the desired number of clusters.
+                    A dendrogram is a tree-like diagram that shows the sequence of merges (or splits).
+                    You can “cut” the dendrogram at any level to get the desired number of clusters.
                 </p>
-              
+
                 <h4>Divisive Clustering (Top-Down)</h4>
                 <p>
-                  This method starts with all points in one big cluster and splits them recursively.
-                  It's less common and computationally heavier than agglomerative.
+                    This method starts with all points in one big cluster and splits them recursively.
+                    It's less common and computationally heavier than agglomerative.
                 </p>
-              
+
                 <p>Steps:</p>
                 <ol>
-                  <li>Start with all points in one cluster: [1, 5, 8, 10, 19, 20]</li>
-                  <li>Split into two clusters based on large distance gap → [1, 5, 8, 10] and [19, 20]</li>
-                  <li>Keep splitting each sub-cluster until each point is separate.</li>
+                    <li>Start with all points in one cluster: [1, 5, 8, 10, 19, 20]</li>
+                    <li>Split into two clusters based on large distance gap → [1, 5, 8, 10] and [19, 20]</li>
+                    <li>Keep splitting each sub-cluster until each point is separate.</li>
                 </ol>
-              <img src="../../images/ml6.svg" alt="" class="wb">
+                <img src="../../images/ml6.svg" alt="" class="wb">
                 <h4>Advantages</h4>
                 <ul>
-                  <li>No need to pre-define K (number of clusters).</li>
-                  <li>Produces a full cluster hierarchy.</li>
-                  <li>Works well with small datasets and dendrograms help visualize structure.</li>
+                    <li>No need to pre-define K (number of clusters).</li>
+                    <li>Produces a full cluster hierarchy.</li>
+                    <li>Works well with small datasets and dendrograms help visualize structure.</li>
                 </ul>
-              
+
                 <h4>Limitations</h4>
                 <ul>
-                  <li>Computationally expensive for large datasets.</li>
-                  <li>Not suitable for streaming or dynamic data.</li>
-                  <li>Once a merge/split happens, it can't be undone.</li>
+                    <li>Computationally expensive for large datasets.</li>
+                    <li>Not suitable for streaming or dynamic data.</li>
+                    <li>Once a merge/split happens, it can't be undone.</li>
                 </ul>
-              
+
                 <h4>Note:</h4>
                 <p>
-                  Use libraries like <code>scipy.cluster.hierarchy</code> in Python to create dendrograms and perform clustering automatically.
+                    Use libraries like <code>scipy.cluster.hierarchy</code> in Python to create dendrograms and perform
+                    clustering automatically.
                 </p>
-              </div>
-              
+            </div>
+
         </div>
+        <div class="in">
+            <h3>DBSCAN Clustering Algorithm</h3>
+
+            <p>
+                DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm
+                that groups together points that are closely packed, marking points that lie alone in low-density
+                regions
+                as noise. It is especially useful when clusters have irregular shapes.
+            </p>
+
+            <h4>Key Concepts</h4>
+            <ul>
+                <li><strong>Epsilon (ε):</strong> The maximum radius of the neighborhood around a point. Think of it as
+                    how far you look around a person to find friends.</li>
+                <li><strong>MinPts:</strong> Minimum number of points required to form a dense region (cluster). Like
+                    minimum people needed in a group to call it a crowd.</li>
+                <li><strong>Core Point:</strong> A point that has at least MinPts neighbors within ε radius.</li>
+                <li><strong>Border Point:</strong> A point that has fewer than MinPts neighbors but lies within the
+                    neighborhood of a core point.</li>
+                <li><strong>Noise Point:</strong> A point that is neither core nor border (isolated points).</li>
+            </ul>
+
+            <h4>Real-Life Analogy: Mall Supervisor</h4>
+            <p>
+                Imagine you are a supervisor in a mall watching the crowd. You define your neighborhood radius (ε) as
+                how far you look around a person to see if they are in a crowd. You decide that if a group has at least
+                4 people (MinPts), you call it a crowd (cluster). If someone is with enough people nearby, they are a
+                <em>core point</em>. If they are near a crowd but don't have enough people themselves, they are a
+                <em>border point</em>. People wandering alone far from any crowd are <em>noise</em>.
+            </p>
+
+            <h4>Example Dataset</h4>
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <thead>
+                        <tr>
+                            <th>Point</th>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>P1</td>
+                            <td>4.5</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>P2</td>
+                            <td>5</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>P3</td>
+                            <td>6</td>
+                            <td>6.5</td>
+                        </tr>
+                        <tr>
+                            <td>P4</td>
+                            <td>7</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>P5</td>
+                            <td>9</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>P6</td>
+                            <td>7</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>P7</td>
+                            <td>8</td>
+                            <td>3.5</td>
+                        </tr>
+                        <tr>
+                            <td>P8</td>
+                            <td>9</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>P9</td>
+                            <td>4</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>P10</td>
+                            <td>3</td>
+                            <td>7.5</td>
+                        </tr>
+                        <tr>
+                            <td>P11</td>
+                            <td>4</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>P12</td>
+                            <td>3.5</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Parameters</h4>
+            <ul>
+                <li><strong>Epsilon (ε):</strong> 1.9 (radius to search neighbors)</li>
+                <li><strong>MinPts:</strong> 4 (minimum points to form a cluster)</li>
+            </ul>
+
+            <h4>Euclidean Distance Formula</h4>
+            <p>To find distance between two points \(P_i = (x_i, y_i)\) and \(P_j = (x_j, y_j)\):</p>
+            <p class="ms">
+                \( d = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2} \)
+            </p>
+
+            <h4>Distance Table (All Pairwise Distances)</h4>
+            <p>Calculated distances between points (rounded to 2 decimals):</p>
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>P1</th>
+                            <th>P2</th>
+                            <th>P3</th>
+                            <th>P4</th>
+                            <th>P5</th>
+                            <th>P6</th>
+                            <th>P7</th>
+                            <th>P8</th>
+                            <th>P9</th>
+                            <th>P10</th>
+                            <th>P11</th>
+                            <th>P12</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>P1</td>
+                            <td>0.00</td>
+                            <td>1.12</td>
+                            <td>2.12</td>
+                            <td>3.91</td>
+                            <td>6.02</td>
+                            <td>5.59</td>
+                            <td>5.70</td>
+                            <td>5.41</td>
+                            <td>4.03</td>
+                            <td>1.58</td>
+                            <td>2.06</td>
+                            <td>3.16</td>
+                        </tr>
+                        <tr>
+                            <td>P2</td>
+                            <td>1.12</td>
+                            <td>0.00</td>
+                            <td>1.12</td>
+                            <td>2.83</td>
+                            <td>5.00</td>
+                            <td>4.47</td>
+                            <td>4.61</td>
+                            <td>4.47</td>
+                            <td>3.16</td>
+                            <td>2.06</td>
+                            <td>1.41</td>
+                            <td>2.50</td>
+                        </tr>
+                        <tr>
+                            <td>P3</td>
+                            <td>2.12</td>
+                            <td>1.12</td>
+                            <td>0.00</td>
+                            <td>1.80</td>
+                            <td>3.91</td>
+                            <td>3.64</td>
+                            <td>3.61</td>
+                            <td>3.35</td>
+                            <td>3.20</td>
+                            <td>3.16</td>
+                            <td>2.06</td>
+                            <td>2.92</td>
+                        </tr>
+                        <tr>
+                            <td>P4</td>
+                            <td>3.91</td>
+                            <td>2.83</td>
+                            <td>1.80</td>
+                            <td>0.00</td>
+                            <td>2.24</td>
+                            <td>2.00</td>
+                            <td>1.80</td>
+                            <td>2.00</td>
+                            <td>3.16</td>
+                            <td>4.72</td>
+                            <td>3.16</td>
+                            <td>3.50</td>
+                        </tr>
+                        <tr>
+                            <td>P5</td>
+                            <td>6.02</td>
+                            <td>5.00</td>
+                            <td>3.91</td>
+                            <td>2.24</td>
+                            <td>0.00</td>
+                            <td>2.24</td>
+                            <td>1.12</td>
+                            <td>1.00</td>
+                            <td>5.00</td>
+                            <td>6.95</td>
+                            <td>5.39</td>
+                            <td>5.59</td>
+                        </tr>
+                        <tr>
+                            <td>P6</td>
+                            <td>5.59</td>
+                            <td>4.47</td>
+                            <td>3.64</td>
+                            <td>2.00</td>
+                            <td>2.24</td>
+                            <td>0.00</td>
+                            <td>1.12</td>
+                            <td>2.83</td>
+                            <td>3.16</td>
+                            <td>6.02</td>
+                            <td>4.24</td>
+                            <td>4.03</td>
+                        </tr>
+                        <tr>
+                            <td>P7</td>
+                            <td>5.70</td>
+                            <td>4.61</td>
+                            <td>3.61</td>
+                            <td>1.80</td>
+                            <td>1.12</td>
+                            <td>1.12</td>
+                            <td>0.00</td>
+                            <td>1.80</td>
+                            <td>4.03</td>
+                            <td>6.40</td>
+                            <td>4.72</td>
+                            <td>4.74</td>
+                        </tr>
+                        <tr>
+                            <td>P8</td>
+                            <td>5.41</td>
+                            <td>4.47</td>
+                            <td>3.35</td>
+                            <td>2.00</td>
+                            <td>1.00</td>
+                            <td>2.83</td>
+                            <td>1.80</td>
+                            <td>0.00</td>
+                            <td>5.10</td>
+                            <td>6.50</td>
+                            <td>5.10</td>
+                            <td>5.50</td>
+                        </tr>
+                        <tr>
+                            <td>P9</td>
+                            <td>4.03</td>
+                            <td>3.16</td>
+                            <td>3.20</td>
+                            <td>3.16</td>
+                            <td>5.00</td>
+                            <td>3.16</td>
+                            <td>4.03</td>
+                            <td>5.10</td>
+                            <td>0.00</td>
+                            <td>3.64</td>
+                            <td>2.00</td>
+                            <td>1.12</td>
+                        </tr>
+                        <tr>
+                            <td>P10</td>
+                            <td>1.58</td>
+                            <td>2.06</td>
+                            <td>3.16</td>
+                            <td>4.72</td>
+                            <td>6.95</td>
+                            <td>6.02</td>
+                            <td>6.40</td>
+                            <td>6.50</td>
+                            <td>3.64</td>
+                            <td>0.00</td>
+                            <td>1.80</td>
+                            <td>2.55</td>
+                        </tr>
+                        <tr>
+                            <td>P11</td>
+                            <td>2.06</td>
+                            <td>1.41</td>
+                            <td>2.06</td>
+                            <td>3.16</td>
+                            <td>5.39</td>
+                            <td>4.24</td>
+                            <td>4.72</td>
+                            <td>5.10</td>
+                            <td>2.00</td>
+                            <td>1.80</td>
+                            <td>0.00</td>
+                            <td>1.12</td>
+                        </tr>
+                        <tr>
+                            <td>P12</td>
+                            <td>3.16</td>
+                            <td>2.50</td>
+                            <td>2.92</td>
+                            <td>3.50</td>
+                            <td>5.59</td>
+                            <td>4.03</td>
+                            <td>4.74</td>
+                            <td>5.50</td>
+                            <td>1.12</td>
+                            <td>2.55</td>
+                            <td>1.12</td>
+                            <td>0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Step 1: Identify Neighbors of Each Point (Within ε = 1.9)</h4>
+            <p>Check which points are within distance 1.9 for each point:</p>
+            <ul>
+                <li><strong>P1:</strong> P2 (1.12), P10 (1.58) → 2 neighbors + P1 = 3 total</li>
+                <li><strong>P2:</strong> P1 (1.12), P3 (1.12), P11 (1.41) → 3 neighbors + P2 = 4 total</li>
+                <li><strong>P3:</strong> P2 (1.12), P4 (1.80) → 2 neighbors + P3 = 3 total</li>
+                <li><strong>P4:</strong> P3 (1.80), P7 (1.80) → 2 neighbors + P4 = 3 total</li>
+                <li><strong>P5:</strong> P7 (1.12), P8 (1.00) → 2 neighbors + P5 = 3 total</li>
+                <li><strong>P6:</strong> P7 (1.12) → 1 neighbor + P6 = 2 total</li>
+                <li><strong>P7:</strong> P4 (1.80), P5 (1.12), P6 (1.12), P8 (1.80) → 4 neighbors + P7 = 5 total</li>
+                <li><strong>P8:</strong> P5 (1.00), P7 (1.80) → 2 neighbors + P8 = 3 total</li>
+                <li><strong>P9:</strong> P12 (1.12) → 1 neighbor + P9 = 2 total</li>
+                <li><strong>P10:</strong> P1 (1.58), P11 (1.80) → 2 neighbors + P10 = 3 total</li>
+                <li><strong>P11:</strong> P2 (1.41), P10 (1.80), P12 (1.12) → 3 neighbors + P11 = 4 total</li>
+                <li><strong>P12:</strong> P9 (1.12), P11 (1.12) → 2 neighbors + P12 = 3 total</li>
+            </ul>
+
+            <h4>Step 2: Identify Core, Border, and Noise Points</h4>
+            <ul>
+                <li><strong>Core Points (≥ MinPts = 4 total points including itself):</strong>
+                    <ul>
+                        <li><strong>P2:</strong> Has 4 total points (P1, P3, P11, and itself) → Core</li>
+                        <li><strong>P7:</strong> Has 5 total points (P4, P5, P6, P8, and itself) → Core</li>
+                        <li><strong>P11:</strong> Has 4 total points (P2, P10, P12, and itself) → Core</li>
+                    </ul>
+                </li>
+                <li><strong>Border Points (less than 4 total points but within ε of a core point):</strong>
+                    <ul>
+                        <li><strong>P1:</strong> Connected to core point P2</li>
+                        <li><strong>P3:</strong> Connected to core point P2</li>
+                        <li><strong>P4:</strong> Connected to core point P7</li>
+                        <li><strong>P5:</strong> Connected to core point P7</li>
+                        <li><strong>P6:</strong> Connected to core point P7</li>
+                        <li><strong>P8:</strong> Connected to core point P7</li>
+                        <li><strong>P10:</strong> Connected to core point P11</li>
+                        <li><strong>P12:</strong> Connected to core point P11</li>
+                    </ul>
+                </li>
+                <li><strong>Noise Points (not core and not connected to any core point):</strong>
+                    <ul>
+                        <li><strong>P9:</strong> Only connected to P12, but not within ε of any core point</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Step 3: Form Clusters</h4>
+            <p>Since core points P2 and P11 are connected through their mutual neighborhood (distance 1.41 < 1.9), they form one large cluster:</p>
+            <ul>
+                <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)
+                    <ul>
+                        <li>Core points: P2, P11</li>
+                        <li>Border points: P1, P3, P10, P12</li>
+                    </ul>
+                </li>
+                <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)
+                    <ul>
+                        <li>Core point: P7</li>
+                        <li>Border points: P4, P5, P6, P8</li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="../../images/ml7.svg" alt="">
+            <h4>Summary</h4>
+            <ul>
+                <li><strong>Cluster 1:</strong> P1, P2, P3, P10, P11, P12 (6 points)</li>
+                <li><strong>Cluster 2:</strong> P4, P5, P6, P7, P8 (5 points)</li>
+                <li><strong>Noise Points:</strong> P9 (1 point)</li>
+            </ul>
+
+            <h4>Why DBSCAN is Useful?</h4>
+            <p>
+                - It can find clusters of arbitrary shapes.<br>
+                - It automatically identifies noise points.<br>
+                - It does not require specifying the number of clusters upfront.<br>
+            </p>
+        </div>
+
     </div>
     <div class="content-box">
         <p>Reference:</p>
@@ -464,6 +871,8 @@ Unsupervised Learning Algorithms
                     Example | Unsupervised Learning | Machine🖥️ Learning 🙇‍♂️🙇 Video Lecture &neArr;</a></li>
             <li><a href="https://www.youtube.com/watch?v=zxQF8Rmpk1M" target="_blank"> Hierarchical Clustering |
                     Agglomerative vs Divisive with examples Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=gFS_zmgvW_c" target="_blank"> DBSCAN Clustering Algorithm with
+                    Numerical example &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
