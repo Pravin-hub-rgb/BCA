@@ -125,6 +125,116 @@ Unsupervised Learning Algorithms
                     </ul>
                     <li>Step 4: Repeat this for all points. Optionally loop again if needed.</li>
                 </ul>
+                <h4>Distance Formula (1D)</h4>
+                <p>When using just one feature like Shoe Size, distance between two points is the absolute difference:
+                </p>
+                <p class="ms">
+                    \( d = |x_2 - x_1| \)
+                </p>
+
+                <h4>Example Dataset</h4>
+                <p>Consider the following dataset of clients and their shoe sizes:</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Shoe Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alice</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>Bob</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>Charlie</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>Diana</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Edward</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>Fiona</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>George</td>
+                                <td>11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>K-Means (K = 2)</h4>
+                <ul>
+                    <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
+                    <li>Step 2: Randomly select initial centroids:</li>
+                    <ul>
+                        <li>Centroid A = Alice = 6</li>
+                        <li>Centroid B = Bob = 9</li>
+                    </ul>
+                </ul>
+
+                <h4>Step-by-Step Assignment & Updating</h4>
+
+                <ul>
+                    <li><strong>Point Charlie = 7:</strong></li>
+                    <ul>
+                        <li>Distance to A = |7 - 6| = 1</li>
+                        <li>Distance to B = |7 - 9| = 2</li>
+                        <li>→ Assign to Cluster A</li>
+                        <li>Update Centroid A = Average of (6, 7) = 6.5</li>
+                    </ul>
+
+                    <li><strong>Point Diana = 5:</strong></li>
+                    <ul>
+                        <li>Distance to A = |5 - 6.5| = 1.5</li>
+                        <li>Distance to B = |5 - 9| = 4</li>
+                        <li>→ Assign to Cluster A</li>
+                        <li>Update Centroid A = Average of (6, 7, 5) = 6</li>
+                    </ul>
+
+                    <li><strong>Point Edward = 8:</strong></li>
+                    <ul>
+                        <li>Distance to A = |8 - 6| = 2</li>
+                        <li>Distance to B = |8 - 9| = 1</li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Average of (9, 8) = 8.5</li>
+                    </ul>
+
+                    <li><strong>Point Fiona = 10:</strong></li>
+                    <ul>
+                        <li>Distance to A = |10 - 6| = 4</li>
+                        <li>Distance to B = |10 - 8.5| = 1.5</li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Average of (9, 8, 10) = 9</li>
+                    </ul>
+
+                    <li><strong>Point George = 11:</strong></li>
+                    <ul>
+                        <li>Distance to A = |11 - 6| = 5</li>
+                        <li>Distance to B = |11 - 9| = 2</li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Average of (9, 8, 10, 11) = 9.5</li>
+                    </ul>
+                </ul>
+
+                <h4>Final Clusters (After All Points)</h4>
+                <ul>
+                    <li>Cluster A (Centroid ≈ 6): Alice, Charlie, Diana</li>
+                    <li>Cluster B (Centroid ≈ 9.5): Bob, Edward, Fiona, George</li>
+                </ul>
+
 
                 <h4>Euclidean Distance Formula</h4>
                 <p>This formula is used to measure how far two points are from each other in a 2D space (like age and
