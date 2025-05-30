@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3</title>
+    <title>Unsupervised Learning Algorithms</title>
     <link rel="stylesheet" href="../../../../public/style.css">
     <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
-    <link rel="stylesheet" id="highlightStylesheet"
-        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
 </head>
 
 <body class="bg-c">
@@ -35,11 +33,10 @@
             </div>
         </div>
         <div>
-            <h2>Unit 3</h2>
+            <h2>Unsupervised Learning Algorithms</h2>
         </div>
     </div>
     <div class="content-box">
-        <h3>Unit Structure</h3>
         <pre>
             <code>
 Unsupervised Learning Algorithms
@@ -61,12 +58,215 @@ Unsupervised Learning Algorithms
             </code>
         </pre>
         <ul>
-            <li>Not all machine learning involves labeled data — in fact, sometimes we just want the machine to find patterns on its own. That’s where Unsupervised Learning comes in! In this unit, we dive into two powerful unsupervised approaches: clustering and dimensionality reduction.</li>
-            <li>Let’s start with clustering, where the goal is to group similar data points together. You’ll explore the classic K-Means algorithm, evaluate clusters using Silhouette Scores, and go deeper with techniques like Hierarchical Clustering, Fuzzy C-Means for soft clustering, and DBScan, which works great for oddly shaped clusters.</li>
-            <li>Once clustering is covered, we move on to dimensionality reduction — a must when you’re working with huge datasets with too many features. You’ll learn techniques like Low Variance and High Correlation Filters to eliminate unhelpful features, as well as Forward and Backward Feature Selection to pick the most useful ones. Finally, you’ll explore more advanced methods like Principal Component Analysis (PCA) and Projection Methods, which help reduce complexity while keeping the core structure of your data intact.</li>
+            <li>
+                In Machine Learning, not all problems come with labeled data. Sometimes, we don't know the exact output
+                — we just have a lot of raw data and want the system to find hidden patterns or structures in it. That’s
+                where <strong>Unsupervised Learning</strong> comes in! It’s a branch of ML where the model learns
+                directly from the input data without any guidance. Instead of predicting outputs, it focuses on
+                exploring the data — grouping it (clustering), reducing its complexity (dimensionality reduction), or
+                spotting unusual behavior (anomaly detection).
+            </li>
+            <li>
+                In this unit, we dive into two powerful unsupervised approaches: <strong>clustering</strong> and
+                <strong>dimensionality reduction</strong>. Let’s start with clustering, where the goal is to group
+                similar data points together. You’ll explore the classic <strong>K-Means algorithm</strong>, evaluate
+                clusters using <strong>Silhouette Scores</strong>, and go deeper with techniques like
+                <strong>Hierarchical Clustering</strong>, <strong>Fuzzy C-Means</strong> for soft clustering, and
+                <strong>DBScan</strong>, which works great for irregularly shaped clusters.
+            </li>
+            <li>
+                Once clustering is covered, we move on to <strong>dimensionality reduction</strong> — a must when you’re
+                working with huge datasets containing too many features. You’ll learn practical filtering techniques
+                like <strong>Low Variance</strong> and <strong>High Correlation Filters</strong> to eliminate unhelpful
+                features, as well as <strong>Forward and Backward Feature Selection</strong> to choose the most
+                meaningful ones. Finally, you’ll explore more advanced methods like <strong>Principal Component Analysis
+                    (PCA)</strong> and <strong>Projection Methods</strong>, which reduce complexity while keeping the
+                essence of your data intact.
+            </li>
+        </ul>
+
+        <div class="wh">
+            <h2>Clustering Techniques</h2>
+            <p>
+                Clustering is an unsupervised learning technique used to group similar data points into meaningful
+                clusters without any prior labels. It helps in discovering hidden patterns or natural groupings in data.
+                For example, grouping customers by purchasing behavior, or organizing documents by topic. In clustering,
+                the goal is to ensure that data points within the same cluster are more similar to each other than to
+                those in other clusters. There are various clustering techniques like K-Means, Hierarchical Clustering,
+                and DBSCAN — each with its own approach to forming these groups.
+            </p>
+
+            <div class="in">
+                <h3>K-Means Clustering</h3>
+                <p>
+                    K-Means is one of the most popular unsupervised learning algorithms used to group similar data
+                    points into clusters. It is mainly used in clustering problems where we don't have labeled data. The
+                    goal is to divide the data into <strong>K</strong> groups (clusters) based on similarity.
+                </p>
+
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Centroid:</strong> The center of a cluster.</li>
+                    <li><strong>K:</strong> Number of clusters we want to form.</li>
+                    <li><strong>Euclidean Distance:</strong> The distance between a data point and a centroid.</li>
+                </ul>
+
+                <h4>How K-Means Works (Incremental Method)</h4>
+                <ul>
+                    <li>Step 1: Choose the number of clusters K.</li>
+                    <li>Step 2: Randomly initialize K centroids.</li>
+                    <li>Step 3: Go through each data point one by one:</li>
+                    <ul>
+                        <li>Assign it to the nearest centroid (based on distance).</li>
+                        <li><strong>Immediately update</strong> the centroid of that cluster using the mean of current
+                            members.</li>
+                    </ul>
+                    <li>Step 4: Repeat this for all points. Optionally loop again if needed.</li>
+                </ul>
+
+                <h4>Euclidean Distance Formula</h4>
+                <p>This formula is used to measure how far two points are from each other in a 2D space (like age and
+                    amount):</p>
+                <p class="ms">
+                    \( d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \)
+                </p>
+
+                <h4>Example Dataset</h4>
+                <p>Let’s consider the following dataset:</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Age</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>C1</td>
+                                <td>20</td>
+                                <td>500</td>
+                            </tr>
+                            <tr>
+                                <td>C2</td>
+                                <td>40</td>
+                                <td>1000</td>
+                            </tr>
+                            <tr>
+                                <td>C3</td>
+                                <td>30</td>
+                                <td>800</td>
+                            </tr>
+                            <tr>
+                                <td>C4</td>
+                                <td>18</td>
+                                <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>C5</td>
+                                <td>28</td>
+                                <td>1200</td>
+                            </tr>
+                            <tr>
+                                <td>C6</td>
+                                <td>35</td>
+                                <td>1400</td>
+                            </tr>
+                            <tr>
+                                <td>C7</td>
+                                <td>45</td>
+                                <td>1800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>K-Means (K = 2)</h4>
+                <ul>
+                    <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
+                    <li>Step 2: Randomly select 2 initial centroids:</li>
+                    <ul>
+                        <li>Centroid A = C1 = (20, 500)</li>
+                        <li>Centroid B = C2 = (40, 1000)</li>
+                    </ul>
+                </ul>
+
+                <h4>Step-by-Step Assignment & Updating</h4>
+
+                <ul>
+                    <li><strong>Point C3 = (30, 800):</strong></li>
+                    <ul>
+                        <li>Distance to A = √((30 - 20)² + (800 - 500)²) = √(100 + 90000) = √90100 ≈ 300.17</li>
+                        <li>Distance to B = √((30 - 40)² + (800 - 1000)²) = √(100 + 40000) = √40100 ≈ 200.25</li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Average of (40,1000) and (30,800) = (35, 900)</li>
+                    </ul>
+
+                    <li><strong>Point C4 = (18, 300):</strong></li>
+                    <ul>
+                        <li>Distance to A = √((18 - 20)² + (300 - 500)²) = √(4 + 40000) = √40004 ≈ 200.01</li>
+                        <li>Distance to B = √((18 - 35)² + (300 - 900)²) = √(289 + 360000) = √360289 ≈ 600.24</li>
+                        <li>→ Assign to Cluster A</li>
+                        <li>Update Centroid A = Average of (20,500) and (18,300) = (19, 400)</li>
+                    </ul>
+
+                    <li><strong>Point C5 = (28, 1200):</strong></li>
+                    <ul>
+                        <li>Distance to A = √((28 - 19)² + (1200 - 400)²) = √(81 + 640000) = √640081 ≈ 800.05</li>
+                        <li>Distance to B = √((28 - 35)² + (1200 - 900)²) = √(49 + 90000) = √90049 ≈ 300.08</li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Avg of (40,1000), (30,800), (28,1200) = (32.67, 1000)</li>
+                    </ul>
+
+                    <li><strong>Point C6 = (35, 1400):</strong></li>
+                    <ul>
+                        <li>Distance to A = √((35 - 19)² + (1400 - 400)²) = √(256 + 1000000) = √1000256 ≈ 1000.13</li>
+                        <li>Distance to B = √((35 - 32.67)² + (1400 - 1000)²) = √(5.45 + 160000) = √160005.45 ≈ 400.01
+                        </li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Avg of C2, C3, C5, C6 = (40+30+28+35)/4 = 133/4 = 33.25 and
+                            (1000+800+1200+1400)/4 = 4400/4 = 1100</li>
+                        <li>→ New Centroid B = (33.25, 1100)</li>
+                    </ul>
+
+                    <li><strong>Point C7 = (45, 1800):</strong></li>
+                    <ul>
+                        <li>Distance to A = √((45 - 19)² + (1800 - 400)²) = √(676 + 1960000) = √1960676 ≈ 1400.24</li>
+                        <li>Distance to B = √((45 - 33.25)² + (1800 - 1100)²) = √(138.06 + 490000) = √490138.06 ≈ 700.10
+                        </li>
+                        <li>→ Assign to Cluster B</li>
+                        <li>Update Centroid B = Avg of C2, C3, C5, C6, C7 = (40+30+28+35+45)/5 = 178/5 = 35.6 and
+                            (1000+800+1200+1400+1800)/5 = 6200/5 = 1240</li>
+                        <li>→ Final Centroid B = (35.6, 1240)</li>
+                    </ul>
+                </ul>
+
+                <h4>Final Clusters (After All Points)</h4>
+                <ul>
+                    <li>Cluster A (Centroid ≈ 19, 400): C1, C4</li>
+                    <li>Cluster B (Centroid ≈ 35.6, 1240): C2, C3, C5, C6, C7</li>
+                </ul>
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Results depend heavily on the order of data points.</li>
+                    <li>May be less stable than batch K-Means.</li>
+                    <li>Still requires choosing the value of K manually.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="content-box">
+        <p>Reference:</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=5FpsGnkbEpM" target="_blank">K-mean Clustering with Numerical
+                    Example | Unsupervised Learning | Machine🖥️ Learning 🙇‍♂️🙇 Video Lecture &neArr;</a></li>
         </ul>
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
