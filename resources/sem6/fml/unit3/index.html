@@ -1011,9 +1011,9 @@ Unsupervised Learning Algorithms
                 look visually:
             </p>
             <ul>
-                <li><strong>1 Dimension</strong>: A straight line</li>
-                <li><strong>2 Dimensions</strong>: A flat plane (like an x-y graph)</li>
-                <li><strong>3 Dimensions</strong>: A cube or 3D space</li>
+                <li><strong>1 Dimension</strong>: A straight line <br><img src="../../images/ml9.svg" class="wb" alt=""></li>
+                <li><strong>2 Dimensions</strong>: A flat plane (like an x-y graph) <br><img src="../../images/ml10.svg" alt="" class="wb"></li>
+                <li><strong>3 Dimensions</strong>: A cube or 3D space <br><img src="../../images/ml11.svg" alt="" class="wb"></li>
                 <li><strong>4 or More Dimensions</strong>: Cannot be visualized easily — they exist only mathematically
                 </li>
             </ul>
@@ -1627,6 +1627,134 @@ print(df_filtered)
                     of complicated data, PCA is a great skill to have in your toolkit.</p>
 
             </div>
+<div class="in">
+    <h3>Projection Methods (Dimension Reduction)</h3>
+    <p>
+        Projection methods are powerful techniques used in machine learning and data analysis to reduce the number of features (dimensions) in a dataset while retaining the most important information. This helps in visualizing data, reducing storage/computation, and improving model performance.
+    </p>
+    <p>
+        In simpler terms, it's like taking a 3D object and showing it as a 2D shadow on a wall — you lose some details, but keep the overall shape.
+    </p>
+
+    <h4>Why Dimension Reduction?</h4>
+    <ul>
+        <li>To remove redundant or less useful features.</li>
+        <li>To simplify models and reduce overfitting.</li>
+        <li>To visualize high-dimensional data (e.g., plot 10D data in 2D).</li>
+        <li>To improve training time and model performance.</li>
+    </ul>
+
+    <h4>Key Concepts</h4>
+    <ul>
+        <li><strong>High-Dimensional Data:</strong> Data with many features (e.g., 100 columns).</li>
+        <li><strong>Projection:</strong> Mapping high-dimensional data to a lower-dimensional space.</li>
+        <li><strong>Principal Components:</strong> New features (axes) that capture the most variance in data.</li>
+        <li><strong>Variance:</strong> A measure of how much the data spreads out — more variance = more information.</li>
+    </ul>
+
+    <h4>Popular Projection Techniques</h4>
+    <ul>
+        <li><strong>Principal Component Analysis (PCA):</strong> Projects data onto new axes that capture maximum variance.</li>
+        <li><strong>Linear Discriminant Analysis (LDA):</strong> Similar to PCA, but considers class labels to maximize class separability.</li>
+        <li><strong>Random Projection:</strong> Uses random matrices to reduce dimensions with minimal loss of information.</li>
+    </ul>
+
+    <h4>How PCA Works (Step-by-Step)</h4>
+    <ul>
+        <li>Step 1: Standardize the dataset (mean = 0, variance = 1).</li>
+        <li>Step 2: Calculate the covariance matrix.</li>
+        <li>Step 3: Find eigenvalues and eigenvectors of the covariance matrix.</li>
+        <li>Step 4: Choose top-k eigenvectors (those with highest eigenvalues).</li>
+        <li>Step 5: Project the data onto these top-k components.</li>
+    </ul>
+
+    <h4>Example Dataset</h4>
+    <p>Let's consider this simple dataset of students based on their Math and English scores:</p>
+    <div class="table-wrapper">
+        <table class="new-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Math</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Alice</td><td>90</td><td>85</td></tr>
+                <tr><td>Bob</td><td>70</td><td>65</td></tr>
+                <tr><td>Charlie</td><td>60</td><td>60</td></tr>
+                <tr><td>Diana</td><td>95</td><td>90</td></tr>
+                <tr><td>Edward</td><td>80</td><td>70</td></tr>
+                <tr><td>Fiona</td><td>85</td><td>80</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>Visual Intuition (2D to 1D Projection)</h4>
+    <p>Imagine this dataset as points on a 2D graph (Math vs English). PCA will find a new line (principal component) that best fits this spread of points.</p>
+    <p>We can then project each point onto this line and represent each student using just 1 value (coordinate on this line), instead of 2 (Math and English).</p>
+
+    <h4>Mathematical Insight</h4>
+    <p>The direction of the new axis (principal component) is chosen such that:</p>
+    <ul>
+        <li>It passes through the mean of the data.</li>
+        <li>It captures the maximum variance in the data.</li>
+        <li>It is orthogonal (perpendicular) to other components.</li>
+    </ul>
+
+    <h4>Covariance Matrix Formula</h4>
+    <p>Covariance measures how two features vary together. For two features X and Y:</p>
+    <p class="ms">
+        \( \text{Cov}(X, Y) = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y}) \)
+    </p>
+
+    <h4>Eigenvalues & Eigenvectors</h4>
+    <p>These help us understand the directions (eigenvectors) and the importance (eigenvalues) of those directions.</p>
+    <ul>
+        <li>Higher eigenvalue → more variance along that direction.</li>
+        <li>Choose top eigenvectors to keep the most important directions.</li>
+    </ul>
+
+    <h4>Final Projection</h4>
+    <p>Multiply the original data matrix with the top-k eigenvectors (components) to get the transformed lower-dimensional data.</p>
+
+    <h4>Example Output (After PCA with 1 Component)</h4>
+    <p>Each student now has a single score (Principal Component 1) that represents a combination of Math and English:</p>
+    <div class="table-wrapper">
+        <table class="new-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>PC1 Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Alice</td><td>1.5</td></tr>
+                <tr><td>Bob</td><td>-1.2</td></tr>
+                <tr><td>Charlie</td><td>-2.0</td></tr>
+                <tr><td>Diana</td><td>2.0</td></tr>
+                <tr><td>Edward</td><td>0.3</td></tr>
+                <tr><td>Fiona</td><td>1.0</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>Benefits of PCA</h4>
+    <ul>
+        <li>Reduces noise in the dataset.</li>
+        <li>Helps in visualization and pattern discovery.</li>
+        <li>Makes machine learning models faster and more efficient.</li>
+    </ul>
+
+    <h4>Limitations</h4>
+    <ul>
+        <li>PCA is a linear technique — it might not capture complex (non-linear) patterns.</li>
+        <li>It may make interpretation of features difficult after transformation.</li>
+    </ul>
+
+    <h4>Real-Life Analogy</h4>
+    <p>Imagine you have a high-resolution photo (lots of pixels = high dimension). You want to print a small version for your wallet — you shrink it (dimension reduction) while keeping the main idea (faces, colors) intact.</p>
+</div>
 
         </div>
     </div>
