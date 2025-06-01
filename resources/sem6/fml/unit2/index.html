@@ -242,9 +242,9 @@ num_int = int(num_str)  # This will raise a ValueError.
 
                 <li><strong>How to Pass Command Line Arguments:</strong>
                     <ul>
-                        <li>In Python, the <code>sys.argv</code> list from the <code>sys</code> module is used to access
+                        <li>In Python, the <strong>sys.argv</strong> list from the <strong>sys</strong> module is used to access
                             command line arguments.</li>
-                        <li>The first element of <code>sys.argv</code> is always the name of the script, and the
+                        <li>The first element of <strong>sys.argv</strong> is always the name of the script, and the
                             subsequent elements are the arguments passed to the script.</li>
                     </ul>
                 </li>
@@ -291,21 +291,68 @@ Argument: arg3
                     sure to handle cases where no arguments are provided to avoid errors.
                 </li>
             </ul>
+            <h4>Task 1: Accept name and age via command-line arguments and tell when the person will turn 100.</h4>
+            <pre>
+                <code>
+import sys
 
+if len(sys.argv) != 3:
+    print("All required Arguments are not there!! Usage: python3 test.py &lt;name> &lt;age>")
+    sys.exit()
+
+name = sys.argv[1]
+age = int(sys.argv[2])
+year_when_100 = 2025 + (100 - age)
+
+print(f"Hello {name}, you will turn 100 years old in the year {year_when_100}")
+                </code>
+            </pre>
+            <h4>Task 2: CLI Calculator</h4>
+            <pre>
+                <code>
+import sys
+
+if len(sys.argv) != 4:
+    print("Usage: python3 test.py &lt;num1> &lt;num2> &lt;operation>")
+    print("Operations: add, sub, mul, div")
+    sys.exit()
+
+num1 = float(sys.argv[1])
+num2 = float(sys.argv[2])
+op = sys.argv[3]
+
+if op == "add":
+    result = num1 + num2
+elif op == "sub":
+    result = num1 - num2 
+elif op == "mul":
+    result = num1 * num2 
+elif op == "div":
+    if num1 == 0:
+        print("Error: Division by zero")
+        sys.exit()
+    result = num1 / num2 
+else:
+    print("Invalid Operation")
+    sys.exit()
+
+print(f"Result: {result}")
+                </code>
+            </pre>
         </div>
         <div class="wh">
             <h2>Data Input and Output</h2>
             <ul>
-                <li><strong>Using <code>input()</code> to gather user input:</strong>
+                <li><strong>Using <u>input()</u> to gather user input:</strong>
                     <ul>
-                        <li>The <code>input()</code> function allows you to gather data from the user via the console.
+                        <li>The <strong>input()</strong> function allows you to gather data from the user via the console.
                         </li>
                         <li>It reads the input as a string by default, and you can then convert it into another data
                             type (like integer or float) if necessary.</li>
                     </ul>
                 </li>
 
-                <li><strong>Example of using <code>input()</code>:</strong>
+                <li><strong>Example of using <strong>input()</strong>:</strong>
                     <pre>
             <code>
 # Gathering user's name
@@ -317,25 +364,25 @@ print("Hello, " + name + "!")
                         in the output.</p>
                 </li>
 
-                <li><strong>Using <code>print()</code> to display output:</strong>
+                <li><strong>Using <i>print()</i> to display output:</strong>
                     <ul>
-                        <li>The <code>print()</code> function is used to display information to the user or output
+                        <li>The <strong>print()</strong> function is used to display information to the user or output
                             results to the console.</li>
                         <li>It can display strings, numbers, or any other data type, and can even handle multiple items
                             in one call.</li>
                     </ul>
                 </li>
 
-                <li><strong>Example of using <code>print()</code>:</strong>
+                <li><strong>Example of using <i>print()</i>:</strong>
                     <pre>
-            <code>
+                        <code>
 # Displaying a message
 print("Welcome to Python!")
 # Displaying multiple items
 age = 25
 print("Age:", age)
-            </code>
-        </pre>
+                        </code>
+                    </pre>
                     <p>The above code will print out the string "Welcome to Python!" and the age message "Age: 25".</p>
                 </li>
             </ul>
@@ -344,27 +391,27 @@ print("Age:", age)
         <div class="wh">
             <h2>Comments</h2>
             <ul>
-                <li><strong>Single-line comments (<code>#</code>)</strong>:
+                <li><strong>Single-line comments (<strong>#</strong>)</strong>:
                     <ul>
-                        <li>Single-line comments in Python are initiated by the <code>#</code> symbol. Everything after
-                            the <code>#</code> on that line is considered a comment and is ignored by Python during
+                        <li>Single-line comments in Python are initiated by the <strong>#</strong> symbol. Everything after
+                            the <strong>#</strong> on that line is considered a comment and is ignored by Python during
                             execution.</li>
                     </ul>
                 </li>
 
                 <li><strong>Example of single-line comment:</strong>
                     <pre>
-            <code>
+                        <code>
 # This is a single-line comment
-            </code>
-        </pre>
+                        </code>
+                    </pre>
                     <p>The above code won't affect the program and is used to add notes or explanations in the code.</p>
                 </li>
 
                 <li><strong>Multi-line comments (triple quotes)</strong>:
                     <ul>
                         <li>For comments that span multiple lines, Python allows you to use triple quotes
-                            <code>'''</code> or <code>"""</code>.</li>
+                            <strong>'''</strong> or <strong>"""</strong>.</li>
                         <li>These can be useful for adding longer explanations or temporarily disabling blocks of code.
                         </li>
                     </ul>
@@ -372,13 +419,14 @@ print("Age:", age)
 
                 <li><strong>Example of multi-line comment:</strong>
                     <pre>
-            <code>
+                        <code>
 '''
 This is a multi-line comment.
 It spans several lines.
 It can be used for longer explanations or to disable code.
-'''         </code>
-        </pre>
+'''
+                        </code>
+                    </pre>
                     <p>The code inside the triple quotes will be ignored, making it easy to write multi-line comments.
                     </p>
                 </li>
@@ -399,15 +447,15 @@ It can be used for longer explanations or to disable code.
 
                 <li><strong>Example of using <code>import</code>:</strong>
                     <pre>
-            <code>
+                        <code>
 # Importing the math module
 import math
 
 # Using a function from the math module
 result = math.sqrt(16)
 print(result)  # Output: 4.0
-            </code>
-        </pre>
+                        </code>
+                    </pre>
                     <p>The above code imports the <code>math</code> module and uses its <code>sqrt()</code> function to
                         calculate the square root of 16.</p>
                 </li>
@@ -423,7 +471,7 @@ print(result)  # Output: 4.0
 
                 <li><strong>Example of importing a custom module:</strong>
                     <pre>
-            <code>
+                        <code>
 # Assuming you have a file named mymodule.py with a function greet()
 
 # Importing the custom module
@@ -431,8 +479,8 @@ import mymodule
 
 # Using a function from the custom module
 mymodule.greet("John")
-            </code>
-        </pre>
+                        </code>
+                    </pre>
                     <p>This example shows how you can import a custom module (like <code>mymodule.py</code>) and use its
                         functions in your script.</p>
                 </li>
