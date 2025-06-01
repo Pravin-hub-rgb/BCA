@@ -199,176 +199,524 @@ Data Mining Techniques
                     classification using one popular method called Decision Tree Induction.</li>
             </ul>
 
-            <h3>What is a Decision Tree?</h3>
-
-            <ul>
-                <li>Imagine you're playing a guessing game. Someone thinks of an animal, and you ask yes/no questions to
-                    figure out what it is:</li>
-                <ul>
-                    <li>Is it a mammal?</li>
-                    <ul>
-                        <li>Yes → Does it have stripes?</li>
-                        <ul>
-                            <li>Yes → It's a tiger!</li>
-                            <li>No → Maybe a lion.</li>
-                        </ul>
-                        <li>No → Does it fly?</li>
-                        <ul>
-                            <li>Yes → Probably a bird.</li>
-                        </ul>
-                    </ul>
-                </ul>
-                <li>This series of yes/no questions is basically a decision tree—a flowchart-like structure that splits
-                    data step-by-step based on certain features to arrive at a decision or classification.</li>
-                <li>In data mining, decision trees help us classify data points by splitting the data according to the
-                    most important features, eventually labeling each item with a class.</li>
-            </ul>
-
             <div class="in">
-                <h3>How Does Decision Tree Induction Work?</h3>
+                <h3>Introduction to Decision Tree (Classifier)</h3>
 
+                <h4>What is a Decision Tree?</h4>
                 <ul>
-                    <li>Let's say you have a dataset of customers and you want to predict whether they will buy a new
-                        product. Each customer has features like age, income, and previous purchase history. Here's how
-                        decision tree induction works:</li>
+                    <li>A Decision Tree is a type of algorithm mainly used for classification, though it can also be
+                        used for regression tasks.</li>
+                    <li>A Decision Tree helps us take decisions based on data. It breaks a large decision into smaller
+                        ones by checking attributes (conditions) step-by-step.</li>
                     <ul>
-                        <li>Start at the Root: The tree looks at the entire dataset and picks the feature that best
-                            splits
-                            the data into groups with similar outcomes. For example, maybe age splits customers well
-                            (young
-                            vs. old).</li>
-                        <li>Split the Data: Based on the chosen feature (say, age), divide the customers into groups.
+                        <li>It mimics human decision-making.</li>
+                        <li>Real-life example:
+                            <ul>
+                                <li>"Is the email spam or not spam?" → This is a binary classification.</li>
+                            </ul>
                         </li>
-                        <li>Repeat for Each Group: For each subgroup, the tree looks at the remaining features to find
-                            the
-                            next best split (maybe income).</li>
-                        <li>Keep Splitting Until...</li>
-                        <ul>
-                            <li>All data in a group belong to the same class (e.g., all will buy), or</li>
-                            <li>You run out of features, or</li>
-                            <li>The group gets too small.</li>
-                        </ul>
-                        <li>Make a Prediction: Each leaf node of the tree represents a final decision/class.</li>
                     </ul>
                 </ul>
-            </div>
-            <div class="in">
-                <h3>Example: Predicting if a Customer Will Buy a Laptop</h3>
 
+                <h4>Example: Higher Studies Decision Using Decision Tree</h4>
                 <ul>
-                    <li>Here's a tiny example dataset:</li>
-                </ul>
-                <div class="table-wrapper">
-                    <table class="new-table">
-                        <tr>
-                            <th>Age</th>
-                            <th>Income</th>
-                            <th>Student</th>
-                            <th>Buys Laptop?</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                &lt;=30</td>
-                            <td>High</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &lt;=30</td>
-                            <td>High</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>31-40</td>
-                            <td>High</td>
-                            <td>No</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>>40</td>
-                            <td>Medium</td>
-                            <td>No</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>>40</td>
-                            <td>Low</td>
-                            <td>Yes</td>
-                            <td>No</td>
-                        </tr>
-                    </table>
-                </div>
-                <ul>
-                    <li>The decision tree might look like this:</li>
+                    <li>Imagine you're a final-year B.Tech student, and you're confused:</li>
                     <ul>
-                        <li>Is Age <= 30?</li>
-                                <ul>
-                                    <li>Yes → Is Student?</li>
-                                    <ul>
-                                        <li>Yes → Buys Laptop = Yes</li>
-                                        <li>No → Buys Laptop = No</li>
-                                    </ul>
-                                    <li>No → Buys Laptop = Yes</li>
-                                </ul>
+                        <li>Should I go for higher studies or not?</li>
                     </ul>
-                    <li>From this tree, if a customer is 28 and a student, the model predicts they will buy a laptop.
-                    </li>
+                    <li>Let’s structure this into a Decision Tree</li>
+                    <img src="../../images/dw22.svg" alt="" class="wb">
+                    <li>This is a simplified example of how we can structure a decision logically using a tree.</li>
+                    <li>We can add more conditions too. For example:</li>
+                    <ul>
+                        <li>Instead of just "Placed", we can consider Package Value:</li>
+                        <ul>
+                            <li>Package High → No (Don’t go for higher studies)</li>
+                            <li>Package Low → Consider going for higher studies</li>
+                        </ul>
+                    </ul>
                 </ul>
-            </div>
-            <div class="n">
-                <h3>How Does the Tree Choose the Best Feature?</h3>
 
+                <h4>Why Use a Decision Tree?</h4>
                 <ul>
-                    <li>Great question! The tree uses something called information gain (or sometimes Gini index) —
-                        basically a way to measure which feature splits the data best by reducing uncertainty. The goal
-                        is
-                        to find splits that result in groups that are as pure as possible (meaning mostly one class).
+                    <li>When we have training data (sample data from students), we want to classify future decisions.
+                    </li>
+                    <li>Based on this data, the Decision Tree model learns how to take decisions.</li>
+                    <li>Example: Whether a student should go for higher studies or not can be predicted using their
+                        placement status, GATE result, etc.</li>
+                </ul>
+
+                <h4>Core Concepts Behind Decision Tree</h4>
+                <ul>
+                    <li>You can’t just split based on any attribute randomly. There is math behind it.</li>
+                </ul>
+
+                <h4>Key Terms:</h4>
+                <ul>
+                    <li><strong>Entropy</strong>
+                        <ul>
+                            <li>Measures the impurity or randomness in data.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Information Gain</strong>
+                        <ul>
+                            <li>Tells us how much useful info we get after splitting the data on an attribute.</li>
+                        </ul>
                     </li>
                 </ul>
-            </div>
 
+                <h4>How It Works:</h4>
+                <ul>
+                    <li>Calculate Entropy of the full dataset.</li>
+                    <li>Calculate Information Gain for each attribute.</li>
+                    <li>The attribute with the highest information gain becomes the Root Node.</li>
+                    <li>Repeat the process for further splits (child nodes).</li>
+                </ul>
+
+                <h4>Weather Example (Real-Life Decision)</h4>
+                <ul>
+                    <li>Let’s take another decision-making scenario: "Should I play football today?"</li>
+                        <img src="../../images/dw23.svg" alt="" class="wb">
+                    <li>Interpretation:</li>
+                    <ul>
+                        <li>If it's cloudy or rainy, → "Yes, go play."</li>
+                        <li>If it’s sunny, check temperature:
+                            <ul>
+                                <li>Extreme Hot → No</li>
+                                <li>Mild or Normal → Yes</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <li><strong>The final decisions (Yes/No) are called Leaf Nodes.</strong></li>
+                </ul>
+
+                <h4>Structure of a Decision Tree</h4>
+                <ul>
+                    <pre><code>       [Root Node]
+            |
+      ---------------
+     |       |       |
+ [Decision Nodes]  (attributes)
+     |       |
+ [Leaf Nodes] → Final decisions (Yes/No)</code></pre>
+                    <li>Vertex/Node = Decision point or final output.</li>
+                    <li>Edge = Connection between decision steps.</li>
+                </ul>
+
+                <h4>Extra Concept: Pruning (To Simplify Tree)</h4>
+                <ul>
+                    <li>Sometimes the tree becomes too complex, with unnecessary branches.</li>
+                    <ul>
+                        <li><strong>Pruning</strong> = Removing those unnecessary parts.</li>
+                        <li>Helps in avoiding overfitting (making the model too specific to training data).</li>
+                    </ul>
+                </ul>
+
+            </div>
+        </div>
+        <div class="wh">
+            <h2>Clustering Techniques</h2>
+            <ul>
+                <li>Clustering is a fundamental technique in data mining that aims to group a set of data objects into clusters, such that objects within the same cluster are more similar to each other than to those in other clusters. It is considered an unsupervised learning method because it does not rely on predefined class labels; instead, the algorithm discovers inherent groupings in the data based on similarity measures.</li>
+                <li>In clustering, the main objective is to identify natural groupings or patterns in a dataset, enabling analysts to gain insights or simplify further processing. Unlike classification, where the outcome classes are known in advance, clustering algorithms work without prior knowledge of the data labels.</li>
+                <li>Types of Clustering Methods:
+                    <br>Clustering methods can be broadly classified into:
+                    <ul>
+                        <li><strong>Partitioning Methods: Divide data into k non-overlapping Subsets.</strong></li>
+                        <li><strong>Hierarchical Methods:</strong> Create a tree-like structure (dendogram) of nested clusters.</li>
+                    </ul>
+                </li>
+            </ul>
             <div class="in">
-                <h3>Connecting to What We Learned Before</h3>
-
+                <h3>Partition Method</h3>
+                <p>Partition methods construct <strong>k partitions (clusters)</strong> of the data, where each data point belongs to exactly one cluster. The goal is to find the optimal grouping of data points such that:
                 <ul>
-                    <li>Remember association rules showed us relationships in data? Decision trees take it a step
-                        further.
-                        Instead of just spotting which items often appear together, decision trees help us make
-                        decisions
-                        and predictions based on multiple features. This makes them super useful in applications like
-                        spam
-                        detection, medical diagnosis, and even loan approvals.</li>
-                </ul>
+                    <li>Each group (cluster) is internally cohesive (data points in the dame group are similar),</li>
+                    <li>And extternally separated (data points in different groups are dissimilar).</li>
+                </ul>Among all partitioning methods, <strong>K-Means</strong> is the most prominent and foundational algorithm covered in data mining.</p>
+                <div class="wh">
+                    <h3>K-Means Clustering</h3>
+                    <p>
+                        K-Means is one of the most popular unsupervised learning algorithms used to group similar data
+                        points into clusters. It is mainly used in clustering problems where we don't have labeled data. The
+                        goal is to divide the data into <strong>K</strong> groups (clusters) based on similarity.
+                    </p>
+    
+                    <h4>Key Concepts</h4>
+                    <ul>
+                        <li><strong>Centroid:</strong> The center of a cluster.</li>
+                        <li><strong>K:</strong> Number of clusters we want to form.</li>
+                        <li><strong>Euclidean Distance:</strong> The distance between a data point and a centroid.</li>
+                    </ul>
+    
+                    <h4>How K-Means Works (Incremental Method)</h4>
+                    <ul>
+                        <li>Step 1: Choose the number of clusters K.</li>
+                        <li>Step 2: Randomly initialize K centroids.</li>
+                        <li>Step 3: Go through each data point one by one:</li>
+                        <ul>
+                            <li>Assign it to the nearest centroid (based on distance).</li>
+                            <li><strong>Immediately update</strong> the centroid of that cluster using the mean of current
+                                members.</li>
+                        </ul>
+                        <li>Step 4: Repeat this for all points. Optionally loop again if needed.</li>
+                    </ul>
+                    <h4>Distance Formula (1D)</h4>
+                    <p>When using just one feature like Shoe Size, distance between two points is the absolute difference:
+                    </p>
+                    <p class="ms">
+                        \( d = |x_2 - x_1| \)
+                    </p>
+    
+                    <h4>Example Dataset</h4>
+                    <p>Consider the following dataset of clients and their shoe sizes:</p>
+                    <div class="table-wrapper">
+                        <table class="new-table">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Shoe Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Alice</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob</td>
+                                    <td>9</td>
+                                </tr>
+                                <tr>
+                                    <td>Charlie</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Diana</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Edward</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>Fiona</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>George</td>
+                                    <td>11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <h4>K-Means (K = 2)</h4>
+                    <ul>
+                        <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
+                        <li>Step 2: Randomly select initial centroids:</li>
+                        <ul>
+                            <li>Centroid A = Alice = 6</li>
+                            <li>Centroid B = Bob = 9</li>
+                        </ul>
+                        <img src="../../images/ml12.svg" alt="" class="wb">
+                    </ul>
+    
+                    <h4>Step-by-Step Assignment & Updating</h4>
+    
+                    <ul>
+                        <li><strong>Point Charlie = 7:</strong></li>
+                        <ul>
+                            <li>Distance to A = |7 - 6| = 1</li>
+                            <li>Distance to B = |7 - 9| = 2</li>
+                            <li>→ Assign to Cluster A</li>
+                            <li>Update Centroid A = Average of (6, 7) = 6.5</li>
+                            <img src="../../images/ml13.svg" alt="" class="wb">
+                        </ul>
+    
+                        <li><strong>Point Diana = 5:</strong></li>
+                        <ul>
+                            <li>Distance to A = |5 - 6.5| = 1.5</li>
+                            <li>Distance to B = |5 - 9| = 4</li>
+                            <li>→ Assign to Cluster A</li>
+                            <li>Update Centroid A = Average of (6, 7, 5) = 6</li>
+                            <img src="../../images/ml14.svg" alt="" class="wb">
+                        </ul>
+    
+                        <li><strong>Point Edward = 8:</strong></li>
+                        <ul>
+                            <li>Distance to A = |8 - 6| = 2</li>
+                            <li>Distance to B = |8 - 9| = 1</li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Average of (9, 8) = 8.5</li>
+                            <img src="../../images/ml15.svg" alt="" class="wb">
+                        </ul>
+    
+                        <li><strong>Point Fiona = 10:</strong></li>
+                        <ul>
+                            <li>Distance to A = |10 - 6| = 4</li>
+                            <li>Distance to B = |10 - 8.5| = 1.5</li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Average of (9, 8, 10) = 9</li>
+                            <img src="../../images/ml16.svg" alt="" class="wb">
+                        </ul>
+    
+                        <li><strong>Point George = 11:</strong></li>
+                        <ul>
+                            <li>Distance to A = |11 - 6| = 5</li>
+                            <li>Distance to B = |11 - 9| = 2</li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Average of (9, 8, 10, 11) = 9.5</li>
+                            <img src="../../images/ml17.svg" alt="" class="wb">
+                        </ul>
+                    </ul>
+    
+                    <h4>Final Clusters (After All Points)</h4>
+                    <ul>
+                        <li>Cluster A (Centroid ≈ 6): Alice, Charlie, Diana</li>
+                        <li>Cluster B (Centroid ≈ 9.5): Bob, Edward, Fiona, George</li>
+                    </ul>
+    
+    
+                    <h4>Euclidean Distance Formula</h4>
+                    <p>This formula is used to measure how far two points are from each other in a 2D space (like age and
+                        amount):</p>
+                    <p class="ms">
+                        \( d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \)
+                    </p>
+    
+                    <h4>Example Dataset</h4>
+                    <p>Let’s consider the following dataset:</p>
+                    <div class="table-wrapper">
+                        <table class="new-table">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Age</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>C1</td>
+                                    <td>20</td>
+                                    <td>500</td>
+                                </tr>
+                                <tr>
+                                    <td>C2</td>
+                                    <td>40</td>
+                                    <td>1000</td>
+                                </tr>
+                                <tr>
+                                    <td>C3</td>
+                                    <td>30</td>
+                                    <td>800</td>
+                                </tr>
+                                <tr>
+                                    <td>C4</td>
+                                    <td>18</td>
+                                    <td>300</td>
+                                </tr>
+                                <tr>
+                                    <td>C5</td>
+                                    <td>28</td>
+                                    <td>1200</td>
+                                </tr>
+                                <tr>
+                                    <td>C6</td>
+                                    <td>35</td>
+                                    <td>1400</td>
+                                </tr>
+                                <tr>
+                                    <td>C7</td>
+                                    <td>45</td>
+                                    <td>1800</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <h4>K-Means (K = 2)</h4>
+                    <ul>
+                        <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
+                        <li>Step 2: Randomly select 2 initial centroids:</li>
+                        <ul>
+                            <li>Centroid A = C1 = (20, 500)</li>
+                            <li>Centroid B = C2 = (40, 1000)</li>
+                        </ul>
+                    </ul>
+    
+                    <h4>Step-by-Step Assignment & Updating</h4>
+    
+                    <ul>
+                        <li><strong>Point C3 = (30, 800):</strong></li>
+                        <ul>
+                            <li>Distance to A = √((30 - 20)² + (800 - 500)²) = √(100 + 90000) = √90100 ≈ 300.17</li>
+                            <li>Distance to B = √((30 - 40)² + (800 - 1000)²) = √(100 + 40000) = √40100 ≈ 200.25</li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Average of (40,1000) and (30,800) = (35, 900)</li>
+                        </ul>
+    
+                        <li><strong>Point C4 = (18, 300):</strong></li>
+                        <ul>
+                            <li>Distance to A = √((18 - 20)² + (300 - 500)²) = √(4 + 40000) = √40004 ≈ 200.01</li>
+                            <li>Distance to B = √((18 - 35)² + (300 - 900)²) = √(289 + 360000) = √360289 ≈ 600.24</li>
+                            <li>→ Assign to Cluster A</li>
+                            <li>Update Centroid A = Average of (20,500) and (18,300) = (19, 400)</li>
+                        </ul>
+    
+                        <li><strong>Point C5 = (28, 1200):</strong></li>
+                        <ul>
+                            <li>Distance to A = √((28 - 19)² + (1200 - 400)²) = √(81 + 640000) = √640081 ≈ 800.05</li>
+                            <li>Distance to B = √((28 - 35)² + (1200 - 900)²) = √(49 + 90000) = √90049 ≈ 300.08</li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Avg of (40,1000), (30,800), (28,1200) = (32.67, 1000)</li>
+                        </ul>
+    
+                        <li><strong>Point C6 = (35, 1400):</strong></li>
+                        <ul>
+                            <li>Distance to A = √((35 - 19)² + (1400 - 400)²) = √(256 + 1000000) = √1000256 ≈ 1000.13</li>
+                            <li>Distance to B = √((35 - 32.67)² + (1400 - 1000)²) = √(5.45 + 160000) = √160005.45 ≈ 400.01
+                            </li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Avg of C2, C3, C5, C6 = (40+30+28+35)/4 = 133/4 = 33.25 and
+                                (1000+800+1200+1400)/4 = 4400/4 = 1100</li>
+                            <li>→ New Centroid B = (33.25, 1100)</li>
+                        </ul>
+    
+                        <li><strong>Point C7 = (45, 1800):</strong></li>
+                        <ul>
+                            <li>Distance to A = √((45 - 19)² + (1800 - 400)²) = √(676 + 1960000) = √1960676 ≈ 1400.24</li>
+                            <li>Distance to B = √((45 - 33.25)² + (1800 - 1100)²) = √(138.06 + 490000) = √490138.06 ≈ 700.10
+                            </li>
+                            <li>→ Assign to Cluster B</li>
+                            <li>Update Centroid B = Avg of C2, C3, C5, C6, C7 = (40+30+28+35+45)/5 = 178/5 = 35.6 and
+                                (1000+800+1200+1400+1800)/5 = 6200/5 = 1240</li>
+                            <li>→ Final Centroid B = (35.6, 1240)</li>
+                        </ul>
+                    </ul>
+    
+                    <h4>Final Clusters (After All Points)</h4>
+                    <ul>
+                        <li>Cluster A (Centroid ≈ 19, 400): C1, C4</li>
+                        <li>Cluster B (Centroid ≈ 35.6, 1240): C2, C3, C5, C6, C7</li>
+                        <img src="../../images/ml18.svg" alt="" class="wb">
+                    </ul>
+                </div>
             </div>
-
             <div class="in">
-                <h3>Why Are Decision Trees So Popular?</h3>
+                <h3>Hierarchical Clustering</h3>
 
+                <p>
+                    Hierarchical clustering builds a hierarchy of clusters. Unlike K-Means, it does not require
+                    choosing the number of clusters (K) beforehand. There are two main approaches:
+                </p>
+
+                <h4>Types of Hierarchical Clustering</h4>
                 <ul>
-                    <li>Easy to Understand: The tree structure looks like a flowchart anyone can follow.</li>
-                    <li>Works With Different Data Types: Handles numbers and categories easily.</li>
-                    <li>No Need for Much Data Preparation: Doesn't need feature scaling or normalization.</li>
-                    <li>Visualizable: You can literally draw the tree and explain the decisions.</li>
+                    <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and keep
+                        merging the closest pairs until one cluster remains.</li>
+                    <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep splitting
+                        it into smaller clusters.</li>
                 </ul>
-            </div>
 
-            <div class="in">
-                <h3>Summary</h3>
-
+                <h4>Distance Measurement (Linkage Methods)</h4>
                 <ul>
-                    <li>Classification predicts discrete labels; prediction can also mean forecasting continuous values.
+                    <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two clusters.
                     </li>
-                    <li>Decision Tree Induction creates a tree that splits data based on the most informative features.
+                    <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two clusters.
                     </li>
-                    <li>The tree asks questions about data features step-by-step until it can confidently classify data
-                        points.</li>
-                    <li>It's intuitive, easy to visualize, and widely used in many real-world applications.</li>
+                    <li><strong>Average Linkage:</strong> Average of all pairwise distances between points in two
+                        clusters.</li>
                 </ul>
+
+                <h4>Example: Agglomerative Clustering</h4>
+                <p>Given 1D data points: <strong>[1, 5, 8, 10, 19, 20]</strong></p>
+
+                <p>Step-by-step using <strong>single linkage</strong>:</p>
+                <ol>
+                    <li>Start with each point as its own cluster:
+                        <br />
+                        [1], [5], [8], [10], [19], [20]
+                    </li>
+
+                    <li>Find the closest pair (minimum distance):
+                        <br />
+                        Distance(19, 20) = 1 → Merge → [19, 20]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(8, 10) = 2 → Merge → [8, 10]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(5, 8) = 3 → Merge → [5, 8, 10]
+                    </li>
+
+                    <li>Next closest:
+                        <br />
+                        Distance(1, 5) = 4 → Merge → [1, 5, 8, 10]
+                    </li>
+
+                    <li>Final merge:
+                        <br />
+                        Distance(10, 19) = 9 → Merge all → [1, 5, 8, 10, 19, 20]
+                    </li>
+                </ol>
+                <img src="../../images/ml5.svg" alt="" class="wb">
+                <h4>Dendrogram</h4>
+                <p>
+                    A dendrogram is a tree-like diagram that shows the sequence of merges (or splits).
+                    You can “cut” the dendrogram at any level to get the desired number of clusters.
+                </p>
+
+                <h4>Divisive Clustering (Top-Down)</h4>
+                <p>
+                    This method starts with all points in one big cluster and splits them recursively.
+                    It's less common and computationally heavier than agglomerative.
+                </p>
+
+                <p>Steps:</p>
+                <ol>
+                    <li>Start with all points in one cluster: [1, 5, 8, 10, 19, 20]</li>
+                    <li>Split into two clusters based on large distance gap → [1, 5, 8, 10] and [19, 20]</li>
+                    <li>Keep splitting each sub-cluster until each point is separate.</li>
+                </ol>
+                <img src="../../images/ml6.svg" alt="" class="wb">
+                <h4>Advantages</h4>
+                <ul>
+                    <li>No need to pre-define K (number of clusters).</li>
+                    <li>Produces a full cluster hierarchy.</li>
+                    <li>Works well with small datasets and dendrograms help visualize structure.</li>
+                </ul>
+
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Computationally expensive for large datasets.</li>
+                    <li>Not suitable for streaming or dynamic data.</li>
+                    <li>Once a merge/split happens, it can't be undone.</li>
+                </ul>
+
+                <h4>Note:</h4>
+                <p>
+                    Use libraries like <strong>scipy.cluster.hierarchy</strong> in Python to create dendrograms and
+                    perform
+                    clustering automatically.
+                </p>
             </div>
         </div>
     </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=mvveVcbHynE" target="_blank"> Lec-9: Introduction to Decision Tree 🌲 with Real life examples Video Lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
     <script type="module" src="../../../../public/main.js"></script>
 </body>
 
