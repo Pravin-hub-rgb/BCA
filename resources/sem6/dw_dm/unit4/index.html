@@ -197,76 +197,107 @@ Data Mining Techniques
                     </table>
                 </div>
                 <p><strong>Total Transactions:</strong> 5</p>
+                <h4>Understanding Itemsets (Quick Note)</h4>
+                <p><em><strong>Note:</strong> An <strong>itemset</strong> just means a group of items that appear
+                        together in a transaction.
+                        <br>– A <strong>1-itemset</strong> is a single item (like Bread).
+                        <br>– A <strong>2-itemset</strong> is a pair of items (like Bread and Milk).
+                        <br>– A <strong>3-itemset</strong> is a group of three items (like Bread, Milk, and Juice).
+                        <br>We look for these sets in the data and check how often they appear (called support). If they
+                        appear frequently, we keep them. If not, we drop them.</em></p>
 
-                <h4>Step 1: 1-Itemsets and Support</h4>
-                <p class="ms">\( \text{Support} = \left(\frac{\text{Item Count}}{\text{Total Transactions}}\right)
-                    \times 100\% \)</p>
-                <ul>
-                    <li>Bread: 4/5 = 80%</li>
-                    <li>Butter: 3/5 = 60%</li>
-                    <li>Jam: 1/5 = 20%</li>
-                    <li>Milk: 4/5 = 80%</li>
-                    <li>Juice: 3/5 = 60%</li>
-                    <li>Curd: 1/5 = 20%</li>
-                </ul>
-                <p><strong>Frequent 1-Itemsets:</strong> Bread, Butter, Milk, Juice</p>
 
-                <h4>Step 2: 2-Itemsets and Support</h4>
-                <ul>
-                    <li>{Bread, Milk}: 3/5 = 60%</li>
-                    <li>{Milk, Juice}: 3/5 = 60%</li>
-                </ul>
-                <p><strong>Frequent 2-Itemsets:</strong> {Bread, Milk}, {Milk, Juice}</p>
-
-                <h4>Step 3: 3-Itemsets</h4>
-                <p>Check {Bread, Milk, Juice}: occurs 2/5 = 40% → Not frequent</p>
-
-                <h4>Step 4: Association Rules and Confidence</h4>
-                <p class="ms">\( \text{Confidence}(X \Rightarrow Y) = \frac{\text{Support}(X \cup Y)}{\text{Support}(X)}
-                    \times 100\% \)</p>
-                <ul>
-                    <li>Bread → Milk: 60% / 80% = 75%</li>
-                    <li>Milk → Bread: 60% / 80% = 75%</li>
-                    <li>Milk → Juice: 60% / 80% = 75%</li>
-                    <li>Juice → Milk: 60% / 60% = 100%</li>
-                </ul>
-
-                <h4>Final Valid Rules (Confidence ≥ 75%)</h4>
-                <div class="table-wrapper">
-                    <table class="new-table">
-                        <tr>
-                            <th>Rule</th>
-                            <th>Confidence</th>
-                            <th>Interpretation</th>
-                        </tr>
-                        <tr>
-                            <td>Bread → Milk</td>
-                            <td>75%</td>
-                            <td>75% chance Milk is also bought with Bread</td>
-                        </tr>
-                        <tr>
-                            <td>Milk → Bread</td>
-                            <td>75%</td>
-                            <td>75% chance Bread is also bought with Milk</td>
-                        </tr>
-                        <tr>
-                            <td>Milk → Juice</td>
-                            <td>75%</td>
-                            <td>75% chance Juice is also bought with Milk</td>
-                        </tr>
-                        <tr>
-                            <td>Juice → Milk</td>
-                            <td>100%</td>
-                            <td>100% chance Milk is bought with Juice</td>
-                        </tr>
-                    </table>
-                </div>
-                <h4>Insights</h4>
-                <ul>
-                    <li><strong>Strongest Rule:</strong> Juice → Milk (100%)</li>
-                    <li><strong>Moderate Associations:</strong> Bread ↔ Milk, Milk ↔ Juice (75%)</li>
-                    <li><strong>Strategy:</strong> Bundle Milk and Juice for promotions</li>
-                </ul>
+                        <h4>Step 1: 1-Itemsets and Support</h4>
+                        <p><strong>Goal:</strong> First, we list all individual items (1-itemsets) and count how many transactions they appear in.</p>
+                        <p>Support is calculated using the formula:</p>
+                        <p class="ms">\( \text{Support} = \left(\frac{\text{Item Count}}{\text{Total Transactions}}\right) \times 100\% \)</p>
+                        <p><strong>Total Transactions = 5</strong></p>
+                        <ul>
+                            <li><strong>Bread</strong> appears in T1, T2, T3, and T5 → that’s 4 transactions → 4/5 = <strong>80%</strong></li>
+                            <li><strong>Butter</strong> appears in T1, T2, and T5 → 3 transactions → 3/5 = <strong>60%</strong></li>
+                            <li><strong>Jam</strong> appears in only T2 → 1 transaction → 1/5 = <strong>20%</strong></li>
+                            <li><strong>Milk</strong> appears in T1, T3, T4, and T5 → 4 transactions → 4/5 = <strong>80%</strong></li>
+                            <li><strong>Juice</strong> appears in T3, T4, and T5 → 3 transactions → 3/5 = <strong>60%</strong></li>
+                            <li><strong>Curd</strong> appears in only T4 → 1 transaction → 1/5 = <strong>20%</strong></li>
+                        </ul>
+                        <p><strong>Minimum Support = 50%</strong>. So we remove items with less than 50% support.</p>
+                        <p><strong>Frequent 1-Itemsets:</strong> Bread (80%), Butter (60%), Milk (80%), Juice (60%)</p>
+                        <p>These are called <strong>frequent</strong> because they appear in at least 50% of transactions.</p>
+                        
+                        <h4>Step 2: 2-Itemsets and Support</h4>
+                        <p><strong>Now we combine the frequent 1-itemsets in pairs</strong> and check how often those pairs occur together in transactions.</p>
+                        <p>Only combinations of previously frequent 1-itemsets are considered (Bread, Butter, Milk, Juice).</p>
+                        <ul>
+                            <li><strong>{Bread, Milk}</strong> appears in T1, T3, T5 → 3 transactions → 3/5 = <strong>60%</strong></li>
+                            <li><strong>{Milk, Juice}</strong> appears in T3, T4, T5 → 3 transactions → 3/5 = <strong>60%</strong></li>
+                            <li><strong>{Bread, Butter}</strong> appears in T1, T2, T5 → 3 transactions → 3/5 = <strong>60%</strong></li>
+                            <li><strong>{Butter, Milk}</strong> appears in T1, T5 → 2 transactions → 2/5 = <strong>40%</strong> (not frequent)</li>
+                            <li><strong>{Bread, Juice}</strong> appears in T3, T5 → 2 transactions → 2/5 = <strong>40%</strong> (not frequent)</li>
+                            <li><strong>{Butter, Juice}</strong> appears in T5 only → 1 transaction → 1/5 = <strong>20%</strong> (not frequent)</li>
+                        </ul>
+                        <p>Again, we apply the <strong>minimum support = 50%</strong>.</p>
+                        <p><strong>Frequent 2-Itemsets:</strong> {Bread, Milk}, {Milk, Juice}, {Bread, Butter}</p>
+                        
+                        <h4>Step 3: 3-Itemsets and Support</h4>
+                        <p><strong>Now we form groups of 3 items from the frequent 2-itemsets.</strong></p>
+                        <p>Only valid combinations from previous frequent sets are checked:</p>
+                        <ul>
+                            <li><strong>{Bread, Milk, Juice}</strong> appears in T3 and T5 → 2 transactions → 2/5 = <strong>40%</strong></li>
+                            <li><strong>{Bread, Milk, Butter}</strong> appears in T1 and T5 → 2 transactions → 2/5 = <strong>40%</strong></li>
+                        </ul>
+                        <p>Both are <strong>less than 50%</strong>, so they are not frequent.</p>
+                        <p><strong>Frequent 3-Itemsets:</strong> None</p>
+                        
+                        <h4>Step 4: Association Rules and Confidence</h4>
+                        <p>Now we take the frequent 2-itemsets and generate rules like X → Y.</p>
+                        <p>Confidence is calculated using:</p>
+                        <p class="ms">\( \text{Confidence}(X \Rightarrow Y) = \frac{\text{Support}(X \cup Y)}{\text{Support}(X)} \times 100\% \)</p>
+                        
+                        <ul>
+                            <li><strong>Bread → Milk</strong>: Support(Bread ∪ Milk) = 60%, Support(Bread) = 80% → 60/80 = <strong>75%</strong></li>
+                            <li><strong>Milk → Bread</strong>: Support(Milk ∪ Bread) = 60%, Support(Milk) = 80% → 60/80 = <strong>75%</strong></li>
+                            <li><strong>Milk → Juice</strong>: Support(Milk ∪ Juice) = 60%, Support(Milk) = 80% → 60/80 = <strong>75%</strong></li>
+                            <li><strong>Juice → Milk</strong>: Support(Juice ∪ Milk) = 60%, Support(Juice) = 60% → 60/60 = <strong>100%</strong></li>
+                        </ul>
+                        
+                        <h4>Final Valid Rules (Confidence ≥ 75%)</h4>
+                        <div class="table-wrapper">
+                            <table class="new-table">
+                                <tr>
+                                    <th>Rule</th>
+                                    <th>Confidence</th>
+                                    <th>Interpretation</th>
+                                </tr>
+                                <tr>
+                                    <td>Bread → Milk</td>
+                                    <td>75%</td>
+                                    <td>75% of the time, when Bread is bought, Milk is also bought</td>
+                                </tr>
+                                <tr>
+                                    <td>Milk → Bread</td>
+                                    <td>75%</td>
+                                    <td>75% of the time, when Milk is bought, Bread is also bought</td>
+                                </tr>
+                                <tr>
+                                    <td>Milk → Juice</td>
+                                    <td>75%</td>
+                                    <td>75% of the time, when Milk is bought, Juice is also bought</td>
+                                </tr>
+                                <tr>
+                                    <td>Juice → Milk</td>
+                                    <td>100%</td>
+                                    <td>100% of the time, when Juice is bought, Milk is always bought</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <h4>Insights</h4>
+                        <ul>
+                            <li><strong>Strongest Rule:</strong> Juice → Milk (100%) — Milk is always bought when Juice is bought.</li>
+                            <li><strong>Moderate Associations:</strong> Bread ↔ Milk, Milk ↔ Juice (75%)</li>
+                            <li><strong>Business Tip:</strong> Promote or bundle Milk and Juice together, as they have a strong association.</li>
+                        </ul>
+                        
 
                 <h4>Algorithm Summary</h4>
                 <ol>
@@ -278,7 +309,8 @@ Data Mining Techniques
                     <li>Filter rules by confidence threshold</li>
                     <li>Interpret valid rules for business use</li>
                 </ol>
-                <p>This process uncovers strong purchasing patterns and aids in data-driven decisions for retail and
+                <p>This process uncovers strong purchasing patterns and aids in data-driven decisions for
+                    retail and
                     e-commerce.</p>
             </div>
 
@@ -646,9 +678,9 @@ Data Mining Techniques
                     such
                     that:
                 <ul>
-                    <li>Each group (cluster) is internally cohesive (data points in the dame group are similar),
+                    <li>Each group (cluster) is internally cohesive (data points in the same group are similar),
                     </li>
-                    <li>And extternally separated (data points in different groups are dissimilar).</li>
+                    <li>And externally separated (data points in different groups are dissimilar).</li>
                 </ul>Among all partitioning methods, <strong>K-Means</strong> is the most prominent and foundational
                 algorithm covered in data mining.</p>
                 <div class="wh">
