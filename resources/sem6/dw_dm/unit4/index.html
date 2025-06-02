@@ -71,25 +71,28 @@ Data Mining Techniques
                 k-means clustering) and the hierarchical method (which builds nested clusters).</li>
         </ul>
         <div class="wh">
-            <h2>Association Rules – Finding Hidden Patterns in Data</h2>
+            <h2>Association Rules – Discovering Item Relationships in Data</h2>
 
             <ul>
-                <li>So imagine you're running a grocery store. Every day, hundreds of customers come in and buy
-                    different combinations of items.</li>
-                <li>Some buy bread and butter, some buy milk and cookies, and a few might even buy toothpaste with
-                    bananas (no judgment!).</li>
-                <li>Wouldn't it be helpful if you could figure out which items are often bought together?</li>
-                <li>That's exactly what Association Rules help with in data mining.</li>
-                <li>They're all about finding interesting relationships—or associations—between items in large datasets,
-                    especially in something like a transaction database.</li>
+                <li> Association rule mining is a data mining technique used to identify
+                    interesting relationships or patterns between items in large datasets. It aims to find rules that
+                    predict the occurrence of an item based on the occurrences of other items.
+                </li>
+                <!-- <li>
+                    <strong>Purpose:</strong> The primary goal is to discover hidden correlations, co-occurrences, or
+                    dependencies between variables in transactional or relational data.
+                </li> -->
+                <li>Association rules are widely applied in market basket
+                    analysis, where the objective is to determine which items are frequently purchased together by
+                    customers.
+                </li>
             </ul>
-            <div class="in">
-                <h3>From Transaction Databases</h3>
 
-                <ul>
-                    <li>Let's stick with the grocery store example.</li>
-                    <li>Suppose you have a database of customer purchases that looks like this:</li>
-                </ul>
+            <div class="in">
+                <h3>Association Rule Mining in Transactional Databases</h3>
+                <p>Consider a transaction database of a retail grocery store, where each transaction records a set of
+                    items purchased by a customer during a single visit.</p>
+                <p>A sample of such a database is shown below:</p>
 
                 <div class="table-wrapper">
                     <table class="new-table">
@@ -120,81 +123,372 @@ Data Mining Techniques
                     </table>
                 </div>
 
+                <p>From this dataset, we can identify recurring combinations of items. For example, customers who
+                    purchase both Bread and Milk also tend to purchase Diapers. This relationship is expressed as an
+                    <strong>association rule</strong>:
+                </p>
+                <p class="ms">\( \text{Bread} \land \text{Milk} \Rightarrow \text{Diaper} \)</p>
+
+                <p>The usefulness and strength of such a rule are measured using:</p>
                 <ul>
-                    <li>You might start seeing patterns like:</li>
-                    <li>"Customers who buy Bread and Milk also tend to buy Diapers."</li>
-                    <li>This can be written as an association rule:</li>
-                    <li>Bread + Milk → Diaper</li>
-                    <li>And to make it useful, we look at a few key measures:</li>
-                    <ul>
-                        <li>Support: How often does this combo occur?</li>
-                        <li>Confidence: When Bread and Milk are bought, how often is Diaper also bought?</li>
-                        <li>Lift: How much more likely is Diaper bought when Bread and Milk are bought, compared to
-                            random
-                            chance?</li>
-                    </ul>
-                    <li>These help us decide if a rule is truly valuable or just a coincidence.</li>
+                    <li><strong>Support</strong>: How often the itemset appears in the dataset.</li>
+                    <li><strong>Confidence</strong>: Likelihood of buying the consequent (e.g., Diaper) given the
+                        antecedent (e.g., Bread and Milk).</li>
+                    <li><strong>Lift</strong>: Indicates how much more often the consequent is bought with the
+                        antecedent than expected. Lift &gt; 1 suggests a positive association.</li>
                 </ul>
-            </div>
-            <div class="in">
-                <h3>From Relational Databases</h3>
+                <p>These metrics help determine whether a rule is meaningful or coincidental.</p>
 
+                <h3>Apriori Algorithm for Association Rule Mining</h3>
+
+                <p>Now that we understand what association rules are and how they reveal patterns in data, the next
+                    question is: <strong>How do we find these rules?</strong></p>
+                <p>That’s where the <strong>Apriori Algorithm</strong> comes in. It is a foundational technique used to
+                    automatically generate frequent itemsets and discover association rules from large datasets
+                    efficiently.</p>
+
+                <h4>Introduction</h4>
+                <p>Association Rule Mining is commonly used in <strong>Market Basket Analysis</strong> to discover
+                    patterns such as:</p>
                 <ul>
-                    <li>Now, what if the data isn't neatly organized like that?</li>
-                    <li>Sometimes, we work with relational databases—basically, databases with multiple linked tables
-                        (like
-                        Customers, Orders, Products, etc.).</li>
-                    <li>Instead of just checking what items were bought together, we might want to explore associations
-                        across different tables.</li>
-                    <li>For example:</li>
-                    <li>"Customers aged 25-34 who buy protein bars also tend to buy bottled water."</li>
-                    <li>We're now using more structured data, maybe pulling age from a Customers table and purchases
-                        from an
-                        Orders table.</li>
-                    <li>Association rules here become a bit more complex but even more powerful, since you can factor in
-                        things like age, location, or time of day.</li>
+                    <li>Which items are purchased together</li>
+                    <li>Likelihood of selling items together</li>
+                    <li>If item X is bought, how likely is item Y also bought?</li>
                 </ul>
+
+                <h4>Problem Statement</h4>
+                <p>Given transaction data, generate association rules like:</p>
+                <p class="ms">\( X \Rightarrow Y \)</p>
+                <p>This means: If X is purchased, then Y is also likely purchased.</p>
+
+                <h4>Key Parameters</h4>
+                <ul>
+                    <li><strong>Minimum Support</strong>: 50%</li>
+                    <li><strong>Minimum Confidence</strong>: 75%</li>
+                </ul>
+
+                <h4>Sample Dataset</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Items</th>
+                        </tr>
+                        <tr>
+                            <td>T1</td>
+                            <td>Bread, Butter, Milk</td>
+                        </tr>
+                        <tr>
+                            <td>T2</td>
+                            <td>Bread, Butter, Jam</td>
+                        </tr>
+                        <tr>
+                            <td>T3</td>
+                            <td>Bread, Milk, Juice</td>
+                        </tr>
+                        <tr>
+                            <td>T4</td>
+                            <td>Curd, Milk, Juice</td>
+                        </tr>
+                        <tr>
+                            <td>T5</td>
+                            <td>Bread, Butter, Milk, Juice</td>
+                        </tr>
+                    </table>
+                </div>
+                <p><strong>Total Transactions:</strong> 5</p>
+
+                <h4>Step 1: 1-Itemsets and Support</h4>
+                <p class="ms">\( \text{Support} = \left(\frac{\text{Item Count}}{\text{Total Transactions}}\right)
+                    \times 100\% \)</p>
+                <ul>
+                    <li>Bread: 4/5 = 80%</li>
+                    <li>Butter: 3/5 = 60%</li>
+                    <li>Jam: 1/5 = 20%</li>
+                    <li>Milk: 4/5 = 80%</li>
+                    <li>Juice: 3/5 = 60%</li>
+                    <li>Curd: 1/5 = 20%</li>
+                </ul>
+                <p><strong>Frequent 1-Itemsets:</strong> Bread, Butter, Milk, Juice</p>
+
+                <h4>Step 2: 2-Itemsets and Support</h4>
+                <ul>
+                    <li>{Bread, Milk}: 3/5 = 60%</li>
+                    <li>{Milk, Juice}: 3/5 = 60%</li>
+                </ul>
+                <p><strong>Frequent 2-Itemsets:</strong> {Bread, Milk}, {Milk, Juice}</p>
+
+                <h4>Step 3: 3-Itemsets</h4>
+                <p>Check {Bread, Milk, Juice}: occurs 2/5 = 40% → Not frequent</p>
+
+                <h4>Step 4: Association Rules and Confidence</h4>
+                <p class="ms">\( \text{Confidence}(X \Rightarrow Y) = \frac{\text{Support}(X \cup Y)}{\text{Support}(X)}
+                    \times 100\% \)</p>
+                <ul>
+                    <li>Bread → Milk: 60% / 80% = 75%</li>
+                    <li>Milk → Bread: 60% / 80% = 75%</li>
+                    <li>Milk → Juice: 60% / 80% = 75%</li>
+                    <li>Juice → Milk: 60% / 60% = 100%</li>
+                </ul>
+
+                <h4>Final Valid Rules (Confidence ≥ 75%)</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <tr>
+                            <th>Rule</th>
+                            <th>Confidence</th>
+                            <th>Interpretation</th>
+                        </tr>
+                        <tr>
+                            <td>Bread → Milk</td>
+                            <td>75%</td>
+                            <td>75% chance Milk is also bought with Bread</td>
+                        </tr>
+                        <tr>
+                            <td>Milk → Bread</td>
+                            <td>75%</td>
+                            <td>75% chance Bread is also bought with Milk</td>
+                        </tr>
+                        <tr>
+                            <td>Milk → Juice</td>
+                            <td>75%</td>
+                            <td>75% chance Juice is also bought with Milk</td>
+                        </tr>
+                        <tr>
+                            <td>Juice → Milk</td>
+                            <td>100%</td>
+                            <td>100% chance Milk is bought with Juice</td>
+                        </tr>
+                    </table>
+                </div>
+                <h4>Insights</h4>
+                <ul>
+                    <li><strong>Strongest Rule:</strong> Juice → Milk (100%)</li>
+                    <li><strong>Moderate Associations:</strong> Bread ↔ Milk, Milk ↔ Juice (75%)</li>
+                    <li><strong>Strategy:</strong> Bundle Milk and Juice for promotions</li>
+                </ul>
+
+                <h4>Algorithm Summary</h4>
+                <ol>
+                    <li>Find 1-itemsets → calculate support → apply threshold</li>
+                    <li>Generate k-itemsets → calculate support → filter</li>
+                    <li>Repeat until no frequent itemsets</li>
+                    <li>Generate association rules from frequent itemsets</li>
+                    <li>Calculate confidence for each rule</li>
+                    <li>Filter rules by confidence threshold</li>
+                    <li>Interpret valid rules for business use</li>
+                </ol>
+                <p>This process uncovers strong purchasing patterns and aids in data-driven decisions for retail and
+                    e-commerce.</p>
             </div>
 
+
+
             <div class="in">
-                <h3>Correlation Analysis – Are These Items Really Related?</h3>
+                <h3>Association Rule Mining in Relational Databases</h3>
 
                 <ul>
-                    <li>Okay, so we've spotted some patterns. But how do we know they're not just random flukes?</li>
-                    <li>Let's say you find this rule:</li>
-                    <li>"Toothpaste → Bananas"</li>
-                    <li>Weird, right? Just because two items are often bought together doesn't mean they're really
-                        related.
+                    <li>
+                        In many real-world scenarios, data is not stored as simple itemsets within a single
+                        table.
+                        Instead, it is often organized in the form of <strong>relational databases</strong>,
+                        which
+                        consist of multiple interconnected tables.
                     </li>
-                    <li>That's where correlation analysis comes in.</li>
-                    <li>It checks whether items are truly connected or just happen to appear together.</li>
-                    <li>This helps filter out misleading associations so that you don't make silly business decisions
-                        like
-                        placing toothpaste next to bananas (unless you're running a prank store).</li>
+                    <li>
+                        For example, a business may store customer-related data in one table
+                        (<em>Customers</em>),
+                        transaction details in another (<em>Orders</em>), and product information in a third
+                        (<em>Products</em>).
+                    </li>
+                    <li>
+                        In such cases, association rule mining can be extended beyond basic itemset analysis to
+                        discover
+                        complex patterns involving multiple attributes and relationships.
+                    </li>
+                    <li>
+                        A representative association rule derived from relational data could be:
+                        <ul>
+                            <li><strong>“Customers aged 25–34 who purchase protein bars also tend to purchase
+                                    bottled
+                                    water.”</strong></li>
+                        </ul>
+                    </li>
+                    <li>
+                        This rule incorporates structured information drawn from multiple sources: age from the
+                        <em>Customers</em> table and purchase behavior from the <em>Orders</em> table.
+                    </li>
+                    <li>
+                        As such, relational association rules are often more informative and context-aware,
+                        allowing the
+                        discovery of deeper, attribute-driven insights.
+                    </li>
+                    <li>
+                        However, these rules tend to be more complex to generate and require careful data
+                        preprocessing,
+                        including table joins, attribute selection, and normalization.
+                    </li>
                 </ul>
             </div>
 
-            <h3>Wrapping Up Association Rules</h3>
+            <div class="in">
+                <h3>Correlation Analysis – Understanding If Patterns Are Truly Related</h3>
 
-            <ul>
-                <li>So to sum it up:</li>
+                <p>
+                    In data mining, we often find patterns using association rules. These rules tell us which
+                    items are
+                    frequently bought together.
+                    However, frequent co-occurrence does not always mean a real relationship exists between the
+                    items.
+                    This is where <strong>correlation analysis</strong> comes in.
+                </p>
+
+                <h4>Why Correlation Analysis?</h4>
                 <ul>
-                    <li>Association rules help find item combinations that occur together.</li>
-                    <li>They're most commonly used in transaction databases (like market basket analysis).</li>
-                    <li>But they can also be applied in more complex relational databases.</li>
-                    <li>And with correlation analysis, we separate meaningful rules from just coincidences.</li>
+                    <li>Sometimes, rules like <strong>"Toothpaste → Bananas"</strong> appear in data. But this
+                        could
+                        just be a coincidence.</li>
+                    <li>Correlation analysis helps check whether such patterns are actually meaningful or just
+                        random.
+                    </li>
+                    <li>It measures the strength and direction of the relationship between two items or
+                        variables.</li>
+                    <li>This makes sure businesses use only useful rules for decisions like product placement or
+                        bundling offers.</li>
                 </ul>
-            </ul>
+
+                <h4>Key Types of Correlation</h4>
+                <ul>
+                    <li><strong>Positive Correlation</strong>: Both variables increase together</li>
+                    <li><strong>Negative Correlation</strong>: One increases, the other decreases</li>
+                    <li><strong>No Correlation</strong>: Variables change independently</li>
+                </ul>
+
+                <h4>Correlation Coefficient (Pearson’s r)</h4>
+                <p>
+                    The Pearson correlation coefficient (\( \gamma \) or \( r \)) tells how strongly and in what
+                    direction two variables are related.
+                </p>
+                <p class="ms">
+                    \[ \gamma(A,B) = \frac{\sum (A - \bar{A})(B - \bar{B})}{(n-1) \cdot \sigma_A \cdot \sigma_B}
+                    \]
+                </p>
+                <ul>
+                    <li>\( \bar{A} \): Mean of A</li>
+                    <li>\( \bar{B} \): Mean of B</li>
+                    <li>\( \sigma_A \), \( \sigma_B \): Standard deviations</li>
+                    <li>\( n \): Number of tuples in the data</li>
+                </ul>
+
+                <h4>Interpretation of Values</h4>
+                <table class="new-table">
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+1</td>
+                            <td>Perfect positive correlation</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>No correlation</td>
+                        </tr>
+                        <tr>
+                            <td>-1</td>
+                            <td>Perfect negative correlation</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Step-by-Step Calculation</h4>
+
+                <h4>Step 1: Calculate Means</h4>
+                <p>\( \bar{A} = \frac{\sum A}{n} \), \( \bar{B} = \frac{\sum B}{n} \)</p>
+
+                <h4>Step 2: Calculate Sample Standard Deviation</h4>
+                <p class="ms">
+                    \[ \sigma = \sqrt{\frac{\sum (x - \bar{x})^2}{n - 1}} \]
+                </p>
+
+                <h4>Step 3: Apply the Correlation Formula</h4>
+                <p>Plug in all values into the main formula for \( \gamma(A,B) \)</p>
+
+                <h4>Worked Example</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>34</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Step 1:</strong> Calculate means</p>
+                <ul>
+                    <li class="ms">\( \bar{A} = \frac{20 + 12 + 9}{3} = 13.66 \)</li>
+                    <li class="ms">\( \bar{B} = \frac{8 + 34 + 4}{3} = 15.33 \)</li>
+                </ul>
+
+                <p><strong>Step 2:</strong> Calculate standard deviations</p>
+                <p class="ms">
+                    \[ \sigma_A = \sqrt{\frac{(6.34)^2 + (-1.66)^2 + (-4.66)^2}{2}} = \sqrt{32.34} = 5.68 \]
+                    \[ \sigma_B = \sqrt{\frac{(-7.33)^2 + (18.67)^2 + (-11.33)^2}{2}} = \sqrt{265.34} = 16.28 \]
+                </p>
+
+                <p><strong>Step 3:</strong> Apply correlation formula</p>
+                <p class="ms">
+                    \[
+                    \gamma(A,B) = \frac{(6.34)(-7.33) + (-1.66)(18.67) + (-4.66)(-11.33)}{2 \cdot 5.68 \cdot
+                    16.28} \\
+                    = \frac{-46.48 - 30.99 + 52.80}{184.94} = \frac{-24.67}{184.94} \approx -0.13
+                    \]
+                </p>
+
+                <h4>Conclusion</h4>
+                <ul>
+                    <li>\( \gamma(A,B) \approx -0.13 \) suggests a weak negative correlation.</li>
+                    <li>If \( \gamma \approx -1 \), then it's a strong inverse relationship.</li>
+                </ul>
+
+                <h4>Applications in Data Mining</h4>
+                <ul>
+                    <li>Filtering out random associations from association rule mining</li>
+                    <li>Feature selection: removing redundant features</li>
+                    <li>Improving model accuracy by using only meaningful variable relationships</li>
+                </ul>
+            </div>
+
         </div>
         <div class="wh">
             <h2>Classification and Prediction – Making Smart Decisions from Data</h2>
 
             <ul>
-                <li>Alright, so we just talked about how association rules help us find patterns, like "People who buy
+                <li>Alright, so we just talked about how association rules help us find patterns, like "People who
+                    buy
                     bread and milk also buy diapers." But what if you want to predict something? Like, based on a
                     customer's previous shopping behavior, can we guess what they might buy next? Or in a medical
                     setting, can we predict if a patient has a disease based on their symptoms?</li>
-                <li>That's where Classification and Prediction come into play. These techniques help us categorize data
+                <li>That's where Classification and Prediction come into play. These techniques help us categorize
+                    data
                     into classes (classification) or predict continuous values (prediction). For now, let's focus on
                     classification using one popular method called Decision Tree Induction.</li>
             </ul>
@@ -206,7 +500,8 @@ Data Mining Techniques
                 <ul>
                     <li>A Decision Tree is a type of algorithm mainly used for classification, though it can also be
                         used for regression tasks.</li>
-                    <li>A Decision Tree helps us take decisions based on data. It breaks a large decision into smaller
+                    <li>A Decision Tree helps us take decisions based on data. It breaks a large decision into
+                        smaller
                         ones by checking attributes (conditions) step-by-step.</li>
                     <ul>
                         <li>It mimics human decision-making.</li>
@@ -239,7 +534,8 @@ Data Mining Techniques
 
                 <h4>Why Use a Decision Tree?</h4>
                 <ul>
-                    <li>When we have training data (sample data from students), we want to classify future decisions.
+                    <li>When we have training data (sample data from students), we want to classify future
+                        decisions.
                     </li>
                     <li>Based on this data, the Decision Tree model learns how to take decisions.</li>
                     <li>Example: Whether a student should go for higher studies or not can be predicted using their
@@ -276,7 +572,7 @@ Data Mining Techniques
                 <h4>Weather Example (Real-Life Decision)</h4>
                 <ul>
                     <li>Let’s take another decision-making scenario: "Should I play football today?"</li>
-                        <img src="../../images/dw23.svg" alt="" class="wb">
+                    <img src="../../images/dw23.svg" alt="" class="wb">
                     <li>Interpretation:</li>
                     <ul>
                         <li>If it's cloudy or rainy, → "Yes, go play."</li>
@@ -317,38 +613,61 @@ Data Mining Techniques
         <div class="wh">
             <h2>Clustering Techniques</h2>
             <ul>
-                <li>Clustering is a fundamental technique in data mining that aims to group a set of data objects into clusters, such that objects within the same cluster are more similar to each other than to those in other clusters. It is considered an unsupervised learning method because it does not rely on predefined class labels; instead, the algorithm discovers inherent groupings in the data based on similarity measures.</li>
-                <li>In clustering, the main objective is to identify natural groupings or patterns in a dataset, enabling analysts to gain insights or simplify further processing. Unlike classification, where the outcome classes are known in advance, clustering algorithms work without prior knowledge of the data labels.</li>
+                <li>Clustering is a fundamental technique in data mining that aims to group a set of data objects
+                    into
+                    clusters, such that objects within the same cluster are more similar to each other than to those
+                    in
+                    other clusters. It is considered an unsupervised learning method because it does not rely on
+                    predefined class labels; instead, the algorithm discovers inherent groupings in the data based
+                    on
+                    similarity measures.</li>
+                <li>In clustering, the main objective is to identify natural groupings or patterns in a dataset,
+                    enabling analysts to gain insights or simplify further processing. Unlike classification, where
+                    the
+                    outcome classes are known in advance, clustering algorithms work without prior knowledge of the
+                    data
+                    labels.</li>
                 <li>Types of Clustering Methods:
                     <br>Clustering methods can be broadly classified into:
                     <ul>
                         <li><strong>Partitioning Methods: Divide data into k non-overlapping Subsets.</strong></li>
-                        <li><strong>Hierarchical Methods:</strong> Create a tree-like structure (dendogram) of nested clusters.</li>
+                        <li><strong>Hierarchical Methods:</strong> Create a tree-like structure (dendogram) of
+                            nested
+                            clusters.</li>
                     </ul>
                 </li>
             </ul>
             <div class="in">
                 <h3>Partition Method</h3>
-                <p>Partition methods construct <strong>k partitions (clusters)</strong> of the data, where each data point belongs to exactly one cluster. The goal is to find the optimal grouping of data points such that:
+                <p>Partition methods construct <strong>k partitions (clusters)</strong> of the data, where each data
+                    point belongs to exactly one cluster. The goal is to find the optimal grouping of data points
+                    such
+                    that:
                 <ul>
-                    <li>Each group (cluster) is internally cohesive (data points in the dame group are similar),</li>
+                    <li>Each group (cluster) is internally cohesive (data points in the dame group are similar),
+                    </li>
                     <li>And extternally separated (data points in different groups are dissimilar).</li>
-                </ul>Among all partitioning methods, <strong>K-Means</strong> is the most prominent and foundational algorithm covered in data mining.</p>
+                </ul>Among all partitioning methods, <strong>K-Means</strong> is the most prominent and foundational
+                algorithm covered in data mining.</p>
                 <div class="wh">
                     <h3>K-Means Clustering</h3>
                     <p>
-                        K-Means is one of the most popular unsupervised learning algorithms used to group similar data
-                        points into clusters. It is mainly used in clustering problems where we don't have labeled data. The
+                        K-Means is one of the most popular unsupervised learning algorithms used to group similar
+                        data
+                        points into clusters. It is mainly used in clustering problems where we don't have labeled
+                        data.
+                        The
                         goal is to divide the data into <strong>K</strong> groups (clusters) based on similarity.
                     </p>
-    
+
                     <h4>Key Concepts</h4>
                     <ul>
                         <li><strong>Centroid:</strong> The center of a cluster.</li>
                         <li><strong>K:</strong> Number of clusters we want to form.</li>
-                        <li><strong>Euclidean Distance:</strong> The distance between a data point and a centroid.</li>
+                        <li><strong>Euclidean Distance:</strong> The distance between a data point and a centroid.
+                        </li>
                     </ul>
-    
+
                     <h4>How K-Means Works (Incremental Method)</h4>
                     <ul>
                         <li>Step 1: Choose the number of clusters K.</li>
@@ -356,18 +675,20 @@ Data Mining Techniques
                         <li>Step 3: Go through each data point one by one:</li>
                         <ul>
                             <li>Assign it to the nearest centroid (based on distance).</li>
-                            <li><strong>Immediately update</strong> the centroid of that cluster using the mean of current
+                            <li><strong>Immediately update</strong> the centroid of that cluster using the mean of
+                                current
                                 members.</li>
                         </ul>
                         <li>Step 4: Repeat this for all points. Optionally loop again if needed.</li>
                     </ul>
                     <h4>Distance Formula (1D)</h4>
-                    <p>When using just one feature like Shoe Size, distance between two points is the absolute difference:
+                    <p>When using just one feature like Shoe Size, distance between two points is the absolute
+                        difference:
                     </p>
                     <p class="ms">
                         \( d = |x_2 - x_1| \)
                     </p>
-    
+
                     <h4>Example Dataset</h4>
                     <p>Consider the following dataset of clients and their shoe sizes:</p>
                     <div class="table-wrapper">
@@ -410,7 +731,7 @@ Data Mining Techniques
                             </tbody>
                         </table>
                     </div>
-    
+
                     <h4>K-Means (K = 2)</h4>
                     <ul>
                         <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
@@ -421,9 +742,9 @@ Data Mining Techniques
                         </ul>
                         <img src="../../images/ml12.svg" alt="" class="wb">
                     </ul>
-    
+
                     <h4>Step-by-Step Assignment & Updating</h4>
-    
+
                     <ul>
                         <li><strong>Point Charlie = 7:</strong></li>
                         <ul>
@@ -433,7 +754,7 @@ Data Mining Techniques
                             <li>Update Centroid A = Average of (6, 7) = 6.5</li>
                             <img src="../../images/ml13.svg" alt="" class="wb">
                         </ul>
-    
+
                         <li><strong>Point Diana = 5:</strong></li>
                         <ul>
                             <li>Distance to A = |5 - 6.5| = 1.5</li>
@@ -442,7 +763,7 @@ Data Mining Techniques
                             <li>Update Centroid A = Average of (6, 7, 5) = 6</li>
                             <img src="../../images/ml14.svg" alt="" class="wb">
                         </ul>
-    
+
                         <li><strong>Point Edward = 8:</strong></li>
                         <ul>
                             <li>Distance to A = |8 - 6| = 2</li>
@@ -451,7 +772,7 @@ Data Mining Techniques
                             <li>Update Centroid B = Average of (9, 8) = 8.5</li>
                             <img src="../../images/ml15.svg" alt="" class="wb">
                         </ul>
-    
+
                         <li><strong>Point Fiona = 10:</strong></li>
                         <ul>
                             <li>Distance to A = |10 - 6| = 4</li>
@@ -460,7 +781,7 @@ Data Mining Techniques
                             <li>Update Centroid B = Average of (9, 8, 10) = 9</li>
                             <img src="../../images/ml16.svg" alt="" class="wb">
                         </ul>
-    
+
                         <li><strong>Point George = 11:</strong></li>
                         <ul>
                             <li>Distance to A = |11 - 6| = 5</li>
@@ -470,21 +791,23 @@ Data Mining Techniques
                             <img src="../../images/ml17.svg" alt="" class="wb">
                         </ul>
                     </ul>
-    
+
                     <h4>Final Clusters (After All Points)</h4>
                     <ul>
                         <li>Cluster A (Centroid ≈ 6): Alice, Charlie, Diana</li>
                         <li>Cluster B (Centroid ≈ 9.5): Bob, Edward, Fiona, George</li>
                     </ul>
-    
-    
+
+
                     <h4>Euclidean Distance Formula</h4>
-                    <p>This formula is used to measure how far two points are from each other in a 2D space (like age and
+                    <p>This formula is used to measure how far two points are from each other in a 2D space (like
+                        age
+                        and
                         amount):</p>
                     <p class="ms">
                         \( d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \)
                     </p>
-    
+
                     <h4>Example Dataset</h4>
                     <p>Let’s consider the following dataset:</p>
                     <div class="table-wrapper">
@@ -535,7 +858,7 @@ Data Mining Techniques
                             </tbody>
                         </table>
                     </div>
-    
+
                     <h4>K-Means (K = 2)</h4>
                     <ul>
                         <li>Step 1: Choose K = 2 (we want 2 clusters).</li>
@@ -545,57 +868,68 @@ Data Mining Techniques
                             <li>Centroid B = C2 = (40, 1000)</li>
                         </ul>
                     </ul>
-    
+
                     <h4>Step-by-Step Assignment & Updating</h4>
-    
+
                     <ul>
                         <li><strong>Point C3 = (30, 800):</strong></li>
                         <ul>
                             <li>Distance to A = √((30 - 20)² + (800 - 500)²) = √(100 + 90000) = √90100 ≈ 300.17</li>
-                            <li>Distance to B = √((30 - 40)² + (800 - 1000)²) = √(100 + 40000) = √40100 ≈ 200.25</li>
+                            <li>Distance to B = √((30 - 40)² + (800 - 1000)²) = √(100 + 40000) = √40100 ≈ 200.25
+                            </li>
                             <li>→ Assign to Cluster B</li>
                             <li>Update Centroid B = Average of (40,1000) and (30,800) = (35, 900)</li>
                         </ul>
-    
+
                         <li><strong>Point C4 = (18, 300):</strong></li>
                         <ul>
                             <li>Distance to A = √((18 - 20)² + (300 - 500)²) = √(4 + 40000) = √40004 ≈ 200.01</li>
-                            <li>Distance to B = √((18 - 35)² + (300 - 900)²) = √(289 + 360000) = √360289 ≈ 600.24</li>
+                            <li>Distance to B = √((18 - 35)² + (300 - 900)²) = √(289 + 360000) = √360289 ≈ 600.24
+                            </li>
                             <li>→ Assign to Cluster A</li>
                             <li>Update Centroid A = Average of (20,500) and (18,300) = (19, 400)</li>
                         </ul>
-    
+
                         <li><strong>Point C5 = (28, 1200):</strong></li>
                         <ul>
-                            <li>Distance to A = √((28 - 19)² + (1200 - 400)²) = √(81 + 640000) = √640081 ≈ 800.05</li>
+                            <li>Distance to A = √((28 - 19)² + (1200 - 400)²) = √(81 + 640000) = √640081 ≈ 800.05
+                            </li>
                             <li>Distance to B = √((28 - 35)² + (1200 - 900)²) = √(49 + 90000) = √90049 ≈ 300.08</li>
                             <li>→ Assign to Cluster B</li>
                             <li>Update Centroid B = Avg of (40,1000), (30,800), (28,1200) = (32.67, 1000)</li>
                         </ul>
-    
+
                         <li><strong>Point C6 = (35, 1400):</strong></li>
                         <ul>
-                            <li>Distance to A = √((35 - 19)² + (1400 - 400)²) = √(256 + 1000000) = √1000256 ≈ 1000.13</li>
-                            <li>Distance to B = √((35 - 32.67)² + (1400 - 1000)²) = √(5.45 + 160000) = √160005.45 ≈ 400.01
+                            <li>Distance to A = √((35 - 19)² + (1400 - 400)²) = √(256 + 1000000) = √1000256 ≈
+                                1000.13
+                            </li>
+                            <li>Distance to B = √((35 - 32.67)² + (1400 - 1000)²) = √(5.45 + 160000) = √160005.45 ≈
+                                400.01
                             </li>
                             <li>→ Assign to Cluster B</li>
                             <li>Update Centroid B = Avg of C2, C3, C5, C6 = (40+30+28+35)/4 = 133/4 = 33.25 and
                                 (1000+800+1200+1400)/4 = 4400/4 = 1100</li>
                             <li>→ New Centroid B = (33.25, 1100)</li>
                         </ul>
-    
+
                         <li><strong>Point C7 = (45, 1800):</strong></li>
                         <ul>
-                            <li>Distance to A = √((45 - 19)² + (1800 - 400)²) = √(676 + 1960000) = √1960676 ≈ 1400.24</li>
-                            <li>Distance to B = √((45 - 33.25)² + (1800 - 1100)²) = √(138.06 + 490000) = √490138.06 ≈ 700.10
+                            <li>Distance to A = √((45 - 19)² + (1800 - 400)²) = √(676 + 1960000) = √1960676 ≈
+                                1400.24
+                            </li>
+                            <li>Distance to B = √((45 - 33.25)² + (1800 - 1100)²) = √(138.06 + 490000) = √490138.06
+                                ≈
+                                700.10
                             </li>
                             <li>→ Assign to Cluster B</li>
-                            <li>Update Centroid B = Avg of C2, C3, C5, C6, C7 = (40+30+28+35+45)/5 = 178/5 = 35.6 and
+                            <li>Update Centroid B = Avg of C2, C3, C5, C6, C7 = (40+30+28+35+45)/5 = 178/5 = 35.6
+                                and
                                 (1000+800+1200+1400+1800)/5 = 6200/5 = 1240</li>
                             <li>→ Final Centroid B = (35.6, 1240)</li>
                         </ul>
                     </ul>
-    
+
                     <h4>Final Clusters (After All Points)</h4>
                     <ul>
                         <li>Cluster A (Centroid ≈ 19, 400): C1, C4</li>
@@ -614,17 +948,21 @@ Data Mining Techniques
 
                 <h4>Types of Hierarchical Clustering</h4>
                 <ul>
-                    <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and keep
+                    <li><strong>Agglomerative (Bottom-Up):</strong> Start with each point as its own cluster, and
+                        keep
                         merging the closest pairs until one cluster remains.</li>
-                    <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep splitting
+                    <li><strong>Divisive (Top-Down):</strong> Start with all points in one cluster, and keep
+                        splitting
                         it into smaller clusters.</li>
                 </ul>
 
                 <h4>Distance Measurement (Linkage Methods)</h4>
                 <ul>
-                    <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two clusters.
+                    <li><strong>Single Linkage:</strong> Distance between the closest pair of points in two
+                        clusters.
                     </li>
-                    <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two clusters.
+                    <li><strong>Complete Linkage:</strong> Distance between the farthest pair of points in two
+                        clusters.
                     </li>
                     <li><strong>Average Linkage:</strong> Average of all pairwise distances between points in two
                         clusters.</li>
@@ -711,7 +1049,11 @@ Data Mining Techniques
     <div class="content-box">
         <p>Reference</p>
         <ul>
-            <li><a href="https://www.youtube.com/watch?v=mvveVcbHynE" target="_blank"> Lec-9: Introduction to Decision Tree 🌲 with Real life examples Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=mvveVcbHynE" target="_blank"> Lec-9: Introduction to
+                    Decision
+                    Tree 🌲 with Real life examples Video Lecture &neArr;</a></li>
+            <li><a href="https://www.youtube.com/watch?v=Dy9urawfXos&t=47s" target="_blank"> #13 Correlation
+                    Analysis - Pearson's Correlation Coefficient |DM| Youtube Video Lecture &neArr;</a></li>
         </ul>
     </div>
     <script type="text/javascript" async
