@@ -396,7 +396,7 @@ Data Mining Techniques
                     <li><strong>No Correlation</strong>: Variables change independently</li>
                 </ul>
 
-                <h4>Correlation Coefficient (Pearson’s r)</h4>
+                <!-- <h4>Correlation Coefficient (Pearson’s r)</h4>
                 <p>
                     The Pearson correlation coefficient (\( \gamma \) or \( r \)) tells how strongly and in what
                     direction two variables are related.
@@ -501,8 +501,302 @@ Data Mining Techniques
                 <ul>
                     <li>\( \gamma(A,B) \approx -0.13 \) suggests a weak negative correlation.</li>
                     <li>If \( \gamma \approx -1 \), then it's a strong inverse relationship.</li>
+                </ul> -->
+<h4>Correlation Coefficient (Pearson's r)</h4>
+                <p>
+                    The Pearson correlation coefficient (\( \gamma \) or \( r \)) tells how strongly and in what
+                    direction two variables are related. It measures the strength and direction of a linear relationship
+                    between two continuous variables, ranging from -1 to +1.
+                </p>
+                <p class="ms">
+                    \[ \gamma(A,B) = \frac{\sum (A - \bar{A})(B - \bar{B})}{(n-1) \cdot \sigma_A \cdot \sigma_B}
+                    \]
+                </p>
+                <ul>
+                    <li>\( \bar{A} \): Mean of A</li>
+                    <li>\( \bar{B} \): Mean of B</li>
+                    <li><span class="ms">\( \sigma_A \), \( \sigma_B \)</span>: Standard deviations</li>
+                    <li>\( n \): Number of tuples in the data</li>
+                    <li>\( (A - \bar{A}) \): Deviation of each A value from its mean</li>
+                    <li>\( (B - \bar{B}) \): Deviation of each B value from its mean</li>
                 </ul>
 
+                <h4>Interpretation of Values</h4>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Value</th>
+                                <th>Interpretation</th>
+                                <th>Strength</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>+1</td>
+                                <td>Perfect positive correlation</td>
+                                <td>Perfect</td>
+                            </tr>
+                            <tr>
+                                <td>+0.7 to +0.9</td>
+                                <td>Strong positive correlation</td>
+                                <td>Strong</td>
+                            </tr>
+                            <tr>
+                                <td>+0.3 to +0.7</td>
+                                <td>Moderate positive correlation</td>
+                                <td>Moderate</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>No correlation</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>-0.3 to -0.7</td>
+                                <td>Moderate negative correlation</td>
+                                <td>Moderate</td>
+                            </tr>
+                            <tr>
+                                <td>-0.7 to -0.9</td>
+                                <td>Strong negative correlation</td>
+                                <td>Strong</td>
+                            </tr>
+                            <tr>
+                                <td>-1</td>
+                                <td>Perfect negative correlation</td>
+                                <td>Perfect</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Step-by-Step Calculation</h4>
+
+                <h4>Step 1: Calculate Means</h4>
+                <p>First, find the average of each variable:</p>
+                <p class="ms">\( \bar{A} = \frac{\sum A}{n} = \frac{A_1 + A_2 + ... + A_n}{n} \)</p>
+                <br>
+                <p class="ms">\( \bar{B} = \frac{\sum B}{n} = \frac{B_1 + B_2 + ... + B_n}{n} \)</p>
+
+                <h4>Step 2: Calculate Deviations from Mean</h4>
+                <p>For each data point, calculate how far it is from the mean:</p>
+                <p>For A: \( d_{A_i} = A_i - \bar{A} \)</p>
+                <p>For B: \( d_{B_i} = B_i - \bar{B} \)</p>
+                <p>Some deviations will be positive (above mean) and some negative (below mean).</p>
+
+                <h4>Step 3: Calculate Sample Standard Deviation</h4>
+                <p>Calculate the standard deviation for each variable:</p>
+                <p class="ms">
+                    \[ \sigma_A = \sqrt{\frac{\sum (A - \bar{A})^2}{n - 1}} \]
+                </p>
+                <br>
+                <p class="ms">
+                    \[\sigma_A = \sqrt{\frac{(A_1 - \bar{A})^2 + (A_2 - \bar{A})^2 + ... + (A_n - \bar{A})^2}{n - 1}} \]
+                </p>
+                <br>
+                <p class="ms">
+                    \[ \sigma_B = \sqrt{\frac{\sum (B - \bar{B})^2}{n - 1}}  \]
+                </p>
+                <br>
+                <p class="ms">
+                    \[ \sigma_B = \sqrt{\frac{(B_1 - \bar{B})^2 + (B_2 - \bar{B})^2 + ... + (B_n - \bar{B})^2}{n - 1}} \]
+                </p>
+                <p><strong>Note:</strong> We use (n-1) instead of n for sample standard deviation (Bessel's correction).</p>
+
+                <h4>Step 4: Calculate the Numerator (Sum of Products of Deviations)</h4>
+                <p>Calculate the sum of products of deviations (this measures covariance):</p>
+                <p class="ms">
+                    \[ \text{Numerator} = \sum (A - \bar{A})(B - \bar{B}) = (A_1 - \bar{A})(B_1 - \bar{B}) + (A_2 - \bar{A})(B_2 - \bar{B}) + ... + (A_n - \bar{A})(B_n - \bar{B}) \]
+                </p>
+
+                <h4>Step 5: Apply the Correlation Formula</h4>
+                <p>Plug in all calculated values into the main formula:</p>
+                <p class="ms">
+                    \[ \gamma(A,B) = \frac{\text{Numerator}}{(n-1) \cdot \sigma_A \cdot \sigma_B} \]
+                </p>
+
+                <h4>Worked Example</h4>
+                <p><strong>Given Data:</strong></p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Point</th>
+                                <th>A</th>
+                                <th>B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>20</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>12</td>
+                                <td>34</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Step 1:</strong> Calculate means</p>
+                <ul>
+                    <li class="ms">\( \bar{A} = \frac{20 + 12 + 9}{3} = \frac{41}{3} = 13.67 \)</li> <br>
+                    <li class="ms">\( \bar{B} = \frac{8 + 34 + 4}{3} = \frac{46}{3} = 15.33 \)</li>
+                </ul>
+
+                <p><strong>Step 2:</strong> Calculate deviations from mean</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Point</th>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>\(A - \bar{A}\)</th>
+                                <th>\(B - \bar{B}\)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>20 - 13.67 = 6.33</td>
+                                <td>8 - 15.33 = -7.33</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>12</td>
+                                <td>34</td>
+                                <td>12 - 13.67 = -1.67</td>
+                                <td>34 - 15.33 = 18.67</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>4</td>
+                                <td>9 - 13.67 = -4.67</td>
+                                <td>4 - 15.33 = -11.33</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Step 3:</strong> Calculate standard deviations</p>
+                <p>First, calculate squared deviations:</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Point</th>
+                                <th>\((A - \bar{A})^2\)</th>
+                                <th>\((B - \bar{B})^2\)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>\((6.33)^2 = 40.07\)</td>
+                                <td>\((-7.33)^2 = 53.73\)</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>\((-1.67)^2 = 2.79\)</td>
+                                <td>\((18.67)^2 = 348.57\)</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>\((-4.67)^2 = 21.81\)</td>
+                                <td>\((-11.33)^2 = 128.37\)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sum</strong></td>
+                                <td><strong>64.67</strong></td>
+                                <td><strong>530.67</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Now calculate standard deviations:</p>
+                <p class="ms">
+                    \[ \sigma_A = \sqrt{\frac{64.67}{3-1}} = \sqrt{\frac{64.67}{2}} = \sqrt{32.34} = 5.69 \]
+                </p>
+                <br>
+                <p class="ms">
+                    \[ \sigma_B = \sqrt{\frac{530.67}{3-1}} = \sqrt{\frac{530.67}{2}} = \sqrt{265.34} = 16.29 \]
+                </p>
+
+                <p><strong>Step 4:</strong> Calculate products of deviations</p>
+                <div class="table-wrapper">
+                    <table class="new-table">
+                        <thead>
+                            <tr>
+                                <th>Point</th>
+                                <th>\((A - \bar{A})\)</th>
+                                <th>\((B - \bar{B})\)</th>
+                                <th>\((A - \bar{A})(B - \bar{B})\)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>6.33</td>
+                                <td>-7.33</td>
+                                <td>\((6.33)(-7.33) = -46.40\)</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-1.67</td>
+                                <td>18.67</td>
+                                <td>\((-1.67)(18.67) = -31.16\)</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>-4.67</td>
+                                <td>-11.33</td>
+                                <td>\((-4.67)(-11.33) = 52.91\)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sum</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>-24.65</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Step 5:</strong> Apply correlation formula</p>
+                <p class="ms">
+                    \[
+                    \gamma(A,B) = \frac{-24.65}{(3-1) \cdot 5.69 \cdot 16.29}
+                    \]
+                </p>
+                <p class="ms">
+                    \[
+                    = \frac{-24.65}{2 \cdot 5.69 \cdot 16.29} = \frac{-24.65}{185.38} = -0.133
+                    \]
+                </p>
+
+                <h4>Conclusion</h4>
+                <ul>
+                    <li>\( \gamma(A,B) \approx -0.13 \) suggests a weak negative correlation.</li>
+                    <li>The negative sign indicates that as A increases, B tends to decrease slightly.</li>
+                    <li>The magnitude (0.13) is close to 0, indicating a very weak linear relationship.</li>
+                    <li>Only about 1.7% of the variation in B can be explained by A (r² = 0.13² = 0.017).</li>
+                    <li>If \( \gamma \approx -1 \), then it's a strong inverse relationship.</li>
+                    <li>If \( \gamma \approx +1 \), then it's a strong positive relationship.</li>
+                </ul>
                 <h4>Applications in Data Mining</h4>
                 <ul>
                     <li>Filtering out random associations from association rule mining</li>
