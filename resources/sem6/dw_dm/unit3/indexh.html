@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Data Mining</title>
+    <link rel="stylesheet" href="../../../../public/style.css">
+    <link rel="icon" href="../../../../public/logo/favicon_io/favicon.ico">
+    <link rel="stylesheet" id="highlightStylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tomorrow-night-blue.min.css">
+</head>
+
+<body class="bg-c">
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="../index.html" class="home">back</a>
+        <div class="fix-column-links">
+            <a href="#t1" class="link">Basic Concepts of Data Mining</a>
+            <a href="#t2" class="link">Data Mining Query Languages (DMQLs)</a>
+            <a href="#t3" class="link">Data Mining Primitives</a>
+            <a href="#t4" class="link">Architectures of Data Mining Systems</a>
+            <div class="botbut">
+                <a href="../unit4/index.html" class="link">Next Topic &rarr;</a>
+                <a href="../unit2/index.html" class="link">&larr; Previous Topic</a>
+            </div>
+        </div>
+    </div>
+    <div id="navbar" class="grad">
+        <div>
+            <div class="openbtn" onclick="openNav()">
+                <div id="nav-icon1" for="nav-menu1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Introduction to Data Mining</h2>
+        </div>
+    </div>
+    <div class="content-box">
+        <pre>
+            <code>
+Introduction to Data Mining
+|
+├── 1. Basic Concepts of Data Mining
+│   ├── What is Data Mining?
+│   ├── Knowledge Discovery in Databases (KDD) vs. Data Mining
+│   ├── Data Mining Tools and Applications
+│
+├── 2. Data Mining Primitives
+│   ├── Task-Relevant Data
+│   ├── Mining Objectives
+│   ├── Measures and Identification of Patterns
+│
+├── 3. Data Mining Query Languages
+│   ├── Data Specification
+│   ├── Specifying Kind of Knowledge
+│   ├── Hierarchy Specification
+│   ├── Pattern Presentation and Visualization Specification
+│   ├── Data Mining Languages
+│   └── Standardization of Data Mining
+│
+└── 4. Architectures of Data Mining Systems
+            </code>
+        </pre>
+        <ul>
+            <li>When we talk about Data Mining, we're basically talking about digging through huge amounts of data to
+                find useful patterns, trends, or knowledge — sort of like finding gold in a mountain of rocks. This unit
+                sets the stage by introducing you to the core ideas behind data mining and how it fits into the bigger
+                picture of data analysis and business intelligence.</li>
+            <li>We begin with the basic concepts, including what data mining really means, how it's different from (yet
+                related to) KDD (Knowledge Discovery in Databases), and where it's used — from market research to fraud
+                detection. Then we move into data mining primitives, which are like building blocks that help define
+                what kind of patterns we want to find, what data is relevant, and how we measure our findings.</li>
+            <li>Next, we explore data mining query languages, which allow us to express what kind of patterns we're
+                interested in — whether it’s through specifying data, the kind of knowledge we want, how results should
+                be visualized, or setting up hierarchies and structures. Finally, the unit wraps up with the
+                architecture of data mining systems, explaining how everything works together behind the scenes — from
+                data input to pattern output.</li>
+        </ul>
+        <div id="t1" class="wh">
+    <h2>1. Basic Concepts of Data Mining</h2>
+    <div class="in">
+        <h3>What is Data Mining?</h3>
+        <ul>
+            <li>Data mining ka matlab hota hai bade data ke pile me se kaam ki cheezein ya hidden patterns dhoondhna. Isse hume numbers ke peeche ka asli scene samajhne mein madad milti hai—jaise trends, similarities, ya koi ajeeb baat jo normal nahi lagti. Ye ek smart tool ki tarah hota hai jo maths aur algorithms ka use karke boring raw data ko useful info mein badal deta hai taaki hum better decisions le sakein.</li>
+            <li>Data mining ek smart process hai jisme hum large data sets se useful patterns, relationships, ya unusual behavior nikaalte hain. Isme statistics, machine learning, aur database techniques ka mix use hota hai. Common methods mein classification (data ko group karna), clustering (similar items dhoondhna), regression (values predict karna), aur association rule mining (jaise "X lene wale log aksar Y bhi lete hain") shamil hain.
+                <ul>
+                    <li>Mining start karne se pehle data ko clean aur prepare kiya jaata hai. Phir different algorithms lagaye jaate hain uspar. Ye process baar-baar repeat hota hai—tweaks aur validation ke saath—taaki jo insights milein wo sahi bhi ho aur real life mein kaam bhi aayein.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="in">
+        <h3>KDD vs. Data Mining</h3>
+        <ul>
+            <li>Knowledge Discovery in Databases (KDD) ek complete process hai jisme raw data se kaam ki knowledge nikali jaati hai—data prepare karne se lekar pattern ko samajhne tak. Data mining uska ek important part hai jisme algorithms lagake patterns dhoondhe jaate hain prepared data se. KDD ek badi process hai aur data mining uska main step.</li>
+            <li>KDD ke main 5 steps hote hain: data selection, preprocessing, transformation, data mining, aur interpretation/evaluation. Pehle hum data choose karte hain, phir usko clean karte hain (missing values hataake, noise hataake), uske baad usko sahi format mein badalte hain. Data mining mein patterns dhoondhe jaate hain, aur last mein results check kiye jaate hain ki wo useful hain ya nahi.</li>
+            <li>Data mining mainly algorithms ka part hota hai jisme classification, clustering, association rule mining, aur outlier detection use hote hain. Ye sab transformed data par apply hote hain taaki hidden patterns ya correlations mil sakein. Data mining sirf patterns nikaalta hai, jabki KDD poora pipeline cover karta hai raw data se lekar final useful result tak.</li>
+            <li><strong>KDD aur data mining ke beech main differences:</strong>
+                <ul>
+                    <li>Scope: KDD poori knowledge extraction process hai, jabki data mining sirf pattern discovery pe focus karta hai</li>
+                    <li>Input: KDD raw data se shuru hota hai, data mining prepared data pe kaam karta hai</li>
+                    <li>Output: KDD se actionable knowledge milta hai, data mining se patterns ya models nikalte hain</li>
+                    <li>Techniques: KDD mein data management aur statistical methods bhi use hote hain, data mining mainly algorithms pe based hota hai</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="in">
+        <h3>Data Mining Tools</h3>
+        <p>Data mining tools aise software hote hain jo data mining techniques ko easy aur fast banate hain. Ye tools help karte hain data clean karne, algorithms run karne, aur results show karne mein. Kuch common tools ye hain:</p>
+        <ul>
+            <li>Python/R libraries (jaise scikit-learn, TensorFlow, dplyr) custom algorithms banane ke liye</li>
+            <li>Weka: machine learning aur prediction modeling ke liye</li>
+            <li>RapidMiner: drag-and-drop style data mining ke liye</li>
+            <li>KNIME: visual programming aur analytics ke liye</li>
+            <li>SQL-based tools (jaise Microsoft SQL Server Analysis Services) jo databases ke sath directly kaam karte hain</li>
+        </ul>
+        <p>In tools se aap data cleaning, feature selection, model training, aur performance check kar sakte ho. Inme classification, clustering aur association jaise kaafi built-in algorithms hote hain, jisse coding ka kaam kam ho jaata hai.</p>
+    </div>
+    <div class="in">
+        <h3>Applications of Data Mining</h3>
+        <p>Data mining alag-alag areas mein use hoti hai taaki tough problems solve kiye jaa sakein aur processes better ho sakein. Main uses yeh hain:</p>
+        <ul>
+            <li>Business Intelligence: market basket analysis, customer groups banana, aur churn (customer lose hone) ka prediction</li>
+            <li>Healthcare: disease patterns samajhna, drug ki effectiveness dekhna, aur patient risk analyze karna</li>
+            <li>Finance: fraud pakadna, credit score banana, aur stock market trends dekhna</li>
+            <li>Manufacturing: machines ki maintenance predict karna, quality control aur supply chain better banana</li>
+            <li>Research: scientific data ka analysis, hypothesis test karna, aur nayi knowledge nikaalna</li>
+        </ul>
+        <p>In sab mein, data mining techniques purane ya live data ko analyze karke aise insights nikaalte hain jo decision making mein help karte hain. Method ka choice problem ke type pe depend karta hai—labeled data ke liye supervised learning, unlabeled ke liye unsupervised, aur step-by-step decisions ke liye reinforcement learning. Final results ko accuracy, precision ya F1-score jaise metrics se check kiya jaata hai taaki reliable ho.</p>
+        <ul>
+            <li>Data mining jab big data tools (jaise Hadoop, Spark) ke sath milti hai to bade-bade data sets bhi fast process ho jaate hain. Isse text, images, aur sensor data jaise alag data types ko bhi handle kiya ja sakta hai.</li>
+            <li>Data mining ab deep learning aur AutoML ke sath aur smart hoti ja rahi hai—model choose karne aur tuning mein ab zyada manual kaam nahi karna padta. Lekin data privacy, algorithm bias, aur explain kar paana ab bhi important challenges hain.</li>
+        </ul>
+    </div>
+</div>
+
+        <div id="t2" class="wh">
+    <h2>2. Data Mining Query Languages (DMQLs)</h2>
+
+    <div class="in">
+        <h3>What Are Data Mining Query Languages?</h3>
+        <p>Chalo ek simple sawaal se shuru karte hain:</p>
+        <p>Aap data mining system se baat kaise karoge? Kaise bataoge ki kaunsa pattern dhoondhna hai?</p>
+        <p>Jaise hum databases se baat karne ke liye SQL use karte hain, waise hi data mining systems se baat karne ke liye Data Mining Query Languages (DMQLs) use hoti hain. Ye ek proper way deti hain yeh batane ke liye ki:</p>
+        <ul>
+            <li>Kaunsa data analyze karna hai</li>
+            <li>Kaunsa pattern dhoondhna hai</li>
+            <li>Agar koi hierarchy ya levels hain to wo kya hain</li>
+            <li>Results kaise dikhne chahiye</li>
+        </ul>
+        <p>DMQLs help karti hain raw data ko samajhne layak knowledge mein badalne mein.</p>
+    </div>
+
+    <h3>Components of Data Mining Query Languages</h3>
+
+    <div class="in">
+        <h4>1. Data Specification</h4>
+        <p>Iska matlab: Aapko batana hota hai ki kaunsa dataset, kaunsi table ya kaunsi columns pe aapko data mining karni hai.</p>
+        <p>Example (technical):</p>
+        <pre>
+            <code>
+USE sales_data;
+SELECT * FROM transactions
+WHERE region = 'North';
+            </code>
+        </pre>
+        <p>Iska importance: Ho sakta hai aapke paas 50 tables ho, lekin aap sirf North region ke transactions pe kaam karna chahte ho. Toh ye step help karta hai exact data filter karne mein.</p>
+    </div>
+
+    <div class="in">
+        <h4>2. Specifying Kind of Knowledge to Be Mined</h4>
+        <p>Iska matlab: Aapko define karna hota hai ki aapko kis type ka pattern ya knowledge chahiye. Ye ho sakta hai:</p>
+        <img src="../../images/dw18.svg" class="wb" alt="">
+        <p>Example (DMQL-style):</p>
+        <pre>
+            <code>
+MINE CLASSIFICATION_RULES
+FROM customer_data
+FOR customer_type
+BASED ON age, income, location;
+            </code>
+        </pre>
+    </div>
+
+    <div class="in">
+        <h4>3. Hierarchy Specification</h4>
+        <p>Iska matlab: Jab aapke data mein multiple levels ya hierarchy ho (jaise city, state, country), to aap define kar sakte ho ki kis level pe patterns chahiye.</p>
+        <p>Ye kaafi useful hota hai, jaise:</p>
+        <ul>
+            <li>Product → Category → Department</li>
+            <li>Location → City → State → Country</li>
+        </ul>
+        <p>Aap decide kar sakte ho ki city ke jagah state level pe patterns chahiye.</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+DEFINE HIERARCHY location_hierarchy AS
+(location < city < state < country);
+            </code>
+        </pre>
+        <p>Ab aap aise queries kar sakte ho:</p>
+        <ul>
+            <li>"State wise top-selling product categories batao."</li>
+        </ul>
+    </div>
+
+    <div class="in">
+        <h4>4. Pattern Presentation & Visualization Specification</h4>
+        <p>Iska matlab: Aap system ko batate ho ki mined results kaise dikhne chahiye.</p>
+        <p>Iski zarurat isliye hai kyunki raw results boring ya confusing ho sakte hain. Aap bol sakte ho:</p>
+        <ul>
+            <li>Rules (jaise "Agar age > 25 hai, to insurance leta hai")</li>
+            <li>Tables</li>
+            <li>Charts (bar, pie, scatter)</li>
+            <li>Decision trees</li>
+            <li>Cluster graphs</li>
+        </ul>
+        <p>Example:</p>
+        <pre>
+            <code>
+SHOW RESULTS AS decision_tree;
+            </code>
+        </pre>
+        <p>Isse decision-makers ke liye results samajhna easy ho jaata hai.</p>
+    </div>
+
+    <div class="in">
+        <h4>5. Data Mining Languages (Actual DMQL Syntax)</h4>
+        <p>Yeh real language ya syntax hoti hai jisse aap mining queries likhte ho. Kuch common languages hain:</p>
+        <img src="../../images/dw19.svg" class="wb" alt="">
+        <p>Ek basic DMQL query kuch aise lag sakti hai:</p>
+        <pre>
+            <code>
+USE sales_data;
+MINE association_rules
+FROM transactions
+FOR item
+BASED ON item_list
+WITH support ≥ 0.2, confidence ≥ 0.6;
+            </code>
+        </pre>
+        <p>Iska matlab system ko yeh batana ki aise rules dhoondo jisme support aur confidence ki value specified limit se zyada ho.</p>
+    </div>
+
+    <div class="in">
+        <h4>6. Standardization of Data Mining</h4>
+        <p>Iska matlab: Har tool apna alag syntax use karta hai, jiski wajah se compatibility problems hoti hain.</p>
+        <p>Goal yeh hai: Ek standard language ya format banana jo sabhi platforms pe kaam kare—jaise SQL har database ke liye standard hai.</p>
+        <p>Kuch organizations jo is pe kaam karte hain:</p>
+        <ul>
+            <li>ISO (International Organization for Standardization)</li>
+            <li>DMG (Data Mining Group) – Inhone PMML (Predictive Model Markup Language) banaya</li>
+            <li>W3C – Data exchange formats ko promote karta hai</li>
+        </ul>
+        <p>Importance: Socho aapne ek model Oracle mein banaya aur usko Python ya Excel mein use karna hai—toh standardization se ye possible hota hai.</p>
+    </div>
+</div>
+
+        <div id="t3" class="wh">
+    <h2>3. Data Mining Primitives</h2>
+
+    <div class="in">
+        <h3>First Things First — What Are Data Mining Primitives?</h3>
+        <p>Socho aap pizza order kar rahe ho. Aapko batana padega:</p>
+        <ul>
+            <li>Kaunsi type ki pizza chahiye</li>
+            <li>Kahan deliver karna hai</li>
+            <li>Size kya hona chahiye</li>
+            <li>Kitna spicy ya cheesy ho</li>
+        </ul>
+        <p>Data mining mein bhi kuch aisa hi hota hai. Aap system ko batate ho ki kaunsa data analyze karna hai, kya dhoondhna hai, aur kaise result judge karna hai. Ye basic instructions hi kehlate hain Data Mining Primitives.</p>
+        <p>Toh simple words mein:</p>
+        <ul>
+            <li>Data mining primitives basic blocks hote hain jo help karte hain mining task ko clearly define karne mein.</li>
+        </ul>
+        <p>Ye batate hain ki kya data mine karna hai, kaunsa pattern dhoondhna hai, kaise unhe judge karna hai, aur kaise present karna hai.</p>
+    </div>
+
+    <h3>Let's Explore Each Part of Data Mining Primitives</h3>
+
+    <div class="in">
+        <h4>1. Task-Relevant Data</h4>
+        <p>Basic Idea:</p>
+        <p>Iska simple matlab: Hume kaunsa data chahiye?</p>
+        <p>Har data useful nahi hota. Mining se pehle hume decide karna padta hai ki kaunsi table, columns ya condition lagani hai — jaise sirf 10th class ke students ke marks analyze karna ho.</p>
+        <p>Technical Explanation:</p>
+        <p>Task-relevant data ka matlab hota hai data ka wo part jo mining ke liye useful hai. Isme shamil ho sakta hai:</p>
+        <ul>
+            <li>Khaas table (jaise sales)</li>
+            <li>Important columns (jaise product_name, region, revenue)</li>
+            <li>Filter lagana (jaise WHERE year = 2024)</li>
+        </ul>
+        <p>Example:</p>
+        <pre>
+            <code>
+SELECT product_name, region, revenue
+FROM sales
+WHERE year = 2024;
+            </code>
+        </pre>
+        <p>Yani aap system ko keh rahe ho: "Sirf ye part analyze karo, poora data nahi."</p>
+    </div>
+
+    <div class="in">
+        <h4>2. Mining Objectives</h4>
+        <p>Basic Idea:</p>
+        <p>Ab jab hume pata hai kaunsa data dekhna hai, to ab decide karna hai ki us data se kya dhoondhna hai.</p>
+        <p>Kya aap:</p>
+        <ul>
+            <li>Similar cheezein group karna chahte ho? (Clustering)</li>
+            <li>Kuch predict karna chahte ho? (Classification ya regression)</li>
+            <li>Aise patterns dhoondhna chahte ho jaise "jo log X kharidte hain, wo Y bhi lete hain"? (Association rules)</li>
+        </ul>
+        <p>Bas wahi mining objective hota hai.</p>
+        <p>Technical Explanation:</p>
+        <p>Mining objective batata hai ki hume kis type ka knowledge chahiye. Example:</p>
+        <img src="../../images/dw20.svg" alt="" class="wb">
+        <p>Example (DMQL-style):</p>
+        <pre>
+            <code>
+MINE classification_rules
+FROM customer_data
+FOR customer_type
+BASED ON age, income;
+            </code>
+        </pre>
+    </div>
+
+    <div class="in">
+        <h4>3. Measures and Identification of Patterns</h4>
+        <p>Basic Idea:</p>
+        <p>Ab pattern mil bhi gaya, to kaise pata chalega ki wo useful hai ya time waste?</p>
+        <p>Iske liye kuch measures use karte hain — jaise "sirf wahi pattern dikhao jo frequent hai ya jiska confidence zyada hai".</p>
+        <p>Socho jaise boring memes hata ke sirf spicy wale hi dikhaye jaayein 😄</p>
+        <p>Technical Explanation:</p>
+        <p>Data mining mein hum kuch values ya criteria use karte hain jaise:</p>
+        <img src="../../images/dw21.svg" alt="" class="wb">
+        <p>Example:</p>
+        <ul>
+            <li>Rule: Agar "milk" leta hai → to "bread" bhi leta hai</li>
+            <li>Support = 20%</li>
+            <li>Confidence = 80%</li>
+            <li>Lift = 1.5</li>
+        </ul>
+        <p>In values se system decide karta hai ki pattern useful hai ya bas noise hai.</p>
+    </div>
+</div>
+
+        <div id="t4" class="wh">
+    <h2>4. Architectures of Data Mining Systems</h2>
+    <ul>
+        <li>Socho aaj ke time mein har din billions GB ka data ban raha hai—videos, photos, messages, search queries, online shopping, aur bohot kuch. Ab sawaal ye hai—iss itne saare data mein se hume kaise samajh aaye ki hume kya chahiye? Kaise dhoondein useful cheezein bina confuse hue?</li>
+        <li>Yahi pe data mining ka kaam shuru hota hai. Socho jaise ek bada pahaad hai data ka, aur hume usme se chhoti chhoti kaam ki cheezein nikalni hai. Jaise aap Google pe search karte ho “best laptops under ₹50,000”, aur Google turant relevant results dikhata hai. Par yeh sab possible kaise hota hai?</li>
+        <li>Yeh koi magic nahi hai—yeh hai data mining ka result! Aur iske peeche ek poora system kaam karta hai—jo data collect karta hai, process karta hai, organise karta hai, aur fir aapko exact result deta hai. Is system ke structure ko hi hum kehte hain architecture of a data mining system.</li>
+    </ul>
+    <img class="wb" src="../../images/dw17.svg" alt="">
+    <p><strong>Data Mining System Architecture Overview</strong></p>
+    <ul>
+        <li>Data mining system ka architecture alag-alag layers mein divided hota hai, jahan har layer ka apna specific kaam hota hai. Sabse upar hota hai user interface—yahi se user query dalta hai aur result leta hai. Ye interface directly connect karta hai pattern evaluation component se, jo milne wale patterns ko check karta hai ki wo kaam ke hain ya nahi. Ye check knowledge base ke rules ke through hota hai—jo pehle se defined hoti hai.</li>
+        <li>Pattern evaluation ke neeche hota hai data mining engine—yeh core part hota hai system ka. Ye algorithms lagata hai data pe taaki patterns, relations ya predictions mil sake. Engine knowledge base se bhi connect hota hai taaki uska kaam aur accurate ho.</li>
+        <li>Data mining ke liye jo data chahiye hota hai, wo aata hai database ya data warehouse server se. Yahan pe already structured aur cleaned data stored hota hai. Iske pehle raw data ko clean, integrate aur select kiya jata hai—taaki galat ya extra data remove ho jaye, multiple sources ka data combine ho jaye, aur sirf useful data bache.</li>
+        <li>Architecture ke base mein hoti hain data sources, jisme shamil hain:
+            <ul>
+                <li>Databases jisme operational data hota hai</li>
+                <li>Data warehouses jisme purane historical records hote hain</li>
+                <li>Internet (World Wide Web) jahan se external data milta hai</li>
+                <li>Other sources jaise documents ya logs</li>
+            </ul>
+        </li>
+        <li>Data in sources se upar ki taraf flow karta hai—pehle clean aur integration layer se guzarta hai, fir database server mein jata hai, aur phir mining engine tak pahuchta hai. Jo patterns milte hain unka evaluation hota hai, fir wo result user tak pohchta hai via interface. Knowledge base evaluation aur mining engine dono ko support karta hai, taaki accurate aur useful results milein.</li>
+        <li>Yeh layered design system ko efficient banata hai—data easily handle hota hai, processing fast hoti hai, aur result accurate milte hain. Har component ka ek fix role hota hai, aur milke yeh system raw data ko valuable knowledge mein badal deta hai.</li>
+    </ul>
+</div>
+
+    </div>
+    <div class="content-box">
+        <p>Reference</p>
+        <ul>
+            <li><a href="https://youtu.be/Wqqwk9ztr4w?si=pxt65Nz9QbV6mh9L" target="_blank">Data Mining System
+                    Architecture video lecture &neArr;</a></li>
+        </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script type="module" src="../../../../public/main.js"></script>
+</body>
+
+</html>
