@@ -17,8 +17,8 @@
         <div class="fix-column-links">
             <a href="#" class="link"></a>
             <div class="botbut">
-                <a href="" class="link">Next Topic &rarr;</a>
-                <a href="" class="link">&larr; Previous Topic</a>
+                <a href="../unit3/index.html" class="link">Next Topic &rarr;</a>
+                <a href="../unit1/index.html" class="link">&larr; Previous Topic</a>
             </div>
         </div>
     </div>
@@ -405,18 +405,16 @@ Data Warehouse System
                     inserting, updating,
                     or deleting records in a database).</li>
             </ul>
-            <div class="in">
-                <h3>Challenges of an OLTP system:</h3>
-                <ul>
-                    <li>Since multiple users can access and modify data at the same time, OLTP systems need
-                        <strong>concurrency control</strong> (a method to manage multiple requests without errors) and a
-                        <strong>recovery
-                            mechanism</strong> (a way to restore data in case of failure) to prevent issues like data
-                        conflicts or
-                        system crashes.
-                    </li>
-                </ul>
-            </div>
+            <h4>Challenges of an OLTP system:</h4>
+            <ul>
+                <li>Since multiple users can access and modify data at the same time, OLTP systems need
+                    <strong>concurrency control</strong> (a method to manage multiple requests without errors) and a
+                    <strong>recovery
+                        mechanism</strong> (a way to restore data in case of failure) to prevent issues like data
+                    conflicts or
+                    system crashes.
+                </li>
+            </ul>
 
         </div>
         <div class="wh">
@@ -651,38 +649,50 @@ Data Warehouse System
             <h2>OLTP vs. OLAP</h2>
             <p>OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) are both used in data
                 systems, but they serve different purposes. Let’s compare them side by side:</p>
-
-            <ul>
-                <li><strong>Purpose:</strong> In OLTP, we handle <strong>day-to-day operations</strong> like sales,
-                    inventory, and order processing, where the main goal is to manage <strong>many small transactions
-                        quickly</strong>. On the other hand, in OLAP, we focus on <strong>analyzing large sets of
-                        historical data</strong> to help businesses make <strong>decisions</strong> and understand
-                    trends over time.</li>
-
-                <li><strong>Data Handling:</strong> OLTP systems work with <strong>real-time, up-to-date data</strong>,
-                    handling individual transactions such as inserting, updating, or deleting. In OLAP, we work with
-                    <strong>large volumes of historical data</strong>, often stored in a multi-dimensional format, and
-                    the focus is on summarizing or aggregating data from various perspectives, like time or geography.
-                </li>
-
-                <li><strong>Query Complexity:</strong> In OLTP, the queries are <strong>simple</strong> and run quickly,
-                    as they are designed for transactional tasks. However, in OLAP, queries are more
-                    <strong>complex</strong> because they need to analyze and process large amounts of data, often
-                    involving aggregations or detailed reports.
-                </li>
-
-                <li><strong>Examples:</strong> OLTP is used in systems like <strong>banking</strong>, <strong>order
-                        processing</strong>, and <strong>ticket bookings</strong>, where you need to handle many small
-                    transactions. In contrast, OLAP is used in applications like <strong>business intelligence
-                        tools</strong>, <strong>data mining</strong>, and <strong>reporting systems</strong>, where you
-                    need to analyze trends and patterns over time.</li>
-
-                <li><strong>Data Volume:</strong> OLTP systems manage a <strong>large number of transactions</strong> at
-                    once but handle relatively <strong>small amounts of data</strong> per transaction. OLAP systems deal
-                    with <strong>huge volumes of data</strong> for analysis, but the transactions are much fewer and
-                    more complex.</li>
-            </ul>
-
+            <div class="table-wrapper">
+                <table class="new-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>OLTP</th>
+                            <th>OLAP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Purpose</strong></td>
+                            <td>Handles day-to-day operations like sales, inventory, and order processing. Focus is on
+                                managing many small transactions quickly.</td>
+                            <td>Analyzes large sets of historical data to help businesses make decisions and understand
+                                trends.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Handling</strong></td>
+                            <td>Works with real-time, up-to-date data. Involves inserting, updating, or deleting
+                                individual
+                                transactions.</td>
+                            <td>Deals with large volumes of historical data, often summarized or aggregated across
+                                dimensions like time or geography.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Query Complexity</strong></td>
+                            <td>Simple and fast queries designed for transactional tasks.</td>
+                            <td>Complex queries that involve analysis, aggregation, and reporting on large datasets.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Examples</strong></td>
+                            <td>Banking, order processing, ticket bookings.</td>
+                            <td>Business intelligence tools, data mining, reporting systems.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Volume</strong></td>
+                            <td>Handles a large number of small transactions.</td>
+                            <td>Deals with fewer but more complex transactions involving huge volumes of data.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <p>So basically, OLTP is all about fast, real-time transactions, while OLAP is about analyzing data to
                 uncover valuable insights for decision-making. They work together in a business, but each has its own
                 role.</p>
@@ -728,32 +738,45 @@ Data Warehouse System
             <h3>Categories of OLAP Tools</h3>
 
             <ul>
-                <li><strong>Query and Reporting Tools:</strong> These tools are focused on helping users <strong>query</strong> and
-                    <strong>retrieve</strong> data from OLAP systems and then generate <strong>reports</strong>. They allow users to ask questions
+                <li><strong>Query and Reporting Tools:</strong> These tools are focused on helping users
+                    <strong>query</strong> and
+                    <strong>retrieve</strong> data from OLAP systems and then generate <strong>reports</strong>. They
+                    allow users to ask questions
                     about the data, like "What were our sales in Q1?" or "Which products had the highest growth last
-                    year?" These tools focus on making it easy to access and present data in a user-friendly way.</li>
+                    year?" These tools focus on making it easy to access and present data in a user-friendly way.
+                </li>
 
                 <li><strong>Multidimensional Analysis Tools:</strong> These tools let users explore data from different
-                    <strong>dimensions</strong>, like time, location, or product. Users can <strong>slice</strong>, <strong>dice</strong>, <strong>drill down</strong>, or
-                    <strong>roll up</strong> the data to understand it better and look at trends across different dimensions. This
-                    type of tool is powerful for analyzing large datasets from multiple perspectives.</li>
+                    <strong>dimensions</strong>, like time, location, or product. Users can <strong>slice</strong>,
+                    <strong>dice</strong>, <strong>drill down</strong>, or
+                    <strong>roll up</strong> the data to understand it better and look at trends across different
+                    dimensions. This
+                    type of tool is powerful for analyzing large datasets from multiple perspectives.
+                </li>
 
                 <li><strong>Data Mining Tools:</strong> Data mining tools go a step further and help businesses discover
-                    <strong>hidden patterns</strong> or <strong>insights</strong> in the data using statistical analysis and algorithms. These
+                    <strong>hidden patterns</strong> or <strong>insights</strong> in the data using statistical analysis
+                    and algorithms. These
                     tools can help predict future trends, detect anomalies, or segment data into meaningful groups. For
-                    example, a data mining tool might predict customer behavior based on past transactions.</li>
+                    example, a data mining tool might predict customer behavior based on past transactions.
+                </li>
             </ul>
 
             <h3>OLAP Tools and the Internet</h3>
-            <p>With the rise of cloud computing and internet technologies, <strong>OLAP tools have also expanded to the web</strong>.
-                Now, many OLAP tools are <strong>web-based</strong>, which means businesses can access them from anywhere,
+            <p>With the rise of cloud computing and internet technologies, <strong>OLAP tools have also expanded to the
+                    web</strong>.
+                Now, many OLAP tools are <strong>web-based</strong>, which means businesses can access them from
+                anywhere,
                 collaborate in real-time, and share data analysis easily. This also allows for faster updates and better
                 integration with other business applications, as data is stored on the cloud and can be accessed via a
                 web interface.</p>
 
-            <p>In summary, OLAP tools come in different types, including those for <strong>querying</strong>, <strong>multidimensional
-                analysis</strong>, and <strong>data mining</strong>. With the integration of the internet, OLAP tools have become more
-                accessible and collaborative, making it easier to analyze and make decisions based on data.</p>
+            <p>In summary, OLAP tools come in different types, including those for <strong>querying</strong>,
+                <strong>multidimensional
+                    analysis</strong>, and <strong>data mining</strong>. With the integration of the internet, OLAP
+                tools have become more
+                accessible and collaborative, making it easier to analyze and make decisions based on data.
+            </p>
 
         </div>
     </div>
