@@ -1,29 +1,19 @@
-import numpy as np 
-
-n = int(input("Enter the number of element"))
-
-elements = []
-
-for i in range(n):
-    element = int(input(f"Enter element {i + 1}: "))
-    elements.append(element)
-
-elements_array = np.array(elements)
-print(elements_array)
-file = open("mydata.txt", "w")
-file.write("Name = Henry, Age = 22")
-file.close()
-
-file = open("mydata.txt", "r")
-content = file.read()
-print(content)
-file.close()
-
-file = open("mydata.txt", "a")
-file.write("\nMy hobby is to do cycling")
-file.close()
-
-file = open("mydata.txt", "r")
-content = file.read()
-print(content)
-file.close()
+import numpy as np
+from statistics import mode
+s=[56,67,45,89,78,90,56,67,56,100]
+m=np.mean(s)
+d=np.median(s)
+o=mode(s)
+r=max(s)-min(s)
+a=np.mean([abs(x-m) for x in s])
+mad=np.median([abs(x-d) for x in s])
+v=np.var(s)
+sd=np.std(s)
+print(f"Mean: {m}")
+print(f"Median: {d}")
+print(f"Mode: {o}")
+print(f"Range: {r}")
+print(f"Average Deviation: {a}")
+print(f"Absolute Deviation (MAD): {mad}")
+print(f"Squared Deviation (Variance): {v}")
+print(f"Standard Deviation: {sd}")
