@@ -24,91 +24,94 @@
     <div class="content-box">
         <h1>Computer Graphics Program Basics</h1>
         <div class="wh">
-           <h3>Setting Up a Basic Graphics Environment:</h3>
-<ul>
-    <li>
-        First, we need to include the <strong>graphics.h</strong> header file. It is an old graphics library
-        used in C programming,
-        especially in older compilers like Turbo C. This library provides functions that let you draw things
-        like points, lines, circles,
-        and shapes directly on the screen.
-    </li>
-    <li>Before we start drawing anything, we need to set up a basic environment where we can render
-        graphics.</li>
-    <li>
-        <strong>Initialize the Graphics Mode:</strong> To open a graphics window and start drawing, we use
-        the <strong>initgraph()</strong> function.
-        <pre>
+            <h3>Setting Up a Basic Graphics Environment:</h3>
+            <ul>
+                <li>
+                    First, we need to include the <strong>graphics.h</strong> header file. It is an old graphics library
+                    used in C programming,
+                    especially in older compilers like Turbo C. This library provides functions that let you draw things
+                    like points, lines, circles,
+                    and shapes directly on the screen.
+                </li>
+                <li>Before we start drawing anything, we need to set up a basic environment where we can render
+                    graphics.</li>
+                <li>
+                    <strong>Initialize the Graphics Mode:</strong> To open a graphics window and start drawing, we use
+                    the <strong>initgraph()</strong> function.
+                    <pre>
             <code>
 int gd = DETECT, gm;
 initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
             </code>
         </pre>
-        This will set up a graphics window for you to draw in.
-        <ul>
-            <li>Here, <strong>gd</strong> stands for graphics driver, and <strong>gm</strong> stands for
-                graphics mode.</li>
-            <li><strong>DETECT</strong> is a macro defined in the <strong>graphics.h</strong> library. It is
-                not a keyword in the C language itself
-                but a constant used by the graphics system.</li>
-            <li><strong>DETECT</strong> automatically detects the graphics driver on your system, so you
-                don't have to manually specify one.
-                This makes it easier for the program to run on different systems.</li>
-            <li><strong>gm</strong> will store the mode of the graphics system once it's initialized. It
-                doesn't require a specific value;
-                it gets set by the <strong>initgraph()</strong> function.</li>
-            <li>When passed to <strong>initgraph()</strong>, <strong>DETECT</strong> tells the program to
-                automatically detect the graphics driver
-                based on your system's configuration. This eliminates the need for you to manually specify
-                the graphics driver.</li>
-            <li><strong>Important Note:</strong> In the declaration <code>int gd = DETECT, gm;</code>, 
-                <strong>gm</strong> starts with a garbage value (uninitialized). However, this is intentional 
-                because <strong>initgraph()</strong> will overwrite both <strong>gd</strong> and <strong>gm</strong> 
-                with proper values after detecting the graphics hardware. The function uses their addresses 
-                (<code>&gd, &gm</code>) to modify these variables directly.</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Setting Up Graphics in Turbo C3:</strong>
-        <ul>
-            <li>If you are using <strong>Turbo C3</strong>, ensure that the <strong>BGI (Borland Graphics
-                    Interface) files</strong> are present in the correct directory.</li>
-            <li>The default path in Turbo C3 is: <code>"C:\\TURBOC3\\BGI"</code>.</li>
-            <li>If the path is incorrect, Turbo C3 may throw an error when initializing graphics.</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Common Errors and Fixes in Turbo C3:</strong>
-        <ul>
-            <li><strong>BGI Error: "Graphics not initialized"</strong>
-                <ul>
-                    <li>Ensure that the BGI files exist in the specified path.</li>
-                    <li>Try providing the full path explicitly instead of an empty string.</li>
-                </ul>
-            </li>
-            <li><strong>Error: "Cannot run in full-screen mode" (on modern systems)</strong>
-                <ul>
-                    <li>Turbo C3 is a DOS-based compiler and does not support full-screen graphics in modern
-                        Windows versions.</li>
-                    <li>Use <strong>DOSBox</strong> to run Turbo C3 properly.</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <strong>Exiting Graphics Mode Properly in Turbo C3:</strong>
-        <pre>
+                    This will set up a graphics window for you to draw in.
+                    <ul>
+                        <li>Here, <strong>gd</strong> stands for graphics driver, and <strong>gm</strong> stands for
+                            graphics mode.</li>
+                        <li><strong>DETECT</strong> is a macro defined in the <strong>graphics.h</strong> library. It is
+                            not a keyword in the C language itself
+                            but a constant used by the graphics system.</li>
+                        <li><strong>DETECT</strong> automatically detects the graphics driver on your system, so you
+                            don't have to manually specify one.
+                            This makes it easier for the program to run on different systems.</li>
+                        <li><strong>gm</strong> will store the mode of the graphics system once it's initialized. It
+                            doesn't require a specific value;
+                            it gets set by the <strong>initgraph()</strong> function.</li>
+                        <li>When passed to <strong>initgraph()</strong>, <strong>DETECT</strong> tells the program to
+                            automatically detect the graphics driver
+                            based on your system's configuration. This eliminates the need for you to manually specify
+                            the graphics driver.</li>
+                        <li><strong>Important Note:</strong> In the declaration <code>int gd = DETECT, gm;</code>,
+                            <strong>gm</strong> starts with a garbage value (uninitialized). However, this is
+                            intentional
+                            because <strong>initgraph()</strong> will overwrite both <strong>gd</strong> and
+                            <strong>gm</strong>
+                            with proper values after detecting the graphics hardware. The function uses their addresses
+                            (<code>&gd, &gm</code>) to modify these variables directly.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Setting Up Graphics in Turbo C3:</strong>
+                    <ul>
+                        <li>If you are using <strong>Turbo C3</strong>, ensure that the <strong>BGI (Borland Graphics
+                                Interface) files</strong> are present in the correct directory.</li>
+                        <li>The default path in Turbo C3 is: <code>"C:\\TURBOC3\\BGI"</code>.</li>
+                        <li>If the path is incorrect, Turbo C3 may throw an error when initializing graphics.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Common Errors and Fixes in Turbo C3:</strong>
+                    <ul>
+                        <li><strong>BGI Error: "Graphics not initialized"</strong>
+                            <ul>
+                                <li>Ensure that the BGI files exist in the specified path.</li>
+                                <li>Try providing the full path explicitly instead of an empty string.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Error: "Cannot run in full-screen mode" (on modern systems)</strong>
+                            <ul>
+                                <li>Turbo C3 is a DOS-based compiler and does not support full-screen graphics in modern
+                                    Windows versions.</li>
+                                <li>Use <strong>DOSBox</strong> to run Turbo C3 properly.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Exiting Graphics Mode Properly in Turbo C3:</strong>
+                    <pre>
             <code>
 closegraph();
             </code>
         </pre>
-        <ul>
-            <li>Always call <strong>closegraph();</strong> at the end of your program to properly exit
-                graphics mode and return to text mode.</li>
-            <li>Failing to do this may leave your system screen in an unstable state.</li>
-        </ul>
-    </li>
-</ul>
+                    <ul>
+                        <li>Always call <strong>closegraph();</strong> at the end of your program to properly exit
+                            graphics mode and return to text mode.</li>
+                        <li>Failing to do this may leave your system screen in an unstable state.</li>
+                    </ul>
+                </li>
+            </ul>
             <h3>Program to draw a pixel</h3>
             <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen.
                 The following program demonstrates how to draw a pixel.</p>
@@ -298,36 +301,37 @@ int main() {
             <p>Output:</p>
             <img src="../images/cg4.png" alt="">
             <h3>Drawing line using line() function</h3>
-            <p><strong>The line() Function</strong></p>
-<p>The line() function is part of the graphics.h library and allows you to draw a straight line between two points by specifying their coordinates.</p>
+            <p>The line() function is part of the graphics.h library and allows you to draw a straight line between two
+                points by specifying their coordinates.</p>
 
-<p>Syntax of line()</p>
-<pre>
+            <p>Syntax of line()</p>
+            <pre>
     <code>
 line(int x1, int y1, int x2, int y2);
     </code>
 </pre>
 
-<p>Where:
-<ul>
-    <li>(x1, y1) is the starting point of the line.</li>
-    <li>(x2, y2) is the ending point of the line.</li>
-</ul>
-</p>
+            <p>Where:
+            <ul>
+                <li>(x1, y1) is the starting point of the line.</li>
+                <li>(x2, y2) is the ending point of the line.</li>
+            </ul>
+            </p>
 
-<p>How It Works:</p>
-<ul>
-    <li>You don’t need to manually plot each point to draw a line.</li>
-    <li>Simply call line() with the starting and ending coordinates, and the function will automatically draw the line.</li>
-</ul>
+            <p>How It Works:</p>
+            <ul>
+                <li>You don’t need to manually plot each point to draw a line.</li>
+                <li>Simply call line() with the starting and ending coordinates, and the function will automatically
+                    draw the line.</li>
+            </ul>
 
-<div class="code">
-    <div class="dotc"></div>
-    <button class="ac">
-        Example Program to Draw a Line Using line()
-    </button>
-    <div class="panel">
-        <pre>
+            <div class="code">
+                <div class="dotc"></div>
+                <button class="ac">
+                    Example Program to Draw a Line Using line()
+                </button>
+                <div class="panel">
+                    <pre>
         <code>
 #include &lt;graphics.h>  // Graphics library for drawing
 #include &lt;conio.h>     // For getchar()
@@ -349,8 +353,8 @@ int main() {
 }
         </code>
         </pre>
-    </div>
-</div>
+                </div>
+            </div>
 
             <h3>Program to Draw a Square</h3>
             <div class="code">
@@ -360,39 +364,37 @@ int main() {
                     <pre>
                         <code>
 #include &lt;graphics.h>  // Graphics library for drawing
-#include &lt;conio.h>     // For getchar()
+#include &lt;conio.h>     // For getch()
 
 int main() {
     int gd = DETECT, gm;  // Detect graphics driver and mode
-
     initgraph(&gd, &gm, "");  // Initialize graphics mode
-
+    
     int x1 = 100, y1 = 100;   // Top-left corner of the square
     int side_length = 200;     // Length of the side of the square
-
+    
     // Draw top side (horizontal line)
-    for (int x = x1; x <= x1 + side_length; x++) {
+    for (int x = x1; x < x1 + side_length; x++) {
         putpixel(x, y1, WHITE);  // Draw white pixels
     }
-
+    
     // Draw right side (vertical line)
-    for (int y = y1; y <= y1 + side_length; y++) {
+    for (int y = y1; y < y1 + side_length; y++) {
         putpixel(x1 + side_length, y, WHITE);  // Draw white pixels
     }
-
+    
     // Draw bottom side (horizontal line)
-    for (int x = x1; x <= x1 + side_length; x++) {
+    for (int x = x1 + side_length; x > x1; x--) {
         putpixel(x, y1 + side_length, WHITE);  // Draw white pixels
     }
-
+    
     // Draw left side (vertical line)
-    for (int y = y1; y <= y1 + side_length; y++) {
+    for (int y = y1 + side_length; y > y1; y--) {
         putpixel(x1, y, WHITE);  // Draw white pixels
     }
-
+    
     getch();  // Wait for user input before closing
     closegraph();  // Close graphics mode
-
     return 0;
 }
                         </code>
@@ -1068,71 +1070,74 @@ int main() {
                 Bar Graph,
                 Arc Animation with Circles,
                 Basic Circle Drawing with Color Filling</h2>
-            <div class="in">
-    <h3>Traffic Light</h3>
-    <p>This program draws a simple traffic light with three circles inside a rectangular box.</p>
-
-    <ul>
-        <li><strong>Defining Dimensions</strong></li>
-        <p>We define the width and height of the rectangle and the radius of the circles.</p>
-        <pre>
-            <code>
+<div class="in">
+ <h3>Traffic Light</h3>
+<p>This program draws a simple traffic light with three circles inside a rectangular box.</p>
+<img src="../images/cg31.svg" alt="" class="wb">
+<ul>
+<li><strong>Defining Dimensions</strong></li>
+<p>We define the width and height of the rectangle and the radius of the circles.</p>
+<pre>
+<code>
 int rectWidth = 60, rectHeight = 160;
 int radius = 22;
-            </code>
-        </pre>
-
-        <li><strong>Midpoint Calculation</strong></li>
-        <p>We calculate the center of the screen to position the traffic light properly.</p>
-        <pre>
-            <code>
+</code>
+</pre>
+<li><strong>Midpoint Calculation</strong></li>
+<p>We calculate the center of the screen to position the traffic light properly.</p>
+<pre>
+<code>
 midx = getmaxx() / 2;
 midy = getmaxy() / 2;
-            </code>
-        </pre>
-
-        <li><strong>Drawing the Traffic Light</strong></li>
-        <p>We draw a white rectangle as the traffic light body and three circles inside it.  
-           The circles are placed at fixed positions.</p>
-        <pre>
-            <code>
+</code>
+</pre>
+<li><strong>Drawing the Traffic Light</strong></li>
+<p>We draw a white rectangle as the traffic light body and three circles inside it.
+ The circles are placed at fixed positions.</p>
+<pre>
+<code>
 setcolor(WHITE);
 rectangle(midx - rectWidth / 2, midy - rectHeight / 2, midx + rectWidth / 2, midy + rectHeight / 2);
-
 setfillstyle(SOLID_FILL, RED);
 circle(midx, midy - 50, radius);
 floodfill(midx, midy - 50, WHITE); // Red light
-
 setfillstyle(SOLID_FILL, YELLOW);
 circle(midx, midy, radius);
 floodfill(midx, midy, WHITE); // Yellow light
-
 setfillstyle(SOLID_FILL, GREEN);
 circle(midx, midy + 50, radius);
 floodfill(midx, midy + 50, WHITE); // Green light
-            </code>
-        </pre>
+</code>
+</pre>
+<li><strong>Understanding Circle Placement (Reference to Midpoint)</strong></li>
+<p>
+ All circle positions are calculated relative to the <strong>midpoint (midx, midy)</strong> of the screen:
+</p>
+<ul>
+<li><strong>Top Circle (Red):</strong> Positioned at <code>(midx, midy - 50)</code> → 50 pixels above the center</li>
+<li><strong>Middle Circle (Yellow):</strong> Positioned at <code>(midx, midy)</code> → exactly at the screen center</li>
+<li><strong>Bottom Circle (Green):</strong> Positioned at <code>(midx, midy + 50)</code> → 50 pixels below the center</li>
+</ul>
+<p><strong>Note:</strong> By using the midpoint as our reference, the traffic light is perfectly centered on the screen regardless of screen resolution. The 50-pixel spacing ensures equal distance between all three lights.</p>
 
-        <li><strong>Understanding Circle Placement</strong></li>
-        <p>
-            The middle circle is placed at <strong>midy</strong> (center of rectangle).  
-            The top and bottom circles are placed at fixed offsets:
-        </p>
-        <ul>
-            <li><strong>Top Circle:</strong> Moved up by <code>50</code> → <code>midy - 50</code></li>
-            <li><strong>Middle Circle:</strong> Placed at center → <code>midy</code></li>
-            <li><strong>Bottom Circle:</strong> Moved down by <code>50</code> → <code>midy + 50</code></li>
-        </ul>
+<li><strong>Rectangle Positioning (Also Midpoint-Based)</strong></li>
+<p>The traffic light box is also drawn relative to the midpoint:</p>
+<ul>
+<li><strong>Left edge:</strong> <code>midx - rectWidth / 2</code> → 30 pixels left of center</li>
+<li><strong>Right edge:</strong> <code>midx + rectWidth / 2</code> → 30 pixels right of center</li>
+<li><strong>Top edge:</strong> <code>midy - rectHeight / 2</code> → 80 pixels above center</li>
+<li><strong>Bottom edge:</strong> <code>midy + rectHeight / 2</code> → 80 pixels below center</li>
+</ul>
 
-        <li><strong>Final Step</strong></li>
-        <p>The program waits for user input before closing.</p>
-        <pre>
-            <code>
+<li><strong>Final Step</strong></li>
+<p>The program waits for user input before closing.</p>
+<pre>
+<code>
 getch();
 closegraph();
-            </code>
-        </pre>
-    </ul>
+</code>
+</pre>
+</ul>
 </div>
 
 
@@ -1296,82 +1301,90 @@ closegraph();
                 </ul>
             </div> -->
             <div class="in">
-    <h3>Smiley Face</h3>
-    <p><strong>Understanding the arc() Function for Drawing a Smiley Face</strong></p>
-    <p>To draw a smiley face, we need a curved line for the mouth. This curved line is called an arc.</p>
-    <p><strong>What is an Arc?</strong></p>
-    <ul>
-        <li>Think of an arc as a part of a circle. If a full circle is like a pizza, then an arc is like one
-            slice or a curved section of the crust.</li>
-        <li>When drawing a smiley face, we need an arc for the mouth. This arc is a small portion of a
-            bigger invisible circle.</li>
-    </ul>
-
-    <p><strong>The arc(x, y, startAngle, endAngle, radius) Function</strong></p>
-    <p>This function helps us draw an arc on the screen. Let’s break down its parameters in simple terms:</p>
-    <ol>
-        <li><strong>x, y (Center of the Arc)</strong></li>
-        <ul>
-            <li>These two numbers tell the program where the arc is centered.</li>
-            <li>Example: arc(300, 340, 20, 160, 50); → Here, (300, 340) is the center of the invisible full
-                circle that contains the arc.</li>
-        </ul>
-        <li><strong>startAngle (Where the Arc Begins)</strong></li>
-        <ul>
-            <li>This is the starting point of the arc, measured in degrees.</li>
-            <li>Imagine a clock:
+                <h3>Smiley Face</h3>
+                <p><strong>Understanding the arc() Function for Drawing a Smiley Face</strong></p>
+                <p>To draw a smiley face, we need a curved line for the mouth. This curved line is called an arc.</p>
+                <p><strong>What is an Arc?</strong></p>
                 <ul>
-                    <li>0° → Right side (3 o’clock).</li>
-                    <li>90° → Top (12 o’clock).</li>
-                    <li>180° → Left side (9 o’clock).</li>
-                    <li>270° → Bottom (6 o’clock).</li>
+                    <li>Think of an arc as a part of a circle. If a full circle is like a pizza, then an arc is like one
+                        slice or a curved section of the crust.</li>
+                    <li>When drawing a smiley face, we need an arc for the mouth. This arc is a small portion of a
+                        bigger invisible circle.</li>
                 </ul>
-            </li>
-            <li>If we start at 20°, it means we begin a little above the right side.</li>
-        </ul>
-        <li><strong>endAngle (Where the Arc Ends)</strong></li>
-        <ul>
-            <li>This is the finishing point of the arc, also in degrees.</li>
-            <li>If we set endAngle = 160°, the arc stops near the left side.</li>
-            <li>The arc is drawn from startAngle to endAngle in a counterclockwise direction.</li>
-        </ul>
-        <li><strong>radius (Size of the Arc)</strong></li>
-        <ul>
-            <li>This tells how big the arc should be.</li>
-            <li>A larger radius makes a wider arc.</li>
-            <li>A smaller radius makes a tighter curve.</li>
-            <li>Example: radius = 50 → The arc will be a part of an invisible circle with a radius of 50
-                pixels.</li>
-        </ul>
-    </ol>
 
-    <p><strong>Example: Drawing a Smiley Mouth</strong></p>
-    <pre>
+                <p><strong>The arc(x, y, startAngle, endAngle, radius) Function</strong></p>
+                <p>This function helps us draw an arc on the screen. Let’s break down its parameters in simple terms:
+                </p>
+                <ol>
+                    <li><strong>x, y (Center of the Arc)</strong></li>
+                    <ul>
+                        <li>These two numbers tell the program where the arc is centered.</li>
+                        <li>Example: arc(300, 340, 20, 160, 50); → Here, (300, 340) is the center of the invisible full
+                            circle that contains the arc.</li>
+                    </ul>
+                    <li><strong>startAngle (Where the Arc Begins)</strong></li>
+                    <ul>
+                        <li>This is the starting point of the arc, measured in degrees.</li>
+                        <li>Imagine a clock:
+                            <ul>
+                                <li>0° → Right side (3 o’clock).</li>
+                                <li>90° → Top (12 o’clock).</li>
+                                <li>180° → Left side (9 o’clock).</li>
+                                <li>270° → Bottom (6 o’clock).</li>
+                            </ul>
+                        </li>
+                        <li>If we start at 20°, it means we begin a little above the right side.</li>
+                    </ul>
+                    <li><strong>endAngle (Where the Arc Ends)</strong></li>
+                    <ul>
+                        <li>This is the finishing point of the arc, also in degrees.</li>
+                        <li>If we set endAngle = 160°, the arc stops near the left side.</li>
+                        <li>The arc is drawn from startAngle to endAngle in a counterclockwise direction.</li>
+                    </ul>
+                    <li><strong>radius (Size of the Arc)</strong></li>
+                    <ul>
+                        <li>This tells how big the arc should be.</li>
+                        <li>A larger radius makes a wider arc.</li>
+                        <li>A smaller radius makes a tighter curve.</li>
+                        <li>Example: radius = 50 → The arc will be a part of an invisible circle with a radius of 50
+                            pixels.</li>
+                    </ul>
+                </ol>
+
+                <p><strong>Example: Drawing a Smiley Mouth</strong></p>
+                <pre>
         <code>
 arc(300, 340, 200, 340, 50); 
         </code>
     </pre>
-    <p><strong>Flip the Smile (Make it a Sad Face)</strong></p>
-    <pre>
+                <p><strong>Flip the Smile (Make it a Sad Face)</strong></p>
+                <pre>
         <code>
 arc(300, 340, 20, 160, 50); 
         </code>
     </pre>
-    <p>Here, 200° to 340° creates a downward arc, forming a smile (a U shape). 20° to 160° creates an upward arc, forming a sad face.</p>
-    <ul>
-        <li>"The arc() function draws an arc based on the center point, start angle, end angle, and radius. The angles are measured counterclockwise starting from the 3 o'clock position (0°).
-            <ul>
-                <li>Third Quadrant (240°): This is a point in the third quadrant (left bottom) of the circle, where the angle is between 180° and 270°. From this point, the arc will start to curve downward, creating the bottom part of the smile.</li>
-                <li>Fourth Quadrant (340°): This is in the fourth quadrant (right bottom) of the circle, where the angle is between 270° and 360°.</li>
-            </ul>
-            When we start at 240° (third quadrant) and move counterclockwise to 340° (fourth quadrant), the arc will open upward like the top of a "U," with the curve bending downward to form the shape of a smile."
-        </li>
-    </ul>
+                <p>Here, 200° to 340° creates a downward arc, forming a smile (a U shape). 20° to 160° creates an upward
+                    arc, forming a sad face.</p>
+                <ul>
+                    <li>"The arc() function draws an arc based on the center point, start angle, end angle, and radius.
+                        The angles are measured counterclockwise starting from the 3 o'clock position (0°).
+                        <ul>
+                            <li>Third Quadrant (240°): This is a point in the third quadrant (left bottom) of the
+                                circle, where the angle is between 180° and 270°. From this point, the arc will start to
+                                curve downward, creating the bottom part of the smile.</li>
+                            <li>Fourth Quadrant (340°): This is in the fourth quadrant (right bottom) of the circle,
+                                where the angle is between 270° and 360°.</li>
+                        </ul>
+                        When we start at 240° (third quadrant) and move counterclockwise to 340° (fourth quadrant), the
+                        arc will open upward like the top of a "U," with the curve bending downward to form the shape of
+                        a smile."
+                    </li>
+                </ul>
 
-    <p>Now that we understand how to draw the mouth with the arc, we can draw the full smiley face.</p>
+                <p>Now that we understand how to draw the mouth with the arc, we can draw the full smiley face.</p>
 
-    <h4>Smiley Face Program Code:</h4>
-    <pre>
+                <h4>Smiley Face Program Code:</h4>
+                <pre>
         <code>
 #include &lt;graphics.h>
 #include &lt;conio.h>
@@ -1410,13 +1423,18 @@ void main()
 }
         </code>
     </pre>
-    <p><strong>Explanation:</strong></p>
-    <ul>
-        <li><strong>Face:</strong> The face is drawn as a large circle with a radius of 100, centered at `(midx, midy)`.</li>
-        <li><strong>Eyes:</strong> Two smaller circles (radius 15) are drawn for the eyes. The left eye is placed at `(midx - 35, midy - 30)` and the right eye at `(midx + 35, midy - 30)`. This keeps the eyes symmetrical and positioned on the upper part of the face.</li>
-        <li><strong>Mouth:</strong> The mouth is drawn as an arc. The `arc()` function is used with the center of the mouth at `(midx, midy + 10)`. The arc spans from 200° to 340° for a smile, and you can flip it for a sad face by changing the angles to 20° to 160°.</li>
-    </ul>
-</div>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li><strong>Face:</strong> The face is drawn as a large circle with a radius of 100, centered at
+                        `(midx, midy)`.</li>
+                    <li><strong>Eyes:</strong> Two smaller circles (radius 15) are drawn for the eyes. The left eye is
+                        placed at `(midx - 35, midy - 30)` and the right eye at `(midx + 35, midy - 30)`. This keeps the
+                        eyes symmetrical and positioned on the upper part of the face.</li>
+                    <li><strong>Mouth:</strong> The mouth is drawn as an arc. The `arc()` function is used with the
+                        center of the mouth at `(midx, midy + 10)`. The arc spans from 200° to 340° for a smile, and you
+                        can flip it for a sad face by changing the angles to 20° to 160°.</li>
+                </ul>
+            </div>
 
         </div>
     </div>
