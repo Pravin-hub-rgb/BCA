@@ -27,7 +27,7 @@
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-    Digital Differential Algorithm
+                    Digital Differential Algorithm
                 </button>
                 <div class="panel">
                     <pre>
@@ -342,7 +342,7 @@ void main()
                     </pre>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="wh">
             <div class='code'>
                 <div class='dotc'></div>
@@ -388,7 +388,7 @@ void main() {
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-    Moving Car
+                    Moving Car
                 </button>
                 <div class="panel">
                     <pre>
@@ -543,7 +543,7 @@ void main() {
             <div class='code'>
                 <div class='dotc'></div>
                 <button class="ac">
-    Bar Graph
+                    Bar Graph
                 </button>
                 <div class="panel">
                     <pre>
@@ -592,7 +592,219 @@ int main() {
                 </div>
             </div>
         </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+                    WAP to do Translation of a 2D object.
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
 
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\TC\\BGI"); // Adjust path
+
+    // Original triangle coordinates
+    int points[] = {100, 100, 150, 200, 50, 200, 100, 100};
+    int tx = 80, ty = 50; // Translation vector
+
+    // Draw original triangle (blue)
+    setcolor(BLUE);
+    drawpoly(4, points);
+
+    // Calculate translated coordinates
+    int translated_points[8];
+    for (int i = 0; i < 8; i += 2) {
+        translated_points[i] = points[i] + tx;
+        translated_points[i + 1] = points[i + 1] + ty;
+    }
+
+    // Draw translated triangle (red)
+    setcolor(RED);
+    drawpoly(4, translated_points);
+
+    getch();
+    closegraph();
+    return 0;
+}
+// We are using the `drawpoly` function from graphics.h to draw a polygon. The triangle has 3 vertices, 
+// but to close the polygon we repeat the first vertex at the end. So we have 4 points:
+// [ (x0,y0), (x1,y1), (x2,y2), (x0,y0) ]
+// drawpoly(n, points)
+// - Draws a polygon with n vertices using coordinates in points.
+// - A triangle has 3 vertices, but we repeat the first point at the end to "close" the polygon.
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <div class="wh">
+            <div class='code'>
+                <div class='dotc'></div>
+                <button class="ac">
+WAP to do Scaling of a 2D object
+                </button>
+                <div class="panel">
+                    <pre>
+                        <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\TC\\BGI"); // Adjust path
+    
+    // Original triangle coordinates
+    int points[] = {100, 100, 150, 200, 50, 200, 100, 100};
+    float sx = 1.5, sy = 1.5; // Scaling factors
+    
+    // Draw original triangle (blue)
+    setcolor(BLUE);
+    drawpoly(4, points);
+    
+    // Calculate scaled coordinates
+    int scaled_points[8];
+    for (int i = 0; i < 8; i += 2) {
+        scaled_points[i] = (int)(points[i] * sx);
+        scaled_points[i + 1] = (int)(points[i + 1] * sy);
+    }
+    
+    // Draw scaled triangle (red)
+    setcolor(RED);
+    drawpoly(4, scaled_points);
+    
+    getch();
+    closegraph();
+    return 0;
+}
+// Scaling Formula:
+// new_x = original_x * sx
+// new_y = original_y * sy
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+<div class="wh">
+        <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">
+WAP to do Rotation of a 2D object
+            </button>
+            <div class="panel">
+                <pre>
+                    <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\TC\\BGI"); // Adjust path
+    
+    // Original triangle coordinates
+    int points[] = {200, 100, 250, 200, 150, 200, 200, 100};
+    float angle = 45.0; // Rotation angle in degrees
+    float rad = angle * 3.14159 / 180.0; // Convert to radians
+    
+    // Draw original triangle (blue)
+    setcolor(BLUE);
+    drawpoly(4, points);
+    
+    // Calculate rotated coordinates (rotation about origin)
+    int rotated_points[8];
+    for (int i = 0; i < 8; i += 2) {
+        int x = points[i];
+        int y = points[i + 1];
+        rotated_points[i] = (int)(x * cos(rad) - y * sin(rad));
+        rotated_points[i + 1] = (int)(x * sin(rad) + y * cos(rad));
+    }
+    
+    // Draw rotated triangle (red)
+    setcolor(RED);
+    drawpoly(4, rotated_points);
+    
+    getch();
+    closegraph();
+    return 0;
+}
+
+// Rotation Formula (about origin):
+// new_x = x * cos(θ) - y * sin(θ)
+// new_y = x * sin(θ) + y * cos(θ)
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+    <div class="wh">
+        <div class='code'>
+            <div class='dotc'></div>
+            <button class="ac">
+WAP to do Shearing (X and Y direction)
+            </button>
+            <div class="panel">
+                <pre>
+                    <code class="language-c#">
+#include &lt;graphics.h>
+#include &lt;stdio.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\TC\\BGI"); // Adjust path
+    
+    // Original triangle coordinates
+    int points[] = {100, 100, 150, 200, 50, 200, 100, 100};
+    float shx = 0.5; // X-direction shearing factor
+    float shy = 0.3; // Y-direction shearing factor
+    
+    // Draw original triangle (blue)
+    setcolor(BLUE);
+    drawpoly(4, points);
+    
+    // Calculate X-sheared coordinates
+    int x_sheared_points[8];
+    for (int i = 0; i < 8; i += 2) {
+        int x = points[i];
+        int y = points[i + 1];
+        x_sheared_points[i] = (int)(x + shx * y);
+        x_sheared_points[i + 1] = y;
+    }
+    
+    // Draw X-sheared triangle (red)
+    setcolor(RED);
+    drawpoly(4, x_sheared_points);
+    
+    // Calculate Y-sheared coordinates
+    int y_sheared_points[8];
+    for (int i = 0; i < 8; i += 2) {
+        int x = points[i];
+        int y = points[i + 1];
+        y_sheared_points[i] = x;
+        y_sheared_points[i + 1] = (int)(y + shy * x);
+    }
+    
+    // Draw Y-sheared triangle (green)
+    setcolor(GREEN);
+    drawpoly(4, y_sheared_points);
+    
+    getch();
+    closegraph();
+    return 0;
+}
+
+// Shearing Formulas:
+// X-direction shearing: new_x = x + shx * y, new_y = y
+// Y-direction shearing: new_x = x, new_y = y + shy * x
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
         <!--
     <div class="wh">
         <div class='code'>

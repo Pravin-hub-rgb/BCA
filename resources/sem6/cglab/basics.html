@@ -24,105 +24,91 @@
     <div class="content-box">
         <h1>Computer Graphics Program Basics</h1>
         <div class="wh">
-            <h3>Setting Up a Basic Graphics Environment:</h3>
-            <ul>
-                <li>
-                    First, we need to include the <strong>graphics.h</strong> header file. It is an old graphics library
-                    used in C programming,
-                    especially in older compilers like Turbo C. This library provides functions that let you draw things
-                    like points, lines, circles,
-                    and shapes directly on the screen.
-                </li>
-                <li>Before we start drawing anything, we need to set up a basic environment where we can render
-                    graphics.</li>
-                <li>
-                    <strong>Initialize the Graphics Mode:</strong> To open a graphics window and start drawing, we use
-                    the <strong>initgraph()</strong> function.
-                    <pre>
-                        <code>
+           <h3>Setting Up a Basic Graphics Environment:</h3>
+<ul>
+    <li>
+        First, we need to include the <strong>graphics.h</strong> header file. It is an old graphics library
+        used in C programming,
+        especially in older compilers like Turbo C. This library provides functions that let you draw things
+        like points, lines, circles,
+        and shapes directly on the screen.
+    </li>
+    <li>Before we start drawing anything, we need to set up a basic environment where we can render
+        graphics.</li>
+    <li>
+        <strong>Initialize the Graphics Mode:</strong> To open a graphics window and start drawing, we use
+        the <strong>initgraph()</strong> function.
+        <pre>
+            <code>
 int gd = DETECT, gm;
 initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
-                        </code>
-                    </pre>
-                    This will set up a graphics window for you to draw in.
-                    <ul>
-                        <li>Here, <strong>gd</strong> stands for graphics driver, and <strong>gm</strong> stands for
-                            graphics mode.</li>
-                        <li><strong>DETECT</strong> is a macro defined in the <strong>graphics.h</strong> library. It is
-                            not a keyword in the C language itself
-                            but a constant used by the graphics system.</li>
-                        <li><strong>DETECT</strong> automatically detects the graphics driver on your system, so you
-                            don’t have to manually specify one.
-                            This makes it easier for the program to run on different systems.</li>
-                        <li><strong>gm</strong> will store the mode of the graphics system once it's initialized. It
-                            doesn't require a specific value;
-                            it gets set by the <strong>initgraph()</strong> function.</li>
-                        <li>When passed to <strong>initgraph()</strong>, <strong>DETECT</strong> tells the program to
-                            automatically detect the graphics driver
-                            based on your system’s configuration. This eliminates the need for you to manually specify
-                            the graphics driver.</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>Setting Up Graphics in Turbo C3:</strong>
-                    <ul>
-                        <li>If you are using <strong>Turbo C3</strong>, ensure that the <strong>BGI (Borland Graphics
-                                Interface) files</strong> are present in the correct directory.</li>
-                        <li>The default path in Turbo C3 is: <code>"C:\\TURBOC3\\BGI"</code>.</li>
-                        <li>If the path is incorrect, Turbo C3 may throw an error when initializing graphics.</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>Common Errors and Fixes in Turbo C3:</strong>
-                    <ul>
-                        <li><strong>BGI Error: "Graphics not initialized"</strong>
-                            <ul>
-                                <li>Ensure that the BGI files exist in the specified path.</li>
-                                <li>Try providing the full path explicitly instead of an empty string.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Error: "Cannot run in full-screen mode" (on modern systems)</strong>
-                            <ul>
-                                <li>Turbo C3 is a DOS-based compiler and does not support full-screen graphics in modern
-                                    Windows versions.</li>
-                                <li>Use <strong>DOSBox</strong> to run Turbo C3 properly.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>Exiting Graphics Mode Properly in Turbo C3:</strong>
-                    <pre>
-                        <code>
+            </code>
+        </pre>
+        This will set up a graphics window for you to draw in.
+        <ul>
+            <li>Here, <strong>gd</strong> stands for graphics driver, and <strong>gm</strong> stands for
+                graphics mode.</li>
+            <li><strong>DETECT</strong> is a macro defined in the <strong>graphics.h</strong> library. It is
+                not a keyword in the C language itself
+                but a constant used by the graphics system.</li>
+            <li><strong>DETECT</strong> automatically detects the graphics driver on your system, so you
+                don't have to manually specify one.
+                This makes it easier for the program to run on different systems.</li>
+            <li><strong>gm</strong> will store the mode of the graphics system once it's initialized. It
+                doesn't require a specific value;
+                it gets set by the <strong>initgraph()</strong> function.</li>
+            <li>When passed to <strong>initgraph()</strong>, <strong>DETECT</strong> tells the program to
+                automatically detect the graphics driver
+                based on your system's configuration. This eliminates the need for you to manually specify
+                the graphics driver.</li>
+            <li><strong>Important Note:</strong> In the declaration <code>int gd = DETECT, gm;</code>, 
+                <strong>gm</strong> starts with a garbage value (uninitialized). However, this is intentional 
+                because <strong>initgraph()</strong> will overwrite both <strong>gd</strong> and <strong>gm</strong> 
+                with proper values after detecting the graphics hardware. The function uses their addresses 
+                (<code>&gd, &gm</code>) to modify these variables directly.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Setting Up Graphics in Turbo C3:</strong>
+        <ul>
+            <li>If you are using <strong>Turbo C3</strong>, ensure that the <strong>BGI (Borland Graphics
+                    Interface) files</strong> are present in the correct directory.</li>
+            <li>The default path in Turbo C3 is: <code>"C:\\TURBOC3\\BGI"</code>.</li>
+            <li>If the path is incorrect, Turbo C3 may throw an error when initializing graphics.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Common Errors and Fixes in Turbo C3:</strong>
+        <ul>
+            <li><strong>BGI Error: "Graphics not initialized"</strong>
+                <ul>
+                    <li>Ensure that the BGI files exist in the specified path.</li>
+                    <li>Try providing the full path explicitly instead of an empty string.</li>
+                </ul>
+            </li>
+            <li><strong>Error: "Cannot run in full-screen mode" (on modern systems)</strong>
+                <ul>
+                    <li>Turbo C3 is a DOS-based compiler and does not support full-screen graphics in modern
+                        Windows versions.</li>
+                    <li>Use <strong>DOSBox</strong> to run Turbo C3 properly.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Exiting Graphics Mode Properly in Turbo C3:</strong>
+        <pre>
+            <code>
 closegraph();
-                        </code>
-                    </pre>
-                    <ul>
-                        <li>Always call <strong>closegraph();</strong> at the end of your program to properly exit
-                            graphics mode and return to text mode.</li>
-                        <li>Failing to do this may leave your system screen in an unstable state.</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <strong>Closing the Graphics Mode:</strong> Once you are done with drawing, you should close the
-                    graphics mode using the
-                    <strong>closegraph()</strong> function.
-                    <pre>
-                        <code>
-closegraph();
-                        </code>
-                    </pre>
-                    <ul>
-                        <li><strong>closegraph()</strong> shuts down the graphics system and deallocates any memory used
-                            for graphics.</li>
-                        <li>It ensures that the system returns to text mode properly after graphics operations are
-                            completed.</li>
-                        <li>Failing to call <strong>closegraph()</strong> may leave the screen in an unpredictable
-                            state, especially in older systems.</li>
-                    </ul>
-                </li>
-            </ul>
+            </code>
+        </pre>
+        <ul>
+            <li>Always call <strong>closegraph();</strong> at the end of your program to properly exit
+                graphics mode and return to text mode.</li>
+            <li>Failing to do this may leave your system screen in an unstable state.</li>
+        </ul>
+    </li>
+</ul>
             <h3>Program to draw a pixel</h3>
             <p>Now that we understand the basics of graphics in C, we will start by drawing a point on the screen.
                 The following program demonstrates how to draw a pixel.</p>
