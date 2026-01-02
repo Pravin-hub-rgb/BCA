@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Quiz</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../public/styleouter.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../public/logo/favicon_io/favicon.ico">
+</head>
+<body class="bg-c">
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="unit-select.html?subject=cg"><img src="../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>Computer Graphics Quiz</h2>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <div class="quiz-back-link">
+            <a href="unit-select.html?subject=cg">&larr; Change Unit Selection</a>
+        </div>
+
+        <div id="quizContent">
+            <!-- Quiz questions will be loaded here -->
+        </div>
+
+        <div id="resultsContent" style="display: none;">
+            <!-- Results will be shown here -->
+        </div>
+    </div>
+
+    <script src="subjects-loader.js"></script>
+    <script>
+        let currentQuestions = [];
+        let userAnswers = [];
+        let quizCompleted = false;
+        let currentSubject = null;
+
+        // Get subject ID from URL parameters
+        function getSubjectIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('subject') || 'cg'; // Default to cg for backward compatibility
+        }
+
+        // Load quiz on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            const subjectId = getSubjectIdFromUrl();
+            const selectedUnits = JSON.parse(localStorage.getItem(`${subjectId}QuizUnits`) || localStorage.getItem('cgQuizUnits'));
+
+            if (!selectedUnits || selectedUnits.length === 0) {
+                window.location.href = 'unit-select.html?subject=' + subjectId;
+                return;
+            }
+
+            try {
+                // Load subject configuration
+                const subjects = window.quizSubjectsLoader.loadAvailableSubjects();
+                currentSubject = subjects.find(s => s.id === subjectId);
+
+                if (!currentSubject) {
+                    alert('Subject not found!');
+                    window.location.href = 'subjects.html';
+                    return;
+                }
+
+                // Load questions for this subject
+                await loadSubjectQuestions(subjectId);
+
+                // Update page content
+                updatePageContent();
+
+                // Initialize quiz
+                currentQuestions = generateQuizQuestions(selectedUnits);
+                userAnswers = new Array(currentQuestions.length).fill(null);
+                renderQuiz();
+
+            } catch (error) {
+                console.error('Error loading quiz:', error);
+                alert('Error loading quiz. Please try again.');
+                window.location.href = 'subjects.html';
+            }
+        });
+
+        async function loadSubjectQuestions(subjectId) {
+            // Load questions script
+            const questionsScript = document.createElement('script');
+            questionsScript.src = `subjects/${subjectId}/questions.js`;
+            document.head.appendChild(questionsScript);
+
+            await new Promise((resolve, reject) => {
+                questionsScript.onload = resolve;
+                questionsScript.onerror = reject;
+            });
+        }
+
+        function updatePageContent() {
+            // Update page title
+            document.title = `${currentSubject.name} Quiz`;
+
+            // Update heading
+            const heading = document.querySelector('h1');
+            if (heading) heading.textContent = `${currentSubject.name} Quiz`;
+
+            // Update navbar title
+            const navbarTitle = document.querySelector('#navbar h2');
+            if (navbarTitle) navbarTitle.textContent = `${currentSubject.name} Quiz`;
+
+            // Update navbar back link
+            const navbarBackLink = document.querySelector('#navbar .back a');
+            if (navbarBackLink) navbarBackLink.href = `unit-select.html?subject=${currentSubject.id}`;
+
+            // Update quiz back link
+            const quizBackLink = document.querySelector('.quiz-back-link a');
+            if (quizBackLink) quizBackLink.href = `unit-select.html?subject=${currentSubject.id}`;
+        }
+
+        function renderQuiz() {
+            const quizContent = document.getElementById('quizContent');
+
+            let html = `<h1>${currentSubject.name} Quiz</h1>`;
+            html += `<p style="color: var(--bg-c-color); margin-bottom: 30px;">Answer all questions. You must select an option for each question.</p>`;
+
+            currentQuestions.forEach((question, index) => {
+                const isAnswered = userAnswers[index] !== null;
+                html += `
+                    <div class="quiz-question-card">
+                        <div class="quiz-question-number">Question ${index + 1} of ${currentQuestions.length}</div>
+                        <div class="quiz-question-text">${question.question}</div>
+                        <div class="quiz-options">
+                            ${question.options.map((option, optionIndex) => {
+                                const letter = String.fromCharCode(65 + optionIndex); // A, B, C, D
+                                const isSelected = userAnswers[index] === optionIndex;
+                                let optionClass = 'quiz-option';
+                                if (isSelected) optionClass += ' selected';
+
+                                return `
+                                    <label class="${optionClass}">
+                                        <input type="radio" name="question${index}" value="${optionIndex}" ${isSelected ? 'checked' : ''} onchange="selectOption(${index}, ${optionIndex})">
+                                        <span class="quiz-option-label">${option}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            const allAnswered = answeredCount === currentQuestions.length;
+
+            html += `
+                <div class="quiz-controls">
+                    <div class="quiz-progress-info">
+                        ${answeredCount} of ${currentQuestions.length} questions answered
+                    </div>
+                    <button class="quiz-submit-btn" id="submitBtn" ${allAnswered ? '' : 'disabled'} onclick="submitQuiz()">
+                        Submit Quiz
+                    </button>
+                </div>
+                <div class="quiz-validation-message" id="validationMsg">
+                    Please answer all questions before submitting.
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            renderQuiz();
+        }
+
+        function submitQuiz() {
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            if (answeredCount !== currentQuestions.length) {
+                document.getElementById('validationMsg').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('validationMsg').style.display = 'none';
+            showResults();
+
+            // Smooth scroll to top to show results
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showResults() {
+            quizCompleted = true;
+
+            // Calculate score
+            let correctCount = 0;
+            currentQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+
+            const score = Math.round((correctCount / currentQuestions.length) * 100);
+
+            // Determine score category and emojis
+            let scoreClass = 'score-poor';
+            let emojiCategory = '';
+            let emojiText = '';
+
+            if (score >= 75) {
+                scoreClass = 'score-perfect';
+                emojiCategory = 'Excellent!';
+                emojiText = '😎😎🥳🥳';
+            } else if (score >= 50) {
+                scoreClass = 'score-good';
+                emojiCategory = 'Good Job!';
+                emojiText = '🤓🤓😉😉';
+            } else if (score >= 25) {
+                scoreClass = 'score-average';
+                emojiCategory = 'Keep Trying!';
+                emojiText = '😵‍💫😵‍💫😶😶';
+            } else {
+                scoreClass = 'score-poor';
+                emojiCategory = 'Need More Practice!';
+                emojiText = '👻👻☠️☠️';
+            }
+
+            // Hide quiz, show results
+            document.getElementById('quizContent').style.display = 'none';
+            const resultsContent = document.getElementById('resultsContent');
+            resultsContent.style.display = 'block';
+
+            let html = `
+                <div class="quiz-results-container">
+                    <h1>Quiz Results</h1>
+                    <div class="quiz-score-display ${scoreClass}">${score}%</div>
+                    <div class="quiz-emoji-category">${emojiCategory}</div>
+                    <div class="quiz-emoji-display">${emojiText}</div>
+                    <div class="quiz-results-summary">
+                        <p>You answered <strong>${correctCount}</strong> out of <strong>${currentQuestions.length}</strong> questions correctly.</p>
+                    </div>
+                </div>
+            `;
+
+            // Show all questions with correct/incorrect highlighting
+            html += `<h2 style="margin-top: 40px;">Review Your Answers</h2>`;
+
+            currentQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+
+                html += `
+                    <div class="quiz-question-card">
+                        <div class="quiz-question-number">Question ${index + 1} ${isCorrect ? '<span style="color: #28a745;">✓ Correct</span>' : '<span style="color: #dc3545;">✗ Incorrect</span>'}</div>
+                        <div class="quiz-question-text">${question.question}</div>
+                        <div class="quiz-options">
+                            ${question.options.map((option, optionIndex) => {
+                                const letter = String.fromCharCode(65 + optionIndex);
+                                let optionClass = 'quiz-option';
+                                let statusText = '';
+
+                                if (optionIndex === question.correct) {
+                                    optionClass += ' correct';
+                                    statusText = '<span class="quiz-status-correct">✓ Correct Answer</span>';
+                                } else if (optionIndex === userAnswer && !isCorrect) {
+                                    optionClass += ' incorrect';
+                                    statusText = '<span class="quiz-status-incorrect">✗ Your Answer</span>';
+                                }
+
+                                return `
+                                    <div class="${optionClass}">
+                                        <span class="quiz-letter-label">${letter}.</span>
+                                        <span class="quiz-option-label">${option}</span>
+                                        ${statusText}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="unit-select.html?subject=${currentSubject.id}" class="quiz-retake-btn">Take Another Quiz</a>
+                    <a href="../index.html" class="quiz-retake-btn">Back to Homepage</a>
+                </div>
+            `;
+
+            resultsContent.innerHTML = html;
+        }
+    </script>
+
+    <script type="module" src="../public/main.js"></script>
+</body>
+</html>

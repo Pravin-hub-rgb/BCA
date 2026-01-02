@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Quizzes - BCA Notes</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../public/styleouter.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="../index.html"><img src="../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>Available Quizzes</h2>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h1>Choose a Subject to Quiz</h1>
+
+        <div class="quiz-subject-list">
+            <div class="quiz-subject-item">
+                <div class="quiz-subject-info">
+                    <h3>Computer Graphics</h3>
+                    <p>Semester 6 - Test your knowledge of graphics programming, algorithms, and visualization techniques.</p>
+                    <div class="quiz-subject-meta">
+                        <span>5 Units Available</span>
+                        <span>•</span>
+                        <span>100+ Questions</span>
+                    </div>
+                </div>
+                <a href="unit-select.html" class="quiz-subject-btn">Start Quiz</a>
+            </div>
+        </div>
+
+        <div class="quiz-coming-soon">
+            <h3>Coming Soon...</h3>
+            <p>More subjects will be added with quiz functionality in future updates!</p>
+        </div>
+    </div>
+
+    <script src="subjects-loader.js"></script>
+    <script>
+        // Load and display available subjects
+        function initializeSubjectsPage() {
+            try {
+                const subjects = window.quizSubjectsLoader.loadAvailableSubjects();
+
+                if (subjects.length === 0) {
+                    displayNoSubjects();
+                    return;
+                }
+
+                displaySubjects(subjects);
+            } catch (error) {
+                console.error('Error loading subjects:', error);
+                displayNoSubjects();
+            }
+        }
+
+        function displaySubjects(subjects) {
+            const container = document.querySelector('.quiz-subject-list');
+            container.innerHTML = '';
+
+            subjects.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = 'quiz-subject-item';
+
+                subjectCard.innerHTML = `
+                    <div class="quiz-subject-info">
+                        <h3>${subject.name}</h3>
+                        <p>${subject.description}</p>
+                        <div class="quiz-subject-meta">
+                            <span>${subject.unitCount} Units Available</span>
+                            <span>•</span>
+                            <span>${subject.totalQuestions}+ Questions</span>
+                        </div>
+                    </div>
+                    <a href="unit-select.html?subject=${subject.id}" class="quiz-subject-btn">Start Quiz</a>
+                `;
+
+                container.appendChild(subjectCard);
+            });
+        }
+
+        function displayNoSubjects() {
+            const container = document.querySelector('.quiz-subject-list');
+            container.innerHTML = `
+                <div class="quiz-subject-item">
+                    <div class="quiz-subject-info">
+                        <h3>No Quiz Subjects Available</h3>
+                        <p>Quiz subjects will be added soon. Check back later!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeSubjectsPage);
+    </script>
+    <script type="module" src="../public/main.js"></script>
+</body>
+</html>

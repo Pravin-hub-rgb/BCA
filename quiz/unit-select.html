@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Quiz - Unit Selection</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../public/styleouter.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../public/logo/favicon_io/favicon.ico">
+</head>
+
+<body class="bg-c">
+    <div id="navbar" class="grad">
+        <div class="back">
+            <a href="subjects.html"><img src="../public/back.svg" alt=""></a>
+        </div>
+        <div>
+            <h2>Computer Graphics Quiz</h2>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h1>Select Units for Quiz</h1>
+
+        <div class="quiz-info">
+            <h3>Quiz Rules:</h3>
+            <ul>
+                <li>Select one or more units to include in your quiz</li>
+                <li><strong>1 unit selected:</strong> 15 questions</li>
+                <li><strong>2 units selected:</strong> 20 questions (10 from each)</li>
+                <li><strong>3 units selected:</strong> 25 questions</li>
+                <li><strong>4 units selected:</strong> 30 questions</li>
+                <li><strong>5 units selected:</strong> 40 questions</li>
+                <li>All questions are multiple choice with 4 options</li>
+                <li>You must select an answer for each question</li>
+                <li>Results will be shown after completion</li>
+            </ul>
+        </div>
+
+        <form id="unitForm">
+            <div class="quiz-unit-selection">
+                <!-- Units will be loaded dynamically -->
+            </div>
+
+            <button type="submit" class="quiz-start-btn" id="startBtn" disabled>Start Quiz</button>
+        </form>
+    </div>
+
+    <script src="subjects-loader.js"></script>
+    <script>
+        let currentSubject = null;
+        let currentUnits = [];
+
+        // Get subject ID from URL parameters
+        function getSubjectIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('subject') || 'cg'; // Default to cg for backward compatibility
+        }
+
+        async function initializeUnitSelection() {
+            const subjectId = getSubjectIdFromUrl();
+
+            try {
+                // Load available subjects
+                const subjects = window.quizSubjectsLoader.loadAvailableSubjects();
+                currentSubject = subjects.find(s => s.id === subjectId);
+
+                if (!currentSubject) {
+                    alert('Subject not found!');
+                    window.location.href = 'subjects.html';
+                    return;
+                }
+
+                // Load units for this subject
+                await loadSubjectUnits(subjectId);
+
+                // Update page title and content
+                updatePageContent();
+
+                // Create unit checkboxes
+                createUnitCheckboxes();
+
+                // Initialize button state
+                updateStartButton();
+
+            } catch (error) {
+                console.error('Error initializing unit selection:', error);
+                alert('Error loading subject. Please try again.');
+                window.location.href = 'subjects.html';
+            }
+        }
+
+        async function loadSubjectUnits(subjectId) {
+            // Load units script
+            const unitsScript = document.createElement('script');
+            unitsScript.src = `subjects/${subjectId}/units.js`;
+            document.head.appendChild(unitsScript);
+
+            await new Promise((resolve, reject) => {
+                unitsScript.onload = resolve;
+                unitsScript.onerror = reject;
+            });
+
+            // Get units data
+            const unitsVarName = `${subjectId}Units`;
+            currentUnits = window[unitsVarName] || [];
+        }
+
+        function updatePageContent() {
+            // Update page title
+            document.title = `${currentSubject.name} Quiz - Unit Selection`;
+
+            // Update heading
+            document.querySelector('h1').textContent = `Select Units for ${currentSubject.name} Quiz`;
+
+            // Update navbar title
+            document.querySelector('#navbar h2').textContent = `${currentSubject.name} Quiz`;
+        }
+
+        function createUnitCheckboxes() {
+            const container = document.querySelector('.quiz-unit-selection');
+            container.innerHTML = '';
+
+            currentUnits.forEach(unit => {
+                const unitDiv = document.createElement('div');
+                unitDiv.className = 'quiz-unit-item';
+
+                unitDiv.innerHTML = `
+                    <input type="checkbox" id="unit${unit.id}" name="units" value="${unit.id}">
+                    <label for="unit${unit.id}">Unit ${unit.id}: ${unit.name}</label>
+                `;
+
+                container.appendChild(unitDiv);
+            });
+
+            // Add event listeners to checkboxes
+            document.querySelectorAll('input[name="units"]').forEach(checkbox => {
+                checkbox.addEventListener('change', updateStartButton);
+            });
+        }
+
+        function updateStartButton() {
+            const checkboxes = document.querySelectorAll('input[name="units"]:checked');
+            const selectedUnits = Array.from(checkboxes).map(cb => parseInt(cb.value));
+            const startBtn = document.getElementById('startBtn');
+
+            if (selectedUnits.length > 0) {
+                startBtn.disabled = false;
+                startBtn.textContent = 'Start Quiz';
+            } else {
+                startBtn.disabled = true;
+                startBtn.textContent = 'Start Quiz';
+            }
+        }
+
+        function getTotalQuestions(numSelected) {
+            if (currentSubject && currentSubject.questionDistribution) {
+                return currentSubject.questionDistribution[numSelected] || 15;
+            }
+            // Fallback distribution
+            const distribution = { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 };
+            return distribution[numSelected] || 15;
+        }
+
+        document.getElementById('unitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="units"]:checked');
+            const selectedUnits = Array.from(checkboxes).map(cb => parseInt(cb.value));
+
+            if (selectedUnits.length === 0) {
+                alert('Please select at least one unit.');
+                return;
+            }
+
+            // Store subject and selected units in localStorage
+            localStorage.setItem('currentQuizSubject', currentSubject.id);
+            localStorage.setItem(`${currentSubject.id}QuizUnits`, JSON.stringify(selectedUnits));
+
+            // Redirect to quiz page with subject parameter
+            window.location.href = `quiz.html?subject=${currentSubject.id}`;
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeUnitSelection);
+    </script>
+
+    <script type="module" src="../public/main.js"></script>
+</body>
+</html>
