@@ -37,6 +37,7 @@ import { NavigationManager } from './modules/ui/NavigationManager.js';
 import { SearchManager } from './modules/ui/SearchManager.js';
 import { SemesterManager } from './modules/ui/SemesterManager.js';
 import { GitManager } from './modules/ui/GitManager.js';
+import { SubjectManager } from './modules/ui/SubjectManager.js';
 
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize all managers
@@ -47,16 +48,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchManager = new SearchManager();
   const gitManager = new GitManager();
   const uiManager = new UIManager();
+  const subjectManager = new SubjectManager();
 
   // Initialize UI manager first to clean pre tags before other processing
   uiManager.init();
-  
+
   themeManager.init();
   semesterManager.init();
   notesManager.init();
   navigationManager.init();
   searchManager.init();
   gitManager.init();
+  subjectManager.init();
 
   // Optional: expose to window if retry button uses it
   window.gitManager = gitManager;
