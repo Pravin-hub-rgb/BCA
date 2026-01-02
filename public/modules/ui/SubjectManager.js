@@ -136,22 +136,27 @@ export class SubjectManager {
 
     // Render pinned section if there are pinned subjects
     if (pinned.length > 0) {
-      const pinnedSection = this.createCategorySection('Pinned', pinned);
+      const pinnedSection = this.createCategorySection('Pinned', pinned, false);
       notesContainer.appendChild(pinnedSection);
     }
 
-    // Render category sections
+    // Render category sections - include pinned subjects in their categories too
     const categories = this.getCategories();
     categories.forEach(category => {
       const categorySubjects = unpinned.filter(subject => subject.category === category);
-      if (categorySubjects.length > 0) {
-        const categorySection = this.createCategorySection(category, categorySubjects);
+      const pinnedInCategory = pinned.filter(subject => subject.category === category);
+
+      // Combine unpinned and pinned subjects for this category
+      const allCategorySubjects = [...categorySubjects, ...pinnedInCategory];
+
+      if (allCategorySubjects.length > 0) {
+        const categorySection = this.createCategorySection(category, allCategorySubjects, true);
         notesContainer.appendChild(categorySection);
       }
     });
   }
 
-  createCategorySection(categoryName, subjects) {
+  createCategorySection(categoryName, subjects, isCategorySection = false) {
     const section = document.createElement('div');
     section.className = 'category-section';
 
@@ -164,7 +169,7 @@ export class SubjectManager {
     grid.className = 'subject-grid';
 
     subjects.forEach(subject => {
-      const card = this.createSubjectCard(subject);
+      const card = this.createSubjectCard(subject, isCategorySection);
       grid.appendChild(card);
     });
 
@@ -172,9 +177,16 @@ export class SubjectManager {
     return section;
   }
 
-  createSubjectCard(subject) {
+  createSubjectCard(subject, isCategorySection = false) {
     const card = document.createElement('div');
-    card.className = 'subject-card';
+    let cardClass = 'subject-card';
+
+    // Add highlighting class for pinned subjects in category sections
+    if (isCategorySection && this.isPinned(subject.name)) {
+      cardClass += ' pinned-highlight';
+    }
+
+    card.className = cardClass;
 
     const heartIcon = document.createElement('div');
     heartIcon.className = `heart-icon ${this.isPinned(subject.name) ? 'pinned' : ''}`;

@@ -707,3 +707,120 @@ img.social-logo {
 .terminal-section {
   padding: 5px 0;
 }
+
+/* ===== SUBJECT GRID STYLES ===== */
+
+.category-section {
+  background-color: var(--sem-bg-color);
+  border-radius: 15px;
+  margin: 10px 0;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-header {
+  font-size: 24px;
+  text-align: center;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+.subject-grid {
+  display: grid;
+  margin: 0 0 15px;
+  width: 100%;
+}
+
+.subject-grid > div {
+  border: 0.5px solid grey;
+  border-radius: 10px;
+  margin: 5px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subject-grid > div:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.subject-card.pinned-highlight {
+  border-color: #ff4757 !important;
+  background-color: rgba(255, 71, 87, 0.1) !important;
+  box-shadow: 0 0 8px rgba(255, 71, 87, 0.3);
+}
+
+.heart-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.heart-icon:hover {
+  color: #ff6b6b;
+  transform: scale(1.1);
+}
+
+.heart-icon.pinned {
+  color: #ff4757;
+}
+
+.subject-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--atag-color);
+  margin: 0;
+  word-wrap: break-word;
+  line-height: 1.3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive grid layout - same as original sem-container */
+@media only screen and (min-width: 600px) {
+  .subject-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .subject-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .subject-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .subject-grid > div {
+    height: 65px !important;
+  }
+
+  .subject-name {
+    font-size: 14px;
+  }
+
+  .heart-icon {
+    font-size: 14px;
+  }
+}
