@@ -15,6 +15,7 @@ This document outlines potential enhancements and modernization ideas for the BC
 ### **React Advantages**
 
 #### **🎯 Component Architecture**
+{% raw %}
 ```jsx
 // Reusable Quiz Components
 const QuizCard = ({ subject, onSelect }) => (
@@ -44,8 +45,10 @@ const SelectedUnitsDisplay = ({ selectedUnits, allUnits }) => {
   );
 };
 ```
+{% endraw %}
 
 #### **📊 Advanced State Management**
+{% raw %}
 ```jsx
 // Quiz Context with useReducer
 const QuizProvider = ({ children }) => {
@@ -65,10 +68,12 @@ const QuizProvider = ({ children }) => {
   );
 };
 ```
+{% endraw %}
 
 #### **🔧 Enhanced Features**
 
 ##### **Real-time Unit Selection Display**
+{% raw %}
 ```jsx
 const UnitSelector = ({ units, selectedUnits, onUnitToggle }) => {
   const [hoveredUnit, setHoveredUnit] = useState(null);
@@ -124,8 +129,10 @@ const UnitSelector = ({ units, selectedUnits, onUnitToggle }) => {
   );
 };
 ```
+{% endraw %}
 
 ##### **Progress Tracking & Analytics**
+{% raw %}
 ```jsx
 const QuizProgress = ({ currentQuestion, totalQuestions, timeRemaining }) => {
   const progress = ((currentQuestion + 1) / totalQuestions) * 100;
@@ -150,8 +157,10 @@ const QuizProgress = ({ currentQuestion, totalQuestions, timeRemaining }) => {
   );
 };
 ```
+{% endraw %}
 
 ##### **Results with Unit Breakdown**
+{% raw %}
 ```jsx
 const QuizResults = ({ results, selectedUnits, allUnits }) => {
   const unitPerformance = selectedUnits.map(unitId => {
@@ -197,6 +206,7 @@ const QuizResults = ({ results, selectedUnits, allUnits }) => {
   );
 };
 ```
+{% endraw %}
 
 #### **⚡ Performance Optimizations**
 - **React.memo()**: Prevent unnecessary re-renders
