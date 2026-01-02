@@ -140,14 +140,14 @@ export class SubjectManager {
       notesContainer.appendChild(pinnedSection);
     }
 
-    // Render category sections - include pinned subjects in their categories too
+    // Render category sections - maintain original subject order within categories
     const categories = this.getCategories();
     categories.forEach(category => {
-      const categorySubjects = unpinned.filter(subject => subject.category === category);
-      const pinnedInCategory = pinned.filter(subject => subject.category === category);
-
-      // Combine unpinned and pinned subjects for this category
-      const allCategorySubjects = [...categorySubjects, ...pinnedInCategory];
+      // Get all subjects for this category in their original order
+      const allCategorySubjects = this.subjects.filter(subject =>
+        subject.category === category &&
+        (unpinned.some(u => u.name === subject.name) || pinned.some(p => p.name === subject.name))
+      );
 
       if (allCategorySubjects.length > 0) {
         const categorySection = this.createCategorySection(category, allCategorySubjects, true);
