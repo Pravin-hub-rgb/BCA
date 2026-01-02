@@ -25,6 +25,11 @@
     <div class="content-box">
         <h1>Choose a Subject to Quiz</h1>
 
+        <div id="quiz-searchbox-container">
+            <input type="text" id="quiz-search" placeholder="Search for quiz subjects...">
+            <div id="quiz-suggestions"></div>
+        </div>
+
         <div class="quiz-subject-list">
             <div class="quiz-subject-item">
                 <div class="quiz-subject-info">
@@ -88,6 +93,9 @@
 
                 container.appendChild(subjectCard);
             });
+
+            // Store subjects for search functionality
+            allSubjects = subjects;
         }
 
         function displayNoSubjects() {
@@ -102,8 +110,73 @@
             `;
         }
 
+        // Quiz Search Functionality
+        let allSubjects = [];
+
+        function initializeQuizSearch() {
+            const searchInput = document.getElementById('quiz-search');
+            const suggestionsContainer = document.getElementById('quiz-suggestions');
+
+            if (!searchInput || !suggestionsContainer) return;
+
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.trim().toLowerCase();
+
+                if (query === "") {
+                    suggestionsContainer.style.display = 'none';
+                    displaySubjects(allSubjects); // Show all subjects when search is empty
+                } else {
+                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`\\b${escapedQuery}`, 'i');
+
+                    const matchingSubjects = allSubjects
+                        .filter(subject => regex.test(subject.name))
+                        .sort((a, b) => {
+                            const aStartsWith = a.name.toLowerCase().startsWith(query);
+                            const bStartsWith = b.name.toLowerCase().startsWith(query);
+
+                            if (aStartsWith && !bStartsWith) {
+                                return -1;
+                            } else if (!aStartsWith && bStartsWith) {
+                                return 1;
+                            } else {
+                                return a.name.localeCompare(b.name);
+                            }
+                        });
+
+                    // Show suggestions if there are matches
+                    if (matchingSubjects.length > 0) {
+                        suggestionsContainer.innerHTML = '';
+                        matchingSubjects.forEach(subject => {
+                            const anchor = document.createElement('a');
+                            anchor.innerText = subject.name;
+                            anchor.href = `unit-select.html?subject=${subject.id}`;
+                            suggestionsContainer.appendChild(anchor);
+                        });
+                        suggestionsContainer.style.display = 'block';
+                    } else {
+                        suggestionsContainer.innerHTML = 'No matching quiz subjects found';
+                        suggestionsContainer.style.display = 'block';
+                    }
+
+                    // Filter displayed subjects
+                    displaySubjects(matchingSubjects);
+                }
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+                    suggestionsContainer.style.display = 'none';
+                }
+            });
+        }
+
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializeSubjectsPage);
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeSubjectsPage();
+            initializeQuizSearch();
+        });
     </script>
     <script type="module" src="../public/main.js"></script>
 </body>

@@ -24,8 +24,93 @@ quiz/
 
 ### Current Subjects
 
+- **Computer Graphics** (`cg`) - 5 units, 100 questions ✅
+- **Android Programming** (`android`) - 5 units, 100 questions ✅
+- **Software Project Management and Information Systems** (`spm`) - 5 units, 100 questions ✅
+- **Digital Electronics** (`digital_electronics`) - 5 units, 100 questions ✅
+- **Web Technologies** (`web`) - 5 units, 100 questions ✅
+- **Data Warehousing and Data Mining** (`dw_dm`) - 5 units, 100 questions ✅
+
+## Quiz Development Status
+
+### ✅ **Completed Quizzes**
 - **Computer Graphics** (`cg`) - 5 units, 100 questions
+  - Unit 1: Introduction to Computer Graphics (20 questions)
+  - Unit 2: Mathematics for Computer Graphics (20 questions)
+  - Unit 3: Output Primitives & Clipping (20 questions)
+  - Unit 4: 2D & 3D Transformations (20 questions)
+  - Unit 5: Animation & Graphics Standards (20 questions)
+
 - **Android Programming** (`android`) - 5 units, 100 questions
+  - Unit 1: Introduction to Android (20 questions)
+  - Unit 2: App Components (20 questions)
+  - Unit 3: Intents and User Interface (20 questions)
+  - Unit 4: SQLite Database (20 questions)
+  - Unit 5: Telephony and Sensors (20 questions)
+
+- **Software Project Management and Information Systems** (`spm`) - 5 units, 100 questions
+  - Unit 1: Overview of Software Project Planning (20 questions)
+  - Unit 2: Project Scheduling & Software Configuration Management (20 questions)
+  - Unit 3: Information and Information Systems (20 questions)
+  - Unit 4: Concepts of Planning & Control (20 questions)
+  - Unit 5: Enterprise Resources Planning (ERP) (20 questions)
+
+- **Digital Electronics** (`digital_electronics`) - 5 units, 100 questions
+  - Unit 1: Introduction to Digital Electronics & Number Systems (20 questions)
+  - Unit 2: Logic Gates & Boolean Algebra (20 questions)
+  - Unit 3: Combinational Circuits (25 questions)
+  - Unit 4: Sequential Circuits & Flip-Flops (30 questions)
+  - Unit 5: Counters (40 questions)
+
+- **Web Technologies** (`web`) - 5 units, 100 questions
+  - Unit 1: Web Technology Foundations (20 questions)
+  - Unit 2: HTML & CSS (20 questions)
+  - Unit 3: Extensible Markup Language (XML) (25 questions)
+  - Unit 4: Client Side Scripting with JavaScript (30 questions)
+  - Unit 5: Server Side Scripting with PHP (40 questions)
+
+### ❌ **Planned Quizzes** (Not Yet Created)
+*Update this section as new quizzes are developed*
+
+#### **Semester 6 Subjects:**
+- **Data Mining** (`dm`) - Expected: 5 units, 100 questions
+- **Machine Learning** (`ml`) - Expected: 5 units, 100 questions
+- **Cloud Computing** (`cloud`) - Expected: 5 units, 100 questions
+
+#### **Semester 5 Subjects:**
+- **Software Engineering** (`se`) - Expected: 5 units, 100 questions
+- **Database Management Systems** (`dbms`) - Expected: 5 units, 100 questions
+- **Computer Networks** (`cn`) - Expected: 5 units, 100 questions
+- **Operating Systems** (`os`) - Expected: 5 units, 100 questions
+
+#### **Semester 4 Subjects:**
+- **Software Project Management** (`spm`) - ✅ **COMPLETED**
+- **Computer Organization** (`co`) - Expected: 5 units, 100 questions
+- **Data Structures** (`ds`) - Expected: 5 units, 100 questions
+- **Discrete Mathematics** (`dm`) - Expected: 5 units, 100 questions
+
+#### **Semester 3 Subjects:**
+- **Object Oriented Programming** (`oop`) - Expected: 5 units, 100 questions
+- **Computer Architecture** (`ca`) - Expected: 5 units, 100 questions
+- **Data Communication** (`dc`) - Expected: 5 units, 100 questions
+- **System Programming** (`sp`) - Expected: 5 units, 100 questions
+
+#### **Semester 2 Subjects:**
+- **Advanced C Programming** (`ac`) - Expected: 5 units, 100 questions
+- **Digital Electronics** (`digital_electronics`) - ✅ **COMPLETED**
+- **Mathematics for Computing** (`mc`) - Expected: 5 units, 100 questions
+
+#### **Semester 1 Subjects:**
+- **Computer Fundamentals** (`cf`) - Expected: 5 units, 100 questions
+- **Programming in C** (`pc`) - Expected: 5 units, 100 questions
+- **Mathematics Foundation** (`mf`) - Expected: 5 units, 100 questions
+- **Communication Skills** (`cs`) - Expected: 5 units, 100 questions
+
+### 📊 **Quiz Statistics**
+- **Total Subjects Available:** 6/20+ (30% complete)
+- **Total Questions Created:** 600 questions
+- **Average Questions per Subject:** 100 questions
+- **Average Questions per Unit:** 20 questions
 
 ## How It Works
 
@@ -83,6 +168,338 @@ The quiz system follows these rules for question distribution:
 - **5 units selected**: 40 questions
 
 All questions are randomly selected and shuffled to ensure different experiences each time.
+
+## 🚀 **Quiz Subject Implementation Workflow**
+
+This section provides a **complete step-by-step workflow** for adding new quiz subjects to the BCA Quiz System. Follow this process for consistent, error-free implementations.
+
+---
+
+## 📋 **Complete Implementation Checklist**
+
+### **Phase 1: Preparation & Research**
+- [ ] **Identify subject** and confirm syllabus availability
+- [ ] **Analyze syllabus structure** (units, topics, weightage)
+- [ ] **Review existing quiz subjects** for consistency
+- [ ] **Plan unit structure** (typically 5 units, 20 questions each)
+
+### **Phase 2: Content Creation**
+- [ ] **Create questions** (20 per unit, 4 options, 1 correct)
+- [ ] **Ensure no abbreviations** (follow language rules)
+- [ ] **Verify syllabus coverage** (all topics included)
+- [ ] **Test question quality** (clear, unambiguous, single-concept)
+
+### **Phase 3: File Structure Setup**
+- [ ] **Create subject folder** (`quiz/subjects/{subject-id}/`)
+- [ ] **Create config.js** (metadata and settings)
+- [ ] **Create units.js** (unit definitions and descriptions)
+- [ ] **Create questions.js** (question arrays and generation logic)
+
+### **Phase 4: System Integration**
+- [ ] **Add to subjects-loader.js** (register new subject)
+- [ ] **Update subjects.html** (add to search functionality)
+- [ ] **Test quiz flow** (subject → units → quiz → results)
+- [ ] **Verify responsive design** (mobile compatibility)
+
+### **Phase 5: Documentation & Completion**
+- [ ] **Update quiz-system.md** (add to completed quizzes)
+- [ ] **Update statistics** (subject count, question count)
+- [ ] **Move from "Planned" to "Completed"** in documentation
+- [ ] **Final testing** and quality assurance
+
+---
+
+## 🔄 **Detailed Step-by-Step Process**
+
+### **Step 1: Syllabus Analysis & Planning**
+```bash
+# 1. Find subject resources
+ls resources/sem*/{subject-folder}/
+
+# 2. Read syllabus structure
+cat resources/sem*/{subject-folder}/index.html
+
+# 3. Plan unit breakdown (typically 5 units)
+# - Unit 1: Introduction/Fundamentals
+# - Unit 2: Core Concepts
+# - Unit 3: Advanced Topics
+# - Unit 4: Applications
+# - Unit 5: Special Topics/Projects
+```
+
+### **Step 2: Question Creation**
+```bash
+# Create comprehensive questions following guidelines:
+# - 20 questions per unit minimum
+# - 4 multiple choice options each
+# - 1 definitive correct answer
+# - No abbreviations (full terminology)
+# - Syllabus coverage 100%
+# - Mix of difficulty levels
+```
+
+### **Step 3: Subject Folder Setup**
+```bash
+# Create directory structure
+mkdir -p quiz/subjects/{subject-id}
+
+# Create required files
+touch quiz/subjects/{subject-id}/config.js
+touch quiz/subjects/{subject-id}/units.js
+touch quiz/subjects/{subject-id}/questions.js
+```
+
+### **Step 4: File Implementation**
+
+#### **config.js Template:**
+```javascript
+// quiz/subjects/{subject-id}/config.js
+const {subjectId}Config = {
+    id: '{subject-id}',
+    name: 'Subject Full Name',
+    description: 'Brief description of what the quiz covers',
+    unitCount: 5,
+    totalQuestions: 100,
+    questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 }
+};
+
+// Make available globally
+if (typeof window !== 'undefined') {
+    window.{subjectId}Config = {subjectId}Config;
+}
+```
+
+#### **units.js Template:**
+```javascript
+// quiz/subjects/{subject-id}/units.js
+const {subjectId}Units = [
+    {
+        id: 1,
+        name: "Unit 1 Name",
+        description: "Detailed description of unit content..."
+    },
+    // Add 4 more units...
+];
+
+// Make available globally
+if (typeof window !== 'undefined') {
+    window.{subjectId}Units = {subjectId}Units;
+}
+```
+
+#### **questions.js Template:**
+```javascript
+// quiz/subjects/{subject-id}/questions.js
+const {subjectId}Questions = {
+    1: [ // Unit 1: 20 questions
+        {
+            question: "Question text?",
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            correct: 0  // Index of correct answer
+        },
+        // 19 more questions...
+    ],
+    // Units 2-5: 20 questions each...
+};
+
+// Generate function
+function generateQuizQuestions(selectedUnits) {
+    let questions = [];
+    selectedUnits.forEach(unitId => {
+        if ({subjectId}Questions[unitId]) {
+            {subjectId}Questions[unitId].forEach(question => {
+                questions.push({...question, unit: unitId});
+            });
+        }
+    });
+
+    // Shuffle questions
+    for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+
+    return questions;
+}
+
+// Make available globally
+if (typeof window !== 'undefined') {
+    window.generateQuizQuestions = generateQuizQuestions;
+}
+```
+
+### **Step 5: System Integration**
+
+#### **Update subjects-loader.js:**
+```javascript
+availableSubjects = [
+    // Existing subjects...
+    {
+        id: '{subject-id}',
+        name: 'Subject Full Name',
+        description: 'Brief description...',
+        unitCount: 5,
+        totalQuestions: 100,
+        questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+        unitsPath: 'quiz/subjects/{subject-id}/units.js',
+        questionsPath: 'quiz/subjects/{subject-id}/questions.js'
+    }
+];
+```
+
+#### **Search Integration (Automatic):**
+The search functionality in `quiz/subjects.html` automatically includes new subjects once added to `subjects-loader.js`.
+
+### **Step 6: Documentation Update**
+
+#### **Update quiz-system.md:**
+1. Add subject to "Completed Quizzes" section
+2. Update statistics (total subjects, total questions)
+3. Move from "Planned Quizzes" to "Completed Quizzes"
+4. Add unit breakdown with question counts
+
+---
+
+## 📊 **Quality Assurance Checklist**
+
+### **Content Quality:**
+- [ ] **Question Count**: 20+ questions per unit (100+ total)
+- [ ] **Answer Accuracy**: All correct answers verified
+- [ ] **No Abbreviations**: Full terminology used throughout
+- [ ] **Syllabus Coverage**: All topics adequately represented
+- [ ] **Difficulty Balance**: Mix of easy, medium, hard questions
+
+### **Technical Quality:**
+- [ ] **File Structure**: All required files present and correctly named
+- [ ] **JavaScript Syntax**: No syntax errors, proper exports
+- [ ] **Integration**: Subject appears in quiz selection
+- [ ] **Navigation**: Quiz flow works (subject → units → quiz → results)
+- [ ] **Responsive**: Works on mobile and desktop
+
+### **User Experience:**
+- [ ] **Search Functionality**: Subject appears in search results
+- [ ] **Quiz Flow**: Smooth navigation between pages
+- [ ] **Results Display**: Proper scoring and feedback
+- [ ] **Retake Option**: Ability to restart quiz
+- [ ] **Theme Support**: Works in light and dark modes
+
+---
+
+## 🎯 **Quick Implementation Commands**
+
+```bash
+# 1. Create subject folder and files
+mkdir -p quiz/subjects/{subject-id}
+touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
+
+# 2. Add to subjects loader
+# Edit quiz/subjects-loader.js and add subject entry
+
+# 3. Update documentation
+# Edit docs/quiz-system.md - move to completed, update stats
+
+# 4. Test implementation
+# Open quiz/subjects.html and verify subject appears
+```
+
+---
+
+## 📈 **Progress Tracking Template**
+
+Use this template for tracking implementation progress:
+
+```
+Subject: {Subject Name}
+Start Date: {Date}
+Target Completion: {Date}
+
+Phase 1: Preparation & Research
+- [x] Syllabus analysis completed
+- [x] Unit structure planned
+- [ ] Question outline created
+
+Phase 2: Content Creation
+- [ ] Unit 1 questions (20/20)
+- [ ] Unit 2 questions (20/20)
+- [ ] Unit 3 questions (20/20)
+- [ ] Unit 4 questions (20/20)
+- [ ] Unit 5 questions (20/20)
+
+Phase 3: File Structure Setup
+- [ ] config.js created
+- [ ] units.js created
+- [ ] questions.js created
+
+Phase 4: System Integration
+- [ ] Added to subjects-loader.js
+- [ ] Tested quiz functionality
+- [ ] Verified responsive design
+
+Phase 5: Documentation & Completion
+- [ ] Documentation updated
+- [ ] Statistics updated
+- [ ] Final QA completed
+```
+
+---
+
+## 🚨 **Common Issues & Solutions**
+
+### **Issue: Subject not appearing in quiz**
+**Solution:** Check subjects-loader.js registration and file paths
+
+### **Issue: Questions not loading**
+**Solution:** Verify questions.js syntax and generateQuizQuestions function
+
+### **Issue: Search not working**
+**Solution:** Ensure subject added to subjects-loader.js (search is automatic)
+
+### **Issue: Styling broken**
+**Solution:** Check quiz/styles.css and ensure responsive breakpoints
+
+### **Issue: Quiz flow broken**
+**Solution:** Verify unit-select.html and quiz.html parameter handling
+
+---
+
+## 🎉 **Completion Criteria**
+
+A quiz subject implementation is **complete** when:
+
+- ✅ **Subject appears** in quiz/subjects.html
+- ✅ **Appears in search** results
+- ✅ **Unit selection** works correctly
+- ✅ **Quiz runs** without errors
+- ✅ **Results display** properly
+- ✅ **Documentation updated** with completion status
+- ✅ **Statistics updated** in quiz-system.md
+- ✅ **Responsive design** verified on mobile
+- ✅ **Theme support** (light/dark mode) confirmed
+
+---
+
+## 📚 **Reference Examples**
+
+### **Completed Subjects:**
+- **Computer Graphics** (`cg`) - 5 units, 100 questions
+- **Android Programming** (`android`) - 5 units, 100 questions
+- **Software Project Management & IS** (`spm`) - 5 units, 100 questions
+- **Digital Electronics** (`digital_electronics`) - 5 units, 100 questions
+
+### **File Structure Example:**
+```
+quiz/subjects/digital_electronics/
+├── config.js (metadata)
+├── units.js (unit definitions)
+└── questions.js (100 questions)
+```
+
+### **Integration Points:**
+- `quiz/subjects-loader.js` - Subject registration
+- `quiz/subjects.html` - Search integration (automatic)
+- `docs/quiz-system.md` - Documentation updates
+
+---
 
 ## Adding New Subjects
 

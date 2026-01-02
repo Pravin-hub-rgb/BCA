@@ -39,6 +39,36 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/spm/units.js',
                 questionsPath: 'quiz/subjects/spm/questions.js'
+            },
+            {
+                id: 'digital_electronics',
+                name: 'Digital Electronics',
+                description: 'Test your knowledge of digital systems, number systems, logic gates, combinational and sequential circuits, and counters.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/digital_electronics/units.js',
+                questionsPath: 'quiz/subjects/digital_electronics/questions.js'
+            },
+            {
+                id: 'web',
+                name: 'Web Technologies',
+                description: 'Test your knowledge of web development fundamentals including HTML, CSS, JavaScript, XML, and PHP server-side programming.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/web/units.js',
+                questionsPath: 'quiz/subjects/web/questions.js'
+            },
+            {
+                id: 'dw_dm',
+                name: 'Data Warehousing and Data Mining',
+                description: 'Test your knowledge of data warehouse concepts, OLAP systems, data mining techniques, and advanced data mining applications.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/dw_dm/units.js',
+                questionsPath: 'quiz/subjects/dw_dm/questions.js'
             }
             // Future subjects will be added here
         ];
