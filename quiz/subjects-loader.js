@@ -69,6 +69,86 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/dw_dm/units.js',
                 questionsPath: 'quiz/subjects/dw_dm/questions.js'
+            },
+            {
+                id: 'fml',
+                name: 'Fundamentals of Machine Learning',
+                description: 'Test your knowledge of statistical concepts, Python programming, and machine learning algorithms including supervised and unsupervised learning techniques.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/fml/units.js',
+                questionsPath: 'quiz/subjects/fml/questions.js'
+            },
+            {
+                id: 'dm',
+                name: 'Data Mining',
+                description: 'Test your knowledge of data mining concepts, techniques, algorithms, and applications in extracting valuable insights from large datasets.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/dm/units.js',
+                questionsPath: 'quiz/subjects/dm/questions.js'
+            },
+            {
+                id: 'cloud',
+                name: 'Cloud Computing',
+                description: 'Test your knowledge of cloud computing fundamentals, virtualization, cloud platforms, security, and advanced cloud technologies.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/cloud/units.js',
+                questionsPath: 'quiz/subjects/cloud/questions.js'
+            },
+            {
+                id: 'se',
+                name: 'Software Engineering',
+                description: 'Test your knowledge of software engineering principles, development methodologies, project management, and quality assurance techniques.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/se/units.js',
+                questionsPath: 'quiz/subjects/se/questions.js'
+            },
+            {
+                id: 'dbms',
+                name: 'Database Management Systems',
+                description: 'Test your knowledge of database concepts, relational model, SQL, normalization, transaction management, and database administration.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/dbms/units.js',
+                questionsPath: 'quiz/subjects/dbms/questions.js'
+            },
+            {
+                id: 'cn',
+                name: 'Computer Networks',
+                description: 'Test your knowledge of computer networks fundamentals, protocols, architectures, security, and network technologies.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/cn/units.js',
+                questionsPath: 'quiz/subjects/cn/questions.js'
+            },
+            {
+                id: 'os',
+                name: 'Operating Systems',
+                description: 'Test your knowledge of operating system concepts, process management, memory management, file systems, and system architecture.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/os/units.js',
+                questionsPath: 'quiz/subjects/os/questions.js'
+            },
+            {
+                id: 'co',
+                name: 'Computer Organization',
+                description: 'Test your knowledge of computer system organization, CPU architecture, memory systems, I/O organization, and computer arithmetic.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/co/units.js',
+                questionsPath: 'quiz/subjects/co/questions.js'
             }
             // Future subjects will be added here
         ];
