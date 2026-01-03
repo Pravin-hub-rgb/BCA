@@ -219,6 +219,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/ac/units.js',
                 questionsPath: 'quiz/subjects/ac/questions.js'
+            },
+            {
+                id: 'mc',
+                name: 'Mathematics for Computing',
+                description: 'Test your knowledge of mathematical concepts essential for computing including linear algebra, probability, statistics, and computational mathematics.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/mc/units.js',
+                questionsPath: 'quiz/subjects/mc/questions.js'
             }
             // Future subjects will be added here
         ];
