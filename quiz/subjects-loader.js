@@ -249,6 +249,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/pc/units.js',
                 questionsPath: 'quiz/subjects/pc/questions.js'
+            },
+            {
+                id: 'cs',
+                name: 'Communication Skills',
+                description: 'Test your knowledge of professional communication, technical writing, presentation skills, and interpersonal communication in professional settings.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/cs/units.js',
+                questionsPath: 'quiz/subjects/cs/questions.js'
             }
             // Future subjects will be added here
         ];
