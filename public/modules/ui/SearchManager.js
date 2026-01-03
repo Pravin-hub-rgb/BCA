@@ -30,7 +30,7 @@ export class SearchManager {
       { name: "Computer Graphics", path: "./resources/sem6/cg/index.html" },
       { name: "Computer Organization and Architecture", path: "./resources/sem3/coatbc304/index.html" },
       { name: "Data Structures and File Organization", path: "./resources/sem2/datastructure_and_FO/index.html" },
-      { name: "Digital Electronics", path: "./resources/sem2/digital_electronics/index.html" },
+      { name: "Digital Electronics", path: "./resources/sem2/digital_electronics/index.html", category: "Electronics & Systems" },
       { name: "Operating System", path: "./resources/sem2/operating_sys/index.html" },
 
       // Data & Databases (2)

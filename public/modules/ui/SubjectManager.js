@@ -42,7 +42,7 @@ export class SubjectManager {
       { name: "Computer Graphics", url: "./resources/sem6/cg/index.html", category: "Core Computer Science" },
       { name: "Computer Organization and Architecture", url: "./resources/sem3/coatbc304/index.html", category: "Core Computer Science" },
       { name: "Data Structures and File Organization", url: "./resources/sem2/datastructure_and_FO/index.html", category: "Core Computer Science" },
-      { name: "Digital Electronics", url: "./resources/sem2/digital_electronics/index.html", category: "Core Computer Science" },
+      { name: "Digital Electronics", url: "./resources/sem2/digital_electronics/index.html", category: "Electronics & Systems" },
       { name: "Operating System", url: "./resources/sem2/operating_sys/index.html", category: "Core Computer Science" },
 
       // Data & Databases (2)
