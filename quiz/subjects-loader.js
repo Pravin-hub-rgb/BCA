@@ -229,6 +229,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/mc/units.js',
                 questionsPath: 'quiz/subjects/mc/questions.js'
+            },
+            {
+                id: 'cf',
+                name: 'Computer Fundamentals',
+                description: 'Test your knowledge of basic computer concepts, hardware components, software systems, operating systems, and internet fundamentals.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/cf/units.js',
+                questionsPath: 'quiz/subjects/cf/questions.js'
             }
             // Future subjects will be added here
         ];

@@ -1,7 +1,7 @@
 # BCA Quiz System - Implementation Guide
 
 ## 📊 Current Status
-**22 subjects complete (2200 questions, 110% of planned curriculum)**
+**23 subjects complete (2300 questions, 115% of planned curriculum)**
 
 **Completed Subjects:**
 - Computer Graphics (`cg`) - 5 units, 100 questions
@@ -26,6 +26,7 @@
 - System Programming (`sp`) - 5 units, 100 questions
 - Advanced C Programming (`ac`) - 5 units, 100 questions
 - Mathematics for Computing (`mc`) - 5 units, 100 questions
+- Computer Fundamentals (`cf`) - 5 units, 100 questions
 
 ---
 
@@ -190,62 +191,37 @@ touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
 
 ## 📈 Planned Subjects (Full List)
 
-**🎯 BCA Quiz System Complete! All Semesters Implemented**
-
-### Semester 6 Subjects:
+### Semester 6 Subjects (3/3 completed):
 - **Data Mining** (`dm`) - ✅ **COMPLETED**
 - **Cloud Computing** (`cloud`) - ✅ **COMPLETED**
 - **Machine Learning** (`ml`) - Expected: 5 units, 100 questions *(Completed: Fundamentals of ML)*
 
-### Semester 5 Subjects:
+### Semester 5 Subjects (4/4 completed):
 - **Software Engineering** (`se`) - ✅ **COMPLETED**
 - **Database Management Systems** (`dbms`) - ✅ **COMPLETED**
 - **Computer Networks** (`cn`) - ✅ **COMPLETED**
 - **Operating Systems** (`os`) - ✅ **COMPLETED**
 
-### Semester 4 Subjects:
+### Semester 4 Subjects (4/4 completed):
 - **Software Project Management** (`spm`) - ✅ **COMPLETED**
 - **Computer Organization** (`co`) - ✅ **COMPLETED**
 - **Data Structures** (`ds`) - ✅ **COMPLETED**
 - **Discrete Mathematics** (`dm_math`) - ✅ **COMPLETED**
 
-### Semester 3 Subjects:
+### Semester 3 Subjects (4/4 completed):
 - **Object Oriented Programming** (`oop`) - ✅ **COMPLETED**
 - **Computer Architecture** (`ca`) - ✅ **COMPLETED**
 - **Data Communication** (`dc`) - ✅ **COMPLETED**
 - **System Programming** (`sp`) - ✅ **COMPLETED**
 
-### Semester 2 Subjects:
+### Semester 2 Subjects (3/3 completed):
 - **Advanced C Programming** (`ac`) - ✅ **COMPLETED**
 - **Digital Electronics** (`digital_electronics`) - ✅ **COMPLETED**
 - **Mathematics for Computing** (`mc`) - ✅ **COMPLETED**
 
-### Semester 5 Subjects:
-- **Software Engineering** (`se`) - Expected: 5 units, 100 questions
-- **Database Management Systems** (`dbms`) - Expected: 5 units, 100 questions
-- **Computer Networks** (`cn`) - Expected: 5 units, 100 questions
-- **Operating Systems** (`os`) - Expected: 5 units, 100 questions
-
-### Semester 4 Subjects:
-- **Software Project Management** (`spm`) - ✅ **COMPLETED**
-- **Computer Organization** (`co`) - Expected: 5 units, 100 questions
-- **Data Structures** (`ds`) - Expected: 5 units, 100 questions
-- **Discrete Mathematics** (`dm`) - Expected: 5 units, 100 questions
-
-### Semester 3 Subjects:
-- **Object Oriented Programming** (`oop`) - Expected: 5 units, 100 questions
-- **Computer Architecture** (`ca`) - Expected: 5 units, 100 questions
-- **Data Communication** (`dc`) - Expected: 5 units, 100 questions
-- **System Programming** (`sp`) - Expected: 5 units, 100 questions
-
-### Semester 2 Subjects:
-- **Advanced C Programming** (`ac`) - Expected: 5 units, 100 questions
-- **Digital Electronics** (`digital_electronics`) - ✅ **COMPLETED**
-- **Mathematics for Computing** (`mc`) - Expected: 5 units, 100 questions
-
-### Semester 1 Subjects:
-- **Computer Fundamentals** (`cf`) - Expected: 5 units, 100 questions
-- **Programming in C** (`pc`) - Expected: 5 units, 100 questions
+### Semester 1 Subjects (1/4 completed - 25%):
+- **Computer Fundamentals** (`cf`) - ✅ **COMPLETED**
+- **Programming in C** (`pc`) - Expected: 5 units, 100 questions ⬅️ *NEXT*
 - **Mathematics Foundation** (`mf`) - Expected: 5 units, 100 questions
 - **Communication Skills** (`cs`) - Expected: 5 units, 100 questions
 
