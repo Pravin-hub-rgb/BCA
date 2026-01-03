@@ -74,7 +74,7 @@ export class SubjectManager {
       { name: "Health Education", url: "./resources/sem1/health_edu/health.html", category: "Career & Soft Skills" },
       { name: "Principle of Management", url: "./resources/sem1/principle_of_management/index.html", category: "Career & Soft Skills" },
       { name: "Professional Communication -1", url: "./resources/sem1/professional_communication-1/index.html", category: "Career & Soft Skills" },
-      { name: "Wellness and Stress Management", url: "./resources/sem1/wellness/index.html", category: "Career & Soft Skills" },
+      { name: "Wellness and Stress Management", url: "./resources/sem2/wellness/index.html", category: "Career & Soft Skills" },
 
       // Electronics & Systems (1)
       { name: "Microprocessor", url: "./resources/sem4/micro_tbc402/index.html", category: "Electronics & Systems" }

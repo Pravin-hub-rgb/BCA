@@ -62,7 +62,7 @@ export class SearchManager {
       { name: "Health Education", path: "./resources/sem1/health_edu/health.html" },
       { name: "Principle of Management", path: "./resources/sem1/principle_of_management/index.html" },
       { name: "Professional Communication -1", path: "./resources/sem1/professional_communication-1/index.html" },
-      { name: "Wellness and Stress Management", path: "./resources/sem1/wellness/index.html" },
+      { name: "Wellness and Stress Management", path: "./resources/sem2/wellness/index.html" },
 
       // Electronics & Systems (1)
       { name: "Microprocessor", path: "./resources/sem4/micro_tbc402/index.html" }
