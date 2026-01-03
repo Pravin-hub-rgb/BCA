@@ -62,13 +62,26 @@
 
         async function initializeUnitSelection() {
             const subjectId = getSubjectIdFromUrl();
+            console.log('Initializing unit selection for subject:', subjectId);
 
             try {
+                // Check if subjects loader is available
+                if (!window.quizSubjectsLoader) {
+                    console.error('quizSubjectsLoader not found!');
+                    alert('Subjects loader not available. Please refresh the page.');
+                    return;
+                }
+
                 // Load available subjects
+                console.log('Loading available subjects...');
                 const subjects = window.quizSubjectsLoader.loadAvailableSubjects();
+                console.log('Loaded subjects:', subjects.length);
+
                 currentSubject = subjects.find(s => s.id === subjectId);
+                console.log('Found subject:', currentSubject);
 
                 if (!currentSubject) {
+                    console.error('Subject not found:', subjectId);
                     alert('Subject not found!');
                     window.location.href = 'subjects.html';
                     return;
@@ -94,19 +107,31 @@
         }
 
         async function loadSubjectUnits(subjectId) {
+            console.log('Loading units for subject:', subjectId);
+
             // Load units script
             const unitsScript = document.createElement('script');
             unitsScript.src = `subjects/${subjectId}/units.js`;
+            console.log('Script src:', unitsScript.src);
+
             document.head.appendChild(unitsScript);
 
             await new Promise((resolve, reject) => {
-                unitsScript.onload = resolve;
-                unitsScript.onerror = reject;
+                unitsScript.onload = () => {
+                    console.log('Units script loaded successfully');
+                    resolve();
+                };
+                unitsScript.onerror = (error) => {
+                    console.error('Failed to load units script:', error);
+                    reject(error);
+                };
             });
 
-            // Get units data
-            const unitsVarName = `${subjectId}Units`;
+            // Get units data - convert subjectId to camelCase for variable name
+            const unitsVarName = subjectId.replace(/_([a-z])/g, (match, letter) => letter.toUpperCase()) + 'Units';
+            console.log('Looking for variable:', unitsVarName);
             currentUnits = window[unitsVarName] || [];
+            console.log('Found units:', currentUnits.length);
         }
 
         function updatePageContent() {

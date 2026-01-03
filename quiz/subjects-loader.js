@@ -149,6 +149,76 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/co/units.js',
                 questionsPath: 'quiz/subjects/co/questions.js'
+            },
+            {
+                id: 'ds',
+                name: 'Data Structures',
+                description: 'Test your knowledge of fundamental data structures, algorithms, and their implementations including arrays, trees, graphs, sorting, and searching techniques.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/ds/units.js',
+                questionsPath: 'quiz/subjects/ds/questions.js'
+            },
+            {
+                id: 'dm_math',
+                name: 'Discrete Mathematics',
+                description: 'Test your knowledge of mathematical foundations for computer science including logic, sets, relations, graphs, and combinatorial mathematics.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/dm_math/units.js',
+                questionsPath: 'quiz/subjects/dm_math/questions.js'
+            },
+            {
+                id: 'oop',
+                name: 'Object Oriented Programming',
+                description: 'Test your knowledge of object-oriented programming principles, concepts, and implementation including classes, inheritance, polymorphism, and design patterns.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/oop/units.js',
+                questionsPath: 'quiz/subjects/oop/questions.js'
+            },
+            {
+                id: 'ca',
+                name: 'Computer Architecture',
+                description: 'Test your knowledge of computer system architecture, instruction sets, pipelining, memory hierarchy, I/O systems, and parallel processing.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/ca/units.js',
+                questionsPath: 'quiz/subjects/ca/questions.js'
+            },
+            {
+                id: 'dc',
+                name: 'Data Communication',
+                description: 'Test your knowledge of data communication fundamentals, transmission media, multiplexing techniques, switching methods, and network protocols.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/dc/units.js',
+                questionsPath: 'quiz/subjects/dc/questions.js'
+            },
+            {
+                id: 'sp',
+                name: 'System Programming',
+                description: 'Test your knowledge of system programming concepts including assemblers, loaders, linkers, macros, compilers, and system software development.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/sp/units.js',
+                questionsPath: 'quiz/subjects/sp/questions.js'
+            },
+            {
+                id: 'ac',
+                name: 'Advanced C Programming',
+                description: 'Test your knowledge of advanced C programming concepts including pointers, memory management, data structures, file handling, and system programming in C.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/ac/units.js',
+                questionsPath: 'quiz/subjects/ac/questions.js'
             }
             // Future subjects will be added here
         ];

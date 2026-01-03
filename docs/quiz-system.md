@@ -1,7 +1,7 @@
 # BCA Quiz System - Implementation Guide
 
 ## 📊 Current Status
-**14 subjects complete (1400 questions, 70% of planned curriculum)**
+**21 subjects complete (2100 questions, 105% of planned curriculum)**
 
 **Completed Subjects:**
 - Computer Graphics (`cg`) - 5 units, 100 questions
@@ -18,6 +18,13 @@
 - Computer Networks (`cn`) - 5 units, 100 questions
 - Operating Systems (`os`) - 5 units, 100 questions
 - Computer Organization (`co`) - 5 units, 100 questions
+- Data Structures (`ds`) - 5 units, 100 questions
+- Discrete Mathematics (`dm_math`) - 5 units, 100 questions
+- Object Oriented Programming (`oop`) - 5 units, 100 questions
+- Computer Architecture (`ca`) - 5 units, 100 questions
+- Data Communication (`dc`) - 5 units, 100 questions
+- System Programming (`sp`) - 5 units, 100 questions
+- Advanced C Programming (`ac`) - 5 units, 100 questions
 
 ---
 
@@ -182,7 +189,7 @@ touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
 
 ## 📈 Planned Subjects (Full List)
 
-**🎯 Next Priority: Data Structures (`ds`) - Semester 4**
+**🎯 Ready for Semester 2 completion!**
 
 ### Semester 6 Subjects:
 - **Data Mining** (`dm`) - ✅ **COMPLETED**
@@ -198,8 +205,19 @@ touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
 ### Semester 4 Subjects:
 - **Software Project Management** (`spm`) - ✅ **COMPLETED**
 - **Computer Organization** (`co`) - ✅ **COMPLETED**
-- **Data Structures** (`ds`) - Expected: 5 units, 100 questions ⬅️ *NEXT*
-- **Discrete Mathematics** (`dm`) - Expected: 5 units, 100 questions
+- **Data Structures** (`ds`) - ✅ **COMPLETED**
+- **Discrete Mathematics** (`dm_math`) - ✅ **COMPLETED**
+
+### Semester 3 Subjects:
+- **Object Oriented Programming** (`oop`) - ✅ **COMPLETED**
+- **Computer Architecture** (`ca`) - ✅ **COMPLETED**
+- **Data Communication** (`dc`) - ✅ **COMPLETED**
+- **System Programming** (`sp`) - ✅ **COMPLETED**
+
+### Semester 2 Subjects:
+- **Advanced C Programming** (`ac`) - ✅ **COMPLETED**
+- **Digital Electronics** (`digital_electronics`) - ✅ **COMPLETED**
+- **Mathematics for Computing** (`mc`) - Expected: 5 units, 100 questions ⬅️ *NEXT PRIORITY*
 
 ### Semester 5 Subjects:
 - **Software Engineering** (`se`) - Expected: 5 units, 100 questions
