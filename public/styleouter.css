@@ -89,13 +89,26 @@ body:not(.dark-mode) {
   background-size: 100% 100%;
 }
 
-/* Fix mobile background image scrolling issues */
+/* Perfect fixed background for mobile - no scrolling issues */
 @media only screen and (max-width: 768px) {
-  body {
-    background-attachment: local;
+  body.dark-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./images/mainbgbca.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Remove original background on mobile dark mode */
+  body.dark-mode {
+    background-image: none;
   }
 }
 
