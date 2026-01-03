@@ -123,7 +123,13 @@ export class SubjectManager {
 
   getCategories() {
     const categories = [...new Set(this.subjects.map(subject => subject.category))];
-    return categories.sort();
+
+    // Prioritize Programming Languages to appear first
+    return categories.sort((a, b) => {
+      if (a === 'Programming Languages') return -1;
+      if (b === 'Programming Languages') return 1;
+      return a.localeCompare(b);
+    });
   }
 
   renderSubjects() {
