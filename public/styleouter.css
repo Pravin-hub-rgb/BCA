@@ -91,6 +91,10 @@ body:not(.dark-mode) {
 
 /* Perfect fixed background for mobile - no scrolling issues */
 @media only screen and (max-width: 768px) {
+  body.dark-mode {
+    position: relative;
+  }
+
   body.dark-mode::before {
     content: '';
     position: fixed;
@@ -98,17 +102,14 @@ body:not(.dark-mode) {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('./images/mainbgbca.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: url('./images/mainbgbca.jpg') center/cover no-repeat;
     z-index: -1;
     pointer-events: none;
   }
 
-  /* Remove original background on mobile dark mode */
-  body.dark-mode {
-    background-image: none;
+  /* Ensure html has proper background */
+  html {
+    background: #000;
   }
 }
 
