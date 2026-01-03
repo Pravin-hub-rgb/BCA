@@ -239,6 +239,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/cf/units.js',
                 questionsPath: 'quiz/subjects/cf/questions.js'
+            },
+            {
+                id: 'pc',
+                name: 'Programming in C',
+                description: 'Test your knowledge of C programming fundamentals including syntax, data types, control structures, functions, arrays, pointers, and file handling.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/pc/units.js',
+                questionsPath: 'quiz/subjects/pc/questions.js'
             }
             // Future subjects will be added here
         ];

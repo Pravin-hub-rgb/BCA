@@ -1,7 +1,7 @@
 # BCA Quiz System - Implementation Guide
 
 ## 📊 Current Status
-**23 subjects complete (2300 questions, 115% of planned curriculum)**
+**24 subjects complete (2400 questions, 120% of planned curriculum)**
 
 **Completed Subjects:**
 - Computer Graphics (`cg`) - 5 units, 100 questions
@@ -27,6 +27,7 @@
 - Advanced C Programming (`ac`) - 5 units, 100 questions
 - Mathematics for Computing (`mc`) - 5 units, 100 questions
 - Computer Fundamentals (`cf`) - 5 units, 100 questions
+- Programming in C (`pc`) - 5 units, 100 questions
 
 ---
 
@@ -219,10 +220,10 @@ touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
 - **Digital Electronics** (`digital_electronics`) - ✅ **COMPLETED**
 - **Mathematics for Computing** (`mc`) - ✅ **COMPLETED**
 
-### Semester 1 Subjects (1/4 completed - 25%):
+### Semester 1 Subjects (2/4 completed - 50%):
 - **Computer Fundamentals** (`cf`) - ✅ **COMPLETED**
-- **Programming in C** (`pc`) - Expected: 5 units, 100 questions ⬅️ *NEXT*
-- **Mathematics Foundation** (`mf`) - Expected: 5 units, 100 questions
+- **Programming in C** (`pc`) - ✅ **COMPLETED**
+- **Mathematics Foundation** (`mf`) - Expected: 5 units, 100 questions ⬅️ *NEXT*
 - **Communication Skills** (`cs`) - Expected: 5 units, 100 questions
 
 *Last updated: January 2026*
