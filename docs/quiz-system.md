@@ -1,7 +1,7 @@
 # BCA Quiz System - Implementation Guide
 
 ## 📊 Current Status
-**25 subjects complete (2500 questions, 125% of planned curriculum)**
+**26 subjects complete (2600 questions, 130% of planned curriculum)**
 
 **Completed Subjects:**
 - Computer Graphics (`cg`) - 5 units, 100 questions
@@ -29,6 +29,7 @@
 - Computer Fundamentals (`cf`) - 5 units, 100 questions
 - Programming in C (`pc`) - 5 units, 100 questions
 - Communication Skills (`cs`) - 5 units, 100 questions
+- Machine Learning (`ml`) - 5 units, 100 questions
 
 ---
 
@@ -196,7 +197,7 @@ touch quiz/subjects/{subject-id}/{config.js,units.js,questions.js}
 ### Semester 6 Subjects (3/3 completed):
 - **Data Mining** (`dm`) - ✅ **COMPLETED**
 - **Cloud Computing** (`cloud`) - ✅ **COMPLETED**
-- **Machine Learning** (`ml`) - Expected: 5 units, 100 questions *(Completed: Fundamentals of ML)*
+- **Machine Learning** (`ml`) - ✅ **COMPLETED**
 
 ### Semester 5 Subjects (4/4 completed):
 - **Software Engineering** (`se`) - ✅ **COMPLETED**

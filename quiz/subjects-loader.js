@@ -259,6 +259,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/cs/units.js',
                 questionsPath: 'quiz/subjects/cs/questions.js'
+            },
+            {
+                id: 'ml',
+                name: 'Machine Learning',
+                description: 'Test your knowledge of advanced machine learning algorithms, neural networks, deep learning, computer vision, NLP, and model deployment techniques.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/ml/units.js',
+                questionsPath: 'quiz/subjects/ml/questions.js'
             }
             // Future subjects will be added here
         ];
