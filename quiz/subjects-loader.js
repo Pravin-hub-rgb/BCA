@@ -279,6 +279,16 @@ function loadAvailableSubjects() {
                 questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
                 unitsPath: 'quiz/subjects/wellness/units.js',
                 questionsPath: 'quiz/subjects/wellness/questions.js'
+            },
+            {
+                id: 'pm',
+                name: 'Principles of Management',
+                description: 'Test your knowledge of management principles, theories, functions, and practices including planning, organizing, staffing, controlling, and modern management concepts.',
+                unitCount: 5,
+                totalQuestions: 100,
+                questionDistribution: { 1: 15, 2: 20, 3: 25, 4: 30, 5: 40 },
+                unitsPath: 'quiz/subjects/pm/units.js',
+                questionsPath: 'quiz/subjects/pm/questions.js'
             }
             // Future subjects will be added here
         ];

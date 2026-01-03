@@ -1,7 +1,7 @@
 # BCA Quiz System - Implementation Guide
 
 ## 📊 Current Status
-**27 subjects complete (2700 questions, 135% of planned curriculum)**
+**28 subjects complete (2800 questions, 140% of planned curriculum)**
 
 **Completed Subjects:**
 - Computer Graphics (`cg`) - 5 units, 100 questions
@@ -31,6 +31,7 @@
 - Communication Skills (`cs`) - 5 units, 100 questions
 - Machine Learning (`ml`) - 5 units, 100 questions
 - Wellness and Stress Management (`wellness`) - 5 units, 100 questions
+- Principles of Management (`pm`) - 5 units, 100 questions
 
 ---
 
